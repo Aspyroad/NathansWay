@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ED846A11-F3F8-4277-9E00-8AC75C114910}</ProjectGuid>
+    <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NathansWay</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>NathansWay</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <MtouchLink>None</MtouchLink>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <MtouchLink>None</MtouchLink>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ConsolePause>false</ConsolePause>
+    <CodesignKey>iPhone Developer</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <BuildIpa>true</BuildIpa>
+    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\iPhone\AppStore</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <ConsolePause>false</ConsolePause>
+    <CodesignProvision>Automatic:AppStore</CodesignProvision>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="monotouch" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+    <Folder Include="NathansWay.Numeracy.Android\" />
+    <Folder Include="NathansWay.Numeracy.iOS\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Data\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Exception\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Exception\MVC\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Menu\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Menu\MVC\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Student\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Student\MVC\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Teacher\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Teacher\Teacher\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\ScrewDriver\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\Hammer\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\Pliers\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\ScrewDriver\Content\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\Pliers\Content\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\Hammer\Content\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\" />
+    <Folder Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\Content\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Lesson\" />
+    <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\" />
+    <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Info.plist" />
+    <None Include="Entitlements.plist" />
+    <None Include="NathansWay.Numeracy.iOS\Exception\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\Data\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\Exception\MVC\ViewFiles.txt" />
+    <None Include="NathansWay.Numeracy.iOS\Student\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\Teacher\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\ToolBox\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\Menu\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\Lesson\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\WorkSpace\README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.cs" />
+    <Compile Include="AppDelegate.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\ToolBox\NathansWay.iOS.Game.Core.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Hammer\ToolBox.iOS.Hammer.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.designer.cs">
+      <DependentUpon>NathansWayViewController.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.xib" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\AspyRoad_iOSCore\AspyRoad_iOSCore.csproj">
+      <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
+      <Name>AspyRoad_iOSCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
+      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
+      <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>
