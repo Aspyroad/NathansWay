@@ -47,6 +47,9 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchI18n>
+    </MtouchI18n>
+    <MtouchArch>ARMv7</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -89,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="NathansWay.Numeracy.Android\" />
     <Folder Include="NathansWay.Numeracy.iOS\" />
     <Folder Include="NathansWay.Numeracy.iOS\Data\" />
     <Folder Include="NathansWay.Numeracy.iOS\Exception\" />
@@ -111,6 +113,7 @@
     <Folder Include="NathansWay.Numeracy.iOS\Lesson\" />
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\" />
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
+    <Folder Include="Content\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -143,13 +146,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\AspyRoad_iOSCore\AspyRoad_iOSCore.csproj">
-      <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
-      <Name>AspyRoad_iOSCore</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
       <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
       <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AspyRoad_iOSCore\AspyRoad.iOSCore.csproj">
+      <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
+      <Name>AspyRoad.iOSCore</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
