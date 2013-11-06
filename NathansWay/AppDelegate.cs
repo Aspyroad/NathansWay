@@ -14,9 +14,28 @@ namespace NathansWay
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
+		/// <summary>How to access these varibles from within the app</summary>
+		/// e.g. 
+		/// UIApplication.SharedApplication.Delegate.FolderNameLibrary
+
+		/// <summary>
+		/// Path to the library folder
+		/// </summary>
+		private const string FolderNameLibrary = "Library";
+
+		/// <summary>
+		/// Path to the ImageData folder
+		/// </summary>
+		private const string FolderNameImageData = "ImageData";
+
+		/// <summary>
+		/// The name of the version file.
+		/// </summary>
+		private const string VersionFileName = "version.dat";
 		// class-level declarations
 		UIWindow window;
 		NathansWayViewController viewController;
+
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
 		// method you should instantiate the window, load the UI into it and then make the window

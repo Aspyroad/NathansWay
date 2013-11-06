@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>NathansWay</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.your-company.NathansWay</string>
+	<string>com.AspyRoad.NathansWay</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>

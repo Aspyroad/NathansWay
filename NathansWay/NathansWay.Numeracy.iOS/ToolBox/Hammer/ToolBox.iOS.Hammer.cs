@@ -110,4 +110,3 @@ namespace ToolBox.iOS.Hammer
 	#endregion
 	}
 }
-\
