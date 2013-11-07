@@ -27,7 +27,7 @@
 *.sbr
 *.sdf
 ipch/
-obj/
+obj/iPhoneSimulator/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
