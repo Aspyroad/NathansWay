@@ -17,7 +17,7 @@ using MonoTouch.CoreGraphics;
 
 #endregion
 
-namespace Aspyroad
+namespace Aspyroad.iOSCore
 {
 	// Aspy Delegates
 	public delegate void GlobalTouchEventHandler (Object sender, GlobalTouchEventArgs e);

@@ -95,10 +95,18 @@
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.designer.cs">
       <DependentUpon>MenuMainViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\AspyRoad_iOSCore\Aspyroad.Aspygame.Control.designer.cs">
+      <DependentUpon>Aspyroad.Aspygame.Control.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomSlideSegue.cs" />
+    <Compile Include="CustomSlideSegue.designer.cs">
+      <DependentUpon>CustomSlideSegue.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.xib" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBord.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -114,5 +122,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\.DS_Store" />
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\Menu\.DS_Store" />
+    <BundleResource Include="Resources\.DS_Store" />
   </ItemGroup>
 </Project>

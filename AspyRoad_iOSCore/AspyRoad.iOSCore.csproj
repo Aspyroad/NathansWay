@@ -45,5 +45,6 @@
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Aspyroad.Aspygame.Control.cs" />
+    <Compile Include="Aspyroad.iOSCore.ViewBase.cs" />
   </ItemGroup>
 </Project>
