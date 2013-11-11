@@ -11,11 +11,11 @@ namespace AspyRoad.iOSCore
 		}
 		
 		
-		public static CGPointMake(Float x, Float y)
+		public static PointF CGPointMake(float x, float y)
 			{
-			    Pointf p; 
-			    p.x = x; 
-			    p.y = y; 
+			    PointF p = new PointF(); 
+			    p.X = x; 
+			    p.Y = y; 
 			    return p;
 			}	
 	}

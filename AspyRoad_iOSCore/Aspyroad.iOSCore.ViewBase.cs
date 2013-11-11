@@ -41,6 +41,11 @@ namespace AspyRoad.iOSCore
 				//UIView.Animate(kAnimationDuration,0.0,
 
 			} 
+			else
+			{
+			
+			
+			}
 
 			
 			//[destinationViewController.view 
@@ -51,14 +56,7 @@ namespace AspyRoad.iOSCore
 		
 		}
 		
-//		private delegate void slideright ()
-//		{
-//				;
-//			//vcDest.View.Center = 	
-//		}
-
-
-
+		private delegate void slideright ();
 
 	}
 }
