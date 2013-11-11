@@ -1,5 +1,6 @@
 #OS junk files
 [Tt]humbs.db
+*.DS_Store
 
 #Visual Studio files
 *.pidb
@@ -26,7 +27,7 @@
 *.sbr
 *.sdf
 ipch/
-obj/iPhoneSimulator/
+obj/
 [Bb]in
 [Dd]ebug*/
 [Rr]elease*/
