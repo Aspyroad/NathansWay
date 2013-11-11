@@ -102,6 +102,9 @@
     <Compile Include="CustomSlideSegue.designer.cs">
       <DependentUpon>CustomSlideSegue.cs</DependentUpon>
     </Compile>
+    <Compile Include="..\..\MonoGame\MonoGame.Framework\iOS\iOSGameView.designer.cs">
+      <DependentUpon>iOSGameView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.xib" />

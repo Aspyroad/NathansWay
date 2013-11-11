@@ -47,4 +47,7 @@
     <Compile Include="Aspyroad.Aspygame.Control.cs" />
     <Compile Include="Aspyroad.iOSCore.ViewBase.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Aspyroad.iOSCore.Utilities" />
+  </ItemGroup>
 </Project>
