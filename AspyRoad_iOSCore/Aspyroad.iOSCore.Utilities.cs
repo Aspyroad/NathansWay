@@ -4,14 +4,25 @@ using MonoTouch.UIKit;
 
 namespace AspyRoad.iOSCore
 {
-	public class Utilities
+
+	/// <summary>
+	/// Singleton Utilities object.
+	/// </summary>
+	public sealed class Utilities
 	{
-		public Utilities()
+		private Utilities()
 		{
 		}
 		
+		public static Utilities Instance
+		{
+			get { return _instance; }
+	    }
+	    
+	    static readonly Utilities _instance = new Utilities ();
 		
-		public static PointF CGPointMake(float x, float y)
+		
+		public static PointF CGPointMake (float x, float y)
 			{
 			    PointF p = new PointF(); 
 			    p.X = x; 
