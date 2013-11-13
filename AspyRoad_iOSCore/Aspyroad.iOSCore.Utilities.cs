@@ -8,18 +8,18 @@ namespace AspyRoad.iOSCore
 	/// <summary>
 	/// Singleton Utilities object.
 	/// </summary>
-	public sealed class Utilities
+	public sealed class AspyUtilities
 	{
-		private Utilities()
+		private AspyUtilities()
 		{
 		}
 		
-		public static Utilities Instance
+		public static AspyUtilities Instance
 		{
 			get { return _instance; }
 	    }
 	    
-	    static readonly Utilities _instance = new Utilities ();
+	    static readonly AspyUtilities _instance = new AspyUtilities ();
 		
 		
 		public static PointF CGPointMake (float x, float y)

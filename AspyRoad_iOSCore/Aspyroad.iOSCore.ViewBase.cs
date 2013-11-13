@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using AspyRoad.iOSCore;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 
 
 namespace AspyRoad.iOSCore
@@ -13,17 +14,9 @@ namespace AspyRoad.iOSCore
 		private UIViewController vcSource;
 		private UIViewController vcDest;
 		private SizeF screenSize;
-		
-		#region Events And Delegates
-		// Would-could have probably used Lambdas but Im not sure if Ill need to notify anything else when this is happening.
-		public event slideright SlidingRight;
-        public event slideleft SlidingLeft;
-        
-        
-        public delegate void slideright (Object sender, EventArgs e);
-		public delegate void slideleft (Object sender, EventArgs e);
-		#endregion
-		
+		private NSAction _slideright;
+		private NSAction _slideleft;
+				
 		#region Construction
 		public aspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
 		{
@@ -32,7 +25,7 @@ namespace AspyRoad.iOSCore
 			// Set screen variables
 			this.screenSize = UIScreen.MainScreen.Bounds.Size;
 		}
-
+		// Sys //
 		public aspySlidingSegue(IntPtr handle) :base(handle)
 		{
 		}
@@ -42,43 +35,26 @@ namespace AspyRoad.iOSCore
 		{
 			vcSource.View.AddSubview (vcDest.View);
 			vcDest.View.Frame = vcSource.View.Window.Frame;
-
 			vcDest.View.Bounds = vcSource.View.Bounds;
-			
-			
+
+			// Always runs
+			UICompletionHandler _animationcomplete = new UICompletionHandler (animateComplete);
+
 			// this.slideleft
 			if (true)
 			{
-				//UIView.Animate(kAnimationDuration,0.0,
-
+				// Hook up our delegates
+				_slideright = new NSAction(animateSlideRight);
+				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideleft, _animationcomplete);
 			} 
-			else
+			if (true)
 			{
-			
-			
+				_slideleft = new NSAction(animateSlideLeft);
+				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideright, _animationcomplete);			
 			}
 
-			
-			//[destinationViewController.view 
-			//	               setCenter:CGPointMake(screenSize.height + screenSize.height/2, screenSize.height/2 - 138)];
-            //[destinationViewController.view 
-			//	               setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
-			
-			//completion:^(BOOL finished){
-			//                 [destinationViewController.view removeFromSuperview];
-			//                 [sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
-			
-			
-//			                         animations:^{
-//                             [destinationViewController.view setCenter:CGPointMake(-1*screenSize.height/2, screenSize.height/2 - 138)];
-//                             [destinationViewController.view setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
-//                         }
-//                         completion:^(BOOL finished){
-//                             [destinationViewController.view removeFromSuperview];
-//                             [sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
-        
-		
 		}
+
 		
 		private void animateSlideLeft()
 		{
@@ -88,14 +64,129 @@ namespace AspyRoad.iOSCore
 			x = (screenSize.Height + (screenSize.Height/2));
 			y = ((screenSize.Height/2) - 138);
 			
-			vcDest.View.Center = Utilities.CGPointMake(x, y);
+			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
+
+			x = (screenSize.Width/2 + 127);
+			y = ((screenSize.Height/2) - 138);
+
+			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
 			
 		}
+
+		/// <summary>
+		/// Raises the slide left event.
+		/// </summary>
+		/// <param name="e">E.</param>
+		#region eventhookups
+//		protected virtual void OnSlideLeft(EventArgs e)
+//		{
+//			SlideLeft handler = SlidingLeft;
+//			if (handler != null)
+//			{
+//				handler(e);
+//			}
+//		}
+		#endregion
+
+		private void animateComplete(bool finished)
+		{
+			vcDest.View.RemoveFromSuperview();
+			vcSource.PresentViewController(vcDest, false, null);
+
+		}
+
+		/// <summary>
+		/// Raises the animate complete event.
+		/// </summary>
+		/// <param name="e">E.</param>
+		#region eventhookups
+//		protected virtual void OnAnimateComplete(EventArgs e)
+//		{
+//			AnimateComplete handler = AnimationComplete;
+//			if (handler != null)
+//			{
+//				handler(e);
+//			}
+//		}
+		#endregion
 		
 		private void animateSlideRight()
 		{
-		
+			float x = 0;
+			float y = 0;
+
+			x = (-1 * screenSize.Height/2);
+			y = ((screenSize.Height/2) - 138);
+
+			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
+
+			x = (screenSize.Width/2 + 127);
+			y = ((screenSize.Height/2) - 138);
+
+			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
 		}
+
+		/// <summary>
+		/// Raises the slide right event.
+		/// </summary>
+		/// <param name="e">E.</param>
+		#region eventhookups
+//		protected virtual void OnSlideRight(EventArgs e)
+//		{
+//			SlideRight handler = SlidingRight;
+//			if (handler != null)
+//			{
+//				handler(e);
+//			}
+//		}
+		#endregion
+
+		#region original sample
+			//		#define kAnimationDuration 0.5
+			//
+			//		#import "CustomSlideSegue.h"
+			//
+			//		@implementation CustomSlideSegue
+			//
+			//			- (void)perform
+			//		{
+			//			UIViewController *sourceViewController = (UIViewController *) self.sourceViewController;
+			//			UIViewController *destinationViewController = (UIViewController *) self.destinationViewController;
+			//
+			//			[sourceViewController.view addSubview:destinationViewController.view];
+			//			[destinationViewController.view setFrame:sourceViewController.view.window.frame];
+			//
+			//			[destinationViewController.view setBounds:sourceViewController.view.bounds];
+			//			CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+			//
+			//			if ( !self.slideLeft ) {
+			//				[UIView animateWithDuration:kAnimationDuration
+			//				 delay:0.0
+			//				 options:UIViewAnimationOptionCurveEaseOut
+			//				 animations:^{
+			//					[destinationViewController.view setCenter:CGPointMake(screenSize.height + screenSize.height/2, screenSize.height/2 - 138)];
+			//					[destinationViewController.view setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
+			//				 }
+			//				 completion:^(BOOL finished){
+			//					[destinationViewController.view removeFromSuperview];
+			//					[sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
+			//				 }];
+			//			} else {
+			//				[UIView animateWithDuration:kAnimationDuration
+			//				 delay:0.0
+			//				 options:UIViewAnimationOptionCurveEaseOut
+			//				 animations:^{
+			//					[destinationViewController.view setCenter:CGPointMake(-1*screenSize.height/2, screenSize.height/2 - 138)];
+			//					[destinationViewController.view setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
+			//				 }
+			//				 completion:^(BOOL finished){
+			//					[destinationViewController.view removeFromSuperview];
+			//					[sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
+			//				 }];
+			//			}
+			//		}
+		#endregion
+
 
 
 	}
