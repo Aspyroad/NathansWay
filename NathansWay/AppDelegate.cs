@@ -5,6 +5,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Aspyroad;
 using NathansWay.Numeracy.iOS;
+using Aspyroad.iOSCore;
 
 namespace NathansWay
 {
@@ -49,8 +50,10 @@ namespace NathansWay
 
 			GameViewControl myGv = new GameViewControl ();
 			viewController = new NathansWayViewController ();
+			
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
+			viewController.lblTouchEvent.Text = "Oh my";
 			
 			return true;
 		}

@@ -36,8 +36,6 @@ namespace Aspyroad.iOSCore
 		}
 
 	}
-
-
 	
 	[MonoTouch.Foundation.Register ("SevenButton")]
 	public class SevenButton : UIButton
@@ -155,13 +153,11 @@ namespace Aspyroad.iOSCore
 			}
 		}
 		
-		// ********************************An Aspyroad Production Copyright2013******************************************
-		// Event Args Defs
-		public class GlobalTouchEventArgs : EventArgs
-		{
-			public UITouchPhase TouchPhase { get; set; }
-			public DateTime TimeReached { get; set; }			
-		}
+	public class GlobalTouchEventArgs : EventArgs
+	{
+		public UITouchPhase TouchPhase { get; set; }
+		public DateTime TimeReached { get; set; }			
+	}
 		
 	[MonoTouch.Foundation.Register("newView")]	
 	public partial class newView : UIView
