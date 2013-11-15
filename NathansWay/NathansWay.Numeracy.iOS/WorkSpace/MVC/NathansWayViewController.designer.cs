@@ -14,12 +14,20 @@ namespace NathansWay
 	{
 		[Outlet]
 		public MonoTouch.UIKit.UILabel lblTouchEvent { get; set; }
+
+		[Outlet]
+		public MonoTouch.UIKit.UILabel lblTouchEvent2 { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
 			if (lblTouchEvent != null) {
 				lblTouchEvent.Dispose ();
 				lblTouchEvent = null;
+			}
+
+			if (lblTouchEvent2 != null) {
+				lblTouchEvent2.Dispose ();
+				lblTouchEvent2 = null;
 			}
 		}
 	}

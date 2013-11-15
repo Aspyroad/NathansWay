@@ -34,7 +34,7 @@ namespace NathansWay
 		/// </summary>
 		private const string VersionFileName = "version.dat";
 		// class-level declarations
-		UIWindow window;
+		AspyWindow window;
 		NathansWayViewController viewController;
 
 		//
@@ -48,15 +48,27 @@ namespace NathansWay
 		{
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 
-			GameViewControl myGv = new GameViewControl ();
+			//GameViewControl myGv = new GameViewControl ();
 			viewController = new NathansWayViewController ();
 			
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
-			viewController.lblTouchEvent.Text = "Oh my";
-			
+			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
+		
+		// Function which will be exectuted whne the event fires. 
+        public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
+        {
+			string strString = "";
+			viewController.lblTouchEvent.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			
+			foreach(UIGestureRecognizer t in e.UITouchObj.GestureRecognizers)
+			{
+				strString = strString + e.UITouchObj.GestureRecognizers.ToString ();
+			}
+			viewController.lblTouchEvent2.Text = strString.ToString();
+        }
 	}
 }
 
