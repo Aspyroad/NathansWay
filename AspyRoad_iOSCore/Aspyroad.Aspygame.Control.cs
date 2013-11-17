@@ -25,7 +25,11 @@ namespace Aspyroad.iOSCore
 	public class GlobalTouchEventArgs : EventArgs
 	{
 		public UITouch UITouchObj { get; set; }
-		public DateTime TimeReached { get; set; }			
+		public UIGestureRecognizer gestureType { get; set; }
+		public int gestureCount { get; set; }
+		public NSSet TouchSet { get; set; }
+		public int numTaps { get; set; }
+		public double TimeReached { get; set; }			
 	}
 
 	[MonoTouch.Foundation.Register ("AspyWindow")]
@@ -69,17 +73,22 @@ namespace Aspyroad.iOSCore
 		{
 			if (evt.Type == UIEventType.Touches)
 			{
+				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
+				args.TouchSet = evt.AllTouches;
+
 				foreach (UITouch t in evt.AllTouches)
 				{
-					// Check touch types
-					if (t.Phase == UITouchPhase.Began)
-					{
-					
-					}
-
-					GlobalTouchEventArgs args = new GlobalTouchEventArgs();
+					args.gestureCount = t.GestureRecognizers.GetLength ();
+					args.numTaps = t.TapCount;
 					args.UITouchObj = t;
-					args.TimeReached = DateTime.Now;
+					args.TimeReached = t.Timestamp;
+
+					if (args.gestureCount > 1)
+					{
+
+					}	 
+
+
 					IveBeenTouched(args);
 				}
 			}
