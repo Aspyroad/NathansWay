@@ -26,10 +26,12 @@ namespace Aspyroad.iOSCore
 	{
 		public UITouch UITouchObj { get; set; }
 		public UIGestureRecognizer gestureType { get; set; }
+		public string strGestureType { get; set; }
 		public int gestureCount { get; set; }
 		public NSSet TouchSet { get; set; }
 		public int numTaps { get; set; }
-		public double TimeReached { get; set; }			
+		public double TimeReached { get; set; }		
+		//public 	
 	}
 
 	[MonoTouch.Foundation.Register ("AspyWindow")]
@@ -78,15 +80,19 @@ namespace Aspyroad.iOSCore
 
 				foreach (UITouch t in evt.AllTouches)
 				{
-					args.gestureCount = t.GestureRecognizers.GetLength ();
+					args.gestureCount = t.GestureRecognizers.Length;
 					args.numTaps = t.TapCount;
 					args.UITouchObj = t;
 					args.TimeReached = t.Timestamp;
 
-					if (args.gestureCount > 1)
-					{
-
-					}	 
+					//if (args.gestureCount == 1)
+					//{
+						foreach (UIGestureRecognizer g in t.GestureRecognizers)
+						{
+							var myType = g.GetType ();
+						    args.strGestureType = myType.Name;						
+						}
+					//}	 
 
 
 					IveBeenTouched(args);
