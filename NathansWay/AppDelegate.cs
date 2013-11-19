@@ -62,11 +62,7 @@ namespace NathansWay
         {
 			string strString = "";
 			viewController.lblTouchEvent.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
-			
-			foreach(UIGestureRecognizer t in e.UITouchObj.GestureRecognizers)
-			{
-				strString = strString + e.UITouchObj.GestureRecognizers.ToString ();
-			}
+			strString = strString + e.strGestureType.ToString ();
 			viewController.lblTouchEvent2.Text = strString.ToString();
         }
 	}
