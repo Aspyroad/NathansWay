@@ -25,11 +25,8 @@ namespace Aspyroad.iOSCore
 	public class GlobalTouchEventArgs : EventArgs
 	{
 		public UITouch UITouchObj { get; set; }
-<<<<<<< HEAD
-=======
 		public UIGestureRecognizer gestureType { get; set; }
 		public string strGestureType { get; set; }
->>>>>>> f97318e74de66a4ba2f1a51293e6c6077e6b25d0
 		public int gestureCount { get; set; }
 		public NSSet TouchSet { get; set; }
 		public int numTaps { get; set; }
