@@ -25,7 +25,6 @@ namespace Aspyroad.iOSCore
 	public class GlobalTouchEventArgs : EventArgs
 	{
 		public UITouch UITouchObj { get; set; }
-		public UIGestureRecognizer gestureType { get; set; }
 		public int gestureCount { get; set; }
 		public NSSet TouchSet { get; set; }
 		public int numTaps { get; set; }
@@ -59,10 +58,6 @@ namespace Aspyroad.iOSCore
 			{
 				handler(this, e);
 			} 
-			else
-			{
-				throw new NullReferenceException ("GlobalTouchEventHandler - handler cannot be null");
-			}
 		}
 
 		// There is a handy catch-all method in UIWindow called sendEvent: 
@@ -73,8 +68,20 @@ namespace Aspyroad.iOSCore
 		{
 			if (evt.Type == UIEventType.Touches)
 			{
+
+				UITapGestureRecognizer tapGesture = null;
+				UISwipeGestureRecognizer swipeGesture = null;
+				UIPinchGestureRecognizer pinchGesture = null;
+				UIPanGestureRecognizer panGesture = null;
+				UIRotationGestureRecognizer rotorGesture = null;
+
+
+
+
 				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
 				args.TouchSet = evt.AllTouches;
+
+
 
 				foreach (UITouch t in evt.AllTouches)
 				{
@@ -110,8 +117,10 @@ namespace Aspyroad.iOSCore
 			    base.MakeKeyWindow ();
 			}
 		}
-		
-	[MonoTouch.Foundation.Register("newView")]	
+
+	#region Testcode
+	// Commented out the class registration, no stubs are needed as its just a test.		
+	//[MonoTouch.Foundation.Register("newView")]	
 	public partial class newView : UIView
 	{
 
@@ -147,7 +156,7 @@ namespace Aspyroad.iOSCore
 		
 	}	
 	
-	[MonoTouch.Foundation.Register ("SevenButton")]
+	//[MonoTouch.Foundation.Register ("SevenButton")]
 	public class SevenButton : UIButton
 	{
 		// Required for the Xamarin iOS Desinger
@@ -188,4 +197,5 @@ namespace Aspyroad.iOSCore
 			context.FillRect (nb);
 		}
 	}
+	#endregion
 }
