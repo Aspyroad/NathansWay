@@ -14,7 +14,6 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
-
 #endregion
 
 namespace Aspyroad.iOSCore
@@ -37,22 +36,73 @@ namespace Aspyroad.iOSCore
 	[MonoTouch.Foundation.Register ("AspyWindow")]
 	public class AspyWindow : MonoTouch.UIKit.UIWindow
 	{
-		// Events
+		#region Events
 		public event GlobalTouchEventHandler SomeonesTouchingMeInMySpecialPlace;
-		
+		#endregion
+
+		#region Class Variables
+		private UITapGestureRecognizer _tapGesture = null;
+		private UISwipeGestureRecognizer _swipeGesture = null;
+		private UIPinchGestureRecognizer _pinchGesture = null;
+		private UIPanGestureRecognizer _panGesture = null;
+		private UIRotationGestureRecognizer _rotorGesture = null;
+		private UILongPressGestureRecognizer _longGesture = null;
+		#endregion
+
 		#region Constructors
 		
 		public AspyWindow ()
 		{
+			AspyWindowInit ();
 		}
 		public AspyWindow (IntPtr handle) : base(handle)
 		{
 		}
 		public AspyWindow (RectangleF myRect) : base(myRect)
-		{				
+		{	
+			AspyWindowInit();			
 		}
 			
-		#endregion			
+		#endregion
+
+		#region Action Delegates
+
+
+		#endregion
+
+		#region Public Variables
+
+		public UISwipeGestureRecognizer swipeGesture
+		{
+			get { return this._swipeGesture; }
+		}
+		public UITapGestureRecognizer tapGesture
+		{
+			get { return this._tapGesture; }
+		}
+		public UIPinchGestureRecognizer pinchGesture
+		{
+			get { return this._pinchGesture; }
+		}
+		public UIPanGestureRecognizer panGesture
+		{
+			get { return this._panGesture; }
+		}
+		public UIRotationGestureRecognizer rotorGesture
+		{
+			get { return this._rotorGesture; }
+		}
+		public UILongPressGestureRecognizer longGesture
+		{
+			get { return this._longGesture; }
+		}
+
+		#endregion
+
+		static private void AspyWindowInit()
+		{
+
+		}
 
 		protected virtual void IveBeenTouched (GlobalTouchEventArgs e)
 		{
@@ -63,7 +113,7 @@ namespace Aspyroad.iOSCore
 			} 
 		}
 
-		// There is a handy catch-all method in UIWindow called sendEvent: 
+		// Catch-all touches method in UIWindow called sendEvent: 
 		// which sees every event near the start of the event-handling pipeline. 
 		// If you want to do any non-standard additional event handling, 
 		// this is a good place to put it.
@@ -72,19 +122,8 @@ namespace Aspyroad.iOSCore
 			if (evt.Type == UIEventType.Touches)
 			{
 
-				UITapGestureRecognizer tapGesture = null;
-				UISwipeGestureRecognizer swipeGesture = null;
-				UIPinchGestureRecognizer pinchGesture = null;
-				UIPanGestureRecognizer panGesture = null;
-				UIRotationGestureRecognizer rotorGesture = null;
-
-
-
-
 				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
 				args.TouchSet = evt.AllTouches;
-
-
 
 				foreach (UITouch t in evt.AllTouches)
 				{
@@ -107,6 +146,38 @@ namespace Aspyroad.iOSCore
 				}
 			}
 			base.SendEvent (evt);
+		}
+
+		public void WireUpGestureRecognizer(Type gestureType, NSAction gestureAction)
+		{
+
+			switch (gestureType)
+			{
+				case _tapGesture.GetType():
+				{
+
+				}
+				case _swipeGesture.GetType():
+				{
+
+				}
+				case _longGesture.GetType():
+				{
+
+				}
+				case _pinchGesture.GetType():
+				{
+
+				}
+				case _panGesture.GetType():
+				{
+
+				}
+				case _rotorGesture.GetType():
+				{
+
+				}
+			}
 		}
 			
 		public override void MakeKeyWindow ()  

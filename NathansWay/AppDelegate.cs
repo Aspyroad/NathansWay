@@ -36,6 +36,7 @@ namespace NathansWay
 		// class-level declarations
 		AspyWindow window;
 		NathansWayViewController viewController;
+		NSAction swipeGesture;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -50,9 +51,12 @@ namespace NathansWay
 
 			//GameViewControl myGv = new GameViewControl ();
 			viewController = new NathansWayViewController ();
+
+			swipeGesture = new NSAction(printeswipe);
 			
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
+			window.WireUpGestureRecognizer(new UISwipeGestureRecognizer(), swipeGesture);
 			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
@@ -64,7 +68,15 @@ namespace NathansWay
 			viewController.lblTouchEvent.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
 			viewController.lblTouchEvent2.Text = strString.ToString();
+
         }
+
+
+
+		private void printeswipe ()
+		{
+			viewController.lblTouchEvent2.Text = "Swiped";
+		}
 	}
 }
 
