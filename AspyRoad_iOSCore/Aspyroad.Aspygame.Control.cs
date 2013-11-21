@@ -30,7 +30,6 @@ namespace AspyRoad.iOSCore
 		public NSSet TouchSet { get; set; }
 		public int numTaps { get; set; }
 		public double TimeReached { get; set; }		
-		//public 	
 	}
 
 	[MonoTouch.Foundation.Register ("AspyWindow")]
@@ -132,14 +131,18 @@ namespace AspyRoad.iOSCore
 					args.numTaps = t.TapCount;
 					args.UITouchObj = t;
 					args.TimeReached = t.Timestamp;
+					args.strGestureType = "No gesture";
 
 					//if (args.gestureCount == 1)
 					//{
-						foreach (UIGestureRecognizer g in t.GestureRecognizers)
+					foreach (UIGestureRecognizer g in t.GestureRecognizers)
+					{
+						var myType = g.GetType();
+						if (myType.Name.Length > 0)
 						{
-							var myType = g.GetType ();
-						    args.strGestureType = myType.Name;						
+							args.strGestureType = myType.Name;						
 						}
+					}
 					//}	 
 
 
@@ -156,27 +159,34 @@ namespace AspyRoad.iOSCore
 			{			
 				case AspyUtilities.GestureTypes.UITap: //Tap
 				{
-					
+					this._tapGesture = new UITapGestureRecognizer(gestureAction);
+					this.AddGestureRecognizer(this._tapGesture);
+					break;
 				}
 				case AspyUtilities.GestureTypes.UIPinch: //Pinch
 				{
-
+					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
+					break;
 				}
 				case AspyUtilities.GestureTypes.UIPan: //Pan
 				{
-
+					this._panGesture = new UIPanGestureRecognizer(gestureAction);
+					break;
 				}
 				case AspyUtilities.GestureTypes.UISwipe: //Swipe
 				{
-
+					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
+					break;
 				}
 				case AspyUtilities.GestureTypes.UIRotation: //Rotation
 				{
-
+					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
+					break;
 				}
 				case AspyUtilities.GestureTypes.UILongPress: //Longpress
 				{
-
+					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
+					break;
 				}
 			}
 		}
