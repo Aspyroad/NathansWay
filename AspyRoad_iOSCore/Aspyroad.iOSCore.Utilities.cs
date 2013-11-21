@@ -19,8 +19,7 @@ namespace AspyRoad.iOSCore
 			get { return _instance; }
 	    }
 	    
-	    static readonly AspyUtilities _instance = new AspyUtilities ();
-		
+	    static readonly AspyUtilities _instance = new AspyUtilities ();		
 		
 		public static PointF CGPointMake (float x, float y)
 			{
@@ -29,6 +28,16 @@ namespace AspyRoad.iOSCore
 			    p.Y = y; 
 			    return p;
 			}	
+			
+		public enum GestureTypes
+		{
+			UITap = 0,
+			UIPinch = 1,
+			UIPan = 2,
+			UISwipe = 3,
+			UIRotation = 4,
+			UILongPress = 5		
+		}	
 	}
 }
 

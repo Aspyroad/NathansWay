@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using Aspyroad;
 using NathansWay.Numeracy.iOS;
-using Aspyroad.iOSCore;
+using AspyRoad.iOSCore;
 
 namespace NathansWay
 {
@@ -56,7 +55,7 @@ namespace NathansWay
 			
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
-			window.WireUpGestureRecognizer(new UISwipeGestureRecognizer(), swipeGesture);
+			window.WireUpGestureRecognizer(AspyUtilities.GestureTypes.UISwipe, swipeGesture);
 			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
@@ -70,8 +69,6 @@ namespace NathansWay
 			viewController.lblTouchEvent2.Text = strString.ToString();
 
         }
-
-
 
 		private void printeswipe ()
 		{

@@ -16,7 +16,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 #endregion
 
-namespace Aspyroad.iOSCore
+namespace AspyRoad.iOSCore
 {
 	// Aspy Delegates
 	public delegate void GlobalTouchEventHandler (Object sender, GlobalTouchEventArgs e);
@@ -47,6 +47,7 @@ namespace Aspyroad.iOSCore
 		private UIPanGestureRecognizer _panGesture = null;
 		private UIRotationGestureRecognizer _rotorGesture = null;
 		private UILongPressGestureRecognizer _longGesture = null;
+		
 		#endregion
 
 		#region Constructors
@@ -148,32 +149,32 @@ namespace Aspyroad.iOSCore
 			base.SendEvent (evt);
 		}
 
-		public void WireUpGestureRecognizer(Type gestureType, NSAction gestureAction)
+		public void WireUpGestureRecognizer(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
 		{
 
-			switch (gestureType)
-			{
-				case _tapGesture.GetType():
+			switch (gestype)
+			{			
+				case AspyUtilities.GestureTypes.UITap: //Tap
+				{
+					
+				}
+				case AspyUtilities.GestureTypes.UIPinch: //Pinch
 				{
 
 				}
-				case _swipeGesture.GetType():
+				case AspyUtilities.GestureTypes.UIPan: //Pan
 				{
 
 				}
-				case _longGesture.GetType():
+				case AspyUtilities.GestureTypes.UISwipe: //Swipe
 				{
 
 				}
-				case _pinchGesture.GetType():
+				case AspyUtilities.GestureTypes.UIRotation: //Rotation
 				{
 
 				}
-				case _panGesture.GetType():
-				{
-
-				}
-				case _rotorGesture.GetType():
+				case AspyUtilities.GestureTypes.UILongPress: //Longpress
 				{
 
 				}
