@@ -26,7 +26,8 @@
 
 // Here’s what the UIWindow subclass could look like:
  
-@interface CTTouchInterceptingWindow : UIWindow {
+@interface CTTouchInterceptingWindow : UIWindow 
+{
     NSMutableArray *views;
  
     @private
@@ -41,32 +42,47 @@
  
 @implementation CTTouchInterceptingWindow
  
-- (void)dealloc {
+- (void)dealloc 
+{
     if ( views ) [views release];
     [super dealloc];
 }
  
-- (void)addViewForTouchPriority:(UIView*)view {
-    if ( !views ) views = [[NSMutableArray alloc] init];
+- (void)addViewForTouchPriority:(UIView*)view 
+{
+    if ( !views ) 
+    {
+        views = [[NSMutableArray alloc] init];
+    }
     [views addObject:view];
 }
-- (void)removeViewForTouchPriority:(UIView*)view {
-    if ( !views ) return;
+- (void)removeViewForTouchPriority:(UIView*)view 
+{
+
+    if ( !views ) 
+    {
+        return;
+    }
     [views removeObject:view];
 }
  
-- (void)sendEvent:(UIEvent *)event {
-    if ( !views || [views count] == 0 ) {
+- (void)sendEvent:(UIEvent *)event 
+{
+    if ( !views || [views count] == 0 ) 
+    {
         [super sendEvent:event];
         return;
     }
  
     UITouch *touch = [[event allTouches] anyObject];
  
-    switch ( touch.phase ) {
+    switch ( touch.phase ) 
+    {
         case UITouchPhaseBegan:
-            for ( UIView *view in views ) {
-                if ( CGRectContainsPoint([view frame], [touch locationInView:[view superview]]) ) {
+            for ( UIView *view in views ) 
+            {
+                if ( CGRectContainsPoint([view frame], [touch locationInView:[view superview]]) ) 
+                {
                     touchView = view;
                     [touchView touchesBegan:[event allTouches] withEvent:event];
                     return;
@@ -74,20 +90,23 @@
             }
             break;
         case UITouchPhaseMoved:
-            if ( touchView ) {
+            if ( touchView ) 
+            {
                 [touchView touchesMoved:[event allTouches] withEvent:event];
                 return;
             }
             break;
         case UITouchPhaseCancelled:
-            if ( touchView ) {
+            if ( touchView ) 
+            {
                 [touchView touchesCancelled:[event allTouches] withEvent:event];
                 return;
             }
             touchView = nil;
             break;
         case UITouchPhaseEnded:
-            if ( touchView ) {
+            if ( touchView ) 
+            {
                 [touchView touchesEnded:[event allTouches] withEvent:event];
                 return;
             }

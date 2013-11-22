@@ -98,7 +98,9 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
-
+		
+		#region Private Members
+		
 		static private void AspyWindowInit()
 		{
 
@@ -112,11 +114,9 @@ namespace AspyRoad.iOSCore
 				handler(this, e);
 			} 
 		}
+		
+		#endregion
 
-		// Catch-all touches method in UIWindow called sendEvent: 
-		// which sees every event near the start of the event-handling pipeline. 
-		// If you want to do any non-standard additional event handling, 
-		// this is a good place to put it.
 		public override void SendEvent (UIEvent evt)
 		{
 			if (evt.Type == UIEventType.Touches)
@@ -152,44 +152,69 @@ namespace AspyRoad.iOSCore
 			base.SendEvent (evt);
 		}
 
-		public void WireUpGestureRecognizer(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		public void WireUpGestureToWindow(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
 		{
-
+			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
+		}
+		
+		public void WireUpGestureToView(AspyUtilities.GestureTypes gestype, NSAction gestureAction, UIView gestureView)
+		{
+			gestureView.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
+		}	
+		
+		public void RemoveGestureRecogniser(AspyUtilities.GestureTypes gestype, UIView gestureView)
+		{
+			if (gestureView == null)
+			{
+				//this.
+			}
+		}	
+	
+		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		{
 			switch (gestype)
 			{			
 				case AspyUtilities.GestureTypes.UITap: //Tap
 				{
 					this._tapGesture = new UITapGestureRecognizer(gestureAction);
-					this.AddGestureRecognizer(this._tapGesture);
-					break;
+					//this.AddGestureRecognizer(this._tapGesture);
+					return this._tapGesture;					
 				}
 				case AspyUtilities.GestureTypes.UIPinch: //Pinch
 				{
 					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
-					break;
+					//this.AddGestureRecognizer (this._pinchGesture);					
+					return this._tapGesture;
 				}
 				case AspyUtilities.GestureTypes.UIPan: //Pan
 				{
 					this._panGesture = new UIPanGestureRecognizer(gestureAction);
-					break;
+					//this.AddGestureRecognizer(this._panGesture);
+					return this._tapGesture;
 				}
 				case AspyUtilities.GestureTypes.UISwipe: //Swipe
 				{
 					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
-					break;
+					//this.AddGestureRecognizer(this._swipeGesture);
+					return this._tapGesture;
 				}
 				case AspyUtilities.GestureTypes.UIRotation: //Rotation
 				{
 					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
-					break;
+					//this.AddGestureRecognizer(this._rotorGesture);
+					return this._tapGesture;
 				}
-				case AspyUtilities.GestureTypes.UILongPress: //Longpress
+			    case AspyUtilities.GestureTypes.UILongPress: //Longpress
 				{
-					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
-					break;
-				}
+					this._longGesture = new UILongPressGestureRecognizer (gestureAction);
+					//this.AddGestureRecognizer(this._longGesture);
+					return this._tapGesture;
+				}				
 			}
+			
+			return new UIGestureRecognizer ();
 		}
+		
 			
 		public override void MakeKeyWindow ()  
 		{		

@@ -55,7 +55,7 @@ namespace NathansWay
 			
 			window.RootViewController = viewController;
 			window.MakeKeyAndVisible ();
-			window.WireUpGestureRecognizer(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			window.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture, viewController.View);
 			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
@@ -66,8 +66,6 @@ namespace NathansWay
 			string strString = "";
 			viewController.lblTouchEvent.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
-			//viewController.lblTouchEvent2.Text = strString.ToString();
-
         }
 
 		private void printeswipe ()
