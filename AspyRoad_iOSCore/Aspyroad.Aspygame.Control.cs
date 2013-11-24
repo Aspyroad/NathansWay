@@ -114,8 +114,55 @@ namespace AspyRoad.iOSCore
 				handler(this, e);
 			} 
 		}
+
+		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		{
+			switch (gestype)
+			{			
+				case AspyUtilities.GestureTypes.UITap: //Tap
+					{
+						this._tapGesture = new UITapGestureRecognizer(gestureAction);
+						//this.AddGestureRecognizer(this._tapGesture);
+						return this._tapGesture;					
+					}
+				case AspyUtilities.GestureTypes.UIPinch: //Pinch
+					{
+						this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
+						//this.AddGestureRecognizer (this._pinchGesture);					
+						return this._tapGesture;
+					}
+				case AspyUtilities.GestureTypes.UIPan: //Pan
+					{
+						this._panGesture = new UIPanGestureRecognizer(gestureAction);
+						//this.AddGestureRecognizer(this._panGesture);
+						return this._tapGesture;
+					}
+				case AspyUtilities.GestureTypes.UISwipe: //Swipe
+					{
+						this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
+						//this.AddGestureRecognizer(this._swipeGesture);
+						return this._tapGesture;
+					}
+				case AspyUtilities.GestureTypes.UIRotation: //Rotation
+					{
+						this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
+						//this.AddGestureRecognizer(this._rotorGesture);
+						return this._tapGesture;
+					}
+				case AspyUtilities.GestureTypes.UILongPress: //Longpress
+					{
+						this._longGesture = new UILongPressGestureRecognizer (gestureAction);
+						//this.AddGestureRecognizer(this._longGesture);
+						return this._tapGesture;
+					}				
+			}
+
+			return new UIGestureRecognizer ();
+		}
 		
 		#endregion
+
+		#region Public Members
 
 		public override void SendEvent (UIEvent evt)
 		{
@@ -169,68 +216,8 @@ namespace AspyRoad.iOSCore
 				//this.
 			}
 		}	
-	
-		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
-		{
-			switch (gestype)
-			{			
-				case AspyUtilities.GestureTypes.UITap: //Tap
-				{
-					this._tapGesture = new UITapGestureRecognizer(gestureAction);
-					//this.AddGestureRecognizer(this._tapGesture);
-					return this._tapGesture;					
-				}
-				case AspyUtilities.GestureTypes.UIPinch: //Pinch
-				{
-					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
-					//this.AddGestureRecognizer (this._pinchGesture);					
-					return this._tapGesture;
-				}
-				case AspyUtilities.GestureTypes.UIPan: //Pan
-				{
-					this._panGesture = new UIPanGestureRecognizer(gestureAction);
-					//this.AddGestureRecognizer(this._panGesture);
-					return this._tapGesture;
-				}
-				case AspyUtilities.GestureTypes.UISwipe: //Swipe
-				{
-					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
-					//this.AddGestureRecognizer(this._swipeGesture);
-					return this._tapGesture;
-				}
-				case AspyUtilities.GestureTypes.UIRotation: //Rotation
-				{
-					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
-					//this.AddGestureRecognizer(this._rotorGesture);
-					return this._tapGesture;
-				}
-			    case AspyUtilities.GestureTypes.UILongPress: //Longpress
-				{
-					this._longGesture = new UILongPressGestureRecognizer (gestureAction);
-					//this.AddGestureRecognizer(this._longGesture);
-					return this._tapGesture;
-				}				
-			}
-			
-			return new UIGestureRecognizer ();
-		}
-		
-			
-		public override void MakeKeyWindow ()  
-		{		
-//			RectangleF myFrame;
-//			SevenButton myButton;
-//			myFrame = new RectangleF (50, 50, 100, 100);
-//			//			
-//			myButton = new SevenButton();
-//			myButton.Draw (myFrame);
-//			myButton.SetBackGroundColor (UIColor.DarkGray);				
-//			//				
-//			    var myVC = this.RootViewController;	
-//			    myVC.View.AddSubview (myButton);
-			    base.MakeKeyWindow ();
-			}
-		}
+
+		#endregion				
 
 	#region Testcode
 	// Commented out the class registration, no stubs are needed as its just a test.		
@@ -263,12 +250,26 @@ namespace AspyRoad.iOSCore
 		
 			myButton2.Draw (myFrame2);	
 			//base.Draw (rect);			
-		}
-		
-		
-		
+		}	
 		
 	}	
+	
+	//		public override void MakeKeyWindow ()  
+	//		{		
+	//			RectangleF myFrame;
+	//			SevenButton myButton;
+	//			myFrame = new RectangleF (50, 50, 100, 100);
+	//					
+	//			myButton = new SevenButton();
+	//			myButton.Draw (myFrame);
+	//			myButton.SetBackGroundColor (UIColor.DarkGray);				
+	//						
+	//			var myVC = this.RootViewController;	
+	//			myVC.View.AddSubview (myButton);
+	//		    base.MakeKeyWindow ();
+	//		}
+
+	}
 	
 	//[MonoTouch.Foundation.Register ("SevenButton")]
 	public class SevenButton : UIButton
