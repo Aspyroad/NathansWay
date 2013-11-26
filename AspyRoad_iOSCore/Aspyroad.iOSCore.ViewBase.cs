@@ -190,5 +190,32 @@ namespace AspyRoad.iOSCore
 
 
 	}
+			
+	[MonoTouch.Foundation.Register("AspyView")]	
+	public partial class AspyView : UIView
+	{
+		
+		#region Contructors
+		
+		public AspyView (RectangleF myFrame) : base (myFrame)
+		{	
+		}
+		
+		public AspyView (IntPtr handle) : base(handle)
+		{
+		}	
+		
+		#endregion
+		
+		#region Public Memebers
+		
+		public void WireUpGestureToView(AspyUtilities.GestureTypes gestype, NSAction gestureAction, UIView gestureView)
+		{
+			gestureView.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
+		}	
+			
+		#endregion			
+		
+	}	
 }
 
