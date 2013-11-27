@@ -20,7 +20,7 @@ namespace AspyRoad.iOSCore
 	    }
 	    
 	    static readonly AspyUtilities _instance = new AspyUtilities ();		
-		
+
 		public static PointF CGPointMake (float x, float y)
 			{
 			    PointF p = new PointF(); 
@@ -28,7 +28,8 @@ namespace AspyRoad.iOSCore
 			    p.Y = y; 
 			    return p;
 			}	
-			
+
+		//[MonoTouch.Foundation.Export("GestureTypes")]	
 		public enum GestureTypes
 		{
 			UITap = 0,

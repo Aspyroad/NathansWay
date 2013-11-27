@@ -87,10 +87,6 @@
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Hammer\ToolBox.iOS.Hammer.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.designer.cs">
-      <DependentUpon>NathansWayViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.designer.cs">
       <DependentUpon>MenuMainViewController.cs</DependentUpon>
@@ -102,11 +98,15 @@
     <Compile Include="CustomSlideSegue.designer.cs">
       <DependentUpon>CustomSlideSegue.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.designer.cs">
+      <DependentUpon>QAView.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\NathansWayViewController.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBord.storyboard" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -123,5 +123,6 @@
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\.DS_Store" />
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\Menu\.DS_Store" />
     <BundleResource Include="Resources\.DS_Store" />
+    <BundleResource Include="Resources\Default-568h%402x.png" />
   </ItemGroup>
 </Project>

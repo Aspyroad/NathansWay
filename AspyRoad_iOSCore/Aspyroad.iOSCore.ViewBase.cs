@@ -3,7 +3,7 @@ using System.Drawing;
 using AspyRoad.iOSCore;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
-
+using MonoTouch.ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
@@ -194,26 +194,139 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspyView")]	
 	public partial class AspyView : UIView
 	{
-		
+
+		#region Class Variables
+		private UITapGestureRecognizer _tapGesture = null;
+		private UISwipeGestureRecognizer _swipeGesture = null;
+		private UIPinchGestureRecognizer _pinchGesture = null;
+		private UIPanGestureRecognizer _panGesture = null;
+		private UIRotationGestureRecognizer _rotorGesture = null;
+		private UILongPressGestureRecognizer _longGesture = null;		
+		#endregion
+
 		#region Contructors
-		
-		public AspyView (RectangleF myFrame) : base (myFrame)
-		{	
-		}
-		
+
 		public AspyView (IntPtr handle) : base(handle)
 		{
+
 		}	
+		public AspyView ()
+		{
+
+
+
+
+		}
+
 		
 		#endregion
-		
-		#region Public Memebers
-		
-		public void WireUpGestureToView(AspyUtilities.GestureTypes gestype, NSAction gestureAction, UIView gestureView)
+
+		#region Public Variables
+
+		public UISwipeGestureRecognizer swipeGesture
 		{
-			gestureView.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
+			get { return this._swipeGesture; }
+		}
+		public UITapGestureRecognizer tapGesture
+		{
+			get { return this._tapGesture; }
+		}
+		public UIPinchGestureRecognizer pinchGesture
+		{
+			get { return this._pinchGesture; }
+		}
+		public UIPanGestureRecognizer panGesture
+		{
+			get { return this._panGesture; }
+		}
+		public UIRotationGestureRecognizer rotorGesture
+		{
+			get { return this._rotorGesture; }
+		}
+		public UILongPressGestureRecognizer longGesture
+		{
+			get { return this._longGesture; }
+		}
+
+		#endregion
+
+		#region Public Members
+
+		//[MonoTouch.Foundation.Action("WireUpGestureToView")]
+		public void WireUpGestureToView(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		{
+			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
 		}	
-			
+
+		public void RemoveGestureFromWindow(AspyUtilities.GestureTypes gestype)
+		{
+		}
+
+		
+		#endregion
+
+		#region Private Members
+
+		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		{
+			UIGestureRecognizer returnedGesture;
+
+			switch (gestype)
+			{			
+				case AspyUtilities.GestureTypes.UITap: //Tap
+					{
+						this._tapGesture = new UITapGestureRecognizer(gestureAction);
+						returnedGesture = this._tapGesture;		
+						break;			
+					}
+				case AspyUtilities.GestureTypes.UIPinch: //Pinch
+					{
+						this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
+						returnedGesture = this._pinchGesture;	
+						break;
+					}
+				case AspyUtilities.GestureTypes.UIPan: //Pan
+					{
+						this._panGesture = new UIPanGestureRecognizer(gestureAction);
+						returnedGesture = this._panGesture;	
+						break;
+					}
+				case AspyUtilities.GestureTypes.UISwipe: //Swipe
+					{
+						this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
+						returnedGesture = this._swipeGesture;	
+						break;
+					}
+				case AspyUtilities.GestureTypes.UIRotation: //Rotation
+					{
+						this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
+						returnedGesture = this._rotorGesture;	
+						break;
+					}
+				case AspyUtilities.GestureTypes.UILongPress: //Longpress
+					{
+						this._longGesture = new UILongPressGestureRecognizer (gestureAction);
+						returnedGesture = this._longGesture;	
+						break;
+					}
+				default:
+					{
+						returnedGesture = null;
+						break;
+					}					
+			}
+
+			if (returnedGesture == null)
+			{
+				throw new NullReferenceException("Erroe creating gesture");
+			}
+			else
+			{
+				return returnedGesture;
+			}
+		}
+
+
 		#endregion			
 		
 	}	

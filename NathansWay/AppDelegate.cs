@@ -5,6 +5,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using NathansWay.Numeracy.iOS;
 using AspyRoad.iOSCore;
+using NathansWay.WorkSpace;
 
 namespace NathansWay
 {
@@ -34,7 +35,7 @@ namespace NathansWay
 		private const string VersionFileName = "version.dat";
 		// class-level declarations
 		AspyWindow window;
-		NathansWayViewController viewController;
+		QAView viewController;
 		NSAction swipeGesture;
 
 		//
@@ -49,28 +50,30 @@ namespace NathansWay
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 
 			//GameViewControl myGv = new GameViewControl ();
-			viewController = new NathansWayViewController ();
+			viewController = new QAView();
 
 			swipeGesture = new NSAction(printeswipe);
-			
+
 			window.RootViewController = viewController;
+
+			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			//viewController.mainQAView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
 			window.MakeKeyAndVisible ();
-			window.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture, viewController.View);
 			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
-		
+
 		// Function which will be exectuted whne the event fires. 
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
         {
 			string strString = "";
-			viewController.lblTouchEvent.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			viewController.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
         }
 
 		private void printeswipe ()
 		{
-			viewController.lblTouchEvent2.Text = "Swiped";
+			viewController.Q2.Text = "Swiped";
 		}
 	}
 }
