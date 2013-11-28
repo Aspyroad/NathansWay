@@ -102,6 +102,7 @@
     <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.designer.cs">
       <DependentUpon>QAView.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.xib" />
