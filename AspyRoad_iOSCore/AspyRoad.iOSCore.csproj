@@ -47,5 +47,6 @@
     <Compile Include="Aspyroad.iOSCore.ViewBase.cs" />
     <Compile Include="Aspyroad.iOSCore.Utilities.cs" />
     <Compile Include="Aspyroad.iOSCore.Window.cs" />
+    <Compile Include="Aspyroad.iOSCore.ViewController.cs" />
   </ItemGroup>
 </Project>

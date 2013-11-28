@@ -7,44 +7,36 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.WorkSpace
 {
-    public partial class QAView : UIViewController
+	public partial class QAViewController : UIViewController
     {
 		private vwQAWorkSpace vwQAView;
 
-		public QAView() : base("QAView", null)
+		//public QAViewController() : base("QAView", null)
+		public QAViewController()
         {
-
         }
 
-        public override void DidReceiveMemoryWarning()
-        {
-            // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();
-			
-            // Release any cached data, images, etc that aren't in use.
-        }
+		public override void DidReceiveMemoryWarning()
+		{
+			base.DidReceiveMemoryWarning();
+		}
+
+
+		public override void LoadView()
+		{
+			//base.LoadView();
+			vwQAView = new vwQAWorkSpace ();
+			View = vwQAView;
+		}
 
         public override void ViewDidLoad()
         {
+
             base.ViewDidLoad();
 
-			vwQAView = new vwQAWorkSpace ();
-			View.AddSubview (vwQAView);
-			
             // Perform any additional setup after loading the view, typically from a nib.
         }
 
-		public vwQAWorkSpace xibViewLayer
-		{
-			get { return this.vwQAView; }
-		}
-		public UILabel Q1
-		{
-			get { return this.Q1; }
-		}
-		public UILabel Q2
-		{
-			get { return this.Q2; }
-		}
+
     }
 }        

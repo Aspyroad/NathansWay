@@ -28,8 +28,8 @@
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <connections>
-                <outlet property="q1" destination="NaM-Zo-8Yq" id="j55-GO-p2a"/>
-                <outlet property="q2" destination="ZFh-jd-0OQ" id="Geq-tA-Diw"/>
+                <outlet property="lbl1" destination="NaM-Zo-8Yq" id="W2z-IT-dzO"/>
+                <outlet property="lbl2" destination="ZFh-jd-0OQ" id="GzP-Hf-Yi2"/>
             </connections>
         </view>
     </objects>

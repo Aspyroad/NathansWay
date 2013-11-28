@@ -10,24 +10,24 @@ using System.CodeDom.Compiler;
 namespace NathansWay.WorkSpace
 {
 	[Register ("vwQAWorkSpace")]
-	partial class vwQAWorkSpace
+	public partial class vwQAWorkSpace
 	{
 		[Outlet]
-		MonoTouch.UIKit.UILabel q1 { get; set; }
+		MonoTouch.UIKit.UILabel lbl1 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel q2 { get; set; }
+		MonoTouch.UIKit.UILabel lbl2 { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
-			if (q1 != null) {
-				q1.Dispose ();
-				q1 = null;
+			if (lbl1 != null) {
+				lbl1.Dispose ();
+				lbl1 = null;
 			}
 
-			if (q2 != null) {
-				q2.Dispose ();
-				q2 = null;
+			if (lbl2 != null) {
+				lbl2.Dispose ();
+				lbl2 = null;
 			}
 		}
 	}

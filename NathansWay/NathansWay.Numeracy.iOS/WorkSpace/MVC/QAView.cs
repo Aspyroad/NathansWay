@@ -14,12 +14,21 @@ namespace NathansWay.WorkSpace
 		{
 		}
 
-		public vwQAWorkSpace()
+		public vwQAWorkSpace() : base ()
 		{
-			var arr = NSBundle.MainBundle.LoadNib("QAView", this, null);
-			var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
-			v.Frame = UIScreen.MainScreen.Bounds;
-			this.AddSubview(v);
+			UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
+			var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
+			//var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
+			//v.Frame = UIScreen.MainScreen.Bounds;
+		}
+
+		public UILabel Q1
+		{
+			get { return this.lbl1; }
+		}
+		public UILabel Q2
+		{
+			get { return this.lbl2; }
 		}
 
 	}

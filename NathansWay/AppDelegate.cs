@@ -35,7 +35,7 @@ namespace NathansWay
 		private const string VersionFileName = "version.dat";
 		// class-level declarations
 		AspyWindow window;
-		QAView viewController;
+		QAViewController viewController;
 		NSAction swipeGesture;
 
 		//
@@ -49,17 +49,16 @@ namespace NathansWay
 		{
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 
-			//GameViewControl myGv = new GameViewControl ();
-			viewController = new QAView();
+			viewController = new QAViewController();
 
 			swipeGesture = new NSAction(printeswipe);
 
 			window.RootViewController = viewController;
 
-			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
-			//viewController.mainQAView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			viewController.View.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
 			window.MakeKeyAndVisible ();
-			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
+			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 
@@ -67,13 +66,13 @@ namespace NathansWay
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
         {
 			string strString = "";
-			viewController.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			//viewController.View..Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
         }
 
 		private void printeswipe ()
 		{
-			viewController.Q2.Text = "Swiped";
+			//viewController.Q2.Text = "Swiped";
 		}
 	}
 }
