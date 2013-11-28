@@ -17,7 +17,17 @@ namespace AspyRoad.iOSCore
 		{
 		}
 
-		public override View 
+//		public override AspyView View
+//		{
+//			get
+//			{
+//				return base.View;
+//			}
+//			set
+//			{
+//				base.View = value;
+//			}
+//		}
 
 
 	}

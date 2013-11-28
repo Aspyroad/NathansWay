@@ -20,15 +20,30 @@ namespace NathansWay.WorkSpace
 			var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
 			//var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
 			//v.Frame = UIScreen.MainScreen.Bounds;
+			this.AddSubview(v);
+			//this.UserInteractionEnabled = true;
+		}
+
+//		public UILabel Q1
+//		{
+//			get { return this.lbl1; }
+//
+//		}
+		public UILabel Q2
+		{
+			get { return this.lbl2; }
 		}
 
 		public UILabel Q1
 		{
-			get { return this.lbl1; }
-		}
-		public UILabel Q2
-		{
-			get { return this.lbl2; }
+			get
+			{
+				return this.lbl1;
+			}
+			set
+			{
+				lbl1 = value;
+			}
 		}
 
 	}

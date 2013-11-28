@@ -7,7 +7,7 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.WorkSpace
 {
-	public partial class QAViewController : UIViewController
+	public partial class QAViewController : AspyViewController
     {
 		private vwQAWorkSpace vwQAView;
 
@@ -27,6 +27,7 @@ namespace NathansWay.WorkSpace
 			//base.LoadView();
 			vwQAView = new vwQAWorkSpace ();
 			View = vwQAView;
+			View.BringSubviewToFront(vwQAView);
 		}
 
         public override void ViewDidLoad()
@@ -36,6 +37,11 @@ namespace NathansWay.WorkSpace
 
             // Perform any additional setup after loading the view, typically from a nib.
         }
+
+		public vwQAWorkSpace QAWorkSpaceView
+		{
+			get { return this.vwQAView; }
+		}
 
 
     }

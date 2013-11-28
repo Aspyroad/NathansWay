@@ -55,9 +55,12 @@ namespace NathansWay
 
 			window.RootViewController = viewController;
 
-			window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
-			viewController.View.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
 			window.MakeKeyAndVisible ();
+
+			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			viewController.View.BackgroundColor = UIColor.Brown;
+
 			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
@@ -66,13 +69,13 @@ namespace NathansWay
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
         {
 			string strString = "";
-			//viewController.View..Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
         }
 
 		private void printeswipe ()
 		{
-			//viewController.Q2.Text = "Swiped";
+			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 	}
 }
