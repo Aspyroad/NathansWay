@@ -7,44 +7,29 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.WorkSpace
 {
-	public partial class vwQAWorkSpace : AspyView
+	public partial class vwQAWorkSpace : UIView
 	{
 
 		public vwQAWorkSpace(IntPtr h): base (h)
 		{
 		}
 
-		public vwQAWorkSpace() : base ()
+		public vwQAWorkSpace(RectangleF rf) : base (rf)
 		{
-			UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
-			var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
-			//var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
-			//v.Frame = UIScreen.MainScreen.Bounds;
-			this.AddSubview(v);
-			//this.UserInteractionEnabled = true;
+			#region NIB Load Method 1
+			//UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
+			//var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
+			#endregion
+
+			#region NIB Load Method 2
+			var arr = NSBundle.MainBundle.LoadNib("QAView", this, null);
+			var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
+			#endregion
+
+			v.Frame = UIScreen.MainScreen.Bounds;
+			AddSubview(v);
 		}
 
-//		public UILabel Q1
-//		{
-//			get { return this.lbl1; }
-//
-//		}
-		public UILabel Q2
-		{
-			get { return this.lbl2; }
-		}
-
-		public UILabel Q1
-		{
-			get
-			{
-				return this.lbl1;
-			}
-			set
-			{
-				lbl1 = value;
-			}
-		}
 
 	}
 }

@@ -13,10 +13,10 @@ namespace NathansWay.WorkSpace
 	public partial class vwQAWorkSpace
 	{
 		[Outlet]
-		MonoTouch.UIKit.UILabel lbl1 { get; set; }
+		public MonoTouch.UIKit.UILabel lbl1 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UILabel lbl2 { get; set; }
+		public MonoTouch.UIKit.UILabel lbl2 { get; set; }
 		
 		void ReleaseDesignerOutlets ()
 		{
