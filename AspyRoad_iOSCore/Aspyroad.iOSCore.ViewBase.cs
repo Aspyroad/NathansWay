@@ -208,16 +208,10 @@ namespace AspyRoad.iOSCore
 
 		public AspyView (IntPtr handle) : base(handle)
 		{
-
 		}	
 		public AspyView ()
 		{
-
-
-
-
 		}
-
 		
 		#endregion
 
@@ -318,7 +312,7 @@ namespace AspyRoad.iOSCore
 
 			if (returnedGesture == null)
 			{
-				throw new NullReferenceException("Erroe creating gesture");
+				throw new NullReferenceException("Error creating gesture");
 			}
 			else
 			{

@@ -35,8 +35,8 @@ namespace NathansWay
 		private const string VersionFileName = "version.dat";
 		// class-level declarations
 		//AspyWindow window;
-		UIWindow window;
-		TestAppViewController viewController;
+		AspyWindow window;
+		QAViewController viewController;
 		NSAction swipeGesture;
 
 		//
@@ -49,9 +49,9 @@ namespace NathansWay
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			//window = new AspyWindow (UIScreen.MainScreen.Bounds);
-			window = new UIWindow(UIScreen.MainScreen.Bounds);
+			window = new AspyWindow(UIScreen.MainScreen.Bounds);
 
-			viewController = new TestAppViewController();
+			viewController = new QAViewController();
 
 			swipeGesture = new NSAction(printeswipe);
 
@@ -60,10 +60,10 @@ namespace NathansWay
 			window.MakeKeyAndVisible ();
 
 			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
-			//viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
-			viewController.View.BackgroundColor = UIColor.Brown;
+			viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			//viewController.View = UIColor.Brown;
 
-			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
+			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 
@@ -71,13 +71,13 @@ namespace NathansWay
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
         {
 			string strString = "";
-			//viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
         }
 
 		private void printeswipe ()
 		{
-			//.QAWorkSpaceView.Q2.Text = "Swiped";
+			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 	}
 }

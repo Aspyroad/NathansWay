@@ -7,14 +7,14 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.WorkSpace
 {
-	public partial class vwQAWorkSpace : UIView
+	public partial class vwQAWorkSpace : AspyView
 	{
 
 		public vwQAWorkSpace(IntPtr h): base (h)
 		{
 		}
 
-		public vwQAWorkSpace(RectangleF rf) : base (rf)
+		public vwQAWorkSpace(RectangleF rf)
 		{
 			#region NIB Load Method 1
 			//UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
@@ -29,6 +29,32 @@ namespace NathansWay.WorkSpace
 			v.Frame = UIScreen.MainScreen.Bounds;
 			AddSubview(v);
 		}
+		
+		#region UI Objects
+		public UILabel Q1
+		{
+			get
+			{
+				return this.lbl1;
+			}
+			set
+			{
+				this.lbl1 = value;
+			}
+		}
+		
+		public UILabel Q2
+		{
+			get
+			{
+				return this.lbl2;
+			}
+			set
+			{
+				this.lbl2 = value;
+			}
+		}
+		#endregion
 
 
 	}
