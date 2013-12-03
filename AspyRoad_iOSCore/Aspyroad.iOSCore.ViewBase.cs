@@ -7,7 +7,8 @@ using MonoTouch.ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-	public class aspySlidingSegue : UIStoryboardSegue
+	[MonoTouch.Foundation.Register("AspySlidingSegue")]	
+	public class AspySlidingSegue : UIStoryboardSegue
 	{
 		private const double kAnimationDuration = 0.5;
 
@@ -320,9 +321,7 @@ namespace AspyRoad.iOSCore
 			}
 		}
 
-
 		#endregion			
 		
 	}	
 }
-

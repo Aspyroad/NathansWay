@@ -5,6 +5,7 @@ using MonoTouch.UIKit;
 
 namespace AspyRoad.iOSCore
 {
+	[MonoTouch.Foundation.Register("AspyViewController")]	
 	public class AspyViewController : UIViewController
 	{
 	

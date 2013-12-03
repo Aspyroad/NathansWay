@@ -31,7 +31,6 @@ namespace AspyRoad.iOSCore
 		public double TimeReached { get; set; }		
 	}
 
-	[MonoTouch.Foundation.Register ("AspyWindow")]
 	public class AspyWindow : MonoTouch.UIKit.UIWindow
 	{
 		#region Events
