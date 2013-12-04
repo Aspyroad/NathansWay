@@ -2,12 +2,13 @@ using System;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using AspyRoad.iOSCore;
 
-namespace MenuMainViewController
+namespace NathansWay.Numeracy.iOS.Menu
 {
-	public partial class MenuMain : UIViewController
+	public partial class vcMenu1Start : AspyViewController
 	{
-		public MenuMain () : base ("MenuMain", null)
+		public vcMenu1Start () : base ("MenuMain", null)
 		{
 		}
 
@@ -25,6 +26,14 @@ namespace MenuMainViewController
 			
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
+
+		partial void btnTestSegue(NSObject sender)
+		{
+			//this.PerformSegue(
+		}
+
+		
+
 	}
 }
 

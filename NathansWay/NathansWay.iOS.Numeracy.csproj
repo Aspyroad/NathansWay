@@ -87,18 +87,21 @@
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Hammer\ToolBox.iOS.Hammer.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.designer.cs">
-      <DependentUpon>MenuMainViewController.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAViewController.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.designer.cs">
       <DependentUpon>QAView.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu1Start.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu1Start.designer.cs">
+      <DependentUpon>vcMenu1Start.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu2Student.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu2Student.designer.cs">
+      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewController.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
   </ItemGroup>

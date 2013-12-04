@@ -5,14 +5,15 @@
 // Manual changes to this file may not be handled correctly.
 //
 using MonoTouch.Foundation;
+using AspyRoad.iOSCore;
 
-namespace NathansWay
+namespace NathansWay.Numeracy.iOS.Menu
 {
-	[Register ("MenuMain")]
-	partial class MenuMain
-	{
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+    [Register("vcMenu2Student")]
+	public partial class vcMenu2Student : AspyViewController
+    {
+        void ReleaseDesignerOutlets()
+        {
+        }
+    }
 }

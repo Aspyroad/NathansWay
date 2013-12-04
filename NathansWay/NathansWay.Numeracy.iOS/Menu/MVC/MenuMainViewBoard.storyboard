@@ -5,40 +5,96 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Vc Menu1 Start-->
         <scene sceneID="vxW-M0-OXp">
             <objects>
-                <viewController id="JYt-to-IEW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A">
+                <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" colorLabel="IBBuiltInLabel-Orange">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zrT-80-r70">
-                                <rect key="frame" x="747" y="283" width="211" height="187"/>
+                                <rect key="frame" x="793" y="120" width="211" height="187"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Next">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnTestSegue:" destination="JYt-to-IEW" eventType="touchUpInside" id="k3e-ic-zCZ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NathansWay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="hPx-cD-MEQ">
+                                <rect key="frame" x="0.0" y="5" width="337" height="65"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="60"/>
+                                <color key="textColor" red="0.49732506793478259" green="0.49732506793478259" blue="0.49732506793478259" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numbers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TH5-Rv-hMw">
+                                <rect key="frame" x="105" y="31" width="232" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="55"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E8Q-oZ-enw" customClass="AspyButton" colorLabel="IBBuiltInLabel-Yellow">
+                                <rect key="frame" x="32" y="120" width="253" height="92"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.16613590063608538" green="0.55901834239130432" blue="0.12664304895565673" alpha="1" colorSpace="calibratedRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="gdfg"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
+                                <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Penis">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <attributedString key="userComments">
+                                    <fragment content="G">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="toolTip"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <connections>
+                                    <action selector="btnMenuActionStudent:" destination="JYt-to-IEW" eventType="touchUpInside" id="eDP-l6-ZwQ"/>
+                                </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.49102354929563097" green="0.12302030285967135" blue="0.66520889945652173" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.32011846160000001" green="0.1203185952" blue="0.4983865489" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" button="YES"/>
+                        </accessibility>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                        <attributedString key="userComments">
+                            <fragment content="Hit Me">
+                                <attributes>
+                                    <font key="NSFont" metaFont="toolTip"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
+                        <outlet property="btnStudent" destination="E8Q-oZ-enw" id="Ukz-WZ-Ear"/>
+                        <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>
                         <segue destination="SeT-kK-yyl" kind="custom" customClass="AspySlidingSegue" id="luA-yX-Z7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2706" y="-2346"/>
+            <point key="canvasLocation" x="-3218" y="-3032"/>
         </scene>
-        <!--View Controller-->
+        <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
             <objects>
-                <viewController id="SeT-kK-yyl" sceneMemberID="viewController">
+                <viewController id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="V3N-Nh-4eh">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -49,7 +105,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1237" y="-2346"/>
+            <point key="canvasLocation" x="-2045" y="-3027"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

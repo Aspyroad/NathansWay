@@ -45,10 +45,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Aspyroad.iOSCore.ViewBase.cs" />
     <Compile Include="Aspyroad.iOSCore.Utilities.cs" />
-    <Compile Include="Aspyroad.iOSCore.Window.cs" />
-    <Compile Include="Aspyroad.iOSCore.ViewController.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyView.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyViewController.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyWindow.Base.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

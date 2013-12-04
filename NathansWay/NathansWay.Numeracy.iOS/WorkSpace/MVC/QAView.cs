@@ -5,7 +5,7 @@ using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 using MonoTouch.ObjCRuntime;
 
-namespace NathansWay.WorkSpace
+namespace NathansWay.Numeracy.iOS.WorkSpace
 {
 	public partial class vwQAWorkSpace : AspyView
 	{
