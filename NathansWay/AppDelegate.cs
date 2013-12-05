@@ -35,6 +35,7 @@ namespace NathansWay
 		private const string VersionFileName = "version.dat";
 		// class-level declarations
 		//AspyWindow window;
+		
 		AspyWindow window;
 		QAViewController viewController;
 		NSAction swipeGesture;
@@ -48,20 +49,21 @@ namespace NathansWay
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			//window = new AspyWindow (UIScreen.MainScreen.Bounds);
-			window = new AspyWindow(UIScreen.MainScreen.Bounds);
-
+			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 			viewController = new QAViewController();
-
 			swipeGesture = new NSAction(printeswipe);
-
 			window.RootViewController = viewController;
-
 			window.MakeKeyAndVisible ();
-
+			
+			
+			#region Gesture From Window
+			// Get gesture from Sendevents - Window object
 			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			#endregion
+			
+			#region Gesture From AspyView
 			viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
-			//viewController.View = UIColor.Brown;
+			#endregion
 
 			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
@@ -79,6 +81,22 @@ namespace NathansWay
 		{
 			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
+		
+		
+//		public static UIStoryboard Storyboard = UIStoryboard.FromName ("Main", null);
+//		public static UIViewController initialViewController;
+//
+//		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+//		{
+//			// create a new window instance based on the screen size
+//			window = new UIWindow (UIScreen.MainScreen.Bounds);
+//
+//			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+//
+//			window.RootViewController = initialViewController;
+//			window.MakeKeyAndVisible ();
+//			return true;
+//		}
 	}
 }
 

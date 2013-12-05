@@ -7,7 +7,7 @@
 using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.WorkSpace
+namespace NathansWay.Numeracy.iOS.WorkSpace
 {
 	[Register ("vwQAWorkSpace")]
 	public partial class vwQAWorkSpace
