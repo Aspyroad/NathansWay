@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using Microsoft.Xna.Framework;
 using MonoTouch.UIKit;
-using Aspyroad;
+using AspyRoad.iOSCore;
 using NathansWay;
 
 namespace NathansWay.Numeracy.iOS

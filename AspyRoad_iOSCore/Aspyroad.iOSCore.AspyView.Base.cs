@@ -19,7 +19,7 @@ namespace AspyRoad.iOSCore
 		private NSAction _slideleft;
 				
 		#region Construction
-		public aspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
+		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
 		{
 			vcSource = _vcSource;
 			vcDest = _vcDest;
@@ -27,7 +27,7 @@ namespace AspyRoad.iOSCore
 			this.screenSize = UIScreen.MainScreen.Bounds.Size;
 		}
 		// Sys //
-		public aspySlidingSegue(IntPtr handle) :base(handle)
+		public AspySlidingSegue(IntPtr handle) :base(handle)
 		{
 		}
 		#endregion
@@ -193,7 +193,7 @@ namespace AspyRoad.iOSCore
 	}
 			
 	[MonoTouch.Foundation.Register("AspyView")]	
-	public partial class AspyView : UIView
+	public class AspyView : UIView
 	{
 
 		#region Class Variables

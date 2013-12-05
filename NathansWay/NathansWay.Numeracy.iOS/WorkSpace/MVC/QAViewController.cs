@@ -4,6 +4,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 using MonoTouch.ObjCRuntime;
+using NathansWay.Numeracy.iOS.WorkSpace;
 
 namespace NathansWay.WorkSpace
 {
@@ -33,9 +34,6 @@ namespace NathansWay.WorkSpace
         {
 
             base.ViewDidLoad();
-			//vwQAView = new vwQAWorkSpace(View.Frame);
-			//View.AddSubview(vwQAView);
-			//View.BringSubviewToFront (vwQAView);
 
             // Perform any additional setup after loading the view, typically from a nib.
         }
