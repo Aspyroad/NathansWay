@@ -8,7 +8,11 @@ namespace NathansWay.Numeracy.iOS.Menu
 {
 	public partial class vcMenu1Start : AspyViewController
 	{
-		public vcMenu1Start () : base ("MenuMain", null)
+		public vcMenu1Start () : base ()
+		{
+		}
+
+		public vcMenu1Start (IntPtr h) : base (h) 
 		{
 		}
 
@@ -29,6 +33,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		partial void btnTestSegue(NSObject sender)
 		{
+
 			this.PerformSegue("sgStart_Student",sender)	;
 		}
 

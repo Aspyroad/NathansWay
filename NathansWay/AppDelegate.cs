@@ -38,6 +38,9 @@ namespace NathansWay
 		
 		AspyWindow window;
 		QAViewController viewController;
+		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
+		public static UIViewController initialViewController;
+
 		NSAction swipeGesture;
 
 		//
@@ -49,12 +52,21 @@ namespace NathansWay
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			#region Setup Storyboard
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
-			viewController = new QAViewController();
-			swipeGesture = new NSAction(printeswipe);
-			window.RootViewController = viewController;
-			window.MakeKeyAndVisible ();
-			
+			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+			window.RootViewController = initialViewController;
+			#endregion
+
+			#region Setup Single View
+//			window = new AspyWindow (UIScreen.MainScreen.Bounds);
+//			viewController = new QAViewController();
+//			swipeGesture = new NSAction(printeswipe);
+//			window.RootViewController = viewController;
+			#endregion
+
+
+			window.MakeKeyAndVisible ();			
 			
 			#region Gesture From Window
 			// Get gesture from Sendevents - Window object
@@ -62,10 +74,10 @@ namespace NathansWay
 			#endregion
 			
 			#region Gesture From AspyView
-			viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			//viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
 			#endregion
 
-			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
+			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 

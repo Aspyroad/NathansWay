@@ -8,9 +8,13 @@ namespace NathansWay.Numeracy.iOS.Menu
 {
 	public partial class vcMenu2Student : AspyViewController
     {
-        public vcMenu2Student() : base("vcMenu2Student", null)
+        public vcMenu2Student() 
         {
         }
+
+		public vcMenu2Student (IntPtr h) : base (h)
+		{
+		}
 
         public override void DidReceiveMemoryWarning()
         {

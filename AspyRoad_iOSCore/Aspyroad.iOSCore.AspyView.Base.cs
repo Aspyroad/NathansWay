@@ -19,6 +19,11 @@ namespace AspyRoad.iOSCore
 		private NSAction _slideleft;
 				
 		#region Construction
+
+		public AspySlidingSegue()
+		{
+		}
+
 		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
 		{
 			vcSource = _vcSource;

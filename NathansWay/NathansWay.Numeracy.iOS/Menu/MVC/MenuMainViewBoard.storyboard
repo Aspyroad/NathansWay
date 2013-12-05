@@ -9,7 +9,7 @@
         <scene sceneID="vxW-M0-OXp">
             <objects>
                 <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" colorLabel="IBBuiltInLabel-Orange">
+                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="AspyView" colorLabel="IBBuiltInLabel-Orange">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -69,37 +69,24 @@
                             <accessibilityTraits key="traits" none="YES" button="YES"/>
                         </accessibility>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                        <attributedString key="userComments">
-                            <fragment content="Hit Me">
-                                <attributes>
-                                    <font key="NSFont" metaFont="toolTip"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
-                        <outlet property="btnStudent" destination="E8Q-oZ-enw" id="Ukz-WZ-Ear"/>
                         <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>
                         <segue destination="SeT-kK-yyl" kind="custom" identifier="sgStart_Student" customClass="AspySlidingSegue" id="luA-yX-Z7V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
             <point key="canvasLocation" x="-750" y="-562"/>
-=======
-            <point key="canvasLocation" x="-1014" y="-292"/>
->>>>>>> 7729e3bdcf48a9b37f702396f61728ad92cc1969
         </scene>
         <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
             <objects>
                 <viewController id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="V3N-Nh-4eh">
+                    <view key="view" contentMode="scaleToFill" id="V3N-Nh-4eh" customClass="AspyView">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,11 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-<<<<<<< HEAD
             <point key="canvasLocation" x="423" y="-557"/>
-=======
-            <point key="canvasLocation" x="159" y="-287"/>
->>>>>>> 7729e3bdcf48a9b37f702396f61728ad92cc1969
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
