@@ -75,7 +75,9 @@
                     <connections>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
                         <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>
-                        <segue destination="SeT-kK-yyl" kind="custom" identifier="sgStart_Student" customClass="AspySlidingSegue" id="luA-yX-Z7V"/>
+                        <segue destination="SeT-kK-yyl" kind="popover" identifier="sgStart_Student" customClass="AspySlidingSegue" id="luA-yX-Z7V">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>

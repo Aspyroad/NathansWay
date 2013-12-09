@@ -35,11 +35,25 @@ namespace AspyRoad.iOSCore
 		// Sys //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
 		{
+			this.Setmeup ();
 		}
 		#endregion
+		
+		private void Setmeup ()
+		{
+			if (vcSource == null)
+			{
+				vcSource = this.SourceViewController;
+			}
+			if (vcDest == null)
+			{
+				vcDest = this.DestinationViewController;
+			}		
+		}
 
 		public override void Perform()
 		{
+			
 			vcSource.View.AddSubview (vcDest.View);
 			vcDest.View.Frame = vcSource.View.Window.Frame;
 			vcDest.View.Bounds = vcSource.View.Bounds;
@@ -52,13 +66,13 @@ namespace AspyRoad.iOSCore
 			{
 				// Hook up our delegates
 				_slideright = new NSAction(animateSlideRight);
-				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideleft, _animationcomplete);
+				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideright, _animationcomplete);
 			} 
-			if (true)
-			{
-				_slideleft = new NSAction(animateSlideLeft);
-				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideright, _animationcomplete);			
-			}
+//			if (true)
+//			{
+//				_slideleft = new NSAction(animateSlideLeft);
+//				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideleft, _animationcomplete);			
+//			}
 
 		}
 
@@ -122,13 +136,13 @@ namespace AspyRoad.iOSCore
 			float x = 0;
 			float y = 0;
 
-			x = (-1 * screenSize.Height/2);
-			y = ((screenSize.Height/2) - 138);
+			x = (screenSize.Height/2);
+			y = (screenSize.Height/2);
 
 			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
 
-			x = (screenSize.Width/2 + 127);
-			y = ((screenSize.Height/2) - 138);
+			x = (screenSize.Width/2);
+			y = (screenSize.Height/2);
 
 			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
 		}
