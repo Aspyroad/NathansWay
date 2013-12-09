@@ -9,7 +9,7 @@
         <scene sceneID="vxW-M0-OXp">
             <objects>
                 <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="AspyView" colorLabel="IBBuiltInLabel-Orange">
+                    <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="vMenu1Start" colorLabel="IBBuiltInLabel-Orange">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>

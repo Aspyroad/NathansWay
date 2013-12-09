@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using AspyRoad.iOSCore;
 using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 
@@ -207,7 +208,9 @@ namespace AspyRoad.iOSCore
 		private UIPinchGestureRecognizer _pinchGesture = null;
 		private UIPanGestureRecognizer _panGesture = null;
 		private UIRotationGestureRecognizer _rotorGesture = null;
-		private UILongPressGestureRecognizer _longGesture = null;		
+		private UILongPressGestureRecognizer _longGesture = null;
+
+		private CGContext _currentContext = null;
 		#endregion
 
 		#region Contructors
@@ -246,6 +249,12 @@ namespace AspyRoad.iOSCore
 		public UILongPressGestureRecognizer longGesture
 		{
 			get { return this._longGesture; }
+		}
+
+		public CGContext currentContext
+		{
+			get { return this._currentContext; }
+			set { this._currentContext = value; }
 		}
 
 		#endregion
