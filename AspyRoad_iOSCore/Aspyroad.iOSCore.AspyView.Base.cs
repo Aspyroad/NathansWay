@@ -11,13 +11,16 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspySlidingSegue")]	
 	public class AspySlidingSegue : UIStoryboardSegue
 	{
-		private const double kAnimationDuration = 0.5;
+		private const double kAnimationDuration = 1.5;
 
 		private UIViewController vcSource;
 		private UIViewController vcDest;
 		private SizeF screenSize;
 		private NSAction _slider;
 		private UICompletionHandler _animationcomplete;
+		private UIView preV;
+		private UIView newV;
+
 
 				
 		#region Construction
@@ -37,7 +40,6 @@ namespace AspyRoad.iOSCore
 		// Sys //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
 		{
-			this.Setmeup ();
 		}
 		#endregion
 		
@@ -46,25 +48,25 @@ namespace AspyRoad.iOSCore
 			if (vcSource == null)
 			{
 				vcSource = this.SourceViewController;
+				preV = vcSource.View;
 			}
 			if (vcDest == null)
 			{
 				vcDest = this.DestinationViewController;
+				newV = vcDest.View;
 			}		
 		}
 
 		public override void Perform()
 		{
-
-			UIView preV = vcDest.View;
-			UIView newV = vcSource.View;
+			Setmeup();
 			newV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.Y);
 			AspyUtilities.G__MainWindow.InsertSubviewAbove (newV,preV);
 			
 			if (true)
 			{
 				_slider = new NSAction(animateSlide);
-				_animationcomplete = new UICompletionHandler (animateSlide(bool finished) );
+				_animationcomplete = new UICompletionHandler (animateComplete);
 				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
 			}
 
@@ -93,8 +95,8 @@ namespace AspyRoad.iOSCore
 		
 		private void animateSlide()
 		{
-			vcDest.View.Center = AspyUtilities.CGPointMake (vcDest.View.Center.X, vcSource.View.Center.Y);
-			vcSource.View.Center = AspyUtilities.CGPointMake ((0 - vcDest.View.Center.X), vcSource.View.Center.Y);		
+			newV.Center = AspyUtilities.CGPointMake (newV.Center.X, preV.Center.Y);
+			preV.Center = AspyUtilities.CGPointMake ((0 - newV.Center.X), preV.Center.Y);		
 		}
 
 		/// <summary>
@@ -114,7 +116,7 @@ namespace AspyRoad.iOSCore
 
 		private void animateComplete(bool finished)
 		{
-			vcDest.View.RemoveFromSuperview();
+			newV.RemoveFromSuperview();
 			AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
 
 		}

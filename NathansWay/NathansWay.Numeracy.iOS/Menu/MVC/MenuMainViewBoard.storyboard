@@ -75,7 +75,7 @@
                     <connections>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
                         <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>
-                        <segue destination="SeT-kK-yyl" kind="custom" customClass="AspySlidingSegue" id="rcT-DG-C6g"/>
+                        <segue destination="SeT-kK-yyl" kind="custom" identifier="sgStart_Student" customClass="AspySlidingSegue" id="rcT-DG-C6g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,10 +86,10 @@
         <scene sceneID="ctK-gc-yRU">
             <objects>
                 <viewController id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="V3N-Nh-4eh" customClass="vMenu2Student">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="V3N-Nh-4eh" customClass="vMenu2Student">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.1661359006" green="0.55901834240000003" blue="0.12664304900000001" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
