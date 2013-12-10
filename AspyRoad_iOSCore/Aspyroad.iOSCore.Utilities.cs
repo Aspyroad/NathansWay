@@ -32,11 +32,8 @@ namespace AspyRoad.iOSCore
 
 		public static AspyWindow G__MainWindow
 		{
-			get { return UIApplication.SharedApplication.KeyWindow; }
+			get { return (AspyWindow)UIApplication.SharedApplication.KeyWindow; }
 		}
-
-
-
 
 		//[MonoTouch.Foundation.Export("GestureTypes")]	
 		public enum GestureTypes

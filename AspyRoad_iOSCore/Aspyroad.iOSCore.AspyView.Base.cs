@@ -16,8 +16,8 @@ namespace AspyRoad.iOSCore
 		private UIViewController vcSource;
 		private UIViewController vcDest;
 		private SizeF screenSize;
-		private NSAction _slideright;
-		private NSAction _slideleft;
+		private NSAction _slider;
+		private UICompletionHandler _animationcomplete;
 
 				
 		#region Construction
@@ -58,17 +58,15 @@ namespace AspyRoad.iOSCore
 
 			UIView preV = vcDest.View;
 			UIView newV = vcSource.View;
-			newV.Center = CGPo
-
-
-
-
-
-
-
-
-
-
+			newV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.Y);
+			AspyUtilities.G__MainWindow.InsertSubviewAbove (newV,preV);
+			
+			if (true)
+			{
+				_slider = new NSAction(animateSlide);
+				_animationcomplete = new UICompletionHandler (animateSlide(bool finished) );
+				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
+			}
 
 
 ////			-(void)perform {
@@ -76,8 +74,8 @@ namespace AspyRoad.iOSCore
 ////				UIView *newV = ((UIViewController *)self.destinationViewController).view;
 ////
 ////				UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
-//				newV.center = CGPointMake(preV.center.x + preV.frame.size.width, newV.center.y);
-//				[window insertSubview:newV aboveSubview:preV];
+////				newV.center = CGPointMake(preV.center.x + preV.frame.size.width, newV.center.y);
+////				[window insertSubview:newV aboveSubview:preV];
 //
 //				[UIView animateWithDuration:0.4
 //					animations:^{
@@ -93,21 +91,10 @@ namespace AspyRoad.iOSCore
 		}
 
 		
-		private void animateSlideLeft()
+		private void animateSlide()
 		{
-			float x = 0;
-			float y = 0;
-			
-			x = (screenSize.Height + (screenSize.Height/2));
-			y = ((screenSize.Height/2) - 138);
-			
-			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
-
-			x = (screenSize.Width/2 + 127);
-			y = ((screenSize.Height/2) - 138);
-
-			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
-			
+			vcDest.View.Center = AspyUtilities.CGPointMake (vcDest.View.Center.X, vcSource.View.Center.Y);
+			vcSource.View.Center = AspyUtilities.CGPointMake ((0 - vcDest.View.Center.X), vcSource.View.Center.Y);		
 		}
 
 		/// <summary>
@@ -128,7 +115,7 @@ namespace AspyRoad.iOSCore
 		private void animateComplete(bool finished)
 		{
 			vcDest.View.RemoveFromSuperview();
-			vcSource.PresentViewController(vcDest, false, null);
+			AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
 
 		}
 
