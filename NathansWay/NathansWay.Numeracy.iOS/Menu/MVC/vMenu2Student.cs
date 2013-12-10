@@ -6,14 +6,14 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.Numeracy.iOS.Menu
 {
-	[MonoTouch.Foundation.Register ("vMenu1Start")]
-	public partial class vMenu1Start : AspyView
+	[MonoTouch.Foundation.Register ("vMenu2Student")]
+	public partial class vMenu2Student : AspyView
 	{
-		public vMenu1Start () : base ()
+		public vMenu2Student () : base ()
 		{
 		}
 
-		public vMenu1Start (IntPtr h) : base (h) 
+		public vMenu2Student (IntPtr h) : base (h) 
 		{
 		}
 
@@ -24,6 +24,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 		}
 
 
-    }
+	}
 }
+
 

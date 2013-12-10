@@ -18,11 +18,13 @@ namespace AspyRoad.iOSCore
 		private SizeF screenSize;
 		private NSAction _slideright;
 		private NSAction _slideleft;
+
 				
 		#region Construction
 
 		public AspySlidingSegue()
 		{
+
 		}
 
 		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
@@ -53,26 +55,40 @@ namespace AspyRoad.iOSCore
 
 		public override void Perform()
 		{
-			
-			vcSource.View.AddSubview (vcDest.View);
-			vcDest.View.Frame = vcSource.View.Window.Frame;
-			vcDest.View.Bounds = vcSource.View.Bounds;
 
-			// Always runs
-			UICompletionHandler _animationcomplete = new UICompletionHandler (animateComplete);
+			UIView preV = vcDest.View;
+			UIView newV = vcSource.View;
+			newV.Center = CGPo
 
-			// this.slideleft
-			if (true)
-			{
-				// Hook up our delegates
-				_slideright = new NSAction(animateSlideRight);
-				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideright, _animationcomplete);
-			} 
-//			if (true)
-//			{
-//				_slideleft = new NSAction(animateSlideLeft);
-//				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slideleft, _animationcomplete);			
-//			}
+
+
+
+
+
+
+
+
+
+
+
+////			-(void)perform {
+////				UIView *preV = ((UIViewController *)self.sourceViewController).view;
+////				UIView *newV = ((UIViewController *)self.destinationViewController).view;
+////
+////				UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+//				newV.center = CGPointMake(preV.center.x + preV.frame.size.width, newV.center.y);
+//				[window insertSubview:newV aboveSubview:preV];
+//
+//				[UIView animateWithDuration:0.4
+//					animations:^{
+//						newV.center = CGPointMake(preV.center.x, newV.center.y);
+//						preV.center = CGPointMake(0- preV.center.x, newV.center.y);}
+//					completion:^(BOOL finished){
+//						[preV removeFromSuperview];
+//						window.rootViewController = self.destinationViewController;
+//				}];
+
+
 
 		}
 

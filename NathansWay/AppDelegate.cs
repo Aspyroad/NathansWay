@@ -33,9 +33,10 @@ namespace NathansWay
 		/// The name of the version file.
 		/// </summary>
 		private const string VersionFileName = "version.dat";
+
+
 		// class-level declarations
-		//AspyWindow window;
-		
+		//AspyWindow window;		
 		AspyWindow window;
 		QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);

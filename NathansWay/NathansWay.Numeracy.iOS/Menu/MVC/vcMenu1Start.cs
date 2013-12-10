@@ -19,8 +19,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();
-			
+			base.DidReceiveMemoryWarning ();			
 			// Release any cached data, images, etc that aren't in use.
 		}
 
@@ -33,12 +32,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		partial void btnTestSegue(NSObject sender)
 		{
-
-			this.PerformSegue("sgStart_Student",sender)	;
+			//this.PerformSegue("sgStart_Student",sender)	;
 		}
-
-		
-
 	}
 }
 

@@ -101,6 +101,7 @@
       <DependentUpon>vcMenu2Student.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
