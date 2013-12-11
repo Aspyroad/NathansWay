@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.Foundation;
@@ -6,6 +7,14 @@ using MonoTouch.UIKit;
 using NathansWay.Numeracy.iOS;
 using AspyRoad.iOSCore;
 using NathansWay.WorkSpace;
+
+
+using System;
+
+using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
+using MonoTouch.Foundation;
+using MonoTouch.ObjCRuntime;
 
 namespace NathansWay
 {
@@ -17,22 +26,10 @@ namespace NathansWay
 	{
 		/// <summary>How to access these varibles from within the app</summary>
 		/// e.g. 
-		/// UIApplication.SharedApplication.Delegate.FolderNameLibrary
+		/// UIApplication.SharedApplication.Delegate.<name of property>
 
-		/// <summary>
-		/// Path to the library folder
-		/// </summary>
-		private const string FolderNameLibrary = "Library";
-
-		/// <summary>
-		/// Path to the ImageData folder
-		/// </summary>
-		private const string FolderNameImageData = "ImageData";
-
-		/// <summary>
-		/// The name of the version file.
-		/// </summary>
-		private const string VersionFileName = "version.dat";
+		// Set the amazing Global variables needed for our wonderous app
+		//AspyUtilities.G__ViewAutoResize = UIViewAutoresizing.None;
 
 
 		// class-level declarations

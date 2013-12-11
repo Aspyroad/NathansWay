@@ -112,43 +112,43 @@ namespace AspyRoad.iOSCore
 			} 
 		}
 
-		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		private UIGestureRecognizer CreateGestureType (AspyUtilities.G__GestureTypes gestype, NSAction gestureAction)
 		{
 			UIGestureRecognizer returnedGesture;
 
 			switch (gestype)
 			{			
-				case AspyUtilities.GestureTypes.UITap: //Tap
+				case AspyUtilities.G__GestureTypes.UITap: //Tap
 					{
 						this._tapGesture = new UITapGestureRecognizer(gestureAction);
 						returnedGesture = this._tapGesture;		
 						break;			
 					}
-				case AspyUtilities.GestureTypes.UIPinch: //Pinch
+				case AspyUtilities.G__GestureTypes.UIPinch: //Pinch
 					{
 						this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
 						returnedGesture = this._pinchGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UIPan: //Pan
+				case AspyUtilities.G__GestureTypes.UIPan: //Pan
 					{
 						this._panGesture = new UIPanGestureRecognizer(gestureAction);
 						returnedGesture = this._panGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UISwipe: //Swipe
+				case AspyUtilities.G__GestureTypes.UISwipe: //Swipe
 					{
 						this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
 						returnedGesture = this._swipeGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UIRotation: //Rotation
+				case AspyUtilities.G__GestureTypes.UIRotation: //Rotation
 					{
 						this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
 						returnedGesture = this._rotorGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UILongPress: //Longpress
+				case AspyUtilities.G__GestureTypes.UILongPress: //Longpress
 					{
 						this._longGesture = new UILongPressGestureRecognizer (gestureAction);
 						returnedGesture = this._longGesture;	
@@ -210,12 +210,12 @@ namespace AspyRoad.iOSCore
 			base.SendEvent (evt);
 		}
 
-		public void WireUpGestureToWindow(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		public void WireUpGestureToWindow(AspyUtilities.G__GestureTypes gestype, NSAction gestureAction)
 		{
 			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
 		}	
 		
-		public void RemoveGestureFromWindow(AspyUtilities.GestureTypes gestype)
+		public void RemoveGestureFromWindow(AspyUtilities.G__GestureTypes gestype)
 		{
 
 		}	

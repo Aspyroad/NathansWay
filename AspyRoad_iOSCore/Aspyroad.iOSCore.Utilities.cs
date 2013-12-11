@@ -20,7 +20,25 @@ namespace AspyRoad.iOSCore
 	    }
 	    
 
-	    static readonly AspyUtilities _instance = new AspyUtilities ();		
+	    static readonly AspyUtilities _instance = new AspyUtilities ();
+
+		private static UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
+
+//		/// <summary>
+//		/// Path to the library folder
+//		/// </summary>
+//		private const string FolderNameLibrary = "Library";
+//
+//		/// <summary>
+//		/// Path to the ImageData folder
+//		/// </summary>
+//		private const string FolderNameImageData = "ImageData";
+//
+//		/// <summary>
+//		/// The name of the version file.
+//		/// </summary>
+//		private const string VersionFileName = "version.dat";
+
 
 		public static PointF CGPointMake (float x, float y)
 		{
@@ -35,8 +53,7 @@ namespace AspyRoad.iOSCore
 			get { return (AspyWindow)UIApplication.SharedApplication.KeyWindow; }
 		}
 
-		//[MonoTouch.Foundation.Export("GestureTypes")]	
-		public enum GestureTypes
+		public enum G__GestureTypes
 		{
 			UITap = 0,
 			UIPinch = 1,
@@ -44,7 +61,13 @@ namespace AspyRoad.iOSCore
 			UISwipe = 3,
 			UIRotation = 4,
 			UILongPress = 5		
-		}	
+		}
+
+		public static UIViewAutoresizing G__ViewAutoResize
+		{
+			get { return __ViewAutoResize; }
+			set { __ViewAutoResize = value; }
+		}
 	}
 }
 

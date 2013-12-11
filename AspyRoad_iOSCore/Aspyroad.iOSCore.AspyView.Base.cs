@@ -44,25 +44,9 @@ namespace AspyRoad.iOSCore
 		}
 		#endregion
 		
-		private void Setmeup ()
-		{
-			if (vcSource == null)
-			{
-				vcSource = this.SourceViewController;
-				preV = vcSource.View;
-			}
-			if (vcDest == null)
-			{
-				vcDest = this.DestinationViewController;
-				newV = vcDest.View;
-			}
-			
-			window = AspyUtilities.G__MainWindow	;
-		}
-
 		public override void Perform()
 		{
-			Setmeup();
+			SetControllers();
 			
 			newV.Center = AspyUtilities.CGPointMake ((preV.Center.Y + preV.Frame.Size.Height), newV.Center.X);
 			preV.InsertSubview (newV,0);
@@ -76,7 +60,6 @@ namespace AspyRoad.iOSCore
 				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
 			}
 
-
 ////			-(void)perform {
 ////				UIView *preV = ((UIViewController *)self.sourceViewController).view;
 ////				UIView *newV = ((UIViewController *)self.destinationViewController).view;
@@ -84,21 +67,35 @@ namespace AspyRoad.iOSCore
 ////				UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
 ////				newV.center = CGPointMake(preV.center.x + preV.frame.size.width, newV.center.y);
 ////				[window insertSubview:newV aboveSubview:preV];
-//
-//				[UIView animateWithDuration:0.4
-//					animations:^{
-//						newV.center = CGPointMake(preV.center.x, newV.center.y);
-//						preV.center = CGPointMake(0- preV.center.x, newV.center.y);}
-//					completion:^(BOOL finished){
-//						[preV removeFromSuperview];
-//						window.rootViewController = self.destinationViewController;
-//				}];
-
-
+////
+////				[UIView animateWithDuration:0.4
+////					animations:^{
+////						newV.center = CGPointMake(preV.center.x, newV.center.y);
+////						preV.center = CGPointMake(0- preV.center.x, newV.center.y);}
+////					completion:^(BOOL finished){
+////						[preV removeFromSuperview];
+////						window.rootViewController = self.destinationViewController;
+////				}];
 
 		}
 
+		private void SetControllers ()
+		{
+			if (vcSource == null)
+			{
+				vcSource = this.SourceViewController;
+				preV = vcSource.View;
+			}
+			if (vcDest == null)
+			{
+				vcDest = this.DestinationViewController;
+				newV = vcDest.View;
+			}
+
+			window = AspyUtilities.G__MainWindow;
+		}
 		
+
 		private void animateSlide()
 		{
 			newV.Center = AspyUtilities.CGPointMake (newV.Center.X, preV.Center.Y);
@@ -106,13 +103,13 @@ namespace AspyRoad.iOSCore
 		}
 
 		/// <summary>
-		/// Raises the slide left event.
+		/// Raises the slide event.
 		/// </summary>
 		/// <param name="e">E.</param>
 		#region eventhookups
-//		protected virtual void OnSlideLeft(EventArgs e)
+//		protected virtual void OnSlide(EventArgs e)
 //		{
-//			SlideLeft handler = SlidingLeft;
+//			Slide handler = Sliding;
 //			if (handler != null)
 //			{
 //				handler(e);
@@ -124,7 +121,6 @@ namespace AspyRoad.iOSCore
 		{
 			//newV.RemoveFromSuperview();
 			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
-
 		}
 
 		/// <summary>
@@ -142,69 +138,6 @@ namespace AspyRoad.iOSCore
 //		}
 		#endregion
 		
-
-		/// <summary>
-		/// Raises the slide right event.
-		/// </summary>
-		/// <param name="e">E.</param>
-		#region eventhookups
-//		protected virtual void OnSlideRight(EventArgs e)
-//		{
-//			SlideRight handler = SlidingRight;
-//			if (handler != null)
-//			{
-//				handler(e);
-//			}
-//		}
-		#endregion
-
-		#region original sample
-			//		#define kAnimationDuration 0.5
-			//
-			//		#import "CustomSlideSegue.h"
-			//
-			//		@implementation CustomSlideSegue
-			//
-			//			- (void)perform
-			//		{
-			//			UIViewController *sourceViewController = (UIViewController *) self.sourceViewController;
-			//			UIViewController *destinationViewController = (UIViewController *) self.destinationViewController;
-			//
-			//			[sourceViewController.view addSubview:destinationViewController.view];
-			//			[destinationViewController.view setFrame:sourceViewController.view.window.frame];
-			//
-			//			[destinationViewController.view setBounds:sourceViewController.view.bounds];
-			//			CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-			//
-			//			if ( !self.slideLeft ) {
-			//				[UIView animateWithDuration:kAnimationDuration
-			//				 delay:0.0
-			//				 options:UIViewAnimationOptionCurveEaseOut
-			//				 animations:^{
-			//					[destinationViewController.view setCenter:CGPointMake(screenSize.height + screenSize.height/2, screenSize.height/2 - 138)];
-			//					[destinationViewController.view setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
-			//				 }
-			//				 completion:^(BOOL finished){
-			//					[destinationViewController.view removeFromSuperview];
-			//					[sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
-			//				 }];
-			//			} else {
-			//				[UIView animateWithDuration:kAnimationDuration
-			//				 delay:0.0
-			//				 options:UIViewAnimationOptionCurveEaseOut
-			//				 animations:^{
-			//					[destinationViewController.view setCenter:CGPointMake(-1*screenSize.height/2, screenSize.height/2 - 138)];
-			//					[destinationViewController.view setCenter:CGPointMake(screenSize.width/2 + 127, screenSize.height/2 - 138)];
-			//				 }
-			//				 completion:^(BOOL finished){
-			//					[destinationViewController.view removeFromSuperview];
-			//					[sourceViewController presentViewController:destinationViewController animated:NO completion:nil];
-			//				 }];
-			//			}
-			//		}
-		#endregion
-
-
 
 	}
 			
@@ -272,12 +205,12 @@ namespace AspyRoad.iOSCore
 		#region Public Members
 
 		//[MonoTouch.Foundation.Action("WireUpGestureToView")]
-		public void WireUpGestureToView(AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		public void WireUpGestureToView(AspyUtilities.G__GestureTypes gestype, NSAction gestureAction)
 		{
 			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
 		}	
 
-		public void RemoveGestureFromWindow(AspyUtilities.GestureTypes gestype)
+		public void RemoveGestureFromWindow(AspyUtilities.G__GestureTypes gestype)
 		{
 		}
 
@@ -286,43 +219,43 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		private UIGestureRecognizer CreateGestureType (AspyUtilities.GestureTypes gestype, NSAction gestureAction)
+		private UIGestureRecognizer CreateGestureType (AspyUtilities.G__GestureTypes gestype, NSAction gestureAction)
 		{
 			UIGestureRecognizer returnedGesture;
 
 			switch (gestype)
 			{			
-				case AspyUtilities.GestureTypes.UITap: //Tap
+				case AspyUtilities.G__GestureTypes.UITap: //Tap
 					{
 						this._tapGesture = new UITapGestureRecognizer(gestureAction);
 						returnedGesture = this._tapGesture;		
 						break;			
 					}
-				case AspyUtilities.GestureTypes.UIPinch: //Pinch
+				case AspyUtilities.G__GestureTypes.UIPinch: //Pinch
 					{
 						this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
 						returnedGesture = this._pinchGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UIPan: //Pan
+				case AspyUtilities.G__GestureTypes.UIPan: //Pan
 					{
 						this._panGesture = new UIPanGestureRecognizer(gestureAction);
 						returnedGesture = this._panGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UISwipe: //Swipe
+				case AspyUtilities.G__GestureTypes.UISwipe: //Swipe
 					{
 						this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
 						returnedGesture = this._swipeGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UIRotation: //Rotation
+				case AspyUtilities.G__GestureTypes.UIRotation: //Rotation
 					{
 						this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
 						returnedGesture = this._rotorGesture;	
 						break;
 					}
-				case AspyUtilities.GestureTypes.UILongPress: //Longpress
+				case AspyUtilities.G__GestureTypes.UILongPress: //Longpress
 					{
 						this._longGesture = new UILongPressGestureRecognizer (gestureAction);
 						returnedGesture = this._longGesture;	
