@@ -17,11 +17,11 @@ namespace NathansWay.Numeracy.iOS.Menu
 		{
 		}
 
-		public override void Draw(RectangleF rect)
-		{
-			base.Draw(rect);
-			this.currentContext = UIGraphics.GetCurrentContext();
-		}
+//		public override void Draw(RectangleF rect)
+//		{
+//			base.Draw(rect);
+//			this.currentContext = UIGraphics.GetCurrentContext();
+//		}
 
 
     }

@@ -11,7 +11,7 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspySlidingSegue")]	
 	public class AspySlidingSegue : UIStoryboardSegue
 	{
-		private const double kAnimationDuration = 1.5;
+		private const double kAnimationDuration = 1.0;
 
 		private UIViewController vcSource;
 		private UIViewController vcDest;
@@ -20,6 +20,7 @@ namespace AspyRoad.iOSCore
 		private UICompletionHandler _animationcomplete;
 		private UIView preV;
 		private UIView newV;
+		private AspyWindow window;
 
 
 				
@@ -54,19 +55,24 @@ namespace AspyRoad.iOSCore
 			{
 				vcDest = this.DestinationViewController;
 				newV = vcDest.View;
-			}		
+			}
+			
+			window = AspyUtilities.G__MainWindow	;
 		}
 
 		public override void Perform()
 		{
 			Setmeup();
-			newV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.Y);
-			AspyUtilities.G__MainWindow.InsertSubviewAbove (newV,preV);
 			
+			newV.Center = AspyUtilities.CGPointMake ((preV.Center.Y + preV.Frame.Size.Height), newV.Center.X);
+			preV.InsertSubview (newV,0);
+					
 			if (true)
 			{
+				// Setup Delegates
 				_slider = new NSAction(animateSlide);
 				_animationcomplete = new UICompletionHandler (animateComplete);
+				// Execute Animation
 				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
 			}
 
@@ -116,8 +122,8 @@ namespace AspyRoad.iOSCore
 
 		private void animateComplete(bool finished)
 		{
-			newV.RemoveFromSuperview();
-			AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
+			//newV.RemoveFromSuperview();
+			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
 
 		}
 
@@ -136,21 +142,6 @@ namespace AspyRoad.iOSCore
 //		}
 		#endregion
 		
-		private void animateSlideRight()
-		{
-			float x = 0;
-			float y = 0;
-
-			x = (screenSize.Height/2);
-			y = (screenSize.Height/2);
-
-			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
-
-			x = (screenSize.Width/2);
-			y = (screenSize.Height/2);
-
-			vcDest.View.Center = AspyUtilities.CGPointMake(x, y);
-		}
 
 		/// <summary>
 		/// Raises the slide right event.
