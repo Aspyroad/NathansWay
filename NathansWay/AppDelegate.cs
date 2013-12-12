@@ -8,25 +8,32 @@ using NathansWay.Numeracy.iOS;
 using AspyRoad.iOSCore;
 using NathansWay.WorkSpace;
 
-
-using System;
-
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
-
-namespace NathansWay
+namespace NathansWay.iOS.Numeracy
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to
 	// application events from iOS.
+
+
+	[Register ("AspyAppDelegate")]
+	public class AspyAppDelegate : UIApplicationDelegate
+	{
+		public Globals _Global;
+
+		public	int _myint;
+
+
+	}
+
+
 	[Register ("AppDelegate")]
-	public partial class AppDelegate : UIApplicationDelegate
+	public class AppDelegate : AspyAppDelegate
 	{
 		/// <summary>How to access these varibles from within the app</summary>
 		/// e.g. 
 		/// UIApplication.SharedApplication.Delegate.<name of property>
+
+
 
 		// Set the amazing Global variables needed for our wonderous app
 		//AspyUtilities.G__ViewAutoResize = UIViewAutoresizing.None;
@@ -50,6 +57,7 @@ namespace NathansWay
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			this.
 			#region Setup Storyboard
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
@@ -62,7 +70,6 @@ namespace NathansWay
 //			swipeGesture = new NSAction(printeswipe);
 //			window.RootViewController = viewController;
 			#endregion
-
 
 			window.MakeKeyAndVisible ();			
 			

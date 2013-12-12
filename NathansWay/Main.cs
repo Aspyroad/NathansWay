@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using AspyRoad.iOSCore;
 
-namespace NathansWay
+namespace NathansWay.iOS.Numeracy
 {
 	public class Application
 	{

@@ -8,6 +8,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 {
 	public partial class vcMenu1Start : AspyViewController
 	{
+
 		public vcMenu1Start () : base ()
 		{
 		}
@@ -19,7 +20,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
-			base.DidReceiveMemoryWarning ();			
+			base.DidReceiveMemoryWarning ();
+				
 			// Release any cached data, images, etc that aren't in use.
 		}
 

@@ -21,8 +21,6 @@ namespace AspyRoad.iOSCore
 		private UIView preV;
 		private UIView newV;
 		private AspyWindow window;
-
-
 				
 		#region Construction
 
@@ -53,7 +51,6 @@ namespace AspyRoad.iOSCore
 			
 			//window.BringSubviewToFront (newV);
 			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
-
 					
 //			if (true)
 //			{
@@ -96,7 +93,8 @@ namespace AspyRoad.iOSCore
 				newV = vcDest.View;
 			}
 
-			window = AspyUtilities.G__MainWindow;
+
+
 		}
 		
 
