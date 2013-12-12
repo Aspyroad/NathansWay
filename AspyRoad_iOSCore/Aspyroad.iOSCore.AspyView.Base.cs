@@ -48,17 +48,21 @@ namespace AspyRoad.iOSCore
 		{
 			SetControllers();
 			
-			newV.Center = AspyUtilities.CGPointMake ((preV.Center.Y + preV.Frame.Size.Height), newV.Center.X);
-			preV.InsertSubview (newV,0);
+			//preV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.X);
+			window.AddSubview (newV);
+			
+			//window.BringSubviewToFront (newV);
+			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
+
 					
-			if (true)
-			{
-				// Setup Delegates
-				_slider = new NSAction(animateSlide);
-				_animationcomplete = new UICompletionHandler (animateComplete);
-				// Execute Animation
-				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
-			}
+//			if (true)
+//			{
+//				// Setup Delegates
+//				_slider = new NSAction(animateSlide);
+//				_animationcomplete = new UICompletionHandler (animateComplete);
+//				// Execute Animation
+//				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
+//			}
 
 ////			-(void)perform {
 ////				UIView *preV = ((UIViewController *)self.sourceViewController).view;
