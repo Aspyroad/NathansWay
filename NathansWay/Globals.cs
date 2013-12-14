@@ -3,11 +3,18 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
-	public class Globals : AspyGlobals
+	public sealed class Globals : AspyGlobals
     {
-		public Globals() : base()
-        {
-        }
+		static readonly Globals _instance = new Globals ();
+		
+		private Globals()
+		{
+		}
+		
+		public static Globals Instance
+		{
+			get { return _instance; }
+	    }
 
 		/// <summary>
 		/// Path to the library folder
@@ -23,7 +30,6 @@ namespace NathansWay.iOS.Numeracy
 		/// The name of the version file.
 		/// </summary>
 		private const string VersionFileName = "version.dat";
-
 
     }
 }

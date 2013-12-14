@@ -11,7 +11,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 	{
 		public vMenu2Student () : base ()
 		{
-			UIApplication.SharedApplication.De
+			
 		}
 
 		public vMenu2Student (IntPtr h) : base (h) 

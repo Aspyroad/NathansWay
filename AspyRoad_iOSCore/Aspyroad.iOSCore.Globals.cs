@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 
 namespace AspyRoad.iOSCore
 {
@@ -15,6 +16,11 @@ namespace AspyRoad.iOSCore
 		public AspyWindow G__MainWindow
 		{
 			get { return (AspyWindow)UIApplication.SharedApplication.KeyWindow; }
+		}
+		
+		public static UIApplicationDelegate _appDelegate
+		{
+			get { return UIApplication.SharedApplication.Delegate; }		
 		}
 
 		public enum G__GestureTypes

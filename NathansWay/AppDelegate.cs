@@ -14,30 +14,12 @@ namespace NathansWay.iOS.Numeracy
 	// User Interface of the application, as well as listening (and optionally responding) to
 	// application events from iOS.
 
-
-	[Register ("AspyAppDelegate")]
-	public class AspyAppDelegate : UIApplicationDelegate
-	{
-		public Globals _Global;
-
-		public	int _myint;
-
-
-	}
-
-
 	[Register ("AppDelegate")]
-	public class AppDelegate : AspyAppDelegate
+	public class AppDelegate : UIApplicationDelegate
 	{
 		/// <summary>How to access these varibles from within the app</summary>
 		/// e.g. 
 		/// UIApplication.SharedApplication.Delegate.<name of property>
-
-
-
-		// Set the amazing Global variables needed for our wonderous app
-		//AspyUtilities.G__ViewAutoResize = UIViewAutoresizing.None;
-
 
 		// class-level declarations
 		//AspyWindow window;		
@@ -57,7 +39,10 @@ namespace NathansWay.iOS.Numeracy
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			this.
+			// Set the amazing Global variables needed for our wonderous app
+			Globals.G__ViewAutoResize = UIViewAutoresizing.None;
+			
+
 			#region Setup Storyboard
 			window = new AspyWindow (UIScreen.MainScreen.Bounds);
 			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
@@ -99,21 +84,6 @@ namespace NathansWay.iOS.Numeracy
 			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 		
-		
-//		public static UIStoryboard Storyboard = UIStoryboard.FromName ("Main", null);
-//		public static UIViewController initialViewController;
-//
-//		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-//		{
-//			// create a new window instance based on the screen size
-//			window = new UIWindow (UIScreen.MainScreen.Bounds);
-//
-//			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
-//
-//			window.RootViewController = initialViewController;
-//			window.MakeKeyAndVisible ();
-//			return true;
-//		}
 	}
 }
 
