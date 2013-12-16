@@ -19,17 +19,15 @@ namespace NathansWay.iOS.Numeracy
 		/// <summary>
 		/// Path to the library folder
 		/// </summary>
-		private const string FolderNameLibrary = "Library";
-
+		private const string _folderNameLibrary = "Library";
 		/// <summary>
 		/// Path to the ImageData folder
 		/// </summary>
-		private const string FolderNameImageData = "ImageData";
-
+		private const string _folderNameImageData = "ImageData";
 		/// <summary>
 		/// The name of the version file.
 		/// </summary>
-		private const string VersionFileName = "version.dat";
+		private const string _versionFileName = "version.dat";
 
     }
 }
