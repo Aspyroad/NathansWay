@@ -162,10 +162,24 @@ namespace AspyRoad.iOSCore
 
 		public AspyView (IntPtr handle) : base(handle)
 		{
-		}	
+			Initialize ();
+		}
+
+		[Export("initWithCoder:")]
+		public AspyView (NSCoder coder) : base(coder)
+		{
+			Initialize ();
+		}
+
 		public AspyView ()
 		{
+			Initialize ();
 		}
+
+		void Initialize ()
+		{
+		}
+
 		
 		#endregion
 
@@ -279,6 +293,68 @@ namespace AspyRoad.iOSCore
 				return returnedGesture;
 			}
 		}
+
+		/// <summary>
+		/// A helper method to position the controls appropriately, based on the 
+		/// orientation
+		/// </summary>
+		protected void PositionControls (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			// depending one what orientation we start in, we want to position our controls
+			// appropriately
+//			switch (toInterfaceOrientation) {
+//				// if we're switchign to landscape
+//				case UIInterfaceOrientation.LandscapeLeft:
+//				case UIInterfaceOrientation.LandscapeRight:
+//
+//					// reposition the buttons
+//					button1.Frame = new System.Drawing.RectangleF (10, 10, 100, 33);
+//					button2.Frame = new System.Drawing.RectangleF (10, 200, 100, 33);
+//
+//					// reposition the image
+//					image.Frame = new System.Drawing.RectangleF (240, 25, this.image.Frame.Width, this.image.Frame.Height);
+//
+//					break;
+//
+//					// we're switch back to portrait
+//				case UIInterfaceOrientation.Portrait:
+//				case UIInterfaceOrientation.PortraitUpsideDown:
+//
+//					// reposition the buttons
+//					button1.Frame = new System.Drawing.RectangleF (10, 10, 100, 33);
+//					button2.Frame = new System.Drawing.RectangleF (200, 10, 100, 33);
+//
+//					// reposition the image
+//					image.Frame = new System.Drawing.RectangleF (20, 150, this.image.Frame.Width, this.image.Frame.Height);
+//
+//					break;
+			}
+		}
+
+		#endregion
+
+		#region Overrides
+
+		/// <summary>
+		/// When the device rotates, the OS calls this method to determine if it should try and rotate the
+		/// application and then call WillAnimateRotation
+		/// </summary>
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			// we're passed to orientation that it will rotate to. in our case, we could
+			// just return true, but this switch illustrates how you can test for the 
+			// different cases
+			switch (toInterfaceOrientation) 
+			{
+				case UIInterfaceOrientation.LandscapeLeft:
+				case UIInterfaceOrientation.LandscapeRight:
+				case UIInterfaceOrientation.Portrait:
+				case UIInterfaceOrientation.PortraitUpsideDown:
+				default:
+					return true;
+			}
+		}
+
 
 		#endregion			
 		

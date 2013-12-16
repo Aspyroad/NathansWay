@@ -38,5 +38,7 @@ namespace AspyRoad.iOSCore
 			get { return __ViewAutoResize; }
 			set { __ViewAutoResize = value; }
 		}
+
+
 	}
 }
