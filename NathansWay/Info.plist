@@ -10,9 +10,9 @@
 	<array>
 		<integer>2</integer>
 	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
+	<key>UISupportedInterfaceOrientationss</key>
 	<array>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
+    	<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>5.1</string>

@@ -20,7 +20,6 @@ namespace AspyRoad.iOSCore
 		private UICompletionHandler _animationcomplete;
 		private UIView preV;
 		private UIView newV;
-		private AspyWindow window;
 				
 		#region Construction
 
@@ -44,13 +43,14 @@ namespace AspyRoad.iOSCore
 		
 		public override void Perform()
 		{
-			SetControllers();
+			SetControllers ();
 			
 			//preV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.X);
-			window.AddSubview (newV);
+			preV.AddSubview (newV);
+			newV.Frame = preV.Frame;
+			//AspyGlobals.G__MainWindow.AddSubview (newV);				
 			
-			//window.BringSubviewToFront (newV);
-			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
+			//AspyGlobals.G__MainWindow.RootViewController = this.DestinationViewController;
 					
 //			if (true)
 //			{

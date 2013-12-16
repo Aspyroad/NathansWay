@@ -18,17 +18,10 @@ namespace AspyRoad.iOSCore
 		{
 		}
 
-//		public override AspyView View
-//		{
-//			get
-//			{
-//				return base.View;
-//			}
-//			set
-//			{
-//				base.View = value;
-//			}
-//		}
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+	        return (toInterfaceOrientation == UIInterfaceOrientation.Portrait);
+	    }
 
 
 	}
