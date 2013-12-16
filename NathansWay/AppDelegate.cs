@@ -24,11 +24,11 @@ namespace NathansWay.iOS.Numeracy
 		// class-level declarations
 		//AspyWindow window;		
 		AspyWindow window;
-		QAViewController viewController;
+		//QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
 		public static UIViewController initialViewController;
 
-		NSAction swipeGesture;
+		//NSAction swipeGesture;
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -75,13 +75,13 @@ namespace NathansWay.iOS.Numeracy
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
         {
 			string strString = "";
-			viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			//viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
 			strString = strString + e.strGestureType.ToString ();
         }
 
 		private void printeswipe ()
 		{
-			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
+			//viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 		
 	}
