@@ -24,11 +24,20 @@ namespace NathansWay.iOS.Numeracy
 		// class-level declarations
 		//AspyWindow window;		
 		AspyWindow window;
+		//RectangleF UIWindowFrame = new RectangleF(0,0,1024,768);
+
 		//QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
 		public static UIViewController initialViewController;
 
 		//NSAction swipeGesture;
+		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+		{
+			return UIInterfaceOrientationMask.Landscape;
+		}
+
+
+
 
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -41,10 +50,11 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Set the amazing Global variables needed for our wonderous app
 			Globals.G__ViewAutoResize = UIViewAutoresizing.None;
-			
+						
 
 			#region Setup Storyboard
-			window = new AspyWindow (UIScreen.MainScreen.Bounds);
+			window = new AspyWindow (new RectangleF(0,0,1024,768));
+			//window = new AspyWindow ();
 			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
 			window.RootViewController = initialViewController;
 			#endregion

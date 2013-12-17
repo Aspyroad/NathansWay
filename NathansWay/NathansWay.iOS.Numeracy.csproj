@@ -104,10 +104,6 @@
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
     <Compile Include="Globals.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
@@ -122,6 +118,8 @@
   <ItemGroup>
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\.DS_Store" />
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\Menu\.DS_Store" />
-    <BundleResource Include="Resources\.DS_Store" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
   </ItemGroup>
 </Project>

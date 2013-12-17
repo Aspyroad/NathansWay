@@ -51,32 +51,36 @@ namespace AspyRoad.iOSCore
 		
 		public static bool  G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
 		{
-			bool bShouldrotate = false;
-
-			switch (toInterfaceOrientation) 
-			{
-				case UIInterfaceOrientation.LandscapeLeft:
-				{
-					bShouldrotate = true;
-				}
-				case UIInterfaceOrientation.LandscapeRight:
-				{
-					bShouldrotate = true;
-				}
-				case UIInterfaceOrientation.Portrait:
-				{
-					bShouldrotate = true;
-				}
-				case UIInterfaceOrientation.PortraitUpsideDown:
-				{
-					bShouldrotate = true;
-				}
-				default:
-					return false;
-			}
-			
-			return bShouldrotate;
-			
+//			bool bShouldrotate = false;
+//
+//			switch (toInterfaceOrientation) 
+//			{
+//				case UIInterfaceOrientation.LandscapeLeft:
+//				{
+//					bShouldrotate = true;
+//					break;
+//				}
+//				case UIInterfaceOrientation.LandscapeRight:
+//				{
+//					bShouldrotate = true;
+//					break;
+//				}
+//				case UIInterfaceOrientation.Portrait:
+//				{
+//					bShouldrotate = true;
+//					break;
+//				}
+//				case UIInterfaceOrientation.PortraitUpsideDown:
+//				{
+//					bShouldrotate = true;
+//					break;
+//				}
+//				default:
+//					return false;
+//			}
+//			
+//			return bShouldrotate;
+			return false;
 		}
 		
 		public static UIInterfaceOrientationMask G__GetSupportedOrientations

@@ -162,7 +162,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		[Export("initWithCoder:")]
+		//[Export("initWithCoder:")]
 		public AspyView (NSCoder coder) : base(coder)
 		{
 			Initialize ();
@@ -331,7 +331,6 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
-
 
 		#endregion			
 		

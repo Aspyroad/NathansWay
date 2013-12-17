@@ -19,7 +19,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 		
-		////[Export("initWithCoder:")]
+
 		public AspyViewController (NSCoder coder) : base(coder)
 		{
 			Initialize ();

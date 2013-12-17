@@ -17,6 +17,10 @@ namespace NathansWay.Numeracy.iOS.Menu
 		{
 		}
 
+		public vcMenu1Start (NSCoder coder) : base(coder)
+		{
+		}
+
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.

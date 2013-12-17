@@ -10,7 +10,7 @@
             <objects>
                 <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="vMenu1Start" colorLabel="IBBuiltInLabel-Orange">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="zrT-80-r70">
@@ -68,10 +68,7 @@
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" none="YES" button="YES"/>
                         </accessibility>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
                         <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>
@@ -87,12 +84,10 @@
             <objects>
                 <viewController id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="V3N-Nh-4eh" customClass="vMenu2Student">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="0.1661359006" green="0.55901834240000003" blue="0.12664304900000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
