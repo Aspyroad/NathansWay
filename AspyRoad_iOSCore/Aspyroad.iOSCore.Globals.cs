@@ -48,12 +48,42 @@ namespace AspyRoad.iOSCore
 			get { return __ViewAutoResize; }
 			set { __ViewAutoResize = value; }
 		}
-<<<<<<< HEAD
+		
+		public static bool  G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			bool bShouldrotate = false;
 
-
-=======
+			switch (toInterfaceOrientation) 
+			{
+				case UIInterfaceOrientation.LandscapeLeft:
+				{
+					bShouldrotate = true;
+				}
+				case UIInterfaceOrientation.LandscapeRight:
+				{
+					bShouldrotate = true;
+				}
+				case UIInterfaceOrientation.Portrait:
+				{
+					bShouldrotate = true;
+				}
+				case UIInterfaceOrientation.PortraitUpsideDown:
+				{
+					bShouldrotate = true;
+				}
+				default:
+					return false;
+			}
+			
+			return bShouldrotate;
+			
+		}
+		
+		public static UIInterfaceOrientationMask G__GetSupportedOrientations
+		{
+			get { return UIInterfaceOrientationMask.Landscape; }
+	    }
 		
 		#endregion
->>>>>>> 5f1c393a8308a110b2de0c97561e026f58ae3c64
 	}
 }

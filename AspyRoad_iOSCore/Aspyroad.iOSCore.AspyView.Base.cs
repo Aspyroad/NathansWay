@@ -92,9 +92,6 @@ namespace AspyRoad.iOSCore
 				vcDest = this.DestinationViewController;
 				newV = vcDest.View;
 			}
-
-
-
 		}
 		
 
@@ -328,32 +325,12 @@ namespace AspyRoad.iOSCore
 //					image.Frame = new System.Drawing.RectangleF (20, 150, this.image.Frame.Width, this.image.Frame.Height);
 //
 //					break;
-			}
+			
 		}
 
 		#endregion
 
 		#region Overrides
-
-		/// <summary>
-		/// When the device rotates, the OS calls this method to determine if it should try and rotate the
-		/// application and then call WillAnimateRotation
-		/// </summary>
-		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-		{
-			// we're passed to orientation that it will rotate to. in our case, we could
-			// just return true, but this switch illustrates how you can test for the 
-			// different cases
-			switch (toInterfaceOrientation) 
-			{
-				case UIInterfaceOrientation.LandscapeLeft:
-				case UIInterfaceOrientation.LandscapeRight:
-				case UIInterfaceOrientation.Portrait:
-				case UIInterfaceOrientation.PortraitUpsideDown:
-				default:
-					return true;
-			}
-		}
 
 
 		#endregion			
