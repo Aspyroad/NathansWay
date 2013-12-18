@@ -33,15 +33,13 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-		/// <summary>
-		/// When the device rotates, the OS calls this method to determine if it should try and rotate the
-		/// application and then call WillAnimateRotation
-		/// </summary>
+		// Depreciated - but needed for iOS 5
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
 			return AspyGlobals.G__ShouldAutorotate (toInterfaceOrientation);
 		}
 		
+		// Now standard - iOS 6
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{
 	        return AspyGlobals.G__GetSupportedOrientations;

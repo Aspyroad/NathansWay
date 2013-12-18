@@ -49,13 +49,12 @@ namespace NathansWay.iOS.Numeracy
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			// Set the amazing Global variables needed for our wonderous app
-			Globals.G__ViewAutoResize = UIViewAutoresizing.None;
-						
+			Globals.G__ViewAutoResize = UIViewAutoresizing.None;			
 
 			#region Setup Storyboard
 			window = new AspyWindow (new RectangleF(0,0,1024,768));
 			//window = new AspyWindow ();
-			initialViewController = Storyboard.InstantiateInitialViewController () as UIViewController;
+			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
 			#endregion
 

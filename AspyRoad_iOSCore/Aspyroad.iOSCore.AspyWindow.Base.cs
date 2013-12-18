@@ -50,14 +50,15 @@ namespace AspyRoad.iOSCore
 		
 		public AspyWindow ()
 		{
-			AspyWindowInit ();
+			Initialize ();
 		}
 		public AspyWindow (IntPtr handle) : base(handle)
 		{
+			Initialize ();
 		}
 		public AspyWindow (RectangleF myRect) : base(myRect)
 		{	
-			AspyWindowInit();			
+			Initialize ();		
 		}
 			
 		#endregion
@@ -98,9 +99,9 @@ namespace AspyRoad.iOSCore
 		
 		#region Private Members
 
-		private void AspyWindowInit()
-		{
-
+		private void Initialize ()
+		{	
+			// Do something!
 		}
 
 		protected virtual void IveBeenTouched (GlobalTouchEventArgs e)
@@ -220,7 +221,14 @@ namespace AspyRoad.iOSCore
 
 		}	
 
-		#endregion						
+		#endregion	
+		
+		#region Overrides
+		
+
+
+
+		#endregion	
 	}	
 	
 	public class AspyGesture : UIGestureRecognizer
@@ -242,8 +250,7 @@ namespace AspyRoad.iOSCore
 					
 		}
 			
-		#endregion
-	
+		#endregion	
 	}
 	
 	#region Testcode
