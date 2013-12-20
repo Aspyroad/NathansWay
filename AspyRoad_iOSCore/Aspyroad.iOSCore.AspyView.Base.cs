@@ -40,14 +40,16 @@ namespace AspyRoad.iOSCore
 		{
 		}
 		#endregion
-		
+
 		public override void Perform()
 		{
 			SetControllers ();
 			
 			//preV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.X);
+
 			preV.AddSubview (newV);
-			newV.Frame = preV.Frame;
+			//newV.Frame = preV.Frame;
+
 			//AspyGlobals.G__MainWindow.AddSubview (newV);				
 			
 			//AspyGlobals.G__MainWindow.RootViewController = this.DestinationViewController;
@@ -84,12 +86,12 @@ namespace AspyRoad.iOSCore
 		{
 			if (vcSource == null)
 			{
-				vcSource = this.SourceViewController;
+				vcSource = base.SourceViewController;
 				preV = vcSource.View;
 			}
 			if (vcDest == null)
 			{
-				vcDest = this.DestinationViewController;
+				vcDest = base.DestinationViewController;
 				newV = vcDest.View;
 			}
 		}

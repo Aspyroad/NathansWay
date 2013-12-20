@@ -27,13 +27,13 @@ namespace AspyRoad.iOSCore
 		
 		private void Initialize()
 		{		
-		
 		}	
 
 
 		#region Overrides
 
-		// Depreciated - but needed for iOS 5
+
+		[Obsolete("Depreciated - needed for iOS 5",false)]
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
 			return AspyGlobals.G__ShouldAutorotate (toInterfaceOrientation);

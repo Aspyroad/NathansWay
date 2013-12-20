@@ -24,21 +24,14 @@ namespace NathansWay.iOS.Numeracy
 		// class-level declarations
 		//AspyWindow window;		
 		AspyWindow window;
-		//RectangleF UIWindowFrame = new RectangleF(0,0,1024,768);
 
 		//QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
-		public static UIViewController initialViewController;
+		public static AspyViewController initialViewController;
 
 		//NSAction swipeGesture;
-		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
-		{
-			return UIInterfaceOrientationMask.Landscape;
-		}
 
-
-
-
+		#region Overrides
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
 		// method you should instantiate the window, load the UI into it and then make the window
@@ -52,7 +45,9 @@ namespace NathansWay.iOS.Numeracy
 			Globals.G__ViewAutoResize = UIViewAutoresizing.None;			
 
 			#region Setup Storyboard
-			window = new AspyWindow (new RectangleF(0,0,1024,768));
+			window = new AspyWindow (Globals.G__UIRectangle);
+			window.Bounds = Globals.G__UIRectangle;
+
 			//window = new AspyWindow ();
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
@@ -79,6 +74,14 @@ namespace NathansWay.iOS.Numeracy
 			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
+
+		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+		{
+			return UIInterfaceOrientationMask.Landscape;
+		}
+
+		#endregion
+
 
 		// Function which will be exectuted whne the event fires. 
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)

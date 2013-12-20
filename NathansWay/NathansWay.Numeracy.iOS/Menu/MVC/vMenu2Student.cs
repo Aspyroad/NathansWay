@@ -11,17 +11,20 @@ namespace NathansWay.Numeracy.iOS.Menu
 	{
 		public vMenu2Student () : base ()
 		{
+			Initialize ();
 		}
 
 		public vMenu2Student (IntPtr h) : base (h) 
 		{
+			Initialize ();
 		}
 
-//		public override void Draw(RectangleF rect)
-//		{
-//			base.Draw(rect);
-//			this.currentContext = UIGraphics.GetCurrentContext();
-//		}
+		void Initialize ()
+		{
+			//int x = 0;
+		}
+
+		//public override
 
 
 	}

@@ -10,7 +10,7 @@ namespace AspyRoad.iOSCore
 		#region Constructors
 		
 		public AspyGlobals()
-		{
+		{			 
 		}
 		
 		#endregion	
@@ -18,6 +18,7 @@ namespace AspyRoad.iOSCore
 		#region Private Members
 		
 		private static UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
+		private static RectangleF __UIWindow = new RectangleF(0,0,1024,768);
 		
 		#endregion
 
@@ -47,6 +48,11 @@ namespace AspyRoad.iOSCore
 		{
 			get { return __ViewAutoResize; }
 			set { __ViewAutoResize = value; }
+		}
+
+		public static RectangleF G__UIRectangle
+		{
+			get { return __UIWindow; } 
 		}
 		
 		public static bool  G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
