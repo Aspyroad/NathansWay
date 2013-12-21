@@ -10,7 +10,8 @@ namespace AspyRoad.iOSCore
 		#region Constructors
 		
 		public AspyGlobals()
-		{			 
+		{	
+			__UIWindow = UIScreen.MainScreen.Bounds;
 		}
 		
 		#endregion	

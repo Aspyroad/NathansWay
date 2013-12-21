@@ -22,12 +22,11 @@ namespace AspyRoad.iOSCore
 		private UIView newV;
 				
 		#region Construction
-
+		// Def .ctr
 		public AspySlidingSegue()
 		{
-
 		}
-
+		// AspyCustom .ctor
 		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
 		{
 			vcSource = _vcSource;
@@ -35,7 +34,7 @@ namespace AspyRoad.iOSCore
 			// Set screen variables
 			this.screenSize = UIScreen.MainScreen.Bounds.Size;
 		}
-		// Sys //
+		// Sys .ctor //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
 		{
 		}
@@ -94,8 +93,7 @@ namespace AspyRoad.iOSCore
 				vcDest = base.DestinationViewController;
 				newV = vcDest.View;
 			}
-		}
-		
+		}		
 
 		private void animateSlide()
 		{
@@ -124,20 +122,6 @@ namespace AspyRoad.iOSCore
 			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
 		}
 
-		/// <summary>
-		/// Raises the animate complete event.
-		/// </summary>
-		/// <param name="e">E.</param>
-		#region eventhookups
-//		protected virtual void OnAnimateComplete(EventArgs e)
-//		{
-//			AnimateComplete handler = AnimationComplete;
-//			if (handler != null)
-//			{
-//				handler(e);
-//			}
-//		}
-		#endregion
 		
 
 	}
@@ -155,6 +139,8 @@ namespace AspyRoad.iOSCore
 		private UILongPressGestureRecognizer _longGesture = null;
 
 		private CGContext _currentContext = null;
+		private bool _bUseWindowBounds = false;
+		private bool _bUSeWindowFrame = false;
 		#endregion
 
 		#region Contructors
@@ -170,17 +156,22 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyView ()
+		public AspyView (RectangleF frame) : base(frame)
+		{
+			Initialize ();
+		}
+		
+		public AspyView () : base ()
 		{
 			Initialize ();
 		}
 
-		void Initialize ()
-		{
-		}
-
-		
 		#endregion
+		
+		protected void Initialize ()
+		{
+			
+		}
 
 		#region Public Variables
 
@@ -213,7 +204,8 @@ namespace AspyRoad.iOSCore
 		{
 			get { return this._currentContext; }
 			set { this._currentContext = value; }
-		}
+		}		
+		
 
 		#endregion
 
@@ -333,8 +325,6 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
-
 		#endregion			
-		
 	}	
 }
