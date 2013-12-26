@@ -3,7 +3,7 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
-	public sealed class Globals : AspyGlobals
+	public sealed class Globals 
     {
 		static readonly Globals _instance = new Globals ();
 		

@@ -5,13 +5,20 @@ using MonoTouch.Foundation;
 
 namespace AspyRoad.iOSCore
 {
-	public class AspyGlobals
+	public sealed class AspyGlobals
 	{
-		#region Constructors
+
+		static readonly AspyGlobals _instance = new AspyGlobals ();
 		
-		public AspyGlobals()
-		{	
-			__UIWindow = UIScreen.MainScreen.Bounds;
+		#region Constructors	
+		
+		public static AspyGlobals Instance
+		{
+			get { return _instance; }
+	    }
+	    
+	    private AspyGlobals()
+		{
 		}
 		
 		#endregion	
@@ -19,7 +26,9 @@ namespace AspyRoad.iOSCore
 		#region Private Members
 		
 		private static UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
-		private static RectangleF __UIWindow = new RectangleF(0,0,1024,768);
+		private static RectangleF __UIWindow = UIApplication.SharedApplication.KeyWindow.Bounds;
+		private static bool _InitializeAllViewToWindowBounds = true;
+		private static bool _InitializeAllViewToWindowFrame = true;
 		
 		#endregion
 
@@ -58,35 +67,35 @@ namespace AspyRoad.iOSCore
 		
 		public static bool  G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
 		{
-//			bool bShouldrotate = false;
-//
-//			switch (toInterfaceOrientation) 
-//			{
-//				case UIInterfaceOrientation.LandscapeLeft:
-//				{
-//					bShouldrotate = true;
-//					break;
-//				}
-//				case UIInterfaceOrientation.LandscapeRight:
-//				{
-//					bShouldrotate = true;
-//					break;
-//				}
-//				case UIInterfaceOrientation.Portrait:
-//				{
-//					bShouldrotate = true;
-//					break;
-//				}
-//				case UIInterfaceOrientation.PortraitUpsideDown:
-//				{
-//					bShouldrotate = true;
-//					break;
-//				}
-//				default:
-//					return false;
-//			}
-//			
-//			return bShouldrotate;
+			//			bool bShouldrotate = false;
+			//
+			//			switch (toInterfaceOrientation) 
+			//			{
+			//				case UIInterfaceOrientation.LandscapeLeft:
+			//				{
+			//					bShouldrotate = true;
+			//					break;
+			//				}
+			//				case UIInterfaceOrientation.LandscapeRight:
+			//				{
+			//					bShouldrotate = true;
+			//					break;
+			//				}
+			//				case UIInterfaceOrientation.Portrait:
+			//				{
+			//					bShouldrotate = true;
+			//					break;
+			//				}
+			//				case UIInterfaceOrientation.PortraitUpsideDown:
+			//				{
+			//					bShouldrotate = true;
+			//					break;
+			//				}
+			//				default:
+			//					return false;
+			//			}
+			//			
+			//			return bShouldrotate;
 			return false;
 		}
 		
@@ -94,6 +103,19 @@ namespace AspyRoad.iOSCore
 		{
 			get { return UIInterfaceOrientationMask.Landscape; }
 	    }
+	    
+		public static bool G__InitializeAllViewToWindowBounds
+		{
+			get { return _InitializeAllViewToWindowBounds; }
+			set { _InitializeAllViewToWindowBounds = value; }
+		
+		}
+		
+		public static bool G__InitializeAllViewToWindowFrame
+		{
+			get { return _InitializeAllViewToWindowFrame; }
+			set { _InitializeAllViewToWindowFrame = value;}		
+		}		
 		
 		#endregion
 	}

@@ -140,7 +140,7 @@ namespace AspyRoad.iOSCore
 
 		private CGContext _currentContext = null;
 		private bool _bUseWindowBounds = false;
-		private bool _bUSeWindowFrame = false;
+		private bool _bUseWindowFrame = false;
 		#endregion
 
 		#region Contructors
@@ -170,6 +170,9 @@ namespace AspyRoad.iOSCore
 		
 		protected void Initialize ()
 		{
+			this.UseWindowBounds = AspyGlobals.G__InitializeAllViewToWindowBounds;
+			this.UseWindowFrame = AspyGlobals.G__InitializeAllViewToWindowFrame;
+			
 			
 		}
 
@@ -204,7 +207,45 @@ namespace AspyRoad.iOSCore
 		{
 			get { return this._currentContext; }
 			set { this._currentContext = value; }
-		}		
+		}
+			
+		public 	bool UseWindowBounds
+		{	
+			get { return _bUseWindowBounds; }
+			set 
+			{
+				if (value == true)
+				{
+					this._bUseWindowBounds = true;
+					// Set this views bounds to MainWindow
+					this.Bounds = AspyGlobals.G__MainWindow.Bounds;				
+				}
+				else
+				{
+					this._bUseWindowBounds = false;
+				}			
+			}
+		
+		}
+		public bool UseWindowFrame
+		{
+			get { return _bUseWindowFrame; }
+			set 
+			{
+				if (value == true)
+				{
+					this._bUseWindowFrame = true;
+					// Set this views bounds to MainWindow
+					this.Frame = AspyGlobals.G__MainWindow.Frame;				
+				}
+				else
+				{
+					this._bUseWindowFrame = false;
+				}			
+			}
+		
+		}
+		
 		
 
 		#endregion
