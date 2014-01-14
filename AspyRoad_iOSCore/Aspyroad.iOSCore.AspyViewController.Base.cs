@@ -33,17 +33,17 @@ namespace AspyRoad.iOSCore
 		#region Overrides
 
 
-		[Obsolete("Depreciated - needed for iOS 5",false)]
-		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-		{
-			return AspyGlobals.G__ShouldAutorotate (toInterfaceOrientation);
-		}
+//		[Obsolete("Depreciated - needed for iOS 5",false)]
+//		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+//		{
+//			return AspyGlobals.G__ShouldAutorotate (toInterfaceOrientation);
+//		}
 		
 		// Now standard - iOS 6
-		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
-		{
-	        return AspyGlobals.G__GetSupportedOrientations;
-	    }
+//		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
+//		{
+//	        return AspyGlobals.G__GetSupportedOrientations;
+//	    }
 
 
 		#endregion	
