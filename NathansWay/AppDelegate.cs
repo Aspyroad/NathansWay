@@ -15,7 +15,7 @@ namespace NathansWay.iOS.Numeracy
 	// application events from iOS.
 
 	[Register ("AppDelegate")]
-	public class AppDelegate : UIApplicationDelegate
+	public class AppDelegate : AspyUIApplicationDelegate
 	{
 		/// <summary>How to access these varibles from within the app</summary>
 		/// e.g. 
@@ -23,14 +23,15 @@ namespace NathansWay.iOS.Numeracy
 
 		// class-level declarations
 		// Setup AspyRoad.iOS libraries.
-		AspyGlobals Globe;
+		
 		AspyWindow window;
+		
 
 
 
 
 
-		//QAViewController viewController;
+		//QAViewController viewContr oller;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
 		public static AspyViewController initialViewController;
 
@@ -47,8 +48,9 @@ namespace NathansWay.iOS.Numeracy
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			// Setup the Aspyroad.iOSCore.AspyGlobals
-			//Globe = AspyGlobals.Instance();
-			Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
+			this.Globe = new AspyRoad.iOSCore.AspyGlobals ();
+			
+			this.Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
 
 
 			#region Setup Storyboard

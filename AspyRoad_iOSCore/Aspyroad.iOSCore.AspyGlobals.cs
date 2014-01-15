@@ -19,7 +19,7 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 	    
-		private AspyGlobals()
+		public AspyGlobals()
 		{
 		}
 		

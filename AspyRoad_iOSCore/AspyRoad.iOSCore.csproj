@@ -56,6 +56,7 @@
     <Compile Include="Aspyroad.iOSCore.AspyFactories.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyUtilities.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTypes.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyAppDel.Base.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />
