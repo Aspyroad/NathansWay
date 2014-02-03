@@ -25,11 +25,6 @@ namespace NathansWay.iOS.Numeracy
 		// Setup AspyRoad.iOS libraries.
 		
 		AspyWindow window;
-		
-
-
-
-
 
 		//QAViewController viewContr oller;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
@@ -48,13 +43,12 @@ namespace NathansWay.iOS.Numeracy
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			// Setup the Aspyroad.iOSCore.AspyGlobals
-			this.Globe = new AspyRoad.iOSCore.AspyGlobals ();
-			
+			this.Globe = new AspyRoad.iOSCore.AspyGlobals ();			
 			this.Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
-
 
 			#region Setup Storyboard
 			window = new AspyWindow ();
+			this.Globe.G__UIRectangle = window.Bounds; 
 			//window.Bounds = Globals.G__UIRectangle;
 
 			//window = new AspyWindow ();

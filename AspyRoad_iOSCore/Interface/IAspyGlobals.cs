@@ -17,7 +17,7 @@ namespace AspyRoad.iOSCore
 
 		UIViewAutoresizing G__ViewAutoResize { get; set; }
 
-		RectangleF G__UIRectangle { get; }
+		RectangleF G__UIRectangle { get; set; }
 
 		UIInterfaceOrientationMask G__GetSupportedOrientations { get; }
 

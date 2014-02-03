@@ -19,10 +19,10 @@ namespace AspyRoad.iOSCore
 			{
 				this._Globe = value;
 			}
-//			get 
-//			{
-//				this._Globe;
-//			}
+			get 
+			{
+				return this._Globe;
+			}
 		
 		}
 	}

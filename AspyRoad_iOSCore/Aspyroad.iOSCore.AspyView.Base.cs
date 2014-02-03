@@ -121,9 +121,7 @@ namespace AspyRoad.iOSCore
 		{
 			//newV.RemoveFromSuperview();
 			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
-		}
-
-		
+		}	
 
 	}
 			
@@ -140,6 +138,7 @@ namespace AspyRoad.iOSCore
 		private UILongPressGestureRecognizer _longGesture = null;
 
 		private CGContext _currentContext = null;
+		private AspyGlobals _globals = null;
 		private bool _bUseWindowBounds = false;
 		private bool _bUseWindowFrame = false;
 
@@ -173,6 +172,8 @@ namespace AspyRoad.iOSCore
 		
 		protected void Initialize ()
 		{
+		
+			this._globals = (AspyGlobals)AspyUIApplicationDelegate.G
 			
 			//this.UseWindowBounds = AspyGlobals.G__InitializeAllViewToWindowBounds;
 			//this.UseWindowFrame = AspyGlobals.G__InitializeAllViewToWindowFrame;			

@@ -11,7 +11,8 @@ namespace AspyRoad.iOSCore
 		#region Private Members
 
 		private UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
-		private RectangleF __UIWindow = UIApplication.SharedApplication.KeyWindow.Bounds;
+		//private RectangleF __UIWindow = UIApplication.SharedApplication.
+		private RectangleF __UIWindow;
 		private bool _InitializeAllViewToWindowBounds = true;
 		private bool _InitializeAllViewToWindowFrame = true;
 
@@ -46,7 +47,8 @@ namespace AspyRoad.iOSCore
 
 		public RectangleF G__UIRectangle
 		{
-			get { return __UIWindow; } 
+			get { return __UIWindow; }
+			set { __UIWindow = value; } 
 		}
 		
 		public bool G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
