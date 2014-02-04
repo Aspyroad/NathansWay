@@ -8,7 +8,7 @@
     <ProjectGuid>{ED846A11-F3F8-4277-9E00-8AC75C114910}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NathansWay</RootNamespace>
+    <RootNamespace>NathansWay.Numeracy.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>NathansWay</AssemblyName>
   </PropertyGroup>
@@ -65,6 +65,7 @@
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\" />
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
     <Folder Include="Content\" />
+    <Folder Include="NathansWay.Numeracy.iOS\MonoGame\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -103,6 +104,7 @@
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\MonoGame\iOSGamePlatform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
