@@ -116,6 +116,10 @@
       <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
       <Name>AspyRoad.iOSCore</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj">
+      <Project>{61F33CB8-B0D6-4356-AA69-23AAFBFA014C}</Project>
+      <Name>NathansWay.Numeracy.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\NathansWay.Numeracy.iOS\.DS_Store" />
