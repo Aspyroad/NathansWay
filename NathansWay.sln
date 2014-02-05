@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network.iOS", "..\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspyRoad.iOSCore", "AspyRoad_iOSCore\AspyRoad.iOSCore.csproj", "{587047CE-E3BC-4A5D-A59E-58558971F231}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Numeracy.Shared", "NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj", "{8DD61860-526C-4447-B806-E0ADC61DFB54}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -23,6 +25,10 @@ Global
 		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
