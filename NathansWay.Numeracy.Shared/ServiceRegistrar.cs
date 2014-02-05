@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+<<<<<<< HEAD
 
 
 namespace NathansWay.Numeracy.Shared
@@ -26,12 +27,24 @@ namespace NathansWay.Numeracy.Shared
     /// </summary>
     public static class ServiceRegistrar 
     {
+=======
+using FieldService.Data;
+using FieldService.Utilities;
+using FieldService.ViewModels;
+
+namespace FieldService {
+    /// <summary>
+    /// Class for registering services for the app
+    /// </summary>
+    public static class ServiceRegistrar {
+>>>>>>> 605b7e83dbe2071b617d342041348c66efb91a04
 
         /// <summary>
         /// Call on startup of the app, it configures ServiceContainer
         /// </summary>
         public static void Startup ()
         {
+<<<<<<< HEAD
 //            ServiceContainer.Register<ILoginService> (() => new SampleLoginService ());
 //            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
 //
@@ -47,6 +60,23 @@ namespace NathansWay.Numeracy.Shared
 //            ServiceContainer.Register<LoginViewModel>();
 //            ServiceContainer.Register<PhotoViewModel>();
 //#endif
+=======
+            ServiceContainer.Register<ILoginService> (() => new SampleLoginService ());
+            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
+
+#if !NETFX_CORE
+            //Only do these on iOS or Android
+            ServiceContainer.Register<MenuViewModel> ();
+            ServiceContainer.Register<AssignmentViewModel>();
+            ServiceContainer.Register<DocumentViewModel>();
+            ServiceContainer.Register<ExpenseViewModel>();
+            ServiceContainer.Register<HistoryViewModel>();
+            ServiceContainer.Register<ItemViewModel>();
+            ServiceContainer.Register<LaborViewModel>();
+            ServiceContainer.Register<LoginViewModel>();
+            ServiceContainer.Register<PhotoViewModel>();
+#endif
+>>>>>>> 605b7e83dbe2071b617d342041348c66efb91a04
         }
     }
 }
