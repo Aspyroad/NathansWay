@@ -1,11 +1,11 @@
 using System;
-using System.Drawing;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using NathansWay.Numeracy.iOS;
 using AspyRoad.iOSCore;
+using NathansWay.Numeracy.iOS;
 using NathansWay.WorkSpace;
 
 namespace NathansWay.iOS.Numeracy
@@ -84,7 +84,6 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		#endregion
-
 
 		// Function which will be exectuted whne the event fires. 
         public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)

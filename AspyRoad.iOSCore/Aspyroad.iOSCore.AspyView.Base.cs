@@ -171,10 +171,7 @@ namespace AspyRoad.iOSCore
 		#endregion
 		
 		protected void Initialize ()
-		{
-		
-			this._globals = (AspyGlobals)AspyUIApplicationDelegate.G
-			
+		{			
 			//this.UseWindowBounds = AspyGlobals.G__InitializeAllViewToWindowBounds;
 			//this.UseWindowFrame = AspyGlobals.G__InitializeAllViewToWindowFrame;			
 			

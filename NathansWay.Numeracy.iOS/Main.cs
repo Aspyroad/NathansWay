@@ -4,6 +4,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
