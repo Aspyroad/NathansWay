@@ -29,8 +29,14 @@ namespace NathansWay.Numeracy.Shared
         /// <summary>
         /// Call on startup of the app, it configures ServiceContainer
         /// </summary>
-        public static void Startup ()
+        public static void Startup (Action function)
         {
+			function.Invoke ();
+			InitializeShared ();
+        }
+        
+		private static void InitializeShared()
+		{
 			//            ServiceContainer.Register<ILoginService> (() => new SampleLoginService ());
 			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
 			//
@@ -45,7 +51,7 @@ namespace NathansWay.Numeracy.Shared
 			//            ServiceContainer.Register<LaborViewModel>();
 			//            ServiceContainer.Register<LoginViewModel>();
 			//            ServiceContainer.Register<PhotoViewModel>();
-			//#endif
-        }
+			//#endif		
+		}
     }
 }

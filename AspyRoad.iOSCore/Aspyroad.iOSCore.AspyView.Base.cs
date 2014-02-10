@@ -138,7 +138,7 @@ namespace AspyRoad.iOSCore
 		private UILongPressGestureRecognizer _longGesture = null;
 
 		private CGContext _currentContext = null;
-		private AspyGlobals _globals = null;
+		private AspyiOSGlobals _globals = null;
 		private bool _bUseWindowBounds = false;
 		private bool _bUseWindowFrame = false;
 

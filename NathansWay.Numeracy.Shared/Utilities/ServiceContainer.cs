@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.Numeracy.Shared.Utilities 
+namespace NathansWay.Numeracy.Shared
 {
     public class ServiceContainer 
     {
@@ -32,6 +32,7 @@ namespace NathansWay.Numeracy.Shared.Utilities
             }
         }
 
+		// Overload 1 - Takes a 
         public static void Register<T> (T service)
         {
             Instance.Services [typeof (T)] = new Lazy<object> (() => service);

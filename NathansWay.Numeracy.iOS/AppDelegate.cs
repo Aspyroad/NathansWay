@@ -6,7 +6,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 using NathansWay.Numeracy.iOS;
-using NathansWay.WorkSpace;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -43,13 +43,19 @@ namespace NathansWay.iOS.Numeracy
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			// Setup the Aspyroad.iOSCore.AspyGlobals
-			this.Globe = new AspyRoad.iOSCore.AspyGlobals ();			
-			this.Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
+			//this.Globe = new AspyRoad.iOSCore.AspyGlobals ();			
+			//this.Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
+
+			
 
 			#region Setup Storyboard
 			window = new AspyWindow ();
-			this.Globe.G__UIRectangle = window.Bounds; 
-			//window.Bounds = Globals.G__UIRectangle;
+			
+			ServiceContainer.Register<IAspyiOSGlobals> (() => new AspyiOSGlobals ());
+			ServiceContainer.Register<AspyWindow> (window);
+			
+			this.Globe = ServiceContainer.Resolve<IAspyiOSGlobals>();
+			window.Bounds = this.Globe.G__UIRectangle;
 
 			//window = new AspyWindow ();
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;

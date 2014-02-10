@@ -11,9 +11,9 @@ namespace AspyRoad.iOSCore
 		{
 		}
 		
-		private IAspyGlobals _Globe;
+		private IAspyiOSGlobals _Globe;
 		
-		public IAspyGlobals Globe
+		public IAspyiOSGlobals Globe
 		{
 			set
 			{

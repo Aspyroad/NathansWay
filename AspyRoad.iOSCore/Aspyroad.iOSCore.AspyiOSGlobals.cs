@@ -5,7 +5,7 @@ using MonoTouch.Foundation;
 
 namespace AspyRoad.iOSCore
 {
-	public class AspyGlobals :  IAspyGlobals
+	public class AspyiOSGlobals :  IAspyiOSGlobals
 	{	
 
 		#region Private Members
@@ -20,7 +20,7 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 	    
-		public AspyGlobals()
+		public AspyiOSGlobals()
 		{
 		}
 		

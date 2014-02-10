@@ -79,6 +79,7 @@
     <None Include="NathansWay.Numeracy.iOS\Menu\README.md" />
     <None Include="NathansWay.Numeracy.iOS\Lesson\README.md" />
     <None Include="NathansWay.Numeracy.iOS\WorkSpace\README.md" />
+    <None Include="NathansWay.Numeracy.iOS\MonoGame\iOSGamePlatform.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
     <Compile Include="Globals.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\MonoGame\iOSGamePlatform.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
