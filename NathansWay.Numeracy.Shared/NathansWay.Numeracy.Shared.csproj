@@ -35,9 +35,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="ServiceRegistrar.cs" />
+    <Compile Include="Interface\ISharedGlobals.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Utilities\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
 </Project>

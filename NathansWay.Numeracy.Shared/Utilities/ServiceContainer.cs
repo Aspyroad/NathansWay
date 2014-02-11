@@ -39,7 +39,6 @@ namespace NathansWay.Numeracy.Shared
         }
 
         public static void Register<T> () where T : new ()
-
         {
             Instance.Services [typeof (T)] = new Lazy<object> (() => new T ());
         }

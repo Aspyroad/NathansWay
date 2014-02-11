@@ -51,10 +51,11 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Storyboard
 			window = new AspyWindow ();
 			
-			ServiceContainer.Register<IAspyiOSGlobals> (() => new AspyiOSGlobals ());
+			
+			ServiceContainer.Register<IAspyGlobals> (() => new AspyGlobals ());
 			ServiceContainer.Register<AspyWindow> (window);
 			
-			this.Globe = ServiceContainer.Resolve<IAspyiOSGlobals>();
+			this.Globe = ServiceContainer.Resolve<IAspyGlobals>();
 			window.Bounds = this.Globe.G__UIRectangle;
 
 			//window = new AspyWindow ();

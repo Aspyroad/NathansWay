@@ -11,17 +11,17 @@ namespace AspyRoad.iOSCore
 		{
 		}
 		
-		private IAspyiOSGlobals _Globe;
+		private IAspyGlobals _iosGlobals;
 		
-		public IAspyiOSGlobals Globe
+		public IAspyGlobals iOSGlobals
 		{
 			set
 			{
-				this._Globe = value;
+				this._iosGlobals = value;
 			}
 			get 
 			{
-				return this._Globe;
+				return this._iosGlobals;
 			}
 		
 		}

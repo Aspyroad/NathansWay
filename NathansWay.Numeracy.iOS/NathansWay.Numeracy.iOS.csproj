@@ -104,7 +104,6 @@
     </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
-    <Compile Include="Globals.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

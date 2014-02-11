@@ -8,7 +8,7 @@ using MonoTouch.Foundation;
 
 namespace AspyRoad.iOSCore
 {
-	public interface IAspyiOSGlobals
+	public interface IAspyGlobals
     {
 		// Properties
 		AspyWindow G__MainWindow { get; }

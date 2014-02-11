@@ -29,11 +29,16 @@ namespace NathansWay.Numeracy.Shared
         /// <summary>
         /// Call on startup of the app, it configures ServiceContainer
         /// </summary>
-        public static void Startup (Action function)
+        public static void Startup (Action InitializeNonShared)
         {
-			function.Invoke ();
+			InitializeNonShared.Invoke ();
 			InitializeShared ();
         }
+        
+		public static void Startup ()
+		{
+			InitializeShared ();
+		}
         
 		private static void InitializeShared()
 		{
