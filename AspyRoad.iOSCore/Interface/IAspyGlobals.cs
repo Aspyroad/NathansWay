@@ -13,7 +13,7 @@ namespace AspyRoad.iOSCore
 		// Properties
 		AspyWindow G__MainWindow { get; }
 		
-		UIApplicationDelegate _appDelegate { get; }
+		AspyUIApplicationDelegate G__AppDelegate { get; }
 
 		UIViewAutoresizing G__ViewAutoResize { get; set; }
 

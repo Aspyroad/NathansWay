@@ -20,7 +20,7 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 	    
-		public AspyiOSGlobals()
+		public AspyGlobals()
 		{
 		}
 		
@@ -34,7 +34,7 @@ namespace AspyRoad.iOSCore
 			get { return (AspyWindow)UIApplication.SharedApplication.KeyWindow; }
 		}
 		
-		public UIApplicationDelegate _appDelegate
+		public AspyUIApplicationDelegate G__AppDelegate
 		{
 			get { return UIApplication.SharedApplication.Delegate; }		
 		}

@@ -24,12 +24,10 @@ namespace NathansWay.iOS.Numeracy
 		// class-level declarations
 		// Setup AspyRoad.iOS libraries.
 		
-		AspyWindow window;
-
-		//QAViewController viewContr oller;
+		private AspyWindow window;
+		//QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
 		public static AspyViewController initialViewController;
-
 		//NSAction swipeGesture;
 
 		#region Overrides
@@ -42,23 +40,29 @@ namespace NathansWay.iOS.Numeracy
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			// Setup the window
+			window = new AspyWindow ();
+
+			// Setup services and globals for iOS
 			// Setup the Aspyroad.iOSCore.AspyGlobals
-			//this.Globe = new AspyRoad.iOSCore.AspyGlobals ();			
-			//this.Globe.G__ViewAutoResize = UIViewAutoresizing.None;		
+			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals ();
+				
+			// Set global variables here....		
+			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
+			this.iOSGlobals.G__UIRectangle = UIScreen.MainScreen.Bounds;		
 
 			
 
 			#region Setup Storyboard
-			window = new AspyWindow ();
+
 			
 			
 			ServiceContainer.Register<IAspyGlobals> (() => new AspyGlobals ());
 			ServiceContainer.Register<AspyWindow> (window);
 			
-			this.Globe = ServiceContainer.Resolve<IAspyGlobals>();
-			window.Bounds = this.Globe.G__UIRectangle;
+			//this.Globe = ServiceContainer.Resolve<IAspyGlobals>();
+			//window.Bounds = this.Globe.G__UIRectangle;
 
-			//window = new AspyWindow ();
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
 			#endregion

@@ -15,18 +15,12 @@ namespace NathansWay.iOS.Numeracy
 		{		
 			// Setup our services for core library.
 			// Pass in our non shared   
-			ServiceRegistrar.Startup (new Action (InitializeNonShared));
+			ServiceRegistrar.Startup ();
 			
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.
 			UIApplication.Main (args, null, "AppDelegate");
-		}
-		
-		// Anything "non -shared" that you would lkike the service registar to initialize
-		// Throw sin here.
-		static void InitializeNonShared()
-		{
-					
-		}
+		}		
+
 	}
 }

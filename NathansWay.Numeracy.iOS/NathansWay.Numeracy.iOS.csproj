@@ -66,6 +66,7 @@
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
     <Folder Include="Content\" />
     <Folder Include="NathansWay.Numeracy.iOS\MonoGame\" />
+    <Folder Include="Resources\NathansWay.Numeracy.iOS\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -119,10 +120,6 @@
       <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
       <Name>Aspyroad.iOSCore</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\NathansWay.Numeracy.iOS\.DS_Store" />
-    <BundleResource Include="Resources\NathansWay.Numeracy.iOS\Menu\.DS_Store" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
