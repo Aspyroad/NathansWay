@@ -51,17 +51,16 @@ namespace NathansWay.iOS.Numeracy
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
 			this.iOSGlobals.G__UIRectangle = UIScreen.MainScreen.Bounds;		
 
-			
-
-			#region Setup Storyboard
-
-			
-			
-			ServiceContainer.Register<IAspyGlobals> (() => new AspyGlobals ());
+			// Register any iOS services needed		
+			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			ServiceContainer.Register<AspyWindow> (window);
+			// ** Note how to retrieve from services.
+			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
-			//this.Globe = ServiceContainer.Resolve<IAspyGlobals>();
-			//window.Bounds = this.Globe.G__UIRectangle;
+			
+			#region Setup Storyboard			
+			
+			//window.Bounds = 
 
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;

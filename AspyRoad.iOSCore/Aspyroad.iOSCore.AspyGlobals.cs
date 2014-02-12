@@ -36,7 +36,7 @@ namespace AspyRoad.iOSCore
 		
 		public AspyUIApplicationDelegate G__AppDelegate
 		{
-			get { return UIApplication.SharedApplication.Delegate; }		
+			get { return (AspyUIApplicationDelegate)UIApplication.SharedApplication.Delegate; }		
 		}
 
 		public UIViewAutoresizing G__ViewAutoResize
