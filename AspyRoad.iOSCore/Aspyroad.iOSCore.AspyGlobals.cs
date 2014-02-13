@@ -11,8 +11,10 @@ namespace AspyRoad.iOSCore
 		#region Private Members
 
 		private UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
-		//private RectangleF __UIWindow = UIApplication.SharedApplication.
-		private RectangleF __UIWindow;
+		private RectangleF __RectWindowPortait;
+		private RectangleF __RectWindowLandscape;
+		
+		
 		private bool _InitializeAllViewToWindowBounds = true;
 		private bool _InitializeAllViewToWindowFrame = true;
 
@@ -22,12 +24,12 @@ namespace AspyRoad.iOSCore
 	    
 		public AspyGlobals()
 		{
+			this.Initialize ();
 		}
 		
 		#endregion
 
 		#region Public Members
-		
 
 		public AspyWindow G__MainWindow
 		{
@@ -44,15 +46,11 @@ namespace AspyRoad.iOSCore
 			get { return __ViewAutoResize; }
 			set { __ViewAutoResize = value; }
 		}
-
-		public RectangleF G__UIRectangle
-		{
-			get { return __UIWindow; }
-			set { __UIWindow = value; } 
-		}
 		
 		public bool G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
 		{
+			//TODO Fix autorotate in Global, always returns false, needs to be set	
+				
 			//			bool bShouldrotate = false;
 			//
 			//			switch (toInterfaceOrientation) 
@@ -82,6 +80,7 @@ namespace AspyRoad.iOSCore
 			//			}
 			//			
 			//			return bShouldrotate;
+			//
 			return false;
 		}
 		
@@ -101,8 +100,37 @@ namespace AspyRoad.iOSCore
 			get { return _InitializeAllViewToWindowFrame; }
 			set { _InitializeAllViewToWindowFrame = value;}		
 		}	
+		
+		public RectangleF  G__RectWindowLandscape
+		{
+			get { return __RectWindowLandscape; }			
+		}
+		
+		public RectangleF G__RectWindowPortait
+		{
+			get { return __RectWindowPortait; }
+		}
 
-		#endregion			
+		#endregion
+		
+		#region Private Functions
+		
+		private void Initialize ()
+		{
+			SwapOrientations(UIScreen.MainScreen.Bounds);			
+		}
+		
+		// iOS UIScreen Bounds are always returned in portait mode
+		// Extract values and create global portait and landscape values.
+		private void SwapOrientations(RectangleF _rect)
+		{
+			// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
+			this.__RectWindowPortait = new RectangleF(_rect.X, _rect.Y, _rect.Size.Width, _rect.Size.Height);
+			// Swap values hieght and width values for landscape
+			this.__RectWindowLandscape = new RectangleF (_rect.X, _rect.Y, _rect.Size.Height, _rect.Size.Width);	
+		}
+		
+		#endregion
 
 	}
 }

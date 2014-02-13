@@ -49,7 +49,6 @@ namespace NathansWay.iOS.Numeracy
 				
 			// Set global variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
-			this.iOSGlobals.G__UIRectangle = UIScreen.MainScreen.Bounds;		
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
@@ -60,7 +59,7 @@ namespace NathansWay.iOS.Numeracy
 			
 			#region Setup Storyboard			
 			
-			//window.Bounds = 
+			window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
 
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
