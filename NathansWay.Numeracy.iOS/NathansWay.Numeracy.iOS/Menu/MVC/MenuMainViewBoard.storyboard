@@ -9,7 +9,7 @@
         <scene sceneID="vxW-M0-OXp">
             <objects>
                 <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
-                    <view key="view" opaque="NO" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="vMenu1Start" colorLabel="IBBuiltInLabel-Orange">
+                    <view key="view" autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="vMenu1Start" colorLabel="IBBuiltInLabel-Orange">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -71,6 +71,7 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
                         <outlet property="btnTest" destination="zrT-80-r70" id="B9l-aK-sdD"/>

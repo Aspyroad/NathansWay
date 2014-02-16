@@ -59,7 +59,7 @@ namespace NathansWay.iOS.Numeracy
 			
 			#region Setup Storyboard			
 			
-			window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
+			//window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
 
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;

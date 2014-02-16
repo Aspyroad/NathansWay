@@ -49,8 +49,8 @@ namespace AspyRoad.iOSCore
 		
 		public bool G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
 		{
-			//TODO Fix autorotate in Global, always returns false, needs to be set	
-				
+			//TODO::Fix autorotate in Global, always returns false, needs to be set	
+						
 			//			bool bShouldrotate = false;
 			//
 			//			switch (toInterfaceOrientation) 

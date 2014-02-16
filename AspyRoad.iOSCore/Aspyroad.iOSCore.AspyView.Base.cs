@@ -6,6 +6,12 @@ using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 
+// TODO:: Not a fan of including the shared lib in Aspyroad.iOSCore, breaks dependancy rules
+// Maybe ok for now. I can only assume Aspyroad.iOSCore will be used with the shared lib always
+// ********************************
+using NathansWay.Numeracy.Shared;
+// ********************************
+
 namespace AspyRoad.iOSCore
 {			
 	[MonoTouch.Foundation.Register("AspyView")]	
@@ -19,9 +25,9 @@ namespace AspyRoad.iOSCore
 		private UIPanGestureRecognizer _panGesture = null;
 		private UIRotationGestureRecognizer _rotorGesture = null;
 		private UILongPressGestureRecognizer _longGesture = null;
-
+		
+		private IAspyGlobals iOSGlobals;
 		private CGContext _currentContext = null;
-		private AspyGlobals _globals = null;
 		private bool _bUseWindowBounds = false;
 		private bool _bUseWindowFrame = false;
 
@@ -53,10 +59,12 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 		
-		protected void Initialize ()
-		{			
-			//this.UseWindowBounds = AspyGlobals.G__InitializeAllViewToWindowBounds;
-			//this.UseWindowFrame = AspyGlobals.G__InitializeAllViewToWindowFrame;			
+		private void Initialize ()
+		{	
+			this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+			
+			this.UseWindowBounds = iOSGlobals.G__InitializeAllViewToWindowBounds;
+			this.UseWindowFrame = iOSGlobals.G__InitializeAllViewToWindowFrame;
 			
 		}
 
