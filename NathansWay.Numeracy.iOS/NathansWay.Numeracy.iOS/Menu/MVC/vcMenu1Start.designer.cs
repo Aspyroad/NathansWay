@@ -13,10 +13,16 @@ namespace NathansWay.Numeracy.iOS.Menu
 	partial class vcMenu1Start
 	{
 		[Outlet]
+		AspyRoad.iOSCore.AspyButton btnMenuLesson { get; set; }
+
+		[Outlet]
 		AspyRoad.iOSCore.AspyButton btnMenuStudent { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btnTest { get; set; }
+		AspyRoad.iOSCore.AspyButton btnTest { get; set; }
+
+		[Action ("btnMenuActionLessons:")]
+		partial void btnMenuActionLessons (MonoTouch.Foundation.NSObject sender);
 
 		[Action ("btnMenuActionStudent:")]
 		partial void btnMenuActionStudent (MonoTouch.Foundation.NSObject sender);
@@ -29,6 +35,11 @@ namespace NathansWay.Numeracy.iOS.Menu
 			if (btnMenuStudent != null) {
 				btnMenuStudent.Dispose ();
 				btnMenuStudent = null;
+			}
+
+			if (btnMenuLesson != null) {
+				btnMenuLesson.Dispose ();
+				btnMenuLesson = null;
 			}
 
 			if (btnTest != null) {

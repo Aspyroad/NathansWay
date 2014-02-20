@@ -6,9 +6,9 @@ using AspyRoad.iOSCore;
 using MonoTouch.ObjCRuntime;
 using NathansWay.Numeracy.iOS.WorkSpace;
 
-namespace NathansWay.WorkSpace
+namespace NathansWay.Numeracy.iOS.WorkSpace
 {
-	public class QAViewController : UIViewController
+	public class QAViewController : AspyViewController
     {
 		private vwQAWorkSpace vwQAView;
 

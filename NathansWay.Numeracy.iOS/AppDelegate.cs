@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 using NathansWay.Numeracy.iOS;
 using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.iOS.WorkSpace;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -15,7 +16,8 @@ namespace NathansWay.iOS.Numeracy
 	// application events from iOS.
 
 	[Register ("AppDelegate")]
-	public class AppDelegate : AspyUIApplicationDelegate
+	//public class AppDelegate : AspyUIApplicationDelegate
+	public class AppDelegate : UIApplicationDelegate
 	{
 		/// <summary>How to access these varibles from within the app</summary>
 		/// e.g. 
@@ -25,10 +27,11 @@ namespace NathansWay.iOS.Numeracy
 		// Setup AspyRoad.iOS libraries.
 		
 		private AspyWindow window;
-		//QAViewController viewController;
+		private QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
 		public static AspyViewController initialViewController;
-		//NSAction swipeGesture;
+		private IAspyGlobals iOSGlobals;
+		NSAction swipeGesture;
 
 		#region Overrides
 		//
@@ -57,10 +60,9 @@ namespace NathansWay.iOS.Numeracy
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
 			
-			#region Setup Storyboard			
-			
-			//window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
-
+			#region Setup Storyboard
+			// Frame is important as it also defines the area fro touch input.
+			window.Frame = this.iOSGlobals.G__RectWindowPortait;
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
 			#endregion
@@ -80,10 +82,10 @@ namespace NathansWay.iOS.Numeracy
 			#endregion
 			
 			#region Gesture From AspyView
-			//viewController.QAWorkSpaceView.WireUpGestureToView(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			//viewController.QAWorkSpaceView.WireUpGestureToView(G__GestureTypes.UIPinch, swipeGesture);
 			#endregion
 
-			//window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
+			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 
@@ -104,7 +106,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private void printeswipe ()
 		{
-			//viewController.QAWorkSpaceView.Q2.Text = "Swiped";
+			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 		
 	}

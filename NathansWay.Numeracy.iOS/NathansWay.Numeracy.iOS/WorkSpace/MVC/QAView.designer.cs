@@ -10,16 +10,27 @@ using System.CodeDom.Compiler;
 namespace NathansWay.Numeracy.iOS.WorkSpace
 {
 	[Register ("vwQAWorkSpace")]
-	public partial class vwQAWorkSpace
+	partial class vwQAWorkSpace
 	{
 		[Outlet]
-		public MonoTouch.UIKit.UILabel lbl1 { get; set; }
+		AspyRoad.iOSCore.AspyButton btnTest { get; set; }
 
 		[Outlet]
-		public MonoTouch.UIKit.UILabel lbl2 { get; set; }
+		public MonoTouch.UIKit.UILabel lbl1 { get; private set; }
+
+		[Outlet]
+		public MonoTouch.UIKit.UILabel lbl2 { get; private set; }
+
+		[Action ("btnTestClick:")]
+		partial void btnTestClick (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnTest != null) {
+				btnTest.Dispose ();
+				btnTest = null;
+			}
+
 			if (lbl1 != null) {
 				lbl1.Dispose ();
 				lbl1 = null;

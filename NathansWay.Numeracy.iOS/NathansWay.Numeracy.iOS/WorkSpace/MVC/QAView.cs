@@ -10,12 +10,18 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 	public partial class vwQAWorkSpace : AspyView
 	{
 
-		public vwQAWorkSpace(IntPtr h): base (h)
+		public vwQAWorkSpace (IntPtr h) : base (h)
 		{
 		}
 
 		public vwQAWorkSpace(RectangleF rf)
 		{
+			this.Initialize ();		
+		}
+		
+		private void Initialize()
+		{
+			
 			#region NIB Load Method 1
 			//UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
 			//var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
@@ -26,8 +32,14 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 			var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
 			#endregion
 
-			v.Frame = UIScreen.MainScreen.Bounds;
-			AddSubview(v);
+			v.Frame = this.RectWindowLandscape;
+			AddSubview(v);	
+			
+		}
+		
+		partial void btnTestClick (NSObject sender)
+		{
+			throw new System.NotImplementedException ();
 		}
 		
 		#region UI Objects

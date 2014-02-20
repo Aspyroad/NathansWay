@@ -127,5 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
   </ItemGroup>
 </Project>

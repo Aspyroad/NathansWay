@@ -30,8 +30,8 @@ namespace AspyRoad.iOSCore
 		private CGContext _currentContext = null;
 		private bool _bUseWindowBounds = false;
 		private bool _bUseWindowFrame = false;
-
-
+		private RectangleF _RectWindowLandscape;
+		private RectangleF _RectWindowPortait;
 		#endregion
 
 		#region Contructors
@@ -63,8 +63,10 @@ namespace AspyRoad.iOSCore
 		{	
 			this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
 			
-			this.UseWindowBounds = iOSGlobals.G__InitializeAllViewToWindowBounds;
-			this.UseWindowFrame = iOSGlobals.G__InitializeAllViewToWindowFrame;
+			this._bUseWindowBounds = iOSGlobals.G__InitializeAllViewToWindowBounds;
+			this._bUseWindowFrame = iOSGlobals.G__InitializeAllViewToWindowFrame;
+			this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
+			this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
 			
 		}
 
@@ -137,6 +139,17 @@ namespace AspyRoad.iOSCore
 			}
 		
 		}
+		public RectangleF RectWindowLandscape
+		{
+			get { return this._RectWindowLandscape; }
+			// Shouldnt need setters???
+		}
+		public RectangleF RectWindowPortait
+		{
+			get { return this._RectWindowPortait; }	
+			// Shouldnt need setters???
+		}
+		
 		
 		
 

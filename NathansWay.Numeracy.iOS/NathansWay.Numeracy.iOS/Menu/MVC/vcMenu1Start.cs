@@ -40,6 +40,11 @@ namespace NathansWay.Numeracy.iOS.Menu
 		{
 			this.PerformSegue("sgStart_Student",sender)	;
 		}
+		
+		partial void btnMenuActionLessons (NSObject sender)
+		{
+			throw new System.NotImplementedException ();
+		}
 	}
 }
 
