@@ -33,7 +33,7 @@ namespace AspyRoad.iOSCore
 			vcDest = _vcDest;
 			
 			// Set screen variables
-			this.screenSize = UIScreen.MainScreen.Bounds.Size;
+			//this.screenSize = UIScreen.MainScreen.Bounds.Size;
 		}
 		// Sys .ctor //
 		public AspySlidingSegue(IntPtr handle) :base(handle)

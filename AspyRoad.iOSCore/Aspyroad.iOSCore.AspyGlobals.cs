@@ -15,8 +15,8 @@ namespace AspyRoad.iOSCore
 		private RectangleF __RectWindowLandscape;
 		
 		
-		private bool _InitializeAllViewToWindowBounds = true;
-		private bool _InitializeAllViewToWindowFrame = true;
+		private bool _InitializeAllViewOrientation;
+		private G__Orientation _Orientation = G__Orientation.Portait;
 
 		#endregion
 
@@ -89,17 +89,17 @@ namespace AspyRoad.iOSCore
 			get { return UIInterfaceOrientationMask.Landscape; }
 	    }
 	    
-		public bool G__InitializeAllViewToWindowBounds
+		public bool G__InitializeAllViewOrientation
 		{
-			get { return _InitializeAllViewToWindowBounds; }
-			set { _InitializeAllViewToWindowBounds = value; }		
-		}
-		
-		public bool G__InitializeAllViewToWindowFrame
-		{
-			get { return _InitializeAllViewToWindowFrame; }
-			set { _InitializeAllViewToWindowFrame = value;}		
+			get { return _InitializeAllViewOrientation; }
+			set { _InitializeAllViewOrientation = value; }		
 		}	
+		
+		public G__Orientation G__ViewOrientation
+		{
+			get { return _Orientation; }
+			set { _Orientation = value; }
+		}
 		
 		public RectangleF  G__RectWindowLandscape
 		{
@@ -125,9 +125,9 @@ namespace AspyRoad.iOSCore
 		private void SwapOrientations(RectangleF _rect)
 		{
 			// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
-			this.__RectWindowPortait = new RectangleF(_rect.X, _rect.Y, _rect.Size.Width, _rect.Size.Height);
+			this.__RectWindowPortait = new RectangleF(0, 0, _rect.Size.Width, _rect.Size.Height);
 			// Swap values hieght and width values for landscape
-			this.__RectWindowLandscape = new RectangleF (_rect.X, _rect.Y, _rect.Size.Height, _rect.Size.Width);	
+			this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);	
 		}
 		
 		#endregion

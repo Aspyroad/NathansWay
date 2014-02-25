@@ -52,6 +52,9 @@ namespace NathansWay.iOS.Numeracy
 				
 			// Set global variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
+			
+			this.iOSGlobals.G__InitializeAllViewOrientation = true;
+			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
@@ -61,8 +64,8 @@ namespace NathansWay.iOS.Numeracy
 			
 			
 			#region Setup Storyboard
-			// Frame is important as it also defines the area fro touch input.
-			window.Frame = this.iOSGlobals.G__RectWindowPortait;
+			// Frame is important as it also defines the area for touch input.
+			window.Frame = this.iOSGlobals.G__RectWindowLandscape;
 			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
 			window.RootViewController = initialViewController;
 			#endregion

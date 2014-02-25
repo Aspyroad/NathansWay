@@ -8,7 +8,7 @@
         <!--Vc Menu1 Start-->
         <scene sceneID="vxW-M0-OXp">
             <objects>
-                <viewController id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="JYt-to-IEW" customClass="vcMenu1Start" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" id="f1j-Gl-X9A" customClass="vMenu1Start" colorLabel="IBBuiltInLabel-Orange">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -65,7 +65,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
                                 <rect key="frame" x="20" y="218" width="253" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" patternImage="3E85D8AB-30D8-4602-986D-1753D5ABB464" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="C1F55793-C3E0-4746-9C1B-AE288ECABC19" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,7 +84,6 @@
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="btnMenuLesson" destination="VBl-gh-7y7" id="6oc-3H-cm8"/>
                         <outlet property="btnMenuStudent" destination="E8Q-oZ-enw" id="bJb-PA-84F"/>
@@ -99,7 +98,7 @@
         <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
             <objects>
-                <viewController id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="SeT-kK-yyl" customClass="vcMenu2Student" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="V3N-Nh-4eh" customClass="vMenu2Student">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,7 +113,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="3E85D8AB-30D8-4602-986D-1753D5ABB464" width="256" height="256">
+        <image name="C1F55793-C3E0-4746-9C1B-AE288ECABC19" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

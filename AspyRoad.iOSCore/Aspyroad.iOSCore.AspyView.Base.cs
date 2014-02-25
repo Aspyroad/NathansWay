@@ -28,8 +28,8 @@ namespace AspyRoad.iOSCore
 		
 		private IAspyGlobals iOSGlobals;
 		private CGContext _currentContext = null;
-		private bool _bUseWindowBounds = false;
-		private bool _bUseWindowFrame = false;
+		private bool _bUseGlobalOrientation = false;
+		private G__Orientation _GlobalOrientation;
 		private RectangleF _RectWindowLandscape;
 		private RectangleF _RectWindowPortait;
 		#endregion
@@ -62,11 +62,15 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{	
 			this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
-			
-			this._bUseWindowBounds = iOSGlobals.G__InitializeAllViewToWindowBounds;
-			this._bUseWindowFrame = iOSGlobals.G__InitializeAllViewToWindowFrame;
+			// Set view globals from app wide settings
+			this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
+			this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
 			this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
 			this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
+			// Set up view orientation
+			this.GlobalOrientationSwinger();
+			
+			
 			
 		}
 
@@ -103,42 +107,7 @@ namespace AspyRoad.iOSCore
 			set { this._currentContext = value; }
 		}
 			
-		public 	bool UseWindowBounds
-		{	
-			get { return _bUseWindowBounds; }
-			set 
-			{
-				if (value == true)
-				{
-					this._bUseWindowBounds = true;
-					// Set this views bounds to MainWindow
-					//this.Bounds = AspyGlobals.G__MainWindow.Bounds;				
-				}
-				else
-				{
-					this._bUseWindowBounds = false;
-				}			
-			}
-		
-		}
-		public bool UseWindowFrame
-		{
-			get { return _bUseWindowFrame; }
-			set 
-			{
-				if (value == true)
-				{
-					this._bUseWindowFrame = true;
-					// Set this views bounds to MainWindow
-					//this.Frame = AspyGlobals.G__MainWindow.Frame;				
-				}
-				else
-				{
-					this._bUseWindowFrame = false;
-				}			
-			}
-		
-		}
+
 		public RectangleF RectWindowLandscape
 		{
 			get { return this._RectWindowLandscape; }
@@ -229,6 +198,28 @@ namespace AspyRoad.iOSCore
 			{
 				return returnedGesture;
 			}
+		}
+		
+		private void GlobalOrientationSwinger()
+		{
+			// First check if we want ALL views to follow the global orientation
+			if (this._bUseGlobalOrientation)
+			{
+				switch (this._GlobalOrientation)
+				{
+					case G__Orientation.Portait:
+						this.Frame = this._RectWindowPortait;
+						break;
+                    case G__Orientation.Landscape:
+                        Console.WriteLine("Ive been called");
+                        this.Bounds = this._RectWindowLandscape;
+                        this.Frame = this._RectWindowPortait;
+						break;
+					default:
+					// Set nothing
+						break;
+				}
+			}			
 		}
 
 		/// <summary>

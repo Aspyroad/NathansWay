@@ -120,46 +120,46 @@ namespace AspyRoad.iOSCore
 			switch (gestype)
 			{			
 				case G__GestureTypes.UITap: //Tap
-					{
-						this._tapGesture = new UITapGestureRecognizer(gestureAction);
-						returnedGesture = this._tapGesture;		
-						break;			
-					}
+				{
+					this._tapGesture = new UITapGestureRecognizer(gestureAction);
+					returnedGesture = this._tapGesture;		
+					break;			
+				}
 				case G__GestureTypes.UIPinch: //Pinch
-					{
-						this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
-						returnedGesture = this._pinchGesture;	
-						break;
-					}
+				{
+					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
+					returnedGesture = this._pinchGesture;	
+					break;
+				}
 				case G__GestureTypes.UIPan: //Pan
-					{
-						this._panGesture = new UIPanGestureRecognizer(gestureAction);
-						returnedGesture = this._panGesture;	
-						break;
-					}
+				{
+					this._panGesture = new UIPanGestureRecognizer(gestureAction);
+					returnedGesture = this._panGesture;	
+					break;
+				}
 				case G__GestureTypes.UISwipe: //Swipe
-					{
-						this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
-						returnedGesture = this._swipeGesture;	
-						break;
-					}
+				{
+					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
+					returnedGesture = this._swipeGesture;	
+					break;
+				}
 				case G__GestureTypes.UIRotation: //Rotation
-					{
-						this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
-						returnedGesture = this._rotorGesture;	
-						break;
-					}
+				{
+					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
+					returnedGesture = this._rotorGesture;	
+					break;
+				}
 				case G__GestureTypes.UILongPress: //Longpress
-					{
-						this._longGesture = new UILongPressGestureRecognizer (gestureAction);
-						returnedGesture = this._longGesture;	
-						break;
-					}
+				{
+					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
+					returnedGesture = this._longGesture;	
+					break;
+				}
 				default:
-					{
-						returnedGesture = null;
-						break;
-					}					
+				{
+					returnedGesture = null;
+					break;
+				}					
 			}
 
 			if (returnedGesture == null)

@@ -23,9 +23,9 @@ namespace AspyRoad.iOSCore
 
 		UIInterfaceOrientationMask G__GetSupportedOrientations { get; }
 
-		bool G__InitializeAllViewToWindowBounds { get; set; }
-
-		bool G__InitializeAllViewToWindowFrame { get; set; }
+		bool G__InitializeAllViewOrientation { get; set; }
+        
+        G__Orientation G__ViewOrientation { get; set; }
 
 		// Methods
 		bool G__ShouldAutorotate(UIInterfaceOrientation toInterfaceOrientation) ;

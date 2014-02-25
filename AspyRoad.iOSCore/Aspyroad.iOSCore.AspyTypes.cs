@@ -11,5 +11,12 @@ namespace AspyRoad.iOSCore
 		UIRotation = 4,
 		UILongPress = 5		
 	}
+	
+	public enum G__Orientation
+	{
+		Portait = 0,
+		Landscape = 1,
+		Both = 2
+	}
 }
 
