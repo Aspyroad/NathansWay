@@ -13,12 +13,12 @@ namespace AspyRoad.iOSCore
 	{
 		private const double kAnimationDuration = 1.0;
 
-		private UIViewController vcSource;
+        private UIViewController vcSource;
 		private UIViewController vcDest;
 		private SizeF screenSize;
 		private NSAction _slider;
 		private UICompletionHandler _animationcomplete;
-		private UIView preV;
+        private UIView preV;
 		private UIView newV;
 				
 		#region Construction
@@ -29,11 +29,8 @@ namespace AspyRoad.iOSCore
 		// AspyCustom .ctor
 		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
 		{
-			vcSource = _vcSource;
-			vcDest = _vcDest;
-			
-			// Set screen variables
-			//this.screenSize = UIScreen.MainScreen.Bounds.Size;
+            //vcSource = _vcSource;
+            //vcDest = _vcDest;
 		}
 		// Sys .ctor //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
@@ -43,18 +40,19 @@ namespace AspyRoad.iOSCore
 
 		public override void Perform()
 		{
-			SetControllers ();
+            //SetControllers ();
 			
 			//preV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.X);
 
-			preV.AddSubview (newV);
+            //base.SourceViewController.View.AddSubview (this.DestinationViewController.View);
 			//newV.Frame = preV.Frame;
 
-			//AspyGlobals.G__MainWindow.AddSubview (newV);				
-			
-			//AspyGlobals.G__MainWindow.RootViewController = this.DestinationViewController;
+
+            // Most important to setup the new VC...
+            UIApplication.SharedApplication.KeyWindow.AddSubview (this.DestinationViewController.View);					
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
 					
-//			if (true)
+            //			if (true)
 //			{
 //				// Setup Delegates
 //				_slider = new NSAction(animateSlide);
@@ -63,7 +61,7 @@ namespace AspyRoad.iOSCore
 //				UIView.AnimateNotify(kAnimationDuration, 0.0, UIViewAnimationOptions.CurveEaseOut, _slider, _animationcomplete);			
 //			}
 
-////			-(void)perform {
+            ////			-(void)perform {
 ////				UIView *preV = ((UIViewController *)self.sourceViewController).view;
 ////				UIView *newV = ((UIViewController *)self.destinationViewController).view;
 ////

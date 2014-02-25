@@ -41,7 +41,6 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		//[Export("initWithCoder:")]
 		public AspyView (NSCoder coder) : base(coder)
 		{
 			Initialize ();
@@ -58,21 +57,6 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
-		
-		private void Initialize ()
-		{	
-			this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
-			// Set view globals from app wide settings
-			this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
-			this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
-			this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
-			this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
-			// Set up view orientation
-			this.GlobalOrientationSwinger();
-			
-			
-			
-		}
 
 		#region Public Variables
 
@@ -140,6 +124,18 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Private Members
+
+        private void Initialize ()
+        {   
+            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+            // Set view globals from app wide settings
+            this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
+            this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
+            this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
+            this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
+            // Set up view orientation
+            this.GlobalOrientationSwinger();            
+        }
 
 		private UIGestureRecognizer CreateGestureType (G__GestureTypes gestype, NSAction gestureAction)
 		{
@@ -213,7 +209,7 @@ namespace AspyRoad.iOSCore
                     case G__Orientation.Landscape:
                         Console.WriteLine("Ive been called");
                         this.Bounds = this._RectWindowLandscape;
-                        this.Frame = this._RectWindowPortait;
+                        this.Frame = this._RectWindowLandscape;
 						break;
 					default:
 					// Set nothing
