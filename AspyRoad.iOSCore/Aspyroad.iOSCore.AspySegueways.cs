@@ -20,6 +20,8 @@ namespace AspyRoad.iOSCore
 		private UICompletionHandler _animationcomplete;
         private UIView preV;
 		private UIView newV;
+        private myClass _myClass;
+        private myClass _myClassAssigned;
 				
 		#region Construction
 		// Def .ctr
@@ -35,12 +37,13 @@ namespace AspyRoad.iOSCore
 		// Sys .ctor //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
 		{
+            _myClass = new myClass();
 		}
 		#endregion
 
 		public override void Perform()
 		{
-            //SetControllers ();
+            SetControllers ();
 			
 			//preV.Center = AspyUtilities.CGPointMake ((preV.Center.X + preV.Frame.Size.Width), newV.Center.X);
 
@@ -82,6 +85,10 @@ namespace AspyRoad.iOSCore
 
 		private void SetControllers ()
 		{
+
+            _myClassAssigned = _myClass;
+            _myClass.A = 10;
+
 			if (vcSource == null)
 			{
 				vcSource = base.SourceViewController;
@@ -100,10 +107,17 @@ namespace AspyRoad.iOSCore
 			preV.Center = AspyUtilities.CGPointMake ((0 - newV.Center.X), preV.Center.Y);		
 		}
 
+        private void animateComplete(bool finished)
+        {
+            //newV.RemoveFromSuperview();
+            //AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
+        }   
+
 		/// <summary>
 		/// Raises the slide event.
 		/// </summary>
 		/// <param name="e">E.</param>
+     
 		#region eventhookups
 //		protected virtual void OnSlide(EventArgs e)
 //		{
@@ -115,11 +129,31 @@ namespace AspyRoad.iOSCore
 //		}
 		#endregion
 
-		private void animateComplete(bool finished)
-		{
-			//newV.RemoveFromSuperview();
-			//AspyUtilities.G__MainWindow.RootViewController = this.DestinationViewController;
-		}	
+        private class myClass 
+        {
+            private int a;
+            private int b;
+
+            public myClass()
+            {
+                Console.WriteLine( "myClass .ctor called" );
+                this.a = 2;
+                this.b = 3;
+            }
+
+            public int intAddMe()
+            {
+                return (this.a + this.b);
+            }
+
+            public int A
+            {
+                get { return this.a; }
+                set { this.a = value; }
+            }
+
+        }
+
 
 	}
 }

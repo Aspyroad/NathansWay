@@ -15,13 +15,14 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		public vMenu1Start (IntPtr h) : base (h) 
 		{
+            Console.WriteLine(this.ToString() + " - I just got called");
 		}
 
-//		public override void Draw(RectangleF rect)
-//		{
-//			base.Draw(rect);
-//			this.currentContext = UIGraphics.GetCurrentContext();
-//		}
+        //		public override void Draw(RectangleF rect)
+        //		{
+        //			base.Draw(rect);
+        //			this.currentContext = UIGraphics.GetCurrentContext();
+        //		}
 
 
     }

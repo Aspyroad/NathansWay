@@ -32,6 +32,7 @@ namespace AspyRoad.iOSCore
 		private G__Orientation _GlobalOrientation;
 		private RectangleF _RectWindowLandscape;
 		private RectangleF _RectWindowPortait;
+        private string iMessage;
 		#endregion
 
 		#region Contructors
@@ -127,6 +128,7 @@ namespace AspyRoad.iOSCore
 
         private void Initialize ()
         {   
+            this.iMessage = "I got called and you didnt see it";
             this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
             // Set view globals from app wide settings
             this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
@@ -207,7 +209,9 @@ namespace AspyRoad.iOSCore
 						this.Frame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
-                        Console.WriteLine("Ive been called");
+                        #if DEBUG
+                            Console.WriteLine("Ive been called");
+                        #endif
                         this.Bounds = this._RectWindowLandscape;
                         this.Frame = this._RectWindowLandscape;
 						break;
