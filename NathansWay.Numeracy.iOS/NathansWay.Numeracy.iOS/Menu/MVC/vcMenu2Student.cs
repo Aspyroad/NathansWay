@@ -37,7 +37,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 
         partial void btn4_click(NSObject sender)
         {
-            throw new System.NotImplementedException();
+            //throw new System.NotImplementedException();
+            int x = 10;
         }
 
 		#region Overrides

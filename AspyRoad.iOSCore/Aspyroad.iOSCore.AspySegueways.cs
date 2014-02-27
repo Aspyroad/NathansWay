@@ -20,8 +20,7 @@ namespace AspyRoad.iOSCore
 		private UICompletionHandler _animationcomplete;
         private UIView preV;
 		private UIView newV;
-        private myClass _myClass;
-        private myClass _myClassAssigned;
+
 				
 		#region Construction
 		// Def .ctr
@@ -36,8 +35,7 @@ namespace AspyRoad.iOSCore
 		}
 		// Sys .ctor //
 		public AspySlidingSegue(IntPtr handle) :base(handle)
-		{
-            _myClass = new myClass();
+		{            
 		}
 		#endregion
 
@@ -52,7 +50,7 @@ namespace AspyRoad.iOSCore
 
 
             // Most important to setup the new VC...
-            UIApplication.SharedApplication.KeyWindow.AddSubview (this.DestinationViewController.View);					
+            //UIApplication.SharedApplication.KeyWindow.AddSubview (this.DestinationViewController.View);					
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
 					
             //			if (true)
@@ -85,9 +83,6 @@ namespace AspyRoad.iOSCore
 
 		private void SetControllers ()
 		{
-
-            _myClassAssigned = _myClass;
-            _myClass.A = 10;
 
 			if (vcSource == null)
 			{
@@ -128,31 +123,6 @@ namespace AspyRoad.iOSCore
 //			}
 //		}
 		#endregion
-
-        private class myClass 
-        {
-            private int a;
-            private int b;
-
-            public myClass()
-            {
-                Console.WriteLine( "myClass .ctor called" );
-                this.a = 2;
-                this.b = 3;
-            }
-
-            public int intAddMe()
-            {
-                return (this.a + this.b);
-            }
-
-            public int A
-            {
-                get { return this.a; }
-                set { this.a = value; }
-            }
-
-        }
 
 
 	}
