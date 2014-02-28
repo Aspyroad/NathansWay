@@ -128,7 +128,7 @@ namespace AspyRoad.iOSCore
 
         private void Initialize ()
         {   
-            this.iMessage = "I got called and you didnt see it";
+
             this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
             // Set view globals from app wide settings
             this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
@@ -136,7 +136,11 @@ namespace AspyRoad.iOSCore
             this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
             this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
             // Set up view orientation
-            this.GlobalOrientationSwinger();            
+            this.GlobalOrientationSwinger();  
+
+            #if DEBUG
+                this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
+            #endif
         }
 
 		private UIGestureRecognizer CreateGestureType (G__GestureTypes gestype, NSAction gestureAction)
@@ -209,9 +213,6 @@ namespace AspyRoad.iOSCore
 						this.Frame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
-                        #if DEBUG
-                            Console.WriteLine("Ive been called");
-                        #endif
                         this.Bounds = this._RectWindowLandscape;
                         this.Frame = this._RectWindowLandscape;
 						break;

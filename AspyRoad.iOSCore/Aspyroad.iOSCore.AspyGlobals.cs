@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
@@ -17,9 +18,10 @@ namespace AspyRoad.iOSCore
 		
 		private bool _InitializeAllViewOrientation;
 		private G__Orientation _Orientation = G__Orientation.Portait;
+        private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
 
 		#endregion
-
+         
 		#region Constructors
 	    
 		public AspyGlobals()
@@ -111,7 +113,13 @@ namespace AspyRoad.iOSCore
 			get { return __RectWindowPortait; }
 		}
 
-		#endregion
+        public Dictionary<string, int> G__ViewPool
+        {
+            get { return _ViewPool; }
+            set { _ViewPool = value; }
+        }
+
+        #endregion
 		
 		#region Private Functions
 		

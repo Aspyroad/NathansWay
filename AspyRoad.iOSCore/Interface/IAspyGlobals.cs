@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 using AspyRoad.iOSCore;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
@@ -26,6 +27,8 @@ namespace AspyRoad.iOSCore
 		bool G__InitializeAllViewOrientation { get; set; }
         
         G__Orientation G__ViewOrientation { get; set; }
+
+        Dictionary<string, int> G__ViewPool { get; set; }
 
 		// Methods
 		bool G__ShouldAutorotate(UIInterfaceOrientation toInterfaceOrientation) ;
