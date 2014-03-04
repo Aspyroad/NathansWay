@@ -12,7 +12,7 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspySlidingSegue")]	
 	public class AspySlidingSegue : UIStoryboardSegue
 	{
-        private const double kAnimationDuration = 0.5;
+        private const double kAnimationDuration = 1.0;
 
 		private SizeF screenSize;
 		private NSAction _slider;
@@ -22,6 +22,11 @@ namespace AspyRoad.iOSCore
         private RectangleF tmpRect;
         private UIView vwDest;
         private PointF originalCenter;
+        private PointF leftCenter;
+        private PointF rightCenter;
+        private PointF rightFull;
+        private PointF leftFull;
+        
 
 				
 		#region Construction
@@ -46,22 +51,25 @@ namespace AspyRoad.iOSCore
             //SetControllers ();
             tmpWidth = this.SourceViewController.View.Frame.Size.Width;
             tmpHeight = this.SourceViewController.View.Frame.Size.Height;
-            tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
+            //tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
+            originalCenter = this.DestinationViewController.View.Center;
+            leftCenter = new PointF(0.0f, (tmpHeight / 2));
+            rightCenter = new PointF((tmpHeight / 2), tmpWidth);
+            
+            
+            // Add the destination view tot he source container
+            //this.SourceViewController.View.InsertSubview(this.DestinationViewController.View, 0);
+            //this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View.Subviews[0]);
             
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
             
-            DestinationViewController.View.Frame = tmpRect;
-
-            this.SourceViewController.View.InsertSubview(this.DestinationViewController.View, 0);
-            this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View.Subviews[0]);
-
-            originalCenter = this.DestinationViewController.View.Center;
-            DestinationViewController.View.Center = this.SourceViewController.View.Center;
 
             UIView.AnimateNotify (
                 kAnimationDuration,
+                0,
+                UIViewAnimationOptions.TransitionNone,
                 _slider,
                 _animationcomplete
             );
@@ -133,12 +141,14 @@ namespace AspyRoad.iOSCore
 		}
 
 		private void animateSlide()
-		{
-
+        {
+            //this.SourceViewController.View.Alpha = 0;
+            this.DestinationViewController.View.Center = rightCenter;
+            this.DestinationViewController.View.Center = originalCenter;
         }
 
         private void animateComplete(bool finished)
-        {
+                {
             if (finished)
             {
                 this.SourceViewController.View.RemoveFromSuperview();
@@ -228,52 +238,9 @@ namespace AspyRoad.iOSCore
                 _animationcomplete
             );
 
+            // Most important to setup the new VC... 
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
-
-
-            // Most important to setup the new VC...                
-            //UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
-
-
-            // **************************************************************************
-            // This code is for view ccontroller containment only.
-            // To work on just views we should use the animate feature
-            //CGFloat width = self.view.frame.size.width;
-            //CGFloat height = self.view.frame.size.height;
-
-            //secondController.view.frame = CGRectMake(width, 0, width, height);
-
-            //[self transitionFromViewController:firstController
-            //toViewController:secondController
-            //duration:0.4
-            //options:UIViewAnimationOptionTransitionNone
-            //animations:^(void) {
-            //    firstController.view.frame = CGRectMake(0 - width, 0, width, height);
-            //    secondController.view.frame = CGRectMake(0, 0, width, height);
-            //} 
-            //completion:^(BOOL finished){}
-            //];
-            // **************************************************************************
-
-            // **************************************************************************
-            // Animate between views in the one controller.
-            //[self.view addSubview:toViewController.view];
-            //[UIView animateWithDuration:0.25
-            //delay:0
-            //options:UIViewAnimationOptionCurveEaseOut
-            //animations:^{
-            //fromViewController.view.alpha = 0;
-            //toViewController.view.alpha = 1;
-            //} 
-            //completion:^(BOOL finished){
-            //[fromViewController.view removeFromSuperview];
-            //[fromViewController removeFromParentViewController];
-            //[toViewController didMoveToParentViewController:self];
-            //}];
-            // **************************************************************************
-
-
         }
 
         private void animateSlide()
@@ -340,15 +307,7 @@ namespace AspyRoad.iOSCore
 
         public override void Perform()
         {
-            CATransition transition = new CATransition();
-            transition.Duration = 0.25;
-            transition.TimeOffset = CAMediaTimingFunction.EaseInEaseOut;
-            transition.Type = CATransition.TransitionPush;
-            transition.Subtype = CATransition.TransitionFromLeft;
 
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            // Most important to setup the new VC...
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
 
         }
 
