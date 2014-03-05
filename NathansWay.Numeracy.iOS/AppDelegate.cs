@@ -55,6 +55,14 @@ namespace NathansWay.iOS.Numeracy
 			
 			this.iOSGlobals.G__InitializeAllViewOrientation = true;
 			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
+            this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
+
+            // Orientation handlers two types depending on iOS version
+            // iOS 6 and above >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.LandscapeLeft | UIInterfaceOrientationMask.LandscapeRight;
+            // iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+            this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeLeft | UIInterfaceOrientation.LandscapeRight;
+
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);

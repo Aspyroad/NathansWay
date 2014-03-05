@@ -32,7 +32,7 @@ namespace AspyRoad.iOSCore
 		private G__Orientation _GlobalOrientation;
 		private RectangleF _RectWindowLandscape;
 		private RectangleF _RectWindowPortait;
-        private string iMessage;
+
 		#endregion
 
 		#region Contructors
@@ -120,6 +120,11 @@ namespace AspyRoad.iOSCore
 		public void RemoveGestureFromWindow(G__GestureTypes gestype)
 		{
 		}
+
+        public void ResetFrameAndBounds()
+        {
+            this.GlobalOrientationSwinger();
+        }
 
 		
 		#endregion
@@ -209,12 +214,15 @@ namespace AspyRoad.iOSCore
 			{
 				switch (this._GlobalOrientation)
 				{
-					case G__Orientation.Portait:
-						this.Frame = this._RectWindowPortait;
+                    case G__Orientation.Portait:
+                        //this.Bounds = this._RectWindowPortait;
+                        this.Frame = this._RectWindowPortait;
+                        this.AccessibilityFrame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
-                        this.Bounds = this._RectWindowLandscape;
-                        this.Frame = this._RectWindowLandscape;
+                        //base.Bounds = this._RectWindowLandscape;
+                        base.Frame = this._RectWindowLandscape;
+                        base.AccessibilityFrame = this._RectWindowLandscape;
 						break;
 					default:
 					// Set nothing
@@ -263,6 +271,19 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
+
+        public override UIViewAutoresizing AutoresizingMask
+        {
+            get
+            {
+                return this.iOSGlobals.G__ViewAutoResize;
+            }
+            set
+            {
+                base.AutoresizingMask = value;
+            }
+        }
+            
 		#endregion			
 	}	
 }

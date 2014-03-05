@@ -10,15 +10,23 @@ namespace NathansWay.Numeracy.iOS.Menu
     {
         public vcMenu2Student() 
         {
+            Initialize();
         }
 
 		public vcMenu2Student (IntPtr h) : base (h)
 		{
+            Initialize();
 		}
 
 		public vcMenu2Student (NSCoder coder) : base(coder)
 		{
+            Initialize();
 		}
+
+        private void Initialize ()
+        {
+            this.View.Tag = 101;
+        }
 
         partial void btn1_click(NSObject sender)
         {
@@ -53,7 +61,7 @@ namespace NathansWay.Numeracy.iOS.Menu
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-			
+            this.View.Bounds = iOSGlobals.G__RectWindowLandscape;  
             // Perform any additional setup after loading the view, typically from a nib.
         }
 

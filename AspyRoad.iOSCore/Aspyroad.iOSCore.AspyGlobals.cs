@@ -15,9 +15,11 @@ namespace AspyRoad.iOSCore
 		private RectangleF __RectWindowPortait;
 		private RectangleF __RectWindowLandscape;
 		
-		
+        private bool _ShouldAutoOrientation;
 		private bool _InitializeAllViewOrientation;
+        private UIInterfaceOrientation _InterfaceOrientation;
 		private G__Orientation _Orientation = G__Orientation.Portait;
+        private UIInterfaceOrientationMask _GetSupportedOrientations;
         private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
 
 		#endregion
@@ -31,7 +33,9 @@ namespace AspyRoad.iOSCore
 		
 		#endregion
 
-		#region Public Members
+		#region PublicMembers
+
+        #region Constants
 
 		public AspyWindow G__MainWindow
 		{
@@ -43,52 +47,51 @@ namespace AspyRoad.iOSCore
 			get { return (AspyUIApplicationDelegate)UIApplication.SharedApplication.Delegate; }		
 		}
 
+        public RectangleF  G__RectWindowLandscape
+        {
+            get { return __RectWindowLandscape; }           
+        }
+
+        public RectangleF G__RectWindowPortait
+        {
+            get { return __RectWindowPortait; }
+        }
+
+        public Dictionary<string, int> G__ViewPool
+        {
+            get { return _ViewPool; }
+            set { _ViewPool = value; }
+        }
+
+        #endregion
+
+        #region Initialize At Birth
+        // ************************************************************************************
+        // MUST BE SET AT FIRST USE
 		public UIViewAutoresizing G__ViewAutoResize
 		{
 			get { return __ViewAutoResize; }
 			set { __ViewAutoResize = value; }
 		}
 		
-		public bool G__ShouldAutorotate (UIInterfaceOrientation toInterfaceOrientation)
-		{
-			//TODO::Fix autorotate in Global, always returns false, needs to be set	
-						
-			//			bool bShouldrotate = false;
-			//
-			//			switch (toInterfaceOrientation) 
-			//			{
-			//				case UIInterfaceOrientation.LandscapeLeft:
-			//				{
-			//					bShouldrotate = true;
-			//					break;
-			//				}
-			//				case UIInterfaceOrientation.LandscapeRight:
-			//				{
-			//					bShouldrotate = true;
-			//					break;
-			//				}
-			//				case UIInterfaceOrientation.Portrait:
-			//				{
-			//					bShouldrotate = true;
-			//					break;
-			//				}
-			//				case UIInterfaceOrientation.PortraitUpsideDown:
-			//				{
-			//					bShouldrotate = true;
-			//					break;
-			//				}
-			//				default:
-			//					return false;
-			//			}
-			//			
-			//			return bShouldrotate;
-			//
-			return false;
+        public bool G__ShouldAutorotate ()
+        {
+
+            //Should use _InterfaceOrientation to give a bool based on what is selected.
+            //Not quite as simple as I thought?
+
+            return false;
 		}
+
+        public UIInterfaceOrientation G__5_SupportedOrientation
+        {
+            set  { _InterfaceOrientation = value; }
+        }
 		
-		public UIInterfaceOrientationMask G__GetSupportedOrientations
+        public UIInterfaceOrientationMask G__6_SupportedOrientationMasks
 		{
-			get { return UIInterfaceOrientationMask.Landscape; }
+            get { return _GetSupportedOrientations; }
+            set { _GetSupportedOrientations = value; }
 	    }
 	    
 		public bool G__InitializeAllViewOrientation
@@ -102,22 +105,10 @@ namespace AspyRoad.iOSCore
 			get { return _Orientation; }
 			set { _Orientation = value; }
 		}
-		
-		public RectangleF  G__RectWindowLandscape
-		{
-			get { return __RectWindowLandscape; }			
-		}
-		
-		public RectangleF G__RectWindowPortait
-		{
-			get { return __RectWindowPortait; }
-		}
 
-        public Dictionary<string, int> G__ViewPool
-        {
-            get { return _ViewPool; }
-            set { _ViewPool = value; }
-        }
+        // Finish 
+        // ***********************************************************************************
+        #endregion		
 
         #endregion
 		

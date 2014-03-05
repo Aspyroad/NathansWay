@@ -20,47 +20,53 @@ namespace AspyRoad.iOSCore
         private float tmpWidth;
         private float tmpHeight;
         private RectangleF tmpRect;
-        private UIView vwDest;
         private PointF originalCenter;
         private PointF leftCenter;
         private PointF rightCenter;
         private PointF rightFull;
         private PointF leftFull;
-        
-
-				
-		#region Construction
-		// Def .ctr
-		public AspySlidingSegue()
-		{
-		}
-		// AspyCustom .ctor
-		public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
-		{
+        private AspyView vSource;
+                
+        #region Construction
+        // Def .ctr
+        public AspySlidingSegue()
+        {
+        }
+        // AspyCustom .ctor
+        public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
+        {
             //vcSource = _vcSource;
             //vcDest = _vcDest;
-		}
-		// Sys .ctor //
-		public AspySlidingSegue(IntPtr handle) :base(handle)
-		{            
-		}
-		#endregion
+        }
+        // Sys .ctor //
+        public AspySlidingSegue(IntPtr handle) :base(handle)
+        {            
+        }
+        #endregion
 
 		public override void Perform()
 		{
-            //SetControllers ();
+            //Add the source view to the source container
+            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+            vSource = (AspyView)this.SourceViewController.View;
+
+            // Workout why this wont change the bounds????????????????
+            vSource.ResetFrameAndBounds();
+
+            vSource.Tag = 99;
+
+            this.DestinationViewController.View.AddSubview(vSource);
+            this.DestinationViewController.View.ViewWithTag(99).Bounds = this.DestinationViewController.View.Frame;
+
+
             tmpWidth = this.SourceViewController.View.Frame.Size.Width;
             tmpHeight = this.SourceViewController.View.Frame.Size.Height;
             //tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
             originalCenter = this.DestinationViewController.View.Center;
             leftCenter = new PointF(0.0f, (tmpHeight / 2));
-            rightCenter = new PointF((tmpHeight / 2), tmpWidth);
-            
-            
-            // Add the destination view tot he source container
-            //this.SourceViewController.View.InsertSubview(this.DestinationViewController.View, 0);
-            //this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View.Subviews[0]);
-            
+            rightCenter = new PointF(tmpWidth, (tmpHeight / 2));
+
+
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
@@ -77,6 +83,7 @@ namespace AspyRoad.iOSCore
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             // Most important to setup the new VC...
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
+            //UIApplication.SharedApplication.KeyWindow.RootViewController.View.Alpha = 0;
             
             #region ObjCCode         
             // **************************************************************************
@@ -140,21 +147,21 @@ namespace AspyRoad.iOSCore
 
 		}
 
+        // ************************************Animation**************************************************
+        // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            //this.SourceViewController.View.Alpha = 0;
+            this.SourceViewController.View.Alpha = 0;
             this.DestinationViewController.View.Center = rightCenter;
             this.DestinationViewController.View.Center = originalCenter;
         }
+        // ***********************************************************************************************
 
         private void animateComplete(bool finished)
-                {
-            if (finished)
-            {
+        {
                 this.SourceViewController.View.RemoveFromSuperview();
                 this.SourceViewController.RemoveFromParentViewController();
-            }
-        }   
+        }        
 
 		/// <summary>
 		/// Raises the slide event.

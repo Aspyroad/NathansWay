@@ -22,7 +22,9 @@ namespace AspyRoad.iOSCore
 		
 		RectangleF G__RectWindowPortait { get; }
 
-		UIInterfaceOrientationMask G__GetSupportedOrientations { get; }
+        UIInterfaceOrientationMask G__6_SupportedOrientationMasks { get; set; }
+
+        UIInterfaceOrientation G__5_SupportedOrientation { set; }
 
 		bool G__InitializeAllViewOrientation { get; set; }
         
@@ -31,7 +33,7 @@ namespace AspyRoad.iOSCore
         Dictionary<string, int> G__ViewPool { get; set; }
 
 		// Methods
-		bool G__ShouldAutorotate(UIInterfaceOrientation toInterfaceOrientation) ;
+        bool G__ShouldAutorotate();
 				
     }
 }

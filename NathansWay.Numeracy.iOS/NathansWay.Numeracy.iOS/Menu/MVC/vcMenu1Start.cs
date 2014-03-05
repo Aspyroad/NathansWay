@@ -9,17 +9,26 @@ namespace NathansWay.Numeracy.iOS.Menu
 	public partial class vcMenu1Start : AspyViewController
 	{
 
+
 		public vcMenu1Start () : base ()
 		{
+            this.Initialize();
 		}
 
 		public vcMenu1Start (IntPtr h) : base (h) 
 		{
+            this.Initialize();
 		}
 
 		public vcMenu1Start (NSCoder coder) : base(coder)
 		{
+            this.Initialize();
 		}
+
+        private void Initialize ()
+        {
+            this.View.Tag = 100;
+        }
 
 		public override void DidReceiveMemoryWarning ()
 		{
@@ -33,6 +42,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 		{
 			base.ViewDidLoad ();
 			
+            //Convert.ChangeType(this.View,typeof(IAspyGlobals));
+            this.View.Bounds = iOSGlobals.G__RectWindowLandscape;  
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
