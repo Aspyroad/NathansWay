@@ -11,13 +11,27 @@ namespace NathansWay.Numeracy.iOS.Menu
 	{
 		public vMenu1Start () : base ()
 		{
+            Initialize();
 		}
 
+        public vMenu1Start (RectangleF frame) : base (frame)
+        {
+            Initialize();
+        }
+        
 		public vMenu1Start (IntPtr h) : base (h) 
 		{
-            this.Frame = this.iOSGlobals.G__RectWindowLandscape; 
+            Initialize();            
 		}
 
+        
+        private void Initialize()
+        {               
+            //this.Bounds = this.RectWindowLandscape;
+            //this.Frame = this.RectWindowLandscape;
+            this.Tag = 100;
+        }
+        
         //		public override void Draw(RectangleF rect)
         //		{
         //			base.Draw(rect);

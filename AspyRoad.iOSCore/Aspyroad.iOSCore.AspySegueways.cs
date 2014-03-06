@@ -292,9 +292,6 @@ namespace AspyRoad.iOSCore
     {
         private const double kAnimationDuration = 0.5;
 
-
-
-
         #region Construction
         // Def .ctr
         public AspySliding2Segue()
@@ -312,13 +309,10 @@ namespace AspyRoad.iOSCore
 
         public override void Perform()
         {
-
-
         }
 
         private void animateSlide()
         {
-
         }
 
         private void animateComplete(bool finished)

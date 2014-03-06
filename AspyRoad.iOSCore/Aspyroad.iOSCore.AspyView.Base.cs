@@ -143,9 +143,7 @@ namespace AspyRoad.iOSCore
             this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
             this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
             this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
-            this._RectWindowPortait = iOSGlobals.G__RectWindowPortait;
-            // Set up view orientation
-            this.GlobalOrientationSwinger();  
+            this._RectWindowPortait = iOSGlobals.G__RectWindowPortait; 
 
             #if DEBUG
                 this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
@@ -219,14 +217,14 @@ namespace AspyRoad.iOSCore
 				switch (this._GlobalOrientation)
 				{
                     case G__Orientation.Portait:
-                        //this.Bounds = this._RectWindowPortait;
+                        this.Bounds = this._RectWindowPortait;
                         this.Frame = this._RectWindowPortait;
-                        //this.AccessibilityFrame = this._RectWindowPortait;
+                        this.AccessibilityFrame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
-                        //base.Bounds = this._RectWindowLandscape;
-                        base.Frame = this._RectWindowLandscape;
-                        //base.AccessibilityFrame = this._RectWindowLandscape;
+                        this.Bounds = this._RectWindowLandscape;
+                        this.Frame = this._RectWindowLandscape;
+                        this.AccessibilityFrame = this._RectWindowLandscape;
 						break;
 					default:
 					// Set nothing

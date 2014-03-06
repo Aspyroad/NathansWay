@@ -59,21 +59,17 @@
                                     </fragment>
                                 </attributedString>
                                 <connections>
-                                    <action selector="btnMenuActionStudent:" destination="JYt-to-IEW" eventType="touchUpInside" id="eDP-l6-ZwQ"/>
+                                    <action selector="btnMenuActionStudent:" destination="JYt-to-IEW" eventType="touchUpInside" id="M6w-PT-SuE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
                                 <rect key="frame" x="20" y="218" width="253" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" patternImage="699D9B3F-35AB-4DC9-BD33-EC14179FCDF0" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="FF0D8BA7-569B-4B30-83DE-2EDB17B8746B" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="btnMenuActionLessons:" destination="JYt-to-IEW" eventType="touchUpInside" id="RPb-aW-PS6"/>
-                                    <action selector="btnMenuLessons:" destination="JYt-to-IEW" eventType="touchUpInside" id="SgW-TQ-r26"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.32011846160000001" green="0.1203185952" blue="0.4983865489" alpha="1" colorSpace="calibratedRGB"/>
@@ -161,7 +157,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="699D9B3F-35AB-4DC9-BD33-EC14179FCDF0" width="256" height="256">
+        <image name="FF0D8BA7-569B-4B30-83DE-2EDB17B8746B" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

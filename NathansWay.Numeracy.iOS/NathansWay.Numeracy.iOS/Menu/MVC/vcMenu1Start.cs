@@ -26,8 +26,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 		}
 
         private void Initialize ()
-        {
-            this.View.Tag = 100;             
+        {                        
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -41,6 +40,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+            this.View = (AspyView)this.View;
+            
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
@@ -48,6 +49,11 @@ namespace NathansWay.Numeracy.iOS.Menu
 		{
 			this.PerformSegue("sgStart_Student",sender)	;
 		}
+        
+        partial void btnMenuActionStudent(NSObject sender)
+        {
+            throw new System.NotImplementedException();
+        }
 		
 		partial void btnMenuActionLessons (NSObject sender)
 		{

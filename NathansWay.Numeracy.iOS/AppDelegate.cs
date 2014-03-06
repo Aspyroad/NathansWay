@@ -45,6 +45,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Setup the window
 			window = new AspyWindow ();
+            
 
 			// Setup services and globals for iOS
 			// Setup the Aspyroad.iOSCore.AspyGlobals
@@ -74,7 +75,7 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Storyboard
 			// Frame is important as it also defines the area for touch input.
 			window.Frame = this.iOSGlobals.G__RectWindowLandscape;
-			initialViewController = Storyboard.InstantiateInitialViewController () as AspyViewController;
+			initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
 			window.RootViewController = initialViewController;
 			#endregion
 
