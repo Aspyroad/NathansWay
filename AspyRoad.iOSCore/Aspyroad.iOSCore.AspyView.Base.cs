@@ -19,19 +19,23 @@ namespace AspyRoad.iOSCore
 	{
 
 		#region Class Variables
+        //Public
+        public IAspyGlobals iOSGlobals;
+
+        //Private
 		private UITapGestureRecognizer _tapGesture = null;
 		private UISwipeGestureRecognizer _swipeGesture = null;
 		private UIPinchGestureRecognizer _pinchGesture = null;
 		private UIPanGestureRecognizer _panGesture = null;
 		private UIRotationGestureRecognizer _rotorGesture = null;
-		private UILongPressGestureRecognizer _longGesture = null;
+		private UILongPressGestureRecognizer _longGesture = null;		
 		
-		private IAspyGlobals iOSGlobals;
 		private CGContext _currentContext = null;
 		private bool _bUseGlobalOrientation = false;
 		private G__Orientation _GlobalOrientation;
 		private RectangleF _RectWindowLandscape;
 		private RectangleF _RectWindowPortait;
+
 
 		#endregion
 
@@ -217,12 +221,12 @@ namespace AspyRoad.iOSCore
                     case G__Orientation.Portait:
                         //this.Bounds = this._RectWindowPortait;
                         this.Frame = this._RectWindowPortait;
-                        this.AccessibilityFrame = this._RectWindowPortait;
+                        //this.AccessibilityFrame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
                         //base.Bounds = this._RectWindowLandscape;
                         base.Frame = this._RectWindowLandscape;
-                        base.AccessibilityFrame = this._RectWindowLandscape;
+                        //base.AccessibilityFrame = this._RectWindowLandscape;
 						break;
 					default:
 					// Set nothing

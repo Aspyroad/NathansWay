@@ -48,15 +48,13 @@ namespace AspyRoad.iOSCore
 		{
             //Add the source view to the source container
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
-            vSource = (AspyView)this.SourceViewController.View;
 
             // Workout why this wont change the bounds????????????????
-            vSource.ResetFrameAndBounds();
+            //vSource.ResetFrameAndBounds();
 
-            vSource.Tag = 99;
-
-            this.DestinationViewController.View.AddSubview(vSource);
-            this.DestinationViewController.View.ViewWithTag(99).Bounds = this.DestinationViewController.View.Frame;
+            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+            this.DestinationViewController.View.AddSubview(this.SourceViewController.View);
+            //this.DestinationViewController.View.ViewWithTag().Bounds = this.DestinationViewController.View.Frame;
 
 
             tmpWidth = this.SourceViewController.View.Frame.Size.Width;

@@ -15,6 +15,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		public vMenu1Start (IntPtr h) : base (h) 
 		{
+            this.Frame = this.iOSGlobals.G__RectWindowLandscape; 
 		}
 
         //		public override void Draw(RectangleF rect)

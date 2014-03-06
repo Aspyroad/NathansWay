@@ -61,7 +61,7 @@ namespace NathansWay.Numeracy.iOS.Menu
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.View.Bounds = iOSGlobals.G__RectWindowLandscape;  
+            //this.View.Bounds = iOSGlobals.G__RectWindowLandscape;  
             // Perform any additional setup after loading the view, typically from a nib.
         }
 
