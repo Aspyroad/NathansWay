@@ -14,8 +14,10 @@ namespace AspyRoad.iOSCore
 		private UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
 		private RectangleF __RectWindowPortait;
 		private RectangleF __RectWindowLandscape;
+        private PointF __PntWindowPortaitCenter;
+        private PointF __PntWindowLandscapeCenter;
 		
-        private bool _ShouldAutoOrientation;
+        private bool _ShouldAutoRotate;
 		private bool _InitializeAllViewOrientation;
         private UIInterfaceOrientation _InterfaceOrientation;
 		private G__Orientation _Orientation = G__Orientation.Portait;
@@ -57,6 +59,16 @@ namespace AspyRoad.iOSCore
             get { return __RectWindowPortait; }
         }
 
+        public PointF G__PntWindowLandscapeCenter
+        {
+            get { return __PntWindowLandscapeCenter; }                
+        }
+
+        public PointF G__PntWindowPortaitCenter
+        {
+            get { return __PntWindowPortaitCenter; }                
+        }
+
         public Dictionary<string, int> G__ViewPool
         {
             get { return _ViewPool; }
@@ -74,13 +86,10 @@ namespace AspyRoad.iOSCore
 			set { __ViewAutoResize = value; }
 		}
 		
-        public bool G__ShouldAutorotate ()
+        public bool G__ShouldAutorotate 
         {
-
-            //Should use _InterfaceOrientation to give a bool based on what is selected.
-            //Not quite as simple as I thought?
-
-            return false;
+            get { return _ShouldAutoRotate; }
+            set { _ShouldAutoRotate = value; }
 		}
 
         public UIInterfaceOrientation G__5_SupportedOrientation
@@ -116,7 +125,10 @@ namespace AspyRoad.iOSCore
 		
 		private void Initialize ()
 		{
-			SwapOrientations(UIScreen.MainScreen.Bounds);			
+			SwapOrientations(UIScreen.MainScreen.Bounds);
+            //  Return portait or landscape
+            this.__PntWindowPortaitCenter = new PointF(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
+            this.__PntWindowLandscapeCenter = new PointF(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
 		}
 		
 		// iOS UIScreen Bounds are always returned in portait mode
@@ -126,7 +138,7 @@ namespace AspyRoad.iOSCore
 			// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
 			this.__RectWindowPortait = new RectangleF(0, 0, _rect.Size.Width, _rect.Size.Height);
 			// Swap values hieght and width values for landscape
-			this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);	
+			this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);
 		}
 		
 		#endregion

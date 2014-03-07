@@ -35,6 +35,9 @@ namespace AspyRoad.iOSCore
 		private G__Orientation _GlobalOrientation;
 		private RectangleF _RectWindowLandscape;
 		private RectangleF _RectWindowPortait;
+        private PointF _PntWindowPortaitCenter;
+        private PointF _PntWindowLandscapeCenter;
+
 
 
 		#endregion
@@ -144,6 +147,8 @@ namespace AspyRoad.iOSCore
             this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
             this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
             this._RectWindowPortait = iOSGlobals.G__RectWindowPortait; 
+            this._PntWindowPortaitCenter = iOSGlobals.G__PntWindowPortaitCenter;
+            this._PntWindowLandscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
 
             #if DEBUG
                 this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
@@ -217,11 +222,13 @@ namespace AspyRoad.iOSCore
 				switch (this._GlobalOrientation)
 				{
                     case G__Orientation.Portait:
+                        this.Center = this._PntWindowPortaitCenter;
                         this.Bounds = this._RectWindowPortait;
                         this.Frame = this._RectWindowPortait;
                         this.AccessibilityFrame = this._RectWindowPortait;
 						break;
                     case G__Orientation.Landscape:
+                        this.Center = this._PntWindowLandscapeCenter;
                         this.Bounds = this._RectWindowLandscape;
                         this.Frame = this._RectWindowLandscape;
                         this.AccessibilityFrame = this._RectWindowLandscape;

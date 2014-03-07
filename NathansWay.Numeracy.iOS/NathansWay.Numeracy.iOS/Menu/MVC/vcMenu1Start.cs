@@ -6,7 +6,7 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.Numeracy.iOS.Menu
 {
-	public partial class vcMenu1Start : AspyViewController
+    public partial class vcMenu1Start : AspyViewController
 	{
 
 
@@ -40,7 +40,9 @@ namespace NathansWay.Numeracy.iOS.Menu
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-            this.View = (AspyView)this.View;
+            //this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
+            //this.View.Bounds = this.iOSGlobals.G__RectWindowLandscape;
+            this.View.Tag = 100;
             
 			// Perform any additional setup after loading the view, typically from a nib.
 		}

@@ -73,8 +73,6 @@
     <Folder Include="NathansWay.Numeracy.iOS\MonoGame\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Info.plist" />
-    <None Include="Entitlements.plist" />
     <None Include="NathansWay.Numeracy.iOS\Exception\README.md" />
     <None Include="NathansWay.Numeracy.iOS\Data\README.md" />
     <None Include="NathansWay.Numeracy.iOS\Exception\MVC\ViewFiles.txt" />
@@ -126,7 +124,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.xib" />
   </ItemGroup>
 </Project>

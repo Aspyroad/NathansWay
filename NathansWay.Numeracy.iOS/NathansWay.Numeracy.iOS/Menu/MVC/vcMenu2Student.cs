@@ -45,8 +45,9 @@ namespace NathansWay.Numeracy.iOS.Menu
 
         partial void btn4_click(NSObject sender)
         {
-            //throw new System.NotImplementedException();
-            int x = 10;
+            this.View.Frame = iOSGlobals.G__RectWindowLandscape;
+            int y = 9;
+
         }
 
 		#region Overrides

@@ -7,7 +7,7 @@ using AspyRoad.iOSCore;
 namespace NathansWay.Numeracy.iOS.Menu
 {
 	[MonoTouch.Foundation.Register ("vMenu1Start")]
-	public partial class vMenu1Start : AspyView
+    public partial class vMenu1Start : AspyView
 	{
 		public vMenu1Start () : base ()
 		{

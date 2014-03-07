@@ -22,6 +22,10 @@ namespace AspyRoad.iOSCore
 		
 		RectangleF G__RectWindowPortait { get; }
 
+        PointF G__PntWindowLandscapeCenter { get; }
+
+        PointF G__PntWindowPortaitCenter { get; }
+
         UIInterfaceOrientationMask G__6_SupportedOrientationMasks { get; set; }
 
         UIInterfaceOrientation G__5_SupportedOrientation { set; }

@@ -26,10 +26,10 @@ namespace NathansWay.iOS.Numeracy
 		// class-level declarations
 		// Setup AspyRoad.iOS libraries.
 		
-		private AspyWindow window;
+        private AspyWindow window;
 		private QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
-		public static AspyViewController initialViewController;
+        public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
 		NSAction swipeGesture;
 
@@ -42,41 +42,44 @@ namespace NathansWay.iOS.Numeracy
 		// You have 17 seconds to return from this method, or iOS will terminate your application.
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{
-			// Setup the window
-			window = new AspyWindow ();
-            
+		{           
 
 			// Setup services and globals for iOS
 			// Setup the Aspyroad.iOSCore.AspyGlobals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals ();
 				
 			// Set global variables here....		
-			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
-			
+			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
 			this.iOSGlobals.G__InitializeAllViewOrientation = true;
 			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
-            this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;
+            this.iOSGlobals.G__ShouldAutorotate = false;
+
 
             // Orientation handlers two types depending on iOS version
             // iOS 6 and above >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.LandscapeLeft | UIInterfaceOrientationMask.LandscapeRight;
+            this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.LandscapeRight | UIInterfaceOrientationMask.LandscapeLeft;
             // iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeLeft | UIInterfaceOrientation.LandscapeRight;
+            this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft;
 
+            // Setup the window
+            window = new AspyWindow(iOSGlobals.G__RectWindowLandscape);
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
-			ServiceContainer.Register<AspyWindow> (window);
+            ServiceContainer.Register<AspyWindow> (window);
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
 			
 			#region Setup Storyboard
 			// Frame is important as it also defines the area for touch input.
-			window.Frame = this.iOSGlobals.G__RectWindowLandscape;
-			initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
+            //window.Center = new PointF(512, 384);
+            //window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
+            //window.Frame = this.iOSGlobals.G__RectWindowLandscape;
+
+            initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
 			window.RootViewController = initialViewController;
+
 			#endregion
 
 			#region Setup Single View
@@ -86,7 +89,12 @@ namespace NathansWay.iOS.Numeracy
 //			window.RootViewController = viewController;
 			#endregion
 
-			window.MakeKeyAndVisible ();			
+			window.MakeKeyAndVisible ();
+            //window.Subviews[0].Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
+            //window.Subviews[0].Bounds = this.iOSGlobals.G__RectWindowLandscape;
+            window.Subviews[0].Frame = this.iOSGlobals.G__RectWindowLandscape;
+            window.Tag = 0;
+
 			
 			#region Gesture From Window
 			// Get gesture from Sendevents - Window object
@@ -97,7 +105,7 @@ namespace NathansWay.iOS.Numeracy
 			//viewController.QAWorkSpaceView.WireUpGestureToView(G__GestureTypes.UIPinch, swipeGesture);
 			#endregion
 
-			window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
+            //window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 

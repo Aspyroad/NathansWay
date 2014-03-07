@@ -58,6 +58,10 @@ namespace AspyRoad.iOSCore
             return this.iOSGlobals.G__6_SupportedOrientationMasks;
 	    }
 
+        public override bool ShouldAutorotate()
+        {
+            return base.ShouldAutorotate();
+        }
 
 		#endregion	
 		
