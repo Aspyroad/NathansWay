@@ -49,7 +49,10 @@ namespace AspyRoad.iOSCore
 		[Obsolete("Depreciated - needed for iOS 5",false)]
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
-            return this.iOSGlobals.G__ShouldAutorotate();
+            return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+            if 
+
+            return this.iOSGlobals.G__5_SupportedOrientation;
 		}
 
         // Now standard - iOS 6
@@ -60,7 +63,7 @@ namespace AspyRoad.iOSCore
 
         public override bool ShouldAutorotate()
         {
-            return base.ShouldAutorotate();
+            return this.iOSGlobals.G__ShouldAutorotate;
         }
 
 		#endregion	

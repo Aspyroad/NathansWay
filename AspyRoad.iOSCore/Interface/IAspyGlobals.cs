@@ -28,16 +28,18 @@ namespace AspyRoad.iOSCore
 
         UIInterfaceOrientationMask G__6_SupportedOrientationMasks { get; set; }
 
-        UIInterfaceOrientation G__5_SupportedOrientation { set; }
+        UIInterfaceOrientation G__5_SupportedOrientation { get; set; }
 
 		bool G__InitializeAllViewOrientation { get; set; }
+        
+        bool G__ShouldAutorotate { get; set; }
         
         G__Orientation G__ViewOrientation { get; set; }
 
         Dictionary<string, int> G__ViewPool { get; set; }
+        
+        
 
-		// Methods
-        bool G__ShouldAutorotate();
 				
     }
 }
