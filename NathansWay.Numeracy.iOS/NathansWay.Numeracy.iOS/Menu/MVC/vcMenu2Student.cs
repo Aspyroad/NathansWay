@@ -45,8 +45,6 @@ namespace NathansWay.Numeracy.iOS.Menu
 
         partial void btn4_click(NSObject sender)
         {
-            this.View.Frame = iOSGlobals.G__RectWindowLandscape;
-            int y = 9;
 
         }
 

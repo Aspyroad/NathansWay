@@ -94,7 +94,8 @@ namespace AspyRoad.iOSCore
 
         public UIInterfaceOrientation G__5_SupportedOrientation
         {
-            set  { _InterfaceOrientation = value; }
+            get { return _InterfaceOrientation; }
+            set { _InterfaceOrientation = value; }
         }
 		
         public UIInterfaceOrientationMask G__6_SupportedOrientationMasks

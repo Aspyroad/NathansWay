@@ -57,12 +57,14 @@ namespace NathansWay.iOS.Numeracy
 
             // Orientation handlers two types depending on iOS version
             // iOS 6 and above >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-            this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.LandscapeRight | UIInterfaceOrientationMask.LandscapeLeft;
+            this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.Landscape;
+            // You can use bitwise operators on these
+            // Eg  = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft
             // iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft;
 
             // Setup the window
-            window = new AspyWindow(iOSGlobals.G__RectWindowLandscape);
+            window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
@@ -92,7 +94,7 @@ namespace NathansWay.iOS.Numeracy
 			window.MakeKeyAndVisible ();
             //window.Subviews[0].Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
             //window.Subviews[0].Bounds = this.iOSGlobals.G__RectWindowLandscape;
-            window.Subviews[0].Frame = this.iOSGlobals.G__RectWindowLandscape;
+            //window.Subviews[0].Frame = this.iOSGlobals.G__RectWindowLandscape;
             window.Tag = 0;
 
 			
@@ -113,6 +115,8 @@ namespace NathansWay.iOS.Numeracy
 		{
 			return UIInterfaceOrientationMask.Landscape;
 		}
+
+
 
 		#endregion
 

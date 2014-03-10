@@ -25,7 +25,9 @@ namespace AspyRoad.iOSCore
         private PointF rightCenter;
         private PointF rightFull;
         private PointF leftFull;
-        private AspyView vSource;
+
+        //private AspyViewController vcSrc;
+        //private AspyViewController vcDest;
                 
         #region Construction
         // Def .ctr
@@ -46,29 +48,34 @@ namespace AspyRoad.iOSCore
 
 		public override void Perform()
 		{
-            //Add the source view to the source container
-            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
-
-            // Workout why this wont change the bounds????????????????
-            //vSource.ResetFrameAndBounds();
-
-            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
-            this.DestinationViewController.View.AddSubview(this.SourceViewController.View);
-            //this.DestinationViewController.View.ViewWithTag().Bounds = this.DestinationViewController.View.Frame;
-
-
-            tmpWidth = this.SourceViewController.View.Frame.Size.Width;
-            tmpHeight = this.SourceViewController.View.Frame.Size.Height;
+            tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
+            tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
             //tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
-            originalCenter = this.DestinationViewController.View.Center;
-            leftCenter = new PointF(0.0f, (tmpHeight / 2));
-            rightCenter = new PointF(tmpWidth, (tmpHeight / 2));
+            originalCenter = this.DestinationViewController.View.Center; //new PointF(tmpHeight, tmpWidth);
+            leftCenter = new PointF((tmpHeight/2), (-tmpWidth));
+            rightCenter = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
+
+            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+
+            this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
+            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
+            //this.DestinationViewController.View.Frame = this.SourceViewController.View.Frame;
+            //this.DestinationViewController.View.Bounds = this.SourceViewController.View.Bounds;
+
+            //this.DestinationViewController.View.ViewWithTag(100).Bounds = this.DestinationViewController.View.Bounds;
+            //this.DestinationViewController.View.ViewWithTag(100).Center = this.originalCenter;
+            this.SourceViewController.View.ViewWithTag(101).Center = this.rightCenter;
+            //this.SourceViewController.View.ViewWithTag(101).Frame = this.DestinationViewController.View.Bounds;
+            //this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View);
+            //this.DestinationViewController.View.ViewWithTag(100).Frame = this.DestinationViewController.View.Bounds;
+
+
 
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
-            
+
 
             UIView.AnimateNotify (
                 kAnimationDuration,
@@ -78,9 +85,9 @@ namespace AspyRoad.iOSCore
                 _animationcomplete
             );
 
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             // Most important to setup the new VC...
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
+            //UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
             //UIApplication.SharedApplication.KeyWindow.RootViewController.View.Alpha = 0;
             
             #region ObjCCode         
@@ -149,16 +156,24 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Alpha = 0;
-            this.DestinationViewController.View.Center = rightCenter;
-            this.DestinationViewController.View.Center = originalCenter;
+            this.SourceViewController.View.Center = rightCenter;
+            //this.DestinationViewController.View.ViewWithTag(100).Center = originalCenter;
+            //this.DestinationViewController.View.ViewWithTag(100).Center = leftCenter;
+            //this.SourceViewController.View.ViewWithTag(101).Center = leftCenter;
+            this.SourceViewController.View.ViewWithTag(101).Center = originalCenter;
+
+
+            //this.DestinationViewController.View.Center = rightCenter;
+            //this.DestinationViewController.View.Center = originalCenter;
         }
         // ***********************************************************************************************
 
         private void animateComplete(bool finished)
         {
-                this.SourceViewController.View.RemoveFromSuperview();
-                this.SourceViewController.RemoveFromParentViewController();
+            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
+            //this.SourceViewController.View.RemoveFromSuperview();
+            //this.SourceViewController.RemoveFromParentViewController();
         }        
 
 		/// <summary>
