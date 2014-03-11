@@ -45,7 +45,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 
         partial void btn4_click(NSObject sender)
         {
-
+            this.PerformSegue("sgStudent_Start",sender) ;
         }
 
 		#region Overrides

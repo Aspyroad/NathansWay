@@ -9,8 +9,8 @@ using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
 
-	[MonoTouch.Foundation.Register("AspySlidingSegue")]	
-	public class AspySlidingSegue : UIStoryboardSegue
+	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
+	public class AspySlidingLeftSegue : UIStoryboardSegue
 	{
         private const double kAnimationDuration = 1.0;
 
@@ -21,8 +21,6 @@ namespace AspyRoad.iOSCore
         private float tmpHeight;
         private RectangleF tmpRect;
         private PointF originalCenter;
-        private PointF leftCenter;
-        private PointF rightCenter;
         private PointF rightFull;
         private PointF leftFull;
 
@@ -31,17 +29,17 @@ namespace AspyRoad.iOSCore
                 
         #region Construction
         // Def .ctr
-        public AspySlidingSegue()
+        public AspySlidingLeftSegue()
         {
         }
         // AspyCustom .ctor
-        public AspySlidingSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
+        public AspySlidingLeftSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
             //vcSource = _vcSource;
             //vcDest = _vcDest;
         }
         // Sys .ctor //
-        public AspySlidingSegue(IntPtr handle) :base(handle)
+        public AspySlidingLeftSegue(IntPtr handle) :base(handle)
         {            
         }
         #endregion
@@ -50,26 +48,18 @@ namespace AspyRoad.iOSCore
 		{
             tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
             tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
-            //tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
-            originalCenter = this.DestinationViewController.View.Center; //new PointF(tmpHeight, tmpWidth);
-            leftCenter = new PointF((tmpHeight/2), (-tmpWidth));
-            rightCenter = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
+
+            originalCenter = this.DestinationViewController.View.Center; 
+
+            rightFull = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
+            leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
             this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
-            //this.DestinationViewController.View.Frame = this.SourceViewController.View.Frame;
-            //this.DestinationViewController.View.Bounds = this.SourceViewController.View.Bounds;
-
-            //this.DestinationViewController.View.ViewWithTag(100).Bounds = this.DestinationViewController.View.Bounds;
-            //this.DestinationViewController.View.ViewWithTag(100).Center = this.originalCenter;
-            this.SourceViewController.View.ViewWithTag(101).Center = this.rightCenter;
-            //this.SourceViewController.View.ViewWithTag(101).Frame = this.DestinationViewController.View.Bounds;
-            //this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View);
-            //this.DestinationViewController.View.ViewWithTag(100).Frame = this.DestinationViewController.View.Bounds;
-
-
+            // Put the destination view fully over tot he right, off screen
+            this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
 
 
             // Setup Action Delegates
@@ -84,11 +74,6 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
-
-            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            // Most important to setup the new VC...
-            //UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
-            //UIApplication.SharedApplication.KeyWindow.RootViewController.View.Alpha = 0;
             
             #region ObjCCode         
             // **************************************************************************
@@ -156,24 +141,15 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Center = rightCenter;
-            //this.DestinationViewController.View.ViewWithTag(100).Center = originalCenter;
-            //this.DestinationViewController.View.ViewWithTag(100).Center = leftCenter;
-            //this.SourceViewController.View.ViewWithTag(101).Center = leftCenter;
-            this.SourceViewController.View.ViewWithTag(101).Center = originalCenter;
-
-
-            //this.DestinationViewController.View.Center = rightCenter;
-            //this.DestinationViewController.View.Center = originalCenter;
+            this.SourceViewController.View.Center = leftFull;
         }
-        // ***********************************************************************************************
 
         private void animateComplete(bool finished)
         {
+            //this.SourceViewController.View.RemoveFromSuperview(); Causes a black screen after segue??
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;
-            //this.SourceViewController.View.RemoveFromSuperview();
-            //this.SourceViewController.RemoveFromParentViewController();
+            this.SourceViewController.RemoveFromParentViewController();
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
         }        
 
 		/// <summary>
@@ -229,7 +205,6 @@ namespace AspyRoad.iOSCore
 
         public override void Perform()
         {
-            //SetControllers ();
             tmpWidth = this.SourceViewController.View.Frame.Size.Width;
             tmpHeight = this.SourceViewController.View.Frame.Size.Height;
             tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
@@ -237,11 +212,6 @@ namespace AspyRoad.iOSCore
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
-
-            // Animate with a transition
-            //vwDest = this.DestinationViewController.View;
-            //vwDest.Tag = 99;
-            //vwDest.Frame = tmpRect;
 
             this.SourceViewController.View.InsertSubview(this.DestinationViewController.View, 0);
             this.SourceViewController.View.BringSubviewToFront(this.SourceViewController.View.Subviews[0]);
@@ -265,8 +235,6 @@ namespace AspyRoad.iOSCore
 
         private void animateSlide()
         {
-            //this.SourceViewController.View.Frame = new RectangleF((0 - tmpWidth), 0, tmpWidth, tmpHeight);
-            //this.SourceViewController.View.Subviews[5].Frame = new RectangleF(0, 0, tmpWidth, tmpHeight); 
             DestinationViewController.View.Transform = CGAffineTransform.MakeScale(1, 1);
             DestinationViewController.View.Alpha = 0;
             DestinationViewController.View.Alpha = 1;
@@ -302,42 +270,88 @@ namespace AspyRoad.iOSCore
 
     }
 
-    [MonoTouch.Foundation.Register("AspySliding2Segue")] 
-    public class AspySliding2Segue : UIStoryboardSegue
+    [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
+    public class AspySlidingRightSegue : UIStoryboardSegue
     {
-        private const double kAnimationDuration = 0.5;
+        private const double kAnimationDuration = 1.0;
 
+        private SizeF screenSize;
+        private NSAction _slider;
+        private UICompletionHandler _animationcomplete;
+        private float tmpWidth;
+        private float tmpHeight;
+        private RectangleF tmpRect;
+        private PointF originalCenter;
+        private PointF rightFull;
+        private PointF leftFull;
+
+        //private AspyViewController vcSrc;
+        //private AspyViewController vcDest;
+                
         #region Construction
         // Def .ctr
-        public AspySliding2Segue()
+        public AspySlidingRightSegue()
         {
         }
         // AspyCustom .ctor
-        public AspySliding2Segue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
+        public AspySlidingRightSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
+            //vcSource = _vcSource;
+            //vcDest = _vcDest;
         }
         // Sys .ctor //
-        public AspySliding2Segue(IntPtr handle) :base(handle)
+        public AspySlidingRightSegue(IntPtr handle) :base(handle)
         {            
         }
         #endregion
 
         public override void Perform()
         {
+            tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
+            tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
+
+            originalCenter = this.DestinationViewController.View.Center; 
+
+            rightFull = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
+            leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
+
+            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+
+            this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
+            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
+            // Put the destination view fully over tot he right, off screen
+            this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
+
+
+            // Setup Action Delegates
+            _slider = new NSAction(animateSlide);
+            _animationcomplete = new UICompletionHandler (animateComplete);
+
+
+            UIView.AnimateNotify (
+                kAnimationDuration,
+                0,
+                UIViewAnimationOptions.TransitionNone,
+                _slider,
+                _animationcomplete
+            );
+            
         }
 
+        // ************************************Animation**************************************************
+        // note : animation can only work on one view controller at a time********************************
         private void animateSlide()
         {
+            this.SourceViewController.View.Center = leftFull;
         }
 
         private void animateComplete(bool finished)
         {
-            if (finished)
-            {
-                this.SourceViewController.View.RemoveFromSuperview();
-                this.SourceViewController.RemoveFromParentViewController();
-            }
-        }   
+            //this.SourceViewController.View.RemoveFromSuperview(); Causes a black screen after segue??
+            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            this.SourceViewController.RemoveFromParentViewController();
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
+        }  
 
     }
 

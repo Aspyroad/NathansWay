@@ -65,7 +65,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
                                 <rect key="frame" x="20" y="218" width="253" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" patternImage="9FAAFDD7-DBF5-42B8-92C2-DAB368EC05CD" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="B110D0D0-3293-4741-A35C-B6C9D5104F2A" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -80,12 +80,12 @@
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="SeT-kK-yyl" kind="custom" identifier="sgStart_Student" customClass="AspySlidingSegue" id="rcT-DG-C6g"/>
+                        <segue destination="SeT-kK-yyl" kind="custom" identifier="sgStart_Student" customClass="AspySlidingRightSegue" id="rcT-DG-C6g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-480" y="-923"/>
+            <point key="canvasLocation" x="-424" y="-2479"/>
         </scene>
         <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
@@ -149,15 +149,16 @@
                         <outlet property="btn2" destination="4kA-gn-tFm" id="uxg-QJ-5yF"/>
                         <outlet property="btn3" destination="2Wl-b6-iFe" id="SjT-Z8-9R1"/>
                         <outlet property="btn4" destination="Yl3-gy-aXM" id="jN2-v1-vhN"/>
+                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgStudent_Start" customClass="AspySlidingLeftSegue" id="HHH-Ua-b2A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-480" y="101"/>
+            <point key="canvasLocation" x="-416" y="-1179"/>
         </scene>
     </scenes>
     <resources>
-        <image name="9FAAFDD7-DBF5-42B8-92C2-DAB368EC05CD" width="256" height="256">
+        <image name="B110D0D0-3293-4741-A35C-B6C9D5104F2A" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
