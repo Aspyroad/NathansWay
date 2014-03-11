@@ -65,7 +65,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
                                 <rect key="frame" x="20" y="218" width="253" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" patternImage="B110D0D0-3293-4741-A35C-B6C9D5104F2A" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="FD9C4B17-B8D8-4217-B726-46D7D3836263" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,7 +85,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-424" y="-2479"/>
+            <point key="canvasLocation" x="-854" y="-2821"/>
         </scene>
         <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
@@ -149,16 +149,16 @@
                         <outlet property="btn2" destination="4kA-gn-tFm" id="uxg-QJ-5yF"/>
                         <outlet property="btn3" destination="2Wl-b6-iFe" id="SjT-Z8-9R1"/>
                         <outlet property="btn4" destination="Yl3-gy-aXM" id="jN2-v1-vhN"/>
-                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgStudent_Start" customClass="AspySlidingLeftSegue" id="HHH-Ua-b2A"/>
+                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgStudent_Start" customClass="AspySlidingLeftSegue" id="egc-Ue-Acp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-416" y="-1179"/>
+            <point key="canvasLocation" x="-854" y="-1777"/>
         </scene>
     </scenes>
     <resources>
-        <image name="B110D0D0-3293-4741-A35C-B6C9D5104F2A" width="256" height="256">
+        <image name="FD9C4B17-B8D8-4217-B726-46D7D3836263" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using AspyRoad.iOSCore;
+using NathansWay.Numeracy.Shared;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;
@@ -21,27 +22,37 @@ namespace AspyRoad.iOSCore
         private float tmpHeight;
         private RectangleF tmpRect;
         private PointF originalCenter;
+        private PointF landscapeCenter;
+        private PointF portraitCenter;
         private PointF rightFull;
         private PointF leftFull;
 
-        //private AspyViewController vcSrc;
-        //private AspyViewController vcDest;
+        private IAspyGlobals iOSGlobals;
+
                 
         #region Construction
         // Def .ctr
         public AspySlidingLeftSegue()
         {
+            Initialize();
         }
         // AspyCustom .ctor
         public AspySlidingLeftSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
-            //vcSource = _vcSource;
-            //vcDest = _vcDest;
+            Initialize();
         }
         // Sys .ctor //
         public AspySlidingLeftSegue(IntPtr handle) :base(handle)
-        {            
+        {   
+            Initialize();
         }
+
+        private void Initialize()
+        {   
+            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+        } 
+
+
         #endregion
 
 		public override void Perform()
@@ -50,16 +61,27 @@ namespace AspyRoad.iOSCore
             tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
 
             originalCenter = this.DestinationViewController.View.Center; 
+            landscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
+            portraitCenter = iOSGlobals.G__PntWindowPortaitCenter;
 
-            rightFull = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
-            leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
+            // Check the bounds, this helps correct landscape only apps...like my first!
+            //if (originalCenter == landscapeCenter)
+            ///{
+                rightFull = new PointF(tmpWidth + originalCenter.X, (tmpHeight / 2));
+                leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
+            //}
+            ///else //portait bounds
+            //{
+            //rightFull = new PointF(tmpWidth + originalCenter.Y, (tmpHeight / 2));
+            //leftFull = new PointF(tmpWidth + (tmpWidth / 2), (tmpHeight / 2));
+            //}
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
-            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
+            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
             // Put the destination view fully over tot he right, off screen
-            this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
+            this.SourceViewController.View.ViewWithTag(100).Center = this.leftFull;
 
 
             // Setup Action Delegates
@@ -141,15 +163,15 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Center = leftFull;
+            this.SourceViewController.View.Center = rightFull;
         }
 
         private void animateComplete(bool finished)
         {
             //this.SourceViewController.View.RemoveFromSuperview(); Causes a black screen after segue??
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.RemoveFromParentViewController();
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
+            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            //this.SourceViewController.RemoveFromParentViewController();
+            //UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
         }        
 
 		/// <summary>
@@ -284,9 +306,6 @@ namespace AspyRoad.iOSCore
         private PointF originalCenter;
         private PointF rightFull;
         private PointF leftFull;
-
-        //private AspyViewController vcSrc;
-        //private AspyViewController vcDest;
                 
         #region Construction
         // Def .ctr
