@@ -67,8 +67,8 @@ namespace AspyRoad.iOSCore
             // Check the bounds, this helps correct landscape only apps...like my first!
             //if (originalCenter == landscapeCenter)
             ///{
-                rightFull = new PointF(tmpWidth + originalCenter.X, (tmpHeight / 2));
-                leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
+           rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) );
+           leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) * -1);
             //}
             ///else //portait bounds
             //{
@@ -79,9 +79,11 @@ namespace AspyRoad.iOSCore
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
-            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
+            
             // Put the destination view fully over tot he right, off screen
-            this.SourceViewController.View.ViewWithTag(100).Center = this.leftFull;
+            this.SourceViewController.View.ViewWithTag(100).Center = this.rightFull;
+            this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
+            //this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
 
 
             // Setup Action Delegates
@@ -163,7 +165,7 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Center = rightFull;
+            this.SourceViewController.View.Center = leftFull;
         }
 
         private void animateComplete(bool finished)
@@ -340,6 +342,7 @@ namespace AspyRoad.iOSCore
             this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
             // Put the destination view fully over tot he right, off screen
             this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
+            
 
 
             // Setup Action Delegates
