@@ -60,15 +60,15 @@ namespace AspyRoad.iOSCore
             tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
             tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
 
-            originalCenter = this.DestinationViewController.View.Center; 
+            originalCenter = this.SourceViewController.View.Center; 
             landscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
             portraitCenter = iOSGlobals.G__PntWindowPortaitCenter;
 
             // Check the bounds, this helps correct landscape only apps...like my first!
             //if (originalCenter == landscapeCenter)
             ///{
-           rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) );
-           leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) * -1);
+            rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+            leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) * -1);
             //}
             ///else //portait bounds
             //{
@@ -82,7 +82,7 @@ namespace AspyRoad.iOSCore
             
             // Put the destination view fully over tot he right, off screen
             this.SourceViewController.View.ViewWithTag(100).Center = this.rightFull;
-            this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
+            //this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
             //this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
 
 

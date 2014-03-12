@@ -64,7 +64,8 @@ namespace NathansWay.iOS.Numeracy
             this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft;
 
             // Setup the window
-            window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
+            //window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
+            window = new AspyWindow(UIScreen.MainScreen.Bounds);
 
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
