@@ -60,15 +60,15 @@ namespace AspyRoad.iOSCore
             tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
             tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
 
-            originalCenter = this.SourceViewController.View.Center; 
+            //originalCenter = this.SourceViewController.View.Center; 
             landscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
             portraitCenter = iOSGlobals.G__PntWindowPortaitCenter;
 
             // Check the bounds, this helps correct landscape only apps...like my first!
             //if (originalCenter == landscapeCenter)
             ///{
-            rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
-            leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)) * -1);
+            rightFull = new PointF((tmpHeight/2), ((tmpWidth) + (tmpWidth / 2)) * -1);
+            leftFull = new PointF((tmpWidth * -1), (tmpHeight / 2));
             //}
             ///else //portait bounds
             //{
@@ -80,9 +80,13 @@ namespace AspyRoad.iOSCore
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
             
-            // Put the destination view fully over tot he right, off screen
-            this.SourceViewController.View.ViewWithTag(100).Center = this.rightFull;
-            //this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
+            // Put the destination view fully over tot he right, off screen            
+            // Make sure the destinationview bounds are correct landscape
+            this.SourceViewController.View.ViewWithTag(100).Bounds = iOSGlobals.G__RectWindowLandscape;
+            this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
+            
+            this.SourceViewController.View.ViewWithTag(100).Center = this.leftFull;
+            
             //this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
 
 
@@ -98,6 +102,8 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
+            
+            int x = 10;
             
             #region ObjCCode         
             // **************************************************************************
@@ -165,7 +171,7 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Center = leftFull;
+            this.SourceViewController.View.Center = rightFull;
         }
 
         private void animateComplete(bool finished)

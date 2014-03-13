@@ -43,7 +43,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs">
+      <DependentUpon>Aspyroad.iOSCore.AspyAppDel.Base.cs</DependentUpon>
+    </Compile>
     <Compile Include="Aspyroad.iOSCore.AspyView.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewController.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyWindow.Base.cs" />
