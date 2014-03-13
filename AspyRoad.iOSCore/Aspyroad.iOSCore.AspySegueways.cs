@@ -60,15 +60,16 @@ namespace AspyRoad.iOSCore
             tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
             tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
 
-            //originalCenter = this.SourceViewController.View.Center; 
+            originalCenter = this.SourceViewController.View.Center; 
             landscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
             portraitCenter = iOSGlobals.G__PntWindowPortaitCenter;
 
             // Check the bounds, this helps correct landscape only apps...like my first!
             //if (originalCenter == landscapeCenter)
             ///{
-            rightFull = new PointF((tmpHeight/2), ((tmpWidth) + (tmpWidth / 2)) * -1);
-            leftFull = new PointF((tmpWidth * -1), (tmpHeight / 2));
+            //rightFull = new PointF((tmpHeight/2) , ((tmpWidth) + (tmpWidth / 2)) * -1);
+            rightFull = new PointF((tmpHeight/2) , (tmpWidth / 2) * -1);
+            leftFull = new PointF(((tmpWidth/2 ) * -1), (tmpHeight / 2));
             //}
             ///else //portait bounds
             //{
