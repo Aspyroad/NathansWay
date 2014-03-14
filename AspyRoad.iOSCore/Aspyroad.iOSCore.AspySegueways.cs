@@ -9,9 +9,38 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
+    
+    [MonoTouch.Foundation.Register("AspySegueBase")] 
+    public class AspySegueBase : UIStoryboardSegue
+    {
+        public IAspyGlobals iOSGlobals;
+        
+        #region Construction
+        // Def .ctr
+        public AspySegueBase()
+        {
+            Initialize();
+        }
+        // AspyCustom .ctor
+        public AspySegueBase(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
+        {
+            Initialize();
+        }
+        // Sys .ctor //
+        public AspySegueBase(IntPtr handle) :base(handle)
+        {   
+            Initialize();
+        }
+
+        private void Initialize()
+        {   
+            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+        } 
+        #endregion        
+    }
 
 	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
-	public class AspySlidingLeftSegue : UIStoryboardSegue
+	public class AspySlidingLeftSegue : AspySegueBase
 	{
         private const double kAnimationDuration = 1.0;
 
@@ -27,9 +56,7 @@ namespace AspyRoad.iOSCore
         private PointF rightFull;
         private PointF leftFull;
 
-        private IAspyGlobals iOSGlobals;
-
-                
+                       
         #region Construction
         // Def .ctr
         public AspySlidingLeftSegue()
@@ -48,48 +75,64 @@ namespace AspyRoad.iOSCore
         }
 
         private void Initialize()
-        {   
-            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+        {             
         } 
-
-
         #endregion
 
 		public override void Perform()
 		{
-            tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
-            tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
-
-            originalCenter = this.SourceViewController.View.Center; 
-            landscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
-            portraitCenter = iOSGlobals.G__PntWindowPortaitCenter;
-
-            // Check the bounds, this helps correct landscape only apps...like my first!
-            //if (originalCenter == landscapeCenter)
-            ///{
-            //rightFull = new PointF((tmpHeight/2) , ((tmpWidth) + (tmpWidth / 2)) * -1);
-            rightFull = new PointF((tmpHeight/2) , (tmpWidth / 2) * -1);
-            leftFull = new PointF(((tmpWidth/2 ) * -1), (tmpHeight / 2));
-            //}
-            ///else //portait bounds
-            //{
-            //rightFull = new PointF(tmpWidth + originalCenter.Y, (tmpHeight / 2));
-            //leftFull = new PointF(tmpWidth + (tmpWidth / 2), (tmpHeight / 2));
-            //}
-
+            // Tag the destination with a local tag variable            
+            int tmpTag = this.DestinationViewController.View.Tag;
+            this.DestinationViewController.View.Tag = 999;            
+            
+            // Landscape only segue
+            tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
+            tmpHeight = this.iOSGlobals.G__RectWindowLandscape.Size.Height;
+            
+            //Check the bounds, if they arent landscape, we have a LARGE problem...quit.
+            if (this.SourceViewController.View.Bounds.Width == tmpHeight)
+            {
+                throw new System.ArgumentOutOfRangeException(this.SourceViewController.View.ToString(), "Bounds must be landscape");
+            }
+            
+            //Check the SOURCE VIEW Frame orientation
+            // If the frame is Portait (can happen due to rotation message delays?)
+            // swap the Point sources
+            if (this.SourceViewController.View.Frame.Width == tmpWidth)
+            {
+                rightFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+            }
+            else
+            {
+                rightFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+            }
+            
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
             
-            // Put the destination view fully over tot he right, off screen            
-            // Make sure the destinationview bounds are correct landscape
-            this.SourceViewController.View.ViewWithTag(100).Bounds = iOSGlobals.G__RectWindowLandscape;
-            this.SourceViewController.View.ViewWithTag(100).Frame = iOSGlobals.G__RectWindowLandscape;
-            
-            this.SourceViewController.View.ViewWithTag(100).Center = this.leftFull;
-            
-            //this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(100));
-
+            //Check the DESTINATION VIEW Bounds orientation
+            //These values can be randomised depending on the destinations position in relation to receiving messages from Window
+            //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
+            if (this.SourceViewController.View.ViewWithTag(999).Bounds.Width == tmpHeight)
+            {
+                this.SourceViewController.View.ViewWithTag(999).Bounds = iOSGlobals.G__RectWindowLandscape;
+                this.SourceViewController.View.ViewWithTag(999).Frame = iOSGlobals.G__RectWindowLandscape;
+            }
+            // If the frame is Portait (can happen due to rotation message delays?)
+            // swap the Point sources - technically it should always be landscape after the preceding method...?
+            if (this.SourceViewController.View.ViewWithTag(999).Frame.Width == tmpWidth)
+            {
+                leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2)); 
+            }
+            else
+            {
+                leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));
+            }
+                        
+            // Put the destination view fully over to the right, off screen            
+            // Make sure the destinationview bounds are correct landscape            
+            this.SourceViewController.View.ViewWithTag(999).Center = this.leftFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -103,8 +146,6 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
-            
-            int x = 10;
             
             #region ObjCCode         
             // **************************************************************************

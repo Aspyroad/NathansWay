@@ -49,7 +49,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		partial void btnTestSegue(NSObject sender)
 		{
-			this.PerformSegue("sgStart_Student",sender)	;
+			//this.PerformSegue("sgStart_Student",sender)	;
+            this.PerformSegue("sgStudent_Start",sender);
 		}
         
         partial void btnMenuActionStudent(NSObject sender)
