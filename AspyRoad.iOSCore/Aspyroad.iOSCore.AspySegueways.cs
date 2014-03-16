@@ -42,19 +42,15 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
 	public class AspySlidingLeftSegue : AspySegueBase
 	{
-        private const double kAnimationDuration = 1.0;
+        private const double kAnimationDuration = 0.3;
 
-		private SizeF screenSize;
 		private NSAction _slider;
 		private UICompletionHandler _animationcomplete;
         private float tmpWidth;
         private float tmpHeight;
-        private RectangleF tmpRect;
-        private PointF originalCenter;
-        private PointF landscapeCenter;
-        private PointF portraitCenter;
         private PointF rightFull;
         private PointF leftFull;
+        private int tmpTag;
 
                        
         #region Construction
@@ -82,9 +78,8 @@ namespace AspyRoad.iOSCore
 		public override void Perform()
 		{
             // Tag the destination with a local tag variable            
-            int tmpTag = this.DestinationViewController.View.Tag;
-            this.DestinationViewController.View.Tag = 999;            
-            
+            this.tmpTag = this.DestinationViewController.View.Tag;
+
             // Landscape only segue
             tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
             tmpHeight = this.iOSGlobals.G__RectWindowLandscape.Size.Height;
@@ -114,14 +109,14 @@ namespace AspyRoad.iOSCore
             //Check the DESTINATION VIEW Bounds orientation
             //These values can be randomised depending on the destinations position in relation to receiving messages from Window
             //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
-            if (this.SourceViewController.View.ViewWithTag(999).Bounds.Width == tmpHeight)
+            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds.Width == tmpHeight)
             {
-                this.SourceViewController.View.ViewWithTag(999).Bounds = iOSGlobals.G__RectWindowLandscape;
-                this.SourceViewController.View.ViewWithTag(999).Frame = iOSGlobals.G__RectWindowLandscape;
+                this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds = iOSGlobals.G__RectWindowLandscape;
+                this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame = iOSGlobals.G__RectWindowLandscape;
             }
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources - technically it should always be landscape after the preceding method...?
-            if (this.SourceViewController.View.ViewWithTag(999).Frame.Width == tmpWidth)
+            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
                 leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2)); 
             }
@@ -132,7 +127,7 @@ namespace AspyRoad.iOSCore
                         
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
-            this.SourceViewController.View.ViewWithTag(999).Center = this.leftFull;
+            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.leftFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -218,10 +213,12 @@ namespace AspyRoad.iOSCore
 
         private void animateComplete(bool finished)
         {
-            //this.SourceViewController.View.RemoveFromSuperview(); Causes a black screen after segue??
-            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
+
+            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            this.SourceViewController.DismissViewController(false, null);
             //this.SourceViewController.RemoveFromParentViewController();
-            //UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
         }        
 
 		/// <summary>
@@ -345,7 +342,7 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
     public class AspySlidingRightSegue : UIStoryboardSegue
     {
-        private const double kAnimationDuration = 1.0;
+        private const double kAnimationDuration = 0.3;
 
         private SizeF screenSize;
         private NSAction _slider;
@@ -417,10 +414,12 @@ namespace AspyRoad.iOSCore
 
         private void animateComplete(bool finished)
         {
-            //this.SourceViewController.View.RemoveFromSuperview(); Causes a black screen after segue??
+            this.SourceViewController.View.ViewWithTag(101).RemoveFromSuperview();
+
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.RemoveFromParentViewController();
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
+            this.SourceViewController.DismissViewController(false, null);
+            //this.SourceViewController.RemoveFromParentViewController();
+            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
         }  
 
     }
