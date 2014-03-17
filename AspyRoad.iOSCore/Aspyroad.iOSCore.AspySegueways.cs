@@ -217,7 +217,6 @@ namespace AspyRoad.iOSCore
 
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             this.SourceViewController.DismissViewController(false, null);
-            //this.SourceViewController.RemoveFromParentViewController();
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
         }        
 
@@ -340,70 +339,141 @@ namespace AspyRoad.iOSCore
     }
 
     [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
-    public class AspySlidingRightSegue : UIStoryboardSegue
+    public class AspySlidingRightSegue : AspySegueBase
     {
         private const double kAnimationDuration = 0.3;
 
-        private SizeF screenSize;
         private NSAction _slider;
         private UICompletionHandler _animationcomplete;
         private float tmpWidth;
         private float tmpHeight;
-        private RectangleF tmpRect;
-        private PointF originalCenter;
         private PointF rightFull;
         private PointF leftFull;
+        private int tmpTag;
                 
         #region Construction
         // Def .ctr
         public AspySlidingRightSegue()
         {
+            Initialize();
         }
         // AspyCustom .ctor
         public AspySlidingRightSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
-            //vcSource = _vcSource;
-            //vcDest = _vcDest;
+            Initialize();
         }
         // Sys .ctor //
         public AspySlidingRightSegue(IntPtr handle) :base(handle)
-        {            
+        {   
+            Initialize();
         }
+
+        private void Initialize()
+        {             
+        } 
         #endregion
 
+//        public override void Perform_old()
+//        {
+//            tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
+//            tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
+//
+//            originalCenter = this.DestinationViewController.View.Center; 
+//
+//            rightFull = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
+//            leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
+//
+//            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+//
+//            this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
+//            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
+//            // Put the destination view fully over tot he right, off screen
+//            this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
+//            
+//
+//
+//            // Setup Action Delegates
+//            _slider = new NSAction(animateSlide);
+//            _animationcomplete = new UICompletionHandler (animateComplete);
+//
+//
+//            UIView.AnimateNotify (
+//                kAnimationDuration,
+//                0,
+//                UIViewAnimationOptions.TransitionNone,
+//                _slider,
+//                _animationcomplete
+//            );
+//            
+//        }
+        
         public override void Perform()
         {
-            tmpWidth = this.SourceViewController.View.Bounds.Size.Width;
-            tmpHeight = this.SourceViewController.View.Bounds.Size.Height;
+            // Tag the destination with a local tag variable            
+            this.tmpTag = this.DestinationViewController.View.Tag;
 
-            originalCenter = this.DestinationViewController.View.Center; 
-
-            rightFull = new PointF(tmpWidth + originalCenter.X,(tmpHeight/2));
-            leftFull = new PointF((tmpHeight / 2), tmpWidth + (tmpWidth / 2));
-
+            // Landscape only segue
+            tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
+            tmpHeight = this.iOSGlobals.G__RectWindowLandscape.Size.Height;
+            
+            //Check the bounds, if they arent landscape, we have a LARGE problem...quit.
+            if (this.SourceViewController.View.Bounds.Width == tmpHeight)
+            {
+                throw new System.ArgumentOutOfRangeException(this.SourceViewController.View.ToString(), "Bounds must be landscape");
+            }
+            
+            //Check the SOURCE VIEW Frame orientation
+            // If the frame is Portait (can happen due to rotation message delays?)
+            // swap the Point sources
+            if (this.SourceViewController.View.Frame.Width == tmpWidth)
+            {
+                rightFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+            }
+            else
+            {
+                rightFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+            }
+            
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
-            this.SourceViewController.View.SendSubviewToBack(this.SourceViewController.View.ViewWithTag(101));
-            // Put the destination view fully over tot he right, off screen
-            this.SourceViewController.View.ViewWithTag(101).Center = this.rightFull;
             
-
+            //Check the DESTINATION VIEW Bounds orientation
+            //These values can be randomised depending on the destinations position in relation to receiving messages from Window
+            //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
+            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds.Width == tmpHeight)
+            {
+                this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds = iOSGlobals.G__RectWindowLandscape;
+                this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame = iOSGlobals.G__RectWindowLandscape;
+            }
+            // If the frame is Portait (can happen due to rotation message delays?)
+            // swap the Point sources - technically it should always be landscape after the preceding method...?
+            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
+            {
+                leftFull = new PointF(((tmpWidth / 2)), (tmpHeight / 2)); 
+            }
+            else
+            {
+                leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2)));
+            }
+                        
+            // Put the destination view fully over to the right, off screen            
+            // Make sure the destinationview bounds are correct landscape            
+            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.rightFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
 
 
-            UIView.AnimateNotify (
+            UIView.AnimateNotify(
                 kAnimationDuration,
                 0,
                 UIViewAnimationOptions.TransitionNone,
                 _slider,
                 _animationcomplete
             );
-            
-        }
+        }   
 
         // ************************************Animation**************************************************
         // note : animation can only work on one view controller at a time********************************
@@ -414,11 +484,10 @@ namespace AspyRoad.iOSCore
 
         private void animateComplete(bool finished)
         {
-            this.SourceViewController.View.ViewWithTag(101).RemoveFromSuperview();
+            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
 
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             this.SourceViewController.DismissViewController(false, null);
-            //this.SourceViewController.RemoveFromParentViewController();
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
         }  
 
