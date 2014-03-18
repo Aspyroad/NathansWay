@@ -29,9 +29,6 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		[Action ("btnTestSegue:")]
 		partial void btnTestSegue (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("returnToStepOne:")]
-		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
 		
 		void ReleaseDesignerOutlets ()
 		{

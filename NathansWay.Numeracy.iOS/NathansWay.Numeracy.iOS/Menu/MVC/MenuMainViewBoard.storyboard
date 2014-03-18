@@ -65,13 +65,14 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
                                 <rect key="frame" x="20" y="218" width="253" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" patternImage="31717A40-A989-41CC-AC2F-D691DEFF6AF9" colorSpace="pattern"/>
+                                <color key="backgroundColor" patternImage="F0F780F3-F51E-4114-934F-BE33309741CA" colorSpace="pattern"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Test">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="btnMenuActionLessons:" destination="JYt-to-IEW" eventType="touchUpInside" id="b2Z-n6-b8z"/>
+                                    <segue destination="Afb-7g-2Zs" kind="custom" customClass="AspySlidingUpSegue" id="CFi-vz-dFt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,7 +86,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-854" y="-2821"/>
+            <point key="canvasLocation" x="-1838" y="-2626"/>
+        </scene>
+        <!--Vc Menu3 Lessons-->
+        <scene sceneID="Nod-Wj-smM">
+            <objects>
+                <viewController id="Afb-7g-2Zs" customClass="vcMenu3Lessons" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4tn-bM-qWt" customClass="vMenu3Lessons">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i0X-gI-fW1">
+                                <rect key="frame" x="366" y="126" width="246" height="113"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.29191963180000002" green="1" blue="0.22375054159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btn1_click:" destination="Afb-7g-2Zs" eventType="touchUpInside" id="12o-hP-Lgp"/>
+                                    <segue destination="JYt-to-IEW" kind="custom" customClass="AspySlidingDownSegue" id="Xka-UA-U0U"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.320357224" green="0.23160232059999999" blue="0.92636114359999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    </view>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <outlet property="btn1" destination="i0X-gI-fW1" id="kcy-zm-9YR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c8d-yG-iDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1838" y="-1624"/>
         </scene>
         <!--Vc Menu2 Student-->
         <scene sceneID="ctK-gc-yRU">
@@ -154,11 +188,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6Y-71-Kef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-854" y="-1777"/>
+            <point key="canvasLocation" x="-437" y="-2640"/>
         </scene>
     </scenes>
     <resources>
-        <image name="31717A40-A989-41CC-AC2F-D691DEFF6AF9" width="256" height="256">
+        <image name="F0F780F3-F51E-4114-934F-BE33309741CA" width="256" height="256">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPj9YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQsLzI4O1UkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4606,4 +4640,7 @@ AAAAAAAEAQAAAAAAAABCAAAAAAAAAAAAAAAAAAQO4w
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Xka-UA-U0U"/>
+    </inferredMetricsTieBreakers>
 </document>

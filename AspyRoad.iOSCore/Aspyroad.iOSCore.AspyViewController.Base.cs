@@ -11,7 +11,6 @@ namespace AspyRoad.iOSCore
 	{
         #region Class Variables
         public IAspyGlobals iOSGlobals;
-
         #endregion
 
 

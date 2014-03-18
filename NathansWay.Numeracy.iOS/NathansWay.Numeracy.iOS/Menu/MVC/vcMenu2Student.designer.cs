@@ -35,6 +35,9 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		[Action ("btn4_click:")]
 		partial void btn4_click (MonoTouch.Foundation.NSObject sender);
+
+		[Action ("returnToStepOne:")]
+		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
 		
 		void ReleaseDesignerOutlets ()
 		{
