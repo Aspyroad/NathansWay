@@ -60,7 +60,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 		
 		partial void btnMenuActionLessons (NSObject sender)
 		{
-            this.PerformSegue("sgStudent_Start",sender);
+            this.PerformSegue("sgStart_Lessons",sender);
         }
 	}
 }

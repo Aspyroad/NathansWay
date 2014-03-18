@@ -30,7 +30,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 
         partial void btn1_click(NSObject sender)
         {
-            throw new System.NotImplementedException();
+            this.PerformSegue("sgLessons_Start",sender);
         }
 
 

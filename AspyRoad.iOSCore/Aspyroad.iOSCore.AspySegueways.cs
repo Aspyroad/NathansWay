@@ -415,11 +415,12 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
             {
-                upFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+                upFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));
             }
             else
             {
-                upFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+                //upFull = new PointF((tmpHeight + (tmpHeight / 2)) * -1, (tmpWidth / 2)); 
+                upFull = new PointF((tmpHeight * -1), (tmpWidth / 2));
             }
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -438,11 +439,12 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
-                downFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2)); 
+                //downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)) );
+                downFull = new PointF((tmpWidth / 2), (tmpHeight) );
             }
             else
             {
-                downFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));
+                downFull = new PointF((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));                 
             }
 
             // Put the destination view fully over to the right, off screen            
