@@ -9,11 +9,23 @@ using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
-    
+
     [MonoTouch.Foundation.Register("AspySegueBase")] 
     public class AspySegueBase : UIStoryboardSegue
     {
         public IAspyGlobals iOSGlobals;
+        internal double kAnimationDuration; 
+
+        internal NSAction _slider;
+        internal UICompletionHandler _animationcomplete;
+        internal float tmpWidth;
+        internal float tmpHeight;
+        internal PointF rightFull;
+        internal PointF leftFull;
+        internal PointF upFull;
+        internal PointF downFull;
+        internal int tmpTag;
+        internal PointF originalCenter;
         
         #region Construction
         // Def .ctr
@@ -35,6 +47,7 @@ namespace AspyRoad.iOSCore
         private void Initialize()
         {   
             this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+            kAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
         } 
         #endregion        
     }
@@ -42,17 +55,6 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
 	public class AspySlidingLeftSegue : AspySegueBase
 	{
-        private const double kAnimationDuration = 0.3;
-
-		private NSAction _slider;
-		private UICompletionHandler _animationcomplete;
-        private float tmpWidth;
-        private float tmpHeight;
-        private PointF rightFull;
-        private PointF leftFull;
-        private int tmpTag;
-
-                       
         #region Construction
         // Def .ctr
         public AspySlidingLeftSegue()
@@ -71,7 +73,7 @@ namespace AspyRoad.iOSCore
         }
 
         private void Initialize()
-        {             
+        { 
         } 
         #endregion
 
@@ -214,7 +216,6 @@ namespace AspyRoad.iOSCore
         private void animateComplete(bool finished)
         {
             this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             this.SourceViewController.DismissViewController(false, null);
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
@@ -242,15 +243,6 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
     public class AspySlidingRightSegue : AspySegueBase
     {
-        private const double kAnimationDuration = 0.3;
-
-        private NSAction _slider;
-        private UICompletionHandler _animationcomplete;
-        private float tmpWidth;
-        private float tmpHeight;
-        private PointF rightFull;
-        private PointF leftFull;
-        private int tmpTag;
                 
         #region Construction
         // Def .ctr
@@ -363,16 +355,6 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register("AspySlidingUpSegue")] 
     public class AspySlidingUpSegue : AspySegueBase
     {
-        private const double kAnimationDuration = 0.3;
-
-        private NSAction _slider;
-        private UICompletionHandler _animationcomplete;
-        private float tmpWidth;
-        private float tmpHeight;
-        private PointF upFull;
-        private PointF downFull;
-        private int tmpTag;
-
         #region Construction
         // Def .ctr
         public AspySlidingUpSegue()
@@ -415,12 +397,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
             {
-                upFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));
+                upFull = new PointF((tmpWidth / 2), ((tmpHeight / 2) * -1));
             }
             else
             {
-                //upFull = new PointF((tmpHeight + (tmpHeight / 2)) * -1, (tmpWidth / 2)); 
-                upFull = new PointF((tmpHeight * -1), (tmpWidth / 2));
+                upFull = new PointF(((tmpHeight / 2) * -1), (tmpWidth / 2)); 
             }
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -439,8 +420,7 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
-                //downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)) );
-                downFull = new PointF((tmpWidth / 2), (tmpHeight) );
+                downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));
             }
             else
             {
@@ -450,6 +430,7 @@ namespace AspyRoad.iOSCore
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
             this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.downFull;
+            //this.SourceViewController.View.Center = upFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -486,16 +467,6 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register("AspySlidingDownSegue")] 
     public class AspySlidingDownSegue : AspySegueBase
     {
-        private const double kAnimationDuration = 0.3;
-
-        private NSAction _slider;
-        private UICompletionHandler _animationcomplete;
-        private float tmpWidth;
-        private float tmpHeight;
-        private PointF upFull;
-        private PointF downFull;
-        private int tmpTag;
-
         #region Construction
         // Def .ctr
         public AspySlidingDownSegue()
@@ -538,11 +509,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
             {
-                downFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+                upFull = new PointF(((tmpHeight / 2) * -1), (tmpWidth / 2));
             }
             else
             {
-                downFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+                upFull = new PointF((tmpWidth / 2), ((tmpHeight / 2) * -1)); 
             }
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -561,16 +532,20 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
-                downFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2)); 
+                downFull = new PointF((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));
             }
             else
             {
-                downFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));
+                downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));                 
             }
 
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
-            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.downFull;
+            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.upFull;
+
+            #if DEBUG
+                //this.SourceViewController.View.Center = this.upFull;
+            #endif
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -590,13 +565,12 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
         private void animateSlide()
         {
-            this.SourceViewController.View.Center = upFull;
+            this.SourceViewController.View.Center = downFull;
         }
 
         private void animateComplete(bool finished)
         {
             this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-
             this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             this.SourceViewController.DismissViewController(false, null);
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
@@ -605,18 +579,9 @@ namespace AspyRoad.iOSCore
     }
 
     [MonoTouch.Foundation.Register("AspySpinthatwheelSegue")] 
-    public class AspySpinthatwheelSegue : UIStoryboardSegue
+    public class AspySpinthatwheelSegue : AspySegueBase
     {
-        private const double kAnimationDuration = 1.0;
 
-        private SizeF screenSize;
-        private NSAction _slider;
-        private UICompletionHandler _animationcomplete;
-        private float tmpWidth;
-        private float tmpHeight;
-        private RectangleF tmpRect;
-        private UIView vwDest;
-        private PointF originalCenter;
 
 
         #region Construction
@@ -640,7 +605,6 @@ namespace AspyRoad.iOSCore
         {
             tmpWidth = this.SourceViewController.View.Frame.Size.Width;
             tmpHeight = this.SourceViewController.View.Frame.Size.Height;
-            tmpRect = new RectangleF(tmpWidth, 0, tmpWidth, tmpHeight);
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -651,8 +615,12 @@ namespace AspyRoad.iOSCore
             DestinationViewController.View.Transform = CGAffineTransform.MakeScale(0.05f, 0.05f);
 
 
-            originalCenter = this.DestinationViewController.View.Center;
+            PointF originalCenter = this.DestinationViewController.View.Center;
             DestinationViewController.View.Center = this.SourceViewController.View.Center;
+
+            #if DEBUG
+            //this.SourceViewController.View.Center = this.upFull;
+            #endif
 
             UIView.AnimateNotify (
 

@@ -23,6 +23,7 @@ namespace AspyRoad.iOSCore
 		private G__Orientation _Orientation = G__Orientation.Portait;
         private UIInterfaceOrientationMask _GetSupportedOrientations;
         private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
+        private double _sgAnimationDuration = 1.0 ;
 
 		#endregion
          
@@ -115,6 +116,13 @@ namespace AspyRoad.iOSCore
 			get { return _Orientation; }
 			set { _Orientation = value; }
 		}
+
+        public double G__SegueingAnimationDuration
+
+        {
+            get { return _sgAnimationDuration; }
+            set { _sgAnimationDuration = value; }
+        }
 
         // Finish 
         // ***********************************************************************************

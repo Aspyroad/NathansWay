@@ -37,10 +37,8 @@ namespace AspyRoad.iOSCore
         G__Orientation G__ViewOrientation { get; set; }
 
         Dictionary<string, int> G__ViewPool { get; set; }
-        
-        
 
-				
+        double G__SegueingAnimationDuration { get; set; }				
     }
 }
 
