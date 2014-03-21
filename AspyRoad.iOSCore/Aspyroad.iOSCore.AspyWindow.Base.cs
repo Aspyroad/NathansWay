@@ -273,46 +273,6 @@ namespace AspyRoad.iOSCore
 	//		    base.MakeKeyWindow ();
 	//		
 	
-	//[MonoTouch.Foundation.Register ("SevenButton")]
-	public class SevenButton : UIButton
-	{
-		// Required for the Xamarin iOS Desinger
-		public SevenButton () : base()
-		{
-			// Base Constructor
-		}
-		public SevenButton (IntPtr handle) : base(handle)
-		{
-			// System Constructor
-		}		
-		public SevenButton(RectangleF myFrame)
-		{
-			this.Frame = myFrame;			
-	    }
-	    
-		public void SetBackGroundColor (UIColor myBGColor)
-		{
-			this.BackgroundColor = myBGColor;        
-		}		
-			
-		public override void Draw(RectangleF myFrame)
-		{	
 
-			UIColor background;
-			background = UIColor.Black;
-
-			CGContext context = UIGraphics.GetCurrentContext ();
-		
-			var bounds = Bounds;
-
-			RectangleF nb = bounds.Inset (0, 0);
-			background.SetFill ();
-			context.FillRect (nb);			
-
-			nb = bounds.Inset (1, 1);
-			background.SetFill ();
-			context.FillRect (nb);
-		}
-	}
 	#endregion
 }

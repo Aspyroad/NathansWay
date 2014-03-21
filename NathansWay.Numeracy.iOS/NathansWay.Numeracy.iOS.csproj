@@ -71,6 +71,8 @@
     <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
     <Folder Include="Content\" />
     <Folder Include="NathansWay.Numeracy.iOS\MonoGame\" />
+    <Folder Include="Content\AppImages\" />
+    <Folder Include="NathansWay.Numeracy.iOS\Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NathansWay.Numeracy.iOS\Exception\README.md" />
@@ -112,6 +114,7 @@
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu3Lessons.designer.cs">
       <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\Controls\MenuButtons.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -130,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Info.plist" />
+    <BundleResource Include="Resources\.DS_Store" />
+    <BundleResource Include="Content\AppImages\Setup.png" />
+    <BundleResource Include="Content\AppImages\Student.png" />
+    <BundleResource Include="Content\AppImages\Teacher.png" />
+    <BundleResource Include="Content\AppImages\Toolbox.png" />
+    <BundleResource Include="Content\AppImages\Exit.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
