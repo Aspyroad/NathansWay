@@ -134,11 +134,11 @@
   <ItemGroup>
     <BundleResource Include="Info.plist" />
     <BundleResource Include="Resources\.DS_Store" />
-    <BundleResource Include="Content\AppImages\Setup.png" />
     <BundleResource Include="Content\AppImages\Student.png" />
     <BundleResource Include="Content\AppImages\Teacher.png" />
-    <BundleResource Include="Content\AppImages\Toolbox.png" />
     <BundleResource Include="Content\AppImages\Exit.png" />
+    <BundleResource Include="Content\AppImages\Toolbox_.png" />
+    <BundleResource Include="Content\AppImages\Toolbox.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
