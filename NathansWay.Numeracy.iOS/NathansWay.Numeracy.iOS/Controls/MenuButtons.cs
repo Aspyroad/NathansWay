@@ -35,19 +35,8 @@ namespace NathansWay.Numeracy.iOS.MenuButtons
 
         public override void LayoutSubviews()
         {
-
-
             base.LayoutSubviews();
-
-            RectangleF labRect = this.TitleLabel.Frame;
-            RectangleF imgRect = this.ImageView.Frame;
-
-            labRect.X = imgRect.X;
-            imgRect.X = labRect.X + labRect.Width;
-
-            this.TitleLabel.Frame = labRect;
-            this.ImageView.Frame = imgRect;
-
+            this._iconDownlabelTop();
         }
 
         public override void Draw(RectangleF myFrame)

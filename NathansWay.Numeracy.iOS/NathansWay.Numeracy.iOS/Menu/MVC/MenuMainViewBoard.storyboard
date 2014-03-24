@@ -14,35 +14,35 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zrT-80-r70" customClass="ButtonStudent">
-                                <rect key="frame" x="470" y="107" width="374" height="145"/>
+                                <rect key="frame" x="517" y="171" width="448" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.86400305706521741" green="0.10683088991437785" blue="0.12967350461037352" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17771412280000001" green="0.1523871084" blue="0.91515112700000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <state key="normal" title="Toolbox"/>
                                 <connections>
                                     <action selector="btnTestSegue:" destination="JYt-to-IEW" eventType="touchUpInside" id="Upm-sq-yjQ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NathansWay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="hPx-cD-MEQ">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NathansWay" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" id="hPx-cD-MEQ">
                                 <rect key="frame" x="0.0" y="18" width="337" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <rect key="contentStretch" x="1" y="1" width="1" height="1"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="60"/>
-                                <color key="textColor" red="0.49732506793478259" green="0.49732506793478259" blue="0.49732506793478259" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Numbers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TH5-Rv-hMw">
-                                <rect key="frame" x="105" y="44" width="232" height="41"/>
+                                <rect key="frame" x="150" y="46" width="232" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-UltraLight" family="Avenir Next" pointSize="55"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="E8Q-oZ-enw" userLabel="Button - Menu1" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="7" y="260" width="371" height="149"/>
+                                <rect key="frame" x="62" y="328" width="220" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.0" green="0.63525054487181076" blue="0.73904969262295084" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17771412280000001" green="0.1523871084" blue="0.91515112700000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="gdfg"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -62,9 +62,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="emU-Rq-OM0" userLabel="Button - Menu1" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="7" y="417" width="240" height="117"/>
+                                <rect key="frame" x="290" y="327" width="220" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.13754528802804189" green="0.46281591530054644" blue="0.10484882905297654" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17771412280000001" green="0.1523871084" blue="0.91515112700000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="gdfg"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -85,9 +85,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="e8j-dn-wx3" userLabel="Button - Menu1" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="386" y="478" width="500" height="162"/>
+                                <rect key="frame" x="290" y="485" width="220" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.56478398224043713" green="0.52954501863042636" blue="0.10605197948942209" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17771412280000001" green="0.1523871084" blue="0.91515112700000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="gdfg"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,9 +109,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RMM-JL-7Bw" userLabel="Button - Menu1" colorLabel="IBBuiltInLabel-Yellow">
-                                <rect key="frame" x="7" y="571" width="371" height="69"/>
+                                <rect key="frame" x="61" y="486" width="220" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.44554730191256831" green="0.060698803127871112" blue="0.11123016905385225" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.17771412280000001" green="0.1523871084" blue="0.91515112700000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration" label="gdfg"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
                                 <inset key="contentEdgeInsets" minX="3" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -132,9 +132,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VBl-gh-7y7">
-                                <rect key="frame" x="7" y="107" width="371" height="145"/>
+                                <rect key="frame" x="62" y="170" width="448" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.43529415130615234" green="0.44705885648727417" blue="0.48235297203063965" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" red="0.17771412282333637" green="0.15238710837406788" blue="0.91515112704918034" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="20"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Lessons">
@@ -144,8 +144,25 @@
                                     <action selector="btnMenuActionLessons:" destination="JYt-to-IEW" eventType="touchUpInside" id="b2Z-n6-b8z"/>
                                 </connections>
                             </button>
+                            <textView autoresizesSubviews="NO" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" text="Difference is taught. " selectable="NO" id="ZBg-rP-naG">
+                                <rect key="frame" x="518" y="525" width="447" height="110"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qa9-rs-kbT">
+                                <rect key="frame" x="517" y="328" width="274" height="189"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gaj-Im-XTl">
+                                <rect key="frame" x="799" y="329" width="166" height="189"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.18690343679999999" green="0.35846756810000002" blue="0.47361158289999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.2258397455903208" green="0.43618753122205978" blue="0.5760544740437159" alpha="1" colorSpace="calibratedRGB"/>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
