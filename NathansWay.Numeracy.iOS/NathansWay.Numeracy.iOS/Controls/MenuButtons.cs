@@ -30,7 +30,7 @@ namespace NathansWay.Numeracy.iOS.MenuButtons
 
         private void Initialize()
         {
-            this.SetImage(UIImage.FromFile ("Content/AppImages/Toolbox.png"), UIControlState.Normal);
+            this.SetImage(UIImage.FromFile ("Content/AppImages/Spanner.png"), UIControlState.Normal);
         }
 
         public override void LayoutSubviews()

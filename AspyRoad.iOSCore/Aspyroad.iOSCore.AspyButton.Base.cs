@@ -57,7 +57,7 @@ namespace AspyRoad.iOSCore
             this.imgRect = this.ImageView.Frame;
             
             // Set a margin of 2
-            // Place the iamge first then label left to right
+            // Place the image first then label left to right
             //imgRect.X += 2; //this sets the positon more middle            
             labRect.X = 2;
             imgRect.X = labRect.X + labRect.Width;
@@ -75,7 +75,7 @@ namespace AspyRoad.iOSCore
    
             if (this.Frame.Height > (labRect.Height + imgRect.Height))
             {            
-                // Set the labek and image in the middile of the button
+                // Set the label and image in the middile of the button
                 labRect.X = ((this.Frame.Width / 2) - (labRect.Width / 2));
                 imgRect.X = ((this.Frame.Width / 2) - (imgRect.Width / 2));
                         
@@ -101,7 +101,7 @@ namespace AspyRoad.iOSCore
             
             if (this.Frame.Height > (labRect.Height + imgRect.Height))
             {            
-                // Set the labek and image in the middile of the button
+                // Set the label and image in the middile of the button
                 labRect.X = ((this.Frame.Width / 2) - (labRect.Width / 2));
                 imgRect.X = ((this.Frame.Width / 2) - (imgRect.Width / 2));
                         
