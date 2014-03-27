@@ -25,7 +25,7 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchI18n>
     </MtouchI18n>
-    <MtouchArch>ARMv7</MtouchArch>
+    <MtouchArch>ARMv7, ARMv7s</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -138,7 +138,9 @@
     <BundleResource Include="Content\AppImages\Exit.png" />
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
     <BundleResource Include="Content\AppImages\Toolbox.png" />
-    <BundleResource Include="Content\AppImages\Spanner.png" />
+    <BundleResource Include="Content\AppImages\Kids~ipad.png" />
+    <BundleResource Include="Content\AppImages\Kids%402x~ipad.png" />
+    <BundleResource Include="Content\AppImages\Spanner~ipad.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />

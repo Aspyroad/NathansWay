@@ -30,7 +30,7 @@ namespace NathansWay.Numeracy.iOS.MenuButtons
 
         private void Initialize()
         {
-            this.SetImage(UIImage.FromFile ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+            this.SetImage(UIImage.FromBundle ("Content/AppImages/Kids.png"), UIControlState.Normal);
         }
 
         public override void LayoutSubviews()
@@ -38,25 +38,133 @@ namespace NathansWay.Numeracy.iOS.MenuButtons
             base.LayoutSubviews();
             this._iconDownlabelTop();
         }
-
-        public override void Draw(RectangleF myFrame)
+    }
+    
+    [MonoTouch.Foundation.Register ("ButtonTools")]
+    public class ButtonTools : AspyButton
+    {
+        public ButtonTools () : base()
+        {
+            Initialize();
+        }
+        public ButtonTools (IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }       
+        public ButtonTools (RectangleF myFrame)  : base (myFrame)
         {   
+            Initialize();
+        }
+        public ButtonTools (UIButtonType type) : base (type)
+        {
+            Initialize();
+        }
 
-            //UIColor background;
-            //background = UIColor.Black;
-            //this.SetImage(UIImage.FromFile ("Content/AppImages/Exit.png"), UIControlState.Normal);
+        private void Initialize()
+        {
+            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+        }
 
-            //CGContext context = UIGraphics.GetCurrentContext ();
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            this._iconDownlabelTop();
+        }
+    }
+    
+    [MonoTouch.Foundation.Register ("ButtonLessons")]
+    public class ButtonLessons: AspyButton
+    {
+        public ButtonLessons () : base()
+        {
+            Initialize();
+        }
+        public ButtonLessons (IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }       
+        public ButtonLessons (RectangleF myFrame)  : base (myFrame)
+        {   
+            Initialize();
+        }
+        public ButtonLessons (UIButtonType type) : base (type)
+        {
+            Initialize();
+        }
 
-            //            var bounds = Bounds;
-            //
-            //            RectangleF nb = bounds.Inset (0, 0);
-            //            background.SetFill ();
-            //            context.FillRect (nb);          
-            //
-            //            nb = bounds.Inset (1, 1);
-            //            background.SetFill ();
-            //            context.FillRect (nb);
+        private void Initialize()
+        {
+            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            this._iconDownlabelTop();
+        }
+    }
+    
+    [MonoTouch.Foundation.Register ("ButtonExit")]
+    public class ButtonExit : AspyButton
+    {
+        public ButtonExit () : base()
+        {
+            Initialize();
+        }
+        public ButtonExit (IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }       
+        public ButtonExit (RectangleF myFrame)  : base (myFrame)
+        {   
+            Initialize();
+        }
+        public ButtonExit (UIButtonType type) : base (type)
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            this._iconDownlabelTop();
+        }
+    }
+    
+    [MonoTouch.Foundation.Register ("ButtonTeacher")]
+    public class ButtonTeacher : AspyButton
+    {
+        public ButtonTeacher () : base()
+        {
+            Initialize();
+        }
+        public ButtonTeacher (IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }       
+        public ButtonTeacher (RectangleF myFrame)  : base (myFrame)
+        {   
+            Initialize();
+        }
+        public ButtonTeacher (UIButtonType type) : base (type)
+        {
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+            this._iconDownlabelTop();
         }
     }
 }

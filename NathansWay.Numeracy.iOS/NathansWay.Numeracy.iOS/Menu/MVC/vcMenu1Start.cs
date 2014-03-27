@@ -26,7 +26,8 @@ namespace NathansWay.Numeracy.iOS.Menu
 		}
 
         private void Initialize ()
-        {                        
+        {  
+            this.View.Tag = 100;
         }
 
 		public override void DidReceiveMemoryWarning ()
@@ -39,11 +40,7 @@ namespace NathansWay.Numeracy.iOS.Menu
 
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();
-            //this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
-            //this.View.Bounds = this.iOSGlobals.G__RectWindowLandscape;
-            this.View.Tag = 100;
-            
+			base.ViewDidLoad ();            
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
