@@ -76,10 +76,6 @@ namespace NathansWay.iOS.Numeracy
 			
 			
 			#region Setup Storyboard
-			// Frame is important as it also defines the area for touch input.
-            //window.Center = new PointF(512, 384);
-            //window.Bounds = this.iOSGlobals.G__RectWindowLandscape;
-            //window.Frame = this.iOSGlobals.G__RectWindowLandscape;
 
             initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
 			window.RootViewController = initialViewController;
@@ -94,9 +90,7 @@ namespace NathansWay.iOS.Numeracy
 			#endregion
 
 			window.MakeKeyAndVisible ();
-            //window.Subviews[0].Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-            //window.Subviews[0].Bounds = this.iOSGlobals.G__RectWindowLandscape;
-            //window.Subviews[0].Frame = this.iOSGlobals.G__RectWindowLandscape;
+
             window.Tag = 0;
 
 			

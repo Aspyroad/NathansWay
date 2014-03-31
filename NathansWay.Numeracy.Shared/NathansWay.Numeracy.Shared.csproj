@@ -8,10 +8,10 @@
     <ProjectGuid>{8DD61860-526C-4447-B806-E0ADC61DFB54}</ProjectGuid>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>NathansWay.Numeracy.Shared</RootNamespace>
     <AssemblyName>NathansWay.Numeracy.Shared</AssemblyName>
-    <TargetFrameworkProfile>Profile5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile136</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <RootNamespace>NathansWay.Numeracy.Shared</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,6 +36,7 @@
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="ServiceRegistrar.cs" />
     <Compile Include="Interface\ISharedGlobals.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.DAL.Shared.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -46,5 +47,8 @@
     <Folder Include="DataLayer\" />
     <Folder Include="BusinessLayer\Contracts\" />
     <Folder Include="BusinessLayer\Managers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataLayer\Nathansway.db3" />
   </ItemGroup>
 </Project>
