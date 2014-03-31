@@ -41,6 +41,10 @@
   <ItemGroup>
     <Folder Include="Utilities\" />
     <Folder Include="Interface\" />
-    <Folder Include="Orm\" />
+    <Folder Include="BusinessLayer\" />
+    <Folder Include="DataAccessLayer\" />
+    <Folder Include="DataLayer\" />
+    <Folder Include="BusinessLayer\Contracts\" />
+    <Folder Include="BusinessLayer\Managers\" />
   </ItemGroup>
 </Project>
