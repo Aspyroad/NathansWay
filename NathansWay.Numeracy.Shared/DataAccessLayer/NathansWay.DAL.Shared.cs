@@ -1,11 +1,10 @@
 ﻿using System;
-//using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.DAL.Shared
 {
-    public class NathansWay
+    public class NathansWayFr
     {
-        public NathansWay()
+        public NathansWayFr()
         {
         }
     }

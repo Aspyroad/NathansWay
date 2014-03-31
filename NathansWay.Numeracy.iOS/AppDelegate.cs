@@ -9,7 +9,7 @@ using NathansWay.Numeracy.iOS;
 using NathansWay.Numeracy.Shared;
 using NathansWay.Numeracy.iOS.WorkSpace;
 
-namespace NathansWay.iOS.Numeracy
+namespace NathansWay.Numeracy.iOS
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to
