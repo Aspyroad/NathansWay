@@ -37,6 +37,9 @@
     <Compile Include="ServiceRegistrar.cs" />
     <Compile Include="Interface\ISharedGlobals.cs" />
     <Compile Include="DataAccessLayer\NathansWay.DAL.Shared.cs" />
+    <Compile Include="DataLayer\NathansWay.DB.Shared.Base.cs" />
+    <Compile Include="BusinessLayer\Contracts\NathansWay.BUS.Entity.Shared.cs" />
+    <Compile Include="Interface\INathansWay.BUS.Entity.Shared.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -50,5 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataLayer\Nathansway.db3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="SQLite.Net">
+      <HintPath>..\packages\SQLite.Net-PCL.2.2.0\lib\portable-net4+sl4+wp7+win8+monotouch+MonoAndroid\SQLite.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
