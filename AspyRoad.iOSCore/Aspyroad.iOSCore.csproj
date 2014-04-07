@@ -40,6 +40,7 @@
     <Folder Include="Resources\" />
     <Folder Include="MVC\" />
     <Folder Include="Interface\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -55,6 +56,8 @@
     <Compile Include="Aspyroad.iOSCore.AspyGlobals.cs" />
     <Compile Include="Aspyroad.iOSCore.AspySegueways.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
+    <Compile Include="Utilities\ServiceContainer.cs" />
+    <Compile Include="Utilities\ServiceRegistrar.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

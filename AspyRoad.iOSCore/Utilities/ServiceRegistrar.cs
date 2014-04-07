@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace NathansWay.Numeracy.Shared
+namespace AspyRoad.iOSCore
 {
     /// <summary>
     /// Class for registering services for the app
