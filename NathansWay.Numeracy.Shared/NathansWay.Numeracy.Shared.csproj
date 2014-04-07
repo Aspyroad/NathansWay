@@ -34,12 +34,13 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
-    <Compile Include="Interface\ISharedGlobals.cs" />
     <Compile Include="DataAccessLayer\NathansWay.DAL.Shared.cs" />
     <Compile Include="DataLayer\NathansWay.DB.Shared.Base.cs" />
     <Compile Include="BusinessLayer\Contracts\NathansWay.BUS.Entity.Shared.cs" />
     <Compile Include="Interface\INathansWay.BUS.Entity.Shared.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
+    <Compile Include="Interface\INathansWay.Global.Shared.cs" />
+    <Compile Include="NathansWay.Global.Shared.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
