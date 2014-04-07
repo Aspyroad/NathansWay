@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.Shared
+namespace NathansWay.Shared.Forcopying
 {
     public class ServiceContainer 
     {

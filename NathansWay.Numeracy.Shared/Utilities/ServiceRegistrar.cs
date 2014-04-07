@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace NathansWay.Shared
+namespace NathansWay.Shared.Forcopying
 {
     /// <summary>
     /// Class for registering services for the app

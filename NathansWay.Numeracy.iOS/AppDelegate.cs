@@ -71,6 +71,7 @@ namespace NathansWay.Numeracy.iOS
 			// Register any iOS services needed		
 			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
             ServiceContainer.Register<AspyWindow> (window);
+            
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
