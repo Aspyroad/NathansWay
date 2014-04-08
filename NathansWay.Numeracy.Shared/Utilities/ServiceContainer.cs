@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.Shared.Forcopying
+namespace NathansWay.Numeracy.Shared
 {
-    public class ServiceContainer 
+    public class SharedServiceContainer 
     {
         static object locker = new object ();
-        static ServiceContainer instance;
+        static SharedServiceContainer instance;
 
 		private Dictionary<Type, Lazy<object>> Services { get; set; }
 
-		ServiceContainer ()
+		SharedServiceContainer ()
         {
             Services = new Dictionary<Type, Lazy<object>> ();
         }      
 
-        private static ServiceContainer Instance
+        private static SharedServiceContainer Instance
 		{
 			get
 			{
@@ -25,7 +25,7 @@ namespace NathansWay.Shared.Forcopying
 				{
 					if (instance == null)
 					{
-						instance = new ServiceContainer ();
+						instance = new SharedServiceContainer ();
 					}
                     return instance;
                 }

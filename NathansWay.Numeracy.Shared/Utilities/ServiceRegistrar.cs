@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 
 
-namespace NathansWay.Shared.Forcopying
+namespace NathansWay.Numeracy.Shared
 {
     /// <summary>
     /// Class for registering services for the app
     /// </summary>
-    public static class ServiceRegistrar 
+    public static class SharedServiceRegistrar 
     {
         
 		public static void Startup ()

@@ -26,7 +26,8 @@ namespace NathansWay.DAL.Shared
 
         public static string DatabaseFilePath 
         {
-            get { 
+            get 
+            { 
                 var sqliteFilename = "NathansWay.db3";
 
                 #if NETFX_CORE

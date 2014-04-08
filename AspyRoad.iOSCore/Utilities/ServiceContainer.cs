@@ -5,19 +5,19 @@ using System.Text;
 
 namespace AspyRoad.iOSCore
 {
-    public class ServiceContainer 
+    public class iOSCoreServiceContainer 
     {
         static object locker = new object ();
-        static ServiceContainer instance;
+        static iOSCoreServiceContainer instance;
 
 		private Dictionary<Type, Lazy<object>> Services { get; set; }
 
-		ServiceContainer ()
+		iOSCoreServiceContainer ()
         {
             Services = new Dictionary<Type, Lazy<object>> ();
         }      
 
-        private static ServiceContainer Instance
+        private static iOSCoreServiceContainer Instance
 		{
 			get
 			{

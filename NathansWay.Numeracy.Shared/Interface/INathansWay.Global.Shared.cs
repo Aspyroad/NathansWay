@@ -3,36 +3,36 @@ using System;
 
 namespace NathansWay.Numeracy.Shared
 {
-    public interface IGlobalShared
+    public interface ISharedGlobal
     {		
 		/// <summary>
 		/// Path to the library folder
 		/// </summary>
-        string GS__FolderNameLibrary { get; }
+        string GS__FolderNameLibrary { get; set; }
 		/// <summary>
 		/// Path to the ImageData folder
 		/// </summary>
-        string GS__FolderNameImageData { get; }
+        string GS__FolderNameImageData { get; set; }
 		/// <summary>
 		/// The name of the version file.
 		/// </summary>
-        string GS__VersionFileName { get; }
+        string GS__VersionFileName { get; set; }
         /// <summary>
         /// Global Database Name.
         /// </summary>
-        string GS__DatabaseName { get; }
+        string GS__DatabaseName { get; set; }
         /// <summary>
         /// iOS Database File Path.
         /// </summary>
-        string GS__iOSDatabasePath { get; }
+        string GS__iOSDatabasePath { get; set; }
         /// <summary>
         /// Windows Database File Path.
         /// </summary>
-        string GS__WinDatabasePath { get; }
+        string GS__WinDatabasePath { get; set; }
         /// <summary>
         /// Android Database File Path.
         /// </summary>
-        string GS__AndroidDatabasePath { get; }
+        string GS__AndroidDatabasePath { get; set; }
 
     }
 }

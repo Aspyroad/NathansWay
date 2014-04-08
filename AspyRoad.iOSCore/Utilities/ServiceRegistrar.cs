@@ -9,7 +9,7 @@ namespace AspyRoad.iOSCore
     /// <summary>
     /// Class for registering services for the app
     /// </summary>
-    public static class ServiceRegistrar 
+    public static class iOSCoreServiceRegistrar 
     {
         
 		public static void Startup ()

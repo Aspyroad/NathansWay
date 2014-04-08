@@ -15,7 +15,7 @@ namespace NathansWay.iOS.Numeracy
 		{		
 			// Setup our services for core library.
 			// Pass in our non shared   
-			ServiceRegistrar.Startup ();
+			iOSCoreServiceRegistrar.Startup ();
 			
 			// if you want to use a different Application Delegate class from "AppDelegate"
 			// you can specify it here.

@@ -31,6 +31,7 @@ namespace NathansWay.Numeracy.iOS
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
+        private ISharedGlobal SharedGlobals;
 		NSAction swipeGesture;
 
 		#region Overrides
@@ -42,13 +43,21 @@ namespace NathansWay.Numeracy.iOS
 		// You have 17 seconds to return from this method, or iOS will terminate your application.
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
-		{           
+        {           
 
-			// Setup services and globals for iOS
-			// Setup the Aspyroad.iOSCore.AspyGlobals
-			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals ();
+            // Setup services and globals for iOS
+            // Create iOSCore globals
+            this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
+            // Create shared globals
+            this.SharedGlobals = new NathansWay.Numeracy.Shared.SharedGlobal();
+            
+            // Set SharedGlobals for the Shared lib
+            // This must be done for each device being built
+            this.SharedGlobals.GS__DatabaseName = "NathansWay.db3";
+            //string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
+                string libraryPath = Path.Combine (documentsPath, "../Library/"); // Library folder
 				
-			// Set global variables here....		
+			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
 			this.iOSGlobals.G__InitializeAllViewOrientation = true;
 			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
@@ -67,10 +76,13 @@ namespace NathansWay.Numeracy.iOS
             // Setup the window
             //window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
             window = new AspyWindow(UIScreen.MainScreen.Bounds);
+            
+            // Register any Shared services needed
+            SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
 
 			// Register any iOS services needed		
-			ServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
-            ServiceContainer.Register<AspyWindow> (window);
+			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
+            iOSCoreServiceContainer.Register<AspyWindow> (window);
             
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
