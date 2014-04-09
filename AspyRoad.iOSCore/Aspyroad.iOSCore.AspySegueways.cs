@@ -46,7 +46,7 @@ namespace AspyRoad.iOSCore
 
         private void Initialize()
         {   
-            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
             kAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
         } 
         #endregion        

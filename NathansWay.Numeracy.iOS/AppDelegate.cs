@@ -1,9 +1,13 @@
+// Core
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+// Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+// Aspyroad
 using AspyRoad.iOSCore;
 using NathansWay.Numeracy.iOS;
 using NathansWay.Numeracy.Shared;
@@ -53,9 +57,14 @@ namespace NathansWay.Numeracy.iOS
             
             // Set SharedGlobals for the Shared lib
             // This must be done for each device being built
+            // Db Name
             this.SharedGlobals.GS__DatabaseName = "NathansWay.db3";
-            //string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
-                string libraryPath = Path.Combine (documentsPath, "../Library/"); // Library folder
+            // Documents folder
+            this.SharedGlobals.GS__DocumentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
+            // Library folder
+            this.SharedGlobals.GS__FolderNameLibrary = Path.Combine (this.SharedGlobals.GS__DocumentsPath, "../Library/"); 
+            // Full db path
+            this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

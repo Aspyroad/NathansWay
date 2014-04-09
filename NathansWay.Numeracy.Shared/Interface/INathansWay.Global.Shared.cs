@@ -33,6 +33,13 @@ namespace NathansWay.Numeracy.Shared
         /// Android Database File Path.
         /// </summary>
         string GS__AndroidDatabasePath { get; set; }
-
+        /// <summary>
+        /// User Documents Path.
+        /// </summary>
+        string GS__DocumentsPath { get; set; }
+        /// <summary>
+        /// Full database Path.
+        /// </summary>
+        string GS__FullDbPath { get; set; }
     }
 }

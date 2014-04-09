@@ -22,7 +22,7 @@ namespace NathansWay.DB.Shared
         /// <param name='path'>
         /// Path.
         /// </param>
-        public TeacherDB (string path) : base (path)
+        public TeacherDB (string path) : base ( path )
         {
             // create the tables
             // No need to create any schema as we use a pre existing db

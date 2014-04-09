@@ -25,7 +25,7 @@ namespace AspyRoad.iOSCore
 				{
 					if (instance == null)
 					{
-						instance = new ServiceContainer ();
+                        instance = new iOSCoreServiceContainer  ();
 					}
                     return instance;
                 }

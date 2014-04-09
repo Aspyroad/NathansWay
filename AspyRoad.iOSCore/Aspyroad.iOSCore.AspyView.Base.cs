@@ -141,7 +141,7 @@ namespace AspyRoad.iOSCore
         private void Initialize ()
         {   
 
-            this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>(); 
+            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
             // Set view globals from app wide settings
             this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
             this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
