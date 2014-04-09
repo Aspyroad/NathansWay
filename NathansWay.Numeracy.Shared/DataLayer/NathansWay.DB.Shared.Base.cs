@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using SQLite.Net;
+using SQLite.Net.Interop;
 
 
 namespace NathansWay.DB.Shared
 {
+    
+    
     /// <summary>
     /// TaskDatabase builds on SQLite.Net and represents a specific database, in our case, the Task DB.
     /// It contains methods for retrieval and persistance as well as db creation, all based on the 
@@ -14,6 +17,8 @@ namespace NathansWay.DB.Shared
     public class TeacherDB : SQLiteConnection
     {
         static object locker = new object ();
+        
+        
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Tasky.DL.TaskDatabase"/> TaskDatabase. 
