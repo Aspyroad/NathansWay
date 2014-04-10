@@ -1,7 +1,7 @@
 using System;
 
 
-namespace NathansWay.Numeracy.Shared
+namespace NathansWay.Shared.Global
 {
     public interface ISharedGlobal
     {		

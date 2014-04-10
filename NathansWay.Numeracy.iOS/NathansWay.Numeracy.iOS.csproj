@@ -129,13 +129,13 @@
       <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
       <Name>MonoGame.Framework.iOS</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj">
-      <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
-      <Name>NathansWay.Numeracy.Shared</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">
       <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
       <Name>Aspyroad.iOSCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj">
+      <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
+      <Name>NathansWay.Shared.Numeracy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

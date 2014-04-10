@@ -1,38 +1,39 @@
-﻿using System;
+﻿// System
+using System;
 using System.Collections.Generic;
 using System.Linq;
+// Sqlite -Net -PLC Nuget
 using SQLite.Net;
 using SQLite.Net.Interop;
+// NWShared
+using NathansWay.Shared.Global;
 
 
-namespace NathansWay.DB.Shared
+namespace NathansWay.Shared.DB
 {
-    
-    
-    /// <summary>
-    /// TaskDatabase builds on SQLite.Net and represents a specific database, in our case, the Task DB.
-    /// It contains methods for retrieval and persistance as well as db creation, all based on the 
-    /// underlying ORM.
-    /// </summary>
-    public class TeacherDB : SQLiteConnection
+    public class NathansWayDbBase : SQLiteConnection
     {
-        static object locker = new object ();
-        
-        
+        #region Class Variables
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Tasky.DL.TaskDatabase"/> TaskDatabase. 
-        /// if the database doesn't exist, it will create the database and all the tables.
-        /// </summary>
-        /// <param name='path'>
-        /// Path.
-        /// </param>
-        public TeacherDB (string path) : base ( path )
+        protected static object locker = new object ();  
+        protected ISharedGlobal _sharedglobal; 
+
+        #endregion
+
+        #region Constructors
+
+        public NathansWayDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base (_SQLitePlatform, _path )
         {
-            // create the tables
+            // Create the tables etc
             // No need to create any schema as we use a pre existing db
-            // CreateTable<Task> ();
+
+            // Create our global variables
+            _sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
         }
+
+        #endregion
+
+        #region Private Members
 
         public IEnumerable<T> GetItems<T> () where T : NathansWay.BUS.Entity.Shared.IBusEntity, new ()
         {
@@ -68,13 +69,12 @@ namespace NathansWay.DB.Shared
 
         public int DeleteItem<T>(int seq) where T : NathansWay.BUS.Entity.Shared.IBusEntity, new ()
         {
-            lock (locker) {
-                #if NETFX_CORE
-                return Delete(new T() { SEQ = seq });
-                #else
+            lock (locker) 
+            {
                 return Delete<T> (new T () { SEQ = seq });
-                #endif
             }
         }
+
+        #endregion
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.Numeracy.Shared
+namespace NathansWay.Shared.Global
 {
     public class SharedServiceContainer 
     {

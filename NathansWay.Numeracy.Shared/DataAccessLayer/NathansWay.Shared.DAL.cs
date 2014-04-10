@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using NathansWay.Numeracy.Shared;
+using NathansWay.Shared.Global;
 
-namespace NathansWay.DAL.Shared
+namespace NathansWay.Shared.DAL
 {
     public class TeacherRepository 
     {
-        NathansWay.DB.Shared.TeacherDB db = null;
+        NathansWay.Shared.DB.TeacherDB db = null;
         protected static string dbLocation;     
         protected static TeacherRepository  me;   
-        protected NathansWay.Numeracy.Shared.ISharedGlobal _sharedGlobal;
+        protected NathansWay.Shared.Global.ISharedGlobal _sharedGlobal;
 
         static TeacherRepository ()
         {

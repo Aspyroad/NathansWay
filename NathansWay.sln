@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lidgren.Network.iOS", "..\M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspyroad.iOSCore", "AspyRoad.iOSCore\Aspyroad.iOSCore.csproj", "{587047CE-E3BC-4A5D-A59E-58558971F231}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Numeracy.Shared", "NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj", "{8DD61860-526C-4447-B806-E0ADC61DFB54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Shared.Numeracy", "NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj", "{8DD61860-526C-4447-B806-E0ADC61DFB54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

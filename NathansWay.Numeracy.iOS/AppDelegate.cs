@@ -9,9 +9,10 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
-using NathansWay.Numeracy.iOS;
-using NathansWay.Numeracy.Shared;
-using NathansWay.Numeracy.iOS.WorkSpace;
+using NathansWay.Shared.Global;
+
+
+
 
 namespace NathansWay.Numeracy.iOS
 {
@@ -31,7 +32,7 @@ namespace NathansWay.Numeracy.iOS
 		// Setup AspyRoad.iOS libraries.
 		
         private AspyWindow window;
-		private QAViewController viewController;
+        //private QAViewController viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
@@ -53,7 +54,7 @@ namespace NathansWay.Numeracy.iOS
             // Create iOSCore globals
             this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
             // Create shared globals
-            this.SharedGlobals = new NathansWay.Numeracy.Shared.SharedGlobal();
+            this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
             
             // Set SharedGlobals for the Shared lib
             // This must be done for each device being built
@@ -148,7 +149,7 @@ namespace NathansWay.Numeracy.iOS
 
 		private void printeswipe ()
 		{
-			viewController.QAWorkSpaceView.Q2.Text = "Swiped";
+            //viewController.QAWorkSpaceView.Q2.Text = "Swiped";
 		}
 		
 	}

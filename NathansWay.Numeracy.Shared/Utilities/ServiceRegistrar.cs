@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace NathansWay.Numeracy.Shared
+namespace NathansWay.Shared.Global
 {
     /// <summary>
     /// Class for registering services for the app
