@@ -7,9 +7,13 @@ using System.Linq;
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+// SQLite
+using SQLite.Net.Platform;
+using SQLite.Net.Interop;
 // Aspyroad
 using AspyRoad.iOSCore;
 using NathansWay.Shared.Global;
+using NathansWay.Shared.DB;
 
 
 
@@ -37,6 +41,8 @@ namespace NathansWay.Numeracy.iOS
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
         private ISharedGlobal SharedGlobals;
+        private ISQLitePlatform _iOSSQLitePLatform;
+        private NathansWayDbBase _testDb;
 		NSAction swipeGesture;
 
 		#region Overrides
@@ -55,6 +61,8 @@ namespace NathansWay.Numeracy.iOS
             this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
             // Create shared globals
             this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
+            // Set Sqlite db Platform
+            this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
             
             // Set SharedGlobals for the Shared lib
             // This must be done for each device being built
@@ -89,10 +97,14 @@ namespace NathansWay.Numeracy.iOS
             
             // Register any Shared services needed
             SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
+            // Platform lib needed by the constructor for SQLite Shared
+            SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
             iOSCoreServiceContainer.Register<AspyWindow> (window);
+            
+            _testDb = new NathansWayDbBase();
             
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();

@@ -7,7 +7,7 @@ namespace NathansWay.Shared.DAL
 {
     public class TeacherRepository 
     {
-        NathansWay.Shared.DB.TeacherDB db = null;
+        //NathansWay.Shared.DB.TeacherDB db = null;
         protected static string dbLocation;     
         protected static TeacherRepository  me;   
         protected NathansWay.Shared.Global.ISharedGlobal _sharedGlobal;
@@ -25,7 +25,7 @@ namespace NathansWay.Shared.DAL
             dbLocation = _sharedGlobal.GS__FullDbPath;
 
             // instantiate the database 
-            db = new NathansWay.DB.Shared.TeacherDB(dbLocation);
+            //db = new NathansWay.DB.Shared.TeacherDB(dbLocation);
         }
 
 //        public static Task GetTask(int id)

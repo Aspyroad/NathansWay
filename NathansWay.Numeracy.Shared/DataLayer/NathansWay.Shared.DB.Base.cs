@@ -16,19 +16,22 @@ namespace NathansWay.Shared.DB
         #region Class Variables
 
         protected static object locker = new object ();  
-        protected ISharedGlobal _sharedglobal; 
+        protected ISharedGlobal _sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
 
         #endregion
 
         #region Constructors
 
-        public NathansWayDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base (_SQLitePlatform, _path )
+        public NathansWayDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base (_SQLitePlatform, _path)
+        //public NathansWayDbBase () : 
         {
             // Create the tables etc
             // No need to create any schema as we use a pre existing db
 
             // Create our global variables
-            _sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
+            //_sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
+            
+            
         }
 
         #endregion
