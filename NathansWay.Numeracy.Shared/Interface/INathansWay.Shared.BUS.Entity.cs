@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NathansWay.BUS.Entity.Shared
+namespace NathansWay.Shared.BUS.Entity
 {
     public interface IBusEntity 
     {

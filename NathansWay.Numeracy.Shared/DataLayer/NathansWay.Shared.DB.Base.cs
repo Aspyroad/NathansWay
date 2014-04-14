@@ -33,7 +33,7 @@ namespace NathansWay.Shared.DB
 
         #region Private Members
 
-        public IEnumerable<T> GetItems<T> () where T : NathansWay.BUS.Entity.Shared.IBusEntity, new ()
+        public IEnumerable<T> GetItems<T> () where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
         {
             lock (locker) 
             {
@@ -41,7 +41,7 @@ namespace NathansWay.Shared.DB
             }
         }
 
-        public T GetItem<T> (int seq) where T : NathansWay.BUS.Entity.Shared.IBusEntity, new ()
+        public T GetItem<T> (int seq) where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
         {
             lock (locker) 
             {
@@ -49,7 +49,7 @@ namespace NathansWay.Shared.DB
             }
         }
 
-        public int SaveItem<T> (T item) where T : NathansWay.BUS.Entity.Shared.IBusEntity
+        public int SaveItem<T> (T item) where T : NathansWay.Shared.BUS.Entity.IBusEntity
         {
             lock (locker) 
             {
@@ -65,7 +65,7 @@ namespace NathansWay.Shared.DB
             }
         }
 
-        public int DeleteItem<T>(int seq) where T : NathansWay.BUS.Entity.Shared.IBusEntity, new ()
+        public int DeleteItem<T>(int seq) where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
         {
             lock (locker) 
             {
