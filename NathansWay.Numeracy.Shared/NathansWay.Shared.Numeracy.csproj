@@ -41,6 +41,11 @@
     <Compile Include="Interface\INathansWay.Shared.Global.cs" />
     <Compile Include="NathansWay.Shared.Global.cs" />
     <Compile Include="BusinessLayer\Contracts\NathansWay.Shared.BUS.Entity.cs" />
+    <Compile Include="DataLayer\NathansWay.Shared.DB.Factory.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Teacher.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Student.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Base.cs" />
+    <Compile Include="NathansWay.Shared.Types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -51,6 +56,7 @@
     <Folder Include="DataLayer\" />
     <Folder Include="BusinessLayer\Contracts\" />
     <Folder Include="BusinessLayer\Managers\" />
+    <Folder Include="BusinessLayer\Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DataLayer\Nathansway.db3" />

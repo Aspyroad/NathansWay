@@ -17,7 +17,7 @@ namespace NathansWay.BUS.Entity.Shared
         /// Gets or sets the Database ID.
         /// </summary>
         [PrimaryKey, AutoIncrement]
-        public int SEQ { get; set; }
+        public abstract int SEQ { get; set; }
 
     }
 }
