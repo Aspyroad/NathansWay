@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A406F11E-56A9-4C93-A337-1EEDD8B93B5A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NathansWay</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C4BB637F-0CD5-4CBE-9439-327EC03C58A1</key>
+		<string>https://github.com/Aspyroad/NathansWay.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>XCodeViews/NathansWay/NathansWay.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C4BB637F-0CD5-4CBE-9439-327EC03C58A1</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Aspyroad/NathansWay.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C4BB637F-0CD5-4CBE-9439-327EC03C58A1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C4BB637F-0CD5-4CBE-9439-327EC03C58A1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NathansWay</string>
+		</dict>
+	</array>
+</dict>
+</plist>

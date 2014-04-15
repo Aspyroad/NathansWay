@@ -151,5 +151,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\StartMenu.xib" />
   </ItemGroup>
 </Project>

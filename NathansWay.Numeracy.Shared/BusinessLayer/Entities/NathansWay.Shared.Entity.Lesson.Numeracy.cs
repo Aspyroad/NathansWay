@@ -17,6 +17,7 @@ namespace NathansWay.Shared.BUS.Entity
         private DateTime _dob;
         private string _notes;
         private int _teacher_seq;
+
         #endregion
         
         #region Contructor
