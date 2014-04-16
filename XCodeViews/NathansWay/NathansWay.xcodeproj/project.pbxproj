@@ -19,7 +19,7 @@
 		5E3D06BA18FCAF3C005D03A1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E3D06A218FCAF3C005D03A1 /* UIKit.framework */; };
 		5E3D06C218FCAF3C005D03A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D06C018FCAF3C005D03A1 /* InfoPlist.strings */; };
 		5E3D06C418FCAF3C005D03A1 /* NathansWayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D06C318FCAF3C005D03A1 /* NathansWayTests.m */; };
-		5E3D06CF18FCB006005D03A1 /* vwFraction.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D06CE18FCB006005D03A1 /* vwFraction.xib */; };
+		5E3D06CF18FCB006005D03A1 /* vwNumberCombo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,7 @@
 		5E3D06BF18FCAF3C005D03A1 /* NathansWayTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NathansWayTests-Info.plist"; sourceTree = "<group>"; };
 		5E3D06C118FCAF3C005D03A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E3D06C318FCAF3C005D03A1 /* NathansWayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NathansWayTests.m; sourceTree = "<group>"; };
-		5E3D06CE18FCB006005D03A1 /* vwFraction.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwFraction.xib; sourceTree = "<group>"; };
+		5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwNumberCombo.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,7 +150,7 @@
 		5E3D06CD18FCAF70005D03A1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5E3D06CE18FCB006005D03A1 /* vwFraction.xib */,
+				5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -232,7 +232,7 @@
 			files = (
 				5E3D06A918FCAF3C005D03A1 /* InfoPlist.strings in Resources */,
 				5E3D06B118FCAF3C005D03A1 /* Images.xcassets in Resources */,
-				5E3D06CF18FCB006005D03A1 /* vwFraction.xib in Resources */,
+				5E3D06CF18FCB006005D03A1 /* vwNumberCombo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +374,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NathansWay/NathansWay-Prefix.pch";
 				INFOPLIST_FILE = "NathansWay/NathansWay-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -387,6 +388,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NathansWay/NathansWay-Prefix.pch";
 				INFOPLIST_FILE = "NathansWay/NathansWay-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -451,6 +453,7 @@
 				5E3D06C918FCAF3C005D03A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E3D06CA18FCAF3C005D03A1 /* Build configuration list for PBXNativeTarget "NathansWayTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +462,7 @@
 				5E3D06CC18FCAF3C005D03A1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
