@@ -106,15 +106,19 @@
     <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\QAView.designer.cs">
       <DependentUpon>QAView.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu1Start.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu1Start.cs">
+      <DependentUpon>xMenu1Start.xib</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu1Start.designer.cs">
-      <DependentUpon>vcMenu1Start.cs</DependentUpon>
+      <DependentUpon>xMenu1Start.xib</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu2Student.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu2Student.designer.cs">
       <DependentUpon>vcMenu2Student.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu1Start.cs">
+      <DependentUpon>xMenu1Start.xib</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu2Student.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vcMenu3Lessons.cs" />
     <Compile Include="NathansWay.Numeracy.iOS\Menu\MVC\vMenu3Lessons.cs" />
@@ -122,6 +126,12 @@
       <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.Numeracy.iOS\Controls\MenuButtons.cs" />
+    <Compile Include="NathansWay.Numeracy.iOS\Controls\vcNumberCombo.cs">
+      <DependentUpon>vwNumberCombo.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.Numeracy.iOS\Controls\vNumberCombo.cs">
+      <DependentUpon>vwNumberCombo.xib</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -151,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\MenuMainViewBoard.storyboard" />
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\StartMenu.xib" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Controls\vwNumberCombo.xib" />
+    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\xMenu1Start.xib" />
   </ItemGroup>
 </Project>

@@ -112,8 +112,8 @@ namespace NathansWay.Numeracy.iOS
 			
 			#region Setup Storyboard
 
-            initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
-			window.RootViewController = initialViewController;
+            //initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
+			//window.RootViewController = initialViewController;
 
 			#endregion
 

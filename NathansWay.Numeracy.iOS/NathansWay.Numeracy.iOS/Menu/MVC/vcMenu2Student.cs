@@ -49,6 +49,7 @@ namespace NathansWay.Numeracy.iOS.Menu
         }
 
 		#region Overrides
+        
         public override void DidReceiveMemoryWarning()
         {
             // Releases the view if it doesn't have a superview.
@@ -60,8 +61,6 @@ namespace NathansWay.Numeracy.iOS.Menu
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            //this.View.Bounds = iOSGlobals.G__RectWindowLandscape;  
-            // Perform any additional setup after loading the view, typically from a nib.
         }
 
 		#endregion
