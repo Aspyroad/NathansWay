@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 using AspyRoad.iOSCore;
-using NathansWay.Numeracy.Shared;
+using NathansWay.Shared.Global;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;

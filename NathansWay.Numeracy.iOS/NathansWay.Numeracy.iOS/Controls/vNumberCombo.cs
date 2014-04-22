@@ -24,7 +24,12 @@ namespace NathansWay.Numeracy.iOS.Menu
             Initialize();            
         }
 
-        
+        [Export("initWithCoder:")]
+        public vNumberCombo (NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+                
         private void Initialize()
         {               
             //this.Tag = 190;

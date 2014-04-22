@@ -7,6 +7,7 @@ using System.Linq;
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.ObjCRuntime;
 // SQLite
 using SQLite.Net.Platform;
 using SQLite.Net.Interop;
@@ -36,7 +37,7 @@ namespace NathansWay.Numeracy.iOS
 		// Setup AspyRoad.iOS libraries.
 		
         private AspyWindow window;
-        //private QAViewController viewController;
+        private vcNumberCombo viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
@@ -104,7 +105,7 @@ namespace NathansWay.Numeracy.iOS
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
             iOSCoreServiceContainer.Register<AspyWindow> (window);
             
-            _testDb = new NathansWayDbBase();
+            //_testDb = new NathansWayDbBase();
             
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
@@ -118,10 +119,16 @@ namespace NathansWay.Numeracy.iOS
 			#endregion
 
 			#region Setup Single View
-//			window = new AspyWindow (UIScreen.MainScreen.Bounds);
-//			viewController = new QAViewController();
+
+            // Using viewcontroller constructor to run the nib
+            //viewController = new vcNumberCombo();
+
+            // Runtime method
+            var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
+            viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
+
 //			swipeGesture = new NSAction(printeswipe);
-//			window.RootViewController = viewController;
+			window.RootViewController = viewController;
 			#endregion
 
 			window.MakeKeyAndVisible ();

@@ -2,23 +2,28 @@ using System;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using NathansWay.Numeracy.Shared;
+using NathansWay.Shared.Global;
 
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register("AspyViewController")]	
 	public class AspyViewController : UIViewController
 	{
+
         #region Class Variables
         public IAspyGlobals iOSGlobals;
         #endregion
-
 
         #region Constructors
 		public AspyViewController()
 		{
 			Initialize ();
 		}
+
+        public AspyViewController(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            Initialize ();
+        }
 
 		public AspyViewController(IntPtr h): base (h)
 		{
