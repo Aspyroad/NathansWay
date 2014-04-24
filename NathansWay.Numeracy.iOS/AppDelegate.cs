@@ -121,11 +121,11 @@ namespace NathansWay.Numeracy.iOS
 			#region Setup Single View
 
             // Using viewcontroller constructor to run the nib
-            //viewController = new vcNumberCombo();
+            viewController = new vcNumberCombo();
 
             // Runtime method
-            var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
-            viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
+            //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
+            //viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
 
 //			swipeGesture = new NSAction(printeswipe);
 			window.RootViewController = viewController;
