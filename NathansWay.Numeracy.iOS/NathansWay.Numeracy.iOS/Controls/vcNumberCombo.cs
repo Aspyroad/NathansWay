@@ -62,21 +62,23 @@ namespace NathansWay.Numeracy.iOS
 
             this._pickerdelegate = new PickerDelegate();
             this.pkNumberPicker.Delegate = this._pickerdelegate;
+            
+            
 
 
-            pickerDataModel = new PickerDataModel();
-            this.pkNumberPicker.Source = pickerDataModel;
-
-            this.pkNumberPicker.Center = this.txtNumber.Center;
-
-            // wire up the value change method
-            pickerDataModel.ValueChanged += (s, e) => 
-            {
-                this.txtNumber.Text = pickerDataModel.SelectedItem;
-            };
-
-            // set our initial selection on the label
-            this.txtNumber.Text = pickerDataModel.SelectedItem;
+//            pickerDataModel = new PickerDataModel();
+//            this.pkNumberPicker.Source = pickerDataModel;
+//
+//            this.pkNumberPicker.Center = this.txtNumber.Center;
+//
+//            // wire up the value change method
+//            pickerDataModel.ValueChanged += (s, e) => 
+//            {
+//                this.txtNumber.Text = pickerDataModel.SelectedItem;
+//            };
+//
+//            // set our initial selection on the label
+//            this.txtNumber.Text = pickerDataModel.SelectedItem;
 
 
         }
@@ -177,23 +179,37 @@ namespace NathansWay.Numeracy.iOS
                     this.ValueChanged (this, new EventArgs ());
                 }   
             }
-
-            #endregion
-        } 
-
-        protected class PickerDelegate : UIPickerViewDelegate
-        {
-            public PickerDelegate()
-            {
-            }
-
-            public override UIView GetView(UIPickerView pickerView, int row, int component, UIView view)
+            
+            public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
             {
                 // NOTE: Don't call the base implementation on a Model class
                 // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
                 throw new NotImplementedException();
             }
 
+            #endregion
+        } 
+
+        protected class PickerDelegate : UIPickerViewDelegate
+        {
+
+            public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
+            {
+                UILabel _lblPicker;
+                // NOTE: Don't call the base implementation on a Model class
+                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+                throw new NotImplementedException();
+            }           
+
+        }
+        
+        
+        // Get thisn datasource working and then the code should itterate over each row.        
+        protected class PickerSource : UIPickerViewDataSource
+        {
+            
+            
+            
         }
 
         #endregion

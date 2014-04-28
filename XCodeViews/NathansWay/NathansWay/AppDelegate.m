@@ -52,7 +52,8 @@
     
     UILabel *pickerViewLabel = (id)view;
     
-    if (!pickerViewLabel) {
+    if (!pickerViewLabel)
+    {
         pickerViewLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width - 10.0f, [pickerView rowSizeForComponent:component].height)];
     }
     
