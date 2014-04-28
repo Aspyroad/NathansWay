@@ -46,4 +46,21 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view
+{
+    
+    UILabel *pickerViewLabel = (id)view;
+    
+    if (!pickerViewLabel) {
+        pickerViewLabel= [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, [pickerView rowSizeForComponent:component].width - 10.0f, [pickerView rowSizeForComponent:component].height)];
+    }
+    
+    pickerViewLabel.backgroundColor = [UIColor clearColor];
+    pickerViewLabel.text = therapyTypes[row]; // where therapyTypes[row] is a specific example from my code
+    pickerViewLabel.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:20];
+    
+    return pickerViewLabel;
+}
+
 @end

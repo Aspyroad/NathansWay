@@ -16,7 +16,8 @@ namespace NathansWay.Numeracy.iOS
 
         #region Class Variables
 
-        PickerDataModel pickerDataModel;
+        private PickerDataModel pickerDataModel;
+        private UIPickerViewDelegate _pickerdelegate;
 
         #endregion
 
@@ -59,8 +60,14 @@ namespace NathansWay.Numeracy.iOS
         {
             base.ViewDidLoad();
 
+            this._pickerdelegate = new PickerDelegate();
+            this.pkNumberPicker.Delegate = this._pickerdelegate;
+
+
             pickerDataModel = new PickerDataModel();
             this.pkNumberPicker.Source = pickerDataModel;
+
+            this.pkNumberPicker.Center = this.txtNumber.Center;
 
             // wire up the value change method
             pickerDataModel.ValueChanged += (s, e) => 
@@ -173,6 +180,21 @@ namespace NathansWay.Numeracy.iOS
 
             #endregion
         } 
+
+        protected class PickerDelegate : UIPickerViewDelegate
+        {
+            public PickerDelegate()
+            {
+            }
+
+            public override UIView GetView(UIPickerView pickerView, int row, int component, UIView view)
+            {
+                // NOTE: Don't call the base implementation on a Model class
+                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+                throw new NotImplementedException();
+            }
+
+        }
 
         #endregion
     }
