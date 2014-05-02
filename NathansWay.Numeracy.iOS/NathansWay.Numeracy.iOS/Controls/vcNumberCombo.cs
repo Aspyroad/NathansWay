@@ -19,6 +19,7 @@ namespace NathansWay.Numeracy.iOS
         //private PickerDataModel pickerDataModel;
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
+        private Action<object, EventArgs> ehValueChanged;
         public static List<string> items = new List<string>();
 
         #endregion
@@ -72,34 +73,26 @@ namespace NathansWay.Numeracy.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
+            
+            // Wire up our eventhandler to "valuechanged" member
+            ehValueChanged = new Action<object, EventArgs>(valuechanged);          
+                
             this._pickerdelegate = new PickerDelegate();
             this._pickersource = new PickerSource();
 
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-            // wire up the value change method
-            this._pickerdelegate.psValueChanged += (s, e) =>
-            {
-                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-            };
-
-            //this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+            // Wire up the value change method
+            this._pickerdelegate.psValueChanged += this.ehValueChanged; 
             
-
-
 //            pickerDataModel = new PickerDataModel();
 //            this.pkNumberPicker.Source = pickerDataModel;
-//
-//            this.pkNumberPicker.Center = this.txtNumber.Center;
-//
-
+//            this.pkNumberPicker.Center = this.txtNumber.Center ;           
 //            this.pkNumberPicker.ValueChanged += (s, e) =>
 //            {
 //                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
 //            };  
-
 //
 //            // set our initial selection on the label
 //            this.txtNumber.Text = pickerDataModel.SelectedItem;
@@ -108,6 +101,17 @@ namespace NathansWay.Numeracy.iOS
         }
 
         #endregion
+        
+        #region Private Members
+        
+        private void valuechanged(object s, System.EventArgs e)
+        //private void valuechanged()
+        {
+            this.txtNumber.Text = this._pickerdelegate.SelectedItem;            
+        }
+        
+        #endregion
+        
 
         public class PickerDelegate : UIPickerViewDelegate
         {
@@ -120,7 +124,7 @@ namespace NathansWay.Numeracy.iOS
 
             #region Events
 
-            public event EventHandler<EventArgs> psValueChanged;
+            public event EventHandler psValueChanged;
 
             #endregion
 
