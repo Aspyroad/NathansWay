@@ -186,11 +186,14 @@ namespace AspyRoad.iOSCore
 
 				foreach (UITouch t in evt.AllTouches)
 				{
-					args.gestureCount = t.GestureRecognizers.Length;
-					args.numTaps = t.TapCount;
-					args.UITouchObj = t;
-					args.TimeReached = t.Timestamp;
-					args.strGestureType = "No gesture";
+                    if (t.GestureRecognizers != null)
+                    {
+                        args.gestureCount = t.GestureRecognizers.Length;
+                        args.numTaps = t.TapCount;
+                        args.UITouchObj = t;
+                        args.TimeReached = t.Timestamp;
+                        args.strGestureType = "No gesture";
+                    }
 
 					//if (args.gestureCount == 1)
 					//{

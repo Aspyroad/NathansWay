@@ -19,6 +19,7 @@ namespace NathansWay.Numeracy.iOS
         //private PickerDataModel pickerDataModel;
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
+        private txtNumberDelegate _txtNumberDelegate;
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
 
@@ -73,15 +74,22 @@ namespace NathansWay.Numeracy.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+            // By default we want the picker hidden until the textbox is tapped.
+            this.pkNumberPicker.Alpha = 0;
+
+
             
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action<object, EventArgs>(valuechanged);          
                 
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
+            this._txtNumberDelegate = new txtNumberDelegate();
 
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
+            this.txtNumber.Delegate = this._txtNumberDelegate;
 
             // Wire up the value change method
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
@@ -97,23 +105,39 @@ namespace NathansWay.Numeracy.iOS
 //            // set our initial selection on the label
 //            this.txtNumber.Text = pickerDataModel.SelectedItem;
 
-
         }
 
         #endregion
-        
+
         #region Private Members
-        
+
+        protected void txtSingleTapGestureRecognizer()
+        {
+            // create a new tap gesture
+            UITapGestureRecognizer singleTapGesture = null;
+
+            NSAction action = () => 
+            { 
+                this.pkNumberPicker.Alpha = 1;
+            };
+
+            singleTapGesture = new UITapGestureRecognizer(action);
+
+            singleTapGesture.NumberOfTouchesRequired = 1;
+            singleTapGesture.NumberOfTapsRequired = 1;
+            // add the gesture recognizer to the view
+            txtNumber.AddGestureRecognizer(singleTapGesture);
+        }
+
         private void valuechanged(object s, System.EventArgs e)
         //private void valuechanged()
         {
             this.txtNumber.Text = this._pickerdelegate.SelectedItem;            
         }
         
-        #endregion
-        
+        #endregion        
 
-        public class PickerDelegate : UIPickerViewDelegate
+        protected class PickerDelegate : UIPickerViewDelegate
         {
 
             #region Class Variables
@@ -200,7 +224,6 @@ namespace NathansWay.Numeracy.iOS
 
         }
         
-        // Get thisn datasource working and then the code should itterate over each row.        
         protected class PickerSource : UIPickerViewDataSource
         {
             
@@ -223,7 +246,9 @@ namespace NathansWay.Numeracy.iOS
             }
                         
             #endregion            
-            
+
+            #region Overrides
+
             /// <summary>
             /// Called by the picker to determine how many rows are in a given spinner item
             /// </summary>
@@ -243,10 +268,20 @@ namespace NathansWay.Numeracy.iOS
             public override int GetComponentCount (UIPickerView picker)
             {
                 return 1;
-            }            
-            
+            }  
+
+            #endregion
+
         }
 
+        protected class txtNumberDelegate : UITextFieldDelegate
+        {
+            public override bool ShouldBeginEditing(UITextField textField)
+            {
+                return false;
+            }
+
+        }
 
         #region UIPickerViewModel Implementation
 
