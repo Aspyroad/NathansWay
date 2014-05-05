@@ -124,7 +124,7 @@ namespace NathansWay.Numeracy.iOS
 
             #region Events
 
-            public event EventHandler psValueChanged;
+            public event Action<object, EventArgs> psValueChanged;
 
             #endregion
 
