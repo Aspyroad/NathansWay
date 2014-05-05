@@ -20,7 +20,7 @@ namespace NathansWay.Numeracy.iOS
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
         private Action<object, EventArgs> ehValueChanged;
-        public static List<string> items = new List<string>();
+        private List<string> items = new List<string>();
 
         #endregion
 
@@ -77,8 +77,8 @@ namespace NathansWay.Numeracy.iOS
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action<object, EventArgs>(valuechanged);          
                 
-            this._pickerdelegate = new PickerDelegate();
-            this._pickersource = new PickerSource();
+            this._pickerdelegate = new PickerDelegate(this.items);
+            this._pickersource = new PickerSource(this.items);
 
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
@@ -119,6 +119,7 @@ namespace NathansWay.Numeracy.iOS
             #region Class Variables
 
             protected int selectedIndex = 0;
+            private List<string> _items;
 
             #endregion
 
@@ -127,7 +128,29 @@ namespace NathansWay.Numeracy.iOS
             public event Action<object, EventArgs> psValueChanged;
 
             #endregion
+            
+            #region Constructors
+            
+            public PickerDelegate()
+            {
+                //Initialize();
+            }
+            
+            public PickerDelegate(List<string> Items)
+            {
+                this._items = Items;                
+            }
+                        
+            #endregion
 
+            #region Private Members
+            
+            private void Initialize()
+            {                
+            }
+            
+            #endregion
+            
             #region Public Members
 
             /// <summary>
@@ -135,7 +158,7 @@ namespace NathansWay.Numeracy.iOS
             /// </summary>
             public string SelectedItem
             {
-                get { return items[selectedIndex]; }
+                get { return this._items[selectedIndex]; }
             }
 
             #endregion
@@ -160,7 +183,7 @@ namespace NathansWay.Numeracy.iOS
             /// </summary>
             public override string GetTitle (UIPickerView picker, int row, int component)
             {
-                return items[row];
+                return this._items[row];
             }
 
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
@@ -169,7 +192,7 @@ namespace NathansWay.Numeracy.iOS
                 lbl.TextColor = UIColor.Blue;
                 lbl.Font = UIFont.SystemFontOfSize(30f);
                 lbl.TextAlignment = UITextAlignment.Center;
-                lbl.Text = items[row];
+                lbl.Text = this._items[row];
                 return lbl;
             }   
 
@@ -180,13 +203,38 @@ namespace NathansWay.Numeracy.iOS
         // Get thisn datasource working and then the code should itterate over each row.        
         protected class PickerSource : UIPickerViewDataSource
         {
-
+            
+            #region Class Variables
+            
+            private List<string> _items;
+            
+            #endregion
+            
+            #region Constructors
+            
+            public PickerSource()
+            {
+                
+            }
+            
+            public PickerSource(List<string> Items)
+            {
+                this._items = Items;                
+            }
+                        
+            #endregion            
+            
             /// <summary>
             /// Called by the picker to determine how many rows are in a given spinner item
             /// </summary>
             public override int GetRowsInComponent (UIPickerView picker, int component)
             {
-                return items.Count;
+                int x = 0;
+                if (this._items != null)
+                {
+                    x = this._items.Count;
+                }
+                return x;
             } 
 
             /// <summary>
