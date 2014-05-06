@@ -7,6 +7,7 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
+    [MonoTouch.Foundation.Register ("vContainerView")]
 	public partial class vContainerView : AspyView
 	{
 

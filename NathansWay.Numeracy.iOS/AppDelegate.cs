@@ -41,6 +41,7 @@ namespace NathansWay.iOS.Numeracy
 		
         private AspyWindow window;
         private vcContainerView viewController;
+        private vcNumberCombo viewController1;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
@@ -125,13 +126,14 @@ namespace NathansWay.iOS.Numeracy
 
             // Using viewcontroller constructor to run the nib
             viewController = new vcContainerView();
+            //this.viewController1 = new vcNumberCombo();
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
             //viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
 
 //			swipeGesture = new NSAction(printeswipe);
-			window.RootViewController = viewController;
+            window.RootViewController = viewController;
 			#endregion
 
 			window.MakeKeyAndVisible ();

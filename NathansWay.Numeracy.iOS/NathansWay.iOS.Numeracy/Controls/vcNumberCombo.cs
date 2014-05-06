@@ -93,6 +93,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Wire up the value change method
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
+
+            // Wire up gestures
+            this.txtSingleTapGestureRecognizer();
             
 //            pickerDataModel = new PickerDataModel();
 //            this.pkNumberPicker.Source = pickerDataModel;
