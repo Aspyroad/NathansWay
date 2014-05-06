@@ -8,13 +8,17 @@ using NathansWay.Numeracy.iOS.WorkSpace;
 
 namespace NathansWay.Numeracy.iOS.WorkSpace
 {
-	public class QAViewController : AspyViewController
+	public class vcContainerView : AspyViewController
     {
-		private vwQAWorkSpace vwQAView;
+		//private vwQAWorkSpace vwQAView;
 
-		//public QAViewController() : base("QAView", null)
-		public QAViewController()
+		public vcContainerView () : base("vcContainerView ", null)
         {
+            
+        }
+		public vcContainerView  ()
+        {
+            
         }
 
 		public override void DidReceiveMemoryWarning()
@@ -26,8 +30,8 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView();
-			vwQAView = new vwQAWorkSpace(UIScreen.MainScreen.Bounds);
-			View = vwQAView;
+			//vwQAView = new vwQAWorkSpace(UIScreen.MainScreen.Bounds);
+			//View = vwQAView;
 		}
 
         public override void ViewDidLoad()
@@ -37,12 +41,5 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 
             // Perform any additional setup after loading the view, typically from a nib.
         }
-
-		public vwQAWorkSpace QAWorkSpaceView
-		{
-			get { return this.vwQAView; }
-		}
-
-
     }
 }        

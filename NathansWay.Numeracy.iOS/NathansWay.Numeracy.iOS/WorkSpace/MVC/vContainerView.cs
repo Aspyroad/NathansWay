@@ -7,17 +7,23 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.Numeracy.iOS.WorkSpace
 {
-	public partial class vwQAWorkSpace : AspyView
+	public partial class vContainerView : AspyView
 	{
 
-		public vwQAWorkSpace (IntPtr h) : base (h)
+		public vContainerView  (IntPtr h) : base (h)
 		{
+            this.Initialize (); 
 		}
 
-		public vwQAWorkSpace(RectangleF rf)
+		public vContainerView (RectangleF rf)
 		{
 			this.Initialize ();		
 		}
+        
+        public vContainerView ()
+        {
+            this.Initialize();            
+        }
 		
 		private void Initialize()
 		{
@@ -28,7 +34,7 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 			#endregion
 
 			#region NIB Load Method 2
-			var arr = NSBundle.MainBundle.LoadNib("QAView", this, null);
+			var arr = NSBundle.MainBundle.LoadNib("vwContainerView", this, null);
 			var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
 			#endregion
 
@@ -37,14 +43,6 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 			
 		}
 		
-		partial void btnTestClick (NSObject sender)
-		{
-			throw new System.NotImplementedException ();
-		}
-		
-
-
-
 	}
 }
 
