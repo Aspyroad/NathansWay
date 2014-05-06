@@ -73,8 +73,6 @@
     <Folder Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\" />
     <Folder Include="NathansWay.Numeracy.iOS\ToolBox\SideCutters\Content\" />
     <Folder Include="NathansWay.Numeracy.iOS\Lesson\" />
-    <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\" />
-    <Folder Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\" />
     <Folder Include="Content\" />
     <Folder Include="NathansWay.Numeracy.iOS\MonoGame\" />
     <Folder Include="Content\AppImages\" />
@@ -89,7 +87,6 @@
     <None Include="NathansWay.Numeracy.iOS\ToolBox\README.md" />
     <None Include="NathansWay.Numeracy.iOS\Menu\README.md" />
     <None Include="NathansWay.Numeracy.iOS\Lesson\README.md" />
-    <None Include="NathansWay.Numeracy.iOS\WorkSpace\README.md" />
     <None Include="NathansWay.Numeracy.iOS\MonoGame\iOSGamePlatform.cs" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -130,10 +127,6 @@
     <Compile Include="NathansWay.Numeracy.iOS\Controls\vcNumberCombo.designer.cs">
       <DependentUpon>vcNumberCombo.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\vContainerView.cs" />
-    <Compile Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\vcContainerView.cs">
-      <DependentUpon>vwContainerView.xib</DependentUpon>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -166,8 +159,5 @@
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Menu\MVC\xMenu1Start.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.Numeracy.iOS\Controls\vwNumberCombo.xib" />
-    <InterfaceDefinition Include="NathansWay.Numeracy.iOS\WorkSpace\MVC\vwContainerView.xib">
-      <DependentUpon>vcContainerView.cs</DependentUpon>
-    </InterfaceDefinition>
   </ItemGroup>
 </Project>
