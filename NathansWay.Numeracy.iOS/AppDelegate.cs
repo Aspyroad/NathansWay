@@ -15,11 +15,14 @@ using SQLite.Net.Interop;
 using AspyRoad.iOSCore;
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DB;
+// NathansWay
+using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
+using NathansWay.iOS.Numeracy.Menu;
 
 
 
-
-namespace NathansWay.Numeracy.iOS
+namespace NathansWay.iOS.Numeracy
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the
 	// User Interface of the application, as well as listening (and optionally responding) to
@@ -37,7 +40,7 @@ namespace NathansWay.Numeracy.iOS
 		// Setup AspyRoad.iOS libraries.
 		
         private AspyWindow window;
-        private vcNumberCombo viewController;
+        private vcContainerView viewController;
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
@@ -121,7 +124,7 @@ namespace NathansWay.Numeracy.iOS
 			#region Setup Single View
 
             // Using viewcontroller constructor to run the nib
-            viewController = new vcNumberCombo();
+            viewController = new vcContainerView();
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);

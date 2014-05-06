@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Numeracy.iOS", "NathansWay.Numeracy.iOS\NathansWay.Numeracy.iOS.csproj", "{ED846A11-F3F8-4277-9E00-8AC75C114910}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.iOS.Numeracy", "NathansWay.Numeracy.iOS\NathansWay.iOS.Numeracy.csproj", "{ED846A11-F3F8-4277-9E00-8AC75C114910}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Framework.iOS", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj", "{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}"
 EndProject
@@ -41,6 +41,6 @@ Global
 		{61F33CB8-B0D6-4356-AA69-23AAFBFA014C}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = NathansWay.Numeracy.iOS\NathansWay.Numeracy.iOS.csproj
+		StartupItem = NathansWay.Numeracy.iOS\NathansWay.iOS.Numeracy.csproj
 	EndGlobalSection
 EndGlobal
