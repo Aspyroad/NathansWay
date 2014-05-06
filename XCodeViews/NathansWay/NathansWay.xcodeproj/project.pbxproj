@@ -20,6 +20,7 @@
 		5E3D06C218FCAF3C005D03A1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D06C018FCAF3C005D03A1 /* InfoPlist.strings */; };
 		5E3D06C418FCAF3C005D03A1 /* NathansWayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E3D06C318FCAF3C005D03A1 /* NathansWayTests.m */; };
 		5E3D06CF18FCB006005D03A1 /* vwNumberCombo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */; };
+		5E5F9411191873E30005F56D /* vwContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E5F9410191873E30005F56D /* vwContainerView.xib */; };
 		5EA3F11C18FE186000135856 /* vwFractionCombo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA3F11B18FE186000135856 /* vwFractionCombo.xib */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		5E3D06C118FCAF3C005D03A1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E3D06C318FCAF3C005D03A1 /* NathansWayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NathansWayTests.m; sourceTree = "<group>"; };
 		5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwNumberCombo.xib; sourceTree = "<group>"; };
+		5E5F9410191873E30005F56D /* vwContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwContainerView.xib; sourceTree = "<group>"; };
 		5EA3F11B18FE186000135856 /* vwFractionCombo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwFractionCombo.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -154,6 +156,7 @@
 			children = (
 				5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */,
 				5EA3F11B18FE186000135856 /* vwFractionCombo.xib */,
+				5E5F9410191873E30005F56D /* vwContainerView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 			files = (
 				5E3D06A918FCAF3C005D03A1 /* InfoPlist.strings in Resources */,
 				5E3D06B118FCAF3C005D03A1 /* Images.xcassets in Resources */,
+				5E5F9411191873E30005F56D /* vwContainerView.xib in Resources */,
 				5E3D06CF18FCB006005D03A1 /* vwNumberCombo.xib in Resources */,
 				5EA3F11C18FE186000135856 /* vwFractionCombo.xib in Resources */,
 			);

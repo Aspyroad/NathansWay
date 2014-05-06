@@ -42,31 +42,7 @@ namespace NathansWay.Numeracy.iOS.WorkSpace
 			throw new System.NotImplementedException ();
 		}
 		
-		#region UI Objects
-		public UILabel Q1
-		{
-			get
-			{
-				return this.lbl1;
-			}
-			set
-			{
-				this.lbl1 = value;
-			}
-		}
-		
-		public UILabel Q2
-		{
-			get
-			{
-				return this.lbl2;
-			}
-			set
-			{
-				this.lbl2 = value;
-			}
-		}
-		#endregion
+
 
 
 	}

@@ -178,39 +178,39 @@ namespace AspyRoad.iOSCore
 
 		public override void SendEvent (UIEvent evt)
 		{
-			if (evt.Type == UIEventType.Touches)
-			{
-
-				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
-				args.TouchSet = evt.AllTouches;
-
-				foreach (UITouch t in evt.AllTouches)
-				{
-                    if (t.GestureRecognizers != null)
-                    {
-                        args.gestureCount = t.GestureRecognizers.Length;
-                        args.numTaps = t.TapCount;
-                        args.UITouchObj = t;
-                        args.TimeReached = t.Timestamp;
-                        args.strGestureType = "No gesture";
-                    }
-
-					//if (args.gestureCount == 1)
-					//{
-					foreach (UIGestureRecognizer g in t.GestureRecognizers)
-					{
-						var myType = g.GetType();
-						if (myType.Name.Length > 0)
-						{
-							args.strGestureType = myType.Name;						
-						}
-					}
-					//}	 
-
-
-					IveBeenTouched(args);
-				}
-			}
+//			if (evt.Type == UIEventType.Touches)
+//			{
+//
+//				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
+//				args.TouchSet = evt.AllTouches;
+//
+//				foreach (UITouch t in evt.AllTouches)
+//				{
+//                    if (t.GestureRecognizers != null)
+//                    {
+//                        args.gestureCount = t.GestureRecognizers.Length;
+//                        args.numTaps = t.TapCount;
+//                        args.UITouchObj = t;
+//                        args.TimeReached = t.Timestamp;
+//                        args.strGestureType = "No gesture";
+//                    }
+//
+//					//if (args.gestureCount == 1)
+//					//{
+//					foreach (UIGestureRecognizer g in t.GestureRecognizers)
+//					{
+//						var myType = g.GetType();
+//						if (myType.Name.Length > 0)
+//						{
+//							args.strGestureType = myType.Name;						
+//						}
+//					}
+//					//}	 
+//
+//
+//					IveBeenTouched(args);
+//				}
+//			}
 			base.SendEvent (evt);
 		}
 
