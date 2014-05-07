@@ -40,7 +40,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-
         #region Private Members
 
         private void Initialize()
@@ -54,8 +53,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             NSAction action = () => 
             { 
-                _Number1.pkNumberPicker.Alpha = 1;
-                this.View.BackgroundColor = UIColor.Blue;
+                _Number1.pkNumberPicker.Hidden = false;
+                //this.View.BackgroundColor = UIColor.Blue;
             };
 
             singleTapGesture = new UITapGestureRecognizer(action);
@@ -79,7 +78,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.LoadView();
             this._Number1 = new vcNumberCombo();
-            txtSingleTapGestureRecognizer();
+            
+            //txtSingleTapGestureRecognizer();
+            
             this.View.AddSubview(this._Number1.View);
 			//vwQAView = new vwQAWorkSpace(UIScreen.MainScreen.Bounds);
 			//View = vwQAView;

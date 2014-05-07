@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this.View.Tag = 190;
+            this.View.Tag = 1001;
 
             items.Add("0");
             items.Add("1");
@@ -76,9 +76,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
 
             // By default we want the picker hidden until the textbox is tapped.
-            this.pkNumberPicker.Alpha = 0;
-
-
+            this.View.SendSubviewToBack(this.pkNumberPicker);
+            this.pkNumberPicker.Hidden = true;
             
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action<object, EventArgs>(valuechanged);          
@@ -90,12 +89,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
             this.txtNumber.Delegate = this._txtNumberDelegate;
-
-            // Wire up the value change method
+            
+            ///<Summary>
+            /// Wire up the value change method
+            ///<summary>/
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
 
-            // Wire up gestures
-            this.txtSingleTapGestureRecognizer();
+            // Wire up tapgesture to 
+            //this.txtSingleTapGestureRecognizer();
             
 //            pickerDataModel = new PickerDataModel();
 //            this.pkNumberPicker.Source = pickerDataModel;
@@ -113,7 +114,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Private Members
-
+        
+        partial void txtTouchedDown(NSObject sender)
+        {
+            this.pkNumberPicker.Hidden = false;
+        }
+        
+        /// <summary>
+        /// Not Used
+        /// Couldnt get the gestures to fire this way using UITextField
+        /// </summary>
         protected void txtSingleTapGestureRecognizer()
         {
             // create a new tap gesture
@@ -121,7 +131,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             NSAction action = () => 
             { 
-                this.pkNumberPicker.Alpha = 1;
+                this.pkNumberPicker.Hidden = false;
             };
 
             singleTapGesture = new UITapGestureRecognizer(action);
@@ -132,13 +142,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             txtNumber.AddGestureRecognizer(singleTapGesture);
         }
 
+        /// <summary>
+        /// Combo change valuechanged the specified s and e.
+        /// </summary>
+        /// <param name="s">S.</param>
+        /// <param name="e">E.</param>
         private void valuechanged(object s, System.EventArgs e)
-        //private void valuechanged()
         {
             this.txtNumber.Text = this._pickerdelegate.SelectedItem;            
         }
         
-        #endregion        
+        #endregion    
+        
+        #region Delegate Classes
 
         protected class PickerDelegate : UIPickerViewDelegate
         {
@@ -285,6 +301,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
         }
+        
+        #endregion
 
         #region UIPickerViewModel Implementation
 

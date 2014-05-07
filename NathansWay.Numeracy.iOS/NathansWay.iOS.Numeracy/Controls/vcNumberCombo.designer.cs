@@ -12,10 +12,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 	partial class vcNumberCombo
 	{
 		[Outlet]
-        public MonoTouch.UIKit.UIPickerView pkNumberPicker { get; set; }
+		public MonoTouch.UIKit.UIPickerView pkNumberPicker { get; private set; }
 
 		[Outlet]
-        public MonoTouch.UIKit.UITextField txtNumber { get; set; }
+		public MonoTouch.UIKit.UITextField txtNumber { get; private set; }
+
+		[Action ("txtTouchedDown:")]
+		partial void txtTouchedDown (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
