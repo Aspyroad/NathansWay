@@ -66,7 +66,7 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-		#region Public Variables
+		#region Public Properties
 
 		public UISwipeGestureRecognizer swipeGesture
 		{

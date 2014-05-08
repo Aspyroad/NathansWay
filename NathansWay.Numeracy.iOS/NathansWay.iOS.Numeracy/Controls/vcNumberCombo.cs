@@ -22,6 +22,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private txtNumberDelegate _txtNumberDelegate;
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
+        private int intPrevValue;
+        private int intCurrentValue;
 
         #endregion
 
@@ -96,7 +98,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
 
             // Wire up tapgesture to 
-            //this.txtSingleTapGestureRecognizer();
+            this.txtSingleTapGestureRecognizer();
             
 //            pickerDataModel = new PickerDataModel();
 //            this.pkNumberPicker.Source = pickerDataModel;
@@ -112,12 +114,31 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         #endregion
+        
+        #region Public Properties
+        
+        public int PrevValue
+        {
+            get { return this.intPrevValue; }
+            set { this.intPrevValue = value; }
+        }
+        
+        public int CurrentValue
+        {
+            get { return this.intCurrentValue; }
+            set { this.intCurrentValue = value; }          
+        }
+        
+        #endregion
 
         #region Private Members
         
+        // Single tap to the text field
         partial void txtTouchedDown(NSObject sender)
         {
+            this.intPrevValue = txtNumber.
             this.pkNumberPicker.Hidden = false;
+            this.View.BringSubviewToFront(this.pkNumberPicker);
         }
         
         /// <summary>
@@ -149,7 +170,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// <param name="e">E.</param>
         private void valuechanged(object s, System.EventArgs e)
         {
-            this.txtNumber.Text = this._pickerdelegate.SelectedItem;            
+            this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+            this.View.SendSubviewToBack(this.pkNumberPicker);
+            this.pkNumberPicker.Hidden = true;
+            
         }
         
         #endregion    
@@ -233,7 +257,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 40f));
                 lbl.TextColor = UIColor.Blue;
-                lbl.Font = UIFont.SystemFontOfSize(30f);
+                lbl.Font = UIFont.SystemFontOfSize(70f);
                 lbl.TextAlignment = UITextAlignment.Center;
                 lbl.Text = this._items[row];
                 return lbl;
@@ -299,7 +323,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 return false;
             }
-
+            
         }
         
         #endregion

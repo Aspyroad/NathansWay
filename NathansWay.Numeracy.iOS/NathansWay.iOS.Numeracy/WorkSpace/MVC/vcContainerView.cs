@@ -10,10 +10,6 @@ using AspyRoad.iOSCore;
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
 
-
-
-
-
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
     [Register ("vcContainerView")]
