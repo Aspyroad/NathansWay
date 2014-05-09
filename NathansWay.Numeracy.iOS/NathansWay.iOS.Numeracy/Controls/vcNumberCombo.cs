@@ -132,11 +132,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Private Members
-        
+
         // Single tap to the text field
         partial void txtTouchedDown(NSObject sender)
         {
-            this.intPrevValue = txtNumber.
+            this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
             this.pkNumberPicker.Hidden = false;
             this.View.BringSubviewToFront(this.pkNumberPicker);
         }
