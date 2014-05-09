@@ -7,6 +7,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="vcNumberCombo">
             <connections>
+                <outlet property="btnDown" destination="IQQ-Y1-hQc" id="Ya6-yT-1lv"/>
+                <outlet property="btnUp" destination="EBT-tX-FDt" id="zGl-jd-wDN"/>
                 <outlet property="pkNumberPicker" destination="XTD-Hl-vfo" id="GtH-xy-MPg"/>
                 <outlet property="txtNumber" destination="PGa-Nn-EtH" id="nhg-4O-QXp"/>
                 <outlet property="view" destination="Mdl-gI-wGb" id="6Q4-oE-hee"/>
@@ -38,6 +40,28 @@
                         <action selector="txtTouchedDown:" destination="-1" eventType="touchDown" id="Cim-4Z-4xv"/>
                     </connections>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EBT-tX-FDt" userLabel="btnUp">
+                    <rect key="frame" x="2" y="30" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.16243001589702655" green="1" blue="0.14259543069489444" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnUpTouch:" destination="-1" eventType="touchUpInside" id="aBz-WJ-QVP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IQQ-Y1-hQc" userLabel="btnDown">
+                    <rect key="frame" x="2" y="79" width="50" height="50"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.13035243295190224" blue="0.21653174807761277" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnDownTouch:" destination="-1" eventType="touchUpInside" id="EIS-H9-JYZ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
         </view>

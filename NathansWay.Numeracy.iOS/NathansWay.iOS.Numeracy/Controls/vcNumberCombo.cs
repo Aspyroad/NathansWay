@@ -133,12 +133,29 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        // Single tap to the text field
+        /// <summary>
+        /// User touches the txtNumber control
+        /// </summary>
+        /// <param name="sender">Sender.</param>
         partial void txtTouchedDown(NSObject sender)
         {
             this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            // Clear the text when picker to make it clearer
+            this.txtNumber.Text = "";
             this.pkNumberPicker.Hidden = false;
             this.View.BringSubviewToFront(this.pkNumberPicker);
+        }
+        
+        /// <summary>
+        /// Combo change valuechanged the specified s and e.
+        /// </summary>
+        /// <param name="s">S.</param>
+        /// <param name="e">E.</param>
+        private void valuechanged(object s, System.EventArgs e)
+        {
+            this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+            this.View.SendSubviewToBack(this.pkNumberPicker);
+            this.pkNumberPicker.Hidden = true;            
         }
         
         /// <summary>
@@ -162,19 +179,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // add the gesture recognizer to the view
             txtNumber.AddGestureRecognizer(singleTapGesture);
         }
-
-        /// <summary>
-        /// Combo change valuechanged the specified s and e.
-        /// </summary>
-        /// <param name="s">S.</param>
-        /// <param name="e">E.</param>
-        private void valuechanged(object s, System.EventArgs e)
-        {
-            this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-            this.View.SendSubviewToBack(this.pkNumberPicker);
-            this.pkNumberPicker.Hidden = true;
-            
-        }
         
         #endregion    
         
@@ -193,7 +197,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             #region Events
 
             public event Action<object, EventArgs> psValueChanged;
-
+            
             #endregion
             
             #region Constructors
@@ -253,15 +257,33 @@ namespace NathansWay.iOS.Numeracy.Controls
                 return this._items[row];
             }
 
+            /// <summary>
+            /// Used to supply custom views for each row, in our case a nice large label
+            /// </summary>
+            /// <param name="pickerView">Picker view.</param>
+            /// <param name="row">Row.</param>
+            /// <param name="_view">_view.</param>
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
-                UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 40f));
+                UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
                 lbl.TextColor = UIColor.Blue;
                 lbl.Font = UIFont.SystemFontOfSize(70f);
                 lbl.TextAlignment = UITextAlignment.Center;
                 lbl.Text = this._items[row];
                 return lbl;
-            }   
+            } 
+            
+            /// <Docs>To be added.</Docs>
+            /// <summary>
+            /// Returns a value for the height of our row
+            /// </summary>         
+            /// <returns>The row height.</returns>
+            /// <param name="pickerView">Picker view.</param>
+            /// <param name="component">Component.</param>
+            public override float GetRowHeight(UIPickerView pickerView, int component)
+            {
+                return 60.0f;
+            }
 
             #endregion
 
@@ -312,7 +334,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 return 1;
             }  
-
+            
             #endregion
 
         }
