@@ -135,6 +135,15 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcContainerView.cs">
       <DependentUpon>vwContainerView.xib</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.cs">
+      <DependentUpon>vwNumberPad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberPad.cs">
+      <DependentUpon>vwNumberPad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.designer.cs">
+      <DependentUpon>vcNumberPad.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -168,5 +177,6 @@
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwContainerView.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
   </ItemGroup>
 </Project>

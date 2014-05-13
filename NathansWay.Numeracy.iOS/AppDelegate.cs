@@ -40,8 +40,14 @@ namespace NathansWay.iOS.Numeracy
 		// Setup AspyRoad.iOS libraries.
 		
         private AspyWindow window;
+        
+        // Get rid of these debug only
         private vcContainerView viewController;
         private vcNumberCombo viewController1;
+        private vcNumberPad viewController2;
+        
+        
+        
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
@@ -125,15 +131,16 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Single View
 
             // Using viewcontroller constructor to run the nib
-            viewController = new vcContainerView();
+            //viewController = new vcContainerView();
             //this.viewController1 = new vcNumberCombo();
+            this.viewController2 = new vcNumberPad();
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
             //viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
 
 //			swipeGesture = new NSAction(printeswipe);
-            window.RootViewController = viewController;
+            window.RootViewController = viewController2;
 			#endregion
 
 			window.MakeKeyAndVisible ();

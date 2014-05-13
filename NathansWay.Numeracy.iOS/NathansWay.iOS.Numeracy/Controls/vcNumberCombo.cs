@@ -92,6 +92,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.DataSource = this._pickersource;
             this.txtNumber.Delegate = this._txtNumberDelegate;
             
+            // Place views temp code
+            this.View.SendSubviewToBack(this.btnUp);
+            this.View.SendSubviewToBack(this.btnDown);
+            
             ///<Summary>
             /// Wire up the value change method
             ///<summary>/
