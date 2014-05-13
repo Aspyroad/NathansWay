@@ -52,7 +52,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         partial void btn0Touch(NSObject sender)
         {
-            
+            this._padpushed(this.btn0.TitleLabel.Text.ToString());
         }
 
         #endregion
