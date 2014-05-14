@@ -38,7 +38,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 
         private void Initialize()
         {               
-            //this.Tag = 190;
+            this.Frame = new RectangleF(100, 100, 190, 260);
         }
 
         #endregion
