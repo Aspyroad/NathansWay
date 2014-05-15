@@ -58,6 +58,7 @@
     <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyContainerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />
