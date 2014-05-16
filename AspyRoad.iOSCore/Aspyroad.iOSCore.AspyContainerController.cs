@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -12,6 +13,8 @@ namespace AspyRoad.iOSCore
         #region Class Variables
         
         public IAspyGlobals iOSGlobals;
+        private Dictionary<int, UIViewController> vcContainer;
+        private AspyView vContainerView;
         
         #endregion
 
@@ -45,6 +48,8 @@ namespace AspyRoad.iOSCore
         private void Initialize()
         {   
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
+            this.vContainerView = new AspyView(this.iOSGlobals.G__RectWindowLandscape);  
+            this.vContainerView.BackgroundColor = UIColor.DarkGray;
         }   
         
         #endregion
@@ -54,6 +59,7 @@ namespace AspyRoad.iOSCore
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            this.View = this.vContainerView;
         }
 
         // These puppies cost me a lot of time. DAYS!

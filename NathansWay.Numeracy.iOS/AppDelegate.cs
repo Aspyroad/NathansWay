@@ -41,13 +41,9 @@ namespace NathansWay.iOS.Numeracy
 		
         private AspyWindow window;
         
-        // Get rid of these debug only
-        private vcContainerView viewController;
-        private vcNumberCombo viewController1;
-        private vcNumberPad viewController2;
-        
-        
-        
+        private AspyContainerController vcMainContainerview;
+        private UINavigationController ncMainNavController;
+               
 		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         public static UIViewController initialViewController;
 		private IAspyGlobals iOSGlobals;
