@@ -45,22 +45,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize ()
-        {
-            this.View.Tag = 1001;
-
-            items.Add("0");
-            items.Add("1");
-            items.Add("2");
-            items.Add("3");
-            items.Add("4");
-            items.Add("5");
-            items.Add("6");
-            items.Add("7");
-            items.Add("8");
-            items.Add("9");
-        }
-
         #endregion
 
         #region Overrides
@@ -135,7 +119,23 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #endregion
 
-        #region Private Members
+        #region Private 
+        
+        private void Initialize ()
+        {
+            this.View.Tag = G__VCs.VC_CtrlNumberCombo;
+
+            items.Add("0");
+            items.Add("1");
+            items.Add("2");
+            items.Add("3");
+            items.Add("4");
+            items.Add("5");
+            items.Add("6");
+            items.Add("7");
+            items.Add("8");
+            items.Add("9");
+        }
 
         /// <summary>
         /// User touches the txtNumber control

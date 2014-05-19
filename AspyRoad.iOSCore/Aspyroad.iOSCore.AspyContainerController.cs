@@ -7,7 +7,7 @@ using MonoTouch.UIKit;
 namespace AspyRoad.iOSCore
 {
     [MonoTouch.Foundation.Register("AspyContainerController")]   
-    public class AspyContainerController : UIViewController
+    public class AspyContainerController : UI
     {
 
         #region Class Variables
@@ -61,6 +61,8 @@ namespace AspyRoad.iOSCore
             base.ViewDidLoad();
             this.View = this.vContainerView;
         }
+        
+        public override sub
 
         // These puppies cost me a lot of time. DAYS!
         // But they are totally important when it comes to designing landscape only apps.
