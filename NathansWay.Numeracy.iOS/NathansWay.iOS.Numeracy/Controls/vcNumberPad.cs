@@ -49,7 +49,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 
         private void Initialize ()
         {
-            this.View.Tag = G__VCs.VC_CtrlNumberPad;            
+            this.AspyTag1 = (int)G__VCs.VC_CtrlNumberPad;            
         }
         
         private void _padpushed (string _strPad)

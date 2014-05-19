@@ -11,6 +11,10 @@ namespace AspyRoad.iOSCore
 
         #region Class Variables
         public IAspyGlobals iOSGlobals;
+
+        // Extra tags for id etc.
+        private int _AspyTag1;
+        private int _AspyTag2;
         #endregion
 
         #region Constructors
@@ -42,8 +46,26 @@ namespace AspyRoad.iOSCore
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
 		}	
 
+        #region Public Members
+
+        public int AspyTag1 
+        {
+            get { return _AspyTag1; }
+            set { _AspyTag1 = value; }
+        }
+
+        public int AspyTag2 
+        {
+            get { return _AspyTag2; }
+            set { _AspyTag2 = value; }
+        }
+
+             
+
+        #endregion
 
 		#region Overrides
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -65,7 +87,6 @@ namespace AspyRoad.iOSCore
                 return true;
             }
 		}
-
         // Now standard - iOS 6
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{

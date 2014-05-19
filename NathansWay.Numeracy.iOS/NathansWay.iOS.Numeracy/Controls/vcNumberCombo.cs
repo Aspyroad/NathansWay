@@ -123,7 +123,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         private void Initialize ()
         {
-            this.View.Tag = G__VCs.VC_CtrlNumberCombo;
+            this.AspyTag1 = (int)G__VCs.VC_CtrlNumberCombo;
 
             items.Add("0");
             items.Add("1");

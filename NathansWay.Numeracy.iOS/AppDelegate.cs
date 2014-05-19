@@ -41,11 +41,15 @@ namespace NathansWay.iOS.Numeracy
 		
         private AspyWindow window;
         
-        private AspyContainerController vcMainContainerview;
-        private UINavigationController ncMainNavController;
-               
-		public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
-        public static UIViewController initialViewController;
+        private AspyContainerController ContainerController;
+
+        private vcNumberPad mypad;
+
+        #region Storyboard example setup
+        //public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
+        //public static UIViewController initialViewController;
+        #endregion
+
 		private IAspyGlobals iOSGlobals;
         private ISharedGlobal SharedGlobals;
         private ISQLitePlatform _iOSSQLitePLatform;
@@ -112,12 +116,12 @@ namespace NathansWay.iOS.Numeracy
             iOSCoreServiceContainer.Register<AspyWindow> (window);
             
             //_testDb = new NathansWayDbBase();
-            
+
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
 			
-			#region Setup Storyboard
+            #region Setup Storyboard
 
             //initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
 			//window.RootViewController = initialViewController;
@@ -127,16 +131,29 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Single View
 
             // Using viewcontroller constructor to run the nib
-            //viewController = new vcContainerView();
-            //this.viewController1 = new vcNumberCombo();
-            this.viewController2 = new vcNumberPad();
+            ContainerController = new AspyContainerController();
+
+
+
+            //mypad = new vcNumberPad();
+
+            for (int i=0; i<5; i++)
+            {
+                PageViewController *page = [[PageViewController alloc] init];
+                [tmpArray addObject:page];
+            }
+
+            ContainerController.AddAndDisplayController(mypad);
+            ContainerController.RemoveControllers((int)G__VCs.VC_CtrlNumberPad);
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
             //viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
 
-//			swipeGesture = new NSAction(printeswipe);
-            window.RootViewController = viewController2;
+            //swipeGesture = new NSAction(printeswipe);
+
+            window.RootViewController = ContainerController;
+
 			#endregion
 
 			window.MakeKeyAndVisible ();
