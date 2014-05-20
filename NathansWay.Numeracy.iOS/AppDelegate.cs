@@ -133,18 +133,24 @@ namespace NathansWay.iOS.Numeracy
             // Using viewcontroller constructor to run the nib
             ContainerController = new AspyContainerController();
 
-
-
             //mypad = new vcNumberPad();
-
+            float x = 100.0f;
+            float y = 100.0f;   
+            
             for (int i=0; i<5; i++)
             {
-                PageViewController *page = [[PageViewController alloc] init];
-                [tmpArray addObject:page];
+                x = x + 20.0f;
+                y = y + 20.0f;
+                RectangleF myRect;
+                vcNumberPad pad = new vcNumberPad();
+                pad.AspyTag2 = i;
+                myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
+                pad.View.Frame = myRect;
+                ContainerController.AddAndDisplayController(pad);
             }
 
-            ContainerController.AddAndDisplayController(mypad);
-            ContainerController.RemoveControllers((int)G__VCs.VC_CtrlNumberPad);
+            
+            ContainerController.RemoveVCInstance((int)G__VCs.VC_CtrlNumberPad, 3);
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
