@@ -3,7 +3,7 @@
 namespace NathansWay.iOS.Numeracy
 {
 
-    public enum G__VCs
+    public enum E__VCs
     {
         // Menu
         VC_MenuStart = 1,
@@ -14,6 +14,13 @@ namespace NathansWay.iOS.Numeracy
         VC_CtrlNumberPad = 10,
         VC_CtrlFractionCombo = 11,
         VC_CtrlNumberCombo = 12
+    }
+    
+    public enum E__NumberComboEditMode
+    {
+        EditScroll = 1,
+        EditUpDown = 2,
+        EditNumPad = 3       
     }
     
     

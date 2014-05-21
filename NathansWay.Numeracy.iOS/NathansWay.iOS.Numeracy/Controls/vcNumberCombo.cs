@@ -22,6 +22,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private txtNumberDelegate _txtNumberDelegate;
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
+        private E__NumberComboEditMode currentEditMode;
         private int intPrevValue;
         private int intCurrentValue;
 
@@ -123,7 +124,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         private void Initialize ()
         {
-            this.AspyTag1 = (int)G__VCs.VC_CtrlNumberCombo;
+            this.AspyTag1 = (int)E__VCs.VC_CtrlNumberCombo;
 
             items.Add("0");
             items.Add("1");

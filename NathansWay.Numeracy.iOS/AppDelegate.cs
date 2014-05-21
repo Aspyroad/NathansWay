@@ -43,8 +43,6 @@ namespace NathansWay.iOS.Numeracy
         
         private AspyContainerController ContainerController;
 
-        private vcNumberPad mypad;
-
         #region Storyboard example setup
         //public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
         //public static UIViewController initialViewController;
@@ -53,6 +51,8 @@ namespace NathansWay.iOS.Numeracy
 		private IAspyGlobals iOSGlobals;
         private ISharedGlobal SharedGlobals;
         private ISQLitePlatform _iOSSQLitePLatform;
+        private NumeracySettings _NumeracySettings;
+        
         private NathansWayDbBase _testDb;
 		NSAction swipeGesture;
 
@@ -70,6 +70,8 @@ namespace NathansWay.iOS.Numeracy
             // Setup services and globals for iOS
             // Create iOSCore globals
             this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
+            // Create our appwide user setup settings
+            this._NumeracySettings = new NumeracySettings();
             // Create shared globals
             this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
             // Set Sqlite db Platform
@@ -85,6 +87,10 @@ namespace NathansWay.iOS.Numeracy
             this.SharedGlobals.GS__FolderNameLibrary = Path.Combine (this.SharedGlobals.GS__DocumentsPath, "../Library/"); 
             // Full db path
             this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
+            
+            // Apply user based app settings
+            // Depending on student, teahcer etc some of these will change on log in
+            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -113,6 +119,8 @@ namespace NathansWay.iOS.Numeracy
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
+            // Register app/user settings
+            iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);
             iOSCoreServiceContainer.Register<AspyWindow> (window);
             
             //_testDb = new NathansWayDbBase();
@@ -139,10 +147,10 @@ namespace NathansWay.iOS.Numeracy
             
             for (int i=0; i<5; i++)
             {
-                x = x + 20.0f;
-                y = y + 20.0f;
+                x = x + 60.0f;
+                //y = y + 60.0f;
                 RectangleF myRect;
-                vcNumberPad pad = new vcNumberPad();
+                vcNumberCombo pad = new vcNumberCombo();
                 pad.AspyTag2 = i;
                 myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
                 pad.View.Frame = myRect;
@@ -150,7 +158,7 @@ namespace NathansWay.iOS.Numeracy
             }
 
             
-            ContainerController.RemoveVCInstance((int)G__VCs.VC_CtrlNumberPad, 3);
+            //ContainerController.RemoveVCInstance((int)G__VCs.VC_CtrlNumberPad, 2);
 
             // Runtime method
             //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);

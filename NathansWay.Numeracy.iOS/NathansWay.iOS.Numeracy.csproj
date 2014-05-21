@@ -78,6 +78,8 @@
     <Folder Include="NathansWay.iOS.Numeracy\MonoGame\" />
     <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -145,6 +147,7 @@
       <DependentUpon>vcNumberPad.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy.Types.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.Settings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
