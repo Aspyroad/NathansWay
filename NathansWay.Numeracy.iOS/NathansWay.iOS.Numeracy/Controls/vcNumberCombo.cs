@@ -16,13 +16,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Class Variables
 
-        //private PickerDataModel pickerDataModel;
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
         private txtNumberDelegate _txtNumberDelegate;
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
-        private E__NumberComboEditMode currentEditMode;
+        private E__NumberComboEditMode _currentEditMode;
+        private NumeracySettings _numeracySettings;
         private int intPrevValue;
         private int intCurrentValue;
 
@@ -62,6 +62,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
+            //Setup our editmode details
+            this.CurrentEditMode = this._numeracySettings.CurrentNumberEditMode;
+
             // By default we want the picker hidden until the textbox is tapped.
             this.View.SendSubviewToBack(this.pkNumberPicker);
             this.pkNumberPicker.Hidden = true;
@@ -76,11 +79,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
             this.txtNumber.Delegate = this._txtNumberDelegate;
-            
-            // Place views temp code
-            this.View.SendSubviewToBack(this.btnUp);
-            this.View.SendSubviewToBack(this.btnDown);
-            
+
             ///<Summary>
             /// Wire up the value change method
             ///<summary>/
@@ -117,14 +116,41 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this.intCurrentValue; }
             set { this.intCurrentValue = value; }          
         }
+
+        public E__NumberComboEditMode CurrentEditMode
+        {
+            get { return this._currentEditMode; }
+            set
+            {
+                this._currentEditMode = value;
+
+                switch (this._currentEditMode)
+                {
+                    case (E__NumberComboEditMode.EditScroll):    
+                        this.btnDown.Hidden = true;
+                        this.btnUp.Hidden = true;
+                        break;
+                    case (E__NumberComboEditMode.EditNumPad):
+                        this.btnDown.Hidden = true;
+                        this.btnUp.Hidden = true;
+                        break;
+                    case (E__NumberComboEditMode.EditUpDown):
+                        this.btnDown.Hidden = false;
+                        this.btnUp.Hidden = false;
+                        break;
+                }
+            }
+        }
         
         #endregion
 
-        #region Private 
+        #region Private Members
         
         private void Initialize ()
         {
             this.AspyTag1 = (int)E__VCs.VC_CtrlNumberCombo;
+
+            this._numeracySettings = iOSCoreServiceContainer.Resolve<NumeracySettings>(); 
 
             items.Add("0");
             items.Add("1");
@@ -139,16 +165,64 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         /// <summary>
-        /// User touches the txtNumber control
+        /// User touches the txtNumber control.
+        /// There are two options, bring up the scroller or numberpad.
         /// </summary>
         /// <param name="sender">Sender.</param>
         partial void txtTouchedDown(NSObject sender)
         {
+            this.preEdit();
+
+            if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
+            {
+                this.EditScroll();
+            }
+            else
+            {
+                this.EditNumPad();
+            }
+
+            this.postEdit();
+        }
+
+        partial void btnUpTouch(NSObject sender)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        partial void btnDownTouch(NSObject sender)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void preEdit()
+        {
+            // Store the original value
             this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+        }
+
+        private void postEdit()
+        {
+            // Store the new value
+            this.intCurrentValue = Convert.ToInt32(this.txtNumber.Text);
+        }
+
+        private void EditScroll()
+        {
             // Clear the text when picker to make it clearer
             this.txtNumber.Text = "";
             this.pkNumberPicker.Hidden = false;
             this.View.BringSubviewToFront(this.pkNumberPicker);
+        }
+
+        private void EditNumPad()
+        {
+            // Create an instance of Numberpad
+
+            // Show numberpad
+
+            // Return the number pressed
+
         }
         
         /// <summary>

@@ -90,7 +90,7 @@ namespace NathansWay.iOS.Numeracy
             
             // Apply user based app settings
             // Depending on student, teahcer etc some of these will change on log in
-            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
+            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditUpDown;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -121,6 +121,8 @@ namespace NathansWay.iOS.Numeracy
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
             // Register app/user settings
             iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);
+
+            // Cant remember why the fuck this is here but hey, who cares!
             iOSCoreServiceContainer.Register<AspyWindow> (window);
             
             //_testDb = new NathansWayDbBase();
