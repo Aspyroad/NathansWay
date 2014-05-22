@@ -41,7 +41,7 @@ namespace NathansWay.iOS.Numeracy
 		
         private AspyWindow window;
         
-        private AspyContainerController ContainerController;
+        private AspyContainerController ViewContainerController;
 
         #region Storyboard example setup
         //public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
@@ -111,6 +111,8 @@ namespace NathansWay.iOS.Numeracy
             // Setup the window
             //window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
             window = new AspyWindow(UIScreen.MainScreen.Bounds);
+            // Using viewcontroller constructor to run the nib
+            ViewContainerController = new AspyContainerController();
             
             // Register any Shared services needed
             SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
@@ -122,7 +124,8 @@ namespace NathansWay.iOS.Numeracy
             // Register app/user settings
             iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);
 
-            // Cant remember why the fuck this is here but hey, who cares!
+            // Add our view variables 
+            iOSCoreServiceContainer.Register<AspyContainerController>(this.ViewContainerController);
             iOSCoreServiceContainer.Register<AspyWindow> (window);
             
             //_testDb = new NathansWayDbBase();
@@ -140,8 +143,7 @@ namespace NathansWay.iOS.Numeracy
 
 			#region Setup Single View
 
-            // Using viewcontroller constructor to run the nib
-            ContainerController = new AspyContainerController();
+
 
             //mypad = new vcNumberPad();
             float x = 100.0f;
@@ -156,7 +158,7 @@ namespace NathansWay.iOS.Numeracy
                 pad.AspyTag2 = i;
                 myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
                 pad.View.Frame = myRect;
-                ContainerController.AddAndDisplayController(pad);
+                ViewContainerController.AddAndDisplayController(pad);
             }
 
             
@@ -168,7 +170,7 @@ namespace NathansWay.iOS.Numeracy
 
             //swipeGesture = new NSAction(printeswipe);
 
-            window.RootViewController = ContainerController;
+            window.RootViewController = ViewContainerController;
 
 			#endregion
 

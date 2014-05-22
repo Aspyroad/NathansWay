@@ -15,7 +15,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Events
         
-        public event Action<int> PadPushed;
+        public event Action<string> PadPushed;
         
         #endregion
         
@@ -51,13 +51,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.AspyTag1 = (int)E__VCs.VC_CtrlNumberPad;            
         }
-        
+
         private void _padpushed (string _strPad)
-        {
-            int x = Convert.ToInt32(_strPad);
+        {          
             if (PadPushed != null)
             {
-                PadPushed (x);
+                PadPushed (_strPad);
             }            
         }
         
@@ -120,8 +119,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
             
-            this.View.Frame = new RectangleF(100, 100, 190, 260);
-            
+            this.View.Frame = new RectangleF(100, 100, 190, 260);            
             
         }
         

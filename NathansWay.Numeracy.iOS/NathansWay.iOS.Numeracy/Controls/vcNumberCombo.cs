@@ -23,6 +23,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private List<string> items = new List<string>();
         private E__NumberComboEditMode _currentEditMode;
         private NumeracySettings _numeracySettings;
+        private vcNumberPad _numberpad;
+        private AspyViewController _viewcontollercontainer;
         private int intPrevValue;
         private int intCurrentValue;
 
@@ -150,7 +152,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.AspyTag1 = (int)E__VCs.VC_CtrlNumberCombo;
 
-            this._numeracySettings = iOSCoreServiceContainer.Resolve<NumeracySettings>(); 
+            this._numeracySettings = iOSCoreServiceContainer.Resolve<NumeracySettings>();
+            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>;
 
             items.Add("0");
             items.Add("1");
@@ -179,12 +182,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this.EditNumPad();
+                this.CreateNumPad();
             }
 
             //this.postEdit();
-        }
-        
+        }        
         // Increment up using the touch buttons
         partial void btnUpTouch(NSObject sender)
         {
@@ -232,16 +234,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.BringSubviewToFront(this.pkNumberPicker);
         }
 
-        private void EditNumPad()
+        private void CreateNumPad()
         {
             // Create an instance of Numberpad
+            this._numberpad = new vcNumberPad();
+            //this._viewcontollercontainer
+            _numberpad.PadPushed += this.handlePadPush();
+        }
 
-            // Show numberpad
-
-            // Return the number pressed
+        private void handlePadPush(string padText)
+        {
+            this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            this.intCurrentValue = Convert.ToInt32(padText); 
+            this.txtNumber.Text = padText;
+            _numberpad.PadPushed -= handlePadPush();
+           
 
         }
-        
+
+
         /// <summary>
         /// Combo change valuechanged the specified s and e.
         /// </summary>
