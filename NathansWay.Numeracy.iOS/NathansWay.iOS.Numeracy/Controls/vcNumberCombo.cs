@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //Setup our editmode details
             this.CurrentEditMode = this._numeracySettings.CurrentNumberEditMode;
-
+           
             // By default we want the picker hidden until the textbox is tapped.
             this.View.SendSubviewToBack(this.pkNumberPicker);
             this.pkNumberPicker.Hidden = true;
@@ -182,23 +182,40 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.EditNumPad();
             }
 
-            this.postEdit();
+            //this.postEdit();
         }
-
+        
+        // Increment up using the touch buttons
         partial void btnUpTouch(NSObject sender)
         {
-            throw new System.NotImplementedException();
+            if (this.intCurrentValue < 9)
+            {
+                this.intCurrentValue = this.intCurrentValue + 1;
+            }
+            this.txtNumber.Text = this.intCurrentValue.ToString();
         }
-
+        // Increment down using the touch buttons
         partial void btnDownTouch(NSObject sender)
         {
-            throw new System.NotImplementedException();
+            if (this.intCurrentValue > 0)
+            {
+                this.intCurrentValue = this.intCurrentValue - 1;
+            }
+            this.txtNumber.Text = this.intCurrentValue.ToString();
         }
 
         private void preEdit()
         {
             // Store the original value
-            this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            if (this.txtNumber.Text.Length > 0)
+            {
+                this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            }
+            else
+            {
+                this.intPrevValue = 0;
+                this.txtNumber.Text = "0";
+            }
         }
 
         private void postEdit()
@@ -234,7 +251,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.txtNumber.Text = this._pickerdelegate.SelectedItem;
             this.View.SendSubviewToBack(this.pkNumberPicker);
-            this.pkNumberPicker.Hidden = true;            
+            this.pkNumberPicker.Hidden = true;  
+            this.postEdit();
         }
         
         /// <summary>
