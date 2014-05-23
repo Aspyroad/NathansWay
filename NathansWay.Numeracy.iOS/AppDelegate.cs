@@ -90,7 +90,7 @@ namespace NathansWay.iOS.Numeracy
             
             // Apply user based app settings
             // Depending on student, teahcer etc some of these will change on log in
-            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditScroll;
+            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -107,12 +107,6 @@ namespace NathansWay.iOS.Numeracy
             // Eg  = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft
             // iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
             this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft;
-
-            // Setup the window
-            //window = new AspyWindow(this.iOSGlobals.G__RectWindowLandscape);
-            window = new AspyWindow(UIScreen.MainScreen.Bounds);
-            // Using viewcontroller constructor to run the nib
-            ViewContainerController = new AspyContainerController();
             
             // Register any Shared services needed
             SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
@@ -122,8 +116,13 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
             // Register app/user settings
-            iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);
-
+            iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);            
+            
+            // Setup the window
+            window = new AspyWindow(UIScreen.MainScreen.Bounds);
+            // Using viewcontroller constructor to run the nib
+            ViewContainerController = new AspyContainerController();
+            
             // Add our view variables 
             iOSCoreServiceContainer.Register<AspyContainerController>(this.ViewContainerController);
             iOSCoreServiceContainer.Register<AspyWindow> (window);

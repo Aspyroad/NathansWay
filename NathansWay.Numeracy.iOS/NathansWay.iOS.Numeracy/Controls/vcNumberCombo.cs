@@ -24,7 +24,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private E__NumberComboEditMode _currentEditMode;
         private NumeracySettings _numeracySettings;
         private vcNumberPad _numberpad;
-        private AspyViewController _viewcontollercontainer;
+        private AspyContainerController _viewcontollercontainer;
+        private Action<string> actHandlePad;
         private int intPrevValue;
         private int intCurrentValue;
 
@@ -153,7 +154,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.AspyTag1 = (int)E__VCs.VC_CtrlNumberCombo;
 
             this._numeracySettings = iOSCoreServiceContainer.Resolve<NumeracySettings>();
-            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>;
+            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>();
+            this.actHandlePad = new Action<string>(_handlePadPush);
 
             items.Add("0");
             items.Add("1");
@@ -167,11 +169,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
         }
 
-        /// <summary>
-        /// User touches the txtNumber control.
-        /// There are two options, bring up the scroller or numberpad.
-        /// </summary>
-        /// <param name="sender">Sender.</param>
         partial void txtTouchedDown(NSObject sender)
         {
             this.preEdit();
@@ -182,12 +179,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this.CreateNumPad();
+                this.EditNumPad();
             }
 
             //this.postEdit();
         }        
-        // Increment up using the touch buttons
+        
         partial void btnUpTouch(NSObject sender)
         {
             if (this.intCurrentValue < 9)
@@ -196,7 +193,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             this.txtNumber.Text = this.intCurrentValue.ToString();
         }
-        // Increment down using the touch buttons
+
         partial void btnDownTouch(NSObject sender)
         {
             if (this.intCurrentValue > 0)
@@ -234,30 +231,35 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.BringSubviewToFront(this.pkNumberPicker);
         }
 
-        private void CreateNumPad()
+        private void EditNumPad()
         {
             // Create an instance of Numberpad
             this._numberpad = new vcNumberPad();
-            //this._viewcontollercontainer
-            _numberpad.PadPushed += this.handlePadPush();
+            // Set the pad view position
+            this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
+            //RectangleF rectTmp = new RectangleF()
+            
+            this._viewcontollercontainer.AddAndDisplayController(this._numberpad);
+            
+            
+            _numberpad.PadPushed += this.actHandlePad;
         }
 
-        private void handlePadPush(string padText)
+        private void _handlePadPush(string padText)
         {
             this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
             this.intCurrentValue = Convert.ToInt32(padText); 
             this.txtNumber.Text = padText;
-            _numberpad.PadPushed -= handlePadPush();
+            _numberpad.PadPushed -= this.actHandlePad;
+            // Remove the numpad from the mainviewcontainer
+            if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
+            {
+               // Raise an error 
+            }
            
 
         }
 
-
-        /// <summary>
-        /// Combo change valuechanged the specified s and e.
-        /// </summary>
-        /// <param name="s">S.</param>
-        /// <param name="e">E.</param>
         private void valuechanged(object s, System.EventArgs e)
         {
             this.txtNumber.Text = this._pickerdelegate.SelectedItem;
@@ -265,13 +267,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Hidden = true;  
             this.postEdit();
         }
-        
-        /// <summary>
-        /// Not Used
-        /// Couldnt get the gestures to fire this way using UITextField
-        /// </summary>
+
+        // Currently not in use
         protected void txtSingleTapGestureRecognizer()
         {
+            
             // create a new tap gesture
             UITapGestureRecognizer singleTapGesture = null;
 
