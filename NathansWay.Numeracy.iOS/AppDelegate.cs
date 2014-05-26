@@ -90,7 +90,7 @@ namespace NathansWay.iOS.Numeracy
             
             // Apply user based app settings
             // Depending on student, teahcer etc some of these will change on log in
-            this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
+			this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditUpDown;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

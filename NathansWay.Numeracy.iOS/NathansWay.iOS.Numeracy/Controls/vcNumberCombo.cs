@@ -209,10 +209,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.txtNumber.Text.Length > 0)
             {
                 this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+                this.intCurrentValue = this.intPrevValue;
             }
             else
             {
                 this.intPrevValue = 0;
+                this.intCurrentValue = 0;
                 this.txtNumber.Text = "0";
             }
         }
@@ -237,19 +239,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberpad = new vcNumberPad();
             // Set the pad view position
             this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-            //RectangleF rectTmp = new RectangleF()
-            
-            this._viewcontollercontainer.AddAndDisplayController(this._numberpad);
-            
-            
+
+            this._viewcontollercontainer.AddAndDisplayController(this._numberpad);          
             _numberpad.PadPushed += this.actHandlePad;
         }
 
         private void _handlePadPush(string padText)
         {
-            this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-            this.intCurrentValue = Convert.ToInt32(padText); 
-            this.txtNumber.Text = padText;
+            if (padText != "X")
+            {
+                this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+                this.intCurrentValue = Convert.ToInt32(padText); 
+                this.txtNumber.Text = padText;
+            }
+            else
+            {
+                this.txtNumber.Text = this.intCurrentValue.ToString();
+            }
             _numberpad.PadPushed -= this.actHandlePad;
             // Remove the numpad from the mainviewcontainer
             if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))

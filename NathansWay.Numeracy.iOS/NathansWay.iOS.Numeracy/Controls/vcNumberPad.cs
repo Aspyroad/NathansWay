@@ -20,9 +20,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
         
         #region Private Variables
-        
-        private RectangleF vFrame;
-        
+
         #endregion
         
         #region Constructors
@@ -111,18 +109,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._padpushed(this.btn9.TitleLabel.Text.ToString());
         }
 
+        partial void btnCancelTouch(NSObject sender)
+        {
+            this._padpushed("X");
+        }
+
         #endregion
-        
+
         #region Overrides
         
         public override void ViewDidLoad()
         {
-            base.ViewDidLoad();
-            
-            this.View.Frame = new RectangleF(100, 100, 190, 260);            
-            
+            base.ViewDidLoad();            
+            this.View.Frame = new RectangleF(0, 0, 190, 250);    
+            this.View.Layer.BorderColor = UIColor.Black.CGColor;
+            this.View.Layer.BorderWidth = 3.0f;
         }
-        
+
         #endregion
         
     }

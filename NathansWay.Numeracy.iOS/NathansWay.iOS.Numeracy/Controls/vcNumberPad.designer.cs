@@ -41,6 +41,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 		[Outlet]
 		AspyRoad.iOSCore.AspyButton btn9 { get; set; }
 
+		[Outlet]
+		AspyRoad.iOSCore.AspyButton btnCancel { get; set; }
+
 		[Action ("btn0Touch:")]
 		partial void btn0Touch (MonoTouch.Foundation.NSObject sender);
 
@@ -70,9 +73,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		[Action ("btn9Touch:")]
 		partial void btn9Touch (MonoTouch.Foundation.NSObject sender);
+
+		[Action ("btnCancelTouch:")]
+		partial void btnCancelTouch (MonoTouch.Foundation.NSObject sender);
 		
 		void ReleaseDesignerOutlets ()
 		{
+			if (btn0 != null) {
+				btn0.Dispose ();
+				btn0 = null;
+			}
+
 			if (btn1 != null) {
 				btn1.Dispose ();
 				btn1 = null;
@@ -118,9 +129,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 				btn9 = null;
 			}
 
-			if (btn0 != null) {
-				btn0.Dispose ();
-				btn0 = null;
+			if (btnCancel != null) {
+				btnCancel.Dispose ();
+				btnCancel = null;
 			}
 		}
 	}
