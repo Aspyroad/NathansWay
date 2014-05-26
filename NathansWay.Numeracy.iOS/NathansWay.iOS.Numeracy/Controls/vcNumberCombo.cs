@@ -67,6 +67,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //Setup our editmode details
             this.CurrentEditMode = this._numeracySettings.CurrentNumberEditMode;
+            
+            // Set initital values
+            this.preEdit();
            
             // By default we want the picker hidden until the textbox is tapped.
             this.View.SendSubviewToBack(this.pkNumberPicker);
@@ -191,6 +194,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.intCurrentValue = this.intCurrentValue + 1;
             }
+            else
+            {
+                this.intCurrentValue = 0;
+            }
             this.txtNumber.Text = this.intCurrentValue.ToString();
         }
 
@@ -199,6 +206,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.intCurrentValue > 0)
             {
                 this.intCurrentValue = this.intCurrentValue - 1;
+            }
+            else
+            {
+                this.intCurrentValue = 9;
             }
             this.txtNumber.Text = this.intCurrentValue.ToString();
         }
