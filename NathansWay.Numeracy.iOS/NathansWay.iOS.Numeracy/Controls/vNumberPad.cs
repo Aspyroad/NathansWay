@@ -35,13 +35,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             Initialize();
         }
-                
+            
+		#endregion
+		
+		#region Private Members
+		
         private void Initialize()
         {               
             this.Frame = new RectangleF(100, 100, 190, 260);
         }
 
         #endregion
+		
     }
 }
 

@@ -32,7 +32,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 
         private void Initialize()
         {               
-            //this.Tag = 190;
         }
 
     }

@@ -9,6 +9,8 @@ namespace NathansWay.iOS.Numeracy.Menu
     [MonoTouch.Foundation.Register ("vMenu3Lessons")]
     public partial class vMenu3Lessons : AspyView
 	{
+		#region Constructors
+		
         public vMenu3Lessons () : base ()
         {
             Initialize();
@@ -24,14 +26,21 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();            
         }
 
-        
+		[Export("initWithCoder:")]
+		public vMenu3Lessons (NSCoder coder) : base(coder)
+		{
+			Initialize();
+		}
+		
+		#endregion
+		
+		#region Private Members
+		
         private void Initialize()
         {   
-            this.Frame = this.iOSGlobals.G__RectWindowLandscape; 
-            this.Tag = 101;
         }
 
-
+		#endregion
 	}
 }
 

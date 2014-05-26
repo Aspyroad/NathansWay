@@ -1,4 +1,4 @@
-Aspyroad WorkSpace Class
+NathansWay Numeracy WorkSpace Class
 
-Notes :
+Notes : This class is responsible for displaying the current lesson and any game tools needed for workout.
 

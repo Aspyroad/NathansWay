@@ -9,6 +9,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 	[MonoTouch.Foundation.Register ("vMenu1Start")]
     public partial class vMenu1Start : AspyView
 	{
+		#region Constructors
+		
 		public vMenu1Start () : base ()
 		{
             Initialize();
@@ -24,13 +26,19 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();            
 		}
 
+		[Export("initWithCoder:")]
+		public vMenu1Start (NSCoder coder) : base(coder)
+		{
+			Initialize();
+		}
+		
+		#endregion
+		
+		#region Private Members
         
         private void Initialize()
-        {               
-            //this.Bounds = this.RectWindowLandscape;
-            //this.Frame = this.RectWindowLandscape;
-            this.Tag = 100;
-        }
+        {   
+		}
         
         //		public override void Draw(RectangleF rect)
         //		{
@@ -38,7 +46,7 @@ namespace NathansWay.iOS.Numeracy.Menu
         //			this.currentContext = UIGraphics.GetCurrentContext();
         //		}
 
-
+		#endregion
     }
 }
 

@@ -67,6 +67,14 @@ namespace AspyRoad.iOSCore
             this.View.AddSubview(_newController.View);
             _newController.DidMoveToParentViewController(this);
         }
+		
+		public void AddAndDisplayController(AspyContainerController _newController)
+		{
+			this.AddChildViewController(_newController);
+			this.View.AddSubview(_newController.View);
+			_newController.DidMoveToParentViewController(this);
+		}
+		
         public bool AddController(UIViewController _newController)
         {
             // Test if it loaded

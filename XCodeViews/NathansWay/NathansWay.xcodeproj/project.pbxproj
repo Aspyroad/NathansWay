@@ -23,6 +23,8 @@
 		5E5F9411191873E30005F56D /* vwContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E5F9410191873E30005F56D /* vwContainerView.xib */; };
 		5E88715D19205B0400E7234E /* vwNumberPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E88715C19205B0400E7234E /* vwNumberPad.xib */; };
 		5EA3F11C18FE186000135856 /* vwFractionCombo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EA3F11B18FE186000135856 /* vwFractionCombo.xib */; };
+		5ED0BC2C1933050F00E6C17C /* vwWorkspace.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0BC2B1933050F00E6C17C /* vwWorkspace.xib */; };
+		5ED0BC2E1933072400E6C17C /* vwMainGame.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ED0BC2D1933072400E6C17C /* vwMainGame.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		5E5F9410191873E30005F56D /* vwContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwContainerView.xib; sourceTree = "<group>"; };
 		5E88715C19205B0400E7234E /* vwNumberPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwNumberPad.xib; sourceTree = "<group>"; };
 		5EA3F11B18FE186000135856 /* vwFractionCombo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwFractionCombo.xib; sourceTree = "<group>"; };
+		5ED0BC2B1933050F00E6C17C /* vwWorkspace.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwWorkspace.xib; sourceTree = "<group>"; };
+		5ED0BC2D1933072400E6C17C /* vwMainGame.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = vwMainGame.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,9 +161,11 @@
 			isa = PBXGroup;
 			children = (
 				5E3D06CE18FCB006005D03A1 /* vwNumberCombo.xib */,
+				5ED0BC2B1933050F00E6C17C /* vwWorkspace.xib */,
 				5EA3F11B18FE186000135856 /* vwFractionCombo.xib */,
 				5E5F9410191873E30005F56D /* vwContainerView.xib */,
 				5E88715C19205B0400E7234E /* vwNumberPad.xib */,
+				5ED0BC2D1933072400E6C17C /* vwMainGame.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -242,8 +248,10 @@
 				5E3D06A918FCAF3C005D03A1 /* InfoPlist.strings in Resources */,
 				5E88715D19205B0400E7234E /* vwNumberPad.xib in Resources */,
 				5E3D06B118FCAF3C005D03A1 /* Images.xcassets in Resources */,
+				5ED0BC2E1933072400E6C17C /* vwMainGame.xib in Resources */,
 				5E5F9411191873E30005F56D /* vwContainerView.xib in Resources */,
 				5E3D06CF18FCB006005D03A1 /* vwNumberCombo.xib in Resources */,
+				5ED0BC2C1933050F00E6C17C /* vwWorkspace.xib in Resources */,
 				5EA3F11C18FE186000135856 /* vwFractionCombo.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

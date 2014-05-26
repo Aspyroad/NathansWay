@@ -115,9 +115,13 @@
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu1Start.cs">
       <DependentUpon>xMenu1Start.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu2Student.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu2Student.cs">
+      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu3Lessons.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu3Lessons.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu3Lessons.cs">
+      <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu3Lessons.designer.cs">
       <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
     </Compile>
@@ -131,12 +135,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.designer.cs">
       <DependentUpon>vcNumberCombo.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vContainerView.cs">
-      <DependentUpon>vwContainerView.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcContainerView.cs">
-      <DependentUpon>vwContainerView.xib</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.cs">
       <DependentUpon>vwNumberPad.xib</DependentUpon>
     </Compile>
@@ -148,6 +146,24 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy.Types.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.Settings.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
+      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainWorkSpace.cs">
+      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs">
+      <DependentUpon>vwMainGame.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
+      <DependentUpon>vwWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainGame.cs">
+      <DependentUpon>vwMainGame.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
+      <DependentUpon>vwWorkSpace.xib</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -180,7 +196,9 @@
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Menu\MVC\xMenu1Start.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwContainerView.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
   </ItemGroup>
 </Project>

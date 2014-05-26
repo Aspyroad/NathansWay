@@ -32,15 +32,30 @@ namespace NathansWay.iOS.Numeracy
 	//public class AppDelegate : AspyUIApplicationDelegate
 	public class AppDelegate : UIApplicationDelegate
 	{
+		/// <summary>How to access these varibles from within the app</summary>
+		/// e.g. 
+		/// UIApplication.SharedApplication.Delegate.<name of property>
 
-        private AspyWindow window;        
-        private AspyContainerController ViewContainerController;
+		// class-level declarations
+		// Setup AspyRoad.iOS libraries.
 		
+        private AspyWindow window;
+        
+        private AspyContainerController ViewContainerController;
+
+        #region Storyboard example setup
+        //public static UIStoryboard Storyboard = UIStoryboard.FromName ("MenuMainViewBoard", null);
+        //public static UIViewController initialViewController;
+        #endregion
+
 		private IAspyGlobals iOSGlobals;
         private ISharedGlobal SharedGlobals;
         private ISQLitePlatform _iOSSQLitePLatform;
         private NumeracySettings _NumeracySettings;
         
+        private NathansWayDbBase _testDb;
+		NSAction swipeGesture;
+
 		#region Overrides
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this
@@ -74,8 +89,8 @@ namespace NathansWay.iOS.Numeracy
             this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
             
             // Apply user based app settings
-			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
-			this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
+            // Depending on student, teahcer etc some of these will change on log in
+			this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditScroll;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -117,27 +132,62 @@ namespace NathansWay.iOS.Numeracy
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
 			
+			
+            #region Setup Storyboard
+
+            //initialViewController = (AspyViewController)Storyboard.InstantiateInitialViewController ();
+			//window.RootViewController = initialViewController;
+
+			#endregion
+
 			#region Setup Single View
-			// Start a settings library
-			
-			RectangleF tmpRect1 = new RectangleF(0,0,
-													this.iOSGlobals.G__RectWindowLandscape.Width,
-													this.iOSGlobals.G__RectWindowLandscape.Height - 
-			vcWorkSpace _workspace = new vcWorkSpace();
-			vcMainGame _maingame = new vcMainGame();
-			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
-	
-			
-			
-			ViewContainerController = new AspyContainerController();
-			ViewContainerController.AddAndDisplayController(_mainworkspace);			
+
+
+
+            //mypad = new vcNumberPad();
+            float x = 100.0f;
+            float y = 100.0f;   
+            
+            for (int i=0; i<5; i++)
+            {
+                x = x + 60.0f;
+                //y = y + 60.0f;
+                RectangleF myRect;
+                vcNumberCombo pad = new vcNumberCombo();
+                pad.AspyTag2 = i;
+                myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
+                pad.View.Frame = myRect;
+                ViewContainerController.AddAndDisplayController(pad);
+            }
+
+            
+            //ContainerController.RemoveVCInstance((int)G__VCs.VC_CtrlNumberPad, 2);
+
+            // Runtime method
+            //var v = NSBundle.MainBundle.LoadNib ("vwNumberCombo", this, null);
+            //viewController = Runtime.GetNSObject(v.ValueAt(0)) as vcNumberCombo;
+
+            //swipeGesture = new NSAction(printeswipe);
+
             window.RootViewController = ViewContainerController;
 
 			#endregion
 
 			window.MakeKeyAndVisible ();
-            window.Tag = 0;			
 
+            window.Tag = 0;
+
+			
+			#region Gesture From Window
+			// Get gesture from Sendevents - Window object
+			//window.WireUpGestureToWindow(AspyUtilities.GestureTypes.UITap, swipeGesture);
+			#endregion
+			
+			#region Gesture From AspyView
+			//viewController.QAWorkSpaceView.WireUpGestureToView(G__GestureTypes.UIPinch, swipeGesture);
+			#endregion
+
+            //window.SomeonesTouchingMeInMySpecialPlace += c_ThresholdReached;
 			return true;
 		}
 
@@ -148,7 +198,21 @@ namespace NathansWay.iOS.Numeracy
 
 
 
-		#endregion		
+		#endregion
+
+		// Function which will be exectuted whne the event fires. 
+        public void c_ThresholdReached(Object sender, GlobalTouchEventArgs e)
+        {
+			string strString = "";
+			//viewController.QAWorkSpaceView.Q1.Text = "Phase = " + e.UITouchObj.Phase.ToString ();
+			strString = strString + e.strGestureType.ToString ();
+        }
+
+		private void printeswipe ()
+		{
+            //viewController.QAWorkSpaceView.Q2.Text = "Swiped";
+		}
+		
 	}
 }
 

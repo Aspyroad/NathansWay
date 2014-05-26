@@ -11,7 +11,20 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private E__NumberComboEditMode _currentNumberEditMode;
+		//E__<Nibname><Variable> = Enum
+		//I__
+		private E__NumberComboEditMode _vwNumberCombo_EditMode;
+		
+		
+		// Views sizes.
+		private RectangleF _vwWorkSpace;
+		private RectangleF _vwMainGame;
+		private RectangleF _vwMainWorkSpace;
+		private RectangleF _vwNumberCombo;
+		private RectangleF _vwNumberPad;
+		private RectangleF _vwFractionCombo;
+		
+		
 
         #endregion
          
@@ -29,10 +42,10 @@ namespace NathansWay.iOS.Numeracy
         #region Initialize At Birth
         // ************************************************************************************
 
-        public E__NumberComboEditMode CurrentNumberEditMode
+		public E__NumberComboEditMode Enum_vwNumberCombo_EditMode
         {
-            get { return _currentNumberEditMode; }
-            set { _currentNumberEditMode = value; }
+			get { return _vwNumberCombo_EditMode; }
+			set { _vwNumberCombo_EditMode = value; }
         }
 
         // ************************************************************************************
