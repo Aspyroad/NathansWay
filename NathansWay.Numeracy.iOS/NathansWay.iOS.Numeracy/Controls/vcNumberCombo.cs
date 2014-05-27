@@ -7,6 +7,8 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
+// Nathansway
+using NathansWay.iOS.Numeracy.Settings;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -66,7 +68,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
 
             //Setup our editmode details
-            this.CurrentEditMode = this._numeracySettings.CurrentNumberEditMode;
+            this.CurrentEditMode = this._numeracySettings.NumberCombo.EditMode;
             
             // Set initital values
             this.preEdit();

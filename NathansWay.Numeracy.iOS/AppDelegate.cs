@@ -13,12 +13,14 @@ using SQLite.Net.Platform;
 using SQLite.Net.Interop;
 // Aspyroad
 using AspyRoad.iOSCore;
-using NathansWay.Shared.Global;
-using NathansWay.Shared.DB;
 // NathansWay
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu;
+using NathansWay.iOS.Numeracy.Settings;
+using NathansWay.Shared.Global;
+using NathansWay.Shared.DB;
+
 
 
 
@@ -56,7 +58,7 @@ namespace NathansWay.iOS.Numeracy
             // Create iOSCore globals
             this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
             // Create our appwide user setup settings
-            this._NumeracySettings = new NumeracySettings();
+            this._NumeracySettings = new NumeracySettings(this.iOSGlobals);
             // Create shared globals
             this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
             // Set Sqlite db Platform
@@ -75,7 +77,7 @@ namespace NathansWay.iOS.Numeracy
             
             // Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
-			this._NumeracySettings.CurrentNumberEditMode = E__NumberComboEditMode.EditNumPad;
+            this._NumeracySettings.NumberCombo.EditMode = E__NumberComboEditMode.EditNumPad;
 				
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -120,9 +122,7 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Single View
 			// Start a settings library
 			
-			RectangleF tmpRect1 = new RectangleF(0,0,
-													this.iOSGlobals.G__RectWindowLandscape.Width,
-													this.iOSGlobals.G__RectWindowLandscape.Height - 
+            
 			vcWorkSpace _workspace = new vcWorkSpace();
 			vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
