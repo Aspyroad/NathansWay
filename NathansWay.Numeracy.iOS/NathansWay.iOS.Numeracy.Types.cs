@@ -10,10 +10,14 @@ namespace NathansWay.iOS.Numeracy
         VC_MenuStudent = 2,
         VC_MenuLessons = 3,
         VC_MenuTools = 4,
+        // WorkSpace
+        VC_MainGame = 5,
+        VC_MainWorkSpace = 6,
+        VC_WorkSpace = 7,
         // Controls  
-        VC_CtrlNumberPad = 10,
-        VC_CtrlFractionCombo = 11,
-        VC_CtrlNumberCombo = 12
+        VC_CtrlNumberPad = 100,
+        VC_CtrlFractionCombo = 101,
+        VC_CtrlNumberCombo = 102
     }
     
     public enum E__NumberComboEditMode

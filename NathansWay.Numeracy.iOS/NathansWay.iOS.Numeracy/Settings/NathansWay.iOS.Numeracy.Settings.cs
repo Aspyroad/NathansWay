@@ -11,11 +11,12 @@ using AspyRoad.iOSCore;
 namespace NathansWay.iOS.Numeracy.Settings
 {
     public class NumeracySettings
-    {   
-
-        #region Private Members
-        
+    {          
         public numbercombo NumberCombo;
+        public maingame MainGame;
+        public workspace WorkSpace;
+        
+        #region Private Members
         private IAspyGlobals iOSGlobals;
 	
 		// Views sizes.
@@ -26,8 +27,6 @@ namespace NathansWay.iOS.Numeracy.Settings
 		private RectangleF _vwNumberPad;
 		private RectangleF _vwFractionCombo;
 		
-		
-
         #endregion
          
         #region Constructors
@@ -39,32 +38,57 @@ namespace NathansWay.iOS.Numeracy.Settings
         }
         
         #endregion
-
         
         #region Private Functions
         
         private void Initialize ()
         {
             this.NumberCombo = new numbercombo(this.iOSGlobals);
+            this.MainGame = new maingame(this.iOSGlobals);
+            this.WorkSpace = new workspace(this.iOSGlobals);
         }
         
         #endregion
         
-        public class numbercombo 
+        public abstract class vcSettings
         {
-            private RectangleF _framesize;
+            protected RectangleF _framesize;
+            protected E__VCs _vcTag;
+            
+            public vcSettings()
+            {
+                
+            }
+            
+            public RectangleF FrameSize
+            {
+                get { return _framesize; }
+                set { _framesize = value; }
+            }  
+            
+            public E__VCs VcTag
+            {
+                get { return _vcTag; }
+                set { _vcTag = value; }
+            }           
+        }
+        
+        public class numbercombo : vcSettings
+        {            
             private E__NumberComboEditMode _editmode;
             
             public numbercombo(IAspyGlobals _globals)
             {
-                _framesize = 
+                this._framesize = 
                     new RectangleF
                     ( 
-                        0, // x
-                        0, // y
+                        0,
+                        0,
 						54,
 						68
                     );
+                
+                this._vcTag = E__VCs.VC_CtrlNumberCombo;                
             }
             
             public E__NumberComboEditMode EditMode
@@ -72,36 +96,43 @@ namespace NathansWay.iOS.Numeracy.Settings
                 get { return _editmode; }
                 set { _editmode = value; }
             } 
-            
-            public RectangleF FrameSize
-            {
-                get { return _framesize; }
-                set { _framesize = value; }
-            }             
+                       
         }
-        public class maingame
+        public class maingame : vcSettings
         {
-            private RectangleF _framesize;
-            
+          
             public maingame(IAspyGlobals _globals)
             {
-                _framesize = 
+                this._framesize = 
                     new RectangleF
                     ( 
-                        0, // x
-                        0, // y
+                        0,
+                        0,
                         _globals.G__RectWindowLandscape.Width,
                         ((_globals.G__RectWindowLandscape.Height/4) * 3)
                     );
+                
+                this._vcTag = E__VCs.VC_MainGame;
             }
             
-
-            
-            public RectangleF FrameSize
+        }
+        public class workspace : vcSettings
+        {
+          
+            public workspace(IAspyGlobals _globals)
             {
-                get { return _framesize; }
-                set { _framesize = value; }
-            } 
+                this._framesize = 
+                    new RectangleF
+                    ( 
+                        0,
+                        0,
+                        _globals.G__RectWindowLandscape.Width,
+                        ((_globals.G__RectWindowLandscape.Height/4) * 3)
+                    );
+                
+                this._vcTag = E__VCs.VC_WorkSpace;
+            }
+            
         }
         
 
