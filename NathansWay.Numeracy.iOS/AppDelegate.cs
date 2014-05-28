@@ -122,7 +122,7 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup Single View
 			// Start a settings library
 			
-            
+			// Temp workspace setup code. Mormally this will be behind a menu button.
 			vcWorkSpace _workspace = new vcWorkSpace();
 			vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();

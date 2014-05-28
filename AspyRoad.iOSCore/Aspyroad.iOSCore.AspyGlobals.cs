@@ -136,6 +136,7 @@ namespace AspyRoad.iOSCore
 		{
 			SwapOrientations(UIScreen.MainScreen.Bounds);
             //  Return portait or landscape
+			var x = UIScreen.MainScreen.Scale;
             this.__PntWindowPortaitCenter = new PointF(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
             this.__PntWindowLandscapeCenter = new PointF(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
 		}

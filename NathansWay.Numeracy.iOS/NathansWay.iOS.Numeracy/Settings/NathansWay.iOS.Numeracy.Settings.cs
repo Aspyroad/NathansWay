@@ -62,8 +62,8 @@ namespace NathansWay.iOS.Numeracy.Settings
                     ( 
                         0, // x
                         0, // y
-                        _globals.G__RectWindowLandscape.Width,
-                        _globals.G__RectWindowLandscape.Height
+						54,
+						68
                     );
             }
             
