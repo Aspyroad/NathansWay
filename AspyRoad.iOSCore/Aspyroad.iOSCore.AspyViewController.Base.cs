@@ -12,9 +12,11 @@ namespace AspyRoad.iOSCore
         #region Class Variables
         public IAspyGlobals iOSGlobals;
 
-        // Extra tags for id etc.
+        // Tags for id
         private int _AspyTag1;
         private int _AspyTag2;
+        // String "name" of this vc controller
+        private int _AspyName;
         #endregion
 
         #region Constructors
@@ -60,7 +62,11 @@ namespace AspyRoad.iOSCore
             set { _AspyTag2 = value; }
         }
 
-             
+        public string AspyName
+        {
+            get { return _AspyName; }
+            set { _AspyName = value; }
+        }     
 
         #endregion
 
