@@ -16,6 +16,8 @@ namespace AspyRoad.iOSCore
 		private RectangleF __RectWindowLandscape;
         private PointF __PntWindowPortaitCenter;
         private PointF __PntWindowLandscapeCenter;
+		private bool __IsRetina;
+		private bool __IsiPad;
 		
         private bool _ShouldAutoRotate;
 		private bool _InitializeAllViewOrientation;
@@ -75,6 +77,11 @@ namespace AspyRoad.iOSCore
             get { return _ViewPool; }
             set { _ViewPool = value; }
         }
+		
+		public bool G__IsRetina
+		{
+			get { return __IsRetina; }	
+		}
 
         #endregion
 
@@ -135,8 +142,40 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{
 			SwapOrientations(UIScreen.MainScreen.Bounds);
-            //  Return portait or landscape
-			var x = UIScreen.MainScreen.Scale;
+			
+			// Check if device is a phone or iPad
+			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
+			{
+				this.__IsiPad = true;
+			}
+			else
+			{
+				this.__IsiPad = false;
+			}
+						
+			//if (MonoTouch.UIKit.UIDevice.CurrentDevice.RespondsToSelector(new MonoTouch.ObjCRuntime.Selector("identifierForVendor")))
+			//{
+			//	Console.WriteLine("Must be above iOS 6"); 	
+			//}
+			
+			// Check if display is retina.
+			if (UIScreen.MainScreen.RespondsToSelector(new MonoTouch.ObjCRuntime.Selector("scale")))
+			{
+				if (UIScreen.MainScreen.Scale == 2)
+				{
+					this.__IsRetina = true;
+				}
+				else
+				{
+					this.__IsRetina = false;
+				}
+			}
+			else
+			{
+				this.__IsRetina = false;
+			}
+			
+			//  Return portait or landscape
             this.__PntWindowPortaitCenter = new PointF(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
             this.__PntWindowLandscapeCenter = new PointF(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
 		}

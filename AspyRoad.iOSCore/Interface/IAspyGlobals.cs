@@ -33,6 +33,8 @@ namespace AspyRoad.iOSCore
 		bool G__InitializeAllViewOrientation { get; set; }
         
         bool G__ShouldAutorotate { get; set; }
+		
+		bool G__IsRetina { get; }
         
         G__Orientation G__ViewOrientation { get; set; }
 

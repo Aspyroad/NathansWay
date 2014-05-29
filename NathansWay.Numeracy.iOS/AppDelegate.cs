@@ -34,7 +34,6 @@ namespace NathansWay.iOS.Numeracy
 	//public class AppDelegate : AspyUIApplicationDelegate
 	public class AppDelegate : UIApplicationDelegate
 	{
-
         private AspyWindow window;        
         private AspyContainerController ViewContainerController;
 		
