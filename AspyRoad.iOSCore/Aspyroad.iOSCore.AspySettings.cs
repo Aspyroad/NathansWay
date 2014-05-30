@@ -13,7 +13,7 @@ namespace AspyRoad.iOSCore
 	public class AspySettings : IAspySettings
 	{          
 
-		#region Private Members
+	    #region Private Members
 		
 		private IAspyGlobals iOSGlobals;
 		private Dictionary<string, int> _vcTagList;
@@ -38,31 +38,29 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-        #region Public Members
+		#region Public Members
 
-        public Dictionary<string, int> VCTagList
-        {
-            get { return _vcTagList; }
-            set { _vcTagList = value; }
-        }
+		public Dictionary<string, int> VCTagList
+		{
+		    get { return _vcTagList; }
+		    set { _vcTagList = value; }
+		}
 
-        public vcSettings FindVCSettings(string _vcName)
-        {
+		public VcSettings FindVCSettings(string _vcName)
+		{
 
+		}
 
+		#endregion
+}
 
-        }
-
-        #endregion
-	}
-
-    public abstract class vcSettings
+    public abstract class VcSettings
     {
-        protected RectangleF _framesize;
-        protected int _vcTag;
-        protected string _vcName;
+        private RectangleF _framesize;
+        private int _vcTag;
+        private string _vcName;
 
-        public vcSettings()
+        public VcSettings()
         {
         }
 

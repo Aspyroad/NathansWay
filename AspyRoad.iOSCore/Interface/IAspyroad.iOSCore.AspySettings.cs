@@ -12,9 +12,12 @@ namespace AspyRoad.iOSCore
 {
 	public interface IAspySettings
 	{
-		// Properties
-		
+		// Properties		
 		Dictionary<string, int> VCTagList { get; set; }
-		
-        vcSettings FindVCSettings(string _mt);
+
+        // Methods		
+        VcSettings FindVCSettings(string _mt);
+    }
+
+
 }

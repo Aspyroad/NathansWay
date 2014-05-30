@@ -10,23 +10,15 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Settings
 {
-    public class NumeracySettings
-    {          
+    public class NumeracySettings : IAspySettings
+    {  
+        // All ViewControllers        
         public numbercombo NumberCombo;
         public maingame MainGame;
         public workspace WorkSpace;
         
         #region Private Members
-        private IAspyGlobals iOSGlobals;
-	
-		// Views sizes.
-		private RectangleF _vwWorkSpace;
-		private RectangleF _vwMainGame;
-		private RectangleF _vwMainWorkSpace;
-		
-		private RectangleF _vwNumberPad;
-		private RectangleF _vwFractionCombo;
-		
+        private IAspyGlobals iOSGlobals;		
         #endregion
          
         #region Constructors
@@ -49,37 +41,15 @@ namespace NathansWay.iOS.Numeracy.Settings
         }
         
         #endregion
+
         
-        public abstract class vcSettings
-        {
-            protected RectangleF _framesize;
-            protected E__VCs _vcTag;
-            
-            public vcSettings()
-            {
-                
-            }
-            
-            public RectangleF FrameSize
-            {
-                get { return _framesize; }
-                set { _framesize = value; }
-            }  
-            
-            public E__VCs VcTag
-            {
-                get { return _vcTag; }
-                set { _vcTag = value; }
-            }           
-        }
-        
-        public class numbercombo : vcSettings
+        public class numbercombo : VcSettings
         {            
             private E__NumberComboEditMode _editmode;
             
             public numbercombo(IAspyGlobals _globals)
             {
-                this._framesize = 
+                this.FrameSize = 
                     new RectangleF
                     ( 
                         0,
@@ -87,8 +57,6 @@ namespace NathansWay.iOS.Numeracy.Settings
 						54,
 						68
                     );
-                
-                this._vcTag = E__VCs.VC_CtrlNumberCombo;                
             }
             
             public E__NumberComboEditMode EditMode
@@ -98,12 +66,12 @@ namespace NathansWay.iOS.Numeracy.Settings
             } 
                        
         }
-        public class maingame : vcSettings
+        public class maingame : VcSettings
         {
           
             public maingame(IAspyGlobals _globals)
             {
-                this._framesize = 
+                this.FrameSize = 
                     new RectangleF
                     ( 
                         0,
@@ -112,16 +80,16 @@ namespace NathansWay.iOS.Numeracy.Settings
                         ((_globals.G__RectWindowLandscape.Height/4) * 3)
                     );
                 
-                this._vcTag = E__VCs.VC_MainGame;
+
             }
             
         }
-        public class workspace : vcSettings
+        public class workspace : VcSettings
         {
           
             public workspace(IAspyGlobals _globals)
             {
-                this._framesize = 
+                this.FrameSize = 
                     new RectangleF
                     ( 
                         0,
@@ -130,7 +98,7 @@ namespace NathansWay.iOS.Numeracy.Settings
                         ((_globals.G__RectWindowLandscape.Height/4) * 3)
                     );
                 
-                this._vcTag = E__VCs.VC_WorkSpace;
+
             }
             
         }

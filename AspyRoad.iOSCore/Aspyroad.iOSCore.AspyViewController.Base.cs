@@ -16,7 +16,8 @@ namespace AspyRoad.iOSCore
         private int _AspyTag1;
         private int _AspyTag2;
         // String "name" of this vc controller
-        private int _AspyName;
+        private string _AspyName;
+        private VcSettings _vcSettings;
         #endregion
 
         #region Constructors
@@ -42,11 +43,26 @@ namespace AspyRoad.iOSCore
 		}
 		
         #endregion
+		
 
-		private void Initialize()
-		{	
-            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
-		}	
+	    private void Initialize()
+        {
+            if (iOSCoreServiceContainer == null)
+            {
+                throw new System.NullReferenceException("iOSCoreServiceContainer is Null");
+            }
+            else
+            {      	
+                this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
+            }
+
+        }	
+
+        private VcSettings GetSettings(string _aspyname)
+        {
+
+        }
+
 
         #region Public Members
 
