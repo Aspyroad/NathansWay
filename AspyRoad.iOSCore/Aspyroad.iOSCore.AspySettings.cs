@@ -11,10 +11,9 @@ using AspyRoad.iOSCore;
 namespace AspyRoad.iOSCore
 {
 	public class AspySettings : IAspySettings
-	{          
+	{
+		#region Private Members
 
-	    #region Private Members
-		
 		private IAspyGlobals iOSGlobals;
 		private Dictionary<string, int> _vcTagList;
 
@@ -42,8 +41,8 @@ namespace AspyRoad.iOSCore
 
 		public Dictionary<string, int> VCTagList
 		{
-		    get { return _vcTagList; }
-		    set { _vcTagList = value; }
+			get { return _vcTagList; }
+			set { _vcTagList = value; }
 		}
 
 		public VcSettings FindVCSettings(string _vcName)
@@ -52,35 +51,35 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
-}
+	}
 
-    public abstract class VcSettings
-    {
-        private RectangleF _framesize;
-        private int _vcTag;
-        private string _vcName;
+	public abstract class VcSettings
+	{
+		private RectangleF _framesize;
+		private int _vcTag;
+		private string _vcName;
 
-        public VcSettings()
-        {
-        }
+		public VcSettings()
+		{
+		}
 
-        public RectangleF FrameSize
-        {
-            get { return _framesize; }
-            set { _framesize = value; }
-        }  
+		public RectangleF FrameSize
+		{
+			get { return _framesize; }
+			set { _framesize = value; }
+		}  
 
-        public int VcTag
-        {
-            get { return _vcTag; }
-            set { _vcTag = value; }
-        }  
+		public int VcTag
+		{
+			get { return _vcTag; }
+			set { _vcTag = value; }
+		}
 
-        public string VcName
-        {
-            get { return _vcName; }
-            set { _vcName = value; }
-        }         
-    }
+		public string VcName
+		{
+			get { return _vcName; }
+			set { _vcName = value; }
+		}
+	}
 }
 
