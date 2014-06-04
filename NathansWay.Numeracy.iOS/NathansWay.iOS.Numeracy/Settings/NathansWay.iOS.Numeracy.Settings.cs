@@ -78,6 +78,8 @@ namespace NathansWay.iOS.Numeracy.Settings
 					54,
 					68
 				);
+			this.HasBorder = true;
+
 		}
 
 		public E__NumberComboEditMode EditMode 

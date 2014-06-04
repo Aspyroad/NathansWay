@@ -12,13 +12,16 @@ namespace AspyRoad.iOSCore
 {
 	public interface IAspySettings
 	{
-		// Properties		
+		// Properties
 		Dictionary<int, string> VCTagList { get; set; }
-        // Methods	
+		// Methods
 		//void AspySettings (IAspyGlobals _iOSGlobals);
-        VcSettings FindVCSettings(string _mt);
+		VcSettings FindVCSettings (string _mt);
+
 		void AddVCSettings (VcSettings _vcsettings);
+
 		void AddVC (AspyViewController vctobeadded);
+
 		void AddVC (int aspytag1, string aspyname);
     }
 
@@ -26,13 +29,26 @@ namespace AspyRoad.iOSCore
 	{
 		// Properties
 		RectangleF FrameSize { get; set; }
+
 		int VcTag { get; set; }
+
 		string VcName { get; set; }
+
 		UIColor BackColor {	get; set; }
+
 		UIColor ForeColor { get; set; }
+
 		UIFont FontType { get; set; }
+
 		float FontSize { get; set; }
+
 		string FontName { get; set; }
-		// Methods
+
+		UIColor BorderColor { get; set; }
+
+		bool HasBorder { get; set; }
+
+		float BorderSize { get; set; }
+
 	}
 }

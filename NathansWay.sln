@@ -54,6 +54,7 @@ Global
 		$2.AlignEmbeddedStatements = False
 		$2.IndentPreprocessorDirectives = False
 		$2.AnonymousMethodBraceStyle = NextLine
+		$2.PropertyBraceStyle = NextLine
 		$2.PropertyGetBraceStyle = NextLine
 		$2.PropertySetBraceStyle = NextLine
 		$2.StatementBraceStyle = NextLine

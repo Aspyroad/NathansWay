@@ -160,8 +160,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 			this.AspyTag1 = 102;
 
-			this._numeracySettings = (NumeracySettings)iOSCoreServiceContainer.Resolve<IAspySettings>();
+			this._numeracySettings = this.iOSSettings;
+			this._vcSettings = this._numeracySettings.NumberCombo;
+			
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>();
+
             this.actHandlePad = new Action<string>(_handlePadPush);
 
             items.Add("0");
@@ -174,6 +177,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("7");
             items.Add("8");
             items.Add("9");
+
+
         }
 
         partial void txtTouchedDown(NSObject sender)

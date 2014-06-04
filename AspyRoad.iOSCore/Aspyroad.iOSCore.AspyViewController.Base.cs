@@ -1,6 +1,7 @@
 // System
 using System;
 using System.Drawing;
+
 // Monotouch
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
@@ -56,26 +57,38 @@ namespace AspyRoad.iOSCore
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSSettings = iOSCoreServiceContainer.Resolve<IAspySettings> ();
-
 		}
 
 #endregion
 
 #region Public Members
 
-		public int AspyTag1 {
+		public int AspyTag1
+		{
 			get { return _AspyTag1; }
 			set { _AspyTag1 = value; }
 		}
 
-		public int AspyTag2 {
+		public int AspyTag2
+		{
 			get { return _AspyTag2; }
 			set { _AspyTag2 = value; }
 		}
 
-		public string AspyName {
+		public string AspyName
+		{
 			get { return _AspyName; }
 			set { _AspyName = value; }
+		}
+
+		public void ApplyVcSettings(IVcSettings _basicsettings)
+		{
+			this.View.BackgroundColor = _basicsettings.BackColor;
+			if (_basicsettings.HasBorder)
+			{
+				this.View.Layer.BorderColor = this._vcSettings.BorderColor.CGColor;
+				this.View.Layer.BorderWidth = this._vcSettings.BorderSize;
+			}
 		}
 
 #endregion

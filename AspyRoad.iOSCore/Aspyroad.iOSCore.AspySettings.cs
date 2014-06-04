@@ -2,9 +2,11 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
+
 // Monotouch
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+
 // AspyRoad
 using AspyRoad.iOSCore;
 
@@ -12,33 +14,33 @@ namespace AspyRoad.iOSCore
 {
 	public class AspySettings : IAspySettings
 	{
-		#region Private Members
+#region Private Members
 
 		protected IAspyGlobals iOSGlobals;
 		protected Dictionary<int, string> _vcTagList;
 
-		#endregion
+#endregion
 
-		#region Constructors
+#region Constructors
 
-		public AspySettings(IAspyGlobals _iOSGlobals)
+		public AspySettings (IAspyGlobals _iOSGlobals)
 		{
 			this.iOSGlobals = _iOSGlobals;
 			this.Initialize ();
 		}
 
-		#endregion
+#endregion
 
-		#region Private Members
+#region Private Members
 
 		private void Initialize ()
 		{
-			_vcTagList = new Dictionary<int, string>();
+			_vcTagList = new Dictionary<int, string> ();
 		}
 
-		#endregion
+#endregion
 
-		#region Public Members
+#region Public Members
 
 		public Dictionary<int, string> VCTagList
 		{
@@ -46,31 +48,31 @@ namespace AspyRoad.iOSCore
 			set { _vcTagList = value; }
 		}
 
-		public void AddVC(AspyViewController vctobeadded)
+		public void AddVC (AspyViewController vctobeadded)
 		{
 			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
 		}
 
-		public void AddVC(int aspytag1, string aspyname)
+		public void AddVC (int aspytag1, string aspyname)
 		{
 			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
-		public VcSettings FindVCSettings(string _vcName)
+		public VcSettings FindVCSettings (string _vcName)
 		{
 			return new VcSettings ();
 		}
 
-		public void AddVCSettings(VcSettings _vcSettings)
+		public void AddVCSettings (VcSettings _vcSettings)
 		{
 		}
 
-		#endregion
+#endregion
 	}
 
 	public class VcSettings : IVcSettings
 	{
-		#region Private Members
+#region Private Members
 
 		private RectangleF _framesize;
 		private int _vcTag;
@@ -80,29 +82,36 @@ namespace AspyRoad.iOSCore
 		private UIFont _fonttype;
 		private float _fontsize;
 		private string _fontname;
-		private IAspyGlobals _iOSGlobals;
+		private bool _hasborder;
+		private float _bordersize;
+		private UIColor _bordercolor;
 
-		#endregion
+		//private IAspyGlobals _iOSGlobals;
 
-		#region Constructors
+#endregion
 
-		public VcSettings()
+#region Constructors
+
+		public VcSettings ()
 		{
 			_backcolor = UIColor.LightGray;
 			_forecolor = UIColor.Black;
 			_fontsize = UIFont.SystemFontSize;
 			_fontname = "test";		
+			_bordersize = 1.0f;
+			_hasborder = false;
+			_bordercolor = UIColor.White;
 		}
 
-		#endregion
+#endregion
 
-		#region Public Members
+#region Public Members
 
 		public RectangleF FrameSize
 		{
 			get { return _framesize; }
 			set { _framesize = value; }
-		}  
+		}
 
 		public int VcTag
 		{
@@ -147,6 +156,24 @@ namespace AspyRoad.iOSCore
 		{
 			get { return _fontname; }
 			set { _fontname = value; }
+		}
+
+		public bool HasBorder
+		{
+			get { return _hasborder; }
+			set { _hasborder = value; }
+		}
+
+		public float BorderSize
+		{
+			get { return _bordersize; }
+			set { _bordersize = value; }
+		}
+
+		public UIColor BorderColor
+		{
+			get { return _bordercolor; }
+			set { _bordercolor = value; }
 		}
 
 		#endregion
