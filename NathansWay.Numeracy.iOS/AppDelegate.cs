@@ -100,7 +100,7 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			// Register app/user settings
-			iOSCoreServiceContainer.Register<NumeracySettings>(this._NumeracySettings);
+			iOSCoreServiceContainer.Register<IAspySettings>(this._NumeracySettings);
 
 			// Setup the window
 			window = new AspyWindow(UIScreen.MainScreen.Bounds);
@@ -123,9 +123,10 @@ namespace NathansWay.iOS.Numeracy
 			vcWorkSpace _workspace = new vcWorkSpace();
 			vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
+			vcNumberCombo _numbercombo = new vcNumberCombo();
 
 			ViewContainerController = new AspyContainerController();
-			ViewContainerController.AddAndDisplayController(_mainworkspace);			
+			ViewContainerController.AddAndDisplayController(_numbercombo);			
 			window.RootViewController = ViewContainerController;
 
 			#endregion

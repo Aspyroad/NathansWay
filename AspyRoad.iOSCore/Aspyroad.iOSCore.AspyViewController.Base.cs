@@ -49,25 +49,17 @@ namespace AspyRoad.iOSCore
 
 #endregion
 
-		#region Private Memebers
+#region Private Memebers
 
 		private void Initialize ()
 		{
 			// Main setup
+			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
+			this.iOSSettings = iOSCoreServiceContainer.Resolve<IAspySettings> ();
 
-			// Not sure why Im checking, if this is null, were screwed either way.
-			if (iOSCoreServiceContainer == null)
-			{
-				throw new System.NullReferenceException ("iOSCoreServiceContainer is Null");
-			}
-			else
-			{      	
-				this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-				this.iOSSettings = iOSCoreServiceContainer.Resolve<IAspySettings> ();
-			}
 		}
 
-		#endregion
+#endregion
 
 #region Public Members
 
@@ -93,7 +85,6 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			this._vcSettings = this.iOSSettings.
 		}
 
 		// These puppies cost me a lot of time. DAYS!

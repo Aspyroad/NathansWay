@@ -14,8 +14,8 @@ namespace AspyRoad.iOSCore
 	{
 		#region Private Members
 
-		private IAspyGlobals iOSGlobals;
-		private Dictionary<int, string> _vcTagList;
+		protected IAspyGlobals iOSGlobals;
+		protected Dictionary<int, string> _vcTagList;
 
 		#endregion
 
@@ -33,6 +33,7 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize ()
 		{
+			_vcTagList = new Dictionary<int, string>();
 		}
 
 		#endregion
@@ -57,6 +58,7 @@ namespace AspyRoad.iOSCore
 
 		public VcSettings FindVCSettings(string _vcName)
 		{
+			return new VcSettings ();
 		}
 
 		public void AddVCSettings(VcSettings _vcSettings)
@@ -68,6 +70,8 @@ namespace AspyRoad.iOSCore
 
 	public class VcSettings : IVcSettings
 	{
+		#region Private Members
+
 		private RectangleF _framesize;
 		private int _vcTag;
 		private string _vcName;
@@ -78,13 +82,21 @@ namespace AspyRoad.iOSCore
 		private string _fontname;
 		private IAspyGlobals _iOSGlobals;
 
+		#endregion
+
+		#region Constructors
+
 		public VcSettings()
 		{
 			_backcolor = UIColor.LightGray;
 			_forecolor = UIColor.Black;
 			_fontsize = UIFont.SystemFontSize;
-			_fontname = UIFont.;			
+			_fontname = "test";		
 		}
+
+		#endregion
+
+		#region Public Members
 
 		public RectangleF FrameSize
 		{
@@ -136,6 +148,8 @@ namespace AspyRoad.iOSCore
 			get { return _fontname; }
 			set { _fontname = value; }
 		}
+
+		#endregion
 	}
 }
 

@@ -47,7 +47,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 
         private void Initialize ()
         {
-            this.AspyTag1 = (int)E__VCs.VC_CtrlNumberPad;            
+			this.AspyTag1 = 100; 
+			this.AspyName = "VC_CtrlNumberPad";
         }
 
         private void _padpushed (string _strPad)

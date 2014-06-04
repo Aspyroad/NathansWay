@@ -14,7 +14,8 @@ namespace AspyRoad.iOSCore
 	{
 		// Properties		
 		Dictionary<int, string> VCTagList { get; set; }
-        // Methods		
+        // Methods	
+		//void AspySettings (IAspyGlobals _iOSGlobals);
         VcSettings FindVCSettings(string _mt);
 		void AddVCSettings (VcSettings _vcsettings);
 		void AddVC (AspyViewController vctobeadded);

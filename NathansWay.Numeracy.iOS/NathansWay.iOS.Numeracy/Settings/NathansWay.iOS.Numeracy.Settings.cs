@@ -21,15 +21,12 @@ namespace NathansWay.iOS.Numeracy.Settings
 
 		#region Private Variables
 
-		private IAspyGlobals iOSGlobals;
-
 		#endregion
 
 		#region Constructors
 
-		public NumeracySettings (IAspyGlobals _iOSGlobals)
+		public NumeracySettings (IAspyGlobals _iOSGlobals) : base (_iOSGlobals)
 		{
-			this.iOSGlobals = _iOSGlobals;
 			this.Initialize ();
 		}
 
@@ -71,7 +68,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 	{
 		private E__NumberComboEditMode _editmode;
 
-		public numbercombo (IAspyGlobals _globals)
+		public numbercombo (IAspyGlobals iOSGlobals)
 		{
 			this.FrameSize = 
 				new RectangleF 
@@ -92,30 +89,30 @@ namespace NathansWay.iOS.Numeracy.Settings
 
 	public class maingame : VcSettings
 	{
-		public maingame (IAspyGlobals _globals)
+		public maingame (IAspyGlobals iOSGlobals)
 		{
 			this.FrameSize = 
 				new RectangleF 
 				(
 					0,
 					0,
-					_globals.G__RectWindowLandscape.Width,
-					((_globals.G__RectWindowLandscape.Height / 4) * 3)
+					iOSGlobals.G__RectWindowLandscape.Width,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
 				);
 		}
 	}
 
 	public class workspace : VcSettings
 	{
-		public workspace (IAspyGlobals _globals)
+		public workspace (IAspyGlobals iOSGlobals)
 		{
 			this.FrameSize = 
 				new RectangleF 
 				(
 					0,
 					0,
-					_globals.G__RectWindowLandscape.Width,
-					((_globals.G__RectWindowLandscape.Height / 4) * 3)
+					iOSGlobals.G__RectWindowLandscape.Width,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
 				);
 		}
 	}
