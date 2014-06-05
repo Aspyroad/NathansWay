@@ -81,10 +81,10 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-		public void ApplyVcSettings(IVcSettings _basicsettings)
+		public void ApplyVcSettings()
 		{
-			this.View.BackgroundColor = _basicsettings.BackColor;
-			if (_basicsettings.HasBorder)
+			this.View.BackgroundColor = this._vcSettings.BackColor;
+			if (this._vcSettings.HasBorder)
 			{
 				this.View.Layer.BorderColor = this._vcSettings.BorderColor.CGColor;
 				this.View.Layer.BorderWidth = this._vcSettings.BorderSize;
@@ -98,6 +98,10 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			if (this._vcSettings != null)
+			{
+				this.ApplyVcSettings ();
+			}
 		}
 
 		// These puppies cost me a lot of time. DAYS!

@@ -18,6 +18,7 @@ namespace AspyRoad.iOSCore
 
 		protected IAspyGlobals iOSGlobals;
 		protected Dictionary<int, string> _vcTagList;
+		protected Dictionary<int, IVcSettings> _vcSettinsList;
 
 #endregion
 
@@ -48,6 +49,12 @@ namespace AspyRoad.iOSCore
 			set { _vcTagList = value; }
 		}
 
+		public Dictionary<int, IVcSettings> VCSettingsList
+		{
+			get { return _vcSettinsList;}
+			set { _vcSettinsList = value; }
+		}
+
 		public void AddVC (AspyViewController vctobeadded)
 		{
 			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
@@ -61,6 +68,12 @@ namespace AspyRoad.iOSCore
 		public VcSettings FindVCSettings (string _vcName)
 		{
 			return new VcSettings ();
+		}
+
+		public VcSettings FindVCSettings (int _vcTag)
+		{
+
+
 		}
 
 		public void AddVCSettings (VcSettings _vcSettings)

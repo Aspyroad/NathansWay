@@ -67,7 +67,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-			_numeracySettings = (NumeracySettings)this.iOSSettings;
+			//_numeracySettings = (NumeracySettings)this.iOSSettings;
 
             //Setup our editmode details
             this.CurrentEditMode = this._numeracySettings.NumberCombo.EditMode;
@@ -160,7 +160,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 			this.AspyTag1 = 102;
 
-			this._numeracySettings = this.iOSSettings;
+			this._numeracySettings = (NumeracySettings)this.iOSSettings;
 			this._vcSettings = this._numeracySettings.NumberCombo;
 			
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>();

@@ -79,6 +79,8 @@ namespace NathansWay.iOS.Numeracy.Settings
 					68
 				);
 			this.HasBorder = true;
+			this.BackColor = UIColor.White;
+			this.BorderColor = UIColor.Blue;
 
 		}
 
