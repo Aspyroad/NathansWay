@@ -159,10 +159,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         private void Initialize ()
         {
 			this.AspyTag1 = 102;
+			this.AspyName = "VC_CtrlNumberCombo";
 
 			this._numeracySettings = (NumeracySettings)this.iOSSettings;
-			this._vcSettings = this._numeracySettings.NumberCombo;
-			
+			//this._vcSettings = this._numeracySettings.NumberCombo;
+			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
+
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>();
 
             this.actHandlePad = new Action<string>(_handlePadPush);
@@ -593,6 +595,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public vcs_numbercombo (IAspyGlobals iOSGlobals)
 		{
+			this.VcTag = 102;
+			this.VcName = "VC_CtrlNumberCombo";
+
 			this.FrameSize = 
 				new RectangleF 
 				(
@@ -603,7 +608,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 				);
 			this.HasBorder = true;
 			this.BackColor = UIColor.White;
-			this.BorderColor = UIColor.Blue;
+			this.BorderColor = UIColor.Brown;
+			this.BorderSize = 4.0f;
 
 		}
 

@@ -41,12 +41,12 @@ namespace NathansWay.iOS.Numeracy.Settings
 
 		private void Initialize ()
 		{
-			// Initialize the main list
-			this.ListViewControllers ();
-
 			this.NumberCombo = new vcs_numbercombo (this.iOSGlobals);
 			this.MainGame = new vcs_maingame (this.iOSGlobals);
 			this.WorkSpace = new vcs_workspace (this.iOSGlobals);
+
+			// Initialize the main list
+			this.ListViewControllers ();
 		}
 
 		#endregion
@@ -60,12 +60,15 @@ namespace NathansWay.iOS.Numeracy.Settings
 			this.AddVC (4, "VC_MenuTools");
 			// WorkSpace
 			this.AddVC (5, "VC_MainGame");
+			this.AddVCSettings (this.MainGame);
 			this.AddVC (6, "VC_MainWorkSpace"); 
-			this.AddVC (7, "VC_WorkSpace"); 
+			this.AddVC (7, "VC_WorkSpace");
+			this.AddVCSettings (this.WorkSpace);
 			// Controls 
 			this.AddVC (100, "VC_CtrlNumberPad");
 			this.AddVC (101, "VC_CtrlFractionCombo");
 			this.AddVC (102, "VC_CtrlNumberCombo");
+			this.AddVCSettings (this.NumberCombo);
 		}
 	}
 }

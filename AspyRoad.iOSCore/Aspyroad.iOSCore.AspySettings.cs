@@ -2,6 +2,7 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
+using System.Linq;
 
 // Monotouch
 using MonoTouch.UIKit;
@@ -42,13 +43,13 @@ namespace AspyRoad.iOSCore
 
 		protected void AddVCSettings(IVcSettings _vcsetting)
 		{
-			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting.VcName); 
+			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
 		}
 
-		protected void AddVC (AspyViewController vctobeadded)
-		{
-			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
-		}
+//		private void AddVC (AspyViewController vctobeadded)
+//		{
+//			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
+//		}
 
 		protected void AddVC (int aspytag1, string aspyname)
 		{
@@ -73,9 +74,10 @@ namespace AspyRoad.iOSCore
 
 		public VcSettings FindVCSettings (string _vcName)
 		{
-			return from x in _vcSettingsList
-					where x.Value.VcName = _vcName
-					select x.Value;
+			var y = from x in _vcSettingsList
+				where x.Value.VcName == _vcName
+				select x.Value;
+			return (VcSettings)y;
 		}
 
 		public VcSettings FindVCSettings (int _vcTag)
@@ -83,17 +85,13 @@ namespace AspyRoad.iOSCore
 			IVcSettings _value;
 			if (this._vcSettingsList.TryGetValue(_vcTag, out _value))
 			{
-				return _value;
+				return (VcSettings)_value;
 			}
 			else
 			{
 				throw new KeyNotFoundException ("VcSettings not found");
 			}
 
-		}
-
-		public void AddVCSettings (VcSettings _vcSettings)
-		{
 		}
 
 #endregion

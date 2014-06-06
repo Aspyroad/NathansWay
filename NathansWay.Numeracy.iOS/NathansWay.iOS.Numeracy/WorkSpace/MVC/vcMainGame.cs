@@ -42,6 +42,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		private void Initialize()
 		{
+			this.AspyTag1 = 5;
+			this.AspyName = "VC_MainGame";
 		}
 
 		#endregion
@@ -72,6 +74,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		public vcs_maingame (IAspyGlobals iOSGlobals)
 		{
+			this.VcTag = 5;
+			this.VcName = "VC_MainGame";
+
 			this.FrameSize = 
 				new RectangleF 
 				(
