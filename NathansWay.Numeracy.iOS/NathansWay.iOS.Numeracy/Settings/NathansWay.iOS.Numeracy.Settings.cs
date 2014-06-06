@@ -10,14 +10,19 @@ using MonoTouch.Foundation;
 // AspyRoad
 using AspyRoad.iOSCore;
 
+// Numeracy
+using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
+using NathansWay.iOS.Numeracy.Menu ;
+
 namespace NathansWay.iOS.Numeracy.Settings
 {
 	public class NumeracySettings : AspySettings
 	{
 		// All ViewControllers
-		public numbercombo NumberCombo;
-		public maingame MainGame;
-		public workspace WorkSpace;
+		public vcs_numbercombo NumberCombo;
+		public vcs_maingame MainGame;
+		public vcs_workspace WorkSpace;
 
 		#region Private Variables
 
@@ -39,9 +44,9 @@ namespace NathansWay.iOS.Numeracy.Settings
 			// Initialize the main list
 			this.ListViewControllers ();
 
-			this.NumberCombo = new numbercombo (this.iOSGlobals);
-			this.MainGame = new maingame (this.iOSGlobals);
-			this.WorkSpace = new workspace (this.iOSGlobals);
+			this.NumberCombo = new vcs_numbercombo (this.iOSGlobals);
+			this.MainGame = new vcs_maingame (this.iOSGlobals);
+			this.WorkSpace = new vcs_workspace (this.iOSGlobals);
 		}
 
 		#endregion
@@ -61,63 +66,6 @@ namespace NathansWay.iOS.Numeracy.Settings
 			this.AddVC (100, "VC_CtrlNumberPad");
 			this.AddVC (101, "VC_CtrlFractionCombo");
 			this.AddVC (102, "VC_CtrlNumberCombo");
-		}
-	}
-
-	public class numbercombo : VcSettings
-	{
-		private E__NumberComboEditMode _editmode;
-
-		public numbercombo (IAspyGlobals iOSGlobals)
-		{
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					0,
-					54,
-					68
-				);
-			this.HasBorder = true;
-			this.BackColor = UIColor.White;
-			this.BorderColor = UIColor.Blue;
-
-		}
-
-		public E__NumberComboEditMode EditMode 
-		{
-			get { return _editmode; }
-			set { _editmode = value; }
-		}
-	}
-
-	public class maingame : VcSettings
-	{
-		public maingame (IAspyGlobals iOSGlobals)
-		{
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					0,
-					iOSGlobals.G__RectWindowLandscape.Width,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
-				);
-		}
-	}
-
-	public class workspace : VcSettings
-	{
-		public workspace (IAspyGlobals iOSGlobals)
-		{
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					0,
-					iOSGlobals.G__RectWindowLandscape.Width,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
-				);
 		}
 	}
 }

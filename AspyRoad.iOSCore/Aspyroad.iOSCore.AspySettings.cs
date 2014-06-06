@@ -18,7 +18,7 @@ namespace AspyRoad.iOSCore
 
 		protected IAspyGlobals iOSGlobals;
 		protected Dictionary<int, string> _vcTagList;
-		protected Dictionary<int, IVcSettings> _vcSettinsList;
+		protected Dictionary<int, IVcSettings> _vcSettingsList;
 
 #endregion
 
@@ -32,11 +32,27 @@ namespace AspyRoad.iOSCore
 
 #endregion
 
-#region Private Members
+		#region Private/Protected Members
 
 		private void Initialize ()
 		{
 			_vcTagList = new Dictionary<int, string> ();
+			_vcSettingsList = new Dictionary<int, IVcSettings> ();
+		}
+
+		protected void AddVCSettings(IVcSettings _vcsetting)
+		{
+			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting.VcName); 
+		}
+
+		protected void AddVC (AspyViewController vctobeadded)
+		{
+			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
+		}
+
+		protected void AddVC (int aspytag1, string aspyname)
+		{
+			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
 #endregion
@@ -51,28 +67,28 @@ namespace AspyRoad.iOSCore
 
 		public Dictionary<int, IVcSettings> VCSettingsList
 		{
-			get { return _vcSettinsList;}
-			set { _vcSettinsList = value; }
-		}
-
-		public void AddVC (AspyViewController vctobeadded)
-		{
-			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
-		}
-
-		public void AddVC (int aspytag1, string aspyname)
-		{
-			this._vcTagList.Add (aspytag1, aspyname);
+			get { return _vcSettingsList;}
+			set { _vcSettingsList = value; }
 		}
 
 		public VcSettings FindVCSettings (string _vcName)
 		{
-			return new VcSettings ();
+			return from x in _vcSettingsList
+					where x.Value.VcName = _vcName
+					select x.Value;
 		}
 
 		public VcSettings FindVCSettings (int _vcTag)
 		{
-
+			IVcSettings _value;
+			if (this._vcSettingsList.TryGetValue(_vcTag, out _value))
+			{
+				return _value;
+			}
+			else
+			{
+				throw new KeyNotFoundException ("VcSettings not found");
+			}
 
 		}
 
@@ -189,7 +205,7 @@ namespace AspyRoad.iOSCore
 			set { _bordercolor = value; }
 		}
 
-		#endregion
+#endregion
 	}
 }
 

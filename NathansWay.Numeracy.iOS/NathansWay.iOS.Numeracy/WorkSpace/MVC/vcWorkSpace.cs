@@ -81,5 +81,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#endregion
 	}
+
+	#region VCSettings
+
+	public class vcs_workspace : VcSettings
+	{
+		public vcs_workspace (IAspyGlobals iOSGlobals)
+		{
+			this.FrameSize = 
+				new RectangleF 
+				(
+					0,
+					0,
+					iOSGlobals.G__RectWindowLandscape.Width,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
+				);
+		}
+	}
+
+	#endregion
 }
 

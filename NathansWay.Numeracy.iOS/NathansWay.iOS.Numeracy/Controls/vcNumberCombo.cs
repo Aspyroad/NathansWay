@@ -584,5 +584,37 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
     }
+
+	#region VCSettings
+
+	public class vcs_numbercombo : VcSettings
+	{
+		private E__NumberComboEditMode _editmode;
+
+		public vcs_numbercombo (IAspyGlobals iOSGlobals)
+		{
+			this.FrameSize = 
+				new RectangleF 
+				(
+					0,
+					0,
+					54,
+					68
+				);
+			this.HasBorder = true;
+			this.BackColor = UIColor.White;
+			this.BorderColor = UIColor.Blue;
+
+		}
+
+		public E__NumberComboEditMode EditMode 
+		{
+			get { return _editmode; }
+			set { _editmode = value; }
+		}
+	}
+
+	#endregion
+
 }
 

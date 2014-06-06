@@ -14,15 +14,13 @@ namespace AspyRoad.iOSCore
 	{
 		// Properties
 		Dictionary<int, string> VCTagList { get; set; }
+
 		// Methods
-		//void AspySettings (IAspyGlobals _iOSGlobals);
-		VcSettings FindVCSettings (string _mt);
+		VcSettings FindVCSettings (string _vcname);
+
+		VcSettings FinsVCSettings (int _vctag);
 
 		void AddVCSettings (VcSettings _vcsettings);
-
-		void AddVC (AspyViewController vctobeadded);
-
-		void AddVC (int aspytag1, string aspyname);
     }
 
 	public interface IVcSettings
