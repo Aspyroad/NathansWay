@@ -12,12 +12,18 @@ using AspyRoad.iOSCore;
 
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.Settings;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcWorkSpace")]
 	public partial class vcWorkSpace : AspyContainerController
 	{
+		#region Private Variables
+		private NumeracySettings _numeracySettings;
+
+		#endregion
+
 		#region Constructors
 
 		public vcWorkSpace(IntPtr h) : base(h)
@@ -31,7 +37,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			Initialize();
 		}
 
-		public vcWorkSpace() : base("vcWorkSpace", null)
+		public vcWorkSpace() : base("vwWorkSpace", null)
 		{   
 			Initialize();
 		}
@@ -44,6 +50,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			this.AspyTag1 = 7;
 			this.AspyName = "VC_WorkSpace";
+
+			// Create our settings class
+			this._numeracySettings = (NumeracySettings)this.iOSSettings;
+			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
 		}
 
 		#endregion
@@ -64,21 +74,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.ViewDidLoad();
 			
-			//mypad = new vcNumberPad();
-			float x = 100.0f;
-			float y = 100.0f;   
-
-			for (int i=0; i<5; i++)
-			{
-				x = x + 60.0f;
-				//y = y + 60.0f;
-				RectangleF myRect;
-				vcNumberCombo pad = new vcNumberCombo();
-				pad.AspyTag2 = i;
-				myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
-				pad.View.Frame = myRect;
-				this.AddAndDisplayController(pad);
-			}
+//			//mypad = new vcNumberPad();
+//			float x = 100.0f;
+//			float y = 100.0f;   
+//
+//			for (int i=0; i<5; i++)
+//			{
+//				x = x + 60.0f;
+//				//y = y + 60.0f;
+//				RectangleF myRect;
+//				vcNumberCombo pad = new vcNumberCombo();
+//				pad.AspyTag2 = i;
+//				myRect = new RectangleF(x, y, pad.View.Frame.Width, pad.View.Frame.Height);
+//				pad.View.Frame = myRect;
+//				this.AddAndDisplayController(pad);
+//			}
 		}
 
 		#endregion
@@ -93,13 +103,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.VcTag = 7;
 			this.VcName = "VC_WorkSpace";
 
+			this.HasBorder = true;
+			this.BorderColor = UIColor.Cyan;;
+			this.BorderSize = 2.0f;
+
 			this.FrameSize = 
 				new RectangleF 
 				(
-					0,
+
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
 					0,
 					iOSGlobals.G__RectWindowLandscape.Width,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
+					200
 				);
 		}
 	}

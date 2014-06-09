@@ -12,12 +12,18 @@ using AspyRoad.iOSCore;
 
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.Settings;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcMainGame")]
 	public partial class vcMainGame : AspyViewController
 	{
+		#region Private Variables
+		private NumeracySettings _numeracySettings;
+
+		#endregion
+
 		#region Constructors
 
 		public vcMainGame(IntPtr h) : base(h)
@@ -44,6 +50,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			this.AspyTag1 = 5;
 			this.AspyName = "VC_MainGame";
+
+			// Create our settings class
+			this._numeracySettings = (NumeracySettings)this.iOSSettings;
+			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
 		}
 
 		#endregion
@@ -76,6 +86,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			this.VcTag = 5;
 			this.VcName = "VC_MainGame";
+
+			this.HasBorder = true;
+			this.BorderColor = UIColor.White;
+			this.BorderSize = 2.0f;
 
 			this.FrameSize = 
 				new RectangleF 

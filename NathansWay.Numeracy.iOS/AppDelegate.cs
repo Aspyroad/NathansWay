@@ -123,11 +123,13 @@ namespace NathansWay.iOS.Numeracy
 			vcWorkSpace _workspace = new vcWorkSpace();
 			vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
-			vcNumberCombo _numbercombo = new vcNumberCombo();
 
 			ViewContainerController = new AspyContainerController();
-			ViewContainerController.AddAndDisplayController(_numbercombo);			
+			ViewContainerController.AddAndDisplayController(_maingame);
+			ViewContainerController.AddAndDisplayController(_workspace);
+
 			window.RootViewController = ViewContainerController;
+			//window.RootViewController = _maingame;
 
 			#endregion
 
