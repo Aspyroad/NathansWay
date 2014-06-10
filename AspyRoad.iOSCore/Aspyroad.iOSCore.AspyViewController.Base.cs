@@ -84,6 +84,7 @@ namespace AspyRoad.iOSCore
 		public void ApplyVcSettings()
 		{
 			this.View.BackgroundColor = this._vcSettings.BackColor;
+			this.View.Frame = this._vcSettings.FrameSize;
 			if (this._vcSettings.HasBorder)
 			{
 				this.View.Layer.BorderColor = this._vcSettings.BorderColor.CGColor;

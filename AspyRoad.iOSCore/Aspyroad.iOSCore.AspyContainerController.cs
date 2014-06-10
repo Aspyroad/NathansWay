@@ -149,9 +149,9 @@ namespace AspyRoad.iOSCore
         
         public override void ViewDidLoad()
         {
+			this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;  
+			this.View.BackgroundColor = UIColor.DarkGray;
             base.ViewDidLoad();
-            this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;  
-            this.View.BackgroundColor = UIColor.DarkGray;
         }
         
         #endregion  

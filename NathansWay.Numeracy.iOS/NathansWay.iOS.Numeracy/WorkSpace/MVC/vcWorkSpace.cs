@@ -104,17 +104,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.VcName = "VC_WorkSpace";
 
 			this.HasBorder = true;
-			this.BorderColor = UIColor.Cyan;;
+			this.BorderColor = UIColor.Purple;
 			this.BorderSize = 2.0f;
 
 			this.FrameSize = 
 				new RectangleF 
 				(
-
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
 					0,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
 					iOSGlobals.G__RectWindowLandscape.Width,
-					200
+					(iOSGlobals.G__RectWindowLandscape.Height / 4)
 				);
 		}
 	}
