@@ -122,14 +122,17 @@ namespace NathansWay.iOS.Numeracy
 			// Temp workspace setup code. Mormally this will be behind a menu button.
 			vcWorkSpace _workspace = new vcWorkSpace();
 			vcMainGame _maingame = new vcMainGame();
-			//vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
+			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
+
+			_mainworkspace.AddAndDisplayController(_workspace);
 
 			ViewContainerController = new AspyContainerController();
 			ViewContainerController.AddAndDisplayController(_maingame);
-			ViewContainerController.AddAndDisplayController(_workspace);
+			ViewContainerController.AddAndDisplayController(_mainworkspace);
+			ViewContainerController.View.BringSubviewToFront(_workspace.View);
 
-			window.RootViewController = ViewContainerController;
-			//window.RootViewController = _maingame;
+			//window.RootViewController = ViewContainerController;
+			window.RootViewController = _mainworkspace;
 
 			#endregion
 

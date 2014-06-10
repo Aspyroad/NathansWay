@@ -111,9 +111,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 				new RectangleF 
 				(
 					0,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
-					iOSGlobals.G__RectWindowLandscape.Width,
-					(iOSGlobals.G__RectWindowLandscape.Height / 4)
+					(((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) - this.BorderSize),
+					400,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) - (2 * this.BorderSize))
 				);
 		}
 	}

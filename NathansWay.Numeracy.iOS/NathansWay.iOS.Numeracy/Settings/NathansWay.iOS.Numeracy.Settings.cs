@@ -23,6 +23,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 		public vcs_numbercombo NumberCombo;
 		public vcs_maingame MainGame;
 		public vcs_workspace WorkSpace;
+		public vcs_mainworkspace MainWorkSpace;
 
 		#region Private Variables
 
@@ -44,6 +45,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 			this.NumberCombo = new vcs_numbercombo (this.iOSGlobals);
 			this.MainGame = new vcs_maingame (this.iOSGlobals);
 			this.WorkSpace = new vcs_workspace (this.iOSGlobals);
+			this.MainWorkSpace = new vcs_mainworkspace (this.iOSGlobals);
 
 			// Initialize the main list
 			this.ListViewControllers ();
@@ -62,6 +64,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 			this.AddVC (5, "VC_MainGame");
 			this.AddVCSettings (this.MainGame);
 			this.AddVC (6, "VC_MainWorkSpace"); 
+			this.AddVCSettings (this.MainWorkSpace);
 			this.AddVC (7, "VC_WorkSpace");
 			this.AddVCSettings (this.WorkSpace);
 			// Controls 

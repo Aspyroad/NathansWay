@@ -9,12 +9,17 @@ using MonoTouch.ObjCRuntime;
 using AspyRoad.iOSCore;
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.Settings;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register ("vcMainWorkSpace")]
 	public partial class vcMainWorkSpace : AspyContainerController
     {
+		#region Private Variables
+		private NumeracySettings _numeracySettings;
+
+		#endregion
 
         #region Constructors
 
@@ -40,6 +45,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void Initialize()
         {
+			this.AspyTag1 = 6;
+			this.AspyName = "VC_MainWorkSpace";
+
+			// Create our settings class
+			this._numeracySettings = (NumeracySettings)this.iOSSettings;
+			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
         }
 
         #endregion
@@ -63,4 +74,30 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		
 		#endregion
     }
+
+	#region VCSettings
+
+	public class vcs_mainworkspace : VcSettings
+	{
+		public vcs_mainworkspace (IAspyGlobals iOSGlobals)
+		{
+			this.VcTag = 6;
+			this.VcName = "VC_MainWorkSpace";
+
+			this.HasBorder = true;
+			this.BorderColor = UIColor.Blue;
+			this.BorderSize = 2.0f;
+
+			this.FrameSize = 
+				new RectangleF 
+				(
+					0,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
+					iOSGlobals.G__RectWindowLandscape.Width,
+					(iOSGlobals.G__RectWindowLandscape.Height / 4)
+				);
+		}
+	}
+
+	#endregion
 }        
