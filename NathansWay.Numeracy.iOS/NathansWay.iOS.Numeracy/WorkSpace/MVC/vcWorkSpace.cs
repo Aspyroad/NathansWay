@@ -17,7 +17,7 @@ using NathansWay.iOS.Numeracy.Settings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcWorkSpace")]
-	public partial class vcWorkSpace : AspyContainerController
+	public partial class vcWorkSpace : AspyViewController
 	{
 		#region Private Variables
 		private NumeracySettings _numeracySettings;
@@ -59,6 +59,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#endregion
 
 		#region Overrides
+
+		public override void WillMoveToParentViewController (UIViewController parent)
+		{
+			base.WillMoveToParentViewController (parent);
+		}
 
 		public override void DidReceiveMemoryWarning()
 		{
@@ -106,6 +111,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.HasBorder = true;
 			this.BorderColor = UIColor.Purple;
 			this.BorderSize = 2.0f;
+			this.BackColor = UIColor.Black;
 
 			this.FrameSize = 
 				new RectangleF 

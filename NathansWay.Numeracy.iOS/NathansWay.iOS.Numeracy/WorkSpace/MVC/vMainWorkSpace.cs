@@ -11,7 +11,7 @@ using AspyRoad.iOSCore;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[MonoTouch.Foundation.Register ("vMainWorkSpace")]
-	public partial class vMainWorkSpace : vMainGame
+	public partial class vMainWorkSpace : AspyView
 	{
 
 		#region Constructors

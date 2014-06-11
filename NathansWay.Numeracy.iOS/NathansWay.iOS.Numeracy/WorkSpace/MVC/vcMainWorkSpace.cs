@@ -14,7 +14,7 @@ using NathansWay.iOS.Numeracy.Settings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register ("vcMainWorkSpace")]
-	public partial class vcMainWorkSpace : AspyContainerController
+	public partial class vcMainWorkSpace : AspyViewController
     {
 		#region Private Variables
 		private NumeracySettings _numeracySettings;

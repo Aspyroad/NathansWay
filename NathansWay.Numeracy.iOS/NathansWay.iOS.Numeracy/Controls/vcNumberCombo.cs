@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private E__NumberComboEditMode _currentEditMode;
         private NumeracySettings _numeracySettings;
         private vcNumberPad _numberpad;
-        private AspyContainerController _viewcontollercontainer;
+		private AspyViewController _viewcontollercontainer;
         private Action<string> actHandlePad;
         private int intPrevValue;
         private int intCurrentValue;
@@ -165,7 +165,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			//this._vcSettings = this._numeracySettings.NumberCombo;
 			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
 
-            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyContainerController>();
+			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewController>();
 
             this.actHandlePad = new Action<string>(_handlePadPush);
 

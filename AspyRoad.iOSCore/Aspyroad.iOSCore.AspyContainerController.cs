@@ -63,6 +63,7 @@ namespace AspyRoad.iOSCore
         /// <param name="_newController">_new controller.</param>
         public void AddAndDisplayController(AspyViewController _newController)
         {
+			//_newController.WillMoveToParentViewController (this);
             this.AddChildViewController(_newController);
             this.View.AddSubview(_newController.View);
             _newController.DidMoveToParentViewController(this);
@@ -70,6 +71,7 @@ namespace AspyRoad.iOSCore
 		
 		public void AddAndDisplayController(AspyContainerController _newController)
 		{
+			//_newController.WillMoveToParentViewController (this);
 			this.AddChildViewController(_newController);
 			this.View.AddSubview(_newController.View);
 			_newController.DidMoveToParentViewController(this);

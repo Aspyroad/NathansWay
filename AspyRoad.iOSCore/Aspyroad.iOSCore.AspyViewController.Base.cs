@@ -81,7 +81,7 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-		public void ApplyVcSettings()
+		public void ApplyVcSettings ()
 		{
 			this.View.BackgroundColor = this._vcSettings.BackColor;
 			this.View.Frame = this._vcSettings.FrameSize;
@@ -90,6 +90,91 @@ namespace AspyRoad.iOSCore
 				this.View.Layer.BorderColor = this._vcSettings.BorderColor.CGColor;
 				this.View.Layer.BorderWidth = this._vcSettings.BorderSize;
 			}
+		}
+
+#endregion
+
+#region Public Container Members
+
+		/// <summary>
+		/// Add an view controller and add its view to the parent.
+		/// </summary>
+		/// <returns><c>true</c>If the VC is added to the parent children array,<c>false</c> otherwise.</returns>
+		/// <param name="_newController">_new controller.</param>
+		public void AddAndDisplayController (AspyViewController _newController)
+		{
+			//_newController.WillMoveToParentViewController (this);
+			this.AddChildViewController (_newController);
+			this.View.AddSubview (_newController.View);
+			_newController.DidMoveToParentViewController (this);
+		}
+
+		public bool AddController (UIViewController _newController)
+		{
+			// Test if it loaded
+			return true;
+		}
+
+		/// <summary>
+		/// Removes all instances from parent where AspyTag = ?
+		/// </summary>
+		/// <returns><c>true</c>, if controllers was removed, <c>false</c> otherwise.</returns>
+		/// <param name="_AspyTag">_ aspy tag.</param>
+		public bool RemoveControllers (int _AspyTag)
+		{
+			bool _return = false;
+			// Find the controller with the same string name
+			foreach (AspyViewController vc in this.ChildViewControllers)
+			{
+				if (vc.AspyTag1 == _AspyTag)
+				{
+					vc.WillMoveToParentViewController (null);
+					vc.View.RemoveFromSuperview ();
+					vc.RemoveFromParentViewController ();
+
+					if (vc.ParentViewController == null)
+					{
+						_return = true;
+					}
+					else
+					{
+						_return = false;
+					}
+				}
+			}
+			return _return;
+		}
+
+		/// <summary>
+		/// Removes a particular VC and view from the container.
+		/// Useful for building adhoc vc hierarchies on the fly.
+		/// </summary>
+		/// <returns><c>true</c>, if VC instance was removed, <c>false</c> otherwise.</returns>
+		/// <param name="VCType">VC type.</param>
+		/// <param name="VCInstance">VC instance.</param>
+		public bool RemoveVCInstance (int VCType, int VCInstance)
+		{
+			bool _return = false;
+			// Find the controller with the same string name
+			foreach (AspyViewController vc in this.ChildViewControllers)
+			{
+				if ((vc.AspyTag1 == VCType) && (vc.AspyTag2 == VCInstance))
+				{
+					vc.WillMoveToParentViewController (null);
+					vc.View.RemoveFromSuperview ();
+					vc.RemoveFromParentViewController ();
+
+					if (vc.ParentViewController == null)
+					{
+						_return = true;
+					}
+					else
+					{
+						_return = false;
+					}
+				}
+			}
+			return _return;
 		}
 
 #endregion

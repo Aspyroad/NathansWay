@@ -35,7 +35,7 @@ namespace NathansWay.iOS.Numeracy
 	public class AppDelegate : UIApplicationDelegate
 	{
 		private AspyWindow window;
-		private AspyContainerController ViewContainerController;
+		private AspyViewController ViewContainerController;
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
@@ -105,10 +105,10 @@ namespace NathansWay.iOS.Numeracy
 			// Setup the window
 			window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Using viewcontroller constructor to run the nib
-			ViewContainerController = new AspyContainerController();
+			ViewContainerController = new AspyViewController();
 
 			// Add our view variables 
-			iOSCoreServiceContainer.Register<AspyContainerController>(this.ViewContainerController);
+			iOSCoreServiceContainer.Register<AspyViewController>(this.ViewContainerController);
 			iOSCoreServiceContainer.Register<AspyWindow> (window);
 
 			//_testDb = new NathansWayDbBase();
@@ -121,18 +121,19 @@ namespace NathansWay.iOS.Numeracy
 
 			// Temp workspace setup code. Mormally this will be behind a menu button.
 			vcWorkSpace _workspace = new vcWorkSpace();
-			vcMainGame _maingame = new vcMainGame();
+			//vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
 
 			_mainworkspace.AddAndDisplayController(_workspace);
 
-			ViewContainerController = new AspyContainerController();
-			ViewContainerController.AddAndDisplayController(_maingame);
+			ViewContainerController = new AspyViewController();
+			//ViewContainerController.AddAndDisplayController(_maingame);
 			ViewContainerController.AddAndDisplayController(_mainworkspace);
-			ViewContainerController.View.BringSubviewToFront(_workspace.View);
+			//_mainworkspace.View.BringSubviewToFront(_mainworkspace.ChildViewControllers[0].View);
 
-			//window.RootViewController = ViewContainerController;
-			window.RootViewController = _mainworkspace;
+
+			window.RootViewController = ViewContainerController;
+			//window.RootViewController = _mainworkspace;
 
 			#endregion
 
