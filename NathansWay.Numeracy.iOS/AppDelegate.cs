@@ -126,14 +126,13 @@ namespace NathansWay.iOS.Numeracy
 
 			_mainworkspace.AddAndDisplayController(_workspace);
 
-			ViewContainerController = new AspyViewController();
+			//ViewContainerController = new AspyViewController();
 			//ViewContainerController.AddAndDisplayController(_maingame);
-			ViewContainerController.AddAndDisplayController(_mainworkspace);
-			//_mainworkspace.View.BringSubviewToFront(_mainworkspace.ChildViewControllers[0].View);
+			//ViewContainerController.AddAndDisplayController(_mainworkspace);
+			//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
 
-
-			window.RootViewController = ViewContainerController;
-			//window.RootViewController = _mainworkspace;
+			//window.RootViewController = ViewContainerController;
+			window.RootViewController = _mainworkspace;
 
 			#endregion
 

@@ -50,7 +50,7 @@ namespace AspyRoad.iOSCore
 
 #endregion
 
-#region Private Memebers
+#region Private Members
 
 		private void Initialize ()
 		{
