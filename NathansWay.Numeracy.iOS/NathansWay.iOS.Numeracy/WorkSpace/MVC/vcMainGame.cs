@@ -88,8 +88,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.VcName = "VC_MainGame";
 
 			this.HasBorder = true;
-			this.BorderColor = UIColor.White;
-			this.BorderSize = 2.0f;
+			this.BorderColor = UIColor.Black;
+			this.BorderSize = 1.0f;
+			this.BackColor = UIColor.Orange;
 
 			this.FrameSize = 
 				new RectangleF 

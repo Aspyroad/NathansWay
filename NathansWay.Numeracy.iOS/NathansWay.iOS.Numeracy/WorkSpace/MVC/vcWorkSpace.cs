@@ -110,16 +110,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 			this.HasBorder = true;
 			this.BorderColor = UIColor.Purple;
-			this.BorderSize = 2.0f;
+			this.BorderSize = 1.0f;
 			this.BackColor = UIColor.Black;
 
 			this.FrameSize = 
 				new RectangleF 
 				(
-					0,
-					(((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) - this.BorderSize),
+					(this.BorderSize),
+					(((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) + (this.BorderSize)),
 					400,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) - (2 * this.BorderSize))
+					(iOSGlobals.G__RectWindowLandscape.Height / 4) - (this.BorderSize * 2)
 				);
 		}
 	}

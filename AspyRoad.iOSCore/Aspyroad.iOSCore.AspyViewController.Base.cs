@@ -103,16 +103,17 @@ namespace AspyRoad.iOSCore
 		/// <param name="_newController">_new controller.</param>
 		public void AddAndDisplayController (AspyViewController _newController)
 		{
-			//_newController.WillMoveToParentViewController (this);
 			this.AddChildViewController (_newController);
+			// Add View and subviews
 			this.View.AddSubview (_newController.View);
+			this.View.AddSubviews (_newController.View.Subviews);
 			_newController.DidMoveToParentViewController (this);
 		}
 
-		public bool AddController (UIViewController _newController)
+		public void AddController (UIViewController _newController)
 		{
-			// Test if it loaded
-			return true;
+			this.AddChildViewController (_newController);
+			_newController.DidMoveToParentViewController (this);
 		}
 
 		/// <summary>
@@ -129,7 +130,13 @@ namespace AspyRoad.iOSCore
 				if (vc.AspyTag1 == _AspyTag)
 				{
 					vc.WillMoveToParentViewController (null);
+					// Remove all views in this vc
 					vc.View.RemoveFromSuperview ();
+					foreach(UIView v in vc.View.Subviews)
+					{
+						v.RemoveFromSuperview ();
+					}
+					//Notify delegates
 					vc.RemoveFromParentViewController ();
 
 					if (vc.ParentViewController == null)
@@ -162,6 +169,13 @@ namespace AspyRoad.iOSCore
 				{
 					vc.WillMoveToParentViewController (null);
 					vc.View.RemoveFromSuperview ();
+					// Remove all views in this vc
+					vc.View.RemoveFromSuperview ();
+					foreach(UIView v in vc.View.Subviews)
+					{
+						v.RemoveFromSuperview ();
+					}
+					//Notify delegates
 					vc.RemoveFromParentViewController ();
 
 					if (vc.ParentViewController == null)
