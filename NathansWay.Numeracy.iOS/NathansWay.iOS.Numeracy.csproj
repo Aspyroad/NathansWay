@@ -164,6 +164,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\MonoGame\ParallaxingBackground.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
