@@ -39,8 +39,17 @@ namespace FlappyMonkey
 		public static GameState State { get; set; }
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
+
+		Texture2D wallTexture, topWallCapTexture, bottomWallCapTexture, 
+		playerTexture, groundBottom, gameOverTexture, scoreBoardTexture,scoreTexture, highScoreTexture;
+
+		bool accelActive;
+		int wallHeight;
+		Rectangle bottomGroundRect;
+		int scoreBoardPadding = 0;
+
 		// Represents the player
-		Player player;
+		//Player player;
 		// Keyboard states used to determine key presses
 		////KeyboardState currentKeyboardState;
 		////KeyboardState previousKeyboardState;
@@ -59,16 +68,11 @@ namespace FlappyMonkey
 		{
 			graphics = new GraphicsDeviceManager (this) 
 			{
-				#if __OUYA__
-				SupportedOrientations = DisplayOrientation.LandscapeLeft |  DisplayOrientation.LandscapeRight,
-				#else 
 				SupportedOrientations = DisplayOrientation.Portrait,
-				#endif
 				IsFullScreen = true,
 			};
 
 			Content.RootDirectory = "Content";
-
 		}
 
 		/// <summary>
@@ -79,8 +83,8 @@ namespace FlappyMonkey
 		{
 			State = GameState.Menu;
 
-			//wallHeight = Math.Min (GraphicsDevice.Viewport.Height, MaxWallheight);
-			//bottomGroundRect = new Rectangle (0, wallHeight + 1, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - MaxWallheight);
+			wallHeight = Math.Min (GraphicsDevice.Viewport.Height, MaxWallheight);
+			bottomGroundRect = new Rectangle (0, wallHeight + 1, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - MaxWallheight);
 			//player = new Player ();
 			ground = new ParallaxingBackground ();
 			base.Initialize ();
@@ -97,45 +101,45 @@ namespace FlappyMonkey
 			// TODO: use this.Content to load your game content here eg.
 			playerTexture = Content.Load<Texture2D> ("player");
 
-			player.Initialize (playerTexture, new Vector2 (graphics.GraphicsDevice.Viewport.Width / 3, graphics.GraphicsDevice.Viewport.Height / 2));
-			wallTexture = Content.Load<Texture2D> ("pipe");
-			topWallCapTexture = Content.Load<Texture2D> ("pipeTopCap");
-			bottomWallCapTexture = Content.Load<Texture2D> ("pipeBottomCap");
+			//player.Initialize (playerTexture, new Vector2 (graphics.GraphicsDevice.Viewport.Width / 3, graphics.GraphicsDevice.Viewport.Height / 2));
+			//wallTexture = Content.Load<Texture2D> ("pipe");
+			//topWallCapTexture = Content.Load<Texture2D> ("pipeTopCap");
+			//bottomWallCapTexture = Content.Load<Texture2D> ("pipeBottomCap");
 
-			font = Content.Load<SpriteFont> ("gameFont");
+			//font = Content.Load<SpriteFont> ("gameFont");
 
 			groundBottom = Content.Load<Texture2D> ("bottomGround");
 			ground.Initialize (Content, "ground", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -GamePhysics.WallSpeed, false);
-			clouds1.Initialize (Content, "clouds1", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.25f, true);
-			clouds2.Initialize (Content, "clouds2", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -(GamePhysics.WallSpeed + .5f), true);
-			bushes.Initialize (Content, "bushes", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -1, false, true);
-			buildings.Initialize (Content, "buildings", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.5f, false, true);
+			//clouds1.Initialize (Content, "clouds1", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.25f, true);
+			//clouds2.Initialize (Content, "clouds2", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -(GamePhysics.WallSpeed + .5f), true);
+			//bushes.Initialize (Content, "bushes", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -1, false, true);
+			//buildings.Initialize (Content, "buildings", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.5f, false, true);
 
-			Number.Initialize (Content);
-			gameOverTexture = Content.Load<Texture2D> ("gameOver");
-			scoreBoardTexture = Content.Load<Texture2D> ("scoreBackground");
-			highScoreTexture = Content.Load<Texture2D> ("highScore");
-			scoreTexture = Content.Load<Texture2D> ("score");
-			gameOverPosition.X = (GraphicsDevice.Viewport.Width - (gameOverTexture.Width * 8)) / 2;
-			scoreBoardRect.X = (int)gameOverPosition.X;
-			scoreBoardRect.Width = gameOverTexture.Width * 8;
-			scoreBoardPadding = gameOverTexture.Height;
-			scoreBoardRect.Height = (scoreBoardPadding * 6) + highScoreTexture.Height + scoreTexture.Height + (int)(Number.Height * scoreScale * 2);
+			//Number.Initialize (Content);
+			//gameOverTexture = Content.Load<Texture2D> ("gameOver");
+			//scoreBoardTexture = Content.Load<Texture2D> ("scoreBackground");
+			//highScoreTexture = Content.Load<Texture2D> ("highScore");
+			//scoreTexture = Content.Load<Texture2D> ("score");
+			//gameOverPosition.X = (GraphicsDevice.Viewport.Width - (gameOverTexture.Width * 8)) / 2;
+			//scoreBoardRect.X = (int)gameOverPosition.X;
+			//scoreBoardRect.Width = gameOverTexture.Width * 8;
+			//scoreBoardPadding = gameOverTexture.Height;
+			//scoreBoardRect.Height = (scoreBoardPadding * 6) + highScoreTexture.Height + scoreTexture.Height + (int)(Number.Height * scoreScale * 2);
 			Reset ();
 		}
 
 		public void Reset ()
 		{
 			State = GameState.Menu;
-			wallSpanTime = GamePhysics.StartWallSpawnRate;
-			player.Active = true;
-			player.Health = 1;
-			maxGap = GamePhysics.MaximumGapSize;
-			score = 0;
-			walls.Clear ();
+			//wallSpanTime = GamePhysics.StartWallSpawnRate;
+			//player.Active = true;
+			//player.Health = 1;
+			//maxGap = GamePhysics.MaximumGapSize;
+			//score = 0;
+			//walls.Clear ();
 
 			var playerPosition = new Vector2 (graphics.GraphicsDevice.Viewport.Width / 3, graphics.GraphicsDevice.Viewport.Height / 2);
-			player.Position = playerPosition;
+			//player.Position = playerPosition;
 		}
 
 		#endregion

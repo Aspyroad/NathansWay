@@ -73,11 +73,11 @@
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\" />
-    <Folder Include="NathansWay.iOS.Numeracy\MonoGame\" />
     <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -161,6 +161,8 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
+    <Compile Include="Interface\INathansWay.iOS.Numeracy.Tool.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

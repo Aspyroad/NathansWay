@@ -52,7 +52,6 @@
     <Compile Include="Aspyroad.iOSCore.AspyUtilities.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTypes.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyAppDel.Base.cs" />
-    <Compile Include="Interface\IAspyGlobals.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyGlobals.cs" />
     <Compile Include="Aspyroad.iOSCore.AspySegueways.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
@@ -60,6 +59,7 @@
     <Compile Include="Utilities\ServiceRegistrar.cs" />
     <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Interface\IAspyroad.iOSCore.AspySettings.cs" />
+    <Compile Include="Interface\IAspyroad.iOSCore.AspyGlobals.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />
