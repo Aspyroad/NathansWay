@@ -54,8 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
-    <Folder Include="Content\" />
-    <Folder Include="Content\AppImages\" />
     <Folder Include="NathansWay.iOS.Numeracy\" />
     <Folder Include="NathansWay.iOS.Numeracy\Data\" />
     <Folder Include="NathansWay.iOS.Numeracy\Exception\" />
@@ -91,7 +89,6 @@
     <None Include="NathansWay.iOS.Numeracy\ToolBox\README.md" />
     <None Include="NathansWay.iOS.Numeracy\Menu\README.md" />
     <None Include="NathansWay.iOS.Numeracy\Lesson\README.md" />
-    <None Include="NathansWay.iOS.Numeracy\MonoGame\iOSGamePlatform.cs" />
     <None Include="NathansWay.iOS.Numeracy\WorkSpace\README.md" />
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +161,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\MonoGame\ParallaxingBackground.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -184,13 +180,13 @@
   <ItemGroup>
     <BundleResource Include="Info.plist" />
     <BundleResource Include="Resources\.DS_Store" />
-    <BundleResource Include="Content\AppImages\Teacher.png" />
     <BundleResource Include="Content\AppImages\Exit.png" />
-    <BundleResource Include="Content\AppImages\Toolbox_.png" />
-    <BundleResource Include="Content\AppImages\Toolbox.png" />
-    <BundleResource Include="Content\AppImages\Kids~ipad.png" />
     <BundleResource Include="Content\AppImages\Kids%402x~ipad.png" />
+    <BundleResource Include="Content\AppImages\Kids~ipad.png" />
     <BundleResource Include="Content\AppImages\Spanner~ipad.png" />
+    <BundleResource Include="Content\AppImages\Teacher.png" />
+    <BundleResource Include="Content\AppImages\Toolbox.png" />
+    <BundleResource Include="Content\AppImages\Toolbox_.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Menu\MVC\MenuMainViewBoard.storyboard" />
