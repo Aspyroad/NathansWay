@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NathansWay.Shared.MonoToolz
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.iOS.MonoToolz", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoToolz.csproj", "{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Droid.MonoGame", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.Droid.MonoGame\NathansWay.Droid.MonoGame.csproj", "{05046D7A-62B0-4DE0-A033-1EACA8465F71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Droid.MonoToolz", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.Droid.MonoGame\NathansWay.Droid.MonoToolz.csproj", "{05046D7A-62B0-4DE0-A033-1EACA8465F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

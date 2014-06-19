@@ -8,6 +8,9 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
+// NathansWay
+using NathansWay.iOS.MonoToolz;
+
 
 
 namespace NathansWay.iOS.Numeracy.ToolBox

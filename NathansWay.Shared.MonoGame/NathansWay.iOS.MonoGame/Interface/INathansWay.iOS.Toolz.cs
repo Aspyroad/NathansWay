@@ -23,10 +23,11 @@ using Microsoft.Xna.Framework.Media;
 
 #endregion
 
-namespace NathansWay.iOS.MonoToolz
+namespace ToolBox.Toolz
 {
 	public interface ITool
 	{
+		Game _maingame { get; }
 	}
 }
 

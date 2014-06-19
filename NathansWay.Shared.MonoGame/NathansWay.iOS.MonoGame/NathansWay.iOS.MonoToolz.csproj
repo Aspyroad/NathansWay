@@ -46,7 +46,8 @@
     <Compile Include="Hammer\Game1.cs" />
     <Compile Include="Interface\INathansWay.iOS.Toolz.cs" />
     <Compile Include="Common\ToolBox.iOS.Toolz.ParallaxingBg.cs" />
-    <Compile Include="Hammer\ToolBox.iOS.Toolz.Hammer.cs" />
+    <Compile Include="Hammer\ToolBox.Toolz.Hammer.Physics.cs" />
+    <Compile Include="Hammer\ToolBox.Toolz.Hammer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
