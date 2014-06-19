@@ -69,7 +69,6 @@
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\Content\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Hammer\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\" />
@@ -96,7 +95,6 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.Game.Core.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Hammer\ToolBox.iOS.Hammer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu1Start.cs">
@@ -161,7 +159,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="Interface\INathansWay.iOS.Numeracy.Tool.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -177,6 +174,10 @@
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
       <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
       <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoToolz.csproj">
+      <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
+      <Name>NathansWay.iOS.MonoToolz</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

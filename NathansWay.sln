@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Shared.Numeracy"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Framework.iOS", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj", "{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NathansWay.Shared.MonoGame", "NathansWay.Shared.MonoGame", "{5AC0A644-6D96-49C4-A8B3-34D88EA240A9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NathansWay.Shared.MonoToolz", "NathansWay.Shared.MonoToolz", "{5AC0A644-6D96-49C4-A8B3-34D88EA240A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.iOS.MonoGame", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoGame.csproj", "{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.iOS.MonoToolz", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoToolz.csproj", "{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Droid.MonoGame", "NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.Droid.MonoGame\NathansWay.Droid.MonoGame.csproj", "{05046D7A-62B0-4DE0-A033-1EACA8465F71}"
 EndProject
@@ -61,17 +61,6 @@ Global
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.Release|iPhone.Build.0 = Release|Any CPU
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.AppStore|iPhone.Build.0 = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhone.Build.0 = Release|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
@@ -108,6 +97,17 @@ Global
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.Release|iPhone.Build.0 = Release|iPhoneSimulator
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhone.Build.0 = Release|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{734EAA48-F1CA-481A-B391-0285BC0E8B40}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{61F33CB8-B0D6-4356-AA69-23AAFBFA014C}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{61F33CB8-B0D6-4356-AA69-23AAFBFA014C}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{61F33CB8-B0D6-4356-AA69-23AAFBFA014C}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU

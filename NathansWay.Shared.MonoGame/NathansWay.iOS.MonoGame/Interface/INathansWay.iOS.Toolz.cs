@@ -23,7 +23,7 @@ using Microsoft.Xna.Framework.Media;
 
 #endregion
 
-namespace NathansWay.iOS.Numeracy
+namespace NathansWay.iOS.MonoToolz
 {
 	public interface ITool
 	{

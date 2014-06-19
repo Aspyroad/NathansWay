@@ -38,12 +38,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Hammer\Game1.cs" />
-    <Compile Include="Common\ParallaxingBackground.cs" />
+    <Compile Include="Interface\INathansWay.iOS.Toolz.cs" />
+    <Compile Include="Common\ToolBox.iOS.Toolz.ParallaxingBg.cs" />
+    <Compile Include="Hammer\ToolBox.iOS.Toolz.Hammer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

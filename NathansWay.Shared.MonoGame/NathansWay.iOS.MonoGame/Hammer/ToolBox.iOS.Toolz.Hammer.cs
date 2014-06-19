@@ -1,9 +1,17 @@
-﻿#region Using Statements
-// System
+#region File Description
+//-----------------------------------------------------------------------------
+// iOS_MonogameViewGame.cs
+//
+// Microsoft XNA Community Game Platform
+// Copyright (C) Microsoft Corporation. All rights reserved.
+//-----------------------------------------------------------------------------
+#endregion
+
+#region Using Statements
 using System;
 using System.Collections.Generic;
 using System.Linq;
-// MonoGame
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,59 +21,46 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Media;
 
-#endregion
-namespace FlappyMonkey
-{
 
-	public enum GameState
-	{
-		Menu,
-		Playing,
-		Score
-	}
+
+#endregion
+
+namespace ToolBox.iOS.Toolz.Hammer
+{
 	/// <summary>
 	/// Default Project Template
 	/// </summary>
-	public class Game1 : Game
+	public class Hammer : Game
 	{
-		#region Fields
-		public static GameState State { get; set; }
+
+		#region Private Variables
 		GraphicsDeviceManager graphics;
 		SpriteBatch spriteBatch;
-
-		Texture2D wallTexture, topWallCapTexture, bottomWallCapTexture, 
-		playerTexture, groundBottom, gameOverTexture, scoreBoardTexture,scoreTexture, highScoreTexture;
-
+		Texture2D logoTexture;
+		Texture2D wallTexture, playerTexture, groundBottom;
 		bool accelActive;
 		int wallHeight;
 		Rectangle bottomGroundRect;
 		int scoreBoardPadding = 0;
-
-		// Represents the player
-		//Player player;
-		// Keyboard states used to determine key presses
-		////KeyboardState currentKeyboardState;
-		////KeyboardState previousKeyboardState;
-		// Gamepad states used to determine button presses
-		////GamePadState currentGamePadState;
-		////GamePadState previousGamePadState;
 		TouchCollection previousTouches;
 		TouchCollection currentTouches;
 		ParallaxingBackground ground;
-
+		ParallaxingBackground clouds1;
+		ParallaxingBackground clouds2;
+		// Conts
+		const int MaxWallheight = 920;
 		#endregion
 
-		#region Initialization
+	#region Initialization
 
-		public Game1 ()
-		{
-			graphics = new GraphicsDeviceManager (this) 
-			{
-				SupportedOrientations = DisplayOrientation.Portrait,
-				IsFullScreen = true,
-			};
+        public Hammer()  
+        {
 
+			graphics = new GraphicsDeviceManager(this);
+			
 			Content.RootDirectory = "Content";
+
+			graphics.IsFullScreen = false;
 		}
 
 		/// <summary>
@@ -74,12 +69,12 @@ namespace FlappyMonkey
 		/// </summary>
 		protected override void Initialize ()
 		{
-			State = GameState.Menu;
-
 			wallHeight = Math.Min (GraphicsDevice.Viewport.Height, MaxWallheight);
 			bottomGroundRect = new Rectangle (0, wallHeight + 1, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height - MaxWallheight);
 			//player = new Player ();
 			ground = new ParallaxingBackground ();
+			clouds1 = new ParallaxingBackground ();
+			clouds2 = new ParallaxingBackground ();
 			base.Initialize ();
 		}
 		int scoreScale = 3;
@@ -90,49 +85,16 @@ namespace FlappyMonkey
 		{
 			// Create a new SpriteBatch, which can be use to draw textures.
 			spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
-			
-			// TODO: use this.Content to load your game content here eg.
-			playerTexture = Content.Load<Texture2D> ("player");
-
-			//player.Initialize (playerTexture, new Vector2 (graphics.GraphicsDevice.Viewport.Width / 3, graphics.GraphicsDevice.Viewport.Height / 2));
-			//wallTexture = Content.Load<Texture2D> ("pipe");
-			//topWallCapTexture = Content.Load<Texture2D> ("pipeTopCap");
-			//bottomWallCapTexture = Content.Load<Texture2D> ("pipeBottomCap");
-
-			//font = Content.Load<SpriteFont> ("gameFont");
 
 			groundBottom = Content.Load<Texture2D> ("bottomGround");
 			ground.Initialize (Content, "ground", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -GamePhysics.WallSpeed, false);
-			//clouds1.Initialize (Content, "clouds1", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.25f, true);
-			//clouds2.Initialize (Content, "clouds2", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -(GamePhysics.WallSpeed + .5f), true);
-			//bushes.Initialize (Content, "bushes", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -1, false, true);
-			//buildings.Initialize (Content, "buildings", wallHeight, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.5f, false, true);
-
-			//Number.Initialize (Content);
-			//gameOverTexture = Content.Load<Texture2D> ("gameOver");
-			//scoreBoardTexture = Content.Load<Texture2D> ("scoreBackground");
-			//highScoreTexture = Content.Load<Texture2D> ("highScore");
-			//scoreTexture = Content.Load<Texture2D> ("score");
-			//gameOverPosition.X = (GraphicsDevice.Viewport.Width - (gameOverTexture.Width * 8)) / 2;
-			//scoreBoardRect.X = (int)gameOverPosition.X;
-			//scoreBoardRect.Width = gameOverTexture.Width * 8;
-			//scoreBoardPadding = gameOverTexture.Height;
-			//scoreBoardRect.Height = (scoreBoardPadding * 6) + highScoreTexture.Height + scoreTexture.Height + (int)(Number.Height * scoreScale * 2);
+			clouds1.Initialize (Content, "clouds1", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -.25f, true);
+			clouds2.Initialize (Content, "clouds2", 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, -(GamePhysics.WallSpeed + .5f), true);
 			Reset ();
 		}
 
 		public void Reset ()
 		{
-			State = GameState.Menu;
-			//wallSpanTime = GamePhysics.StartWallSpawnRate;
-			//player.Active = true;
-			//player.Health = 1;
-			//maxGap = GamePhysics.MaximumGapSize;
-			//score = 0;
-			//walls.Clear ();
-
-			var playerPosition = new Vector2 (graphics.GraphicsDevice.Viewport.Width / 3, graphics.GraphicsDevice.Viewport.Height / 2);
-			//player.Position = playerPosition;
 		}
 
 		#endregion
@@ -149,26 +111,13 @@ namespace FlappyMonkey
 			base.Update (gameTime);
 
 			// Save the previous state of the keyboard and game pad so we can determinesingle key/button presses
-			previousGamePadState = currentGamePadState;
-			previousKeyboardState = currentKeyboardState;
+
 			previousTouches = currentTouches;
 
 			// Read the current state of the keyboard and gamepad and store it
-			currentKeyboardState = Keyboard.GetState ();
-			currentGamePadState = GamePad.GetState (PlayerIndex.One);
 			currentTouches = TouchPanel.GetState ();
 
 
-			//Update the player
-			var shouldFly = Toggled (); //currentTouches.Any() || currentKeyboardState.IsKeyDown (Keys.Space) || currentGamePadState.IsButtonDown(Buttons.A) ;
-			if (shouldFly && State == GameState.Menu)
-				State = GameState.Playing;
-			else if (shouldFly && State == GameState.Score)
-				shouldFly = false;
-			player.Update (gameTime, shouldFly, wallHeight + 1, State == GameState.Menu);
-
-
-		
 			if (State != GameState.Score){
 				ground.Update ();
 				buildings.Update ();
@@ -323,7 +272,7 @@ namespace FlappyMonkey
 			ground.Draw (spriteBatch);
 
 
-//			// Draw the score
+			//			// Draw the score
 			if (State == GameState.Playing)
 				Number.Draw (spriteBatch, score, Number.Alignment.Center, new Rectangle (0, GraphicsDevice.Viewport.TitleSafeArea.Height / 4, GraphicsDevice.Viewport.TitleSafeArea.Width, 0), scoreScale);
 
@@ -348,8 +297,8 @@ namespace FlappyMonkey
 
 
 			}
-//			// Draw the player health
-//			spriteBatch.DrawString (font, "health: " + player.Health, new Vector2 (GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + 30), Color.White);
+			//			// Draw the player health
+			//			spriteBatch.DrawString (font, "health: " + player.Health, new Vector2 (GraphicsDevice.Viewport.TitleSafeArea.X, GraphicsDevice.Viewport.TitleSafeArea.Y + 30), Color.White);
 
 			// Stop drawing
 			spriteBatch.End ();
@@ -357,7 +306,5 @@ namespace FlappyMonkey
 
 			base.Draw (gameTime);
 		}
-
-		#endregion
 	}
 }
