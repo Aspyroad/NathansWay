@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ToolBox.Toolz.Hammer
+namespace NathansWay.Shared.MonoToolz
 {
 	public class HammerPhysics
 	{
