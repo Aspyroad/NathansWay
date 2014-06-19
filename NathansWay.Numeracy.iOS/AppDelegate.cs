@@ -21,7 +21,7 @@ using NathansWay.iOS.Numeracy.Settings;
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DB;
 
-using NathansWay.iOS.MonoToolz;
+using NathansWay.Shared.MonoToolz;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -51,6 +51,8 @@ namespace NathansWay.iOS.Numeracy
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+			#region Setup
+
 			// Setup services and globals for iOS
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
@@ -114,6 +116,8 @@ namespace NathansWay.iOS.Numeracy
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
+
+			#endregion
 
 			#region Setup Single View
 			// Start a settings library

@@ -23,7 +23,7 @@ using Microsoft.Xna.Framework.Media;
 
 #endregion
 
-namespace ToolBox.Toolz
+namespace NathansWay.Shared.MonoToolz
 {
 	public interface ITool
 	{
