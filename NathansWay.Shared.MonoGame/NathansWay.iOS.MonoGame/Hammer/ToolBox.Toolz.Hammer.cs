@@ -31,27 +31,39 @@ namespace NathansWay.Shared.MonoToolz
 		#region Private Variables
 
 		private Game _maingame;
+		private E__ToolBoxToolz _gametype;
 
 		#endregion
 
 		#region Constructor
 		public Hammer()
 		{
-			this.MainGame = new HammerGame ();
+			this._gametype = E__ToolBoxToolz.Hammerz;
+			this._maingame = new HammerGame ();
 		}
 		#endregion
+
+		#region Public Member
 
 		public Game MainGame
 		{
 			get { return _maingame; }
 		}
 
+		public E__ToolBoxToolz ToolType
+		{
+			get { return _gametype; }
+		}
+
+		#endregion
+
+		#region MainGame
+
 		private class HammerGame : Game
 		{
 
 			#region Private Variables
 
-			private HammerPhysics hammerphysics;
 			private GraphicsDeviceManager graphics;
 			private SpriteBatch spriteBatch;
 			private Texture2D logoTexturem, wallTexture, playerTexture, groundBottom;
@@ -76,7 +88,6 @@ namespace NathansWay.Shared.MonoToolz
 			public HammerGame()  
 	        {
 				graphics = new GraphicsDeviceManager(this);
-				hammerphysics = new HammerPhysics ();			
 				Content.RootDirectory = "Content";
 				graphics.IsFullScreen = false;
 			}
@@ -117,7 +128,7 @@ namespace NathansWay.Shared.MonoToolz
 					wallHeight, 
 					GraphicsDevice.Viewport.Width, 
 					GraphicsDevice.Viewport.Height, 
-					-this.hammerphysics.WallSpeed, 
+					-HammerPhysics.WallSpeed, 
 					false
 				);
 				this.clouds1.Initialize 
@@ -137,7 +148,7 @@ namespace NathansWay.Shared.MonoToolz
 					0, 
 					GraphicsDevice.Viewport.Width, 
 					GraphicsDevice.Viewport.Height, 
-					-(hammerphysics.WallSpeed + .5f), 
+					-(HammerPhysics.WallSpeed + .5f), 
 					true
 				);
 
@@ -220,7 +231,10 @@ namespace NathansWay.Shared.MonoToolz
 				base.Draw (gameTime);
 			}
 			#endregion
+
 		}
+
+		#endregion
 
 	}
 }

@@ -9,16 +9,7 @@ namespace NathansWay.iOS.Numeracy
         EditUpDown = 2,
         EditNumPad = 3       
     }
-
-	public enum E__ToolBoxToolz
-	{
-		Hammerz = 1,
-		Plierz = 2,
-		ScrewDriverz = 3,
-		SideCutterz = 4
-	}
-    
-    
+	   
 }
 
 

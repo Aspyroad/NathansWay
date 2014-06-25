@@ -48,6 +48,7 @@
     <Compile Include="Common\ToolBox.iOS.Toolz.ParallaxingBg.cs" />
     <Compile Include="Hammer\ToolBox.Toolz.Hammer.Physics.cs" />
     <Compile Include="Hammer\ToolBox.Toolz.Hammer.cs" />
+    <Compile Include="NathansWay.iOS.MonoToolz.Types.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

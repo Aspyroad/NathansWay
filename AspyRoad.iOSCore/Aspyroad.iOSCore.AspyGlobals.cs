@@ -44,7 +44,8 @@ namespace AspyRoad.iOSCore
 
 		public AspyWindow G__MainWindow
 		{
-			get { return (AspyWindow)UIApplication.SharedApplication.KeyWindow; }
+			//TODO : This is a terrible way of grabbing the window, your never sure wiht multiwindow apps
+			get { return (AspyWindow)UIApplication.SharedApplication.Windows [0]; }
 		}
 		
 		public AspyUIApplicationDelegate G__AppDelegate

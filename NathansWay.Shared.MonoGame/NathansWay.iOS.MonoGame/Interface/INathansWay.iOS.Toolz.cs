@@ -27,7 +27,8 @@ namespace NathansWay.Shared.MonoToolz
 {
 	public interface ITool
 	{
-		Game _maingame { get; }
+		E__ToolBoxToolz ToolType { get; }
+		Game MainGame { get; }
 	}
 }
 

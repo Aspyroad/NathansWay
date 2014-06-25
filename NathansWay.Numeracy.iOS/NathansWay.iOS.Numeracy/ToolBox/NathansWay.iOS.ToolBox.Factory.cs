@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
 // NathansWay
-using NathansWay.iOS.MonoToolz;
+using NathansWay.Shared.MonoToolz;
 
 
 
@@ -18,21 +18,50 @@ namespace NathansWay.iOS.Numeracy.ToolBox
 	public class ToolFactory
 	{
 		private ITool _newTool;
+		private ITool _oldTool;
 
-		public ToolFactory (E__ToolBoxToolz newTool)
+		public ToolFactory ()
 		{
-			// Create our tool...somehow.
+			//this.Intialize ();
 		}
 
 		private void Intialize ()
 		{
-
 		}
 
-		private ITool BrandNewTool ()
+		#region Public Members
+		public ITool CreateNewTool (E__ToolBoxToolz newTool)
 		{
-
+			switch (newTool)
+			{
+				case E__ToolBoxToolz.Hammerz:
+				{
+					_newTool = new Hammer ();
+					return _newTool;
+				}
+				case E__ToolBoxToolz.Plierz:
+				{
+					_newTool = new Hammer ();
+					return _newTool;
+				}
+				case E__ToolBoxToolz.ScrewDriverz:
+				{
+					_newTool = new Hammer ();
+					return _newTool;
+				}
+				case E__ToolBoxToolz.SideCutterz:
+				{
+					_newTool = new Hammer ();
+					return _newTool;
+				}
+				default:
+				{
+					_newTool = new Hammer ();
+					return _newTool;
+				}
+			}
 		}
+		#endregion
 	}
 }
 

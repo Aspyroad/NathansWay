@@ -182,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Info.plist" />
-    <BundleResource Include="Resources\.DS_Store" />
     <BundleResource Include="Content\AppImages\Exit.png" />
     <BundleResource Include="Content\AppImages\Kids%402x~ipad.png" />
     <BundleResource Include="Content\AppImages\Kids~ipad.png" />

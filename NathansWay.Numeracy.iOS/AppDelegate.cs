@@ -18,6 +18,7 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.Settings;
+using NathansWay.iOS.Numeracy.ToolBox;
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DB;
 
@@ -40,6 +41,8 @@ namespace NathansWay.iOS.Numeracy
 		private ISharedGlobal SharedGlobals;
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracySettings _NumeracySettings;
+		private List<NSObject> _applicationObservers;
+		private ToolFactory ToolBuilder;
 
 		#region Overrides
 		//
@@ -51,8 +54,10 @@ namespace NathansWay.iOS.Numeracy
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-			#region Setup
 
+			#region Setup
+			// Setup the window
+			window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Setup services and globals for iOS
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
@@ -103,14 +108,17 @@ namespace NathansWay.iOS.Numeracy
 			// Register app/user settings
 			iOSCoreServiceContainer.Register<IAspySettings>(this._NumeracySettings);
 
-			// Setup the window
-			window = new AspyWindow(UIScreen.MainScreen.Bounds);
+
 			// Using viewcontroller constructor to run the nib
 			ViewContainerController = new AspyViewController();
 
 			// Add our view variables 
 			iOSCoreServiceContainer.Register<AspyViewController>(this.ViewContainerController);
 			iOSCoreServiceContainer.Register<AspyWindow> (window);
+
+			// Build a ToolBoxFactory
+			ToolBuilder = new ToolFactory();
+			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
 
 			//_testDb = new NathansWayDbBase();
 
@@ -119,16 +127,20 @@ namespace NathansWay.iOS.Numeracy
 
 			#endregion
 
-			#region Setup Single View
-			// Start a settings library
+			#region Setup UI
+			// Start a toolfactory
+			ITool hammer;
+			hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
+
+			AspyViewController _vcHammer = hammer.MainGame.Services.GetService<AspyViewController>();
 
 			// Temp workspace setup code. Mormally this will be behind a menu button.
 			vcWorkSpace _workspace = new vcWorkSpace();
-			vcMainGame _maingame = new vcMainGame();
+			//vcMainGame _maingame = new vcMainGame();
 			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
 
 			ViewContainerController = new AspyViewController();
-			ViewContainerController.AddAndDisplayController(_maingame);
+			ViewContainerController.AddAndDisplayController(_vcHammer);
 			ViewContainerController.AddAndDisplayController(_mainworkspace);
 			//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
 
@@ -140,8 +152,76 @@ namespace NathansWay.iOS.Numeracy
 			window.MakeKeyAndVisible ();
 			window.Tag = 0;
 
+			hammer.MainGame.Run ();
+
 			return true;
 		}
+
+		private void BeginObservingUIApplication ()
+		{
+			var events = new Tuple<NSString, Action<NSNotification>>[] 
+			{
+				Tuple.Create (
+					UIApplication.WillEnterForegroundNotification,
+					new Action<NSNotification> (Application_WillEnterForeground)),
+				Tuple.Create (
+					UIApplication.DidEnterBackgroundNotification,
+					new Action<NSNotification> (Application_DidEnterBackground)),
+				Tuple.Create (
+					UIApplication.DidBecomeActiveNotification,
+					new Action<NSNotification> (Application_DidBecomeActive)),
+				Tuple.Create (
+					UIApplication.WillResignActiveNotification,
+					new Action<NSNotification> (Application_WillResignActive)),
+				Tuple.Create (
+					UIApplication.WillTerminateNotification,
+					new Action<NSNotification> (Application_WillTerminate)),
+				Tuple.Create (
+					UIApplication.DidReceiveMemoryWarningNotification,
+					new Action<NSNotification> (Application_DidReceiveMemoryWarning))
+			};
+
+			foreach (var entry in events)
+			{
+				_applicationObservers.Add (NSNotificationCenter.DefaultCenter.AddObserver (entry.Item1, entry.Item2));
+			}
+		}
+	
+		#region Notification Handling
+
+		private void Application_WillEnterForeground (NSNotification notification)
+		{
+			// Already handled in Application_DidBecomeActive. See below for IsActive state change.	
+		}
+
+		private void Application_DidEnterBackground (NSNotification notification)
+		{
+			// Already handled in Application_WillResignActive. See below for IsActive state change.
+		}
+
+		private void Application_DidBecomeActive (NSNotification notification)
+		{
+
+		}
+
+		private void Application_WillResignActive (NSNotification notification)
+		{
+
+		}
+
+		private void Application_WillTerminate (NSNotification notification)
+		{
+
+		}
+
+		private void Application_DidReceiveMemoryWarning (NSNotification notification)
+		{
+			// FIXME: Possibly add some more sophisticated behavior here.  It's
+			//        also possible that this is not iOSGamePlatform's job.
+			GC.Collect ();
+		}
+
+		#endregion //Notification Handling
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
 		{
