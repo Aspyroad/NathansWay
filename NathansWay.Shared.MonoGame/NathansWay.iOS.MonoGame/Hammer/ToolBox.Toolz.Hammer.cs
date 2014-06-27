@@ -120,11 +120,11 @@ namespace NathansWay.Shared.MonoToolz
 			{
 				// Create a new SpriteBatch, which can be use to draw textures.
 				this.spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
-				this.groundBottom = Content.Load<Texture2D> ("bottomGround");
+				this.groundBottom = Content.Load<Texture2D> ("Hammer\\bottomGround");
 				this.ground.Initialize 
 				(
 					Content, 
-					"ground", 
+					"Hammer\\ground", 
 					wallHeight, 
 					GraphicsDevice.Viewport.Width, 
 					GraphicsDevice.Viewport.Height, 
@@ -134,7 +134,7 @@ namespace NathansWay.Shared.MonoToolz
 				this.clouds1.Initialize 
 				(
 					Content, 
-					"clouds1", 
+					"Hammer\\clouds1", 
 					0, 
 					GraphicsDevice.Viewport.Width, 
 					GraphicsDevice.Viewport.Height, 
@@ -144,7 +144,7 @@ namespace NathansWay.Shared.MonoToolz
 				this.clouds2.Initialize 
 				(
 					Content, 
-					"clouds2", 
+					"Hammer\\clouds2", 
 					0, 
 					GraphicsDevice.Viewport.Width, 
 					GraphicsDevice.Viewport.Height, 

@@ -39,7 +39,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Interface\" />
-    <Folder Include="Content\Hammer\" />
+    <Folder Include="Resources\Content\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClass.cs" />
@@ -58,9 +58,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Hammer\ground.png" />
-    <None Include="Content\Hammer\clouds1.png" />
-    <None Include="Content\Hammer\clouds2.png" />
-    <None Include="Content\Hammer\logo.png" />
+    <BundleResource Include="Resources\Content\Hammer\clouds1.png" />
+    <BundleResource Include="Resources\Content\Hammer\clouds2.png" />
+    <BundleResource Include="Resources\Content\Hammer\ground.png" />
+    <BundleResource Include="Resources\Content\Hammer\logo.png" />
+    <BundleResource Include="Resources\Content\Hammer\bottomGround.png" />
   </ItemGroup>
 </Project>
