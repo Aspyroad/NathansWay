@@ -18,6 +18,7 @@ namespace AspyRoad.iOSCore
         private PointF __PntWindowLandscapeCenter;
 		private bool __IsRetina;
 		private bool __IsiPad;
+		private bool __PrefersStatusBarHidden;
 		
         private bool _ShouldAutoRotate;
 		private bool _InitializeAllViewOrientation;
@@ -118,6 +119,12 @@ namespace AspyRoad.iOSCore
 			get { return _InitializeAllViewOrientation; }
 			set { _InitializeAllViewOrientation = value; }		
 		}	
+
+		public bool G__PrefersStatusBarHidden
+		{
+			get { return __PrefersStatusBarHidden; }
+			set { __PrefersStatusBarHidden = value; }
+		}
 		
 		public G__Orientation G__ViewOrientation
 		{
@@ -179,6 +186,8 @@ namespace AspyRoad.iOSCore
 			//  Return portait or landscape
             this.__PntWindowPortaitCenter = new PointF(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
             this.__PntWindowLandscapeCenter = new PointF(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
+
+			this.__PrefersStatusBarHidden = false;
 		}
 		
 		// iOS UIScreen Bounds are always returned in portait mode
