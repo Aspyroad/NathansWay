@@ -59,7 +59,7 @@ namespace NathansWay.Shared.MonoToolz
 
 		#region MainGame
 
-		private class HammerGame : Game
+		private class HammerGame : AspyGame
 		{
 
 			#region Private Variables
