@@ -208,6 +208,9 @@ namespace AspyRoad.iOSCore
 		// But they are totally important when it comes to designing landscape only apps.
 		// When the user flips the interface, (when the app first starts of cooarse! these are called!!)
 		// If you dont return the right values, it cost you a lot of time.
+
+		#region Autorotation for iOS 5 or older
+
 		[Obsolete ("Depreciated - needed for iOS 5", false)]
 		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
 		{
@@ -220,7 +223,11 @@ namespace AspyRoad.iOSCore
 				return true;
 			}
 		}
-		// Now standard - iOS 6
+
+		#endregion
+
+		#region Autorotation for iOS 6 or newer
+
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{
 			return this.iOSGlobals.G__6_SupportedOrientationMasks;
@@ -242,6 +249,17 @@ namespace AspyRoad.iOSCore
 
 			return tmpresult;
 		}
+
+		#endregion
+
+		#region Hide statusbar for iOS 7 and above
+
+		public override bool PrefersStatusBarHidden ()
+		{
+			return this.iOSGlobals.G__PrefersStatusBarHidden;
+		}
+
+		#endregion
 
 #endregion
 		
