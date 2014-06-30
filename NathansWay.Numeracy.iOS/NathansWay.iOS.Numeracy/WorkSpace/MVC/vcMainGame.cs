@@ -80,28 +80,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 	#region VCSettings
 
-	public class vcs_maingame : VcSettings
-	{
-		public vcs_maingame (IAspyGlobals iOSGlobals)
-		{
-			this.VcTag = 5;
-			this.VcName = "VC_MainGame";
-
-			this.HasBorder = true;
-			this.BorderColor = UIColor.Black;
-			this.BorderSize = 1.0f;
-			this.BackColor = UIColor.Orange;
-
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					0,
-					iOSGlobals.G__RectWindowLandscape.Width,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
-				);
-		}
-	}
+//	public class vcs_maingame : VcSettings
+//	{
+//		public vcs_maingame (IAspyGlobals iOSGlobals)
+//		{
+//			this.VcTag = 5;
+//			this.VcName = "VC_MainGame";
+//
+//			this.HasBorder = true;
+//			this.BorderColor = UIColor.Black;
+//			this.BorderSize = 1.0f;
+//			this.BackColor = UIColor.White;
+//
+//			this.FrameSize = 
+//				new RectangleF 
+//				(
+//					0,
+//					0,
+//					iOSGlobals.G__RectWindowLandscape.Width,
+//					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
+//				);
+//		}
+//	}
 
 	#endregion
 }

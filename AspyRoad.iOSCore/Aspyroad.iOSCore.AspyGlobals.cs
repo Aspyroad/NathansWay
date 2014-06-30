@@ -39,13 +39,13 @@ namespace AspyRoad.iOSCore
 		
 		#endregion
 
-		#region PublicMembers
+		#region Public Members
 
         #region Constants
 
 		public AspyWindow G__MainWindow
 		{
-			//TODO : This is a terrible way of grabbing the window, your never sure wiht multiwindow apps
+			//TODO : This is a terrible way of grabbing the window, your never sure with multiwindow apps
 			get { return (AspyWindow)UIApplication.SharedApplication.Windows [0]; }
 		}
 		
