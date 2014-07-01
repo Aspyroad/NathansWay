@@ -74,31 +74,4 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		
 		#endregion
     }
-
-	#region VCSettings
-
-	public class vcs_mainworkspace : VcSettings
-	{
-		public vcs_mainworkspace (IAspyGlobals iOSGlobals)
-		{
-			this.VcTag = 6;
-			this.VcName = "VC_MainWorkSpace";
-
-			this.HasBorder = true;
-			this.BorderColor = UIColor.Black;
-			this.BorderSize = 1.0f;
-			this.BackColor = UIColor.White;
-
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
-					iOSGlobals.G__RectWindowLandscape.Width,
-					(iOSGlobals.G__RectWindowLandscape.Height / 4)
-				);
-		}
-	}
-
-	#endregion
 }        
