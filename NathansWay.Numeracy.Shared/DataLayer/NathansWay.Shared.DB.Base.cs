@@ -11,7 +11,7 @@ using NathansWay.Shared.Global;
 
 namespace NathansWay.Shared.DB
 {
-    public class NathansWayDbBase : SQLiteConnection
+	public class NathansWayDbBase : SQLiteConnection
     {
         #region Class Variables
 
