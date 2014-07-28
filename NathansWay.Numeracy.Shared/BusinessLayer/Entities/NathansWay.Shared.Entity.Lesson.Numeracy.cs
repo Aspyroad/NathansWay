@@ -4,6 +4,7 @@ using System;
 using SQLite.Net.Attributes;
 // Shared
 using NathansWay.Shared;
+using NathansWay.Shared.BUS.Services;
 
 namespace NathansWay.Shared.BUS.Entity
 {
