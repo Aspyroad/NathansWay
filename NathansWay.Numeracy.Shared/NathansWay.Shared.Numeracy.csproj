@@ -44,10 +44,10 @@
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Teacher.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Student.cs" />
     <Compile Include="NathansWay.Shared.Types.cs" />
-    <Compile Include="BusinessLayer\Contracts\NathansWay.Shared.Entity.Base.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.School.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Lesson.Numeracy.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetail.Numeracy.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Base.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
