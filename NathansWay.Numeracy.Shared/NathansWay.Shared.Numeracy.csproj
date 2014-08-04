@@ -36,7 +36,6 @@
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
     <Compile Include="DataLayer\NathansWay.Shared.DB.Base.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.cs" />
     <Compile Include="NathansWay.Shared.Global.cs" />
     <Compile Include="DataLayer\NathansWay.Shared.DB.Factory.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Teacher.cs" />
@@ -50,6 +49,7 @@
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Entity.cs" />
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Services.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Base.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
