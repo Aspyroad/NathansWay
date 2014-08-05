@@ -39,7 +39,10 @@ namespace NathansWay.iOS.Numeracy
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
+		// Database
 		private ISQLitePlatform _iOSSQLitePLatform;
+		private NathansWayDbBase _iOSDbContext;
+
 		private NumeracySettings _NumeracySettings;
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
@@ -65,8 +68,6 @@ namespace NathansWay.iOS.Numeracy
 			this._NumeracySettings = new NumeracySettings(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
-			// Set Sqlite db Platform
-			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
@@ -78,6 +79,11 @@ namespace NathansWay.iOS.Numeracy
 			this.SharedGlobals.GS__FolderNameLibrary = Path.Combine (this.SharedGlobals.GS__DocumentsPath, "../Library/"); 
 			// Full db path
 			this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
+
+			// Set Sqlite db Platform
+			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
+			// Set up a database context
+			this._iOSDbContext = new NathansWayDbBase(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
 
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
@@ -103,6 +109,8 @@ namespace NathansWay.iOS.Numeracy
 			SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
+			// Register the database connection
+			SharedServiceContainer.Register<NathansWayDbBase>(this._iOSDbContext);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);

@@ -20,13 +20,14 @@ namespace NathansWay.Shared.DB
 	public class NathansWayDbBase : SQLiteConnection
     {
         #region Class Variables
-		protected ISharedGlobal _sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
+		protected ISharedGlobal _sharedglobal;
 		#if NETFX_CORE
 		private static readonly string Path = "Database.db"; //TODO: change this later
 		#elif NCRUNCH
 		private static readonly string Path = System.IO.Path.GetTempFileName();
 		#else
-		private static readonly string Path = _sharedglobal.GS__FullDbPath;
+		//private static readonly string Path = _sharedglobal.GS__FullDbPath;
+		private static readonly string Path;
 		#endif
 		private static bool initialized = false;
 		private ISQLitePlatform _sqliteplatform;
@@ -45,7 +46,9 @@ namespace NathansWay.Shared.DB
 
         public NathansWayDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base (_SQLitePlatform, _path)
         {
-			_sqliteplatform = _SQLitePlatform;        
+			_sqliteplatform = _SQLitePlatform; 
+			_sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
+			Path = _path;
         }
 
         #endregion
@@ -56,7 +59,7 @@ namespace NathansWay.Shared.DB
 		/// <returns></returns>
 		public static Task Initialize (CancellationToken cancellationToken)
 		{
-			return CreateDatabase(new SQLiteAsyncConnection(Path, true), cancellationToken);
+			return CreateDatabase(new SQLiteAsyncConnection()(Path, true), cancellationToken);
 		}
 
 		/// <summary>

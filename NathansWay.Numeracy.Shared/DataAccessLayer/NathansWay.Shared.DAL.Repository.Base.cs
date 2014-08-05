@@ -1,13 +1,21 @@
 ﻿// Core
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
 using System.IO;
 // Sqlite -Net -PLC Nuget
 using SQLite.Net;
+using SQLite.Net.Async;
+using SQLite.Net.Attributes;
 using SQLite.Net.Interop;
 // NathansWay
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DAL.Repository;
+using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL
 {
@@ -16,7 +24,7 @@ namespace NathansWay.Shared.DAL
 
 		protected static object locker = new object ();  
         protected static string dbLocation;     
-        protected NathansWay.Shared.Global.ISharedGlobal _sharedGlobal;
+		protected ISharedGlobal _sharedGlobal;
 
         public NWRepository ()
 		{
@@ -28,7 +36,7 @@ namespace NathansWay.Shared.DAL
 
 		#region Private Members
 
-		public IEnumerable<T> GetItems<T> () where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
+		public Task<IEnumerable<T>> GetItemsAsync<T> () where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
 		{
 			lock (locker) 
 			{
