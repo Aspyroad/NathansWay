@@ -50,6 +50,7 @@
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Services.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Base.cs" />
+    <Compile Include="DataLayer\NathansWay.Shared.DB.Numeracy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

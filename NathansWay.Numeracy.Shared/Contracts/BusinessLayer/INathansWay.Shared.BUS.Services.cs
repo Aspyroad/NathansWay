@@ -22,9 +22,7 @@ namespace NathansWay.Shared.BUS.Services.Data
     /// </summary>
     public interface IBusinessDataServices
 	{
-		Task<int>  SaveEntity (IBusEntity t, CancellationToken cancellationToken = default(CancellationToken));
-
-
+		Task<int>  SomeBusOperation (IBusEntity t, CancellationToken cancellationToken = default(CancellationToken));
 
 		//        /// <summary>
 //        /// Gets a list of assignments

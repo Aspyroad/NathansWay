@@ -12,6 +12,7 @@ using SQLite.Net;
 using SQLite.Net.Async;
 using SQLite.Net.Attributes;
 using SQLite.Net.Interop;
+
 // NathansWay
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DAL.Repository;
@@ -38,9 +39,12 @@ namespace NathansWay.Shared.DAL
 
 		public Task<IEnumerable<T>> GetItemsAsync<T> () where T : NathansWay.Shared.BUS.Entity.IBusEntity, new ()
 		{
-			lock (locker) 
+			using (var db = new SQLiteConnection (dbLocation))
 			{
-				return (from i in Table<T> () select i).ToList ();
+				lock (locker)
+				{
+					return (from i in db.Table<T> () select i).ToList ();
+				}
 			}
 		}
 
