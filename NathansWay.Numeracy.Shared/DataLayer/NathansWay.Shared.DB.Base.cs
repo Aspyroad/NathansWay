@@ -99,26 +99,34 @@ namespace NathansWay.Shared.DB
 			});
 		}
 
-		protected abstract Task InitializeData (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+		protected abstract class InitializeData<IBusEntity> where IBusEntity : new()
 		{
-//			return Task.Factory.StartNew(() =>
-//			{
-//				var countTask = connection.Table<T>().CountAsync();
-//				countTask.Wait();
-//
-//				//If no records exist, insert our initial data
-//				if (countTask.Result == 0)
-//				{
-//					// Insert our data
-//					//var insertTask = connection.InsertAllAsync(TestData.All);
-//
-//					//Wait for inserts
-//					//insertTask.Wait();
-//
-//					//Mark data as inserted created
-//					datainitialized = true;
-//				}
-//			});
+			public InitializeData (IBusEntity _enititytable, SQLiteAsyncConnection _connection, CancellationToken _cancellationToken)
+			{
+				Initialize(_enititytable, _connection, _cancellationToken);
+			}
+
+			private Task Initialize(IBusEntity enititytable, SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+			{
+				return Task.Factory.StartNew(() =>
+				{
+					var countTask = connection.Table<IBusEntity>().CountAsync();
+					countTask.Wait();
+
+					//If no records exist, insert our initial data
+					if (countTask.Result == 0)
+					{
+						// Insert our data
+						//var insertTask = connection.InsertAllAsync(TestData.All);
+
+						//Wait for inserts
+						//insertTask.Wait();
+
+						//Mark data as inserted created
+						datainitialized = true;
+					}
+				});
+			}
 		}
     }
 }
