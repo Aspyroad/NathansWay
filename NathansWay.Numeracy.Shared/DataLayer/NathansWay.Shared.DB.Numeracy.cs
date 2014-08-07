@@ -16,20 +16,20 @@ namespace NathansWay.Shared.DB
 {
 	public class NumeracyDB : NWDbBase
 	{
-		private readonly Type [] tableTypes = new Type []
-		{
-			typeof(EntityLesson),
-			typeof(EntityLessonDetail),
-			typeof(EntitySchool),
-			typeof(EntityStudent),
-			typeof(EntityTeacher)
-		};
-
-
-
 		public NumeracyDB (ISQLitePlatform _SQLitePlatform, string _path) : base()
 		{
-			this.
+			// Inialize tables
+			tableTypes = new Type []
+			{
+				typeof(EntityLesson),
+				typeof(EntityLessonDetail),
+				typeof(EntitySchool),
+				typeof(EntityStudent),
+				typeof(EntityTeacher)
+			};
+
+
+			//this.
 		}
 	}
 }

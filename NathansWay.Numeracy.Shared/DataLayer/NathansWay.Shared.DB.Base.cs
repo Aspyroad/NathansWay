@@ -20,28 +20,22 @@ namespace NathansWay.Shared.DB
 	/// <summary>
 	/// A helper class for working with SQLite
 	/// </summary>
-	public class NWDbBase
+	public abstract class NWDbBase<T>
     {
         #region Class Variables
+		// Protected base members
 		protected ISharedGlobal _sharedglobal;
-		#if NETFX_CORE
-		private static readonly string Path = "Database.db"; //TODO: change this later
-		#elif NCRUNCH
-		private static readonly string Path = System.IO.Path.GetTempFileName();
-		#else
-		//private static readonly string Path = _sharedglobal.GS__FullDbPath;
-		private readonly string Path;
-		#endif
-		private bool initialized = false;
+		protected Type[] tableTypes;
+		protected bool dbinitialized = false;
+		protected bool datainitialized = false;
+		// Private
+		private string Path;
 		private ISQLitePlatform _sqliteplatform;
 		private SQLiteAsyncConnection _ConnectionAsync;
 		private SQLiteConnection _Connection;
 		private SQLiteConnectionWithLock _ConnectionLock;
 		private SQLiteConnectionString _ConnectionString;
-
-
-
-        #endregion
+		#endregion
 
         #region Constructors
 
@@ -60,9 +54,12 @@ namespace NathansWay.Shared.DB
 		/// For use within the app on startup, this will create the database
 		/// </summary>
 		/// <returns></returns>
-		public static Task Initialize (CancellationToken cancellationToken)
+		public Task Initialize (Func<bool> CheckExisting, CancellationToken cancellationToken)
 		{
-			return CreateDatabase(new SQLiteAsyncConnection()(Path, true), cancellationToken);
+			if (!CheckExisting ())
+			{
+				return CreateDatabase (new SQLiteAsyncConnection () (Path, true), cancellationToken);
+			}
 		}
 
 		/// <summary>
@@ -71,39 +68,57 @@ namespace NathansWay.Shared.DB
 		public SQLiteAsyncConnection GetConnection (CancellationToken cancellationToken)
 		{
 			var connection = new SQLiteAsyncConnection(()=>_ConnectionLock);
-			if (!initialized)
+			if (!dbinitialized)
 			{
 				CreateDatabase(connection, cancellationToken).Wait();
 			}
 			return connection;
 		}
 
-		private Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+		protected Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
 		{
 			return Task.Factory.StartNew(() =>
 			{
 				//Create the tables
-				var createTask = connection.CreateTablesAsync (tableTypes);
-				createTask.Wait();
-
-				//Check if there are any teachers.
-				//There should always be a
-				var countTask = connection.Table<EntityTeacher>().CountAsync();
-				countTask.Wait();
-
-				//If no assignments exist, insert our initial data
-				if (countTask.Result == 0)
+				// Check that table types have been defined
+				if (tableTypes != null)
 				{
-					//var insertTask = connection.InsertAllAsync(TestData.All);
+					var createTask = connection.CreateTablesAsync (tableTypes);
+					createTask.Wait();
 
-					//Wait for inserts
-					//insertTask.Wait();
-
-					//Mark database created
-					initialized = true;
+					if (createTask.Result == 0)
+					{
+						dbinitialized = true;
+					}
 				}
+				else
+				{
+					throw new ArgumentNullException("Type[] tableTypes has not been intialized");
+				}
+					
 			});
 		}
 
+		protected abstract Task InitializeData (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+		{
+//			return Task.Factory.StartNew(() =>
+//			{
+//				var countTask = connection.Table<T>().CountAsync();
+//				countTask.Wait();
+//
+//				//If no records exist, insert our initial data
+//				if (countTask.Result == 0)
+//				{
+//					// Insert our data
+//					//var insertTask = connection.InsertAllAsync(TestData.All);
+//
+//					//Wait for inserts
+//					//insertTask.Wait();
+//
+//					//Mark data as inserted created
+//					datainitialized = true;
+//				}
+//			});
+		}
     }
 }
