@@ -14,18 +14,15 @@ using SQLite.Net.Async;
 
 namespace NathansWay.Shared.DB
 {
-	//TODO: This class neesd to be split into a base class! Then add the entitys in an inherited class
-
 
 	/// <summary>
 	/// A helper class for working with SQLite
 	/// </summary>
-	public abstract class NWDbBase<T>
+	public abstract class NWDbBase
     {
         #region Class Variables
 		// Protected base members
 		protected ISharedGlobal _sharedglobal;
-		protected Type[] tableTypes;
 		protected bool dbinitialized = false;
 		protected bool datainitialized = false;
 		// Private
@@ -75,15 +72,24 @@ namespace NathansWay.Shared.DB
 			return connection;
 		}
 
+		/// <summary>
+		/// Array of all Entities within the database.
+		/// </summary>
+		/// <value>Type Array</value>
+		public abstract Type[] TableType
+		{
+			get;
+		}
+
 		protected Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
 		{
 			return Task.Factory.StartNew(() =>
 			{
 				//Create the tables
 				// Check that table types have been defined
-				if (tableTypes != null)
+				if (TableType != null)
 				{
-					var createTask = connection.CreateTablesAsync (tableTypes);
+					var createTask = connection.CreateTablesAsync (TableType);
 					createTask.Wait();
 
 					if (createTask.Result == 0)
@@ -99,7 +105,7 @@ namespace NathansWay.Shared.DB
 			});
 		}
 
-		protected abstract class InitializeData<IBusEntity> where IBusEntity : new()
+		protected class InitializeData<IBusEntity> where IBusEntity : new()
 		{
 			public InitializeData (IBusEntity _enititytable, SQLiteAsyncConnection _connection, CancellationToken _cancellationToken)
 			{
@@ -121,10 +127,10 @@ namespace NathansWay.Shared.DB
 
 						//Wait for inserts
 						//insertTask.Wait();
-
-						//Mark data as inserted created
-						datainitialized = true;
 					}
+
+					//Mark data as inserted created
+					datainitialized = true;
 				});
 			}
 		}

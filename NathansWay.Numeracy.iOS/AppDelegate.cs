@@ -41,7 +41,7 @@ namespace NathansWay.iOS.Numeracy
 		private ISharedGlobal SharedGlobals;
 		// Database
 		private ISQLitePlatform _iOSSQLitePLatform;
-		private NathansWayDbBase _DbContext;
+		private NumeracyDB _DbContext;
 
 		private NumeracySettings _NumeracySettings;
 		private List<NSObject> _applicationObservers;
@@ -83,7 +83,7 @@ namespace NathansWay.iOS.Numeracy
 			// Set Sqlite db Platform
 			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
-			this._DbContext = new NathansWayDbBase(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
+			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
 
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
@@ -110,7 +110,7 @@ namespace NathansWay.iOS.Numeracy
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
-			SharedServiceContainer.Register<NathansWayDbBase>(this._DbContext);
+			SharedServiceContainer.Register<NumeracyDB>(this._DbContext);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);

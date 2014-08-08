@@ -16,10 +16,12 @@ namespace NathansWay.Shared.DB
 {
 	public class NumeracyDB : NWDbBase
 	{
+		private Type[] _tableTypes;
+
 		public NumeracyDB (ISQLitePlatform _SQLitePlatform, string _path) : base()
 		{
 			// Inialize tables
-			tableTypes = new Type []
+			_tableTypes = new Type []
 			{
 				typeof(EntityLesson),
 				typeof(EntityLessonDetail),
@@ -27,9 +29,35 @@ namespace NathansWay.Shared.DB
 				typeof(EntityStudent),
 				typeof(EntityTeacher)
 			};
+		}
+
+		public override Type[] TableType
+		{
+			get
+			{
+				return _tableTypes;
+			}
+		}
 
 
-			//this.
+
+		public Task<T> GetAsync<T>(object pk) where T : new()
+		{
+			if (pk == null)
+			{
+				throw new ArgumentNullException("pk");
+			}
+			return Task.Factory.StartNew<T>(
+			delegate
+			{
+				SQLiteConnectionWithLock connection = this.GetConnection();
+				T result;
+				using (connection.Lock())
+				{
+					result = connection.Get<T>(pk);
+				}
+				return result;
+			}, CancellationToken.None, this._taskCreationOptions, this._taskScheduler ?? TaskScheduler.get_Default());
 		}
 	}
 }
