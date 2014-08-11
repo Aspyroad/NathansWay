@@ -50,11 +50,12 @@ namespace NathansWay.Shared.DB
 			return Task.Factory.StartNew<T>(
 			delegate
 			{
-				SQLiteConnectionWithLock connection = this.GetConnection();
+				SQLiteConnectionWithLock connection = this.GetAsyncConnection();
 				T result;
 				using (connection.Lock())
 				{
 					result = connection.Get<T>(pk);
+
 				}
 				return result;
 			}, CancellationToken.None, this._taskCreationOptions, this._taskScheduler ?? TaskScheduler.get_Default());

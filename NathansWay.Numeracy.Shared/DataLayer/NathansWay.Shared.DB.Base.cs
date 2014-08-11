@@ -62,14 +62,23 @@ namespace NathansWay.Shared.DB
 		/// <summary>
 		/// Global way to grab a connection to the database, make sure to wrap in a using
 		/// </summary>
-		public SQLiteAsyncConnection GetConnection (CancellationToken cancellationToken)
+		public SQLiteAsyncConnection GetAsyncConnection (CancellationToken cancellationToken)
 		{
-			var connection = new SQLiteAsyncConnection(()=>_ConnectionLock);
+			var connAsync = new SQLiteAsyncConnection(()=>_ConnectionLock);
 			if (!dbinitialized)
 			{
-				CreateDatabase(connection, cancellationToken).Wait();
+				CreateDatabase(connAsync, cancellationToken).Wait();
 			}
-			return connection;
+			return connAsync;
+		}
+
+		/// <summary>
+		/// Global way to grab a connection to the database, make sure to wrap in a using
+		/// </summary>
+		public SQLiteConnection GetConnection ()
+		{
+			var conn = new SQLiteConnection(_sqliteplatform, Path, false);
+			return conn;
 		}
 
 		/// <summary>
