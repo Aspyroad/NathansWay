@@ -110,7 +110,7 @@ namespace NathansWay.iOS.Numeracy
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
-			SharedServiceContainer.Register<NumeracyDB>(this._DbContext);
+			SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);

@@ -6,11 +6,12 @@ using System.Threading;
 // Sqlite -Net -PLC Nuget
 using SQLite.Net;
 using SQLite.Net.Interop;
+using SQLite.Net.Async;
 // NWShared
 using NathansWay.Shared.Global;
 using NathansWay.Shared.BUS.Entity;
 using System.Threading.Tasks;
-using SQLite.Net.Async;
+
 
 namespace NathansWay.Shared.DB
 {
@@ -18,7 +19,7 @@ namespace NathansWay.Shared.DB
 	/// <summary>
 	/// A helper class for working with SQLite
 	/// </summary>
-	public abstract class NWDbBase
+	public abstract class NWDbBase : INWDatabaseContext
     {
         #region Class Variables
 		// Protected base members
@@ -35,8 +36,7 @@ namespace NathansWay.Shared.DB
 		#endregion
 
         #region Constructors
-
-		public NWDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base (_SQLitePlatform, _path)
+		public NWDbBase (ISQLitePlatform _SQLitePlatform, string _path) : base ()
         {
 			_sqliteplatform = _SQLitePlatform; 
 			_sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
@@ -44,30 +44,39 @@ namespace NathansWay.Shared.DB
 			_ConnectionLock = new SQLiteConnectionWithLock (_sqliteplatform, _ConnectionString);
 			Path = _path;
         }
-
         #endregion
 
 		/// <summary>
 		/// For use within the app on startup, this will create the database
 		/// </summary>
 		/// <returns></returns>
-		public Task Initialize (Func<bool> CheckExisting, CancellationToken cancellationToken)
+		public virtual Task Initialize (Func<bool> CheckExisting, CancellationTokenSource cancellationToken)
 		{
 			if (!CheckExisting ())
 			{
-				return CreateDatabase (new SQLiteAsyncConnection () (Path, true), cancellationToken);
+				return CreateDatabase (new SQLiteAsyncConnection (Path, true), cancellationToken.Token);
 			}
 		}
 
 		/// <summary>
-		/// Global way to grab a connection to the database, make sure to wrap in a using
+		/// Basic global async connection to the database, make sure to wrap in a using...
 		/// </summary>
-		public SQLiteAsyncConnection GetAsyncConnection (CancellationToken cancellationToken)
+		public virtual SQLiteAsyncConnection GetAsyncConnection ()
+		{
+			var connAsync = new SQLiteAsyncConnection(()=>_ConnectionLock);
+			return connAsync;
+		}
+
+		/// <summary>
+		/// Overload connection to the database, needs a cancellationtoken to create the db if it not initialized,
+		/// make sure to wrap in a using...
+		/// </summary>
+		public virtual SQLiteAsyncConnection GetAsyncConnection (CancellationTokenSource cancellationToken)
 		{
 			var connAsync = new SQLiteAsyncConnection(()=>_ConnectionLock);
 			if (!dbinitialized)
 			{
-				CreateDatabase(connAsync, cancellationToken).Wait();
+				CreateDatabase(connAsync, cancellationToken.Token).Wait();
 			}
 			return connAsync;
 		}
@@ -75,7 +84,7 @@ namespace NathansWay.Shared.DB
 		/// <summary>
 		/// Global way to grab a connection to the database, make sure to wrap in a using
 		/// </summary>
-		public SQLiteConnection GetConnection ()
+		public virtual SQLiteConnection GetConnection ()
 		{
 			var conn = new SQLiteConnection(_sqliteplatform, Path, false);
 			return conn;
@@ -90,7 +99,7 @@ namespace NathansWay.Shared.DB
 			get;
 		}
 
-		protected Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+		public virtual Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
 		{
 			return Task.Factory.StartNew(() =>
 			{
@@ -111,10 +120,10 @@ namespace NathansWay.Shared.DB
 					throw new ArgumentNullException("Type[] tableTypes has not been intialized");
 				}
 					
-			});
+			}, cancellationToken);
 		}
 
-		protected class InitializeData<IBusEntity> where IBusEntity : new()
+		public class InitializeData<IBusEntity> where IBusEntity : new()
 		{
 			public InitializeData (IBusEntity _enititytable, SQLiteAsyncConnection _connection, CancellationToken _cancellationToken)
 			{
@@ -143,5 +152,6 @@ namespace NathansWay.Shared.DB
 				});
 			}
 		}
+
     }
 }

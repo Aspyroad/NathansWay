@@ -14,11 +14,12 @@ using SQLite.Net.Async;
 
 namespace NathansWay.Shared.DB
 {
-	public class NumeracyDB : NWDbBase
+	public class NumeracyDB : NWDbBase, INWDatabaseContext
 	{
 		private Type[] _tableTypes;
+		private CancellationTokenSource _cancelToken;
 
-		public NumeracyDB (ISQLitePlatform _SQLitePlatform, string _path) : base()
+		public NumeracyDB (ISQLitePlatform _SQLitePlatform, string _path) : base(_SQLitePlatform, _path)
 		{
 			// Inialize tables
 			_tableTypes = new Type []
@@ -39,26 +40,21 @@ namespace NathansWay.Shared.DB
 			}
 		}
 
-
-
-		public Task<T> GetAsync<T>(object pk) where T : new()
+		private CancellationTokenSource CancelToken
 		{
-			if (pk == null)
+			get
 			{
-				throw new ArgumentNullException("pk");
+				return _cancelToken;
 			}
-			return Task.Factory.StartNew<T>(
-			delegate
+			set
 			{
-				SQLiteConnectionWithLock connection = this.GetAsyncConnection();
-				T result;
-				using (connection.Lock())
+				if (this._cancelToken != null)
 				{
-					result = connection.Get<T>(pk);
-
+					// Destroy the old token
+					this._cancelToken = null;
 				}
-				return result;
-			}, CancellationToken.None, this._taskCreationOptions, this._taskScheduler ?? TaskScheduler.get_Default());
+				this._cancelToken = value;
+			}
 		}
 	}
 }
