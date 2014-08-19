@@ -54,7 +54,7 @@ namespace NathansWay.Shared.DB
 		{
 			if (!CheckExisting ())
 			{
-				return CreateDatabase (new SQLiteAsyncConnection (Path, true), cancellationToken.Token);
+				return CreateDatabase (, cancellationToken.Token);
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace NathansWay.Shared.DB
 					var createTask = connection.CreateTablesAsync (TableType);
 					createTask.Wait();
 
-					if (createTask.Result == 0)
+					if (createTask.Result.Results. == 0)
 					{
 						dbinitialized = true;
 					}
