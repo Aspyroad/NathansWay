@@ -35,9 +35,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
-    <Compile Include="DataLayer\NathansWay.Shared.DB.Base.cs" />
     <Compile Include="NathansWay.Shared.Global.cs" />
-    <Compile Include="DataLayer\NathansWay.Shared.DB.Factory.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Teacher.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Student.cs" />
     <Compile Include="NathansWay.Shared.Types.cs" />
@@ -50,23 +48,26 @@
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Services.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Base.cs" />
-    <Compile Include="DataLayer\NathansWay.Shared.DB.Numeracy.cs" />
-    <Compile Include="DataLayer\INathansWay.Shared.DB.context.cs" />
+    <Compile Include="DbContext\NathansWay.Shared.DB.Base.cs" />
+    <Compile Include="DbContext\NathansWay.Shared.DB.Factory.cs" />
+    <Compile Include="DbContext\NathansWay.Shared.DB.Numeracy.cs" />
+    <Compile Include="Contracts\DbContext\INathansWay.Shared.DB.context.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Utilities\" />
     <Folder Include="BusinessLayer\" />
     <Folder Include="DataAccessLayer\" />
-    <Folder Include="DataLayer\" />
     <Folder Include="BusinessLayer\Managers\" />
     <Folder Include="BusinessLayer\Entities\" />
     <Folder Include="Contracts\" />
     <Folder Include="Contracts\BusinessLayer\" />
     <Folder Include="Contracts\DataAccessLayer\" />
+    <Folder Include="DbContext\" />
+    <Folder Include="Contracts\DbContext\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataLayer\Nathansway.db3" />
+    <Content Include="DbContext\Nathansway.db3" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net">

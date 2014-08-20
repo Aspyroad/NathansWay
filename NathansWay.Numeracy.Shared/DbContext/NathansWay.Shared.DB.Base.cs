@@ -24,14 +24,13 @@ namespace NathansWay.Shared.DB
         #region Class Variables
 		// Protected base members
 		protected ISharedGlobal _sharedglobal;
-		protected bool dbinitialized = false;
-		protected bool datainitialized = false;
+		private static bool dbinitialized = false;
+		private static bool datainitialized = false;
 		// Private
 		private string Path;
 		private ISQLitePlatform _sqliteplatform;
 		private SQLiteAsyncConnection _ConnectionAsync;
 		private SQLiteConnection _Connection;
-		private SQLiteConnectionWithLock _ConnectionLock;
 		private SQLiteConnectionString _ConnectionString;
 		#endregion
 
@@ -41,7 +40,6 @@ namespace NathansWay.Shared.DB
 			_sqliteplatform = _SQLitePlatform; 
 			_sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
 			_ConnectionString = new SQLiteConnectionString (_sharedglobal.GS__FullDbPath, false);
-			_ConnectionLock = new SQLiteConnectionWithLock (_sqliteplatform, _ConnectionString);
 			Path = _path;
         }
         #endregion
@@ -52,10 +50,8 @@ namespace NathansWay.Shared.DB
 		/// <returns></returns>
 		public virtual Task Initialize (Func<bool> CheckExisting, CancellationTokenSource cancellationToken)
 		{
-			if (!CheckExisting ())
-			{
-				return CreateDatabase (, cancellationToken.Token);
-			}
+				var conasync = this.GetAsyncConnection ();
+				return CreateDatabase (CheckExisting, conasync, cancellationToken.Token);
 		}
 
 		/// <summary>
@@ -63,6 +59,7 @@ namespace NathansWay.Shared.DB
 		/// </summary>
 		public virtual SQLiteAsyncConnection GetAsyncConnection ()
 		{
+			var _ConnectionLock = new SQLiteConnectionWithLock (_sqliteplatform, _ConnectionString);
 			var connAsync = new SQLiteAsyncConnection(()=>_ConnectionLock);
 			return connAsync;
 		}
@@ -73,10 +70,11 @@ namespace NathansWay.Shared.DB
 		/// </summary>
 		public virtual SQLiteAsyncConnection GetAsyncConnection (CancellationTokenSource cancellationToken)
 		{
+			var _ConnectionLock = new SQLiteConnectionWithLock (_sqliteplatform, _ConnectionString);
 			var connAsync = new SQLiteAsyncConnection(()=>_ConnectionLock);
 			if (!dbinitialized)
 			{
-				CreateDatabase(connAsync, cancellationToken.Token).Wait();
+				CreateDatabase(null, connAsync, cancellationToken.Token).Wait();
 			}
 			return connAsync;
 		}
@@ -99,25 +97,29 @@ namespace NathansWay.Shared.DB
 			get;
 		}
 
-		public virtual Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken)
+		public virtual Task CreateDatabase (Func<bool> CheckExisting, SQLiteAsyncConnection connection, CancellationToken cancellationToken)
 		{
+
+
 			return Task.Factory.StartNew(() =>
 			{
-				//Create the tables
-				// Check that table types have been defined
-				if (TableType != null)
+				if (CheckExisting ())
 				{
-					var createTask = connection.CreateTablesAsync (TableType);
-					createTask.Wait();
-
-					if (createTask.Result.Results. == 0)
-					{
-						dbinitialized = true;
-					}
+					// Do something
 				}
 				else
 				{
-					throw new ArgumentNullException("Type[] tableTypes has not been intialized");
+					// Create the tables
+					// Check that table types have been defined
+					if (TableType != null)
+					{
+						var createTask = connection.CreateTablesAsync (TableType);
+						createTask.Wait();
+					}
+					else
+					{
+						throw new ArgumentNullException("Type[] tableTypes has not been intialized");
+					}
 				}
 					
 			}, cancellationToken);
@@ -148,7 +150,7 @@ namespace NathansWay.Shared.DB
 					}
 
 					//Mark data as inserted created
-					datainitialized = true;
+					NWDbBase.datainitialized = true;
 				});
 			}
 		}

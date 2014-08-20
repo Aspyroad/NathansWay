@@ -20,15 +20,14 @@ namespace NathansWay.Shared.DAL.Repository
 {
 	public interface IRepository<T>
 	{
+		INWDatabaseContext db { get; }
 
-		string dbLocation { get; set; }
-
-		Task<int> Insert (T entity, CancellationToken cancellationToken = default(CancellationToken));
-		Task<int> Update (T entity, CancellationToken cancellationToken = default(CancellationToken));
-		Task<int> Delete (T entity, CancellationToken cancellationToken = default(CancellationToken));
-		Task<IQueryable<T>> SearchFor (Expression<Func<T, bool>> predicate);
-		Task<IQueryable<T>> GetAll ();
-		T GetById (int id);
+		Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new() ;
+		Task<List<U>> GetSeqAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new() ;
+		//Task<List<T>> SelectAsync<T> (Expression<Func<T, bool>> predicate);
 	}
 }
 
