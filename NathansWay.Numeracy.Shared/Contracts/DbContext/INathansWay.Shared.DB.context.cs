@@ -25,7 +25,7 @@ namespace NathansWay.Shared.DB
 	public interface INWDatabaseContext
 	{
 		Task Initialize (Func<bool> CheckExisting, CancellationTokenSource cancellationToken);
-		Task CreateDatabase (SQLiteAsyncConnection connection, CancellationToken cancellationToken);
+		Task CreateDatabase (Func<bool> CheckExisting, SQLiteAsyncConnection connection, CancellationToken cancellationToken);
 		SQLiteAsyncConnection GetAsyncConnection ();
 		SQLiteConnection GetConnection ();
 		Type[] TableType { get; }

@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
+//using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -51,12 +52,28 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>A Task TResult List IEntity containing T seq</returns>
 		/// <param name="seq">Seq</param>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<U>> GetSeqAsync<U> (U _entity) where U : IBusEntity, new()
+		public Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
 			return Conn.Table<U> ().Where ((x) => (x.SEQ == _entity.SEQ)).ToListAsync ();
 		}
-
+		/// <summary>
+		/// Selects some async.
+		/// </summary>
+		/// <returns>The some async.</returns>
+		/// <param name="predicate">Predicate.</param>
+		/// <typeparam name="U">The 1st type parameter.</typeparam>
+		public Task<List<U>> SelectSomeAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new()
+		{
+			var Conn = _db.GetAsyncConnection ();
+			return Conn.Table<U> ().Where (predicate).ToListAsync ();
+		}
+		/// <summary>
+		/// Inserts an entity async.
+		/// </summary>
+		/// <returns>Task<int></returns>
+		/// <param name="_entity">Entity.</param>
+		/// <typeparam name="U">The 1st type parameter.</typeparam>
 		public Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
@@ -69,7 +86,12 @@ namespace NathansWay.Shared.DAL.Repository
 				return Conn.InsertAsync (_entity);
 			}
 		}
-
+		/// <summary>
+		/// Updates an entity async.
+		/// </summary>
+		/// <returns>The async.</returns>
+		/// <param name="_entity">Entity.</param>
+		/// <typeparam name="U">The 1st type parameter.</typeparam>
 		public Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
@@ -82,13 +104,21 @@ namespace NathansWay.Shared.DAL.Repository
 				return Conn.InsertAsync (_entity);
 			}
 		}
-
+		/// <summary>
+		/// Deletes an entity async.
+		/// </summary>
+		/// <returns>Task</returns>
+		/// <param name="_entity">Entity.</param>
+		/// <typeparam name="U">The 1st type parameter.</typeparam>
 		public Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
 			return Conn.DeleteAsync<U> (_entity.SEQ);
 		}
-
+		/// <summary>
+		/// Gets the current db context.
+		/// </summary>
+		/// <value>The db.</value>
 		public INWDatabaseContext db
 		{
 			get { return _db; }

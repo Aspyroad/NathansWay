@@ -52,6 +52,7 @@
     <Compile Include="DbContext\NathansWay.Shared.DB.Factory.cs" />
     <Compile Include="DbContext\NathansWay.Shared.DB.Numeracy.cs" />
     <Compile Include="Contracts\DbContext\INathansWay.Shared.DB.context.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Teacher.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
