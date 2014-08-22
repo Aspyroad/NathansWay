@@ -31,7 +31,6 @@ namespace NathansWay.Shared.DAL.Repository
         public NWRepository ()
 		{
 			_sharedGlobal = SharedServiceContainer.Resolve<ISharedGlobal> ();
-			// set the db location
 			_db = SharedServiceContainer.Resolve<INWDatabaseContext> ();
 		}
 
