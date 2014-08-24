@@ -78,8 +78,7 @@ namespace NathansWay.Shared.BUS.Entity
         }
         
         #endregion
-        
-        
+                
     }
 }
 
