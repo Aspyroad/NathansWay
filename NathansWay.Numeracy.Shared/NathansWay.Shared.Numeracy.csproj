@@ -58,7 +58,7 @@
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Result.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Toolz.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Settings.cs" />
-    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Toolz.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Toolz.Numeracy.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
