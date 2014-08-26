@@ -13,7 +13,8 @@ namespace NathansWay.Shared.BUS.Entity
         
         private string _nameFirst;
         private string _nameLast;
-        private int _school;
+        private int _schoolSeq;
+		private DateTime _datetmcreate;
         
         #endregion
         
@@ -28,27 +29,33 @@ namespace NathansWay.Shared.BUS.Entity
             
         #region Public Members 
             
-        [PrimaryKey, AutoIncrement]
-        public override int SEQ 
-        { 
-            get { return this._seq; }
-            set { this._seq = value; }
-        }
-        public string nameFirst 
+		//        [PrimaryKey, AutoIncrement]
+		//        public override int SEQ 
+		//        { 
+		//            get { return this._seq; }
+		//            set { this._seq = value; }
+		//        }
+        public string NameFirst 
         { 
             get { return this._nameFirst; } 
             set { this._nameFirst = value; }
         }
-        public string nameLast 
+        public string NameLast 
         { 
             get { return this._nameLast; } 
             set { this._nameLast = value; }
         }
-        public int school 
+        public int SchoolSeq
         { 
-            get { return this.school; }
-            set { this._school = value; }
+			get { return this._schoolSeq; }
+			set { this._schoolSeq = value; }
         }
+		//		public DateTime createdate
+		//		{
+		//			get { return this._datetmcreate; }
+		//			set { this._datetmcreate = value; }
+		//		}
+
             
         #endregion     
         

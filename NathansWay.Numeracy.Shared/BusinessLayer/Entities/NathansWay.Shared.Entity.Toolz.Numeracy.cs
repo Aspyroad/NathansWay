@@ -11,9 +11,9 @@ namespace NathansWay.Shared.BUS.Entity
 	{
 		#region Private Variables
 
-//		private string _;
-//		private string _nameLast;
-//		private int _school;
+		private string _nameTool;
+		private string _description;
+		//private int _school;
 
 		#endregion
 
@@ -28,27 +28,22 @@ namespace NathansWay.Shared.BUS.Entity
 
 		#region Public Members 
 
-		[PrimaryKey, AutoIncrement]
-		public override int SEQ 
+		//		[PrimaryKey, AutoIncrement]
+		//		public override int SEQ 
+		//		{ 
+		//			get { return this._seq; }
+		//			set { this._seq = value; }
+		//		}
+		public string nameTool
 		{ 
-			get { return this._seq; }
-			set { this._seq = value; }
+			get { return this._nameTool; } 
+			set { this._nameTool = value; }
 		}
-//		public string nameFirst 
-//		{ 
-//			get { return this._nameFirst; } 
-//			set { this._nameFirst = value; }
-//		}
-//		public string nameLast 
-//		{ 
-//			get { return this._nameLast; } 
-//			set { this._nameLast = value; }
-//		}
-//		public int school 
-//		{ 
-//			get { return this.school; }
-//			set { this._school = value; }
-//		}
+		public string description
+		{ 
+			get { return this._description; } 
+			set { this._description = value; }
+		}
 
 		#endregion     
 
