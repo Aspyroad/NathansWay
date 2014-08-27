@@ -35,6 +35,7 @@ namespace NathansWay.Shared.BUS.Entity
 		//            get { return this._seq; }
 		//            set { this._seq = value; }
 		//        }
+
         public string NameFirst 
         { 
             get { return this._nameFirst; } 
@@ -50,13 +51,13 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._schoolSeq; }
 			set { this._schoolSeq = value; }
         }
+
 		//		public DateTime createdate
 		//		{
 		//			get { return this._datetmcreate; }
 		//			set { this._datetmcreate = value; }
 		//		}
-
-            
+		            
         #endregion     
         
         #region Private Members

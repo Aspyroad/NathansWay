@@ -34,6 +34,7 @@ namespace NathansWay.Shared.BUS.Entity
 		//			get { return this._seq; }
 		//			set { this._seq = value; }
 		//		}
+
 		public string nameTool
 		{ 
 			get { return this._nameTool; } 

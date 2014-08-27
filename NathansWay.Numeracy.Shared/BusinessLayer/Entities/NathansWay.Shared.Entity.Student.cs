@@ -13,10 +13,11 @@ namespace NathansWay.Shared.BUS.Entity
         
         private string _nameFirst;
         private string _nameLast;
-        private int _school_seq;
+        private int _schoolSeq;
         private DateTime _dob;
         private string _notes;
-        private int _teacher_seq;
+        private int _teacherSeq;
+
         #endregion
         
         #region Contructor
@@ -30,26 +31,27 @@ namespace NathansWay.Shared.BUS.Entity
             
         #region Public Members 
             
-        [PrimaryKey, AutoIncrement, Indexed]
-        public override int SEQ 
-        { 
-            get { return this._seq; }
-            set { this._seq = value; }
-        }
-        public string nameFirst 
+		//        [PrimaryKey, AutoIncrement, Indexed]
+		//        public override int SEQ 
+		//        { 
+		//            get { return this._seq; }
+		//            set { this._seq = value; }
+		//        }
+
+        public string NameFirst 
         { 
             get { return this._nameFirst; } 
             set { this._nameFirst = value; }
         }
-        public string nameLast 
+        public string NameLast 
         { 
             get { return this._nameLast; } 
             set { this._nameLast = value; }
         }
-        public int school_seq
+        public int SchoolSeq
         { 
-            get { return this.school_seq; }
-            set { this._school_seq = value; }
+            get { return this._schoolSeq; }
+            set { this._schoolSeq = value; }
         }
         public DateTime dob
         {
@@ -62,11 +64,10 @@ namespace NathansWay.Shared.BUS.Entity
             set { this._notes = value; }            
         }
         [Indexed]
-        public int teacher_seq
+        public int teacherSeq
         {
-            get { return this._teacher_seq; }
-            set { this._teacher_seq = value; }
-            
+            get { return this._teacherSeq; }
+            set { this._teacherSeq = value; }            
         }
             
         #endregion     
