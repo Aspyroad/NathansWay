@@ -1,0 +1,15 @@
+CREATE TRIGGER trg_LessonDetailUpdateDate
+       AFTER UPDATE ON LessonDetail
+BEGIN
+UPDATE LessonDetail
+SET datetmupdated = DATETIME( 'NOW' )
+WHERE seq = old.seq;
+END;
+
+CREATE TRIGGER trg_LessonDetailCreateDate
+       AFTER INSERT ON LessonDetail
+BEGIN
+UPDATE LessonDetail
+SET datetmcreate = DATETIME( 'NOW' )
+WHERE seq = new.seq;
+END;
