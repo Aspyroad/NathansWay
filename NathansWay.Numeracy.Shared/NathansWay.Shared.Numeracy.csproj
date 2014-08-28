@@ -56,10 +56,10 @@
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Result.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Toolz.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Settings.cs" />
-    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Results.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Lesson.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetail.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Toolz.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetailResults.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

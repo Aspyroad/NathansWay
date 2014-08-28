@@ -7,7 +7,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.Shared.BUS.Entity
 {
-	public class EntityResultz : EntityBase
+	public class EntityLessonDetailResults : EntityBase
 	{
 		#region Private Variables
 
@@ -34,13 +34,6 @@ namespace NathansWay.Shared.BUS.Entity
 		#endregion
 
 		#region Public Members 
-
-		//        [PrimaryKey, AutoIncrement]
-		//        public override int SEQ 
-		//        { 
-		//            get { return this._seq; }
-		//            set { this._seq = value; }
-		//        }
 
 		public int StudentSeq
 		{ 

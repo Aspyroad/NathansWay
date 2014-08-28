@@ -11,12 +11,13 @@ namespace NathansWay.Shared.BUS.Entity
     {
         #region Private Variables
         
-        private string _nameFirst;
-        private string _nameLast;
-        private int _school_seq;
-        private DateTime _dob;
-        private string _notes;
-        private int _teacher_seq;
+		private int _lesson_seq;
+        private string _operator;
+        private string _equation;
+		private string _method;
+		private string _answer;
+		private string _notes;
+
         #endregion
         
         #region Contructor
@@ -29,44 +30,41 @@ namespace NathansWay.Shared.BUS.Entity
         #endregion
             
         #region Public Members 
-            
-        [PrimaryKey, AutoIncrement, Indexed]
-        public override int SEQ 
+		[Indexed, Column("lesson_seq")]
+        public int LessonSeq
         { 
-            get { return this._seq; }
-            set { this._seq = value; }
+            get { return this._lesson_seq; } 
+			set { this._lesson_seq = value; }
         }
-        public string nameFirst 
+		[Column("operator")]
+        public string Operator
         { 
-            get { return this._nameFirst; } 
-            set { this._nameFirst = value; }
+			get { return this._operator; } 
+			set { this._operator = value; }
         }
-        public string nameLast 
+		[Column("equation")]
+		public string Equation
         { 
-            get { return this._nameLast; } 
-            set { this._nameLast = value; }
+            get { return this._equation; }
+            set { this._equation = value; }
         }
-        public int school_seq
-        { 
-            get { return this.school_seq; }
-            set { this._school_seq = value; }
-        }
-        public DateTime dob
+		[Column("method")]
+		public string Method
         {
-            get { return this._dob; }
-            set { this._dob = value; }            
+            get { return this._method; }
+			set { this._method = value; }            
         }
-        public string notes
+		[Column("answer")]
+		public string Answer
+		{
+			get { return this._answer; }
+			set { this._answer = value; }            
+		}
+		[Column("notes")]
+        public string Notes
         {
             get { return this._notes; }
             set { this._notes = value; }            
-        }
-        [Indexed]
-        public int teacher_seq
-        {
-            get { return this._teacher_seq; }
-            set { this._teacher_seq = value; }
-            
         }
             
         #endregion     

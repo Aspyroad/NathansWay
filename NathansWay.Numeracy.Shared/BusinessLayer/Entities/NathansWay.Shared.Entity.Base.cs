@@ -15,6 +15,7 @@ namespace NathansWay.Shared.BUS.Entity
         
         protected int _seq;
 		protected DateTime _datetmcreate;
+		protected DateTime _datetmupdated;
         
         public EntityBase()
         {
@@ -23,17 +24,23 @@ namespace NathansWay.Shared.BUS.Entity
         /// <summary>
         /// Gets or sets the Database SEQ.
         /// </summary>
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, Indexed, AutoIncrement]
         public int SEQ
 		{
 			get { return _seq; }
 			set { _seq = value; }
 		}
-
+		[Column("datetmcreate")]
 		public DateTime DateTmCreate
 		{
 			get { return _datetmcreate; }
 			set { _datetmcreate = value; }
+		}
+		[Column("datetmupdated")]
+		public DateTime DateTmUpdated
+		{
+			get { return _datetmupdated; }
+			set { _datetmupdated = value; }
 		}
 
     }

@@ -14,7 +14,6 @@ namespace NathansWay.Shared.BUS.Entity
         private string _nameFirst;
         private string _nameLast;
         private int _schoolSeq;
-		private DateTime _datetmcreate;
         
         #endregion
         

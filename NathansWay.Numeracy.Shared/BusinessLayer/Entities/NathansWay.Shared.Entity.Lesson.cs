@@ -12,12 +12,12 @@ namespace NathansWay.Shared.BUS.Entity
     {
         #region Private Variables
         
-        private string _nameFirst;
-        private string _nameLast;
-        private int _school_seq;
-        private DateTime _dob;
-        private string _notes;
-        private int _teacher_seq;
+        private string _nameLesson;
+        private string _description;
+        private int _difficulty;
+		private int _scoreTopResult;
+		private int _scoreTopMethod;
+        private int _methodCount;
 
         #endregion
         
@@ -32,43 +32,30 @@ namespace NathansWay.Shared.BUS.Entity
             
         #region Public Members 
             
-        [PrimaryKey, AutoIncrement, Indexed]
-        public override int SEQ 
+        public string NameLesson
         { 
-            get { return this._seq; }
-            set { this._seq = value; }
+			get { return this._nameLesson; } 
+			set { this._nameLesson = value; }
         }
-        public string nameFirst 
+        public string Description
         { 
-            get { return this._nameFirst; } 
-            set { this._nameFirst = value; }
+            get { return this._description; } 
+			set { this._description = value; }
         }
-        public string nameLast 
+		public int Difficulty
         { 
-            get { return this._nameLast; } 
-            set { this._nameLast = value; }
+			get { return this._difficulty; }
+			set { this._difficulty = value; }
         }
-        public int school_seq
-        { 
-            get { return this.school_seq; }
-            set { this._school_seq = value; }
-        }
-        public DateTime dob
+		public int ScoreTopResult
         {
-            get { return this._dob; }
-            set { this._dob = value; }            
+			get { return this._scoreTopResult; }
+			set { this._scoreTopMethod = value; }            
         }
-        public string notes
+		public int MethodCount
         {
-            get { return this._notes; }
-            set { this._notes = value; }            
-        }
-        [Indexed]
-        public int teacher_seq
-        {
-            get { return this._teacher_seq; }
-            set { this._teacher_seq = value; }
-            
+			get { return this._methodCount; }
+			set { this._methodCount = value; }            
         }
             
         #endregion     
@@ -79,8 +66,7 @@ namespace NathansWay.Shared.BUS.Entity
         {            
         }
         
-        #endregion
-        
+        #endregion        
         
     }
 }
