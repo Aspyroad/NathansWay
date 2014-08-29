@@ -34,17 +34,19 @@ namespace NathansWay.Shared.BUS.Entity
 		//            get { return this._seq; }
 		//            set { this._seq = value; }
 		//        }
-
+		[Column("namefirst")]
         public string NameFirst 
         { 
             get { return this._nameFirst; } 
             set { this._nameFirst = value; }
         }
+		[Column("namelast")]
         public string NameLast 
         { 
             get { return this._nameLast; } 
             set { this._nameLast = value; }
         }
+		[Column("school_seq")]
         public int SchoolSeq
         { 
 			get { return this._schoolSeq; }

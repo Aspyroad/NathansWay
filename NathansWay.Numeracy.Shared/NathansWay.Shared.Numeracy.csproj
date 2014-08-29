@@ -60,6 +60,10 @@
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetail.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Toolz.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetailResults.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Block.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.BlockDetail.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.BlockResults.cs" />
+    <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonResults.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

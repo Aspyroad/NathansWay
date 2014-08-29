@@ -31,33 +31,44 @@ namespace NathansWay.Shared.BUS.Entity
         #endregion
             
         #region Public Members 
-            
+
+        [Column("namelesson")]
         public string NameLesson
         { 
 			get { return this._nameLesson; } 
 			set { this._nameLesson = value; }
         }
+		[Column("description")]
         public string Description
         { 
             get { return this._description; } 
 			set { this._description = value; }
         }
+		[Column("difficulty")]
 		public int Difficulty
         { 
 			get { return this._difficulty; }
 			set { this._difficulty = value; }
         }
+		[Column("scoretopresult")]
 		public int ScoreTopResult
         {
 			get { return this._scoreTopResult; }
 			set { this._scoreTopMethod = value; }            
         }
+		[Column("scoretopmethod")]
+		public int ScoreTopMethod
+		{
+			get { return this._scoreTopResult; }
+			set { this._scoreTopMethod = value; }            
+		}
+		[Column("methodcount")]
 		public int MethodCount
         {
 			get { return this._methodCount; }
 			set { this._methodCount = value; }            
-        }
-            
+        }  
+
         #endregion     
         
         #region Private Members
