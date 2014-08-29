@@ -1,7 +1,7 @@
 ﻿// Core
 using System;
-using System.Threading;
-using System.Threading.Tasks;
+//using System.Threading;
+//using System.Threading.Tasks;
 // SQLite
 using SQLite.Net.Attributes;
 // Shared
@@ -14,8 +14,8 @@ namespace NathansWay.Shared.BUS.Entity
     {
         
         protected int _seq;
-		protected DateTime _datetmcreate;
-		protected DateTime _datetmupdated;
+		protected DateTime _datetmCreate;
+		protected DateTime _datetmUpdated;
         
         public EntityBase()
         {
@@ -24,7 +24,7 @@ namespace NathansWay.Shared.BUS.Entity
         /// <summary>
         /// Gets or sets the Database SEQ.
         /// </summary>
-        [PrimaryKey, Indexed, AutoIncrement]
+        [PrimaryKey, Indexed, AutoIncrement, Column("seq")]
         public int SEQ
 		{
 			get { return _seq; }
@@ -33,14 +33,29 @@ namespace NathansWay.Shared.BUS.Entity
 		[Column("datetmcreate")]
 		public DateTime DateTmCreate
 		{
-			get { return _datetmcreate; }
-			set { _datetmcreate = value; }
+			get
+			{ 
+				if (_datetmCreate == null)
+				{
+					_datetmCreate = DateTime.Now;
+				}
+				return _datetmCreate; 
+			}
+			set { _datetmCreate = value; }
 		}
 		[Column("datetmupdated")]
 		public DateTime DateTmUpdated
 		{
-			get { return _datetmupdated; }
-			set { _datetmupdated = value; }
+			get 
+			{
+				if (_datetmUpdated == null)
+				{
+					_datetmUpdated = DateTime.Now;
+				}
+
+				return _datetmUpdated; 
+			}
+			set { _datetmUpdated = value; }
 		}
 
     }

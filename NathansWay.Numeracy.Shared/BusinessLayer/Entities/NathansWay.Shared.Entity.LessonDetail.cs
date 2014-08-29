@@ -15,7 +15,7 @@ namespace NathansWay.Shared.BUS.Entity
         private string _operator;
         private string _equation;
 		private string _method;
-		private string _answer;
+		private string _result;
 		private string _notes;
 
         #endregion
@@ -55,10 +55,10 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._method = value; }            
         }
 		[Column("answer")]
-		public string Answer
+		public string Result
 		{
-			get { return this._answer; }
-			set { this._answer = value; }            
+			get { return this._result; }
+			set { this._result = value; }            
 		}
 		[Column("notes")]
         public string Notes
