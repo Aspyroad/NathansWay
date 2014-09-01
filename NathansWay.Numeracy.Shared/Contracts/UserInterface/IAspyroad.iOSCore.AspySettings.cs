@@ -1,14 +1,12 @@
 ﻿// System
 using System;
-using System.Drawing;
+//using System.Drawing;
 using System.Collections.Generic;
-// Mono
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
+// Xamarin
+using Xamarin.Forms;
 
 
-namespace AspyRoad.iOSCore
+namespace NathansWay.Shared
 {
 	public interface IAspySettings
 	{
@@ -32,21 +30,23 @@ namespace AspyRoad.iOSCore
 
 		string VcName { get; set; }
 
-		UIColor BackColor {	get; set; }
+		Color BackColor {	get; set; }
 
-		UIColor ForeColor { get; set; }
+		Color ForeColor { get; set; }
 
-		UIFont FontType { get; set; }
+		//UIFont FontType { get; set; }
 
 		float FontSize { get; set; }
 
 		string FontName { get; set; }
 
-		UIColor BorderColor { get; set; }
+		Color BorderColor { get; set; }
 
 		bool HasBorder { get; set; }
 
 		float BorderSize { get; set; }
 
 	}
+
+
 }

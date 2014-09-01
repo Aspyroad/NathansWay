@@ -163,6 +163,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.VCSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">
       <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>

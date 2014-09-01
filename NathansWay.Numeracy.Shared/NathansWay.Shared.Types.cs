@@ -1,5 +1,6 @@
 ﻿using System;
 
+
 namespace NathansWay.Shared
 {
     public enum G__Entities : int
@@ -30,7 +31,5 @@ namespace NathansWay.Shared
 		Normal = 1,
 		Hard = 2
 	}
-     
-
 }
 

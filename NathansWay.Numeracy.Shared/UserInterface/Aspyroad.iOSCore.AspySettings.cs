@@ -1,29 +1,25 @@
 ﻿// System
 using System;
-using System.Drawing;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
-// Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+// Xamarin
+using Xamarin.Forms;
 
-// AspyRoad
-using AspyRoad.iOSCore;
 
-namespace AspyRoad.iOSCore
+namespace NathansWay.Shared
 {
 	public class AspySettings : IAspySettings
 	{
-#region Private Members
+		#region Private Members
 
 		protected IAspyGlobals iOSGlobals;
 		protected Dictionary<int, string> _vcTagList;
 		protected Dictionary<int, IVcSettings> _vcSettingsList;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		public AspySettings (IAspyGlobals _iOSGlobals)
 		{
@@ -31,7 +27,7 @@ namespace AspyRoad.iOSCore
 			this.Initialize ();
 		}
 
-#endregion
+		#endregion
 
 		#region Private/Protected Members
 
@@ -46,7 +42,7 @@ namespace AspyRoad.iOSCore
 			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
 		}
 
-//		private void AddVC (AspyViewController vctobeadded)
+		//		private void AddVC (AspyViewController vctobeadded)
 //		{
 //			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
 //		}
@@ -56,9 +52,9 @@ namespace AspyRoad.iOSCore
 			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
-#endregion
+		#endregion
 
-#region Public Members
+		#region Public Members
 
 		public Dictionary<int, string> VCTagList
 		{
@@ -94,45 +90,46 @@ namespace AspyRoad.iOSCore
 
 		}
 
-#endregion
+		#endregion
 	}
 
 	public class VcSettings : IVcSettings
 	{
-#region Private Members
+		#region Private Members
 
 		private RectangleF _framesize;
 		private int _vcTag;
 		private string _vcName;
-		private UIColor _backcolor;
-		private UIColor _forecolor;
-		private UIFont _fonttype;
+	 	// _backcolor;
+		private Color _forecolor;
+		private Font _fonttype;
 		private float _fontsize;
 		private string _fontname;
 		private bool _hasborder;
 		private float _bordersize;
-		private UIColor _bordercolor;
+		private Color _bordercolor;
 
 		//private IAspyGlobals _iOSGlobals;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		public VcSettings ()
 		{
-			_backcolor = UIColor.LightGray;
-			_forecolor = UIColor.Black;
-			_fontsize = UIFont.SystemFontSize;
+			_backcolor = Color.Gray;
+			_forecolor = Color.Black;
+			_fontsize = Device.OnPlatform(Font.OfSize(""))
 			_fontname = "test";		
 			_bordersize = 1.0f;
 			_hasborder = false;
 			_bordercolor = UIColor.White;
+
 		}
 
-#endregion
+		#endregion
 
-#region Public Members
+		#region Public Members
 
 		public RectangleF FrameSize
 		{
@@ -203,7 +200,7 @@ namespace AspyRoad.iOSCore
 			set { _bordercolor = value; }
 		}
 
-#endregion
+		#endregion
 	}
 }
 
