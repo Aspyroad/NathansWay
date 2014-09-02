@@ -85,6 +85,5 @@ namespace NathansWay.iOS.Numeracy.Settings
 				);
 		}
 	}
-
 }
 

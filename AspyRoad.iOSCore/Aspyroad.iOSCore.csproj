@@ -59,6 +59,8 @@
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
     <Compile Include="Interface\IAspyroad.iOSCore.AspyGlobals.cs" />
+    <Compile Include="Interface\IAspyroad.iOSCore.AspySettings.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

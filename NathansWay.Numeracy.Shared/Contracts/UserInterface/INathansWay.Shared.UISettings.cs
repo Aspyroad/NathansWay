@@ -1,28 +1,17 @@
 ﻿// System
 using System;
 //using System.Drawing;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 // Xamarin
 using Xamarin.Forms;
 
 
 namespace NathansWay.Shared
 {
-	public interface IAspySettings
+	public interface IUISettings
 	{
-		// Properties
-		Dictionary<int, string> VCTagList { get; set; }
+		// A global interface to supply system wide display settings
 
-		// Methods
-		VcSettings FindVCSettings (string _vcname);
-
-		VcSettings FindVCSettings (int _vctag);
-
-		//void AddVCSettings (VcSettings _vcsettings);
-    }
-
-	public interface IVcSettings
-	{
 		// Properties
 		RectangleF FrameSize { get; set; }
 
@@ -45,6 +34,8 @@ namespace NathansWay.Shared
 		bool HasBorder { get; set; }
 
 		float BorderSize { get; set; }
+
+		// Methods
 
 	}
 
