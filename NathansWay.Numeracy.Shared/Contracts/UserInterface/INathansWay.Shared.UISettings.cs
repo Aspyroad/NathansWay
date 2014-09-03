@@ -19,7 +19,7 @@ namespace NathansWay.Shared
 
 		string VcName { get; set; }
 
-		Color BackColor {	get; set; }
+		Color BackColor { get; set; }
 
 		Color ForeColor { get; set; }
 
@@ -36,6 +36,12 @@ namespace NathansWay.Shared
 		float BorderSize { get; set; }
 
 		// Methods
+		int SaveSettings (IUISettings _uisettings);
+		IUISettings GetSettingByTag (int Tag);
+		IUISettings GetSettingByName (string Name);
+
+		// USE a global tag 0. The 0 tag is the first that all inherit from.
+		// Then if you need specific settings you download a single tag
 
 	}
 

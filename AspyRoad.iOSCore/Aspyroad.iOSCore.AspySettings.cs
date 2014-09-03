@@ -1,13 +1,21 @@
 ﻿// System
 using System;
+//using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
+
+// Mono
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+
+// NathansWay
+using NathansWay.Shared;
 
 // Xamarin
 using Xamarin.Forms;
 
 
-namespace NathansWay.Shared
+namespace AspyRoad.iOSCore
 {
 	public class AspySettings : IAspySettings
 	{
@@ -93,21 +101,21 @@ namespace NathansWay.Shared
 		#endregion
 	}
 
-	public class VcSettings : IVcSettings
+	public class VcSettings : IVcSettings, IUISettings
 	{
 		#region Private Members
 
 		private RectangleF _framesize;
 		private int _vcTag;
 		private string _vcName;
-	 	// _backcolor;
-		private Color _forecolor;
-		private Font _fonttype;
+		private UIColor _backcolor;
+		private UIColor _forecolor;
+		private UIFont _fonttype;
 		private float _fontsize;
 		private string _fontname;
 		private bool _hasborder;
 		private float _bordersize;
-		private Color _bordercolor;
+		private UIColor _bordercolor;
 
 		//private IAspyGlobals _iOSGlobals;
 
