@@ -6,12 +6,6 @@ using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 
-// TODO:: Not a fan of including the shared lib in Aspyroad.iOSCore, breaks dependancy rules
-// Maybe ok for now. I can only assume Aspyroad.iOSCore will be used with the shared lib always
-// ********************************
-using NathansWay.Shared;
-// ********************************
-
 namespace AspyRoad.iOSCore
 {			
 	[MonoTouch.Foundation.Register("AspyView")]	

@@ -1,6 +1,6 @@
 ﻿// System
 using System;
-//using System.Drawing;
+using System.Drawing;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 // NathansWay
-using NathansWay.Shared;
+//using NathansWay.Shared;
 
 // Xamarin
 using Xamarin.Forms;
@@ -45,16 +45,6 @@ namespace AspyRoad.iOSCore
 			_vcSettingsList = new Dictionary<int, IVcSettings> ();
 		}
 
-		protected void AddVCSettings(IVcSettings _vcsetting)
-		{
-			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
-		}
-
-		//		private void AddVC (AspyViewController vctobeadded)
-//		{
-//			this._vcTagList.Add	(vctobeadded.AspyTag1, vctobeadded.AspyName);
-//		}
-
 		protected void AddVC (int aspytag1, string aspyname)
 		{
 			this._vcTagList.Add (aspytag1, aspyname);
@@ -76,7 +66,7 @@ namespace AspyRoad.iOSCore
 			set { _vcSettingsList = value; }
 		}
 
-		public VcSettings FindVCSettings (string _vcName)
+		public IVcSettings FindVCSettings (string _vcName)
 		{
 			var y = from x in _vcSettingsList
 				where x.Value.VcName == _vcName
@@ -84,7 +74,7 @@ namespace AspyRoad.iOSCore
 			return (VcSettings)y;
 		}
 
-		public VcSettings FindVCSettings (int _vcTag)
+		public IVcSettings FindVCSettings (int _vcTag)
 		{
 			IVcSettings _value;
 			if (this._vcSettingsList.TryGetValue(_vcTag, out _value))
@@ -98,10 +88,15 @@ namespace AspyRoad.iOSCore
 
 		}
 
+		public void AddVCSettings(IVcSettings _vcsetting)
+		{
+			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
+		}
+
 		#endregion
 	}
 
-	public class VcSettings : IVcSettings, IUISettings
+	public class VcSettings : IVcSettings
 	{
 		#region Private Members
 
@@ -125,19 +120,12 @@ namespace AspyRoad.iOSCore
 
 		public VcSettings ()
 		{
-			_backcolor = Color.Gray;
-			_forecolor = Color.Black;
-			_fontsize = Device.OnPlatform(Font.OfSize(""))
-			_fontname = "test";		
-			_bordersize = 1.0f;
-			_hasborder = false;
-			_bordercolor = UIColor.White;
 
 		}
 
 		#endregion
 
-		#region Public Members
+		#region Public GetterSetter
 
 		public RectangleF FrameSize
 		{
@@ -206,6 +194,26 @@ namespace AspyRoad.iOSCore
 		{
 			get { return _bordercolor; }
 			set { _bordercolor = value; }
+		}
+
+		#endregion
+
+		#region Public Members
+
+
+		#endregion
+
+		#region Private Members
+
+		private void Initialize ()
+		{
+			_backcolor = UIColor.Gray;
+			_forecolor = UIColor.Black;
+			//_fontsize = UIFont.
+			_fontname = "test";		
+			_bordersize = 1.0f;
+			_hasborder = false;
+			_bordercolor = UIColor.White;
 		}
 
 		#endregion

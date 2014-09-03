@@ -28,7 +28,7 @@ namespace NathansWay.Shared.BUS.Entity
 
 		#region Contructor
 
-		public EntityResultz()
+		public EntityLessonDetailResults()
 		{
 			//Initialize();
 		}
