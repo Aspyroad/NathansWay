@@ -14,7 +14,6 @@ using MonoTouch.UIKit;
 // Xamarin
 using Xamarin.Forms;
 
-
 namespace AspyRoad.iOSCore
 {
 	public class AspySettings : IAspySettings
@@ -43,11 +42,6 @@ namespace AspyRoad.iOSCore
 		{
 			_vcTagList = new Dictionary<int, string> ();
 			_vcSettingsList = new Dictionary<int, IVcSettings> ();
-		}
-
-		protected void AddVC (int aspytag1, string aspyname)
-		{
-			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
 		#endregion
@@ -91,6 +85,11 @@ namespace AspyRoad.iOSCore
 		public void AddVCSettings(IVcSettings _vcsetting)
 		{
 			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
+		}
+
+		public void AddVC (int aspytag1, string aspyname)
+		{
+			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
 		#endregion

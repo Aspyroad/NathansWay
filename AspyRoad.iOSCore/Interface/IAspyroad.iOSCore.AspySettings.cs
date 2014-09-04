@@ -21,6 +21,8 @@ namespace AspyRoad.iOSCore
 		IVcSettings FindVCSettings (int _vctag);
 
 		void AddVCSettings (IVcSettings _vcsettings);
+
+		void AddVC (int aspytag1, string aspyname);
     }
 
 	public interface IVcSettings

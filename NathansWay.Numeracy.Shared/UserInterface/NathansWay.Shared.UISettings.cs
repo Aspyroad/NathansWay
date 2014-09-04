@@ -1,19 +1,24 @@
-﻿// System
+﻿// Core
 using System;
-//using System.Drawing;
-//using System.Collections.Generic;
 // Xamarin
 using Xamarin.Forms;
 
-
 namespace NathansWay.Shared
 {
-	public interface IUISettings
+	public class UISettings : IUISettings
 	{
-		// A global interface to supply system wide display settings
+		#region Private Variables
 
-		// Properties
-		RectangleF FrameSize { get; set; }
+
+
+		#endregion
+
+		public UISettings ()
+		{
+			//Color test = new Color ();
+		}
+
+		//RectangleF FrameSize { get; set; }
 
 		int VcTag { get; set; }
 
@@ -35,18 +40,20 @@ namespace NathansWay.Shared
 
 		float BorderSize { get; set; }
 
+
+
 		// Methods
-		int SaveSettings (IUISettings _uisettings);
+		public int SaveSettings (IUISettings _uisettings);
+		{
+			int x = 0;
+			return x;
+		}
 		int SaveGlobalSetting (UISettings _uisettings);
 		IUISettings GetSettingByTag (int Tag);
 		IUISettings GetSettingByName (string Name);
 		IUISettings GetGlobalSetting ();
 
 
-		// USE a global tag 0. The 0 tag is the first that all inherit from.
-		// Then if you need specific settings you download a single tag
-
 	}
-
-
 }
+
