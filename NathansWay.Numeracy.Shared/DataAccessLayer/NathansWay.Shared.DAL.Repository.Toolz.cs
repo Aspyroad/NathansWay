@@ -23,9 +23,9 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class ToolzRepo<T> : NWRepository<T>
+	public class ToolSettingsRepo<T> : NWRepository<T>
 	{
-		public ToolzRepo ()
+		public ToolSettingsRepo ()
 		{
 		}
 	}

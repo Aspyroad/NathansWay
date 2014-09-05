@@ -2,6 +2,8 @@
 using System;
 // SQLite
 using SQLite.Net.Attributes;
+// Xamarin
+using Xamarin.Forms;
 // Shared
 using NathansWay.Shared;
 
@@ -88,47 +90,71 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._vcName; }
 			set { this._vcName = value; }
 		}
-		[Column("datetmcomplete")]
-		public DateTime EndTime
+		[Column("backcolor")]
+		public Color BackColor
 		{ 
-			get { return this._backColor; }
-			set { this._backColor = value; }
+			get 
+			{ 
+				return this._backColor; 
+			}
+			set 
+			{ 
+				this._backColor = value; 
+			}
 		}
-		[Column("operator")]
-		public string Operator
+		[Column("forecolor")]
+		public Color ForeColor
 		{ 
-			get { return this._operator; } 
-			set { this._operator = value; }
+			get 
+			{ 
+				return this._foreColor; 
+			} 
+			set 
+			{ 
+				this._foreColor = value; 
+			}
 		}
-		[Column("equation")]
-		public string Equation
+		[Column("fontsize")]
+		public int FontSize
 		{ 
-			get { return this._equation; }
-			set { this._equation = value; }
+			get 
+			{ 
+				return this._fontSize; 
+			}
+			set 
+			{ 
+				this._fontSize = value; 
+			}
 		}
-		[Column("method")]
-		public string Method
+		[Column("fontname")]
+		public string FontName
 		{
-			get { return this._method; }
-			set { this._method = value; }            
+			get { return this._fontName; }
+			set { this._fontName = value; }            
 		}
-		[Column("result")]
-		public string Result
+		[Column("bordercolor")]
+		public string BorderColor
 		{
-			get { return this._result; }
-			set { this._result = value; }            
+			get 
+			{ 
+				return this._borderColor; 
+			}
+			set 
+			{ 
+				this._borderColor = value; 
+			}
 		}
-		[Column("correctresult")]
-		public int ScoreResult
+		[Column("bordersize")]
+		public int BorderSize
 		{ 
-			get { return this._scoreResult; } 
-			set { this._scoreResult = value; }
+			get { return this._borderSize; } 
+			set { this._borderSize = value; }
 		}
-		[Column("correctmethod")]
-		public int ScoreMethod
+		[Column("hasborder")]
+		public bool HasBorder
 		{ 
-			get { return this._scoreMethod; } 
-			set { this._scoreMethod = value; }
+			get { return this._hasBorder; } 
+			set { this._hasBorder = value; }
 		}
 
 		#endregion     

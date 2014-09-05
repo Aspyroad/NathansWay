@@ -1,6 +1,5 @@
 ﻿// System
 using System;
-//using System.Drawing;
 //using System.Collections.Generic;
 // Xamarin
 using Xamarin.Forms;
@@ -41,7 +40,6 @@ namespace NathansWay.Shared
 		IUISettings GetSettingByTag (int Tag);
 		IUISettings GetSettingByName (string Name);
 		IUISettings GetGlobalSetting ();
-
 
 		// USE a global tag 0. The 0 tag is the first that all inherit from.
 		// Then if you need specific settings you download a single tag
