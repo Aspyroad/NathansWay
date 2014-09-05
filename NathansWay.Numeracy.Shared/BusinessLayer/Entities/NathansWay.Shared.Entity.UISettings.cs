@@ -9,7 +9,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.Shared.BUS.Entity
 {
-	public class Settings : EntityBase
+	public class EntityUISettings : EntityBase
 	{
 		#region Private Variables
 
@@ -30,7 +30,7 @@ namespace NathansWay.Shared.BUS.Entity
 
 		#region Contructor
 
-		public Settings()
+		public EntityUISettings()
 		{
 			//Initialize();
 		}

@@ -7,6 +7,8 @@ namespace NathansWay.Shared
 	{
 		private float height;
 		private float width;
+		private float x;
+		private float y;
 
 
 		//

@@ -72,7 +72,7 @@ namespace NathansWay.Shared
 		{
 			return new UISettings ();
 		}
-		IUISettings GetGlobalSetting ();
+		//IUISettings GetGlobalSetting ();
 
 
 	}

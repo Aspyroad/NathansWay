@@ -77,6 +77,7 @@
     <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
     <Folder Include="Interface\" />
+    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -161,6 +162,7 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.VCSettings.cs" />
+    <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

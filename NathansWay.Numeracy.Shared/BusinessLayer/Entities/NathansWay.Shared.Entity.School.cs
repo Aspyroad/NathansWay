@@ -30,12 +30,6 @@ namespace NathansWay.Shared.BUS.Entity
             
         #region Public Members 
             
-        [PrimaryKey, AutoIncrement, Indexed]
-        public override int SEQ 
-        { 
-            get { return this._seq; }
-            set { this._seq = value; }
-        }
         public string nameFirst 
         { 
             get { return this._nameFirst; } 
