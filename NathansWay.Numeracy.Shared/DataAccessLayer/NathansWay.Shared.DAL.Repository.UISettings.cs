@@ -28,22 +28,49 @@ namespace NathansWay.Shared.DAL.Repository
 		public UISettingsRepo ()
 		{
 
-
 		}
-	
 
 		/// <summary>
-		/// Gets a , async.
+		/// Gets a UISetting entity by vctag, async.
 		/// </summary>
-		/// <returns>A Task TResult List IEntity</returns>
-		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
+		/// <returns>A Task TResult List EntityUISettings</returns>
+		/// <param name="_vcTag">int Vc tag.</param>
+		/// <typeparam name="T">where T : EntityUISettings, new()</typeparam>
 		public Task<List<T>> GetSettingByTag<T> (int _vcTag) where T : EntityUISettings, new()
 		{
-			Func<T, bool> deleg = i => i.VcTag.Equals(_vcTag);
+			Func<T, bool> predicate = i => i.VcTag.Equals(_vcTag);
 			var Conn = _db.GetAsyncConnection ();
 			return Conn.Table<T> ()
-				.Where (deleg)
+				.Where (predicate)
 				.ToListAsync ();
+		}
+		/// <summary>
+		/// Gets a UISetting entity by vcname, async.
+		/// </summary>
+		/// <returns>The setting by tag.</returns>
+		/// <param name="_vcTag">Vc tag.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public Task<List<T>> GetSettingByName<T> (string _vcName) where T : EntityUISettings, new()
+		{
+			Func<T, bool> predicate = (i => i.VcName.Equals(_vcName));
+			var Conn = _db.GetAsyncConnection ();
+			return Conn.Table<T> ()
+				.Where (predicate)
+				.ToListAsync ();
+		}
+
+
+
+		// Methods
+		public int SaveSettings (IUISettings _uisettings)
+		{
+			int x = 0;
+			return x;
+		}
+		int SaveGlobalSetting (UISettings _uisettings)
+		{
+			int x = 0;
+			return x;
 		}
 
 	}

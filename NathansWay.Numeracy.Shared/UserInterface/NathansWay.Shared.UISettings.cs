@@ -53,26 +53,7 @@ namespace NathansWay.Shared
 
 
 
-		// Methods
-		public int SaveSettings (IUISettings _uisettings)
-		{
-			int x = 0;
-			return x;
-		}
-		int SaveGlobalSetting (UISettings _uisettings)
-		{
-			int x = 0;
-			return x;
-		}
-		IUISettings GetSettingByTag (int Tag)
-		{
-			return new UISettings ();
-		}
-		IUISettings GetSettingByName (string Name)
-		{
-			return new UISettings ();
-		}
-		//IUISettings GetGlobalSetting ();
+
 
 
 	}
