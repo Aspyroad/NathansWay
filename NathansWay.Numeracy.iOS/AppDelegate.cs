@@ -17,7 +17,7 @@ using AspyRoad.iOSCore;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu;
-using NathansWay.iOS.Numeracy.Settings;
+using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DB;

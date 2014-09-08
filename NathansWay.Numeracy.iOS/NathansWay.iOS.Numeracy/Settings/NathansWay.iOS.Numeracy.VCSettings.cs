@@ -13,11 +13,51 @@ using AspyRoad.iOSCore;
 // Numeracy
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
-using NathansWay.iOS.Numeracy.Menu ;
+using NathansWay.iOS.Numeracy.Menu;
 
-namespace NathansWay.iOS.Numeracy.Settings
+// Shared
+using NathansWay.Shared.BUS.Entity;
+
+namespace NathansWay.iOS.Numeracy.UISettings
 {
-	public class vcs_maingame : VcSettings
+	public class vcs_global : VcSettings
+	{
+		public vcs_global (IAspyGlobals iOSGlobals)
+		{
+
+		}
+
+		#region Public Members
+
+		protected IVcSettings EntityUISettings2VcSettings (EntityUISettings _uiSettings)
+		{
+			// x, y, width, height
+			var strArray = _uiSettings._frameSize.Split (',');
+			RectangleF tmpRect = 
+				new RectangleF (
+					float.Parse (strArray [0]),
+					float.Parse (strArray [1]),
+					float.Parse (strArray [2]),
+					float.Parse (strArray [3])
+				);
+
+//					// Convert a RectF to Text (csv)
+//					string tmpStrRect = 
+//						value.X.ToString () + ',' +
+//						value.Y.ToString () + ',' +
+//						value.Width.ToString () + ',' +
+//						value.Height.ToString ();
+//					this._frameSize = tmpStrRect;
+
+			}
+
+		}
+
+
+		#endregion
+	}
+
+	public class vcs_maingame : vcs_global
 	{
 		public vcs_maingame (IAspyGlobals iOSGlobals)
 		{
@@ -40,7 +80,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 		}
 	}
 
-	public class vcs_mainworkspace : VcSettings
+	public class vcs_mainworkspace : vcs_global
 	{
 		public vcs_mainworkspace (IAspyGlobals iOSGlobals)
 		{
@@ -63,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.Settings
 		}
 	}
 
-	public class vcs_workspace : VcSettings
+	public class vcs_workspace : vcs_global
 	{
 		public vcs_workspace (IAspyGlobals iOSGlobals)
 		{

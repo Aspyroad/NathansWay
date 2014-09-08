@@ -5,10 +5,10 @@ namespace NathansWay.Shared
 {
 	public struct RectangleF
 	{
-		private float height;
-		private float width;
-		private float x;
-		private float y;
+		private int height;
+		private int width;
+		private int x;
+		private int y;
 
 
 		//
@@ -282,8 +282,10 @@ namespace NathansWay.Shared
 
 	public struct Rectangle
 	{
-		private float height;
-		private float width;
+		private int height;
+		private int width;
+		private int x;
+		private int y;
 		//
 		// Static Fields
 		//
@@ -730,8 +732,8 @@ namespace NathansWay.Shared
 
 	public struct Size
 	{
-		private float height;
-		private float width;
+		private int height;
+		private int width;
 		//
 		// Static Fields
 		//
@@ -1015,8 +1017,8 @@ namespace NathansWay.Shared
 
 	public struct Point
 	{
-		private float x;
-		private float y;
+		private int x;
+		private int y;
 		//
 		// Static Fields
 		//

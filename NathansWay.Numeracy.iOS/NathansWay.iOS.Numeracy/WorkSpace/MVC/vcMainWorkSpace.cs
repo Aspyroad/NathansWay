@@ -9,7 +9,7 @@ using MonoTouch.ObjCRuntime;
 using AspyRoad.iOSCore;
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.iOS.Numeracy.Settings;
+using NathansWay.iOS.Numeracy.UISettings;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

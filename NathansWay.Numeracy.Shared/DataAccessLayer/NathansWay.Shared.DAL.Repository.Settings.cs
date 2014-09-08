@@ -23,7 +23,7 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class SettingsRepo<T> : NWRepository<T>
+	public class SettingsRepo<T> : NWRepository<T> where T : UI
 	{
 		public SettingsRepo ()
 		{

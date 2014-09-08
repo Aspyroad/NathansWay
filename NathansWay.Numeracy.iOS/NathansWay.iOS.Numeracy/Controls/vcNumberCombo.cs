@@ -8,7 +8,7 @@ using MonoTouch.UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.iOS.Numeracy.Settings;
+using NathansWay.iOS.Numeracy.UISettings;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {

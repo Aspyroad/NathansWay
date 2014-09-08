@@ -23,7 +23,7 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class ResultRepo<T> : NWRepository<T>
+	public class ResultRepo<T> : NWRepository<T> where T  : EntityLessonDetailResults , new()
 	{
 		public ResultRepo ()
 		{

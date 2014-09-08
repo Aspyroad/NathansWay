@@ -52,31 +52,11 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._teacherSeq = value; }
 		}
 		[Column("framesize")]
-		public RectangleF FrameSize
+		public string FrameSize
 		{ 
-			get 
-			{ 
-				// x, y, width, height
-				var strArray = _frameSize.Split (',');
-				RectangleF tmpRect = 
-					new RectangleF (
-						float.Parse (strArray [0]),
-						float.Parse (strArray [1]),
-						float.Parse (strArray [2]),
-						float.Parse (strArray [3])
-					);
-				 return tmpRect; 
-			}
-			set 
-			{ 
-				// Convert a RectF to Text (csv)
-				string tmpStrRect = 
-					value.X.ToString () + ',' +
-					value.Y.ToString () + ',' +
-					value.Width.ToString () + ',' +
-					value.Height.ToString ();
-				this._frameSize = tmpStrRect;
-			}
+			get { return this._frameSize; }
+			set { this._frameSize = value; }
+
 		}
 		[Column("vctag")]
 		public int VcTag
@@ -91,7 +71,7 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._vcName = value; }
 		}
 		[Column("backcolor")]
-		public Color BackColor
+		public string BackColor
 		{ 
 			get 
 			{ 
@@ -103,7 +83,7 @@ namespace NathansWay.Shared.BUS.Entity
 			}
 		}
 		[Column("forecolor")]
-		public Color ForeColor
+		public string ForeColor
 		{ 
 			get 
 			{ 

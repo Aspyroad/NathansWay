@@ -59,18 +59,20 @@ namespace NathansWay.Shared.DAL.Repository
 				.ToListAsync ();
 		}
 
-
-
-		// Methods
-		public int SaveSettings (IUISettings _uisettings)
+		public Task<int> SaveGlobalSetting (EntityUISettings _uiSettings)
 		{
-			int x = 0;
-			return x;
-		}
-		int SaveGlobalSetting (UISettings _uisettings)
-		{
-			int x = 0;
-			return x;
+			var Conn = _db.GetAsyncConnection ();
+			if (_uiSettings.SEQ != 0)
+			{
+				_uiSettings.SEQ = 0;
+				var tmpTask = Conn.UpdateAsync (_uiSettings);
+				tmpTask.Wait ();
+				//
+			}
+			else
+			{
+				return Conn.InsertAsync (_uiSettings);
+			}
 		}
 
 	}

@@ -15,7 +15,7 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu ;
 
-namespace NathansWay.iOS.Numeracy.Settings
+namespace NathansWay.iOS.Numeracy.UISettings
 {
 	public class NumeracySettings : AspySettings
 	{
