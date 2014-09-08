@@ -23,9 +23,9 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class SettingsRepo<T> : NWRepository<T> where T : UI
+	public class BlockResultsRepo<T> : NWRepository<T> where T : EntityBlockResults, new()
 	{
-		public SettingsRepo ()
+		public BlockResultsRepo ()
 		{
 		}
 	}

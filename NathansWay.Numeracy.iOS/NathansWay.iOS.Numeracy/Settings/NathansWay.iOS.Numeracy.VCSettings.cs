@@ -31,25 +31,9 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		protected IVcSettings EntityUISettings2VcSettings (EntityUISettings _uiSettings)
 		{
-			// x, y, width, height
-			var strArray = _uiSettings._frameSize.Split (',');
-			RectangleF tmpRect = 
-				new RectangleF (
-					float.Parse (strArray [0]),
-					float.Parse (strArray [1]),
-					float.Parse (strArray [2]),
-					float.Parse (strArray [3])
-				);
 
-//					// Convert a RectF to Text (csv)
-//					string tmpStrRect = 
-//						value.X.ToString () + ',' +
-//						value.Y.ToString () + ',' +
-//						value.Width.ToString () + ',' +
-//						value.Height.ToString ();
-//					this._frameSize = tmpStrRect;
 
-			}
+
 
 		}
 

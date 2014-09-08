@@ -44,7 +44,6 @@
     <Compile Include="Contracts\INathansWay.Shared.Global.cs" />
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Entity.cs" />
     <Compile Include="Contracts\BusinessLayer\INathansWay.Shared.BUS.Services.cs" />
-    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Base.cs" />
     <Compile Include="DbContext\NathansWay.Shared.DB.Base.cs" />
     <Compile Include="DbContext\NathansWay.Shared.DB.Factory.cs" />
@@ -52,9 +51,6 @@
     <Compile Include="Contracts\DbContext\INathansWay.Shared.DB.context.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Teacher.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Student.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Lesson.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Result.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Settings.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Lesson.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetail.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonDetailResults.cs" />
@@ -70,6 +66,24 @@
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.ToolSettings.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.UISettings.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.UISettings.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Blocks.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.BlockResults.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.LessonDetailResults.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Lessons.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.LessonResults.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.BlockResults.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Blocks.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.LessonDetailResults.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.LessonResults.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Lessons.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Student.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.School.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.School.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Teacher.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.ToolSettings.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.UISettings.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Base.cs" />
+    <Compile Include="BusinessLayer\Services\NathansWay.Shared.BUS.BusinessDataServices.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.2.2.6243\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.2.2.6243\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />
@@ -77,7 +91,6 @@
     <Folder Include="Utilities\" />
     <Folder Include="BusinessLayer\" />
     <Folder Include="DataAccessLayer\" />
-    <Folder Include="BusinessLayer\Managers\" />
     <Folder Include="BusinessLayer\Entities\" />
     <Folder Include="Contracts\" />
     <Folder Include="Contracts\BusinessLayer\" />
@@ -86,6 +99,7 @@
     <Folder Include="Contracts\DbContext\" />
     <Folder Include="Contracts\UserInterface\" />
     <Folder Include="UserInterface\" />
+    <Folder Include="BusinessLayer\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DbContext\Nathansway.db3" />

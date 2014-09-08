@@ -12,28 +12,11 @@ namespace AspyRoad.iOSCore
     public static class iOSCoreServiceRegistrar 
     {
         
-		public static void Startup ()
+		public static void Startup (Action fInitialize)
 		{
-			InitializeShared ();
+			fInitialize ();
 		}
         
-		private static void InitializeShared()
-		{
-			//            ServiceContainer.Register<ILoginService> (() => new SampleLoginService ());
-			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
-			//
-			//#if !NETFX_CORE
-			//            //Only do these on iOS or Android
-			//            ServiceContainer.Register<MenuViewModel> ();
-			//            ServiceContainer.Register<AssignmentViewModel>();
-			//            ServiceContainer.Register<DocumentViewModel>();
-			//            ServiceContainer.Register<ExpenseViewModel>();
-			//            ServiceContainer.Register<HistoryViewModel>();
-			//            ServiceContainer.Register<ItemViewModel>();
-			//            ServiceContainer.Register<LaborViewModel>();
-			//            ServiceContainer.Register<LoginViewModel>();
-			//            ServiceContainer.Register<PhotoViewModel>();
-			//#endif		
-		}
+
     }
 }

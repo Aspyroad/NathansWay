@@ -31,5 +31,15 @@ namespace NathansWay.Shared
 		Normal = 1,
 		Hard = 2
 	}
+
+	public enum G__OperatorPlease
+	{
+		Addition = 0,
+		Subtraction = 1,
+		Division = 2,
+		Multiplication = 3,
+		Random = 4,
+		Multi = 5
+	}
 }
 

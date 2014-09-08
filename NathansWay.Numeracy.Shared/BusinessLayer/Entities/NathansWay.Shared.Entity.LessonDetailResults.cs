@@ -17,10 +17,13 @@ namespace NathansWay.Shared.BUS.Entity
 		private int _lessonDetailSeq;
 		private DateTime _datetmStart;
 		private DateTime _datetmComplete;
-		private string _operator;
+		//TODO : We need an enumeration on operator -,+,x,/,
+		private G__OperatorPlease _operator;
 		private string _equation;
 		private string _method;
 		private string _result;
+		//TODO : We need an enumeration on dificulty, let a teacher score how well they achieved the result.
+		private int _resultDifficulty;
 		private bool _correctResult;
 		private bool _correctMethod;
 
@@ -74,10 +77,10 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._datetmComplete = value; }
 		}
 		[Column("operator")]
-		public string Operator
+		public G__OperatorPlease Operator
 		{ 
 			get { return this._operator; } 
-			set { this._operator = value; }
+			set { this._operator = (G__OperatorPlease)value; }
 		}
 		[Column("equation")]
 		public string Equation
@@ -98,16 +101,16 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._result = value; }            
 		}
 		[Column("correctresult")]
-		public int ScoreResult
+		public bool ScoreResult
 		{ 
-			get { return this._scoreResult; } 
-			set { this._scoreResult = value; }
+			get { return this._correctResult; } 
+			set { this._correctResult = value; }
 		}
 		[Column("correctmethod")]
-		public int ScoreMethod
+		public bool ScoreMethod
 		{ 
-			get { return this._scoreMethod; } 
-			set { this._scoreMethod = value; }
+			get { return this._correctMethod; } 
+			set { this._correctMethod = value; }
 		}
 
 		#endregion     

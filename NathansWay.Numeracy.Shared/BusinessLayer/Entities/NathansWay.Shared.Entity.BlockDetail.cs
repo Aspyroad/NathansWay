@@ -39,9 +39,9 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._lessonSeq = value; }
 		}
 		[Column("lessontype")]
-		public int LessonType
+		public G__LessonTypes LessonType
 		{ 
-			get { return (int)this._lessonType; } 
+			get { return this._lessonType; } 
 			set 
 			{
 				this._lessonSeq = (G__LessonTypes)value; 

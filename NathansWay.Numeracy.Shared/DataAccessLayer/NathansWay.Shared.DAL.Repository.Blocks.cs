@@ -23,9 +23,9 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class LessonRepo<T> : NWRepository<T> where T : EntityLesson, new()
+	public class BlocksRepo<T> : NWRepository<T> where T : EntityBlock, EntityBlockDetail, new()
 	{
-		public LessonRepo ()
+		public BlocksRepo ()
 		{
 		}
 	}
