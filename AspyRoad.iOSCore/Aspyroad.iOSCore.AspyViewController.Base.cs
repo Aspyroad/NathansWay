@@ -21,7 +21,7 @@ namespace AspyRoad.iOSCore
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
-		protected VcSettings _vcSettings;
+		protected IVcSettings _vcSettings;
 
 #endregion
 
