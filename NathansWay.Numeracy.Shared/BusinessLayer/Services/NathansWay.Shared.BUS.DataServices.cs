@@ -14,12 +14,18 @@ using SQLite.Net.Interop;
 using NathansWay.Shared.Global;
 using NathansWay.Shared.DB;
 using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.DAL.Repository;
 
-
-namespace NathansWay.Shared.DAL.Repository
+namespace NathansWay.Numeracy.Shared
 {
-	public interface IToolSettings<T> : IRepository<T>
+	public class DataServices
 	{
+		public IRepoBlockResults<EntityBlockResults> repBlockResults;
+
+		public DataServices ()
+		{
+			RepoBlockResults = new Bl
+		}
 	}
 }
 

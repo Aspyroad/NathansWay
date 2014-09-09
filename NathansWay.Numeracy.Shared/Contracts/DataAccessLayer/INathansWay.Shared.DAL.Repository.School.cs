@@ -18,17 +18,8 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IRepository<T>
+	public interface ISchool<T> : IRepository<T>
 	{
-		INWDatabaseContext db { get; }
-
-		Task<List<T>> SelectAllAsync<T> () where T : IBusEntity, new() ;
-		Task<List<T>> SelectSeqAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<List<T>> SelectSomeAsync<T> (Expression<Func<T,bool>> predicate) where T : IBusEntity, new() ;
-		Task<int> InsertAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<int> UpdateAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<int> DeleteAsync<T> (T _entity) where T : IBusEntity, new() ;
-		//Task<List<T>> SelectAsync<T> (Expression<Func<T, bool>> predicate);
 	}
 }
 

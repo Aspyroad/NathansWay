@@ -28,7 +28,6 @@ namespace NathansWay.Shared.DAL.Repository
 		Task<int> InsertAsync<T> (T _entity) where T : IBusEntity, new() ;
 		Task<int> UpdateAsync<T> (T _entity) where T : IBusEntity, new() ;
 		Task<int> DeleteAsync<T> (T _entity) where T : IBusEntity, new() ;
-		//Task<List<T>> SelectAsync<T> (Expression<Func<T, bool>> predicate);
 	}
 }
 

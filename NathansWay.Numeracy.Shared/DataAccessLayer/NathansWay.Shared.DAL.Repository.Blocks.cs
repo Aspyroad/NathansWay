@@ -23,10 +23,24 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class BlocksRepo<T> : NWRepository<T> where T : EntityBlock, EntityBlockDetail, new()
+	public class RepoBlocks
 	{
-		public BlocksRepo ()
+		public RepoBlocks()
 		{
+		}
+
+		public class RepoBlock<EntityBlock> : NWRepository<EntityBlock>
+		{
+			public RepoBlock ()
+			{
+			}
+		}
+
+		public class RepoBlockDetail<EntityBlockDetail> : NWRepository<EntityBlockDetail>
+		{
+			public RepoBlockDetail ()
+			{
+			}
 		}
 	}
 }
