@@ -18,8 +18,10 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IBlocks<T> : IRepository<T>
+	public interface IRepoBlocks
 	{
+		IRepoBlock<EntityBlock> repBlock { get; }
+		IRepoBlockDetail<EntityBlockDetail> repBlockDetail { get; } 
 	}
 }
 

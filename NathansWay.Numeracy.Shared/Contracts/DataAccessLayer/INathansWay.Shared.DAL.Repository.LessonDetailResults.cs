@@ -18,7 +18,7 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface ILessonDetailResults<T> : IRepository<T>
+	public interface IRepoLessonDetailResults<EntityLessonDetailResults> : IRepository<IBusEntity>
 	{
 	}
 }

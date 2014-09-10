@@ -18,8 +18,10 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface ILessons<T> : IRepository<T>
+	public interface IRepoLessons
 	{
+		RepoLesson<EntityLesson> repLesson { get; }
+		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 	}
 }
 

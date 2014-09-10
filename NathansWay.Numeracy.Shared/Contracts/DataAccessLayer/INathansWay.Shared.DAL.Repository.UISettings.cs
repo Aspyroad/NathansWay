@@ -18,7 +18,7 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IUISettings<T> : IRepository<T>
+	public interface IRepoUISettings<EntityUISettings> : IRepository<IBusEntity>
 	{
 	}
 }

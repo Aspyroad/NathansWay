@@ -23,24 +23,48 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class RepoBlocks
+	public class RepoBlocks : IRepoBlocks
 	{
+		#region Private Members
+
+		private RepoBlock<EntityBlock> _repBlock;
+		private RepoBlockDetail<EntityBlockDetail> _repBlockDetail;
+
+		#endregion
+
 		public RepoBlocks()
 		{
+			_repBlock = new RepoBlock<EntityBlock> ();
+			_repBlockDetail = new RepoBlockDetail<EntityBlockDetail> ();
 		}
 
-		public class RepoBlock<EntityBlock> : NWRepository<EntityBlock>
+		#region Public Members
+
+		public RepoBlock<EntityBlock> repBlock
 		{
-			public RepoBlock ()
-			{
-			}
+			get { return this._repBlock; }
 		}
 
-		public class RepoBlockDetail<EntityBlockDetail> : NWRepository<EntityBlockDetail>
+		public RepoBlockDetail<EntityBlockDetail> repBlockDetail
 		{
-			public RepoBlockDetail ()
-			{
-			}
+			get { return this._repBlockDetail; }
+		}
+
+		#endregion
+	}
+
+	public class RepoBlock<T> : IRepoBlock<T> where T : EntityBlock, new()
+	{
+		public RepoBlock ()
+		{
 		}
 	}
+
+	public class RepoBlockDetail<T> : IRepoBlockDetail<T> where T : EntityBlockDetail, new()
+	{
+		public RepoBlockDetail ()
+		{
+		}
+	}
+
 }

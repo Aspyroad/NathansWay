@@ -23,9 +23,9 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class UISettingsRepo<T> : NWRepository<T> where T : EntityUISettings, new()
+	public class RepoUISettings<T> : NWRepository<T> where T : EntityUISettings, new()
 	{
-		public UISettingsRepo ()
+		public RepoUISettings ()
 		{
 
 		}
@@ -38,9 +38,9 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <typeparam name="T">where T : EntityUISettings, new()</typeparam>
 		public Task<List<T>> GetSettingByTag<T> (int _vcTag) where T : EntityUISettings, new()
 		{
-			Func<T, bool> predicate = i => i.VcTag.Equals(_vcTag);
+			Func<EntityUISettings, bool> predicate = i => i.VcTag.Equals(_vcTag);
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<T> ()
+			return Conn.Table<EntityUISettings> ()
 				.Where (predicate)
 				.ToListAsync ();
 		}
@@ -59,7 +59,7 @@ namespace NathansWay.Shared.DAL.Repository
 				.ToListAsync ();
 		}
 
-		public Task<int> SaveGlobalSetting (EntityUISettings _uiSettings)
+		public Task<int> SaveGlobalSetting (T _uiSettings)
 		{
 			var Conn = _db.GetAsyncConnection ();
 			if (_uiSettings.SEQ != 0)

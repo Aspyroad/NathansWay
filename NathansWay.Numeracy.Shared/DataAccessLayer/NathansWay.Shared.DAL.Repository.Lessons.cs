@@ -23,10 +23,48 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class LessonsRepo<T> : NWRepository<T> where T : EntityLesson, EntityLessonDetail, new()
+	public class RepoLessons : IRepoLessons
 	{
-		public LessonsRepo ()
+		#region Private Members
+
+		private RepoLesson<EntityLesson> _repLesson;
+		private RepoLessonDetail<EntityLessonDetail> _repLessonDetail;
+
+		#endregion
+
+		public RepoLessons ()
 		{
+		}
+
+		#region Public Members
+
+		public RepoLesson<EntityLesson> repLesson
+		{
+			get { return _repLesson; }
+		}
+
+		public RepoLessonDetail<EntityLessonDetail> repLessonDetail
+		{
+			get { return _repLessonDetail; }
+		}
+
+		#endregion
+
+	}
+
+	public class RepoLesson<T> : IRepository<T> where T : EntityLesson, new()
+	{
+		public RepoLesson ()
+		{
+
+		}
+	}
+
+	public class RepoLessonDetail<T> : IRepository<T> where T : EntityLessonDetail, new()
+	{
+		public RepoLessonDetail()
+		{
+
 		}
 	}
 }
