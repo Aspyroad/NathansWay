@@ -12,7 +12,7 @@ namespace AspyRoad.iOSCore
 	public class AspyViewController : UIViewController
 	{
 
-#region Class Variables
+		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
 		public IAspySettings iOSSettings;
@@ -23,9 +23,9 @@ namespace AspyRoad.iOSCore
 		private string _AspyName;
 		protected IVcSettings _vcSettings;
 
-#endregion
+		#endregion
 
-#region Constructors
+		#region Constructors
 
 		public AspyViewController ()
 		{
@@ -48,9 +48,9 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-#endregion
+		#endregion
 
-#region Private Members
+		#region Private Members
 
 		private void Initialize ()
 		{
@@ -59,9 +59,9 @@ namespace AspyRoad.iOSCore
 			this.iOSSettings = iOSCoreServiceContainer.Resolve<IAspySettings> ();
 		}
 
-#endregion
+		#endregion
 
-#region Public Members
+		#region Public Members
 
 		public int AspyTag1
 		{
@@ -92,9 +92,9 @@ namespace AspyRoad.iOSCore
 			}
 		}
 
-#endregion
+		#endregion
 
-#region Public Container Members
+		#region Public Container Members
 
 		/// <summary>
 		/// Add an view controller and add its view to the parent.
@@ -191,9 +191,9 @@ namespace AspyRoad.iOSCore
 			return _return;
 		}
 
-#endregion
+		#endregion
 
-#region Overrides
+		#region Overrides
 
 		public override void ViewDidLoad ()
 		{
@@ -261,7 +261,7 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-#endregion
+		#endregion
 		
 	}
 }

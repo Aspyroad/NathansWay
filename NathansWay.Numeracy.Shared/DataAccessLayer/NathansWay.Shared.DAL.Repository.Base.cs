@@ -40,10 +40,10 @@ namespace NathansWay.Shared.DAL.Repository
 		/// </summary>
 		/// <returns>A Task TResult List IEntity</returns>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<T>> SelectAllAsync<T> () where T : IBusEntity, new()
+		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<T> ().ToListAsync();
+			return Conn.Table<U> ().ToListAsync();
 		}
 		/// <summary>
 		/// Gets an IEntity based on the supplied seq.
@@ -51,10 +51,10 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>A Task TResult List IEntity containing T seq</returns>
 		/// <param name="seq">Seq</param>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<T>> SelectSeqAsync<T> (T _entity) where T : IBusEntity, new()
+		public Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<T> ().Where ((x) => (x.SEQ == _entity.SEQ)).ToListAsync ();
+			return Conn.Table<U> ().Where ((x) => (x.SEQ == _entity.SEQ)).ToListAsync ();
 		}
 		/// <summary>
 		/// Selects some async.
@@ -62,10 +62,10 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The some async.</returns>
 		/// <param name="predicate">Predicate.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<List<T>> SelectSomeAsync<T> (Expression<Func<T,bool>> predicate) where T : IBusEntity, new()
+		public Task<List<U>> SelectSomeAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<T> ().Where (predicate).ToListAsync ();
+			return Conn.Table<U> ().Where (predicate).ToListAsync ();
 		}
 		/// <summary>
 		/// Inserts an entity async.
@@ -73,7 +73,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>Task<int></returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> InsertAsync<T> (T _entity) where T : IBusEntity, new()
+		public Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
 			if (_entity.SEQ != 0)
@@ -91,7 +91,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The async.</returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> UpdateAsync<T> (T _entity) where T : IBusEntity, new()
+		public Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
 			if (_entity.SEQ != 0)
@@ -109,10 +109,10 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>Task</returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> DeleteAsync<T> (T _entity) where T : IBusEntity, new()
+		public Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.DeleteAsync<T> (_entity.SEQ);
+			return Conn.DeleteAsync<U> (_entity.SEQ);
 		}
 		/// <summary>
 		/// Gets the current db context.

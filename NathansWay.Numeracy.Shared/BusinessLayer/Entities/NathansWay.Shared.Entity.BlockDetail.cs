@@ -44,7 +44,10 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._lessonType; } 
 			set 
 			{
-				this._lessonSeq = (G__LessonTypes)value; 
+				var tmp = value ; 
+
+				this._lessonSeq = tmp;
+
 			}
 		}
 

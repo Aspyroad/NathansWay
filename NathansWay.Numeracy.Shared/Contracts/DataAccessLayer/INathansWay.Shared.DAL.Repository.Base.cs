@@ -18,16 +18,16 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IRepository<T>
+	public interface IRepository<T> 
 	{
 		INWDatabaseContext db { get; }
 
-		Task<List<T>> SelectAllAsync<T> () where T : IBusEntity, new() ;
-		Task<List<T>> SelectSeqAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<List<T>> SelectSomeAsync<T> (Expression<Func<T,bool>> predicate) where T : IBusEntity, new() ;
-		Task<int> InsertAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<int> UpdateAsync<T> (T _entity) where T : IBusEntity, new() ;
-		Task<int> DeleteAsync<T> (T _entity) where T : IBusEntity, new() ;
+		Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new() ;
+		Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<List<U>> SelectSomeAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new() ;
+		Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new() ;
+		Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new() ;
 	}
 }
 

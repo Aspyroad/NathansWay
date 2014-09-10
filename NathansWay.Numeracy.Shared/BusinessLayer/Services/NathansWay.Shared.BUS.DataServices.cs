@@ -16,17 +16,8 @@ using NathansWay.Shared.DB;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DAL.Repository;
 
-namespace NathansWay.Numeracy.Shared
+namespace NathansWay.Shared.BUS
 {
-	public class DataServices
-	{
-		public IRepoBlockResults<EntityBlockResults> repBlockResults;
-		public I
 
-		public DataServices ()
-		{
-			RepoBlockResults = new Bl
-		}
-	}
 }
 
