@@ -31,7 +31,7 @@ namespace AspyRoad.iOSCore
             Initialize();
         }
         
-        public void Initialize()
+        protected virtual void Initialize()
         {            
         }
         

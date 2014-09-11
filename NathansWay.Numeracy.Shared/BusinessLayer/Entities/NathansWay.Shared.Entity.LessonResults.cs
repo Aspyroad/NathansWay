@@ -34,7 +34,7 @@ namespace NathansWay.Shared.BUS.Entity
 
 		#endregion
 
-		#region Public Members 
+		#region DataTable Members 
 		[Column("student_seq")]
 		public int StudentSeq
 		{ 
@@ -89,6 +89,16 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._countComplete; }
 			set { this._countComplete = value; }
 		}
+		[Column("notes")]
+		public string Notes
+		{ 
+			get { return this._notes; } 
+			set { this._notes = value; }
+		}
+		#endregion  
+
+		#region UI Public Members
+
 		public bool DidComplete
 		{ 
 			get 
@@ -104,13 +114,8 @@ namespace NathansWay.Shared.BUS.Entity
 				return this._didComplete; 
 			} 
 		}
-		[Column("notes")]
-		public string Notes
-		{ 
-			get { return this._notes; } 
-			set { this._notes = value; }
-		}
-		#endregion     
+
+		#endregion
 
 		#region Private Members
 

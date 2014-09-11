@@ -104,15 +104,8 @@
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu1Start.designer.cs">
       <DependentUpon>xMenu1Start.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu2Student.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu2Student.designer.cs">
-      <DependentUpon>vcMenu2Student.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu1Start.cs">
       <DependentUpon>xMenu1Start.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu2Student.cs">
-      <DependentUpon>vcMenu2Student.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu3Lessons.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu3Lessons.cs">
@@ -163,6 +156,13 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.VCSettings.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcMenu2Student.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcMenu2Student.designer.cs">
+      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vMenu2Student.cs">
+      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -195,7 +195,6 @@
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Menu\MVC\MenuMainViewBoard.storyboard" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Menu\MVC\xMenu1Start.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
@@ -203,5 +202,6 @@
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\MenuMainViewBoard.storyboard" />
   </ItemGroup>
 </Project>

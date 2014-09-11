@@ -28,9 +28,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize()
+		protected override void Initialize()
         {
             this.SetImage(UIImage.FromBundle ("Content/AppImages/Kids.png"), UIControlState.Normal);
+			base.Initialize();
         }
 
         public override void LayoutSubviews()

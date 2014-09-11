@@ -80,11 +80,6 @@ namespace NathansWay.iOS.Numeracy
 			// Full db path
 			this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
 
-			// Set Sqlite db Platform
-			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
-			// Set up a database context
-			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
-
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
 			this._NumeracySettings.NumberCombo.EditMode = E__NumberComboEditMode.EditNumPad;
@@ -107,6 +102,10 @@ namespace NathansWay.iOS.Numeracy
 
 			// Register any Shared services needed
 			SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
+			// Set Sqlite db Platform
+			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
+			// Set up a database context
+			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection

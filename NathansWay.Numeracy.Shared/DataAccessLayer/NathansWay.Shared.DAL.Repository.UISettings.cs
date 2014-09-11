@@ -36,11 +36,11 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>A Task TResult List EntityUISettings</returns>
 		/// <param name="_vcTag">int Vc tag.</param>
 		/// <typeparam name="T">where T : EntityUISettings, new()</typeparam>
-		public Task<List<T>> GetSettingByTag<T> (int _vcTag) where T : EntityUISettings, new()
+		public Task<List<U>> GetSettingByTag<U> (int _vcTag) where U : EntityUISettings, new()
 		{
-			Func<EntityUISettings, bool> predicate = i => i.VcTag.Equals(_vcTag);
+			Expression<Func<U, bool>> predicate = i => i.VcTag.Equals(_vcTag);
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<EntityUISettings> ()
+			return Conn.Table<U> ()
 				.Where (predicate)
 				.ToListAsync ();
 		}
@@ -50,11 +50,11 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The setting by tag.</returns>
 		/// <param name="_vcTag">Vc tag.</param>
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
-		public Task<List<T>> GetSettingByName<T> (string _vcName) where T : EntityUISettings, new()
+		public Task<List<U>> GetSettingByName<U> (string _vcName) where U : EntityUISettings, new()
 		{
-			Func<T, bool> predicate = (i => i.VcName.Equals(_vcName));
+			Expression<Func<U, bool>> predicate = (i => i.VcName.Equals(_vcName));
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<T> ()
+			return Conn.Table<U> ()
 				.Where (predicate)
 				.ToListAsync ();
 		}
@@ -62,17 +62,20 @@ namespace NathansWay.Shared.DAL.Repository
 		public Task<int> SaveGlobalSetting (T _uiSettings)
 		{
 			var Conn = _db.GetAsyncConnection ();
+			Task<int> tmpTask;
 			if (_uiSettings.SEQ != 0)
 			{
 				_uiSettings.SEQ = 0;
-				var tmpTask = Conn.UpdateAsync (_uiSettings);
+				tmpTask = Conn.UpdateAsync (_uiSettings);
 				tmpTask.Wait ();
 				//
 			}
 			else
 			{
-				return Conn.InsertAsync (_uiSettings);
+				tmpTask = Conn.InsertAsync (_uiSettings);
 			}
+			return tmpTask;
+
 		}
 
 	}

@@ -21,9 +21,6 @@ namespace NathansWay.iOS.Numeracy
 		// This is the main entry point of the application.
 		static void Main (string[] args)
 		{	
-			// Setup our services for core library.
-			// Pass in our non shared   
-			iOSCoreServiceRegistrar.Startup (action);
 
 			UIApplication.Main (args, null, "AppDelegate");
 		}

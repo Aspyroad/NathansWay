@@ -14,11 +14,13 @@ namespace NathansWay.Shared.BUS.Entity
     {
         
         protected int _seq;
-		protected DateTime _datetmCreate;
-		protected DateTime _datetmUpdated;
+		// Using DateTime? is the same as Nullable<DateTime>
+		protected DateTime? _datetmCreate;
+		protected DateTime? _datetmUpdated;
         
         public EntityBase()
         {
+
         }
         
         /// <summary>
@@ -31,11 +33,11 @@ namespace NathansWay.Shared.BUS.Entity
 			set { _seq = value; }
 		}
 		[Column("datetmcreate")]
-		public DateTime DateTmCreate
+		public Nullable<DateTime> DateTmCreate
 		{
 			get
 			{ 
-				if (_datetmCreate == null)
+				if (!_datetmCreate.HasValue)
 				{
 					_datetmCreate = DateTime.Now;
 				}
@@ -44,11 +46,11 @@ namespace NathansWay.Shared.BUS.Entity
 			set { _datetmCreate = value; }
 		}
 		[Column("datetmupdated")]
-		public DateTime DateTmUpdated
+		public Nullable<DateTime> DateTmUpdated
 		{
 			get 
 			{
-				if (_datetmUpdated == null)
+				if (!_datetmUpdated.HasValue)
 				{
 					_datetmUpdated = DateTime.Now;
 				}

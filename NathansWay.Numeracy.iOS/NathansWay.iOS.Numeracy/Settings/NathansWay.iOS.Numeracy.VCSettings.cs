@@ -31,10 +31,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		protected IVcSettings EntityUISettings2VcSettings (EntityUISettings _uiSettings)
 		{
-
-
-
-
+			return new VcSettings ();
 		}
 
 
@@ -43,7 +40,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 	public class vcs_maingame : vcs_global
 	{
-		public vcs_maingame (IAspyGlobals iOSGlobals)
+		public vcs_maingame (IAspyGlobals iOSGlobals) : base(iOSGlobals)
 		{
 			this.VcTag = 5;
 			this.VcName = "VC_MainGame";
@@ -66,7 +63,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 	public class vcs_mainworkspace : vcs_global
 	{
-		public vcs_mainworkspace (IAspyGlobals iOSGlobals)
+		public vcs_mainworkspace (IAspyGlobals iOSGlobals) : base(iOSGlobals)
 		{
 			this.VcTag = 6;
 			this.VcName = "VC_MainWorkSpace";
@@ -89,7 +86,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 	public class vcs_workspace : vcs_global
 	{
-		public vcs_workspace (IAspyGlobals iOSGlobals)
+		public vcs_workspace (IAspyGlobals iOSGlobals) : base(iOSGlobals)
 		{
 			this.VcTag = 7;
 			this.VcName = "VC_WorkSpace";

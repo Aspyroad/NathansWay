@@ -23,9 +23,9 @@ namespace NathansWay.Shared.BUS.Entity
 		private DateTime _datetmComplete;
 		private int countEquation;
 		private int countComplete;
-		private G__LessonTypes G__LessonTypes;
-		private G__Difficulty difficulty;
-		private string notes;
+		private int _lessonTypes;
+		private int _difficulty;
+		private string _notes;
 
 		#endregion
 
@@ -70,11 +70,29 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._scoreResult; } 
 			set { this._scoreResult = value; }
 		}
+		[Column("datetmstart")]
+		public DateTime StartTime
+		{ 
+			get { return this._datetmStart; }
+			set { this._datetmStart = value; }
+		}
+		[Column("datetmcomplete")]
+		public DateTime EndTime
+		{ 
+			get { return this._datetmComplete; }
+			set { this._datetmComplete = value; }
+		}
 		[Column("difficulty")]
-		public G__Difficulty Difficulty
+		public int Difficulty
 		{ 
 			get { return this._difficulty; }
 			set { this._difficulty = value; }
+		}
+		[Column("notes")]
+		public string Notes
+		{ 
+			get { return this._notes; } 
+			set { this._notes = value; }
 		}
 
 		#endregion     

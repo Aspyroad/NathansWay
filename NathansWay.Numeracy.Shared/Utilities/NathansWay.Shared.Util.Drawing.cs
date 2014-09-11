@@ -5,10 +5,10 @@ namespace NathansWay.Shared
 {
 	public struct RectangleF
 	{
-		private int height;
-		private int width;
-		private int x;
-		private int y;
+		private float height;
+		private float width;
+		private float x;
+		private float y;
 
 
 		//

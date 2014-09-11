@@ -52,7 +52,7 @@ namespace NathansWay.Shared.DAL.Repository
 
 	}
 
-	public class RepoLesson<T> : IRepository<T> where T : EntityLesson, new()
+	public class RepoLesson<T> : NWRepository<T> where T : EntityLesson, new()
 	{
 		public RepoLesson ()
 		{
@@ -60,7 +60,7 @@ namespace NathansWay.Shared.DAL.Repository
 		}
 	}
 
-	public class RepoLessonDetail<T> : IRepository<T> where T : EntityLessonDetail, new()
+	public class RepoLessonDetail<T> : NWRepository<T> where T : EntityLessonDetail, new()
 	{
 		public RepoLessonDetail()
 		{

@@ -11,7 +11,7 @@ namespace NathansWay.Shared.BUS.Entity
 
 		private int _blockSeq;
 		private int _lessonSeq;
-		private G__LessonTypes  _lessonType;
+		private int _lessonType;
 
 		#endregion
 
@@ -39,15 +39,15 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._lessonSeq = value; }
 		}
 		[Column("lessontype")]
-		public G__LessonTypes LessonType
+		public int LessonType
 		{ 
-			get { return this._lessonType; } 
+			get 
+			{ 
+				return this._lessonType; 
+			} 
 			set 
 			{
-				var tmp = value ; 
-
-				this._lessonSeq = tmp;
-
+				this._lessonSeq = value;
 			}
 		}
 

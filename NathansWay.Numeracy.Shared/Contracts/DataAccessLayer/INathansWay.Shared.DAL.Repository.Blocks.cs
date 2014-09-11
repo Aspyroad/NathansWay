@@ -20,8 +20,8 @@ namespace NathansWay.Shared.DAL.Repository
 {
 	public interface IRepoBlocks
 	{
-		IRepoBlock<EntityBlock> repBlock { get; }
-		IRepoBlockDetail<EntityBlockDetail> repBlockDetail { get; } 
+		RepoBlock<EntityBlock> repBlock { get; }
+		RepoBlockDetail<EntityBlockDetail> repBlockDetail { get; } 
 	}
 }
 

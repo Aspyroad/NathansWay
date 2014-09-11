@@ -5,9 +5,6 @@ namespace NathansWay.iOS.Numeracy
 {
 	public static class HelperFunctions
 	{
-		public HelperFunctions ()
-		{
-		}
 
 		public static RectangleF StringToRectF(string _strRect)
 		{
