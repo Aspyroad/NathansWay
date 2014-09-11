@@ -33,8 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ServiceContainer.cs" />
-    <Compile Include="Utilities\ServiceRegistrar.cs" />
     <Compile Include="NathansWay.Shared.Global.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Teacher.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.Student.cs" />
@@ -58,10 +56,8 @@
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.BlockDetail.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.BlockResults.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonResults.cs" />
-    <Compile Include="Utilities\NathansWay.Drawing.cs" />
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UISettings.cs" />
     <Compile Include="UserInterface\NathansWay.Shared.UISettings.cs" />
-    <Compile Include="Utilities\NathansWay.Shared.HelperFunctions.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.ToolSettings.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.ToolSettings.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.UISettings.cs" />
@@ -88,6 +84,11 @@
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.BlockDetail.cs" />
     <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.PropertyChangedBase.cs" />
     <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.ViewModel.Base.cs" />
+    <Compile Include="Utilities\NathansWay.Shared.Util.TaskExtensions.cs" />
+    <Compile Include="Utilities\NathansWay.Shared.Util.ServiceContainer.cs" />
+    <Compile Include="Utilities\NathansWay.Shared.Util.ServiceRegistrar.cs" />
+    <Compile Include="Utilities\NathansWay.Shared.Util.Drawing.cs" />
+    <Compile Include="Utilities\NathansWay.Shared.Util.HelperFunctions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.2.2.6243\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.2.2.6243\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />

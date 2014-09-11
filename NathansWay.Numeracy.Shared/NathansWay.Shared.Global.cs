@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NathansWay.Shared.Global
+namespace NathansWay.Shared.Utilities
 {
     public class SharedGlobal : ISharedGlobal
     {

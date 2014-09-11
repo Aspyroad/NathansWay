@@ -19,7 +19,7 @@ using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
-using NathansWay.Shared.Global;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 
 using NathansWay.Shared.MonoToolz;
@@ -67,7 +67,7 @@ namespace NathansWay.iOS.Numeracy
 			// Create our appwide user setup settings
 			this._NumeracySettings = new NumeracySettings(this.iOSGlobals);
 			// Create shared globals
-			this.SharedGlobals = new NathansWay.Shared.Global.SharedGlobal();
+			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built

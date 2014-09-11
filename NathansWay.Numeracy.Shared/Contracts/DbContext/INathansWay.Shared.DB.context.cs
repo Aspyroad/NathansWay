@@ -12,7 +12,7 @@ using SQLite.Net.Async;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Global;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DAL.Repository;
 

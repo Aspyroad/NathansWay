@@ -4,7 +4,7 @@ using System;
 using Xamarin.Forms;
 
 
-namespace NathansWay.Shared
+namespace NathansWay.Shared.Utilities
 {
 	public static class HelperFunctions 
 	{

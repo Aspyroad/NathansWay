@@ -15,7 +15,7 @@ using SQLite.Net.Attributes;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Global;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DB;

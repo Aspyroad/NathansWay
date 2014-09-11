@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Global;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DAL.Repository;

@@ -5,7 +5,7 @@ using SQLite.Net;
 using SQLite.Net.Interop;
 // Shared
 using NathansWay.Shared;
-using NathansWay.Shared.Global;
+using NathansWay.Shared.Utilities;
 
 
 namespace NathansWay.Shared.DB

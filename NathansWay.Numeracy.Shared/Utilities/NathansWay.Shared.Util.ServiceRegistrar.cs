@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace NathansWay.Shared.Global
+namespace NathansWay.Shared.Utilities
 {
     /// <summary>
     /// Class for registering services for the app
