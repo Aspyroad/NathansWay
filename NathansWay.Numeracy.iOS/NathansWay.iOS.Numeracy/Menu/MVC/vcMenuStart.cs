@@ -1,33 +1,37 @@
+// System
 using System;
 using System.Drawing;
+// Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+// AspyCore
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-    public partial class vcMenu1Start : AspyViewController
+    public partial class vcMenuStart : AspyViewController
 	{
 
 
-		public vcMenu1Start () : base ()
+		public vcMenuStart () : base ()
 		{
             this.Initialize();
 		}
 
-		public vcMenu1Start (IntPtr h) : base (h) 
+		public vcMenuStart (IntPtr h) : base (h) 
 		{
             this.Initialize();
 		}
 
-		public vcMenu1Start (NSCoder coder) : base(coder)
+		public vcMenuStart (NSCoder coder) : base(coder)
 		{
             this.Initialize();
 		}
 
         private void Initialize ()
         {  
-            this.View.Tag = 100;
+			this.AspyTag1 = 1;
+			this.AspyName = "VC_MenuStart";
         }
 
 		public override void DidReceiveMemoryWarning ()

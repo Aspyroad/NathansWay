@@ -1,44 +1,64 @@
+// System
 using System;
 using System.Drawing;
+// Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+// AspyCore
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-    public partial class vcMenu3Lessons : AspyViewController
+	public partial class vcToolBox : AspyViewController
     {
-
-        public vcMenu3Lessons() 
+        public vcToolBox() 
         {
             Initialize();
         }
 
-        public vcMenu3Lessons (IntPtr h) : base (h)
+		public vcToolBox (IntPtr h) : base (h)
 		{
             Initialize();
 		}
 
-        public vcMenu3Lessons (NSCoder coder) : base(coder)
+		public vcToolBox (NSCoder coder) : base(coder)
 		{
             Initialize();
 		}
 
         private void Initialize ()
         {
-            this.View.Tag = 102;
+			this.AspyTag1 = 6;
+			this.AspyName = "VC_ToolBox";
         }
 
         partial void btn1_click(NSObject sender)
         {
-            this.PerformSegue("sgLessons_Start",sender);
+            throw new System.NotImplementedException();
+        }
+
+        partial void btn2_click(NSObject sender)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        partial void btn3_click(NSObject sender)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        partial void btn4_click(NSObject sender)
+        {
+            this.PerformSegue("sgStudent_Start",sender) ;
         }
 
 		#region Overrides
+        
         public override void DidReceiveMemoryWarning()
         {
             // Releases the view if it doesn't have a superview.
-            base.DidReceiveMemoryWarning();			
+            base.DidReceiveMemoryWarning();
+			
             // Release any cached data, images, etc that aren't in use.
         }
 
@@ -48,7 +68,6 @@ namespace NathansWay.iOS.Numeracy.Menu
         }
 
 		#endregion
-
     }
 }
 

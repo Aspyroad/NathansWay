@@ -78,6 +78,8 @@
     <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
     <Folder Include="Interface\" />
     <Folder Include="Utilities\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Lesson\MVC\" />
+    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\MVC\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,22 +100,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu1Start.cs">
-      <DependentUpon>xMenu1Start.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu1Start.designer.cs">
-      <DependentUpon>xMenu1Start.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu1Start.cs">
-      <DependentUpon>xMenu1Start.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu3Lessons.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenu3Lessons.cs">
-      <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenu3Lessons.designer.cs">
-      <DependentUpon>vcMenu3Lessons.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\MenuButtons.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.cs">
       <DependentUpon>vwNumberCombo.xib</DependentUpon>
@@ -156,12 +142,47 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.VCSettings.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcMenu2Student.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcMenu2Student.designer.cs">
-      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.designer.cs">
+      <DependentUpon>vcMenuStart.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vMenu2Student.cs">
-      <DependentUpon>vcMenu2Student.cs</DependentUpon>
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenuStart.cs">
+      <DependentUpon>vcMenuStart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessons.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessons.designer.cs">
+      <DependentUpon>vcLessons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessons.cs">
+      <DependentUpon>vcLessons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcStudent.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vcStudent.designer.cs">
+      <DependentUpon>vcStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vStudent.cs">
+      <DependentUpon>vcStudent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vcTeacher.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vcTeacher.designer.cs">
+      <DependentUpon>vcTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vTeacher.cs">
+      <DependentUpon>vcTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Settings\MVC\vcSettings.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Settings\MVC\vcSettings.designer.cs">
+      <DependentUpon>vcSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Settings\MVC\vSettings.cs">
+      <DependentUpon>vcSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\MVC\vcToolBox.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\MVC\vcToolBox.designer.cs">
+      <DependentUpon>vcToolBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\MVC\vToolBox.cs">
+      <DependentUpon>vcToolBox.cs</DependentUpon>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -195,13 +216,12 @@
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Menu\MVC\xMenu1Start.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\MenuMainViewBoard.storyboard" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
   </ItemGroup>
 </Project>

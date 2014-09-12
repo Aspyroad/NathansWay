@@ -1,31 +1,35 @@
+// System
 using System;
 using System.Drawing;
+// Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+// AspyCore
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-	public partial class vcMenu2Student : AspyViewController
+	public partial class vcStudent : AspyViewController
     {
-        public vcMenu2Student() 
+        public vcStudent() 
         {
             Initialize();
         }
 
-		public vcMenu2Student (IntPtr h) : base (h)
+		public vcStudent (IntPtr h) : base (h)
 		{
             Initialize();
 		}
 
-		public vcMenu2Student (NSCoder coder) : base(coder)
+		public vcStudent (NSCoder coder) : base(coder)
 		{
             Initialize();
 		}
 
         private void Initialize ()
         {
-            this.View.Tag = 101;
+			this.AspyTag1 = 2;
+			this.AspyName = "VC_Student";
         }
 
         partial void btn1_click(NSObject sender)

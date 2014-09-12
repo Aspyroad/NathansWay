@@ -55,17 +55,20 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		private void ListViewControllers()
 		{
-			// Menu
+			// Menu - Data
 			this.AddVC (1, "VC_MenuStart");
-			this.AddVC (2, "VC_MenuStudent");
-			this.AddVC (3, "VC_MenuLessons");
-			this.AddVC (4, "VC_MenuTools");
+			this.AddVC (2, "VC_Student");
+			this.AddVC (3, "VC_Lessons");
+			this.AddVC (4, "VC_Settings");
+			this.AddVC (5, "VC_Teacher");
+			this.AddVC (6, "VC_ToolBox");
+			//this.AddVC (7, "VC_Tools");
 			// WorkSpace
-			this.AddVC (5, "VC_MainGame");
+			this.AddVC (20, "VC_MainGame");
 			this.AddVCSettings (this.MainGame);
-			this.AddVC (6, "VC_MainWorkSpace"); 
+			this.AddVC (21, "VC_MainWorkSpace"); 
 			this.AddVCSettings (this.MainWorkSpace);
-			this.AddVC (7, "VC_WorkSpace");
+			this.AddVC (22, "VC_WorkSpace");
 			this.AddVCSettings (this.WorkSpace);
 			// Controls 
 			this.AddVC (100, "VC_CtrlNumberPad");

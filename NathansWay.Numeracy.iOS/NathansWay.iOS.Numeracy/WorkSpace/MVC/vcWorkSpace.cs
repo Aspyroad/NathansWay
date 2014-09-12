@@ -48,7 +48,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		private void Initialize()
 		{
-			this.AspyTag1 = 7;
+			this.AspyTag1 = 22;
 			this.AspyName = "VC_WorkSpace";
 
 			// Create our settings class

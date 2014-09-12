@@ -9,8 +9,8 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-	[Register ("vcMenu1Start")]
-	partial class vcMenu1Start
+	[Register ("vcMenuStart")]
+	partial class vcMenuStart
 	{
 		[Outlet]
 		AspyRoad.iOSCore.AspyButton btnMenuLesson { get; set; }

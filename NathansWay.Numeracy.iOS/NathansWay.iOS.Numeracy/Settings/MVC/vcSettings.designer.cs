@@ -7,10 +7,10 @@
 using MonoTouch.Foundation;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy
 {
-	[Register ("vcMenu2Student")]
-	partial class vcMenu2Student
+	[Register ("vcSettings")]
+	partial class vcSettings
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn1 { get; set; }
