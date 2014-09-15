@@ -50,7 +50,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender)
 		{
-			this.PerformSegue("sgStart_Lessons",sender);
+			this.PerformSegue("sgStudent_Start",sender);
 		}
 
 		partial void btnMenuActionStudent (NathansWay.iOS.Numeracy.Controls.ButtonStudent sender)

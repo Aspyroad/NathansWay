@@ -8,14 +8,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{05046D7A-62B0-4DE0-A033-1EACA8465F71}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NathansWay.Droid.MonoGame</RootNamespace>
+    <RootNamespace>NathansWay.Shared.MonoToolz</RootNamespace>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <AssemblyName>NathansWay.Droid.MonoGame</AssemblyName>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0.3</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,12 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
-    <Compile Include="..\Common\ParallaxingBackground.cs">
-      <Link>Common\ParallaxingBackground.cs</Link>
-    </Compile>
-    <Compile Include="..\Hammer\Game1.cs">
-      <Link>Hammer\Game1.cs</Link>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

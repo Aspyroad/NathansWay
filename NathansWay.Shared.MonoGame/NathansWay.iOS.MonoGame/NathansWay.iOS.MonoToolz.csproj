@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>NathansWay.iOS.MonoGame</RootNamespace>
+    <RootNamespace>NathansWay.Shared.MonoToolz</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>NathansWay.iOS.MonoGame</AssemblyName>
   </PropertyGroup>

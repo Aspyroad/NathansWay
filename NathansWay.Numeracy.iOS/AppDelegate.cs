@@ -157,7 +157,7 @@ namespace NathansWay.iOS.Numeracy
 			//			//window.RootViewController = _mainworkspace;
 
 			//Load our storyboard and setup our UIWindow and first view controller
-			storyboard = UIStoryboard.FromName ("NathansWay.Nureracy", null);
+			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
 			window.RootViewController = storyboard.InstantiateInitialViewController () as vcMenuStart;
 
 			#endregion
