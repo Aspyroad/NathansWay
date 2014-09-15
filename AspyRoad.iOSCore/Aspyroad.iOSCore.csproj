@@ -48,8 +48,8 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="MVC\" />
-    <Folder Include="Interface\" />
     <Folder Include="Utilities\" />
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -67,9 +67,9 @@
     <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
-    <Compile Include="Interface\IAspyroad.iOSCore.AspyGlobals.cs" />
-    <Compile Include="Interface\IAspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
+    <Compile Include="Contracts\IAspyroad.iOSCore.AspyGlobals.cs" />
+    <Compile Include="Contracts\IAspyroad.iOSCore.AspySettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

@@ -1,10 +1,12 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
+using System;
 using MonoTouch.Foundation;
+using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Menu
@@ -22,30 +24,19 @@ namespace NathansWay.iOS.Numeracy.Menu
 		AspyRoad.iOSCore.AspyButton btnTest { get; set; }
 
 		[Action ("btnMenuActionLessons:")]
-		partial void btnMenuActionLessons (MonoTouch.Foundation.NSObject sender);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender);
 
 		[Action ("btnMenuActionStudent:")]
-		partial void btnMenuActionStudent (MonoTouch.Foundation.NSObject sender);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btnMenuActionStudent (NathansWay.iOS.Numeracy.Controls.ButtonStudent sender);
 
 		[Action ("btnTestSegue:")]
-		partial void btnTestSegue (MonoTouch.Foundation.NSObject sender);
-		
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btnTestSegue (NathansWay.iOS.Numeracy.Controls.ButtonTools sender);
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (btnMenuLesson != null) {
-				btnMenuLesson.Dispose ();
-				btnMenuLesson = null;
-			}
-
-			if (btnMenuStudent != null) {
-				btnMenuStudent.Dispose ();
-				btnMenuStudent = null;
-			}
-
-			if (btnTest != null) {
-				btnTest.Dispose ();
-				btnTest = null;
-			}
 		}
 	}
 }

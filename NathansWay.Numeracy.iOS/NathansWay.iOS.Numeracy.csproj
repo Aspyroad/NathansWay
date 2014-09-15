@@ -76,10 +76,10 @@
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
-    <Folder Include="Interface\" />
     <Folder Include="Utilities\" />
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\MVC\" />
+    <Folder Include="Contracts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

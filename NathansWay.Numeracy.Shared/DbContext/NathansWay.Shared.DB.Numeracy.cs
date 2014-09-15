@@ -28,7 +28,14 @@ namespace NathansWay.Shared.DB
 				typeof(EntityLessonDetail),
 				typeof(EntitySchool),
 				typeof(EntityStudent),
-				typeof(EntityTeacher)
+				typeof(EntityTeacher),
+				typeof(EntityBlock),
+				typeof(EntityBlockDetail),
+				typeof(EntityBlockResults),
+				typeof(EntityLessonDetailResults),
+				typeof(EntityLessonResults),
+				typeof(EntityToolSettings),
+				typeof(EntityUISettings)
 			};
 		}
 

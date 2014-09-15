@@ -34,6 +34,7 @@ namespace NathansWay.iOS.Numeracy
 	//public class AppDelegate : AspyUIApplicationDelegate
 	public class AppDelegate : UIApplicationDelegate
 	{
+		private UIStoryboard storyboard;
 		private AspyWindow window;
 		private AspyViewController ViewContainerController;
 
@@ -136,31 +137,35 @@ namespace NathansWay.iOS.Numeracy
 			#endregion
 
 			#region Setup UI
-			// Start a toolfactory
-			ITool hammer;
-			hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
+			//			// Start a toolfactory
+			//			ITool hammer;
+			//			hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
+			//
+			//			AspyViewController _vcHammer = hammer.MainGame.Services.GetService<AspyViewController>();
+			//
+			//			// Temp workspace setup code. Mormally this will be behind a menu button.
+			//			vcWorkSpace _workspace = new vcWorkSpace();
+			//			//vcMainGame _maingame = new vcMainGame();
+			//			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
+			//
+			//			ViewContainerController = new AspyViewController();
+			//			ViewContainerController.AddAndDisplayController(_vcHammer);
+			//			ViewContainerController.AddAndDisplayController(_mainworkspace);
+			//			//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
+			//
+			//			window.RootViewController = ViewContainerController;
+			//			//window.RootViewController = _mainworkspace;
 
-			AspyViewController _vcHammer = hammer.MainGame.Services.GetService<AspyViewController>();
-
-			// Temp workspace setup code. Mormally this will be behind a menu button.
-			vcWorkSpace _workspace = new vcWorkSpace();
-			//vcMainGame _maingame = new vcMainGame();
-			vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
-
-			ViewContainerController = new AspyViewController();
-			ViewContainerController.AddAndDisplayController(_vcHammer);
-			ViewContainerController.AddAndDisplayController(_mainworkspace);
-			//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
-
-			window.RootViewController = ViewContainerController;
-			//window.RootViewController = _mainworkspace;
+			//Load our storyboard and setup our UIWindow and first view controller
+			storyboard = UIStoryboard.FromName ("NathansWay.Nureracy", null);
+			window.RootViewController = storyboard.InstantiateInitialViewController () as vcMenuStart;
 
 			#endregion
 
 			window.MakeKeyAndVisible ();
 			window.Tag = 0;
 
-			hammer.MainGame.Run ();
+			//hammer.MainGame.Run ();
 
 			return true;
 		}

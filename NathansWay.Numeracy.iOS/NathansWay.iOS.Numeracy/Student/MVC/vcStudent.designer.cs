@@ -1,10 +1,12 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio to store outlets and
-// actions made in the UI designer. If it is removed, they will be lost.
-// Manual changes to this file may not be handled correctly.
+// This file has been generated automatically by Xamarin Studio from the outlets and
+// actions declared in your storyboard file.
+// Manual changes to this file will not be maintained.
 //
+using System;
 using MonoTouch.Foundation;
+using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Menu
@@ -24,42 +26,15 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn4 { get; set; }
 
-		[Action ("btn1_click:")]
-		partial void btn1_click (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("btn2_click:")]
-		partial void btn2_click (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("btn3_click:")]
-		partial void btn3_click (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("btn4_click:")]
-		partial void btn4_click (MonoTouch.Foundation.NSObject sender);
-
 		[Action ("returnToStepOne:")]
 		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
-		
+
+		[Action ("btn1_click:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btn1_click (UIButton sender);
+
 		void ReleaseDesignerOutlets ()
 		{
-			if (btn1 != null) {
-				btn1.Dispose ();
-				btn1 = null;
-			}
-
-			if (btn2 != null) {
-				btn2.Dispose ();
-				btn2 = null;
-			}
-
-			if (btn3 != null) {
-				btn3.Dispose ();
-				btn3 = null;
-			}
-
-			if (btn4 != null) {
-				btn4.Dispose ();
-				btn4 = null;
-			}
 		}
 	}
 }

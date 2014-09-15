@@ -6,28 +6,28 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-    [MonoTouch.Foundation.Register ("vMenu3Lessons")]
-    public partial class vMenu3Lessons : AspyView
+    [MonoTouch.Foundation.Register ("vLessons")]
+    public partial class vLessons : AspyView
 	{
 		#region Constructors
 		
-        public vMenu3Lessons () : base ()
+        public vLessons () : base ()
         {
             Initialize();
         }
 
-        public vMenu3Lessons (RectangleF frame) : base (frame)
+        public vLessons (RectangleF frame) : base (frame)
         {
             Initialize();
         }
         
-        public vMenu3Lessons (IntPtr h) : base (h) 
+        public vLessons (IntPtr h) : base (h) 
         {
             Initialize();            
         }
 
 		[Export("initWithCoder:")]
-		public vMenu3Lessons (NSCoder coder) : base(coder)
+		public vLessons (NSCoder coder) : base(coder)
 		{
 			Initialize();
 		}

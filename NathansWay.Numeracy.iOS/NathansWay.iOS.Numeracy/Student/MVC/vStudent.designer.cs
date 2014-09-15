@@ -11,18 +11,9 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-	[Register ("vcLessons")]
-	partial class vcLessons
+	[Register ("vStudent")]
+	partial class vStudent
 	{
-		[Outlet]
-		MonoTouch.UIKit.UIButton btn1 { get; set; }
-
-		[Action ("btn1_click:")]
-		partial void btn1_click (MonoTouch.Foundation.NSObject sender);
-
-		[Action ("returnToMenu:")]
-		partial void returnToMenu (MonoTouch.UIKit.UIStoryboardSegue segue);
-
 		void ReleaseDesignerOutlets ()
 		{
 		}

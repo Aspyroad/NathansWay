@@ -48,21 +48,21 @@ namespace NathansWay.iOS.Numeracy.Menu
 			// Perform any additional setup after loading the view, typically from a nib.
 		}
 
-		partial void btnTestSegue(NSObject sender)
+		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender)
 		{
-			//this.PerformSegue("sgStart_Student",sender)	;
-            this.PerformSegue("sgStudent_Start",sender);
+			this.PerformSegue("sgStart_Lessons",sender);
 		}
-        
-        partial void btnMenuActionStudent(NSObject sender)
-        {
-            throw new System.NotImplementedException();
-        }
-		
-		partial void btnMenuActionLessons (NSObject sender)
+
+		partial void btnMenuActionStudent (NathansWay.iOS.Numeracy.Controls.ButtonStudent sender)
 		{
-            this.PerformSegue("sgStart_Lessons",sender);
-        }
+			throw new NotImplementedException ();
+		}
+
+		partial void btnTestSegue (NathansWay.iOS.Numeracy.Controls.ButtonTools sender)
+		{
+			this.PerformSegue("sgStudent_Start",sender);
+		}
+
 	}
 }
 
