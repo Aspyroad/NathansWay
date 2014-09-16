@@ -52,7 +52,7 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		private void Initialize ()
+		protected virtual void Initialize ()
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();

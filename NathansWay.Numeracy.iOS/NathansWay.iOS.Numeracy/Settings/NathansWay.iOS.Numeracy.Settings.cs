@@ -76,6 +76,10 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			this.AddVC (102, "VC_CtrlNumberCombo");
 			this.AddVCSettings (this.NumberCombo);
 		}
+
+		#region Public Members
+
+		#endregion
 	}
 }
 

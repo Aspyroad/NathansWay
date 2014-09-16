@@ -1,5 +1,6 @@
 ﻿// System
 using System;
+using System.Drawing;
 using System.Collections;
 using System.Collections.Generic;
 // Mono
@@ -9,9 +10,77 @@ using MonoTouch.Foundation;
 
 namespace AspyRoad.iOSCore
 {
-	/// <summary>
-	/// Overridden UIPickerViewModel - Serves as the datasource for the picklist
-	/// </summary>
+	[Register ("AspyComboBox")]
+	public class AspyComboBox : AspyViewController
+	{
+		#region Class Variables
+
+		private AspyPickerView _pickersView;
+		private AspyPickerViewModel _pickerModel;
+		private AspyTextField _pickerTxtField;
+		private UIFont _pickerFont;
+		private UIColor _pickerBackGround;
+
+		private Action<object, EventArgs> _pickerValueChanged;
+
+		#endregion
+
+		#region Constructors
+
+		public AspyComboBox ()
+		{
+			Initialize ();
+		}
+
+		public AspyComboBox (string nibName, NSBundle bundle) : base (nibName, bundle)
+		{
+			Initialize ();
+		}
+
+		public AspyComboBox (IntPtr h) : base (h)
+		{
+			Initialize ();
+		}
+
+
+		public AspyComboBox (NSCoder coder) : base (coder)
+		{
+			Initialize ();
+		}
+
+		#endregion
+
+		#region Private Members
+
+		protected override void Initialize ()
+		{
+			base.Initialize ();
+			// Any setup code for initialization
+			_pickersView = new AspyPickerView ();
+			_pickerTxtField = new AspyTextField ();
+			_pickerModel = new AspyPickerViewModel ();
+		}
+
+		#endregion
+
+		#region Public Members
+
+
+
+		#endregion
+
+		#region Overrides
+
+		public override void ViewDidLoad ()
+		{
+			base.ViewDidLoad ();
+			this.View.AddSubview ();
+		}
+
+
+		#endregion
+	}
+	
     public class AspyPickerView : UIPickerView  
     {
         #region Class Variables
@@ -24,19 +93,46 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #region Constructor
+		#region Contructors
 
-        public AspyPickerView ()
-        {
+		public AspyPickerView (IntPtr handle) : base(handle)
+		{
+			Initialize ();
+		}
 
-        }
+		public AspyPickerView (NSCoder coder) : base(coder)
+		{
+			Initialize ();
+		}
 
-        #endregion
+		public AspyPickerView (RectangleF frame) : base(frame)
+		{
+			Initialize ();
+		}
+
+		public AspyPickerView () : base ()
+		{
+			Initialize ();
+		}
+
+		#endregion
+
+		#region Private Members
+
+		private void Initialize()
+		{
+
+		}
+
+		#endregion
+
+		#region Overrides
+
+
+
+		#endregion
     }
 
-	/// <summary>
-	/// Overridden UIPickerViewModel - Serves as the datasource for the picklist
-	/// </summary>
     public class AspyPickerViewModel : UIPickerViewModel 
     {
         #region Class Variables
@@ -57,6 +153,11 @@ namespace AspyRoad.iOSCore
 		public AspyPickerViewModel ()
         {
         }
+
+		public AspyPickerViewModel (List<string> _dataList)
+		{
+			this.items = _dataList;
+		}
 
         #endregion
 
@@ -130,5 +231,37 @@ namespace AspyRoad.iOSCore
         #endregion
     }
 
-}
+	public class AspyTextField : UITextField
+	{
+		#region Contructors
 
+		public AspyTextField (IntPtr handle) : base(handle)
+		{
+			Initialize ();
+		}
+
+		public AspyTextField (NSCoder coder) : base(coder)
+		{
+			Initialize ();
+		}
+
+		public AspyTextField (RectangleF frame) : base(frame)
+		{
+			Initialize ();
+		}
+
+		public AspyTextField () : base ()
+		{
+			Initialize ();
+		}
+
+		#endregion
+
+		//#region Private Members
+
+		private void Initialize()
+		{
+
+		}
+	}
+}

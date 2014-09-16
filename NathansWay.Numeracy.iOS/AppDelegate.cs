@@ -107,6 +107,7 @@ namespace NathansWay.iOS.Numeracy
 			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
 			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
+			this._DbContext.SetDataNumeracySettings(this._NumeracySettings)
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
@@ -117,12 +118,14 @@ namespace NathansWay.iOS.Numeracy
 			// Register app/user settings
 			iOSCoreServiceContainer.Register<IAspySettings>(this._NumeracySettings);
 
+			// Register settings
+
 
 			// Using viewcontroller constructor to run the nib
-			ViewContainerController = new AspyViewController();
+			//ViewContainerController = new AspyViewController();
 
 			// Add our view variables 
-			iOSCoreServiceContainer.Register<AspyViewController>(this.ViewContainerController);
+			//iOSCoreServiceContainer.Register<AspyViewController>(this.ViewContainerController);
 			iOSCoreServiceContainer.Register<AspyWindow> (window);
 
 			// Build a ToolBoxFactory
