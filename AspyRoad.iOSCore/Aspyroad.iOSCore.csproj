@@ -50,6 +50,7 @@
     <Folder Include="MVC\" />
     <Folder Include="Utilities\" />
     <Folder Include="Contracts\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -70,6 +71,7 @@
     <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspyGlobals.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspySettings.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyUIPickerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

@@ -61,8 +61,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize()
+        protected override void Initialize()
         {
+			base.Initialize ();
             this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
         }
 
@@ -93,8 +94,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize()
+        protected override void Initialize()
         {
+			base.Initialize ();
             this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
         }
 
@@ -125,8 +127,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize()
+        protected override void Initialize()
         {
+			base.Initialize ();
             this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
         }
 
@@ -157,8 +160,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        private void Initialize()
+        protected override void Initialize()
         {
+			base.Initialize ();
             this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
         }
 
@@ -168,5 +172,39 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._iconDownlabelTop();
         }
     }
+
+	[MonoTouch.Foundation.Register ("ButtonSchool")]
+	public class ButtonSchool : AspyButton
+	{
+
+		public ButtonSchool () : base()
+		{
+			Initialize();
+		}
+		public ButtonSchool (IntPtr handle) : base(handle)
+		{
+			Initialize();
+		}       
+		public ButtonSchool (RectangleF myFrame)  : base (myFrame)
+		{   
+			Initialize();
+		}
+		public ButtonSchool (UIButtonType type) : base (type)
+		{
+			Initialize();
+		} 
+
+		protected override void Initialize()
+		{
+			base.Initialize ();
+			this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+		}
+
+		public override void LayoutSubviews()
+		{
+			base.LayoutSubviews();
+			this._iconDownlabelTop();
+		}
+	}
 }
 

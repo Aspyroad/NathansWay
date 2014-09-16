@@ -26,6 +26,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn4 { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		vStudent vStudent { get; set; }
+
 		[Action ("returnToStepOne:")]
 		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
 
@@ -33,20 +37,12 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void btn1_click (UIButton sender);
 
-		[Action ("btn2_click:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn2_click (UIButton sender);
-
-		[Action ("btn3_click:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn3_click (UIButton sender);
-
-		[Action ("btn4_click:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn4_click (UIButton sender);
-
 		void ReleaseDesignerOutlets ()
 		{
+			if (vStudent != null) {
+				vStudent.Dispose ();
+				vStudent = null;
+			}
 		}
 	}
 }

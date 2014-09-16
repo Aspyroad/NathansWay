@@ -4,7 +4,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("vLessons")]
     public partial class vLessons : AspyView
@@ -37,7 +37,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		#region Private Members
 		
         private void Initialize()
-        {   
+        {
+			this.Tag = 3;
         }
 
 		#endregion

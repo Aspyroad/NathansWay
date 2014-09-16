@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>NathansWay.Numeracy</string>
+	<string>NathansWay.iOS.Numeracy</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.AspyRoad.NathansWay.Numeracy</string>
 	<key>UIDeviceFamily</key>
@@ -17,5 +17,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

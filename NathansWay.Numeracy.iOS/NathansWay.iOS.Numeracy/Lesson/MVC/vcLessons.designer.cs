@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy
 {
 	[Register ("vcLessons")]
 	partial class vcLessons
@@ -17,14 +17,20 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn1 { get; set; }
 
-		[Action ("btn1_click:")]
-		partial void btn1_click (MonoTouch.Foundation.NSObject sender);
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		vLessons vLessons { get; set; }
 
 		[Action ("returnToMenu:")]
-		partial void returnToMenu (MonoTouch.UIKit.UIStoryboardSegue segue);
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void returnToMenu (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (vLessons != null) {
+				vLessons.Dispose ();
+				vLessons = null;
+			}
 		}
 	}
 }

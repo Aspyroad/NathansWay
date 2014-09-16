@@ -44,24 +44,19 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();            
-			// Perform any additional setup after loading the view, typically from a nib.
+			base.ViewDidLoad ();  
 		}
 
 		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender)
 		{
-			this.PerformSegue("sgStudent_Start",sender);
+			this.PerformSegue("sgMenu2Toolbox",sender);
 		}
 
-		partial void btnMenuActionStudent (NathansWay.iOS.Numeracy.Controls.ButtonStudent sender)
+		partial void btnMenuActionToolbox (NathansWay.iOS.Numeracy.Controls.ButtonTools sender)
 		{
-			throw new NotImplementedException ();
+			this.PerformSegue("sgMenu2Toolbox", sender);
 		}
 
-		partial void btnTestSegue (NathansWay.iOS.Numeracy.Controls.ButtonTools sender)
-		{
-			this.PerformSegue("sgStudent_Start",sender);
-		}
 
 	}
 }

@@ -40,7 +40,8 @@ namespace NathansWay.iOS.Numeracy
 		#region Private Members
         
         private void Initialize()
-        {   
+        {
+			this.Tag = 4;
         }
 
 		#endregion

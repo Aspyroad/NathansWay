@@ -9,10 +9,10 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy
+namespace NathansWay.iOS.Numeracy.Menu
 {
-	[Register ("vLessons")]
-	partial class vLessons
+	[Register ("vToolBox")]
+	partial class vToolBox
 	{
 		void ReleaseDesignerOutlets ()
 		{

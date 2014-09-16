@@ -40,7 +40,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		#region Private Members
         
         private void Initialize()
-        {   
+        {
+			this.Tag = 1;
 		}
         
         //		public override void Draw(RectangleF rect)

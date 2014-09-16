@@ -7,7 +7,7 @@ using MonoTouch.UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy
 {
     public partial class vcLessons : AspyViewController
     {
@@ -33,10 +33,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.AspyName = "VC_Settings";
         }
 
-        partial void btn1_click(NSObject sender)
-        {
-            this.PerformSegue("sgLessons_Start",sender);
-        }
+		partial void returnToMenu (UIButton sender)
+		{
+			this.PerformSegue("sgLessons_Start", sender);
+		}
 
 		#region Overrides
         public override void DidReceiveMemoryWarning()
@@ -50,6 +50,11 @@ namespace NathansWay.iOS.Numeracy.Menu
         {
             base.ViewDidLoad();
         }
+
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+		}
 
 		#endregion
 
