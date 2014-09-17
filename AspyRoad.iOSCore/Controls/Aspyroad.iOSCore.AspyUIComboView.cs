@@ -73,7 +73,7 @@ namespace AspyRoad.iOSCore
 			// _pickersView = new AspyPickerView ();
 			_pickerTxtField = new AspyTextField ();
 			_pickerModel = new AspyPickerViewModel ();
-
+			// Setup some basics for the non adventurous
 			if (_txtAttributes == null)
 			{
 				_txtAttributes.Font = UIFont.FromName ("ArialMT", 12.0f);
@@ -87,6 +87,7 @@ namespace AspyRoad.iOSCore
 			{
 				_txtAppearence.BackgroundColor = UIColor.White;
 			}
+			UIButton.Appearance.Se
 		}  
 
 		#endregion

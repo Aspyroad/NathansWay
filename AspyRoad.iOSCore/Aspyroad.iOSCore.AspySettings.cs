@@ -95,14 +95,13 @@ namespace AspyRoad.iOSCore
 		#endregion
 	}
 
-	public class VcSettings : IVcSettings
+	public class VcUIAppearance //: IVcSettings
 	{
 		#region Private Members
 
-		private RectangleF _framesize;
 		private int _vcTag;
 		private string _vcName;
-		private UIColor _backcolor;
+		private UIColor _backTextColor;
 		private UIColor _forecolor;
 		private UIFont _fonttype;
 		private float _fontsize;
@@ -111,16 +110,20 @@ namespace AspyRoad.iOSCore
 		private float _bordersize;
 		private UIColor _bordercolor;
 
-		//private IAspyGlobals _iOSGlobals;
-
 		#endregion
 
 		#region Constructors
 
-		public VcSettings ()
+		public VcUIAppearance ()
 		{
-
 		}
+
+		// We want to save a full setting and retrieve a full setting from the database here.
+		// Needs to have a repo in the database called UISettings or maybe themes.
+		// It also needs to save either a UIVeiwController type (base or all) or a more senior
+		// inheritence of the same base type (UIViewController) then we can load views.
+		// And do we need to signal them so they can reload the new theme 
+		// (id say yes, some AspyVC base work needed to hook this up)
 
 		#endregion
 
