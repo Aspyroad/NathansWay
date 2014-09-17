@@ -71,7 +71,9 @@
     <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspyGlobals.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspySettings.cs" />
-    <Compile Include="Controls\Aspyroad.iOSCore.AspyUIPickerViewModel.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyUIComboView.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyLabel.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyTextField.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

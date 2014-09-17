@@ -15,11 +15,16 @@ namespace AspyRoad.iOSCore
 	{
 		#region Class Variables
 
-		private AspyPickerView _pickersView;
+		// private AspyPickerView _pickersView;
 		private AspyPickerViewModel _pickerModel;
 		private AspyTextField _pickerTxtField;
-		private UIFont _pickerFont;
-		private UIColor _pickerBackGround;
+
+		// Style for text in the picker and textbox
+		private UITextAttributes _txtAttributes;
+		// TextBox ViewAppearance
+		private UIView.UIViewAppearance _txtAppearence;
+		// Picker ViewAppearance
+		private UIView.UIViewAppearance _pckAppearance;
 
 		private Action<object, EventArgs> _pickerValueChanged;
 
@@ -30,6 +35,15 @@ namespace AspyRoad.iOSCore
 		public AspyComboBox ()
 		{
 			Initialize ();
+		}
+
+		public AspyComboBox (UITextAttributes _txtattributes, 
+								UIView.UIViewAppearance _txtappearance,
+								UIView.UIViewAppearance _pckappearance)
+		{
+			this._txtAttributes = _txtattributes;
+			this._txtAppearence = _txtappearance;
+			this._pckAppearance = _pckappearance;
 		}
 
 		public AspyComboBox (string nibName, NSBundle bundle) : base (nibName, bundle)
@@ -56,16 +70,46 @@ namespace AspyRoad.iOSCore
 		{
 			base.Initialize ();
 			// Any setup code for initialization
-			_pickersView = new AspyPickerView ();
+			// _pickersView = new AspyPickerView ();
 			_pickerTxtField = new AspyTextField ();
 			_pickerModel = new AspyPickerViewModel ();
-		}
+
+			if (_txtAttributes == null)
+			{
+				_txtAttributes.Font = UIFont.FromName ("ArialMT", 12.0f);
+				_txtAttributes.TextColor = UIColor.Black;
+			}
+			if (_pckAppearance == null)
+			{
+				_pckAppearance.BackgroundColor = UIColor.White;
+			}
+			if (_txtAppearence == null)
+			{
+				_txtAppearence.BackgroundColor = UIColor.White;
+			}
+		}  
 
 		#endregion
 
 		#region Public Members
 
+		public UITextAttributes ComboBoxTextStyle
+		{
+			get { return _txtAttributes; }
+			set { _txtAttributes = value; }
+		}
 
+		public UIView.UIViewAppearance TextAppearance
+		{
+			get { return _txtAppearence; }
+			set { _txtAppearence = value; }
+		}
+
+		public UIView.UIViewAppearance PickerAppearance
+		{
+			get { return _pckAppearance; }
+			set { _pckAppearance = value; }
+		}
 
 		#endregion
 
@@ -121,13 +165,11 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize()
 		{
-
 		}
 
 		#endregion
 
 		#region Overrides
-
 
 
 		#endregion
@@ -231,37 +273,8 @@ namespace AspyRoad.iOSCore
         #endregion
     }
 
-	public class AspyTextField : UITextField
-	{
-		#region Contructors
 
-		public AspyTextField (IntPtr handle) : base(handle)
-		{
-			Initialize ();
-		}
 
-		public AspyTextField (NSCoder coder) : base(coder)
-		{
-			Initialize ();
-		}
 
-		public AspyTextField (RectangleF frame) : base(frame)
-		{
-			Initialize ();
-		}
-
-		public AspyTextField () : base ()
-		{
-			Initialize ();
-		}
-
-		#endregion
-
-		//#region Private Members
-
-		private void Initialize()
-		{
-
-		}
 	}
 }
