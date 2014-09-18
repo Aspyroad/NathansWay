@@ -17,13 +17,9 @@ using NathansWay.iOS.Numeracy.Menu ;
 
 namespace NathansWay.iOS.Numeracy.UISettings
 {
-	public class NumeracySettings : AspySettings
+	public class NumeracyUIManager : AspyUIManager
 	{
 		// All ViewControllers
-		public vcs_numbercombo NumberCombo;
-		public vcs_maingame MainGame;
-		public vcs_workspace WorkSpace;
-		public vcs_mainworkspace MainWorkSpace;
 
 		#region Private Variables
 
@@ -31,7 +27,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		#region Constructors
 
-		public NumeracySettings (IAspyGlobals _iOSGlobals) : base (_iOSGlobals)
+		public NumeracyUIManager (IAspyGlobals _iOSGlobals) : base (_iOSGlobals)
 		{
 			this.Initialize ();
 		}
@@ -42,11 +38,6 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		private void Initialize ()
 		{
-			this.NumberCombo = new vcs_numbercombo (this.iOSGlobals);
-			this.MainGame = new vcs_maingame (this.iOSGlobals);
-			this.WorkSpace = new vcs_workspace (this.iOSGlobals);
-			this.MainWorkSpace = new vcs_mainworkspace (this.iOSGlobals);
-
 			// Initialize the main list
 			this.ListViewControllers ();
 		}
@@ -65,19 +56,55 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			//this.AddVC (7, "VC_Tools");
 			// WorkSpace
 			this.AddVC (20, "VC_MainGame");
-			this.AddVCSettings (this.MainGame);
+			//this.AddVCSettings (this.MainGame);
 			this.AddVC (21, "VC_MainWorkSpace"); 
-			this.AddVCSettings (this.MainWorkSpace);
+			//this.AddVCSettings (this.MainWorkSpace);
 			this.AddVC (22, "VC_WorkSpace");
-			this.AddVCSettings (this.WorkSpace);
+			//this.AddVCSettings (this.WorkSpace);
 			// Controls 
 			this.AddVC (100, "VC_CtrlNumberPad");
 			this.AddVC (101, "VC_CtrlFractionCombo");
 			this.AddVC (102, "VC_CtrlNumberCombo");
-			this.AddVCSettings (this.NumberCombo);
+			//this.AddVCSettings (this.NumberCombo);
 		}
 
 		#region Public Members
+
+		public class GlobalUIAppearance
+		{
+
+			private IUISettings _SavedUISettings;
+			private IUISettings _AppConstantUISettings;
+
+
+			public GlobalUIAppearance()
+			{
+
+			}
+
+			public GlobalUIAppearance(IUISettings _globalUI)
+			{
+				// Just in case I want to supply my own settings
+				_SavedUISettings = _globalUI;
+			}
+
+			public void Run ()
+			{
+				var _button = UIButton.Appearance;
+				_button.BackgroundColor = _SavedUISettings.ButtonNormalBGColor;
+				_button.SetTitleColor (_SavedUISettings.ButtonNormalTitleColor, UIControlState.Normal);
+				_button.SetTitleColor (_SavedUISettings.ButtonPressedTitleColor, UIControlState.Selected); 
+
+				// Blah Blah Blah have fun!
+
+
+
+			}
+
+
+
+
+		}
 
 		#endregion
 	}

@@ -55,7 +55,7 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspySettings> ();
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
 		}
 
 		#endregion
