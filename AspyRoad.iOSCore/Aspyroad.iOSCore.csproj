@@ -68,12 +68,12 @@
     <Compile Include="Aspyroad.iOSCore.AspyButton.Base.cs" />
     <Compile Include="Utilities\ServiceContainer.cs" />
     <Compile Include="Utilities\ServiceRegistrar.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspyGlobals.cs" />
-    <Compile Include="Contracts\IAspyroad.iOSCore.AspySettings.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyUIComboView.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyLabel.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTextField.cs" />
+    <Compile Include="Contracts\IAspyroad.iOSCore.AspyUIManager.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyUIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

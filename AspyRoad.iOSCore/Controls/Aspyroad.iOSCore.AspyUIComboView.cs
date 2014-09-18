@@ -87,7 +87,6 @@ namespace AspyRoad.iOSCore
 			{
 				_txtAppearence.BackgroundColor = UIColor.White;
 			}
-			UIButton.Appearance.Se
 		}  
 
 		#endregion
@@ -273,9 +272,4 @@ namespace AspyRoad.iOSCore
 
         #endregion
     }
-
-
-
-
-	}
 }

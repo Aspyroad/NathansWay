@@ -161,7 +161,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			this.AspyTag1 = 102;
 			this.AspyName = "VC_CtrlNumberCombo";
 
-			this._numeracySettings = (NumeracySettings)this.iOSSettings;
+			this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
 			//this._vcSettings = this._numeracySettings.NumberCombo;
 			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
 

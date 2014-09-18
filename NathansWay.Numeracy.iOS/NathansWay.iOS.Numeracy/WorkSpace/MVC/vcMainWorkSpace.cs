@@ -49,7 +49,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_MainWorkSpace";
 
 			// Create our settings class
-			this._numeracySettings = (NumeracySettings)this.iOSSettings;
+			this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
 			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
         }
 

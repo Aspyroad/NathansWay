@@ -15,16 +15,24 @@ namespace NathansWay.Shared.BUS.Entity
 
 		private int _studentSeq;
 		private int _teacherSeq;
-		private string _frameSize;
 		private int _vcTag;
 		private string _vcName;
-		private string _backColor;
-		private string _foreColor;
-		private int _fontSize;
-		private string _fontName;
-		private string _borderColor;
-		private bool _hasBorder;
-		private int _borderSize;
+		// UIButton
+		private string _btnNormalBGColor;
+		private string _btnPressedBGColor;
+		private string _btnNormalTitleColor;
+		private string _btnPressedTitleColor;
+		//private string _btnNormalBGImage;
+		//private string _btnPressedBGImage;
+		// UIView
+		private string _vwBGColor;
+		private string _vwBGTint;
+		// UILabel
+		private string _lblTitleColor;
+		// UITextViews
+		private string _txtBGColor;
+		private string _txtBGTint;
+		private string _txtTextColor;
 
 		#endregion
 
@@ -51,13 +59,6 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._teacherSeq; } 
 			set { this._teacherSeq = value; }
 		}
-		[Column("framesize")]
-		public string FrameSize
-		{ 
-			get { return this._frameSize; }
-			set { this._frameSize = value; }
-
-		}
 		[Column("vctag")]
 		public int VcTag
 		{ 
@@ -70,71 +71,94 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._vcName; }
 			set { this._vcName = value; }
 		}
-		[Column("backcolor")]
-		public string BackColor
+		// UIButton
+		[Column("btnNormalBGColor")]
+		public string ButtonNormalBGColor
+		{ 
+			get { return this._btnNormalBGColor; }
+			set { this._btnNormalBGColor = value; }
+
+		}
+		[Column("btnPressedBGColor")]
+		public string ButtonPressedBGColor
 		{ 
 			get 
 			{ 
-				return this._backColor; 
+				return this._btnPressedBGColor; 
 			}
 			set 
 			{ 
-				this._backColor = value; 
+				this._btnPressedBGColor = value; 
 			}
 		}
-		[Column("forecolor")]
-		public string ForeColor
+		[Column("btnNormalTitleColor")]
+		public string ButtonNormalTitleColor
 		{ 
 			get 
 			{ 
-				return this._foreColor; 
+				return this._btnNormalTitleColor; 
 			} 
 			set 
 			{ 
-				this._foreColor = value; 
+				this._btnNormalTitleColor = value; 
 			}
 		}
-		[Column("fontsize")]
-		public int FontSize
+		[Column("btnPressedTitleColor")]
+		public int ButtonPressedTitleColor
 		{ 
 			get 
 			{ 
-				return this._fontSize; 
+				return this._btnPressedTitleColor; 
 			}
 			set 
 			{ 
-				this._fontSize = value; 
+				this._btnPressedTitleColor = value; 
 			}
 		}
-		[Column("fontname")]
-		public string FontName
+		// UIView
+		[Column("vwBGColor")]
+		public string ViewBackGroundColor
 		{
-			get { return this._fontName; }
-			set { this._fontName = value; }            
+			get { return this._vwBGColor; }
+			set { this._vwBGColor = value; }            
 		}
-		[Column("bordercolor")]
-		public string BorderColor
+		[Column("vwBGTint")]
+		public string ViewBackGroundTint
 		{
 			get 
 			{ 
-				return this._borderColor; 
+				return this._vwBGTint; 
 			}
 			set 
 			{ 
-				this._borderColor = value; 
+				this._vwBGTint = value; 
 			}
 		}
-		[Column("bordersize")]
-		public int BorderSize
+		// UILabel
+		[Column("lblTitleColor")]
+		public string LabelTitleColor
 		{ 
-			get { return this._borderSize; } 
-			set { this._borderSize = value; }
+			get { return this._lblTitleColor; } 
+			set { this._lblTitleColor = value; }
 		}
-		[Column("hasborder")]
-		public bool HasBorder
+		// UIText
+		[Column("txtBGColor")]
+		public string TextBackGroundColor
 		{ 
-			get { return this._hasBorder; } 
-			set { this._hasBorder = value; }
+			get { return this._txtBGColor; } 
+			set { this._txtBGColor = value; }
+		}
+		[Column("txtBGTint")]
+		public string TextBackGroundTint
+		{ 
+			get { return this._txtBGTint; } 
+			set { this._txtBGTint = value; }
+		}
+		[Column("txtTextColor")]
+		public string TextTextColor
+		{ 
+			get { return this._txtTextColor; } 
+			set { this._txtTextColor = value; }
 		}
 
 		#endregion     

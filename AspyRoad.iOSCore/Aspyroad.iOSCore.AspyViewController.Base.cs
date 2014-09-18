@@ -15,13 +15,12 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
-		public IAspySettings iOSSettings;
+		public IAspyUIManager iOSUIAppearance;
 		// Tags for id
 		private int _AspyTag1;
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
-		protected IVcSettings _vcSettings;
 
 		#endregion
 
@@ -56,7 +55,7 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			this.iOSSettings = iOSCoreServiceContainer.Resolve<IAspySettings> ();
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspySettings> ();
 		}
 
 		#endregion
@@ -81,15 +80,12 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-		public void ApplyVcSettings ()
+		public void ApplyUIAppearance (int _tag)
 		{
-			this.View.BackgroundColor = this._vcSettings.BackColor;
-			this.View.Frame = this._vcSettings.FrameSize;
-			if (this._vcSettings.HasBorder)
-			{
-				this.View.Layer.BorderColor = this._vcSettings.BorderColor.CGColor;
-				this.View.Layer.BorderWidth = this._vcSettings.BorderSize;
-			}
+			// Query the UIManager, see if theres a tag with its own UI
+			// If so load it
+
+
 		}
 
 		#endregion
@@ -198,10 +194,7 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			if (this._vcSettings != null)
-			{
-				this.ApplyVcSettings ();
-			}
+			this.ApplyUIAppearance (this._AspyTag1);
 		}
 
 		// These puppies cost me a lot of time. DAYS!
