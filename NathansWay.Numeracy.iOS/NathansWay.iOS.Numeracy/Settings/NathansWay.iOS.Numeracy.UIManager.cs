@@ -70,41 +70,6 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		#region Public Members
 
-		public class GlobalUIAppearance
-		{
-
-			private IUISettings _SavedUISettings;
-			private IUISettings _AppConstantUISettings;
-
-
-			public GlobalUIAppearance()
-			{
-
-			}
-
-			public GlobalUIAppearance(IUISettings _globalUI)
-			{
-				// Just in case I want to supply my own settings
-				_SavedUISettings = _globalUI;
-			}
-
-			public void Run ()
-			{
-				var _button = UIButton.Appearance;
-				_button.BackgroundColor = _SavedUISettings.ButtonNormalBGColor;
-				_button.SetTitleColor (_SavedUISettings.ButtonNormalTitleColor, UIControlState.Normal);
-				_button.SetTitleColor (_SavedUISettings.ButtonPressedTitleColor, UIControlState.Selected); 
-
-				// Blah Blah Blah have fun!
-
-
-
-			}
-
-
-
-
-		}
 
 		#endregion
 	}

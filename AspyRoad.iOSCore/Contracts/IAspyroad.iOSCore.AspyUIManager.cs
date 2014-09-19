@@ -13,25 +13,40 @@ namespace AspyRoad.iOSCore
 	public interface IAspyUIManager
 	{
 		// Properties
+		IUITheme GlobalSavedUItheme { get; set; }
+
+		IUITheme GlobalAppUITheme { get; set; }
+
 		Dictionary<int, string> VCTagList { get; set; }
+
+		Dictionary<int, IUITheme> VcUIThemes { get; set; }
+
 		// Methods
-		IUISettings FindUISettings (string _vcname);
+		IUITheme FindVcUITheme (string _vcname);
 
-		IUISettings FindUISettings (int _vctag);
+		IUITheme FindVcUITheme (int _vctag);
 
-		void AddVCSettings (IUISettings _vcsettings);
+		void AddVcUITheme (IUITheme _vcuitheme);
 
 		void AddVC (int aspytag1, string aspyname);
+
+		void ApplyGlobalSavedUITheme ();
+
+		void ApplyGlobalAppUITheme ();
+
+		//void GetSavedUIThemes ();
+
     }
 
-	public interface IUISettings
+	public interface IUITheme
 	{
 		// Id
 		string VcName { get; set; } 
 		int VcTag { get; set; } 
 		// UIButton
 		UIColor ButtonNormalBGColor { get; set; } 
-		UIColor ButtonPressedBGColor { get; set; } 
+		// Removed as it cant be set...best to use an image instead.
+		//UIColor ButtonPressedBGColor { get; set; } 
 		UIColor ButtonNormalTitleColor { get; set; } 
 		UIColor ButtonPressedTitleColor { get; set; } 
 		UIImage ButtonNormalBGImage { get; set; } 
@@ -45,5 +60,6 @@ namespace AspyRoad.iOSCore
 		UIColor TextBGColor { get; set; } 
 		UIColor TextBGTint { get; set; } 
 		UIColor TextTextColor { get; set; } 
+
 	}
 }

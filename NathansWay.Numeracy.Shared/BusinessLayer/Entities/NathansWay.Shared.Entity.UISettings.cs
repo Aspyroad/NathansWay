@@ -18,12 +18,11 @@ namespace NathansWay.Shared.BUS.Entity
 		private int _vcTag;
 		private string _vcName;
 		// UIButton
-		private string _btnNormalBGColor;
-		private string _btnPressedBGColor;
+		private string _btnBGColor;
+		private string _btnPressedBGImage;
 		private string _btnNormalTitleColor;
 		private string _btnPressedTitleColor;
-		//private string _btnNormalBGImage;
-		//private string _btnPressedBGImage;
+		private string _btnNormalBGImage;
 		// UIView
 		private string _vwBGColor;
 		private string _vwBGTint;
@@ -73,22 +72,34 @@ namespace NathansWay.Shared.BUS.Entity
 		}
 		// UIButton
 		[Column("btnNormalBGColor")]
-		public string ButtonNormalBGColor
+		public string ButtonBGColor
 		{ 
-			get { return this._btnNormalBGColor; }
-			set { this._btnNormalBGColor = value; }
+			get { return this._btnBGColor; }
+			set { this._btnBGColor = value; }
 
 		}
-		[Column("btnPressedBGColor")]
-		public string ButtonPressedBGColor
+		[Column("btnPressedBGImage")]
+		public string ButtonPressedBGImage
 		{ 
 			get 
 			{ 
-				return this._btnPressedBGColor; 
+				return this._btnPressedBGImage; 
 			}
 			set 
 			{ 
-				this._btnPressedBGColor = value; 
+				this._btnPressedBGImage = value; 
+			}
+		}
+		[Column("btnNormalBGImage")]
+		public string ButtonNormalBGImage
+		{ 
+			get 
+			{ 
+				return this._btnNormalBGImage; 
+			}
+			set 
+			{ 
+				this._btnNormalBGImage = value; 
 			}
 		}
 		[Column("btnNormalTitleColor")]
@@ -104,7 +115,7 @@ namespace NathansWay.Shared.BUS.Entity
 			}
 		}
 		[Column("btnPressedTitleColor")]
-		public int ButtonPressedTitleColor
+		public string ButtonPressedTitleColor
 		{ 
 			get 
 			{ 

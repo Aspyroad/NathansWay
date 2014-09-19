@@ -16,13 +16,17 @@ using Xamarin.Forms;
 
 namespace AspyRoad.iOSCore
 {
-	public class AspyUIManager : IAspyUIManager
+	public abstract class AspyUIManager : IAspyUIManager
 	{
 		#region Private Members
 
 		protected IAspyGlobals iOSGlobals;
 		protected Dictionary<int, string> _vcTagList;
-		protected Dictionary<int, IUISettings> _vcSettingsList;
+		protected Dictionary<int, IUITheme> _vcUIThemeList;
+		// Saved in the database
+		protected IUITheme _globalsavedUItheme;
+		// Appwide, supplied upon creation by the client of AspyCore
+		protected IUITheme _globalappUItheme;
 
 		#endregion
 
@@ -41,12 +45,24 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{
 			_vcTagList = new Dictionary<int, string> ();
-			_vcSettingsList = new Dictionary<int, IUISettings> ();
+			_vcUIThemeList = new Dictionary<int, IUITheme> ();
 		}
 
 		#endregion
 
 		#region Public Members
+
+		public IUITheme GlobalSavedUITheme
+		{
+			get { return _globalsavedUItheme;}
+			set { _globalsavedUItheme = value; }
+		}
+
+		public IUITheme GlobalAppUITheme
+		{
+			get { return _globalappUItheme; }
+			set { _globalappUItheme = value; }
+		}
 
 		public Dictionary<int, string> VCTagList
 		{
@@ -54,26 +70,26 @@ namespace AspyRoad.iOSCore
 			set { _vcTagList = value; }
 		}
 
-		public Dictionary<int, IUISettings> VCSettingsList
+		public Dictionary<int, IUITheme> VcUIThemes
 		{
-			get { return _vcSettingsList;}
-			set { _vcSettingsList = value; }
+			get { return _vcUIThemeList;}
+			set { _vcUIThemeList = value; }
 		}
 
-		public IUISettings FindVCSettings (string _vcName)
+		public IUITheme FindVcUITheme (string _vcName)
 		{
 			var y = from x in _vcSettingsList
 				where x.Value.VcName == _vcName
 				select x.Value;
-			return (IUISettings)y;
+			return (IUITheme)y;
 		}
 
-		public IUISettings FindVCSettings (int _vcTag)
+		public IUITheme FindVcUITheme (int _vcTag)
 		{
-			IUISettings _value;
+			IUITheme _value;
 			if (this._vcSettingsList.TryGetValue(_vcTag, out _value))
 			{
-				return (IUISettings)_value;
+				return (IUITheme)_value;
 			}
 			else
 			{
@@ -82,16 +98,44 @@ namespace AspyRoad.iOSCore
 
 		}
 
-		public void AddVCSettings(IUISettings _vcsetting)
+		public void AddVcUITheme(IUITheme _vcuitheme)
 		{
-			this._vcSettingsList.Add (_vcsetting.VcTag, _vcsetting); 
+			this._vcUIThemeList.Add (_vcuitheme.VcTag, _vcuitheme); 
 		}
-
+		// Full lost of all Vcs and tags
 		public void AddVC (int aspytag1, string aspyname)
 		{
 			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
+		public void ApplyGlobalSavedUITheme ()
+		{
+			// UIButton
+			var _button = UIButton.Appearance;
+			_button.BackgroundColor = _globalsavedUItheme.ButtonNormalBGColor;
+			_button.SetTitleColor (_globalsavedUItheme.ButtonNormalTitleColor, UIControlState.Normal);
+			_button.SetTitleColor (_globalsavedUItheme.ButtonPressedTitleColor, UIControlState.Selected); 
+
+			// UIView
+			var _view = UIView.Appearance;
+			_view.BackgroundColor = _globalsavedUItheme.ViewBGColor;
+			_view.TintColor = _globalsavedUItheme.ViewBGTint;
+
+			// UITextField
+			var _textbox = UITextView.Appearance;
+			_textbox.BackgroundColor = _globalsavedUItheme.TextBGColor;
+			_textbox.TintColor = _globalsavedUItheme.TextBGTint;
+
+
+		}
+
+		public void ApplyGlobalAppUITheme()
+		{
+
+
+
+		}
+			
 		#endregion
 	}
 }
