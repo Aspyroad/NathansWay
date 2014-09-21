@@ -44,7 +44,7 @@ namespace NathansWay.iOS.Numeracy
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
 
-		private NumeracySettings _NumeracySettings;
+		private NumeracyUIManager _numeracyUIManager;
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
 
@@ -66,7 +66,7 @@ namespace NathansWay.iOS.Numeracy
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
 			// Create our appwide user setup settings
-			this._NumeracySettings = new NumeracySettings(this.iOSGlobals);
+			this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
 
@@ -83,7 +83,7 @@ namespace NathansWay.iOS.Numeracy
 
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
-			this._NumeracySettings.NumberCombo.EditMode = E__NumberComboEditMode.EditNumPad;
+			//this._numeracyUIManager.NumberCombo.EditMode = E__NumberComboEditMode.EditNumPad;
 
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -107,7 +107,7 @@ namespace NathansWay.iOS.Numeracy
 			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
 			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
-			this._DbContext.SetDataNumeracySettings(this._NumeracySettings)
+			//this._DbContext.SetDataNumeracySettings(this._NumeracySettings);
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
@@ -116,7 +116,7 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			// Register app/user settings
-			iOSCoreServiceContainer.Register<IAspySettings>(this._NumeracySettings);
+			iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
 
 			// Register settings
 

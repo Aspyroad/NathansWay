@@ -78,7 +78,7 @@ namespace AspyRoad.iOSCore
 
 		public IUITheme FindVcUITheme (string _vcName)
 		{
-			var y = from x in _vcSettingsList
+			var y = from x in _vcUIThemeList
 				where x.Value.VcName == _vcName
 				select x.Value;
 			return (IUITheme)y;
@@ -87,7 +87,7 @@ namespace AspyRoad.iOSCore
 		public IUITheme FindVcUITheme (int _vcTag)
 		{
 			IUITheme _value;
-			if (this._vcSettingsList.TryGetValue(_vcTag, out _value))
+			if (this._vcUIThemeList.TryGetValue(_vcTag, out _value))
 			{
 				return (IUITheme)_value;
 			}
@@ -112,7 +112,7 @@ namespace AspyRoad.iOSCore
 		{
 			// UIButton
 			var _button = UIButton.Appearance;
-			_button.BackgroundColor = _globalsavedUItheme.ButtonNormalBGColor;
+			_button.BackgroundColor = _globalsavedUItheme.ButtonBGColor;
 			_button.SetTitleColor (_globalsavedUItheme.ButtonNormalTitleColor, UIControlState.Normal);
 			_button.SetTitleColor (_globalsavedUItheme.ButtonPressedTitleColor, UIControlState.Selected); 
 

@@ -40,6 +40,9 @@ namespace NathansWay.iOS.Numeracy.UISettings
 		{
 			// Initialize the main list
 			this.ListViewControllers ();
+			// Apply Global Theme MoFo
+			this._globalappUItheme = new NumeracyGlobalUITheme ();
+			this.ApplyGlobalAppUITheme();
 		}
 
 		#endregion
@@ -72,6 +75,101 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 
 		#endregion
+	}
+
+	public class NumeracyGlobalUITheme : IUITheme
+	{
+		public NumeracyGlobalUITheme ()
+		{
+			Initialize ();
+		}
+
+		private void Initialize ()
+		{
+			// Set Global name and tag
+			this.VcName = "Global";
+			this.VcTag = 666;
+			// Button
+			this.ButtonBGColor = UIColor.Black;
+			this.ButtonNormalTitleColor = UIColor.White;
+			this.ButtonPressedTitleColor = UIColor.Gray;
+			this.ButtonNormalBGImage = null;
+			this.ButtonPressedBGImage = null;
+			// View
+			this.ViewBGColor = UIColor.Orange;
+			this.ViewBGTint = UIColor.Clear;
+			// Label
+			this.LabelTitleColor = UIColor.White;
+			// Text View
+			this.TextBGColor = UIColor.White;
+			this.TextBGTint = UIColor.Clear;
+
+		}
+		// Id
+		public string VcName
+		{
+			get;
+			set;
+		}
+		public int VcTag
+		{
+			get;
+			set;
+		}
+		// Button
+		public UIColor ButtonBGColor
+		{
+			get;
+			set;
+		}
+		public UIColor ButtonNormalTitleColor
+		{
+			get;
+			set;
+		}
+		public UIColor ButtonPressedTitleColor
+		{
+			get;
+			set;
+		}
+		public UIImage ButtonNormalBGImage
+		{
+			get;
+			set;
+		}
+		public UIImage ButtonPressedBGImage
+		{
+			get;
+			set;
+		}
+		// View
+		public UIColor ViewBGColor
+		{
+			get;
+			set;
+		}
+		public UIColor ViewBGTint
+		{
+			get;
+			set;
+		}
+		// Label
+		public UIColor LabelTitleColor
+		{
+			get;
+			set;
+		}
+		// Text
+		public UIColor TextBGColor
+		{
+			get;
+			set;
+		}
+		public UIColor TextBGTint
+		{
+			get;
+			set;
+		}
 	}
 }
 

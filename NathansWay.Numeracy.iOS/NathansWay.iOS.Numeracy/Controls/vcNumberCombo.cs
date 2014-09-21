@@ -24,7 +24,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
         private E__NumberComboEditMode _currentEditMode;
-        private NumeracySettings _numeracySettings;
+        //private NumeracySettings _numeracySettings;
         private vcNumberPad _numberpad;
 		private AspyViewController _viewcontollercontainer;
         private Action<string> actHandlePad;
@@ -70,7 +70,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 			//_numeracySettings = (NumeracySettings)this.iOSSettings;
 
             //Setup our editmode details
-            this.CurrentEditMode = this._numeracySettings.NumberCombo.EditMode;
+			//TODO : Fix settings in numbercombo
+			this.CurrentEditMode = E__NumberComboEditMode.EditNumPad; //this._numeracySettings.NumberCombo.EditMode;
             
             // Set initital values
             this.preEdit();
@@ -156,14 +157,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
         
-        private void Initialize ()
+        protected override void Initialize ()
         {
+			base.Initialize ();
 			this.AspyTag1 = 102;
 			this.AspyName = "VC_CtrlNumberCombo";
 
-			this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
+			//this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
 			//this._vcSettings = this._numeracySettings.NumberCombo;
-			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
+			//this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
 
 			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewController>();
 
@@ -589,36 +591,36 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 	#region VCSettings
 
-	public class vcs_numbercombo : VcSettings
-	{
-		private E__NumberComboEditMode _editmode;
-
-		public vcs_numbercombo (IAspyGlobals iOSGlobals)
-		{
-			this.VcTag = 102;
-			this.VcName = "VC_CtrlNumberCombo";
-
-			this.FrameSize = 
-				new RectangleF 
-				(
-					0,
-					0,
-					54,
-					68
-				);
-			this.HasBorder = true;
-			this.BackColor = UIColor.White;
-			this.BorderColor = UIColor.Brown;
-			this.BorderSize = 4.0f;
-
-		}
-
-		public E__NumberComboEditMode EditMode 
-		{
-			get { return _editmode; }
-			set { _editmode = value; }
-		}
-	}
+//	public class vcs_numbercombo : VcSettings
+//	{
+//		private E__NumberComboEditMode _editmode;
+//
+//		public vcs_numbercombo (IAspyGlobals iOSGlobals)
+//		{
+//			this.VcTag = 102;
+//			this.VcName = "VC_CtrlNumberCombo";
+//
+//			this.FrameSize = 
+//				new RectangleF 
+//				(
+//					0,
+//					0,
+//					54,
+//					68
+//				);
+//			this.HasBorder = true;
+//			this.BackColor = UIColor.White;
+//			this.BorderColor = UIColor.Brown;
+//			this.BorderSize = 4.0f;
+//
+//		}
+//
+//		public E__NumberComboEditMode EditMode 
+//		{
+//			get { return _editmode; }
+//			set { _editmode = value; }
+//		}
+//	}
 
 	#endregion
 

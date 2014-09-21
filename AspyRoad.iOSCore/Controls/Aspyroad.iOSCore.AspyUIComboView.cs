@@ -118,7 +118,7 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			this.View.AddSubview ();
+			//this.View.AddSubview ();
 		}
 
 

@@ -58,7 +58,7 @@
     }
     
     pickerViewLabel.backgroundColor = [UIColor clearColor];
-    pickerViewLabel.text = therapyTypes[row]; // where therapyTypes[row] is a specific example from my code
+    //pickerViewLabel.text = therapyTypes[row]; // where therapyTypes[row] is a specific example from my code
     pickerViewLabel.font = [UIFont fontWithName:@"ChalkboardSE-Regular" size:20];
     
     return pickerViewLabel;

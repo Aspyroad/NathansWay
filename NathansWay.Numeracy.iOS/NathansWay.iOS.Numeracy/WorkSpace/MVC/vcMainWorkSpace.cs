@@ -17,7 +17,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public partial class vcMainWorkSpace : AspyViewController
     {
 		#region Private Variables
-		private NumeracySettings _numeracySettings;
+		//private NumeracySettings _numeracySettings;
 
 		#endregion
 
@@ -49,8 +49,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_MainWorkSpace";
 
 			// Create our settings class
-			this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
-			this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
+			//this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
+			//this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
         }
 
         #endregion
