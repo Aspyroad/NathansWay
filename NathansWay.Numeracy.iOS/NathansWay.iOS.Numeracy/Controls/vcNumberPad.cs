@@ -45,8 +45,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Private Members
                 
-        private void Initialize ()
+        protected override void Initialize ()
         {
+			base.Initialize ();
 			this.AspyTag1 = 100; 
 			this.AspyName = "VC_CtrlNumberPad";
         }

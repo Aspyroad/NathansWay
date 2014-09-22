@@ -12,6 +12,7 @@ namespace NathansWay.iOS.Numeracy.Menu
     public partial class vcMenuStart : AspyViewController
 	{
 
+		#region Contructors
 
 		public vcMenuStart () : base ()
 		{
@@ -28,11 +29,18 @@ namespace NathansWay.iOS.Numeracy.Menu
             this.Initialize();
 		}
 
-        private void Initialize ()
+		#endregion
+
+		#region Private Members
+
+        protected override void Initialize ()
         {  
+			base.Initialize ();
 			this.AspyTag1 = 1;
 			this.AspyName = "VC_MenuStart";
         }
+
+		#endregion
 
 		public override void DidReceiveMemoryWarning ()
 		{

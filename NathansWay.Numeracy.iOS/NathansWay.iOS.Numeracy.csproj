@@ -10,7 +10,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>NathansWay.iOS.Numeracy</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>NathansWay</AssemblyName>
+    <MtouchSdkVersion>8.0</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,21 +25,23 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
-    <MtouchSdkVersion>8.0</MtouchSdkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <MtouchLink>None</MtouchLink>
-    <ConsolePause>false</ConsolePause>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <AssemblyName>NathansWay</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>NathansWayNumeracy</AssemblyName>
+    <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
+    <CodesignProvision>4ba75e09-0dcc-4ead-920f-81bde060a745</CodesignProvision>
     <MtouchI18n>
     </MtouchI18n>
-    <MtouchArch>i386</MtouchArch>
-    <MtouchSdkVersion>5.1</MtouchSdkVersion>
+    <MtouchArch>ARMv7</MtouchArch>
+    <IpaPackageName>
+    </IpaPackageName>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -93,6 +95,7 @@
     <None Include="NathansWay.iOS.Numeracy\Menu\README.md" />
     <None Include="NathansWay.iOS.Numeracy\Lesson\README.md" />
     <None Include="NathansWay.iOS.Numeracy\WorkSpace\README.md" />
+    <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -197,13 +200,13 @@
       <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
       <Name>NathansWay.Shared.Numeracy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
-      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
-      <Name>MonoGame.Framework.iOS</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoToolz.csproj">
       <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
       <Name>NathansWay.iOS.MonoToolz</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
+      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
+      <Name>MonoGame.Framework.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

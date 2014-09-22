@@ -11,6 +11,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 {
 	public partial class vcSettings : AspyViewController
     {
+		#region Constructors
+
         public vcSettings() 
         {
             Initialize();
@@ -26,34 +28,17 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();
 		}
 
-        private void Initialize ()
-        {
-			this.AspyTag1 = 4;
-			this.AspyName = "VC_Settings";
-        }
-
-//        partial void btn1_click(NSObject sender)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-//
-//        partial void btn2_click(NSObject sender)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-//
-//        partial void btn3_click(NSObject sender)
-//        {
-//            throw new System.NotImplementedException();
-//        }
-//
-//        partial void btn4_click(NSObject sender)
-//        {
-//            this.PerformSegue("sgStudent_Start",sender) ;
-//        }
+		#endregion
 
 		#region Overrides
         
+		protected override  void Initialize ()
+		{
+			base.Initialize ();
+			this.AspyTag1 = 4;
+			this.AspyName = "VC_Settings";
+		}
+
         public override void DidReceiveMemoryWarning()
         {
             // Releases the view if it doesn't have a superview.
@@ -68,6 +53,26 @@ namespace NathansWay.iOS.Numeracy.Menu
         }
 
 		#endregion
+
+		//        partial void btn1_click(NSObject sender)
+		//        {
+		//            throw new System.NotImplementedException();
+		//        }
+		//
+		//        partial void btn2_click(NSObject sender)
+		//        {
+		//            throw new System.NotImplementedException();
+		//        }
+		//
+		//        partial void btn3_click(NSObject sender)
+		//        {
+		//            throw new System.NotImplementedException();
+		//        }
+		//
+		//        partial void btn4_click(NSObject sender)
+		//        {
+		//            this.PerformSegue("sgStudent_Start",sender) ;
+		//        }
     }
 }
 

@@ -40,8 +40,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 		
 		#region Private Members
 		
-        private void Initialize()
-        {               
+        protected override void Initialize()
+        {    
+			base.Initialize ();
             this.Frame = new RectangleF(100, 100, 190, 260);
         }
 

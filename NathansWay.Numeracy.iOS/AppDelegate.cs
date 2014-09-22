@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy
 	{
 		private UIStoryboard storyboard;
 		private AspyWindow window;
-		private AspyViewController ViewContainerController;
+		//private AspyViewController ViewContainerController;
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;

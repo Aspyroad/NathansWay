@@ -26,8 +26,9 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();
 		}
 
-        private void Initialize ()
+        protected override void Initialize ()
         {
+			base.Initialize ();
 			this.AspyTag1 = 6;
 			this.AspyName = "VC_ToolBox";
         }

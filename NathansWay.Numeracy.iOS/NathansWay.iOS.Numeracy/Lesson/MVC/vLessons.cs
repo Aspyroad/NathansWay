@@ -36,8 +36,9 @@ namespace NathansWay.iOS.Numeracy
 		
 		#region Private Members
 		
-        private void Initialize()
+        protected override void Initialize()
         {
+			base.Initialize ();
 			this.Tag = 3;
         }
 

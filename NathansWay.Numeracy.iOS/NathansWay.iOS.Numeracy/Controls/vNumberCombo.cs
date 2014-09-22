@@ -30,8 +30,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
                 
-        private void Initialize()
-        {               
+        protected override void Initialize()
+        {  
+			base.Initialize ();
         }
 
     }

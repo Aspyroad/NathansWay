@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>NathansWay.iOS.Numeracy</string>
+	<string>NathansWayNumeracy</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.AspyRoad.NathansWay.Numeracy</string>
+	<string>com.aspyroad.nathansway</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
