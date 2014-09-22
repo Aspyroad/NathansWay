@@ -54,7 +54,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		partial void btnMenuActionToolbox (NathansWay.iOS.Numeracy.Controls.ButtonTools sender)
 		{
-			this.PerformSegue("sgMenu2Toolbox", sender);
+			//this.PerformSegue("sgMenu2Toolbox", sender);
 		}
 
 

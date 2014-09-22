@@ -309,13 +309,13 @@ namespace AspyRoad.iOSCore
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
-            {
-                rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2)); 
-            }
-            else
-            {
-                rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));
-            }
+			{
+				rightFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+			}
+			else
+			{
+				rightFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+			}
                         
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
@@ -333,6 +333,7 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
+
         }   
 
         // ************************************Animation**************************************************
@@ -346,7 +347,7 @@ namespace AspyRoad.iOSCore
         {
             this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
 
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
+            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
             this.SourceViewController.DismissViewController(false, null);
             UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
         }  
