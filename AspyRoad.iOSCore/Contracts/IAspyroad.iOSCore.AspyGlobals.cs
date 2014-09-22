@@ -36,6 +36,8 @@ namespace AspyRoad.iOSCore
 		
 		bool G__IsRetina { get; }
 
+		Version G__iOSVersion { get; }
+
 		bool G__PrefersStatusBarHidden { get; set; }
         
         G__Orientation G__ViewOrientation { get; set; }

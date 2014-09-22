@@ -19,6 +19,7 @@ namespace AspyRoad.iOSCore
 		private bool __IsRetina;
 		private bool __IsiPad;
 		private bool __PrefersStatusBarHidden;
+		private Version __VersionNumber;
 		
         private bool _ShouldAutoRotate;
 		private bool _InitializeAllViewOrientation;
@@ -27,6 +28,8 @@ namespace AspyRoad.iOSCore
         private UIInterfaceOrientationMask _GetSupportedOrientations;
         private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
         private double _sgAnimationDuration = 1.0 ;
+
+		private RectangleF __RectScreen;
 
 		#endregion
          
@@ -83,6 +86,11 @@ namespace AspyRoad.iOSCore
 		public bool G__IsRetina
 		{
 			get { return __IsRetina; }	
+		}
+
+		public Version G__iOSVersion
+		{
+			get { return __VersionNumber; }
 		}
 
         #endregion
@@ -149,8 +157,11 @@ namespace AspyRoad.iOSCore
 		
 		private void Initialize ()
 		{
-			SwapOrientations(UIScreen.MainScreen.Bounds);
-			
+			this.__RectScreen = UIScreen.MainScreen.Bounds;
+			this.__VersionNumber = new Version(UIDevice.CurrentDevice.SystemVersion);
+			this.__RectWindowPortait = new RectangleF(0,0,Math.Min(__RectScreen.Width, __RectScreen.Height), Math.Max(__RectScreen.Width, __RectScreen.Height));
+			this.__RectWindowLandscape = new RectangleF(0,0,Math.Max(__RectScreen.Width, __RectScreen.Height), Math.Min(__RectScreen.Width, __RectScreen.Height));
+						
 			// Check if device is a phone or iPad
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
 			{
@@ -190,15 +201,33 @@ namespace AspyRoad.iOSCore
 			this.__PrefersStatusBarHidden = false;
 		}
 		
-		// iOS UIScreen Bounds are always returned in portait mode
-		// Extract values and create global portait and landscape values.
-		private void SwapOrientations(RectangleF _rect)
-		{
-			// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
-			this.__RectWindowPortait = new RectangleF(0, 0, _rect.Size.Width, _rect.Size.Height);
-			// Swap values hieght and width values for landscape
-			this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);
-		}
+//		// iOS UIScreen Bounds are always returned in portait mode
+//		// Extract values and create global portait and landscape values.
+//		private void SwapOrientations(RectangleF _rect)
+//		{
+//			this.__VersionNumber = new Version(UIDevice.CurrentDevice.SystemVersion);
+//
+//			this.__RectWindowPortait = new RectangleF(0,0,Math.Min(__RectScreen.Width, __RectScreen.Height), Math.Max(__RectScreen.Width, __RectScreen.Height));
+//			this.__RectWindowLandscape = new RectangleF(0,0,Math.Max(__RectScreen.Width, __RectScreen.Height), Math.Min(__RectScreen.Width, __RectScreen.Height));
+//
+//			if (this.__VersionNumber.Major >= 8)
+//			{
+//				// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
+//				//this.__RectWindowPortait = new RectangleF(0, 0, _rect.Size.Width, _rect.Size.Height);
+//				// Swap height and width values for landscape
+//				// this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Width, _rect.Size.Height);
+//				this.__RectWindowLandscape = new RectangleF(0,0,Math.Max(__RectScreen.Width, __RectScreen.Height), Math.Min(__RectScreen.Width, __RectScreen.Height));
+//			}
+//			else
+//			{
+//				// Swap values hieght and width values for landscape
+//				this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);
+//			}
+//			// Simply copy assign UIScreen bounds to __RectWindowPortait as this is startup default
+//			this.__RectWindowPortait = new RectangleF(0, 0, _rect.Size.Width, _rect.Size.Height);
+//			// Swap values hieght and width values for landscape
+//			this.__RectWindowLandscape = new RectangleF (0, 0, _rect.Size.Height, _rect.Size.Width);
+//		}
 		
 		#endregion
 

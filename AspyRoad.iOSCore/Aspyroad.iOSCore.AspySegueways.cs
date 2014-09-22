@@ -272,7 +272,6 @@ namespace AspyRoad.iOSCore
         {
             // Tag the destination with a local tag variable            
             this.tmpTag = this.DestinationViewController.View.Tag;
-
             // Landscape only segue
             tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
             tmpHeight = this.iOSGlobals.G__RectWindowLandscape.Size.Height;
