@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeTemplates version="3.0">
+  <CodeTemplate version="2.0">
+    <Header>
+      <_Group>C#</_Group>
+      <Version />
+      <MimeType>text/x-csharp</MimeType>
+      <Shortcut>Delegate Example</Shortcut>
+      <_Description>Tutorial</_Description>
+      <TemplateType>Unknown</TemplateType>
+    </Header>
+    <Variables />
+    <Code><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ModernLanguageConstructs
+{
+    class Program
+    {
+        // Part 1 - Explicit declaration of a delegate (helps a compiler ensure type safety)
+        public delegate double delegateConvertTemperature(double sourceTemp);
+
+        // A sample class to play with
+        class TemperatureConverterImp
+        {
+            // Part 2 - Will be attached to a delegate later in the code
+            public double ConvertToFahrenheit(double celsius)
+            {
+                return (celsius * 9.0/5.0) + 32.0;
+            }
+
+            //  Part 3 - Will be attached to a delegate later in the code
+            public double ConvertToCelsius(double fahrenheit)
+            {
+                return (fahrenheit - 32.0) * 5.0 / 9.0;
+            }
+        }
+
+
+        static void Main(string[] args)
+        {
+            //  Part 4 - Instantiate the main object
+            TemperatureConverterImp obj = new TemperatureConverterImp();
+
+            //  Part 5 - Intantiate delegate #1
+            delegateConvertTemperature delConvertToFahrenheit =
+                         new delegateConvertTemperature(obj.ConvertToFahrenheit);
+
+            //  Part 6 - Intantiate delegate #2
+            delegateConvertTemperature delConvertToCelsius =
+                         new delegateConvertTemperature(obj.ConvertToCelsius);
+
+            // Use delegates to accomplish work
+
+            //  Part 7 - delegate #1
+            double celsius = 0.0;
+            double fahrenheit = delConvertToFahrenheit(celsius);
+            string msg1 = string.Format("Celsius = {0}, Fahrenheit = {1}",
+                                         celsius, fahrenheit);
+            Console.WriteLine(msg1);
+
+            //  Part 8 - delegate #2
+            fahrenheit = 212.0;
+            celsius = delConvertToCelsius(fahrenheit);
+            string msg2 = string.Format("Celsius = {0}, Fahrenheit = {1}",
+                                         celsius, fahrenheit);
+            Console.WriteLine(msg2);
+        }
+    }
+}]]></Code>
+  </CodeTemplate>
+</CodeTemplates>

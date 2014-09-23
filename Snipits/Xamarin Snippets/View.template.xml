@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeTemplates version="3.0">
+  <CodeTemplate version="2.0">
+    <Header>
+      <_Group>C#</_Group>
+      <Version />
+      <MimeType>text/x-csharp</MimeType>
+      <Shortcut>View</Shortcut>
+      <_Description>View Template</_Description>
+      <TemplateType>Unknown</TemplateType>
+    </Header>
+    <Variables>
+      <Variable name="Classname">
+        <Default>notset</Default>
+      </Variable>
+    </Variables>
+    <Code><![CDATA[// System
+using System;
+using System.Drawing;
+// Monotouch
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using MonoTouch.ObjCRuntime;
+// AspyRoad
+using AspyRoad.iOSCore;
+
+namespace NathansWay.iOS.Numeracy.WorkSpace
+{
+    [MonoTouch.Foundation.Register ("$Classname$")]
+	public partial class $Classname$ : AspyView
+	{
+
+		#region Constructors
+		public $Classname$  (IntPtr h) : base (h)
+		{
+            this.Initialize (); 
+		}
+
+		public $Classname$ (RectangleF rf)
+		{
+			this.Initialize ();		
+		}
+        
+        public $Classname$ ()
+        {
+            this.Initialize();            
+        }
+
+        [Export("initWithCoder:")]
+        public $Classname$ (NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+		#endregion
+		
+		#region Private Members
+		
+		private void Initialize()
+		{
+			// This.Tag = 1;
+			
+			#region NIB Load Method 1
+			//UINib qaNib = UINib.FromName("QAView", NSBundle.MainBundle);
+			//var v = (vwQAWorkSpace)qaNib.Instantiate(null, null)[0];
+			#endregion
+
+			#region NIB Load Method 2
+            //var arr = NSBundle.MainBundle.LoadNib("vwContainerView", this, null);
+            //var v = Runtime.GetNSObject(arr.ValueAt(0)) as UIView;
+			#endregion
+
+            //AddSubview(v);			
+		}
+		
+		#endregion
+		
+	}
+}
+]]></Code>
+  </CodeTemplate>
+</CodeTemplates>

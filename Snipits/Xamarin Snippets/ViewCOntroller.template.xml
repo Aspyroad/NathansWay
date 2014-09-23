@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeTemplates version="3.0">
+  <CodeTemplate version="2.0">
+    <Header>
+      <_Group>C#</_Group>
+      <Version />
+      <MimeType>text/x-csharp</MimeType>
+      <Shortcut>Viewcontroller</Shortcut>
+      <_Description>View controller template</_Description>
+      <TemplateType>Unknown</TemplateType>
+    </Header>
+    <Variables>
+      <Variable name="NibName">
+        <Default>notset</Default>
+      </Variable>
+      <Variable name="Classname">
+        <Default>notset</Default>
+        <_ToolTip>Classname</_ToolTip>
+      </Variable>
+    </Variables>
+    <Code><![CDATA[// System
+using System;
+using System.Drawing;
+// Monotouch
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using MonoTouch.ObjCRuntime;
+//Aspyroad
+using AspyRoad.iOSCore;
+//NathansWay
+using NathansWay.iOS.Numeracy.Controls;
+
+namespace NathansWay.iOS.Numeracy.WorkSpace
+{
+	[Register ("$NibName$")]
+	public partial class $Classname$ : AspyViewController
+    {
+
+        #region Constructors
+
+		public $Classname$ (IntPtr h) : base (h)
+        {
+            Initialize();
+        }
+
+        [Export("initWithCoder:")]
+		public $Classname$ (NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+		public $Classname$ () : base("$Classname$", null)
+        {   
+			Initialize();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void Initialize()
+        {
+        }
+
+        #endregion
+		
+		
+		#region Overrides
+
+		public override void DidReceiveMemoryWarning()
+		{
+			base.DidReceiveMemoryWarning();
+		}
+
+		public override void LoadView()
+		{
+			base.LoadView();            
+		}
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+        }
+		
+		#endregion
+    }
+}        
+]]></Code>
+  </CodeTemplate>
+</CodeTemplates>

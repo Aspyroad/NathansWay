@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeTemplates version="3.0">
+  <CodeTemplate version="2.0">
+    <Header>
+      <_Group>C#</_Group>
+      <Version />
+      <MimeType>text/x-csharp</MimeType>
+      <Shortcut>Func Example</Shortcut>
+      <_Description>Tutorial</_Description>
+      <TemplateType>Unknown</TemplateType>
+    </Header>
+    <Variables />
+    <Code><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ModernLanguageConstructs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Part 1 - First Func<> that takes an int and returns a string
+            Func<int, string> displayHex = delegate(int intValue)
+            {
+                return (intValue.ToString("X"));
+            };
+
+            // Part 2 - Second Func<> that takes a hex string and 
+            // returns an int
+            Func<string, int> displayInteger = delegate(string hexValue)
+            {
+                return (int.Parse(hexValue,
+                    System.Globalization.NumberStyles.HexNumber));
+            };
+
+            // Part 3 - exercise Func<> delegates
+            Console.WriteLine(displayHex(16));
+            Console.WriteLine(displayInteger("10"));
+        }
+    }
+}
+]]></Code>
+  </CodeTemplate>
+</CodeTemplates>

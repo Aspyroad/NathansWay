@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeTemplates version="3.0">
+  <CodeTemplate version="2.0">
+    <Header>
+      <_Group>C#</_Group>
+      <Version />
+      <MimeType>text/x-csharp</MimeType>
+      <Shortcut>Lambdas Example</Shortcut>
+      <_Description>Tutorial</_Description>
+      <TemplateType>Unknown</TemplateType>
+    </Header>
+    <Variables />
+    <Code><![CDATA[using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace ModernLanguageConstructs
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Part 1 - An action and a lambda
+            Action<int> displayHex = intValue =>
+            {
+                Console.WriteLine(intValue.ToString("X"));
+            };
+
+            Action<string> displayInteger = hexValue =>
+            {
+                Console.WriteLine(int.Parse(hexValue,
+                    System.Globalization.NumberStyles.HexNumber));
+            };
+
+            // Part 2 - Use the lambda expressions
+            displayHex(16);
+            displayInteger("10");
+
+        }
+    }
+}]]></Code>
+  </CodeTemplate>
+</CodeTemplates>
