@@ -44,7 +44,7 @@ namespace NathansWay.iOS.Numeracy
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
 
-		private NumeracyUIManager _numeracyUIManager;
+		//private NumeracyUIManager _numeracyUIManager;
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
 
@@ -66,7 +66,7 @@ namespace NathansWay.iOS.Numeracy
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
 			// Create our appwide user setup settings
-			this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
+			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
 
@@ -104,19 +104,18 @@ namespace NathansWay.iOS.Numeracy
 			// Register any Shared services needed
 			SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
 			// Set Sqlite db Platform
-			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
+			//this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
-			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
-			//this._DbContext.SetDataNumeracySettings(this._NumeracySettings);
+			//this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
 			// Platform lib needed by the constructor for SQLite Shared
-			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
+			//SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
-			SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
+			//SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			// Register app/user settings
-			iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
+			//iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
 
 			// Register settings
 
