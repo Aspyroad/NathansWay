@@ -80,7 +80,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.ViewDidLoad();
 
-						this.View.BackgroundColor = UIColor.Black;
+						//this.View.BackgroundColor = UIColor.Black;
 			
 						this.View.Frame = 
 							new RectangleF 

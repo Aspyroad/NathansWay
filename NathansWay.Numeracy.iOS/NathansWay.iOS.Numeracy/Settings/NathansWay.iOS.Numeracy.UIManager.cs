@@ -41,8 +41,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			// Initialize the main list
 			this.ListViewControllers ();
 			// Apply Global Theme MoFo
-			//this._globalappUItheme = new NumeracyGlobalUITheme ();
-			//this.ApplyGlobalAppUITheme();
+			this._globalappUItheme = new NumeracyGlobalUITheme ();
+			this.ApplyGlobalAppUITheme();
 		}
 
 		#endregion
@@ -97,7 +97,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			this.ButtonPressedBGImage = null;
 			// View
 			this.ViewBGColor = UIColor.Orange;
-			this.ViewBGTint = UIColor.Clear;
+			//this.ViewBGTint = UIColor.Clear;
 			// Label
 			this.LabelTitleColor = UIColor.White;
 			// Text View

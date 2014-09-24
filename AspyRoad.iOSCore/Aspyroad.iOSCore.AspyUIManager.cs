@@ -118,7 +118,7 @@ namespace AspyRoad.iOSCore
 
 			// UIView
 			var _view = UIView.Appearance;
-			_view.BackgroundColor = _globalsavedUItheme.ViewBGColor;
+			UIView.Appearance.BackgroundColor = _globalsavedUItheme.ViewBGColor;
 			_view.TintColor = _globalsavedUItheme.ViewBGTint;
 
 			// UITextField
