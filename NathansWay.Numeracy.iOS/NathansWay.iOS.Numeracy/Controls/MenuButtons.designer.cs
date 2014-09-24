@@ -11,11 +11,11 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-	[Register ("ButtonTools")]
-	partial class ButtonTools
-	{
-		void ReleaseDesignerOutlets ()
-		{
-		}
-	}
+//	[Register ("ButtonTools")]
+//	partial class ButtonTools
+//	{
+//		void ReleaseDesignerOutlets ()
+//		{
+//		}
+//	}
 }

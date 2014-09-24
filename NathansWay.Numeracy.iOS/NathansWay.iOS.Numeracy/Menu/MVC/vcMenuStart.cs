@@ -52,7 +52,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		public override void ViewDidLoad ()
 		{
-			base.ViewDidLoad ();  
+			base.ViewDidLoad (); 
+			View.Frame = new RectangleF (0, 0, 1024, 768);
 		}
 
 		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender)
@@ -63,6 +64,29 @@ namespace NathansWay.iOS.Numeracy.Menu
 		partial void btnMenuActionToolbox (NathansWay.iOS.Numeracy.Controls.ButtonTools sender)
 		{
 			//this.PerformSegue("sgMenu2Toolbox", sender);
+		}
+
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+//			if (toInterfaceOrientation == this.iOSGlobals.G__5_SupportedOrientation)
+//			{
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+
+			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
+				return true;
+			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeLeft)
+				return true;
+//			if (toInterfaceOrientation == UIInterfaceOrientation.Portrait)
+//				rot = false;
+//			if (toInterfaceOrientation == UIInterfaceOrientation.PortraitUpsideDown)
+//				rot = false;
+
+			return false;
 		}
 
 

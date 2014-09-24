@@ -34,10 +34,10 @@ namespace NathansWay.iOS.Numeracy
 			this.AspyName = "VC_Settings";
         }
 
-		partial void returnToMenu (UIButton sender)
-		{
-			this.PerformSegue("sgLessons_Start", sender);
-		}
+//		partial void returnToMenu (UIButton sender)
+//		{
+//			this.PerformSegue("sgLessons_Start", sender);
+//		}
 
 		#region Overrides
         public override void DidReceiveMemoryWarning()

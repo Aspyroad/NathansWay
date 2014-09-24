@@ -15,7 +15,7 @@ using SQLite.Net.Interop;
 using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.iOS.Numeracy.WorkSpace;
+//using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
@@ -44,7 +44,7 @@ namespace NathansWay.iOS.Numeracy
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
 
-		//private NumeracyUIManager _numeracyUIManager;
+		private NumeracyUIManager _numeracyUIManager;
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
 
@@ -66,7 +66,7 @@ namespace NathansWay.iOS.Numeracy
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
 			// Create our appwide user setup settings
-			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
+			this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
 
@@ -115,7 +115,7 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			// Register app/user settings
-			//iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
+			iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
 
 			// Register settings
 
@@ -139,35 +139,35 @@ namespace NathansWay.iOS.Numeracy
 			#endregion
 
 			#region Setup UI
-						// Start a toolfactory
-						ITool hammer;
-						hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
-			
-						AspyViewController _vcHammer = hammer.MainGame.Services.GetService<AspyViewController>();
-			
-						// Temp workspace setup code. Mormally this will be behind a menu button.
-						vcWorkSpace _workspace = new vcWorkSpace();
-						//vcMainGame _maingame = new vcMainGame();
-						vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
-			
-						ViewContainerController = new AspyViewController();
-						ViewContainerController.AddAndDisplayController(_vcHammer);
-						ViewContainerController.AddAndDisplayController(_mainworkspace);
-						//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
-			
-						window.RootViewController = ViewContainerController;
-						//window.RootViewController = _mainworkspace;
+//						// Start a toolfactory
+//						ITool hammer;
+//						hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
+//			
+//						AspyViewController _vcHammer = hammer.MainGame.Services.GetService<AspyViewController>();
+//			
+//						// Temp workspace setup code. Mormally this will be behind a menu button.
+//						vcWorkSpace _workspace = new vcWorkSpace();
+//						//vcMainGame _maingame = new vcMainGame();
+//						vcMainWorkSpace _mainworkspace = new vcMainWorkSpace();
+//			
+//						ViewContainerController = new AspyViewController();
+//						ViewContainerController.AddAndDisplayController(_vcHammer);
+//						ViewContainerController.AddAndDisplayController(_mainworkspace);
+//						//ViewContainerController.View.AddSubview(_mainworkspace.ChildViewControllers[0].View);
+//			
+//						window.RootViewController = ViewContainerController;
+//						//window.RootViewController = _mainworkspace;
 
 			//Load our storyboard and setup our UIWindow and first view controller
-			//storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
-			//window.RootViewController = storyboard.InstantiateInitialViewController () as vcMenuStart;
+			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+			window.RootViewController = storyboard.InstantiateInitialViewController () as vcMenuStart;
 
 			#endregion
 
 			window.MakeKeyAndVisible ();
 			window.Tag = 0;
 
-			hammer.MainGame.Run ();
+			//hammer.MainGame.Run ();
 
 			return true;
 		}

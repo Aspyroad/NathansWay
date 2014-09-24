@@ -26,6 +26,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn4 { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		vToolBox ToolBox { get; set; }
+
 		[Action ("returnToStepOne:")]
 		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
 
@@ -35,6 +39,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (ToolBox != null) {
+				ToolBox.Dispose ();
+				ToolBox = null;
+			}
 		}
 	}
 }

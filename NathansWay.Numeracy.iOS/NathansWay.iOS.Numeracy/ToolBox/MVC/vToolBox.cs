@@ -43,6 +43,7 @@ namespace NathansWay.iOS.Numeracy.Menu
         {  
 			base.Initialize ();
 			this.Tag = 6;
+			this.Frame = new RectangleF (0, 0, 1024, 768);
         }
 
 		#endregion

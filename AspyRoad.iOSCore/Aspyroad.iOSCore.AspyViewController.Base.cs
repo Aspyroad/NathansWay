@@ -204,18 +204,18 @@ namespace AspyRoad.iOSCore
 
 		#region Autorotation for iOS 5 or older
 
-		[Obsolete ("Depreciated - needed for iOS 5", false)]
-		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-		{
-			if (toInterfaceOrientation == this.iOSGlobals.G__5_SupportedOrientation)
-			{
-				return false;
-			}
-			else
-			{
-				return true;
-			}
-		}
+//		[Obsolete ("Depreciated - needed for iOS 5", false)]
+//		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+//		{
+//			if (toInterfaceOrientation == this.iOSGlobals.G__5_SupportedOrientation)
+//			{
+//				return true;
+//			}
+//			else
+//			{
+//				return false;
+//			}
+//		}
 
 		#endregion
 

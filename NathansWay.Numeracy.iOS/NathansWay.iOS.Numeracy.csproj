@@ -10,7 +10,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>NathansWay.iOS.Numeracy</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <MtouchSdkVersion>8.0</MtouchSdkVersion>
     <AssemblyName>NathansWayiOSNumeracy</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
@@ -27,6 +26,7 @@
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
     <MtouchLink>None</MtouchLink>
+    <MtouchSdkVersion>7.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
@@ -40,8 +40,7 @@
     <IpaPackageName>
     </IpaPackageName>
     <MtouchLink>None</MtouchLink>
-    <BuildIpa>true</BuildIpa>
-    <MtouchDebug>true</MtouchDebug>
+    <MtouchSdkVersion>8.0</MtouchSdkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -75,7 +74,6 @@
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\" />
-    <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\MVC\" />
@@ -83,6 +81,8 @@
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\MVC\" />
     <Folder Include="Contracts\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
+    <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -105,44 +105,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\MenuButtons.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.cs">
-      <DependentUpon>vwNumberCombo.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberCombo.cs">
-      <DependentUpon>vwNumberCombo.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.designer.cs">
-      <DependentUpon>vcNumberCombo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.cs">
-      <DependentUpon>vwNumberPad.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberPad.cs">
-      <DependentUpon>vwNumberPad.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.designer.cs">
-      <DependentUpon>vcNumberPad.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy.Types.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
-      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainWorkSpace.cs">
-      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs">
-      <DependentUpon>vwMainGame.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
-      <DependentUpon>vwWorkSpace.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainGame.cs">
-      <DependentUpon>vwMainGame.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
-      <DependentUpon>vwWorkSpace.xib</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.cs" />
@@ -189,6 +152,46 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.UISettings.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.UIManager.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\MenuButtons.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\MenuButtons.designer.cs">
+      <DependentUpon>MenuButtons.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberCombo.cs">
+      <DependentUpon>vwNumberCombo.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberPad.cs">
+      <DependentUpon>vwNumberPad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.cs">
+      <DependentUpon>vwNumberCombo.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.designer.cs">
+      <DependentUpon>vwNumberCombo.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.cs">
+      <DependentUpon>vwNumberPad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.designer.cs">
+      <DependentUpon>vwNumberPad.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainGame.cs">
+      <DependentUpon>vwMainGame.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainWorkSpace.cs">
+      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
+      <DependentUpon>vwWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs">
+      <DependentUpon>vwMainGame.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
+      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
+      <DependentUpon>vwWorkSpace.xib</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -221,12 +224,12 @@
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
   </ItemGroup>
   <ItemGroup>
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
   </ItemGroup>
 </Project>

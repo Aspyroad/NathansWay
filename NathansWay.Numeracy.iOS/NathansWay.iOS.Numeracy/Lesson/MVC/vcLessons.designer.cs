@@ -17,20 +17,8 @@ namespace NathansWay.iOS.Numeracy
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn1 { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		vLessons vLessons { get; set; }
-
-		[Action ("returnToMenu:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void returnToMenu (UIButton sender);
-
 		void ReleaseDesignerOutlets ()
 		{
-			if (vLessons != null) {
-				vLessons.Dispose ();
-				vLessons = null;
-			}
 		}
 	}
 }
