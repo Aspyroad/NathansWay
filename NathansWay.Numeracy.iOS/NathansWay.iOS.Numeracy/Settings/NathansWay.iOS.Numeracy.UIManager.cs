@@ -41,8 +41,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			// Initialize the main list
 			this.ListViewControllers ();
 			// Apply Global Theme MoFo
-			this._globalappUItheme = new NumeracyGlobalUITheme ();
-			this.ApplyGlobalAppUITheme();
+			//this._globalappUItheme = new NumeracyGlobalUITheme ();
+			//this.ApplyGlobalAppUITheme();
 		}
 
 		#endregion

@@ -79,7 +79,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+						this.View.BackgroundColor = UIColor.Black;
 			
+						this.View.Frame = 
+							new RectangleF 
+							(
+								1.0f,
+								((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) ,
+								400,
+								(iOSGlobals.G__RectWindowLandscape.Height / 4) 
+							);
+
 //			//mypad = new vcNumberPad();
 //			float x = 100.0f;
 //			float y = 100.0f;   

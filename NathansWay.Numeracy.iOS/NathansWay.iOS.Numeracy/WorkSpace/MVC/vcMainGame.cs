@@ -73,7 +73,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void ViewDidLoad()
 		{
-			base.ViewDidLoad();
+			base.ViewDidLoad ();
+
+			this.View.BackgroundColor = UIColor.White;
+
+			this.View.Frame = 
+				new RectangleF 
+				(
+					0,
+					0,
+					iOSGlobals.G__RectWindowLandscape.Width,
+					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
+				);
 		}
 
 		#endregion

@@ -145,7 +145,7 @@ namespace AspyRoad.iOSCore
             this._PntWindowLandscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
 
             #if DEBUG
-                this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
+                //this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
             #endif
         }
 
