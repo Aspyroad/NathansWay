@@ -39,7 +39,9 @@
     <MtouchArch>ARMv7</MtouchArch>
     <IpaPackageName>
     </IpaPackageName>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchLink>None</MtouchLink>
+    <BuildIpa>true</BuildIpa>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -94,6 +96,7 @@
     <None Include="NathansWay.iOS.Numeracy\Lesson\README.md" />
     <None Include="NathansWay.iOS.Numeracy\WorkSpace\README.md" />
     <None Include="Entitlements.plist" />
+    <None Include="RELEASE-NOTES.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
