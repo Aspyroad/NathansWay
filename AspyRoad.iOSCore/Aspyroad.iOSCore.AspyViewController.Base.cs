@@ -21,6 +21,7 @@ namespace AspyRoad.iOSCore
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
+		private string _viewClass;
 
 		#endregion
 
@@ -40,7 +41,6 @@ namespace AspyRoad.iOSCore
 		{
 			Initialize ();
 		}
-
 
 		public AspyViewController (NSCoder coder) : base (coder)
 		{
@@ -102,8 +102,10 @@ namespace AspyRoad.iOSCore
 			this.AddChildViewController (_newController);
 			// Add View and subviews
 			this.View.AddSubview (_newController.View);
-			this.View.AddSubviews (_newController.View.Subviews);
+			//TODO: Wrap this in an 'If'? Boolean to decide if they want to? 
+				//this.View.AddSubviews (_newController.View.Subviews);
 			_newController.DidMoveToParentViewController (this);
+
 		}
 
 		public void AddController (UIViewController _newController)
@@ -194,8 +196,9 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			this.View.Tag = this.AspyTag1;
 			this.ApplyUIAppearance (this._AspyTag1);
-		}
+		}			
 
 		// These puppies cost me a lot of time. DAYS!
 		// But they are totally important when it comes to designing landscape only apps.
@@ -204,18 +207,29 @@ namespace AspyRoad.iOSCore
 
 		#region Autorotation for iOS 5 or older
 
-//		[Obsolete ("Depreciated - needed for iOS 5", false)]
-//		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-//		{
-//			if (toInterfaceOrientation == this.iOSGlobals.G__5_SupportedOrientation)
-//			{
-//				return true;
-//			}
-//			else
-//			{
-//				return false;
-//			}
-//		}
+		[Obsolete ("Depreciated - needed for iOS 5", false)]
+		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+		{
+			bool ret = false;
+
+			if (iOSGlobals.G__5_SupportedOrientation == UIInterfaceOrientation.LandscapeLeft)
+			{
+				if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeLeft || toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
+				{
+					ret = true;
+				}
+
+			}
+			if (iOSGlobals.G__5_SupportedOrientation == UIInterfaceOrientation.Portrait)
+			{
+				if ((toInterfaceOrientation == UIInterfaceOrientation.Portrait) || (toInterfaceOrientation == UIInterfaceOrientation.PortraitUpsideDown))
+				{
+					ret = true;
+				}
+			}
+
+			return ret;
+		}
 
 		#endregion
 
@@ -228,20 +242,27 @@ namespace AspyRoad.iOSCore
 		// AND....
 		public override bool ShouldAutorotate ()
 		{
-			bool tmpresult;
-
-			UIInterfaceOrientation _interfaceorientation = UIApplication.SharedApplication.StatusBarOrientation;
-			if (_interfaceorientation == this.iOSGlobals.G__5_SupportedOrientation)
+			bool ret = false;
+			if (InterfaceOrientation == UIInterfaceOrientation.LandscapeLeft || InterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
 			{
-				tmpresult = false;
-			}
-			else
-			{
-				tmpresult = true;
+				ret = true;
 			}
 
-			return tmpresult;
+			return ret;
+
 		}
+
+		public override void DidRotate (UIInterfaceOrientation fromInterfaceOrientation)
+		{
+
+			//base.DidRotate (fromInterfaceOrientation);
+		}
+
+		public override void WillRotate (UIInterfaceOrientation toInterfaceOrientation, double duration)
+		{
+			//base.WillRotate (toInterfaceOrientation, duration);
+		}
+
 
 		#endregion
 

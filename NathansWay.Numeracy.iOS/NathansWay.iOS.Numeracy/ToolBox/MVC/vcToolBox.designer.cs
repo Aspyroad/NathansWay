@@ -28,7 +28,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		vToolBox ToolBox { get; set; }
+		UIView ToolBox { get; set; }
 
 		[Action ("returnToStepOne:")]
 		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);

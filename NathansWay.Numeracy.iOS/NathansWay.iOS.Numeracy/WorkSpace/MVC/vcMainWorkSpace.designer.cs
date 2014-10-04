@@ -9,13 +9,13 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Controls
+namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-//	[Register ("ButtonTools")]
-//	partial class ButtonTools
-//	{
-//		void ReleaseDesignerOutlets ()
-//		{
-//		}
-//	}
+	[Register ("vcMainWorkSpace")]
+	partial class vcMainWorkSpace
+	{
+		void ReleaseDesignerOutlets ()
+		{
+		}
+	}
 }

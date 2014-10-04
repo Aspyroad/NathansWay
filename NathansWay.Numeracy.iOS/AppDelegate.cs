@@ -31,12 +31,15 @@ namespace NathansWay.iOS.Numeracy
 	// application events from iOS.
 
 	[Register ("AppDelegate")]
-	//public class AppDelegate : AspyUIApplicationDelegate
 	public class AppDelegate : UIApplicationDelegate
 	{
+		#region Private Members
+
 		private UIStoryboard storyboard;
 		private AspyWindow window;
-		private AspyViewController ViewContainerController;
+		private AspyViewContainer _mainController;
+		private UINavigationController _mainNav;
+		private vcMenuStart _menuStart;
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
@@ -48,8 +51,10 @@ namespace NathansWay.iOS.Numeracy
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
 
+		#endregion
+
 		#region Overrides
-		//
+
 		// This method is invoked when the application has loaded and is ready to run. In this
 		// method you should instantiate the window, load the UI into it and then make the window
 		// visible.
@@ -60,8 +65,6 @@ namespace NathansWay.iOS.Numeracy
 		{
 
 			#region Setup
-			// Setup the window
-			window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Setup services and globals for iOS
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
@@ -90,48 +93,39 @@ namespace NathansWay.iOS.Numeracy
 			this.iOSGlobals.G__InitializeAllViewOrientation = true;
 			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
 			this.iOSGlobals.G__ShouldAutorotate = false;
-			this.iOSGlobals.G__SegueingAnimationDuration = 0.5;
+			this.iOSGlobals.G__SegueingAnimationDuration = 0.8;
 			this.iOSGlobals.G__PrefersStatusBarHidden = true;
 
 			// Orientation handlers two types depending on iOS version
 			// iOS 6 and above >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 			this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.Landscape;
 			// You can use bitwise operators on these
+			// NOTE : I couldnt get the bitwise versions to compare, not sure why, so I assume that Lanscapeleft and right are the same
+			// Doesnt really matter as its only for iOS5.
+			// in the autorotate function for iOS5
 			// Eg  = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft
 			// iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft;
+			this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeLeft;
 
 			// Register any Shared services needed
 			SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
 			// Set Sqlite db Platform
-			//this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
+			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
-			//this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
+			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
 			// Platform lib needed by the constructor for SQLite Shared
-			//SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
+			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
-			//SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
+			SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 			// Register app/user settings
 			iOSCoreServiceContainer.Register<IAspyUIManager>(this._numeracyUIManager);
 
-			// Register settings
-
-
-			// Using viewcontroller constructor to run the nib
-			//ViewContainerController = new AspyViewController();
-
-			// Add our view variables 
-			//iOSCoreServiceContainer.Register<AspyViewController>(this.ViewContainerController);
-			iOSCoreServiceContainer.Register<AspyWindow> (window);
-
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
-
-			//_testDb = new NathansWayDbBase();
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
@@ -139,6 +133,8 @@ namespace NathansWay.iOS.Numeracy
 			#endregion
 
 			#region Setup UI
+
+			// TODO : Remove and insert this into .ctor code for lesson UI startup 
 //						// Start a toolfactory
 //						ITool hammer;
 //						hammer = ToolBuilder.CreateNewTool(E__ToolBoxToolz.Hammerz);
@@ -158,14 +154,34 @@ namespace NathansWay.iOS.Numeracy
 //						window.RootViewController = ViewContainerController;
 //						//window.RootViewController = _mainworkspace;
 
-			//Load our storyboard and setup our UIWindow and first view controller
+			// Setup the window
+			window = new AspyWindow(UIScreen.MainScreen.Bounds);
+			// Register our window
+			iOSCoreServiceContainer.Register<AspyWindow> (window);
+
+			// Load our storyboard and setup our UIWindow and first view controller
 			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
-			window.RootViewController = storyboard.InstantiateInitialViewController () as vcMenuStart;
+			// Setup view controllers
+			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 
+			//_mainController = storyboard.InstantiateViewController("MainContainer") as AspyViewContainer;
+			_mainController = new AspyViewContainer();
+			//_mainNav = new UINavigationController(_mainController);
+
+			// Use storyboard ids to create VCs
+			_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
+			//_menuStart = new vcMenuStart();
+
+			//Add our navigation object to the service library
+			//iOSCoreServiceContainer.Register<AspyViewContainer> (_mainController);
+			window.MakeKeyAndVisible();
+			window.RootViewController = _mainController;
+			//window.RootViewController = _mainNav;
+			//window.MakeKeyAndVisible();
+			_mainController.AddAndDisplayController(_menuStart);
+
+			//window.MakeKeyAndVisible();
 
 			#endregion
-
-			window.MakeKeyAndVisible ();
-			window.Tag = 0;
 
 			//hammer.MainGame.Run ();
 
@@ -236,13 +252,17 @@ namespace NathansWay.iOS.Numeracy
 			GC.Collect ();
 		}
 
-		#endregion //Notification Handling
+		#endregion
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
 		{
 			return UIInterfaceOrientationMask.Landscape;
 		}
 
-		#endregion		
+
+		#endregion	
+
+
+
 	}
 }

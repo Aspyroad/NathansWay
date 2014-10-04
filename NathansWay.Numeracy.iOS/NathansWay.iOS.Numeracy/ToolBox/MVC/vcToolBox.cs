@@ -52,31 +52,17 @@ namespace NathansWay.iOS.Numeracy.Menu
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-			this.View.Frame = new RectangleF (0, 0, 1024, 768);
         }
 
-		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
-		{
-			//			if (toInterfaceOrientation == this.iOSGlobals.G__5_SupportedOrientation)
-			//			{
-			//				return true;
-			//			}
-			//			else
-			//			{
-			//				return false;
-			//			}
-
-			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
-				return true;
-			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeLeft)
-				return true;
-			//			if (toInterfaceOrientation == UIInterfaceOrientation.Portrait)
-			//				rot = false;
-			//			if (toInterfaceOrientation == UIInterfaceOrientation.PortraitUpsideDown)
-			//				rot = false;
-
-			return false;
-		}
+//		public override bool ShouldAutorotateToInterfaceOrientation (UIInterfaceOrientation toInterfaceOrientation)
+//		{
+//			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeRight)
+//				return true;
+//			if (toInterfaceOrientation == UIInterfaceOrientation.LandscapeLeft)
+//				return true;
+//
+//			return false;
+//		}
 
 		#endregion
     }

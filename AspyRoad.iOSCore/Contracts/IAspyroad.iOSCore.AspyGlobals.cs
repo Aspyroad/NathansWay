@@ -13,6 +13,8 @@ namespace AspyRoad.iOSCore
     {
 		// Properties
 		AspyWindow G__MainWindow { get; }
+
+		AspyViewController G__VCContainer { get; set; }
 		
 		AspyUIApplicationDelegate G__AppDelegate { get; }
 

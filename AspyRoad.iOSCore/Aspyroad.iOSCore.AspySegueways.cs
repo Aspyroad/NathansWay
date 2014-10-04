@@ -50,8 +50,33 @@ namespace AspyRoad.iOSCore
         {   
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
             kAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
+
         } 
-        #endregion        
+        #endregion   
+
+		protected void animateComplete(bool finished)
+		{
+			// Reposition our views into the center after the animations changed the center points
+			this.DestinationViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
+			this.SourceViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
+			// When we added the destination view as a subview of source, it inadvertenly adds DestinationVC as a child of Source VC!
+			this.SourceViewController.View.ViewWithTag (tmpTag).RemoveFromSuperview ();
+
+			// Remove both source and destination from any Containers
+			this.DestinationViewController.WillMoveToParentViewController (null);
+			this.DestinationViewController.RemoveFromParentViewController ();
+			this.DestinationViewController.DidMoveToParentViewController (null);
+
+			this.SourceViewController.WillMoveToParentViewController (null);
+			this.SourceViewController.RemoveFromParentViewController ();
+			this.SourceViewController.DidMoveToParentViewController (null);
+
+			// Add the new view to the Root Container
+			this.DestinationViewController.WillMoveToParentViewController (iOSGlobals.G__MainWindow.RootViewController);
+			iOSGlobals.G__MainWindow.RootViewController.AddChildViewController(this.DestinationViewController);
+			this.DestinationViewController.DidMoveToParentViewController(iOSGlobals.G__MainWindow.RootViewController);
+			iOSGlobals.G__MainWindow.RootViewController.View.AddSubview (this.DestinationViewController.View);
+		}  
     }
 
 	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
@@ -76,13 +101,15 @@ namespace AspyRoad.iOSCore
 
         private void Initialize()
         { 
+
         } 
         #endregion
 
-		public override void Perform()
+		public override void Perform ()
 		{
             // Tag the destination with a local tag variable            
             this.tmpTag = this.DestinationViewController.View.Tag;
+			this.DestinationViewController.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
 
             // Landscape only segue
             tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
@@ -91,52 +118,44 @@ namespace AspyRoad.iOSCore
             //Check the bounds, if they arent landscape, we have a LARGE problem...quit.
             if (this.SourceViewController.View.Bounds.Width == tmpHeight)
             {
-                throw new System.ArgumentOutOfRangeException(this.SourceViewController.View.ToString(), "Bounds must be landscape");
+                throw new System.ArgumentOutOfRangeException(this.SourceViewController.View.ToString(), "AspyCore - Bounds must be landscape");
             }
             
-            //Check the SOURCE VIEW Frame orientation
+            // Check the SOURCE VIEW Frame orientation
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources
-            if (this.SourceViewController.View.Frame.Width == tmpWidth)
-            {
-                rightFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
-            }
-            else
-            {
-                rightFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
-            }
+			if (this.SourceViewController.View.Frame.Width == tmpWidth)
+			{
+				rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+			}
+			else
+			{
+				rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+			}
             
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
-            
-            //Check the DESTINATION VIEW Bounds orientation
-            //These values can be randomised depending on the destinations position in relation to receiving messages from Window
-            //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
-            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds.Width == tmpHeight)
-            {
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds = iOSGlobals.G__RectWindowLandscape;
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame = iOSGlobals.G__RectWindowLandscape;
-            }
+
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
 			{
-				leftFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+				leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
 			}
 			else
 			{
-				leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+				leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));              
 			}
                         
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
-            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.leftFull;
+            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.rightFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
-            _animationcomplete = new UICompletionHandler (animateComplete);
-
+            _animationcomplete = new UICompletionHandler (this.animateComplete);
+			//_animationcomplete (true);
 
             UIView.AnimateNotify (
                 kAnimationDuration,
@@ -212,23 +231,15 @@ namespace AspyRoad.iOSCore
         // note : animation can only work on one view controller at a time********************************
 		private void animateSlide()
         {
-            this.SourceViewController.View.Center = rightFull;
-        }
-
-        private void animateComplete(bool finished)
-        {
-            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.DismissViewController(false, null);
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;            
-        }        
-
-		/// <summary>
-		/// Raises the slide event.
-		/// </summary>
-		/// <param name="e">E.</param>
+            this.SourceViewController.View.Center = leftFull;
+        }  
      
 		#region eventhookups
+
+//		/// <summary>
+//		/// Raises the slide event.
+//		/// </summary>
+//		/// <param name="e">E.</param>
 //		protected virtual void OnSlide(EventArgs e)
 //		{
 //			Slide handler = Sliding;
@@ -238,8 +249,6 @@ namespace AspyRoad.iOSCore
 //			}
 //		}
 		#endregion
-
-
 	}
 
     [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
@@ -271,7 +280,9 @@ namespace AspyRoad.iOSCore
         public override void Perform()
         {
             // Tag the destination with a local tag variable            
-            this.tmpTag = this.DestinationViewController.View.Tag;
+			this.tmpTag = this.DestinationViewController.View.Tag;
+			//this.DestinationViewController.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
+
             // Landscape only segue
             tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
             tmpHeight = this.iOSGlobals.G__RectWindowLandscape.Size.Height;
@@ -286,40 +297,31 @@ namespace AspyRoad.iOSCore
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
-            {
-                leftFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
-            }
-            else
-            {
-                leftFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
-            }
-            
-            //TODO:  Create a tagging dictionary to tag all views? That would be cool.
+			{
+				leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+			}
+			else
+			{
+				leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+			}
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
             
-            //Check the DESTINATION VIEW Bounds orientation
-            //These values can be randomised depending on the destinations position in relation to receiving messages from Window
-            //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
-            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds.Width == tmpHeight)
-            {
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds = iOSGlobals.G__RectWindowLandscape;
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame = iOSGlobals.G__RectWindowLandscape;
-            }
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
 			{
-				rightFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+				rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
 			}
 			else
 			{
-				rightFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+				rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
 			}
+
                         
             // Put the destination view fully over to the right, off screen            
             // Make sure the destinationview bounds are correct landscape            
-            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.rightFull;
+            this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.leftFull;
 
             // Setup Action Delegates
             _slider = new NSAction(animateSlide);
@@ -333,24 +335,14 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
-
         }   
 
         // ************************************Animation**************************************************
         // note : animation can only work on one view controller at a time********************************
         private void animateSlide()
         {
-            this.SourceViewController.View.Center = leftFull;
+            this.SourceViewController.View.Center = rightFull;
         }
-
-        private void animateComplete(bool finished)
-        {
-            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-
-            //this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.DismissViewController(false, null);
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
-        }  
 
     }
 
@@ -394,7 +386,7 @@ namespace AspyRoad.iOSCore
                 throw new System.ArgumentOutOfRangeException(this.SourceViewController.View.ToString(), "Bounds must be landscape");
             }
 
-            //Check the SOURCE VIEW Frame orientation
+            // Check the SOURCE VIEW Frame orientation
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
@@ -410,14 +402,6 @@ namespace AspyRoad.iOSCore
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
 
-            //Check the DESTINATION VIEW Bounds orientation
-            //These values can be randomised depending on the destinations position in relation to receiving messages from Window
-            //ie Rotation messages. We will swap bounds and frame to Landscape. This is purely for animation purposes.
-            if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds.Width == tmpHeight)
-            {
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Bounds = iOSGlobals.G__RectWindowLandscape;
-                this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame = iOSGlobals.G__RectWindowLandscape;
-            }
             // If the frame is Portait (can happen due to rotation message delays?)
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
@@ -439,13 +423,17 @@ namespace AspyRoad.iOSCore
             _animationcomplete = new UICompletionHandler (animateComplete);
 
 
-            UIView.AnimateNotify(
+           	UIView.AnimateNotify(
                 kAnimationDuration,
                 0,
                 UIViewAnimationOptions.TransitionNone,
                 _slider,
                 _animationcomplete
             );
+
+			this.SourceViewController.NavigationController.Transition (this.SourceViewController, this.DestinationViewController, kAnimationDuration, UIViewAnimationOptions.TransitionNone,
+				_slider,
+				_animationcomplete);
         }   
 
         // ************************************Animation**************************************************
@@ -454,15 +442,6 @@ namespace AspyRoad.iOSCore
         {
             this.SourceViewController.View.Center = upFull;
         }
-
-        private void animateComplete(bool finished)
-        {
-            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.DismissViewController(false, null);
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
-        }  
 
     }
 
@@ -569,15 +548,6 @@ namespace AspyRoad.iOSCore
         {
             this.SourceViewController.View.Center = downFull;
         }
-
-        private void animateComplete(bool finished)
-        {
-            this.SourceViewController.View.ViewWithTag(tmpTag).RemoveFromSuperview();
-            this.SourceViewController.PresentViewController(this.DestinationViewController, false, null);
-            this.SourceViewController.DismissViewController(false, null);
-            UIApplication.SharedApplication.KeyWindow.RootViewController = this.DestinationViewController;             
-        }  
-
     }
 
     [MonoTouch.Foundation.Register("AspySpinthatwheelSegue")] 
@@ -643,33 +613,6 @@ namespace AspyRoad.iOSCore
             DestinationViewController.View.Alpha = 1;
             DestinationViewController.View.Center = originalCenter;
         }
-
-        private void animateComplete(bool finished)
-        {
-            if (finished)
-            {
-                this.SourceViewController.View.RemoveFromSuperview();
-                this.SourceViewController.RemoveFromParentViewController();
-
-            }
-        }   
-
-        /// <summary>
-        /// Raises the slide event.
-        /// </summary>
-        /// <param name="e">E.</param>
-
-        #region eventhookups
-        //      protected virtual void OnSlide(EventArgs e)
-        //      {
-        //          Slide handler = Sliding;
-        //          if (handler != null)
-        //          {
-        //              handler(e);
-        //          }
-        //      }
-        #endregion
-
 
     }
 }

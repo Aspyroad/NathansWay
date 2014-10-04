@@ -227,7 +227,12 @@ namespace AspyRoad.iOSCore
 		#endregion	
 		
 		#region Overrides
-		
+
+		public override void SubviewAdded (UIView uiview)
+		{
+			base.SubviewAdded (uiview);
+			//this.ViewWithTag (666).Frame = new RectangleF (PointF.Empty, this.Frame.Size);
+		}
 
 
 

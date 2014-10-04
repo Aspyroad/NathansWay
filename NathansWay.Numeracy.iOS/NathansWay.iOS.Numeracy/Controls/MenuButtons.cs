@@ -9,7 +9,7 @@ using MonoTouch.ObjCRuntime;
 namespace NathansWay.iOS.Numeracy.Controls
 {
     [MonoTouch.Foundation.Register ("ButtonStudent")]
-    public class ButtonStudent : AspyButton
+    public	class ButtonStudent : AspyButton
     {
         public ButtonStudent () : base()
         {

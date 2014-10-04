@@ -28,7 +28,7 @@ namespace AspyRoad.iOSCore
         private UIInterfaceOrientationMask _GetSupportedOrientations;
         private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
         private double _sgAnimationDuration = 1.0 ;
-
+		private AspyViewController _vcContainer;
 		private RectangleF __RectScreen;
 
 		#endregion
@@ -48,7 +48,7 @@ namespace AspyRoad.iOSCore
 
 		public AspyWindow G__MainWindow
 		{
-			//TODO : This is a terrible way of grabbing the window, your never sure with multiwindow apps
+			//TODO : This is a terrible way of grabbing the window, your never sure with multiwindowed apps
 			get { return (AspyWindow)UIApplication.SharedApplication.Windows [0]; }
 		}
 		
@@ -96,8 +96,10 @@ namespace AspyRoad.iOSCore
         #endregion
 
         #region Initialize At Birth
+
         // ************************************************************************************
         // MUST BE SET AT FIRST USE
+
 		public UIViewAutoresizing G__ViewAutoResize
 		{
 			get { return __ViewAutoResize; }
@@ -147,8 +149,15 @@ namespace AspyRoad.iOSCore
             set { _sgAnimationDuration = value; }
         }
 
+		public AspyViewController G__VCContainer
+		{
+			get { return _vcContainer; }
+			set { _vcContainer = value; }
+		}
+
         // Finish 
         // ***********************************************************************************
+
         #endregion		
 
         #endregion

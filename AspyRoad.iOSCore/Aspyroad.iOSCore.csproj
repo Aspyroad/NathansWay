@@ -82,6 +82,7 @@
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTextField.cs" />
     <Compile Include="Contracts\IAspyroad.iOSCore.AspyUIManager.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyUIManager.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyViewContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

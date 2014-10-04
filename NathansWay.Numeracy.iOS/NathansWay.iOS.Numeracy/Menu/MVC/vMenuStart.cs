@@ -44,12 +44,13 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.Initialize ();
 			this.Tag = 1;
 		}
+			 
         
-        //		public override void Draw(RectangleF rect)
-        //		{
-        //			base.Draw(rect);
-        //			this.currentContext = UIGraphics.GetCurrentContext();
-        //		}
+//		public override void Draw(RectangleF rect)
+//		{
+//			base.Draw(rect);
+//			this.currentContext = UIGraphics.GetCurrentContext();
+//		}
 
 		#endregion
     }
