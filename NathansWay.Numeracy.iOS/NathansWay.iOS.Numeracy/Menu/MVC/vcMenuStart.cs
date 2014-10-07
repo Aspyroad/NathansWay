@@ -42,13 +42,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
-//		public override void LoadView ()
-//		{
-//			//base.LoadView ();
-//			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
-//			this.View.BackgroundColor = UIColor.Orange;
-//		}
-
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.

@@ -38,7 +38,7 @@ namespace NathansWay.iOS.Numeracy
 		private UIStoryboard storyboard;
 		private AspyWindow window;
 		private AspyViewContainer _mainController;
-		private UINavigationController _mainNav;
+		//private UINavigationController _mainNav;
 		private vcMenuStart _menuStart;
 
 		private IAspyGlobals iOSGlobals;
@@ -161,11 +161,11 @@ namespace NathansWay.iOS.Numeracy
 
 			// Load our storyboard and setup our UIWindow and first view controller
 			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+
 			// Setup view controllers
 			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 
 			//_mainController = storyboard.InstantiateViewController("MainContainer") as AspyViewContainer;
 			_mainController = new AspyViewContainer();
-			//_mainNav = new UINavigationController(_mainController);
 
 			// Use storyboard ids to create VCs
 			_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;

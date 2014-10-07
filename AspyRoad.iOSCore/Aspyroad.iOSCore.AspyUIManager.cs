@@ -12,7 +12,7 @@ using MonoTouch.UIKit;
 //using NathansWay.Shared;
 
 // Xamarin
-using Xamarin.Forms;
+//using Xamarin.Forms;
 
 namespace AspyRoad.iOSCore
 {
