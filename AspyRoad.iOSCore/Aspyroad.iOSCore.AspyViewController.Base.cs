@@ -22,6 +22,8 @@ namespace AspyRoad.iOSCore
 		// String "name" of this vc controller
 		private string _AspyName;
 		private string _viewClass;
+		// Theme
+		private IUIAspyTheme _vctheme;
 
 		#endregion
 
@@ -55,7 +57,8 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			//this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
+			this.iOSUIAppearance.ApplyAspyUITheme (this);
 		}
 
 		#endregion
@@ -80,7 +83,7 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-		public void ApplyUIAppearance (int _tag)
+		public void ApplyUIAppearance ()
 		{
 			// Query the UIManager, see if theres a tag with its own UI
 			// If so load it

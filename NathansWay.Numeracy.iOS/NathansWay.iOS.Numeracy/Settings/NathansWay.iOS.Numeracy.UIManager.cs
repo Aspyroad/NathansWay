@@ -90,18 +90,18 @@ namespace NathansWay.iOS.Numeracy.UISettings
 		{
 			// Set Global name and tag
 			this.VcName = "Global";
-			this.VcTag = 666;
+			this.VcTag = 847339;
 			// Button
-			this.ButtonBGColor = UIColor.Brown;
+			//this.ButtonBGColor = UIColor.Brown;
 			this.ButtonNormalTitleColor = UIColor.White;
 			this.ButtonPressedTitleColor = UIColor.Gray;
 			this.ButtonNormalBGImage = null;
 			this.ButtonPressedBGImage = null;
 			// View
-			this.ViewBGColor = UIColor.Orange;
+			//this.ViewBGColor = UIColor.Orange;
 			//this.ViewBGTint = UIColor.Clear;
 			// Label
-			this.LabelTitleColor = UIColor.White;
+			//this.LabelTitleColor = UIColor.White;
 			// Text View
 			this.TextBGColor = UIColor.Clear;
 			this.TextBGTint = UIColor.Clear;

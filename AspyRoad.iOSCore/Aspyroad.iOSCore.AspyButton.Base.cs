@@ -31,7 +31,8 @@ namespace AspyRoad.iOSCore
             Initialize();
         }
         
-        protected virtual void Initialize()
+		#region Private Members
+		protected virtual void Initialize()
         {            
         }
         
@@ -118,6 +119,15 @@ namespace AspyRoad.iOSCore
                 this._iconLeftlabelRight();
             }
         }
+		#endregion
+
+		#region Public Members
+
+		public string
+
+
+		#endregion
+
 
         //        public override void Draw(RectangleF myFrame)
         //        {   

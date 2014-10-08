@@ -9,7 +9,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 // NathansWay
-//using NathansWay.Shared;
+
 
 // Xamarin
 //using Xamarin.Forms;
@@ -118,7 +118,7 @@ namespace AspyRoad.iOSCore
 
 			// UIView
 			var _view = UIView.Appearance;
-			UIView.Appearance.BackgroundColor = _globalsavedUItheme.ViewBGColor;
+			_view.BackgroundColor = _globalsavedUItheme.ViewBGColor;
 			_view.TintColor = _globalsavedUItheme.ViewBGTint;
 
 			// UITextField
@@ -135,6 +135,13 @@ namespace AspyRoad.iOSCore
 
 
 		}
+
+		public void ApplyAspyUITheme(AspyViewController applyToThisVC)
+		{
+
+		}
+
+
 			
 		#endregion
 	}

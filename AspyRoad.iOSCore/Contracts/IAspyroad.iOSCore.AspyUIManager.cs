@@ -34,6 +34,8 @@ namespace AspyRoad.iOSCore
 
 		void ApplyGlobalAppUITheme ();
 
+		void ApplyAspyUITheme (AspyViewController applyToThisVC);
+
 		//void GetSavedUIThemes ();
 
     }
@@ -74,8 +76,10 @@ namespace AspyRoad.iOSCore
 		RectangleF A__FrameSize { get; set; }
 		// Label BG Color
 		UIColor A__LabelBGColor { get; set; }
+		//
 		// textField-View Text Color
 		UIColor A__TextTextColor { get; set; } 
+		// textField-View 
 
 	}
 }
