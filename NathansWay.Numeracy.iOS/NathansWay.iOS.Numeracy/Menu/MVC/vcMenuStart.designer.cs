@@ -25,7 +25,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.Controls.ButtonLessons Lessons { get; set; }
+		NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson Lessons { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -49,7 +49,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.Controls.ButtonTools Tools { get; set; }
+		NathansWay.iOS.Numeracy.Controls.ButtonStyleToolBox Tools { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -57,7 +57,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Action ("btnMenuActionLessons:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender);
+		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender);
 
 		[Action ("btnMenuActionStudent:")]
 		[GeneratedCode ("iOS Designer", "1.0")]

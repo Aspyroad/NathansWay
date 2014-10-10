@@ -123,8 +123,6 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
-		public string
-
 
 		#endregion
 

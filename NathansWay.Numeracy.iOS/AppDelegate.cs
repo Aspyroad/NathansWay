@@ -69,7 +69,7 @@ namespace NathansWay.iOS.Numeracy
 			// Create iOSCore globals
 			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
 			// Create our appwide user setup settings
-			this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
+			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
 

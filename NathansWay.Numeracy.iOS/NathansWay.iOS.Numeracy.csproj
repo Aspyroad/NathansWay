@@ -83,6 +83,7 @@
     <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\Container\" />
+    <Folder Include="NathansWay.iOS.Numeracy\StyleKit\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -189,6 +190,8 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkToolBox.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkLesson.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

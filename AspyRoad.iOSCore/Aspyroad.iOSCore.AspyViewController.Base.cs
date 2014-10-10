@@ -58,7 +58,7 @@ namespace AspyRoad.iOSCore
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
-			this.iOSUIAppearance.ApplyAspyUITheme (this);
+			//this.iOSUIAppearance.ApplyAspyUITheme (this);
 		}
 
 		#endregion
@@ -200,7 +200,7 @@ namespace AspyRoad.iOSCore
 		{
 			base.ViewDidLoad ();
 			this.View.Tag = this.AspyTag1;
-			this.ApplyUIAppearance (this._AspyTag1);
+			//this.ApplyUIAppearance (this._AspyTag1);
 		}			
 
 		// These puppies cost me a lot of time. DAYS!

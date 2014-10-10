@@ -60,7 +60,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ViewDidAppear (animated);
 		}
 
-		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonLessons sender)
+		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender)
 		{
 			this.PerformSegue("sgMenu2Toolbox",sender);
 		}

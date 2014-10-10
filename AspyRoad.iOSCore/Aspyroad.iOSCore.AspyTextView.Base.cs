@@ -28,7 +28,7 @@ namespace AspyRoad.iOSCore
 		{ 
 			Initialize();    
 		}
-		public AspyTextView (UIButtonType type) : base (type)
+		public AspyTextView (NSCoder coder) : base (coder)
 		{
 			Initialize();
 		}

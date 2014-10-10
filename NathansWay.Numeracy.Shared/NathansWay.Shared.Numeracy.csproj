@@ -112,6 +112,7 @@
     <Folder Include="Contracts\UserInterface\" />
     <Folder Include="UserInterface\" />
     <Folder Include="BusinessLayer\Services\" />
+    <Folder Include="StyleKit\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="DbContext\Nathansway.db3" />

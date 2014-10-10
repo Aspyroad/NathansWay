@@ -11,8 +11,8 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-	[Register ("ButtonTools")]
-	partial class ButtonTools
+	[Register ("SkDarkToolBox")]
+	partial class ButtonStyleToolBox
 	{
 		void ReleaseDesignerOutlets ()
 		{
