@@ -5,7 +5,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
-using NathansWay.iOS.Numeracy.StyleKit;
+using NathansWay.iOS.Numeracy.Graphics;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -478,10 +478,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 		}
 	}
 
-	[Register ("SkDarkToolBox")]
+	[Register ("ButtonStyleToolBox")]
 	public class ButtonStyleToolBox : AspyButton
 	{
 		private RectangleF _frameLesson;
+		private SkDarkToolBox _svgToolBox;
 
 		public ButtonStyleToolBox () : base()
 		{
@@ -504,18 +505,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 		protected override void Initialize()
 		{
 			base.Initialize ();
+			_svgToolBox = new SkDarkToolBox ();
 		}
 
 		public override void Draw (RectangleF rect)
 		{
-			SkDarkToolBox.DrawCanvas1 (rect);
+			_svgToolBox.DrawCanvas1 (rect);
 		}
 	}
 
-	[Register ("SkDarkLesson")]
+	[Register ("ButtonStyleLesson")]
 	public class ButtonStyleLesson : AspyButton
 	{
 		private RectangleF _frameLesson;
+		private SkDarkLesson _svgLesson;
 
 		public ButtonStyleLesson () : base()
 		{
@@ -538,11 +541,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 		protected override void Initialize()
 		{
 			base.Initialize ();
+			_svgLesson = new SkDarkLesson ();
 		}
 
 		public override void Draw (RectangleF rect)
 		{
-			SkDarkLesson.DrawCanvas1 (rect);
+			_svgLesson.DrawCanvas1 (rect);
 		}
 	}
 }

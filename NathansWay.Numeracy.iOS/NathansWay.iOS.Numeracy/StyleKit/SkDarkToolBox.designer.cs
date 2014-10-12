@@ -9,10 +9,10 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Controls
+namespace NathansWay.iOS.Numeracy.Graphics
 {
-	[Register ("ButtonStyleToolBox")]
-	partial class ButtonStyleToolBox
+	[Register ("ButtonDarkToolBox")]
+	partial class ButtonDarkToolBox
 	{
 		void ReleaseDesignerOutlets ()
 		{

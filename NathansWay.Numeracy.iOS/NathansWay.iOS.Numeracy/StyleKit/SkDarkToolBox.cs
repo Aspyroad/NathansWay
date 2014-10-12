@@ -16,21 +16,21 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 
-namespace NathansWay.iOS.Numeracy.StyleKit
+namespace NathansWay.iOS.Numeracy.Graphics
 {
-    [Register ("SkDarkToolBox")]
-    public class SkDarkToolBox : NSObject
+	//[Register ("ButtonDarkToolBox")]
+	public class SkDarkToolBox : UIButton
     {
 
         //// Initialization
 
-        static SkDarkToolBox()
+		public SkDarkToolBox()
         {
         }
 
         //// Drawing Methods
 
-        public static void DrawCanvas1(RectangleF frame)
+        public void DrawCanvas1(RectangleF frame)
         {
             //// General Declarations
             var colorSpace = CGColorSpace.CreateDeviceRGB();

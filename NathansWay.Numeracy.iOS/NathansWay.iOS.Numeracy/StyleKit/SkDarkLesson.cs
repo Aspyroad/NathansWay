@@ -1,6 +1,6 @@
 //
 //  SkDarkLesson.cs
-//  NathansWay
+//  NathansWay.iOS.Numeracy.StyleKit
 //
 //  Created by Brett Anthony on 10/10/2014.
 //  Copyright (c) 2014 AspyRoad Software. All rights reserved.
@@ -16,21 +16,21 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 
-namespace NathansWay.iOS.Numeracy.StyleKit
+namespace NathansWay.iOS.Numeracy.Graphics
 {
-    [Register ("SkDarkLesson")]
-    public class SkDarkLesson : NSObject
+	//[Register ("SkDarkLesson")]
+	public class SkDarkLesson : NSObject
     {
 
         //// Initialization
 
-        static SkDarkLesson()
+		public SkDarkLesson()
         {
         }
 
         //// Drawing Methods
 
-        public static void DrawCanvas1(RectangleF frame)
+        public void DrawCanvas1(RectangleF frame)
         {
             //// General Declarations
             var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -57,13 +57,22 @@ namespace NathansWay.iOS.Numeracy.StyleKit
             var shadow2Offset = new SizeF(2.1f, -3.1f);
             var shadow2BlurRadius = 5.0f;
 
+            //// Rounded Rectangle 2 Drawing
+            var roundedRectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(1.5f, 0.5f, 448.0f, 150.0f), 24.0f);
+            UIColor.White.SetFill();
+            roundedRectangle2Path.Fill();
+            UIColor.White.SetStroke();
+            roundedRectangle2Path.LineWidth = 1.0f;
+            roundedRectangle2Path.Stroke();
+
+
             //// Rounded Rectangle Drawing
-            var roundedRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(-0.5f, 0.5f, 448.0f, 150.0f), 24.0f);
+            var roundedRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(1.5f, 0.5f, 448.0f, 150.0f), 24.0f);
             context.SaveState();
             roundedRectanglePath.AddClip();
             context.DrawLinearGradient(btnLessonBlackGradient,
-                new PointF(231.23f, 150.5f),
-                new PointF(223.5f, 0.5f),
+                new PointF(233.23f, 150.5f),
+                new PointF(225.5f, 0.5f),
                 CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
             context.RestoreState();
             strokeBorder.SetStroke();
