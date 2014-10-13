@@ -14,7 +14,6 @@ namespace AspyRoad.iOSCore
         private RectangleF labRect;
         private RectangleF imgRect;
 		private bool _isPressed;
-		private UIColor _normalColor;
 
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
@@ -126,6 +125,11 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
+		public bool IsPressed
+		{
+			get{ return _isPressed; }
+			set{ _isPressed = value; }
+		}
 
 		#endregion
 

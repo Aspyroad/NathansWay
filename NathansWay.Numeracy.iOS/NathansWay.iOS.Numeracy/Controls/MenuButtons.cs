@@ -519,7 +519,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (RectangleF rect)
 		{
-			SkDarkToolBox.DrawCanvas1 (rect);
+			SkDarkToolBox.DrawCanvas1 (rect, this.IsPressed);
 		}
 	}
 
@@ -553,7 +553,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (RectangleF rect)
 		{
-			SkDarkLesson.DrawCanvas1 (rect);
+			SkDarkLesson.DrawCanvas1 (rect, this.IsPressed);
 		}
 	}
 }

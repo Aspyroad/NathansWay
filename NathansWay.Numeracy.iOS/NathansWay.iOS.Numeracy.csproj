@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkToolBox.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkLesson.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkMenuBackGround.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

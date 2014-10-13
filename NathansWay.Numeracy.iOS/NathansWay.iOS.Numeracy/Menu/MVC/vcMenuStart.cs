@@ -4,14 +4,16 @@ using System.Drawing;
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
+// NathansWay
+using NathansWay.iOS.Numeracy.Graphics;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
     public partial class vcMenuStart : AspyViewController
 	{
-
 		#region Contructors
 
 		public vcMenuStart () : base ()
@@ -38,7 +40,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.Initialize ();
 			this.AspyTag1 = 1;
 			this.AspyName = "VC_MenuStart";
+
         }
+
+
 
 		#endregion
 
@@ -53,6 +58,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -64,8 +70,5 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			this.PerformSegue("sgMenu2Toolbox",sender);
 		}
-			
-
 	}
 }
-

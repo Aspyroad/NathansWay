@@ -29,14 +29,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel NathansWay { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UILabel Numbers { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		NathansWay.iOS.Numeracy.Controls.ButtonSchool School { get; set; }
 
 		[Outlet]
@@ -53,7 +45,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView vMenuStart { get; set; }
+		vMenuStart vMenuStart { get; set; }
 
 		[Action ("btnMenuActionLessons:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -68,14 +60,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 			if (Lessons != null) {
 				Lessons.Dispose ();
 				Lessons = null;
-			}
-			if (NathansWay != null) {
-				NathansWay.Dispose ();
-				NathansWay = null;
-			}
-			if (Numbers != null) {
-				Numbers.Dispose ();
-				Numbers = null;
 			}
 			if (School != null) {
 				School.Dispose ();
