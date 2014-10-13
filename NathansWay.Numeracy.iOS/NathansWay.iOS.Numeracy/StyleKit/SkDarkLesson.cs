@@ -24,13 +24,13 @@ namespace NathansWay.iOS.Numeracy.Graphics
 
         //// Initialization
 
-		public SkDarkLesson()
+		static SkDarkLesson()
         {
         }
 
         //// Drawing Methods
 
-        public void DrawCanvas1(RectangleF frame)
+        public static void DrawCanvas1(RectangleF frame)
         {
             //// General Declarations
             var colorSpace = CGColorSpace.CreateDeviceRGB();

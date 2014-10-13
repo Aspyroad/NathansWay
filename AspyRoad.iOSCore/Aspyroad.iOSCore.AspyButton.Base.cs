@@ -13,6 +13,9 @@ namespace AspyRoad.iOSCore
     {
         private RectangleF labRect;
         private RectangleF imgRect;
+		private bool _isPressed;
+		private UIColor _normalColor;
+
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
         {
@@ -126,6 +129,61 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
+		/// <summary>
+		/// Invoked when the user touches 
+		/// </summary>
+		public event Action<UIButton> Tapped;
+
+		/// <summary>
+		/// Whether the button is rendered enabled or not.
+		/// </summary>
+		public override bool Enabled 
+		{ 
+			get 
+			{
+				return base.Enabled;
+			}
+			set 
+			{
+				base.Enabled = value;
+				SetNeedsDisplay ();
+			}
+		}
+
+		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
+		{
+			SetNeedsDisplay ();
+			_isPressed = true;
+			return base.BeginTracking (uitouch, uievent);
+		}
+
+		public override void EndTracking (UITouch uitouch, UIEvent uievent)
+		{
+			if (_isPressed && Enabled)
+			{
+				if (Tapped != null)
+				{
+					Tapped (this);
+				}
+			}
+			_isPressed = false;
+			SetNeedsDisplay ();
+			base.EndTracking (uitouch, uievent);
+		}
+
+		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
+		{
+			var touch = uievent.AllTouches.AnyObject as UITouch;
+			if (Bounds.Contains (touch.LocationInView (this)))
+			{
+				_isPressed = true;
+			}
+			else
+			{
+				_isPressed = false;
+			}
+			return base.ContinueTracking (uitouch, uievent);
+		}
 
         //        public override void Draw(RectangleF myFrame)
         //        {   

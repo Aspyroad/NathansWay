@@ -245,11 +245,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 		/// <summary>
 		/// Whether the button is rendered enabled or not.
 		/// </summary>
-		public override bool Enabled { 
-			get {
+		public override bool Enabled 
+		{ 
+			get 
+			{
 				return base.Enabled;
 			}
-			set {
+			set 
+			{
 				base.Enabled = value;
 				SetNeedsDisplay ();
 			}
@@ -264,9 +267,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void EndTracking (UITouch uitouch, UIEvent uievent)
 		{
-			if (isPressed && Enabled){
+			if (isPressed && Enabled)
+			{
 				if (Tapped != null)
+				{
 					Tapped (this);
+				}
 			}
 			isPressed = false;
 			SetNeedsDisplay ();
@@ -277,9 +283,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 		{
 			var touch = uievent.AllTouches.AnyObject as UITouch;
 			if (Bounds.Contains (touch.LocationInView (this)))
+			{
 				isPressed = true;
+			}
 			else
+			{
 				isPressed = false;
+			}
 			return base.ContinueTracking (uitouch, uievent);
 		}
 
@@ -299,7 +309,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 				out buttonColorRGBA [2],
 				out buttonColorRGBA [3]
 			);
-			if (isPressed) {
+			if (isPressed) 
+			{
 				// Get the Hue Saturation Brightness Alpha copy of the color				
 				var buttonColorHSBA = new float[4];
 				buttonColor.GetHSBA (
@@ -482,7 +493,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 	public class ButtonStyleToolBox : AspyButton
 	{
 		private RectangleF _frameLesson;
-		private SkDarkToolBox _svgToolBox;
 
 		public ButtonStyleToolBox () : base()
 		{
@@ -505,12 +515,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 		protected override void Initialize()
 		{
 			base.Initialize ();
-			_svgToolBox = new SkDarkToolBox ();
 		}
 
 		public override void Draw (RectangleF rect)
 		{
-			_svgToolBox.DrawCanvas1 (rect);
+			SkDarkToolBox.DrawCanvas1 (rect);
 		}
 	}
 
@@ -518,7 +527,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 	public class ButtonStyleLesson : AspyButton
 	{
 		private RectangleF _frameLesson;
-		private SkDarkLesson _svgLesson;
 
 		public ButtonStyleLesson () : base()
 		{
@@ -541,12 +549,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 		protected override void Initialize()
 		{
 			base.Initialize ();
-			_svgLesson = new SkDarkLesson ();
 		}
 
 		public override void Draw (RectangleF rect)
 		{
-			_svgLesson.DrawCanvas1 (rect);
+			SkDarkLesson.DrawCanvas1 (rect);
 		}
 	}
 }
