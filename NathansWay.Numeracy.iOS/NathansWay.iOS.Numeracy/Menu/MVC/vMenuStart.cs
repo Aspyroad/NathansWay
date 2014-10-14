@@ -16,7 +16,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
-		private SizeF _colorTextNumbersOuterShadowOffset;
+		private SizeF _colorTextNumbersShadowOffset;
+		private SizeF _colorButtonShadowOffset;
 
 		#endregion
 
@@ -50,7 +51,8 @@ namespace NathansWay.iOS.Numeracy.Menu
         protected override void Initialize()
         {
 			base.Initialize ();
-			this._colorTextNumbersOuterShadowOffset = new SizeF(-2.1f, 1.1f);
+			this._colorTextNumbersShadowOffset = new SizeF(-0.0f, 0.0f);
+			this._colorButtonShadowOffset = new SizeF(-0.0f, 0.0f);
 		}
 
 		#endregion
@@ -59,15 +61,16 @@ namespace NathansWay.iOS.Numeracy.Menu
 		// Main background canvas
 		private void DrawCanvasMain(RectangleF menuLogoFrame)
 		{
+
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
 			var context = UIGraphics.GetCurrentContext();
 
 			//// Color Declarations
-			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.263f);
+			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.249f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-			var colorText1OuterShadowColor = UIColor.FromRGBA(0.302f, 0.300f, 0.119f, 1.000f);
-			var colorMainBackGroundStart = UIColor.FromRGBA(0.626f, 0.465f, 0.179f, 0.796f);
+			var colorText1OuterShadowColor = UIColor.FromRGBA(0.631f, 0.374f, 0.103f, 0.541f);
+			var colorMainBackGroundStart = UIColor.FromRGBA(0.698f, 0.484f, 0.104f, 0.796f);
 			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
 
 			//// Gradient Declarations
@@ -76,12 +79,15 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var gradientBackGround = new CGGradient(colorSpace, gradientBackGroundColors, gradientBackGroundLocations);
 
 			//// Shadow Declarations
-			var colorTextOuterShadow = colorTextOuterShadowColor.CGColor;
-			var colorTextOuterShadowOffset = new SizeF(-38.1f, -11.1f);
-			var colorTextOuterShadowBlurRadius = 5.0f;
-			var colorTextNumbersOuterShadow = colorText1OuterShadowColor.CGColor;
-			//var colorTextNumbersOuterShadowOffset = new SizeF(-2.1f, 1.1f);
-			var colorTextNumbersOuterShadowBlurRadius = 5.0f;
+			var colorTextNathansWayShadow = colorTextOuterShadowColor.CGColor;
+			var colorTextNathansWayShadowOffset = new SizeF(-38.1f, -11.1f);
+			var colorTextNathansWayShadowBlurRadius = 5.0f;
+			var colorButtonShadow = colorText1OuterShadowColor.CGColor;
+			//var colorButtonShadowOffset = new SizeF(0.1f, -0.1f);
+			var colorButtonShadowBlurRadius = 5.0f;
+			var colorTextNumbersShadow = colorTextOuterShadowColor.CGColor;
+			//var colorTextNumbersShadowOffset = new SizeF(0.1f, -0.1f);
+			var colorTextNumbersShadowBlurRadius = 5.0f;
 
 			//// Rectangle Drawing
 			var rectanglePath = UIBezierPath.FromRect(menuLogoFrame);
@@ -97,11 +103,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textLogoNathansWay Drawing
-			RectangleF textLogoNathansWayRect = new RectangleF(5.0f, 4.0f, 345.0f, 75.0f);
+			RectangleF textLogoNathansWayRect = new RectangleF(0.0f, 0.0f, 350.0f, 80.0f);
 			{
 				var textContent = "nathansway";
 				context.SaveState();
-				context.SetShadowWithColor(colorTextOuterShadowOffset, colorTextOuterShadowBlurRadius, colorTextOuterShadow);
+				context.SetShadowWithColor(colorTextNathansWayShadowOffset, colorTextNathansWayShadowBlurRadius, colorTextNathansWayShadow);
 				colorTextNathansWay.SetFill();
 				var textLogoNathansWayFont = UIFont.FromName("HelveticaNeue-Light", 50.0f);
 				textLogoNathansWayRect.Offset(0.0f, (textLogoNathansWayRect.Height - new NSString(textContent).StringSize(textLogoNathansWayFont, textLogoNathansWayRect.Size).Height) / 2.0f);
@@ -112,13 +118,13 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textNumberDisplay Drawing
-			RectangleF textNumberDisplayRect = new RectangleF(0.0f, 46.0f, 1024.0f, 128.0f);
+			RectangleF textNumberDisplayRect = new RectangleF(116.0f, 47.0f, 329.0f, 80.0f);
 			{
-				var textContent = "1 2 3 4 5 6 7 8 9 0";
+				var textContent = "1234567890";
 				context.SaveState();
-				context.SetShadowWithColor(this._colorTextNumbersOuterShadowOffset, colorTextNumbersOuterShadowBlurRadius, colorTextNumbersOuterShadow);
+				context.SetShadowWithColor(this._colorTextNumbersShadowOffset, colorTextNumbersShadowBlurRadius, colorTextNumbersShadow);
 				colorTextNathansWay.SetFill();
-				var textNumberDisplayFont = UIFont.FromName("Helvetica-Light", 120.0f);
+				var textNumberDisplayFont = UIFont.FromName("Helvetica-Light", 40.0f);
 				textNumberDisplayRect.Offset(0.0f, (textNumberDisplayRect.Height - new NSString(textContent).StringSize(textNumberDisplayFont, textNumberDisplayRect.Size).Height) / 2.0f);
 				new NSString(textContent).DrawString(textNumberDisplayRect, textNumberDisplayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
 				context.RestoreState();
@@ -130,16 +136,41 @@ namespace NathansWay.iOS.Numeracy.Menu
 			RectangleF textNumbersRect = new RectangleF(102.0f, 31.0f, 227.0f, 65.0f);
 			UIColor.White.SetFill();
 			new NSString("Numbers").DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+
+
+			//// templateButtonLesson Drawing
+			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 190.0f, 448.0f, 150.0f), 24.0f);
+			context.SaveState();
+			context.SetShadowWithColor(this._colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
+			UIColor.White.SetFill();
+			templateButtonLessonPath.Fill();
+			context.RestoreState();
+
+
+
+			//// templateButtonToolBox Drawing
+			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 190.0f, 448.0f, 150.0f), 24.0f);
+			context.SaveState();
+			context.SetShadowWithColor(this._colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
+			UIColor.White.SetFill();
+			templateButtonToolBoxPath.Fill();
+			context.RestoreState();
 		}
 
         #endregion
 
 		#region Public Members
 
-		public SizeF ColorTextOuterShadowOffset
+		public SizeF ColorTextNumbersShadowOffset
 		{
-			get{ return _colorTextNumbersOuterShadowOffset; }
-			set{ _colorTextNumbersOuterShadowOffset = value; }
+			get{ return _colorTextNumbersShadowOffset; }
+			set{ _colorTextNumbersShadowOffset = value; }
+		}
+
+		public SizeF ColorButtonShadowOffset
+		{
+			get{ return _colorButtonShadowOffset; }
+			set{ _colorButtonShadowOffset = value; }
 		}
 
 		#endregion
