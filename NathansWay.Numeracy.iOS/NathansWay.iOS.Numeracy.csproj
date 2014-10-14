@@ -24,9 +24,8 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
-    <MtouchLink>None</MtouchLink>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchSdkVersion>5.1</MtouchSdkVersion>
+    <MtouchLink>Full</MtouchLink>
+    <MtouchSdkVersion>7.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
@@ -39,7 +38,9 @@
     <MtouchArch>ARMv7</MtouchArch>
     <IpaPackageName>
     </IpaPackageName>
-    <MtouchSdkVersion>6.1</MtouchSdkVersion>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchLink>None</MtouchLink>
+    <MtouchSdkVersion>8.0</MtouchSdkVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,6 +99,9 @@
     <None Include="NathansWay.iOS.Numeracy\WorkSpace\README.md" />
     <None Include="Entitlements.plist" />
     <None Include="RELEASE-NOTES.txt" />
+    <None Include="NathansWay.iOS.Numeracy\StyleKit\SkMenuBackGround.cs" />
+    <None Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkToolBox.cs" />
+    <None Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkLesson.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -190,9 +194,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
       <DependentUpon>vwWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkToolBox.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkDarkLesson.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\StyleKit\SkMenuBackGround.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

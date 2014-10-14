@@ -8,15 +8,14 @@ using MonoTouch.CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
-using NathansWay.iOS.Numeracy.Graphics;
+//using NathansWay.iOS.Numeracy.Graphics;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
 	[MonoTouch.Foundation.Register ("vMenuStart")]
     public partial class vMenuStart : AspyView
 	{
-		public NSShadow _colorTextNumbersOuterShadow;
-		private CMMotionManager _motionManager; 
+
 
 		#region Constructors
 		
@@ -49,18 +48,10 @@ namespace NathansWay.iOS.Numeracy.Menu
         {
 			base.Initialize ();
 			this.Tag = 1;
-			_colorTextNumbersOuterShadow = new NSShadow ();
-			_motionManager = new CMMotionManager ();
-			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
-			{
-				var pt = new SizeF( (float)data.Acceleration.X, (float)data.Acceleration.Y );
-				_colorTextNumbersOuterShadow.ShadowOffset = pt;
-				this.ViewWithTag ();
-				//this.lblZ.Text = data.Acceleration.Z.ToString ("0.00000000");
-			});
+
 
 		}
-			 
+
         
 //		public override void Draw(RectangleF rect)
 //		{
@@ -69,7 +60,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 //		}
 		public override void Draw(RectangleF rect)
 		{
-			SkMenuBackGround.DrawCanvasMain (_colorTextNumbersOuterShadow, rect);
+			//SkMenuBackGround.DrawCanvasMain (rect);
 			base.Draw(rect);
 		}
 

@@ -8,12 +8,19 @@ using MonoTouch.CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
-using NathansWay.iOS.Numeracy.Graphics;
+//using NathansWay.iOS.Numeracy.Graphics;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
     public partial class vcMenuStart : AspyViewController
 	{
+
+		#region Private Variables
+
+		private CMMotionManager _motionManager; 
+
+		#endregion
+
 		#region Contructors
 
 		public vcMenuStart () : base ()
@@ -43,8 +50,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 
         }
 
-
-
 		#endregion
 
 		public override void DidReceiveMemoryWarning ()
@@ -58,7 +63,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			_motionManager = new CMMotionManager ();
+			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
+			{
+				//var pt = new SizeF( (float)data.Acceleration.X, (float)data.Acceleration.Y );
+				//SkMenuBackGround.ColorTextNumbersOuterShadow.ShadowOffset = pt;
 
+				//this.lblZ.Text = data.Acceleration.Z.ToString ("0.00000000");
+			});
 		}
 
 		public override void ViewDidAppear (bool animated)

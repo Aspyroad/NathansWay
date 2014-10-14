@@ -2,8 +2,6 @@
 using System;
 // SQLite
 using SQLite.Net.Attributes;
-// Xamarin
-using Xamarin.Forms;
 // Shared
 using NathansWay.Shared;
 
