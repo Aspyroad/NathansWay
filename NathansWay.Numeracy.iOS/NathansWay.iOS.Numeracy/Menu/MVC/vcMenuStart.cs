@@ -12,12 +12,14 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-    public partial class vcMenuStart : AspyViewController
+	[MonoTouch.Foundation.Register ("vcMenuStart")]
+    public class vcMenuStart : AspyViewController
 	{
 
 		#region Private Variables
 
 		private CMMotionManager _motionManager; 
+		private vMenuStart _vMenuStart;
 
 		#endregion
 
@@ -52,6 +54,13 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
+		public override void LoadView()
+		{
+			//base.LoadView();
+			this._vMenuStart = new vMenuStart (this.iOSGlobals.G__RectWindowLandscape);
+			this.View = _vMenuStart;
+		}
+
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
@@ -78,9 +87,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ViewDidAppear (animated);
 		}
 
-		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender)
-		{
-			this.PerformSegue("sgMenu2Toolbox",sender);
-		}
+//		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender)
+//		{
+//			this.PerformSegue("sgMenu2Toolbox",sender);
+//		}
 	}
 }

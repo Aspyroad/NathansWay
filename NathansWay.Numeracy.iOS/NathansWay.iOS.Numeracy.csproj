@@ -24,8 +24,8 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>i386</MtouchArch>
-    <MtouchLink>Full</MtouchLink>
-    <MtouchSdkVersion>7.1</MtouchSdkVersion>
+    <MtouchLink>None</MtouchLink>
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
@@ -114,9 +114,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.designer.cs">
-      <DependentUpon>vcMenuStart.cs</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenuStart.cs">
       <DependentUpon>vcMenuStart.cs</DependentUpon>
     </Compile>

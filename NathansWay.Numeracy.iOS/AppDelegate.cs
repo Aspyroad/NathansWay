@@ -160,7 +160,7 @@ namespace NathansWay.iOS.Numeracy
 			iOSCoreServiceContainer.Register<AspyWindow> (window);
 
 			// Load our storyboard and setup our UIWindow and first view controller
-			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+			//storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
 
 			// Setup view controllers
 			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 
@@ -168,7 +168,7 @@ namespace NathansWay.iOS.Numeracy
 			_mainController = new AspyViewContainer();
 
 			// Use storyboard ids to create VCs
-			_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
+			_menuStart = new vcMenuStart();
 			//_menuStart = new vcMenuStart();
 
 			//Add our navigation object to the service library
