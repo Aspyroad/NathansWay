@@ -53,6 +53,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this._colorTextNumbersOuterShadowOffset = new SizeF(-2.1f, 1.1f);
 		}
 
+		#endregion
+
+		#region Drawn Graphics
+		// Main background canvas
 		private void DrawCanvasMain(RectangleF menuLogoFrame)
 		{
 			//// General Declarations
@@ -60,8 +64,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var context = UIGraphics.GetCurrentContext();
 
 			//// Color Declarations
-			var colorTextNathansWay = UIColor.FromRGBA(1.000f, 0.761f, 0.409f, 0.263f);
-			var colorTextOuterShadowColor = UIColor.FromRGBA(0.406f, 0.215f, 0.000f, 0.428f);
+			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.263f);
+			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 			var colorText1OuterShadowColor = UIColor.FromRGBA(0.302f, 0.300f, 0.119f, 1.000f);
 			var colorMainBackGroundStart = UIColor.FromRGBA(0.626f, 0.465f, 0.179f, 0.796f);
 			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
@@ -127,7 +131,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 			UIColor.White.SetFill();
 			new NSString("Numbers").DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 		}
-
 
         #endregion
 
