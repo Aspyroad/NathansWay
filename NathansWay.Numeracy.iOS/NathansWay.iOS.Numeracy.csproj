@@ -38,8 +38,7 @@
     <MtouchArch>ARMv7</MtouchArch>
     <IpaPackageName>
     </IpaPackageName>
-    <MtouchDebug>true</MtouchDebug>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>Full</MtouchLink>
     <MtouchSdkVersion>8.0</MtouchSdkVersion>
   </PropertyGroup>
   <ItemGroup>

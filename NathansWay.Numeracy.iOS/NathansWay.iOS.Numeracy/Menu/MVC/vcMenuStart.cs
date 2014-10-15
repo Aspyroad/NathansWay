@@ -27,6 +27,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private ButtonStyleLesson btnMenuLessons;
 		private ButtonStyleToolBox btnMenuToolbox;
 
+		private UITextView txtX;
+		private UITextView txtY;
+
 		#endregion
 
 		#region Contructors
@@ -85,8 +88,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			base.ViewDidLoad ();
 
-			_motionManager = new CMMotionManager ();
-			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
+			//_motionManager = new CMMotionManager ();
+			//_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
 
 //			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
 //			{
@@ -97,12 +100,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 			// Add Menu Buttons
 			this.btnMenuLessons = new ButtonStyleLesson (new RectangleF(50.0f, 190.0f, 448.0f, 150.0f));
 			this.View.AddSubview (this.btnMenuLessons);
-			//this.View.BringSubviewToFront (this.btnMenuLessons);
 			this.btnMenuToolbox = new ButtonStyleToolBox (new RectangleF(526.0f, 190.0f, 448.0f, 150.0f));
 			this.View.AddSubview (this.btnMenuToolbox);
 
-
-
+			// TextFields
+			this.txtX = new UITextView(new RectangleF(50.0f, 388.0f, 184.0f, 35.0f));
+			this.View.AddSubview (this.txtX);
+			this.txtY = new UITextView(new RectangleF(50.0f, 430.0f, 184.0f, 35.0f));
+			this.View.AddSubview (this.txtY); 
 
 		}
 
@@ -117,11 +122,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		private void doGyro (CMAccelerometerData _data, NSError _error	)
 		{
-			var pt = new SizeF( (float)_data.Acceleration.X, (float)_data.Acceleration.Y );
-			if (this._shadowOffset != pt)
-			{
-				this.View.SetNeedsDisplay ();
-			}
+			//this.txtX.Text = (_data.Acceleration.X * 100).ToString ("000.0");
+			//this.txtY.Text = (_data.Acceleration.Y * 100).ToString ("000.0");
 		}
 
 
