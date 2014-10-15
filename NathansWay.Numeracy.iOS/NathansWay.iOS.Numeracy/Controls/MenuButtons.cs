@@ -213,6 +213,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 	#endregion
 
+	#region Test BlueButton
 	/// <summary>
 	/// Blue button example
 	/// http://paintcodeapp.com/examples.html
@@ -489,6 +490,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 		}
 	}
 
+	#endregion
+
 	[Register ("ButtonStyleToolBox")]
 	public class ButtonStyleToolBox : AspyButton
 	{
@@ -539,7 +542,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
 			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
-			var strokeBorder = UIColor.FromRGBA(0.574f, 0.346f, 0.093f, 0.829f);
 			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
 			var colorImageBlade = UIColor.FromRGBA(0.688f, 0.714f, 0.732f, 1.000f);
 			var colorImageWrench = UIColor.FromRGBA(0.515f, 0.582f, 0.585f, 1.000f);
@@ -552,22 +554,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 			//// Variable Declarations
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainEnd.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
-			//// BackGroundWhite Drawing
-			var backGroundWhitePath = UIBezierPath.FromRoundedRect(new RectangleF(1.0f, 1.0f, 446.0f, 150.0f), 24.0f);
-			UIColor.White.SetFill();
-			backGroundWhitePath.Fill();
-			UIColor.White.SetStroke();
-			backGroundWhitePath.LineWidth = 1.0f;
-			backGroundWhitePath.Stroke();
-
-
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, -0.0f, 448.0f, 152.0f), 24.0f);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
 				new PointF(243.92f, 161.44f),
-				new PointF(224.0f, -0.0f),
+				new PointF(224.0f, 0.0f),
 				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
 			context.RestoreState();
 
@@ -657,23 +650,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorImageBlade.SetFill();
 					bezier10Path.Fill();
-
-
-					//// Bezier 12 Drawing
-					UIBezierPath bezier12Path = new UIBezierPath();
-					bezier12Path.MoveTo(new PointF(23.51f, 123.16f));
-					bezier12Path.AddLineTo(new PointF(79.25f, 70.25f));
-					bezier12Path.AddLineTo(new PointF(67.21f, 59.1f));
-					bezier12Path.AddLineTo(new PointF(56.61f, 69.13f));
-					bezier12Path.AddCurveToPoint(new PointF(54.65f, 81.94f), new PointF(58.6f, 73.59f), new PointF(58.08f, 79.16f));
-					bezier12Path.AddCurveToPoint(new PointF(40.65f, 84.17f), new PointF(51.21f, 85.28f), new PointF(45.85f, 85.84f));
-					bezier12Path.AddLineTo(new PointF(11.47f, 111.46f));
-					bezier12Path.AddLineTo(new PointF(23.51f, 123.16f));
-					bezier12Path.ClosePath();
-					bezier12Path.MiterLimit = 4.0f;
-
-					strokeBorder.SetFill();
-					bezier12Path.Fill();
 				}
 
 
@@ -684,8 +660,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 
 		#endregion
-
-
 
 	}
 
@@ -751,22 +725,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 			//// Variable Declarations
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainEnd.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
-			//// Rounded Rectangle 2 Drawing
-			var roundedRectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(1.0f, 1.0f, 446.0f, 148.0f), 24.0f);
-			UIColor.White.SetFill();
-			roundedRectangle2Path.Fill();
-			UIColor.White.SetStroke();
-			roundedRectangle2Path.LineWidth = 1.0f;
-			roundedRectangle2Path.Stroke();
-
-
-			//// Rounded Rectangle Drawing
-			var roundedRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 150.0f), 24.0f);
+			//// MainFront Drawing
+			var mainFrontPath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
 			context.SaveState();
-			roundedRectanglePath.AddClip();
+			mainFrontPath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
-				new PointF(211.74f, 157.42f),
-				new PointF(225.5f, 1.5f),
+				new PointF(210.24f, 158.0f),
+				new PointF(224.0f, 0.0f),
 				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
 			context.RestoreState();
 

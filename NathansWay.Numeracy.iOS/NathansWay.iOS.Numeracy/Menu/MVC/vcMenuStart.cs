@@ -21,6 +21,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private CMMotionManager _motionManager; 
 		private vMenuStart _vMenuStart;
 		private CMAccelerometerHandler cmHandler;
+		private SizeF _shadowOffset;
 
 		// Controls
 		private ButtonStyleLesson btnMenuLessons;
@@ -53,8 +54,10 @@ namespace NathansWay.iOS.Numeracy.Menu
         {  
 			base.Initialize ();
 			this.AspyTag1 = 1;
-			this.AspyName = "VC_MenuStart";
-
+			this.AspyName = "VC_Menu";
+			// Assign method to GyroHandler
+			cmHandler = this.doGyro;
+			_shadowOffset = new SizeF ();
         }
 
 		#endregion
@@ -65,6 +68,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			//base.LoadView();
 			this._vMenuStart = new vMenuStart (this.iOSGlobals.G__RectWindowLandscape);
+			this._vMenuStart.ColorButtonShadowOffset = _shadowOffset;
+			this._vMenuStart.ColorTextNumbersShadowOffset = _shadowOffset;
 			this.View = _vMenuStart;
 		}
 
@@ -81,11 +86,13 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ViewDidLoad ();
 
 			_motionManager = new CMMotionManager ();
-			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
-			{
-				//var pt = new SizeF( (float)data.Acceleration.X, (float)data.Acceleration.Y );
-				//SkMenuBackGround.ColorTextNumbersOuterShadow.ShadowOffset = pt;
-			});
+			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
+
+//			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
+//			{
+//				//var pt = new SizeF( (float)data.Acceleration.X, (float)data.Acceleration.Y );
+//				//SkMenuBackGround.ColorTextNumbersOuterShadow.ShadowOffset = pt;
+//			});
 
 			// Add Menu Buttons
 			this.btnMenuLessons = new ButtonStyleLesson (new RectangleF(50.0f, 190.0f, 448.0f, 150.0f));
@@ -106,11 +113,21 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
-		#region Delegates
+		#region Actions
 
+		private void doGyro (CMAccelerometerData _data, NSError _error	)
+		{
+			var pt = new SizeF( (float)_data.Acceleration.X, (float)_data.Acceleration.Y );
+			if (this._shadowOffset != pt)
+			{
+				this.View.SetNeedsDisplay ();
+			}
+		}
 
 
 		#endregion
+
+
 //		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender)
 //		{
 //			this.PerformSegue("sgMenu2Toolbox",sender);
