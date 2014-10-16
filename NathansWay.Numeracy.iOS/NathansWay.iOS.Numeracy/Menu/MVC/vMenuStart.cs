@@ -5,6 +5,7 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
+using MonoTouch.CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 
@@ -18,6 +19,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		private SizeF _colorTextNumbersShadowOffset;
 		private SizeF _colorButtonShadowOffset;
+		private PointF _latestPoint;
+		private CMMotionManager _motionManager; 
+		//private vMenuStart _vMenuStart;
+		private CMAccelerometerHandler cmHandler;
 
 		#endregion
 
@@ -53,6 +58,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.Initialize ();
 			this._colorTextNumbersShadowOffset = new SizeF(-0.0f, 0.0f);
 			this._colorButtonShadowOffset = new SizeF(-0.0f, 0.0f);
+			cmHandler = this.doGyro;
+			_motionManager = new CMMotionManager ();
+			_motionManager.AccelerometerUpdateInterval = (1.0/5.0);
+			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
 		}
 
 		#endregion
@@ -176,12 +185,40 @@ namespace NathansWay.iOS.Numeracy.Menu
 		#endregion
 
 		#region Overrides
-		
+
+		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+		{
+			base.TouchesMoved (touches, evt);
+
+			UITouch touch = touches.AnyObject as UITouch;
+
+			if (touch != null) 
+			{
+				this._latestPoint = touch.LocationInView (this);
+				//this._colorButtonShadowOffset = new SizeF (this._latestPoint);
+				//SetNeedsDisplay ();
+			}
+		}
+
 		public override void Draw(RectangleF rect)
 		{
 			DrawCanvasMain (rect);
 			base.Draw(rect);
 		}
+
+		#endregion
+
+
+		#region Actions
+
+		private void doGyro (CMAccelerometerData _data, NSError _error	)
+		{
+			//this.txtX.Text = (_data.Acceleration.X * 100).ToString ("000.0");
+			//this.txtY.Text = (_data.Acceleration.Y * 100).ToString ("000.0");
+			this.ColorButtonShadowOffset = new SizeF( (float)(_data.Acceleration.Y * 50), (float)(_data.Acceleration.X * 50) );
+			this.SetNeedsDisplay ();
+		}
+
 
 		#endregion
     }

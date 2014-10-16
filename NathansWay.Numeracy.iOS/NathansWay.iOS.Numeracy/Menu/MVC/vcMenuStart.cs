@@ -59,7 +59,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.AspyTag1 = 1;
 			this.AspyName = "VC_Menu";
 			// Assign method to GyroHandler
-			cmHandler = this.doGyro;
+
 			_shadowOffset = new SizeF ();
         }
 
@@ -88,8 +88,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			base.ViewDidLoad ();
 
-			//_motionManager = new CMMotionManager ();
-			//_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
+
 
 //			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, (data, error) =>
 //			{
@@ -118,16 +117,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
-		#region Actions
 
-		private void doGyro (CMAccelerometerData _data, NSError _error	)
-		{
-			//this.txtX.Text = (_data.Acceleration.X * 100).ToString ("000.0");
-			//this.txtY.Text = (_data.Acceleration.Y * 100).ToString ("000.0");
-		}
-
-
-		#endregion
 
 
 //		partial void btnMenuActionLessons (NathansWay.iOS.Numeracy.Controls.ButtonStyleLesson sender)
