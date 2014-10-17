@@ -17,13 +17,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
-		private SizeF _colorTextNumbersShadowOffset;
-		private SizeF _colorButtonShadowOffset;
-		private PointF _latestPoint;
-		private CMMotionManager _motionManager; 
-		//private vMenuStart _vMenuStart;
-		private CMAccelerometerHandler cmHandler;
-
 		#endregion
 
 		#region Constructors
@@ -56,31 +49,24 @@ namespace NathansWay.iOS.Numeracy.Menu
         protected override void Initialize()
         {
 			base.Initialize ();
-			this._colorTextNumbersShadowOffset = new SizeF(-0.0f, 0.0f);
-			this._colorButtonShadowOffset = new SizeF(-0.0f, 0.0f);
-			cmHandler = this.doGyro;
-			_motionManager = new CMMotionManager ();
-			_motionManager.AccelerometerUpdateInterval = (1.0/5.0);
-			_motionManager.StartAccelerometerUpdates (NSOperationQueue.CurrentQueue, cmHandler);
 		}
 
 		#endregion
 
-		#region Drawn Graphics
-		// Main background canvas
+		#region DrawnGraphics
+
 		private void DrawCanvasMain(RectangleF menuLogoFrame)
 		{
-
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
 			var context = UIGraphics.GetCurrentContext();
 
 			//// Color Declarations
-			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.249f);
-			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-			var colorText1OuterShadowColor = UIColor.FromRGBA(0.631f, 0.374f, 0.103f, 0.541f);
-			var colorMainBackGroundStart = UIColor.FromRGBA(0.698f, 0.484f, 0.104f, 0.796f);
+			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.387f);
+			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
+			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.791f);
 			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
+			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
 			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
@@ -91,11 +77,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNathansWayShadow = colorTextOuterShadowColor.CGColor;
 			var colorTextNathansWayShadowOffset = new SizeF(-38.1f, -11.1f);
 			var colorTextNathansWayShadowBlurRadius = 5.0f;
-			var colorButtonShadow = colorText1OuterShadowColor.CGColor;
-			//var colorButtonShadowOffset = new SizeF(0.1f, -0.1f);
-			var colorButtonShadowBlurRadius = 5.0f;
-			var colorTextNumbersShadow = colorTextOuterShadowColor.CGColor;
-			//var colorTextNumbersShadowOffset = new SizeF(0.1f, -0.1f);
+			var colorTextNumbersShadow = colorTextNumbersShadowColor.CGColor;
+			var colorTextNumbersShadowOffset = new SizeF(10.1f, 11.1f);
 			var colorTextNumbersShadowBlurRadius = 5.0f;
 
 			//// Rectangle Drawing
@@ -112,7 +95,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textLogoNathansWay Drawing
-			RectangleF textLogoNathansWayRect = new RectangleF(0.0f, 0.0f, 350.0f, 80.0f);
+			RectangleF textLogoNathansWayRect = new RectangleF(0.0f, -0.0f, 350.0f, 70.0f);
 			{
 				var textContent = "nathansway";
 				context.SaveState();
@@ -127,11 +110,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textNumberDisplay Drawing
-			RectangleF textNumberDisplayRect = new RectangleF(116.0f, 47.0f, 329.0f, 80.0f);
+			RectangleF textNumberDisplayRect = new RectangleF(94.0f, 50.0f, 329.0f, 62.0f);
 			{
 				var textContent = "1234567890";
 				context.SaveState();
-				context.SetShadowWithColor(this._colorTextNumbersShadowOffset, colorTextNumbersShadowBlurRadius, colorTextNumbersShadow);
+				context.SetShadowWithColor(colorTextNumbersShadowOffset, colorTextNumbersShadowBlurRadius, colorTextNumbersShadow);
 				colorTextNathansWay.SetFill();
 				var textNumberDisplayFont = UIFont.FromName("Helvetica-Light", 40.0f);
 				textNumberDisplayRect.Offset(0.0f, (textNumberDisplayRect.Height - new NSString(textContent).StringSize(textNumberDisplayFont, textNumberDisplayRect.Size).Height) / 2.0f);
@@ -142,63 +125,67 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textNumbers Drawing
-			RectangleF textNumbersRect = new RectangleF(102.0f, 31.0f, 227.0f, 65.0f);
+			RectangleF textNumbersRect = new RectangleF(85.0f, 27.0f, 227.0f, 65.0f);
 			UIColor.White.SetFill();
 			new NSString("Numbers").DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 
 
 			//// templateButtonLesson Drawing
-			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 190.0f, 448.0f, 150.0f), 24.0f);
-			context.SaveState();
-			context.SetShadowWithColor(this._colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
+			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 120.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonLessonPath.Fill();
-			context.RestoreState();
-
 
 
 			//// templateButtonToolBox Drawing
-			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 190.0f, 448.0f, 150.0f), 24.0f);
-			context.SaveState();
-			context.SetShadowWithColor(this._colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
+			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 120.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonToolBoxPath.Fill();
-			context.RestoreState();
+
+
+			//// templateButtonLesson 2 Drawing
+			var templateButtonLesson2Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 280.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson2Path.Fill();
+
+
+			//// templateButtonLesson 3 Drawing
+			var templateButtonLesson3Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 280.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson3Path.Fill();
+
+
+			//// templateButtonLesson 4 Drawing
+			var templateButtonLesson4Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 441.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson4Path.Fill();
+
+
+			//// templateButtonLesson 5 Drawing
+			var templateButtonLesson5Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 441.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson5Path.Fill();
+
+
+			//// templateButtonLesson 6 Drawing
+			var templateButtonLesson6Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 600.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson6Path.Fill();
+
+
+			//// templateButtonLesson 7 Drawing
+			var templateButtonLesson7Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 600.0f, 448.0f, 150.0f), 24.0f);
+			UIColor.White.SetFill();
+			templateButtonLesson7Path.Fill();
 		}
 
         #endregion
 
 		#region Public Members
 
-		public SizeF ColorTextNumbersShadowOffset
-		{
-			get{ return _colorTextNumbersShadowOffset; }
-			set{ _colorTextNumbersShadowOffset = value; }
-		}
-
-		public SizeF ColorButtonShadowOffset
-		{
-			get{ return _colorButtonShadowOffset; }
-			set{ _colorButtonShadowOffset = value; }
-		}
 
 		#endregion
 
 		#region Overrides
-
-		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
-		{
-			base.TouchesMoved (touches, evt);
-
-			UITouch touch = touches.AnyObject as UITouch;
-
-			if (touch != null) 
-			{
-				this._latestPoint = touch.LocationInView (this);
-				//this._colorButtonShadowOffset = new SizeF (this._latestPoint);
-				//SetNeedsDisplay ();
-			}
-		}
 
 		public override void Draw(RectangleF rect)
 		{
@@ -208,15 +195,30 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
+		#region Touches
 
-		#region Actions
-
-		private void doGyro (CMAccelerometerData _data, NSError _error	)
+		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
 		{
-			//this.txtX.Text = (_data.Acceleration.X * 100).ToString ("000.0");
-			//this.txtY.Text = (_data.Acceleration.Y * 100).ToString ("000.0");
-			this.ColorButtonShadowOffset = new SizeF( (float)(_data.Acceleration.Y * 50), (float)(_data.Acceleration.X * 50) );
-			this.SetNeedsDisplay ();
+			base.TouchesMoved (touches, evt);
+
+			UITouch touch = touches.AnyObject as UITouch;
+
+			if (touch != null) 
+			{
+				//SetNeedsDisplay ();
+			}
+		}
+
+		public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+		{
+			base.TouchesEnded (touches, evt);
+
+			UITouch touch = touches.AnyObject as UITouch;
+
+			if (touch != null) 
+			{
+				//SetNeedsDisplay ();
+			}
 		}
 
 

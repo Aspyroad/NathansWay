@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="577">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -13,62 +13,43 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <segue destination="Afb-7g-2Zs" kind="custom" identifier="sgMenu2Toolbox" customClass="AspySlidingRightSegue" id="152"/>
+                        <segue destination="Afb-7g-2Zs" kind="custom" identifier="sgMenu2Toolbox" customClass="AspySlidingLeftSegue" id="152"/>
+                        <segue destination="612" kind="custom" id="617" customClass="AspySlidingRightSegue" identifier="sgMenu2Lessons"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="130" y="-1233"/>
+            <point key="canvasLocation" x="1285" y="-1018"/>
         </scene>
         <!--Aspy View Container-->
         <!--Vc Tool Box-->
         <scene sceneID="Nod-Wj-smM">
             <objects>
-                <viewController id="Afb-7g-2Zs" customClass="vcToolBox" sceneMemberID="viewController">
-                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="4tn-bM-qWt">
-                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="i0X-gI-fW1">
-                                <rect key="frame" x="41" y="31" width="246" height="63"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.29191963180000002" green="1" blue="0.22375054159999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="btn1_click:" destination="Afb-7g-2Zs" eventType="touchUpInside" id="12o-hP-Lgp"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.320357224" green="0.23160232059999999" blue="0.92636114359999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
+                <viewController id="Afb-7g-2Zs" customClass="vcToolBox" sceneMemberID="viewController" storyboardIdentifier="vcToolBox">
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
-                        <outlet property="ToolBox" destination="4tn-bM-qWt" id="name-outlet-4tn-bM-qWt"/>
-                        <outlet property="btn1" destination="i0X-gI-fW1" id="kcy-zm-9YR"/>
                         <segue destination="JYt-to-IEW" kind="custom" identifier="sgToolBox2Menu" customClass="AspySlidingLeftSegue" id="154"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c8d-yG-iDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1490" y="-1232"/>
+            <point key="canvasLocation" x="2490" y="-1887"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="576">
+        <scene sceneID="611">
             <objects>
-                <navigationController storyboardIdentifier="MainNavigator" definesPresentationContext="YES" navigationBarHidden="YES" id="577" sceneMemberID="viewController">
+                <viewController id="612" customClass="vcLessons" sceneMemberID="viewController" storyboardIdentifier="vcLessons">
+                    <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="1024" height="768"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="580">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    </navigationBar>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="581" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <segue destination="614" kind="custom" identifier="sgToolBox2Menu" customClass="AspySlidingLeftSegue" id="613"/>
+                        <segue destination="JYt-to-IEW" kind="custom" id="619" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-197" y="-2595"/>
+            <point key="canvasLocation" x="58" y="-1880"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

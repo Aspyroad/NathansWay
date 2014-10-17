@@ -26,23 +26,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[Outlet]
 		MonoTouch.UIKit.UIButton btn4 { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		UIView ToolBox { get; set; }
-
 		[Action ("returnToStepOne:")]
 		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
 
-		[Action ("btn1_click:")]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn1_click (UIButton sender);
-
 		void ReleaseDesignerOutlets ()
 		{
-			if (ToolBox != null) {
-				ToolBox.Dispose ();
-				ToolBox = null;
-			}
 		}
 	}
 }

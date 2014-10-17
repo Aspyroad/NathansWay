@@ -33,10 +33,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.AspyName = "VC_ToolBox";
         }
 
-		partial void btn1_click (UIButton sender)
-		{
-			this.PerformSegue("sgToolBox2Menu",sender);
-		}
+//		partial void btn1_click (UIButton sender)
+//		{
+//			this.PerformSegue("sgToolBox2Menu",sender);
+//		}
 
 
 		#region Overrides
