@@ -64,19 +64,23 @@ namespace NathansWay.iOS.Numeracy.Menu
 			//// Color Declarations
 			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.387f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
-			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.791f);
+			var colorText1OuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.740f);
 			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
-			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
-			var gradientBackGroundLocations = new float [] {0.0f, 1.0f};
+			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, UIColor.FromRGBA(0.901f, 0.513f, 0.000f, 0.870f).CGColor, colorMainBackGroundEnd.CGColor};
+			var gradientBackGroundLocations = new float [] {0.0f, 0.59f, 1.0f};
 			var gradientBackGround = new CGGradient(colorSpace, gradientBackGroundColors, gradientBackGroundLocations);
 
 			//// Shadow Declarations
 			var colorTextNathansWayShadow = colorTextOuterShadowColor.CGColor;
 			var colorTextNathansWayShadowOffset = new SizeF(-38.1f, -11.1f);
 			var colorTextNathansWayShadowBlurRadius = 5.0f;
+			var colorButtonShadow = colorText1OuterShadowColor.CGColor;
+			var colorButtonShadowOffset = new SizeF(0.1f, -0.1f);
+			var colorButtonShadowBlurRadius = 10.0f;
 			var colorTextNumbersShadow = colorTextNumbersShadowColor.CGColor;
 			var colorTextNumbersShadowOffset = new SizeF(10.1f, 11.1f);
 			var colorTextNumbersShadowBlurRadius = 5.0f;
@@ -131,52 +135,51 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// templateButtonLesson Drawing
-			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 120.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 255.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonLessonPath.Fill();
 
 
 			//// templateButtonToolBox Drawing
-			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 120.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 255.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonToolBoxPath.Fill();
 
 
-			//// templateButtonLesson 2 Drawing
-			var templateButtonLesson2Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 280.0f, 448.0f, 150.0f), 24.0f);
+			//// templateButtonTeacher Drawing
+			var templateButtonTeacherPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 415.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
-			templateButtonLesson2Path.Fill();
+			templateButtonTeacherPath.Fill();
 
 
-			//// templateButtonLesson 3 Drawing
-			var templateButtonLesson3Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 280.0f, 448.0f, 150.0f), 24.0f);
+			//// templateButtonStudent Drawing
+			var templateButtonStudentPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 415.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
-			templateButtonLesson3Path.Fill();
+			templateButtonStudentPath.Fill();
 
 
-			//// templateButtonLesson 4 Drawing
-			var templateButtonLesson4Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 441.0f, 448.0f, 150.0f), 24.0f);
+			//// templateButtonLessonEdit Drawing
+			var templateButtonLessonEditPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 575.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
-			templateButtonLesson4Path.Fill();
+			templateButtonLessonEditPath.Fill();
 
 
-			//// templateButtonLesson 5 Drawing
-			var templateButtonLesson5Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 441.0f, 448.0f, 150.0f), 24.0f);
+			//// templateButtonVisuals Drawing
+			var templateButtonVisualsPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 575.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
-			templateButtonLesson5Path.Fill();
+			templateButtonVisualsPath.Fill();
 
 
-			//// templateButtonLesson 6 Drawing
-			var templateButtonLesson6Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 600.0f, 448.0f, 150.0f), 24.0f);
-			UIColor.White.SetFill();
-			templateButtonLesson6Path.Fill();
-
-
-			//// templateButtonLesson 7 Drawing
-			var templateButtonLesson7Path = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 600.0f, 448.0f, 150.0f), 24.0f);
-			UIColor.White.SetFill();
-			templateButtonLesson7Path.Fill();
+			//// Rectangle 2 Drawing
+			var rectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 124.5f, 924.0f, 120.0f), 6.0f);
+			context.SaveState();
+			context.SetShadowWithColor(colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
+			colorMainBackGroundEnd.SetStroke();
+			rectangle2Path.LineWidth = 1.0f;
+			rectangle2Path.Stroke();
+			context.RestoreState();
 		}
+
 
         #endregion
 

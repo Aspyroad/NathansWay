@@ -803,5 +803,609 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 
 	}
+
+	[Register ("ButtonStyleTeacher")]
+	public class ButtonStyleTeacher : AspyButton
+	{
+
+		#region Constructors
+
+		public ButtonStyleTeacher () : base()
+		{
+			Initialize();
+		}
+		public ButtonStyleTeacher (IntPtr handle) : base(handle)
+		{
+			Initialize();
+		}       
+		public ButtonStyleTeacher (RectangleF myFrame)  : base (myFrame)
+		{   
+			Initialize();
+		}
+		public ButtonStyleTeacher (UIButtonType type) : base (type)
+		{
+			Initialize();
+		} 
+
+		#endregion
+
+		#region Overrides
+
+		protected override void Initialize()
+		{
+			base.Initialize ();
+		}
+
+		public override void Draw (RectangleF rect)
+		{
+			DrawCanvas1 (rect, this.IsPressed);
+		}
+
+		#endregion
+
+		#region Draw Methods
+
+		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		{
+			//// General Declarations
+			var colorSpace = CGColorSpace.CreateDeviceRGB();
+			var context = UIGraphics.GetCurrentContext();
+
+			//// Color Declarations
+			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
+			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
+			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
+
+			//// Shadow Declarations
+			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
+			var shadowTextTitleOffset = new SizeF(2.1f, -3.1f);
+			var shadowTextTitleBlurRadius = 5.0f;
+
+			//// Variable Declarations
+			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
+
+			//// MainSurfaceRectangle Drawing
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			context.SaveState();
+			mainSurfaceRectanglePath.AddClip();
+			context.DrawLinearGradient(colorWhenTapped,
+				new PointF(243.92f, 161.44f),
+				new PointF(224.0f, 0.0f),
+				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+			context.RestoreState();
+
+
+			//// ToolBox Drawing
+			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			context.SaveState();
+			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+			colorTextGradient.SetFill();
+			new NSString("Teacher\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			context.RestoreState();
+
+
+
+			//// Groups
+			{
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
+			}
+
+
+			//// Group
+			{
+				//// Bezier 2 Drawing
+				UIBezierPath bezier2Path = new UIBezierPath();
+				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
+				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
+				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
+				bezier2Path.ClosePath();
+				bezier2Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier2Path.Fill();
+
+
+				//// Bezier 4 Drawing
+				UIBezierPath bezier4Path = new UIBezierPath();
+				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
+				bezier4Path.ClosePath();
+				bezier4Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier4Path.Fill();
+
+
+				//// Rectangle 2 Drawing
+				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
+				colorMainImage.SetFill();
+				rectangle2Path.Fill();
+
+
+				//// Bezier Drawing
+				UIBezierPath bezierPath = new UIBezierPath();
+				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
+				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
+				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
+				bezierPath.ClosePath();
+				bezierPath.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezierPath.Fill();
+			}
+
+		}
+
+		#endregion
+	}
+
+	[Register ("ButtonStyleStudent")]
+	public class ButtonStyleStudent : AspyButton
+	{
+
+		#region Constructors
+
+		public ButtonStyleStudent () : base()
+		{
+			Initialize();
+		}
+		public ButtonStyleStudent (IntPtr handle) : base(handle)
+		{
+			Initialize();
+		}       
+		public ButtonStyleStudent (RectangleF myFrame)  : base (myFrame)
+		{   
+			Initialize();
+		}
+		public ButtonStyleStudent (UIButtonType type) : base (type)
+		{
+			Initialize();
+		} 
+
+		#endregion
+
+		#region Overrides
+
+		protected override void Initialize()
+		{
+			base.Initialize ();
+		}
+
+		public override void Draw (RectangleF rect)
+		{
+			DrawCanvas1 (rect, this.IsPressed);
+		}
+
+		#endregion
+
+		#region Draw Methods
+
+		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		{
+			//// General Declarations
+			var colorSpace = CGColorSpace.CreateDeviceRGB();
+			var context = UIGraphics.GetCurrentContext();
+
+			//// Color Declarations
+			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
+			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
+			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
+
+			//// Shadow Declarations
+			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
+			var shadowTextTitleOffset = new SizeF(2.1f, -3.1f);
+			var shadowTextTitleBlurRadius = 5.0f;
+
+			//// Variable Declarations
+			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
+
+			//// MainSurfaceRectangle Drawing
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			context.SaveState();
+			mainSurfaceRectanglePath.AddClip();
+			context.DrawLinearGradient(colorWhenTapped,
+				new PointF(243.92f, 161.44f),
+				new PointF(224.0f, 0.0f),
+				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+			context.RestoreState();
+
+
+			//// ToolBox Drawing
+			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			context.SaveState();
+			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+			colorTextGradient.SetFill();
+			new NSString("Student\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			context.RestoreState();
+
+
+
+			//// Groups
+			{
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
+			}
+
+
+			//// Group
+			{
+				//// Bezier 2 Drawing
+				UIBezierPath bezier2Path = new UIBezierPath();
+				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
+				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
+				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
+				bezier2Path.ClosePath();
+				bezier2Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier2Path.Fill();
+
+
+				//// Bezier 4 Drawing
+				UIBezierPath bezier4Path = new UIBezierPath();
+				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
+				bezier4Path.ClosePath();
+				bezier4Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier4Path.Fill();
+
+
+				//// Rectangle 2 Drawing
+				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
+				colorMainImage.SetFill();
+				rectangle2Path.Fill();
+
+
+				//// Bezier Drawing
+				UIBezierPath bezierPath = new UIBezierPath();
+				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
+				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
+				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
+				bezierPath.ClosePath();
+				bezierPath.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezierPath.Fill();
+			}
+
+		}
+
+		#endregion
+	}
+
+	[Register ("ButtonStyleLessonEdit")]
+	public class ButtonStyleLessonEdit : AspyButton
+	{
+
+		#region Constructors
+
+		public ButtonStyleLessonEdit () : base()
+		{
+			Initialize();
+		}
+		public ButtonStyleLessonEdit (IntPtr handle) : base(handle)
+		{
+			Initialize();
+		}       
+		public ButtonStyleLessonEdit (RectangleF myFrame)  : base (myFrame)
+		{   
+			Initialize();
+		}
+		public ButtonStyleLessonEdit (UIButtonType type) : base (type)
+		{
+			Initialize();
+		} 
+
+		#endregion
+
+		#region Overrides
+
+		protected override void Initialize()
+		{
+			base.Initialize ();
+		}
+
+		public override void Draw (RectangleF rect)
+		{
+			DrawCanvas1 (rect, this.IsPressed);
+		}
+
+		#endregion
+
+		#region Draw Methods
+
+		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		{
+			//// General Declarations
+			var colorSpace = CGColorSpace.CreateDeviceRGB();
+			var context = UIGraphics.GetCurrentContext();
+
+			//// Color Declarations
+			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
+			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
+			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
+
+			//// Shadow Declarations
+			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
+			var shadowTextTitleOffset = new SizeF(2.1f, -3.1f);
+			var shadowTextTitleBlurRadius = 5.0f;
+
+			//// Variable Declarations
+			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
+
+			//// MainSurfaceRectangle Drawing
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			context.SaveState();
+			mainSurfaceRectanglePath.AddClip();
+			context.DrawLinearGradient(colorWhenTapped,
+				new PointF(243.92f, 161.44f),
+				new PointF(224.0f, 0.0f),
+				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+			context.RestoreState();
+
+
+			//// ToolBox Drawing
+			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			context.SaveState();
+			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+			colorTextGradient.SetFill();
+			new NSString("LessonEdit\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			context.RestoreState();
+
+
+
+			//// Groups
+			{
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
+			}
+
+
+			//// Group
+			{
+				//// Bezier 2 Drawing
+				UIBezierPath bezier2Path = new UIBezierPath();
+				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
+				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
+				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
+				bezier2Path.ClosePath();
+				bezier2Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier2Path.Fill();
+
+
+				//// Bezier 4 Drawing
+				UIBezierPath bezier4Path = new UIBezierPath();
+				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
+				bezier4Path.ClosePath();
+				bezier4Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier4Path.Fill();
+
+
+				//// Rectangle 2 Drawing
+				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
+				colorMainImage.SetFill();
+				rectangle2Path.Fill();
+
+
+				//// Bezier Drawing
+				UIBezierPath bezierPath = new UIBezierPath();
+				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
+				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
+				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
+				bezierPath.ClosePath();
+				bezierPath.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezierPath.Fill();
+			}
+
+		}
+
+		#endregion
+	}
+
+	[Register ("ButtonStyleVisuals")]
+	public class ButtonStyleVisuals : AspyButton
+	{
+
+		#region Constructors
+
+		public ButtonStyleVisuals () : base()
+		{
+			Initialize();
+		}
+		public ButtonStyleVisuals (IntPtr handle) : base(handle)
+		{
+			Initialize();
+		}       
+		public ButtonStyleVisuals (RectangleF myFrame)  : base (myFrame)
+		{   
+			Initialize();
+		}
+		public ButtonStyleVisuals (UIButtonType type) : base (type)
+		{
+			Initialize();
+		} 
+
+		#endregion
+
+		#region Overrides
+
+		protected override void Initialize()
+		{
+			base.Initialize ();
+		}
+
+		public override void Draw (RectangleF rect)
+		{
+			DrawCanvas1 (rect, this.IsPressed);
+		}
+
+		#endregion
+
+		#region Draw Methods
+
+		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		{
+			//// General Declarations
+			var colorSpace = CGColorSpace.CreateDeviceRGB();
+			var context = UIGraphics.GetCurrentContext();
+
+			//// Color Declarations
+			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
+			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
+			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
+
+			//// Shadow Declarations
+			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
+			var shadowTextTitleOffset = new SizeF(2.1f, -3.1f);
+			var shadowTextTitleBlurRadius = 5.0f;
+
+			//// Variable Declarations
+			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
+
+			//// MainSurfaceRectangle Drawing
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			context.SaveState();
+			mainSurfaceRectanglePath.AddClip();
+			context.DrawLinearGradient(colorWhenTapped,
+				new PointF(243.92f, 161.44f),
+				new PointF(224.0f, 0.0f),
+				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+			context.RestoreState();
+
+
+			//// ToolBox Drawing
+			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			context.SaveState();
+			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+			colorTextGradient.SetFill();
+			new NSString("Teacher\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			context.RestoreState();
+
+
+
+			//// Groups
+			{
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
+			}
+
+
+			//// Group
+			{
+				//// Bezier 2 Drawing
+				UIBezierPath bezier2Path = new UIBezierPath();
+				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
+				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
+				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
+				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
+				bezier2Path.ClosePath();
+				bezier2Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier2Path.Fill();
+
+
+				//// Bezier 4 Drawing
+				UIBezierPath bezier4Path = new UIBezierPath();
+				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
+				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
+				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
+				bezier4Path.ClosePath();
+				bezier4Path.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezier4Path.Fill();
+
+
+				//// Rectangle 2 Drawing
+				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
+				colorMainImage.SetFill();
+				rectangle2Path.Fill();
+
+
+				//// Bezier Drawing
+				UIBezierPath bezierPath = new UIBezierPath();
+				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
+				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
+				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
+				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
+				bezierPath.ClosePath();
+				bezierPath.MiterLimit = 4.0f;
+
+				colorMainImage.SetFill();
+				bezierPath.Fill();
+			}
+
+		}
+
+		#endregion
+	}
 }
 

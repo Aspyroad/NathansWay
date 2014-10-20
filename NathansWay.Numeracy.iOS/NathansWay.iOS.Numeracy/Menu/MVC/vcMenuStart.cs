@@ -23,6 +23,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 		// Controls
 		private ButtonStyleLesson btnMenuLessons;
 		private ButtonStyleToolBox btnMenuToolbox;
+		private ButtonStyleTeacher btnMenuTeacher;
+		private ButtonStyleStudent btnMenuStudent;
+		private ButtonStyleLessonEdit btnMenuLessonEdit;
+		private ButtonStyleVisuals btnMenuVisuals;
 
 		//private UITextView txtX;
 		//private UITextView txtY;
@@ -81,12 +85,29 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ViewDidLoad ();
 
 			// Add Menu Buttons
-			this.btnMenuLessons = new ButtonStyleLesson (new RectangleF(50.0f, 120.0f, 448.0f, 150.0f));
+			this.btnMenuLessons = new ButtonStyleLesson (new RectangleF(50.0f, 255.0f, 448.0f, 150.0f));
 			this.btnMenuLessons.TouchUpInside += btnMenuLessons_touchupinside;
 			this.View.AddSubview (this.btnMenuLessons);
-			this.btnMenuToolbox = new ButtonStyleToolBox (new RectangleF(526.0f, 120.0f, 448.0f, 150.0f));
+
+			this.btnMenuToolbox = new ButtonStyleToolBox (new RectangleF(526.0f, 255.0f, 448.0f, 150.0f));
 			this.btnMenuToolbox.TouchUpInside += btnMenuToolbox_touchupinside;
 			this.View.AddSubview (this.btnMenuToolbox);
+
+			this.btnMenuTeacher = new ButtonStyleTeacher (new RectangleF(50.0f, 415.0f, 448.0f, 150.0f));
+			this.btnMenuTeacher.TouchUpInside += btnMenuTeacher_touchupinside;
+			this.View.AddSubview (this.btnMenuTeacher);
+
+			this.btnMenuStudent = new ButtonStyleStudent (new RectangleF(526.0f, 415.0f, 448.0f, 150.0f));
+			this.btnMenuStudent.TouchUpInside += btnMenuStudent_touchupinside;
+			this.View.AddSubview (this.btnMenuStudent);
+
+			this.btnMenuLessonEdit = new ButtonStyleLessonEdit (new RectangleF(50.0f, 575.0f, 448.0f, 150.0f));
+			this.btnMenuLessonEdit.TouchUpInside += btnMenuLessonEdit_touchupinside;
+			this.View.AddSubview (this.btnMenuLessonEdit);
+
+			this.btnMenuVisuals = new ButtonStyleVisuals (new RectangleF(526.0f, 575.0f, 448.0f, 150.0f));
+			this.btnMenuVisuals.TouchUpInside += btnMenuVisuals_touchupinside;
+			this.View.AddSubview (this.btnMenuVisuals);
 
 			// TextFields
 //			this.txtX = new UITextView(new RectangleF(50.0f, 388.0f, 184.0f, 35.0f));
@@ -95,6 +116,23 @@ namespace NathansWay.iOS.Numeracy.Menu
 //			this.View.AddSubview (this.txtY); 
 
 		}
+
+		void btnMenuVisuals_touchupinside (object sender, EventArgs e)
+		{
+			
+		}
+
+		void btnMenuLessonEdit_touchupinside (object sender, EventArgs e)
+		{
+			
+		}
+
+		void btnMenuStudent_touchupinside (object sender, EventArgs e)
+		{
+			
+		}
+
+
 
 		public override void ViewDidAppear (bool animated)
 		{
@@ -114,6 +152,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private void btnMenuToolbox_touchupinside (object sender, EventArgs e)
 		{
 			this.PerformSegue("sgToolbox2Menu", sender as NSObject);
+		}
+
+		private void btnMenuTeacher_touchupinside (object sender, EventArgs e)
+		{
+
 		}
 
 		#endregion
