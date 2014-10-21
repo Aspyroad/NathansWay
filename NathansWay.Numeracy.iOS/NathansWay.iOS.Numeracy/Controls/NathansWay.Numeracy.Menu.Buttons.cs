@@ -542,9 +542,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
 			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
+			var strokeBorder = UIColor.FromRGBA(0.574f, 0.346f, 0.093f, 0.829f);
 			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
-			var colorImageBlade = UIColor.FromRGBA(0.688f, 0.714f, 0.732f, 1.000f);
-			var colorImageWrench = UIColor.FromRGBA(0.515f, 0.582f, 0.585f, 1.000f);
 
 			//// Shadow Declarations
 			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
@@ -610,8 +609,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 					bezier4Path.ClosePath();
 					bezier4Path.MiterLimit = 4.0f;
 
-					colorImageWrench.SetFill();
+					colorMainImage.SetFill();
 					bezier4Path.Fill();
+					strokeBorder.SetStroke();
+					bezier4Path.LineWidth = 2.0f;
+					bezier4Path.Stroke();
 
 
 					//// Bezier 8 Drawing
@@ -632,6 +634,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorMainImage.SetFill();
 					bezier8Path.Fill();
+					strokeBorder.SetStroke();
+					bezier8Path.LineWidth = 2.0f;
+					bezier8Path.Stroke();
 
 
 					//// Bezier 10 Drawing
@@ -648,8 +653,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 					bezier10Path.ClosePath();
 					bezier10Path.MiterLimit = 4.0f;
 
-					colorImageBlade.SetFill();
+					colorMainImage.SetFill();
 					bezier10Path.Fill();
+					strokeBorder.SetStroke();
+					bezier10Path.LineWidth = 2.0f;
+					bezier10Path.Stroke();
 				}
 
 
@@ -657,7 +665,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 				context.RestoreState();
 			}
 		}
-
 
 		#endregion
 	}

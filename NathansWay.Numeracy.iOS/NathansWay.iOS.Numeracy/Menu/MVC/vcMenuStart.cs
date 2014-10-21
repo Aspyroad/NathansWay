@@ -15,8 +15,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 	[MonoTouch.Foundation.Register ("vcMenuStart")]
     public class vcMenuStart : AspyViewController
 	{
-
-		#region Private Variables
+				#region Private Variables
 		// View
 		private vMenuStart _vMenuStart;
 
@@ -72,6 +71,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.View = _vMenuStart;
 		}
 
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+		}
+
 		public override void DidReceiveMemoryWarning ()
 		{
 			// Releases the view if it doesn't have a superview.
@@ -117,30 +121,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		}
 
-		void btnMenuVisuals_touchupinside (object sender, EventArgs e)
-		{
-			
-		}
-
-		void btnMenuLessonBuilder_touchupinside (object sender, EventArgs e)
-		{
-			
-		}
-
-		void btnMenuStudent_touchupinside (object sender, EventArgs e)
-		{
-			
-		}
-
-
-
-		public override void ViewDidAppear (bool animated)
-		{
-			base.ViewDidAppear (animated);
-		}
-
 		#endregion
-
 
 		#region Delegates
 
@@ -155,6 +136,21 @@ namespace NathansWay.iOS.Numeracy.Menu
 		}
 
 		private void btnMenuTeacher_touchupinside (object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnMenuVisuals_touchupinside (object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnMenuLessonBuilder_touchupinside (object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnMenuStudent_touchupinside (object sender, EventArgs e)
 		{
 
 		}

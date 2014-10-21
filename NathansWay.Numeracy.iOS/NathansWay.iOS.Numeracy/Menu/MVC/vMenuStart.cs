@@ -180,7 +180,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 			context.RestoreState();
 		}
 
-
         #endregion
 
 		#region Public Members
