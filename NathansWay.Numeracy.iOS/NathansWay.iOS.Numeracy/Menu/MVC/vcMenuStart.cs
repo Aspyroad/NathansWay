@@ -25,7 +25,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private ButtonStyleToolBox btnMenuToolbox;
 		private ButtonStyleTeacher btnMenuTeacher;
 		private ButtonStyleStudent btnMenuStudent;
-		private ButtonStyleLessonEdit btnMenuLessonEdit;
+		private ButtonStyleLessonBuilder btnMenuLessonBuilder;
 		private ButtonStyleVisuals btnMenuVisuals;
 
 		//private UITextView txtX;
@@ -101,9 +101,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.btnMenuStudent.TouchUpInside += btnMenuStudent_touchupinside;
 			this.View.AddSubview (this.btnMenuStudent);
 
-			this.btnMenuLessonEdit = new ButtonStyleLessonEdit (new RectangleF(50.0f, 575.0f, 448.0f, 150.0f));
-			this.btnMenuLessonEdit.TouchUpInside += btnMenuLessonEdit_touchupinside;
-			this.View.AddSubview (this.btnMenuLessonEdit);
+			this.btnMenuLessonBuilder = new ButtonStyleLessonBuilder (new RectangleF(50.0f, 575.0f, 448.0f, 150.0f));
+			this.btnMenuLessonBuilder.TouchUpInside += btnMenuLessonBuilder_touchupinside;
+			this.View.AddSubview (this.btnMenuLessonBuilder);
 
 			this.btnMenuVisuals = new ButtonStyleVisuals (new RectangleF(526.0f, 575.0f, 448.0f, 150.0f));
 			this.btnMenuVisuals.TouchUpInside += btnMenuVisuals_touchupinside;
@@ -122,7 +122,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			
 		}
 
-		void btnMenuLessonEdit_touchupinside (object sender, EventArgs e)
+		void btnMenuLessonBuilder_touchupinside (object sender, EventArgs e)
 		{
 			
 		}

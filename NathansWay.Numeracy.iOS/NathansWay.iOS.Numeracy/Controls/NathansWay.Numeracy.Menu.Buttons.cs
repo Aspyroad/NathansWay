@@ -660,13 +660,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 
 		#endregion
-
 	}
 
 	[Register ("ButtonStyleLesson")]
 	public class ButtonStyleLesson : AspyButton
 	{
-
 		#region Constructors
 
 		public ButtonStyleLesson () : base()
@@ -801,13 +799,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 		}
 
 		#endregion
-
 	}
 
 	[Register ("ButtonStyleTeacher")]
 	public class ButtonStyleTeacher : AspyButton
 	{
-
 		#region Constructors
 
 		public ButtonStyleTeacher () : base()
@@ -900,6 +896,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 			//// Group
 			{
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
 				//// Bezier 2 Drawing
 				UIBezierPath bezier2Path = new UIBezierPath();
 				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
@@ -948,8 +949,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				colorMainImage.SetFill();
 				bezierPath.Fill();
-			}
 
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
+			}
 		}
 
 		#endregion
@@ -958,7 +962,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 	[Register ("ButtonStyleStudent")]
 	public class ButtonStyleStudent : AspyButton
 	{
-
 		#region Constructors
 
 		public ButtonStyleStudent () : base()
@@ -1027,12 +1030,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 			context.RestoreState();
 
 
-			//// ToolBox Drawing
-			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			//// txtStudent Drawing
+			RectangleF txtStudentRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
 			context.SaveState();
 			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 			colorTextGradient.SetFill();
-			new NSString("Student\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			new NSString("Student").DrawString(RectangleF.Inflate(txtStudentRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 			context.RestoreState();
 
 
@@ -1049,82 +1052,114 @@ namespace NathansWay.iOS.Numeracy.Controls
 			}
 
 
-			//// Group
+			//// Group 2
 			{
-				//// Bezier 2 Drawing
-				UIBezierPath bezier2Path = new UIBezierPath();
-				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
-				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
-				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
-				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
-				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
-				bezier2Path.ClosePath();
-				bezier2Path.MiterLimit = 4.0f;
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+				context.BeginTransparencyLayer();
+
+
+				//// Bezier 6 Drawing
+				UIBezierPath bezier6Path = new UIBezierPath();
+				bezier6Path.MoveTo(new PointF(76.34f, 49.71f));
+				bezier6Path.AddCurveToPoint(new PointF(93.41f, 33.34f), new PointF(85.78f, 49.71f), new PointF(93.41f, 42.36f));
+				bezier6Path.AddCurveToPoint(new PointF(76.34f, 17.0f), new PointF(93.41f, 24.3f), new PointF(85.78f, 17.0f));
+				bezier6Path.AddCurveToPoint(new PointF(59.26f, 33.34f), new PointF(66.89f, 17.0f), new PointF(59.26f, 24.3f));
+				bezier6Path.AddCurveToPoint(new PointF(76.34f, 49.71f), new PointF(59.25f, 42.36f), new PointF(66.89f, 49.71f));
+				bezier6Path.ClosePath();
+				bezier6Path.MiterLimit = 4.0f;
 
 				colorMainImage.SetFill();
-				bezier2Path.Fill();
+				bezier6Path.Fill();
 
 
-				//// Bezier 4 Drawing
-				UIBezierPath bezier4Path = new UIBezierPath();
-				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
-				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
-				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
-				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
-				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
-				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
-				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
-				bezier4Path.ClosePath();
-				bezier4Path.MiterLimit = 4.0f;
+				//// Bezier 8 Drawing
+				UIBezierPath bezier8Path = new UIBezierPath();
+				bezier8Path.MoveTo(new PointF(92.94f, 53.69f));
+				bezier8Path.AddCurveToPoint(new PointF(104.04f, 59.94f), new PointF(100.76f, 53.95f), new PointF(104.04f, 59.94f));
+				bezier8Path.AddLineTo(new PointF(129.26f, 93.04f));
+				bezier8Path.AddCurveToPoint(new PointF(130.91f, 98.24f), new PointF(130.3f, 94.51f), new PointF(130.91f, 96.31f));
+				bezier8Path.AddCurveToPoint(new PointF(121.17f, 107.57f), new PointF(130.91f, 103.39f), new PointF(126.55f, 107.57f));
+				bezier8Path.AddCurveToPoint(new PointF(117.6f, 106.89f), new PointF(119.88f, 107.57f), new PointF(118.71f, 107.3f));
+				bezier8Path.AddLineTo(new PointF(102.38f, 102.83f));
+				bezier8Path.AddLineTo(new PointF(102.38f, 117.36f));
+				bezier8Path.AddLineTo(new PointF(49.53f, 117.36f));
+				bezier8Path.AddLineTo(new PointF(49.53f, 102.83f));
+				bezier8Path.AddLineTo(new PointF(34.31f, 106.89f));
+				bezier8Path.AddCurveToPoint(new PointF(30.73f, 107.57f), new PointF(33.24f, 107.3f), new PointF(32.03f, 107.57f));
+				bezier8Path.AddCurveToPoint(new PointF(21.0f, 98.24f), new PointF(25.35f, 107.57f), new PointF(21.0f, 103.39f));
+				bezier8Path.AddCurveToPoint(new PointF(22.69f, 93.04f), new PointF(21.0f, 96.31f), new PointF(21.6f, 94.51f));
+				bezier8Path.AddLineTo(new PointF(47.89f, 59.94f));
+				bezier8Path.AddCurveToPoint(new PointF(58.98f, 53.69f), new PointF(47.89f, 59.94f), new PointF(51.2f, 53.95f));
+				bezier8Path.AddLineTo(new PointF(92.94f, 53.69f));
+				bezier8Path.AddLineTo(new PointF(92.94f, 53.69f));
+				bezier8Path.ClosePath();
+				bezier8Path.MoveTo(new PointF(75.96f, 107.21f));
+				bezier8Path.AddLineTo(new PointF(75.96f, 107.21f));
+				bezier8Path.AddLineTo(new PointF(95.68f, 100.95f));
+				bezier8Path.AddLineTo(new PointF(95.25f, 100.86f));
+				bezier8Path.AddCurveToPoint(new PointF(100.51f, 83.67f), new PointF(81.63f, 97.04f), new PointF(86.92f, 79.84f));
+				bezier8Path.AddLineTo(new PointF(102.38f, 84.3f));
+				bezier8Path.AddLineTo(new PointF(102.38f, 64.88f));
+				bezier8Path.AddLineTo(new PointF(75.96f, 73.13f));
+				bezier8Path.AddLineTo(new PointF(49.54f, 64.88f));
+				bezier8Path.AddLineTo(new PointF(49.54f, 84.29f));
+				bezier8Path.AddLineTo(new PointF(51.4f, 83.67f));
+				bezier8Path.AddCurveToPoint(new PointF(56.69f, 100.86f), new PointF(65.0f, 79.83f), new PointF(70.31f, 97.04f));
+				bezier8Path.AddLineTo(new PointF(56.25f, 100.94f));
+				bezier8Path.AddLineTo(new PointF(75.96f, 107.21f));
+				bezier8Path.AddLineTo(new PointF(75.96f, 107.21f));
+				bezier8Path.ClosePath();
+				bezier8Path.MiterLimit = 4.0f;
 
 				colorMainImage.SetFill();
-				bezier4Path.Fill();
+				bezier8Path.Fill();
 
 
-				//// Rectangle 2 Drawing
-				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
-				colorMainImage.SetFill();
-				rectangle2Path.Fill();
-
-
-				//// Bezier Drawing
-				UIBezierPath bezierPath = new UIBezierPath();
-				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
-				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
-				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
-				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
-				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
-				bezierPath.ClosePath();
-				bezierPath.MiterLimit = 4.0f;
+				//// Bezier 10 Drawing
+				UIBezierPath bezier10Path = new UIBezierPath();
+				bezier10Path.MoveTo(new PointF(130.24f, 128.8f));
+				bezier10Path.AddCurveToPoint(new PointF(132.67f, 126.48f), new PointF(131.59f, 128.8f), new PointF(132.67f, 127.77f));
+				bezier10Path.AddLineTo(new PointF(132.67f, 126.48f));
+				bezier10Path.AddCurveToPoint(new PointF(130.24f, 124.15f), new PointF(132.67f, 125.18f), new PointF(131.59f, 124.15f));
+				bezier10Path.AddLineTo(new PointF(23.6f, 124.15f));
+				bezier10Path.AddCurveToPoint(new PointF(21.17f, 126.48f), new PointF(22.28f, 124.15f), new PointF(21.17f, 125.18f));
+				bezier10Path.AddLineTo(new PointF(21.17f, 126.48f));
+				bezier10Path.AddCurveToPoint(new PointF(23.6f, 128.8f), new PointF(21.17f, 127.77f), new PointF(22.28f, 128.8f));
+				bezier10Path.AddLineTo(new PointF(130.24f, 128.8f));
+				bezier10Path.ClosePath();
+				bezier10Path.MiterLimit = 4.0f;
 
 				colorMainImage.SetFill();
-				bezierPath.Fill();
+				bezier10Path.Fill();
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
 			}
-
 		}
 
 		#endregion
 	}
 
-	[Register ("ButtonStyleLessonEdit")]
-	public class ButtonStyleLessonEdit : AspyButton
+	[Register ("ButtonStyleLessonBuilder")]
+	public class ButtonStyleLessonBuilder : AspyButton
 	{
-
 		#region Constructors
 
-		public ButtonStyleLessonEdit () : base()
+		public ButtonStyleLessonBuilder () : base()
 		{
 			Initialize();
 		}
-		public ButtonStyleLessonEdit (IntPtr handle) : base(handle)
+		public ButtonStyleLessonBuilder (IntPtr handle) : base(handle)
 		{
 			Initialize();
 		}       
-		public ButtonStyleLessonEdit (RectangleF myFrame)  : base (myFrame)
+		public ButtonStyleLessonBuilder (RectangleF myFrame)  : base (myFrame)
 		{   
 			Initialize();
 		}
-		public ButtonStyleLessonEdit (UIButtonType type) : base (type)
+		public ButtonStyleLessonBuilder (UIButtonType type) : base (type)
 		{
 			Initialize();
 		} 
@@ -1178,80 +1213,121 @@ namespace NathansWay.iOS.Numeracy.Controls
 			context.RestoreState();
 
 
-			//// ToolBox Drawing
-			RectangleF toolBoxRect = new RectangleF(132.0f, 0.0f, 146.0f, 64.0f);
+			//// txtStudent Drawing
+			RectangleF txtStudentRect = new RectangleF(132.0f, 0.0f, 261.0f, 64.0f);
 			context.SaveState();
 			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 			colorTextGradient.SetFill();
-			new NSString("LessonEdit\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			new NSString("Lesson Builder").DrawString(RectangleF.Inflate(txtStudentRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 			context.RestoreState();
 
 
 
-			//// Groups
+			//// LessonEditImage
 			{
 				context.SaveState();
 				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 				context.BeginTransparencyLayer();
 
 
-				context.EndTransparencyLayer();
-				context.RestoreState();
-			}
-
-
-			//// Group
-			{
 				//// Bezier 2 Drawing
 				UIBezierPath bezier2Path = new UIBezierPath();
-				bezier2Path.MoveTo(new PointF(68.5f, 18.0f));
-				bezier2Path.AddLineTo(new PointF(7.0f, 54.33f));
-				bezier2Path.AddLineTo(new PointF(68.5f, 90.67f));
-				bezier2Path.AddLineTo(new PointF(130.0f, 54.33f));
-				bezier2Path.AddLineTo(new PointF(68.5f, 18.0f));
+				bezier2Path.MoveTo(new PointF(106.0f, 66.21f));
+				bezier2Path.AddLineTo(new PointF(106.0f, 36.54f));
+				bezier2Path.AddLineTo(new PointF(86.45f, 17.0f));
+				bezier2Path.AddLineTo(new PointF(22.0f, 17.0f));
+				bezier2Path.AddLineTo(new PointF(22.0f, 129.0f));
+				bezier2Path.AddLineTo(new PointF(106.0f, 129.0f));
+				bezier2Path.AddLineTo(new PointF(106.0f, 128.79f));
+				bezier2Path.AddCurveToPoint(new PointF(134.0f, 97.5f), new PointF(121.75f, 127.04f), new PointF(133.99f, 113.71f));
+				bezier2Path.AddCurveToPoint(new PointF(106.0f, 66.21f), new PointF(133.99f, 81.28f), new PointF(121.75f, 67.95f));
+				bezier2Path.ClosePath();
+				bezier2Path.MoveTo(new PointF(84.99f, 25.45f));
+				bezier2Path.AddLineTo(new PointF(97.55f, 38.0f));
+				bezier2Path.AddLineTo(new PointF(84.99f, 38.0f));
+				bezier2Path.AddLineTo(new PointF(84.99f, 25.45f));
+				bezier2Path.ClosePath();
+				bezier2Path.MoveTo(new PointF(29.0f, 122.0f));
+				bezier2Path.AddLineTo(new PointF(29.0f, 23.99f));
+				bezier2Path.AddLineTo(new PointF(78.0f, 23.99f));
+				bezier2Path.AddLineTo(new PointF(78.0f, 45.0f));
+				bezier2Path.AddLineTo(new PointF(99.0f, 45.0f));
+				bezier2Path.AddLineTo(new PointF(99.0f, 66.21f));
+				bezier2Path.AddCurveToPoint(new PointF(82.72f, 73.0f), new PointF(92.87f, 66.89f), new PointF(87.27f, 69.32f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 73.0f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 80.0f));
+				bezier2Path.AddLineTo(new PointF(76.31f, 80.0f));
+				bezier2Path.AddCurveToPoint(new PointF(72.83f, 87.0f), new PointF(74.87f, 82.16f), new PointF(73.71f, 84.51f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 87.0f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 94.0f));
+				bezier2Path.AddLineTo(new PointF(71.21f, 94.0f));
+				bezier2Path.AddCurveToPoint(new PointF(71.0f, 97.5f), new PointF(71.08f, 95.15f), new PointF(71.0f, 96.31f));
+				bezier2Path.AddCurveToPoint(new PointF(82.72f, 122.0f), new PointF(71.0f, 107.4f), new PointF(75.58f, 116.23f));
+				bezier2Path.AddLineTo(new PointF(29.0f, 122.0f));
+				bezier2Path.ClosePath();
+				bezier2Path.MoveTo(new PointF(102.5f, 121.59f));
+				bezier2Path.AddCurveToPoint(new PointF(78.4f, 97.5f), new PointF(89.2f, 121.56f), new PointF(78.43f, 110.8f));
+				bezier2Path.AddCurveToPoint(new PointF(102.5f, 73.4f), new PointF(78.43f, 84.2f), new PointF(89.2f, 73.43f));
+				bezier2Path.AddCurveToPoint(new PointF(126.59f, 97.5f), new PointF(115.8f, 73.43f), new PointF(126.56f, 84.2f));
+				bezier2Path.AddCurveToPoint(new PointF(102.5f, 121.59f), new PointF(126.56f, 110.8f), new PointF(115.8f, 121.56f));
+				bezier2Path.ClosePath();
+				bezier2Path.MoveTo(new PointF(92.0f, 59.0f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 59.0f));
+				bezier2Path.AddLineTo(new PointF(36.0f, 66.0f));
+				bezier2Path.AddLineTo(new PointF(92.0f, 66.0f));
+				bezier2Path.AddLineTo(new PointF(92.0f, 59.0f));
 				bezier2Path.ClosePath();
 				bezier2Path.MiterLimit = 4.0f;
 
+				context.SaveState();
+				context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 				colorMainImage.SetFill();
 				bezier2Path.Fill();
+				context.RestoreState();
 
 
-				//// Bezier 4 Drawing
-				UIBezierPath bezier4Path = new UIBezierPath();
-				bezier4Path.MoveTo(new PointF(107.64f, 77.34f));
-				bezier4Path.AddLineTo(new PointF(68.5f, 102.78f));
-				bezier4Path.AddLineTo(new PointF(29.36f, 77.34f));
-				bezier4Path.AddLineTo(new PointF(29.36f, 103.99f));
-				bezier4Path.AddLineTo(new PointF(68.5f, 127.0f));
-				bezier4Path.AddLineTo(new PointF(107.64f, 103.99f));
-				bezier4Path.AddLineTo(new PointF(107.64f, 77.34f));
-				bezier4Path.ClosePath();
-				bezier4Path.MiterLimit = 4.0f;
 
-				colorMainImage.SetFill();
-				bezier4Path.Fill();
+				//// Group 4
+				{
+					//// Bezier 4 Drawing
+					UIBezierPath bezier4Path = new UIBezierPath ();
+					bezier4Path.MoveTo (new PointF (98.67f, 111.0f));
+					bezier4Path.AddLineTo (new PointF (88.0f, 111.0f));
+					bezier4Path.AddLineTo (new PointF (88.0f, 100.67f));
+					bezier4Path.AddLineTo (new PointF (98.67f, 111.0f));
+					bezier4Path.ClosePath ();
+					bezier4Path.MiterLimit = 4.0f;
 
-
-				//// Rectangle 2 Drawing
-				var rectangle2Path = UIBezierPath.FromRect(new RectangleF(125.0f, 54.0f, 4.0f, 30.0f));
-				colorMainImage.SetFill();
-				rectangle2Path.Fill();
+					context.SaveState ();
+					context.SetShadowWithColor (shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+					colorMainImage.SetFill ();
+					bezier4Path.Fill ();
+					context.RestoreState ();
 
 
-				//// Bezier Drawing
-				UIBezierPath bezierPath = new UIBezierPath();
-				bezierPath.MoveTo(new PointF(127.0f, 82.0f));
-				bezierPath.AddLineTo(new PointF(122.0f, 87.0f));
-				bezierPath.AddLineTo(new PointF(127.0f, 92.0f));
-				bezierPath.AddLineTo(new PointF(132.0f, 87.0f));
-				bezierPath.AddLineTo(new PointF(127.0f, 82.0f));
-				bezierPath.ClosePath();
-				bezierPath.MiterLimit = 4.0f;
 
-				colorMainImage.SetFill();
-				bezierPath.Fill();
+					//// Bezier 7 Drawing
+					UIBezierPath bezier7Path = new UIBezierPath ();
+					bezier7Path.MoveTo (new PointF (120.0f, 90.33f));
+					bezier7Path.AddLineTo (new PointF (102.22f, 107.55f));
+					bezier7Path.AddLineTo (new PointF (91.56f, 97.22f));
+					bezier7Path.AddLineTo (new PointF (109.33f, 80.0f));
+					bezier7Path.AddLineTo (new PointF (120.0f, 90.33f));
+					bezier7Path.ClosePath ();
+					bezier7Path.MiterLimit = 4.0f;
+
+					context.SaveState ();
+					context.SetShadowWithColor (shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
+					colorMainImage.SetFill ();
+					bezier7Path.Fill ();
+					context.RestoreState ();
+
+				}
+
+
+				context.EndTransparencyLayer();
+				context.RestoreState();
 			}
-
 		}
 
 		#endregion
@@ -1260,7 +1336,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 	[Register ("ButtonStyleVisuals")]
 	public class ButtonStyleVisuals : AspyButton
 	{
-
 		#region Constructors
 
 		public ButtonStyleVisuals () : base()
