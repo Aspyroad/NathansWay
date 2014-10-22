@@ -120,6 +120,22 @@ namespace AspyRoad.iOSCore
 			set { _textSize = value; }
 		}
 
+		public void SetItems (List<string> _items)
+		{
+			if (_items == null)
+			{
+				this._pickerModel.Items = new List<string> ();
+				this._pickerModel.Items.Add ("John Brown");
+				this._pickerModel.Items.Add ("Sahara Pipeline"); 
+			}
+			else
+			{
+				this._pickerModel.Items = _items;
+			}
+
+		}
+
+
 		#endregion
 
 		#region Overrides
@@ -188,7 +204,7 @@ namespace AspyRoad.iOSCore
         #region Class Variables
 
         protected int selectedIndex = 0;
-		protected List<string> items;
+		protected List<string> _items;
 
         #endregion
 
@@ -206,7 +222,7 @@ namespace AspyRoad.iOSCore
 
 		public AspyPickerViewModel (List<string> _dataList)
 		{
-			this.items = _dataList;
+			this._items = _dataList;
 		}
 
         #endregion
@@ -215,8 +231,8 @@ namespace AspyRoad.iOSCore
 
         public List<string> Items
         {
-            get { return items; }
-            set { items = value; }
+            get { return _items; }
+            set { _items = value; }
         }
 
         /// <summary>
@@ -224,7 +240,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public string SelectedItem
         {
-            get { return items[selectedIndex]; }
+            get { return _items[selectedIndex]; }
         }
 
         #endregion
@@ -236,7 +252,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override int GetRowsInComponent (UIPickerView picker, int component)
         {
-            return items.Count;
+            return _items.Count;
         }
 
         /// <summary>
@@ -245,7 +261,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override string GetTitle (UIPickerView picker, int row, int component)
         {
-            return items[row];
+            return _items[row];
         }
 
         /// <summary>
@@ -275,7 +291,12 @@ namespace AspyRoad.iOSCore
         {
             // NOTE: Don't call the base implementation on a Model class
             // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
-            throw new NotImplementedException();
+			UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
+			lbl.TextColor = UIColor.Black;
+			lbl.Font = UIFont.SystemFontOfSize(70f);
+			lbl.TextAlignment = UITextAlignment.Center;
+			lbl.Text = this._items[row];
+			return lbl;
         }
 
         #endregion
