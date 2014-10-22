@@ -525,14 +525,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (RectangleF rect)
 		{
-			DrawCanvas1 (rect, this.IsPressed);
+			DrawFToolBox (rect, this.IsPressed);
 		}
 
 		#endregion
 
 		#region Draw Methods
 
-		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		private void DrawFToolBox(RectangleF frame, bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -542,7 +542,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
 			var colorGradientButtonMainStart = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 			var colorGradientButtonMainEnd = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.702f);
-			var strokeBorder = UIColor.FromRGBA(0.574f, 0.346f, 0.093f, 0.829f);
 			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
 
 			//// Shadow Declarations
@@ -611,53 +610,44 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorMainImage.SetFill();
 					bezier4Path.Fill();
-					strokeBorder.SetStroke();
-					bezier4Path.LineWidth = 2.0f;
-					bezier4Path.Stroke();
 
 
 					//// Bezier 8 Drawing
 					UIBezierPath bezier8Path = new UIBezierPath();
-					bezier8Path.MoveTo(new PointF(67.21f, 59.1f));
-					bezier8Path.AddLineTo(new PointF(56.61f, 69.13f));
-					bezier8Path.AddCurveToPoint(new PointF(54.65f, 81.94f), new PointF(58.6f, 73.59f), new PointF(58.08f, 79.16f));
-					bezier8Path.AddCurveToPoint(new PointF(40.65f, 84.17f), new PointF(51.21f, 85.28f), new PointF(45.85f, 85.84f));
-					bezier8Path.AddLineTo(new PointF(11.47f, 111.46f));
-					bezier8Path.AddLineTo(new PointF(41.56f, 139.87f));
-					bezier8Path.AddLineTo(new PointF(70.74f, 112.58f));
-					bezier8Path.AddCurveToPoint(new PointF(72.7f, 99.21f), new PointF(68.75f, 107.57f), new PointF(69.27f, 102.55f));
-					bezier8Path.AddCurveToPoint(new PointF(86.7f, 97.54f), new PointF(76.13f, 95.87f), new PointF(81.5f, 95.31f));
-					bezier8Path.AddLineTo(new PointF(97.3f, 87.51f));
-					bezier8Path.AddLineTo(new PointF(67.21f, 59.1f));
+					bezier8Path.MoveTo(new PointF(70.21f, 62.1f));
+					bezier8Path.AddLineTo(new PointF(59.61f, 72.13f));
+					bezier8Path.AddCurveToPoint(new PointF(57.65f, 84.94f), new PointF(61.6f, 76.59f), new PointF(61.08f, 82.16f));
+					bezier8Path.AddCurveToPoint(new PointF(43.65f, 87.17f), new PointF(54.21f, 88.28f), new PointF(48.85f, 88.84f));
+					bezier8Path.AddLineTo(new PointF(14.47f, 114.46f));
+					bezier8Path.AddLineTo(new PointF(44.56f, 142.87f));
+					bezier8Path.AddLineTo(new PointF(73.74f, 115.58f));
+					bezier8Path.AddCurveToPoint(new PointF(75.7f, 102.21f), new PointF(71.75f, 110.57f), new PointF(72.27f, 105.55f));
+					bezier8Path.AddCurveToPoint(new PointF(89.7f, 100.54f), new PointF(79.13f, 98.87f), new PointF(84.5f, 98.31f));
+					bezier8Path.AddLineTo(new PointF(100.3f, 90.51f));
+					bezier8Path.AddLineTo(new PointF(70.21f, 62.1f));
 					bezier8Path.ClosePath();
 					bezier8Path.MiterLimit = 4.0f;
 
 					colorMainImage.SetFill();
 					bezier8Path.Fill();
-					strokeBorder.SetStroke();
-					bezier8Path.LineWidth = 2.0f;
-					bezier8Path.Stroke();
 
 
 					//// Bezier 10 Drawing
 					UIBezierPath bezier10Path = new UIBezierPath();
-					bezier10Path.MoveTo(new PointF(85.26f, 75.82f));
-					bezier10Path.AddLineTo(new PointF(127.07f, 36.27f));
-					bezier10Path.AddLineTo(new PointF(133.08f, 42.39f));
-					bezier10Path.AddLineTo(new PointF(141.0f, 23.46f));
-					bezier10Path.AddLineTo(new PointF(134.98f, 17.33f));
-					bezier10Path.AddLineTo(new PointF(115.03f, 25.13f));
-					bezier10Path.AddLineTo(new PointF(121.05f, 30.7f));
-					bezier10Path.AddLineTo(new PointF(79.25f, 70.25f));
-					bezier10Path.AddLineTo(new PointF(85.26f, 75.82f));
+					bezier10Path.MoveTo(new PointF(88.26f, 79.82f));
+					bezier10Path.AddLineTo(new PointF(130.07f, 40.27f));
+					bezier10Path.AddLineTo(new PointF(136.08f, 46.39f));
+					bezier10Path.AddLineTo(new PointF(144.0f, 27.46f));
+					bezier10Path.AddLineTo(new PointF(137.98f, 21.33f));
+					bezier10Path.AddLineTo(new PointF(118.03f, 29.13f));
+					bezier10Path.AddLineTo(new PointF(124.05f, 34.7f));
+					bezier10Path.AddLineTo(new PointF(82.25f, 74.25f));
+					bezier10Path.AddLineTo(new PointF(88.26f, 79.82f));
 					bezier10Path.ClosePath();
 					bezier10Path.MiterLimit = 4.0f;
 
 					colorMainImage.SetFill();
 					bezier10Path.Fill();
-					strokeBorder.SetStroke();
-					bezier10Path.LineWidth = 2.0f;
-					bezier10Path.Stroke();
 				}
 
 
@@ -702,14 +692,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (RectangleF rect)
 		{
-			DrawCanvas1 (rect, this.IsPressed);
+			DrawFLesson (rect, this.IsPressed);
 		}
 
 		#endregion
 
 		#region Draw Methods
 
-		private void DrawCanvas1(RectangleF frame, bool isTapped)
+		private void DrawFLesson(RectangleF frame, bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();

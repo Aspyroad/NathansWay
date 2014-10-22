@@ -64,7 +64,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 			//// Color Declarations
 			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.387f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
-			var colorText1OuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.740f);
 			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
@@ -78,12 +77,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNathansWayShadow = colorTextOuterShadowColor.CGColor;
 			var colorTextNathansWayShadowOffset = new SizeF(-38.1f, -11.1f);
 			var colorTextNathansWayShadowBlurRadius = 5.0f;
-			var colorButtonShadow = colorText1OuterShadowColor.CGColor;
-			var colorButtonShadowOffset = new SizeF(0.1f, -0.1f);
-			var colorButtonShadowBlurRadius = 10.0f;
 			var colorTextNumbersShadow = colorTextNumbersShadowColor.CGColor;
-			var colorTextNumbersShadowOffset = new SizeF(10.1f, 11.1f);
+			var colorTextNumbersShadowOffset = new SizeF(26.1f, 15.1f);
 			var colorTextNumbersShadowBlurRadius = 5.0f;
+
+			//// Variable Declarations
+			var strTeacherName = "Teacher Name";
+			var strStudentName = "Student Name";
+			var strAppName = "Numbers";
 
 			//// Rectangle Drawing
 			var rectanglePath = UIBezierPath.FromRect(menuLogoFrame);
@@ -114,7 +115,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			//// textNumberDisplay Drawing
-			RectangleF textNumberDisplayRect = new RectangleF(94.0f, 50.0f, 329.0f, 62.0f);
+			RectangleF textNumberDisplayRect = new RectangleF(94.0f, 44.0f, 329.0f, 74.0f);
 			{
 				var textContent = "1234567890";
 				context.SaveState();
@@ -131,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			//// textNumbers Drawing
 			RectangleF textNumbersRect = new RectangleF(85.0f, 27.0f, 227.0f, 65.0f);
 			UIColor.White.SetFill();
-			new NSString("Numbers").DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			new NSString(strAppName).DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 
 
 			//// templateButtonLesson Drawing
@@ -172,12 +173,21 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 			//// Rectangle 2 Drawing
 			var rectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 124.5f, 924.0f, 120.0f), 6.0f);
-			context.SaveState();
-			context.SetShadowWithColor(colorButtonShadowOffset, colorButtonShadowBlurRadius, colorButtonShadow);
-			colorMainBackGroundEnd.SetStroke();
+			UIColor.White.SetStroke();
 			rectangle2Path.LineWidth = 1.0f;
 			rectangle2Path.Stroke();
-			context.RestoreState();
+
+
+			//// txtTeacherName Drawing
+			RectangleF txtTeacherNameRect = new RectangleF(50.0f, 126.0f, 448.0f, 55.0f);
+			UIColor.White.SetFill();
+			new NSString(strTeacherName).DrawString(txtTeacherNameRect, UIFont.FromName("Helvetica-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+
+
+			//// txtStudentName Drawing
+			RectangleF txtStudentNameRect = new RectangleF(526.0f, 126.0f, 448.0f, 55.0f);
+			UIColor.White.SetFill();
+			new NSString(strStudentName).DrawString(txtStudentNameRect, UIFont.FromName("Helvetica-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 		}
 
         #endregion

@@ -324,7 +324,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected class PickerDelegate : UIPickerViewDelegate
         {
-
             #region Class Variables
 
             protected int selectedIndex = 0;

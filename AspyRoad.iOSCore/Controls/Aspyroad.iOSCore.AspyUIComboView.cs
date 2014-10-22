@@ -28,6 +28,9 @@ namespace AspyRoad.iOSCore
 
 		private Action<object, EventArgs> _pickerValueChanged;
 
+		private float _textSize;
+		private RectangleF _aspyTextFieldFrame;
+
 		#endregion
 
 		#region Constructors
@@ -36,7 +39,7 @@ namespace AspyRoad.iOSCore
 		{
 			Initialize ();
 		}
-
+		// Probably not going to be used, we will set appearance in the VC base class
 		public AspyComboBox (UITextAttributes _txtattributes, 
 								UIView.UIViewAppearance _txtappearance,
 								UIView.UIViewAppearance _pckappearance)
@@ -56,7 +59,6 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-
 		public AspyComboBox (NSCoder coder) : base (coder)
 		{
 			Initialize ();
@@ -71,12 +73,13 @@ namespace AspyRoad.iOSCore
 			base.Initialize ();
 			// Any setup code for initialization
 			// _pickersView = new AspyPickerView ();
-			_pickerTxtField = new AspyTextField ();
+			_pickerTxtField = new AspyTextField (_aspyTextFieldFrame);
 			_pickerModel = new AspyPickerViewModel ();
+			_textSize = 12.0f;
 			// Setup some basics for the non adventurous
 			if (_txtAttributes == null)
 			{
-				_txtAttributes.Font = UIFont.FromName ("ArialMT", 12.0f);
+				_txtAttributes.Font = UIFont.FromName ("Helvetica-Light", _textSize);
 				_txtAttributes.TextColor = UIColor.Black;
 			}
 			if (_pckAppearance == null)
@@ -111,6 +114,12 @@ namespace AspyRoad.iOSCore
 			set { _pckAppearance = value; }
 		}
 
+		public float TextSize
+		{
+			get { return _textSize;	}
+			set { _textSize = value; }
+		}
+
 		#endregion
 
 		#region Overrides
@@ -120,7 +129,6 @@ namespace AspyRoad.iOSCore
 			base.ViewDidLoad ();
 			//this.View.AddSubview ();
 		}
-
 
 		#endregion
 	}
