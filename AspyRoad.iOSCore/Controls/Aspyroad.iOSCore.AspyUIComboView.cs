@@ -23,7 +23,10 @@ namespace AspyRoad.iOSCore
 		private Action<object, EventArgs> _pickerValueChanged;
 		// UI Appearance
 		private float _textSize;
-		private RectangleF _aspyTextFieldFrame;
+		private RectangleF _aspyComboBoxFrame;
+		private RectangleF _aspyLabelFrame;
+		private int x;
+
 
 		#endregion
 
@@ -34,11 +37,12 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyComboBox (RectangleF _txtBoxFrame)
-		{
-			this._aspyTextFieldFrame = _txtBoxFrame;
-			Initialize ();
-		}
+//		public AspyComboBox (RectangleF _txtBoxFrame)
+//		{
+//			this._aspyComboBoxFrame = _txtBoxFrame;
+//
+//			Initialize ();
+//		}
 
 		public AspyComboBox (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
@@ -63,16 +67,18 @@ namespace AspyRoad.iOSCore
 		{
 			base.Initialize ();
 
-			// UI Creation
-			_pickerTxtField = new AspyTextField (_aspyTextFieldFrame);
-			_pickerView = new AspyPickerView (_aspyTextFieldFrame);
-			// Model Creation
-			_pickerModel = new AspyPickerViewModel ();
-			this.SetItems (null);
-
-			// UI Text Size Appearance
+			// Global UI
 			_textSize = 40.0f;
+			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
+			//this._aspyLabelFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
+			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 
+			#region TextBox
+			// UI Creation
+			_pickerTxtField = new AspyTextField (_aspyComboBoxFrame);
+			// Delegates
+			this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
+			this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
 			// Visual Attributes For TextBox
 			_pickerTxtField.Font = UIFont.FromName ("Helvetica-Light", _textSize);
 			_pickerTxtField.TextColor = UIColor.Black;
@@ -80,12 +86,29 @@ namespace AspyRoad.iOSCore
 			_pickerTxtField.Layer.CornerRadius = 5;
 			_pickerTxtField.Layer.BorderWidth = 1;
 			_pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
+			#endregion
 
+			#region PickerViewModel
+			// Model Creation
+			_pickerModel = new AspyPickerViewModel ();
 			// Visual Attributes For PickerView
 			_pickerModel.TextSize = _textSize;
+			_pickerModel.LabelFrame = this._aspyLabelFrame;
+			// Fill our pickerviewmodel with data
+			this.SetItems (null);
+			#endregion
+
+			#region PickerView
+			_pickerView = new AspyPickerView (_aspyComboBoxFrame);
+			_pickerView.BackgroundColor = UIColor.White;
+			// By default we want the picker hidden until the textbox is tapped.
+			_pickerView.Hidden = true;
+			_pickerView.DataSource = _pickerModel;
+			#endregion
 
 
-		}  
+
+		}
 
 		#endregion
 
@@ -101,9 +124,11 @@ namespace AspyRoad.iOSCore
 		{
 			if (_items == null)
 			{
-				this._pickerModel.Items = new List<string> ();
-				this._pickerModel.Items.Add ("John Brown");
-				this._pickerModel.Items.Add ("Sahara Pipeline"); 
+				var x = new List<string> ();
+				x.Add ("John Brown");
+				x.Add ("Sahara Pipeline"); 
+				this._pickerModel.Items = x;
+
 			}
 			else
 			{
@@ -112,20 +137,51 @@ namespace AspyRoad.iOSCore
 
 		}
 
-
 		#endregion
 
 		#region Overrides
+//		public override void LoadView ()
+//		{
+//			this.View = new UIView (_aspyComboBoxFrame);
+//		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			this.View.AddSubview (this._pickerTxtField);
+
+
+
+			this.View.AddSubview (_pickerTxtField);
 			this.View.AddSubview (_pickerView);
+			this.View.SendSubviewToBack(_pickerView);
+			this.View.BringSubviewToFront (_pickerTxtField);
 		}
 
 		#endregion
+
+		#region Delegates
+
+		private void pickerTxtField_TouchDown (object sender, EventArgs e)
+		{
+			// Clear the text when picker to make it clearer
+			this._pickerTxtField.Text = "";
+			this._pickerView.Hidden = false;
+			this.View.BringSubviewToFront(this._pickerView);
+		}  
+
+		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
+		{
+			public override bool ShouldBeginEditing(UITextField textField)
+			{
+				return false;
+			}
+		}
+
+		#endregion
+
 	}
+
+
 	
     public class AspyPickerView : UIPickerView  
     {
@@ -184,6 +240,7 @@ namespace AspyRoad.iOSCore
         protected int selectedIndex = 0;
 		protected List<string> _items;
 		protected float _textSize;
+		protected RectangleF _labelFrame;
 
         #endregion
 
@@ -225,6 +282,11 @@ namespace AspyRoad.iOSCore
 		public float TextSize
 		{
 			set { _textSize = value; }
+		}
+
+		public RectangleF LabelFrame
+		{
+			set { _labelFrame = value; }
 		}
 
         #endregion
@@ -273,15 +335,18 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
-            // NOTE: Don't call the base implementation on a Model class
-            // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_eventsthis.
-			UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
+			UILabel lbl = new UILabel(_labelFrame);
 			lbl.TextColor = UIColor.Black;
 			lbl.Font = UIFont.SystemFontOfSize(_textSize);
 			lbl.TextAlignment = UITextAlignment.Center;
 			lbl.Text = this._items[row];
 			return lbl;
         }
+
+		public override float GetRowHeight (UIPickerView picker, int component)
+		{
+			return 60.0f;
+		}
 
         #endregion
     }
