@@ -14,20 +14,14 @@ namespace AspyRoad.iOSCore
 	public class AspyComboBox : AspyViewController
 	{
 		#region Class Variables
-
-		// private AspyPickerView _pickersView;
-		private AspyPickerViewModel _pickerModel;
+		// Main UI views
+		private AspyPickerView _pickerView;
 		private AspyTextField _pickerTxtField;
-
-		// Style for text in the picker and textbox
-		private UITextAttributes _txtAttributes;
-		// TextBox ViewAppearance
-		private UIView.UIViewAppearance _txtAppearence;
-		// Picker ViewAppearance
-		private UIView.UIViewAppearance _pckAppearance;
-
+		// Data Model
+		private AspyPickerViewModel _pickerModel;
+		// Event data for change
 		private Action<object, EventArgs> _pickerValueChanged;
-
+		// UI Appearance
 		private float _textSize;
 		private RectangleF _aspyTextFieldFrame;
 
@@ -39,14 +33,11 @@ namespace AspyRoad.iOSCore
 		{
 			Initialize ();
 		}
-		// Probably not going to be used, we will set appearance in the VC base class
-		public AspyComboBox (UITextAttributes _txtattributes, 
-								UIView.UIViewAppearance _txtappearance,
-								UIView.UIViewAppearance _pckappearance)
+
+		public AspyComboBox (RectangleF _txtBoxFrame)
 		{
-			this._txtAttributes = _txtattributes;
-			this._txtAppearence = _txtappearance;
-			this._pckAppearance = _pckappearance;
+			this._aspyTextFieldFrame = _txtBoxFrame;
+			Initialize ();
 		}
 
 		public AspyComboBox (string nibName, NSBundle bundle) : base (nibName, bundle)
@@ -71,48 +62,34 @@ namespace AspyRoad.iOSCore
 		protected override void Initialize ()
 		{
 			base.Initialize ();
-			// Any setup code for initialization
-			// _pickersView = new AspyPickerView ();
+
+			// UI Creation
 			_pickerTxtField = new AspyTextField (_aspyTextFieldFrame);
+			_pickerView = new AspyPickerView (_aspyTextFieldFrame);
+			// Model Creation
 			_pickerModel = new AspyPickerViewModel ();
-			_textSize = 12.0f;
-			// Setup some basics for the non adventurous
-			if (_txtAttributes == null)
-			{
-				_txtAttributes.Font = UIFont.FromName ("Helvetica-Light", _textSize);
-				_txtAttributes.TextColor = UIColor.Black;
-			}
-			if (_pckAppearance == null)
-			{
-				_pckAppearance.BackgroundColor = UIColor.White;
-			}
-			if (_txtAppearence == null)
-			{
-				_txtAppearence.BackgroundColor = UIColor.White;
-			}
+			this.SetItems (null);
+
+			// UI Text Size Appearance
+			_textSize = 40.0f;
+
+			// Visual Attributes For TextBox
+			_pickerTxtField.Font = UIFont.FromName ("Helvetica-Light", _textSize);
+			_pickerTxtField.TextColor = UIColor.Black;
+			//_pickerTxtField.BackgroundColor = UIColor.White;
+			_pickerTxtField.Layer.CornerRadius = 5;
+			_pickerTxtField.Layer.BorderWidth = 1;
+			_pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
+
+			// Visual Attributes For PickerView
+			_pickerModel.TextSize = _textSize;
+
+
 		}  
 
 		#endregion
 
 		#region Public Members
-
-		public UITextAttributes ComboBoxTextStyle
-		{
-			get { return _txtAttributes; }
-			set { _txtAttributes = value; }
-		}
-
-		public UIView.UIViewAppearance TextAppearance
-		{
-			get { return _txtAppearence; }
-			set { _txtAppearence = value; }
-		}
-
-		public UIView.UIViewAppearance PickerAppearance
-		{
-			get { return _pckAppearance; }
-			set { _pckAppearance = value; }
-		}
 
 		public float TextSize
 		{
@@ -143,7 +120,8 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			//this.View.AddSubview ();
+			this.View.AddSubview (this._pickerTxtField);
+			this.View.AddSubview (_pickerView);
 		}
 
 		#endregion
@@ -205,6 +183,7 @@ namespace AspyRoad.iOSCore
 
         protected int selectedIndex = 0;
 		protected List<string> _items;
+		protected float _textSize;
 
         #endregion
 
@@ -242,6 +221,11 @@ namespace AspyRoad.iOSCore
         {
             get { return _items[selectedIndex]; }
         }
+
+		public float TextSize
+		{
+			set { _textSize = value; }
+		}
 
         #endregion
 
@@ -290,10 +274,10 @@ namespace AspyRoad.iOSCore
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
             // NOTE: Don't call the base implementation on a Model class
-            // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+            // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_eventsthis.
 			UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
 			lbl.TextColor = UIColor.Black;
-			lbl.Font = UIFont.SystemFontOfSize(70f);
+			lbl.Font = UIFont.SystemFontOfSize(_textSize);
 			lbl.TextAlignment = UITextAlignment.Center;
 			lbl.Text = this._items[row];
 			return lbl;

@@ -20,12 +20,15 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private vMenuStart _vMenuStart;
 
 		// Controls
+		// Buttons
 		private ButtonStyleLesson btnMenuLessons;
 		private ButtonStyleToolBox btnMenuToolbox;
 		private ButtonStyleTeacher btnMenuTeacher;
 		private ButtonStyleStudent btnMenuStudent;
 		private ButtonStyleLessonBuilder btnMenuLessonBuilder;
 		private ButtonStyleVisuals btnMenuVisuals;
+		// ComboBox
+		private AspyComboBox cmbTeacher;
 
 		//private UITextView txtX;
 		//private UITextView txtY;
@@ -113,8 +116,12 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.btnMenuVisuals.TouchUpInside += btnMenuVisuals_touchupinside;
 			this.View.AddSubview (this.btnMenuVisuals);
 
+			// Add ComboBoxes MuthaFucka!
+			this.cmbTeacher = new AspyComboBox (new RectangleF (75.0f, 180.0f, 400.0f, 44.0f));
+			this.View.AddSubview (this.cmbTeacher.View);
+
 			// TextFields
-//			this.txtX = new UITextView(new RectangleF(50.0f, 388.0f, 184.0f, 35.0f));
+//			this.txtX = new UITextView(new RectangleF(75.0f, 180.0f, 400.0f, 44.0f));
 //			this.View.AddSubview (this.txtX);
 //			this.txtY = new UITextView(new RectangleF(50.0f, 430.0f, 184.0f, 35.0f));
 //			this.View.AddSubview (this.txtY); 
