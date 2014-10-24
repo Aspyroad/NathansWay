@@ -89,13 +89,16 @@ namespace AspyRoad.iOSCore
 			#endregion
 
 			#region PickerViewModel
+			var x = new List<string> ();
+			x.Add ("John Brown");
+			x.Add ("Sahara Pipeline"); 
 			// Model Creation
-			_pickerModel = new AspyPickerViewModel ();
+			_pickerModel = new AspyPickerViewModel (x);
 			// Visual Attributes For PickerView
 			_pickerModel.TextSize = _textSize;
 			_pickerModel.LabelFrame = this._aspyLabelFrame;
 			// Fill our pickerviewmodel with data
-			this.SetItems (null);
+			//this.SetItems (null);
 			#endregion
 
 			#region PickerView
@@ -103,7 +106,8 @@ namespace AspyRoad.iOSCore
 			_pickerView.BackgroundColor = UIColor.White;
 			// By default we want the picker hidden until the textbox is tapped.
 			_pickerView.Hidden = true;
-			_pickerView.DataSource = _pickerModel;
+			//_pickerView.DataSource = _pickerModel;
+			_pickerView.Model = _pickerModel;
 			#endregion
 
 
@@ -140,10 +144,6 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
-//		public override void LoadView ()
-//		{
-//			this.View = new UIView (_aspyComboBoxFrame);
-//		}
 
 		public override void ViewDidLoad ()
 		{
@@ -178,10 +178,7 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
-
 	}
-
-
 	
     public class AspyPickerView : UIPickerView  
     {
@@ -228,6 +225,7 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
+
 
 
 		#endregion

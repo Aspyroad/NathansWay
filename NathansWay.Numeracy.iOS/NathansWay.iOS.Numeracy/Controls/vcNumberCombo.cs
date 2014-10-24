@@ -423,7 +423,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
             #endregion
-
         }
         
         protected class PickerSource : UIPickerViewDataSource
