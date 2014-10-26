@@ -25,8 +25,6 @@ namespace AspyRoad.iOSCore
 		private float _textSize;
 		private RectangleF _aspyComboBoxFrame;
 		private RectangleF _aspyLabelFrame;
-		private int x;
-
 
 		#endregion
 
@@ -68,7 +66,7 @@ namespace AspyRoad.iOSCore
 			base.Initialize ();
 
 			// Global UI
-			_textSize = 40.0f;
+			_textSize = 30.0f;
 			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			//this._aspyLabelFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
@@ -86,24 +84,21 @@ namespace AspyRoad.iOSCore
 			_pickerTxtField.Layer.CornerRadius = 5;
 			_pickerTxtField.Layer.BorderWidth = 1;
 			_pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
+			_pickerTxtField.TextAlignment = UITextAlignment.Center;
 			#endregion
 
 			#region PickerViewModel
-			var x = new List<string> ();
-			x.Add ("John Brown");
-			x.Add ("Sahara Pipeline"); 
 			// Model Creation
-			_pickerModel = new AspyPickerViewModel (x);
+			_pickerModel = new AspyPickerViewModel ();
 			// Visual Attributes For PickerView
 			_pickerModel.TextSize = _textSize;
 			_pickerModel.LabelFrame = this._aspyLabelFrame;
 			// Fill our pickerviewmodel with data
-			//this.SetItems (null);
+			this.SetItems (null);
 			#endregion
 
 			#region PickerView
-			_pickerView = new AspyPickerView (_aspyComboBoxFrame);
-			_pickerView.BackgroundColor = UIColor.White;
+			_pickerView = new AspyPickerView (new RectangleF (75.0f, 121.0f, 400.0f, 44.0f));
 			// By default we want the picker hidden until the textbox is tapped.
 			_pickerView.Hidden = true;
 			//_pickerView.DataSource = _pickerModel;
@@ -343,7 +338,7 @@ namespace AspyRoad.iOSCore
 
 		public override float GetRowHeight (UIPickerView picker, int component)
 		{
-			return 60.0f;
+			return 50.0f;
 		}
 
         #endregion
