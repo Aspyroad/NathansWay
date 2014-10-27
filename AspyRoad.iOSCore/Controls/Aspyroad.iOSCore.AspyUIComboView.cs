@@ -74,12 +74,6 @@ namespace AspyRoad.iOSCore
 			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 
-			//UI for prior iOS7
-			if (this.iOSGlobals.G__iOSVersion.Major < 7)
-			{
-				//this._pickerView.
-
-			}
 
 			#region TextBox
 			// UI Creation
@@ -126,9 +120,18 @@ namespace AspyRoad.iOSCore
 			);
 			// By default we want the picker hidden until the textbox is tapped.
 			_pickerView.Hidden = true;
+
 			//_pickerView.DataSource = _pickerModel;
 			_pickerView.Model = _pickerModel;
+
+
+
+
+
 			#endregion
+
+
+
 
 
 
@@ -187,8 +190,37 @@ namespace AspyRoad.iOSCore
 			this.View.AddSubview (_pickerView);
 			this.View.SendSubviewToBack(_pickerView);
 			this.View.BringSubviewToFront (_pickerTxtField);
+
+		}
+			
+
+		public override void ViewDidAppear (bool animated)
+		{
+			base.ViewDidAppear (animated);
+
+			#region UI for prior iOS7
+			// Just in case the _picker isnt drawn
+			if (_pickerView.Subviews.GetUpperBound (0) > 0)
+			{
+				if (this.iOSGlobals.G__iOSVersion.Major < 7)
+				{
+					_pickerView.BackgroundColor = UIColor.Clear;
+					// Clear all crap UI from pickerview prior to iOS7
+					// This clears all pickerview background
+					foreach (UIView v in _pickerView.Subviews)
+					{
+						if (v.GetType() != typeof(UITableView))
+						{
+							v.Alpha = 0.5f;
+						}
+					}
+				}
+			}
+
+			#endregion
 		}
 
+			
 		#endregion
 
 		#region Delegates
@@ -259,14 +291,11 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize()
 		{
-
 		}
 
 		#endregion
 
 		#region Overrides
-
-
 
 		#endregion
     }
@@ -379,11 +408,12 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
-			UILabel lbl = new UILabel(_labelFrame);
+			AspyLabel lbl = new AspyLabel(_labelFrame);
 			lbl.TextColor = UIColor.White;
 			lbl.Font = UIFont.FromName(_fontName, _fontSize);
 			lbl.TextAlignment = UITextAlignment.Center;
 			lbl.Text = this._items[row];
+			lbl.BackgroundColor = UIColor.Clear;
 			return lbl;
         }
 
