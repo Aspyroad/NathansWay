@@ -37,12 +37,12 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-//		public AspyComboBox (RectangleF _txtBoxFrame)
-//		{
-//			this._aspyComboBoxFrame = _txtBoxFrame;
-//
-//			Initialize ();
-//		}
+		public AspyComboBox (RectangleF _txtBoxFrame)
+		{
+			this._aspyComboBoxFrame = _txtBoxFrame;
+
+			Initialize ();
+		}
 
 		public AspyComboBox (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
@@ -61,6 +61,18 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
+		#region DeConstructors
+
+		protected override void Dispose (bool disposing)
+		{
+			base.Dispose (disposing);
+
+			//Do this because the ViewModel hangs around for the lifetime of the app
+			this._pickerTxtField.TouchDown -= pickerTxtField_TouchDown;
+		}
+
+		#endregion
+
 		#region Private Members
 
 		protected override void Initialize ()
@@ -71,7 +83,8 @@ namespace AspyRoad.iOSCore
 			_fontSize = 30.0f;
 			_fontName = "HelveticaNeue-Light";
 			_pickerRowHeight = (_fontSize + 20.0f);
-			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
+
+			//this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 
 
@@ -124,16 +137,7 @@ namespace AspyRoad.iOSCore
 			//_pickerView.DataSource = _pickerModel;
 			_pickerView.Model = _pickerModel;
 
-
-
-
-
 			#endregion
-
-
-
-
-
 
 		}
 
@@ -231,10 +235,15 @@ namespace AspyRoad.iOSCore
 			this._pickerTxtField.Text = "";
 			this._pickerView.Hidden = false;
 			this.View.BringSubviewToFront(this._pickerView);
+
+			// UI - Text field half clear white to show it is being edited
+			this._pickerTxtField.BackgroundColor = UIColor.White;
+			this._pickerTxtField.Alpha = 0.5f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
 		{
+			// Block the text field from being manually edited
 			public override bool ShouldBeginEditing(UITextField textField)
 			{
 				return false;
@@ -245,7 +254,12 @@ namespace AspyRoad.iOSCore
 		{
 			this._pickerTxtField.Text = this._pickerModel.SelectedItem;
 			this.View.SendSubviewToBack(this._pickerTxtField);
-			this._pickerView.Hidden = true;  
+			this._pickerView.Hidden = true; 
+
+			// UI - Reverse text field half clear white to show it is being edited
+			this._pickerTxtField.BackgroundColor = UIColor.Clear;
+			this._pickerTxtField.Alpha = 1.0f;
+
 		}
 
 		#endregion
@@ -409,11 +423,13 @@ namespace AspyRoad.iOSCore
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
 			AspyLabel lbl = new AspyLabel(_labelFrame);
-			lbl.TextColor = UIColor.White;
+			lbl.TextColor = UIColor.Black;
 			lbl.Font = UIFont.FromName(_fontName, _fontSize);
 			lbl.TextAlignment = UITextAlignment.Center;
 			lbl.Text = this._items[row];
+			// Thrown in for < iOS7
 			lbl.BackgroundColor = UIColor.Clear;
+
 			return lbl;
         }
 
