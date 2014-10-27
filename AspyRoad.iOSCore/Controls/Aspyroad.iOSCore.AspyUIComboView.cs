@@ -67,12 +67,19 @@ namespace AspyRoad.iOSCore
 		{
 			base.Initialize ();
 
-			// Global UI
+			// Global UI TESTING
 			_fontSize = 30.0f;
 			_fontName = "HelveticaNeue-Light";
 			_pickerRowHeight = (_fontSize + 20.0f);
 			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
+
+			//UI for prior iOS7
+			if (this.iOSGlobals.G__iOSVersion.Major < 7)
+			{
+				//this._pickerView.
+
+			}
 
 			#region TextBox
 			// UI Creation
@@ -99,6 +106,7 @@ namespace AspyRoad.iOSCore
 			_pickerModel.LabelFrame = this._aspyLabelFrame;
 			// Wireup our event
 			_pickerValueChanged = new Action<object, EventArgs>(valuechanged);
+			this._pickerModel.ValueChanged += valuechanged;
 			// Fill our pickerviewmodel with data
 			this.SetItems (null);
 			#endregion
@@ -203,10 +211,9 @@ namespace AspyRoad.iOSCore
 
 		private void valuechanged(object s, System.EventArgs e)
 		{
-//			this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-//			this.View.SendSubviewToBack(this.pkNumberPicker);
-//			this.pkNumberPicker.Hidden = true;  
-//			this.postEdit();
+			this._pickerTxtField.Text = this._pickerModel.SelectedItem;
+			this.View.SendSubviewToBack(this._pickerTxtField);
+			this._pickerView.Hidden = true;  
 		}
 
 		#endregion
@@ -252,6 +259,7 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize()
 		{
+
 		}
 
 		#endregion
