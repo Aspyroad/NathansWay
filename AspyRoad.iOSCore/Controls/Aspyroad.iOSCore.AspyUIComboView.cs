@@ -22,7 +22,9 @@ namespace AspyRoad.iOSCore
 		// Event data for change
 		private Action<object, EventArgs> _pickerValueChanged;
 		// UI Appearance
-		private float _textSize;
+		private float _fontSize;
+		private float _pickerRowHeight;
+		private string _fontName;
 		private RectangleF _aspyComboBoxFrame;
 		private RectangleF _aspyLabelFrame;
 
@@ -66,9 +68,10 @@ namespace AspyRoad.iOSCore
 			base.Initialize ();
 
 			// Global UI
-			_textSize = 30.0f;
+			_fontSize = 30.0f;
+			_fontName = "HelveticaNeue-Light";
+			_pickerRowHeight = (_fontSize + 20.0f);
 			this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
-			//this._aspyLabelFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 
 			#region TextBox
@@ -78,7 +81,7 @@ namespace AspyRoad.iOSCore
 			this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
 			this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
 			// Visual Attributes For TextBox
-			_pickerTxtField.Font = UIFont.FromName ("Helvetica-Light", _textSize);
+			_pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
 			_pickerTxtField.TextColor = UIColor.Black;
 			//_pickerTxtField.BackgroundColor = UIColor.White;
 			_pickerTxtField.Layer.CornerRadius = 5;
@@ -91,14 +94,28 @@ namespace AspyRoad.iOSCore
 			// Model Creation
 			_pickerModel = new AspyPickerViewModel ();
 			// Visual Attributes For PickerView
-			_pickerModel.TextSize = _textSize;
+			_pickerModel.FontSize = _fontSize;
+			_pickerModel.FontName = _fontName;
 			_pickerModel.LabelFrame = this._aspyLabelFrame;
+			// Wireup our event
+			_pickerValueChanged = new Action<object, EventArgs>(valuechanged);
 			// Fill our pickerviewmodel with data
 			this.SetItems (null);
 			#endregion
 
 			#region PickerView
-			_pickerView = new AspyPickerView (new RectangleF (75.0f, 121.0f, 400.0f, 44.0f));
+			// Here we use all the same sizes as the text box but we adjust the Y cord 
+			// to allow for and center the height of the picker
+			_pickerView = new AspyPickerView 
+			(
+				new RectangleF 
+				(	
+					_aspyComboBoxFrame.X, 
+					(_aspyComboBoxFrame.Y - 59.0f), 
+					_aspyComboBoxFrame.Width,
+					_aspyComboBoxFrame.Height
+				)
+			);
 			// By default we want the picker hidden until the textbox is tapped.
 			_pickerView.Hidden = true;
 			//_pickerView.DataSource = _pickerModel;
@@ -113,10 +130,21 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
-		public float TextSize
+		public float FontSize
 		{
-			get { return _textSize;	}
-			set { _textSize = value; }
+			get { return _fontSize;	}
+			set { _fontSize = value; }
+		}
+
+		public string FontName
+		{
+			get { return _fontName; }
+			set { _fontName = value; }
+		}
+
+		public float PickerRowHeight
+		{
+			set { _pickerRowHeight = value; }
 		}
 
 		public void SetItems (List<string> _items)
@@ -125,7 +153,8 @@ namespace AspyRoad.iOSCore
 			{
 				var x = new List<string> ();
 				x.Add ("John Brown");
-				x.Add ("Sahara Pipeline"); 
+				x.Add ("Sahara Pipeline");
+				x.Add ("Widebrow Montgumery");
 				this._pickerModel.Items = x;
 
 			}
@@ -170,6 +199,14 @@ namespace AspyRoad.iOSCore
 			{
 				return false;
 			}
+		}
+
+		private void valuechanged(object s, System.EventArgs e)
+		{
+//			this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+//			this.View.SendSubviewToBack(this.pkNumberPicker);
+//			this.pkNumberPicker.Hidden = true;  
+//			this.postEdit();
 		}
 
 		#endregion
@@ -232,7 +269,8 @@ namespace AspyRoad.iOSCore
 
         protected int selectedIndex = 0;
 		protected List<string> _items;
-		protected float _textSize;
+		protected float _fontSize;
+		protected string _fontName;
 		protected RectangleF _labelFrame;
 
         #endregion
@@ -272,9 +310,14 @@ namespace AspyRoad.iOSCore
             get { return _items[selectedIndex]; }
         }
 
-		public float TextSize
+		public float FontSize
 		{
-			set { _textSize = value; }
+			set { _fontSize = value; }
+		}
+
+		public string FontName
+		{
+			set { _fontName = value; }
 		}
 
 		public RectangleF LabelFrame
@@ -329,8 +372,8 @@ namespace AspyRoad.iOSCore
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
 			UILabel lbl = new UILabel(_labelFrame);
-			lbl.TextColor = UIColor.Black;
-			lbl.Font = UIFont.SystemFontOfSize(_textSize);
+			lbl.TextColor = UIColor.White;
+			lbl.Font = UIFont.FromName(_fontName, _fontSize);
 			lbl.TextAlignment = UITextAlignment.Center;
 			lbl.Text = this._items[row];
 			return lbl;
