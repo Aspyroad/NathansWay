@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
 
-
 namespace AspyRoad.iOSCore
 {
 	[Register ("AspyComboBox")]

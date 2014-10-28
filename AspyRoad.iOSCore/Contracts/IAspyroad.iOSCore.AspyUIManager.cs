@@ -34,7 +34,7 @@ namespace AspyRoad.iOSCore
 
 		void ApplyGlobalAppUITheme ();
 
-		void ApplyAspyUITheme (AspyViewController applyToThisVC);
+		//void ApplyAspyUITheme (AspyViewController applyToThisVC);
 
 		//void GetSavedUIThemes ();
 
@@ -46,23 +46,33 @@ namespace AspyRoad.iOSCore
 		string VcName { get; set; } 
 		int VcTag { get; set; } 
 
+		// Globals
+		string GlobalFontName { get; set; }
+		int GlobalFontSize { get; set; }
+		string GlobalFontColor { get; set; }
+		string GlobalBackGroundColor { get; set; }
+
 		// UIButton
-		UIColor ButtonBGColor { get; set; } 
-		// Removed as it cant be set...best to use an image instead.
-		//UIColor ButtonPressedBGColor { get; set; } 
-		UIColor ButtonNormalTitleColor { get; set; } 
-		UIColor ButtonPressedTitleColor { get; set; } 
-		UIImage ButtonNormalBGImage { get; set; } 
-		UIImage ButtonPressedBGImage { get; set; } 
+		string ButtonNormalBGColor { get; set; } 
+		string ButtonPressedBGColor { get; set; } 
+		string ButtonNormalTitleColor { get; set; } 
+		string ButtonPressedTitleColor { get; set; } 
+	 	string ButtonNormalBGImage { get; set; } 
+		string ButtonPressedBGImage { get; set; } 
+		string ButtonFontName { get; set; }
+
 		// UIView
-		UIColor ViewBGColor { get; set; } 
-		UIColor ViewBGTint { get; set; } 
+		string ViewBGColor { get; set; } 
+		string ViewBGTint { get; set; } 
+
 		// UILabel
-		UIColor LabelTitleColor { get; set; } 
+		string LabelFontName { get; set; }
+		string LabelHighLightedTextColor { get; set; }
+		string LabelTextColor { get; set; } 
 
 		// UITextViews
-		UIColor TextBGColor { get; set; } 
-		UIColor TextBGTint { get; set; } 
+		string TextBGColor { get; set; } 
+		string TextBGTint { get; set; } 
 
 	}
 
