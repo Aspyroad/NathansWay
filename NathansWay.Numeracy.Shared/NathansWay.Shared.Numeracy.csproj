@@ -96,6 +96,8 @@
     <Compile Include="Utilities\NathansWay.Shared.Util.ServiceRegistrar.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.Drawing.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.HelperFunctions.cs" />
+    <Compile Include="Contracts\UserInterface\INathansWay.Shared.UIManager.cs" />
+    <Compile Include="UserInterface\NathansWay.Shared.UIManagerBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

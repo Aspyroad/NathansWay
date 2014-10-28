@@ -15,7 +15,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 	[MonoTouch.Foundation.Register ("vcMenuStart")]
     public class vcMenuStart : AspyViewController
 	{
-				#region Private Variables
+		#region Private Variables
 		// View
 		private vMenuStart _vMenuStart;
 
