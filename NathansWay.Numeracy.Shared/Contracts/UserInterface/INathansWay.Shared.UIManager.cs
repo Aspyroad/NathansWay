@@ -33,7 +33,7 @@ namespace NathansWay.Shared
 	public interface IUITheme
 	{
 		// Versions
-		bool IsiOS7 { get; set; }
+		bool IsiOS7 { get; }
 		// Id
 		string VcName { get; set; } 
 		int VcTag { get; set; } 
@@ -44,31 +44,31 @@ namespace NathansWay.Shared
 		string FontBoldNameiOS7 { get; set; }
 		float FontSize { get; set; }
 		float FontSizeiOS7 { get; set; }
-		G__Color FontColor { get; set; }
+		G__Color _FontColor { set; }
 
 		// UIButton
-		G__Color ButtonNormalBGColor { get; set; } 
-		G__Color ButtonPressedBGColor { get; set; } 
-		G__Color ButtonNormalTitleColor { get; set; } 
-		G__Color ButtonPressedTitleColor { get; set; } 
-	 	string ButtonNormalBGImage { get; set; } 
-		string ButtonPressedBGImage { get; set; } 
+		G__Color _ButtonNormalBGColor { set; } 
+		G__Color _ButtonPressedBGColor { set; } 
+		G__Color _ButtonNormalTitleColor { set; } 
+		G__Color _ButtonPressedTitleColor { set; } 
+	 	string _ButtonNormalBGImage { set; } 
+		string _ButtonPressedBGImage { set; } 
 		string ButtonFontName { get; set; }
 
 		// UIView
-		G__Color ViewBGColor { get; set; } 
-		G__Color ViewBGTint { get; set; } 
+		G__Color _ViewBGColor { set; } 
+		G__Color _ViewBGTint { set; } 
 
 		// UILabel
 		string LabelFontName { get; set; }
-		G__Color LabelHighLightedTextColor { get; set; }
-		G__Color LabelTextColor { get; set; } 
+		G__Color _LabelHighLightedTextColor { set; }
+		G__Color _LabelTextColor { set; } 
 
 		// UITextViews
-		G__Color TextBGColor { get; set; } 
-		G__Color TextBGTint { get; set; } 
-		G__Color TextHighLightedTextColor { get; set; }
-		G__Color TextColor { get; set; } 
+		G__Color _TextBGColor { set; } 
+		G__Color _TextBGTint { set; } 
+		G__Color _TextHighLightedTextColor { set; }
+		G__Color _TextColor { set; } 
 
 		IUITheme SaveThemeToFile (string strFile, string strLocation);
 

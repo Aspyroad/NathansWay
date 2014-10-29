@@ -22,7 +22,6 @@ namespace NathansWay.iOS.Numeracy.UISettings
 {
 	public class iOSUIManager : UIManagerBase
 	{
-		// All ViewControllers
 
 		#region Private Variables
 
@@ -49,11 +48,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			//this._globalsavedUItheme = new NumeracyGlobalUITheme ();
 			//this.ApplyGlobalAppUITheme();
 			//this.ApplyGlobalSavedUITheme ();
-
 		}
-
-		#endregion
-
 		private void ListViewControllers()
 		{
 			// Menu - Data
@@ -78,9 +73,9 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			//this.AddVCSettings (this.NumberCombo);
 		}
 
+		#endregion
+
 		#region Public Members
-
-
 
 		// Some sort of apply method....??
 		//			// UIButton
@@ -104,6 +99,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 	public class iOSUITheme : IUITheme
 	{
+
 		#region Private Variables
 
 		private IAspyGlobals _iosglobals;
@@ -119,8 +115,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 		protected string _fontnameiOS7;
 		protected string _fontboldname;
 		protected string _fontboldnameiOS7;
-		protected int _fontsize;
-		protected int _fontsizeiOS7;
+		protected float _fontsize;
+		protected float _fontsizeiOS7;
 		protected Lazy<UIColor> _globalfontcolor;
 
 		// UIButton
@@ -134,7 +130,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		// UIView
 		protected Lazy<UIColor> _viewbgcolor;
-		protected string _viewbgtint;
+		protected Lazy<UIColor> _viewbgtint;
 
 		// UILabel
 		protected string _labelfontname;
@@ -143,18 +139,24 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		// UITextViews
 		protected Lazy<UIColor> _textbgcolor;
-		protected string _textbgtint;
+		protected Lazy<UIColor> _textbgtint;
 		protected Lazy<UIColor> _texthighlightedtextcolor;
 		protected Lazy<UIColor> _textcolor;
 		#endregion
 
 		#endregion
-	
+
+		#region Constructors
+
 		public iOSUITheme (IAspyGlobals _iOSGlobals)
 		{
 			this._iosglobals = _iOSGlobals;
 			Initialize ();
 		}
+
+		#endregion
+
+		#region Private Members
 
 		private void Initialize ()
 		{
@@ -179,6 +181,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 //			this.TextBGTint = UIColor.Clear;
 
 		}
+
+		#endregion
 
 		#region Interface Members Only
 
@@ -209,7 +213,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			get { return _vcTag; }
 			set { _vcTag = value; }
 		}
-		// Globals
+		// Fonts
 		public string FontName 
 		{ 
 			get { return _fontname; } 
@@ -240,54 +244,54 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			get { return _fontsizeiOS7; }
 			set { _fontsizeiOS7 = value; }
 		}
-		public G__Color FontColor 
+		public G__Color _FontColor 
 		{ 
 			set 
 			{
-				_globalfontcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_globalfontcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			}
 		}
 		// UIButton
-		public G__Color ButtonNormalBGColor 
+		public G__Color _ButtonNormalBGColor 
 		{ 
 			set 
 			{
-				_buttonnormalbgcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_buttonnormalbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		} 
-		public G__Color ButtonPressedBGColor 		
+		public G__Color _ButtonPressedBGColor 		
 		{ 
 			set 
 			{
-				_buttonpressedbgcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_buttonpressedbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		} 
-		public G__Color ButtonNormalTitleColor		
+		public G__Color _ButtonNormalTitleColor		
 		{ 
 			set 
 			{
-				_buttonnormaltitlecolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_buttonnormaltitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public G__Color ButtonPressedTitleColor		
+		public G__Color _ButtonPressedTitleColor		
 		{ 
 			set 
 			{
-				_buttonpressedtitlecolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_buttonpressedtitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public string ButtonNormalBGImage 
+		public string _ButtonNormalBGImage 
 		{ 
 			set 
 			{
-				_buttonnormalbgimage = UIImage.FromFile (value);
+				_buttonnormalbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
 			}
 		} 
-		public string ButtonPressedBGImage 
+		public string _ButtonPressedBGImage 
 		{ 
 			set 
 			{
-				_buttonpressedbgimage = UIImage.FromFile (value);
+				_buttonpressedbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
 			}
 		} 
 		public string ButtonFontName
@@ -296,18 +300,18 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			set { _buttonfontname = value; }
 		}
 		// UIView
-		public G__Color ViewBGColor 
+		public G__Color _ViewBGColor 
 		{ 
 			set 
 			{
-				_viewbgcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_viewbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		} 
-		public G__Color ViewBGTint		
+		public G__Color _ViewBGTint		
 		{ 
 			set 
 			{
-				_viewbgtint = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_viewbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		} 
 		// UILabel
@@ -316,47 +320,47 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			get { return _labelfontname;}
 			set { _labelfontname = value; }
 		}
-		public G__Color LabelHighLightedTextColor 		
+		public G__Color _LabelHighLightedTextColor 		
 		{ 
 			set 
 			{
-				_labelhighlightedtextcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_labelhighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public G__Color LabelTextColor 		
+		public G__Color _LabelTextColor 		
 		{ 
 			set 
 			{
-				_labeltextcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_labeltextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		} 
 		// UITextViews
-		public G__Color TextBGColor		
+		public G__Color _TextBGColor		
 		{ 
 			set 
 			{
-				_textbgcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_textbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public G__Color TextBGTint
+		public G__Color _TextBGTint
 		{ 
 			set 
 			{
-				_textbgtint = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_textbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public G__Color TextHighLightedTextColor
+		public G__Color _TextHighLightedTextColor
 		{ 
 			set 
 			{
-				_texthighlightedtextcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_texthighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
-		public G__Color TextColor
+		public G__Color _TextColor
 		{ 
 			set 
 			{
-				_textcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
+				_textcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
 			} 
 		}
 
@@ -376,27 +380,140 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		#region iOS Members Only
 
+		// Font
 		public UIFont FontOfSize (float size)
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, size);
 		}
-
-		public static UIFont FontBoldOfSize (float size)
+		public UIFont FontBoldOfSize (float size)
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontBoldNameiOS7 : this.FontBoldName, size);
 		}
-
 		public UIFont FontDefaultSize ()
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, this.IsiOS7 ? this.FontSizeiOS7 : this.FontSize);
 		}
-
-		public static UIFont FontBoldDefaultSize ()
+		public UIFont FontBoldDefaultSize ()
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontBoldNameiOS7 : this.FontBoldName, this.IsiOS7 ? this.FontSizeiOS7 : this.FontSize);
 		}
-
-
+		public Lazy<UIColor> FontColor
+		{ 
+			get 
+			{
+				return _globalfontcolor; 
+			}
+		}
+		// Button
+		public Lazy<UIColor> ButtonNormalBGColor
+		{ 
+			get 
+			{
+				return _buttonnormalbgcolor;
+			} 
+		} 
+		public Lazy<UIColor> ButtonPressedBGColor
+		{ 
+			get 
+			{
+				return _buttonpressedbgcolor; 
+			} 
+		} 
+		public Lazy<UIColor> ButtonNormalTitleColor		
+		{ 
+			get 
+			{
+				return _buttonnormaltitlecolor;
+			} 
+		}
+		public Lazy<UIColor> ButtonPressedTitleColor		
+		{ 
+			get 
+			{
+				return _buttonpressedtitlecolor;
+			} 
+		}
+		public Lazy<UIImage> ButtonNormalBGImage 
+		{ 
+			get 
+			{
+				return _buttonnormalbgimage; 
+			}
+		} 
+		public Lazy<UIImage> ButtonPressedBGImage 
+		{ 
+			get 
+			{
+				return _buttonpressedbgimage; 
+			}
+		} 
+		public UIFont ButtonFont (float size)
+		{
+			return UIFont.FromName (this.ButtonFontName, size);
+		}
+		// UIView
+		public Lazy<UIColor> ViewBGColor 
+		{ 
+			get 
+			{
+				return _viewbgcolor; 
+			} 
+		} 
+		public Lazy<UIColor> ViewBGTint		
+		{ 
+			get 
+			{
+				return _viewbgtint;
+			} 
+		} 
+		// UILabel
+		public UIFont LabeFont (float size)
+		{
+			return UIFont.FromName (this.LabelFontName, size);
+		}
+		public Lazy<UIColor> LabelHighLightedTextColor 		
+		{ 
+			get 
+			{
+				return _labelhighlightedtextcolor;
+			} 
+		}
+		public Lazy<UIColor> LabelTextColor 		
+		{ 
+			get 
+			{
+				return _labeltextcolor;
+			} 
+		} 
+		// UITextViews
+		public Lazy<UIColor> TextBGColor		
+		{ 
+			get 
+			{
+				return _textbgcolor;
+			} 
+		}
+		public Lazy<UIColor> TextBGTint
+		{ 
+			get 
+			{
+				return _textbgtint;
+			} 
+		}
+		public Lazy<UIColor> TextHighLightedTextColor
+		{ 
+			get 
+			{
+				return _texthighlightedtextcolor;
+			} 
+		}
+		public Lazy<UIColor> TextColor
+		{ 
+			get 
+			{
+				return _textcolor;
+			} 
+		}
 
 		#endregion
 	}
