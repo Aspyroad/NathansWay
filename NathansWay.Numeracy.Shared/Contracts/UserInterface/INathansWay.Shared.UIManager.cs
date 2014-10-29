@@ -63,7 +63,7 @@ namespace NathansWay.Shared
 
 		// UIView
 		G__Color ViewBGColor { get; set; } 
-		string ViewBGTint { get; set; } 
+		G__Color ViewBGTint { get; set; } 
 
 		// UILabel
 		string LabelFontName { get; set; }
@@ -72,7 +72,7 @@ namespace NathansWay.Shared
 
 		// UITextViews
 		G__Color TextBGColor { get; set; } 
-		string TextBGTint { get; set; } 
+		G__Color TextBGTint { get; set; } 
 		G__Color TextHighLightedTextColor { get; set; }
 		G__Color TextColor { get; set; } 
 
