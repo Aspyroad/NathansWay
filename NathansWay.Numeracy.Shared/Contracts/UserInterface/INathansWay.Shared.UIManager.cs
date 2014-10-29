@@ -28,10 +28,6 @@ namespace NathansWay.Shared
 
 		void ApplyGlobalUITheme ();
 
-		IUITheme SaveThemeToFile (string strFile, string strLocation);
-
-		IUITheme GetThemeFromFile (string strFile, string strLocation);
-
     }
 
 	public interface IUITheme
@@ -42,15 +38,13 @@ namespace NathansWay.Shared
 		string VcName { get; set; } 
 		int VcTag { get; set; } 
 
-		// Globals
-		string GlobalFontName { get; set; }
-		string GlobalFontNameiOS7 { get; set; }
-		string GlobalFontBoldName { get; set; }
-		string GlobalFontBoldNameiOS7 { get; set; }
-		int GlobalFontSize { get; set; }
-		int GlobalFontSizeiOS7 { get; set; }
-		G__Color GlobalFontColor { get; set; }
-		G__Color GlobalBackGroundColor { get; set; }
+		string FontName { get; set; }
+		string FontNameiOS7 { get; set; }
+		string FontBoldName { get; set; }
+		string FontBoldNameiOS7 { get; set; }
+		float FontSize { get; set; }
+		float FontSizeiOS7 { get; set; }
+		G__Color FontColor { get; set; }
 
 		// UIButton
 		G__Color ButtonNormalBGColor { get; set; } 
@@ -75,6 +69,10 @@ namespace NathansWay.Shared
 		G__Color TextBGTint { get; set; } 
 		G__Color TextHighLightedTextColor { get; set; }
 		G__Color TextColor { get; set; } 
+
+		IUITheme SaveThemeToFile (string strFile, string strLocation);
+
+		IUITheme GetThemeFromFile (string strFile, string strLocation);
 
 	}
 

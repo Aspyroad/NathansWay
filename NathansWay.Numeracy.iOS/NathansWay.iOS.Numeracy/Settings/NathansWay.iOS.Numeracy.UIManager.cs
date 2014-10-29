@@ -26,6 +26,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		#region Private Variables
 
+		private iOSUITheme _globaltheme;
+
 		#endregion
 
 		#region Constructors
@@ -79,6 +81,24 @@ namespace NathansWay.iOS.Numeracy.UISettings
 		#region Public Members
 
 
+
+		// Some sort of apply method....??
+		//			// UIButton
+		//			var _button = UIButton.Appearance;
+		//			_button.BackgroundColor = _globalsavedUItheme.ButtonBGColor;
+		//			_button.SetTitleColor (_globalsavedUItheme.ButtonNormalTitleColor, UIControlState.Normal);
+		//			_button.SetTitleColor (_globalsavedUItheme.ButtonPressedTitleColor, UIControlState.Selected); 
+		//
+		//			// UIView
+		//			var _view = UIView.Appearance;
+		//			_view.BackgroundColor = _globalsavedUItheme.ViewBGColor;
+		//			_view.TintColor = _globalsavedUItheme.ViewBGTint;
+		//
+		//			// UITextField
+		//			var _textbox = UITextView.Appearance;
+		//			_textbox.BackgroundColor = _globalsavedUItheme.TextBGColor;
+		//			_textbox.TintColor = _globalsavedUItheme.TextBGTint;
+
 		#endregion
 	}
 
@@ -95,14 +115,13 @@ namespace NathansWay.iOS.Numeracy.UISettings
 		protected int _vcTag;
 
 		// Globals
-		protected string _globalfontname;
-		protected string _globalfontnameiOS7;
-		protected string _globalfontboldname;
-		protected string _globalfontboldnameiOS7;
-		protected int _globalfontsize;
-		protected int _globalfontsizeiOS7;
+		protected string _fontname;
+		protected string _fontnameiOS7;
+		protected string _fontboldname;
+		protected string _fontboldnameiOS7;
+		protected int _fontsize;
+		protected int _fontsizeiOS7;
 		protected Lazy<UIColor> _globalfontcolor;
-		protected Lazy<UIColor> _globalbackgroundcolor;
 
 		// UIButton
 		protected Lazy<UIColor> _buttonnormalbgcolor;
@@ -143,6 +162,8 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			this._vcName = "Global";
 			this._vcTag = 847339;
 
+
+
 //			this.ButtonBGColor = UIColor.Brown;
 //			this.ButtonNormalTitleColor = UIColor.White;
 //			this.ButtonPressedTitleColor = UIColor.Gray;
@@ -159,7 +180,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
 		}
 
-		#region Interface Members
+		#region Interface Members Only
 
 		public bool IsiOS7
 		{
@@ -189,49 +210,42 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			set { _vcTag = value; }
 		}
 		// Globals
-		public string GlobalFontName 
+		public string FontName 
 		{ 
-			get { return _globalfontname; } 
-			set { _globalfontname = value; }
+			get { return _fontname; } 
+			set { _fontname = value; }
 		}
-		public string GlobalFontNameiOS7 
+		public string FontNameiOS7 
 		{ 
-			get { return _globalfontnameiOS7; }
-			set { _globalfontnameiOS7 = value; } 
+			get { return _fontnameiOS7; }
+			set { _fontnameiOS7 = value; } 
 		}
-		public string GlobalFontBoldName 
+		public string FontBoldName 
 		{ 
-			get { return _globalfontboldname; }
-			set { _globalfontboldnameiOS7 = value; }
+			get { return _fontboldname; }
+			set { _fontboldnameiOS7 = value; }
 		}
-		public string GlobalFontBoldNameiOS7 
+		public string FontBoldNameiOS7 
 		{ 
-			get { return _globalfontboldnameiOS7; } 
-			set { _globalfontboldnameiOS7 = value; }
+			get { return _fontboldnameiOS7; } 
+			set { _fontboldnameiOS7 = value; }
 		}
-		public int GlobalFontSize 
+		public float FontSize 
 		{ 
-			get { return _globalfontsize; }
-			set { _globalfontsizeiOS7 = value; }
+			get { return _fontsize; }
+			set { _fontsizeiOS7 = value; }
 		}
-		public int GlobalFontSizeiOS7 
+		public float FontSizeiOS7 
 		{ 
-			get { return _globalfontsizeiOS7; }
-			set { _globalfontsizeiOS7 = value; }
+			get { return _fontsizeiOS7; }
+			set { _fontsizeiOS7 = value; }
 		}
-		public G__Color GlobalFontColor 
+		public G__Color FontColor 
 		{ 
 			set 
 			{
 				_globalfontcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
 			}
-		}
-		public G__Color GlobalBackGroundColor 
-		{ 
-			set 
-			{
-				_globalbackgroundcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
-			} 
 		}
 		// UIButton
 		public G__Color ButtonNormalBGColor 
@@ -345,6 +359,44 @@ namespace NathansWay.iOS.Numeracy.UISettings
 				_textcolor = UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha);
 			} 
 		}
+
+		public IUITheme SaveThemeToFile (string strFile, string strLocation)
+		{
+			var x = new Object ();
+			return (IUITheme)x;
+		}
+
+		public IUITheme GetThemeFromFile (string strFile, string strLocation)
+		{
+			var x = new Object ();
+			return (IUITheme)x;
+		}
+
+		#endregion
+
+		#region iOS Members Only
+
+		public UIFont FontOfSize (float size)
+		{
+			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, size);
+		}
+
+		public static UIFont FontBoldOfSize (float size)
+		{
+			return UIFont.FromName (this.IsiOS7 ? this.FontBoldNameiOS7 : this.FontBoldName, size);
+		}
+
+		public UIFont FontDefaultSize ()
+		{
+			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, this.IsiOS7 ? this.FontSizeiOS7 : this.FontSize);
+		}
+
+		public static UIFont FontBoldDefaultSize ()
+		{
+			return UIFont.FromName (this.IsiOS7 ? this.FontBoldNameiOS7 : this.FontBoldName, this.IsiOS7 ? this.FontSizeiOS7 : this.FontSize);
+		}
+
+
 
 		#endregion
 	}

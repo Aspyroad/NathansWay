@@ -7,6 +7,8 @@ using System.Collections.Generic;
 
 namespace NathansWay.Shared
 {
+	// Note the Abstract.
+	// This class needs a few methods implemented as per framework (iOS, Android etc) 
 	public abstract class UIManagerBase : ISharedUIManager
 	{
 		#region Private Members
@@ -97,40 +99,6 @@ namespace NathansWay.Shared
 
 		public abstract void ApplyGlobalUITheme ();
 
-		//			// UIButton
-			//			var _button = UIButton.Appearance;
-			//			_button.BackgroundColor = _globalsavedUItheme.ButtonBGColor;
-			//			_button.SetTitleColor (_globalsavedUItheme.ButtonNormalTitleColor, UIControlState.Normal);
-			//			_button.SetTitleColor (_globalsavedUItheme.ButtonPressedTitleColor, UIControlState.Selected); 
-			//
-			//			// UIView
-			//			var _view = UIView.Appearance;
-			//			_view.BackgroundColor = _globalsavedUItheme.ViewBGColor;
-			//			_view.TintColor = _globalsavedUItheme.ViewBGTint;
-			//
-			//			// UITextField
-			//			var _textbox = UITextView.Appearance;
-			//			_textbox.BackgroundColor = _globalsavedUItheme.TextBGColor;
-			//			_textbox.TintColor = _globalsavedUItheme.TextBGTint;
-
-		public void ApplyGlobalAppUITheme()
-		{
-
-
-
-		}
-
-		public IUITheme SaveThemeToFile (string strFile, string strLocation)
-		{
-			var x = new Object ();
-			return (IUITheme)x;
-		}
-
-		public IUITheme GetThemeFromFile (string strFile, string strLocation)
-		{
-			var x = new Object ();
-			return (IUITheme)x;
-		}
 			
 		#endregion
 	}

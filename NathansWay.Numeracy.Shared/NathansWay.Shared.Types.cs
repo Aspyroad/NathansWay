@@ -2,6 +2,7 @@
 using System.Globalization;
 
 
+// NathansWay Type Library
 
 namespace NathansWay.Shared
 {

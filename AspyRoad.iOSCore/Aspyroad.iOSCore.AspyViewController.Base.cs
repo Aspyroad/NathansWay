@@ -15,7 +15,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
-		public IAspyUIManager iOSUIAppearance;
+		//public IAspyUIManager iOSUIAppearance;
 		// Tags for id
 		private int _AspyTag1;
 		private int _AspyTag2;
@@ -23,7 +23,7 @@ namespace AspyRoad.iOSCore
 		private string _AspyName;
 		private string _viewClass;
 		// Theme
-		private IUIAspyTheme _vctheme;
+		//private IUIAspyTheme _vctheme;
 
 		#endregion
 
@@ -51,13 +51,13 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-		#region Private Members
+		#region Private Members*
 
 		protected virtual void Initialize ()
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
+			//this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
 			//this.iOSUIAppearance.ApplyAspyUITheme (this);
 		}
 
