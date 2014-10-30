@@ -68,14 +68,7 @@ namespace AspyRoad.iOSCore
 		public int AspyTag1
 		{
 			get { return _AspyTag1; }
-			set 
-			{ 
-				_AspyTag1 = value;
-				if (this.View != null)
-				{
-					this.View.Tag = value;
-				}
-			}
+			set { _AspyTag1 = value; }
 		}
 
 		public string AspyStringTag
@@ -218,6 +211,11 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+			View.Tag = _AspyTag1;
+			// Copy the original tag number to tag2
+			// There are times with multiple controls where we need different tag numbers
+			// But we can always get the global control tag from tag2
+			_AspyTag2 = _AspyTag1;
 		}			
 
 		// These puppies cost me a lot of time. DAYS!

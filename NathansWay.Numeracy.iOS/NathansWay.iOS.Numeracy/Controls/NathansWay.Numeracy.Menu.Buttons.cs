@@ -712,11 +712,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var strokeBorder = UIColor.FromRGBA(0.574f, 0.346f, 0.093f, 0.829f);
 			var colorMainImage = UIColor.FromRGBA(0.647f, 0.388f, 0.063f, 1.000f);
 
-			//// Shadow Declarations
-			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
-			var shadowTextTitleOffset = new SizeF(2.1f, -3.1f);
-			var shadowTextTitleBlurRadius = 5.0f;
-
 			//// Variable Declarations
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainEnd.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
@@ -733,12 +728,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 			//// Text Drawing
 			RectangleF textRect = new RectangleF(145.0f, 0.0f, 112.0f, 64.0f);
-			context.SaveState();
-			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 			colorTextGradient.SetFill();
 			new NSString("Lesson").DrawString(RectangleF.Inflate(textRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
-			context.RestoreState();
-
 
 
 			//// Bezier 2 Drawing
@@ -784,16 +775,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 			bezier2Path.ClosePath();
 			bezier2Path.MiterLimit = 4.0f;
 
-			context.SaveState();
-			context.SetShadowWithColor(shadowTextTitleOffset, shadowTextTitleBlurRadius, shadowTextTitle);
 			colorMainImage.SetFill();
 			bezier2Path.Fill();
-			context.RestoreState();
-
 			strokeBorder.SetStroke();
 			bezier2Path.LineWidth = 1.0f;
 			bezier2Path.Stroke();
 		}
+
 
 		#endregion
 	}
