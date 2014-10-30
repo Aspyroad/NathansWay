@@ -77,6 +77,8 @@ namespace AspyRoad.iOSCore
 		protected override void Initialize ()
 		{
 			base.Initialize ();
+			this.AspyTag1 = 103;
+			this.AspyName = "VC_CtrlComboBox";
 
 			// Global UI TESTING
 			_fontSize = 30.0f;
@@ -86,8 +88,8 @@ namespace AspyRoad.iOSCore
 			//this._aspyComboBoxFrame = new RectangleF (75.0f, 180.0f, 400.0f, 44.0f);
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 
-
 			#region TextBox
+
 			// UI Creation
 			_pickerTxtField = new AspyTextField (_aspyComboBoxFrame);
 			// Delegates
@@ -101,6 +103,7 @@ namespace AspyRoad.iOSCore
 			_pickerTxtField.Layer.BorderWidth = 1;
 			_pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
 			_pickerTxtField.TextAlignment = UITextAlignment.Center;
+
 			#endregion
 
 			#region PickerViewModel
@@ -183,19 +186,21 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
+		public override void LoadView ()
+		{
+			base.LoadView ();
+			//this.View = new UIView (_aspyComboBoxFrame);
+		}
+
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
-
 
 			this.View.AddSubview (_pickerTxtField);
 			this.View.AddSubview (_pickerView);
 			this.View.SendSubviewToBack(_pickerView);
 			this.View.BringSubviewToFront (_pickerTxtField);
-
-		}
-			
+		}			
 
 		public override void ViewDidAppear (bool animated)
 		{
@@ -222,8 +227,7 @@ namespace AspyRoad.iOSCore
 
 			#endregion
 		}
-
-			
+					
 		#endregion
 
 		#region Delegates

@@ -97,7 +97,7 @@ namespace NathansWay.Shared
 			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
-		public abstract void ApplyGlobalUITheme ();
+		//public abstract void ApplyGlobalUITheme ();
 
 			
 		#endregion

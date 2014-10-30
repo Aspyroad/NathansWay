@@ -70,7 +70,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 			this.AddVC (100, "VC_CtrlNumberPad");
 			this.AddVC (101, "VC_CtrlFractionCombo");
 			this.AddVC (102, "VC_CtrlNumberCombo");
-			//this.AddVCSettings (this.NumberCombo);
+			this.AddVC (103, "VC_CtrlComboBox");
 		}
 
 		#endregion

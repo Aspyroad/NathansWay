@@ -68,7 +68,26 @@ namespace AspyRoad.iOSCore
 		public int AspyTag1
 		{
 			get { return _AspyTag1; }
-			set { _AspyTag1 = value; }
+			set 
+			{ 
+				_AspyTag1 = value;
+				if (this.View != null)
+				{
+					this.View.Tag = value;
+				}
+			}
+		}
+
+		public string AspyStringTag
+		{
+			get 
+			{
+				return _AspyTag1.ToString ().Trim ();
+			}
+			set
+			{
+				_AspyTag1 = Convert.ToInt16 (value);
+			}
 		}
 
 		public int AspyTag2
@@ -199,8 +218,6 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			this.View.Tag = this.AspyTag1;
-			//this.ApplyUIAppearance (this._AspyTag1);
 		}			
 
 		// These puppies cost me a lot of time. DAYS!
