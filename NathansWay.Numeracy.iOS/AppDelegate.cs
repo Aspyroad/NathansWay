@@ -47,7 +47,6 @@ namespace NathansWay.iOS.Numeracy
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
 
-		private iOSUIManager _numeracyUIManager;
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
 
@@ -120,8 +119,6 @@ namespace NathansWay.iOS.Numeracy
 
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
-			// Register app/user settings
-			iOSCoreServiceContainer.Register<iOSUIManager>(this._numeracyUIManager);
 
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();

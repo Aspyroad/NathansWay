@@ -70,9 +70,7 @@ namespace NathansWay.Shared
 		G__Color _TextHighLightedTextColor { set; }
 		G__Color _TextColor { set; } 
 
-		IUITheme SaveThemeToFile (string strFile, string strLocation);
 
-		IUITheme GetThemeFromFile (string strFile, string strLocation);
 
 	}
 

@@ -16,7 +16,6 @@ namespace NathansWay.Shared
 		protected Dictionary<int, string> _vcTagList;
 		protected Dictionary<int, IUITheme> _vcUIThemeList;
 		protected IUITheme _globalUItheme;
-		protected IUITheme _vcUITheme;
 
 		#endregion
 
@@ -24,17 +23,23 @@ namespace NathansWay.Shared
 
 		public UIManagerBase ()
 		{
-			this.Initialize ();
+
 		}
 
 		#endregion
 
 		#region Private/Protected Members
 
-		private void Initialize ()
+		private IUITheme SaveThemeToFile (string strFile, string strLocation)
 		{
-			_vcTagList = new Dictionary<int, string> ();
-			_vcUIThemeList = new Dictionary<int, IUITheme> ();
+			var x = new Object ();
+			return (IUITheme)x;
+		}
+
+		private IUITheme GetThemeFromFile (string strFile, string strLocation)
+		{
+			var x = new Object ();
+			return (IUITheme)x;
 		}
 
 		#endregion
@@ -45,12 +50,6 @@ namespace NathansWay.Shared
 		{
 			get { return _globalUItheme; }
 			set { _globalUItheme = value; }
-		}
-
-		public IUITheme VcUITheme
-		{
-			get { return _vcUITheme; }
-			set { _vcUITheme = value; }
 		}
 
 		public Dictionary<int, string> VcTagList
@@ -97,9 +96,16 @@ namespace NathansWay.Shared
 			this._vcTagList.Add (aspytag1, aspyname);
 		}
 
-		//public abstract void ApplyGlobalUITheme ();
+		public bool SaveUIThemes ()
+		{
+			return false;
+		}
 
-			
+		public bool LoadUIThemes ()
+		{
+			return false;
+		}
+
 		#endregion
 	}
 }

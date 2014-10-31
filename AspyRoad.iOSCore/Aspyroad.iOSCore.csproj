@@ -50,6 +50,7 @@
     <Folder Include="Utilities\" />
     <Folder Include="Contracts\" />
     <Folder Include="Controls\" />
+    <Folder Include="Settings\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -73,8 +74,15 @@
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTextField.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewContainer.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTextView.Base.cs" />
+    <Compile Include="Settings\Aspyroad.iOSCore.UIManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj">
+      <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
+      <Name>NathansWay.Shared.Numeracy</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
