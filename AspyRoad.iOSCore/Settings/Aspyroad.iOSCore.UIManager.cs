@@ -17,7 +17,8 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#region Private Variables
 
-		private iOSUITheme _globaltheme;
+		private iOSUITheme _globaliOSTheme;
+		private UIGlobalTheme _sharedGlobalTheme;
 
 		#endregion
 
@@ -36,6 +37,9 @@ namespace AspyRoad.iOSCore.UISettings
 		{
 			_vcTagList = new Dictionary<int, string> ();
 			_vcUIThemeList = new Dictionary<int, IUITheme> ();
+			_globaliOSTheme = new iOSUITheme ();
+
+
 		}
 
 		#endregion
@@ -196,7 +200,7 @@ namespace AspyRoad.iOSCore.UISettings
 		{ 
 			set 
 			{
-				_globalfontcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_globalfontcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			}
 		}
 		// UIButton
@@ -204,28 +208,28 @@ namespace AspyRoad.iOSCore.UISettings
 		{ 
 			set 
 			{
-				_buttonnormalbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_buttonnormalbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		} 
 		public G__Color _ButtonPressedBGColor 		
 		{ 
 			set 
 			{
-				_buttonpressedbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_buttonpressedbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		} 
 		public G__Color _ButtonNormalTitleColor		
 		{ 
 			set 
 			{
-				_buttonnormaltitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_buttonnormaltitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public G__Color _ButtonPressedTitleColor		
 		{ 
 			set 
 			{
-				_buttonpressedtitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_buttonpressedtitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public string _ButtonNormalBGImage 
@@ -252,14 +256,14 @@ namespace AspyRoad.iOSCore.UISettings
 		{ 
 			set 
 			{
-				_viewbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_viewbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		} 
 		public G__Color _ViewBGTint		
 		{ 
 			set 
 			{
-				_viewbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_viewbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		} 
 		// UILabel
@@ -272,14 +276,14 @@ namespace AspyRoad.iOSCore.UISettings
 		{ 
 			set 
 			{
-				_labelhighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_labelhighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public G__Color _LabelTextColor 		
 		{ 
 			set 
 			{
-				_labeltextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_labeltextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		} 
 		// UITextViews
@@ -287,28 +291,28 @@ namespace AspyRoad.iOSCore.UISettings
 		{ 
 			set 
 			{
-				_textbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_textbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public G__Color _TextBGTint
 		{ 
 			set 
 			{
-				_textbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_textbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public G__Color _TextHighLightedTextColor
 		{ 
 			set 
 			{
-				_texthighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_texthighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 		public G__Color _TextColor
 		{ 
 			set 
 			{
-				_textcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.Red, value.Green, value.Blue, value.Alpha));
+				_textcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
 			} 
 		}
 

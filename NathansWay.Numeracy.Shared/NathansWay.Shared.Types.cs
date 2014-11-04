@@ -134,6 +134,55 @@ namespace NathansWay.Shared
 			}
 		}
 
+		// RGB values returned as RGB floats for UIColor UIColor only accepts 0-1 values. eg 0.335, 0.0 , 1.0 ,0.999
+		public float RedRGB
+		{
+			get
+			{
+				return (this._r/255.0);
+			}
+			set
+			{
+				this._r = value;
+			}
+		}
+
+		public float GreenRGB
+		{
+			get
+			{
+				return (this._g/255.0);
+			}
+			set
+			{
+				this._g = value;
+			}
+		}
+
+		public float BlueRGB
+		{
+			get
+			{
+				return (this._b/255.0);
+			}
+			set
+			{
+				this._b = value;
+			}
+		}
+
+		public float AlphaRGB
+		{
+			get
+			{
+				return (this._alpha/255.0);
+			}
+			set
+			{
+				this._alpha = value;
+			}
+		}
+
 		public override string ToString()
 		{
 			return string.Format("{0},{1},{2},{3}", new object[] 
