@@ -32,46 +32,46 @@ namespace NathansWay.Shared
 
 	public interface IUITheme
 	{
-		// Versions
-		bool IsiOS7 { get; }
+		// Platform Specific Only
+		//bool IsiOS7 { get; set; }
+
+
 		// Id
 		string VcName { get; set; } 
 		int VcTag { get; set; } 
 
+		// Fonts
 		string FontName { get; set; }
-		string FontNameiOS7 { get; set; }
+		//string FontNameiOS7 { get; set; }
 		string FontBoldName { get; set; }
-		string FontBoldNameiOS7 { get; set; }
+		//string FontBoldNameiOS7 { get; set; }
 		float FontSize { get; set; }
-		float FontSizeiOS7 { get; set; }
-		G__Color _FontColor { set; }
+		//float FontSizeiOS7 { get; set; }
+		G__Color _FontColor { get; set; }
 
-		// UIButton
-		G__Color _ButtonNormalBGColor { set; } 
-		G__Color _ButtonPressedBGColor { set; } 
-		G__Color _ButtonNormalTitleColor { set; } 
-		G__Color _ButtonPressedTitleColor { set; } 
-	 	string _ButtonNormalBGImage { set; } 
-		string _ButtonPressedBGImage { set; } 
+		// Buttons
+		G__Color _ButtonNormalBGColor { get; set; }
+		G__Color _ButtonPressedBGColor { get; set; }
+		G__Color _ButtonNormalTitleColor { get; set; } 
+		G__Color _ButtonPressedTitleColor { get; set; }
+		string _ButtonNormalBGImage { get; set; } 
+		string _ButtonPressedBGImage { get; set; }
 		string ButtonFontName { get; set; }
 
-		// UIView
-		G__Color _ViewBGColor { set; } 
-		G__Color _ViewBGTint { set; } 
+		// Views/Forms
+		G__Color _ViewBGColor { get; set; } 
+		G__Color _ViewBGTint { get; set; }
 
-		// UILabel
+		// Label
 		string LabelFontName { get; set; }
-		G__Color _LabelHighLightedTextColor { set; }
-		G__Color _LabelTextColor { set; } 
+		G__Color _LabelHighLightedTextColor { get; set; }
+		G__Color _LabelTextColor { get; set; } 
 
-		// UITextViews
-		G__Color _TextBGColor { set; } 
-		G__Color _TextBGTint { set; } 
-		G__Color _TextHighLightedTextColor { set; }
-		G__Color _TextColor { set; } 
-
-
-
+		// TextViews
+		G__Color _TextBGColor { get; set; }
+		G__Color _TextBGTint { get; set; } 
+		G__Color _TextHighLightedTextColor { get; set; }
+		G__Color _TextColor { get; set; }
 	}
 
 }

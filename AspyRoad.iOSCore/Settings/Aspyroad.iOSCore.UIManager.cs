@@ -19,13 +19,15 @@ namespace AspyRoad.iOSCore.UISettings
 
 		private iOSUITheme _globaliOSTheme;
 		private UIGlobalTheme _sharedGlobalTheme;
+		private IAspyGlobals _iOSGlobals;
 
 		#endregion
 
 		#region Constructors
 
-		public iOSUIManager (IAspyGlobals _iOSGlobals)
+		public iOSUIManager (IAspyGlobals iOSGlobals)
 		{
+			_iOSGlobals = iOSGlobals;
 			this.Initialize ();
 		}
 
@@ -37,14 +39,19 @@ namespace AspyRoad.iOSCore.UISettings
 		{
 			_vcTagList = new Dictionary<int, string> ();
 			_vcUIThemeList = new Dictionary<int, IUITheme> ();
-			_globaliOSTheme = new iOSUITheme ();
-
-
+			_sharedGlobalTheme = new UIGlobalTheme ();
+			_globaliOSTheme  = new iOSUITheme (_iOSGlobals, _sharedGlobalTheme);
 		}
 
 		#endregion
 
 		#region Public Members
+
+		public iOSUITheme iOSTheme
+		{
+			get { return _iOSGlobals; }
+			set { _iOSGlobals = value; }	
+		}
 
 		// Some sort of apply method....??
 		//			// UIButton
@@ -114,6 +121,7 @@ namespace AspyRoad.iOSCore.UISettings
 		#endregion
 
 		#endregion
+		private IUITheme g;
 
 		#region Constructors
 
@@ -123,37 +131,59 @@ namespace AspyRoad.iOSCore.UISettings
 			Initialize ();
 		}
 
+		public iOSUITheme (IAspyGlobals _iOSGlobals, IUITheme _sharedGlobal)
+		{
+			this._iosglobals = _iOSGlobals;
+			this.g = _sharedGlobal;
+
+			Initialize ();
+			AssignGlobals ();
+		}
+
 		#endregion
 
 		#region Private Members
 
 		private void Initialize ()
 		{
-			// Set Global name and tag
-			this._vcName = "Global";
-			this._vcTag = 847339;
+		}
+
+		private void AssignGlobals()
+		{
+			// Tags
+			VcName = g.VcName;
+			VcTag = g.VcTag;
+			// Fonts
+			FontName = g.FontName;
+			FontBoldName = g.FontBoldName;
+			FontSize = g.FontSize;
+			_FontColor = g._FontColor;
+			// Buttons
+			_ButtonNormalBGColor = g._ButtonNormalBGColor;
+			_ButtonPressedBGColor = g._ButtonPressedBGColor;
+			_ButtonNormalTitleColor = g._ButtonNormalTitleColor;
+			_ButtonPressedTitleColor = g._ButtonPressedTitleColor;
+			_ButtonNormalBGImage = g._ButtonNormalBGImage;
+			_ButtonPressedBGImage = g._ButtonPressedBGImage;
+			ButtonFontName = g.ButtonFontName;
+			// View
+			_ViewBGColor = g._ViewBGColor;
+			_ViewBGTint = g._ViewBGTint;
+			// Labels
+			LabelFontName = g.LabelFontName;
+			_LabelHighLightedTextColor = g._LabelHighLightedTextColor;
+			_LabelTextColor = g._LabelTextColor;
+			// TextViews
+			_TextBGColor = g._TextBGColor;
+			_TextBGTint = g._TextBGTint;
+			_TextHighLightedTextColor = g._TextHighLightedTextColor;
+			_TextColor = g._TextColor;
 		}
 
 		#endregion
 
 		#region Interface Members Only
 
-		public bool IsiOS7
-		{
-			get 
-			{
-				bool i;
-				if (_iosglobals.G__iOSVersion.Major >= 7)
-				{
-					i = true;
-				}
-				else
-				{
-					i = false;
-				}
-				return i;			
-			}
-		}
 		// Id
 		public string VcName
 		{
@@ -196,8 +226,9 @@ namespace AspyRoad.iOSCore.UISettings
 			get { return _fontsizeiOS7; }
 			set { _fontsizeiOS7 = value; }
 		}
-		public G__Color _FontColor 
+		public G__Color _FontColor
 		{ 
+			private get;
 			set 
 			{
 				_globalfontcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -206,6 +237,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UIButton
 		public G__Color _ButtonNormalBGColor 
 		{ 
+			private get;
 			set 
 			{
 				_buttonnormalbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -213,6 +245,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ButtonPressedBGColor 		
 		{ 
+			private get;
 			set 
 			{
 				_buttonpressedbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -220,6 +253,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ButtonNormalTitleColor		
 		{ 
+			private get;
 			set 
 			{
 				_buttonnormaltitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -227,6 +261,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _ButtonPressedTitleColor		
 		{ 
+			private get;
 			set 
 			{
 				_buttonpressedtitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -234,6 +269,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public string _ButtonNormalBGImage 
 		{ 
+			private get;
 			set 
 			{
 				_buttonnormalbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
@@ -241,6 +277,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public string _ButtonPressedBGImage 
 		{ 
+			private get;
 			set 
 			{
 				_buttonpressedbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
@@ -254,6 +291,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UIView
 		public G__Color _ViewBGColor 
 		{ 
+			private get;
 			set 
 			{
 				_viewbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -261,6 +299,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ViewBGTint		
 		{ 
+			private get;
 			set 
 			{
 				_viewbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -274,6 +313,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _LabelHighLightedTextColor 		
 		{ 
+			private get;
 			set 
 			{
 				_labelhighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -281,6 +321,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _LabelTextColor 		
 		{ 
+			private get;
 			set 
 			{
 				_labeltextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -289,6 +330,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UITextViews
 		public G__Color _TextBGColor		
 		{ 
+			private get;
 			set 
 			{
 				_textbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -296,6 +338,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextBGTint
 		{ 
+			private get;
 			set 
 			{
 				_textbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -303,6 +346,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextHighLightedTextColor
 		{ 
+			private get;
 			set 
 			{
 				_texthighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -310,6 +354,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextColor
 		{ 
+			private get;
 			set 
 			{
 				_textcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -319,6 +364,23 @@ namespace AspyRoad.iOSCore.UISettings
 		#endregion
 
 		#region iOS Members Only
+
+		public bool IsiOS7
+		{
+			get 
+			{
+				bool i;
+				if (_iosglobals.G__iOSVersion.Major >= 7)
+				{
+					i = true;
+				}
+				else
+				{
+					i = false;
+				}
+				return i;			
+			}
+		}
 
 		// Font
 		public UIFont FontOfSize (float size)

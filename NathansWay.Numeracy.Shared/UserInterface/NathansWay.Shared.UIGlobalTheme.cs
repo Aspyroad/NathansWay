@@ -4,46 +4,46 @@ using System;
 
 namespace NathansWay.Shared
 {
-	public class UIGlobalTheme
+	public class UIGlobalTheme : IUITheme
 	{
 
 		#region Public Variables
 
-		public string VcName;
-		public int VcTag;
+		public string VcName { get; set; }
+		public int VcTag { get; set; }
 
-		public string FontName;
-		public string FontNameiOS7;
-		public string FontBoldName;
-		public string FontBoldNameiOS7;
-		public float FontSize;
-		public float FontSizeiOS7;
-		public G__Color _FontColor;
+		public string FontName { get; set; }
+		//public string FontNameiOS7 { get; set; }
+		public string FontBoldName { get; set; }
+		//public string FontBoldNameiOS7 { get; set; }
+		public float FontSize { get; set; }
+		//public float FontSizeiOS7 { get; set; }
+		public G__Color _FontColor { get; set; }
 
 
 		// UIButton
-		public G__Color _ButtonNormalBGColor;
-		public G__Color _ButtonPressedBGColor;
-		public G__Color _ButtonNormalTitleColor;
-		public G__Color _ButtonPressedTitleColor;
-		public string _ButtonNormalBGImage;
-		public string _ButtonPressedBGImage;
-		public string ButtonFontName;
+		public G__Color _ButtonNormalBGColor { get; set; }
+		public G__Color _ButtonPressedBGColor { get; set; }
+		public G__Color _ButtonNormalTitleColor { get; set; }
+		public G__Color _ButtonPressedTitleColor { get; set; }
+		public string _ButtonNormalBGImage { get; set; }
+		public string _ButtonPressedBGImage { get; set; }
+		public string ButtonFontName { get; set; }
 
 		// UIView
-		public G__Color _ViewBGColor;
-		public G__Color _ViewBGTint;
+		public G__Color _ViewBGColor { get; set; }
+		public G__Color _ViewBGTint { get; set; }
 
 		// UILabel
-		public string LabelFontName;
-		public G__Color _LabelHighLightedTextColor;
-		public G__Color _LabelTextColor;
+		public string LabelFontName { get; set; }
+		public G__Color _LabelHighLightedTextColor { get; set; }
+		public G__Color _LabelTextColor { get; set; }
 
 		// UITextViews
-		public G__Color _TextBGColor;
-		public G__Color _TextBGTint;
-		public G__Color _TextHighLightedTextColor;
-		public G__Color _TextColor;
+		public G__Color _TextBGColor { get; set; }
+		public G__Color _TextBGTint { get; set; }
+		public G__Color _TextHighLightedTextColor { get; set; }
+		public G__Color _TextColor { get; set; }
 
 		#endregion
 
@@ -51,15 +51,16 @@ namespace NathansWay.Shared
 
 		public UIGlobalTheme()
 		{
+
 			VcName = "Global";
 			VcTag = "999";
 
 			FontName = "HelveticaNeue-Medium";
-			FontNameiOS7 = "HelveticaNeue-Light";
+			//FontNameiOS7 = "HelveticaNeue-Light";
 			FontBoldName = "HelveticaNeue-Bold";
-			FontBoldNameiOS7 = "HelveticaNeue-Medium";
+			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
 			FontSize = 20.0f;
-			FontSizeiOS7 = 20.0f;
+			//FontSizeiOS7 = 20.0f;
 			_FontColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
 
 

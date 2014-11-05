@@ -139,7 +139,7 @@ namespace NathansWay.Shared
 		{
 			get
 			{
-				return (this._r/255.0);
+				return (this._r/255.0f);
 			}
 			set
 			{
@@ -151,7 +151,7 @@ namespace NathansWay.Shared
 		{
 			get
 			{
-				return (this._g/255.0);
+				return (this._g/255.0f);
 			}
 			set
 			{
@@ -163,7 +163,7 @@ namespace NathansWay.Shared
 		{
 			get
 			{
-				return (this._b/255.0);
+				return (this._b/255.0f);
 			}
 			set
 			{
@@ -175,7 +175,7 @@ namespace NathansWay.Shared
 		{
 			get
 			{
-				return (this._alpha/255.0);
+				return (this._alpha/255.0f);
 			}
 			set
 			{

@@ -6,6 +6,9 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
+// AspyCore
+using AspyRoad.iOSCore.UISettings;
+
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register ("AspyViewController")]	
@@ -14,16 +17,14 @@ namespace AspyRoad.iOSCore
 
 		#region Class Variables
 
-		public IAspyGlobals iOSGlobals;
-		//public IAspyUIManager iOSUIAppearance;
+		protected IAspyGlobals iOSGlobals;
+		protected iOSUIManager iOSUIAppearance;
 		// Tags for id
 		private int _AspyTag1;
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
 		private string _viewClass;
-		// Theme
-		//private IUIAspyTheme _vctheme;
 
 		#endregion
 
@@ -51,14 +52,13 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-		#region Private Members*
+		#region Private Members
 
 		protected virtual void Initialize ()
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			//this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<IAspyUIManager> ();
-			//this.iOSUIAppearance.ApplyAspyUITheme (this);
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 		}
 
 		#endregion
@@ -97,6 +97,7 @@ namespace AspyRoad.iOSCore
 
 		public void ApplyUIAppearance ()
 		{
+			this.View.BackgroundColor = iOSUIAppearance.iOSTheme.ViewBGColor;
 			// Query the UIManager, see if theres a tag with its own UI
 			// If so load it
 

@@ -13,6 +13,7 @@ using SQLite.Net.Platform;
 using SQLite.Net.Interop;
 // Aspyroad
 using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
 // NathansWay
 using NathansWay.iOS.Numeracy.Controls;
 //using NathansWay.iOS.Numeracy.WorkSpace;
@@ -43,6 +44,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
+		private iOSUIManager _numeracyUIManager;
 		// Database
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
@@ -257,7 +259,38 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 
-		#endregion	
+		#endregion
+
+		#region Private Members
+
+		private void SetUpUI()
+		{
+			_numeracyUIManager = new iOSUIManager (iOSGlobals);
+
+			_numeracyUIManager.AddVC (1, "VC_MenuStart");
+			_numeracyUIManager.AddVC (2, "VC_Student");
+			_numeracyUIManager.AddVC (3, "VC_Lessons");
+			_numeracyUIManager.AddVC (4, "VC_Settings");
+			_numeracyUIManager.AddVC (5, "VC_Teacher");
+			_numeracyUIManager.AddVC (6, "VC_ToolBox");
+			//_numeracyUIManager.AddVC (7, "VC_Tools");
+			// WorkSpace
+			_numeracyUIManager.AddVC (20, "VC_MainGame");
+			_numeracyUIManager.AddVC (21, "VC_MainWorkSpace"); 
+			_numeracyUIManager.AddVC (22, "VC_WorkSpace");
+			// Controls 
+			_numeracyUIManager.AddVC (100, "VC_CtrlNumberPad");
+			_numeracyUIManager.AddVC (101, "VC_CtrlFractionCombo");
+			_numeracyUIManager.AddVC (102, "VC_CtrlNumberCombo");
+			_numeracyUIManager.AddVC (103, "VC_CtrlComboBox");
+
+
+			// Register app/user settings
+			iOSCoreServiceContainer.Register<iOSUIManager>(this._numeracyUIManager);
+
+		}
+
+		#endregion
 
 	}
 }
