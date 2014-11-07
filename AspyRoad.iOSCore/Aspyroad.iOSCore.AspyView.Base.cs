@@ -1,6 +1,12 @@
+// System
 using System;
 using System.Drawing;
+
+// Aspyroad
 using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
+
+// Monotouch
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
@@ -13,26 +19,18 @@ namespace AspyRoad.iOSCore
 	{
 
 		#region Class Variables
-        //Public
-        public IAspyGlobals iOSGlobals;
 
-        //Private
-		private UITapGestureRecognizer _tapGesture = null;
-		private UISwipeGestureRecognizer _swipeGesture = null;
-		private UIPinchGestureRecognizer _pinchGesture = null;
-		private UIPanGestureRecognizer _panGesture = null;
-		private UIRotationGestureRecognizer _rotorGesture = null;
-		private UILongPressGestureRecognizer _longGesture = null;		
-		
-		private CGContext _currentContext = null;
-		private bool _bUseGlobalOrientation = false;
-		private G__Orientation _GlobalOrientation;
-		private RectangleF _RectWindowLandscape;
-		private RectangleF _RectWindowPortait;
-        private PointF _PntWindowPortaitCenter;
-        private PointF _PntWindowLandscapeCenter;
+        protected IAspyGlobals iOSGlobals;
+		protected iOSUIManager iOSUIAppearance;
+        
+		protected UITapGestureRecognizer _tapGesture = null;
+		protected UISwipeGestureRecognizer _swipeGesture = null;
+		protected UIPinchGestureRecognizer _pinchGesture = null;
+		protected UIPanGestureRecognizer _panGesture = null;
+		protected UIRotationGestureRecognizer _rotorGesture = null;
+		protected UILongPressGestureRecognizer _longGesture = null;	
 
-
+		protected CGContext _currentContext;
 
 		#endregion
 
@@ -87,26 +85,11 @@ namespace AspyRoad.iOSCore
 			get { return this._longGesture; }
 		}
 
-		public CGContext currentContext
+		public CGContext CurrentContext
 		{
-			get { return this._currentContext; }
+			get { return _currentContext; }
 			set { this._currentContext = value; }
 		}
-			
-
-		public RectangleF RectWindowLandscape
-		{
-			get { return this._RectWindowLandscape; }
-			// Shouldnt need setters???
-		}
-		public RectangleF RectWindowPortait
-		{
-			get { return this._RectWindowPortait; }	
-			// Shouldnt need setters???
-		}
-		
-		
-		
 
 		#endregion
 
@@ -121,13 +104,15 @@ namespace AspyRoad.iOSCore
 		public void RemoveGestureFromWindow(G__GestureTypes gestype)
 		{
 		}
+				
+		#endregion
 
-        public void ResetFrameAndBounds()
-        {
-            this.GlobalOrientationSwinger();
-        }
+		#region Abstract Members
 
-		
+		protected virtual void ApplyUI()
+		{
+		}
+
 		#endregion
 
 		#region Private Members
@@ -135,17 +120,12 @@ namespace AspyRoad.iOSCore
 		protected virtual void Initialize ()
         {   
 
-            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
-            // Set view globals from app wide settings
-            this._bUseGlobalOrientation = iOSGlobals.G__InitializeAllViewOrientation;
-            this._GlobalOrientation = iOSGlobals.G__ViewOrientation;
-            this._RectWindowLandscape = iOSGlobals.G__RectWindowLandscape;
-            this._RectWindowPortait = iOSGlobals.G__RectWindowPortait; 
-            this._PntWindowPortaitCenter = iOSGlobals.G__PntWindowPortaitCenter;
-            this._PntWindowLandscapeCenter = iOSGlobals.G__PntWindowLandscapeCenter;
+            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> (); 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+			this.ApplyUI ();
 
             #if DEBUG
-                //this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
+                this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
             #endif
         }
 
@@ -206,69 +186,12 @@ namespace AspyRoad.iOSCore
 			{
 				return returnedGesture;
 			}
-		}
-		
-		private void GlobalOrientationSwinger()
-		{
-			// First check if we want ALL views to follow the global orientation
-			if (this._bUseGlobalOrientation)
-			{
-				switch (this._GlobalOrientation)
-				{
-                    case G__Orientation.Portait:
-                        this.Center = this._PntWindowPortaitCenter;
-                        this.Bounds = this._RectWindowPortait;
-                        this.Frame = this._RectWindowPortait;
-                        this.AccessibilityFrame = this._RectWindowPortait;
-						break;
-                    case G__Orientation.Landscape:
-                        this.Center = this._PntWindowLandscapeCenter;
-                        this.Bounds = this._RectWindowLandscape;
-                        this.Frame = this._RectWindowLandscape;
-                        this.AccessibilityFrame = this._RectWindowLandscape;
-						break;
-					default:
-					// Set nothing
-						break;
-				}
-			}			
-		}
+		}	
 
-		/// <summary>
-		/// A helper method to position the controls appropriately, based on the 
-		/// orientation
-		/// </summary>
-		protected void PositionControls (UIInterfaceOrientation toInterfaceOrientation)
+		protected void ApplyUIAppearance()
 		{
-			// depending one what orientation we start in, we want to position our controls
-			// appropriately
-//			switch (toInterfaceOrientation) {
-//				// if we're switchign to landscape
-//				case UIInterfaceOrientation.LandscapeLeft:
-//				case UIInterfaceOrientation.LandscapeRight:
-//
-//					// reposition the buttons
-//					button1.Frame = new System.Drawing.RectangleF (10, 10, 100, 33);
-//					button2.Frame = new System.Drawing.RectangleF (10, 200, 100, 33);
-//
-//					// reposition the image
-//					image.Frame = new System.Drawing.RectangleF (240, 25, this.image.Frame.Width, this.image.Frame.Height);
-//
-//					break;
-//
-//					// we're switch back to portrait
-//				case UIInterfaceOrientation.Portrait:
-//				case UIInterfaceOrientation.PortraitUpsideDown:
-//
-//					// reposition the buttons
-//					button1.Frame = new System.Drawing.RectangleF (10, 10, 100, 33);
-//					button2.Frame = new System.Drawing.RectangleF (200, 10, 100, 33);
-//
-//					// reposition the image
-//					image.Frame = new System.Drawing.RectangleF (20, 150, this.image.Frame.Width, this.image.Frame.Height);
-//
-//					break;
-			
+			this.BackgroundColor = this.iOSUIAppearance.iOSTheme.ViewBGColor.Value;
+
 		}
 
 		#endregion

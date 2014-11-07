@@ -1,6 +1,10 @@
-﻿using System;
+﻿// System
+using System;
 using System.Drawing;
+// AspyRoad
 using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
+// Monotouch
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
@@ -10,10 +14,13 @@ namespace AspyRoad.iOSCore
 {
     [MonoTouch.Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton
-    {
+	{
+		// Privates
         private RectangleF labRect;
         private RectangleF imgRect;
 		private bool _isPressed;
+		// Protected
+		protected iOSUIManager iOSUIAppearance; 
 
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
@@ -35,7 +42,8 @@ namespace AspyRoad.iOSCore
         
 		#region Private Members
 		protected virtual void Initialize()
-        {            
+        { 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
         }
         
         protected void _iconLeftlabelRight()

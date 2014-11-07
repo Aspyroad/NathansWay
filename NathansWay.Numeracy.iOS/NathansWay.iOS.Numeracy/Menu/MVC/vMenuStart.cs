@@ -17,6 +17,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
+		private UIColor colorMainBackGroundEnd; // = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
+
 		#endregion
 
 		#region Constructors
@@ -65,7 +67,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.387f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
 			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.740f);
-			var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
+			//var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
@@ -203,6 +205,12 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			DrawCanvasMain (rect);
 			base.Draw(rect);
+		}
+
+		protected override void ApplyUI ()
+		{
+			base.ApplyUI ();
+			this.colorMainBackGroundEnd = iOSUIAppearance.iOSTheme.ViewBGColor;
 		}
 
 		#endregion

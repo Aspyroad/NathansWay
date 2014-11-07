@@ -18,7 +18,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		protected IAspyGlobals iOSGlobals;
-		protected iOSUIManager iOSUIAppearance;
+
 		// Tags for id
 		private int _AspyTag1;
 		private int _AspyTag2;
@@ -58,7 +58,7 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+
 		}
 
 		#endregion
@@ -97,7 +97,7 @@ namespace AspyRoad.iOSCore
 
 		public void ApplyUIAppearance ()
 		{
-			this.View.BackgroundColor = iOSUIAppearance.iOSTheme.ViewBGColor;
+
 			// Query the UIManager, see if theres a tag with its own UI
 			// If so load it
 

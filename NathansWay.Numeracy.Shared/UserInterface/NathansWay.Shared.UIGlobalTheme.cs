@@ -53,7 +53,7 @@ namespace NathansWay.Shared
 		{
 
 			VcName = "Global";
-			VcTag = "999";
+			VcTag = 999;
 
 			FontName = "HelveticaNeue-Medium";
 			//FontNameiOS7 = "HelveticaNeue-Light";

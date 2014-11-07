@@ -11,7 +11,7 @@ namespace NathansWay.Shared
 		// Properties
 		IUITheme GlobalUITheme { get; set; }
 
-		IUITheme VcUITheme { get; set; }
+		//IUITheme VcUITheme { get; set; }
 
 		Dictionary<int, string> VcTagList { get; set; }
 
@@ -52,24 +52,24 @@ namespace NathansWay.Shared
 		// Buttons
 		G__Color _ButtonNormalBGColor { get; set; }
 		G__Color _ButtonPressedBGColor { get; set; }
-		G__Color _ButtonNormalTitleColor { get; set; } 
+		G__Color _ButtonNormalTitleColor { get; set; }
 		G__Color _ButtonPressedTitleColor { get; set; }
 		string _ButtonNormalBGImage { get; set; } 
 		string _ButtonPressedBGImage { get; set; }
 		string ButtonFontName { get; set; }
 
 		// Views/Forms
-		G__Color _ViewBGColor { get; set; } 
+		G__Color _ViewBGColor { get; set; }
 		G__Color _ViewBGTint { get; set; }
 
 		// Label
 		string LabelFontName { get; set; }
 		G__Color _LabelHighLightedTextColor { get; set; }
-		G__Color _LabelTextColor { get; set; } 
+		G__Color _LabelTextColor { get; set; }
 
 		// TextViews
 		G__Color _TextBGColor { get; set; }
-		G__Color _TextBGTint { get; set; } 
+		G__Color _TextBGTint { get; set; }
 		G__Color _TextHighLightedTextColor { get; set; }
 		G__Color _TextColor { get; set; }
 	}

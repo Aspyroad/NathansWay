@@ -47,11 +47,6 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#region Public Members
 
-		public iOSUITheme iOSTheme
-		{
-			get { return _iOSGlobals; }
-			set { _iOSGlobals = value; }	
-		}
 
 		// Some sort of apply method....??
 		//			// UIButton
@@ -228,7 +223,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _FontColor
 		{ 
-			private get;
+			get { return _ }
 			set 
 			{
 				_globalfontcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -237,7 +232,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UIButton
 		public G__Color _ButtonNormalBGColor 
 		{ 
-			private get;
+			private get {}
 			set 
 			{
 				_buttonnormalbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -245,7 +240,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ButtonPressedBGColor 		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_buttonpressedbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -253,7 +248,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ButtonNormalTitleColor		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_buttonnormaltitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -261,7 +256,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _ButtonPressedTitleColor		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_buttonpressedtitlecolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -269,7 +264,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public string _ButtonNormalBGImage 
 		{ 
-			private get;
+			//get { }
 			set 
 			{
 				_buttonnormalbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
@@ -277,7 +272,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public string _ButtonPressedBGImage 
 		{ 
-			private get;
+			//get { }
 			set 
 			{
 				_buttonpressedbgimage = new Lazy<UIImage> (() => UIImage.FromFile (value.Trim ()));
@@ -291,7 +286,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UIView
 		public G__Color _ViewBGColor 
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_viewbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -299,7 +294,7 @@ namespace AspyRoad.iOSCore.UISettings
 		} 
 		public G__Color _ViewBGTint		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_viewbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -313,7 +308,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _LabelHighLightedTextColor 		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_labelhighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -321,7 +316,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _LabelTextColor 		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_labeltextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -330,7 +325,7 @@ namespace AspyRoad.iOSCore.UISettings
 		// UITextViews
 		public G__Color _TextBGColor		
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_textbgcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -338,7 +333,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextBGTint
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_textbgtint = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -346,7 +341,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextHighLightedTextColor
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_texthighlightedtextcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
@@ -354,7 +349,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 		public G__Color _TextColor
 		{ 
-			private get;
+			private get { }
 			set 
 			{
 				_textcolor = new Lazy<UIColor> (() => UIColor.FromRGBA (value.RedRGB, value.GreenRGB, value.BlueRGB, value.AlphaRGB));
