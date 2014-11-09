@@ -47,31 +47,31 @@ namespace NathansWay.Shared
 		//string FontBoldNameiOS7 { get; set; }
 		float FontSize { get; set; }
 		//float FontSizeiOS7 { get; set; }
-		G__Color _FontColor { get; set; }
+		G__Color FontColor { get; set; }
 
 		// Buttons
-		G__Color _ButtonNormalBGColor { get; set; }
-		G__Color _ButtonPressedBGColor { get; set; }
-		G__Color _ButtonNormalTitleColor { get; set; }
-		G__Color _ButtonPressedTitleColor { get; set; }
-		string _ButtonNormalBGImage { get; set; } 
-		string _ButtonPressedBGImage { get; set; }
+		G__Color ButtonNormalBGColor { get; set; }
+		G__Color ButtonPressedBGColor { get; set; }
+		G__Color ButtonNormalTitleColor { get; set; }
+		G__Color ButtonPressedTitleColor { get; set; }
+		string ButtonNormalBGImage { get; set; } 
+		string ButtonPressedBGImage { get; set; }
 		string ButtonFontName { get; set; }
 
 		// Views/Forms
-		G__Color _ViewBGColor { get; set; }
-		G__Color _ViewBGTint { get; set; }
+		G__Color ViewBGColor { get; set; }
+		G__Color ViewBGTint { get; set; }
 
 		// Label
 		string LabelFontName { get; set; }
-		G__Color _LabelHighLightedTextColor { get; set; }
-		G__Color _LabelTextColor { get; set; }
+		G__Color LabelHighLightedTextColor { get; set; }
+		G__Color LabelTextColor { get; set; }
 
 		// TextViews
-		G__Color _TextBGColor { get; set; }
-		G__Color _TextBGTint { get; set; }
-		G__Color _TextHighLightedTextColor { get; set; }
-		G__Color _TextColor { get; set; }
+		G__Color TextBGColor { get; set; }
+		G__Color TextBGTint { get; set; }
+		G__Color TextHighLightedTextColor { get; set; }
+		G__Color TextColor { get; set; }
 	}
 
 }

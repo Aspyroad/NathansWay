@@ -108,5 +108,240 @@ namespace NathansWay.Shared
 
 		#endregion
 	}
+
+
+
+	public class UIThemeBase : IUITheme
+	{
+
+		#region Interface Members
+
+		protected bool _IsiOS7;
+		// Id
+		protected string _vcName;
+		protected int _vcTag;
+
+		// Globals
+		protected string _fontname;
+		protected string _fontnameiOS7;
+		protected string _fontboldname;
+		protected string _fontboldnameiOS7;
+		protected float _fontsize;
+		protected float _fontsizeiOS7;
+		protected Lazy<G__Color> _globalfontcolor;
+
+		// UIButton
+		protected Lazy<G__Color> _buttonnormalbgcolor;
+		protected Lazy<G__Color> _buttonpressedbgcolor;
+		protected Lazy<G__Color> _buttonnormaltitlecolor;
+		protected Lazy<G__Color> _buttonpressedtitlecolor;
+		protected string _buttonnormalbgimage;
+		protected string _buttonpressedbgimage;
+		protected string _buttonfontname;
+
+		// UIView
+		protected Lazy<G__Color> _viewbgcolor;
+		protected Lazy<G__Color> _viewbgtint;
+
+		// UILabel
+		protected string _labelfontname;
+		protected Lazy<G__Color> _labelhighlightedtextcolor;
+		protected Lazy<G__Color> _labeltextcolor;
+
+		// UITextViews
+		protected Lazy<G__Color> _textbgcolor;
+		protected Lazy<G__Color> _textbgtint;
+		protected Lazy<G__Color> _texthighlightedtextcolor;
+		protected Lazy<G__Color> _textcolor;
+
+		#endregion
+
+
+		#region Constructors
+
+		public UIThemeBase ()
+		{
+			Initialize ();
+		}
+
+		#endregion
+
+		#region Private Members
+
+		protected virtual void Initialize ()
+		{
+		}
+
+//		private void AssignGlobals()
+//		{
+//			// Tags
+//			VcName = g.VcName;
+//			VcTag = g.VcTag;
+//			// Fonts
+//			FontName = g.FontName;
+//			FontBoldName = g.FontBoldName;
+//			FontSize = g.FontSize;
+//			_FontColor = g._FontColor;
+//			// Buttons
+//			_ButtonNormalBGColor = g._ButtonNormalBGColor;
+//			_ButtonPressedBGColor = g._ButtonPressedBGColor;
+//			_ButtonNormalTitleColor = g._ButtonNormalTitleColor;
+//			_ButtonPressedTitleColor = g._ButtonPressedTitleColor;
+//			_ButtonNormalBGImage = g._ButtonNormalBGImage;
+//			_ButtonPressedBGImage = g._ButtonPressedBGImage;
+//			ButtonFontName = g.ButtonFontName;
+//			// View
+//			_ViewBGColor = g._ViewBGColor;
+//			_ViewBGTint = g._ViewBGTint;
+//			// Labels
+//			LabelFontName = g.LabelFontName;
+//			_LabelHighLightedTextColor = g._LabelHighLightedTextColor;
+//			_LabelTextColor = g._LabelTextColor;
+//			// TextViews
+//			_TextBGColor = g._TextBGColor;
+//			_TextBGTint = g._TextBGTint;
+//			_TextHighLightedTextColor = g._TextHighLightedTextColor;
+//			_TextColor = g._TextColor;
+//		}
+
+		#endregion
+
+		#region Interface Members Only
+
+		// Id
+		public string VcName
+		{
+			get { return _vcName; }
+			set { _vcName = value; }
+		}
+		public int VcTag
+		{
+			get { return _vcTag; }
+			set { _vcTag = value; }
+		}
+		// Fonts
+		public string FontName 
+		{ 
+			get { return _fontname; } 
+			set { _fontname = value; }
+		}
+		public string FontNameiOS7 
+		{ 
+			get { return _fontnameiOS7; }
+			set { _fontnameiOS7 = value; } 
+		}
+		public string FontBoldName 
+		{ 
+			get { return _fontboldname; }
+			set { _fontboldnameiOS7 = value; }
+		}
+		public string FontBoldNameiOS7 
+		{ 
+			get { return _fontboldnameiOS7; } 
+			set { _fontboldnameiOS7 = value; }
+		}
+		public float FontSize 
+		{ 
+			get { return _fontsize; }
+			set { _fontsizeiOS7 = value; }
+		}
+		public float FontSizeiOS7 
+		{ 
+			get { return _fontsizeiOS7; }
+			set { _fontsizeiOS7 = value; }
+		}
+		public Lazy<G__Color> FontColor
+		{ 
+			get { return _globalfontcolor.Value; }
+			set { _globalfontcolor = value; }
+		}
+
+		// UIButton
+		public Lazy<G__Color> ButtonNormalBGColor 
+		{ 
+			get { return _buttonnormalbgcolor.Value; }
+			set { _buttonnormalbgcolor = value; } 
+		} 
+		public Lazy<G__Color> ButtonPressedBGColor 		
+		{ 
+			get { return _buttonpressedbgcolor.Value; }
+			set { _buttonpressedbgcolor = value; } 
+		} 
+		public Lazy<G__Color> ButtonNormalTitleColor		
+		{ 
+			get { return _buttonnormaltitlecolor.Value; }
+			set { _buttonnormaltitlecolor = value; } 
+		}
+		public Lazy<G__Color> ButtonPressedTitleColor		
+		{ 
+			get { return _buttonpressedtitlecolor.Value; }
+			set { _buttonpressedtitlecolor = value; } 
+		}
+		public string ButtonNormalBGImage 
+		{ 
+			get { return _buttonnormalbgimage; }
+			set { _buttonnormalbgimage = value; }
+		} 
+		public string ButtonPressedBGImage 
+		{ 
+			get { return _buttonpressedbgimage; }
+			set { _buttonpressedbgimage = value; }
+		} 
+		public string ButtonFontName
+		{ 
+			get { return _buttonfontname;}
+			set { _buttonfontname = value; }
+		}
+		// UIView
+		public Lazy<G__Color> ViewBGColor 
+		{ 
+			get { return _viewbgcolor.Value; }
+			set { _viewbgcolor = value; } 
+		} 
+		public Lazy<G__Color> ViewBGTint		
+		{ 
+			get { return _viewbgtint.Value; }
+			set { _viewbgtint = value; } 
+		} 
+		// UILabel
+		public string LabelFontName 
+		{ 
+			get { return _labelfontname;}
+			set { _labelfontname = value; }
+		}
+		public Lazy<G__Color> LabelHighLightedTextColor 		
+		{ 
+			get {  return _labelhighlightedtextcolor.Value; }
+			set { _labelhighlightedtextcolor = value; } 
+		}
+		public Lazy<G__Color> LabelTextColor 		
+		{ 
+			get { return _labeltextcolor.Value; }
+			set { _labeltextcolor = value; } 
+		} 
+		// UITextViews
+		public Lazy<G__Color> TextBGColor		
+		{ 
+			get { return _textbgcolor.Value; }
+			set { _textbgcolor = value; } 
+		}
+		public Lazy<G__Color> TextBGTint
+		{ 
+			get { return _textbgtint.Value; }
+			set { _textbgtint = value; } 
+		}
+		public Lazy<G__Color> TextHighLightedTextColor
+		{ 
+			get { return _texthighlightedtextcolor.Value; }
+			set { _texthighlightedtextcolor = value; }
+		}
+		Lazy<G__Color> TextColor
+		{ 
+			get { return _textcolor.Value; }
+			set { _textcolor = value; } 
+		}
+
+		#endregion
+	}
 }
 
