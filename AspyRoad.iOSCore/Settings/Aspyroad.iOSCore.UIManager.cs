@@ -47,6 +47,11 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#region Public Members
 
+		public iOSUITheme GlobaliOSTheme
+		{
+			get { return _globaliOSTheme; }
+		}
+
 		// Some sort of apply method....??
 		//			// UIButton
 		//			var _button = UIButton.Appearance;
@@ -153,7 +158,12 @@ namespace AspyRoad.iOSCore.UISettings
 		/// <returns>UIColor</returns>
 		public Lazy<UIColor> convertUIColor (Lazy<G__Color> gcolor)
 		{
-			return new Lazy<UIColor> (() => UIColor.FromRGBA (gcolor.Value.RedRGB, gcolor.Value.GreenRGB, gcolor.Value.BlueRGB, gcolor.Value.AlphaRGB));
+			return new Lazy<UIColor> (() => UIColor.FromRGBA (
+				(float)gcolor.Value.RedRGB, 
+				(float)gcolor.Value.GreenRGB, 
+				(float)gcolor.Value.BlueRGB, 
+				(float)gcolor.Value.AlphaRGB)
+			);
 		}
 
 		#endregion

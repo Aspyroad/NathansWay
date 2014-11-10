@@ -17,7 +17,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
-		private UIColor colorMainBackGroundEnd; // = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
+		//private UIColor colorTextWhiteFade; // = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
+		private UIColor colorMainBackGroundStart;
+		private UIColor colorMainBackGroundEnd;
 
 		#endregion
 
@@ -57,22 +59,20 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#region DrawnGraphics
 
-		private void DrawCanvasMain(RectangleF menuLogoFrame)
+		private void DrawCanvasMain(UIColor colorMainBackGroundStart, UIColor colorMainBackGroundEnd, RectangleF menuLogoFrame)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
 			var context = UIGraphics.GetCurrentContext();
 
 			//// Color Declarations
-			var colorTextNathansWay = UIColor.FromRGBA(0.933f, 0.890f, 0.827f, 0.387f);
+			var colorTextWhiteFade = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.392f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
-			var colorMainBackGroundStart = UIColor.FromRGBA(1.000f, 0.571f, 0.000f, 0.740f);
-			//var colorMainBackGroundEnd = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
-			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, UIColor.FromRGBA(0.901f, 0.513f, 0.000f, 0.870f).CGColor, colorMainBackGroundEnd.CGColor};
-			var gradientBackGroundLocations = new float [] {0.0f, 0.59f, 1.0f};
+			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, UIColor.FromRGBA(0.745f, 0.439f, 0.000f, 0.833f).CGColor, colorMainBackGroundEnd.CGColor};
+			var gradientBackGroundLocations = new float [] {0.0f, 0.57f, 1.0f};
 			var gradientBackGround = new CGGradient(colorSpace, gradientBackGroundColors, gradientBackGroundLocations);
 
 			//// Shadow Declarations
@@ -84,14 +84,18 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNumbersShadowBlurRadius = 5.0f;
 
 			//// Variable Declarations
-			var strTeacherName = "Teacher Name";
-			var strStudentName = "Student Name";
 			var strAppName = "Numbers";
 
-			//// Rectangle Drawing
-			var rectanglePath = UIBezierPath.FromRect(menuLogoFrame);
+			//// FrameBackdropWhite Drawing
+			var frameBackdropWhitePath = UIBezierPath.FromRect(menuLogoFrame);
+			UIColor.White.SetFill();
+			frameBackdropWhitePath.Fill();
+
+
+			//// MainFrame Drawing
+			var mainFramePath = UIBezierPath.FromRect(menuLogoFrame);
 			context.SaveState();
-			rectanglePath.AddClip();
+			mainFramePath.AddClip();
 			context.DrawLinearGradient(gradientBackGround, new PointF(512.0f, -0.0f), new PointF(512.0f, 768.0f), 0);
 			context.RestoreState();
 
@@ -107,7 +111,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 				var textContent = "nathansway";
 				context.SaveState();
 				context.SetShadowWithColor(colorTextNathansWayShadowOffset, colorTextNathansWayShadowBlurRadius, colorTextNathansWayShadow);
-				colorTextNathansWay.SetFill();
+				colorTextWhiteFade.SetFill();
 				var textLogoNathansWayFont = UIFont.FromName("HelveticaNeue-Light", 50.0f);
 				textLogoNathansWayRect.Offset(0.0f, (textLogoNathansWayRect.Height - new NSString(textContent).StringSize(textLogoNathansWayFont, textLogoNathansWayRect.Size).Height) / 2.0f);
 				new NSString(textContent).DrawString(textLogoNathansWayRect, textLogoNathansWayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
@@ -122,7 +126,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 				var textContent = "1234567890";
 				context.SaveState();
 				context.SetShadowWithColor(colorTextNumbersShadowOffset, colorTextNumbersShadowBlurRadius, colorTextNumbersShadow);
-				colorTextNathansWay.SetFill();
+				colorTextWhiteFade.SetFill();
 				var textNumberDisplayFont = UIFont.FromName("Helvetica-Light", 40.0f);
 				textNumberDisplayRect.Offset(0.0f, (textNumberDisplayRect.Height - new NSString(textContent).StringSize(textNumberDisplayFont, textNumberDisplayRect.Size).Height) / 2.0f);
 				new NSString(textContent).DrawString(textNumberDisplayRect, textNumberDisplayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
@@ -173,23 +177,25 @@ namespace NathansWay.iOS.Numeracy.Menu
 			templateButtonVisualsPath.Fill();
 
 
-			//// Rectangle 2 Drawing
-			var rectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 124.5f, 924.0f, 120.0f), 6.0f);
-			UIColor.White.SetStroke();
-			rectangle2Path.LineWidth = 1.0f;
-			rectangle2Path.Stroke();
+			//// ComboBoxGroupFrame Drawing
+			var comboBoxGroupFramePath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 124.5f, 924.0f, 120.0f), 6.0f);
+			colorTextWhiteFade.SetStroke();
+			comboBoxGroupFramePath.LineWidth = 1.0f;
+			comboBoxGroupFramePath.Stroke();
 
 
-			//// txtTeacherName Drawing
-			RectangleF txtTeacherNameRect = new RectangleF(50.0f, 126.0f, 448.0f, 55.0f);
-			UIColor.White.SetFill();
-			new NSString(strTeacherName).DrawString(txtTeacherNameRect, UIFont.FromName("Helvetica-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			//// TeacherFrame Drawing
+			var teacherFramePath = UIBezierPath.FromRoundedRect(new RectangleF(75.0f, 180.0f, 401.0f, 44.0f), 6.0f);
+			colorTextWhiteFade.SetStroke();
+			teacherFramePath.LineWidth = 1.0f;
+			teacherFramePath.Stroke();
 
 
-			//// txtStudentName Drawing
-			RectangleF txtStudentNameRect = new RectangleF(526.0f, 126.0f, 448.0f, 55.0f);
-			UIColor.White.SetFill();
-			new NSString(strStudentName).DrawString(txtStudentNameRect, UIFont.FromName("Helvetica-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
+			//// StudentFrame Drawing
+			var studentFramePath = UIBezierPath.FromRoundedRect(new RectangleF(549.5f, 179.5f, 401.0f, 44.0f), 6.0f);
+			colorTextWhiteFade.SetStroke();
+			studentFramePath.LineWidth = 1.0f;
+			studentFramePath.Stroke();
 		}
 
         #endregion
@@ -203,14 +209,24 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		public override void Draw(RectangleF rect)
 		{
-			DrawCanvasMain (rect);
+			ApplyUI ();
+			DrawCanvasMain (this.colorMainBackGroundStart, this.colorMainBackGroundEnd, rect);
 			base.Draw(rect);
 		}
 
 		protected override void ApplyUI ()
 		{
 			base.ApplyUI ();
-			//this.colorMainBackGroundEnd = iOSUIAppearance.iOSTheme.ViewBGColor;
+			//var bgColor = iOSUIAppearance.GlobaliOSTheme.ViewBGColor;
+			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+			//this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+
+			this.colorMainBackGroundStart = UIColor.FromRGBA (
+				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 
+				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.GreenRGB,
+				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.BlueRGB,
+				0.40f
+			);
 		}
 
 		#endregion

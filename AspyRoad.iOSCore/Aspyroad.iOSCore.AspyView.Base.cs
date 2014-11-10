@@ -122,7 +122,7 @@ namespace AspyRoad.iOSCore
 
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> (); 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			this.ApplyUI ();
+			//this.ApplyUI ();
 
             #if DEBUG
                 //this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
