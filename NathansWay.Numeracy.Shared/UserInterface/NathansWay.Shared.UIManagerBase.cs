@@ -116,18 +116,18 @@ namespace NathansWay.Shared
 
 		#region Interface Members
 
-		protected bool _IsiOS7;
+		//protected bool _IsiOS7;
 		// Id
 		protected string _vcName;
 		protected int _vcTag;
 
 		// Globals
 		protected string _fontname;
-		protected string _fontnameiOS7;
+		//protected string _fontnameiOS7;
 		protected string _fontboldname;
-		protected string _fontboldnameiOS7;
+		//protected string _fontboldnameiOS7;
 		protected float _fontsize;
-		protected float _fontsizeiOS7;
+		//protected float _fontsizeiOS7;
 		protected Lazy<G__Color> _globalfontcolor;
 
 		// UIButton
@@ -225,56 +225,56 @@ namespace NathansWay.Shared
 			get { return _fontname; } 
 			set { _fontname = value; }
 		}
-		public string FontNameiOS7 
-		{ 
-			get { return _fontnameiOS7; }
-			set { _fontnameiOS7 = value; } 
-		}
+//		public string FontNameiOS7 
+//		{ 
+//			get { return _fontnameiOS7; }
+//			set { _fontnameiOS7 = value; } 
+//		}
 		public string FontBoldName 
 		{ 
 			get { return _fontboldname; }
-			set { _fontboldnameiOS7 = value; }
+			set { _fontboldname = value; }
 		}
-		public string FontBoldNameiOS7 
-		{ 
-			get { return _fontboldnameiOS7; } 
-			set { _fontboldnameiOS7 = value; }
-		}
+//		public string FontBoldNameiOS7 
+//		{ 
+//			get { return _fontboldnameiOS7; } 
+//			set { _fontboldnameiOS7 = value; }
+//		}
 		public float FontSize 
 		{ 
 			get { return _fontsize; }
-			set { _fontsizeiOS7 = value; }
+			set { _fontsize = value; }
 		}
-		public float FontSizeiOS7 
-		{ 
-			get { return _fontsizeiOS7; }
-			set { _fontsizeiOS7 = value; }
-		}
+//		public float FontSizeiOS7 
+//		{ 
+//			get { return _fontsizeiOS7; }
+//			set { _fontsizeiOS7 = value; }
+//		}
 		public Lazy<G__Color> FontColor
 		{ 
-			get { return _globalfontcolor.Value; }
+			get { return _globalfontcolor; }
 			set { _globalfontcolor = value; }
 		}
 
 		// UIButton
 		public Lazy<G__Color> ButtonNormalBGColor 
 		{ 
-			get { return _buttonnormalbgcolor.Value; }
+			get { return _buttonnormalbgcolor; }
 			set { _buttonnormalbgcolor = value; } 
 		} 
 		public Lazy<G__Color> ButtonPressedBGColor 		
 		{ 
-			get { return _buttonpressedbgcolor.Value; }
+			get { return _buttonpressedbgcolor; }
 			set { _buttonpressedbgcolor = value; } 
 		} 
 		public Lazy<G__Color> ButtonNormalTitleColor		
 		{ 
-			get { return _buttonnormaltitlecolor.Value; }
+			get { return _buttonnormaltitlecolor; }
 			set { _buttonnormaltitlecolor = value; } 
 		}
 		public Lazy<G__Color> ButtonPressedTitleColor		
 		{ 
-			get { return _buttonpressedtitlecolor.Value; }
+			get { return _buttonpressedtitlecolor; }
 			set { _buttonpressedtitlecolor = value; } 
 		}
 		public string ButtonNormalBGImage 
@@ -295,12 +295,12 @@ namespace NathansWay.Shared
 		// UIView
 		public Lazy<G__Color> ViewBGColor 
 		{ 
-			get { return _viewbgcolor.Value; }
+			get { return _viewbgcolor; }
 			set { _viewbgcolor = value; } 
 		} 
 		public Lazy<G__Color> ViewBGTint		
 		{ 
-			get { return _viewbgtint.Value; }
+			get { return _viewbgtint; }
 			set { _viewbgtint = value; } 
 		} 
 		// UILabel
@@ -311,33 +311,33 @@ namespace NathansWay.Shared
 		}
 		public Lazy<G__Color> LabelHighLightedTextColor 		
 		{ 
-			get {  return _labelhighlightedtextcolor.Value; }
+			get {  return _labelhighlightedtextcolor; }
 			set { _labelhighlightedtextcolor = value; } 
 		}
 		public Lazy<G__Color> LabelTextColor 		
 		{ 
-			get { return _labeltextcolor.Value; }
+			get { return _labeltextcolor; }
 			set { _labeltextcolor = value; } 
 		} 
 		// UITextViews
 		public Lazy<G__Color> TextBGColor		
 		{ 
-			get { return _textbgcolor.Value; }
+			get { return _textbgcolor; }
 			set { _textbgcolor = value; } 
 		}
 		public Lazy<G__Color> TextBGTint
 		{ 
-			get { return _textbgtint.Value; }
+			get { return _textbgtint; }
 			set { _textbgtint = value; } 
 		}
 		public Lazy<G__Color> TextHighLightedTextColor
 		{ 
-			get { return _texthighlightedtextcolor.Value; }
+			get { return _texthighlightedtextcolor; }
 			set { _texthighlightedtextcolor = value; }
 		}
-		Lazy<G__Color> TextColor
+		public Lazy<G__Color> TextColor
 		{ 
-			get { return _textcolor.Value; }
+			get { return _textcolor; }
 			set { _textcolor = value; } 
 		}
 

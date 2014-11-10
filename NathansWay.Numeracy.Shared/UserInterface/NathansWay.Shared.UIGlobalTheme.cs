@@ -18,32 +18,32 @@ namespace NathansWay.Shared
 		//public string FontBoldNameiOS7 { get; set; }
 		public float FontSize { get; set; }
 		//public float FontSizeiOS7 { get; set; }
-		public G__Color FontColor { get; set; }
+		public Lazy<G__Color> FontColor { get; set; }
 
 
 		// UIButton
-		public G__Color ButtonNormalBGColor { get; set; }
-		public G__Color ButtonPressedBGColor { get; set; }
-		public G__Color ButtonNormalTitleColor { get; set; }
-		public G__Color ButtonPressedTitleColor { get; set; }
+		public Lazy<G__Color> ButtonNormalBGColor { get; set; }
+		public Lazy<G__Color> ButtonPressedBGColor { get; set; }
+		public Lazy<G__Color> ButtonNormalTitleColor { get; set; }
+		public Lazy<G__Color> ButtonPressedTitleColor { get; set; }
 		public string ButtonNormalBGImage { get; set; }
 		public string ButtonPressedBGImage { get; set; }
 		public string ButtonFontName { get; set; }
 
 		// UIView
-		public G__Color ViewBGColor { get; set; }
-		public G__Color ViewBGTint { get; set; }
+		public Lazy<G__Color> ViewBGColor { get; set; }
+		public Lazy<G__Color> ViewBGTint { get; set; }
 
 		// UILabel
 		public string LabelFontName { get; set; }
-		public G__Color LabelHighLightedTextColor { get; set; }
-		public G__Color LabelTextColor { get; set; }
+		public Lazy<G__Color> LabelHighLightedTextColor { get; set; }
+		public Lazy<G__Color> LabelTextColor { get; set; }
 
 		// UITextViews
-		public G__Color TextBGColor { get; set; }
-		public G__Color TextBGTint { get; set; }
-		public G__Color TextHighLightedTextColor { get; set; }
-		public G__Color TextColor { get; set; }
+		public Lazy<G__Color> TextBGColor { get; set; }
+		public Lazy<G__Color> TextBGTint { get; set; }
+		public Lazy<G__Color> TextHighLightedTextColor { get; set; }
+		public Lazy<G__Color> TextColor { get; set; }
 
 		#endregion
 
@@ -61,32 +61,32 @@ namespace NathansWay.Shared
 			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
 			FontSize = 20.0f;
 			//FontSizeiOS7 = 20.0f;
-			FontColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
+			FontColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 
 
 			// UIButton
-			ButtonNormalBGColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			ButtonPressedBGColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			ButtonNormalTitleColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			ButtonPressedTitleColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
+			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalBGImage = "";
 			ButtonPressedBGImage = "";
 			ButtonFontName = "HelveticaNeue-Medium";
 
 			// UIView
-			ViewBGColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			ViewBGTint = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black 
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
 			// UILabel
 			LabelFontName = "";
-			LabelHighLightedTextColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			LabelTextColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black 
+			LabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			LabelTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
 			// UITextViews
-			TextBGColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			TextBGTint = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			TextHighLightedTextColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
-			TextColor = new G__Color (255.0f, 255.0f, 255.0f, 255.0f); // Black
+			TextBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			TextBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 
 		}
 

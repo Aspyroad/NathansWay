@@ -47,31 +47,31 @@ namespace NathansWay.Shared
 		//string FontBoldNameiOS7 { get; set; }
 		float FontSize { get; set; }
 		//float FontSizeiOS7 { get; set; }
-		G__Color FontColor { get; set; }
+		Lazy<G__Color> FontColor { get; set; }
 
 		// Buttons
-		G__Color ButtonNormalBGColor { get; set; }
-		G__Color ButtonPressedBGColor { get; set; }
-		G__Color ButtonNormalTitleColor { get; set; }
-		G__Color ButtonPressedTitleColor { get; set; }
+		Lazy<G__Color> ButtonNormalBGColor { get; set; }
+		Lazy<G__Color> ButtonPressedBGColor { get; set; }
+		Lazy<G__Color> ButtonNormalTitleColor { get; set; }
+		Lazy<G__Color> ButtonPressedTitleColor { get; set; }
 		string ButtonNormalBGImage { get; set; } 
 		string ButtonPressedBGImage { get; set; }
 		string ButtonFontName { get; set; }
 
 		// Views/Forms
-		G__Color ViewBGColor { get; set; }
-		G__Color ViewBGTint { get; set; }
+		Lazy<G__Color> ViewBGColor { get; set; }
+		Lazy<G__Color> ViewBGTint { get; set; }
 
 		// Label
 		string LabelFontName { get; set; }
-		G__Color LabelHighLightedTextColor { get; set; }
-		G__Color LabelTextColor { get; set; }
+		Lazy<G__Color> LabelHighLightedTextColor { get; set; }
+		Lazy<G__Color> LabelTextColor { get; set; }
 
 		// TextViews
-		G__Color TextBGColor { get; set; }
-		G__Color TextBGTint { get; set; }
-		G__Color TextHighLightedTextColor { get; set; }
-		G__Color TextColor { get; set; }
+		Lazy<G__Color> TextBGColor { get; set; }
+		Lazy<G__Color> TextBGTint { get; set; }
+		Lazy<G__Color> TextHighLightedTextColor { get; set; }
+		Lazy<G__Color> TextColor { get; set; }
 	}
 
 }
