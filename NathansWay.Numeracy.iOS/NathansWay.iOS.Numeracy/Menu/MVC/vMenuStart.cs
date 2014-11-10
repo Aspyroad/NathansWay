@@ -210,7 +210,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		protected override void ApplyUI ()
 		{
 			base.ApplyUI ();
-			this.colorMainBackGroundEnd = iOSUIAppearance.iOSTheme.ViewBGColor;
+			//this.colorMainBackGroundEnd = iOSUIAppearance.iOSTheme.ViewBGColor;
 		}
 
 		#endregion

@@ -26,8 +26,8 @@ namespace NathansWay.Shared
 		public Lazy<G__Color> ButtonPressedBGColor { get; set; }
 		public Lazy<G__Color> ButtonNormalTitleColor { get; set; }
 		public Lazy<G__Color> ButtonPressedTitleColor { get; set; }
-		public string ButtonNormalBGImage { get; set; }
-		public string ButtonPressedBGImage { get; set; }
+		public string ButtonNormalBGStrImage { get; set; }
+		public string ButtonPressedBGStrImage { get; set; }
 		public string ButtonFontName { get; set; }
 
 		// UIView
@@ -69,8 +69,8 @@ namespace NathansWay.Shared
 			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-			ButtonNormalBGImage = "";
-			ButtonPressedBGImage = "";
+			ButtonNormalBGStrImage = "";
+			ButtonPressedBGStrImage = "";
 			ButtonFontName = "HelveticaNeue-Medium";
 
 			// UIView

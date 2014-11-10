@@ -152,7 +152,8 @@ namespace NathansWay.iOS.Numeracy
 //			
 //						window.RootViewController = ViewContainerController;
 //						//window.RootViewController = _mainworkspace;
-
+			//Setup UIManager
+			this.SetUpUI();
 			// Setup the window
 			window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Register our window

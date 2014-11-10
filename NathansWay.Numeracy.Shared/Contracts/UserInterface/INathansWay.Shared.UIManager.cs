@@ -54,8 +54,8 @@ namespace NathansWay.Shared
 		Lazy<G__Color> ButtonPressedBGColor { get; set; }
 		Lazy<G__Color> ButtonNormalTitleColor { get; set; }
 		Lazy<G__Color> ButtonPressedTitleColor { get; set; }
-		string ButtonNormalBGImage { get; set; } 
-		string ButtonPressedBGImage { get; set; }
+		string ButtonNormalBGStrImage { get; set; } 
+		string ButtonPressedBGStrImage { get; set; }
 		string ButtonFontName { get; set; }
 
 		// Views/Forms

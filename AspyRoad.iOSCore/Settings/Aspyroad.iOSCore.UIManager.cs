@@ -104,10 +104,16 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#region Private Members
 
+		/// <summary>
+		/// Initialize this instance.
+		/// </summary>
 		private void Initialize ()
 		{
 		}
 
+		/// <summary>
+		/// Assigns the globals.
+		/// </summary>
 		private void AssignGlobals ()
 		{
 			// Tags
@@ -117,27 +123,37 @@ namespace AspyRoad.iOSCore.UISettings
 			FontName = g.FontName;
 			FontBoldName = g.FontBoldName;
 			FontSize = g.FontSize;
-			_FontColor = g.FontColor;
+			FontColor = g.FontColor;
 			// Buttons
-			_ButtonNormalBGColor = g.ButtonNormalBGColor;
-			_ButtonPressedBGColor = g.ButtonPressedBGColor;
-			_ButtonNormalTitleColor = g.ButtonNormalTitleColor;
-			_ButtonPressedTitleColor = g.ButtonPressedTitleColor;
-			_ButtonNormalBGImage = g.ButtonNormalBGImage;
-			_ButtonPressedBGImage = g.ButtonPressedBGImage;
+			ButtonNormalBGColor = g.ButtonNormalBGColor;
+			ButtonPressedBGColor = g.ButtonPressedBGColor;
+			ButtonNormalTitleColor = g.ButtonNormalTitleColor;
+			ButtonPressedTitleColor = g.ButtonPressedTitleColor;
+			ButtonNormalBGStrImage = g.ButtonNormalBGStrImage;
+			ButtonPressedBGStrImage = g.ButtonPressedBGStrImage;
 			ButtonFontName = g.ButtonFontName;
 			// View
-			_ViewBGColor = g.ViewBGColor;
-			_ViewBGTint = g.ViewBGTint;
+			ViewBGColor = g.ViewBGColor;
+			ViewBGTint = g.ViewBGTint;
 			// Labels
 			LabelFontName = g.LabelFontName;
-			_LabelHighLightedTextColor = g.LabelHighLightedTextColor;
-			_LabelTextColor = g.LabelTextColor;
+			LabelHighLightedTextColor = g.LabelHighLightedTextColor;
+			LabelTextColor = g.LabelTextColor;
 			// TextViews
-			_TextBGColor = g.TextBGColor;
-			_TextBGTint = g.TextBGTint;
-			_TextHighLightedTextColor = g.TextHighLightedTextColor;
-			_TextColor = g.TextColor;
+			TextBGColor = g.TextBGColor;
+			TextBGTint = g.TextBGTint;
+			TextHighLightedTextColor = g.TextHighLightedTextColor;
+			TextColor = g.TextColor;
+		}
+
+		/// <summary>
+		/// Converts a G__Color struct to a new UIColor object
+		/// </summary>
+		/// <param name="gcolor"></param>
+		/// <returns>UIColor</returns>
+		public Lazy<UIColor> convertUIColor (Lazy<G__Color> gcolor)
+		{
+			return new Lazy<UIColor> (() => UIColor.FromRGBA (gcolor.Value.RedRGB, gcolor.Value.GreenRGB, gcolor.Value.BlueRGB, gcolor.Value.AlphaRGB));
 		}
 
 		#endregion
@@ -163,6 +179,10 @@ namespace AspyRoad.iOSCore.UISettings
 			set { _fontsizeiOS7 = value; }
 		}
 
+		/// <summary>
+		/// iOS was a major UI change
+		/// </summary>
+		/// <value><c>true</c> if this instance is iOS7 or greater; otherwise, <c>false</c>.</value>
 		public bool IsiOS7
 		{
 			get
@@ -201,59 +221,61 @@ namespace AspyRoad.iOSCore.UISettings
 			return UIFont.FromName (this.IsiOS7 ? this.FontBoldNameiOS7 : this.FontBoldName, this.IsiOS7 ? this.FontSizeiOS7 : this.FontSize);
 		}
 
-		public Lazy<UIColor> FontColor
+		public Lazy<UIColor> FontUIColor
 		{ 
 			get
 			{
-				return _globalfontcolor; 
+				return this.convertUIColor(_globalfontcolor); 
 			}
 		}
 		// Button
-		public Lazy<UIColor> ButtonNormalBGColor
+		public Lazy<UIColor> ButtonNormalBGUIColor
 		{ 
 			get
 			{
-				return _buttonnormalbgcolor.;
+				return this.convertUIColor(_buttonnormalbgcolor);
 			} 
 		}
 
-		public Lazy<UIColor> ButtonPressedBGColor
+		public Lazy<UIColor> ButtonPressedBGUIColor
 		{ 
 			get
 			{
-				return _buttonpressedbgcolor; 
+				return this.convertUIColor(_buttonpressedbgcolor); 
 			} 
 		}
 
-		public Lazy<UIColor> ButtonNormalTitleColor
+		public Lazy<UIColor> ButtonNormalTitleUIColor
 		{ 
+
 			get
 			{
-				return _buttonnormaltitlecolor;
+				return this.convertUIColor(_buttonnormaltitlecolor);
 			} 
 		}
 
-		public Lazy<UIColor> ButtonPressedTitleColor
+		public Lazy<UIColor> ButtonPressedTitleUIColor
 		{ 
 			get
 			{
-				return _buttonpressedtitlecolor;
+				return this.convertUIColor(_buttonpressedtitlecolor);
 			} 
 		}
 
-		public Lazy<UIImage> ButtonNormalBGImage
+		public Lazy<UIImage> ButtonNormalBGUIImage
 		{ 
 			get
 			{
-				return _buttonnormalbgimage; 
+				return new Lazy<UIImage> (() => UIImage.FromFile (_buttonnormalbgstrimage)); 
+
 			}
 		}
 
-		public Lazy<UIImage> ButtonPressedBGImage
+		public Lazy<UIImage> ButtonPressedBGUIImage
 		{ 
 			get
 			{
-				return _buttonpressedbgimage; 
+				return new Lazy<UIImage> (() => UIImage.FromFile (_buttonpressedbgstrimage)); 
 			}
 		}
 
@@ -262,19 +284,19 @@ namespace AspyRoad.iOSCore.UISettings
 			return UIFont.FromName (this.ButtonFontName, size);
 		}
 		// UIView
-		public Lazy<UIColor> ViewBGColor
+		public Lazy<UIColor> ViewBGUIColor
 		{ 
 			get
 			{
-				return _viewbgcolor; 
+				return this.convertUIColor(_viewbgcolor); 
 			} 
 		}
 
-		public Lazy<UIColor> ViewBGTint
+		public Lazy<UIColor> ViewBGUITint
 		{ 
 			get
 			{
-				return _viewbgtint;
+				return this.convertUIColor(_viewbgtint);
 			} 
 		}
 		// UILabel
@@ -283,51 +305,51 @@ namespace AspyRoad.iOSCore.UISettings
 			return UIFont.FromName (this.LabelFontName, size);
 		}
 
-		public Lazy<UIColor> LabelHighLightedTextColor
+		public Lazy<UIColor> LabelHighLightedTextUIColor
 		{ 
 			get
 			{
-				return _labelhighlightedtextcolor;
+				return this.convertUIColor(_labelhighlightedtextcolor);
 			} 
 		}
 
-		public Lazy<UIColor> LabelTextColor
+		public Lazy<UIColor> LabelTextUIColor
 		{ 
 			get
 			{
-				return _labeltextcolor;
+				return this.convertUIColor(_labeltextcolor);
 			} 
 		}
 		// UITextViews
-		public Lazy<UIColor> TextBGColor
+		public Lazy<UIColor> TextBGUIColor
 		{ 
 			get
 			{
-				return _textbgcolor;
+				return this.convertUIColor(_textbgcolor);
 			} 
 		}
 
-		public Lazy<UIColor> TextBGTint
+		public Lazy<UIColor> TextBGUITint
 		{ 
 			get
 			{
-				return _textbgtint;
+				return this.convertUIColor(_textbgtint);
 			} 
 		}
 
-		public Lazy<UIColor> TextHighLightedTextColor
+		public Lazy<UIColor> TextHighLightedTextUIColor
 		{ 
 			get
 			{
-				return _texthighlightedtextcolor;
+				return this.convertUIColor(_texthighlightedtextcolor);
 			} 
 		}
 
-		public Lazy<UIColor> TextColor
+		public Lazy<UIColor> TextUIColor
 		{ 
 			get
 			{
-				return _textcolor;
+				return this.convertUIColor(_textcolor);
 			} 
 		}
 

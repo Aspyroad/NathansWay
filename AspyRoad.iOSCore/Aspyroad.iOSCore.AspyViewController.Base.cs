@@ -17,7 +17,7 @@ namespace AspyRoad.iOSCore
 
 		#region Class Variables
 
-		protected IAspyGlobals iOSGlobals;
+		public IAspyGlobals iOSGlobals;
 
 		// Tags for id
 		private int _AspyTag1;

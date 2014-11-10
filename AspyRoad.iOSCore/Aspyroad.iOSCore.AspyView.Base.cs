@@ -125,7 +125,7 @@ namespace AspyRoad.iOSCore
 			this.ApplyUI ();
 
             #if DEBUG
-                this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
+                //this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
             #endif
         }
 
@@ -190,7 +190,7 @@ namespace AspyRoad.iOSCore
 
 		protected void ApplyUIAppearance()
 		{
-			this.BackgroundColor = this.iOSUIAppearance.iOSTheme.ViewBGColor.Value;
+			//this.BackgroundColor = this.iOSUIAppearance.;
 
 		}
 

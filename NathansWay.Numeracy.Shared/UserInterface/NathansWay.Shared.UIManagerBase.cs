@@ -135,8 +135,8 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _buttonpressedbgcolor;
 		protected Lazy<G__Color> _buttonnormaltitlecolor;
 		protected Lazy<G__Color> _buttonpressedtitlecolor;
-		protected string _buttonnormalbgimage;
-		protected string _buttonpressedbgimage;
+		protected string _buttonnormalbgstrimage;
+		protected string _buttonpressedbgstrimage;
 		protected string _buttonfontname;
 
 		// UIView
@@ -155,7 +155,6 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _textcolor;
 
 		#endregion
-
 
 		#region Constructors
 
@@ -277,15 +276,15 @@ namespace NathansWay.Shared
 			get { return _buttonpressedtitlecolor; }
 			set { _buttonpressedtitlecolor = value; } 
 		}
-		public string ButtonNormalBGImage 
+		public string ButtonNormalBGStrImage 
 		{ 
-			get { return _buttonnormalbgimage; }
-			set { _buttonnormalbgimage = value; }
+			get { return _buttonnormalbgstrimage; }
+			set { _buttonnormalbgstrimage = value; }
 		} 
-		public string ButtonPressedBGImage 
+		public string ButtonPressedBGStrImage 
 		{ 
-			get { return _buttonpressedbgimage; }
-			set { _buttonpressedbgimage = value; }
+			get { return _buttonpressedbgstrimage; }
+			set { _buttonpressedbgstrimage = value; }
 		} 
 		public string ButtonFontName
 		{ 
