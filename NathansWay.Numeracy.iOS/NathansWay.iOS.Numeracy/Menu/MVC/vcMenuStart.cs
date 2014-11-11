@@ -54,6 +54,26 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#endregion
 
+		#region Deconstructor
+
+		protected override void Dispose (bool disposing)
+		{
+			base.Dispose (disposing);
+
+			if (disposing)
+			{
+				//Do this because the ViewModel hangs around for the lifetime of the app
+				this.btnMenuVisuals.TouchUpInside -= btnMenuVisuals_touchupinside;
+				this.btnMenuLessons.TouchUpInside -= btnMenuLessons_touchupinside;
+				this.btnMenuToolbox.TouchUpInside -= btnMenuToolbox_touchupinside;
+				this.btnMenuTeacher.TouchUpInside -= btnMenuTeacher_touchupinside;
+				this.btnMenuStudent.TouchUpInside -= btnMenuStudent_touchupinside;
+				this.btnMenuLessonBuilder.TouchUpInside -= btnMenuLessonBuilder_touchupinside;
+			}
+		}
+
+		#endregion
+
 		#region Private Members
 
         protected override void Initialize ()
@@ -168,3 +188,5 @@ namespace NathansWay.iOS.Numeracy.Menu
 		#endregion
 	}
 }
+
+

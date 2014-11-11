@@ -134,6 +134,7 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _buttonnormalbgcolor;
 		protected Lazy<G__Color> _buttonnormalbgcolortransition;
 		protected Lazy<G__Color> _buttonpressedbgcolor;
+		protected Lazy<G__Color> _buttonnormalsvgcolor;
 		protected Lazy<G__Color> _buttonnormaltitlecolor;
 		protected Lazy<G__Color> _buttonpressedtitlecolor;
 		protected string _buttonnormalbgstrimage;
@@ -272,6 +273,11 @@ namespace NathansWay.Shared
 		{ 
 			get { return _buttonpressedbgcolor; }
 			set { _buttonpressedbgcolor = value; } 
+		} 
+		public Lazy<G__Color> ButtonNormalSVGColor 		
+		{ 
+			get { return _buttonnormalsvgcolor; }
+			set { _buttonnormalsvgcolor = value; } 
 		} 
 		public Lazy<G__Color> ButtonNormalTitleColor		
 		{ 

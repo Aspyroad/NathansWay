@@ -32,6 +32,12 @@ namespace AspyRoad.iOSCore
 
 		protected CGContext _currentContext;
 
+		// UI Variables
+		protected UIColor colorMainBackGroundStart;
+		protected UIColor colorMainBackGroundEnd;
+		protected UIFont fontMain;
+		protected UIColor colorMainFont;
+
 		#endregion
 
 		#region Contructors
@@ -107,10 +113,13 @@ namespace AspyRoad.iOSCore
 				
 		#endregion
 
-		#region Abstract Members
+		#region Virtual Members
 
 		protected virtual void ApplyUI()
 		{
+			// We use values as colors are lazy loaded
+			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
 		}
 
 		#endregion
@@ -187,12 +196,6 @@ namespace AspyRoad.iOSCore
 				return returnedGesture;
 			}
 		}	
-
-		protected void ApplyUIAppearance()
-		{
-			//this.BackgroundColor = this.iOSUIAppearance.;
-
-		}
 
 		#endregion
 

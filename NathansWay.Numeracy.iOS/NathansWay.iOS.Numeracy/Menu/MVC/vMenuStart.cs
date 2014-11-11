@@ -17,10 +17,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
-		//private UIColor colorTextWhiteFade; // = UIColor.FromRGBA(0.802f, 0.456f, 0.000f, 1.000f);
-		private UIColor colorMainBackGroundStart;
-		private UIColor colorMainBackGroundEnd;
-
 		#endregion
 
 		#region Constructors
@@ -71,8 +67,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
-			var gradientBackGroundColors = new CGColor [] {UIColor.FromRGBA(0.7f, 0.4f, 0.000f, 0.7f).CGColor, colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
-			var gradientBackGroundLocations = new float [] {0.0f, 0.57f, 1.0f};
+			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
+			var gradientBackGroundLocations = new float [] {0.0f, 0.1f, 1.0f};
 			var gradientBackGround = new CGGradient(colorSpace, gradientBackGroundColors, gradientBackGroundLocations);
 
 			//// Shadow Declarations
@@ -217,9 +213,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 		protected override void ApplyUI ()
 		{
 			base.ApplyUI ();
-			//var bgColor = iOSUIAppearance.GlobaliOSTheme.ViewBGColor;
-			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
 
 //			this.colorMainBackGroundStart = UIColor.FromRGBA (
 //				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 

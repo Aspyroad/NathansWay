@@ -20,7 +20,11 @@ namespace AspyRoad.iOSCore
         private RectangleF imgRect;
 		private bool _isPressed;
 		// Protected
+		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
+		protected UIColor colorNormalSVGColor;
+		protected UIColor colorButtonBGStart;
+		protected UIColor colorButtonBGEnd;
 
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
@@ -141,11 +145,23 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
+		#region Virtual Members
+
+		protected virtual void ApplyUI()
+		{
+			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
+			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+			this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
+		}
+
+		#endregion
+
 		/// <summary>
 		/// Invoked when the user touches 
 		/// </summary>
 		public event Action<UIButton> Tapped;
 
+		#region Overrides
 		/// <summary>
 		/// Whether the button is rendered enabled or not.
 		/// </summary>
@@ -196,6 +212,8 @@ namespace AspyRoad.iOSCore
 			}
 			return base.ContinueTracking (uitouch, uievent);
 		}
+
+		#endregion
 
         //        public override void Draw(RectangleF myFrame)
         //        {   

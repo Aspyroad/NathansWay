@@ -53,6 +53,7 @@ namespace NathansWay.Shared
 		Lazy<G__Color> ButtonNormalBGColor { get; set; }
 		Lazy<G__Color> ButtonNormalBGColorTransition { get; set; }
 		Lazy<G__Color> ButtonPressedBGColor { get; set; }
+		Lazy<G__Color> ButtonNormalSVGColor { get; set; }
 		Lazy<G__Color> ButtonNormalTitleColor { get; set; }
 		Lazy<G__Color> ButtonPressedTitleColor { get; set; }
 		string ButtonNormalBGStrImage { get; set; } 

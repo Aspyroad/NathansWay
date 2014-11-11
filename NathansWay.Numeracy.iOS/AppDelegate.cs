@@ -175,7 +175,7 @@ namespace NathansWay.iOS.Numeracy
 			//iOSCoreServiceContainer.Register<AspyViewContainer> (_mainController);
 			window.MakeKeyAndVisible();
 			window.RootViewController = _mainController;
-			//window.RootViewController = _mainNav;
+			//window.RootViewController = _menuStart;
 			//window.MakeKeyAndVisible();
 			_mainController.AddAndDisplayController(_menuStart);
 

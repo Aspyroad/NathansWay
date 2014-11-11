@@ -135,6 +135,7 @@ namespace AspyRoad.iOSCore.UISettings
 			ButtonPressedBGColor = g.ButtonPressedBGColor;
 			ButtonNormalTitleColor = g.ButtonNormalTitleColor;
 			ButtonPressedTitleColor = g.ButtonPressedTitleColor;
+			ButtonNormalSVGColor = g.ButtonNormalSVGColor;
 			ButtonNormalBGStrImage = g.ButtonNormalBGStrImage;
 			ButtonPressedBGStrImage = g.ButtonPressedBGStrImage;
 			ButtonFontName = g.ButtonFontName;
@@ -240,12 +241,21 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_globalfontcolor); 
 			}
 		}
+
 		// Button
 		public Lazy<UIColor> ButtonNormalBGUIColor
 		{ 
 			get
 			{
 				return this.convertUIColor(_buttonnormalbgcolor);
+			} 
+		}
+
+		public Lazy<UIColor> ButtonNormalBGUIColorTransition
+		{ 
+			get
+			{
+				return this.convertUIColor(_buttonnormalbgcolortransition);
 			} 
 		}
 
@@ -274,6 +284,14 @@ namespace AspyRoad.iOSCore.UISettings
 			} 
 		}
 
+		public Lazy<UIColor> ButtonNormalSVGUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_buttonnormalsvgcolor);
+			} 
+		}
+
 		public Lazy<UIImage> ButtonNormalBGUIImage
 		{ 
 			get
@@ -295,6 +313,7 @@ namespace AspyRoad.iOSCore.UISettings
 		{
 			return UIFont.FromName (this.ButtonFontName, size);
 		}
+
 		// UIView
 		public Lazy<UIColor> ViewBGUIColor
 		{ 
@@ -303,6 +322,7 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_viewbgcolor); 
 			} 
 		}
+
 		public Lazy<UIColor> ViewBGUIColorTransition
 		{ 
 			get
@@ -318,6 +338,7 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_viewbgtint);
 			} 
 		}
+
 		// UILabel
 		public UIFont LabeFont (float size)
 		{
@@ -339,6 +360,7 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_labeltextcolor);
 			} 
 		}
+
 		// UITextViews
 		public Lazy<UIColor> TextBGUIColor
 		{ 
