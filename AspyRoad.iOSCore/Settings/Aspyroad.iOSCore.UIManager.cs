@@ -131,6 +131,7 @@ namespace AspyRoad.iOSCore.UISettings
 			FontColor = g.FontColor;
 			// Buttons
 			ButtonNormalBGColor = g.ButtonNormalBGColor;
+			ButtonNormalBGColorTransition = g.ButtonNormalBGColorTransition;
 			ButtonPressedBGColor = g.ButtonPressedBGColor;
 			ButtonNormalTitleColor = g.ButtonNormalTitleColor;
 			ButtonPressedTitleColor = g.ButtonPressedTitleColor;
@@ -139,6 +140,7 @@ namespace AspyRoad.iOSCore.UISettings
 			ButtonFontName = g.ButtonFontName;
 			// View
 			ViewBGColor = g.ViewBGColor;
+			ViewBGColorTransition = g.ViewBGColorTransition;
 			ViewBGTint = g.ViewBGTint;
 			// Labels
 			LabelFontName = g.LabelFontName;
@@ -299,6 +301,13 @@ namespace AspyRoad.iOSCore.UISettings
 			get
 			{
 				return this.convertUIColor(_viewbgcolor); 
+			} 
+		}
+		public Lazy<UIColor> ViewBGUIColorTransition
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewbgcolortransition); 
 			} 
 		}
 

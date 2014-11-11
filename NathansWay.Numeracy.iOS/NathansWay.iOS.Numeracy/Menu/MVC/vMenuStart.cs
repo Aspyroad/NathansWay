@@ -71,7 +71,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
 
 			//// Gradient Declarations
-			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, UIColor.FromRGBA(0.745f, 0.439f, 0.000f, 0.833f).CGColor, colorMainBackGroundEnd.CGColor};
+			var gradientBackGroundColors = new CGColor [] {UIColor.FromRGBA(0.7f, 0.4f, 0.000f, 0.7f).CGColor, colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
 			var gradientBackGroundLocations = new float [] {0.0f, 0.57f, 1.0f};
 			var gradientBackGround = new CGGradient(colorSpace, gradientBackGroundColors, gradientBackGroundLocations);
 
@@ -219,14 +219,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ApplyUI ();
 			//var bgColor = iOSUIAppearance.GlobaliOSTheme.ViewBGColor;
 			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-			//this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
 
-			this.colorMainBackGroundStart = UIColor.FromRGBA (
-				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 
-				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.GreenRGB,
-				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.BlueRGB,
-				0.40f
-			);
+//			this.colorMainBackGroundStart = UIColor.FromRGBA (
+//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 
+//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.GreenRGB,
+//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.BlueRGB,
+//				0.40f
+//			);
 		}
 
 		#endregion

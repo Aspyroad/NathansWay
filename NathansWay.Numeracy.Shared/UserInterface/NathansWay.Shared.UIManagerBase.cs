@@ -132,6 +132,7 @@ namespace NathansWay.Shared
 
 		// UIButton
 		protected Lazy<G__Color> _buttonnormalbgcolor;
+		protected Lazy<G__Color> _buttonnormalbgcolortransition;
 		protected Lazy<G__Color> _buttonpressedbgcolor;
 		protected Lazy<G__Color> _buttonnormaltitlecolor;
 		protected Lazy<G__Color> _buttonpressedtitlecolor;
@@ -141,6 +142,7 @@ namespace NathansWay.Shared
 
 		// UIView
 		protected Lazy<G__Color> _viewbgcolor;
+		protected Lazy<G__Color> _viewbgcolortransition;
 		protected Lazy<G__Color> _viewbgtint;
 
 		// UILabel
@@ -261,6 +263,11 @@ namespace NathansWay.Shared
 			get { return _buttonnormalbgcolor; }
 			set { _buttonnormalbgcolor = value; } 
 		} 
+		public Lazy<G__Color> ButtonNormalBGColorTransition 
+		{ 
+			get { return _buttonnormalbgcolortransition; }
+			set { _buttonnormalbgcolortransition = value; } 
+		} 
 		public Lazy<G__Color> ButtonPressedBGColor 		
 		{ 
 			get { return _buttonpressedbgcolor; }
@@ -296,6 +303,11 @@ namespace NathansWay.Shared
 		{ 
 			get { return _viewbgcolor; }
 			set { _viewbgcolor = value; } 
+		} 
+		public Lazy<G__Color> ViewBGColorTransition 
+		{ 
+			get { return _viewbgcolortransition; }
+			set { _viewbgcolortransition = value; } 
 		} 
 		public Lazy<G__Color> ViewBGTint		
 		{ 

@@ -51,6 +51,7 @@ namespace NathansWay.Shared
 
 		// Buttons
 		Lazy<G__Color> ButtonNormalBGColor { get; set; }
+		Lazy<G__Color> ButtonNormalBGColorTransition { get; set; }
 		Lazy<G__Color> ButtonPressedBGColor { get; set; }
 		Lazy<G__Color> ButtonNormalTitleColor { get; set; }
 		Lazy<G__Color> ButtonPressedTitleColor { get; set; }
@@ -60,6 +61,7 @@ namespace NathansWay.Shared
 
 		// Views/Forms
 		Lazy<G__Color> ViewBGColor { get; set; }
+		Lazy<G__Color> ViewBGColorTransition { get; set; }
 		Lazy<G__Color> ViewBGTint { get; set; }
 
 		// Label
