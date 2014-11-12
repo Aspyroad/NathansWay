@@ -69,7 +69,7 @@ namespace NathansWay.Shared
 
 			// UIButton
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 220.0f)); // Black
+			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 180.0f)); // Black
 			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalSVGColor = new Lazy<G__Color> (() => new G__Color(190.0f, 112.0f, 0.0f, 255.0f)); // Same as Backgroubnd View
 			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
@@ -79,8 +79,8 @@ namespace NathansWay.Shared
 			ButtonFontName = "HelveticaNeue-Medium";
 
 			// UIView
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(180.0f, 102.0f, 0.0f, 255.0f)); // Orange
-			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(180.0f, 102.0f, 0.0f, 210.0f)); // Orange less alpha
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 255.0f)); // Orange
+			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
 			// UILabel

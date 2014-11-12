@@ -9,20 +9,20 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
-    public partial class vcLessons : AspyViewController
+    public partial class vcLessonMenu : AspyViewController
     {
 
-        public vcLessons() 
+        public vcLessonMenu() 
         {
             Initialize();
         }
 
-        public vcLessons (IntPtr h) : base (h)
+        public vcLessonMenu (IntPtr h) : base (h)
 		{
             Initialize();
 		}
 
-        public vcLessons (NSCoder coder) : base(coder)
+        public vcLessonMenu (NSCoder coder) : base(coder)
 		{
             Initialize();
 		}
@@ -31,7 +31,7 @@ namespace NathansWay.iOS.Numeracy
         {
 			base.Initialize ();
 			this.AspyTag1 = 3;
-			this.AspyName = "VC_Settings";
+			this.AspyName = "VC_LessonMenu";
         }
 
 //		partial void returnToMenu (UIButton sender)

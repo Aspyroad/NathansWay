@@ -9,11 +9,14 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Graphics
+namespace NathansWay.iOS.Numeracy
 {
-	[Register ("ButtonDarkLesson")]
-	partial class ButtonDarkLesson
+	[Register ("vcLessonMenu")]
+	partial class vcLessonMenu
 	{
+		[Outlet]
+		MonoTouch.UIKit.UIButton btn1 { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 		}

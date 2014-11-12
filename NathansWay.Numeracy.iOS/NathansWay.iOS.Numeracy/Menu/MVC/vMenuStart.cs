@@ -23,23 +23,23 @@ namespace NathansWay.iOS.Numeracy.Menu
 		
 		public vMenuStart () : base ()
 		{
-            Initialize();
+            //Initialize();
 		}
 
         public vMenuStart (RectangleF frame) : base (frame)
         {
-            Initialize();
+            //Initialize();
         }
         
 		public vMenuStart (IntPtr h) : base (h) 
 		{
-            Initialize();            
+            //Initialize();            
 		}
 
 		[Export("initWithCoder:")]
 		public vMenuStart (NSCoder coder) : base(coder)
 		{
-			Initialize();
+			//Initialize();
 		}
 		
 		#endregion
@@ -207,7 +207,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			ApplyUI ();
 			DrawCanvasMain (this.colorMainBackGroundStart, this.colorMainBackGroundEnd, rect);
-			base.Draw(rect);
+			//base.Draw(rect);
 		}
 
 		protected override void ApplyUI ()

@@ -168,7 +168,7 @@ namespace NathansWay.iOS.Numeracy
 			_mainController = new AspyViewContainer();
 
 			// Use storyboard ids to create VCs
-			_menuStart = new vcMenuStart();
+			//_menuStart = new vcMenuStart();
 			_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
 
 			//Add our navigation object to the service library
@@ -270,10 +270,11 @@ namespace NathansWay.iOS.Numeracy
 
 			_numeracyUIManager.AddVC (1, "VC_MenuStart");
 			_numeracyUIManager.AddVC (2, "VC_Student");
-			_numeracyUIManager.AddVC (3, "VC_Lessons");
-			_numeracyUIManager.AddVC (4, "VC_Settings");
-			_numeracyUIManager.AddVC (5, "VC_Teacher");
-			_numeracyUIManager.AddVC (6, "VC_ToolBox");
+			_numeracyUIManager.AddVC (3, "VC_LessonMenu");
+			_numeracyUIManager.AddVC (4, "VC_Lesson");
+			_numeracyUIManager.AddVC (5, "VC_Settings");
+			_numeracyUIManager.AddVC (6, "VC_Teacher");
+			_numeracyUIManager.AddVC (7, "VC_ToolBox");
 			//_numeracyUIManager.AddVC (7, "VC_Tools");
 			// WorkSpace
 			_numeracyUIManager.AddVC (20, "VC_MainGame");

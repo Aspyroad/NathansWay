@@ -25,7 +25,7 @@
         <!--Vc Tool Box-->
         <scene sceneID="Nod-Wj-smM">
             <objects>
-                <viewController id="Afb-7g-2Zs" customClass="vcToolBox" sceneMemberID="viewController" storyboardIdentifier="vcToolBox">
+                <viewController id="Afb-7g-2Zs" customClass="vcToolBox" sceneMemberID="viewController" storyboardIdentifier="vcToolBox" title="ToolBox">
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -39,7 +39,7 @@
         <!--Navigation Controller-->
         <scene sceneID="611">
             <objects>
-                <viewController id="612" customClass="vcLessons" sceneMemberID="viewController" storyboardIdentifier="vcLessons">
+                <viewController id="612" customClass="vcLessonMenu" sceneMemberID="viewController" storyboardIdentifier="vcLessonMenu" title="Lessons">
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
@@ -50,6 +50,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="58" y="-1880"/>
+        </scene>
+        <scene sceneID="625">
+            <objects>
+                <viewController id="626" customClass="vcLessons" sceneMemberID="viewController" storyboardIdentifier="vcLessons" title="Lessons">
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <connections>
+                        <segue destination="628" kind="custom" identifier="sgToolBox2Menu" customClass="AspySlidingLeftSegue" id="627"/>
+                        <segue destination="630" kind="custom" id="629" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="631" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1109" y="-1872"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
