@@ -15,10 +15,23 @@ namespace NathansWay.iOS.Numeracy
 	partial class vcLessonMenu
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn1 { get; set; }
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISwipeGestureRecognizer grSwipeBack2Menu { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UITableView tvLessonMenu { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (grSwipeBack2Menu != null) {
+				grSwipeBack2Menu.Dispose ();
+				grSwipeBack2Menu = null;
+			}
+			if (tvLessonMenu != null) {
+				tvLessonMenu.Dispose ();
+				tvLessonMenu = null;
+			}
 		}
 	}
 }
