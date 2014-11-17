@@ -18,11 +18,19 @@ namespace NathansWay.iOS.Numeracy
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UISwipeGestureRecognizer grSwipeBack2Menu { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		vLessonMenu vLessonMenu { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (grSwipeBack2Menu != null) {
 				grSwipeBack2Menu.Dispose ();
 				grSwipeBack2Menu = null;
+			}
+			if (vLessonMenu != null) {
+				vLessonMenu.Dispose ();
+				vLessonMenu = null;
 			}
 		}
 	}

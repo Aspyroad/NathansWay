@@ -4,11 +4,21 @@ using System.Drawing;
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
 // AspyCore
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
+	#region Private Variables
+
+
+	slider = new UISlider(new RectangleF(100,  30, 210, 20));
+	View.Add (slider);
+
+	#endregion
+
+
     public partial class vcLessonMenu : AspyViewController
     {
 
@@ -50,6 +60,9 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+
+			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
+			//ultrasound_power_slider.Transform = transform;
         }
 
 		public override void ViewWillAppear (bool animated)
