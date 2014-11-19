@@ -12,19 +12,12 @@ using MonoTouch.ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspyButton")]
+	[MonoTouch.Foundation.Register ("AspySlider")]
 	public class AspySlider : UISlider
 	{
-		// Privates
-		private RectangleF labRect;
-		private RectangleF imgRect;
-		private bool _isPressed;
-		// Protected
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
-		protected UIColor colorNormalSVGColor;
-		protected UIColor colorButtonBGStart;
-		protected UIColor colorButtonBGEnd;
+		protected UIImage imageThumb;
 
 		// Required for the Xamarin iOS Desinger
 		public AspySlider () : base()
@@ -39,21 +32,30 @@ namespace AspyRoad.iOSCore
 		{ 
 			Initialize();    
 		}
-		public AspySlider (UIButtonType type) : base (type)
+		[Export("initWithCoder:")]
+		public AspySlider (NSCoder coder) : base(coder)
 		{
 			Initialize();
 		}
 
 		#region Private Members
+
 		protected virtual void Initialize()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+			this.MinValue = 1.0f;
+			this.MaxValue = 100.0f;
+			this.Value = 0.0f;
 		}
-
 
 		#endregion
 
 		#region Public Members
+
+		public void SetUI ()
+		{
+			this.ApplyUI ();
+		}
 
 
 		#endregion
@@ -62,9 +64,13 @@ namespace AspyRoad.iOSCore
 
 		protected virtual void ApplyUI()
 		{
-			//this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
-			//this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-			//this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
+			this.MaximumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MaxTrackTintUIColor.Value;
+			this.MinimumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MinTrackTintUIColor.Value;
+
+			// Sorround for placement only
+			this.Layer.BorderColor = UIColor.Black.CGColor;
+			this.Layer.BorderWidth = 1;
+
 		}
 
 		#endregion

@@ -173,6 +173,11 @@ namespace AspyRoad.iOSCore.UISettings
 			TextBGTint = g.TextBGTint;
 			TextHighLightedTextColor = g.TextHighLightedTextColor;
 			TextColor = g.TextColor;
+			// Slider
+			MaxTrackTintColor = g.MaxTrackTintColor;
+			MinTrackTintColor = g.MinTrackTintColor;
+			ThumbColor = g.ThumbColor;
+			ThumbStrImage = g.ThumbStrImage;
 		}
 
 		/// <summary>
@@ -193,7 +198,6 @@ namespace AspyRoad.iOSCore.UISettings
 		#endregion
 
 		#region iOS Members Only
-
 
 		public string FontNameiOS7
 		{ 
@@ -413,6 +417,40 @@ namespace AspyRoad.iOSCore.UISettings
 			{
 				return this.convertUIColor(_textcolor);
 			} 
+		}
+
+		// UISliderViews
+		public Lazy<UIColor> MaxTrackTintUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_maxtracktintcolor);
+			} 
+		}
+
+		public Lazy<UIColor> MinTrackTintUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_mintracktintcolor);
+			} 
+		}
+
+		public Lazy<UIColor> ThumbUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_thumbcolor);
+			} 
+		}
+
+		public Lazy<UIImage> ThumbUIImage
+		{ 
+			get
+			{
+				return new Lazy<UIImage> (() => UIImage.FromFile (_thumbstrimage)); 
+
+			}
 		}
 
 		#endregion

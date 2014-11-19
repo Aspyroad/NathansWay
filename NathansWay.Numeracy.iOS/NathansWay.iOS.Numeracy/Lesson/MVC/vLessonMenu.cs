@@ -62,25 +62,14 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw(RectangleF rect)
 		{
-			base.Draw;
-
-			ApplyUI ();
-			//DrawCanvasMain (this.colorMainBackGroundStart, this.colorMainBackGroundEnd, rect);
-			//base.Draw(rect);
-
-
+			base.Draw (this.iOSGlobals.G__RectWindowLandscape);
+			this.ApplyUI ();
 		}
 
 		protected override void ApplyUI ()
 		{
 			base.ApplyUI ();
-
-			//			this.colorMainBackGroundStart = UIColor.FromRGBA (
-			//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 
-			//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.GreenRGB,
-			//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.BlueRGB,
-			//				0.40f
-			//			);
+			
 		}
 
 		#endregion

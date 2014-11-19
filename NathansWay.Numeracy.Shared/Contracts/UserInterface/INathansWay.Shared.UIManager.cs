@@ -75,6 +75,12 @@ namespace NathansWay.Shared
 		Lazy<G__Color> TextBGTint { get; set; }
 		Lazy<G__Color> TextHighLightedTextColor { get; set; }
 		Lazy<G__Color> TextColor { get; set; }
+
+		// Slider View
+		Lazy<G__Color> MaxTrackTintColor { get; set; }
+		Lazy<G__Color> MinTrackTintColor { get; set; }
+		Lazy<G__Color> ThumbColor { get; set; }
+		string ThumbStrImage { get; set; }
 	}
 
 }

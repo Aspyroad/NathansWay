@@ -40,7 +40,8 @@ namespace NathansWay.iOS.Numeracy
 		private AspyWindow window;
 		private AspyViewContainer _mainController;
 		//private UINavigationController _mainNav;
-		private vcMenuStart _menuStart;
+		//private vcMenuStart _menuStart;
+		private vcLessonMenu _menuStart;
 
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
@@ -169,10 +170,12 @@ namespace NathansWay.iOS.Numeracy
 
 			// Use storyboard ids to create VCs
 			//_menuStart = new vcMenuStart();
-			_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
+			//_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
+			_menuStart = storyboard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
 
 			//Add our navigation object to the service library
 			//iOSCoreServiceContainer.Register<AspyViewContainer> (_mainController);
+
 			window.MakeKeyAndVisible();
 			window.RootViewController = _mainController;
 			//window.RootViewController = _menuStart;
@@ -187,6 +190,8 @@ namespace NathansWay.iOS.Numeracy
 
 			return true;
 		}
+
+		#region Application Control
 
 		private void BeginObservingUIApplication ()
 		{
@@ -259,6 +264,7 @@ namespace NathansWay.iOS.Numeracy
 			return UIInterfaceOrientationMask.Landscape;
 		}
 
+		#endregion
 
 		#endregion
 

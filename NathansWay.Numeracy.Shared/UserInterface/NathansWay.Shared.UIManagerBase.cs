@@ -157,6 +157,12 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _texthighlightedtextcolor;
 		protected Lazy<G__Color> _textcolor;
 
+		// Slider View
+		protected Lazy<G__Color> _maxtracktintcolor { get; set; }
+		protected Lazy<G__Color> _mintracktintcolor { get; set; }
+		protected Lazy<G__Color> _thumbcolor { get; set; }
+		protected string _thumbstrimage { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -356,6 +362,27 @@ namespace NathansWay.Shared
 		{ 
 			get { return _textcolor; }
 			set { _textcolor = value; } 
+		}
+		// UISlider
+		public Lazy<G__Color> MaxTrackTintColor 	
+		{ 
+			get { return _maxtracktintcolor; }
+			set { _maxtracktintcolor = value; } 
+		}
+		public Lazy<G__Color> MinTrackTintColor
+		{ 
+			get { return _mintracktintcolor; }
+			set { _mintracktintcolor = value; } 
+		}
+		public Lazy<G__Color> ThumbColor
+		{ 
+			get { return _thumbcolor; }
+			set { _thumbcolor = value; }
+		}
+		public string ThumbStrImage
+		{ 
+			get { return _thumbstrimage; }
+			set { _thumbstrimage = value; } 
 		}
 
 		#endregion

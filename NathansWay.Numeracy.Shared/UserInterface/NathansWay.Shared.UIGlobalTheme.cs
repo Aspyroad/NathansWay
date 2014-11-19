@@ -20,7 +20,6 @@ namespace NathansWay.Shared
 		//public float FontSizeiOS7 { get; set; }
 		public Lazy<G__Color> FontColor { get; set; }
 
-
 		// UIButton
 		public Lazy<G__Color> ButtonNormalBGColor { get; set; }
 		public Lazy<G__Color> ButtonNormalBGColorTransition { get; set; }
@@ -48,6 +47,12 @@ namespace NathansWay.Shared
 		public Lazy<G__Color> TextHighLightedTextColor { get; set; }
 		public Lazy<G__Color> TextColor { get; set; }
 
+		// Slider View
+		public Lazy<G__Color> MaxTrackTintColor { get; set; }
+		public Lazy<G__Color> MinTrackTintColor { get; set; }
+		public Lazy<G__Color> ThumbColor { get; set; }
+		public string ThumbStrImage { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -65,7 +70,6 @@ namespace NathansWay.Shared
 			FontSize = 20.0f;
 			//FontSizeiOS7 = 20.0f;
 			FontColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-
 
 			// UIButton
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
@@ -93,6 +97,12 @@ namespace NathansWay.Shared
 			TextBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+
+			// Slider View
+			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+			MinTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+			ThumbColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ThumbStrImage = "";
 
 		}
 

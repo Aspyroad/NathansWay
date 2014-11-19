@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="612">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -38,7 +38,7 @@
         <!--LessonMenu-->
         <scene sceneID="611">
             <objects>
-                <viewController storyboardIdentifier="vcLessonMenu" title="LessonMenu" id="612" customClass="vcLessonMenu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vcLessonMenu" title="LessonMenu" id="612" customClass="vcLessonMenu" sceneMemberID="viewController" nibName="">
                     <view key="view" contentMode="scaleToFill" id="HHF-DQ-RDH" customClass="vLessonMenu">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

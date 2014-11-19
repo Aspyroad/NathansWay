@@ -10,17 +10,19 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
-	#region Private Variables
-
-
-	slider = new UISlider(new RectangleF(100,  30, 210, 20));
-	View.Add (slider);
-
-	#endregion
-
-
     public partial class vcLessonMenu : AspyViewController
     {
+
+		#region Private Variables
+
+		//slider = new UISlider(new RectangleF(100,  30, 210, 20));
+		//View.Add (slider);
+		// Controls
+		protected AspySlider sliderDifficulty;
+
+		#endregion
+
+		#region Constructors
 
         public vcLessonMenu() 
         {
@@ -37,19 +39,17 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
 		}
 
+		#endregion
+
         protected override void Initialize ()
         {
 			base.Initialize ();
 			this.AspyTag1 = 3;
 			this.AspyName = "VC_LessonMenu";
         }
-
-//		partial void returnToMenu (UIButton sender)
-//		{
-//			this.PerformSegue("sgLessons_Start", sender);
-//		}
-
+			
 		#region Overrides
+
         public override void DidReceiveMemoryWarning()
         {
             // Releases the view if it doesn't have a superview.
@@ -61,8 +61,8 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
 
-			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
-			//ultrasound_power_slider.Transform = transform;
+			// Slider
+			this.Setup_Slider ();
         }
 
 		public override void ViewWillAppear (bool animated)
@@ -72,6 +72,22 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 
+		#region Private Members
+
+		private void Setup_Slider ()
+		{
+			sliderDifficulty = new AspySlider(new RectangleF(60,  0, 180, 40));
+			sliderDifficulty.SetUI ();
+
+			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
+			sliderDifficulty.Transform = transform;
+
+			View.Add (sliderDifficulty);
+
+		}
+
+
+		#endregion
     }
 }
 
