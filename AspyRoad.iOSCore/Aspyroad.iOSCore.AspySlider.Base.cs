@@ -66,16 +66,15 @@ namespace AspyRoad.iOSCore
 		{
 			this.MaximumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MaxTrackTintUIColor.Value;
 			this.MinimumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MinTrackTintUIColor.Value;
+			//this.ThumbTintColor = iOSUIAppearance.GlobaliOSTheme.ThumbUIColor.Value;
 
 			// Sorround for placement only
-			this.Layer.BorderColor = UIColor.Black.CGColor;
-			this.Layer.BorderWidth = 1;
+			//this.Layer.BorderColor = UIColor.Black.CGColor;
+			//this.Layer.BorderWidth = 1;
 
 		}
 
 		#endregion
-
-
 
 	}
 }

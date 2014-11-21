@@ -192,6 +192,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLesson.cs">
       <DependentUpon>vcLesson.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

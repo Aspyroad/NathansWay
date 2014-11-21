@@ -1,18 +1,20 @@
-﻿using System;
+﻿// System
+using System;
 using System.Drawing;
+// AspyRoad
 using AspyRoad.iOSCore;
+// MonoTouch
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
-//using NathansWay.iOS.Numeracy.Graphics;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
 
 	#region Menu Buttons
 
-    [MonoTouch.Foundation.Register ("ButtonStudent")]
+    //[MonoTouch.Foundation.Register ("ButtonStudent")]
     public	class ButtonStudent : AspyButton
     {
         public ButtonStudent () : base()
@@ -45,7 +47,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
     }
     
-    [MonoTouch.Foundation.Register ("ButtonTools")]
+    //[MonoTouch.Foundation.Register ("ButtonTools")]
     public class ButtonTools : AspyButton
     {
         public ButtonTools () : base()
@@ -78,7 +80,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
     }
     
-    [MonoTouch.Foundation.Register ("ButtonLessons")]
+    //[MonoTouch.Foundation.Register ("ButtonLessons")]
     public class ButtonLessons: AspyButton
     {
         public ButtonLessons () : base()
@@ -111,7 +113,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
     }
     
-    [MonoTouch.Foundation.Register ("ButtonExit")]
+    //[MonoTouch.Foundation.Register ("ButtonExit")]
     public class ButtonExit : AspyButton
     {
         public ButtonExit () : base()
@@ -144,7 +146,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
     }
     
-    [MonoTouch.Foundation.Register ("ButtonTeacher")]
+    //[MonoTouch.Foundation.Register ("ButtonTeacher")]
     public class ButtonTeacher : AspyButton
     {
         public ButtonTeacher () : base()
@@ -177,7 +179,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
     }
 
-	[MonoTouch.Foundation.Register ("ButtonSchool")]
+	//[MonoTouch.Foundation.Register ("ButtonSchool")]
 	public class ButtonSchool : AspyButton
 	{
 
@@ -222,7 +224,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	/// This implementation only deals with Normal and Pressed states. 
 	/// There is no handling for the Disabled state.
 	/// </remarks>
-	[Register ("SkBlueButton")]
+	//[Register ("SkBlueButton")]
 	public class BlueButton : UIButton 
 	{
 
@@ -492,7 +494,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 	#endregion
 
-	[Register ("ButtonStyleToolBox")]
+	//[Register ("ButtonStyleToolBox")]
 	public class ButtonStyleToolBox : AspyButton
 	{
 		#region Constructors
@@ -655,7 +657,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 
-	[Register ("ButtonStyleLesson")]
+	//[Register ("ButtonStyleLesson")]
 	public class ButtonStyleLesson : AspyButton
 	{
 		#region Constructors
@@ -781,7 +783,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 
-	[Register ("ButtonStyleTeacher")]
+	//[Register ("ButtonStyleTeacher")]
 	public class ButtonStyleTeacher : AspyButton
 	{
 		#region Constructors
@@ -922,7 +924,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 
-	[Register ("ButtonStyleStudent")]
+	//[Register ("ButtonStyleStudent")]
 	public class ButtonStyleStudent : AspyButton
 	{
 		#region Constructors
@@ -1089,7 +1091,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 
-	[Register ("ButtonStyleLessonBuilder")]
+	//[Register ("ButtonStyleLessonBuilder")]
 	public class ButtonStyleLessonBuilder : AspyButton
 	{
 		#region Constructors
@@ -1254,7 +1256,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 
-	[Register ("ButtonStyleVisuals")]
+	//[Register ("ButtonStyleVisuals")]
 	public class ButtonStyleVisuals : AspyButton
 	{
 		#region Constructors

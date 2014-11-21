@@ -76,7 +76,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Setup_Slider ()
 		{
-			sliderDifficulty = new AspySlider(new RectangleF(60,  0, 180, 40));
+			sliderDifficulty = new AspySlider(new RectangleF(-40, 50, 120, 30));
 			sliderDifficulty.SetUI ();
 
 			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 

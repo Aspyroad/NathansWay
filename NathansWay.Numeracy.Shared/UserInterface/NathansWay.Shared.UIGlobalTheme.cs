@@ -99,9 +99,9 @@ namespace NathansWay.Shared
 			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 
 			// Slider View
-			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-			MinTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-			ThumbColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
+			MinTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
+			ThumbColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 255.0f, 100.0f)); // Black
 			ThumbStrImage = "";
 
 		}
