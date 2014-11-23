@@ -20,7 +20,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 
-
 		// Required for the Xamarin iOS Desinger
 		public NumeracyButton () : base()
 		{
@@ -50,12 +49,16 @@ namespace NathansWay.iOS.Numeracy
 		public override void Draw (RectangleF rect)
 		{
 			this.ApplyUI ();
+			DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
+			base.Draw (rect);
+
 		}
 
-//		protected override void ApplyUI ()
-//		{
-//			base.ApplyUI ();
-//		}
+		protected override void ApplyUI ()
+		{
+			base.ApplyUI ();
+			//this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor, UIControlState.Normal);
+		}
 
 		#endregion
 
@@ -65,9 +68,9 @@ namespace NathansWay.iOS.Numeracy
 			( 
 				UIColor colorButtonBGStart, 
 				UIColor colorButtonBGEnd, 
-				UIColor labelTextColor, 
+				//UIColor labelTextColor, 
 				bool isTapped, 
-				string labelText, 
+				//string labelText, 
 				RectangleF buttonFrame
 			)
 		{
@@ -86,10 +89,10 @@ namespace NathansWay.iOS.Numeracy
 			rectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped, new PointF(50.0f, -0.0f), new PointF(50.0f, 50.0f), 0);
 			context.RestoreState();
-			labelTextColor.SetFill();
-			var rectangleFont = UIFont.FromName("Helvetica", 12.0f);
-			rectangleRect.Offset(0.0f, (rectangleRect.Height - new NSString(labelText).StringSize(rectangleFont, rectangleRect.Size).Height) / 2.0f);
-			new NSString(labelText).DrawString(rectangleRect, rectangleFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
+			//labelTextColor.SetFill();
+			//var rectangleFont = UIFont.FromName("Helvetica", 12.0f);
+			//rectangleRect.Offset(0.0f, (rectangleRect.Height - new NSString(labelText).StringSize(rectangleFont, rectangleRect.Size).Height) / 2.0f);
+			//new NSString(labelText).DrawString(rectangleRect, rectangleFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
 		}
 
 		#endregion

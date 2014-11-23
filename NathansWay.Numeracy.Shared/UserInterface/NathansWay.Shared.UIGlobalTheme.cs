@@ -76,7 +76,7 @@ namespace NathansWay.Shared
 			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 180.0f)); // Black
 			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalSVGColor = new Lazy<G__Color> (() => new G__Color(190.0f, 112.0f, 0.0f, 255.0f)); // Same as Backgroubnd View
-			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 255.0f)); // Black
 			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalBGStrImage = "";
 			ButtonPressedBGStrImage = "";
