@@ -44,14 +44,13 @@ namespace NathansWay.iOS.Numeracy
 		protected override void Initialize()
 		{ 
 			base.Initialize ();
+			this.ApplyUI ();
 		}
 
 		public override void Draw (RectangleF rect)
 		{
-			this.ApplyUI ();
 			DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
 			base.Draw (rect);
-
 		}
 
 		protected override void ApplyUI ()

@@ -110,6 +110,11 @@ namespace AspyRoad.iOSCore
 		public void RemoveGestureFromWindow(G__GestureTypes gestype)
 		{
 		}
+
+		public void SetupUI()
+		{
+			this.ApplyUI ();
+		}
 				
 		#endregion
 
@@ -118,8 +123,8 @@ namespace AspyRoad.iOSCore
 		protected virtual void ApplyUI()
 		{
 			// We use values as colors are lazy loaded
-			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
+			this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+
 		}
 
 		#endregion

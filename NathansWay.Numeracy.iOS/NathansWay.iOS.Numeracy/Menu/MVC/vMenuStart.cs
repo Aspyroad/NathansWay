@@ -207,19 +207,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			ApplyUI ();
 			DrawCanvasMain (this.colorMainBackGroundStart, this.colorMainBackGroundEnd, rect);
-			//base.Draw(rect);
 		}
 
 		protected override void ApplyUI ()
 		{
 			base.ApplyUI ();
-
-//			this.colorMainBackGroundStart = UIColor.FromRGBA (
-//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.RedRGB, 
-//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.GreenRGB,
-//				iOSUIAppearance.GlobaliOSTheme.ViewBGColor.Value.BlueRGB,
-//				0.40f
-//			);
+			// We use values as colors are lazy loaded
+			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
 		}
 
 		#endregion

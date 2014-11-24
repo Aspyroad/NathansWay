@@ -15,10 +15,8 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Variables
 
-		//slider = new UISlider(new RectangleF(100,  30, 210, 20));
-		//View.Add (slider);
-		// Controls
-		protected AspySlider sliderDifficulty;
+		private vLessonMenu _vLessonMenu; 
+		private AspySlider sliderDifficulty;
 
 		#endregion
 
@@ -50,6 +48,13 @@ namespace NathansWay.iOS.Numeracy
 			
 		#region Overrides
 
+		public override void LoadView ()
+		{
+			base.LoadView ();
+			this._vLessonMenu = this.View as vLessonMenu;
+			//this.View = _vLessonMenu;
+		}
+
         public override void DidReceiveMemoryWarning()
         {
             // Releases the view if it doesn't have a superview.
@@ -61,8 +66,8 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
 
-			// Slider
 			this.Setup_Slider ();
+			this.Setup_ViewBackGroundUpperLeftRight ();
         }
 
 		public override void ViewWillAppear (bool animated)
@@ -76,13 +81,33 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Setup_Slider ()
 		{
-			sliderDifficulty = new AspySlider(new RectangleF(-40, 50, 120, 30));
+			sliderDifficulty = new AspySlider(new RectangleF(-30, 50, 110, 30));
 			sliderDifficulty.SetUI ();
 
 			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
 			sliderDifficulty.Transform = transform;
 
 			View.Add (sliderDifficulty);
+
+		}
+
+		private void Setup_ViewBackGroundUpperLeftRight()
+		{
+			this.vwBgUpperLeft.Layer.CornerRadius = 10.0f;
+			this.vwBgUpperRight.Layer.CornerRadius = 10.0f;
+
+			//			// border radius
+			//			[v.layer setCornerRadius:30.0f];
+			//
+			//			// border
+			//			[v.layer setBorderColor:[UIColor lightGrayColor].CGColor];
+			//			[v.layer setBorderWidth:1.5f];
+			//
+			//			// drop shadow
+			//			[v.layer setShadowColor:[UIColor blackColor].CGColor];
+			//			[v.layer setShadowOpacity:0.8];
+			//			[v.layer setShadowRadius:3.0];
+			//			[v.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
 
 		}
 

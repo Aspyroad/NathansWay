@@ -44,6 +44,7 @@ namespace NathansWay.iOS.Numeracy
         {
 			base.Initialize ();
 			this.Tag = 3;
+
         }
 
 		#endregion
@@ -63,13 +64,12 @@ namespace NathansWay.iOS.Numeracy
 		public override void Draw(RectangleF rect)
 		{
 			base.Draw (this.iOSGlobals.G__RectWindowLandscape);
-			this.ApplyUI ();
+			//this.ApplyUI ();
 		}
 
 		protected override void ApplyUI ()
 		{
-			base.ApplyUI ();
-			
+			base.ApplyUI ();			
 		}
 
 		#endregion
