@@ -5,14 +5,23 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
+using MonoTouch.CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
+
 
 namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("vLessonMenu")]
     public partial class vLessonMenu : AspyView
 	{
+
+		#region Private Variables
+
+		private CALayer _layer;
+
+		#endregion
+
 		#region Constructors
 		
         public vLessonMenu () : base ()
@@ -63,13 +72,27 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw(RectangleF rect)
 		{
-			base.Draw (this.iOSGlobals.G__RectWindowLandscape);
-			//this.ApplyUI ();
+			// FrameBackdropWhite Drawing
+//			var frameBackdropWhitePath = UIBezierPath.FromRect(rect);
+//			UIColor.White.SetFill();
+//			frameBackdropWhitePath.Fill();
+
+			base.Draw (rect);
+
 		}
 
 		protected override void ApplyUI ()
 		{
-			base.ApplyUI ();			
+			base.ApplyUI ();
+
+
+			_layer = new CALayer ();
+			_layer.Frame = this.Frame;
+			//_layer.BackgroundColor = UIColor.White.CGColor;
+
+
+			this.Layer.InsertSublayer (_layer, 0);
+
 		}
 
 		#endregion

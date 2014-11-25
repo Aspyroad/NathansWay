@@ -11,8 +11,8 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
-	[Register ("OrderByButton")]
-	public class OrderByButton : AspyButton
+	[Register ("ButtonOrderBy")]
+	public class ButtonOrderBy : AspyButton
 	{
 		#region Private Variables
 
@@ -22,19 +22,19 @@ namespace NathansWay.iOS.Numeracy
 		#region Constructors
 
 		// Required for the Xamarin iOS Desinger
-		public OrderByButton () : base()
+		public ButtonOrderBy () : base()
 		{
 			Initialize();
 		}
-		public OrderByButton (IntPtr handle) : base(handle)
+		public ButtonOrderBy (IntPtr handle) : base(handle)
 		{
 			Initialize();
 		}       
-		public OrderByButton (RectangleF myFrame)  : base (myFrame)
+		public ButtonOrderBy (RectangleF myFrame)  : base (myFrame)
 		{ 
 			Initialize();    
 		}
-		public OrderByButton (UIButtonType type) : base (type)
+		public ButtonOrderBy (UIButtonType type) : base (type)
 		{
 			Initialize();
 		}

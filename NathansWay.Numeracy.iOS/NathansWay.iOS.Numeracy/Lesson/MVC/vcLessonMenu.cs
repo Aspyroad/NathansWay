@@ -65,6 +65,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+			this._vLessonMenu.SetupUI ();
 
 			this.Setup_Slider ();
 			this.Setup_ViewBackGroundUpperLeftRight ();
