@@ -11,33 +11,35 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
-	[Register ("NumeracyButton")]
-	public class NumeracyButton : AspyButton
+	[Register ("OrderByButton")]
+	public class OrderByButton : AspyButton
 	{
 		#region Private Variables
 
-		protected RectangleF btnFrame;
 
 		#endregion
 
+		#region Constructors
+
 		// Required for the Xamarin iOS Desinger
-		public NumeracyButton () : base()
+		public OrderByButton () : base()
 		{
 			Initialize();
 		}
-		public NumeracyButton (IntPtr handle) : base(handle)
+		public OrderByButton (IntPtr handle) : base(handle)
 		{
 			Initialize();
 		}       
-		public NumeracyButton (RectangleF myFrame)  : base (myFrame)
+		public OrderByButton (RectangleF myFrame)  : base (myFrame)
 		{ 
-			btnFrame = myFrame;
 			Initialize();    
 		}
-		public NumeracyButton (UIButtonType type) : base (type)
+		public OrderByButton (UIButtonType type) : base (type)
 		{
 			Initialize();
 		}
+
+		#endregion
 
 		#region Overrides 
 
