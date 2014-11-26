@@ -5,6 +5,7 @@ using System.Drawing;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
+using MonoTouch.CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
 
@@ -50,10 +51,10 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void LoadView ()
 		{
-			//base.LoadView ();
-			//this._vLessonMenu = this.View as vLessonMenu;
-			this._vLessonMenu = new vLessonMenu (iOSGlobals.G__RectWindowLandscape);
-			this.View = _vLessonMenu;
+			base.LoadView ();
+			this._vLessonMenu = this.View as vLessonMenu;
+			//this._vLessonMenu = new vLessonMenu (iOSGlobals.G__RectWindowLandscape);
+			//this.View = _vLessonMenu;
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -70,8 +71,6 @@ namespace NathansWay.iOS.Numeracy
 
 			this.Setup_Slider ();
 			this.Setup_ViewBackGroundUpperLeftRight ();
-
-			this.View.SetNeedsDisplay ();
         }
 
 		public override void ViewWillAppear (bool animated)
@@ -97,8 +96,8 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Setup_ViewBackGroundUpperLeftRight()
 		{
-			//this.vwBgUpperLeft.Layer.CornerRadius = 10.0f;
-			//this.vwBgUpperRight.Layer.CornerRadius = 10.0f;
+			this.vwBgUpperLeft.Layer.CornerRadius = 10.0f;
+			this.vwBgUpperRight.Layer.CornerRadius = 10.0f;
 
 			//			// border radius
 			//			[v.layer setCornerRadius:30.0f];

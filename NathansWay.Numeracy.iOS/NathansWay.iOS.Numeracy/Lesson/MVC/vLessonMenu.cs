@@ -18,8 +18,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Variables
 
-		private CALayer _layer;
-
 		#endregion
 
 		#region Constructors
@@ -53,9 +51,6 @@ namespace NathansWay.iOS.Numeracy
         {
 			base.Initialize ();
 			this.Tag = 3;
-
-
-
         }
 
 		#endregion
@@ -72,36 +67,9 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-//		public override void Draw(RectangleF rect)
-//		{
-//			// FrameBackdropWhite Drawing
-////			var frameBackdropWhitePath = UIBezierPath.FromRect(rect);
-////			UIColor.White.SetFill();
-////			frameBackdropWhitePath.Fill();
-//
-//			base.Draw (rect);
-//
-//		}
-
-
 		protected override void ApplyUI ()
 		{
-
-
-			_layer = new CALayer ();
-			//_layer.Frame = this.Frame;
-			_layer.Frame = new RectangleF (100, 50, 200, 200);
-			_layer.BackgroundColor = UIColor.White.CGColor;
-			_layer.Opaque = false;
-			//_layer.Opacity = 0.5f;
-			this.Layer.InsertSublayerBelow (_layer, this.Layer);
-
 			base.ApplyUI ();
-		
-
-
-
-
 		}
 
 		#endregion

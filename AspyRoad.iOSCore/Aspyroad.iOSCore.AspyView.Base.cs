@@ -11,6 +11,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
+using MonoTouch.CoreAnimation;
 
 namespace AspyRoad.iOSCore
 {			
@@ -37,6 +38,8 @@ namespace AspyRoad.iOSCore
 		protected UIColor colorMainBackGroundEnd;
 		protected UIFont fontMain;
 		protected UIColor colorMainFont;
+
+		private CALayer _layer1;
 
 		#endregion
 
@@ -123,7 +126,7 @@ namespace AspyRoad.iOSCore
 		protected virtual void ApplyUI()
 		{
 			// We use values as colors are lazy loaded
-			this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+			this.Layer.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
 
 		}
 
@@ -205,6 +208,16 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
+
+		public override void Draw(RectangleF rect)
+		{
+			base.Draw (rect);
+			_layer1 = new CALayer ();
+			_layer1.Frame = rect;
+			_layer1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
+			this.Layer.InsertSublayer (this._layer1, 0);
+
+		}
 
         public override UIViewAutoresizing AutoresizingMask
         {
