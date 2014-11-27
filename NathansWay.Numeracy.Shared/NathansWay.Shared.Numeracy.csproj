@@ -99,6 +99,7 @@
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UIManager.cs" />
     <Compile Include="UserInterface\NathansWay.Shared.UIManagerBase.cs" />
     <Compile Include="UserInterface\NathansWay.Shared.UIGlobalTheme.cs" />
+    <Compile Include="BusinessLayer\ViewModels\Nathansway.Shared.BUS.LessonViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

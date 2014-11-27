@@ -21,26 +21,42 @@ namespace NathansWay.Shared
 		Toolz = 10
     }
 
-	public enum G__LessonTypes : int
+	public enum G__LessonClass : int
 	{
-		Practice = 0,
-		SpeedTest = 1,
-		Assesment = 2
+		Practice = 1,
+		SpeedTest = 2,
+		Assesment = 3
 	}
 
 	public enum G__Difficulty : int
 	{
-		Easy = 0,
-		Normal = 1,
-		Hard = 2
+		Easy = 1,
+		Level2 = 2,
+		Level3 = 3,
+		Level4 = 4,
+		Level5 = 5,
+		Level6 = 6,
+		Level7 = 7,
+		Level8 = 8,
+		Level9 = 9,
+		Hard = 10
 	}
 
 	public enum G__OperatorPlease
 	{
-		Addition = 0,
-		Subtraction = 1,
-		Division = 2,
-		Multiplication = 3,
+		Addition = 1,
+		Subtraction = 2,
+		Division = 3,
+		Multiplication = 4,
+		Random = 5,
+		Multi = 6
+	}
+
+	public enum G__Expression
+	{
+		Expression = 1,
+		Grouped = 2,
+		Fraction = 3,
 		Random = 4,
 		Multi = 5
 	}

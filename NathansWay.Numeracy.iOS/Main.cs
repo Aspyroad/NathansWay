@@ -10,6 +10,7 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // NathansWay
 using NathansWay.Shared;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared.BUS.ViewModel;
 
 namespace NathansWay.iOS.Numeracy
@@ -21,24 +22,10 @@ namespace NathansWay.iOS.Numeracy
 		// This is the main entry point of the application.
 		static void Main (string[] args)
 		{
+			//Setup our services for core library
+			SharedServiceRegistrar.Startup ();
 
 			UIApplication.Main (args, null, "AppDelegate");
-		}
-
-		private static void InitializeShared ()
-		{
-			#if !NETFX_CORE
-			//Only do these on iOS or Android
-//			iOSCoreServiceContainer.Register<MenuViewModel> ();
-//			iOSCoreServiceContainer.Register<AssignmentViewModel>();
-//			iOSCoreServiceContainer.Register<DocumentViewModel>();
-//			iOSCoreServiceContainer.Register<ExpenseViewModel>();
-//			iOSCoreServiceContainer.Register<HistoryViewModel>();
-//			iOSCoreServiceContainer.Register<ItemViewModel>();
-//			iOSCoreServiceContainer.Register<LaborViewModel>();
-//			iOSCoreServiceContainer.Register<LoginViewModel>();
-//			iOSCoreServiceContainer.Register<PhotoViewModel>();
-			#endif		
 		}
 
 	}
