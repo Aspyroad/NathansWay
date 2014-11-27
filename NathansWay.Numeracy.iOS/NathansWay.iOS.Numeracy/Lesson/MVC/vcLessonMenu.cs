@@ -17,7 +17,7 @@ namespace NathansWay.iOS.Numeracy
 		#region Private Variables
 
 		private vLessonMenu _vLessonMenu; 
-		private AspySlider sliderDifficulty;
+		//private AspySlider sliderDifficulty;
 
 		#endregion
 
@@ -68,8 +68,9 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
 			this._vLessonMenu.SetupUI ();
+			this.lblFilter.SetUI ();
 
-			this.Setup_Slider ();
+			//this.Setup_Slider ();
 			this.Setup_ViewBackGroundUpperLeftRight ();
         }
 
@@ -84,20 +85,21 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Setup_Slider ()
 		{
-			sliderDifficulty = new AspySlider(new RectangleF(-30, 50, 110, 30));
-			sliderDifficulty.SetUI ();
-
-			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
-			sliderDifficulty.Transform = transform;
-
-			View.Add (sliderDifficulty);
+			//			sliderDifficulty = new AspySlider(new RectangleF(20, 50, 150, 30));
+			//			sliderDifficulty.SetUI ();
+			//
+			//			// Spins the slider into a horizontal position
+			//			//CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
+			//			//sliderDifficulty.Transform = transform;
+			//
+			//			View.Add (sliderDifficulty);
 
 		}
 
 		private void Setup_ViewBackGroundUpperLeftRight()
 		{
-			this.vwBgUpperLeft.Layer.CornerRadius = 10.0f;
-			this.vwBgUpperRight.Layer.CornerRadius = 10.0f;
+			this.imBgUpperLeft.Layer.CornerRadius = 10.0f;
+			this.imBgUpperRight.Layer.CornerRadius = 10.0f;
 
 			//			// border radius
 			//			[v.layer setCornerRadius:30.0f];

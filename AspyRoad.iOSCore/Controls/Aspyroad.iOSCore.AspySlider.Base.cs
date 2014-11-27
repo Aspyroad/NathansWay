@@ -57,7 +57,6 @@ namespace AspyRoad.iOSCore
 			this.ApplyUI ();
 		}
 
-
 		#endregion
 
 		#region Virtual Members

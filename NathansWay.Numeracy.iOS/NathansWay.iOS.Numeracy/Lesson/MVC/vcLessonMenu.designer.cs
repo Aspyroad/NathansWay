@@ -16,37 +16,101 @@ namespace NathansWay.iOS.Numeracy
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderEdit { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderLessonName { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderLevel { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderOperator { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderStart { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnHeaderType { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UISwipeGestureRecognizer grSwipeBack2Menu { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView imBgUpperLeft { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIImageView imBgUpperRight { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyLabel lblFilter { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyLabel lblLevel { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		vLessonMenu vLessonMenu { get; set; }
 
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyView vwBgUpperLeft { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyView vwBgUpperRight { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnHeaderEdit != null) {
+				btnHeaderEdit.Dispose ();
+				btnHeaderEdit = null;
+			}
+			if (btnHeaderLessonName != null) {
+				btnHeaderLessonName.Dispose ();
+				btnHeaderLessonName = null;
+			}
+			if (btnHeaderLevel != null) {
+				btnHeaderLevel.Dispose ();
+				btnHeaderLevel = null;
+			}
+			if (btnHeaderOperator != null) {
+				btnHeaderOperator.Dispose ();
+				btnHeaderOperator = null;
+			}
+			if (btnHeaderStart != null) {
+				btnHeaderStart.Dispose ();
+				btnHeaderStart = null;
+			}
+			if (btnHeaderType != null) {
+				btnHeaderType.Dispose ();
+				btnHeaderType = null;
+			}
 			if (grSwipeBack2Menu != null) {
 				grSwipeBack2Menu.Dispose ();
 				grSwipeBack2Menu = null;
 			}
+			if (imBgUpperLeft != null) {
+				imBgUpperLeft.Dispose ();
+				imBgUpperLeft = null;
+			}
+			if (imBgUpperRight != null) {
+				imBgUpperRight.Dispose ();
+				imBgUpperRight = null;
+			}
+			if (lblFilter != null) {
+				lblFilter.Dispose ();
+				lblFilter = null;
+			}
+			if (lblLevel != null) {
+				lblLevel.Dispose ();
+				lblLevel = null;
+			}
 			if (vLessonMenu != null) {
 				vLessonMenu.Dispose ();
 				vLessonMenu = null;
-			}
-			if (vwBgUpperLeft != null) {
-				vwBgUpperLeft.Dispose ();
-				vwBgUpperLeft = null;
-			}
-			if (vwBgUpperRight != null) {
-				vwBgUpperRight.Dispose ();
-				vwBgUpperRight = null;
 			}
 		}
 	}

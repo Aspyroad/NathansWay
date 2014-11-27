@@ -143,6 +143,11 @@ namespace AspyRoad.iOSCore
 			set{ _isPressed = value; }
 		}
 
+		public void SetUI ()
+		{
+			this.ApplyUI ();
+		}
+
 		#endregion
 
 		#region Virtual Members

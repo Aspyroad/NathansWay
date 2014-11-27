@@ -365,7 +365,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 
 		// UILabel
-		public UIFont LabeFont (float size)
+		public UIFont LabelFont (float size)
 		{
 			return UIFont.FromName (this.LabelFontName, size);
 		}
