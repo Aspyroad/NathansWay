@@ -50,6 +50,14 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#endregion
 
+		public Task<List<EntityLesson>> GetLessonsAsync (CancellationToken cancellationToken = default(CancellationToken))
+		{
+			return this._repLesson.db.GetAsyncConnection ()
+				.Table<EntityLesson> ()
+				.OrderBy (i => i.SEQ)
+				.ToListAsync ();
+		}
+
 	}
 
 	public class RepoLesson<T> : NWRepository<T> where T : EntityLesson, new()
