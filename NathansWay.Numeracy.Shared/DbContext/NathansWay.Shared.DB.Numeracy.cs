@@ -14,7 +14,7 @@ using SQLite.Net.Async;
 
 namespace NathansWay.Shared.DB
 {
-	public class NumeracyDB : NWDbBase, INWDatabaseContext
+	public class NumeracyDB : NWDbBase
 	{
 		private Type[] _tableTypes;
 		private CancellationTokenSource _cancelToken;
@@ -37,6 +37,8 @@ namespace NathansWay.Shared.DB
 				typeof(EntityToolSettings),
 				typeof(EntityUISettings)
 			};
+
+
 		}
 
 		public override Type[] TableType

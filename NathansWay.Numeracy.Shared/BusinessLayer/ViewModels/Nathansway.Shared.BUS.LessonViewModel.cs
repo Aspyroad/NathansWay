@@ -13,7 +13,7 @@ using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DAL.Repository;
 using NathansWay.Shared.Utilities;
 
-using CancellationToken = System.Threading.CancellationToken;
+
 
 namespace NathansWay.Shared.BUS.ViewModel
 {
@@ -23,6 +23,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		readonly IRepoLessons lessonservice;
 		private List<EntityLesson> lessons;
+		//private EntityLesson activeLesson;
 
 		#endregion
 
@@ -47,11 +48,17 @@ namespace NathansWay.Shared.BUS.ViewModel
 		/// <summary>
 		/// Loads the assignments asynchronously
 		/// </summary>
-		public Task LoadLessonsAsync ()
+		//public Task LoadLessonsAsync ()
+		public List<EntityLesson> LoadLessonsAsync ()
 		{
-			return lessonservice
-				.GetLessonsAsync ()
-				.ContinueOnCurrentThread (t => { return t.Result; });
+			return lessonservice.GetLessonsAsync2 ();
+//			return lessonservice
+//				.GetLessonsAsync2 ()
+//				.ContinueOnCurrentThread (t => 
+//				{ 
+//					lessons = t.Result;
+//					return t.Result; 
+//				});
 		}
 	}
 }

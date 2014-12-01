@@ -117,7 +117,9 @@
     <Folder Include="BusinessLayer\Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DbContext\Nathansway.db3" />
+    <Content Include="DbContext\Nathansway.db3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net">

@@ -23,7 +23,8 @@ namespace NathansWay.Shared.DAL.Repository
 		RepoLesson<EntityLesson> repLesson { get; }
 		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 
-		Task<List<EntityLesson>> GetLessonsAsync (CancellationToken cancellationToken = default(CancellationToken));
+		Task<List<EntityLesson>> GetLessonsAsync ();
+		List<EntityLesson> GetLessonsAsync2 ();
 	}
 }
 

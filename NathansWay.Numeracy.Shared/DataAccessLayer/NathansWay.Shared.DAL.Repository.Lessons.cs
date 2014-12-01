@@ -23,7 +23,7 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class RepoLessons : IRepoLessons
+	public class RepoLessons : NWRepository<EntityLesson>, IRepoLessons
 	{
 		#region Private Members
 
@@ -50,12 +50,23 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#endregion
 
-		public Task<List<EntityLesson>> GetLessonsAsync (CancellationToken cancellationToken = default(CancellationToken))
+		public Task<List<EntityLesson>> GetLessonsAsync ()
 		{
-			return this._repLesson.db.GetAsyncConnection ()
+			return _db.GetAsyncConnection ()
 				.Table<EntityLesson> ()
 				.OrderBy (i => i.SEQ)
 				.ToListAsync ();
+		}
+
+		public List<EntityLesson> GetLessonsAsync2 ()
+		{
+
+			var _data = _db.GetConnection ()
+				.Query<EntityLesson> (@"
+				SELECT * FROM Lesson
+				")
+				.ToList<EntityLesson> ();
+			return _data;
 		}
 
 	}

@@ -56,7 +56,7 @@ namespace NathansWay.iOS.Numeracy
 
 			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
 
-			var xList = lessonViewModel.LoadLessonsAsync ();
+			lessonViewModel.LoadLessonsAsync ();
         }
 			
 		#region Overrides

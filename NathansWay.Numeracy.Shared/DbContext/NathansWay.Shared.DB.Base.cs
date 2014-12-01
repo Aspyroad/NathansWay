@@ -40,6 +40,7 @@ namespace NathansWay.Shared.DB
 			_sqliteplatform = _SQLitePlatform; 
 			_sharedglobal = SharedServiceContainer.Resolve<ISharedGlobal>();
 			_ConnectionString = new SQLiteConnectionString (_sharedglobal.GS__FullDbPath, false);
+
 			Path = _path;
         }
         #endregion
