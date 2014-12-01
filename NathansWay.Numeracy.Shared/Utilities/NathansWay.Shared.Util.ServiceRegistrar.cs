@@ -10,6 +10,7 @@ using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS;
 using NathansWay.Shared.DAL.Repository;
 using NathansWay.Shared.BUS.ViewModel;
+using NathansWay.Shared.Utilities;
 
 
 namespace NathansWay.Shared.Utilities
@@ -30,6 +31,7 @@ namespace NathansWay.Shared.Utilities
 			SharedServiceContainer.Register<IRepoLessons> (() => new RepoLessons ());
 			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
 			//
+
 			#if !NETFX_CORE
 				//Only do these on iOS or Android
 				SharedServiceContainer.Register<LessonViewModel> ();

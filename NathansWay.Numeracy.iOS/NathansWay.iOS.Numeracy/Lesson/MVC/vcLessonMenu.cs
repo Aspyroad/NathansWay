@@ -8,6 +8,13 @@ using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
+// NathansWay
+// NathansWay
+using NathansWay.Shared.DAL;
+using NathansWay.Shared.BUS.ViewModel;
+using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.DAL.Repository;
+using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -16,7 +23,8 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Variables
 
-		private vLessonMenu _vLessonMenu; 
+		private vLessonMenu _vLessonMenu;
+		private LessonViewModel lessonViewModel;
 		//private AspySlider sliderDifficulty;
 
 		#endregion
@@ -45,6 +53,10 @@ namespace NathansWay.iOS.Numeracy
 			base.Initialize ();
 			this.AspyTag1 = 3;
 			this.AspyName = "VC_LessonMenu";
+
+			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
+
+			var xList = lessonViewModel.LoadLessonsAsync ();
         }
 			
 		#region Overrides
