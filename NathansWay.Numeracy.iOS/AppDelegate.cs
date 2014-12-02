@@ -77,6 +77,7 @@ namespace NathansWay.iOS.Numeracy
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
+			this.SharedGlobals.GS__RootAppPath = Environment.CurrentDirectory; 
 			// Db Name
 			this.SharedGlobals.GS__DatabaseName = "NathansWay.db3";
 			// Documents folder
@@ -85,6 +86,10 @@ namespace NathansWay.iOS.Numeracy
 			this.SharedGlobals.GS__FolderNameLibrary = Path.Combine (this.SharedGlobals.GS__DocumentsPath, "../Library/"); 
 			// Full db path
 			this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
+			// Copy the database if needed
+			// For building we ALWAYS copy the db as we need to capture build changes.
+			//this.CopyDb();
+			this.ExplcitCopyDb();
 
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
@@ -296,6 +301,22 @@ namespace NathansWay.iOS.Numeracy
 			// Register app/user settings
 			iOSCoreServiceContainer.Register<iOSUIManager>(this._numeracyUIManager);
 
+		}
+
+		private void CopyDb ()
+		{
+			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db/", this.SharedGlobals.GS__DatabaseName);
+
+			if (File.Exists(this.SharedGlobals.GS__FullDbPath) == false) 
+			{
+				File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath);
+			} 
+		}
+
+		private void ExplcitCopyDb ()
+		{
+			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db/", this.SharedGlobals.GS__DatabaseName);
+			File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath, true);
 		}
 
 		#endregion

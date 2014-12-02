@@ -6,6 +6,7 @@ namespace NathansWay.Shared.Utilities
     {
         
         #region PrivateVariables
+		protected string rootPath;
         protected string folderNameLibrary;
         protected string folderNameImageData;
         protected string documentsPath;
@@ -24,6 +25,11 @@ namespace NathansWay.Shared.Utilities
         #endregion
       
         #region ConstantVariables
+		public string GS__RootAppPath
+		{
+			get { return rootPath; }
+			set { rootPath = value; }
+		}
         public string GS__FolderNameLibrary
         {
             get { return folderNameLibrary; }

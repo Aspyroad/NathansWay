@@ -16,9 +16,10 @@ namespace NathansWay.Shared.BUS.Entity
         private string _nameLesson;
         private string _description;
         private int _difficulty;
+		private int _operator;
 		private int _scoreTopResult;
 		private int _scoreTopMethod;
-        private int _methodCount;
+        //private int _methodCount;
 
         #endregion
         
@@ -51,24 +52,30 @@ namespace NathansWay.Shared.BUS.Entity
 			get { return this._difficulty; }
 			set { this._difficulty = value; }
         }
+		[Column("operator")]
+		public int Operator
+		{
+			get { return this._operator; }
+			set { this._operator = value; }            
+		}
 		[Column("scoretopresult")]
 		public int ScoreTopResult
-        {
+		{
 			get { return this._scoreTopResult; }
-			set { this._scoreTopMethod = value; }            
-        }
+			set { this._scoreTopResult = value; }            
+		}
 		[Column("scoretopmethod")]
 		public int ScoreTopMethod
 		{
-			get { return this._scoreTopResult; }
+			get { return this._scoreTopMethod; }
 			set { this._scoreTopMethod = value; }            
 		}
-		[Column("methodcount")]
-		public int MethodCount
-        {
-			get { return this._methodCount; }
-			set { this._methodCount = value; }            
-        }  
+//		[Column("methodcount")]
+//		public int MethodCount
+//        {
+//			get { return this._methodCount; }
+//			set { this._methodCount = value; }            
+//        }  
 
         #endregion     
         

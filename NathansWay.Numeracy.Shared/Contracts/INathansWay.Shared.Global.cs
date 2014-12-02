@@ -4,7 +4,11 @@ using System;
 namespace NathansWay.Shared.Utilities
 {
     public interface ISharedGlobal
-    {		
+    {	
+		/// <summary>
+		/// Path to Root Application.
+		/// </summary>
+		string GS__RootAppPath { get; set; }
 		/// <summary>
 		/// Path to the library folder
 		/// </summary>

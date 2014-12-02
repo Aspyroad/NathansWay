@@ -23,7 +23,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		readonly IRepoLessons lessonservice;
 		private List<EntityLesson> lessons;
-		//private EntityLesson activeLesson;
+		private EntityLesson activeLesson;
 
 		#endregion
 
@@ -48,17 +48,18 @@ namespace NathansWay.Shared.BUS.ViewModel
 		/// <summary>
 		/// Loads the assignments asynchronously
 		/// </summary>
-		//public Task LoadLessonsAsync ()
-		public List<EntityLesson> LoadLessonsAsync ()
+		public Task LoadLessonsAsync ()
+		//public List<EntityLesson> LoadLessonsAsync ()
 		{
-			return lessonservice.GetLessonsAsync2 ();
-//			return lessonservice
-//				.GetLessonsAsync2 ()
-//				.ContinueOnCurrentThread (t => 
-//				{ 
-//					lessons = t.Result;
-//					return t.Result; 
-//				});
+			//return lessonservice.GetLessonsAsync ();
+			return lessonservice
+				.GetLessonsAsync ()
+				.ContinueOnCurrentThread (t => 
+				{ 
+					//activeLesson = t.Result.First ();
+					lessons = t.Result;
+					return t.Result; 
+				});
 		}
 	}
 }

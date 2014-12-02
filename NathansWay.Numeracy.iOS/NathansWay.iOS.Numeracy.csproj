@@ -100,7 +100,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.Game.Core.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
@@ -193,6 +192,8 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.OrderBy.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.Menu.cs" />
+    <Compile Include="Utilities\NathansWay.iOS.Numeracy.SyncInvoke.cs" />
+    <Compile Include="AppDelegate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -223,7 +224,7 @@
     <BundleResource Include="Content\AppImages\Teacher.png" />
     <BundleResource Include="Content\AppImages\Toolbox.png" />
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
-    <BundleResource Include="Utilities\NathansWay.iOS.Numeracy.SyncInvoke.cs" />
+    <BundleResource Include="Content\Db\Nathansway.db3" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
