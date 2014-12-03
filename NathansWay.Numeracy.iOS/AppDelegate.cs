@@ -305,7 +305,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private void CopyDb ()
 		{
-			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db/", this.SharedGlobals.GS__DatabaseName);
+			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"/Content/Db/", this.SharedGlobals.GS__DatabaseName);
 
 			if (File.Exists(this.SharedGlobals.GS__FullDbPath) == false) 
 			{
@@ -315,8 +315,16 @@ namespace NathansWay.iOS.Numeracy
 
 		private void ExplcitCopyDb ()
 		{
-			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db/", this.SharedGlobals.GS__DatabaseName);
-			File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath, true);
+			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db", this.SharedGlobals.GS__DatabaseName);
+			//string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, this.SharedGlobals.GS__DatabaseName);
+			try
+			{
+				File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath, true);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine (ex.Message);
+			}
 		}
 
 		#endregion

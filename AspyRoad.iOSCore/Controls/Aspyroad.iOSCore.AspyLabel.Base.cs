@@ -47,7 +47,7 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
-		public void SetUI ()
+		public void SetupUI ()
 		{
 			this.ApplyUI ();
 		}

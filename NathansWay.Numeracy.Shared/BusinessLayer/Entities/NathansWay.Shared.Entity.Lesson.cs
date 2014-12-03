@@ -37,7 +37,7 @@ namespace NathansWay.Shared.BUS.Entity
         [Column("namelesson")]
         public string NameLesson
         { 
-			get { return this._nameLesson; } 
+			get { return this._nameLesson.Trim(); } 
 			set { this._nameLesson = value; }
         }
 		[Column("description")]

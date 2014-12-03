@@ -228,15 +228,21 @@
     <BundleResource Include="Content\AppImages\Teacher.png" />
     <BundleResource Include="Content\AppImages\Toolbox.png" />
     <BundleResource Include="Content\AppImages\Toolbox_.png" />
-    <BundleResource Include="Content\Db\Nathansway.db3" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Student\NathansWay.Numeracy.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Db\Nathansway.db3">
+      <DeployService-Deploy>True</DeployService-Deploy>
+      <DeployService-TargetDirectoryId>CommonApplicationData</DeployService-TargetDirectoryId>
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </Content>
   </ItemGroup>
 </Project>

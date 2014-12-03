@@ -56,13 +56,6 @@ namespace NathansWay.iOS.Numeracy
 
 			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
 
-			lessonViewModel.LoadLessonsAsync ().ContinueWith (_ => 
-			{
-				BeginInvokeOnMainThread (() => 
-				{
-					//this.tvLessonMain.ReReloadData ();
-				});
-			});
         }
 			
 		#region Overrides
@@ -71,9 +64,6 @@ namespace NathansWay.iOS.Numeracy
 		{
 			base.LoadView ();
 			this._vLessonMenu = this.View as vLessonMenu;
-			this.tvLessonMain.Source = new LessonMenuTableSource (this);
-			//this._vLessonMenu = new vLessonMenu (iOSGlobals.G__RectWindowLandscape);
-			//this.View = _vLessonMenu;
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -87,15 +77,19 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
 			this._vLessonMenu.SetupUI ();
-			this.lblFilter.SetUI ();
-
+			this.lblFilter.SetupUI ();
 			//this.Setup_Slider ();
 			this.Setup_ViewBackGroundUpperLeftRight ();
+
+			this.tvLessonMain.Source = new LessonMenuTableSource (this);
+
         }
 
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
+
+			this.LoadLessons ();
 		}
 
 		#endregion
@@ -114,7 +108,6 @@ namespace NathansWay.iOS.Numeracy
 			//			View.Add (sliderDifficulty);
 
 		}
-
 		private void Setup_ViewBackGroundUpperLeftRight()
 		{
 			this.imBgUpperLeft.Layer.CornerRadius = 10.0f;
@@ -134,14 +127,27 @@ namespace NathansWay.iOS.Numeracy
 			//			[v.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
 
 		}
+		private void LoadLessons ()
+		{
+
+			lessonViewModel.LoadLessonsAsync ().ContinueWith (_ => 
+			{
+				BeginInvokeOnMainThread (() => 
+				{
+					this.tvLessonMain.ReloadData ();
+				});
+			});
+
+		}
+
+		#endregion
 
 		public class LessonMenuTableSource : UITableViewSource 
 		{
 			#region Private Variables
 
 			private vcLessonMenu vclessonmenu ;
-			string[] tableItems;
-			string cellIdentifier = "TableCell";
+			private LessonViewModel vmLesson;
 
 			#endregion
 
@@ -150,7 +156,7 @@ namespace NathansWay.iOS.Numeracy
 			public LessonMenuTableSource (vcLessonMenu _vc)
 			{
 				this.vclessonmenu = _vc;
-				//tableItems = items;
+				this.vmLesson = SharedServiceContainer.Resolve<LessonViewModel> ();
 			}
 
 			#endregion
@@ -159,27 +165,25 @@ namespace NathansWay.iOS.Numeracy
 
 			public override int RowsInSection (UITableView tableview, int section)
 			{
-				return vclessonmenu.lessonViewModel.Lessons.Count;
+				return this.vmLesson.Lessons == null ? 0 : this.vmLesson.Lessons.Count;
 			}
 			public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
 			{
 
-				var lesson = vclessonmenu.lessonViewModel.Lessons [indexPath.Row];
-				var cell = tableView.DequeueReusableCell ("vLessonTableCell") as vLessonTableCell;
+				var lesson = this.vmLesson.Lessons [indexPath.Row];
+				var cell = tableView.DequeueReusableCell ("LessonTableCell") as vLessonTableCell;
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
 				return cell;
-//				UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
-//				// if there are no cells to reuse, create a new one
-//				if (cell == null)
-//					cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
-//				cell.TextLabel.Text = tableItems[indexPath.Row];
-//				return cell;
+				//				UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
+				//				// if there are no cells to reuse, create a new one
+				//				if (cell == null)
+				//					cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
+				//				cell.TextLabel.Text = tableItems[indexPath.Row];
+				//				return cell;
 			}
 
 			#endregion
 		}
-
-		#endregion
     }
 }
 
