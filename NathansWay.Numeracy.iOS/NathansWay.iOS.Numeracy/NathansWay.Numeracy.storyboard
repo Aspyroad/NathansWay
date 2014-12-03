@@ -91,28 +91,28 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="710">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="710" customClass="vLessonTableCell">
                                         <rect key="frame" x="0.0" y="22" width="626" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="710" id="q1s-uR-rPo">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="710" id="q1s-uR-rPo" customClass="AspyView">
                                             <rect key="frame" x="0.0" y="0.0" width="626" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Type" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="869">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Type" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="869" customClass="AspyLabel">
                                                     <rect key="frame" x="470" y="0.0" width="86" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="AspyLabel">
                                                     <rect key="frame" x="381" y="0.0" width="90" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Lesson Name" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="719">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Lesson Name" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="719" customClass="AspyLabel">
                                                     <rect key="frame" x="226" y="0.0" width="156" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -135,7 +135,7 @@
                                                     <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="805">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="805" customClass="AspyLabel">
                                                     <rect key="frame" x="555" y="0.0" width="71" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,6 +145,14 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="lblEdit" destination="805" id="name-outlet-805"/>
+                                            <outlet property="lblLessonName" destination="719" id="name-outlet-719"/>
+                                            <outlet property="lblOperator" destination="726" id="name-outlet-726"/>
+                                            <outlet property="lblStart" destination="727" id="name-outlet-727"/>
+                                            <outlet property="lblType" destination="869" id="name-outlet-869"/>
+                                            <outlet property="lblLevel" destination="718" id="name-outlet-718"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -155,7 +163,7 @@
                                     <color key="titleShadowColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rEB-1m-kf2" customClass="ButtonOrderBy" fixedFrame="YES">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="rEB-1m-kf2" customClass="ButtonOrderBy">
                                 <rect key="frame" x="560" y="129" width="68" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit">
@@ -193,19 +201,21 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
+                        <outlet property="btnHeaderEdit" destination="rEB-1m-kf2" id="name-outlet-rEB-1m-kf2"/>
+                        <outlet property="btnHeaderLessonName" destination="850" id="name-outlet-850"/>
+                        <outlet property="btnHeaderLevel" destination="849" id="name-outlet-849"/>
+                        <outlet property="btnHeaderOperator" destination="863" id="name-outlet-863"/>
+                        <outlet property="btnHeaderStart" destination="Wcc-YF-ZYu" id="name-outlet-Wcc-YF-ZYu"/>
+                        <outlet property="btnHeaderType" destination="866" id="name-outlet-866"/>
                         <outlet property="grSwipeBack2Menu" destination="649" id="name-outlet-649"/>
                         <outlet property="imBgUpperLeft" destination="934" id="name-outlet-934"/>
-                        <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
-                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
+                        <outlet property="imBgUpperRight" destination="941" id="name-outlet-941"/>
                         <outlet property="lblFilter" destination="927" id="name-outlet-927"/>
                         <outlet property="lblLevel" destination="Cbo-pO-OhT" id="name-outlet-Cbo-pO-OhT"/>
-                        <outlet property="imBgUpperRight" destination="941" id="name-outlet-941"/>
-                        <outlet property="btnHeaderStart" destination="Wcc-YF-ZYu" id="name-outlet-Wcc-YF-ZYu"/>
-                        <outlet property="btnHeaderLevel" destination="849" id="name-outlet-849"/>
-                        <outlet property="btnHeaderLessonName" destination="850" id="name-outlet-850"/>
-                        <outlet property="btnHeaderOperator" destination="863" id="name-outlet-863"/>
-                        <outlet property="btnHeaderType" destination="866" id="name-outlet-866"/>
-                        <outlet property="btnHeaderEdit" destination="rEB-1m-kf2" id="name-outlet-rEB-1m-kf2"/>
+                        <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
+                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
+                        <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
+                        <outlet property="tvLessonItems" destination="728" id="name-outlet-728"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -56,7 +56,13 @@ namespace NathansWay.iOS.Numeracy
 
 			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
 
-			lessonViewModel.LoadLessonsAsync ();
+			lessonViewModel.LoadLessonsAsync ().ContinueWith (_ => 
+			{
+				BeginInvokeOnMainThread (() => 
+				{
+					//this.tvLessonMain.ReReloadData ();
+				});
+			});
         }
 			
 		#region Overrides
@@ -65,6 +71,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			base.LoadView ();
 			this._vLessonMenu = this.View as vLessonMenu;
+			this.tvLessonMain.Source = new LessonMenuTableSource (this);
 			//this._vLessonMenu = new vLessonMenu (iOSGlobals.G__RectWindowLandscape);
 			//this.View = _vLessonMenu;
 		}
@@ -128,6 +135,49 @@ namespace NathansWay.iOS.Numeracy
 
 		}
 
+		public class LessonMenuTableSource : UITableViewSource 
+		{
+			#region Private Variables
+
+			private vcLessonMenu vclessonmenu ;
+			string[] tableItems;
+			string cellIdentifier = "TableCell";
+
+			#endregion
+
+			#region Constructors
+
+			public LessonMenuTableSource (vcLessonMenu _vc)
+			{
+				this.vclessonmenu = _vc;
+				//tableItems = items;
+			}
+
+			#endregion
+
+			#region Overrides
+
+			public override int RowsInSection (UITableView tableview, int section)
+			{
+				return vclessonmenu.lessonViewModel.Lessons.Count;
+			}
+			public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+			{
+
+				var lesson = vclessonmenu.lessonViewModel.Lessons [indexPath.Row];
+				var cell = tableView.DequeueReusableCell ("vLessonTableCell") as vLessonTableCell;
+				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
+				return cell;
+//				UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
+//				// if there are no cells to reuse, create a new one
+//				if (cell == null)
+//					cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
+//				cell.TextLabel.Text = tableItems[indexPath.Row];
+//				return cell;
+			}
+
+			#endregion
+		}
 
 		#endregion
     }
