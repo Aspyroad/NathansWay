@@ -58,7 +58,25 @@ namespace NathansWay.Shared.DAL.Repository
 				.ToListAsync ();
 		}
 
-		public List<EntityLesson> GetLessonsAsync2 ()
+		public Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson)
+		{
+			return _db.GetAsyncConnection ()
+				.Table<EntityLessonDetail> ()
+				.Where(l => l.SEQ == lesson.SEQ)
+				.OrderBy (i => i.SEQ)
+				.ToListAsync ();
+		}
+
+		public Task<List<EntityLesson>> GetLessonsFilteredAsync (Expression<Func<EntityLesson, bool>> expr1)
+		{
+			return _db.GetAsyncConnection ()
+				.Table<EntityLesson> ()
+				.Where(expr1)
+				.OrderBy (i => i.SEQ)
+				.ToListAsync ();
+		}
+
+		public List<EntityLesson> GetLessons ()
 		{
 
 			var _data = _db.GetConnection ()

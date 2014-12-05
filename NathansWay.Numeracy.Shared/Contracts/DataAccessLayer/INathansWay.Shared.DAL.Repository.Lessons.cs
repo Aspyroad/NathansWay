@@ -24,7 +24,11 @@ namespace NathansWay.Shared.DAL.Repository
 		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 
 		Task<List<EntityLesson>> GetLessonsAsync ();
-		List<EntityLesson> GetLessonsAsync2 ();
+		Task<List<EntityLesson>> GetLessonsFilteredAsync (Expression<Func<EntityLesson, bool>> expr1);
+		Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson);
+
+		// Non parallel
+		List<EntityLesson> GetLessons ();
 	}
 }
 

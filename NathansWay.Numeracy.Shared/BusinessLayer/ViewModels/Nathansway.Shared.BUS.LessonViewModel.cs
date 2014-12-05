@@ -49,9 +49,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 		/// Loads the assignments asynchronously
 		/// </summary>
 		public Task LoadLessonsAsync ()
-		//public List<EntityLesson> LoadLessonsAsync ()
 		{
-			//return lessonservice.GetLessonsAsync ();
 			return lessonservice
 				.GetLessonsAsync ()
 				.ContinueOnCurrentThread (t => 
