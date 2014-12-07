@@ -38,6 +38,10 @@ namespace NathansWay.iOS.Numeracy
 		[GeneratedCode ("iOS Designer", "1.0")]
 		AspyRoad.iOSCore.AspyLabel lblType { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UIProgressView pvLevel { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (lblEdit != null) {
@@ -63,6 +67,10 @@ namespace NathansWay.iOS.Numeracy
 			if (lblType != null) {
 				lblType.Dispose ();
 				lblType = null;
+			}
+			if (pvLevel != null) {
+				pvLevel.Dispose ();
+				pvLevel = null;
 			}
 		}
 	}

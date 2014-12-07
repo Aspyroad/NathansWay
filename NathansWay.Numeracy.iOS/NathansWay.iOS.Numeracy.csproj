@@ -236,7 +236,7 @@
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Student\NathansWay.Numeracy.storyboard" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Db\Nathansway.db3">
