@@ -52,6 +52,14 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		UISegmentedControl scOperatorFilter { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		UISegmentedControl scTypeFilter { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView tvLessonItems { get; set; }
 
 		[Outlet]
@@ -60,6 +68,14 @@ namespace NathansWay.iOS.Numeracy
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (scOperatorFilter != null) {
+				scOperatorFilter.Dispose ();
+				scOperatorFilter = null;
+			}
+			if (scTypeFilter != null) {
+				scTypeFilter.Dispose ();
+				scTypeFilter = null;
+			}
 			if (tvLessonItems != null) {
 				tvLessonItems.Dispose ();
 				tvLessonItems = null;
