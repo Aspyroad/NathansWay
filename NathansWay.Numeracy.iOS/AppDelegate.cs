@@ -79,7 +79,7 @@ namespace NathansWay.iOS.Numeracy
 			// This must be done for each device being built
 			this.SharedGlobals.GS__RootAppPath = Environment.CurrentDirectory; 
 			// Db Name
-			this.SharedGlobals.GS__DatabaseName = "NathansWay.db3";
+			this.SharedGlobals.GS__DatabaseName = "Nathansway.db3";
 			// Documents folder
 			this.SharedGlobals.GS__DocumentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
 			// Library folder
@@ -317,13 +317,13 @@ namespace NathansWay.iOS.Numeracy
 		{
 			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db", this.SharedGlobals.GS__DatabaseName);
 			//string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, this.SharedGlobals.GS__DatabaseName);
-			try
+			//try
 			{
 				File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath, true);
 			}
-			catch (Exception ex)
+			//catch (Exception ex)
 			{
-				Console.WriteLine (ex.Message);
+				//Console.WriteLine (ex.Message);
 			}
 		}
 
