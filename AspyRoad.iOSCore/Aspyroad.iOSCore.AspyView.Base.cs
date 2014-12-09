@@ -205,18 +205,30 @@ namespace AspyRoad.iOSCore
 			}
 		}	
 
+		private RectangleF rectCurrentOrientation ()
+		{
+			if (AspyUtilities.IsLandScape ())
+			{
+				return this.iOSGlobals.G__RectWindowLandscape;
+			}
+			else
+			{
+				return this.iOSGlobals.G__RectWindowPortait;
+			}
+		} 
+
 		#endregion
 
 		#region Overrides
 
 		public override void Draw(RectangleF rect)
 		{
+			var x = rectCurrentOrientation ();
 			base.Draw (rect);
 			_layer1 = new CALayer ();
 			_layer1.Frame = rect;
 			_layer1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
 			this.Layer.InsertSublayer (this._layer1, 0);
-
 		}
 
         public override UIViewAutoresizing AutoresizingMask

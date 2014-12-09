@@ -28,6 +28,23 @@ namespace AspyRoad.iOSCore
 		    p.Y = y; 
 		    return p;
 		}	
+
+		public static bool IsLandScape ()
+		{ 
+			bool bReturn;
+			var mmm = UIApplication.SharedApplication.StatusBarOrientation;
+			if (mmm == (UIInterfaceOrientation.LandscapeLeft | UIInterfaceOrientation.LandscapeRight))
+			{
+				bReturn = true;
+			}
+			else
+			{
+				bReturn = false;
+			}
+
+			return bReturn;
+
+		}
 	}
 }
 

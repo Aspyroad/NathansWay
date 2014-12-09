@@ -60,7 +60,6 @@
     <Compile Include="Aspyroad.iOSCore.AspyWindow.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewSettings.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyFactories.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspyUtilities.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTypes.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyAppDel.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyGlobals.cs" />
@@ -77,6 +76,7 @@
     <Compile Include="Controls\Aspyroad.iOSCore.AspyButton.Base.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspySlider.Base.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTextView.Base.cs" />
+    <Compile Include="Utilities\Aspyroad.iOSCore.Util.Functions.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />
