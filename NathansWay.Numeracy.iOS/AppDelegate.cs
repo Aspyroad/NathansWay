@@ -38,7 +38,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private UIStoryboard storyboard;
 		private AspyWindow window;
-		private AspyViewContainer _mainController;
+		private vcMainContainer _mainContainer;
 		//private UINavigationController _mainNav;
 		//private vcMenuStart _menuStart;
 		private vcLessonMenu _menuStart;
@@ -167,25 +167,26 @@ namespace NathansWay.iOS.Numeracy
 
 			// Load our storyboard and setup our UIWindow and first view controller
 			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+			iOSCoreServiceContainer.Register<UIStoryboard> (storyboard);
 
 			// Setup view controllers
 			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 
-			//_mainController = storyboard.InstantiateViewController("MainContainer") as AspyViewContainer;
-			_mainController = new AspyViewContainer();
+			//_mainController = storyboard.InstantiateViewController("vcMainContainer") as vcMainContainer;
+			_mainContainer = new vcMainContainer();
 
 			// Use storyboard ids to create VCs
 			//_menuStart = new vcMenuStart();
 			//_menuStart = storyboard.InstantiateViewController("vcMenuStart") as vcMenuStart;
-			_menuStart = storyboard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
+			//_menuStart = storyboard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
 
 			//Add our navigation object to the service library
 			//iOSCoreServiceContainer.Register<AspyViewContainer> (_mainController);
 
-			window.MakeKeyAndVisible();
-			window.RootViewController = _mainController;
-			//window.RootViewController = _menuStart;
 			//window.MakeKeyAndVisible();
-			_mainController.AddAndDisplayController(_menuStart);
+			window.RootViewController = _mainContainer;
+			//window.RootViewController = _menuStart;
+			window.MakeKeyAndVisible();
+			//_mainController.AddAndDisplayController(_menuStart);
 
 			//window.MakeKeyAndVisible();
 

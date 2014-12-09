@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="612">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -90,7 +90,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="0" indentationWidth="0.0" id="710" customClass="vLessonTableCell" reuseIdentifier="LessonTableCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="LessonTableCell" id="710" customClass="vLessonTableCell">
                                         <rect key="frame" x="0.0" y="22" width="626" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="710" id="q1s-uR-rPo" customClass="AspyView">
@@ -147,10 +147,10 @@
                                         <connections>
                                             <outlet property="lblEdit" destination="805" id="name-outlet-805"/>
                                             <outlet property="lblLessonName" destination="719" id="name-outlet-719"/>
+                                            <outlet property="lblLevel" destination="718" id="name-outlet-718"/>
                                             <outlet property="lblOperator" destination="726" id="name-outlet-726"/>
                                             <outlet property="lblStart" destination="727" id="name-outlet-727"/>
                                             <outlet property="lblType" destination="869" id="name-outlet-869"/>
-                                            <outlet property="lblLevel" destination="718" id="name-outlet-718"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -213,8 +213,15 @@
                                     <segment title="÷"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OTa-Cl-Gig">
+                                <rect key="frame" x="903" y="72" width="101" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="0" alpha="1"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
@@ -230,12 +237,12 @@
                         <outlet property="imBgUpperRight" destination="941" id="name-outlet-941"/>
                         <outlet property="lblFilter" destination="927" id="name-outlet-927"/>
                         <outlet property="lblLevel" destination="Cbo-pO-OhT" id="name-outlet-Cbo-pO-OhT"/>
-                        <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
-                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
-                        <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
-                        <outlet property="tvLessonItems" destination="728" id="name-outlet-728"/>
                         <outlet property="scOperatorFilter" destination="962" id="name-outlet-962"/>
                         <outlet property="scTypeFilter" destination="957" id="name-outlet-957"/>
+                        <outlet property="tvLessonItems" destination="728" id="name-outlet-728"/>
+                        <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
+                        <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
+                        <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,6 +250,7 @@
             </objects>
             <point key="canvasLocation" x="-2" y="-1956"/>
         </scene>
+        <!--MainContainer-->
         <!--Lesson-->
         <scene sceneID="625">
             <objects>

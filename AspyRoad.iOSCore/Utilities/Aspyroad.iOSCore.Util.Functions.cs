@@ -1,6 +1,10 @@
+// System
 using System;
 using System.Drawing;
+// Mono
 using MonoTouch.UIKit;
+// Aspyroad
+using AspyRoad.iOSCore;
 
 namespace AspyRoad.iOSCore
 {
@@ -33,7 +37,8 @@ namespace AspyRoad.iOSCore
 		{ 
 			bool bReturn;
 			var mmm = UIApplication.SharedApplication.StatusBarOrientation;
-			if (mmm == (UIInterfaceOrientation.LandscapeLeft | UIInterfaceOrientation.LandscapeRight))
+			// Is the interface left or right landscape?
+			if ((mmm == UIInterfaceOrientation.LandscapeLeft) || (mmm == UIInterfaceOrientation.LandscapeRight))
 			{
 				bReturn = true;
 			}
@@ -45,6 +50,18 @@ namespace AspyRoad.iOSCore
 			return bReturn;
 
 		}
+
+		public RectangleF rectCurrentOrientation (AspyGlobals myGlobals)
+		{
+			if (AspyUtilities.IsLandScape ())
+			{
+				return myGlobals.G__RectWindowLandscape;
+			}
+			else
+			{
+				return myGlobals.G__RectWindowPortait;
+			}
+		} 
 	}
 }
 

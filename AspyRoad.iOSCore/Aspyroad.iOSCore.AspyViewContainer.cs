@@ -57,9 +57,9 @@ namespace AspyRoad.iOSCore
 
 //		public override void LoadView ()
 //		{
+//			//base.LoadView ();
 //			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
 //			this.View.BackgroundColor = UIColor.White;
-//			this.View.Tag = 666;
 //		}
 
 		public override void ViewWillAppear (bool animated)
@@ -71,6 +71,7 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidAppear (bool animated)
 		{
 			// Always correct bounds and frame
+
 			base.ViewDidAppear (animated);
 		}
 
