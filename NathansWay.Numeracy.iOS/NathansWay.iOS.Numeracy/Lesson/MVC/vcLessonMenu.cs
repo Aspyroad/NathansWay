@@ -64,7 +64,6 @@ namespace NathansWay.iOS.Numeracy
 		{
 			base.LoadView ();
 			this._vLessonMenu = this.View as vLessonMenu;
-
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -90,7 +89,6 @@ namespace NathansWay.iOS.Numeracy
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
-
 			this.LoadLessons ();
 		}
 

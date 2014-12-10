@@ -115,17 +115,11 @@ namespace AspyRoad.iOSCore
 		/// <param name="_newController">_new controller.</param>
 		public void AddAndDisplayController (AspyViewController _newController)
 		{
-			//this.AddChildViewController (_newController);
+			this.AddChildViewController (_newController);
 			// Add View and subviews
-			//this.View.AddSubview (_newController.View);
-			this.PresentViewController (_newController, false, null);
-
-
-
-			//TODO: Wrap this in an 'If'? Boolean to decide if they want to? 
-				//this.View.AddSubviews (_newController.View.Subviews);
+			_newController.View.Frame = this.View.Bounds;
+			this.View.AddSubview (_newController.View);
 			_newController.DidMoveToParentViewController (this);
-
 		}
 
 		public void AddController (UIViewController _newController)

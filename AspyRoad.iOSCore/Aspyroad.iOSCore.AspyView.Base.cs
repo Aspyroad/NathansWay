@@ -126,8 +126,7 @@ namespace AspyRoad.iOSCore
 		protected virtual void ApplyUI()
 		{
 			// We use values as colors are lazy loaded
-			//this.Layer.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
-
+			this.Layer.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
 		}
 
 		#endregion
@@ -211,13 +210,7 @@ namespace AspyRoad.iOSCore
 
 		public override void Draw(RectangleF rect)
 		{
-			// iOS 7 always returns portrait screen sizes
-			//var x = rectCurrentOrientation ();
 			base.Draw (rect);
-//			_layer1 = new CALayer ();
-//			_layer1.Frame = rect;
-//			_layer1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
-//			this.Layer.InsertSublayer (this._layer1, 0);
 		}
 
         public override UIViewAutoresizing AutoresizingMask

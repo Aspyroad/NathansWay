@@ -83,7 +83,7 @@ namespace NathansWay.Shared
 			ButtonFontName = "HelveticaNeue-Medium";
 
 			// UIView
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 0.0f, 220.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 80.0f, 0.0f, 120.0f)); // Orange
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 

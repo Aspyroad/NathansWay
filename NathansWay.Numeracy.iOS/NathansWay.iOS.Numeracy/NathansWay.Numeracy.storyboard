@@ -35,10 +35,10 @@
             </objects>
             <point key="canvasLocation" x="2490" y="-1887"/>
         </scene>
-        <!--LessonMenu-->
+        <!--Lesson Menu-->
         <scene sceneID="611">
             <objects>
-                <viewController storyboardIdentifier="vcLessonMenu" title="LessonMenu" nibName="" id="612" customClass="vcLessonMenu" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vcLessonMenu" title="Lesson Menu" nibName="" id="612" customClass="vcLessonMenu" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="HHF-DQ-RDH" customClass="vLessonMenu">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -221,7 +221,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="0" alpha="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="btnHeaderEdit" destination="rEB-1m-kf2" id="name-outlet-rEB-1m-kf2"/>
@@ -248,7 +248,6 @@
             </objects>
             <point key="canvasLocation" x="-2" y="-1956"/>
         </scene>
-        <!--MainContainer-->
         <!--Lesson-->
         <scene sceneID="625">
             <objects>
@@ -269,12 +268,4 @@
     <inferredMetricsTieBreakers>
         <segue reference="619"/>
     </inferredMetricsTieBreakers>
-    <resources>
-        <image name="Content/AppImages/Exit.png" width="128" height="128"/>
-        <image name="Content/AppImages/Kids.png" width="128" height="128"/>
-        <image name="Content/AppImages/Spanner.png" width="128" height="128"/>
-        <image name="Content/AppImages/Teacher.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox_.png" width="128" height="128"/>
-    </resources>
 </document>

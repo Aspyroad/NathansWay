@@ -55,13 +55,6 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-//		public override void LoadView ()
-//		{
-//			//base.LoadView ();
-//			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
-//			this.View.BackgroundColor = UIColor.White;
-//		}
-
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
@@ -71,7 +64,6 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidAppear (bool animated)
 		{
 			// Always correct bounds and frame
-
 			base.ViewDidAppear (animated);
 		}
 
@@ -84,7 +76,6 @@ namespace AspyRoad.iOSCore
 		{
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
-
 		}
 
 		#region Autorotation for iOS 6 or newer

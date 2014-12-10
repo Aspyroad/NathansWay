@@ -16,9 +16,9 @@ namespace NathansWay.iOS.Numeracy
 	{
 		#region Class Variables
 
-		protected UIStoryboard _storyBoard;
-		protected Lazy<vcMenuStart> _vcMainMenu;
-		public vcLessonMenu _vcLessonMenu;
+		public UIStoryboard _storyBoard;
+		public Lazy<vcMenuStart> _vcMainMenu;
+		public Lazy<vcLessonMenu> _vcLessonMenu;
 
 		#endregion
 
@@ -55,7 +55,8 @@ namespace NathansWay.iOS.Numeracy
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
-			_vcLessonMenu = _storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
+			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
+
 			//laborController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<LaborController>());
 			//expenseController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<ExpenseController>());
 			//documentController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<DocumentController>());
@@ -74,25 +75,25 @@ namespace NathansWay.iOS.Numeracy
 		public override void LoadView ()
 		{
 			base.LoadView ();
-			//this.View = new UIView (this.iOSGlobals.G__RectWindowLandscape);
+			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
+			this.View.BackgroundColor = UIColor.White;
 		}
+
 
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
 
-			// Load our initial vc
-			//this.AddAndDisplayController(_vcLessonMenu.Value);
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			// Always correct bounds and frame
-
 			base.ViewDidAppear (animated);
-			this.AddAndDisplayController(_vcLessonMenu);
-			//this.View.ViewWithTag(3).Frame = this.View.Frame;
+
+			// Load our initial vc
+			this.AddAndDisplayController(_vcLessonMenu.Value);
 		}
 
 		public override void ViewDidLayoutSubviews ()
