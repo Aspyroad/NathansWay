@@ -115,9 +115,13 @@ namespace AspyRoad.iOSCore
 		/// <param name="_newController">_new controller.</param>
 		public void AddAndDisplayController (AspyViewController _newController)
 		{
-			this.AddChildViewController (_newController);
+			//this.AddChildViewController (_newController);
 			// Add View and subviews
-			this.View.AddSubview (_newController.View);
+			//this.View.AddSubview (_newController.View);
+			this.PresentViewController (_newController, false, null);
+
+
+
 			//TODO: Wrap this in an 'If'? Boolean to decide if they want to? 
 				//this.View.AddSubviews (_newController.View.Subviews);
 			_newController.DidMoveToParentViewController (this);
@@ -250,13 +254,20 @@ namespace AspyRoad.iOSCore
 			return ret;
 		}
 
+		public override UIInterfaceOrientation PreferredInterfaceOrientationForPresentation ()
+		{
+			//return base.PreferredInterfaceOrientationForPresentation ();
+			return UIInterfaceOrientation.LandscapeLeft;
+		}
+
 		#endregion
 
 		#region Autorotation for iOS 6 or newer
 
 		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{
-			return this.iOSGlobals.G__6_SupportedOrientationMasks;
+			//return this.iOSGlobals.G__6_SupportedOrientationMasks;
+			return UIInterfaceOrientationMask.Landscape;
 		}
 		// AND....
 		public override bool ShouldAutorotate ()
@@ -273,13 +284,12 @@ namespace AspyRoad.iOSCore
 
 		public override void DidRotate (UIInterfaceOrientation fromInterfaceOrientation)
 		{
-
-			//base.DidRotate (fromInterfaceOrientation);
+			base.DidRotate (fromInterfaceOrientation);
 		}
 
 		public override void WillRotate (UIInterfaceOrientation toInterfaceOrientation, double duration)
 		{
-			//base.WillRotate (toInterfaceOrientation, duration);
+			base.WillRotate (toInterfaceOrientation, duration);
 		}
 
 

@@ -223,8 +223,6 @@
                         </subviews>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="1" blue="0" alpha="1"/>
                     </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <outlet property="btnHeaderEdit" destination="rEB-1m-kf2" id="name-outlet-rEB-1m-kf2"/>
                         <outlet property="btnHeaderLessonName" destination="850" id="name-outlet-850"/>

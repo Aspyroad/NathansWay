@@ -84,7 +84,22 @@ namespace AspyRoad.iOSCore
 		{
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
+
 		}
+
+		#region Autorotation for iOS 6 or newer
+
+		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
+		{
+			return UIInterfaceOrientationMask.AllButUpsideDown;
+		}
+
+		public override bool ShouldAutorotate ()
+		{
+			return true;
+		}
+
+		#endregion
 			
 		#endregion
 	}
