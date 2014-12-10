@@ -83,13 +83,14 @@ namespace NathansWay.iOS.Numeracy
 			this.Setup_ViewBackGroundUpperLeftRight ();
 
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
+			// Load Initial lesson list
+			this.LoadLessonsInit ();
 
         }
 
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
-			this.LoadLessons ();
 		}
 
 		#endregion
@@ -127,7 +128,7 @@ namespace NathansWay.iOS.Numeracy
 			//			[v.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
 
 		}
-		private void LoadLessons ()
+		private void LoadLessonsInit ()
 		{
 
 			lessonViewModel.LoadLessonsAsync ().ContinueWith (_ => 

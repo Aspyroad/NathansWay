@@ -58,7 +58,6 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-
 		}
 
 		#endregion
@@ -113,6 +112,15 @@ namespace AspyRoad.iOSCore
 		/// </summary>
 		/// <returns><c>true</c>If the VC is added to the parent children array,<c>false</c> otherwise.</returns>
 		/// <param name="_newController">_new controller.</param>
+		public void AddAndDisplayController (AspyViewController _newController, RectangleF _frame)
+		{
+			this.AddChildViewController (_newController);
+			// Add View and subview
+			_newController.View.Frame = _frame;
+			this.View.AddSubview (_newController.View);
+			_newController.DidMoveToParentViewController (this);
+		}
+
 		public void AddAndDisplayController (AspyViewController _newController)
 		{
 			this.AddChildViewController (_newController);
