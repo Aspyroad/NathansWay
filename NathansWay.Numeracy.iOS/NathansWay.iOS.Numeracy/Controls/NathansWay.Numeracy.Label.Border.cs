@@ -23,39 +23,30 @@ namespace NathansWay.iOS.Numeracy
 
 		public BorderLabel (IntPtr handle) : base(handle)
 		{
-			Initialize ();
+			Init_BorderLabel ();
 		}
 
 		public BorderLabel (NSCoder coder) : base(coder)
 		{
-			Initialize ();
+			Init_BorderLabel ();
 		}
 
 		public BorderLabel (RectangleF frame) : base(frame)
 		{
-			Initialize ();
+			Init_BorderLabel ();
 		}
 
 		public BorderLabel () : base ()
 		{
-			Initialize ();
+			Init_BorderLabel ();
 		}
 
 		#endregion
 
+		#region Overrides
 
-		#region Override Members
-
-		protected override void Initialize()
+		private void Init_BorderLabel()
 		{
-			base.Initialize ();
-			ApplyUI ();
-		}
-
-		protected override void ApplyUI ()
-		{
-			// Apply label font color
-			base.ApplyUI ();
 
 		}
 
@@ -63,7 +54,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			base.Draw (rect);
 			this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
-			this.Layer.BorderWidth = 2.0f;
+			this.Layer.BorderWidth = 1.0f;
 		}
 
 		#endregion

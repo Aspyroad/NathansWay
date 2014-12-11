@@ -9,7 +9,6 @@ using MonoTouch.CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
-// NathansWay
 using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared.BUS.Entity;

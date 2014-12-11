@@ -199,7 +199,7 @@
       <DependentUpon>vLessonTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcMainContainer.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Label.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Label.Border.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

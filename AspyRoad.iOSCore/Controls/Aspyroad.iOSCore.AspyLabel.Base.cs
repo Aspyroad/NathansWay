@@ -25,22 +25,22 @@ namespace AspyRoad.iOSCore
 
 		public AspyLabel (IntPtr handle) : base(handle)
 		{
-			Initialize ();
+			Initialize_Base ();
 		}
 
 		public AspyLabel (NSCoder coder) : base(coder)
 		{
-			Initialize ();
+			Initialize_Base ();
 		}
 
 		public AspyLabel (RectangleF frame) : base(frame)
 		{
-			Initialize ();
+			Initialize_Base ();
 		}
 
 		public AspyLabel () : base ()
 		{
-			Initialize ();
+			Initialize_Base ();
 		}
 
 		#endregion
@@ -56,9 +56,9 @@ namespace AspyRoad.iOSCore
 
 		#region Virtual Members
 
-		protected virtual void Initialize()
+		private void Initialize_Base()
 		{
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();		 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();	
 		}
 
 		protected virtual void ApplyUI ()
