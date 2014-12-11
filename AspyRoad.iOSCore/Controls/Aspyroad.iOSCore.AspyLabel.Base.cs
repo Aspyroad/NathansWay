@@ -58,8 +58,7 @@ namespace AspyRoad.iOSCore
 
 		protected virtual void Initialize()
 		{
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			//this.TextAlignment = UITextAlignment.Center;			 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();		 
 		}
 
 		protected virtual void ApplyUI ()
