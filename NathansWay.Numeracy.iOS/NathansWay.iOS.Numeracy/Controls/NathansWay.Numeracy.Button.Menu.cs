@@ -11,489 +11,6 @@ using MonoTouch.ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-
-	#region Menu Buttons
-
-    //[MonoTouch.Foundation.Register ("ButtonStudent")]
-    public	class ButtonStudent : AspyButton
-    {
-        public ButtonStudent () : base()
-        {
-            Initialize();
-        }
-        public ButtonStudent (IntPtr handle) : base(handle)
-        {
-            Initialize();
-        }       
-        public ButtonStudent (RectangleF myFrame)  : base (myFrame)
-        {   
-            Initialize();
-        }
-        public ButtonStudent (UIButtonType type) : base (type)
-        {
-            Initialize();
-        }
-
-		protected override void Initialize()
-        {
-            this.SetImage(UIImage.FromBundle ("Content/AppImages/Kids.png"), UIControlState.Normal);
-			base.Initialize();
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-            this._iconDownlabelTop();
-        }
-    }
-    
-    //[MonoTouch.Foundation.Register ("ButtonTools")]
-    public class ButtonTools : AspyButton
-    {
-        public ButtonTools () : base()
-        {
-            Initialize();
-        }
-        public ButtonTools (IntPtr handle) : base(handle)
-        {
-            Initialize();
-        }       
-        public ButtonTools (RectangleF myFrame)  : base (myFrame)
-        {   
-            Initialize();
-        }
-        public ButtonTools (UIButtonType type) : base (type)
-        {
-            Initialize();
-        }
-
-        protected override void Initialize()
-        {
-			base.Initialize ();
-            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-            this._iconDownlabelTop();
-        }
-    }
-    
-    //[MonoTouch.Foundation.Register ("ButtonLessons")]
-    public class ButtonLessons: AspyButton
-    {
-        public ButtonLessons () : base()
-        {
-            Initialize();
-        }
-        public ButtonLessons (IntPtr handle) : base(handle)
-        {
-            Initialize();
-        }       
-        public ButtonLessons (RectangleF myFrame)  : base (myFrame)
-        {   
-            Initialize();
-        }
-        public ButtonLessons (UIButtonType type) : base (type)
-        {
-            Initialize();
-        }
-
-        protected override void Initialize()
-        {
-			base.Initialize ();
-            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-            this._iconDownlabelTop();
-        }
-    }
-    
-    //[MonoTouch.Foundation.Register ("ButtonExit")]
-    public class ButtonExit : AspyButton
-    {
-        public ButtonExit () : base()
-        {
-            Initialize();
-        }
-        public ButtonExit (IntPtr handle) : base(handle)
-        {
-            Initialize();
-        }       
-        public ButtonExit (RectangleF myFrame)  : base (myFrame)
-        {   
-            Initialize();
-        }
-        public ButtonExit (UIButtonType type) : base (type)
-        {
-            Initialize();
-        }
-
-        protected override void Initialize()
-        {
-			base.Initialize ();
-            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-            this._iconDownlabelTop();
-        }
-    }
-    
-    //[MonoTouch.Foundation.Register ("ButtonTeacher")]
-    public class ButtonTeacher : AspyButton
-    {
-        public ButtonTeacher () : base()
-        {
-            Initialize();
-        }
-        public ButtonTeacher (IntPtr handle) : base(handle)
-        {
-            Initialize();
-        }       
-        public ButtonTeacher (RectangleF myFrame)  : base (myFrame)
-        {   
-            Initialize();
-        }
-        public ButtonTeacher (UIButtonType type) : base (type)
-        {
-            Initialize();
-        }
-
-        protected override void Initialize()
-        {
-			base.Initialize ();
-            this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-            this._iconDownlabelTop();
-        }
-    }
-
-	//[MonoTouch.Foundation.Register ("ButtonSchool")]
-	public class ButtonSchool : AspyButton
-	{
-
-		public ButtonSchool () : base()
-		{
-			Initialize();
-		}
-		public ButtonSchool (IntPtr handle) : base(handle)
-		{
-			Initialize();
-		}       
-		public ButtonSchool (RectangleF myFrame)  : base (myFrame)
-		{   
-			Initialize();
-		}
-		public ButtonSchool (UIButtonType type) : base (type)
-		{
-			Initialize();
-		} 
-
-		protected override void Initialize()
-		{
-			base.Initialize ();
-			this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
-		}
-
-		public override void LayoutSubviews()
-		{
-			base.LayoutSubviews();
-			this._iconDownlabelTop();
-		}
-	}
-
-	#endregion
-
-	#region Test BlueButton
-	/// <summary>
-	/// Blue button example
-	/// http://paintcodeapp.com/examples.html
-	/// </summary>
-	/// <remarks>
-	/// This implementation only deals with Normal and Pressed states. 
-	/// There is no handling for the Disabled state.
-	/// </remarks>
-	//[Register ("SkBlueButton")]
-	public class BlueButton : UIButton 
-	{
-
-		bool isPressed;
-
-		public UIColor NormalColor;
-
-		/// <summary>
-		/// Invoked when the user touches 
-		/// </summary>
-		public event Action<BlueButton> Tapped;
-
-		/// <summary>
-		/// Creates a new instance of the GlassButton using the specified dimensions
-		/// </summary>
-		public BlueButton (RectangleF frame) : base (frame)
-		{
-			NormalColor = UIColor.FromRGBA (0.00f, 0.37f, 0.89f, 1.00f);
-		}
-
-		/// <summary>
-		/// Whether the button is rendered enabled or not.
-		/// </summary>
-		public override bool Enabled 
-		{ 
-			get 
-			{
-				return base.Enabled;
-			}
-			set 
-			{
-				base.Enabled = value;
-				SetNeedsDisplay ();
-			}
-		}
-
-		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
-		{
-			SetNeedsDisplay ();
-			isPressed = true;
-			return base.BeginTracking (uitouch, uievent);
-		}
-
-		public override void EndTracking (UITouch uitouch, UIEvent uievent)
-		{
-			if (isPressed && Enabled)
-			{
-				if (Tapped != null)
-				{
-					Tapped (this);
-				}
-			}
-			isPressed = false;
-			SetNeedsDisplay ();
-			base.EndTracking (uitouch, uievent);
-		}
-
-		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
-		{
-			var touch = uievent.AllTouches.AnyObject as UITouch;
-			if (Bounds.Contains (touch.LocationInView (this)))
-			{
-				isPressed = true;
-			}
-			else
-			{
-				isPressed = false;
-			}
-			return base.ContinueTracking (uitouch, uievent);
-		}
-
-		public override void Draw (RectangleF rect)
-		{
-			var context = UIGraphics.GetCurrentContext ();
-			var bounds = Bounds;
-
-			//UIColor background = Enabled ? isPressed ? HighlightedColor : NormalColor : DisabledColor;
-
-
-			UIColor buttonColor = NormalColor; //UIColor.FromRGBA (0.00f, 0.37f, 0.89f, 1.00f);
-			var buttonColorRGBA = new float[4];
-			buttonColor.GetRGBA (
-				out buttonColorRGBA [0],
-				out buttonColorRGBA [1],
-				out buttonColorRGBA [2],
-				out buttonColorRGBA [3]
-			);
-			if (isPressed) 
-			{
-				// Get the Hue Saturation Brightness Alpha copy of the color				
-				var buttonColorHSBA = new float[4];
-				buttonColor.GetHSBA (
-					out buttonColorHSBA [0],
-					out buttonColorHSBA [1],
-					out buttonColorHSBA [2],
-					out buttonColorHSBA [3]
-				);
-				// Change the brightness to a fixed value (0.5f)
-				buttonColor = UIColor.FromHSBA (buttonColorHSBA [0], buttonColorHSBA [1], 0.5f, buttonColorHSBA [3]);
-				// Re-set the base buttonColorRGBA because everything else is relative to it
-				buttonColorRGBA = new float[4];
-				buttonColor.GetRGBA (
-					out buttonColorRGBA [0],
-					out buttonColorRGBA [1],
-					out buttonColorRGBA [2],
-					out buttonColorRGBA [3]
-				);
-			}
-
-
-			using (var colorSpace = CGColorSpace.CreateDeviceRGB ()) {
-
-
-
-				// ------------- START PAINTCODE -------------
-
-				//// Color Declarations
-				UIColor upColorOut = UIColor.FromRGBA (0.79f, 0.79f, 0.79f, 1.00f);
-				UIColor bottomColorDown = UIColor.FromRGBA (0.21f, 0.21f, 0.21f, 1.00f);
-				UIColor upColorInner = UIColor.FromRGBA (0.17f, 0.18f, 0.20f, 1.00f);
-				UIColor bottomColorInner = UIColor.FromRGBA (0.98f, 0.98f, 0.99f, 1.00f);
-
-
-				UIColor buttonFlareUpColor = UIColor.FromRGBA (
-					(buttonColorRGBA[0] * 0.3f + 0.7f),
-					(buttonColorRGBA[1] * 0.3f + 0.7f),
-					(buttonColorRGBA[2] * 0.3f + 0.7f),
-					(buttonColorRGBA[3] * 0.3f + 0.7f)
-				);
-				UIColor buttonTopColor = UIColor.FromRGBA (
-					(buttonColorRGBA[0] * 0.8f),
-					(buttonColorRGBA[1] * 0.8f),
-					(buttonColorRGBA[2] * 0.8f),
-					(buttonColorRGBA[3] * 0.8f + 0.2f)
-				);
-				UIColor buttonBottomColor = UIColor.FromRGBA (
-					(buttonColorRGBA[0] * 0 + 1),
-					(buttonColorRGBA[1] * 0 + 1),
-					(buttonColorRGBA[2] * 0 + 1),
-					(buttonColorRGBA[3] * 0 + 1)
-				);
-				UIColor buttonFlareBottomColor = UIColor.FromRGBA (
-					(buttonColorRGBA[0] * 0.8f + 0.2f),
-					(buttonColorRGBA[1] * 0.8f + 0.2f),
-					(buttonColorRGBA[2] * 0.8f + 0.2f),
-					(buttonColorRGBA[3] * 0.8f + 0.2f)
-				);
-				UIColor flareWhite = UIColor.FromRGBA (1.00f, 1.00f, 1.00f, 0.83f);
-
-				//// Gradient Declarations
-				var ringGradientColors = new CGColor [] {upColorOut.CGColor, bottomColorDown.CGColor};
-				var ringGradientLocations = new float [] {0, 1};
-				var ringGradient = new CGGradient (colorSpace, ringGradientColors, ringGradientLocations);
-				var ringInnerGradientColors = new CGColor [] {upColorInner.CGColor, bottomColorInner.CGColor};
-				var ringInnerGradientLocations = new float [] {0, 1};
-				var ringInnerGradient = new CGGradient (colorSpace, ringInnerGradientColors, ringInnerGradientLocations);
-				var buttonGradientColors = new CGColor [] {buttonBottomColor.CGColor, buttonTopColor.CGColor};
-				var buttonGradientLocations = new float [] {0, 1};
-				var buttonGradient = new CGGradient (colorSpace, buttonGradientColors, buttonGradientLocations);
-				var overlayGradientColors = new CGColor [] {flareWhite.CGColor, UIColor.Clear.CGColor};
-				var overlayGradientLocations = new float [] {0, 1};
-				var overlayGradient = new CGGradient (colorSpace, overlayGradientColors, overlayGradientLocations);
-				var buttonFlareGradientColors = new CGColor [] {buttonFlareUpColor.CGColor, buttonFlareBottomColor.CGColor};
-				var buttonFlareGradientLocations = new float [] {0, 1};
-				var buttonFlareGradient = new CGGradient (colorSpace, buttonFlareGradientColors, buttonFlareGradientLocations);
-
-				//// Shadow Declarations
-				var buttonInnerShadow = UIColor.Black.CGColor;
-				var buttonInnerShadowOffset = new SizeF (0, -0);
-				var buttonInnerShadowBlurRadius = 5;
-				var buttonOuterShadow = UIColor.Black.CGColor;
-				var buttonOuterShadowOffset = new SizeF (0, 2);
-
-
-				var buttonOuterShadowBlurRadius = isPressed ? 2 : 5;	// ADDED this code after PaintCode
-
-
-				//// outerOval Drawing
-				var outerOvalPath = UIBezierPath.FromOval (new RectangleF (5, 5, 63, 63));
-				context.SaveState ();
-				context.SetShadowWithColor (buttonOuterShadowOffset, buttonOuterShadowBlurRadius, buttonOuterShadow);
-				context.BeginTransparencyLayer (null);
-				outerOvalPath.AddClip ();
-				context.DrawLinearGradient (ringGradient, new PointF (36.5f, 5), new PointF (36.5f, 68), 0);
-				context.EndTransparencyLayer ();
-				context.RestoreState ();
-
-
-
-				//// overlayOval Drawing
-				var overlayOvalPath = UIBezierPath.FromOval (new RectangleF (5, 5, 63, 63));
-				context.SaveState ();
-				overlayOvalPath.AddClip ();
-				context.DrawRadialGradient (overlayGradient,
-					new PointF (36.5f, 12.23f), 17.75f,
-					new PointF (36.5f, 36.5f), 44.61f,
-					CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
-				context.RestoreState ();
-
-
-
-				//// innerOval Drawing
-				var innerOvalPath = UIBezierPath.FromOval (new RectangleF (12, 12, 49, 49));
-				context.SaveState ();
-				innerOvalPath.AddClip ();
-				context.DrawLinearGradient (ringInnerGradient, new PointF (36.5f, 12), new PointF (36.5f, 61), 0);
-				context.RestoreState ();
-
-
-
-				//// buttonOval Drawing
-				var buttonOvalPath = UIBezierPath.FromOval (new RectangleF (14, 13, 46, 46));
-				context.SaveState ();
-				buttonOvalPath.AddClip ();
-				context.DrawRadialGradient (buttonGradient,
-					new PointF (37, 63.23f), 2.44f,
-					new PointF (37, 44.48f), 23.14f,
-					CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
-				context.RestoreState ();
-
-				////// buttonOval Inner Shadow
-				var buttonOvalBorderRect = buttonOvalPath.Bounds;
-				buttonOvalBorderRect.Inflate (buttonInnerShadowBlurRadius, buttonInnerShadowBlurRadius);
-				buttonOvalBorderRect.Offset (-buttonInnerShadowOffset.Width, -buttonInnerShadowOffset.Height);
-				buttonOvalBorderRect = RectangleF.Union (buttonOvalBorderRect, buttonOvalPath.Bounds);
-				buttonOvalBorderRect.Inflate (1, 1);
-
-				var buttonOvalNegativePath = UIBezierPath.FromRect (buttonOvalBorderRect);
-				buttonOvalNegativePath.AppendPath (buttonOvalPath);
-				buttonOvalNegativePath.UsesEvenOddFillRule = true;
-
-				context.SaveState ();
-				{
-					var xOffset = buttonInnerShadowOffset.Width + (float)Math.Round (buttonOvalBorderRect.Width);
-					var yOffset = buttonInnerShadowOffset.Height;
-					context.SetShadowWithColor (
-						new SizeF (xOffset + (xOffset >= 0 ? 0.1f : -0.1f), yOffset + (yOffset >= 0 ? 0.1f : -0.1f)),
-						buttonInnerShadowBlurRadius,
-						buttonInnerShadow);
-
-					buttonOvalPath.AddClip ();
-					var transform = CGAffineTransform.MakeTranslation (-(float)Math.Round (buttonOvalBorderRect.Width), 0);
-					buttonOvalNegativePath.ApplyTransform (transform);
-					UIColor.Gray.SetFill ();
-					buttonOvalNegativePath.Fill ();
-				}
-				context.RestoreState ();
-
-
-
-
-				//// flareOval Drawing
-				var flareOvalPath = UIBezierPath.FromOval (new RectangleF (22, 14, 29, 15));
-				context.SaveState ();
-				flareOvalPath.AddClip ();
-				context.DrawLinearGradient (buttonFlareGradient, new PointF (36.5f, 14), new PointF (36.5f, 29), 0);
-				context.RestoreState ();
-
-
-				// ------------- END PAINTCODE -------------
-
-
-
-			}
-		}
-	}
-
-	#endregion
-
 	//[Register ("ButtonStyleToolBox")]
 	public class ButtonStyleToolBox : AspyButton
 	{
@@ -501,29 +18,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleToolBox () : base()
 		{
-			Initialize();
+			Init_ButtonStyleToolBox ();
 		}
 		public ButtonStyleToolBox (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleToolBox ();
 		}       
 		public ButtonStyleToolBox (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleToolBox ();
 		}
 		public ButtonStyleToolBox (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleToolBox ();
 		} 
+
+		private void Init_ButtonStyleToolBox()
+		{
+		}
 
 		#endregion
 
 		#region Overrides
-
-		protected override void Initialize()
-		{
-			base.Initialize ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -531,7 +47,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -653,7 +169,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			}
 		}
 
-
 		#endregion
 	}
 
@@ -664,29 +179,30 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleLesson () : base()
 		{
-			Initialize();
+			Init_ButtonStyleLesson ();
 		}
 		public ButtonStyleLesson (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleLesson ();
 		}       
 		public ButtonStyleLesson (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleLesson ();
 		}
 		public ButtonStyleLesson (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleLesson ();
 		} 
+
+		private void Init_ButtonStyleLesson ()
+		{
+		}
+
 
 		#endregion
 
 		#region Overrides
 
-		protected override void Initialize()
-		{
-			base.Initialize ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -694,7 +210,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLesson (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -790,28 +306,27 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleTeacher () : base()
 		{
-			Initialize();
+			Init_ButtonStyleTeacher ();
 		}
 		public ButtonStyleTeacher (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleTeacher ();
 		}       
 		public ButtonStyleTeacher (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleTeacher ();
 		}
 		public ButtonStyleTeacher (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleTeacher ();
 		} 
 
 		#endregion
 
 		#region Overrides
 
-		protected override void Initialize()
+		private void Init_ButtonStyleTeacher ()
 		{
-			base.Initialize ();
 		}
 
 		public override void Draw (RectangleF rect)
@@ -820,7 +335,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFTeacher (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -931,29 +446,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleStudent () : base()
 		{
-			Initialize();
+			Init_ButtonStyleStudent ();
 		}
 		public ButtonStyleStudent (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleStudent ();
 		}       
 		public ButtonStyleStudent (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleStudent ();
 		}
 		public ButtonStyleStudent (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleStudent ();
 		} 
+
+		private void Init_ButtonStyleStudent ()
+		{
+		}
 
 		#endregion
 
 		#region Overrides
-
-		protected override void Initialize()
-		{
-			base.Initialize ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -961,7 +475,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFStudent (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -1098,29 +612,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleLessonBuilder () : base()
 		{
-			Initialize();
+			Init_ButtonStyleLessonBuilder ();
 		}
 		public ButtonStyleLessonBuilder (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleLessonBuilder ();
 		}       
 		public ButtonStyleLessonBuilder (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleLessonBuilder ();
 		}
 		public ButtonStyleLessonBuilder (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleLessonBuilder ();
 		} 
+
+		private void Init_ButtonStyleLessonBuilder ()
+		{
+		}
 
 		#endregion
 
 		#region Overrides
-
-		protected override void Initialize()
-		{
-			base.Initialize ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -1128,7 +641,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLessonEdit (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -1263,29 +776,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleVisuals () : base()
 		{
-			Initialize();
+			Init_ButtonStyleVisuals ();
 		}
 		public ButtonStyleVisuals (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonStyleVisuals ();
 		}       
 		public ButtonStyleVisuals (RectangleF myFrame)  : base (myFrame)
 		{   
-			Initialize();
+			Init_ButtonStyleVisuals ();
 		}
 		public ButtonStyleVisuals (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonStyleVisuals ();
 		} 
+
+		private void Init_ButtonStyleVisuals ()
+		{
+		}
 
 		#endregion
 
 		#region Overrides
-
-		protected override void Initialize()
-		{
-			base.Initialize ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -1293,7 +805,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFVisuals (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
@@ -1560,4 +1072,475 @@ namespace NathansWay.iOS.Numeracy.Controls
 		#endregion
 	}
 }
+
+#region Old Buttons
+
+////[MonoTouch.Foundation.Register ("ButtonStudent")]
+//public	class ButtonStudent : AspyButton
+//{
+//	public ButtonStudent () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonStudent (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonStudent (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonStudent (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	}
+//
+//	protected override void Initialize()
+//	{
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Kids.png"), UIControlState.Normal);
+//		base.Initialize();
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[MonoTouch.Foundation.Register ("ButtonTools")]
+//public class ButtonTools : AspyButton
+//{
+//	public ButtonTools () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonTools (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonTools (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonTools (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	}
+//
+//	protected override void Initialize()
+//	{
+//		base.Initialize ();
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[MonoTouch.Foundation.Register ("ButtonLessons")]
+//public class ButtonLessons: AspyButton
+//{
+//	public ButtonLessons () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonLessons (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonLessons (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonLessons (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	}
+//
+//	protected override void Initialize()
+//	{
+//		base.Initialize ();
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[MonoTouch.Foundation.Register ("ButtonExit")]
+//public class ButtonExit : AspyButton
+//{
+//	public ButtonExit () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonExit (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonExit (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonExit (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	}
+//
+//	protected override void Initialize()
+//	{
+//		base.Initialize ();
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[MonoTouch.Foundation.Register ("ButtonTeacher")]
+//public class ButtonTeacher : AspyButton
+//{
+//	public ButtonTeacher () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonTeacher (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonTeacher (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonTeacher (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	}
+//
+//	protected override void Initialize()
+//	{
+//		base.Initialize ();
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[MonoTouch.Foundation.Register ("ButtonSchool")]
+//public class ButtonSchool : AspyButton
+//{
+//
+//	public ButtonSchool () : base()
+//	{
+//		Initialize();
+//	}
+//	public ButtonSchool (IntPtr handle) : base(handle)
+//	{
+//		Initialize();
+//	}       
+//	public ButtonSchool (RectangleF myFrame)  : base (myFrame)
+//	{   
+//		Initialize();
+//	}
+//	public ButtonSchool (UIButtonType type) : base (type)
+//	{
+//		Initialize();
+//	} 
+//
+//	protected override void Initialize()
+//	{
+//		base.Initialize ();
+//		this.SetImage(UIImage.FromBundle ("Content/AppImages/Spanner.png"), UIControlState.Normal);
+//	}
+//
+//	public override void LayoutSubviews()
+//	{
+//		base.LayoutSubviews();
+//		this._iconDownlabelTop();
+//	}
+//}
+//
+////[Register ("SkBlueButton")]
+//public class BlueButton : UIButton 
+//{
+//
+//	bool isPressed;
+//
+//	public UIColor NormalColor;
+//
+//	/// <summary>
+//	/// Invoked when the user touches 
+//	/// </summary>
+//	public event Action<BlueButton> Tapped;
+//
+//	/// <summary>
+//	/// Creates a new instance of the GlassButton using the specified dimensions
+//	/// </summary>
+//	public BlueButton (RectangleF frame) : base (frame)
+//	{
+//		NormalColor = UIColor.FromRGBA (0.00f, 0.37f, 0.89f, 1.00f);
+//	}
+//
+//	/// <summary>
+//	/// Whether the button is rendered enabled or not.
+//	/// </summary>
+//	public override bool Enabled 
+//	{ 
+//		get 
+//		{
+//			return base.Enabled;
+//		}
+//		set 
+//		{
+//			base.Enabled = value;
+//			SetNeedsDisplay ();
+//		}
+//	}
+//
+//	public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
+//	{
+//		SetNeedsDisplay ();
+//		isPressed = true;
+//		return base.BeginTracking (uitouch, uievent);
+//	}
+//
+//	public override void EndTracking (UITouch uitouch, UIEvent uievent)
+//	{
+//		if (isPressed && Enabled)
+//		{
+//			if (Tapped != null)
+//			{
+//				Tapped (this);
+//			}
+//		}
+//		isPressed = false;
+//		SetNeedsDisplay ();
+//		base.EndTracking (uitouch, uievent);
+//	}
+//
+//	public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
+//	{
+//		var touch = uievent.AllTouches.AnyObject as UITouch;
+//		if (Bounds.Contains (touch.LocationInView (this)))
+//		{
+//			isPressed = true;
+//		}
+//		else
+//		{
+//			isPressed = false;
+//		}
+//		return base.ContinueTracking (uitouch, uievent);
+//	}
+//
+//	public override void Draw (RectangleF rect)
+//	{
+//		var context = UIGraphics.GetCurrentContext ();
+//		var bounds = Bounds;
+//
+//		//UIColor background = Enabled ? isPressed ? HighlightedColor : NormalColor : DisabledColor;
+//
+//
+//		UIColor buttonColor = NormalColor; //UIColor.FromRGBA (0.00f, 0.37f, 0.89f, 1.00f);
+//		var buttonColorRGBA = new float[4];
+//		buttonColor.GetRGBA (
+//			out buttonColorRGBA [0],
+//			out buttonColorRGBA [1],
+//			out buttonColorRGBA [2],
+//			out buttonColorRGBA [3]
+//		);
+//		if (isPressed) 
+//		{
+//			// Get the Hue Saturation Brightness Alpha copy of the color				
+//			var buttonColorHSBA = new float[4];
+//			buttonColor.GetHSBA (
+//				out buttonColorHSBA [0],
+//				out buttonColorHSBA [1],
+//				out buttonColorHSBA [2],
+//				out buttonColorHSBA [3]
+//			);
+//			// Change the brightness to a fixed value (0.5f)
+//			buttonColor = UIColor.FromHSBA (buttonColorHSBA [0], buttonColorHSBA [1], 0.5f, buttonColorHSBA [3]);
+//			// Re-set the base buttonColorRGBA because everything else is relative to it
+//			buttonColorRGBA = new float[4];
+//			buttonColor.GetRGBA (
+//				out buttonColorRGBA [0],
+//				out buttonColorRGBA [1],
+//				out buttonColorRGBA [2],
+//				out buttonColorRGBA [3]
+//			);
+//		}
+//
+//
+//		using (var colorSpace = CGColorSpace.CreateDeviceRGB ()) {
+//
+//
+//
+//			// ------------- START PAINTCODE -------------
+//
+//			//// Color Declarations
+//			UIColor upColorOut = UIColor.FromRGBA (0.79f, 0.79f, 0.79f, 1.00f);
+//			UIColor bottomColorDown = UIColor.FromRGBA (0.21f, 0.21f, 0.21f, 1.00f);
+//			UIColor upColorInner = UIColor.FromRGBA (0.17f, 0.18f, 0.20f, 1.00f);
+//			UIColor bottomColorInner = UIColor.FromRGBA (0.98f, 0.98f, 0.99f, 1.00f);
+//
+//
+//			UIColor buttonFlareUpColor = UIColor.FromRGBA (
+//				(buttonColorRGBA[0] * 0.3f + 0.7f),
+//				(buttonColorRGBA[1] * 0.3f + 0.7f),
+//				(buttonColorRGBA[2] * 0.3f + 0.7f),
+//				(buttonColorRGBA[3] * 0.3f + 0.7f)
+//			);
+//			UIColor buttonTopColor = UIColor.FromRGBA (
+//				(buttonColorRGBA[0] * 0.8f),
+//				(buttonColorRGBA[1] * 0.8f),
+//				(buttonColorRGBA[2] * 0.8f),
+//				(buttonColorRGBA[3] * 0.8f + 0.2f)
+//			);
+//			UIColor buttonBottomColor = UIColor.FromRGBA (
+//				(buttonColorRGBA[0] * 0 + 1),
+//				(buttonColorRGBA[1] * 0 + 1),
+//				(buttonColorRGBA[2] * 0 + 1),
+//				(buttonColorRGBA[3] * 0 + 1)
+//			);
+//			UIColor buttonFlareBottomColor = UIColor.FromRGBA (
+//				(buttonColorRGBA[0] * 0.8f + 0.2f),
+//				(buttonColorRGBA[1] * 0.8f + 0.2f),
+//				(buttonColorRGBA[2] * 0.8f + 0.2f),
+//				(buttonColorRGBA[3] * 0.8f + 0.2f)
+//			);
+//			UIColor flareWhite = UIColor.FromRGBA (1.00f, 1.00f, 1.00f, 0.83f);
+//
+//			//// Gradient Declarations
+//			var ringGradientColors = new CGColor [] {upColorOut.CGColor, bottomColorDown.CGColor};
+//			var ringGradientLocations = new float [] {0, 1};
+//			var ringGradient = new CGGradient (colorSpace, ringGradientColors, ringGradientLocations);
+//			var ringInnerGradientColors = new CGColor [] {upColorInner.CGColor, bottomColorInner.CGColor};
+//			var ringInnerGradientLocations = new float [] {0, 1};
+//			var ringInnerGradient = new CGGradient (colorSpace, ringInnerGradientColors, ringInnerGradientLocations);
+//			var buttonGradientColors = new CGColor [] {buttonBottomColor.CGColor, buttonTopColor.CGColor};
+//			var buttonGradientLocations = new float [] {0, 1};
+//			var buttonGradient = new CGGradient (colorSpace, buttonGradientColors, buttonGradientLocations);
+//			var overlayGradientColors = new CGColor [] {flareWhite.CGColor, UIColor.Clear.CGColor};
+//			var overlayGradientLocations = new float [] {0, 1};
+//			var overlayGradient = new CGGradient (colorSpace, overlayGradientColors, overlayGradientLocations);
+//			var buttonFlareGradientColors = new CGColor [] {buttonFlareUpColor.CGColor, buttonFlareBottomColor.CGColor};
+//			var buttonFlareGradientLocations = new float [] {0, 1};
+//			var buttonFlareGradient = new CGGradient (colorSpace, buttonFlareGradientColors, buttonFlareGradientLocations);
+//
+//			//// Shadow Declarations
+//			var buttonInnerShadow = UIColor.Black.CGColor;
+//			var buttonInnerShadowOffset = new SizeF (0, -0);
+//			var buttonInnerShadowBlurRadius = 5;
+//			var buttonOuterShadow = UIColor.Black.CGColor;
+//			var buttonOuterShadowOffset = new SizeF (0, 2);
+//
+//
+//			var buttonOuterShadowBlurRadius = isPressed ? 2 : 5;	// ADDED this code after PaintCode
+//
+//
+//			//// outerOval Drawing
+//			var outerOvalPath = UIBezierPath.FromOval (new RectangleF (5, 5, 63, 63));
+//			context.SaveState ();
+//			context.SetShadowWithColor (buttonOuterShadowOffset, buttonOuterShadowBlurRadius, buttonOuterShadow);
+//			context.BeginTransparencyLayer (null);
+//			outerOvalPath.AddClip ();
+//			context.DrawLinearGradient (ringGradient, new PointF (36.5f, 5), new PointF (36.5f, 68), 0);
+//			context.EndTransparencyLayer ();
+//			context.RestoreState ();
+//
+//
+//
+//			//// overlayOval Drawing
+//			var overlayOvalPath = UIBezierPath.FromOval (new RectangleF (5, 5, 63, 63));
+//			context.SaveState ();
+//			overlayOvalPath.AddClip ();
+//			context.DrawRadialGradient (overlayGradient,
+//				new PointF (36.5f, 12.23f), 17.75f,
+//				new PointF (36.5f, 36.5f), 44.61f,
+//				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+//			context.RestoreState ();
+//
+//
+//
+//			//// innerOval Drawing
+//			var innerOvalPath = UIBezierPath.FromOval (new RectangleF (12, 12, 49, 49));
+//			context.SaveState ();
+//			innerOvalPath.AddClip ();
+//			context.DrawLinearGradient (ringInnerGradient, new PointF (36.5f, 12), new PointF (36.5f, 61), 0);
+//			context.RestoreState ();
+//
+//
+//
+//			//// buttonOval Drawing
+//			var buttonOvalPath = UIBezierPath.FromOval (new RectangleF (14, 13, 46, 46));
+//			context.SaveState ();
+//			buttonOvalPath.AddClip ();
+//			context.DrawRadialGradient (buttonGradient,
+//				new PointF (37, 63.23f), 2.44f,
+//				new PointF (37, 44.48f), 23.14f,
+//				CGGradientDrawingOptions.DrawsBeforeStartLocation | CGGradientDrawingOptions.DrawsAfterEndLocation);
+//			context.RestoreState ();
+//
+//			////// buttonOval Inner Shadow
+//			var buttonOvalBorderRect = buttonOvalPath.Bounds;
+//			buttonOvalBorderRect.Inflate (buttonInnerShadowBlurRadius, buttonInnerShadowBlurRadius);
+//			buttonOvalBorderRect.Offset (-buttonInnerShadowOffset.Width, -buttonInnerShadowOffset.Height);
+//			buttonOvalBorderRect = RectangleF.Union (buttonOvalBorderRect, buttonOvalPath.Bounds);
+//			buttonOvalBorderRect.Inflate (1, 1);
+//
+//			var buttonOvalNegativePath = UIBezierPath.FromRect (buttonOvalBorderRect);
+//			buttonOvalNegativePath.AppendPath (buttonOvalPath);
+//			buttonOvalNegativePath.UsesEvenOddFillRule = true;
+//
+//			context.SaveState ();
+//			{
+//				var xOffset = buttonInnerShadowOffset.Width + (float)Math.Round (buttonOvalBorderRect.Width);
+//				var yOffset = buttonInnerShadowOffset.Height;
+//				context.SetShadowWithColor (
+//					new SizeF (xOffset + (xOffset >= 0 ? 0.1f : -0.1f), yOffset + (yOffset >= 0 ? 0.1f : -0.1f)),
+//					buttonInnerShadowBlurRadius,
+//					buttonInnerShadow);
+//
+//				buttonOvalPath.AddClip ();
+//				var transform = CGAffineTransform.MakeTranslation (-(float)Math.Round (buttonOvalBorderRect.Width), 0);
+//				buttonOvalNegativePath.ApplyTransform (transform);
+//				UIColor.Gray.SetFill ();
+//				buttonOvalNegativePath.Fill ();
+//			}
+//			context.RestoreState ();
+//
+//
+//
+//
+//			//// flareOval Drawing
+//			var flareOvalPath = UIBezierPath.FromOval (new RectangleF (22, 14, 29, 15));
+//			context.SaveState ();
+//			flareOvalPath.AddClip ();
+//			context.DrawLinearGradient (buttonFlareGradient, new PointF (36.5f, 14), new PointF (36.5f, 29), 0);
+//			context.RestoreState ();
+//
+//
+//			// ------------- END PAINTCODE -------------
+//
+//
+//
+//		}
+//	}
+//}
+
+#endregion
 

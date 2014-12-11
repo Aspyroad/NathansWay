@@ -52,6 +52,14 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnBackToMenu { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnLevel1 { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView tvLessonItems { get; set; }
 
 		[Outlet]
@@ -60,6 +68,14 @@ namespace NathansWay.iOS.Numeracy
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnBackToMenu != null) {
+				btnBackToMenu.Dispose ();
+				btnBackToMenu = null;
+			}
+			if (btnLevel1 != null) {
+				btnLevel1.Dispose ();
+				btnLevel1 = null;
+			}
 			if (tvLessonItems != null) {
 				tvLessonItems.Dispose ();
 				tvLessonItems = null;

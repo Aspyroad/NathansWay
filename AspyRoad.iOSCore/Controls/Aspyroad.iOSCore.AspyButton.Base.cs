@@ -29,26 +29,28 @@ namespace AspyRoad.iOSCore
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
         {
-            Initialize();
+			Initialize_Base();
         }
         public AspyButton (IntPtr handle) : base(handle)
         {
-            Initialize();
+			Initialize_Base();
         }       
         public AspyButton (RectangleF myFrame)  : base (myFrame)
         { 
-            Initialize();    
+			Initialize_Base();    
         }
         public AspyButton (UIButtonType type) : base (type)
         {
-            Initialize();
+			Initialize_Base();
         }
+
+		private void Initialize_Base()
+		{ 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+		}
         
 		#region Private Members
-		protected virtual void Initialize()
-        { 
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-        }
+
         
         protected void _iconLeftlabelRight()
         {
@@ -133,6 +135,7 @@ namespace AspyRoad.iOSCore
                 this._iconLeftlabelRight();
             }
         }
+
 		#endregion
 
 		#region Public Members
@@ -143,16 +146,11 @@ namespace AspyRoad.iOSCore
 			set{ _isPressed = value; }
 		}
 
-		public void SetUI ()
-		{
-			this.ApplyUI ();
-		}
-
 		#endregion
 
 		#region Virtual Members
 
-		protected virtual void ApplyUI()
+		public virtual void ApplyUI()
 		{
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
 			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;

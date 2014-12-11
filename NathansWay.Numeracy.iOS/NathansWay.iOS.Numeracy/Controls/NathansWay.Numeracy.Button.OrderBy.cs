@@ -24,30 +24,29 @@ namespace NathansWay.iOS.Numeracy
 		// Required for the Xamarin iOS Desinger
 		public ButtonOrderBy () : base()
 		{
-			Initialize();
+			Init_ButtonOrderBy();
 		}
 		public ButtonOrderBy (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_ButtonOrderBy();
 		}       
 		public ButtonOrderBy (RectangleF myFrame)  : base (myFrame)
 		{ 
-			Initialize();    
+			Init_ButtonOrderBy();    
 		}
 		public ButtonOrderBy (UIButtonType type) : base (type)
 		{
-			Initialize();
+			Init_ButtonOrderBy();
+		}
+
+		private void Init_ButtonOrderBy()
+		{ 
+			this.ApplyUI ();
 		}
 
 		#endregion
 
 		#region Overrides 
-
-		protected override void Initialize()
-		{ 
-			base.Initialize ();
-			this.ApplyUI ();
-		}
 
 		public override void Draw (RectangleF rect)
 		{
@@ -55,7 +54,7 @@ namespace NathansWay.iOS.Numeracy
 			base.Draw (rect);
 		}
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 			//this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor, UIControlState.Normal);
@@ -98,8 +97,5 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 	}
-
-
-
 }
 

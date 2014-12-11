@@ -53,6 +53,12 @@ namespace NathansWay.iOS.Numeracy
 		public override void Draw (RectangleF rect)
 		{
 			base.Draw (rect);
+		}
+
+		public override void ApplyUI ()
+		{
+			base.ApplyUI ();
+			// Apply our border details
 			this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
 			this.Layer.BorderWidth = 1.0f;
 		}

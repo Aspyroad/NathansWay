@@ -43,25 +43,21 @@ namespace AspyRoad.iOSCore
 			Initialize_Base ();
 		}
 
-		#endregion
-
-		#region Public Members
-
-		public void SetupUI ()
-		{
-			this.ApplyUI ();
-		}
-
-		#endregion
-
-		#region Virtual Members
-
 		private void Initialize_Base()
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();	
 		}
 
-		protected virtual void ApplyUI ()
+		#endregion
+
+		#region Public Members
+
+
+		#endregion
+
+		#region Virtual Members
+
+		public virtual void ApplyUI ()
 		{
 			// Apply label font color
 			this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;

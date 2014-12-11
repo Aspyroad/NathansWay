@@ -22,25 +22,24 @@ namespace AspyRoad.iOSCore
 		// Required for the Xamarin iOS Desinger
 		public AspySlider () : base()
 		{
-			Initialize();
+			Init_AspySlider ();
 		}
 		public AspySlider (IntPtr handle) : base(handle)
 		{
-			Initialize();
+			Init_AspySlider ();
 		}       
 		public AspySlider (RectangleF myFrame)  : base (myFrame)
 		{ 
-			Initialize();    
+			Init_AspySlider ();  
 		}
-		[Export("initWithCoder:")]
 		public AspySlider (NSCoder coder) : base(coder)
 		{
-			Initialize();
+			Init_AspySlider ();
 		}
 
 		#region Private Members
 
-		protected virtual void Initialize()
+		private void Init_AspySlider ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 			this.MinValue = 1.0f;
@@ -52,16 +51,18 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
-		public void SetUI ()
+		public void LayOutVertical ()
 		{
-			this.ApplyUI ();
+			// Spins the slider into a vertical position
+			CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
+			this.Transform = transform;
 		}
 
 		#endregion
 
 		#region Virtual Members
 
-		protected virtual void ApplyUI()
+		public virtual void ApplyUI()
 		{
 			this.MaximumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MaxTrackTintUIColor.Value;
 			this.MinimumTrackTintColor = iOSUIAppearance.GlobaliOSTheme.MinTrackTintUIColor.Value;

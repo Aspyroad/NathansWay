@@ -75,11 +75,11 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+			// Setup visuals
+			this.ApplyUI ();
 
-			this._vLessonMenu.SetupUI ();
-			this.lblFilter.SetupUI ();
-			//this.Setup_Slider ();
-			this.Setup_ViewBackGroundUpperLeftRight ();
+
+
 
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
 			// Load Initial lesson list
@@ -96,37 +96,25 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Members
 
-		private void Setup_Slider ()
+
+		public void ApplyUI ()
 		{
-			//			sliderDifficulty = new AspySlider(new RectangleF(20, 50, 150, 30));
-			//			sliderDifficulty.SetUI ();
-			//
-			//			// Spins the slider into a horizontal position
-			//			//CGAffineTransform transform = CGAffineTransform.MakeRotation((float)(Math.PI * 1.5)); 
-			//			//sliderDifficulty.Transform = transform;
-			//
-			//			View.Add (sliderDifficulty);
+			this._vLessonMenu.SetupUI ();
+			this.lblFilter.ApplyUI ();
+			this.Setup_ViewBackGroundUpperLeftRight ();
 
 		}
+
+		// Control Setup
+
+		// Bezier Curves on the background blocks
 		private void Setup_ViewBackGroundUpperLeftRight()
 		{
 			this.imBgUpperLeft.Layer.CornerRadius = 10.0f;
 			this.imBgUpperRight.Layer.CornerRadius = 10.0f;
-
-			//			// border radius
-			//			[v.layer setCornerRadius:30.0f];
-			//
-			//			// border
-			//			[v.layer setBorderColor:[UIColor lightGrayColor].CGColor];
-			//			[v.layer setBorderWidth:1.5f];
-			//
-			//			// drop shadow
-			//			[v.layer setShadowColor:[UIColor blackColor].CGColor];
-			//			[v.layer setShadowOpacity:0.8];
-			//			[v.layer setShadowRadius:3.0];
-			//			[v.layer setShadowOffset:CGSizeMake(2.0, 2.0)];
-
 		}
+
+		// Data 
 		private void LoadLessonsInit ()
 		{
 

@@ -74,17 +74,15 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void LoadView ()
 		{
-			base.LoadView ();
+			// White backing for out app
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
 			this.View.BackgroundColor = UIColor.White;
 		}
-
 
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
-
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -92,8 +90,10 @@ namespace NathansWay.iOS.Numeracy
 			// Always correct bounds and frame
 			base.ViewDidAppear (animated);
 
+			// ***********************************************
 			// Load our initial vc
 			this.AddAndDisplayController(_vcLessonMenu.Value);
+			// ***********************************************
 		}
 
 		public override void ViewDidLayoutSubviews ()
@@ -105,9 +105,6 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
-			//this.AddAndDisplayController(_vcLessonMenu.Value);
-			//this.View.ViewWithTag(3).Bounds = this.View.Bounds;
-
 		}
 
 		#endregion
