@@ -60,6 +60,22 @@ namespace NathansWay.iOS.Numeracy
 			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
 		}
 
+		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
+		{
+			var touch = uievent.AllTouches.AnyObject as UITouch;
+			if (Bounds.Contains (touch.LocationInView (this)))
+			{
+				// Mod I want these to work fast
+				// This should be true for correct touch tracking but we want to disable
+				// regular tracking, these need to work instanly afgter touch...
+				IsPressed = false;
+			}
+			else
+			{
+				IsPressed = false;
+			}
+			return base.ContinueTracking (uitouch, uievent);
+		}
 		#endregion
 
 		#region Private Members
@@ -80,7 +96,7 @@ namespace NathansWay.iOS.Numeracy
 			//UIColor.Clear.SetFill();
 			rectanglePath.Fill();
 			labelTextColor.SetStroke();
-			rectanglePath.LineWidth = 3.0f;
+			rectanglePath.LineWidth = 2.0f;
 			rectanglePath.Stroke();
 			labelTextColor.SetFill();
 		}
