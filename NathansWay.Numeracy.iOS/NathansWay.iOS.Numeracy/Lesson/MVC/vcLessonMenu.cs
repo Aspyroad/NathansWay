@@ -24,6 +24,10 @@ namespace NathansWay.iOS.Numeracy
 
 		private vLessonMenu _vLessonMenu;
 		private LessonViewModel lessonViewModel;
+
+		// Lesson level hold state
+		// Used to let us know the current level filtering
+		private int intLevelHoldState;
 		//private AspySlider sliderDifficulty;
 
 		#endregion
@@ -78,7 +82,9 @@ namespace NathansWay.iOS.Numeracy
 			// Setup visuals
 			this.ApplyUI ();
 
-
+			// Register Events
+			this.btnLevel1.TouchUpInside += OnClick_btnLevel1;
+			this.btnLevel2.TouchUpInside += OnClick_btnLevel2;
 
 
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
@@ -86,6 +92,8 @@ namespace NathansWay.iOS.Numeracy
 			this.LoadLessonsInit ();
 
         }
+
+
 
 		public override void ViewWillAppear (bool animated)
 		{
@@ -106,6 +114,7 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		// Control Setup
+
 
 		// Bezier Curves on the background blocks
 		private void Setup_ViewBackGroundUpperLeftRight()
@@ -129,6 +138,36 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		#endregion
+
+		#region EventHandlers
+
+		private void OnClick_btnLevel1 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel1);
+		}
+		private void OnClick_btnLevel2 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel2);
+		}
+
+
+		private void GlobalButtonLevelClick (ButtonLabelStyle btnLevelButton)
+		{
+			// Turn off the old button
+			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intLevelHoldState) as ButtonLabelStyle;
+			if (tmpBtnViewOld != null)
+			{
+				tmpBtnViewOld.HoldState = false;
+				tmpBtnViewOld.SetNeedsDisplay ();
+			}
+
+			this.intLevelHoldState = btnLevelButton.Tag;
+			btnLevelButton.HoldState = true;
+		}
+
+
+		#endregion
+
 
 		public class LessonMenuTableSource : UITableViewSource 
 		{

@@ -19,6 +19,7 @@ namespace AspyRoad.iOSCore
         private RectangleF labRect;
         private RectangleF imgRect;
 		private bool _isPressed;
+		private bool _holdState;
 		// Protected
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
@@ -47,6 +48,8 @@ namespace AspyRoad.iOSCore
 		private void Initialize_Base()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+			this._holdState = false;
+			this._isPressed = false;
 		}
         
 		#region Private Members
@@ -144,6 +147,12 @@ namespace AspyRoad.iOSCore
 		{
 			get{ return _isPressed; }
 			set{ _isPressed = value; }
+		}
+
+		public bool HoldState
+		{
+			get{ return _holdState; }
+			set{ _holdState = value; }
 		}
 
 		#endregion

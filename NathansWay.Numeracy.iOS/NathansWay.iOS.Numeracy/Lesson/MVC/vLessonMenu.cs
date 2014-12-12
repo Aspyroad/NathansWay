@@ -15,7 +15,6 @@ namespace NathansWay.iOS.Numeracy
     [MonoTouch.Foundation.Register ("vLessonMenu")]
     public partial class vLessonMenu : AspyView
 	{
-
 		#region Private Variables
 
 		#endregion

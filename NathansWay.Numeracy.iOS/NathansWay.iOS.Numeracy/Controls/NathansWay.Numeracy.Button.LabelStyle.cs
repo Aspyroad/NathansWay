@@ -16,7 +16,6 @@ namespace NathansWay.iOS.Numeracy
 	{
 		#region Private Variables
 
-
 		#endregion
 
 		#region Constructors
@@ -50,7 +49,8 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw (RectangleF rect)
 		{
-			DrawButtonLabelStyle (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value,  rect);
+
+			DrawButtonLabelStyle (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, rect);
 			base.Draw (rect);
 		}
 
@@ -66,11 +66,18 @@ namespace NathansWay.iOS.Numeracy
 
 		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
 		{
-
 			//// Rectangle Drawing
 			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
 			var rectanglePath = UIBezierPath.FromRect(rectangleRect);
-			UIColor.Clear.SetFill();
+			if (this.IsPressed || this.HoldState)
+			{
+				UIColor.FromRGBA (255, 255, 255, 100).SetFill ();
+			}
+			else
+			{
+				UIColor.Clear.SetFill ();
+			}
+			//UIColor.Clear.SetFill();
 			rectanglePath.Fill();
 			labelTextColor.SetStroke();
 			rectanglePath.LineWidth = 3.0f;

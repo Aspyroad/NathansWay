@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Menu-->
+        <!--Vc Menu Start - Menu-->
         <scene sceneID="vxW-M0-OXp">
             <objects>
                 <viewController storyboardIdentifier="vcMenuStart" title="Menu" modalTransitionStyle="crossDissolve" id="JYt-to-IEW" customClass="vcMenuStart" sceneMemberID="viewController">
@@ -21,7 +21,7 @@
             </objects>
             <point key="canvasLocation" x="1285" y="-1018"/>
         </scene>
-        <!--ToolBox-->
+        <!--Vc Tool Box - ToolBox-->
         <scene sceneID="Nod-Wj-smM">
             <objects>
                 <viewController storyboardIdentifier="vcToolBox" title="ToolBox" id="Afb-7g-2Zs" customClass="vcToolBox" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
             </objects>
             <point key="canvasLocation" x="2490" y="-1887"/>
         </scene>
-        <!--Lesson Menu-->
+        <!--Vc Lesson Menu - Lesson Menu-->
         <scene sceneID="611">
             <objects>
                 <viewController storyboardIdentifier="vcLessonMenu" title="Lesson Menu" nibName="" id="612" customClass="vcLessonMenu" sceneMemberID="viewController">
@@ -59,10 +59,10 @@
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vdx-PJ-hZt">
-                                        <rect key="frame" x="0.0" y="22" width="392" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="280" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vdx-PJ-hZt" id="QGG-Yg-YzI">
-                                            <rect key="frame" x="0.0" y="0.0" width="392" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -74,19 +74,19 @@
                                 <state key="normal" title="Level"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="850" customClass="ButtonOrderBy">
-                                <rect key="frame" x="226" y="129" width="158" height="42"/>
+                                <rect key="frame" x="226" y="129" width="255" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Lesson Name"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="863" customClass="ButtonOrderBy">
-                                <rect key="frame" x="384" y="129" width="90" height="42"/>
+                                <rect key="frame" x="481" y="129" width="90" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Operator">
                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="866" customClass="ButtonOrderBy">
-                                <rect key="frame" x="474" y="129" width="86" height="42"/>
+                                <rect key="frame" x="571" y="129" width="100" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Type">
                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
@@ -98,28 +98,28 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="LessonTableCell" id="710" customClass="vLessonTableCell">
-                                        <rect key="frame" x="0.0" y="22" width="626" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="737" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="710" id="q1s-uR-rPo" customClass="AspyView">
-                                            <rect key="frame" x="0.0" y="0.0" width="626" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="737" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Type" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="869" customClass="AspyLabel">
-                                                    <rect key="frame" x="470" y="0.0" width="86" height="44"/>
+                                                    <rect key="frame" x="566" y="0.0" width="100" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="AspyLabel">
-                                                    <rect key="frame" x="381" y="0.0" width="90" height="44"/>
+                                                    <rect key="frame" x="481" y="0.0" width="90" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Lesson Name" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="719" customClass="AspyLabel">
-                                                    <rect key="frame" x="226" y="0.0" width="156" height="44"/>
+                                                    <rect key="frame" x="224" y="0.0" width="255" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -142,7 +142,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="805" customClass="AspyLabel">
-                                                    <rect key="frame" x="666" y="-1" width="71" height="44"/>
+                                                    <rect key="frame" x="666" y="0.0" width="71" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -177,7 +177,7 @@
                                 </state>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Level" lineBreakMode="tailTruncation" minimumFontSize="10" id="Cbo-pO-OhT" customClass="AspyLabel">
-                                <rect key="frame" x="447" y="19" width="40" height="22"/>
+                                <rect key="frame" x="472" y="11" width="40" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -195,55 +195,61 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OTa-Cl-Gig" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="759" y="50" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back To Menu                                           &gt;"/>
+                                <state key="normal" title="Back To Menu                      &gt;"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="986" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="494" y="12" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="986" customClass="ButtonLabelStyle" tag="1">
+                                <rect key="frame" x="471" y="33" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="1"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="987" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="534" y="12" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="987" customClass="ButtonLabelStyle" tag="2">
+                                <rect key="frame" x="522" y="33" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="2"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="988" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="574" y="12" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="988" customClass="ButtonLabelStyle" tag="3">
+                                <rect key="frame" x="573" y="33" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="3"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="989" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="494" y="48" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="989" customClass="ButtonLabelStyle" tag="4">
+                                <rect key="frame" x="624" y="33" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="4"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="990" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="534" y="48" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="990" customClass="ButtonLabelStyle" tag="5">
+                                <rect key="frame" x="675" y="33" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="5"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="991" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="574" y="48" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="991" customClass="ButtonLabelStyle" tag="6">
+                                <rect key="frame" x="471" y="74" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="6"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToS-ak-G8W" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="494" y="84" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToS-ak-G8W" customClass="ButtonLabelStyle" fixedFrame="YES" tag="7">
+                                <rect key="frame" x="522" y="74" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="7"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToY-tE-chS" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="534" y="84" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ToY-tE-chS" customClass="ButtonLabelStyle" fixedFrame="YES" tag="8">
+                                <rect key="frame" x="573" y="74" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="8"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lc6-Pe-hwr" customClass="ButtonLabelStyle">
-                                <rect key="frame" x="574" y="84" width="38" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Lc6-Pe-hwr" customClass="ButtonLabelStyle" fixedFrame="YES" tag="9">
+                                <rect key="frame" x="624" y="74" width="50" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="9"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="h7g-Ed-FNP" customClass="ButtonLabelStyle" fixedFrame="YES" tag="10">
+                                <rect key="frame" x="675" y="74" width="50" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="10"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
                     <connections>
                         <outlet property="btnBackToMenu" destination="OTa-Cl-Gig" id="name-outlet-OTa-Cl-Gig"/>
@@ -263,6 +269,15 @@
                         <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
                         <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
                         <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
+                        <outlet property="btnLevel2" destination="987" id="name-outlet-987"/>
+                        <outlet property="btnLevel3" destination="988" id="name-outlet-988"/>
+                        <outlet property="btnLevel4" destination="989" id="name-outlet-989"/>
+                        <outlet property="btnLevel5" destination="990" id="name-outlet-990"/>
+                        <outlet property="btnLevel6" destination="991" id="name-outlet-991"/>
+                        <outlet property="btnLevel7" destination="ToS-ak-G8W" id="name-outlet-ToS-ak-G8W"/>
+                        <outlet property="btnLevel8" destination="ToY-tE-chS" id="name-outlet-ToY-tE-chS"/>
+                        <outlet property="btnLevel9" destination="Lc6-Pe-hwr" id="name-outlet-Lc6-Pe-hwr"/>
+                        <outlet property="btnLevel10" destination="h7g-Ed-FNP" id="name-outlet-h7g-Ed-FNP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -270,7 +285,7 @@
             </objects>
             <point key="canvasLocation" x="-2" y="-1956"/>
         </scene>
-        <!--Lesson-->
+        <!--Vc Lesson - Lesson-->
         <scene sceneID="625">
             <objects>
                 <viewController storyboardIdentifier="vcLessons" title="Lesson" id="626" customClass="vcLesson" sceneMemberID="viewController">
@@ -290,4 +305,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="619"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="Content/AppImages/Exit.png" width="128" height="128"/>
+        <image name="Content/AppImages/Kids.png" width="128" height="128"/>
+        <image name="Content/AppImages/Spanner.png" width="128" height="128"/>
+        <image name="Content/AppImages/Teacher.png" width="128" height="128"/>
+        <image name="Content/AppImages/Toolbox.png" width="128" height="128"/>
+        <image name="Content/AppImages/Toolbox_.png" width="128" height="128"/>
+    </resources>
 </document>
