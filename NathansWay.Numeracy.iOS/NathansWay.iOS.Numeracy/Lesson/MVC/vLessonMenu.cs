@@ -36,7 +36,6 @@ namespace NathansWay.iOS.Numeracy
             Initialize();            
         }
 
-		[Export("initWithCoder:")]
 		public vLessonMenu (NSCoder coder) : base(coder)
 		{
 			Initialize();
@@ -49,7 +48,7 @@ namespace NathansWay.iOS.Numeracy
         protected override void Initialize()
         {
 			base.Initialize ();
-			this.Tag = 3;
+			this.Tag = 6003;
         }
 
 		#endregion

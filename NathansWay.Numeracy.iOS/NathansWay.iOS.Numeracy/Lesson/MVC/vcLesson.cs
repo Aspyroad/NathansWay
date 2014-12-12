@@ -30,7 +30,7 @@ namespace NathansWay.iOS.Numeracy
         protected override void Initialize ()
         {
 			base.Initialize ();
-			this.AspyTag1 = 3;
+			this.AspyTag1 = 6004;
 			this.AspyName = "VC_Lesson";
         }
 

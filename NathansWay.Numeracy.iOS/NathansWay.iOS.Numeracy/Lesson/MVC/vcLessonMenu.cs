@@ -54,7 +54,7 @@ namespace NathansWay.iOS.Numeracy
         protected override void Initialize ()
         {
 			base.Initialize ();
-			this.AspyTag1 = 3;
+			this.AspyTag1 = 6003;
 			this.AspyName = "VC_LessonMenu";
 
 			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
@@ -85,6 +85,14 @@ namespace NathansWay.iOS.Numeracy
 			// Register Events
 			this.btnLevel1.TouchUpInside += OnClick_btnLevel1;
 			this.btnLevel2.TouchUpInside += OnClick_btnLevel2;
+			this.btnLevel3.TouchUpInside += OnClick_btnLevel3;
+			this.btnLevel4.TouchUpInside += OnClick_btnLevel4;
+			this.btnLevel5.TouchUpInside += OnClick_btnLevel5;
+			this.btnLevel6.TouchUpInside += OnClick_btnLevel6;
+			this.btnLevel7.TouchUpInside += OnClick_btnLevel7;
+			this.btnLevel8.TouchUpInside += OnClick_btnLevel8;
+			this.btnLevel9.TouchUpInside += OnClick_btnLevel9;
+			this.btnLevel10.TouchUpInside += OnClick_btnLevel10;
 
 
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
@@ -148,6 +156,38 @@ namespace NathansWay.iOS.Numeracy
 		private void OnClick_btnLevel2 (object sender, EventArgs e)
 		{
 			this.GlobalButtonLevelClick (this.btnLevel2);
+		}
+		private void OnClick_btnLevel3 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel3);
+		}
+		private void OnClick_btnLevel4 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel4);
+		}
+		private void OnClick_btnLevel5 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel5);
+		}
+		private void OnClick_btnLevel6 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel6);
+		}
+		private void OnClick_btnLevel7 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel7);
+		}
+		private void OnClick_btnLevel8 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel8);
+		}
+		private void OnClick_btnLevel9 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel9);
+		}
+		private void OnClick_btnLevel10 (object sender, EventArgs e)
+		{
+			this.GlobalButtonLevelClick (this.btnLevel10);
 		}
 
 

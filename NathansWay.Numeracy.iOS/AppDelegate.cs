@@ -280,23 +280,23 @@ namespace NathansWay.iOS.Numeracy
 		{
 			_numeracyUIManager = new iOSUIManager (iOSGlobals);
 
-			_numeracyUIManager.AddVC (1, "VC_MenuStart");
-			_numeracyUIManager.AddVC (2, "VC_Student");
-			_numeracyUIManager.AddVC (3, "VC_LessonMenu");
-			_numeracyUIManager.AddVC (4, "VC_Lesson");
-			_numeracyUIManager.AddVC (5, "VC_Settings");
-			_numeracyUIManager.AddVC (6, "VC_Teacher");
-			_numeracyUIManager.AddVC (7, "VC_ToolBox");
+			_numeracyUIManager.AddVC (6001, "VC_MenuStart");
+			_numeracyUIManager.AddVC (6002, "VC_Student");
+			_numeracyUIManager.AddVC (6003, "VC_LessonMenu");
+			_numeracyUIManager.AddVC (6004, "VC_Lesson");
+			_numeracyUIManager.AddVC (6005, "VC_Settings");
+			_numeracyUIManager.AddVC (6006, "VC_Teacher");
+			_numeracyUIManager.AddVC (6007, "VC_ToolBox");
 			//_numeracyUIManager.AddVC (7, "VC_Tools");
 			// WorkSpace
-			_numeracyUIManager.AddVC (20, "VC_MainGame");
-			_numeracyUIManager.AddVC (21, "VC_MainWorkSpace"); 
-			_numeracyUIManager.AddVC (22, "VC_WorkSpace");
+			_numeracyUIManager.AddVC (60020, "VC_MainGame");
+			_numeracyUIManager.AddVC (60021, "VC_MainWorkSpace"); 
+			_numeracyUIManager.AddVC (60022, "VC_WorkSpace");
 			// Controls 
-			_numeracyUIManager.AddVC (100, "VC_CtrlNumberPad");
-			_numeracyUIManager.AddVC (101, "VC_CtrlFractionCombo");
-			_numeracyUIManager.AddVC (102, "VC_CtrlNumberCombo");
-			_numeracyUIManager.AddVC (103, "VC_CtrlComboBox");
+			_numeracyUIManager.AddVC (600100, "VC_CtrlNumberPad");
+			_numeracyUIManager.AddVC (600101, "VC_CtrlFractionCombo");
+			_numeracyUIManager.AddVC (600102, "VC_CtrlNumberCombo");
+			_numeracyUIManager.AddVC (600103, "VC_CtrlComboBox");
 
 
 			// Register app/user settings
