@@ -163,6 +163,12 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _thumbcolor { get; set; }
 		protected string _thumbstrimage { get; set; }
 
+		// UITableView
+		public Lazy<G__Color> _sectionindexbgcolor { get; set; }
+		public Lazy<G__Color> _sectionindexcolor { get; set; }
+		public Lazy<G__Color> _sectionindextrackingcolor { get; set; }
+		public Lazy<G__Color> _seperatorcolor { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -383,6 +389,28 @@ namespace NathansWay.Shared
 		{ 
 			get { return _thumbstrimage; }
 			set { _thumbstrimage = value; } 
+		}
+
+		// UITableView
+		public Lazy<G__Color> SectionIndexBGColor 
+		{ 
+			get{ return _sectionindexbgcolor; }
+			set{ _sectionindexbgcolor = value; } 
+		}
+		public Lazy<G__Color> SectionIndexColor 
+		{ 
+			get{ return _sectionindexcolor;; }
+			set{ _sectionindexcolor = value; } 		
+		}
+		public Lazy<G__Color> SectionIndexTrackingColor 
+		{ 
+			get{ return _sectionindextrackingcolor; }
+			set{ _sectionindextrackingcolor = value; } 
+		}
+		public Lazy<G__Color> SeperatorColor 
+		{ 
+			get{ return _seperatorcolor; }
+			set{ _seperatorcolor = value; } 
 		}
 
 		#endregion

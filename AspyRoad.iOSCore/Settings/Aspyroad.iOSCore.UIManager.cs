@@ -135,6 +135,8 @@ namespace AspyRoad.iOSCore.UISettings
 		/// </summary>
 		private void Initialize ()
 		{
+			// Set constant appearance values
+			UITableViewCell.UITableViewCellAppear
 		}
 
 		/// <summary>
@@ -178,6 +180,8 @@ namespace AspyRoad.iOSCore.UISettings
 			MinTrackTintColor = g.MinTrackTintColor;
 			ThumbColor = g.ThumbColor;
 			ThumbStrImage = g.ThumbStrImage;
+			// TableView
+			SectionIndexColor = g.SectionIndexColor;
 		}
 
 		/// <summary>
@@ -451,6 +455,22 @@ namespace AspyRoad.iOSCore.UISettings
 				return new Lazy<UIImage> (() => UIImage.FromFile (_thumbstrimage)); 
 
 			}
+		}
+
+		public Lazy<UIColor> SectionIndexUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_sectionindexcolor);
+			} 
+		}
+
+		public Lazy<UIColor> SectionIndexBGUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_sectionindexbgcolor);
+			} 
 		}
 
 		#endregion
