@@ -81,6 +81,12 @@ namespace NathansWay.Shared
 		Lazy<G__Color> MinTrackTintColor { get; set; }
 		Lazy<G__Color> ThumbColor { get; set; }
 		string ThumbStrImage { get; set; }
+
+		// UITableView
+		Lazy<G__Color> SectionIndexBGColor { get; set; }
+		Lazy<G__Color> SectionIndexColor { get; set; }
+		Lazy<G__Color> SectionIndexTrackingColor { get; set; }
+		Lazy<G__Color> SeperatorColor { get; set; }
 	}
 
 }

@@ -84,7 +84,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			//// Rectangle Drawing
 			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-			var rectanglePath = UIBezierPath.FromRect(rectangleRect);
+			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 8.0f);
 			if (this.IsPressed || this.HoldState)
 			{
 				UIColor.FromRGBA (255, 255, 255, 100).SetFill ();
@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy
 			//UIColor.Clear.SetFill();
 			rectanglePath.Fill();
 			labelTextColor.SetStroke();
-			rectanglePath.LineWidth = 2.0f;
+			rectanglePath.LineWidth = 3.0f;
 			rectanglePath.Stroke();
 			labelTextColor.SetFill();
 		}

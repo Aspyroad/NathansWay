@@ -53,6 +53,12 @@ namespace NathansWay.Shared
 		public Lazy<G__Color> ThumbColor { get; set; }
 		public string ThumbStrImage { get; set; }
 
+		// UITableView
+		public Lazy<G__Color> SectionIndexBGColor { get; set; }
+		public Lazy<G__Color> SectionIndexColor { get; set; }
+		public Lazy<G__Color> SectionIndexTrackingColor { get; set; }
+		public Lazy<G__Color> SeperatorColor { get; set; }
+
 		#endregion
 
 		#region Constructors
