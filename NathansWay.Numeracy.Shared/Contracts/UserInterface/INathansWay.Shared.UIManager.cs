@@ -87,6 +87,11 @@ namespace NathansWay.Shared
 		Lazy<G__Color> SectionIndexColor { get; set; }
 		Lazy<G__Color> SectionIndexTrackingColor { get; set; }
 		Lazy<G__Color> SeperatorColor { get; set; }
+
+		// UITableViewCell - view
+		Lazy<G__Color> ViewCellBGColor { get; set; }
+		Lazy<G__Color> ViewCellBGColorTransition { get; set; }
+		Lazy<G__Color> ViewCellBGTint { get; set; }
 	}
 
 }

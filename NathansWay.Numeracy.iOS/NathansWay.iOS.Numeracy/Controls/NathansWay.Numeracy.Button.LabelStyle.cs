@@ -25,14 +25,17 @@ namespace NathansWay.iOS.Numeracy
 		{
 			Init_ButtonLabelStyle();
 		}
+
 		public ButtonLabelStyle (IntPtr handle) : base(handle)
 		{
 			Init_ButtonLabelStyle();
-		}       
+		} 
+
 		public ButtonLabelStyle (RectangleF myFrame)  : base (myFrame)
 		{ 
 			Init_ButtonLabelStyle();    
 		}
+
 		public ButtonLabelStyle (UIButtonType type) : base (type)
 		{
 			Init_ButtonLabelStyle();
@@ -84,7 +87,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			//// Rectangle Drawing
 			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 8.0f);
+			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 4.0f);
 			if (this.IsPressed || this.HoldState)
 			{
 				UIColor.FromRGBA (255, 255, 255, 100).SetFill ();

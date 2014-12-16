@@ -135,8 +135,6 @@ namespace AspyRoad.iOSCore.UISettings
 		/// </summary>
 		private void Initialize ()
 		{
-			// Set constant appearance values
-			UITableViewCell.UITableViewCellAppear
 		}
 
 		/// <summary>
@@ -182,7 +180,28 @@ namespace AspyRoad.iOSCore.UISettings
 			ThumbStrImage = g.ThumbStrImage;
 			// TableView
 			SectionIndexColor = g.SectionIndexColor;
+			SectionIndexBGColor = g.SectionIndexBGColor;
+			SectionIndexTrackingColor = g.SectionIndexTrackingColor;
+			SeperatorColor = g.SeperatorColor;
+			// TableViewCell
+			ViewCellBGColor = g.ViewCellBGColor;
+			ViewCellBGColorTransition = g.ViewCellBGColorTransition;
+			ViewCellBGTint = g.ViewBGTint;
+
+			// Apply global appearnce
+			this.ApplyGlobalAppearance ();
+
 		}
+
+		public void ApplyGlobalAppearance()
+		{
+			// Set constant appearance values
+			//UITableViewCell.Appearance.BackgroundColor = ViewCellBGUIColor.Value;
+			//UITableViewCell.Appearance.BackgroundColor = UIColor.White;
+			UITableView.Appearance.SectionIndexColor  = UIColor.Brown;
+
+		}
+
 
 		/// <summary>
 		/// Converts a G__Color struct to a new UIColor object
@@ -457,6 +476,7 @@ namespace AspyRoad.iOSCore.UISettings
 			}
 		}
 
+		// UIViewTable
 		public Lazy<UIColor> SectionIndexUIColor
 		{ 
 			get
@@ -470,6 +490,48 @@ namespace AspyRoad.iOSCore.UISettings
 			get
 			{
 				return this.convertUIColor(_sectionindexbgcolor);
+			} 
+		}
+
+		public Lazy<UIColor> SectionIndexTrackingUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_sectionindextrackingcolor);
+			} 
+		}
+
+		public Lazy<UIColor> SeperatorUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_seperatorcolor);
+			} 
+		}
+
+		// UIViewTableCell
+
+		public Lazy<UIColor> ViewCellBGUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewcellbgcolor);
+			} 
+		}
+
+		public Lazy<UIColor> ViewCellBGUIColorTransition
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewcellbgcolortransition);
+			} 
+		}
+
+		public Lazy<UIColor> ViewCellBGUITint
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewbgtint);
 			} 
 		}
 

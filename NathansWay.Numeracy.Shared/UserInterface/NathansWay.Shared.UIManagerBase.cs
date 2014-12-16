@@ -169,6 +169,11 @@ namespace NathansWay.Shared
 		public Lazy<G__Color> _sectionindextrackingcolor { get; set; }
 		public Lazy<G__Color> _seperatorcolor { get; set; }
 
+		// UITableViewCell - view
+		public Lazy<G__Color> _viewcellbgcolor { get; set; }
+		public Lazy<G__Color> _viewcellbgcolortransition { get; set; }
+		public Lazy<G__Color> _viewcellbgtint { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -399,7 +404,7 @@ namespace NathansWay.Shared
 		}
 		public Lazy<G__Color> SectionIndexColor 
 		{ 
-			get{ return _sectionindexcolor;; }
+			get{ return _sectionindexcolor; }
 			set{ _sectionindexcolor = value; } 		
 		}
 		public Lazy<G__Color> SectionIndexTrackingColor 
@@ -411,6 +416,23 @@ namespace NathansWay.Shared
 		{ 
 			get{ return _seperatorcolor; }
 			set{ _seperatorcolor = value; } 
+		}
+
+		// UITableViewCell
+		public Lazy<G__Color> ViewCellBGColor 
+		{ 
+			get{ return _viewcellbgcolor; } 
+			set{ _viewcellbgcolor = value; }
+		}
+		public Lazy<G__Color> ViewCellBGColorTransition 
+		{ 
+			get{ return _viewcellbgcolortransition; }
+			set{ _viewcellbgcolortransition = value; }
+		}
+		public Lazy<G__Color> ViewCellBGTint 
+		{ 
+			get{ return _viewcellbgtint; }
+			set{ _viewcellbgtint = value; }
 		}
 
 		#endregion

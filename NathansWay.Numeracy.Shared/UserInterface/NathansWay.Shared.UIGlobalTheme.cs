@@ -59,6 +59,11 @@ namespace NathansWay.Shared
 		public Lazy<G__Color> SectionIndexTrackingColor { get; set; }
 		public Lazy<G__Color> SeperatorColor { get; set; }
 
+		// UITableViewCell - view
+		public Lazy<G__Color> ViewCellBGColor { get; set; }
+		public Lazy<G__Color> ViewCellBGColorTransition { get; set; }
+		public Lazy<G__Color> ViewCellBGTint { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -110,6 +115,17 @@ namespace NathansWay.Shared
 			MinTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
 			ThumbColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 255.0f, 100.0f)); // Black
 			ThumbStrImage = "";
+
+			// UITableVIew
+			SectionIndexBGColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // Orange
+			SectionIndexColor = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // Orange less alpha
+			SectionIndexTrackingColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
+			SeperatorColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // Orange
+
+			// UITableVIewCell
+			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // Orange
+			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // Orange less alpha
+			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
 		}
 
