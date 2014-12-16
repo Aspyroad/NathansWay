@@ -29,7 +29,6 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();            
         }
 
-		[Export("initWithCoder:")]
 		public vToolBox (NSCoder coder) : base(coder)
 		{
 			Initialize();
@@ -39,9 +38,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		
 		#region Private Members
         
-        protected override void Initialize()
+        private void Initialize()
         {  
-			base.Initialize ();
 			this.Tag = 6;
         }
 

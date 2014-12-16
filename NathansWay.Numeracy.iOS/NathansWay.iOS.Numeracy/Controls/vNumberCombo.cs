@@ -24,15 +24,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();            
         }
 
-        [Export("initWithCoder:")]
         public vNumberCombo (NSCoder coder) : base(coder)
         {
             Initialize();
         }
                 
-        protected override void Initialize()
+        private void Initialize()
         {  
-			base.Initialize ();
         }
 
     }

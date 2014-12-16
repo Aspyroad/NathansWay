@@ -45,9 +45,8 @@ namespace NathansWay.iOS.Numeracy
 		
 		#region Private Members
 		
-        protected override void Initialize()
+        private void Initialize()
         {
-			base.Initialize ();
 			this.Tag = 6003;
         }
 
@@ -65,7 +64,7 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-		protected override void ApplyUI ()
+		public override void ApplyUI ()
 		{
 			base.ApplyUI ();
 		}

@@ -30,7 +30,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();            
         }
 
-        [Export("initWithCoder:")]
         public vNumberPad (NSCoder coder) : base(coder)
         {
             Initialize();
@@ -40,9 +39,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 		
 		#region Private Members
 		
-        protected override void Initialize()
+        private void Initialize()
         {    
-			base.Initialize ();
             this.Frame = new RectangleF(100, 100, 190, 260);
         }
 

@@ -18,6 +18,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
+		protected iOSUIManager iOSUIAppearance; 
 
 		// Tags for id
 		private int _AspyTag1;
@@ -58,6 +59,7 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 		}
 
 		#endregion

@@ -39,9 +39,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 		
 		#region Private Members
         
-        protected override void Initialize()
+        private void Initialize()
         {   
-			base.Initialize ();
         }
 
 		#endregion

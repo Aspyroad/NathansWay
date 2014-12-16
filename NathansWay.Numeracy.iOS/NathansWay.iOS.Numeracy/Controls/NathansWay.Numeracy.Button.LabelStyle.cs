@@ -52,7 +52,6 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw (RectangleF rect)
 		{
-
 			DrawButtonLabelStyle (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, rect);
 			base.Draw (rect);
 		}
@@ -66,19 +65,10 @@ namespace NathansWay.iOS.Numeracy
 		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
 		{
 			var touch = uievent.AllTouches.AnyObject as UITouch;
-			if (Bounds.Contains (touch.LocationInView (this)))
-			{
-				// Mod I want these to work fast
-				// This should be true for correct touch tracking but we want to disable
-				// regular tracking, these need to work instanly afgter touch...
-				IsPressed = false;
-			}
-			else
-			{
-				IsPressed = false;
-			}
+			IsPressed = false;	
 			return base.ContinueTracking (uitouch, uievent);
 		}
+
 		#endregion
 
 		#region Private Members

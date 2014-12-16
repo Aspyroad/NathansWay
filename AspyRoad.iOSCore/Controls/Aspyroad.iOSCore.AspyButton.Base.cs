@@ -53,8 +53,7 @@ namespace AspyRoad.iOSCore
 		}
         
 		#region Private Members
-
-        
+		        
         protected void _iconLeftlabelRight()
         {
             //TODO: Need to protect against a failed image load??

@@ -96,6 +96,46 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpAdd { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpAddSub { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpDivision { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpMultiply { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpMultSub { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnOpSubtract { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnTypeBasic { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnTypeFractions { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnTypeGroups { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonLabelStyle btnTypeMixed { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView tvLessonItems { get; set; }
 
 		[Outlet]
@@ -147,6 +187,46 @@ namespace NathansWay.iOS.Numeracy
 			if (btnLevel9 != null) {
 				btnLevel9.Dispose ();
 				btnLevel9 = null;
+			}
+			if (btnOpAdd != null) {
+				btnOpAdd.Dispose ();
+				btnOpAdd = null;
+			}
+			if (btnOpAddSub != null) {
+				btnOpAddSub.Dispose ();
+				btnOpAddSub = null;
+			}
+			if (btnOpDivision != null) {
+				btnOpDivision.Dispose ();
+				btnOpDivision = null;
+			}
+			if (btnOpMultiply != null) {
+				btnOpMultiply.Dispose ();
+				btnOpMultiply = null;
+			}
+			if (btnOpMultSub != null) {
+				btnOpMultSub.Dispose ();
+				btnOpMultSub = null;
+			}
+			if (btnOpSubtract != null) {
+				btnOpSubtract.Dispose ();
+				btnOpSubtract = null;
+			}
+			if (btnTypeBasic != null) {
+				btnTypeBasic.Dispose ();
+				btnTypeBasic = null;
+			}
+			if (btnTypeFractions != null) {
+				btnTypeFractions.Dispose ();
+				btnTypeFractions = null;
+			}
+			if (btnTypeGroups != null) {
+				btnTypeGroups.Dispose ();
+				btnTypeGroups = null;
+			}
+			if (btnTypeMixed != null) {
+				btnTypeMixed.Dispose ();
+				btnTypeMixed = null;
 			}
 			if (tvLessonItems != null) {
 				tvLessonItems.Dispose ();

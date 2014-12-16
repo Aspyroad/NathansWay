@@ -29,7 +29,6 @@ namespace NathansWay.iOS.Numeracy
             Initialize();            
         }
 
-		[Export("initWithCoder:")]
 		public vSettings (NSCoder coder) : base(coder)
 		{
 			Initialize();
@@ -39,9 +38,8 @@ namespace NathansWay.iOS.Numeracy
 		
 		#region Private Members
         
-        protected override void Initialize()
+        private void Initialize()
         {
-			base.Initialize ();
 			this.Tag = 4;
         }
 

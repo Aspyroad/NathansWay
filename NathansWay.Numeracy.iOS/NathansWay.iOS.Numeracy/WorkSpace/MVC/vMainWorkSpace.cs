@@ -40,9 +40,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		
 		#region Private Members
 		
-		protected override void Initialize()
+		private void Initialize()
 		{	
-			base.Initialize ();
 		}
 		
 		#endregion

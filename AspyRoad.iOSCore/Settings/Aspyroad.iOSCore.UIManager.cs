@@ -179,11 +179,13 @@ namespace AspyRoad.iOSCore.UISettings
 			ThumbColor = g.ThumbColor;
 			ThumbStrImage = g.ThumbStrImage;
 			// TableView
-			SectionIndexColor = g.SectionIndexColor;
-			SectionIndexBGColor = g.SectionIndexBGColor;
-			SectionIndexTrackingColor = g.SectionIndexTrackingColor;
-			SeperatorColor = g.SeperatorColor;
+			ViewTableBGColor = g.ViewTableBGColor;
+			ViewTableSectionIndexColor = g.ViewTableSectionIndexColor;
+			ViewTableSectionIndexBGColor = g.ViewTableSectionIndexBGColor;
+			ViewTableSectionIndexTrackingColor = g.ViewTableSectionIndexTrackingColor;
+			ViewTableSeperatorColor = g.ViewTableSeperatorColor;
 			// TableViewCell
+			ViewCellSelectedColor = g.ViewCellSelectedColor;
 			ViewCellBGColor = g.ViewCellBGColor;
 			ViewCellBGColorTransition = g.ViewCellBGColorTransition;
 			ViewCellBGTint = g.ViewBGTint;
@@ -196,9 +198,8 @@ namespace AspyRoad.iOSCore.UISettings
 		public void ApplyGlobalAppearance()
 		{
 			// Set constant appearance values
-			//UITableViewCell.Appearance.BackgroundColor = ViewCellBGUIColor.Value;
-			//UITableViewCell.Appearance.BackgroundColor = UIColor.White;
-			UITableView.Appearance.SectionIndexColor  = UIColor.Brown;
+
+			//UITableView.Appearance.BackgroundColor = ViewTableBGUIColor.Value;
 
 		}
 
@@ -476,40 +477,59 @@ namespace AspyRoad.iOSCore.UISettings
 			}
 		}
 
-		// UIViewTable
-		public Lazy<UIColor> SectionIndexUIColor
+		#region UIViewTable
+
+		public Lazy<UIColor> ViewTableBGUIColor
 		{ 
 			get
 			{
-				return this.convertUIColor(_sectionindexcolor);
+				return this.convertUIColor(_viewtablebgcolor);
 			} 
 		}
 
-		public Lazy<UIColor> SectionIndexBGUIColor
+		public Lazy<UIColor> ViewTableSectionIndexUIColor
 		{ 
 			get
 			{
-				return this.convertUIColor(_sectionindexbgcolor);
+				return this.convertUIColor(_viewtablesectionindexcolor);
 			} 
 		}
 
-		public Lazy<UIColor> SectionIndexTrackingUIColor
+		public Lazy<UIColor> ViewTableSectionIndexBGUIColor
 		{ 
 			get
 			{
-				return this.convertUIColor(_sectionindextrackingcolor);
+				return this.convertUIColor(_viewtablesectionindexbgcolor);
 			} 
 		}
 
-		public Lazy<UIColor> SeperatorUIColor
+		public Lazy<UIColor> ViewTableSectionIndexTrackingUIColor
 		{ 
 			get
 			{
-				return this.convertUIColor(_seperatorcolor);
+				return this.convertUIColor(_viewtablesectionindextrackingcolor);
 			} 
 		}
 
-		// UIViewTableCell
+		public Lazy<UIColor> ViewTableSeperatorUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewtableseperatorcolor);
+			} 
+		}
+
+		#endregion
+
+		#region UIViewTableCell
+
+		public Lazy<UIColor> ViewCellSelectedUIColor
+		{ 
+			get
+			{
+				return this.convertUIColor(_viewcellselectedcolor);
+			} 
+		}
 
 		public Lazy<UIColor> ViewCellBGUIColor
 		{ 
@@ -534,6 +554,8 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_viewbgtint);
 			} 
 		}
+
+		#endregion 
 
 		#endregion
 	}

@@ -83,12 +83,14 @@ namespace NathansWay.Shared
 		string ThumbStrImage { get; set; }
 
 		// UITableView
-		Lazy<G__Color> SectionIndexBGColor { get; set; }
-		Lazy<G__Color> SectionIndexColor { get; set; }
-		Lazy<G__Color> SectionIndexTrackingColor { get; set; }
-		Lazy<G__Color> SeperatorColor { get; set; }
+		Lazy<G__Color> ViewTableBGColor { get; set; }
+		Lazy<G__Color> ViewTableSectionIndexBGColor { get; set; }
+		Lazy<G__Color> ViewTableSectionIndexColor { get; set; }
+		Lazy<G__Color> ViewTableSectionIndexTrackingColor { get; set; }
+		Lazy<G__Color> ViewTableSeperatorColor { get; set; }
 
-		// UITableViewCell - view
+		// UITableViewCell 
+		Lazy<G__Color> ViewCellSelectedColor { get; set; }
 		Lazy<G__Color> ViewCellBGColor { get; set; }
 		Lazy<G__Color> ViewCellBGColorTransition { get; set; }
 		Lazy<G__Color> ViewCellBGTint { get; set; }

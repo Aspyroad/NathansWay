@@ -14,7 +14,7 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.iOS.Numeracy
 {
-	public partial class vLessonTableCell : UITableViewCell
+	public partial class vLessonTableCell : AspyTableViewCell
 	{
 		#region Private Variables
 
@@ -34,8 +34,6 @@ namespace NathansWay.iOS.Numeracy
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
 			this.lblLessonName.Text = lesson.NameLesson;
-
-
 		}
 
 		#endregion
@@ -45,6 +43,7 @@ namespace NathansWay.iOS.Numeracy
 		public override void AwakeFromNib ()
 		{
 			base.AwakeFromNib ();
+
 		}
 
 		#endregion

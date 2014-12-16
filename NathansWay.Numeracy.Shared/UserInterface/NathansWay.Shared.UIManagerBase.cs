@@ -164,12 +164,14 @@ namespace NathansWay.Shared
 		protected string _thumbstrimage { get; set; }
 
 		// UITableView
-		public Lazy<G__Color> _sectionindexbgcolor { get; set; }
-		public Lazy<G__Color> _sectionindexcolor { get; set; }
-		public Lazy<G__Color> _sectionindextrackingcolor { get; set; }
-		public Lazy<G__Color> _seperatorcolor { get; set; }
+		public Lazy<G__Color> _viewtablebgcolor { get; set; }
+		public Lazy<G__Color> _viewtablesectionindexbgcolor { get; set; }
+		public Lazy<G__Color> _viewtablesectionindexcolor { get; set; }
+		public Lazy<G__Color> _viewtablesectionindextrackingcolor { get; set; }
+		public Lazy<G__Color> _viewtableseperatorcolor { get; set; }
 
 		// UITableViewCell - view
+		public Lazy<G__Color> _viewcellselectedcolor { get; set; }
 		public Lazy<G__Color> _viewcellbgcolor { get; set; }
 		public Lazy<G__Color> _viewcellbgcolortransition { get; set; }
 		public Lazy<G__Color> _viewcellbgtint { get; set; }
@@ -397,28 +399,38 @@ namespace NathansWay.Shared
 		}
 
 		// UITableView
-		public Lazy<G__Color> SectionIndexBGColor 
+		public Lazy<G__Color> ViewTableBGColor 
 		{ 
-			get{ return _sectionindexbgcolor; }
-			set{ _sectionindexbgcolor = value; } 
+			get{ return _viewtablebgcolor; }
+			set{ _viewtablebgcolor = value; } 
 		}
-		public Lazy<G__Color> SectionIndexColor 
+		public Lazy<G__Color> ViewTableSectionIndexBGColor 
 		{ 
-			get{ return _sectionindexcolor; }
-			set{ _sectionindexcolor = value; } 		
+			get{ return _viewtablesectionindexbgcolor; }
+			set{ _viewtablesectionindexbgcolor = value; } 
 		}
-		public Lazy<G__Color> SectionIndexTrackingColor 
+		public Lazy<G__Color> ViewTableSectionIndexColor 
 		{ 
-			get{ return _sectionindextrackingcolor; }
-			set{ _sectionindextrackingcolor = value; } 
+			get{ return _viewtablesectionindexcolor; }
+			set{ _viewtablesectionindexcolor = value; } 		
 		}
-		public Lazy<G__Color> SeperatorColor 
+		public Lazy<G__Color> ViewTableSectionIndexTrackingColor 
 		{ 
-			get{ return _seperatorcolor; }
-			set{ _seperatorcolor = value; } 
+			get{ return _viewtablesectionindextrackingcolor; }
+			set{ _viewtablesectionindextrackingcolor = value; } 
+		}
+		public Lazy<G__Color> ViewTableSeperatorColor 
+		{ 
+			get{ return _viewtableseperatorcolor; }
+			set{ _viewtableseperatorcolor = value; } 
 		}
 
 		// UITableViewCell
+		public Lazy<G__Color> ViewCellSelectedColor 
+		{ 
+			get{ return _viewcellselectedcolor; } 
+			set{ _viewcellselectedcolor = value; }
+		}
 		public Lazy<G__Color> ViewCellBGColor 
 		{ 
 			get{ return _viewcellbgcolor; } 
