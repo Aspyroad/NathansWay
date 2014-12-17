@@ -140,8 +140,9 @@ namespace NathansWay.iOS.Numeracy
 			this.Setup_ViewBackGroundUpperLeftRight ();
 
 			// TableViews
-			this.tvLessonMain.BackgroundView = null;
+			//this.tvLessonMain.BackgroundView = null;
 			this.tvLessonMain.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+
 
 		}
 
@@ -262,8 +263,15 @@ namespace NathansWay.iOS.Numeracy
 			{
 
 				var lesson = this.vmLesson.Lessons [indexPath.Row];
+
 				var cell = tableView.DequeueReusableCell ("LessonTableCell") as vLessonTableCell;
+				cell.IndexValue = indexPath.Row;
+				cell.
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
+
+
+				// Work ios 7  and below what about 8??
+				//cell.BackgroundColor = UIColor.Brown;//iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
 				return cell;
 				//				UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
 				//				// if there are no cells to reuse, create a new one

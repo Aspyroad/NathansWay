@@ -17,7 +17,7 @@ namespace NathansWay.iOS.Numeracy
 	public partial class vLessonTableCell : AspyTableViewCell
 	{
 		#region Private Variables
-
+		 
 
 		#endregion
 

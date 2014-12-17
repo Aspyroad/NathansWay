@@ -17,6 +17,7 @@ namespace AspyRoad.iOSCore
 		#region Private Variables
 
 		protected iOSUIManager iOSUIAppearance;
+		protected int _indexValue;
 
 		#endregion
 
@@ -32,13 +33,39 @@ namespace AspyRoad.iOSCore
 		#region Private Methods
 
 		private void Initialize ()
-		{  
+		{ 
+			_indexValue = 0;
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+			ApplyUI ();
 		}
 
 		#endregion
 
 		#region Public Methods
+
+		public int IndexValue 
+		{
+			get { return _indexValue; }
+			set { _indexValue = value; }
+		}
+
+		public virtual void ApplyUI ()
+		{
+			// Set the background selected view color
+			this.SelectedBackgroundView = new UIView ();
+			this.SelectedBackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
+			// Setup normal color
+			this.BackgroundView = new UIView ();
+
+			if (AspyUtilities.IsOdd(_indexValue))
+			{
+				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+			}
+			else
+			{
+				this.BackgroundView.BackgroundColor = UIColor.Cyan;
+			}
+		}
 
 		#endregion
 
@@ -48,11 +75,7 @@ namespace AspyRoad.iOSCore
 		{
 			base.AwakeFromNib ();
 
-			// Set the background selected view color
-			var selectedbgview = new UIView ();
-			selectedbgview.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
-			this.SelectedBackgroundView = selectedbgview;
-			this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+
 		}
 
 		#endregion

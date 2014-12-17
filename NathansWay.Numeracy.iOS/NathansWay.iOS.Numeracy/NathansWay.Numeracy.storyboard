@@ -53,10 +53,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="728" opaque="NO">
+                            <tableView opaque="NO" clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="728">
                                 <rect key="frame" x="742" y="129" width="280" height="637"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="1" green="1" blue="1" alpha="1"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Vdx-PJ-hZt">
                                         <rect key="frame" x="0.0" y="22" width="280" height="44"/>
@@ -92,10 +92,10 @@
                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <tableView clipsSubviews="YES" alpha="0.84999999999999998" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="709">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="709">
                                 <rect key="frame" x="2" y="172" width="737" height="594"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="1" green="1" blue="1" alpha="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="LessonTableCell" id="710" customClass="vLessonTableCell">
                                         <rect key="frame" x="0.0" y="22" width="737" height="44"/>
@@ -128,7 +128,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="718" customClass="AspyLabel">
                                                     <rect key="frame" x="125" y="0.0" width="100" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -136,7 +135,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="&lt;       Start" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="727" customClass="AspyLabel">
                                                     <rect key="frame" x="0.0" y="0.0" width="124" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -144,7 +142,6 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Edit" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="805" customClass="AspyLabel">
                                                     <rect key="frame" x="666" y="0.0" width="71" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -192,7 +189,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Type" lineBreakMode="tailTruncation" minimumFontSize="10" id="HSA-pA-EFv" customClass="AspyLabel" fixedFrame="YES">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Type" lineBreakMode="tailTruncation" minimumFontSize="10" id="HSA-pA-EFv" customClass="AspyLabel">
                                 <rect key="frame" x="242" y="11" width="70" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -203,7 +200,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OTa-Cl-Gig" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="759" y="50" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back To Menu                      &gt;"/>
+                                <state key="normal" title="Back To Menu                      >"/>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="986" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="471" y="33" width="50" height="40"/>
@@ -291,28 +288,28 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="x ÷"/>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RtK-Pf-shO" customClass="ButtonLabelStyle" fixedFrame="YES">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="RtK-Pf-shO" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="242" y="33" width="110" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Basic"/>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bQ1-lQ-sw4" customClass="ButtonLabelStyle" fixedFrame="YES">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bQ1-lQ-sw4" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="353" y="33" width="110" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Fractions"/>
                             </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oPa-Yf-jgw" customClass="ButtonLabelStyle" fixedFrame="YES">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oPa-Yf-jgw" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="242" y="74" width="110" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Groups"/>
                             </button>
-                            <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wxx-8D-mCK" customClass="ButtonLabelStyle" fixedFrame="YES">
+                            <button opaque="NO" tag="5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wxx-8D-mCK" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="353" y="74" width="110" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -341,6 +338,16 @@
                         <outlet property="btnLevel7" destination="ToS-ak-G8W" id="name-outlet-ToS-ak-G8W"/>
                         <outlet property="btnLevel8" destination="ToY-tE-chS" id="name-outlet-ToY-tE-chS"/>
                         <outlet property="btnLevel9" destination="Lc6-Pe-hwr" id="name-outlet-Lc6-Pe-hwr"/>
+                        <outlet property="btnOpAdd" destination="aM0-8G-tUa" id="name-outlet-aM0-8G-tUa"/>
+                        <outlet property="btnOpAddSub" destination="sSf-Wq-bCc" id="name-outlet-sSf-Wq-bCc"/>
+                        <outlet property="btnOpDivision" destination="9Zm-4e-rIE" id="name-outlet-9Zm-4e-rIE"/>
+                        <outlet property="btnOpMultSub" destination="V08-HT-Ky9" id="name-outlet-V08-HT-Ky9"/>
+                        <outlet property="btnOpMultiply" destination="h8Y-6c-e8J" id="name-outlet-h8Y-6c-e8J"/>
+                        <outlet property="btnOpSubtract" destination="2ZY-n5-0zu" id="name-outlet-2ZY-n5-0zu"/>
+                        <outlet property="btnTypeBasic" destination="RtK-Pf-shO" id="name-outlet-RtK-Pf-shO"/>
+                        <outlet property="btnTypeFractions" destination="bQ1-lQ-sw4" id="name-outlet-bQ1-lQ-sw4"/>
+                        <outlet property="btnTypeGroups" destination="oPa-Yf-jgw" id="name-outlet-oPa-Yf-jgw"/>
+                        <outlet property="btnTypeMixed" destination="Wxx-8D-mCK" id="name-outlet-Wxx-8D-mCK"/>
                         <outlet property="grSwipeBack2Menu" destination="649" id="name-outlet-649"/>
                         <outlet property="imBgUpperLeft" destination="934" id="name-outlet-934"/>
                         <outlet property="imBgUpperRight" destination="941" id="name-outlet-941"/>
@@ -350,16 +357,6 @@
                         <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
                         <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
                         <segue destination="JYt-to-IEW" kind="custom" identifier="sgLessons2Menu" customClass="AspySlidingLeftSegue" id="619"/>
-                        <outlet property="btnOpAdd" destination="aM0-8G-tUa" id="name-outlet-aM0-8G-tUa"/>
-                        <outlet property="btnOpMultiply" destination="h8Y-6c-e8J" id="name-outlet-h8Y-6c-e8J"/>
-                        <outlet property="btnOpSubtract" destination="2ZY-n5-0zu" id="name-outlet-2ZY-n5-0zu"/>
-                        <outlet property="btnOpDivision" destination="9Zm-4e-rIE" id="name-outlet-9Zm-4e-rIE"/>
-                        <outlet property="btnOpAddSub" destination="sSf-Wq-bCc" id="name-outlet-sSf-Wq-bCc"/>
-                        <outlet property="btnOpMultSub" destination="V08-HT-Ky9" id="name-outlet-V08-HT-Ky9"/>
-                        <outlet property="btnTypeBasic" destination="RtK-Pf-shO" id="name-outlet-RtK-Pf-shO"/>
-                        <outlet property="btnTypeFractions" destination="bQ1-lQ-sw4" id="name-outlet-bQ1-lQ-sw4"/>
-                        <outlet property="btnTypeGroups" destination="oPa-Yf-jgw" id="name-outlet-oPa-Yf-jgw"/>
-                        <outlet property="btnTypeMixed" destination="Wxx-8D-mCK" id="name-outlet-Wxx-8D-mCK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -387,12 +384,4 @@
     <inferredMetricsTieBreakers>
         <segue reference="619"/>
     </inferredMetricsTieBreakers>
-    <resources>
-        <image name="Content/AppImages/Exit.png" width="128" height="128"/>
-        <image name="Content/AppImages/Kids.png" width="128" height="128"/>
-        <image name="Content/AppImages/Spanner.png" width="128" height="128"/>
-        <image name="Content/AppImages/Teacher.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox_.png" width="128" height="128"/>
-    </resources>
 </document>

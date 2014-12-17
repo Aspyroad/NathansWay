@@ -62,6 +62,11 @@ namespace AspyRoad.iOSCore
 				return myGlobals.G__RectWindowPortait;
 			}
 		} 
+
+		public static bool IsOdd(int value)
+		{
+			return value % 2 != 0;
+		}
 	}
 }
 
