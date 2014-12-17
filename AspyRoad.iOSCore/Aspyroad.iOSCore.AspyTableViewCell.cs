@@ -39,6 +39,18 @@ namespace AspyRoad.iOSCore
 			ApplyUI ();
 		}
 
+		private void AlternateCellColor ()
+		{
+			if (AspyUtilities.IsOdd(_indexValue))
+			{
+				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColorTransition.Value;
+			}
+			else
+			{
+				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+			}
+		}
+
 		#endregion
 
 		#region Public Methods
@@ -46,7 +58,11 @@ namespace AspyRoad.iOSCore
 		public int IndexValue 
 		{
 			get { return _indexValue; }
-			set { _indexValue = value; }
+			set 
+			{ 
+				_indexValue = value;
+				AlternateCellColor ();
+			}
 		}
 
 		public virtual void ApplyUI ()
@@ -56,15 +72,7 @@ namespace AspyRoad.iOSCore
 			this.SelectedBackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
 			// Setup normal color
 			this.BackgroundView = new UIView ();
-
-			if (AspyUtilities.IsOdd(_indexValue))
-			{
-				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
-			}
-			else
-			{
-				this.BackgroundView.BackgroundColor = UIColor.Cyan;
-			}
+			AlternateCellColor ();
 		}
 
 		#endregion
@@ -74,8 +82,6 @@ namespace AspyRoad.iOSCore
 		public override void AwakeFromNib ()
 		{
 			base.AwakeFromNib ();
-
-
 		}
 
 		#endregion

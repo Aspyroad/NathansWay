@@ -48,8 +48,8 @@ namespace NathansWay.Shared
 		Subtraction = 2,
 		Division = 3,
 		Multiplication = 4,
-		Random = 5,
-		Multi = 6
+		AddSub = 5,
+		DivMulti = 6
 	}
 
 	public enum G__Expression
@@ -210,6 +210,25 @@ namespace NathansWay.Shared
 			});
 		}
 
+	}
+
+	public struct G__Operators
+	{
+		// Statics
+		public static readonly G__Operators Empty;
+
+		// Privates
+		readonly string _addition = "+";
+		readonly string _subtraction = "–";
+		readonly string _division = "÷";
+		readonly string _multiplication = "x";
+		readonly string _addsub = "+ –";
+		readonly string _divmulti = "÷ x";
+
+		public override string ToString ()
+		{
+			return string.Format ("[G__Operators]");
+		}
 
 	}
 }

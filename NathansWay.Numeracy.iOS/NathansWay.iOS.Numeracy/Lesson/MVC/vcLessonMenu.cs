@@ -266,7 +266,6 @@ namespace NathansWay.iOS.Numeracy
 
 				var cell = tableView.DequeueReusableCell ("LessonTableCell") as vLessonTableCell;
 				cell.IndexValue = indexPath.Row;
-				cell.
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
 
 
