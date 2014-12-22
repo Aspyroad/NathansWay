@@ -9,6 +9,7 @@ using MonoTouch.CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 // NathansWay
+using NathansWay.Shared;
 using NathansWay.Shared.BUS.Entity;
 
 
@@ -34,6 +35,21 @@ namespace NathansWay.iOS.Numeracy
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
 			this.lblLessonName.Text = lesson.NameLesson;
+			this.lblOperator.Text = G__Operators.GetOp ((G__OperatorPlease)lesson.Operator);
+			this.lblType.Text = G__Expressions.GetType ((G__Expression)lesson.ExpressionType);
+		}
+
+		#endregion
+
+		#region Private Variables
+
+		private CALayer GetLevelIndicator(int _level)
+		{
+			var x = new CALayer ();
+			x.
+
+
+
 		}
 
 		#endregion

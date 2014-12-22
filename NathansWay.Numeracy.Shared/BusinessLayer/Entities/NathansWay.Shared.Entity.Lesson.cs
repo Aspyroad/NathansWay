@@ -17,6 +17,7 @@ namespace NathansWay.Shared.BUS.Entity
         private string _description;
         private int _difficulty;
 		private int _operator;
+		private int _expressionType;
 		private int _scoreTopResult;
 		private int _scoreTopMethod;
         //private int _methodCount;
@@ -57,6 +58,12 @@ namespace NathansWay.Shared.BUS.Entity
 		{
 			get { return this._operator; }
 			set { this._operator = value; }            
+		}
+		[Column("expressiontype")]
+		public int ExpressionType
+		{
+			get { return this._expressionType; }
+			set { this._expressionType = value; }            
 		}
 		[Column("scoretopresult")]
 		public int ScoreTopResult

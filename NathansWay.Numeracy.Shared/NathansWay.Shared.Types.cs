@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 
@@ -40,25 +41,6 @@ namespace NathansWay.Shared
 		Level8 = 8,
 		Level9 = 9,
 		Hard = 10
-	}
-
-	public enum G__OperatorPlease
-	{
-		Addition = 1,
-		Subtraction = 2,
-		Division = 3,
-		Multiplication = 4,
-		AddSub = 5,
-		DivMulti = 6
-	}
-
-	public enum G__Expression
-	{
-		Expression = 1,
-		Grouped = 2,
-		Fraction = 3,
-		Random = 4,
-		Multi = 5
 	}
 
 	public struct G__Color
@@ -212,24 +194,82 @@ namespace NathansWay.Shared
 
 	}
 
-	public struct G__Operators
+	#region Operator Logic 
+
+	public enum G__OperatorPlease
 	{
-		// Statics
-		public static readonly G__Operators Empty;
-
-		// Privates
-		readonly string _addition = "+";
-		readonly string _subtraction = "–";
-		readonly string _division = "÷";
-		readonly string _multiplication = "x";
-		readonly string _addsub = "+ –";
-		readonly string _divmulti = "÷ x";
-
-		public override string ToString ()
-		{
-			return string.Format ("[G__Operators]");
-		}
-
+		Addition = 1,
+		Subtraction = 2,
+		Division = 3,
+		Multiplication = 4,
+		AddSub = 5,
+		DivMulti = 6
 	}
+
+	public static class G__Operators
+	{
+		static Dictionary<G__OperatorPlease, string> _dict = new Dictionary<G__OperatorPlease, string>
+		{
+			{G__OperatorPlease.Addition, "+"},
+			{G__OperatorPlease.Subtraction, "–"},
+			{G__OperatorPlease.Division, "÷"},
+			{G__OperatorPlease.Multiplication, "x"},
+			{G__OperatorPlease.AddSub, "+ –"},
+			{G__OperatorPlease.DivMulti, "÷ x"}
+		};
+			
+		public static string GetOp(G__OperatorPlease x)
+		{
+			// Try to get the result in the static Dictionary
+			string result;
+			if (_dict.TryGetValue(x, out result))
+			{
+				return result;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
+	#endregion
+
+	#region Expression Type
+
+	public enum G__Expression
+	{
+		Basic = 1,
+		Grouped = 2,
+		Fraction = 3,
+		Mixed = 4
+	}
+
+	public static class G__Expressions
+	{
+		static Dictionary<G__Expression, string> _dict = new Dictionary<G__Expression, string>
+		{
+			{G__Expression.Basic, "Basic"},
+			{G__Expression.Fraction, "Fraction"},
+			{G__Expression.Grouped, "Grouped"},
+			{G__Expression.Mixed, "Mixed"}
+		};
+
+		public static string GetType(G__Expression x)
+		{
+			// Try to get the result in the static Dictionary
+			string result;
+			if (_dict.TryGetValue(x, out result))
+			{
+				return result;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
+	#endregion
 }
 
