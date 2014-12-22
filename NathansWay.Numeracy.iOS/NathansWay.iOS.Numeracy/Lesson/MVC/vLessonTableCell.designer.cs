@@ -24,7 +24,7 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyLabel lblLevel { get; set; }
+		AspyRoad.iOSCore.LevelLabel lblLevel { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]

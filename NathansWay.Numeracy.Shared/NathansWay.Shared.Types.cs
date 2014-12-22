@@ -29,20 +29,6 @@ namespace NathansWay.Shared
 		Assesment = 3
 	}
 
-	public enum G__Difficulty : int
-	{
-		Easy = 1,
-		Level2 = 2,
-		Level3 = 3,
-		Level4 = 4,
-		Level5 = 5,
-		Level6 = 6,
-		Level7 = 7,
-		Level8 = 8,
-		Level9 = 9,
-		Hard = 10
-	}
-
 	public struct G__Color
 	{
 		// Statics
@@ -256,6 +242,55 @@ namespace NathansWay.Shared
 		};
 
 		public static string GetType(G__Expression x)
+		{
+			// Try to get the result in the static Dictionary
+			string result;
+			if (_dict.TryGetValue(x, out result))
+			{
+				return result;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
+
+	#endregion
+
+	#region LevelType
+
+	public enum G__Level : int
+	{
+		Easy = 1,
+		Level2 = 2,
+		Level3 = 3,
+		Level4 = 4,
+		Level5 = 5,
+		Level6 = 6,
+		Level7 = 7,
+		Level8 = 8,
+		Level9 = 9,
+		Hard = 10
+	}
+
+	public static class G__Levels
+	{
+		static Dictionary<G__Level, string> _dict = new Dictionary<G__Level, string>
+		{
+			{G__Level.Easy, "Easy"},
+			{G__Level.Level2, "Level2"},
+			{G__Level.Level3, "Level3"},
+			{G__Level.Level4, "Level4"},
+			{G__Level.Level5, "Level5"},
+			{G__Level.Level6, "Level6"},
+			{G__Level.Level7, "Level7"},
+			{G__Level.Level8, "Level8"},
+			{G__Level.Level9, "Level9"},
+			{G__Level.Hard, "Hard"}
+		};
+
+		public static string GetLevel(G__Level x)
 		{
 			// Try to get the result in the static Dictionary
 			string result;

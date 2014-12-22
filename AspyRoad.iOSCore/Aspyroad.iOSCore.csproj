@@ -78,6 +78,7 @@
     <Compile Include="Utilities\Aspyroad.iOSCore.Util.Functions.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewContainer.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTableViewCell.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyLevelLabel.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

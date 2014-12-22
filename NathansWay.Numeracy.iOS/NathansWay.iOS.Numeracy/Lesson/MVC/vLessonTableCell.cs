@@ -37,20 +37,12 @@ namespace NathansWay.iOS.Numeracy
 			this.lblLessonName.Text = lesson.NameLesson;
 			this.lblOperator.Text = G__Operators.GetOp ((G__OperatorPlease)lesson.Operator);
 			this.lblType.Text = G__Expressions.GetType ((G__Expression)lesson.ExpressionType);
+			this.lblLevel.Text = G__Levels.GetLevel ((G__Level)lesson.Difficulty);
 		}
 
 		#endregion
 
 		#region Private Variables
-
-		private CALayer GetLevelIndicator(int _level)
-		{
-			var x = new CALayer ();
-			x.
-
-
-
-		}
 
 		#endregion
 
@@ -59,7 +51,6 @@ namespace NathansWay.iOS.Numeracy
 		public override void AwakeFromNib ()
 		{
 			base.AwakeFromNib ();
-
 		}
 
 		#endregion
