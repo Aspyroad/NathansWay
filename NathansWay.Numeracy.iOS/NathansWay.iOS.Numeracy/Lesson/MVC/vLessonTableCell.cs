@@ -37,6 +37,9 @@ namespace NathansWay.iOS.Numeracy
 			this.lblLessonName.Text = lesson.NameLesson;
 			this.lblOperator.Text = G__Operators.GetOp ((G__OperatorPlease)lesson.Operator);
 			this.lblType.Text = G__Expressions.GetType ((G__Expression)lesson.ExpressionType);
+
+			// Set the level bar length
+			this.lblLevel.LevelWidth = (float)lesson.Difficulty;
 			this.lblLevel.Text = G__Levels.GetLevel ((G__Level)lesson.Difficulty);
 		}
 

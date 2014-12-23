@@ -20,10 +20,10 @@ namespace AspyRoad.iOSCore
 	{
 		// HOWTO: Great example of how to add a layer, draw something on it, and add it to a view
 
-
 		#region Private Variables
 
-		protected CALayer levelLayer;
+		protected CALayer _levelLayer;
+		protected float _levelWidth;
 
 		#endregion
 
@@ -49,26 +49,24 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
+		public float LevelWidth
+		{
+			set{ _levelWidth = value; }
+		}
+
 		#endregion
 
 		#region Overrides
 
-//		public override void Draw (System.Drawing.RectangleF rect)
-//		{
-//			base.Draw (rect);
-//			//this.DrawGradient (rect);
-//		}
-
-
-		public override void MovedToSuperview ()
+		public override void Draw (System.Drawing.RectangleF rect)
 		{
-			base.MovedToSuperview ();
+			base.Draw (rect);
+			// Create the layer and draw it.
+			// (This is done in view.drawrect simply because this is the only spot we can get a graphic context in a views lifetime.)
+			this._levelLayer = this.CreateLayerWithDelegate ();
+			this._levelLayer.DrawInContext (UIGraphics.GetCurrentContext ());
 
-			this.levelLayer = this.CreateLayerWithDelegate ();
-			this.levelLayer.Frame = new RectangleF (10, 10, 90, 30);
-			this.levelLayer.SetNeedsDisplay ();
-//			var context = UIGraphics.GetCurrentContext ();
-//			this.levelLayer.RenderInContext (context);
+			this.Layer.AddSublayer (this._levelLayer);
 		}
 
 		#endregion
@@ -109,66 +107,79 @@ namespace AspyRoad.iOSCore
 			new NSString(this.Text).DrawString(textRect, this.Font, UILineBreakMode.TailTruncation, UITextAlignment.Center);
 		}
 
+		#region Custom drawing with layers
 
+		// Method 1: Create a layer and assign a custom delegate that performs the drawing
+		protected CALayer CreateLayerWithDelegate ()
+		{
+			var layer = new CALayer ();
+			layer.Delegate = new LayerDelegate (_levelWidth);
+			return layer;
+		}
+		public class LayerDelegate : CALayerDelegate
+		{
+			private float _width;
 
-			#region Custom drawing with layers
-			// Method 1: Create a layer and assign a custom delegate that performs the drawing
-			protected CALayer CreateLayerWithDelegate ()
+			public LayerDelegate(float width)
 			{
-				var layer = new CALayer ();
-				layer.Delegate = new LayerDelegate ();
-				return layer;
-			}
-			public class LayerDelegate : CALayerDelegate
-			{
-				public override void DrawLayer (CALayer layer, MonoTouch.CoreGraphics.CGContext context)
-				{
-					// implement your drawing
-					var rect = new RectangleF (10, 10, 90, 30);
-					this.DrawGradient (rect, context);
-				}
-
-				private void DrawGradient (System.Drawing.RectangleF rect, CGContext context)
-				{
-					//// General Declarations
-					var colorSpace = CGColorSpace.CreateDeviceRGB ();
-
-					//// Color Declarations
-					var colorGradientEasyToHardColor = UIColor.FromRGBA (0.190f, 0.581f, 0.177f, 1.000f);
-					var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.808f, 0.000f, 0.000f, 0.784f);
-
-					//// Gradient Declarations
-					var colorGradientEasyToHardColors = new CGColor [] {
-						colorGradientEasyToHardColor.CGColor,
-						UIColor.FromRGBA (0.499f, 0.290f, 0.089f, 0.892f).CGColor,
-						colorGradientEasyToHardColor2.CGColor
-					};
-					var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
-					var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
-
-					//// Rectangle Drawing
-					var rectanglePath = UIBezierPath.FromRect (rect);
-					context.SaveState ();
-					rectanglePath.AddClip ();
-					context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, (rect.Width/2)), new PointF (rect.Width, (rect.Width/2)), 0);
-					//context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, 60.0f), new PointF (240.0f, 60.0f), 0);
-					context.RestoreState ();
-				}
+				_width = width;
 			}
 
-
-
-			// Method 2: Create a custom CALayer and override the appropriate methods
-			public class MyCustomLayer : CALayer
+			public override void DrawLayer (CALayer layer, MonoTouch.CoreGraphics.CGContext context)
 			{
-				public override void DrawInContext (MonoTouch.CoreGraphics.CGContext ctx)
-				{
-					base.DrawInContext (ctx);
-					// implement your drawing
-				}
+				// implement your drawing
+				// TODO: This rect really needs to be passed in for LevelLabel reuse senarios.
+				var rect = new RectangleF (10, 36, 100, 8);
+
+				this.DrawGradient (rect, context);
 			}
 
-			#endregion
+			private void DrawGradient (System.Drawing.RectangleF rect, CGContext context)
+			{
+				//// General Declarations
+				var colorSpace = CGColorSpace.CreateDeviceRGB ();
+
+				//// Color Declarations
+				var colorGradientEasyToHardColor = UIColor.FromRGBA (0.190f, 0.581f, 0.177f, 1.000f);
+				var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.808f, 0.000f, 0.000f, 0.784f);
+
+				//// Gradient Declarations
+				var colorGradientEasyToHardColors = new CGColor [] {
+					colorGradientEasyToHardColor.CGColor,
+					UIColor.FromRGBA (0.499f, 0.290f, 0.089f, 0.892f).CGColor,
+					colorGradientEasyToHardColor2.CGColor
+				};
+				var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
+				var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
+
+				// Varied rect for different levels
+				var varirect = new RectangleF (rect.X, rect.Y, (float)(this._width * (rect.Width/10)), rect.Height);
+				//// White BackGround Drawing
+				var bgWhitePath = UIBezierPath.FromRect(varirect);
+				UIColor.White.SetFill();
+				bgWhitePath.Fill();
+
+				//// Rectangle Drawing
+				var rectanglePath = UIBezierPath.FromRect (varirect);
+				context.SaveState ();
+				rectanglePath.AddClip ();
+				context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, (rect.Width/2)), new PointF (rect.Width, (rect.Width/2)), 0);
+				context.RestoreState ();
+			}
+		}
+
+
+		// Method 2: Create a custom CALayer and override the appropriate methods
+		public class MyCustomLayer : CALayer
+		{
+			public override void DrawInContext (MonoTouch.CoreGraphics.CGContext ctx)
+			{
+				base.DrawInContext (ctx);
+				// implement your drawing
+			}
+		}
+
+		#endregion
 
 		#endregion
 
