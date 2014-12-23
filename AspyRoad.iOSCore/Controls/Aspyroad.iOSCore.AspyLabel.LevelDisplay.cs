@@ -6,6 +6,7 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
 using MonoTouch.UIKit;
+using MonoTouch.Foundation;
 using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;
 //using MonoTouch.Foundation;
@@ -21,6 +22,8 @@ namespace AspyRoad.iOSCore
 
 
 		#region Private Variables
+
+		protected CALayer levelLayer;
 
 		#endregion
 
@@ -50,17 +53,29 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-		public override void Draw (System.Drawing.RectangleF rect)
+//		public override void Draw (System.Drawing.RectangleF rect)
+//		{
+//			base.Draw (rect);
+//			//this.DrawGradient (rect);
+//		}
+
+
+		public override void MovedToSuperview ()
 		{
-			base.Draw (rect);
-			this.DrawGradient (rect);
+			base.MovedToSuperview ();
+
+			this.levelLayer = this.CreateLayerWithDelegate ();
+			this.levelLayer.Frame = new RectangleF (10, 10, 90, 30);
+			this.levelLayer.SetNeedsDisplay ();
+//			var context = UIGraphics.GetCurrentContext ();
+//			this.levelLayer.RenderInContext (context);
 		}
 
 		#endregion
 
 		#region Private Members
 
-		private void DrawGradient (System.Drawing.RectangleF rect)
+		private void DrawGradientInContext (System.Drawing.RectangleF rect)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB ();
@@ -94,6 +109,8 @@ namespace AspyRoad.iOSCore
 			new NSString(this.Text).DrawString(textRect, this.Font, UILineBreakMode.TailTruncation, UITextAlignment.Center);
 		}
 
+
+
 			#region Custom drawing with layers
 			// Method 1: Create a layer and assign a custom delegate that performs the drawing
 			protected CALayer CreateLayerWithDelegate ()
@@ -107,6 +124,35 @@ namespace AspyRoad.iOSCore
 				public override void DrawLayer (CALayer layer, MonoTouch.CoreGraphics.CGContext context)
 				{
 					// implement your drawing
+					var rect = new RectangleF (10, 10, 90, 30);
+					this.DrawGradient (rect, context);
+				}
+
+				private void DrawGradient (System.Drawing.RectangleF rect, CGContext context)
+				{
+					//// General Declarations
+					var colorSpace = CGColorSpace.CreateDeviceRGB ();
+
+					//// Color Declarations
+					var colorGradientEasyToHardColor = UIColor.FromRGBA (0.190f, 0.581f, 0.177f, 1.000f);
+					var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.808f, 0.000f, 0.000f, 0.784f);
+
+					//// Gradient Declarations
+					var colorGradientEasyToHardColors = new CGColor [] {
+						colorGradientEasyToHardColor.CGColor,
+						UIColor.FromRGBA (0.499f, 0.290f, 0.089f, 0.892f).CGColor,
+						colorGradientEasyToHardColor2.CGColor
+					};
+					var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
+					var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
+
+					//// Rectangle Drawing
+					var rectanglePath = UIBezierPath.FromRect (rect);
+					context.SaveState ();
+					rectanglePath.AddClip ();
+					context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, (rect.Width/2)), new PointF (rect.Width, (rect.Width/2)), 0);
+					//context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, 60.0f), new PointF (240.0f, 60.0f), 0);
+					context.RestoreState ();
 				}
 			}
 
