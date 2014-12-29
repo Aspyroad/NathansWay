@@ -54,7 +54,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 				.GetLessonsAsync ()
 				.ContinueOnCurrentThread (t => 
 				{ 
-					//activeLesson = t.Result.First ();
 					lessons = t.Result;
 					return t.Result; 
 				});
