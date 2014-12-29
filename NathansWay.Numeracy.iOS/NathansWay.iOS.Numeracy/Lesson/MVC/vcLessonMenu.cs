@@ -28,7 +28,8 @@ namespace NathansWay.iOS.Numeracy
 		// Lesson level hold state
 		// Used to let us know the current level filtering
 		private int intLevelHoldState;
-		//private AspySlider sliderDifficulty;
+		private int intOpHoldState;
+		private int intTypeHoldState;
 
 		#endregion
 
@@ -60,12 +61,16 @@ namespace NathansWay.iOS.Numeracy
 			if (disposing)
 			{
 				//Do this because the ViewModel hangs around for the lifetime of the app
-//				this.btnMenuVisuals.TouchUpInside -= btnMenuVisuals_touchupinside;
-//				this.btnMenuLessons.TouchUpInside -= btnMenuLessons_touchupinside;
-//				this.btnMenuToolbox.TouchUpInside -= btnMenuToolbox_touchupinside;
-//				this.btnMenuTeacher.TouchUpInside -= btnMenuTeacher_touchupinside;
-//				this.btnMenuStudent.TouchUpInside -= btnMenuStudent_touchupinside;
-//				this.btnMenuLessonBuilder.TouchUpInside -= btnMenuLessonBuilder_touchupinside;
+				this.btnLevel1.TouchUpInside -= OnClick_btnLevel1;
+				this.btnLevel2.TouchUpInside -= OnClick_btnLevel2;
+				this.btnLevel3.TouchUpInside -= OnClick_btnLevel3;
+				this.btnLevel4.TouchUpInside -= OnClick_btnLevel4;
+				this.btnLevel5.TouchUpInside -= OnClick_btnLevel5;
+				this.btnLevel6.TouchUpInside -= OnClick_btnLevel6;
+				this.btnLevel7.TouchUpInside -= OnClick_btnLevel7;
+				this.btnLevel8.TouchUpInside -= OnClick_btnLevel8;
+				this.btnLevel9.TouchUpInside -= OnClick_btnLevel9;
+				this.btnLevel10.TouchUpInside -= OnClick_btnLevel10;
 			}
 		}
 
@@ -103,6 +108,7 @@ namespace NathansWay.iOS.Numeracy
 			this.ApplyUI ();
 
 			// Register Events
+			// Level Buttons
 			this.btnLevel1.TouchUpInside += OnClick_btnLevel1;
 			this.btnLevel2.TouchUpInside += OnClick_btnLevel2;
 			this.btnLevel3.TouchUpInside += OnClick_btnLevel3;
@@ -113,13 +119,26 @@ namespace NathansWay.iOS.Numeracy
 			this.btnLevel8.TouchUpInside += OnClick_btnLevel8;
 			this.btnLevel9.TouchUpInside += OnClick_btnLevel9;
 			this.btnLevel10.TouchUpInside += OnClick_btnLevel10;
-
+			// Type Buttons
+			this.btnTypeBasic.TouchUpInside += OnClick_btnTypeBasic;
+			this.btnTypeFractions.TouchUpInside += OnClick_btnTypeFractions;
+			this.btnTypeGroups.TouchUpInside += OnClick_btnTypeGroups;
+			this.btnTypeMixed.TouchUpInside += OnClick_btnTypeMixed;
+			// Operator Buttons
+			this.btnOpAdd.TouchUpInside += OnClick_btnOpAdd;
+			this.btnOpAddSub.TouchUpInside += OnClick_btnOpAddSub;
+			this.btnOpDivision.TouchUpInside += OnClick_btnOpDivision;
+			this.btnOpMultiply.TouchUpInside += OnClick_btnOpMultiply;
+			this.btnOpMultSub.TouchUpInside += OnClick_btnOpMultSub;
+			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
 
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
 			// Load Initial lesson list
 			this.LoadLessonsInit ();
 
         }
+
+
 
 
 
@@ -173,7 +192,7 @@ namespace NathansWay.iOS.Numeracy
 		#endregion
 
 		#region EventHandlers
-
+		// Level Button Handlers
 		private void OnClick_btnLevel1 (object sender, EventArgs e)
 		{
 			this.GlobalButtonLevelClick (this.btnLevel1);
@@ -214,8 +233,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			this.GlobalButtonLevelClick (this.btnLevel10);
 		}
-
-
+		// Global Level Handler 
 		private void GlobalButtonLevelClick (ButtonLabelStyle btnLevelButton)
 		{
 			// Turn off the old button
@@ -230,6 +248,77 @@ namespace NathansWay.iOS.Numeracy
 			btnLevelButton.HoldState = true;
 		}
 
+		// Operator Button Handlers
+		void OnClick_btnOpSubtract (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnOpMultSub (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnOpMultiply (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnOpDivision (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnOpAddSub (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnOpAdd (object sender, EventArgs e)
+		{
+			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+		}
+		// Global Level Handler 
+		private void GlobalButtonOpClick (ButtonLabelStyle btnOpButton)
+		{
+			// Turn off the old button
+			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intOpHoldState) as ButtonLabelStyle;
+			if (tmpBtnViewOld != null)
+			{
+				tmpBtnViewOld.HoldState = false;
+				tmpBtnViewOld.SetNeedsDisplay ();
+			}
+
+			this.intOpHoldState = btnOpButton.Tag;
+			btnOpButton.HoldState = true;
+		}
+
+		// Type Buttons Handlers
+		void OnClick_btnTypeMixed (object sender, EventArgs e)
+		{
+			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnTypeGroups (object sender, EventArgs e)
+		{
+			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnTypeFractions (object sender, EventArgs e)
+		{
+			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+		}
+		void OnClick_btnTypeBasic (object sender, EventArgs e)
+		{
+			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+		}
+		// Global Type Handler 
+		private void GlobalButtonTypeClick (ButtonLabelStyle btnTypeButton)
+		{
+			// Turn off the old button
+			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intTypeHoldState) as ButtonLabelStyle;
+			if (tmpBtnViewOld != null)
+			{
+				tmpBtnViewOld.HoldState = false;
+				tmpBtnViewOld.SetNeedsDisplay ();
+			}
+
+			this.intTypeHoldState = btnTypeButton.Tag;
+			btnTypeButton.HoldState = true;
+		}
 
 		#endregion
 

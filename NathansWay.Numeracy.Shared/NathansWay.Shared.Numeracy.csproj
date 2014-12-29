@@ -101,6 +101,7 @@
     <Compile Include="UserInterface\NathansWay.Shared.UIGlobalTheme.cs" />
     <Compile Include="BusinessLayer\ViewModels\Nathansway.Shared.BUS.LessonViewModel.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.PredicateBuilder.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Pageing.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
