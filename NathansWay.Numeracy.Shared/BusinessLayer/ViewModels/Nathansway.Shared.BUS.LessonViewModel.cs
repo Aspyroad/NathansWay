@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 // NathansWay
 using NathansWay.Shared.DAL;
@@ -23,7 +24,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		readonly IRepoLessons lessonservice;
 		private List<EntityLesson> lessons;
-		private EntityLesson activeLesson;
 
 		#endregion
 
@@ -52,6 +52,19 @@ namespace NathansWay.Shared.BUS.ViewModel
 		{
 			return lessonservice
 				.GetLessonsAsync ()
+				.ContinueOnCurrentThread (t => 
+				{ 
+					lessons = t.Result;
+					return t.Result; 
+				});
+		}
+
+		public Task LoadLessonsAsync ()
+		{
+			// Testing need to add a filter expression here
+
+			return lessonservice
+				.GetLessonsFilteredAsync ()
 				.ContinueOnCurrentThread (t => 
 				{ 
 					lessons = t.Result;
