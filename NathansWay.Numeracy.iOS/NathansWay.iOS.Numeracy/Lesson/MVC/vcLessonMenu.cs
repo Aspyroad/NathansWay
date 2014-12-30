@@ -71,6 +71,18 @@ namespace NathansWay.iOS.Numeracy
 				this.btnLevel8.TouchUpInside -= OnClick_btnLevel8;
 				this.btnLevel9.TouchUpInside -= OnClick_btnLevel9;
 				this.btnLevel10.TouchUpInside -= OnClick_btnLevel10;
+				// Type Buttons
+				this.btnTypeBasic.TouchUpInside -= OnClick_btnTypeBasic;
+				this.btnTypeFractions.TouchUpInside -= OnClick_btnTypeFractions;
+				this.btnTypeGroups.TouchUpInside -= OnClick_btnTypeGroups;
+				this.btnTypeMixed.TouchUpInside -= OnClick_btnTypeMixed;
+				// Operator Buttons
+				this.btnOpAdd.TouchUpInside -= OnClick_btnOpAdd;
+				this.btnOpAddSub.TouchUpInside -= OnClick_btnOpAddSub;
+				this.btnOpDivision.TouchUpInside -= OnClick_btnOpDivision;
+				this.btnOpMultiply.TouchUpInside -= OnClick_btnOpMultiply;
+				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpMultSub;
+				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
 			}
 		}
 
@@ -131,16 +143,15 @@ namespace NathansWay.iOS.Numeracy
 			this.btnOpMultiply.TouchUpInside += OnClick_btnOpMultiply;
 			this.btnOpMultSub.TouchUpInside += OnClick_btnOpMultSub;
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
-
+			// LessonMain TableView
 			this.tvLessonMain.Source = new LessonMenuTableSource (this);
+			//this.tvLessonMain.
+
+
 			// Load Initial lesson list
 			this.LoadLessonsInit ();
 
         }
-
-
-
-
 
 		public override void ViewWillAppear (bool animated)
 		{
