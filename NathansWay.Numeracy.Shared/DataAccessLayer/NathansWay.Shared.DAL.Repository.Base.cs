@@ -28,6 +28,9 @@ namespace NathansWay.Shared.DAL.Repository
 		protected ISharedGlobal _sharedGlobal;
 		protected INWDatabaseContext _db;
 
+		private Expression _wherePredicate;
+		private Expression _orderbyPredicate; 
+
         public NWRepository ()
 		{
 			_sharedGlobal = SharedServiceContainer.Resolve<ISharedGlobal> ();
@@ -35,6 +38,7 @@ namespace NathansWay.Shared.DAL.Repository
 		}
 
 		#region Public Members
+
 		/// <summary>
 		/// Gets a table as a list, async.
 		/// </summary>
@@ -43,7 +47,10 @@ namespace NathansWay.Shared.DAL.Repository
 		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<U> ().ToListAsync();
+			return Conn
+				.Table<U> ()
+				.OrderBy (i => i.SEQ)
+				.ToListAsync();
 		}
 		/// <summary>
 		/// Gets an IEntity based on the supplied seq.
@@ -54,7 +61,10 @@ namespace NathansWay.Shared.DAL.Repository
 		public Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<U> ().Where ((x) => (x.SEQ == _entity.SEQ)).ToListAsync ();
+			return Conn
+				.Table<U> ()
+				.Where ((x) => (x.SEQ == _entity.SEQ))
+				.ToListAsync ();
 		}
 		/// <summary>
 		/// Selects some async.
@@ -62,10 +72,14 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The some async.</returns>
 		/// <param name="predicate">Predicate.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<List<U>> SelectSomeAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new()
+		public Task<List<U>> SelectFilteredAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new()
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.Table<U> ().Where (predicate).ToListAsync ();
+			return Conn
+				.Table<U> ()
+				.Where (_wherePredicate)
+				.OrderBy(_orderbyPredicate)
+				.ToListAsync ();
 		}
 		/// <summary>
 		/// Inserts an entity async.
@@ -123,6 +137,10 @@ namespace NathansWay.Shared.DAL.Repository
 			get { return _db; }
 			private set { _db = value; }
 		}
+
+		public Expres
+
+
 
 		#endregion
 

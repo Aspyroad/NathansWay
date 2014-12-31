@@ -50,12 +50,9 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#endregion
 
-		public Task<List<EntityLesson>> GetLessonsAsync ()
+		public Task<List<EntityLesson>> GetAllLessonsAsync ()
 		{
-			return _db.GetAsyncConnection ()
-				.Table<EntityLesson> ()
-				.OrderBy (i => i.SEQ)
-				.ToListAsync ();
+			return SelectAllAsync<EntityLesson> ();
 		}
 
 		public Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson)
@@ -67,7 +64,7 @@ namespace NathansWay.Shared.DAL.Repository
 				.ToListAsync ();
 		}
 
-		public Task<List<EntityLesson>> GetLessonsFilteredAsync (Expression<Func<EntityLesson, bool>> expr1)
+		public Task<List<EntityLesson>> GetFilteredLessonsAsync (Expression<Func<EntityLesson, bool>> expr1)
 		{
 			return _db.GetAsyncConnection ()
 				.Table<EntityLesson> ()

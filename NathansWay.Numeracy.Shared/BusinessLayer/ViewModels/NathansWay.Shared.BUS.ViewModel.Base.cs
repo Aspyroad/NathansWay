@@ -36,6 +36,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 	/// </summary>
 	public class ViewModelBase : PropertyChangedBase
 	{
+		#region Events
 
 		/// <summary>
 		/// Event for when IsBusy changes
@@ -47,8 +48,9 @@ namespace NathansWay.Shared.BUS.ViewModel
 		/// </summary>
 		public event EventHandler IsValidChanged;
 
-		readonly List<string> errors = new List<string> ();
-		bool isBusy = false;
+		#endregion
+
+		#region Constructor
 
 		/// <summary>
 		/// Default constructor
@@ -59,20 +61,27 @@ namespace NathansWay.Shared.BUS.ViewModel
 			Validate ();
 		}
 
+		#endregion
+
+		#region Privates
+
+		private readonly List<string> errors = new List<string> ();
+		private bool isBusy = false;
+
+		// Holds the start and end seq numbers for the entity attached to this model
+		private int _startSeq;
+		private int _endSeq;
+
+		#endregion
+
+		#region Public Members
+
 		/// <summary>
 		/// Returns true if the current state of the ViewModel is valid
 		/// </summary>
 		public bool IsValid
 		{
 			get { return errors.Count == 0; }
-		}
-
-		/// <summary>
-		/// A list of errors if IsValid is false
-		/// </summary>
-		protected List<string> Errors
-		{
-			get { return errors; }
 		}
 
 		/// <summary>
@@ -83,6 +92,52 @@ namespace NathansWay.Shared.BUS.ViewModel
 			get 
 			{
 				return errors.Aggregate (new StringBuilder (), (b, s) => b.AppendLine (s)).ToString ().Trim ();
+			}
+		}
+
+		/// <summary>
+		/// Value inidicating if a spinner should be shown
+		/// </summary>
+		public bool IsBusy
+		{
+			get { return isBusy; }
+			set 
+			{
+				if (isBusy != value)
+				{
+					isBusy = value;
+
+					OnPropertyChanged ("IsBusy");
+					OnIsBusyChanged ();
+				}
+			}
+		}
+
+		public int StartSeq
+		{
+			get { return _startSeq; }
+			set { _startSeq = value; }
+		}
+
+		public int EndSeq
+		{
+			get { return _endSeq; }
+			set { _endSeq = value; }
+		}
+
+		#endregion
+
+		#region Protected 
+
+		/// <summary>
+		/// Other viewmodels can override this if something should be done when busy
+		/// </summary>
+		protected virtual void OnIsBusyChanged ()
+		{
+			var method = IsBusyChanged;
+			if (method != null)
+			{
+				IsBusyChanged (this, EventArgs.Empty);
 			}
 		}
 
@@ -121,33 +176,13 @@ namespace NathansWay.Shared.BUS.ViewModel
 		}
 
 		/// <summary>
-		/// Value inidicating if a spinner should be shown
+		/// A list of errors if IsValid is false
 		/// </summary>
-		public bool IsBusy
+		protected List<string> Errors
 		{
-			get { return isBusy; }
-			set 
-			{
-				if (isBusy != value)
-				{
-					isBusy = value;
-
-					OnPropertyChanged ("IsBusy");
-					OnIsBusyChanged ();
-				}
-			}
+			get { return errors; }
 		}
 
-		/// <summary>
-		/// Other viewmodels can override this if something should be done when busy
-		/// </summary>
-		protected virtual void OnIsBusyChanged ()
-		{
-			var method = IsBusyChanged;
-			if (method != null)
-			{
-				IsBusyChanged (this, EventArgs.Empty);
-			}
-		}
+		#endregion
 	}
 }

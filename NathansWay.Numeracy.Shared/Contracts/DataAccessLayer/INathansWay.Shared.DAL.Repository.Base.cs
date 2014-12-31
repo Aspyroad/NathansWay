@@ -24,7 +24,7 @@ namespace NathansWay.Shared.DAL.Repository
 
 		Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new() ;
 		Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new() ;
-		Task<List<U>> SelectSomeAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new() ;
+		Task<List<U>> SelectFilteredAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new() ;
 		Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new() ;
 		Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new() ;
 		Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new() ;

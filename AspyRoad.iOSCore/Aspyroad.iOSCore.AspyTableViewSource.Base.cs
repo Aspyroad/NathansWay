@@ -32,6 +32,11 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 
+		public AspyTableViewSource ()
+		{
+			Initialize ();
+		}
+
 		public AspyTableViewSource (IntPtr handle) : base (handle)
 		{
 			Initialize ();
@@ -93,6 +98,20 @@ namespace AspyRoad.iOSCore
 			{
 				this.scrolledToBottom = false;
 			}
+		}
+
+		public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
+		{
+			// NOTE: Don't call the base implementation on a Model class
+			// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+			throw new NotImplementedException ();
+		}
+
+		public override int RowsInSection (UITableView tableview, int section)
+		{
+			// NOTE: Don't call the base implementation on a Model class
+			// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+			throw new NotImplementedException ();
 		}
 
 

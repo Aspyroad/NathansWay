@@ -23,8 +23,8 @@ namespace NathansWay.Shared.DAL.Repository
 		RepoLesson<EntityLesson> repLesson { get; }
 		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 
-		Task<List<EntityLesson>> GetLessonsAsync ();
-		Task<List<EntityLesson>> GetLessonsFilteredAsync (Expression<Func<EntityLesson, bool>> expr1);
+		Task<List<EntityLesson>> GetAllLessonsAsync ();
+		Task<List<EntityLesson>> GetFilteredLessonsAsync (Expression<Func<EntityLesson, bool>> expr1);
 		Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson);
 
 		// Non parallel

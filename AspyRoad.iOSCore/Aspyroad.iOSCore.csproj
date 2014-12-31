@@ -77,10 +77,10 @@
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTextView.Base.cs" />
     <Compile Include="Utilities\Aspyroad.iOSCore.Util.Functions.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewContainer.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspyTableViewCell.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyLabel.LevelDisplay.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspyTableView.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspyTableViewSource.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyTableViewSource.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyTableViewCell.Base.cs" />
+    <Compile Include="Aspyroad.iOSCore.AspyTableView.Base.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

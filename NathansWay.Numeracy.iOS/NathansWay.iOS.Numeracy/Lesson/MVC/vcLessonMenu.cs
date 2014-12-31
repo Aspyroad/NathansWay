@@ -84,6 +84,8 @@ namespace NathansWay.iOS.Numeracy
 				this.btnOpMultiply.TouchUpInside -= OnClick_btnOpMultiply;
 				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpMultSub;
 				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
+				// Tableview Source
+				this.lessonmenusource.ScrolledToBottom -= ScrolledToBottom;
 			}
 		}
 
@@ -146,8 +148,8 @@ namespace NathansWay.iOS.Numeracy
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
 			// LessonMain TableView
 			// Setup tableview source
-			lessonmenusource = new LessonMenuTableSource (this);
-			lessonmenusource.ScrolledToBottom += ScrolledToBottom;
+			this.lessonmenusource = new LessonMenuTableSource (this);
+			this.lessonmenusource.ScrolledToBottom += ScrolledToBottom;
 			this.tvLessonMain.Source = this.lessonmenusource;
 
 			//this.tvLessonMain.
@@ -201,7 +203,7 @@ namespace NathansWay.iOS.Numeracy
 		private void LoadLessonsInit ()
 		{
 
-			lessonViewModel.LoadLessonsAsync ().ContinueWith (_ => 
+			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
 			{
 				BeginInvokeOnMainThread (() => 
 				{
@@ -370,6 +372,7 @@ namespace NathansWay.iOS.Numeracy
 			{
 				return this.vmLesson.Lessons == null ? 0 : this.vmLesson.Lessons.Count;
 			}
+
 			public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
 			{
 
@@ -391,7 +394,12 @@ namespace NathansWay.iOS.Numeracy
 				//				return cell;
 			}
 
-			public override scro
+//			public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+//			{
+//				// NOTE: Don't call the base implementation on a Model class
+//				// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+//				throw new NotImplementedException ();
+//			}
 
 			#endregion
 		}
