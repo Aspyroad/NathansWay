@@ -24,6 +24,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private vLessonMenu _vLessonMenu;
 		private LessonViewModel lessonViewModel;
+		private AspyTableViewSource lessonmenusource;
 
 		// Lesson level hold state
 		// Used to let us know the current level filtering
@@ -144,7 +145,11 @@ namespace NathansWay.iOS.Numeracy
 			this.btnOpMultSub.TouchUpInside += OnClick_btnOpMultSub;
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
 			// LessonMain TableView
-			this.tvLessonMain.Source = new LessonMenuTableSource (this);
+			// Setup tableview source
+			lessonmenusource = new LessonMenuTableSource (this);
+			lessonmenusource.ScrolledToBottom += ScrolledToBottom;
+			this.tvLessonMain.Source = this.lessonmenusource;
+
 			//this.tvLessonMain.
 
 
@@ -152,6 +157,8 @@ namespace NathansWay.iOS.Numeracy
 			this.LoadLessonsInit ();
 
         }
+
+
 
 		public override void ViewWillAppear (bool animated)
 		{
@@ -172,9 +179,13 @@ namespace NathansWay.iOS.Numeracy
 			// TableViews
 			//this.tvLessonMain.BackgroundView = null;
 			this.tvLessonMain.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
-
-
 		}
+
+		private void ScrolledToBottom (object sender, EventArgs e)
+		{		
+			Console.WriteLine ("Im at the bottom");
+		}
+
 
 		// Control Setup
 
@@ -334,7 +345,7 @@ namespace NathansWay.iOS.Numeracy
 		#endregion
 
 
-		public class LessonMenuTableSource : UITableViewSource 
+		public class LessonMenuTableSource : AspyTableViewSource
 		{
 			#region Private Variables
 
@@ -379,6 +390,8 @@ namespace NathansWay.iOS.Numeracy
 				//				cell.TextLabel.Text = tableItems[indexPath.Row];
 				//				return cell;
 			}
+
+			public override scro
 
 			#endregion
 		}

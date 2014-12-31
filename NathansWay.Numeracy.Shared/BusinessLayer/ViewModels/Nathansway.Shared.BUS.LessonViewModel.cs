@@ -59,18 +59,18 @@ namespace NathansWay.Shared.BUS.ViewModel
 				});
 		}
 
-		public Task LoadLessonsAsync ()
-		{
-			// Testing need to add a filter expression here
-
-			return lessonservice
-				.GetLessonsFilteredAsync ()
-				.ContinueOnCurrentThread (t => 
-				{ 
-					lessons = t.Result;
-					return t.Result; 
-				});
-		}
+//		public Task LoadLessonsFilteredAsync ()
+//		{
+//			// Testing need to add a filter expression here
+//
+//			return lessonservice
+//				.GetLessonsFilteredAsync ()
+//				.ContinueOnCurrentThread (t => 
+//				{ 
+//					lessons = t.Result;
+//					return t.Result; 
+//				});
+//		}
 	}
 }
 
