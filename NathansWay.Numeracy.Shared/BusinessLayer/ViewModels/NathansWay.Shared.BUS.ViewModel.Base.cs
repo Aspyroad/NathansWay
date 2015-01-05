@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 // NathansWay
@@ -181,6 +182,19 @@ namespace NathansWay.Shared.BUS.ViewModel
 		protected List<string> Errors
 		{
 			get { return errors; }
+		}
+
+		protected Expression StringToExpression<T>(string fieldname)
+		{
+			Expression memberExpr = Expression.PropertyOrField(
+				T,
+				fieldname
+			);
+
+			// The following statement first creates an expression tree, 
+			// then compiles it, and then runs it.
+			// Expression<Func<EntityLesson, bool>>
+			return Expression.Lambda<Func<T, bool>> (memberExpr);
 		}
 
 		#endregion
