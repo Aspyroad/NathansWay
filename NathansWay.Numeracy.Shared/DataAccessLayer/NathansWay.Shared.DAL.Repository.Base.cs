@@ -28,8 +28,7 @@ namespace NathansWay.Shared.DAL.Repository
 		protected ISharedGlobal _sharedGlobal;
 		protected INWDatabaseContext _db;
 
-		private Expression _wherePredicate;
-		private Expression _orderbyPredicate; 
+
 
         public NWRepository ()
 		{
@@ -137,10 +136,6 @@ namespace NathansWay.Shared.DAL.Repository
 			get { return _db; }
 			private set { _db = value; }
 		}
-
-		public Expres
-
-
 
 		#endregion
 

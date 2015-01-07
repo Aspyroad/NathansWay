@@ -25,6 +25,7 @@ namespace NathansWay.Shared.DAL.Repository
 {
 	public class RepoLessons : NWRepository<EntityLesson>, IRepoLessons
 	{
+
 		#region Private Members
 
 		private RepoLesson<EntityLesson> _repLesson;
@@ -32,9 +33,13 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#endregion
 
+		#region Constructors
+
 		public RepoLessons ()
 		{
 		}
+
+		#endregion
 
 		#region Public Members
 
@@ -47,8 +52,6 @@ namespace NathansWay.Shared.DAL.Repository
 		{
 			get { return _repLessonDetail; }
 		}
-
-		#endregion
 
 		public Task<List<EntityLesson>> GetAllLessonsAsync ()
 		{
@@ -83,6 +86,8 @@ namespace NathansWay.Shared.DAL.Repository
 				.ToList<EntityLesson> ();
 			return _data;
 		}
+
+		#endregion
 
 	}
 

@@ -24,8 +24,8 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		readonly IRepoLessons lessonservice;
 		private List<EntityLesson> lessons;
-		private Expression<Func<EntityLesson, bool>> lessonFilter;
-		private Expression<Func<EntityLesson, bool>> lessonOrder;
+
+
 
 
 

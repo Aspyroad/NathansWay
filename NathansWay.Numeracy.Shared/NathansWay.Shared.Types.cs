@@ -29,6 +29,22 @@ namespace NathansWay.Shared
 		Assesment = 3
 	}
 
+	#region Filtering
+
+	public enum G__Operation 
+	{
+		Equals,
+		GreaterThan,
+		LessThan,
+		GreaterThanOrEqual,
+		LessThanOrEqual,
+		Contains,
+		StartsWith,
+		EndsWith
+	}
+
+	#endregion
+
 	public struct G__Color
 	{
 		// Statics
