@@ -31,13 +31,17 @@ namespace NathansWay.Shared
 
 	#region Filtering
 
-	public enum G__Operation 
+	public enum G__ExpressionType 
 	{
-		Equals,
+		// ** Note
+		// Almost identical to ExpressionType enum
+
+		Equal,
 		GreaterThan,
 		LessThan,
 		GreaterThanOrEqual,
 		LessThanOrEqual,
+		// The following values are not in ExpressionType
 		Contains,
 		StartsWith,
 		EndsWith

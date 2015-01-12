@@ -190,28 +190,17 @@ namespace NathansWay.Shared.BUS.ViewModel
 			get { return errors; }
 		}
 
-		protected Expression StringToExpression<T>(string fieldname)
-		{
-			Expression memberExpr = Expression.PropertyOrField(
-				T,
-				fieldname
-			);
 
-			// The following statement first creates an expression tree, 
-			// then compiles it, and then runs it.
-			// Expression<Func<EntityLesson, bool>>
-			return Expression.Lambda<Func<T, bool>> (memberExpr);
-		}
 
 		#endregion
 	}
 
-	public class NWFiltering<TSource>
+	public class NWFiltering<TSource> where TSource : IBusEntity, new()
 	{
 		#region
 
-		private Expression<Func<EntityLesson, bool>> _predicateWhere;
-		private Expression<Func<EntityLesson, bool>> _predicateOrderBy;
+		private Expression<Func<TSource, bool>> _predicateWhere;
+		private Expression<Func<TSource, bool>> _predicateOrderBy;
 
 		#endregion
 
@@ -224,7 +213,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#endregion
 
-
 		#region Private Members
 
 		private void Initialize()
@@ -236,40 +224,44 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region GetterSetter
 
-		public Expression PredicateWhere
+		public Expression<Func<TSource, bool>> PredicateWhere
 		{
 			get { return _predicateWhere; }
 			set { _predicateWhere = value; }
 		}
 
-		public Expression PredicateOrderBy
-		{
-			get { return _predicateOrderBy; }
-			set { _predicateOrderBy = value; }
-		}
+
 
 		#endregion
 
 		#region Public Members
 
-		public Expression<Func<TSource, bool>> NWOrderBy(string propertyName)
-		{
-			var type = typeof (TSource);
-			var parameter = Expression.Parameter(type, "p");
-			var propertyReference = Expression.Property(parameter, propertyName);
-			return Expression.Lambda<Func<TSource, object> >
-				(propertyReference, new[] { parameter }).Compile();
+//		public Expression<Func<TSource, bool>> NWOrderBy(string propertyName)
+//		{
+//			var type = typeof (TSource);
+//			var parameter = Expression.Parameter(type, "p");
+//			var propertyReference = Expression.Property(parameter, propertyName);
+//			return Expression.Lambda<Func<TSource, object>>(propertyReference, new[] { parameter }).Compile();
+//		}
+//
+//		public Expression<Func<TSource, bool>> NWWhere(string propertyName, object objfilter)
+//		{
+//			var type = typeof (TSource);
+//			var parameter = Expression.Parameter(type, "p");
+//			var propertyReference = Expression.Property(parameter, propertyName);
+//			return Expression.Lambda<Func<TSource, object>>(propertyReference, new[] { parameter }).Compile();
+//
+//		}
 
-		}
-
-		public Expression<Func<TSource, bool>> NWOWhere(string propertyName, object objfilter)
-		{
-			var type = typeof (TSource);
-			var parameter = Expression.Parameter(type, "p");
-			var propertyReference = Expression.Property(parameter, propertyName);
-			return Expression.Lambda<Func<TSource, object>>(propertyReference, new[] { parameter }).Compile();
-
-		}
+//		protected Expression StringToExpression(string fieldname)
+//		{
+//			Expression memberExpr = Expression.PropertyOrField( IBusEntity, fieldname );
+//
+//			// The following statement first creates an expression tree, 
+//			// then compiles it, and then runs it.
+//			// Expression<Func<EntityLesson, bool>>
+//			return Expression.Lambda<Func<T, bool>> (memberExpr);
+//		}
 
 
 
@@ -286,102 +278,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region Samplecode
 
-		public static class ExpressionBuilder 
-		{
-	
-
-			private static MethodInfo containsMethod = typeof(string).GetRuntimeMethod ("Contains");
-			private static MethodInfo startsWithMethod = typeof(string).GetMethod("StartsWith", new Type [] {typeof(string)});
-			private static MethodInfo endsWithMethod = typeof(string).GetMethod("EndsWith", new Type [] { typeof(string)});
-
-
-			public static Expression<Func<T, bool >> GetExpression<T>(IList<NWFilter> filters)
-			{            
-				if  (filters.Count == 0)
-					return null ;
-
-				ParameterExpression param = Expression.Parameter(typeof (T), "t" );
-				Expression exp = null ;
-
-				if (filters.Count == 1)
-				{
-					exp = GetExpression<T> (param, filters [0]);
-				}
-				else if (filters.Count == 2)
-				{
-					exp = GetExpression<T> (param, filters [0], filters [1]);
-				}
-				else 
-				{
-					while  (filters.Count > 0)
-					{
-						var  f1 = filters[0];
-						var  f2 = filters[1];
-
-						if  (exp == null )
-							exp = GetExpression<T>(param, filters[0], filters[1]);
-						else 
-							exp = Expression.AndAlso(exp, GetExpression<T>(param, filters[0], filters[1]));
-
-						filters.Remove(f1);
-						filters.Remove(f2);
-
-						if  (filters.Count == 1)
-						{
-							exp = Expression .AndAlso(exp, GetExpression<T>(param, filters[0]));
-							filters.RemoveAt(0);
-						}
-					}
-				}
-
-				return Expression.Lambda<Func<T, bool>>(exp, param);
-			}
-
-			private static Expression GetExpression<T>(ParameterExpression param, NWFilter filter)
-			{
-				MemberExpression member = Expression.Property(param, filter.PropertyName);
-				ConstantExpression constant = Expression.Constant(filter.Value);
-
-				switch (filter.Operation)
-				{
-					case ExpressionType.Equal:
-						return Expression.Equal(member, constant);
-
-					case ExpressionType.GreaterThan:
-						return Expression.GreaterThan(member, constant);
-
-					case ExpressionType.GreaterThanOrEqual:
-						return Expression.GreaterThanOrEqual(member, constant);
-
-					case ExpressionType.LessThan:
-						return Expression.LessThan(member, constant);
-
-					case ExpressionType.LessThanOrEqual:
-						return Expression.LessThanOrEqual(member, constant);
-
-					case ExpressionType.Contains:
-						return Expression.Call(member, containsMethod, constant);
-
-				case ExpressionType.StartsWith:
-					return Expression.Call(member, startsWithMethod, constant);
-
-				case ExpressionType..EndsWith:
-					return Expression.Call(member, endsWithMethod, constant);
-				}
-
-				return null ;
-			}
-
-			private static BinaryExpression GetExpression<T>(ParameterExpression param, NWFilter NWFilter1, NWFilter  filter2)
-			{
-				Expression bin1 = GetExpression<T>(param, filter1);
-				Expression bin2 = GetExpression<T>(param, filter2);
-
-				var x = 
-
-				return  Expression.AndAlso(bin1, bin2);
-			}
-		}
 
 
 		#endregion
@@ -391,7 +287,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 	public class NWFilter 
 	{
 		public string PropertyName { get ; set ; }
-		public ExpressionType Operation { get ; set ; }
+		public G__ExpressionType Operation { get ; set ; }
 		public object Value { get ; set ; }
 	}
 }
