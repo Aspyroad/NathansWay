@@ -195,12 +195,12 @@ namespace NathansWay.Shared.BUS.ViewModel
 		#endregion
 	}
 
-	public class NWFiltering<TSource> where TSource : IBusEntity, new()
+	public class NWFiltering
 	{
 		#region
 
-		private Expression<Func<TSource, bool>> _predicateWhere;
-		private Expression<Func<TSource, bool>> _predicateOrderBy;
+		private Expression<Func<IBusEntity, bool>> _predicateWhere;
+		private Expression<Func<IBusEntity, bool>> _predicateOrderBy;
 
 		#endregion
 
@@ -224,7 +224,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region GetterSetter
 
-		public Expression<Func<TSource, bool>> PredicateWhere
+		public Expression<Func<IBusEntity, bool>> PredicateWhere
 		{
 			get { return _predicateWhere; }
 			set { _predicateWhere = value; }
@@ -236,32 +236,31 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region Public Members
 
-//		public Expression<Func<TSource, bool>> NWOrderBy(string propertyName)
-//		{
-//			var type = typeof (TSource);
-//			var parameter = Expression.Parameter(type, "p");
-//			var propertyReference = Expression.Property(parameter, propertyName);
-//			return Expression.Lambda<Func<TSource, object>>(propertyReference, new[] { parameter }).Compile();
-//		}
-//
-//		public Expression<Func<TSource, bool>> NWWhere(string propertyName, object objfilter)
-//		{
-//			var type = typeof (TSource);
-//			var parameter = Expression.Parameter(type, "p");
-//			var propertyReference = Expression.Property(parameter, propertyName);
-//			return Expression.Lambda<Func<TSource, object>>(propertyReference, new[] { parameter }).Compile();
-//
-//		}
+		public Expression<Func<T, bool>> NWOrderBy<T>(string propertyName) where T : IBusEntity, new()
+		{
+			var type = typeof (T);
+			var parameter = Expression.Parameter(type, "p");
+			var propertyReference = Expression.Property(parameter, propertyName);
+			return Expression.Lambda<Func<T, object>>(propertyReference, new[] { parameter }).Compile();
+		}
 
-//		protected Expression StringToExpression(string fieldname)
-//		{
-//			Expression memberExpr = Expression.PropertyOrField( IBusEntity, fieldname );
-//
-//			// The following statement first creates an expression tree, 
-//			// then compiles it, and then runs it.
-//			// Expression<Func<EntityLesson, bool>>
-//			return Expression.Lambda<Func<T, bool>> (memberExpr);
-//		}
+		public Expression<Func<T, bool>> NWWhere<T>(string propertyName, object objfilter) where T : IBusEntity, new()
+		{
+			var type = typeof (T);
+			var parameter = Expression.Parameter(type, "p");
+			var propertyReference = Expression.Property(parameter, propertyName);
+			return Expression.Lambda<Func<T, object>>(propertyReference, new[] { parameter }).Compile();
+		}
+
+		public Expression StringToExpression<T>(string fieldname)
+		{
+			Expression memberExpr = Expression.PropertyOrField( T, fieldname );
+
+			// The following statement first creates an expression tree, 
+			// then compiles it, and then runs it.
+			// Expression<Func<EntityLesson, bool>>
+			return Expression.Lambda<Func<T, bool>> (memberExpr);
+		}
 
 
 

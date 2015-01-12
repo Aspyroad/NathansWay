@@ -142,11 +142,12 @@ namespace NathansWay.Shared.DAL.Repository
 		#region GetterSetter
 
 		// This is a generic method, but its a generic gettersetter hack
-		public Expression<Func<U,bool>> PredicateOrderBy<U> () where U : IBusEntity, new()
+		public Expression<Func<T,bool>> PredicateOrderBy<U> () where U : IBusEntity, new()
 		{
 			if (_predicateOrderBy == null)
 			{
-				_predicateOrderBy = (i => i.SEQ);
+				_predicateOrderBy = new Expression<Func<U, bool>> ();
+				_predicateOrderBy.
 			}
 			return _predicateOrderBy;
 		}
