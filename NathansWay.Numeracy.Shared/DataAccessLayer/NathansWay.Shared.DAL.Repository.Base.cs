@@ -27,7 +27,7 @@ namespace NathansWay.Shared.DAL.Repository
 		//protected static object locker = new object ();  
 		protected ISharedGlobal _sharedGlobal;
 		protected INWDatabaseContext _db;
-		protected Expression<Func<T,bool>> _predicateOrderBy;
+		protected Expression<Func<T,object>> _predicateOrderBy;
 
 
         public NWRepository ()
@@ -45,10 +45,13 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
 		{
+			Expression<Func<U,object>> _predicateOrderBy = i => i.SEQ;
+
 			var Conn = _db.GetAsyncConnection ();
 			return Conn
 				.Table<U> ()
-				.OrderBy (i => i.SEQ)
+				.OrderBy(_predicateOrderBy)
+				//.OrderBy (i => i.SEQ)
 				.ToListAsync();
 		}
 		/// <summary>
@@ -77,7 +80,7 @@ namespace NathansWay.Shared.DAL.Repository
 			return Conn
 				.Table<U> ()
 				.Where (predicateWhere)
-				.OrderBy (PredicateOrderBy<U>())
+				.OrderBy (i => i.SEQ)
 				.ToListAsync ();
 		}
 		/// <summary>
@@ -142,15 +145,15 @@ namespace NathansWay.Shared.DAL.Repository
 		#region GetterSetter
 
 		// This is a generic method, but its a generic gettersetter hack
-		public Expression<Func<T,bool>> PredicateOrderBy<U> () where U : IBusEntity, new()
-		{
-			if (_predicateOrderBy == null)
-			{
-				_predicateOrderBy = new Expression<Func<U, bool>> ();
-				_predicateOrderBy.
-			}
-			return _predicateOrderBy;
-		}
+//		public Expression<Func<T,bool>> PredicateOrderBy<U> () where U : IBusEntity, new()
+//		{
+//			if (_predicateOrderBy == null)
+//			{
+//				_predicateOrderBy = new Expression<Func<U, bool>> ();
+//				_predicateOrderBy.
+//			}
+//			return _predicateOrderBy;
+//		}
 
 
 		#endregion

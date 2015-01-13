@@ -197,7 +197,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 	public class NWFiltering
 	{
-		#region
+		#region Private Variables
 
 		private Expression<Func<IBusEntity, bool>> _predicateWhere;
 		private Expression<Func<IBusEntity, bool>> _predicateOrderBy;
@@ -230,37 +230,35 @@ namespace NathansWay.Shared.BUS.ViewModel
 			set { _predicateWhere = value; }
 		}
 
-
-
 		#endregion
 
 		#region Public Members
 
-		public Expression<Func<T, bool>> NWOrderBy<T>(string propertyName) where T : IBusEntity, new()
+		public Expression<Func<T, object>> NWOrderBy<T>(string propertyName) where T : IBusEntity, new()
 		{
 			var type = typeof (T);
 			var parameter = Expression.Parameter(type, "p");
 			var propertyReference = Expression.Property(parameter, propertyName);
-			return Expression.Lambda<Func<T, object>>(propertyReference, new[] { parameter }).Compile();
+			return Expression.Lambda<Func<T, object>> (propertyReference, new[] { parameter });
 		}
 
-		public Expression<Func<T, bool>> NWWhere<T>(string propertyName, object objfilter) where T : IBusEntity, new()
+		public Func<T, bool> NWWhere<T>(string propertyName, object objfilter) where T : IBusEntity, new()
 		{
 			var type = typeof (T);
 			var parameter = Expression.Parameter(type, "p");
 			var propertyReference = Expression.Property(parameter, propertyName);
-			return Expression.Lambda<Func<T, object>>(propertyReference, new[] { parameter }).Compile();
+			return Expression.Lambda<Func<T, bool>>(propertyReference, new[] { parameter }).Compile();
 		}
 
-		public Expression StringToExpression<T>(string fieldname)
-		{
-			Expression memberExpr = Expression.PropertyOrField( T, fieldname );
-
-			// The following statement first creates an expression tree, 
-			// then compiles it, and then runs it.
-			// Expression<Func<EntityLesson, bool>>
-			return Expression.Lambda<Func<T, bool>> (memberExpr);
-		}
+//		public Expression StringToExpression<T>(string fieldname)
+//		{
+//			Expression memberExpr = Expression.PropertyOrField( T, fieldname );
+//
+//			// The following statement first creates an expression tree, 
+//			// then compiles it, and then runs it.
+//			// Expression<Func<EntityLesson, bool>>
+//			return Expression.Lambda<Func<T, bool>> (memberExpr);
+//		}
 
 
 
@@ -270,12 +268,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 		#endregion
 
 		#region Private Class
-
-
-
-		#endregion
-
-		#region Samplecode
 
 
 
