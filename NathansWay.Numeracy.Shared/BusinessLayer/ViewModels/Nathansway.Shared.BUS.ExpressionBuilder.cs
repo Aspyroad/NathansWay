@@ -16,9 +16,9 @@ using NathansWay.Shared.DAL.Repository;
 using NathansWay.Shared.Utilities;
 
 
-namespace NathansWay.Shared.BUS.ViewModel
+namespace NathansWay.Shared.BUS
 {
-	public static class ExpressionBuilder
+	public static class NWExpressionBuilder
 	{
 		// ** Note
 		// We have created our own enum for expresison types
@@ -119,6 +119,78 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 			return  Expression.AndAlso(bin1, bin2);
 		}
+	}
+
+	public static class NWFiltering
+	{
+		#region Private Variables
+
+		private Expression<Func<IBusEntity, bool>> _predicateWhere;
+		private Expression<Func<IBusEntity, bool>> _predicateOrderBy;
+
+		#endregion
+
+		#region Constructors
+
+		public NWFiltering ()
+		{
+			Initialize ();
+		}
+
+		#endregion
+
+		#region Private Members
+
+		private void Initialize()
+		{
+
+		}
+
+		#endregion
+
+		#region GetterSetter
+
+		public Expression<Func<IBusEntity, bool>> PredicateWhere
+		{
+			get { return _predicateWhere; }
+			set { _predicateWhere = value; }
+		}
+
+		#endregion
+
+		#region Public Members
+
+		public Expression<Func<T, object>> NWOrderBy<T>(string propertyName) where T : IBusEntity, new()
+		{
+			var type = typeof (T);
+			var parameter = Expression.Parameter(type, "p");
+			var propertyReference = Expression.Property(parameter, propertyName);
+			return Expression.Lambda<Func<T, object>> (propertyReference, new[] { parameter });
+		}
+
+		public Func<T, bool> NWWhere<T>(string propertyName, object objfilter) where T : IBusEntity, new()
+		{
+			var type = typeof (T);
+			var parameter = Expression.Parameter(type, "p");
+			var propertyReference = Expression.Property(parameter, propertyName);
+			return Expression.Lambda<Func<T, bool>>(propertyReference, new[] { parameter }).Compile();
+		}
+
+		#endregion
+
+		#region Private Class
+
+
+
+		#endregion
+
+	}
+
+	public class NWFilter 
+	{
+		public string PropertyName { get ; set ; }
+		public G__ExpressionType Operation { get ; set ; }
+		public object Value { get ; set ; }
 	}
 }
 

@@ -45,7 +45,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
 		{
-			Expression<Func<U,object>> _predicateOrderBy = i => i.SEQ;
+			Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
 
 			var Conn = _db.GetAsyncConnection ();
 			return Conn

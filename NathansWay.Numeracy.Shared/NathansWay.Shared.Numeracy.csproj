@@ -89,7 +89,6 @@
     <Compile Include="BusinessLayer\Services\NathansWay.Shared.BUS.DataServices.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Block.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.BlockDetail.cs" />
-    <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.PropertyChangedBase.cs" />
     <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.ViewModel.Base.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.TaskExtensions.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.ServiceContainer.cs" />
@@ -103,6 +102,7 @@
     <Compile Include="Utilities\NathansWay.Shared.Util.PredicateBuilder.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Pageing.cs" />
     <Compile Include="BusinessLayer\ViewModels\Nathansway.Shared.BUS.ExpressionBuilder.cs" />
+    <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.PropertyChanged.Base.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

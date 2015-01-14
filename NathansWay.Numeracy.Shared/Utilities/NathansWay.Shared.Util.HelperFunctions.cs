@@ -1,7 +1,7 @@
 ﻿// Core
 using System;
 
-namespace NathansWay.Shared.Utilities
+namespace NathansWay.Shared
 {
 	public static class HelperFunctions 
 	{
