@@ -202,7 +202,7 @@ namespace NathansWay.Shared
 
 	#region Operator Logic 
 
-	public enum G__OperatorPlease
+	public enum G__MathOperator
 	{
 		Addition = 1,
 		Subtraction = 2,
@@ -212,19 +212,19 @@ namespace NathansWay.Shared
 		DivMulti = 6
 	}
 
-	public static class G__Operators
+	public static class G__MathOperators
 	{
-		static Dictionary<G__OperatorPlease, string> _dict = new Dictionary<G__OperatorPlease, string>
+		static Dictionary<G__MathOperator, string> _dict = new Dictionary<G__MathOperator, string>
 		{
-			{G__OperatorPlease.Addition, "+"},
-			{G__OperatorPlease.Subtraction, "–"},
-			{G__OperatorPlease.Division, "÷"},
-			{G__OperatorPlease.Multiplication, "x"},
-			{G__OperatorPlease.AddSub, "+ –"},
-			{G__OperatorPlease.DivMulti, "÷ x"}
+			{G__MathOperator.Addition, "+"},
+			{G__MathOperator.Subtraction, "–"},
+			{G__MathOperator.Division, "÷"},
+			{G__MathOperator.Multiplication, "x"},
+			{G__MathOperator.AddSub, "+ –"},
+			{G__MathOperator.DivMulti, "÷ x"}
 		};
 			
-		public static string GetOp(G__OperatorPlease x)
+		public static string GetOp(G__MathOperator x)
 		{
 			// Try to get the result in the static Dictionary
 			string result;
@@ -243,7 +243,7 @@ namespace NathansWay.Shared
 
 	#region Expression Type
 
-	public enum G__Expression
+	public enum G__MathType
 	{
 		Basic = 1,
 		Grouped = 2,
@@ -251,17 +251,17 @@ namespace NathansWay.Shared
 		Mixed = 4
 	}
 
-	public static class G__Expressions
+	public static class G__MathTypes
 	{
-		static Dictionary<G__Expression, string> _dict = new Dictionary<G__Expression, string>
+		static Dictionary<G__MathType, string> _dict = new Dictionary<G__MathType, string>
 		{
-			{G__Expression.Basic, "Basic"},
-			{G__Expression.Fraction, "Fraction"},
-			{G__Expression.Grouped, "Grouped"},
-			{G__Expression.Mixed, "Mixed"}
+			{G__MathType.Basic, "Basic"},
+			{G__MathType.Fraction, "Fraction"},
+			{G__MathType.Grouped, "Grouped"},
+			{G__MathType.Mixed, "Mixed"}
 		};
 
-		public static string GetType(G__Expression x)
+		public static string GetType(G__MathType x)
 		{
 			// Try to get the result in the static Dictionary
 			string result;
@@ -280,7 +280,7 @@ namespace NathansWay.Shared
 
 	#region LevelType
 
-	public enum G__Level : int
+	public enum G__MathLevel : int
 	{
 		Easy = 1,
 		Level2 = 2,
@@ -294,23 +294,23 @@ namespace NathansWay.Shared
 		Hard = 10
 	}
 
-	public static class G__Levels
+	public static class G__MathLevels
 	{
-		static Dictionary<G__Level, string> _dict = new Dictionary<G__Level, string>
+		static Dictionary<G__MathLevel, string> _dict = new Dictionary<G__MathLevel, string>
 		{
-			{G__Level.Easy, "Easy"},
-			{G__Level.Level2, "Level2"},
-			{G__Level.Level3, "Level3"},
-			{G__Level.Level4, "Level4"},
-			{G__Level.Level5, "Level5"},
-			{G__Level.Level6, "Level6"},
-			{G__Level.Level7, "Level7"},
-			{G__Level.Level8, "Level8"},
-			{G__Level.Level9, "Level9"},
-			{G__Level.Hard, "Hard"}
+			{G__MathLevel.Easy, "Easy"},
+			{G__MathLevel.Level2, "Level2"},
+			{G__MathLevel.Level3, "Level3"},
+			{G__MathLevel.Level4, "Level4"},
+			{G__MathLevel.Level5, "Level5"},
+			{G__MathLevel.Level6, "Level6"},
+			{G__MathLevel.Level7, "Level7"},
+			{G__MathLevel.Level8, "Level8"},
+			{G__MathLevel.Level9, "Level9"},
+			{G__MathLevel.Hard, "Hard"}
 		};
 
-		public static string GetLevel(G__Level x)
+		public static string GetLevel(G__MathLevel x)
 		{
 			// Try to get the result in the static Dictionary
 			string result;

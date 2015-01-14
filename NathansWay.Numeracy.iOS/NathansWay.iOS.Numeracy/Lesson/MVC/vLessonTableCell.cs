@@ -35,12 +35,12 @@ namespace NathansWay.iOS.Numeracy
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
 			this.lblLessonName.Text = lesson.NameLesson;
-			this.lblOperator.Text = G__Operators.GetOp ((G__OperatorPlease)lesson.Operator);
-			this.lblType.Text = G__Expressions.GetType ((G__Expression)lesson.ExpressionType);
+			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
+			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 
 			// Set the level bar length
 			this.lblLevel.LevelWidth = (float)lesson.Difficulty;
-			this.lblLevel.Text = G__Levels.GetLevel ((G__Level)lesson.Difficulty);
+			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
 		}
 
 		#endregion

@@ -18,7 +18,7 @@ namespace NathansWay.Shared.BUS.Entity
 		private DateTime _datetmStart;
 		private DateTime _datetmComplete;
 		//TODO : We need an enumeration on operator -,+,x,/,
-		private G__OperatorPlease _operator;
+		private G__MathOperator _operator;
 		private string _equation;
 		private string _method;
 		private string _result;
@@ -77,10 +77,10 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._datetmComplete = value; }
 		}
 		[Column("operator")]
-		public G__OperatorPlease Operator
+		public G__MathOperator Operator
 		{ 
 			get { return this._operator; } 
-			set { this._operator = (G__OperatorPlease)value; }
+			set { this._operator = (G__MathOperator)value; }
 		}
 		[Column("equation")]
 		public string Equation

@@ -121,7 +121,7 @@ namespace NathansWay.Shared.BUS
 		}
 	}
 
-	public static class NWFiltering
+	public class NWFiltering
 	{
 		#region Private Variables
 
