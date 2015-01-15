@@ -31,6 +31,8 @@ namespace NathansWay.Shared.BUS.ViewModel
 		private NWFilter _filterMathOperator;
 		private NWFilter _filterMathType;
 
+		private Expression<Func<EntityLesson, bool>> _expr;
+
 		#endregion
 
 		#region Constructors
@@ -38,7 +40,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 		public LessonViewModel ()
 		{
 			lessonservice = SharedServiceContainer.Resolve<IRepoLessons> ();
-
 
 			// Prepare filters
 			this._filters = new List<NWFilter> ();
@@ -56,8 +57,8 @@ namespace NathansWay.Shared.BUS.ViewModel
 			this._filterMathType.PropertyName = "ExpressionType";
 			this._filterMathOperator.PropertyName = "Operator";
 			this._filterMathLevel.PropertyName = "Difficulty";
-			// ***
 
+			this._filterMathLevel.Value = 5;
 
 		}
 
@@ -100,10 +101,10 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		public Task LoadFilteredLessonsAsync ()
 		{
+            _expr = NWExpressionBuilder.GetExpression<EntityLesson>(_filters);
 
 			return lessonservice
-				.GetFilteredLessonsAsync (
-					NWExpressionBuilder.GetExpression(this._filters))
+				.GetFilteredLessonsAsync (_expr)
 				.ContinueOnCurrentThread (t => 
 				{ 
 					_lessons = t.Result;

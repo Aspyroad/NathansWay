@@ -203,7 +203,15 @@ namespace NathansWay.iOS.Numeracy
 		private void LoadLessonsInit ()
 		{
 
-			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
+//			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
+//			{
+//				BeginInvokeOnMainThread (() => 
+//				{
+//					this.tvLessonMain.ReloadData ();
+//				});
+//			});
+
+			lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 
 			{
 				BeginInvokeOnMainThread (() => 
 				{
