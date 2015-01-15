@@ -57,9 +57,10 @@ namespace NathansWay.Shared.BUS.ViewModel
 			this._filterMathType.PropertyName = "ExpressionType";
 			this._filterMathOperator.PropertyName = "Operator";
 			this._filterMathLevel.PropertyName = "Difficulty";
-
-			this._filterMathLevel.Value = 5;
-
+            			
+            //this._filterMathType.Value = 2;
+            //this._filterMathOperator.Value = 1;
+            //this._filterMathLevel.Value = 5;
 		}
 
 		#endregion
@@ -83,34 +84,36 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region Public Members
 
+        #region DataTasks 
 
+    		/// <summary>
+    		/// Loads the assignments asynchronously
+    		/// </summary>
+    		public Task LoadAllLessonsAsync ()
+    		{
+    			return lessonservice
+    				.GetAllLessonsAsync ()
+    				.ContinueOnCurrentThread (t => 
+    				{ 
+    					_lessons = t.Result;
+    					return t.Result; 
+    				});
+    		}
 
-		/// <summary>
-		/// Loads the assignments asynchronously
-		/// </summary>
-		public Task LoadAllLessonsAsync ()
-		{
-			return lessonservice
-				.GetAllLessonsAsync ()
-				.ContinueOnCurrentThread (t => 
-				{ 
-					_lessons = t.Result;
-					return t.Result; 
-				});
-		}
+    		public Task LoadFilteredLessonsAsync ()
+    		{
+                _expr = NWExpressionBuilder.GetExpression<EntityLesson>(_filters);
 
-		public Task LoadFilteredLessonsAsync ()
-		{
-            _expr = NWExpressionBuilder.GetExpression<EntityLesson>(_filters);
+    			return lessonservice
+    				.GetFilteredLessonsAsync (_expr)
+    				.ContinueOnCurrentThread (t => 
+    				{ 
+    					_lessons = t.Result;
+    					return t.Result; 
+    				});
+    		}
 
-			return lessonservice
-				.GetFilteredLessonsAsync (_expr)
-				.ContinueOnCurrentThread (t => 
-				{ 
-					_lessons = t.Result;
-					return t.Result; 
-				});
-		}
+        #endregion
 
 		#endregion
 

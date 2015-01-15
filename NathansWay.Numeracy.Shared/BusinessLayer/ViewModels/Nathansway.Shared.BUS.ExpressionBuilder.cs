@@ -82,35 +82,31 @@ namespace NathansWay.Shared.BUS
 			MemberExpression member = Expression.Property(param, filter.PropertyName);
 			ConstantExpression constant = Expression.Constant(filter.Value);
 
-            // Check if the value is null, we may not need all the filters
-			if (constant.Value != null)
-			{
-				switch (filter.Operation)
-                {
-					case G__ExpressionType.Equal:
-					return Expression.Equal (member, constant);
+			switch (filter.Operation)
+            {
+				case G__ExpressionType.Equal:
+				return Expression.Equal (member, constant);
 
-					case G__ExpressionType.GreaterThan:
-					return Expression.GreaterThan (member, constant);
+				case G__ExpressionType.GreaterThan:
+				return Expression.GreaterThan (member, constant);
 
-					case G__ExpressionType.GreaterThanOrEqual:
-					return Expression.GreaterThanOrEqual (member, constant);
+				case G__ExpressionType.GreaterThanOrEqual:
+				return Expression.GreaterThanOrEqual (member, constant);
 
-					case G__ExpressionType.LessThan:
-					return Expression.LessThan (member, constant);
+				case G__ExpressionType.LessThan:
+				return Expression.LessThan (member, constant);
 
-					case G__ExpressionType.LessThanOrEqual:
-					return Expression.LessThanOrEqual (member, constant);
+				case G__ExpressionType.LessThanOrEqual:
+				return Expression.LessThanOrEqual (member, constant);
 
-					case G__ExpressionType.Contains:
-					return Expression.Call (member, containsMethod, constant);
+				case G__ExpressionType.Contains:
+				return Expression.Call (member, containsMethod, constant);
 
-					case G__ExpressionType.StartsWith:
-					return Expression.Call (member, startsWithMethod, constant);
+				case G__ExpressionType.StartsWith:
+				return Expression.Call (member, startsWithMethod, constant);
 
-					case G__ExpressionType.EndsWith:
-					return Expression.Call (member, endsWithMethod, constant);
-				}
+				case G__ExpressionType.EndsWith:
+				return Expression.Call (member, endsWithMethod, constant);
 			}
 
 			return null ;
