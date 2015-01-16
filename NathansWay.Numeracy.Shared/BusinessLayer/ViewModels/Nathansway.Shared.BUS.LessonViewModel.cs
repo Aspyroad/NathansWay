@@ -25,13 +25,9 @@ namespace NathansWay.Shared.BUS.ViewModel
 		readonly IRepoLessons lessonservice;
 
 		private List<EntityLesson> _lessons;
-		private List<NWFilter> _filters;
+		//private List<NWFilter> _filters;
 
-		private NWFilter _filterMathLevel;
-		private NWFilter _filterMathOperator;
-		private NWFilter _filterMathType;
-
-		private Expression<Func<EntityLesson, bool>> _expr;
+        private Expression<Func<EntityLesson, bool>> _expr;
 
 		#endregion
 
@@ -41,23 +37,8 @@ namespace NathansWay.Shared.BUS.ViewModel
 		{
 			lessonservice = SharedServiceContainer.Resolve<IRepoLessons> ();
 
-			// Prepare filters
-			this._filters = new List<NWFilter> ();
-			this._filterMathType = new NWFilter ();
-			this._filters.Add (this._filterMathType);
-			this._filterMathOperator = new NWFilter ();
-			this._filters.Add (this._filterMathOperator);
-			this._filterMathLevel = new NWFilter ();
-			this._filters.Add (this._filterMathLevel);
 
-			this._filterMathType.Operation = G__ExpressionType.Equal;
-			this._filterMathOperator.Operation = G__ExpressionType.Equal;
-			this._filterMathLevel.Operation = G__ExpressionType.Equal;
-
-			this._filterMathType.PropertyName = "ExpressionType";
-			this._filterMathOperator.PropertyName = "Operator";
-			this._filterMathLevel.PropertyName = "Difficulty";
-            			
+                        			
             //this._filterMathType.Value = 2;
             //this._filterMathOperator.Value = 1;
             //this._filterMathLevel.Value = 5;
@@ -119,20 +100,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#region GetterSetter
 
-		public G__MathType FilterMathTypeVal
-		{
-			set { this._filterMathType.Value = (int)value; }
-		}
 
-		public G__MathOperator FilterMathOperatorVal
-		{
-			set { this._filterMathOperator.Value = (int)value; }
-		}
-
-		public G__MathLevel FilterMathLevelVal
-		{
-			set { this._filterMathLevel.Value = (int)value; }
-		}
 
 		#endregion
 

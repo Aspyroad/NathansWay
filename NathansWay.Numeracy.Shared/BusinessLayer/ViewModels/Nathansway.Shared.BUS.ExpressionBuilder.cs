@@ -186,11 +186,46 @@ namespace NathansWay.Shared.BUS
 
 	}
 
-	public class NWFilter 
+	public class NWFilter<T> 
 	{
-		public string PropertyName { get ; set ; }
-		public G__ExpressionType Operation { get ; set ; }
-		public object Value { get ; set ; }
+        private string _propertyName;
+        private G__ExpressionType _operation;
+        private object _value;
+
+        private bool _active;
+        private bool _hasValue;
+
+        public NWFilter()
+        {
+            _active = false;
+            _propertyName = "";
+            _operation = G__ExpressionType.Equal;
+        }
+
+		public string PropertyName 
+        { 
+            get { return _propertyName; } 
+            set { _propertyName = value; } 
+        }
+		public G__ExpressionType Operation 
+        { 
+            get { return _operation; } 
+            set { _operation = value; }
+        }
+		public object Value 
+        { 
+            get { return _value; } 
+            set 
+            { 
+                _value = value; 
+                if (_value != null)
+                {
+                    _hasValue = true;
+                }
+            }
+        }
+
+
 	}
 }
 

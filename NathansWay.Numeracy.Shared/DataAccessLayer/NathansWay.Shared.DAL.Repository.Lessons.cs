@@ -17,6 +17,7 @@ using SQLite.Net.Interop;
 // NathansWay
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DAL;
+using NathansWay.Shared.BUS;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DB;
 
@@ -31,12 +32,29 @@ namespace NathansWay.Shared.DAL.Repository
 		private RepoLesson<EntityLesson> _repLesson;
 		private RepoLessonDetail<EntityLessonDetail> _repLessonDetail;
 
+        // Filters
+        private NWFilter<int> _filterMathLevel;
+        private NWFilter<int> _filterMathOperator;
+        private NWFilter<int> _filterMathType;
+
 		#endregion
 
 		#region Constructors
 
 		public RepoLessons ()
 		{
+            // Prepare filters
+            this._filterMathType = new NWFilter<int> ();
+            this._filterMathOperator = new NWFilter<int> ();
+            this._filterMathLevel = new NWFilter<int> ();
+
+            this._filterMathType.Operation = G__ExpressionType.Equal;
+            this._filterMathOperator.Operation = G__ExpressionType.Equal;
+            this._filterMathLevel.Operation = G__ExpressionType.Equal;
+
+            this._filterMathType.PropertyName = "ExpressionType";
+            this._filterMathOperator.PropertyName = "Operator";
+            this._filterMathLevel.PropertyName = "Difficulty";
 		}
 
 		#endregion
@@ -88,6 +106,28 @@ namespace NathansWay.Shared.DAL.Repository
 		}
 
 		#endregion
+
+        #region GetterSetter
+
+        public NWFilter<int> FilterMathType
+        {
+            set { this._filterMathType = value; }
+            get { return this._filterMathType; }
+        }
+
+        public NWFilter<int> FilterMathOperator
+        {
+            set { this._filterMathOperator = value; }
+            get { return this._filterMathOperator; }
+        }
+
+        public NWFilter<int> FilterMathLevel
+        {
+            set { this._filterMathLevel = value; }
+            get { return this._filterMathLevel; }
+        }
+
+        #endregion
 
 	}
 

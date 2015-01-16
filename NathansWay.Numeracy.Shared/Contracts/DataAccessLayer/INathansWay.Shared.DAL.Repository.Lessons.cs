@@ -14,15 +14,23 @@ using SQLite.Net.Interop;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.BUS;
 
 
 namespace NathansWay.Shared.DAL.Repository
 {
 	public interface IRepoLessons
 	{
+        // Linked Entities
 		RepoLesson<EntityLesson> repLesson { get; }
 		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 
+        // Filters
+        NWFilter<int> FilterMathType { get; set; }
+        NWFilter<int> FilterMathOperator { get; set; }
+        NWFilter<int> FilterMathLevel { get; set; }
+
+        // Database Operations
 		Task<List<EntityLesson>> GetAllLessonsAsync ();
 		Task<List<EntityLesson>> GetFilteredLessonsAsync (Expression<Func<EntityLesson, bool>> expr1);
 		Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson);
