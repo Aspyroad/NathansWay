@@ -22,7 +22,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 	{
 		#region Private Variables
 
-		readonly IRepoLessons lessonservice;
+        readonly IRepoLessons<EntityLesson> lessonservice;
 
 		private List<EntityLesson> _lessons;
 
@@ -40,7 +40,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		public LessonViewModel ()
 		{
-			lessonservice = SharedServiceContainer.Resolve<IRepoLessons> ();
+            lessonservice = SharedServiceContainer.Resolve<IRepoLessons<EntityLesson>> ();
                                     			
             //this._filterMathType.Value = 2;
             //this._filterMathOperator.Value = 1;
@@ -116,7 +116,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 
     		public Task LoadFilteredLessonsAsync ()
     		{
-                _expr = NWExpressionBuilder.GetExpression<EntityLesson>();
 
     			return lessonservice
     				.GetFilteredLessonsAsync ()

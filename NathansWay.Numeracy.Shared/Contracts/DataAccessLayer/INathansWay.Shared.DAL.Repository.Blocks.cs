@@ -14,6 +14,7 @@ using SQLite.Net.Interop;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.BUS;
 
 
 namespace NathansWay.Shared.DAL.Repository

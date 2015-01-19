@@ -18,7 +18,7 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IRepoBlockDetail<EntityBlockDetail> : IRepository<IBusEntity>
+    public interface IRepoBlockDetail<T> : IRepository<T> where T : EntityBlockDetail, new()
 	{
 	}
 }

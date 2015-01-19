@@ -24,13 +24,10 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class RepoLessons : NWRepository<EntityLesson>, IRepoLessons
+    public class RepoLessons<T> : NWRepository<T>, IRepoLessons<T> where T : EntityLesson, new()
 	{
 
 		#region Private Members
-
-		private RepoLesson<EntityLesson> _repLesson;
-		private RepoLessonDetail<EntityLessonDetail> _repLessonDetail;
 
         // Filters
         private NWFilter _filterMathLevel;
@@ -68,51 +65,14 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#region Public Members
 
-		public RepoLesson<EntityLesson> repLesson
+		public Task<List<T>> GetAllLessonsAsync ()
 		{
-			get { return _repLesson; }
+			return SelectAllAsync ();
 		}
 
-		public RepoLessonDetail<EntityLessonDetail> repLessonDetail
+		public Task<List<T>> GetFilteredLessonsAsync ()
 		{
-			get { return _repLessonDetail; }
-		}
-
-		public Task<List<EntityLesson>> GetAllLessonsAsync ()
-		{
-			return SelectAllAsync<EntityLesson> ();
-		}
-
-		public Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson)
-		{
-			return _db.GetAsyncConnection ()
-				.Table<EntityLessonDetail> ()
-				.Where(l => l.SEQ == lesson.SEQ)
-				.OrderBy (i => i.SEQ)
-				.ToListAsync ();
-		}
-
-		public Task<List<EntityLesson>> GetFilteredLessonsAsync (Expression<Func<EntityLesson, bool>> expr1)
-		{
-            return SelectFilteredAsync<EntityLesson>();
-
-
-            //			return _db.GetAsyncConnection ()
-            //				.Table<EntityLesson> ()
-            //				.Where(expr1)
-            //				.OrderBy (i => i.SEQ)
-            //				.ToListAsync ();
-		}
-
-		public List<EntityLesson> GetLessons ()
-		{
-
-			var _data = _db.GetConnection ()
-				.Query<EntityLesson> (@"
-				SELECT * FROM Lesson
-				")
-				.ToList<EntityLesson> ();
-			return _data;
+            return SelectFilteredAsync ();
 		}
 
 		#endregion
@@ -156,4 +116,32 @@ namespace NathansWay.Shared.DAL.Repository
 
 		}
 	}
+
+
+    //      public Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson)
+    //      {
+    //          return _db.GetAsyncConnection ()
+    //              .Table<T> ()
+    //              .Where(l => l.SEQ == lesson.SEQ)
+    //              .OrderBy (i => i.SEQ)
+    //              .ToListAsync ();
+    //      }
+
+    //          return _db.GetAsyncConnection ()
+    //              .Table<EntityLesson> ()
+    //              .Where(expr1)
+    //              .OrderBy (i => i.SEQ)
+    //              .ToListAsync ();
+
+    //      public List<T> GetLessons ()
+    //      {
+    //
+    //          var _data = _db.GetConnection ()
+    //              .Query<T> (@"
+    //              SELECT * FROM Lesson
+    //              ")
+    //              .ToList<T> ();
+    //          return _data;
+    //      }
+
 }

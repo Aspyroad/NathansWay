@@ -282,7 +282,7 @@ namespace NathansWay.Shared
 
 	public enum G__MathLevel : int
 	{
-		Easy = 1,
+		Level1 = 1,
 		Level2 = 2,
 		Level3 = 3,
 		Level4 = 4,
@@ -291,14 +291,14 @@ namespace NathansWay.Shared
 		Level7 = 7,
 		Level8 = 8,
 		Level9 = 9,
-		Hard = 10
+		Level10 = 10
 	}
 
 	public static class G__MathLevels
 	{
 		static Dictionary<G__MathLevel, string> _dict = new Dictionary<G__MathLevel, string>
 		{
-			{G__MathLevel.Easy, "Easy"},
+			{G__MathLevel.Level1, "Level1"},
 			{G__MathLevel.Level2, "Level2"},
 			{G__MathLevel.Level3, "Level3"},
 			{G__MathLevel.Level4, "Level4"},
@@ -307,7 +307,7 @@ namespace NathansWay.Shared
 			{G__MathLevel.Level7, "Level7"},
 			{G__MathLevel.Level8, "Level8"},
 			{G__MathLevel.Level9, "Level9"},
-			{G__MathLevel.Hard, "Hard"}
+			{G__MathLevel.Level10, "Level10"}
 		};
 
 		public static string GetLevel(G__MathLevel x)

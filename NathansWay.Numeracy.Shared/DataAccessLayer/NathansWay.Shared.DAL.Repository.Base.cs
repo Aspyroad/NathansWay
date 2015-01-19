@@ -29,13 +29,12 @@ namespace NathansWay.Shared.DAL.Repository
 		protected ISharedGlobal _sharedGlobal;
 		protected INWDatabaseContext _db;
         // OrderBy Predicate
-		protected Expression<Func<T,object>> _predicateOrderBy;
+        protected Expression<Func<T,object>> _predicateOrderBy; 
         // Where Predicate variables for building and/or 's using ExpressionBuilder
         protected NWFilter[] _arrFilters;
         protected int _intFilterCount;
         // Where Predicate
         protected Expression<Func<T,bool>>  _predicateWhere;
-
 
         public NWRepository ()
 		{
@@ -54,12 +53,12 @@ namespace NathansWay.Shared.DAL.Repository
 		/// </summary>
 		/// <returns>A Task TResult List IEntity</returns>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
+		public Task<List<T>> SelectAllAsync () 
 		{
 			//Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
             var Conn = _db.GetAsyncConnection ();
 			return Conn
-				.Table<U> ()
+				.Table<T> ()
 				.OrderBy(_predicateOrderBy)
 				//.OrderBy (i => i.SEQ)
 				.ToListAsync();
@@ -70,12 +69,12 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>A Task TResult List IEntity containing T seq</returns>
 		/// <param name="seq">Seq</param>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new()
+		public Task<List<T>> SelectSeqAsync (T _entity) 
 		{
             // Obviously only returns one value
 			var Conn = _db.GetAsyncConnection ();
 			return Conn
-				.Table<U> ()
+				.Table<T> ()
 				.Where ((x) => (x.SEQ == _entity.SEQ))
 				.ToListAsync ();
 		}
@@ -85,17 +84,22 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The some async.</returns>
 		/// <param name="predicate">Predicate.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<List<U>> SelectFilteredAsync<U> () where U : IBusEntity, new()
+		public Task<List<T>> SelectFilteredAsync () 
 		{
             // Call here to gather all our filters into a list<NWFilter>
-            List<NWFilter> filters = this.FilterBuilder();
-
-			var Conn = _db.GetAsyncConnection ();
-			return Conn
-				.Table<U> ()
-                .Where (this._predicateWhere)
-                .OrderBy (this._predicateOrderBy)
-				.ToListAsync ();
+            if (this.FilterBuilder())
+            {
+                var Conn = _db.GetAsyncConnection();
+                return Conn
+				.Table<T>()
+                .Where(this._predicateWhere)
+                .OrderBy(this._predicateOrderBy)
+				.ToListAsync();
+            }
+            else
+            {
+                throw new Exception("Error in FilterBuild");
+            }
 		}
 		/// <summary>
 		/// Inserts an entity async.
@@ -103,7 +107,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>Task<int></returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new()
+		public Task<int> InsertAsync (T _entity) 
 		{
 			var Conn = _db.GetAsyncConnection ();
 			if (_entity.SEQ != 0)
@@ -121,7 +125,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The async.</returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new()
+		public Task<int> UpdateAsync (T _entity)
 		{
 			var Conn = _db.GetAsyncConnection ();
 			if (_entity.SEQ != 0)
@@ -139,10 +143,10 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>Task</returns>
 		/// <param name="_entity">Entity.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new()
+		public Task<int> DeleteAsync (T _entity) 
 		{
 			var Conn = _db.GetAsyncConnection ();
-			return Conn.DeleteAsync<U> (_entity.SEQ);
+			return Conn.DeleteAsync<T> (_entity.SEQ);
 		}
 
         #endregion
@@ -157,9 +161,7 @@ namespace NathansWay.Shared.DAL.Repository
 			private set { _db = value; }
 		}
 
-        // Overload 1
-
-        protected bool FilterBuilder()
+        protected bool FilterBuilder() 
         {
             List<NWFilter> filterlist = new List<NWFilter>();
 
@@ -174,7 +176,7 @@ namespace NathansWay.Shared.DAL.Repository
             // Now create our expression form this List<NWFilter>
             if (filterlist.Count > 0)
             {
-                this._predicateWhere = NWExpressionBuilder.GetExpression<EntityLesson>(filterlist);
+                this._predicateWhere = NWExpressionBuilder.GetExpression<T>(filterlist);
                 return true;
             }
             else
@@ -184,20 +186,20 @@ namespace NathansWay.Shared.DAL.Repository
             }
         }
         // Overload 2
-        protected List<NWFilter> FilterBuilder()
-        {
-            List<NWFilter> filterlist = new List<NWFilter>();
-
-            // Use for loop.
-            for (int i = 0; i < _intFilterCount; i++)
-            {
-                if (_arrFilters[i].HasValue)
-                {
-                    filterlist.Add(_arrFilters[i]);
-                }
-            }
-            return filterlist;
-        }
+//        protected List<NWFilter> FilterBuilderList()
+//        {
+//            List<NWFilter> filterlist = new List<NWFilter>();
+//
+//            // Use for loop.
+//            for (int i = 0; i < _intFilterCount; i++)
+//            {
+//                if (_arrFilters[i].HasValue)
+//                {
+//                    filterlist.Add(_arrFilters[i]);
+//                }
+//            }
+//            return filterlist;
+//        }
 
 		#endregion
 
@@ -214,7 +216,7 @@ namespace NathansWay.Shared.DAL.Repository
 //			return _predicateOrderBy;
 //		}
 
-        public Expression<Func<T,bool>> PredicateWhere
+        public Expression<Func<T, bool>> PredicateWhere
         {
             get { return _predicateWhere; }
         }

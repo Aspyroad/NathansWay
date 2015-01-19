@@ -19,22 +19,21 @@ using NathansWay.Shared.BUS.Entity;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public interface IRepository<T> 
+    public interface IRepository<T> 
 	{
 		INWDatabaseContext db { get; }
-        Expression<Func<T,bool>>  PredicateWhere { get; }
-        Expression<Func<T, object>> PredicateOrderBy { get; }
+        Expression<Func<T, bool>>  PredicateWhere { get; }
+        Expression<Func<T, object>> PredicateOrderBy { get; set; }
 
         // Async Tasks DB calls
-		Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new() ;
-		Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new() ;
-		Task<List<U>> SelectFilteredAsync<U> (Expression<Func<U,bool>> predicate) where U : IBusEntity, new() ;
-		Task<int> InsertAsync<U> (U _entity) where U : IBusEntity, new() ;
-		Task<int> UpdateAsync<U> (U _entity) where U : IBusEntity, new() ;
-		Task<int> DeleteAsync<U> (U _entity) where U : IBusEntity, new() ;
+        Task<List<T>> SelectAllAsync() ;
+        Task<List<T>> SelectSeqAsync(T _entity) ;
+        Task<List<T>> SelectFilteredAsync() ;
+        Task<int> InsertAsync(T _entity) ;
+        Task<int> UpdateAsync(T _entity) ;
+        Task<int> DeleteAsync(T _entity) ;
 
         // Util Methods
-        List<NWFilter> FilterBuilder();
 	}
 }
 

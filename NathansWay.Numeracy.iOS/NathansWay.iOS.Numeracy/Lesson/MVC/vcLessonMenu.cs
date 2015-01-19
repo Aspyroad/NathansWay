@@ -9,6 +9,7 @@ using MonoTouch.CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
+using NathansWay.Shared;
 using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared.BUS.Entity;
@@ -74,15 +75,15 @@ namespace NathansWay.iOS.Numeracy
 				this.btnLevel10.TouchUpInside -= OnClick_btnLevel10;
 				// Type Buttons
 				this.btnTypeBasic.TouchUpInside -= OnClick_btnTypeBasic;
-				this.btnTypeFractions.TouchUpInside -= OnClick_btnTypeFractions;
-				this.btnTypeGroups.TouchUpInside -= OnClick_btnTypeGroups;
+				this.btnTypeFractions.TouchUpInside -= OnClick_btnTypeFraction;
+				this.btnTypeGroups.TouchUpInside -= OnClick_btnTypeGrouped;
 				this.btnTypeMixed.TouchUpInside -= OnClick_btnTypeMixed;
 				// Operator Buttons
 				this.btnOpAdd.TouchUpInside -= OnClick_btnOpAdd;
 				this.btnOpAddSub.TouchUpInside -= OnClick_btnOpAddSub;
 				this.btnOpDivision.TouchUpInside -= OnClick_btnOpDivision;
 				this.btnOpMultiply.TouchUpInside -= OnClick_btnOpMultiply;
-				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpMultSub;
+				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpDivMulti;
 				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
 				// Tableview Source
 				this.lessonmenusource.ScrolledToBottom -= ScrolledToBottom;
@@ -136,15 +137,15 @@ namespace NathansWay.iOS.Numeracy
 			this.btnLevel10.TouchUpInside += OnClick_btnLevel10;
 			// Type Buttons
 			this.btnTypeBasic.TouchUpInside += OnClick_btnTypeBasic;
-			this.btnTypeFractions.TouchUpInside += OnClick_btnTypeFractions;
-			this.btnTypeGroups.TouchUpInside += OnClick_btnTypeGroups;
+			this.btnTypeFractions.TouchUpInside += OnClick_btnTypeFraction;
+			this.btnTypeGroups.TouchUpInside += OnClick_btnTypeGrouped;
 			this.btnTypeMixed.TouchUpInside += OnClick_btnTypeMixed;
 			// Operator Buttons
 			this.btnOpAdd.TouchUpInside += OnClick_btnOpAdd;
 			this.btnOpAddSub.TouchUpInside += OnClick_btnOpAddSub;
 			this.btnOpDivision.TouchUpInside += OnClick_btnOpDivision;
 			this.btnOpMultiply.TouchUpInside += OnClick_btnOpMultiply;
-			this.btnOpMultSub.TouchUpInside += OnClick_btnOpMultSub;
+			this.btnOpMultSub.TouchUpInside += OnClick_btnOpDivMulti;
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
 			// LessonMain TableView
 			// Setup tableview source
@@ -159,7 +160,6 @@ namespace NathansWay.iOS.Numeracy
 			this.LoadLessonsInit ();
 
         }
-
 
 
 		public override void ViewWillAppear (bool animated)
@@ -186,6 +186,7 @@ namespace NathansWay.iOS.Numeracy
 		private void ScrolledToBottom (object sender, EventArgs e)
 		{		
 			Console.WriteLine ("Im at the bottom");
+            // Go get more rows!~
 		}
 
 
@@ -203,15 +204,7 @@ namespace NathansWay.iOS.Numeracy
 		private void LoadLessonsInit ()
 		{
 
-//			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
-//			{
-//				BeginInvokeOnMainThread (() => 
-//				{
-//					this.tvLessonMain.ReloadData ();
-//				});
-//			});
-
-			lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 
+			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
 			{
 				BeginInvokeOnMainThread (() => 
 				{
@@ -221,52 +214,65 @@ namespace NathansWay.iOS.Numeracy
 
 		}
 
+        private void LoadLessonsFiltered ()
+        {
+            lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 
+                {
+                    BeginInvokeOnMainThread (() => 
+                        {
+                            this.tvLessonMain.ReloadData ();
+                        });
+                });
+        }
+
 		#endregion
 
 		#region EventHandlers
+
+        #region LevelHandlers
 		// Level Button Handlers
 		private void OnClick_btnLevel1 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel1);
+            this.GlobalButtonLevelClick (this.btnLevel1, G__MathLevel.Level1);
 		}
 		private void OnClick_btnLevel2 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel2);
+            this.GlobalButtonLevelClick (this.btnLevel2, G__MathLevel.Level2);
 		}
 		private void OnClick_btnLevel3 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel3);
+            this.GlobalButtonLevelClick (this.btnLevel3, G__MathLevel.Level3);
 		}
 		private void OnClick_btnLevel4 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel4);
+            this.GlobalButtonLevelClick (this.btnLevel4, G__MathLevel.Level4);
 		}
 		private void OnClick_btnLevel5 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel5);
+            this.GlobalButtonLevelClick (this.btnLevel5, G__MathLevel.Level5);
 		}
 		private void OnClick_btnLevel6 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel6);
+            this.GlobalButtonLevelClick (this.btnLevel6, G__MathLevel.Level6);
 		}
 		private void OnClick_btnLevel7 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel7);
+            this.GlobalButtonLevelClick (this.btnLevel7, G__MathLevel.Level7);
 		}
 		private void OnClick_btnLevel8 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel8);
+            this.GlobalButtonLevelClick (this.btnLevel8, G__MathLevel.Level8);
 		}
 		private void OnClick_btnLevel9 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel9);
+            this.GlobalButtonLevelClick (this.btnLevel9, G__MathLevel.Level9);
 		}
 		private void OnClick_btnLevel10 (object sender, EventArgs e)
 		{
-			this.GlobalButtonLevelClick (this.btnLevel10);
+            this.GlobalButtonLevelClick (this.btnLevel10, G__MathLevel.Level10);
 		}
 		// Global Level Handler 
-		private void GlobalButtonLevelClick (ButtonLabelStyle btnLevelButton)
+		private void GlobalButtonLevelClick (ButtonLabelStyle btnLevelButton, G__MathLevel _mathLevel)
 		{
 			// Turn off the old button
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intLevelHoldState) as ButtonLabelStyle;
@@ -278,35 +284,43 @@ namespace NathansWay.iOS.Numeracy
 
 			this.intLevelHoldState = btnLevelButton.Tag;
 			btnLevelButton.HoldState = true;
+
+            // Set the viewmodel/repo filter
+            this.lessonViewModel.ValMathLevel = _mathLevel;
+            // Refresh/re-query the view
+            this.LoadLessonsFiltered();
 		}
 
+        #endregion
+
+        #region OperatorHandlers
 		// Operator Button Handlers
 		void OnClick_btnOpSubtract (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Subtraction);
 		}
-		void OnClick_btnOpMultSub (object sender, EventArgs e)
+		void OnClick_btnOpDivMulti (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.DivMulti);
 		}
 		void OnClick_btnOpMultiply (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Multiplication);
 		}
 		void OnClick_btnOpDivision (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Division);
 		}
 		void OnClick_btnOpAddSub (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.AddSub);
 		}
 		void OnClick_btnOpAdd (object sender, EventArgs e)
 		{
-			GlobalButtonOpClick ((ButtonLabelStyle)sender);
+            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Addition);
 		}
 		// Global Level Handler 
-		private void GlobalButtonOpClick (ButtonLabelStyle btnOpButton)
+        private void GlobalButtonOpClick (ButtonLabelStyle btnOpButton, G__MathOperator _mathOperator)
 		{
 			// Turn off the old button
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intOpHoldState) as ButtonLabelStyle;
@@ -318,27 +332,36 @@ namespace NathansWay.iOS.Numeracy
 
 			this.intOpHoldState = btnOpButton.Tag;
 			btnOpButton.HoldState = true;
+
+            // Set the viewmodel/repo filter
+            this.lessonViewModel.ValMathOperator = _mathOperator;
+            // Refresh/re-query the view
+            this.LoadLessonsFiltered();
+
 		}
 
+        #endregion
+
+        #region TypeHandlers
 		// Type Buttons Handlers
 		void OnClick_btnTypeMixed (object sender, EventArgs e)
 		{
-			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Mixed);
 		}
-		void OnClick_btnTypeGroups (object sender, EventArgs e)
+		void OnClick_btnTypeGrouped (object sender, EventArgs e)
 		{
-			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Grouped);
 		}
-		void OnClick_btnTypeFractions (object sender, EventArgs e)
+		void OnClick_btnTypeFraction (object sender, EventArgs e)
 		{
-			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Fraction);
 		}
 		void OnClick_btnTypeBasic (object sender, EventArgs e)
 		{
-			GlobalButtonTypeClick ((ButtonLabelStyle)sender);
+            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Basic);
 		}
 		// Global Type Handler 
-		private void GlobalButtonTypeClick (ButtonLabelStyle btnTypeButton)
+        private void GlobalButtonTypeClick (ButtonLabelStyle btnTypeButton, G__MathType _mathType)
 		{
 			// Turn off the old button
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intTypeHoldState) as ButtonLabelStyle;
@@ -350,7 +373,14 @@ namespace NathansWay.iOS.Numeracy
 
 			this.intTypeHoldState = btnTypeButton.Tag;
 			btnTypeButton.HoldState = true;
+
+            // Set the viewmodel/repo filter
+            this.lessonViewModel.ValMathType = _mathType;
+            // Refresh/re-query the view
+            this.LoadLessonsFiltered();
 		}
+
+        #endregion
 
 		#endregion
 

@@ -8,6 +8,7 @@ using System.Text;
 // NathansWay
 using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS;
+using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DAL.Repository;
 using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared.Utilities;
@@ -28,7 +29,7 @@ namespace NathansWay.Shared.Utilities
         
 		private static void InitializeShared()
 		{
-			SharedServiceContainer.Register<IRepoLessons> (() => new RepoLessons ());
+			SharedServiceContainer.Register<IRepoLessons<EntityLesson>> (() => new RepoLessons<EntityLesson> ());
 			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
 			//
 
