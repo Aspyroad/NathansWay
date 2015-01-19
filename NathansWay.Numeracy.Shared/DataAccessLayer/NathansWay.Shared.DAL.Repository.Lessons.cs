@@ -33,9 +33,9 @@ namespace NathansWay.Shared.DAL.Repository
 		private RepoLessonDetail<EntityLessonDetail> _repLessonDetail;
 
         // Filters
-        private NWFilter<int> _filterMathLevel;
-        private NWFilter<int> _filterMathOperator;
-        private NWFilter<int> _filterMathType;
+        private NWFilter _filterMathLevel;
+        private NWFilter _filterMathOperator;
+        private NWFilter _filterMathType;
 
 		#endregion
 
@@ -44,17 +44,24 @@ namespace NathansWay.Shared.DAL.Repository
 		public RepoLessons ()
 		{
             // Prepare filters
-            this._filterMathType = new NWFilter<int> ();
-            this._filterMathOperator = new NWFilter<int> ();
-            this._filterMathLevel = new NWFilter<int> ();
+            this._filterMathType = new NWFilter ();
+            this._filterMathOperator = new NWFilter ();
+            this._filterMathLevel = new NWFilter ();
 
             this._filterMathType.Operation = G__ExpressionType.Equal;
             this._filterMathOperator.Operation = G__ExpressionType.Equal;
             this._filterMathLevel.Operation = G__ExpressionType.Equal;
-
+            // Set field/property names
             this._filterMathType.PropertyName = "ExpressionType";
             this._filterMathOperator.PropertyName = "Operator";
             this._filterMathLevel.PropertyName = "Difficulty";
+
+            // Add our filters to our array
+            this._intFilterCount = 3;
+            this._arrFilters = new NWFilter[this._intFilterCount];
+            this._arrFilters[0] = this._filterMathType;
+            this._arrFilters[1] = this._filterMathOperator;
+            this._arrFilters[2] = this._filterMathLevel;
 		}
 
 		#endregion
@@ -87,11 +94,14 @@ namespace NathansWay.Shared.DAL.Repository
 
 		public Task<List<EntityLesson>> GetFilteredLessonsAsync (Expression<Func<EntityLesson, bool>> expr1)
 		{
-			return _db.GetAsyncConnection ()
-				.Table<EntityLesson> ()
-				.Where(expr1)
-				.OrderBy (i => i.SEQ)
-				.ToListAsync ();
+            return SelectFilteredAsync<EntityLesson>();
+
+
+            //			return _db.GetAsyncConnection ()
+            //				.Table<EntityLesson> ()
+            //				.Where(expr1)
+            //				.OrderBy (i => i.SEQ)
+            //				.ToListAsync ();
 		}
 
 		public List<EntityLesson> GetLessons ()
@@ -109,19 +119,19 @@ namespace NathansWay.Shared.DAL.Repository
 
         #region GetterSetter
 
-        public NWFilter<int> FilterMathType
+        public NWFilter FilterMathType
         {
             set { this._filterMathType = value; }
             get { return this._filterMathType; }
         }
 
-        public NWFilter<int> FilterMathOperator
+        public NWFilter FilterMathOperator
         {
             set { this._filterMathOperator = value; }
             get { return this._filterMathOperator; }
         }
 
-        public NWFilter<int> FilterMathLevel
+        public NWFilter FilterMathLevel
         {
             set { this._filterMathLevel = value; }
             get { return this._filterMathLevel; }

@@ -112,7 +112,7 @@ namespace NathansWay.Shared.BUS
 			return null ;
 		}
 
-		private static BinaryExpression GetExpression<T>(ParameterExpression param, NWFilter filter1, NWFilter  filter2) where T : IBusEntity, new()
+        private static BinaryExpression GetExpression<T>(ParameterExpression param, NWFilter filter1, NWFilter  filter2) where T : IBusEntity, new()
 		{
 			Expression bin1 = GetExpression<T>(param, filter1);
 			Expression bin2 = GetExpression<T>(param, filter2);
@@ -186,7 +186,7 @@ namespace NathansWay.Shared.BUS
 
 	}
 
-	public class NWFilter<T> 
+	public class NWFilter 
 	{
         private string _propertyName;
         private G__ExpressionType _operation;
@@ -223,6 +223,11 @@ namespace NathansWay.Shared.BUS
                     _hasValue = true;
                 }
             }
+        }
+
+        public bool HasValue
+        {
+            get { return _hasValue; }
         }
 
 

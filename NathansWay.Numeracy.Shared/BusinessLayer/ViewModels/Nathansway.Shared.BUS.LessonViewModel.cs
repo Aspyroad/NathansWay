@@ -25,7 +25,12 @@ namespace NathansWay.Shared.BUS.ViewModel
 		readonly IRepoLessons lessonservice;
 
 		private List<EntityLesson> _lessons;
-		//private List<NWFilter> _filters;
+
+        // Filter values, populated by UI calls
+        private G__MathType _valMathType;
+        private G__MathLevel _valMathLevel;
+        private G__MathOperator _valMathOperator;
+
 
         private Expression<Func<EntityLesson, bool>> _expr;
 
@@ -36,9 +41,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 		public LessonViewModel ()
 		{
 			lessonservice = SharedServiceContainer.Resolve<IRepoLessons> ();
-
-
-                        			
+                                    			
             //this._filterMathType.Value = 2;
             //this._filterMathOperator.Value = 1;
             //this._filterMathLevel.Value = 5;
@@ -60,6 +63,36 @@ namespace NathansWay.Shared.BUS.ViewModel
 				this.OnPropertyChanged ("Lessons"); 
 			}
 		}
+
+        public G__MathType ValMathType
+        {
+            get  { return _valMathType; }
+            set 
+            {
+                _valMathType = value;
+                this.lessonservice.FilterMathType.Value = (int)value;
+            }
+        }
+
+        public G__MathLevel ValMathLevel
+        {
+            get  { return _valMathLevel; }
+            set 
+            {
+                _valMathLevel = value;
+                this.lessonservice.FilterMathLevel.Value = (int)value;
+            }
+        }
+
+        public G__MathOperator ValMathOperator
+        {
+            get  { return _valMathOperator; }
+            set 
+            {
+                _valMathOperator = value;
+                this.lessonservice.FilterMathOperator.Value = (int)value;
+            }
+        }
 
 		#endregion
 
@@ -83,10 +116,10 @@ namespace NathansWay.Shared.BUS.ViewModel
 
     		public Task LoadFilteredLessonsAsync ()
     		{
-                _expr = NWExpressionBuilder.GetExpression<EntityLesson>(_filters);
+                _expr = NWExpressionBuilder.GetExpression<EntityLesson>();
 
     			return lessonservice
-    				.GetFilteredLessonsAsync (_expr)
+    				.GetFilteredLessonsAsync ()
     				.ContinueOnCurrentThread (t => 
     				{ 
     					_lessons = t.Result;
@@ -98,12 +131,7 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#endregion
 
-		#region GetterSetter
-
-
-
-		#endregion
-
 	}
 }
+
 

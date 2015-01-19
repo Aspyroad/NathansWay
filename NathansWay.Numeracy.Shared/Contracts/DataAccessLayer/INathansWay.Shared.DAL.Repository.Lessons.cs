@@ -26,9 +26,9 @@ namespace NathansWay.Shared.DAL.Repository
 		RepoLessonDetail<EntityLessonDetail> repLessonDetail { get; }
 
         // Filters
-        NWFilter<int> FilterMathType { get; set; }
-        NWFilter<int> FilterMathOperator { get; set; }
-        NWFilter<int> FilterMathLevel { get; set; }
+        NWFilter FilterMathType { get; set; }
+        NWFilter FilterMathOperator { get; set; }
+        NWFilter FilterMathLevel { get; set; }
 
         // Database Operations
 		Task<List<EntityLesson>> GetAllLessonsAsync ();

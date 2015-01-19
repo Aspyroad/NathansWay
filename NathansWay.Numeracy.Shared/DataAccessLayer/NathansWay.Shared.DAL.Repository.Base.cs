@@ -17,6 +17,7 @@ using SQLite.Net.Interop;
 // NathansWay
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DAL;
+using NathansWay.Shared.BUS;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.DB;
 
@@ -27,16 +28,26 @@ namespace NathansWay.Shared.DAL.Repository
 		//protected static object locker = new object ();  
 		protected ISharedGlobal _sharedGlobal;
 		protected INWDatabaseContext _db;
+        // OrderBy Predicate
 		protected Expression<Func<T,object>> _predicateOrderBy;
+        // Where Predicate variables for building and/or 's using ExpressionBuilder
+        protected NWFilter[] _arrFilters;
+        protected int _intFilterCount;
+        // Where Predicate
+        protected Expression<Func<T,bool>>  _predicateWhere;
 
 
         public NWRepository ()
 		{
 			_sharedGlobal = SharedServiceContainer.Resolve<ISharedGlobal> ();
 			_db = SharedServiceContainer.Resolve<INWDatabaseContext> ();
+            // Base orderby clause
+            _predicateOrderBy = (i => i.SEQ);
 		}
 
 		#region Public Members
+
+        #region DataTasks
 
 		/// <summary>
 		/// Gets a table as a list, async.
@@ -45,9 +56,8 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<U>> SelectAllAsync<U> () where U : IBusEntity, new()
 		{
-			Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
-
-			var Conn = _db.GetAsyncConnection ();
+			//Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
+            var Conn = _db.GetAsyncConnection ();
 			return Conn
 				.Table<U> ()
 				.OrderBy(_predicateOrderBy)
@@ -62,6 +72,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<U>> SelectSeqAsync<U> (U _entity) where U : IBusEntity, new()
 		{
+            // Obviously only returns one value
 			var Conn = _db.GetAsyncConnection ();
 			return Conn
 				.Table<U> ()
@@ -74,13 +85,16 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>The some async.</returns>
 		/// <param name="predicate">Predicate.</param>
 		/// <typeparam name="U">The 1st type parameter.</typeparam>
-		public Task<List<U>> SelectFilteredAsync<U> (Expression<Func<U,bool>> predicateWhere) where U : IBusEntity, new()
+		public Task<List<U>> SelectFilteredAsync<U> () where U : IBusEntity, new()
 		{
+            // Call here to gather all our filters into a list<NWFilter>
+            List<NWFilter> filters = this.FilterBuilder();
+
 			var Conn = _db.GetAsyncConnection ();
 			return Conn
 				.Table<U> ()
-				.Where (predicateWhere)
-				.OrderBy (i => i.SEQ)
+                .Where (this._predicateWhere)
+                .OrderBy (this._predicateOrderBy)
 				.ToListAsync ();
 		}
 		/// <summary>
@@ -130,6 +144,9 @@ namespace NathansWay.Shared.DAL.Repository
 			var Conn = _db.GetAsyncConnection ();
 			return Conn.DeleteAsync<U> (_entity.SEQ);
 		}
+
+        #endregion
+
 		/// <summary>
 		/// Gets the current db context.
 		/// </summary>
@@ -139,6 +156,48 @@ namespace NathansWay.Shared.DAL.Repository
 			get { return _db; }
 			private set { _db = value; }
 		}
+
+        // Overload 1
+
+        protected bool FilterBuilder()
+        {
+            List<NWFilter> filterlist = new List<NWFilter>();
+
+            // Use for loop.
+            for (int i = 0; i < _intFilterCount; i++)
+            {
+                if (_arrFilters[i].HasValue)
+                {
+                    filterlist.Add(_arrFilters[i]);
+                }
+            }
+            // Now create our expression form this List<NWFilter>
+            if (filterlist.Count > 0)
+            {
+                this._predicateWhere = NWExpressionBuilder.GetExpression<EntityLesson>(filterlist);
+                return true;
+            }
+            else
+            {
+                return false;
+
+            }
+        }
+        // Overload 2
+        protected List<NWFilter> FilterBuilder()
+        {
+            List<NWFilter> filterlist = new List<NWFilter>();
+
+            // Use for loop.
+            for (int i = 0; i < _intFilterCount; i++)
+            {
+                if (_arrFilters[i].HasValue)
+                {
+                    filterlist.Add(_arrFilters[i]);
+                }
+            }
+            return filterlist;
+        }
 
 		#endregion
 
@@ -155,6 +214,16 @@ namespace NathansWay.Shared.DAL.Repository
 //			return _predicateOrderBy;
 //		}
 
+        public Expression<Func<T,bool>> PredicateWhere
+        {
+            get { return _predicateWhere; }
+        }
+
+        public Expression<Func<T, object>> PredicateOrderBy
+        {
+            get { return _predicateOrderBy; }
+            set { _predicateOrderBy = value; }
+        }
 
 		#endregion
 
