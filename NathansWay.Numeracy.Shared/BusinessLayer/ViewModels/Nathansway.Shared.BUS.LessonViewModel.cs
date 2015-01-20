@@ -21,18 +21,20 @@ namespace NathansWay.Shared.BUS.ViewModel
 	public class LessonViewModel : ViewModelBase
 	{
 		#region Private Variables
-
-        readonly IRepoLessons<EntityLesson> lessonservice;
+        // Both Lesson and LessonDetail dataservice references
+        readonly IRepoLesson<EntityLesson> lessonService;
+        readonly IRepoLessonDetail<EntityLessonDetail> lessonDetailService;
 
 		private List<EntityLesson> _lessons;
+        private List<EntityLessonDetail> _lessonDetail;
 
-        // Filter values, populated by UI calls
+        // Lesson Filter values, populated by UI calls
         private G__MathType _valMathType;
         private G__MathLevel _valMathLevel;
         private G__MathOperator _valMathOperator;
 
-
-        private Expression<Func<EntityLesson, bool>> _expr;
+        // Lesson Detail Filters
+        private int _valLessonSeq;
 
 		#endregion
 
@@ -40,12 +42,9 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		public LessonViewModel ()
 		{
-            lessonservice = SharedServiceContainer.Resolve<IRepoLessons<EntityLesson>> ();
-                                    			
-            //this._filterMathType.Value = 2;
-            //this._filterMathOperator.Value = 1;
-            //this._filterMathLevel.Value = 5;
-		}
+            lessonService = SharedServiceContainer.Resolve<IRepoLesson<EntityLesson>> ();
+            lessonDetailService = SharedServiceContainer.Resolve<IRepoLessonDetail<EntityLessonDetail>> ();
+        }
 
 		#endregion
 
@@ -64,13 +63,28 @@ namespace NathansWay.Shared.BUS.ViewModel
 			}
 		}
 
+        /// <summary>
+        /// List of Lesson Details
+        /// </summary>
+        public List<EntityLessonDetail> LessonDetail
+        {
+            get { return _lessonDetail; }
+            set 
+            {
+                _lessonDetail = value;
+                this.OnPropertyChanged("LessonDetail");
+            }
+        }
+
+
+        // Lesson Filter Values
         public G__MathType ValMathType
         {
             get  { return _valMathType; }
             set 
             {
                 _valMathType = value;
-                this.lessonservice.FilterMathType.Value = (int)value;
+                this.lessonService.FilterMathType.Value = (int)value;
             }
         }
 
@@ -80,7 +94,7 @@ namespace NathansWay.Shared.BUS.ViewModel
             set 
             {
                 _valMathLevel = value;
-                this.lessonservice.FilterMathLevel.Value = (int)value;
+                this.lessonService.FilterMathLevel.Value = (int)value;
             }
         }
 
@@ -90,7 +104,18 @@ namespace NathansWay.Shared.BUS.ViewModel
             set 
             {
                 _valMathOperator = value;
-                this.lessonservice.FilterMathOperator.Value = (int)value;
+                this.lessonService.FilterMathOperator.Value = (int)value;
+            }
+        }
+
+        // LessonDetail Filter Values
+        public int ValLessonSeq
+        {
+            get { return _valLessonSeq; }
+            set 
+            { 
+                _valLessonSeq = value; 
+                this.lessonDetailService.FilterLessonSeq.Value = value;
             }
         }
 
@@ -100,12 +125,9 @@ namespace NathansWay.Shared.BUS.ViewModel
 
         #region DataTasks 
 
-    		/// <summary>
-    		/// Loads the assignments asynchronously
-    		/// </summary>
     		public Task LoadAllLessonsAsync ()
     		{
-    			return lessonservice
+    			return lessonService
     				.GetAllLessonsAsync ()
     				.ContinueOnCurrentThread (t => 
     				{ 
@@ -117,7 +139,7 @@ namespace NathansWay.Shared.BUS.ViewModel
     		public Task LoadFilteredLessonsAsync ()
     		{
 
-    			return lessonservice
+    			return lessonService
     				.GetFilteredLessonsAsync ()
     				.ContinueOnCurrentThread (t => 
     				{ 
@@ -125,6 +147,17 @@ namespace NathansWay.Shared.BUS.ViewModel
     					return t.Result; 
     				});
     		}
+
+            public Task LoadLessonDetailAsync ()
+            {
+                return lessonDetailService
+                    .GetFilteredLessonDetailAsync()
+                    .ContinueOnCurrentThread(t =>
+                    {
+                        _lessonDetail = t.Result;
+                        return t.Result;
+                    });
+            }
 
         #endregion
 

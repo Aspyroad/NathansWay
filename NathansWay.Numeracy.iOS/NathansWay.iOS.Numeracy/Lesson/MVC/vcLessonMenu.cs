@@ -161,7 +161,6 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);

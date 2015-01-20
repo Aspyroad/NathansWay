@@ -24,7 +24,7 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-    public class RepoLessons<T> : NWRepository<T>, IRepoLessons<T> where T : EntityLesson, new()
+    public class RepoLesson<T> : NWRepository<T>, IRepoLesson<T> where T : EntityLesson, new()
 	{
 
 		#region Private Members
@@ -38,13 +38,13 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#region Constructors
 
-		public RepoLessons ()
+		public RepoLesson ()
 		{
             // Prepare filters
             this._filterMathType = new NWFilter ();
             this._filterMathOperator = new NWFilter ();
             this._filterMathLevel = new NWFilter ();
-
+            // Op Assign
             this._filterMathType.Operation = G__ExpressionType.Equal;
             this._filterMathOperator.Operation = G__ExpressionType.Equal;
             this._filterMathLevel.Operation = G__ExpressionType.Equal;
@@ -65,6 +65,8 @@ namespace NathansWay.Shared.DAL.Repository
 
 		#region Public Members
 
+        #region DataTasks
+
 		public Task<List<T>> GetAllLessonsAsync ()
 		{
 			return SelectAllAsync ();
@@ -74,6 +76,8 @@ namespace NathansWay.Shared.DAL.Repository
 		{
             return SelectFilteredAsync ();
 		}
+
+        #endregion
 
 		#endregion
 
@@ -101,20 +105,56 @@ namespace NathansWay.Shared.DAL.Repository
 
 	}
 
-	public class RepoLesson<T> : NWRepository<T> where T : EntityLesson, new()
+    public class RepoLessonDetail<T> : NWRepository<T>, IRepoLessonDetail<T> where T : EntityLessonDetail, new()
 	{
-		public RepoLesson ()
-		{
+        #region Private Variables
 
-		}
-	}
+        // Filters
+        private NWFilter _filterLessonSeq;
 
-	public class RepoLessonDetail<T> : NWRepository<T> where T : EntityLessonDetail, new()
-	{
+        #endregion
+
+        #region Constructors
+
 		public RepoLessonDetail()
 		{
+            // Filter Setup
+            _filterLessonSeq = new NWFilter();
+            // Op Assign
+            this._filterLessonSeq.Operation = G__ExpressionType.Equal;
+            // Set field/property names
+            this._filterLessonSeq.PropertyName = "LessonSeq";
 
+            // Add our filters to our array
+            this._intFilterCount = 1;
+            this._arrFilters = new NWFilter[this._intFilterCount];
+            this._arrFilters[0] = this._filterLessonSeq;
 		}
+
+        #endregion
+
+        #region Public Variables
+
+        #region DataTasks
+
+        public Task<List<T>> GetFilteredLessonDetailAsync ()
+        {
+            return SelectFilteredAsync ();
+        }
+
+        #endregion
+
+        #endregion
+
+        #region GetterSetter
+
+        public NWFilter FilterLessonSeq
+        {
+            set { this._filterLessonSeq = value; }
+            get { return this._filterLessonSeq; }
+        }
+
+        #endregion
 	}
 
 

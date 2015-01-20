@@ -185,6 +185,7 @@ namespace NathansWay.Shared.DAL.Repository
 
             }
         }
+
         // Overload 2
 //        protected List<NWFilter> FilterBuilderList()
 //        {

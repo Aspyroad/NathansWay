@@ -19,7 +19,7 @@ using NathansWay.Shared.BUS;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-    public interface IRepoLessons<T> where T : EntityLesson, new()
+    public interface IRepoLesson<T> where T : EntityLesson, new()
 	{
         // Filters
         NWFilter FilterMathType { get; set; }
@@ -29,10 +29,16 @@ namespace NathansWay.Shared.DAL.Repository
         // Database Operations
 		Task<List<T>> GetAllLessonsAsync ();
         Task<List<T>> GetFilteredLessonsAsync ();
-		//Task<List<EntityLessonDetail>> GetLessonDetailAsync (EntityLesson lesson);
-
-		// Non parallel
-		//List<T> GetLessons ();
 	}
+
+    public interface IRepoLessonDetail<T> where T : EntityLessonDetail, new()
+    {
+        // Filters
+        NWFilter FilterLessonSeq { get; set; }
+
+        // Database Operations
+        Task<List<T>> GetFilteredLessonDetailAsync ();
+    }
+
 }
 

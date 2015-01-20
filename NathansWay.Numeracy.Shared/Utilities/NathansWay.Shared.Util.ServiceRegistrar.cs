@@ -29,7 +29,9 @@ namespace NathansWay.Shared.Utilities
         
 		private static void InitializeShared()
 		{
-			SharedServiceContainer.Register<IRepoLessons<EntityLesson>> (() => new RepoLessons<EntityLesson> ());
+			SharedServiceContainer.Register<IRepoLesson<EntityLesson>> (() => new RepoLesson<EntityLesson> ());
+            SharedServiceContainer.Register<IRepoLessonDetail<EntityLessonDetail>>(() => new RepoLessonDetail<EntityLessonDetail>());
+
 			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
 			//
 

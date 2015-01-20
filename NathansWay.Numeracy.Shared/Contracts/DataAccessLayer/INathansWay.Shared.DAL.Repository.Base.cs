@@ -33,7 +33,6 @@ namespace NathansWay.Shared.DAL.Repository
         Task<int> UpdateAsync(T _entity) ;
         Task<int> DeleteAsync(T _entity) ;
 
-        // Util Methods
 	}
 }
 
