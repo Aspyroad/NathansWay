@@ -194,6 +194,8 @@ namespace NathansWay.Shared.BUS
 
         private bool _active;
         private bool _hasValue;
+        private bool _hasError;
+        private Exception _exception;
 
         public NWFilter()
         {
@@ -218,9 +220,40 @@ namespace NathansWay.Shared.BUS
             set 
             { 
                 _value = value; 
-                if (_value != null)
+
+                _hasValue = false;
+                _hasError = false;
+
+                if (_value is int)
+                {   
+                    var x = (int)_value;
+                    // If set to 0 dont use this filter
+                    if (x == 0)
+                    {
+                        _hasValue = false;
+                    }
+                    else
+                    {
+                        _hasValue = true;
+                    }
+                }
+                else if (_value is string)
                 {
-                    _hasValue = true;
+                    var x = (string)_value;
+                    // Check for empty string
+                    // Do we need empty strings
+                    if (x.Length == 0)
+                    {
+                        _hasValue = false;
+                    }
+                    else
+                    {
+                        _hasValue = true;
+                    }
+                }
+                else
+                {
+                    _hasError = true;
                 }
             }
         }

@@ -204,6 +204,7 @@ namespace NathansWay.Shared
 
 	public enum G__MathOperator
 	{
+        All = 0,
 		Addition = 1,
 		Subtraction = 2,
 		Division = 3,
@@ -216,6 +217,7 @@ namespace NathansWay.Shared
 	{
 		static Dictionary<G__MathOperator, string> _dict = new Dictionary<G__MathOperator, string>
 		{
+            {G__MathOperator.All, "All"},
 			{G__MathOperator.Addition, "+"},
 			{G__MathOperator.Subtraction, "–"},
 			{G__MathOperator.Division, "÷"},
@@ -245,6 +247,7 @@ namespace NathansWay.Shared
 
 	public enum G__MathType
 	{
+        All = 0,
 		Basic = 1,
 		Grouped = 2,
 		Fraction = 3,
@@ -255,6 +258,7 @@ namespace NathansWay.Shared
 	{
 		static Dictionary<G__MathType, string> _dict = new Dictionary<G__MathType, string>
 		{
+            {G__MathType.All, "All" },
 			{G__MathType.Basic, "Basic"},
 			{G__MathType.Fraction, "Fraction"},
 			{G__MathType.Grouped, "Grouped"},
@@ -282,6 +286,7 @@ namespace NathansWay.Shared
 
 	public enum G__MathLevel : int
 	{
+        All = 0,
 		Level1 = 1,
 		Level2 = 2,
 		Level3 = 3,
@@ -298,6 +303,7 @@ namespace NathansWay.Shared
 	{
 		static Dictionary<G__MathLevel, string> _dict = new Dictionary<G__MathLevel, string>
 		{
+            {G__MathLevel.All, "All"},
 			{G__MathLevel.Level1, "Level1"},
 			{G__MathLevel.Level2, "Level2"},
 			{G__MathLevel.Level3, "Level3"},

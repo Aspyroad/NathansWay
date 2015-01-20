@@ -281,11 +281,19 @@ namespace NathansWay.iOS.Numeracy
 				tmpBtnViewOld.SetNeedsDisplay ();
 			}
 
-			this.intLevelHoldState = btnLevelButton.Tag;
-			btnLevelButton.HoldState = true;
-
-            // Set the viewmodel/repo filter
-            this.lessonViewModel.ValMathLevel = _mathLevel;
+            // Handle toggle functionality
+            if (this.intLevelHoldState == btnLevelButton.Tag)
+            {
+                this.intLevelHoldState = 0;
+                this.lessonViewModel.ValMathLevel = 0;
+            }
+            else
+            {
+                this.intLevelHoldState = btnLevelButton.Tag;
+                btnLevelButton.HoldState = true;
+                // Set the viewmodel/repo filter
+                this.lessonViewModel.ValMathLevel = _mathLevel;
+            }
             // Refresh/re-query the view
             this.LoadLessonsFiltered();
 		}
