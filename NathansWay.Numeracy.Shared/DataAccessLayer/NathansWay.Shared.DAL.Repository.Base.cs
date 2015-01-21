@@ -36,12 +36,18 @@ namespace NathansWay.Shared.DAL.Repository
         // Where Predicate
         protected Expression<Func<T,bool>>  _predicateWhere;
 
+        // Holds the return count, also, start and end seq numbers for the entity attached to this model
+        protected int _returnCount;
+        protected int _intStartSeq;
+        protected int _intEndSeq;
+
         public NWRepository ()
 		{
 			_sharedGlobal = SharedServiceContainer.Resolve<ISharedGlobal> ();
 			_db = SharedServiceContainer.Resolve<INWDatabaseContext> ();
             // Base orderby clause
             _predicateOrderBy = (i => i.SEQ);
+            //Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
 		}
 
 		#region Public Members
@@ -54,8 +60,7 @@ namespace NathansWay.Shared.DAL.Repository
 		/// <returns>A Task TResult List IEntity</returns>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<T>> SelectAllAsync () 
-		{
-			//Expression<Func<U,object>> _predicateOrderBy = (i => i.SEQ);
+		{			
             var Conn = _db.GetAsyncConnection ();
 			return Conn
 				.Table<T> ()
@@ -98,7 +103,9 @@ namespace NathansWay.Shared.DAL.Repository
             }
             else
             {
-                throw new Exception("Error in FilterBuild");
+                //There were no filters, select all?
+                //Not sure if this should be default behaviour
+                return this.SelectAllAsync();
             }
 		}
 		/// <summary>

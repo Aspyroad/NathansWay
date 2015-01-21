@@ -76,7 +76,6 @@ namespace NathansWay.Shared.BUS.ViewModel
             }
         }
 
-
         // Lesson Filter Values
         public G__MathType ValMathType
         {

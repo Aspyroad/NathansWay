@@ -216,6 +216,10 @@ namespace NathansWay.Shared.BUS
         }
 		public object Value 
         { 
+            // I thought of making NWFilter generic?
+            // But that made it harder to use and I still needed to do type checks on values
+            // So, at this stage it can handle ints and strings only.
+            // Future proofing needs this expanded.
             get { return _value; } 
             set 
             { 

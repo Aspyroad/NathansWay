@@ -75,10 +75,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 		private readonly List<string> errors = new List<string> ();
 		private bool isBusy = false;
 
-		// Holds the start and end seq numbers for the entity attached to this model
-		private int _startSeq;
-		private int _endSeq;
-
 		#endregion
 
 		#region Public Members

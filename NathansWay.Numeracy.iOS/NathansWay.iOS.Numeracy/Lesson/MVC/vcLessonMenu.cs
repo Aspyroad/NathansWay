@@ -285,7 +285,7 @@ namespace NathansWay.iOS.Numeracy
             if (this.intLevelHoldState == btnLevelButton.Tag)
             {
                 this.intLevelHoldState = 0;
-                this.lessonViewModel.ValMathLevel = 0;
+                this.lessonViewModel.ValMathLevel = G__MathLevel.All;
             }
             else
             {
@@ -337,13 +337,29 @@ namespace NathansWay.iOS.Numeracy
 				tmpBtnViewOld.SetNeedsDisplay ();
 			}
 
-			this.intOpHoldState = btnOpButton.Tag;
-			btnOpButton.HoldState = true;
-
-            // Set the viewmodel/repo filter
-            this.lessonViewModel.ValMathOperator = _mathOperator;
+            // Handle toggle functionality
+            if (this.intOpHoldState == btnOpButton.Tag)
+            {
+                this.intOpHoldState = 0;
+                this.lessonViewModel.ValMathOperator = G__MathOperator.All;
+            }
+            else
+            {
+                this.intOpHoldState = btnOpButton.Tag;
+                btnOpButton.HoldState = true;
+                // Set the viewmodel/repo filter
+                this.lessonViewModel.ValMathOperator = _mathOperator;
+            }
             // Refresh/re-query the view
             this.LoadLessonsFiltered();
+
+//			this.intOpHoldState = btnOpButton.Tag;
+//			btnOpButton.HoldState = true;
+//
+//            // Set the viewmodel/repo filter
+//            this.lessonViewModel.ValMathOperator = _mathOperator;
+//            // Refresh/re-query the view
+//            this.LoadLessonsFiltered();
 
 		}
 
@@ -378,13 +394,29 @@ namespace NathansWay.iOS.Numeracy
 				tmpBtnViewOld.SetNeedsDisplay ();
 			}
 
-			this.intTypeHoldState = btnTypeButton.Tag;
-			btnTypeButton.HoldState = true;
-
-            // Set the viewmodel/repo filter
-            this.lessonViewModel.ValMathType = _mathType;
+            // Handle toggle functionality
+            if (this.intTypeHoldState == btnTypeButton.Tag)
+            {
+                this.intTypeHoldState = 0;
+                this.lessonViewModel.ValMathType = G__MathType.All;
+            }
+            else
+            {
+                this.intTypeHoldState = btnTypeButton.Tag;
+                btnTypeButton.HoldState = true;
+                // Set the viewmodel/repo filter
+                this.lessonViewModel.ValMathType = _mathType;
+            }
             // Refresh/re-query the view
             this.LoadLessonsFiltered();
+
+//			this.intTypeHoldState = btnTypeButton.Tag;
+//			btnTypeButton.HoldState = true;
+//
+//            // Set the viewmodel/repo filter
+//            this.lessonViewModel.ValMathType = _mathType;
+//            // Refresh/re-query the view
+//            this.LoadLessonsFiltered();
 		}
 
         #endregion
