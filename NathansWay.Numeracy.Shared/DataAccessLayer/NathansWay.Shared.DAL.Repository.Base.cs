@@ -235,6 +235,21 @@ namespace NathansWay.Shared.DAL.Repository
             set { _predicateOrderBy = value; }
         }
 
+        public int StartSeq
+        {
+            get { return _intStartSeq; }
+            //set { _intStartSeq = value; }
+        }
+
+        public int EndSeq
+        {
+            get { return _intEndSeq; }
+            //set { _intEndSeq = value; }
+        }
+
+        public int ReturnCount
+
+
 		#endregion
 
     }

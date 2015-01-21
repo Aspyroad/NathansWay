@@ -116,18 +116,6 @@ namespace NathansWay.Shared.BUS.ViewModel
 			}
 		}
 
-		public int StartSeq
-		{
-			get { return _startSeq; }
-			set { _startSeq = value; }
-		}
-
-		public int EndSeq
-		{
-			get { return _endSeq; }
-			set { _endSeq = value; }
-		}
-
 		#endregion
 
 		#region Protected 
