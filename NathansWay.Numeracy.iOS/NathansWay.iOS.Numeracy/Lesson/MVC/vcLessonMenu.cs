@@ -153,6 +153,11 @@ namespace NathansWay.iOS.Numeracy
 			this.lessonMenuSource = new LessonMenuTableSource (this);
 			this.lessonMenuSource.ScrolledToBottom += ScrolledToBottom;
 			this.tvLessonMain.Source = this.lessonMenuSource;
+            // LessonDteail TableView
+            // Setup tableview source
+            this.lesssonDetailMenuSource = new LessonDetailMenuTableSource (this);
+            // No need to hook anything up to ScolledBottom.
+            this.tvLessonDetail.Source = this.lesssonDetailMenuSource;
 
 			//this.tvLessonMain.
 
@@ -532,7 +537,7 @@ namespace NathansWay.iOS.Numeracy
 
                 var lessonDetail = this.vmLesson.LessonDetail [indexPath.Row];
 
-                var cell = tableView.DequeueReusableCell ("LessonDetailTableCell") as vLessonDetailTableCell;
+                var cell = tableView.DequeueReusableCell ("LessonDetailCell") as vLessonDetailTableCell;
                 cell.IndexValue = indexPath.Row;
                 cell.SetLessonDetailCell (vclessonmenu, lessonDetail, indexPath);
 

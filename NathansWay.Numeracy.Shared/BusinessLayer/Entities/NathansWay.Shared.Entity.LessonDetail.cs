@@ -7,6 +7,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.Shared.BUS.Entity
 {
+    [Table ("LessonDetail")]
     public class EntityLessonDetail : EntityBase
     {
         #region Private Variables
