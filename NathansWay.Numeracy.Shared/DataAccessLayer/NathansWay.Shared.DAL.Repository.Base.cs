@@ -37,7 +37,7 @@ namespace NathansWay.Shared.DAL.Repository
         protected Expression<Func<T,bool>>  _predicateWhere;
 
         // Holds the return count, also, start and end seq numbers for the entity attached to this model
-        protected int _returnCount;
+        protected int _intReturnCount;
         protected int _intStartSeq;
         protected int _intEndSeq;
 
@@ -194,20 +194,20 @@ namespace NathansWay.Shared.DAL.Repository
         }
 
         // Overload 2
-//        protected List<NWFilter> FilterBuilderList()
-//        {
-//            List<NWFilter> filterlist = new List<NWFilter>();
-//
-//            // Use for loop.
-//            for (int i = 0; i < _intFilterCount; i++)
-//            {
-//                if (_arrFilters[i].HasValue)
-//                {
-//                    filterlist.Add(_arrFilters[i]);
-//                }
-//            }
-//            return filterlist;
-//        }
+        //        protected List<NWFilter> FilterBuilderList()
+        //        {
+        //            List<NWFilter> filterlist = new List<NWFilter>();
+        //
+        //            // Use for loop.
+        //            for (int i = 0; i < _intFilterCount; i++)
+        //            {
+        //                if (_arrFilters[i].HasValue)
+        //                {
+        //                    filterlist.Add(_arrFilters[i]);
+        //                }
+        //            }
+        //            return filterlist;
+        //        }
 
 		#endregion
 
@@ -248,6 +248,9 @@ namespace NathansWay.Shared.DAL.Repository
         }
 
         public int ReturnCount
+        {
+            get { return _intReturnCount; }
+        }
 
 
 		#endregion

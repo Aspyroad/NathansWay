@@ -149,13 +149,14 @@ namespace NathansWay.Shared.BUS.ViewModel
 
             public Task LoadLessonDetailAsync ()
             {
-                return lessonDetailService
+                var x = lessonDetailService
                     .GetFilteredLessonDetailAsync()
                     .ContinueOnCurrentThread(t =>
                     {
                         _lessonDetail = t.Result;
                         return t.Result;
                     });
+                return x;
             }
 
         #endregion

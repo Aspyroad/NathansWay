@@ -26,6 +26,7 @@
     <MtouchArch>i386</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
@@ -201,6 +202,10 @@
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcMainContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Label.Bordered.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.LabelStyle.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.designer.cs">
+      <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

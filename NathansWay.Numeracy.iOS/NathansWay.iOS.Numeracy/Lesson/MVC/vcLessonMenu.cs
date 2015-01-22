@@ -25,7 +25,8 @@ namespace NathansWay.iOS.Numeracy
 
 		private vLessonMenu _vLessonMenu;
 		private LessonViewModel lessonViewModel;
-		private AspyTableViewSource lessonmenusource;
+		private AspyTableViewSource lessonMenuSource;
+        private AspyTableViewSource lesssonDetailMenuSource;
 
 		// Lesson level hold state
 		// Used to let us know the current level filtering
@@ -86,7 +87,7 @@ namespace NathansWay.iOS.Numeracy
 				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpDivMulti;
 				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
 				// Tableview Source
-				this.lessonmenusource.ScrolledToBottom -= ScrolledToBottom;
+				this.lessonMenuSource.ScrolledToBottom -= ScrolledToBottom;
 			}
 		}
 
@@ -149,9 +150,9 @@ namespace NathansWay.iOS.Numeracy
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
 			// LessonMain TableView
 			// Setup tableview source
-			this.lessonmenusource = new LessonMenuTableSource (this);
-			this.lessonmenusource.ScrolledToBottom += ScrolledToBottom;
-			this.tvLessonMain.Source = this.lessonmenusource;
+			this.lessonMenuSource = new LessonMenuTableSource (this);
+			this.lessonMenuSource.ScrolledToBottom += ScrolledToBottom;
+			this.tvLessonMain.Source = this.lessonMenuSource;
 
 			//this.tvLessonMain.
 
@@ -213,13 +214,23 @@ namespace NathansWay.iOS.Numeracy
 
 		}
 
-        private void LoadLessonsFiltered ()
+        private void LoadLessonsFilteredAsync ()
         {
             lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 
                 {
                     BeginInvokeOnMainThread (() => 
                         {
                             this.tvLessonMain.ReloadData ();
+                        });
+                });
+        }
+        private void LoadLessonDetailFilteredAsync ()
+        {
+            lessonViewModel.LoadLessonDetailAsync ().ContinueWith (_ => 
+                {
+                    BeginInvokeOnMainThread (() => 
+                        {
+                            this.tvLessonDetail.ReloadData ();
                         });
                 });
         }
@@ -295,7 +306,7 @@ namespace NathansWay.iOS.Numeracy
                 this.lessonViewModel.ValMathLevel = _mathLevel;
             }
             // Refresh/re-query the view
-            this.LoadLessonsFiltered();
+            this.LoadLessonsFilteredAsync();
 		}
 
         #endregion
@@ -351,7 +362,7 @@ namespace NathansWay.iOS.Numeracy
                 this.lessonViewModel.ValMathOperator = _mathOperator;
             }
             // Refresh/re-query the view
-            this.LoadLessonsFiltered();
+            this.LoadLessonsFilteredAsync();
 
 //			this.intOpHoldState = btnOpButton.Tag;
 //			btnOpButton.HoldState = true;
@@ -408,7 +419,7 @@ namespace NathansWay.iOS.Numeracy
                 this.lessonViewModel.ValMathType = _mathType;
             }
             // Refresh/re-query the view
-            this.LoadLessonsFiltered();
+            this.LoadLessonsFilteredAsync();
 
 //			this.intTypeHoldState = btnTypeButton.Tag;
 //			btnTypeButton.HoldState = true;
@@ -471,15 +482,91 @@ namespace NathansWay.iOS.Numeracy
 				//				return cell;
 			}
 
-//			public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
-//			{
-//				// NOTE: Don't call the base implementation on a Model class
-//				// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
-//				throw new NotImplementedException ();
-//			}
+            public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+            {
+                //new UIAlertView("Row Selected", tableItems[indexPath.Row], null, "OK", null).Show();
+                //tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
+                var lesson = this.vmLesson.Lessons [indexPath.Row];
+                this.vmLesson.ValLessonSeq = lesson.SEQ;
+                this.vclessonmenu.LoadLessonDetailFilteredAsync();
+            }
+
+            //			public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+            //			{
+            //				// NOTE: Don't call the base implementation on a Model class
+            //				// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+            //				throw new NotImplementedException ();
+            //			}
 
 			#endregion
 		}
+
+        public class LessonDetailMenuTableSource : AspyTableViewSource
+        {
+            #region Private Variables
+
+            private vcLessonMenu vclessonmenu ;
+            private LessonViewModel vmLesson;
+
+            #endregion
+
+            #region Constructors
+
+            public LessonDetailMenuTableSource (vcLessonMenu _vc)
+            {
+                this.vclessonmenu = _vc;
+                this.vmLesson = SharedServiceContainer.Resolve<LessonViewModel> ();
+            }
+
+            #endregion
+
+            #region Overrides
+
+            public override int RowsInSection (UITableView tableview, int section)
+            {
+                return this.vmLesson.LessonDetail  == null ? 0 : this.vmLesson.LessonDetail.Count;
+            }
+
+            public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+            {
+
+                var lessonDetail = this.vmLesson.LessonDetail [indexPath.Row];
+
+                var cell = tableView.DequeueReusableCell ("LessonDetailTableCell") as vLessonDetailTableCell;
+                cell.IndexValue = indexPath.Row;
+                cell.SetLessonDetailCell (vclessonmenu, lessonDetail, indexPath);
+
+
+
+
+                // Work ios 7  and below what about 8??
+                //cell.BackgroundColor = UIColor.Brown;//iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+                return cell;
+                //              UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
+                //              // if there are no cells to reuse, create a new one
+                //              if (cell == null)
+                //                  cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
+                //              cell.TextLabel.Text = tableItems[indexPath.Row];
+                //              return cell;
+            }
+
+            public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+            {
+                //new UIAlertView("Row Selected", tableItems[indexPath.Row], null, "OK", null).Show();
+                //tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
+                //var lesson = this.vmLesson.Lessons [indexPath.Row];
+
+            }
+
+            //          public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
+            //          {
+            //              // NOTE: Don't call the base implementation on a Model class
+            //              // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+            //              throw new NotImplementedException ();
+            //          }
+
+            #endregion
+        }
     }
 }
 

@@ -136,7 +136,7 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITableView tvLessonItems { get; set; }
+		UITableView tvLessonDetail { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -228,9 +228,9 @@ namespace NathansWay.iOS.Numeracy
 				btnTypeMixed.Dispose ();
 				btnTypeMixed = null;
 			}
-			if (tvLessonItems != null) {
-				tvLessonItems.Dispose ();
-				tvLessonItems = null;
+			if (tvLessonDetail != null) {
+				tvLessonDetail.Dispose ();
+				tvLessonDetail = null;
 			}
 			if (tvLessonMain != null) {
 				tvLessonMain.Dispose ();

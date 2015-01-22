@@ -12,7 +12,7 @@ namespace NathansWay.Shared.BUS.Entity
         #region Private Variables
         
 		private int _lesson_seq;
-        private string _operator;
+        private int _operator;
         private string _equation;
 		private string _method;
 		private string _result;
@@ -37,7 +37,7 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._lesson_seq = value; }
         }
 		[Column("operator")]
-        public string Operator
+        public int Operator
         { 
 			get { return this._operator; } 
 			set { this._operator = value; }
