@@ -141,17 +141,8 @@
       <DependentUpon>vcToolBox.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.UISettings.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberCombo.cs">
-      <DependentUpon>vwNumberCombo.xib</DependentUpon>
-    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\vNumberPad.cs">
       <DependentUpon>vwNumberPad.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.cs">
-      <DependentUpon>vwNumberCombo.xib</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberCombo.designer.cs">
-      <DependentUpon>vwNumberCombo.xib</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\vcNumberPad.cs">
       <DependentUpon>vwNumberPad.xib</DependentUpon>
@@ -206,6 +197,19 @@
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.designer.cs">
       <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Base.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Fraction.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Fraction.designer.cs">
+      <DependentUpon>NathansWay.Numeracy.Input.Fraction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number.designer.cs">
+      <DependentUpon>NathansWay.Numeracy.Input.Number.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number %28copy%29.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number.designer %28copy%29.cs">
+      <DependentUpon>NathansWay.Numeracy.Input.Number %28copy%29.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -244,8 +248,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwFractionCombo.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberCombo.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\Controls\vwNumberPad.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />

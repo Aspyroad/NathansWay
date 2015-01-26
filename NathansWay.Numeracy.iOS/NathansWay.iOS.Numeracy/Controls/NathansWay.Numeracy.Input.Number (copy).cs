@@ -12,7 +12,7 @@ using NathansWay.iOS.Numeracy.UISettings;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-    [Register ("vcNumberCombo")]
+
     public partial class vcNumberCombo : AspyViewController
     {
 
@@ -46,7 +46,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcNumberCombo() : base ("vwNumberCombo", null)
+        public vcNumberCombo()
         {
             Initialize();
         }
@@ -185,7 +185,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        partial void txtTouchedDown(NSObject sender)
+        partial void txtTouchedDown(UITextField sender)
         {
             this.preEdit();
 
@@ -201,7 +201,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.postEdit();
         }        
         
-        partial void btnUpTouch(NSObject sender)
+        partial void btnUpTouch(UIButton sender)
         {
             if (this.intCurrentValue < 9)
             {
@@ -214,7 +214,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.intCurrentValue.ToString();
         }
 
-        partial void btnDownTouch(NSObject sender)
+        partial void btnDownTouch(UIButton sender)
         {
             if (this.intCurrentValue > 0)
             {
@@ -227,7 +227,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.intCurrentValue.ToString();
         }
 
-        private void preEdit()
+        private void preEdit(UITextField _txtField)
         {
             // Store the original value
             if (this.txtNumber.Text.Length > 0)

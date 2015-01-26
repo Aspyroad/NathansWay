@@ -9,23 +9,11 @@ using MonoTouch.UIKit;
 using System;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy.Controls
 {
-	[Register ("vcTeacher")]
-	partial class vcTeacher
+	[Register ("vcFraction")]
+	partial class vcFraction
 	{
-		[Outlet]
-		MonoTouch.UIKit.UIButton btn1 { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UIButton btn2 { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UIButton btn3 { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UIButton btn4 { get; set; }
-
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIButton btnDomDown { get; set; }
@@ -44,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UIPickerView pkDomPicke { get; set; }
+		UIPickerView pkDomPicker { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -62,8 +50,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 		[GeneratedCode ("iOS Designer", "1.0")]
 		UIView vwFractionBar { get; set; }
 
-		[Action ("returnToStepOne:")]
-		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
+		[Action ("btnNumTouchUp:")]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		partial void btnNumTouchUp (UIButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -83,9 +72,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 				btnNumUp.Dispose ();
 				btnNumUp = null;
 			}
-			if (pkDomPicke != null) {
-				pkDomPicke.Dispose ();
-				pkDomPicke = null;
+			if (pkDomPicker != null) {
+				pkDomPicker.Dispose ();
+				pkDomPicker = null;
 			}
 			if (pkNumPicker != null) {
 				pkNumPicker.Dispose ();
