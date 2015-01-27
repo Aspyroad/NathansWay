@@ -77,7 +77,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentEditMode = E__NumberComboEditMode.EditNumPad; 
 
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action<object, EventArgs>(valuechanged);          
+            // PASS A FUNCTION INTO THIS!
+            ehValueChanged = new Action<object, EventArgs>(ValueChanged);          
 
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
@@ -113,14 +114,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected override void Initialize ()
         {
             base.Initialize ();
-            // TOP CLASS FUNCTIONALITY
-            //this.AspyTag1 = 102;
-            //this.AspyName = "VC_CtrlNumberCombo";
+
+            this.strTextValue = "";
 
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewContainer>();
-
             this.actHandlePad = new Action<string>(HandlePadPush);
 
+            // Build our number list
             items.Add("0");
             items.Add("1");
             items.Add("2");
@@ -131,8 +131,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("7");
             items.Add("8");
             items.Add("9");
-
-
         }
 
         protected void BASE_txtTouchedDown(UITextField sender)
@@ -247,7 +245,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        protected void valuechanged(object s, System.EventArgs e)
+        protected virtual void ValueChanged(object s, System.EventArgs e)
         {
             this.strTextValue = this._pickerdelegate.SelectedItem;
             //this.txtNumber.Text = this._pickerdelegate.SelectedItem;

@@ -11,8 +11,8 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-	[Register ("vcNumberCombo")]
-	partial class vcNumberCombo
+    [Register ("vcNumberTextGUI")]
+    partial class vcNumberTextGUI
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIButton btnDown { get; set; }

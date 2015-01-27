@@ -18,9 +18,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Class Variables
 
-        private PickerDelegate _pickerdelegate;
-        private PickerSource _pickersource;
-        private txtNumberDelegate _txtNumberDelegate;
+        //private PickerDelegate _pickerdelegate;
+        //private PickerSource _pickersource;
+        //private txtNumberDelegate _txtNumberDelegate;
         private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
         private E__NumberComboEditMode _currentEditMode;
@@ -67,48 +67,43 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-			//_numeracySettings = (NumeracySettings)this.iOSSettings;
+            // Hook our string variable to the textbox
+            this.txtNumber.Text = this.strTextValue;
+            // Hook our visible boolean to the up/down buttons
+            this.btnDown.Hidden = this.bUpDownButtonVisible;
+            this.btnUp.Hidden = this.bUpDownButtonVisible;
+            // Delegate creations
+            this._pickerdelegate = new PickerDelegate(this.items);
+            this._pickersource = new PickerSource(this.items);
+            this._txtNumberDelegate = new txtNumberDelegate();
+            // Delegate wireups
+            this.pkNumberPicker.Delegate = this._pickerdelegate;
+            this.pkNumberPicker.DataSource = this._pickersource;
+            this.txtNumber.Delegate = this._txtNumberDelegate;
+            // Set initital values
+            this.preEdit(this.txtNumber);
+            // By default we want the picker hidden until the textbox is tapped.
+            this.View.SendSubviewToBack(this.pkNumberPicker);
+            this.pkNumberPicker.Hidden = true;
 
-            //Setup our editmode details
-			//TODO : Fix settings in numbercombo
-//			this.CurrentEditMode = E__NumberComboEditMode.EditNumPad; //this._numeracySettings.NumberCombo.EditMode;
-//            
-//            // Set initital values
-//            this.preEdit();
-//           
-//            // By default we want the picker hidden until the textbox is tapped.
-//            this.View.SendSubviewToBack(this.pkNumberPicker);
-//            this.pkNumberPicker.Hidden = true;
-//            
 //            // Wire up our eventhandler to "valuechanged" member
 //            ehValueChanged = new Action<object, EventArgs>(valuechanged);          
-//                
-//            this._pickerdelegate = new PickerDelegate(this.items);
-//            this._pickersource = new PickerSource(this.items);
-//            this._txtNumberDelegate = new txtNumberDelegate();
-//
-//            this.pkNumberPicker.Delegate = this._pickerdelegate;
-//            this.pkNumberPicker.DataSource = this._pickersource;
-//            this.txtNumber.Delegate = this._txtNumberDelegate;
-//
-//            ///<Summary>
-//            /// Wire up the value change method
-//            ///<summary>/
-//            this._pickerdelegate.psValueChanged += this.ehValueChanged; 
-//
-//            // Wire up tapgesture to 
-//            this.txtSingleTapGestureRecognizer();
+
+            // Old code but kept, this is how you wire up the xamarin combined 
+            // Delegate/Source delegate
+            // Wire up tapgesture
+            // this.txtSingleTapGestureRecognizer();
             
-//            pickerDataModel = new PickerDataModel();
-//            this.pkNumberPicker.Source = pickerDataModel;
-//            this.pkNumberPicker.Center = this.txtNumber.Center ;           
-//            this.pkNumberPicker.ValueChanged += (s, e) =>
-//            {
-//                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-//            };  
-//
-//            // set our initial selection on the label
-//            this.txtNumber.Text = pickerDataModel.SelectedItem;
+            //            pickerDataModel = new PickerDataModel();
+            //            this.pkNumberPicker.Source = pickerDataModel;
+            //            this.pkNumberPicker.Center = this.txtNumber.Center ;           
+            //            this.pkNumberPicker.ValueChanged += (s, e) =>
+            //            {
+            //                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+            //            };  
+            //
+            //            // set our initial selection on the label
+            //            this.txtNumber.Text = pickerDataModel.SelectedItem;
 
         }
 
@@ -116,17 +111,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Public Properties
         
-//        public int PrevValue
-//        {
-//            get { return this.intPrevValue; }
-//            set { this.intPrevValue = value; }
-//        }
-//        
-//        public int CurrentValue
-//        {
-//            get { return this.intCurrentValue; }
-//            set { this.intCurrentValue = value; }          
-//        }
+
 //
 //        public E__NumberComboEditMode CurrentEditMode
 //        {
@@ -162,26 +147,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			base.Initialize ();
 			this.AspyTag1 = 102;
 			this.AspyName = "VC_CtrlNumberTextGUI";
-
-//			//this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
-//			//this._vcSettings = this._numeracySettings.NumberCombo;
-//			//this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
-//
-//			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewController>();
-//
-//            this.actHandlePad = new Action<string>(_handlePadPush);
-//
-//            items.Add("0");
-//            items.Add("1");
-//            items.Add("2");
-//            items.Add("3");
-//            items.Add("4");
-//            items.Add("5");
-//            items.Add("6");
-//            items.Add("7");
-//            items.Add("8");
-//            items.Add("9");
-//
 
         }
 
