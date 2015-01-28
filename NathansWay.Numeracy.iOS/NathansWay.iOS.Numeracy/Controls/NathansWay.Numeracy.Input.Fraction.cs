@@ -10,8 +10,7 @@ using AspyRoad.iOSCore;
 using NathansWay.iOS.Numeracy.UISettings;
 
 namespace NathansWay.iOS.Numeracy.Controls
-{
-    [Register ("vcFraction")]
+{   
     public partial class vcFraction : AspyViewController
     {
         #region Constructors

@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Used to prohibit any manual editing
         protected txtNumberDelegate _txtNumberDelegate;
         // Actions
-        protected Action<object, EventArgs> ehValueChanged;
+        protected Action ehValueChanged;
         protected Action<string> actHandlePad;
         // Picker list data
         protected List<string> items = new List<string>();
@@ -78,7 +78,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Wire up our eventhandler to "valuechanged" member
             // PASS A FUNCTION INTO THIS!
-            ehValueChanged = new Action<object, EventArgs>(ValueChanged);          
+            ehValueChanged = new Action(PickerValueChanged);          
 
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
@@ -133,13 +133,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
         }
 
-        protected void BASE_txtTouchedDown(UITextField sender)
+        protected void BASE_txtTouchedDown(UITextField sender, UIPickerView _pkView)
         {
             this.preEdit(sender);
 
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
-                this.EditScroll();
+                this.EditScroll(_pkView);
             }
             else
             {
@@ -206,10 +206,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.Text = "";
 
             this.bUpDownButtonVisible = false;
-            //this.pkNumberPicker.Hidden = false;
-
+            _picker.Hidden = false;
             this.View.BringSubviewToFront(_picker);
-            //this.View.BringSubviewToFront(this.pkNumberPicker);
         }
 
         protected void EditNumPad()
@@ -223,17 +221,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             _numberpad.PadPushed += this.actHandlePad;
         }
 
-        protected void HandlePadPush(string padText, UITextField _txtField)
+        protected void HandlePadPush(string padText)
         {
             if (padText != "X")
             {
-                this.intPrevValue = Convert.ToInt32(_txtField.Text);
+                this.intPrevValue = Convert.ToInt32(strTextValue);
                 this.intCurrentValue = Convert.ToInt32(padText); 
-                _txtField.Text = padText;
+                strTextValue = padText;
+                //_txtField.Text = padText;
             }
             else
             {
-                _txtField.Text = this.intCurrentValue.ToString();
+                strTextValue = this.intCurrentValue.ToString();
+                //_txtField.Text = this.intCurrentValue.ToString();
             }
             _numberpad.PadPushed -= this.actHandlePad;
             // Remove the numpad from the mainviewcontainer
@@ -245,19 +245,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        protected virtual void ValueChanged(object s, System.EventArgs e)
+        protected virtual void PickerValueChanged()
         {
-            this.strTextValue = this._pickerdelegate.SelectedItem;
-            //this.txtNumber.Text = this._pickerdelegate.SelectedItem;
 
-            // NEED TO LOOK AT THIS WHILE DEBUGGING!!!
-            //-----this.View.SendSubviewToBack(this.pkNumberPicker);
-            //this.View.SendSubviewToBack(this.pkNumberPicker);
-
-            this.bUpDownButtonVisible = true;
-            //this.pkNumberPicker.Hidden = true; 
-
-            this.postEdit();
         }
 
         #endregion    
@@ -313,7 +303,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             #region Events
 
-            public event Action<object, EventArgs> psValueChanged;
+            public event Action psValueChanged;
 
             #endregion
 
@@ -334,7 +324,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             #region Private Members
 
             private void Initialize()
-            {                
+            { 
             }
 
             #endregion
@@ -361,7 +351,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 selectedIndex = row;
                 if (psValueChanged != null)
                 {
-                    psValueChanged (this, new EventArgs ());
+                    psValueChanged ();
                 }   
             }
 

@@ -206,10 +206,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number.designer.cs">
       <DependentUpon>NathansWay.Numeracy.Input.Number.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number %28copy%29.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Number.designer %28copy%29.cs">
-      <DependentUpon>NathansWay.Numeracy.Input.Number %28copy%29.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

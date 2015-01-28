@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         //private PickerDelegate _pickerdelegate;
         //private PickerSource _pickersource;
         //private txtNumberDelegate _txtNumberDelegate;
-        private Action<object, EventArgs> ehValueChanged;
+        //private Action<object, EventArgs> ehValueChanged;
         private List<string> items = new List<string>();
         private E__NumberComboEditMode _currentEditMode;
         //private NumeracySettings _numeracySettings;
@@ -72,6 +72,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Hook our visible boolean to the up/down buttons
             this.btnDown.Hidden = this.bUpDownButtonVisible;
             this.btnUp.Hidden = this.bUpDownButtonVisible;
+
+            // HOOK OUR ACTION PROTOTYPE!!!!
+            this.ehValueChanged = new Action(PickerValueChanged);
+
+
             // Delegate creations
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
@@ -152,108 +157,18 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         partial void txtTouchedDown(UITextField sender)
         {
-//            this.preEdit();
-//
-//            if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
-//            {
-//                this.EditScroll();
-//            }
-//            else
-//            {
-//                this.EditNumPad();
-//            }
-//
-//            //this.postEdit();
+            this.BASE_txtTouchedDown(sender, this.pkNumberPicker);
         }        
         
         partial void btnUpTouch(UIButton sender)
         {
-//            if (this.intCurrentValue < 9)
-//            {
-//                this.intCurrentValue = this.intCurrentValue + 1;
-//            }
-//            else
-//            {
-//                this.intCurrentValue = 0;
-//            }
-//            this.txtNumber.Text = this.intCurrentValue.ToString();
+            this.BASE_btnUpTouch(this.txtNumber);
         }
 
         partial void btnDownTouch(UIButton sender)
         {
-//            if (this.intCurrentValue > 0)
-//            {
-//                this.intCurrentValue = this.intCurrentValue - 1;
-//            }
-//            else
-//            {
-//                this.intCurrentValue = 9;
-//            }
-//            this.txtNumber.Text = this.intCurrentValue.ToString();
+            this.BASE_btnDownTouch(this.txtNumber);
         }
-
-//        private void preEdit(UITextField _txtField)
-//        {
-////            // Store the original value
-////            if (this.txtNumber.Text.Length > 0)
-////            {
-////                this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-////                this.intCurrentValue = this.intPrevValue;
-////            }
-////            else
-////            {
-////                this.intPrevValue = 0;
-////                this.intCurrentValue = 0;
-////                this.txtNumber.Text = "0";
-////            }
-//        }
-
-//        private void postEdit()
-//        {
-//            // Store the new value
-//            this.intCurrentValue = Convert.ToInt32(this.txtNumber.Text);
-//        }
-
-//        private void EditScroll()
-//        {
-//            // Clear the text when picker to make it clearer
-//            this.txtNumber.Text = "";
-//            this.pkNumberPicker.Hidden = false;
-//            this.View.BringSubviewToFront(this.pkNumberPicker);
-//        }
-
-//        private void EditNumPad()
-//        {
-//            // Create an instance of Numberpad
-//            this._numberpad = new vcNumberPad();
-//            // Set the pad view position
-//            this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-//
-//            this._viewcontollercontainer.AddAndDisplayController(this._numberpad);          
-//            _numberpad.PadPushed += this.actHandlePad;
-//        }
-
-//        private void _handlePadPush(string padText)
-//        {
-//            if (padText != "X")
-//            {
-//                this.intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-//                this.intCurrentValue = Convert.ToInt32(padText); 
-//                this.txtNumber.Text = padText;
-//            }
-//            else
-//            {
-//                this.txtNumber.Text = this.intCurrentValue.ToString();
-//            }
-//            _numberpad.PadPushed -= this.actHandlePad;
-//            // Remove the numpad from the mainviewcontainer
-//            if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-//            {
-//               // Raise an error 
-//            }
-//           
-//
-//        }
 
 //        private void valuechanged(object s, System.EventArgs e)
 //        {
@@ -262,6 +177,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 //            this.pkNumberPicker.Hidden = true;  
 //            this.postEdit();
 //        }
+
+        protected override void PickerValueChanged()
+        {
+            //this.strTextValue = this._pickerdelegate.SelectedItem;
+            this.txtNumber.Text = this._pickerdelegate.SelectedItem;
+
+            // NEED TO LOOK AT THIS WHILE DEBUGGING!!!
+
+            this.View.SendSubviewToBack(this.pkNumberPicker);
+            this.bUpDownButtonVisible = true;
+            this.pkNumberPicker.Hidden = true; 
+
+            this.postEdit(this.txtNumber);
+        }
 
         // Currently not in use
 //        protected void txtSingleTapGestureRecognizer()
