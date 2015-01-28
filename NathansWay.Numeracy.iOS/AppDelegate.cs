@@ -180,7 +180,7 @@ namespace NathansWay.iOS.Numeracy
 			//_menuStart = storyboard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
 
 			//Add our navigation object to the service library
-			//iOSCoreServiceContainer.Register<AspyViewContainer> (_mainController);
+            iOSCoreServiceContainer.Register<AspyViewContainer> (_mainContainer);
 
 			//window.MakeKeyAndVisible();
 			window.RootViewController = _mainContainer;
@@ -295,7 +295,7 @@ namespace NathansWay.iOS.Numeracy
 			// Controls 
 			_numeracyUIManager.AddVC (600100, "VC_CtrlNumberPad");
 			_numeracyUIManager.AddVC (600101, "VC_CtrlFractionCombo");
-			_numeracyUIManager.AddVC (600102, "VC_CtrlNumberCombo");
+            _numeracyUIManager.AddVC (600102, "VC_CtrlNumberTextGUI");
 			_numeracyUIManager.AddVC (600103, "VC_CtrlComboBox");
 
 

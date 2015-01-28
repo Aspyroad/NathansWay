@@ -482,12 +482,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o9j-oc-xrY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1500" y="-1388"/>
+            <point key="canvasLocation" x="-1173" y="-1053"/>
         </scene>
         <!--vc Number Combo-->
         <scene sceneID="IY1-3l-QRu">
             <objects>
-                <viewController storyboardIdentifier="NumberCombo" title="vc Number Combo" id="h98-CJ-chy" customClass="vcNumberCombo" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vcCtrlNumberText" title="vc Number Combo" id="h98-CJ-chy" sceneMemberID="viewController" customClass="vcCtrlNumberText">
                     <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="3Wg-8W-5I6" customClass="vNumberCombo">
                         <rect key="frame" x="0.0" y="0.0" width="54" height="66"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -544,7 +544,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5h-Ln-kyp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1651" y="-1418"/>
+            <point key="canvasLocation" x="-1093" y="-988"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

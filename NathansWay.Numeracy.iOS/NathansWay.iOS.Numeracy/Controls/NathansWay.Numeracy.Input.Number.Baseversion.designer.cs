@@ -11,8 +11,8 @@ using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-	[Register ("vcNumberCombo")]
-	partial class vcNumberCombo
+	[Register ("vcCtrlNumberText")]
+	partial class vcCtrlNumberText
 	{
 		[Outlet]
 		MonoTouch.UIKit.UIButton btnDown { get; set; }
@@ -40,22 +40,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		void ReleaseDesignerOutlets ()
 		{
-            if (btnDown != null) {
-                btnDown.Dispose ();
-                btnDown = null;
-            }
-            if (btnUp != null) {
-                btnUp.Dispose ();
-                btnUp = null;
-            }
-            if (pkNumberPicker != null) {
-                pkNumberPicker.Dispose ();
-                pkNumberPicker = null;
-            }
-            if (txtNumber != null) {
-                txtNumber.Dispose ();
-                txtNumber = null;
-            }
 		}
 	}
 }

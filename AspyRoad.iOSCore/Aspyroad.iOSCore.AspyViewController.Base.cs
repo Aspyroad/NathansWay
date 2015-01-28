@@ -123,7 +123,7 @@ namespace AspyRoad.iOSCore
 			_newController.DidMoveToParentViewController (this);
 		}
 
-		public void AddAndDisplayController (AspyViewController _newController)
+		public virtual void AddAndDisplayController (AspyViewController _newController)
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subviews

@@ -8,6 +8,7 @@ using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Menu;
+using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -19,6 +20,7 @@ namespace NathansWay.iOS.Numeracy
 		public UIStoryboard _storyBoard;
 		public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
+        public Lazy<vcCtrlNumberText> _vcCtrlNumberText;
 
 		#endregion
 
@@ -56,6 +58,7 @@ namespace NathansWay.iOS.Numeracy
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
+            _vcCtrlNumberText = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
 
 			//laborController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<LaborController>());
 			//expenseController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<ExpenseController>());
@@ -92,7 +95,8 @@ namespace NathansWay.iOS.Numeracy
 
 			// ***********************************************
 			// Load our initial vc
-			this.AddAndDisplayController(_vcLessonMenu.Value);
+			// this.AddAndDisplayController(_vcLessonMenu.Value);
+            this.AddAndDisplayController(_vcCtrlNumberText.Value);
 			// ***********************************************
 		}
 
@@ -106,6 +110,11 @@ namespace NathansWay.iOS.Numeracy
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 		}
+
+        public override void AddAndDisplayController(AspyViewController _newController)
+        {
+            base.AddAndDisplayController(_newController);
+        }
 
 		#endregion
 	}
