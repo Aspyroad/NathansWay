@@ -348,6 +348,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             singleTapGesture.NumberOfTouchesRequired = 1;
             singleTapGesture.NumberOfTapsRequired = 1;
+
+            // This is needed for ios 7 >
+            singleTapGesture.ShouldRecognizeSimultaneously = delegate
+            {
+                return true;
+            };
+
             // add the gesture recognizer to the view
             this.pkNumberPicker.AddGestureRecognizer(singleTapGesture);
         }
