@@ -168,10 +168,13 @@ namespace AspyRoad.iOSCore.UISettings
 			LabelFontName = g.LabelFontName;
 			LabelHighLightedTextColor = g.LabelHighLightedTextColor;
 			LabelTextColor = g.LabelTextColor;
+            LabelHighLightedBGColor = g.LabelHighLightedBGColor;
+            LabelBGColor = g.LabelBGColor;
 			// TextViews
 			TextBGColor = g.TextBGColor;
 			TextBGTint = g.TextBGTint;
 			TextHighLightedTextColor = g.TextHighLightedTextColor;
+            TextHighLightedBGColor = g.TextHighLightedBGColor;
 			TextColor = g.TextColor;
 			// Slider
 			MaxTrackTintColor = g.MaxTrackTintColor;
@@ -202,7 +205,6 @@ namespace AspyRoad.iOSCore.UISettings
 			//UITableView.Appearance.BackgroundColor = ViewTableBGUIColor.Value;
 
 		}
-
 
 		/// <summary>
 		/// Converts a G__Color struct to a new UIColor object
@@ -262,7 +264,7 @@ namespace AspyRoad.iOSCore.UISettings
 			}
 		}
 
-		// Font
+        #region UIFont
 		public UIFont FontOfSize (float size)
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, size);
@@ -290,8 +292,9 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_globalfontcolor); 
 			}
 		}
+        #endregion
 
-		// Button
+		#region UIButton
 		public Lazy<UIColor> ButtonNormalBGUIColor
 		{ 
 			get
@@ -362,8 +365,9 @@ namespace AspyRoad.iOSCore.UISettings
 		{
 			return UIFont.FromName (this.ButtonFontName, size);
 		}
+        #endregion
 
-		// UIView
+		#region UIView
 		public Lazy<UIColor> ViewBGUIColor
 		{ 
 			get
@@ -387,8 +391,9 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_viewbgtint);
 			} 
 		}
+        #endregion
 
-		// UILabel
+        #region UILabel
 		public UIFont LabelFont (float size)
 		{
 			return UIFont.FromName (this.LabelFontName, size);
@@ -410,7 +415,24 @@ namespace AspyRoad.iOSCore.UISettings
 			} 
 		}
 
-		// UITextViews
+        public Lazy<UIColor> LabelHighLightedBGUIColor
+        { 
+            get
+            {
+                return this.convertUIColor(_labelhighlightedbgcolor);
+            } 
+        }
+
+        public Lazy<UIColor> LabelBGUIColor
+        { 
+            get
+            {
+                return this.convertUIColor(_labelbgcolor);
+            } 
+        }
+        #endregion
+
+		#region UITextViews
 		public Lazy<UIColor> TextBGUIColor
 		{ 
 			get
@@ -435,6 +457,14 @@ namespace AspyRoad.iOSCore.UISettings
 			} 
 		}
 
+        public Lazy<UIColor> TextHighLightedBGUIColor
+        { 
+            get
+            {
+                return this.convertUIColor(_texthighlightedbgcolor);
+            } 
+        }
+
 		public Lazy<UIColor> TextUIColor
 		{ 
 			get
@@ -442,8 +472,9 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_textcolor);
 			} 
 		}
+        #endregion
 
-		// UISliderViews
+		#region UISliderViews
 		public Lazy<UIColor> MaxTrackTintUIColor
 		{ 
 			get
@@ -476,6 +507,7 @@ namespace AspyRoad.iOSCore.UISettings
 
 			}
 		}
+        #endregion
 
 		#region UIViewTable
 

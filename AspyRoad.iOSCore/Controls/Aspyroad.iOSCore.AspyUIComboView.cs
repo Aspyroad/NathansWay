@@ -6,6 +6,8 @@ using System.Collections.Generic;
 // Mono
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
+// AspyRoad
+using AspyRoad.iOSCore.UISettings;
 
 namespace AspyRoad.iOSCore
 {
@@ -265,9 +267,12 @@ namespace AspyRoad.iOSCore
 		#endregion
 	}
 	
+    [MonoTouch.Foundation.Register ("AspyPickerView")] 
     public class AspyPickerView : UIPickerView  
     {
-        #region Class Variables
+        #region Private Variables
+
+        protected iOSUIManager iOSUIAppearance; 
 
         #endregion
 
@@ -305,13 +310,51 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize()
 		{
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.ApplyUI();
 		}
 
 		#endregion
 
 		#region Overrides
 
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+        }
+
 		#endregion
+
+        #region Virtual Members
+
+        public virtual void ApplyUI ()
+        {
+            #region UI for prior iOS7
+            // Just in case the _picker isnt drawn
+            if (this.Subviews.GetUpperBound (0) > 0)
+            {
+                if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                {
+                    this.BackgroundColor = UIColor.Brown;
+                    // Clear all crap UI from pickerview prior to iOS7
+                    // This clears all pickerview background
+                    foreach (UIView v in this.Subviews)
+                    {
+                        if (v.GetType() != typeof(UITableView))
+                        {
+                            v.Alpha = 0.5f;
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            // Apply label font color
+            //this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
+            //this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
+        }
+
+        #endregion
     }
 
     public class AspyPickerViewModel : UIPickerViewModel 
@@ -323,6 +366,9 @@ namespace AspyRoad.iOSCore
 		protected float _fontSize;
 		protected string _fontName;
 		protected RectangleF _labelFrame;
+
+        protected float _rowHeight;
+
 
         #endregion
 
@@ -342,6 +388,17 @@ namespace AspyRoad.iOSCore
 		{
 			this._items = _dataList;
 		}
+
+        #endregion
+
+        #region Private Variables
+
+        protected virtual void Initialize()
+        {
+            _rowHeight = 50.0f;
+        }
+
+
 
         #endregion
 
@@ -375,6 +432,12 @@ namespace AspyRoad.iOSCore
 		{
 			set { _labelFrame = value; }
 		}
+
+        public float RowHeight
+        {
+            get { return _rowHeight; }
+            set { _rowHeight = value; }
+        }
 
         #endregion
 
@@ -429,13 +492,12 @@ namespace AspyRoad.iOSCore
 			lbl.Text = this._items[row];
 			// Thrown in for < iOS7
 			lbl.BackgroundColor = UIColor.Clear;
-
-			return lbl;
+            return lbl;
         }
 
 		public override float GetRowHeight (UIPickerView picker, int component)
 		{
-			return 50.0f;
+            return RowHeight;
 		}
 
         #endregion

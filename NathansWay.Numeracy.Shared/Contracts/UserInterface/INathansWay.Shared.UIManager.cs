@@ -69,11 +69,14 @@ namespace NathansWay.Shared
 		string LabelFontName { get; set; }
 		Lazy<G__Color> LabelHighLightedTextColor { get; set; }
 		Lazy<G__Color> LabelTextColor { get; set; }
+        Lazy<G__Color> LabelHighLightedBGColor { get; set; }
+        Lazy<G__Color> LabelBGColor { get; set; }
 
 		// TextViews
 		Lazy<G__Color> TextBGColor { get; set; }
 		Lazy<G__Color> TextBGTint { get; set; }
 		Lazy<G__Color> TextHighLightedTextColor { get; set; }
+        Lazy<G__Color> TextHighLightedBGColor { get; set; }
 		Lazy<G__Color> TextColor { get; set; }
 
 		// Slider View

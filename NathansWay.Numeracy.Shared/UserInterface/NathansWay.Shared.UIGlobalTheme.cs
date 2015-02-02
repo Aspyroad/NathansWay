@@ -40,14 +40,17 @@ namespace NathansWay.Shared
 		public string LabelFontName { get; set; }
 		public Lazy<G__Color> LabelHighLightedTextColor { get; set; }
 		public Lazy<G__Color> LabelTextColor { get; set; }
+        public Lazy<G__Color> LabelHighLightedBGColor { get; set; }
+        public Lazy<G__Color> LabelBGColor { get; set; }
 
 		// UITextViews
 		public Lazy<G__Color> TextBGColor { get; set; }
 		public Lazy<G__Color> TextBGTint { get; set; }
 		public Lazy<G__Color> TextHighLightedTextColor { get; set; }
+        public Lazy<G__Color> TextHighLightedBGColor { get; set; }
 		public Lazy<G__Color> TextColor { get; set; }
 
-		// Slider View
+		// UISliderView
 		public Lazy<G__Color> MaxTrackTintColor { get; set; }
 		public Lazy<G__Color> MinTrackTintColor { get; set; }
 		public Lazy<G__Color> ThumbColor { get; set; }
@@ -105,11 +108,14 @@ namespace NathansWay.Shared
 			LabelFontName = "";
 			LabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 255.0f, 255.0f)); // Black
 			LabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+            LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+            LabelBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
 
 			// UITextViews
 			TextBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+            TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(40.0f, 40.0f, 40.0f, 255.0f)); // Black
 			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 
 			// Slider View

@@ -150,11 +150,14 @@ namespace NathansWay.Shared
 		protected string _labelfontname;
 		protected Lazy<G__Color> _labelhighlightedtextcolor;
 		protected Lazy<G__Color> _labeltextcolor;
+        protected Lazy<G__Color> _labelhighlightedbgcolor;
+        protected Lazy<G__Color> _labelbgcolor;
 
 		// UITextViews
 		protected Lazy<G__Color> _textbgcolor;
 		protected Lazy<G__Color> _textbgtint;
 		protected Lazy<G__Color> _texthighlightedtextcolor;
+        protected Lazy<G__Color> _texthighlightedbgcolor;
 		protected Lazy<G__Color> _textcolor;
 
 		// Slider View
@@ -355,6 +358,18 @@ namespace NathansWay.Shared
 			get { return _labeltextcolor; }
 			set { _labeltextcolor = value; } 
 		} 
+        public Lazy<G__Color> LabelHighLightedBGColor
+        { 
+            get { return _labelhighlightedbgcolor; }
+            set { _labelhighlightedbgcolor = value; } 
+        } 
+        public Lazy<G__Color> LabelBGColor
+        { 
+            get { return _labelbgcolor; }
+            set { _labelbgcolor = value; } 
+        } 
+
+
 		// UITextViews
 		public Lazy<G__Color> TextBGColor		
 		{ 
@@ -371,6 +386,11 @@ namespace NathansWay.Shared
 			get { return _texthighlightedtextcolor; }
 			set { _texthighlightedtextcolor = value; }
 		}
+        public Lazy<G__Color> TextHighLightedBGColor 
+        { 
+            get { return _texthighlightedbgcolor; } 
+            set { _texthighlightedbgcolor = value; }
+        }
 		public Lazy<G__Color> TextColor
 		{ 
 			get { return _textcolor; }

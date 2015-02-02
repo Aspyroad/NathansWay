@@ -25,25 +25,25 @@ namespace AspyRoad.iOSCore
 
 		public AspyLabel (IntPtr handle) : base(handle)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyLabel (NSCoder coder) : base(coder)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyLabel (RectangleF frame) : base(frame)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyLabel () : base ()
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
-		private void Initialize_Base()
+		protected virtual void Initialize()
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();	
 		}

@@ -31,6 +31,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected int _intCurrentValue;
 
         protected bool _bIsInEditMode;
+        protected bool _bPickerToBottom;
+        protected bool _bPickerToTop;
 
         #endregion
 
@@ -38,18 +40,18 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcCtrlNumberText (IntPtr h) : base (h)
         {
-            Initialize();
+            Initialize_();
         }
 
         [Export("initWithCoder:")]
         public vcCtrlNumberText (NSCoder coder) : base(coder)
         {
-            Initialize();
+            Initialize_();
         }
 
         public vcCtrlNumberText()
         {
-            Initialize();
+            Initialize_();
         }
 
         #endregion
@@ -159,15 +161,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
         
-        protected override void Initialize ()
+        protected void Initialize_ ()
         {
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_CtrlNumberText";
 
 			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewContainer>();
-                       
-
+              
             this.actHandlePad = new Action<string>(_handlePadPush);
 
             items.Add("0");
@@ -187,6 +188,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         partial void txtTouchedDown(UITextField sender)
         {
             this.preEdit();
+
+            // Graphically highlite the text control so we know its selected
+            txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
 
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
@@ -421,10 +425,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override void Selected (UIPickerView picker, int row, int component)
             {
                 selectedIndex = row;
-                if (psValueChanged != null)
-                {
-                    psValueChanged ();
-                }   
+//                if (psValueChanged != null)
+//                {
+//                    psValueChanged ();
+//                }   
             }
 
             /// <summary>

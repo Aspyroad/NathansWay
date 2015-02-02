@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		MonoTouch.UIKit.UIButton btnUp { get; set; }
 
 		[Outlet]
-		public MonoTouch.UIKit.UIPickerView pkNumberPicker { get; private set; }
+		public AspyRoad.iOSCore.AspyPickerView pkNumberPicker { get; private set; }
 
 		[Outlet]
 		public MonoTouch.UIKit.UITextField txtNumber { get; private set; }
