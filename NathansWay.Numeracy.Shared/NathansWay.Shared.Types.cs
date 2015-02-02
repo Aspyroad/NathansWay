@@ -49,7 +49,18 @@ namespace NathansWay.Shared
 
 	#endregion
 
-	public struct G__Color
+    public enum G__UnitPlacement : int
+    {
+        ones = 1,
+        tens = 2,
+        hundreds = 3,
+        thousands = 4,
+        tenthousands = 5,
+        hundredthousands = 6,
+        millions = 7
+    }
+
+    struct G__Color
 	{
 		// Statics
 		public static readonly G__Color Empty;

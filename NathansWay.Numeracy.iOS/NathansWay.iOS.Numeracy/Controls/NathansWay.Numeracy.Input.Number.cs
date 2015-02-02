@@ -9,6 +9,7 @@ using MonoTouch.UIKit;
 using AspyRoad.iOSCore;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -27,12 +28,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected vcNumberPad _numberpad;
         protected AspyViewContainer _viewcontollercontainer;
         protected Action<string> actHandlePad;
+
+        protected G__UnitPlacement _tensUnit;
+
         protected int _intPrevValue;
         protected int _intCurrentValue;
-
         protected bool _bIsInEditMode;
         protected bool _bPickerToBottom;
         protected bool _bPickerToTop;
+
+        private UIColor _preEditColor;
 
         #endregion
 
@@ -69,7 +74,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //Setup our editmode details
 			//TODO : Fix settings in numbercombo
-            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;//this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;//this._numeracySettings.NumberCombo.EditMode;
             
             // Set initital values
             this.preEdit();
@@ -132,6 +137,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._intCurrentValue = value; }          
         }
 
+        public G__UnitPlacement TensUnit
+        {
+            get { return _tensUnit; }
+            set { _tensUnit = value; }
+        }
+
         public E__NumberComboEditMode CurrentEditMode
         {
             get { return this._currentEditMode; }
@@ -189,8 +200,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.preEdit();
 
-            // Graphically highlite the text control so we know its selected
+            // Graphically highlight the text control so we know its selected
+            this._preEditColor = txtNumber.BackgroundColor;
             txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
+            txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
 
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
@@ -252,17 +265,24 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void postEdit()
+        protected void postEdit(string _value)
         {
-            // Store the new value
-            this._intCurrentValue = Convert.ToInt32(this.txtNumber.Text);
+            this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            this._intCurrentValue = Convert.ToInt32(_value); 
+            this.txtNumber.Text = _value;
+
+            txtNumber.BackgroundColor = this._preEditColor;
+            txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
         }
 
         protected void EditScroll()
         {
             this._bIsInEditMode = true;
+
             // Clear the text when picker to make it clearer
-            this.txtNumber.Text = "";
+            // No, I think its best to dim the text
+            // this.txtNumber.TextColor = "";
+
             this.pkNumberPicker.Hidden = false;
             this.View.BringSubviewToFront(this.pkNumberPicker);
         }
@@ -284,15 +304,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (padText != "X")
             {
-                this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-                this._intCurrentValue = Convert.ToInt32(padText); 
-                this.txtNumber.Text = padText;
+                this.postEdit(padText);
             }
             else
             {
-                this.txtNumber.Text = this._intCurrentValue.ToString();
+                this.postEdit(this._intCurrentValue.ToString());
             }
             _numberpad.PadPushed -= this.actHandlePad;
+
             // Remove the numpad from the mainviewcontainer
             if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
             {
@@ -306,10 +325,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void valuechanged()
         {
-            this.txtNumber.Text = this._pickerdelegate.SelectedItem;
             this.View.SendSubviewToBack(this.pkNumberPicker);
-            this.pkNumberPicker.Hidden = true;  
-            this.postEdit();
+            this.pkNumberPicker.Hidden = true;
+
+            this.postEdit(this._pickerdelegate.SelectedItem);
 
             this._bIsInEditMode = false;
         }

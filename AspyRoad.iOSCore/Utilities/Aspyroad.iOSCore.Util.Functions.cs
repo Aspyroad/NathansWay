@@ -67,6 +67,20 @@ namespace AspyRoad.iOSCore
 		{
 			return value % 2 != 0;
 		}
+
+        public static UIColor AlphaHalfer(UIColor _color)
+        {
+            float r, g, b, a;
+            _color.GetRGBA(out r, out g, out b, out a);
+            return new UIColor(r, g, b, 0.30f);
+        }
+
+        public static UIColor AlphaRestorer(UIColor _color)
+        {
+            float r, g, b, a;
+            _color.GetRGBA(out r, out g, out b, out a);
+            return new UIColor(r, g, b, 1.0f);
+        }
 	}
 }
 

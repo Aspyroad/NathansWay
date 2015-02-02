@@ -330,12 +330,11 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI ()
         {
             #region UI for prior iOS7
-            // Just in case the _picker isnt drawn
-            if (this.Subviews.GetUpperBound (0) > 0)
+            if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
-                if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                // Just in case the _picker isnt drawn
+                if (this.Subviews.GetUpperBound (0) > 0)
                 {
-                    this.BackgroundColor = UIColor.Brown;
                     // Clear all crap UI from pickerview prior to iOS7
                     // This clears all pickerview background
                     foreach (UIView v in this.Subviews)
@@ -347,6 +346,11 @@ namespace AspyRoad.iOSCore
                     }
                 }
             }
+            else
+            {
+                this.BackgroundColor = UIColor.Brown;
+            }
+
             #endregion
 
             // Apply label font color
