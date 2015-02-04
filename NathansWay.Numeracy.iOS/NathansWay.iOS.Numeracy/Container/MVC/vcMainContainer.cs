@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcCtrlNumberText.Value, new RectangleF(100, 100, 54, 70));
+            this.AddAndDisplayController(_vcCtrlNumberText.Value, new RectangleF(100, 100, 50, 76));
 			// ***********************************************
 		}
 

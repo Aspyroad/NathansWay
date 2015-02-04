@@ -20,10 +20,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Class Variables
 
+        public NumberSize NumberTextSize;
+
         protected AspyPickerView pkNumberPicker;
-        protected RectangleF _rectNumberPicker;
-        protected float _fNumberPickerHeight;
-        protected float _fNumberPickerWidth;
 
         protected PickerDelegate _pickerdelegate;
         protected PickerSource _pickersource;
@@ -78,19 +77,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-            //Setup our editmode details
-			//TODO : Fix settings in numbercombo
             this.CurrentEditMode = E__NumberComboEditMode.EditScroll;//this._numeracySettings.NumberCombo.EditMode;
 
-            // Setup basic pickerview width/height
-            this._fNumberPickerHeight = 400.0f;
-            this._fNumberPickerWidth = 60.0f;
-            
+            #region Picker And Text Geometry
+
+
+            #endregion
+                        
             // Set initital values
             this.preEdit();
             
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(valuechanged);          
+            ehValueChanged = new Action(ValueChanged);          
                 
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
@@ -124,6 +122,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLayoutSubviews();
         }
+
+        public override ViewD
 
 
         #endregion
@@ -195,7 +195,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewContainer>();
               
-            this.actHandlePad = new Action<string>(_handlePadPush);
+            this.actHandlePad = new Action<string>(HandlePadPush);
 
             items.Add("0");
             items.Add("1");
@@ -208,6 +208,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
+            this._bPickerToTop = false;
+            this._bPickerToBottom = false;
 
         }
 
@@ -297,14 +299,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bIsInEditMode = true;
             var a = this.ParentViewController;
 
-            // create the Rectangle!
-            var x = this.txtNumber.Frame.Right;
-            var y = this.txtNumber.Frame.Bottom;
-            _rectNumberPicker = new RectangleF(x, y, _fNumberPickerWidth, _fNumberPickerHeight);
-            //_rectNumberPicker = new RectangleF(this.View.Frame.Left, this.View.Frame.Top, _fNumberPickerWidth, _fNumberPickerHeight );
 
 
-            Console.WriteLine("Creating the picker");
             this.pkNumberPicker = new AspyPickerView(_rectNumberPicker);
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
@@ -312,21 +308,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-            this._pickerdelegate.CurrentValue = this._intCurrentValue;
-
-            a.View.AddSubview(pkNumberPicker);
+            var b = this.View.Frame;
+            this.View.Frame = new RectangleF(b.X, b.Y, b.Width, 260.0f);
+            this.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
-
-            //this.View.HitTest(
 
             // Clear the text when picker to make it clearer
             // No, I think its best to dim the text
             // this.txtNumber.TextColor = "";
 
             //this._pkNumberPicker.Hidden = false;
-            a.View.BringSubviewToFront(this.pkNumberPicker);
+            this.View.BringSubviewToFront(this.pkNumberPicker);
             this.pkNumberPicker.ApplyUI();
         }
 
@@ -343,7 +337,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             _numberpad.PadPushed += this.actHandlePad;
         }
 
-        protected void _handlePadPush(string padText)
+        protected void HandlePadPush(string padText)
         {
             if (padText != "X")
             {
@@ -366,7 +360,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        protected void valuechanged()
+        protected void ValueChanged()
         {
             this.View.SendSubviewToBack(this.pkNumberPicker);
             this.pkNumberPicker.Hidden = true;
@@ -376,7 +370,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bIsInEditMode = false;
         }
 
-        // Currently not in use
         protected void txtSingleTapGestureRecognizer()
         {
             
@@ -406,7 +399,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 { 
                     if ( this._bIsInEditMode )
                     {
-                        this.valuechanged();
+                        this.ValueChanged();
                     }
                 };
 
@@ -609,6 +602,79 @@ namespace NathansWay.iOS.Numeracy.Controls
                 return false;
             }
             
+        }
+
+        protected class NumberSize
+        {
+            public PointF _pStartPoint;
+
+            public RectangleF _rectNumberPicker;
+            public RectangleF _rectCtrlNumberTextShowPicker;
+            public RectangleF _rectCtrlNumberTextHiddenPicker;
+            public RectangleF _rectTxtNumber;
+            public RectangleF _rectUpButton;
+            public RectangleF _rectDownButton;
+
+            public float _fNumberTextHiddenPkHeight;
+            public float _fNumberTextHiddenPkWidth;
+
+            public float _fNumberPickerHeight;
+            public float _fNumberPickerWidth;
+
+            public float _fTxtNumberHeight;
+            public float _fTxtNumberWidth;
+
+            public float _fUpDownButtonHeight;
+            public float _fUpDownButtonWidth;
+
+            public NumberSize()
+            {
+             
+            }
+
+            public NumberSize(int _scale)
+            {
+
+            }
+
+            private void Initialize()
+            {
+                // All Initial Values
+                this._fNumberTextHiddenPkHeight = 76.0f;
+                this._fNumberTextHiddenPkWidth = 50.0f;
+
+                this._fNumberPickerHeight = 400.0f;
+                this._fNumberPickerWidth = 50.0f;
+
+                this._fTxtNumberHeight = 46.0f;
+                this._fTxtNumberWidth = 50.0f;
+
+                this._fUpDownButtonHeight = 48.0f;
+                this._fUpDownButtonWidth = 50.0f;
+
+                float x = this.txtNumber.Frame.Left;
+                float y;
+
+                if (_bPickerToBottom)
+                {
+                    y = this.txtNumber.Frame.Top;
+                }
+                else
+                {
+                    y = this.txtNumber.Frame.Bottom;
+                }
+
+                _rectNumberPicker = new RectangleF(x, y, _fNumberPickerWidth, _fNumberPickerHeight);
+
+            }
+
+            public void SetScale (int _scale)
+            {
+
+            }
+
+
+
         }
         
         #endregion
