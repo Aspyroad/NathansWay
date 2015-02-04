@@ -60,7 +60,7 @@ namespace NathansWay.Shared
         millions = 7
     }
 
-    struct G__Color
+    public struct G__Color
 	{
 		// Statics
 		public static readonly G__Color Empty;

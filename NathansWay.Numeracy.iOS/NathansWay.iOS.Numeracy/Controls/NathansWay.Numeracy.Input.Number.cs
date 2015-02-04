@@ -7,6 +7,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
@@ -18,6 +19,11 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
 
         #region Class Variables
+
+        protected AspyPickerView pkNumberPicker;
+        protected RectangleF _rectNumberPicker;
+        protected float _fNumberPickerHeight;
+        protected float _fNumberPickerWidth;
 
         protected PickerDelegate _pickerdelegate;
         protected PickerSource _pickersource;
@@ -74,24 +80,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //Setup our editmode details
 			//TODO : Fix settings in numbercombo
-            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;//this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;//this._numeracySettings.NumberCombo.EditMode;
+
+            // Setup basic pickerview width/height
+            this._fNumberPickerHeight = 400.0f;
+            this._fNumberPickerWidth = 60.0f;
             
             // Set initital values
             this.preEdit();
-           
-            // By default we want the picker hidden until the textbox is tapped.
-            this.View.SendSubviewToBack(this.pkNumberPicker);
-            this.pkNumberPicker.Hidden = true;
             
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(valuechanged);          
                 
             this._pickerdelegate = new PickerDelegate(this.items);
             this._pickersource = new PickerSource(this.items);
-            this._txtNumberDelegate = new txtNumberDelegate();
 
-            this.pkNumberPicker.Delegate = this._pickerdelegate;
-            this.pkNumberPicker.DataSource = this._pickersource;
+            this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
 
             ///<Summary>
@@ -99,10 +103,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             ///<summary>/
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
 
-            // Wire up tapgesture to 
-            //this.txtSingleTapGestureRecognizer();
-            this.pkSingleTapGestureRecognizer();
-            
+            // By default we want the picker hidden until the textbox is tapped.
+            //this.View.SendSubviewToBack(this.pkNumberPicker);
+            //this.pkNumberPicker.Hidden = true;
+                        
 //            pickerDataModel = new PickerDataModel();
 //            this.pkNumberPicker.Source = pickerDataModel;
 //            this.pkNumberPicker.Center = this.txtNumber.Center ;           
@@ -116,9 +120,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+        }
+
+
         #endregion
         
         #region Public Properties
+
+        public RectangleF RectPickerNumber
+        {
+            set { _rectNumberPicker = value; }
+        }
 
         public bool IsInEditMode
         {
@@ -208,6 +223,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
                 this.EditScroll();
+                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
+                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, 0);
             }
             else
             {
@@ -278,13 +295,39 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void EditScroll()
         {
             this._bIsInEditMode = true;
+            var a = this.ParentViewController;
+
+            // create the Rectangle!
+            var x = this.txtNumber.Frame.Right;
+            var y = this.txtNumber.Frame.Bottom;
+            _rectNumberPicker = new RectangleF(x, y, _fNumberPickerWidth, _fNumberPickerHeight);
+            //_rectNumberPicker = new RectangleF(this.View.Frame.Left, this.View.Frame.Top, _fNumberPickerWidth, _fNumberPickerHeight );
+
+
+            Console.WriteLine("Creating the picker");
+            this.pkNumberPicker = new AspyPickerView(_rectNumberPicker);
+            this.pkNumberPicker.UserInteractionEnabled = true;
+            this.pkNumberPicker.ShowSelectionIndicator = true;
+
+            this.pkNumberPicker.Delegate = this._pickerdelegate;
+            this.pkNumberPicker.DataSource = this._pickersource;
+
+            this._pickerdelegate.CurrentValue = this._intCurrentValue;
+
+            a.View.AddSubview(pkNumberPicker);
+
+            // Wire up tapgesture to 
+            this.pkSingleTapGestureRecognizer();
+
+            //this.View.HitTest(
 
             // Clear the text when picker to make it clearer
             // No, I think its best to dim the text
             // this.txtNumber.TextColor = "";
 
-            this.pkNumberPicker.Hidden = false;
-            this.View.BringSubviewToFront(this.pkNumberPicker);
+            //this._pkNumberPicker.Hidden = false;
+            a.View.BringSubviewToFront(this.pkNumberPicker);
+            this.pkNumberPicker.ApplyUI();
         }
 
         protected void EditNumPad()
@@ -381,7 +424,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // add the gesture recognizer to the view
             this.pkNumberPicker.AddGestureRecognizer(singleTapGesture);
         }
-        
+
         #endregion    
         
         #region Delegate Classes
@@ -392,6 +435,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             protected int selectedIndex = 0;
             private List<string> _items;
+            protected iOSUIManager iOSUIAppearance;
+            protected int _intCurrentValue;
 
             #endregion
 
@@ -405,11 +450,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             
             public PickerDelegate()
             {
-                //Initialize();
+                Initialize();
             }
             
             public PickerDelegate(List<string> Items)
             {
+                Initialize();
                 this._items = Items;                
             }
                         
@@ -418,7 +464,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             #region Private Members
             
             private void Initialize()
-            {                
+            {
+                this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             }
             
             #endregion
@@ -433,10 +480,17 @@ namespace NathansWay.iOS.Numeracy.Controls
                 get { return this._items[selectedIndex]; }
             }
 
+            public int CurrentValue
+            {
+                set 
+                { 
+                    selectedIndex = value;
+                }
+            }
+
             #endregion
 
             #region Overrides
-
 
             /// <summary>
             /// Called when a row is selected in the spinner
@@ -444,10 +498,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override void Selected (UIPickerView picker, int row, int component)
             {
                 selectedIndex = row;
-//                if (psValueChanged != null)
-//                {
-//                    psValueChanged ();
-//                }   
             }
 
             /// <summary>
@@ -468,8 +518,20 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
                 UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
-                lbl.TextColor = UIColor.Blue;
-                lbl.Font = UIFont.SystemFontOfSize(70f);
+
+                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                {
+                    lbl.TextColor = UIColor.White;
+                    lbl.BackgroundColor = UIColor.Clear; //AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
+                    lbl.Font = UIFont.SystemFontOfSize(50f);
+                }
+                else
+                {
+                    lbl.TextColor = UIColor.Black;
+                    //lbl.BackgroundColor = AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
+                    lbl.Font = UIFont.SystemFontOfSize(55f);
+                }
+
                 lbl.TextAlignment = UITextAlignment.Center;
                 lbl.Text = this._items[row];
                 return lbl;

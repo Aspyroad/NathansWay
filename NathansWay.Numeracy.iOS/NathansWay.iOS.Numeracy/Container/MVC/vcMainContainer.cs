@@ -79,7 +79,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// White backing for out app
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
-			this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.Purple;
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcCtrlNumberText.Value);
+            this.AddAndDisplayController(_vcCtrlNumberText.Value, new RectangleF(100, 100, 54, 70));
 			// ***********************************************
 		}
 
@@ -111,10 +111,7 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewDidLoad ();
 		}
 
-        public override void AddAndDisplayController(AspyViewController _newController)
-        {
-            base.AddAndDisplayController(_newController);
-        }
+
 
 		#endregion
 	}

@@ -311,7 +311,6 @@ namespace AspyRoad.iOSCore
 		private void Initialize()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            this.ApplyUI();
 		}
 
 		#endregion
@@ -321,6 +320,14 @@ namespace AspyRoad.iOSCore
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
+            //this.ApplyUI();
+        }
+
+        public override void Draw(RectangleF rect)
+        {
+            base.Draw(rect);
+            //this.BackgroundColor = UIColor.Clear;
+            this.ApplyUI();
         }
 
 		#endregion
@@ -330,7 +337,7 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI ()
         {
             #region UI for prior iOS7
-            if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 // Just in case the _picker isnt drawn
                 if (this.Subviews.GetUpperBound (0) > 0)
@@ -341,7 +348,8 @@ namespace AspyRoad.iOSCore
                     {
                         if (v.GetType() != typeof(UITableView))
                         {
-                            v.Alpha = 0.5f;
+                            v.Alpha = 0.2f;
+                            //v.Hidden = true;
                         }
                     }
                 }
