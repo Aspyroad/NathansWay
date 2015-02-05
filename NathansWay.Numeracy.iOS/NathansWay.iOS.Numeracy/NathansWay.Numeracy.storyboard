@@ -489,7 +489,7 @@
             <objects>
                 <viewController storyboardIdentifier="vcCtrlNumberText" title="vc Number Combo" id="h98-CJ-chy" sceneMemberID="viewController" customClass="vcCtrlNumberText">
                     <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="3Wg-8W-5I6" customClass="vNumberCombo">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="76"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WQi-om-FNL" userLabel="btnDown" fixedFrame="YES">
@@ -503,10 +503,10 @@
                                     <action selector="btnDownTouch:" destination="h98-CJ-chy" id="1019" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="8" borderStyle="line" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="55" id="ZkA-q6-0eC" userLabel="txtNumber" fixedFrame="YES">
-                                <rect key="frame" x="0.0" y="14" width="50" height="46"/>
+                            <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="8" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="55" id="ZkA-q6-0eC" userLabel="txtNumber" fixedFrame="YES" borderStyle="line">
+                                <rect key="frame" x="0.0" y="14" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="55"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="55"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" keyboardAppearance="alert"/>
                                 <connections>
                                     <action selector="txtTouchedDown:" destination="h98-CJ-chy" id="1017" eventType="touchDown"/>
@@ -530,7 +530,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="50" height="76"/>
+                    <size key="freeformSize" width="200" height="200"/>
                     <connections>
                         <outlet property="txtNumber" destination="ZkA-q6-0eC" id="name-outlet-ZkA-q6-0eC"/>
                         <outlet property="btnUp" destination="InR-43-CTE" id="name-outlet-InR-43-CTE"/>
