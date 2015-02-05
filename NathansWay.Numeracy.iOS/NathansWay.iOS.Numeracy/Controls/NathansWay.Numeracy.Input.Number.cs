@@ -606,9 +606,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected class NumberSize
         {
+            // X Horizontal
+            // Y Vertical
+
             public PointF _pStartPoint;
 
             public RectangleF _rectNumberPicker;
+
             public RectangleF _rectCtrlNumberTextShowPicker;
             public RectangleF _rectCtrlNumberTextHiddenPicker;
             public RectangleF _rectTxtNumber;
@@ -626,6 +630,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public float _fUpDownButtonHeight;
             public float _fUpDownButtonWidth;
+
+            public float _fEdgeSpace;
+            public float _fPickerTopPositionY;
+            public float _fPickerBottomPositionY;
 
             public NumberSize()
             {
@@ -652,24 +660,26 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._fUpDownButtonHeight = 48.0f;
                 this._fUpDownButtonWidth = 50.0f;
 
-                float x = this.txtNumber.Frame.Left;
-                float y;
+                this._fEdgeSpace = 14.0f;
 
-                if (_bPickerToBottom)
-                {
-                    y = this.txtNumber.Frame.Top;
-                }
-                else
-                {
-                    y = this.txtNumber.Frame.Bottom;
-                }
-
-                _rectNumberPicker = new RectangleF(x, y, _fNumberPickerWidth, _fNumberPickerHeight);
+                this._fPickerTopPositionY = (this._pStartPoint.Y + (this._fNumberPickerHeight - this._fEdgeSpace ));
+                this._fPickerBottomPositionY = (this._pStartPoint.Y + this._fEdgeSpace + this._fTxtNumberHeight);
 
             }
 
             public void SetScale (int _scale)
             {
+
+
+
+                if ((_bPickerToBottom) || (!_bPickerToTop))
+                {
+                    this._rectNumberPicker = new RectangleF(0.0f, this._fPickerBottomPositionY, this._fNumberPickerWidth, this._fNumberPickerHeight);
+                }
+                else
+                {
+                    this._rectNumberPicker = new RectangleF(0.0f, this._fPickerTopPositionY, this._fNumberPickerWidth, this._fNumberPickerHeight);
+                }
 
             }
 
