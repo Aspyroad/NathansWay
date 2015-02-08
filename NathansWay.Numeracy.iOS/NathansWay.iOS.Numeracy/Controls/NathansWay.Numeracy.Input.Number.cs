@@ -682,9 +682,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this._rectCtrlNumberTextPickerShowing = new RectangleF
                         (
                             this._pStartPoint.X, 
-                            ((this._pStartPoint.Y - this._fNumberTextHeight) + 200.0f), 
+                            //((this._pStartPoint.Y - this._fNumberTextHeight) - 200.0f), 
+                            ((this._pStartPoint.Y + this._fEdgeSpace + this._fTxtNumberHeight) - 200.0f), 
                             this._fGlobalWidth, 
-                            200.0f
+                            (((this._fEdgeSpace) - this._fBorderWidth) + this._fNumberPickerHeight)
                         ); //(this._fNumberPickerHeight + this._fPickerBottomPositionY));
                     var x = 1;
                 }
