@@ -310,7 +310,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
+            // Reset our view positions. 
+            // Should this be done by the resize class? Im thinking yes.
             this.View.Frame = NumberTextSize._rectCtrlNumberTextPickerShowing;
+            this.txtNumber.Frame = NumberTextSize._rectTxtNumberPickerTopPosition;
             this.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
@@ -623,6 +626,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public RectangleF _rectCtrlNumberTextPickerShowing;
             public RectangleF _rectCtrlNumberText;
             public RectangleF _rectTxtNumber;
+            public RectangleF _rectTxtNumberPickerTopPosition;
             public RectangleF _rectUpButton;
             public RectangleF _rectDownButton;
 
@@ -667,8 +671,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._fEdgeSpace = 14.0f;
 
                 this._fPickerBottomPositionY = (this._fEdgeSpace + this._fTxtNumberHeight);
-                this._fPickerTopPositionY = (this._pStartPoint.Y - (this._fNumberPickerHeight + this._fBorderWidth + this._fPickerBottomPositionY));
-
+                this._fPickerTopPositionY = ((this._fNumberPickerHeight + this._fBorderWidth + this._fPickerBottomPositionY));
 
                 this.SetGlobalFrame();
                 this.SetPickerPosition();
@@ -678,15 +681,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (_vc._bPickerToTop)
                 {
-                    this._rectNumberPicker = new RectangleF(80.0f, this._fPickerTopPositionY, this._fGlobalWidth, this._fNumberPickerHeight);
+                    this._rectNumberPicker = new RectangleF(50.0f, 0.0f, this._fGlobalWidth, (this._fNumberPickerHeight));
                     this._rectCtrlNumberTextPickerShowing = new RectangleF
                         (
                             this._pStartPoint.X, 
-                            //((this._pStartPoint.Y - this._fNumberTextHeight) - 200.0f), 
-                            ((this._pStartPoint.Y + this._fEdgeSpace + this._fTxtNumberHeight) - 200.0f), 
+                            (((this._pStartPoint.Y + this._fTxtNumberHeight) - 200.0f) -  (this._fEdgeSpace)), 
                             this._fGlobalWidth, 
-                            (((this._fEdgeSpace) - this._fBorderWidth) + this._fNumberPickerHeight)
-                        ); //(this._fNumberPickerHeight + this._fPickerBottomPositionY));
+                            //(((this._fEdgeSpace) - this._fBorderWidth) + this._fNumberPickerHeight)
+                            (((3 * this._fEdgeSpace)- this._fBorderWidth) + this._fNumberPickerHeight)
+                        );
+                    this._rectTxtNumberPickerTopPosition = new RectangleF
+                        (
+                            0.0f, 
+                            (200.0f - this._fTxtNumberHeight), 
+                            this._fGlobalWidth,
+                            this._fTxtNumberHeight
+                        );
                     var x = 1;
                 }
                 else
