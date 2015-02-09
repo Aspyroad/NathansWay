@@ -356,7 +356,7 @@ namespace AspyRoad.iOSCore
             }
             else
             {
-                this.BackgroundColor = UIColor.Brown;
+                //this.BackgroundColor = UIColor.Brown;
             }
 
             #endregion

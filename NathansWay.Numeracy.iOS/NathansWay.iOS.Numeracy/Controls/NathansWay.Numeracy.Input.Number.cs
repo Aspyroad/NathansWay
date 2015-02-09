@@ -37,6 +37,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected Action<string> actHandlePad;
         protected UIView _mainView;
         protected bool _bAutoPickerPositionOn;
+        protected AspyLabel _lblPickerView;
 
         protected G__UnitPlacement _tensUnit;
 
@@ -88,7 +89,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(ValueChanged);          
                 
-            this._pickerdelegate = new PickerDelegate(this.items);
+            this._pickerdelegate = new PickerDelegate(this.items, this._lblPickerView);
             this._pickersource = new PickerSource(this.items);
 
             this._txtNumberDelegate = new txtNumberDelegate();
@@ -98,6 +99,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// Wire up the value change method
             ///<summary>/
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
+
+
 
             // By default we want the picker hidden until the textbox is tapped.
             //this.View.SendSubviewToBack(this.pkNumberPicker);
@@ -116,11 +119,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        public override void ViewWillAppear(bool animated)
+        // Is only called when the viewcontroller first lays out its views
+        public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-            NumberTextSize = new NumberSize(this, 0);
+            this.NumberTextSize = new NumberSize(this, 0);
+            this.NumberTextSize.SetPickerPositionNormal();
+            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
+            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
+            this._lblPickerView = new AspyLabel(this.NumberTextSize._rectLabelPickerView);
         }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+            if (pkNumberPicker != null)
+            {
+                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
+                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, 0);
+            }
+        }
+
+
 
         public override void AwakeFromNib()
         {
@@ -141,8 +161,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             set 
             { 
                 this._bPickerToTop = value;
-                this.NumberTextSize.SetPickerPosition();
+                //this.NumberTextSize.SetPickerPositionTop();
             }
+            get { return this._bPickerToTop; }
         }
 
         public int PrevValue
@@ -229,8 +250,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
                 this.EditScroll();
-                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
-                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, 0);
             }
             else
             {
@@ -294,26 +313,41 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._intCurrentValue = Convert.ToInt32(_value); 
             this.txtNumber.Text = _value;
 
+            this.NumberTextSize.SetPickerPositionNormal();
+            // Reset the new frames - these are value types
+            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
+            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
+
             txtNumber.BackgroundColor = this._preEditColor;
             txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
+
         }
 
         protected void EditScroll()
         {
             this._bIsInEditMode = true;
 
+            // Reset our view positions. 
+            if (this._bPickerToTop)
+            {
+                this.NumberTextSize.SetPickerPositionTop();
+            }
+            else
+            {
+                this.NumberTextSize.SetPickerPositionBottom();
+            }
+            // Reset the new frames - these are value types
+            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
+            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
 
             this.pkNumberPicker = new AspyPickerView(NumberTextSize._rectNumberPicker);
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
 
+
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-            // Reset our view positions. 
-            // Should this be done by the resize class? Im thinking yes.
-            this.View.Frame = NumberTextSize._rectCtrlNumberTextPickerShowing;
-            this.txtNumber.Frame = NumberTextSize._rectTxtNumberPickerTopPosition;
             this.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
@@ -439,6 +473,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private List<string> _items;
             protected iOSUIManager iOSUIAppearance;
             protected int _intCurrentValue;
+            protected AspyLabel _lblPickerView;
 
             #endregion
 
@@ -455,8 +490,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 Initialize();
             }
             
-            public PickerDelegate(List<string> Items)
+            public PickerDelegate(List<string> Items, AspyLabel lblPickerView)
             {
+                this._lblPickerView = lblPickerView;
                 Initialize();
                 this._items = Items;                
             }
@@ -468,6 +504,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+
             }
             
             #endregion
@@ -519,24 +556,40 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="_view">_view.</param>
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
-                UILabel lbl = new UILabel(new RectangleF(0, 0, 130f, 60f));
+                //if([self.pickerView selectedRowInComponent:component] == row)
+                UIColor x;
 
-                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                //TODO Make UI label lazy load also change the background colour when selected. 
+
+                if (pickerView.SelectedRowInComponent(component))
                 {
-                    lbl.TextColor = UIColor.White;
-                    lbl.BackgroundColor = UIColor.Clear; //AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
-                    lbl.Font = UIFont.SystemFontOfSize(50f);
+                    //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+
                 }
                 else
                 {
-                    lbl.TextColor = UIColor.Black;
-                    //lbl.BackgroundColor = AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
-                    lbl.Font = UIFont.SystemFontOfSize(55f);
+
+
                 }
 
-                lbl.TextAlignment = UITextAlignment.Center;
-                lbl.Text = this._items[row];
-                return lbl;
+
+
+                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                {
+                    this._lblPickerView.TextColor = UIColor.White;
+                    this._lblPickerView.BackgroundColor = UIColor.Clear; //AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
+                    this._lblPickerView.Font = UIFont.SystemFontOfSize(50f);
+                }
+                else
+                {
+                    this._lblPickerView.TextColor = UIColor.Black;
+                    //lbl.BackgroundColor = AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
+                    this._lblPickerView.Font = UIFont.SystemFontOfSize(55f);
+                }
+
+                this._lblPickerView.TextAlignment = UITextAlignment.Center;
+                this._lblPickerView.Text = this._items[row];
+                return this._lblPickerView;
             } 
             
             /// <Docs>To be added.</Docs>
@@ -617,31 +670,34 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // X Horizontal
             // Y Vertical
-
+            // Starting point when the control is created
             public PointF _pStartPoint;
+            // Parent VC
             private vcCtrlNumberText _vc;
-
+            // Number Picker Spinner Control
             public RectangleF _rectNumberPicker;
-
-            public RectangleF _rectCtrlNumberTextPickerShowing;
+            // Main Control Frame
             public RectangleF _rectCtrlNumberText;
+            // Text Box Frame
             public RectangleF _rectTxtNumber;
-            public RectangleF _rectTxtNumberPickerTopPosition;
+            // Up Down Button Frames, usually the same
             public RectangleF _rectUpButton;
             public RectangleF _rectDownButton;
-
-            public float _fNumberTextHeight;
+            // Label Frame for the Picker View
+            public RectangleF _rectLabelPickerView;
+            // Full Control height
+            public float _fCtrlNumberTextHeight;
+            // Number picker height
             public float _fNumberPickerHeight;
+            // Text Box Height
             public float _fTxtNumberHeight;
-            public float _fBorderWidth;
-
+            // Width is global to the control
             public float _fGlobalWidth;
-
+            // Up Down button height
             public float _fUpDownButtonHeight;
+            // Label SizeF
+            public SizeF _sLabelPickerViewSize;
 
-            public float _fEdgeSpace;
-            public float _fPickerTopPositionY;
-            public float _fPickerBottomPositionY;
 
             public NumberSize(vcCtrlNumberText vc)
             {
@@ -658,58 +714,97 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 _pStartPoint = _vc.View.Frame.Location;
+                this._sLabelPickerViewSize = new SizeF(
 
                 // All Initial Values
-                this._fNumberTextHeight = 76.0f;
+                this._fCtrlNumberTextHeight = 60.0f;
                 this._fNumberPickerHeight = 200.0f;
-                this._fTxtNumberHeight = 50.0f;
-                this._fUpDownButtonHeight = 48.0f;
-                this._fBorderWidth = 2.0f;
+                this._fTxtNumberHeight = 60.0f;
+                this._fUpDownButtonHeight = 30.0f;
 
                 this._fGlobalWidth = 50.0f;
 
-                this._fEdgeSpace = 14.0f;
-
-                this._fPickerBottomPositionY = (this._fEdgeSpace + this._fTxtNumberHeight);
-                this._fPickerTopPositionY = ((this._fNumberPickerHeight + this._fBorderWidth + this._fPickerBottomPositionY));
-
-                this.SetGlobalFrame();
-                this.SetPickerPosition();
+                this.SetPickerPositionNormal();
             }
 
-            public void SetPickerPosition ()
+            public void SetPickerPositionTop ()
             {
-                if (_vc._bPickerToTop)
-                {
-                    this._rectNumberPicker = new RectangleF(50.0f, 0.0f, this._fGlobalWidth, (this._fNumberPickerHeight));
-                    this._rectCtrlNumberTextPickerShowing = new RectangleF
-                        (
-                            this._pStartPoint.X, 
-                            (((this._pStartPoint.Y + this._fTxtNumberHeight) - 200.0f) -  (this._fEdgeSpace)), 
-                            this._fGlobalWidth, 
-                            //(((this._fEdgeSpace) - this._fBorderWidth) + this._fNumberPickerHeight)
-                            (((3 * this._fEdgeSpace)- this._fBorderWidth) + this._fNumberPickerHeight)
-                        );
-                    this._rectTxtNumberPickerTopPosition = new RectangleF
-                        (
-                            0.0f, 
-                            (200.0f - this._fTxtNumberHeight), 
-                            this._fGlobalWidth,
-                            this._fTxtNumberHeight
-                        );
-                    var x = 1;
-                }
-                else
-                {
-                    this._rectNumberPicker = new RectangleF(0.0f, this._fPickerBottomPositionY, this._fGlobalWidth, this._fNumberPickerHeight);
-                    this._rectCtrlNumberTextPickerShowing = new RectangleF(this._pStartPoint.X, this._pStartPoint.Y, this._fGlobalWidth, (this._fNumberPickerHeight + this._fPickerBottomPositionY));
-                }
+                this._rectCtrlNumberText = new RectangleF
+                    (
+                        this._pStartPoint.X, 
+                        (this._pStartPoint.Y - this._fNumberPickerHeight), 
+                        this._fGlobalWidth, 
+                        (this._fNumberPickerHeight + this._fTxtNumberHeight)
+                    );
+                this._rectNumberPicker = new RectangleF
+                    (
+                        0.0f, 
+                        0.0f, 
+                        this._fGlobalWidth, 
+                        this._fNumberPickerHeight
+                    );
+                this._rectTxtNumber = new RectangleF
+                    (
+                        0.0f, 
+                        (this._fNumberPickerHeight), 
+                        this._fGlobalWidth,
+                        this._fTxtNumberHeight
+                    );
             }
 
-            public void SetGlobalFrame ()
+            public void SetPickerPositionBottom ()
             {
-                _rectCtrlNumberText = new RectangleF(_pStartPoint.X, _pStartPoint.Y, this._fGlobalWidth, ((2 * this._fEdgeSpace) + this._fTxtNumberHeight));
+                this._rectNumberPicker = new RectangleF
+                    (
+                        0.0f, 
+                        this._fCtrlNumberTextHeight, 
+                        this._fGlobalWidth, 
+                        this._fNumberPickerHeight
+                    );
+                this._rectCtrlNumberText = new RectangleF
+                    (
+                        this._pStartPoint.X, 
+                        this._pStartPoint.Y, 
+                        this._fGlobalWidth, 
+                        (this._fNumberPickerHeight + this._fCtrlNumberTextHeight)
+                    );
             }
+
+            public void SetPickerPositionNormal ()
+            {
+                this._rectLabelPickerView = new RectangleF
+                    (
+                        0.0f,
+                        0.0f,
+
+
+
+
+
+
+
+
+
+                this._rectCtrlNumberText = new RectangleF
+                    (
+                        this._pStartPoint.X, 
+                        this._pStartPoint.Y, 
+                        this._fGlobalWidth, 
+                        this._fTxtNumberHeight
+                    );
+                this._rectTxtNumber = new RectangleF
+                    (
+                        0.0f, 
+                        0.0f, 
+                        this._fGlobalWidth,
+                        this._fTxtNumberHeight
+                    ); 
+            }
+
+//            public void SetGlobalFrame ()
+//            {
+//                _rectCtrlNumberText = new RectangleF(_pStartPoint.X, _pStartPoint.Y, this._fGlobalWidth, this._fTxtNumberHeight);
+//            }
 
             public void SetScale (int _scale)
             {
