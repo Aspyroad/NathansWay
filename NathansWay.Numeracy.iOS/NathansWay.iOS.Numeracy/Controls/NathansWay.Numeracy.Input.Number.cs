@@ -126,18 +126,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLayoutSubviews()
         {
             base.ViewDidLayoutSubviews();
-            if (pkNumberPicker != null)
-            {
+            //if (pkNumberPicker != null)
+            //{
                 //this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
-                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, _intCurrentValue);
-            }
-        }
-
-
-
-        public override void AwakeFromNib()
-        {
-            base.AwakeFromNib();
+                //this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, _intCurrentValue);
+            //}
         }
 
         #endregion
@@ -233,8 +226,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         partial void txtTouchedDown(UITextField sender)
         {
-            this.preEdit();
+            // Prevent the user double tapping
+            if (this._bIsInEditMode)
+            {
+                // Exit
+                return; 
+            }
 
+            // Begin Editing
+            this.preEdit();
             // Graphically highlight the text control so we know its selected
             this._preEditColor = txtNumber.BackgroundColor;
             txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
@@ -341,6 +341,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
+
             this.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
@@ -352,6 +353,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.View.BringSubviewToFront(this.pkNumberPicker);
             this.pkNumberPicker.ApplyUI();
+
+            this.pkNumberPicker.Select(this._intCurrentValue, 0, false);
         }
 
         protected void EditNumPad()
@@ -530,6 +533,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override void Selected (UIPickerView picker, int row, int component)
             {
                 selectedIndex = row;
+                picker.ReloadComponent(component);
             }
 
             /// <summary>
@@ -549,7 +553,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="_view">_view.</param>
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
-                //if([self.pickerView selectedRowInComponent:component] == row)
                 UILabel _lblPickerView = new UILabel(this._rectPickerView);
 
                 //TODO Make UI label lazy load also change the background colour when selected. 
@@ -702,6 +705,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 _pStartPoint = _vc.View.Frame.Location;
+
                 this._sLabelPickerViewSize = new SizeF(130f, 60f);
 
                 // All Initial Values
@@ -783,11 +787,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                     ); 
             }
 
-//            public void SetGlobalFrame ()
-//            {
-//                _rectCtrlNumberText = new RectangleF(_pStartPoint.X, _pStartPoint.Y, this._fGlobalWidth, this._fTxtNumberHeight);
-//            }
-
             public void SetScale (int _scale)
             {
 
@@ -800,7 +799,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
             }
         }
-
 
         #region UIPickerViewModel Implementation
 
