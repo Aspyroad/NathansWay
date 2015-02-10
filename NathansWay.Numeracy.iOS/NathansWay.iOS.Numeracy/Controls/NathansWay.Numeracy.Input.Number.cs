@@ -37,7 +37,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected Action<string> actHandlePad;
         protected UIView _mainView;
         protected bool _bAutoPickerPositionOn;
-        protected AspyLabel _lblPickerView;
 
         protected G__UnitPlacement _tensUnit;
 
@@ -87,20 +86,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.preEdit();
             
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(ValueChanged);          
-                
-            this._pickerdelegate = new PickerDelegate(this.items, this._lblPickerView);
-            this._pickersource = new PickerSource(this.items);
+            ehValueChanged = new Action(ValueChanged);    
 
             this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
-
-            ///<Summary>
-            /// Wire up the value change method
-            ///<summary>/
-            this._pickerdelegate.psValueChanged += this.ehValueChanged; 
-
-
 
             // By default we want the picker hidden until the textbox is tapped.
             //this.View.SendSubviewToBack(this.pkNumberPicker);
@@ -127,7 +116,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.NumberTextSize.SetPickerPositionNormal();
             this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
             this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
-            this._lblPickerView = new AspyLabel(this.NumberTextSize._rectLabelPickerView);
+
+            this._pickerdelegate = new PickerDelegate(this.items, this.NumberTextSize._rectLabelPickerView);
+            this._pickersource = new PickerSource(this.items);
+            // Wire up the value change method
+            this._pickerdelegate.psValueChanged += this.ehValueChanged; 
         }
 
         public override void ViewDidLayoutSubviews()
@@ -135,8 +128,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLayoutSubviews();
             if (pkNumberPicker != null)
             {
-                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
-                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, 0);
+                //this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
+                this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, _intCurrentValue);
             }
         }
 
@@ -473,7 +466,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private List<string> _items;
             protected iOSUIManager iOSUIAppearance;
             protected int _intCurrentValue;
-            protected AspyLabel _lblPickerView;
+            protected RectangleF _rectPickerView;
 
             #endregion
 
@@ -490,9 +483,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 Initialize();
             }
             
-            public PickerDelegate(List<string> Items, AspyLabel lblPickerView)
+            public PickerDelegate(List<string> Items,  RectangleF rectPickerView)
             {
-                this._lblPickerView = lblPickerView;
+                this._rectPickerView = rectPickerView;
                 Initialize();
                 this._items = Items;                
             }
@@ -557,39 +550,34 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
                 //if([self.pickerView selectedRowInComponent:component] == row)
-                UIColor x;
+                UILabel _lblPickerView = new UILabel(this._rectPickerView);
 
                 //TODO Make UI label lazy load also change the background colour when selected. 
 
-                if (pickerView.SelectedRowInComponent(component))
+                if (pickerView.SelectedRowInComponent(component) == row)
                 {
-                    //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
-
+                    _lblPickerView.BackgroundColor = UIColor.Brown; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
                 else
                 {
-
-
+                    _lblPickerView.BackgroundColor = UIColor.Clear; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
-
-
 
                 if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
                 {
-                    this._lblPickerView.TextColor = UIColor.White;
-                    this._lblPickerView.BackgroundColor = UIColor.Clear; //AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
-                    this._lblPickerView.Font = UIFont.SystemFontOfSize(50f);
+
+                    _lblPickerView.TextColor = UIColor.White;                   
+                    _lblPickerView.Font = UIFont.SystemFontOfSize(50f);
                 }
                 else
                 {
-                    this._lblPickerView.TextColor = UIColor.Black;
-                    //lbl.BackgroundColor = AspyUtilities.AlphaAdjust(lbl.BackgroundColor, 0.5f);
-                    this._lblPickerView.Font = UIFont.SystemFontOfSize(55f);
+                    _lblPickerView.TextColor = UIColor.Black;
+                    _lblPickerView.Font = UIFont.SystemFontOfSize(55f);
                 }
 
-                this._lblPickerView.TextAlignment = UITextAlignment.Center;
-                this._lblPickerView.Text = this._items[row];
-                return this._lblPickerView;
+                _lblPickerView.TextAlignment = UITextAlignment.Center;
+                _lblPickerView.Text = this._items[row];
+                return _lblPickerView;
             } 
             
             /// <Docs>To be added.</Docs>
@@ -601,7 +589,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="component">Component.</param>
             public override float GetRowHeight(UIPickerView pickerView, int component)
             {
-                return 60.0f;
+                return this._rectPickerView.Height;
             }
 
             #endregion
@@ -714,7 +702,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 _pStartPoint = _vc.View.Frame.Location;
-                this._sLabelPickerViewSize = new SizeF(
+                this._sLabelPickerViewSize = new SizeF(130f, 60f);
 
                 // All Initial Values
                 this._fCtrlNumberTextHeight = 60.0f;
@@ -776,15 +764,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                     (
                         0.0f,
                         0.0f,
-
-
-
-
-
-
-
-
-
+                        this._sLabelPickerViewSize.Width,
+                        this._sLabelPickerViewSize.Height
+                    );
                 this._rectCtrlNumberText = new RectangleF
                     (
                         this._pStartPoint.X, 
