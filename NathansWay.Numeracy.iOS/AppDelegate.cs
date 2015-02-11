@@ -180,7 +180,7 @@ namespace NathansWay.iOS.Numeracy
 			//_menuStart = storyboard.InstantiateViewController("vcLessonMenu") as vcLessonMenu;
 
 			//Add our navigation object to the service library
-            iOSCoreServiceContainer.Register<AspyViewContainer> (_mainContainer);
+            iOSCoreServiceContainer.Register<vcMainContainer> (_mainContainer);
 
 			//window.MakeKeyAndVisible();
 			window.RootViewController = _mainContainer;

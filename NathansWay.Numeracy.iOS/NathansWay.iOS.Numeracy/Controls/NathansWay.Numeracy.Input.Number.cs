@@ -33,7 +33,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected List<string> items = new List<string>();
         protected E__NumberComboEditMode _currentEditMode;
         protected vcNumberPad _numberpad;
-        protected AspyViewContainer _viewcontollercontainer;
+        protected vcMainContainer _viewcontollercontainer;
         protected Action<string> actHandlePad;
         protected UIView _mainView;
         protected bool _bAutoPickerPositionOn;
@@ -80,7 +80,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;//this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;//this._numeracySettings.NumberCombo.EditMode;
                         
             // Set initital values
             this.preEdit();
@@ -205,7 +205,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_CtrlNumberText";
 
-			this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewContainer>();
+            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
               
             this.actHandlePad = new Action<string>(HandlePadPush);
 
@@ -362,7 +362,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bIsInEditMode = true;
 
             // Create an instance of Numberpad
-            this._numberpad = new vcNumberPad();
+            this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
             // Set the pad view position
             this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
 

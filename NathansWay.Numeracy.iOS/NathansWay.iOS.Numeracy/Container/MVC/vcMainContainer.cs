@@ -20,6 +20,7 @@ namespace NathansWay.iOS.Numeracy
 		public UIStoryboard _storyBoard;
 		public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
+        public Lazy<vcNumberPad> _vcNumberPad;
         public Lazy<vcCtrlNumberText> _vcCtrlNumberText1;
         public Lazy<vcCtrlNumberText> _vcCtrlNumberText2;
 
@@ -59,6 +60,7 @@ namespace NathansWay.iOS.Numeracy
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
+            _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcCtrlNumberText1 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
             _vcCtrlNumberText2 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
 
