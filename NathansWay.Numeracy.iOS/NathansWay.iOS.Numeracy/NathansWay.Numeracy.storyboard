@@ -539,7 +539,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q5h-Ln-kyp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-972" y="-1052"/>
+            <point key="canvasLocation" x="-1111" y="-1091"/>
         </scene>
         <!--Vc Number Pad-->
         <scene sceneID="M4W-6j-fu5">
@@ -549,7 +549,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="156" height="248"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbJ-CZ-nqo" userLabel="btn1" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbJ-CZ-nqo" userLabel="btn1" customClass="AspyButton" fixedFrame="YES" tag="1">
                                 <rect key="frame" x="2" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -562,7 +562,7 @@
                                     <action selector="btn1Touch:" destination="DGX-GF-oXm" id="1048" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSn-BB-H4s" userLabel="btn2" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSn-BB-H4s" userLabel="btn2" customClass="AspyButton" fixedFrame="YES" tag="2">
                                 <rect key="frame" x="53" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -575,7 +575,7 @@
                                     <action selector="btn2Touch:" destination="DGX-GF-oXm" id="1049" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="46j-aE-7dd" userLabel="btn3" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="46j-aE-7dd" userLabel="btn3" customClass="AspyButton" fixedFrame="YES" tag="3">
                                 <rect key="frame" x="104" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -588,7 +588,7 @@
                                     <action selector="btn3Touch:" destination="DGX-GF-oXm" id="1050" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l8W-IL-1UF" userLabel="btn4" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l8W-IL-1UF" userLabel="btn4" customClass="AspyButton" fixedFrame="YES" tag="4">
                                 <rect key="frame" x="2" y="74" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -601,7 +601,7 @@
                                     <action selector="btn4Touch:" destination="DGX-GF-oXm" id="1051" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29a-AN-xnO" userLabel="btn5" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29a-AN-xnO" userLabel="btn5" customClass="AspyButton" fixedFrame="YES" tag="5">
                                 <rect key="frame" x="53" y="74" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -614,7 +614,7 @@
                                     <action selector="btn5Touch:" destination="DGX-GF-oXm" id="1052" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ady-BF-OV5" userLabel="btn7" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ady-BF-OV5" userLabel="btn7" customClass="AspyButton" fixedFrame="YES" tag="7">
                                 <rect key="frame" x="2" y="124" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -627,7 +627,7 @@
                                     <action selector="btn7Touch:" destination="DGX-GF-oXm" id="1054" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKx-if-diT" userLabel="btn8" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKx-if-diT" userLabel="btn8" customClass="AspyButton" fixedFrame="YES" tag="8">
                                 <rect key="frame" x="53" y="124" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -640,7 +640,7 @@
                                     <action selector="btn8Touch:" destination="DGX-GF-oXm" id="1056" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sCN-MB-CA3" userLabel="btn9" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sCN-MB-CA3" userLabel="btn9" customClass="AspyButton" fixedFrame="YES" tag="9">
                                 <rect key="frame" x="104" y="124" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -666,7 +666,7 @@
                                     <action selector="btn0Touch:" destination="DGX-GF-oXm" id="1059" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MYc-dk-mTS" userLabel="btnUp" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MYc-dk-mTS" userLabel="btnUp" customClass="AspyButton" fixedFrame="YES" tag="1">
                                 <rect key="frame" x="104" y="174" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -679,7 +679,7 @@
                                     <action selector="btnForwardTouch:" destination="DGX-GF-oXm" id="1060" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pyo-P9-o1e" userLabel="btnDown" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pyo-P9-o1e" userLabel="btnDown" customClass="AspyButton" fixedFrame="YES" tag="-1">
                                 <rect key="frame" x="2" y="174" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -704,7 +704,7 @@
                                     <action selector="btnLockedTouch:" destination="DGX-GF-oXm" id="1061" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9m-W3-AES" userLabel="btn6" customClass="AspyButton" fixedFrame="YES">
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9m-W3-AES" userLabel="btn6" customClass="AspyButton" fixedFrame="YES" tag="6">
                                 <rect key="frame" x="104" y="74" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -752,7 +752,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMP-Xb-87g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-826" y="-1091"/>
+            <point key="canvasLocation" x="-987" y="-1091"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -364,9 +364,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create an instance of Numberpad
             this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
             // Set the pad view position
-            this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-
-            this._viewcontollercontainer.AddAndDisplayController(this._numberpad);          
+            //this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
+            this._viewcontollercontainer.AddAndDisplayController(this._numberpad, new RectangleF(0, 0, 156, 256));          
             _numberpad.PadPushed += this.actHandlePad;
         }
 
@@ -789,8 +788,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public void SetScale (int _scale)
             {
-
-
                 var x = _vc.txtNumber.Font.PointSize;
                 x = x + 50.0f;
                 //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
