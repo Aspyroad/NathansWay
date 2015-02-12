@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected E__NumberComboEditMode _currentEditMode;
         protected vcNumberPad _numberpad;
         protected vcMainContainer _viewcontollercontainer;
-        protected Action<string> actHandlePad;
+        protected Action<int> actHandlePad;
         protected UIView _mainView;
         protected bool _bAutoPickerPositionOn;
 
@@ -207,7 +207,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
               
-            this.actHandlePad = new Action<string>(HandlePadPush);
+            this.actHandlePad = new Action<int>(HandlePadPush);
 
             items.Add("0");
             items.Add("1");
@@ -300,11 +300,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void postEdit(string _value)
+        protected void postEdit(int _intValue)
         {
             this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-            this._intCurrentValue = Convert.ToInt32(_value); 
-            this.txtNumber.Text = _value;
+            this._intCurrentValue = _intValue; 
+            this.txtNumber.Text = _intValue.ToString();
 
             this.NumberTextSize.SetPickerPositionNormal();
             // Reset the new frames - these are value types
@@ -365,30 +365,26 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
             // Set the pad view position
             //this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-            this._viewcontollercontainer.AddAndDisplayController(this._numberpad, new RectangleF(0, 0, 156, 256));          
+            this._viewcontollercontainer.AddAndDisplayController(
+                this._numberpad, 
+                new RectangleF(this.iOSGlobals.G__PntWindowLandscapeCenter.X, this.iOSGlobals.G__PntWindowLandscapeCenter.Y, 156, 256)
+            );        
             _numberpad.PadPushed += this.actHandlePad;
         }
 
-        protected void HandlePadPush(string padText)
+        protected void HandlePadPush(int intPadValue)
         {
-            if (padText != "X")
-            {
-                this.postEdit(padText);
-            }
-            else
-            {
-                this.postEdit(this._intCurrentValue.ToString());
-            }
-            _numberpad.PadPushed -= this.actHandlePad;
+            this.postEdit(intPadValue);
+
+            //_numberpad.PadPushed -= this.actHandlePad;
 
             // Remove the numpad from the mainviewcontainer
-            if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-            {
+            //if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
+            //{
                // Raise an error 
-            }
+            //}
 
-            this._bIsInEditMode = false;
-           
+            this._bIsInEditMode = false;   
 
         }
 
@@ -397,7 +393,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.View.SendSubviewToBack(this.pkNumberPicker);
             //this.pkNumberPicker.Hidden = true;
 
-            this.postEdit(this._pickerdelegate.SelectedItem);
+            this.postEdit(this._pickerdelegate.SelectedItemInt);
 
             this._bIsInEditMode = false;
         }
@@ -509,9 +505,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// The current selected item
             /// </summary>
-            public string SelectedItem
+            public string SelectedItemStr
             {
                 get { return this._items[selectedIndex]; }
+            }
+
+            public int SelectedItemInt
+            {
+                get { return selectedIndex; }
             }
 
             public int CurrentValue

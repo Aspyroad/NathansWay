@@ -14,7 +14,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Events
         
-        public event Action<string> PadPushed;
+        public event Action<int> PadPushed;
+        public event Action<int> PadLockPushed;
         
         #endregion
         
@@ -65,6 +66,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             }            
         }
 
+        private void _padlockedpushed (int _intPad)
+        {          
+            if (PadPushed != null)
+            {
+                PadPushed (_intPad);
+            }            
+        }
+
         private void DealWithIt(int _intValue)
         {
             if (this._bDec)
@@ -75,19 +84,21 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
-                    this._intPadValue = this._intPadValue - 1;
+                    this._intPadValue --;
                 }
             }
-
-            if (this._intPadValue)
-
-            else
+            if (this._bInc)
             {
-                this._intPadValue = _intValue;
+                if (_intPadValue == 9)
+                {
+                    this._intPadValue = 0;
+                }
+                else
+                {
+                    this._intPadValue ++;
+                }
             }
-
-            //this._padpushed(this.btn0.TitleLabel.Text.ToString());
-
+            this._padpushed(this._intPadValue);
         }
         
         // Yeah its repetitive, but quick!

@@ -22,7 +22,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected txtNumberDelegate _txtNumberDelegate;
         // Actions
         protected Action ehValueChanged;
-        protected Action<string> actHandlePad;
+        protected Action<int> actHandlePad;
         // Picker list data
         protected List<string> items = new List<string>();
         // Style of editmode
@@ -118,7 +118,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.strTextValue = "";
 
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<AspyViewContainer>();
-            this.actHandlePad = new Action<string>(HandlePadPush);
+            this.actHandlePad = new Action<int>(HandlePadPush);
 
             // Build our number list
             items.Add("0");
@@ -214,35 +214,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create an instance of Numberpad
             this._numberpad = new vcNumberPad();
-            // Set the pad view position
-            this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
+            // Set the pad view position ?
+
 
             this._viewcontollercontainer.AddAndDisplayController(this._numberpad);          
             _numberpad.PadPushed += this.actHandlePad;
         }
 
-        protected void HandlePadPush(string padText)
+        protected void HandlePadPush(int intPadValue)
         {
-            if (padText != "X")
-            {
-                this.intPrevValue = Convert.ToInt32(strTextValue);
-                this.intCurrentValue = Convert.ToInt32(padText); 
-                strTextValue = padText;
-                //_txtField.Text = padText;
-            }
-            else
-            {
-                strTextValue = this.intCurrentValue.ToString();
-                //_txtField.Text = this.intCurrentValue.ToString();
-            }
-            _numberpad.PadPushed -= this.actHandlePad;
-            // Remove the numpad from the mainviewcontainer
-            if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-            {
-                // Raise an error 
-            }
-
-
+            this.intPrevValue = Convert.ToInt32(strTextValue);
+            this.intCurrentValue = intPadValue; 
+            strTextValue = intPadValue.ToString();
         }
 
         protected virtual void PickerValueChanged()
