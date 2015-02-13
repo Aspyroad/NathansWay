@@ -24,6 +24,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private int _intPadValue;
         private bool _bInc;
         private bool _bDec;
+        private bool _bLocked;
 
         #endregion
         
@@ -52,10 +53,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected override void Initialize ()
         {
 			base.Initialize ();
-			this.AspyTag1 = 100; 
-			this.AspyName = "VC_CtrlNumberPad";
+			this.AspyTag1 = 600100; 
+            this.AspyName = "VC_CtrlNumberPad";
             this._bInc = false;
             this._bDec = false;
+            this._bLocked = false;
         }
 
         private void _padpushed (int _intPad)
@@ -68,9 +70,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void _padlockedpushed (int _intPad)
         {          
-            if (PadPushed != null)
+            if (PadLockPushed != null)
             {
-                PadPushed (_intPad);
+                PadLockPushed (_intPad);
             }            
         }
 
@@ -86,8 +88,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this._intPadValue --;
                 }
+                this._bDec = false;
             }
-            if (this._bInc)
+            else if (this._bInc)
             {
                 if (_intPadValue == 9)
                 {
@@ -97,6 +100,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this._intPadValue ++;
                 }
+                this._bInc = false;
+            }
+            else
+            {
+                this._intPadValue = _intValue;
             }
             this._padpushed(this._intPadValue);
         }
@@ -166,7 +174,21 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         partial void btnLockedTouch (AspyRoad.iOSCore.AspyButton sender)
         {
-
+            if (this._bLocked)
+            {
+                this._bLocked = false;
+                // Reset color back to normal
+                this.btnLocked.BackgroundColor = this.btn0.BackgroundColor;
+                this.btnLocked.SetTitle("Lock", UIControlState.Normal);
+            }
+            else
+            {
+                this._bLocked = true;
+                // Reset color back to normal
+                this.btnLocked.BackgroundColor = UIColor.LightGray;
+                this.btnLocked.SetTitle("Locked", UIControlState.Normal);
+            }
+            this._padlockedpushed(this._intPadValue);
         }
 
         #endregion
@@ -178,6 +200,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._intPadValue; }
             set { this._intPadValue = value; }
         }
+        /// <summary>
+        /// If the numberpad is locked on the screen this is set to true.
+        /// </summary>
+        public bool Locked
+        {
+            get { return this._bLocked; }
+        }
 
         #endregion
 
@@ -186,8 +215,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();            
-            //this.View.Frame = new RectangleF(0, 0, 156, 256); 
-
+            // Some basic UI
             this.View.Layer.BorderColor = UIColor.Black.CGColor;
             this.View.Layer.BorderWidth = 2.0f;
         }

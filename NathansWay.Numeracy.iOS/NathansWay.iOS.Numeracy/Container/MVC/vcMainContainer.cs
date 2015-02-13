@@ -100,8 +100,8 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 50, 60));
-            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 50, 60));
+            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
+            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
 
             _vcCtrlNumberText1.Value.PickerToTop = false;
             _vcCtrlNumberText2.Value.PickerToTop = true;
@@ -120,8 +120,6 @@ namespace NathansWay.iOS.Numeracy
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 		}
-
-
 
 		#endregion
 	}

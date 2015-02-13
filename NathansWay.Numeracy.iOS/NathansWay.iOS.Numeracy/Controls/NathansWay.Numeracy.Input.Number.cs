@@ -34,7 +34,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected E__NumberComboEditMode _currentEditMode;
         protected vcNumberPad _numberpad;
         protected vcMainContainer _viewcontollercontainer;
-        protected Action<int> actHandlePad;
+        protected Action<int> actHandlePadPush;
+        protected Action<int> actHandlePadLock;
         protected UIView _mainView;
         protected bool _bAutoPickerPositionOn;
 
@@ -207,7 +208,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
               
-            this.actHandlePad = new Action<int>(HandlePadPush);
+            this.actHandlePadPush = new Action<int>(HandlePadPush);
+            this.actHandlePadLock = new Action<int>(HandlePadLock);
 
             items.Add("0");
             items.Add("1");
@@ -221,7 +223,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
 
             this._bPickerToTop = false;
-
         }
 
         partial void txtTouchedDown(UITextField sender)
@@ -306,14 +307,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._intCurrentValue = _intValue; 
             this.txtNumber.Text = _intValue.ToString();
 
-            this.NumberTextSize.SetPickerPositionNormal();
-            // Reset the new frames - these are value types
-            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
-            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
-
             txtNumber.BackgroundColor = this._preEditColor;
             txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
-
         }
 
         protected void EditScroll()
@@ -329,15 +324,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.NumberTextSize.SetPickerPositionBottom();
             }
+
             // Reset the new frames - these are value types
             this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
             this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
-
+            // Create the picker class
             this.pkNumberPicker = new AspyPickerView(NumberTextSize._rectNumberPicker);
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
-
-
+            // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
@@ -348,7 +343,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkSingleTapGestureRecognizer();
 
             // Clear the text when picker to make it clearer
-            // No, I think its best to dim the text
+            // No, I think its best to dim the text? 
             // this.txtNumber.TextColor = "";
 
             this.View.BringSubviewToFront(this.pkNumberPicker);
@@ -361,46 +356,68 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._bIsInEditMode = true;
 
-            // Create an instance of Numberpad
-            this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
-            // Set the pad view position
-            //this._numberpad.View.Center = this.iOSGlobals.G__PntWindowLandscapeCenter;
-            this._viewcontollercontainer.AddAndDisplayController(
-                this._numberpad, 
-                new RectangleF(this.iOSGlobals.G__PntWindowLandscapeCenter.X, this.iOSGlobals.G__PntWindowLandscapeCenter.Y, 156, 256)
-            );        
-            _numberpad.PadPushed += this.actHandlePad;
+            // Create an instance of Numberpad if its null
+            // TODO : this doesnt work right, we need to check if its been added to the container??
+          
+            if (this._numberpad == null)
+            {
+                this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
+                this._numberpad.PadValue = this.CurrentValue;
+                // Set the pad view position
+                this._viewcontollercontainer.AddAndDisplayController(
+                    this._numberpad, 
+                    new RectangleF(
+                        this.iOSGlobals.G__PntWindowLandscapeCenter.X, 
+                        this.iOSGlobals.G__PntWindowLandscapeCenter.Y, 
+                        156, 
+                        256
+                    )
+                );        
+                _numberpad.PadPushed += this.actHandlePadPush;
+            }
         }
 
         protected void HandlePadPush(int intPadValue)
         {
-            this.postEdit(intPadValue);
+            if (this._bIsInEditMode)
+            {
+                this.postEdit(intPadValue);
+            }
 
-            //_numberpad.PadPushed -= this.actHandlePad;
-
-            // Remove the numpad from the mainviewcontainer
-            //if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-            //{
-               // Raise an error 
-            //}
+            if (!this._numberpad.Locked)
+            {
+                _numberpad.PadPushed -= this.actHandlePadPush;
+                _numberpad.PadLockPushed -= this.actHandlePadLock;
+                // Remove the numberpad from the Maincontainer
+                if (!this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
+                {
+                   // Raise an error 
+                }
+            }
 
             this._bIsInEditMode = false;   
 
         }
 
+        protected void HandlePadLock(int intPadValue)
+        {
+
+        }
+
         protected void ValueChanged()
         {
-            //this.View.SendSubviewToBack(this.pkNumberPicker);
-            //this.pkNumberPicker.Hidden = true;
-
             this.postEdit(this._pickerdelegate.SelectedItemInt);
+
+            this.NumberTextSize.SetPickerPositionNormal();
+            // Reset the new frames - these are value types
+            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
+            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
 
             this._bIsInEditMode = false;
         }
 
         protected void txtSingleTapGestureRecognizer()
-        {
-            
+        {            
             // create a new tap gesture
             UITapGestureRecognizer singleTapGesture = null;
 
@@ -419,7 +436,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void pkSingleTapGestureRecognizer()
         {
-            //
             // create a new tap gesture
             UITapGestureRecognizer singleTapGesture = null;
 
@@ -714,7 +730,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._fTxtNumberHeight = 60.0f;
                 this._fUpDownButtonHeight = 30.0f;
 
-                this._fGlobalWidth = 50.0f;
+                this._fGlobalWidth = 46.0f;
 
                 this.SetPickerPositionNormal();
             }

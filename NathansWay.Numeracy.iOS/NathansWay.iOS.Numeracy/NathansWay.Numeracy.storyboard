@@ -493,7 +493,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="8" borderStyle="line" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="55" id="ZkA-q6-0eC" userLabel="txtNumber">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="46" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="55"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" keyboardAppearance="alert"/>
@@ -502,7 +502,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="InR-43-CTE" userLabel="btnUp">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.1624300159" green="1" blue="0.1425954307" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <state key="normal">
@@ -513,7 +513,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WQi-om-FNL" userLabel="btnDown">
-                                <rect key="frame" x="0.0" y="30" width="50" height="30"/>
+                                <rect key="frame" x="0.0" y="30" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="0.13035243299999999" blue="0.2165317481" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
                                 <state key="normal">
@@ -546,13 +546,12 @@
             <objects>
                 <viewController storyboardIdentifier="vcNumberPad" id="DGX-GF-oXm" customClass="vcNumberPad" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r7Y-Cc-khW" customClass="vNumberPad">
-                        <rect key="frame" x="0.0" y="0.0" width="156" height="248"/>
+                        <rect key="frame" x="0.0" y="0.0" width="156" height="252"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbJ-CZ-nqo" userLabel="btn1" customClass="AspyButton" fixedFrame="YES" tag="1">
                                 <rect key="frame" x="2" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="1">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -565,7 +564,6 @@
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSn-BB-H4s" userLabel="btn2" customClass="AspyButton" fixedFrame="YES" tag="2">
                                 <rect key="frame" x="53" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="2">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -578,7 +576,6 @@
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="46j-aE-7dd" userLabel="btn3" customClass="AspyButton" fixedFrame="YES" tag="3">
                                 <rect key="frame" x="104" y="24" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="3">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -589,9 +586,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l8W-IL-1UF" userLabel="btn4" customClass="AspyButton" fixedFrame="YES" tag="4">
-                                <rect key="frame" x="2" y="74" width="50" height="50"/>
+                                <rect key="frame" x="2" y="75" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="4">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -602,9 +598,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29a-AN-xnO" userLabel="btn5" customClass="AspyButton" fixedFrame="YES" tag="5">
-                                <rect key="frame" x="53" y="74" width="50" height="50"/>
+                                <rect key="frame" x="53" y="75" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="5">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -615,9 +610,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ady-BF-OV5" userLabel="btn7" customClass="AspyButton" fixedFrame="YES" tag="7">
-                                <rect key="frame" x="2" y="124" width="50" height="50"/>
+                                <rect key="frame" x="2" y="126" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="7">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -628,9 +622,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKx-if-diT" userLabel="btn8" customClass="AspyButton" fixedFrame="YES" tag="8">
-                                <rect key="frame" x="53" y="124" width="50" height="50"/>
+                                <rect key="frame" x="53" y="126" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="8">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -641,9 +634,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sCN-MB-CA3" userLabel="btn9" customClass="AspyButton" fixedFrame="YES" tag="9">
-                                <rect key="frame" x="104" y="124" width="50" height="50"/>
+                                <rect key="frame" x="104" y="126" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="9">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -654,9 +646,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Yh-fD-v7Z" userLabel="btn0" customClass="AspyButton" fixedFrame="YES">
-                                <rect key="frame" x="53" y="174" width="50" height="50"/>
+                                <rect key="frame" x="53" y="177" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="0">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -667,9 +658,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MYc-dk-mTS" userLabel="btnUp" customClass="AspyButton" fixedFrame="YES" tag="1">
-                                <rect key="frame" x="104" y="174" width="50" height="50"/>
+                                <rect key="frame" x="104" y="177" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="›">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -680,9 +670,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pyo-P9-o1e" userLabel="btnDown" customClass="AspyButton" fixedFrame="YES" tag="-1">
-                                <rect key="frame" x="2" y="174" width="50" height="50"/>
+                                <rect key="frame" x="2" y="177" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="‹">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -693,11 +682,11 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1iY-a0-hmX" userLabel="btnLocked" customClass="AspyButton" fixedFrame="YES">
-                                <rect key="frame" x="2" y="224" width="152" height="24"/>
+                                <rect key="frame" x="2" y="228" width="152" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
-                                <state key="normal" title="Locked">
+                                <state key="normal" title="Lock">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -705,9 +694,8 @@
                                 </connections>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9m-W3-AES" userLabel="btn6" customClass="AspyButton" fixedFrame="YES" tag="6">
-                                <rect key="frame" x="104" y="74" width="50" height="50"/>
+                                <rect key="frame" x="104" y="75" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="6">
                                     <color key="titleColor" red="0.034068787349999997" green="0.092068774359999994" blue="0.27449378190000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -732,7 +720,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="156" height="248"/>
+                    <size key="freeformSize" width="156" height="252"/>
                     <connections>
                         <outlet property="btn1" destination="mbJ-CZ-nqo" id="name-outlet-mbJ-CZ-nqo"/>
                         <outlet property="btn2" destination="PSn-BB-H4s" id="name-outlet-PSn-BB-H4s"/>

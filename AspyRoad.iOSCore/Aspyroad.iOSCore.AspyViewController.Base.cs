@@ -154,10 +154,13 @@ namespace AspyRoad.iOSCore
 					vc.WillMoveToParentViewController (null);
 					// Remove all views in this vc
 					vc.View.RemoveFromSuperview ();
-					foreach(UIView v in vc.View.Subviews)
-					{
-						v.RemoveFromSuperview ();
-					}
+
+                    // I doubt this is needed, removing subviews is not neccessary
+					//foreach(UIView v in vc.View.Subviews)
+					//{
+					//	v.RemoveFromSuperview ();
+					//}
+
 					//Notify delegates
 					vc.RemoveFromParentViewController ();
 
