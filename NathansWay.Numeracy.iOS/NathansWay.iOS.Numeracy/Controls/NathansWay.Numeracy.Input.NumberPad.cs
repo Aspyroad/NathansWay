@@ -61,7 +61,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bDec = false;
             this._bLocked = false;
             this._bInEditMode = false;
-
             this.createdcount++;
         }
 
@@ -120,6 +119,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.DealWithIt(sender.Tag);
         }
         
+        //partial void btn1Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         partial void btn1Touch(AspyRoad.iOSCore.AspyButton sender)
         {
             this.DealWithIt(sender.Tag);
@@ -184,14 +184,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._bLocked = false;
                 // Reset color back to normal
                 this.btnLocked.BackgroundColor = this.btn0.BackgroundColor;
-                this.btnLocked.SetTitle("Lock", UIControlState.Normal);
+                this.btnLocked.SetTitle("NumberPad-Lock".Aspylate(), UIControlState.Normal);
             }
             else
             {
                 this._bLocked = true;
                 // Reset color back to normal
                 this.btnLocked.BackgroundColor = UIColor.LightGray;
-                this.btnLocked.SetTitle("Locked", UIControlState.Normal);
+                this.btnLocked.SetTitle("NumberPad-Locked".Aspylate(), UIControlState.Normal);
             }
             this._padlockedpushed(this._intPadValue);
         }
@@ -230,6 +230,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Some basic UI
             this.View.Layer.BorderColor = UIColor.Black.CGColor;
             this.View.Layer.BorderWidth = 2.0f;
+        }
+
+        public override void ViewDidLayoutSubviews()
+        {
+            base.ViewDidLayoutSubviews();
+
+            // UI
+            this.btnLocked.SetTitle("NumberPad-Lock".Aspylate(), UIControlState.Normal);
         }
 
         #endregion

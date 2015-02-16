@@ -27,6 +27,13 @@ namespace AspyRoad.iOSCore
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
 
+        // UI styles
+        protected bool _bHasBorder;
+        protected bool _bHasRoundedCorners;
+        protected UIColor colorBorderColor;
+
+
+
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
         {
@@ -50,6 +57,8 @@ namespace AspyRoad.iOSCore
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 			this._holdState = false;
 			this._isPressed = false;
+            this._bHasBorder = false;
+            this._bHasRoundedCorners = false;
 		}
         
 		#region Private Members
@@ -154,6 +163,27 @@ namespace AspyRoad.iOSCore
 			set{ _holdState = value; }
 		}
 
+        public bool HasRounderCorners
+        {
+            get { return this._bHasRoundedCorners; }
+            set
+            {
+                this._bHasRoundedCorners = value;
+                this.ApplyUI();
+            }
+  
+        }
+
+        public bool HasBorder
+        {
+            get { return this._bHasBorder; }
+            set
+            {
+                this._bHasBorder = value;
+                this.ApplyUI();
+            }
+
+        }
 		#endregion
 
 		#region Virtual Members
@@ -165,6 +195,19 @@ namespace AspyRoad.iOSCore
 			this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
 			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
 			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
+
+            // Border
+            if (this._bHasBorder)
+            {
+                this.Layer.BorderWidth = 2.0f;
+                this.Layer.BorderColor = UIColor.Black.CGColor;
+            }
+            if (this._bHasRoundedCorners)
+            {
+                this.Layer.CornerRadius = 3.0f;
+            }
+
+            //this.SetNeedsDisplay();
 		}
 
 		#endregion

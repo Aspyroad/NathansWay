@@ -20,8 +20,16 @@ namespace AspyRoad.iOSCore
     /// <summary>
     /// Class containing helper extension methods
     /// </summary>
-    public static class AspyExtensions 
-	{
+//    public static class AspyExtensions 
+//	{
+//
+//    }
 
+    public static class LocalizationExtensions
+    {
+        public static string Aspylate(this string translate)
+        {
+            return NSBundle.MainBundle.LocalizedString(translate, "", "");
+        }
     }
 }

@@ -84,6 +84,10 @@
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\Container\" />
     <Folder Include="NathansWay.iOS.Numeracy\Container\MVC\" />
+    <Folder Include="Resources\en.lproj\" />
+    <Folder Include="Resources\fr.lproj\" />
+    <Folder Include="Resources\de.lproj\" />
+    <Folder Include="Resources\es.lproj\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NathansWay.iOS.Numeracy\Exception\README.md" />
@@ -208,6 +212,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.vNumberPad.cs">
       <DependentUpon>NathansWay.Numeracy.Input.NumberPad.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.NumberPad.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -244,6 +249,12 @@
       <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </BundleResource>
+    <BundleResource Include="Resources\en.lproj\Localizable.strings">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </BundleResource>
+    <BundleResource Include="Resources\fr.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\de.lproj\Localizable.strings" />
+    <BundleResource Include="Resources\es.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />

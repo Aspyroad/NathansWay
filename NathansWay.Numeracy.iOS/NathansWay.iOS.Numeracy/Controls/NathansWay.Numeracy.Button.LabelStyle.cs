@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy
 
 		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
 		{
-			var touch = uievent.AllTouches.AnyObject as UITouch;
+			//var touch = uievent.AllTouches.AnyObject as UITouch;
 			IsPressed = false;	
 			return base.ContinueTracking (uitouch, uievent);
 		}
