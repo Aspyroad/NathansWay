@@ -25,6 +25,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bInc;
         private bool _bDec;
         private bool _bLocked;
+        private bool _bInEditMode;
+        private int createdcount;
 
         #endregion
         
@@ -58,6 +60,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bInc = false;
             this._bDec = false;
             this._bLocked = false;
+            this._bInEditMode = false;
+
+            this.createdcount++;
         }
 
         private void _padpushed (int _intPad)
@@ -78,7 +83,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void DealWithIt(int _intValue)
         {
-            if (this._bDec)
+            if (this._bDec && this._bInEditMode)
             {
                 if (_intPadValue == 0)
                 {
@@ -86,11 +91,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
-                    this._intPadValue --;
+                    this._intPadValue--;
                 }
                 this._bDec = false;
             }
-            else if (this._bInc)
+            else if (this._bInc && this._bInEditMode)
             {
                 if (_intPadValue == 9)
                 {
@@ -102,7 +107,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 this._bInc = false;
             }
-            else
+            else if (this._bInEditMode)
             {
                 this._intPadValue = _intValue;
             }
@@ -200,6 +205,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._intPadValue; }
             set { this._intPadValue = value; }
         }
+
+        public bool InEditMode
+        {
+            get { return this._bInEditMode; }
+            set { this._bInEditMode = value; }
+        }
+
         /// <summary>
         /// If the numberpad is locked on the screen this is set to true.
         /// </summary>
