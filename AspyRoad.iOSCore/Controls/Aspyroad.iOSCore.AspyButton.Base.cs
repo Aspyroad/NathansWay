@@ -26,7 +26,6 @@ namespace AspyRoad.iOSCore
 		protected UIColor colorNormalSVGColor;
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
-
         // UI styles
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
@@ -169,7 +168,7 @@ namespace AspyRoad.iOSCore
             set
             {
                 this._bHasRoundedCorners = value;
-                this.ApplyUI();
+                //this.ApplyUI();
             }
   
         }
@@ -180,7 +179,7 @@ namespace AspyRoad.iOSCore
             set
             {
                 this._bHasBorder = value;
-                this.ApplyUI();
+                //this.ApplyUI();
             }
 
         }
@@ -199,12 +198,12 @@ namespace AspyRoad.iOSCore
             // Border
             if (this._bHasBorder)
             {
-                this.Layer.BorderWidth = 2.0f;
-                this.Layer.BorderColor = UIColor.Black.CGColor;
+                this.Layer.BorderWidth = 0.5f;
+                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             }
             if (this._bHasRoundedCorners)
             {
-                this.Layer.CornerRadius = 3.0f;
+                this.Layer.CornerRadius = 6.0f;
             }
 
             //this.SetNeedsDisplay();

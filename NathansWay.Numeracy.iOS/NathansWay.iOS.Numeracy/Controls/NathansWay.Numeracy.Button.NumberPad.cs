@@ -43,6 +43,8 @@ namespace NathansWay.iOS.Numeracy
 
         private void Init_ButtonNumberPad()
 		{ 
+            this.HasBorder = true;
+            this.HasRounderCorners = true;
 			this.ApplyUI ();
 		}
 
@@ -58,9 +60,7 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void ApplyUI ()
 		{ 
-            this.HasBorder = true;
-            this.HasRounderCorners = true;
-			//base.ApplyUI ();
+			base.ApplyUI ();
 			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
 		}
 

@@ -28,6 +28,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bInEditMode;
         private int createdcount;
 
+        private float r = 0;
+        private float dx = 0;
+        private float dy = 0;
+
         #endregion
         
         #region Constructors
@@ -114,70 +118,69 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         
         // Yeah its repetitive, but quick!
-        partial void btn0Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn0Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        //partial void btn1Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
-        partial void btn1Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn1Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn2Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn2Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn3Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn3Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn4Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn4Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
 
-        partial void btn5Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn5Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn6Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn6Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn7Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn7Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn8Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn8Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
         
-        partial void btn9Touch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btn9Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
 
-        partial void btnForwardTouch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btnForwardTouch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this._bInc = true;
             this.DealWithIt(sender.Tag);
         }
 
-        partial void btnBackTouch(AspyRoad.iOSCore.AspyButton sender)
+        partial void btnBackTouch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this._bDec = true;
             this.DealWithIt(sender.Tag);
         }
 
-        partial void btnLockedTouch (AspyRoad.iOSCore.AspyButton sender)
+        partial void btnLockedTouch (NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             if (this._bLocked)
             {
@@ -194,6 +197,45 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.btnLocked.SetTitle("NumberPad-Locked".Aspylate(), UIControlState.Normal);
             }
             this._padlockedpushed(this._intPadValue);
+        }
+
+        private void NumberPadPanGestureRecognizer()
+        {
+            // create a new tap gesture
+            UIPanGestureRecognizer MovePadPanGesture = null;
+
+            Action<UIPanGestureRecognizer> action = (pg) => 
+                { 
+                    if ((pg.State == UIGestureRecognizerState.Began || pg.State == UIGestureRecognizerState.Changed) && (pg.NumberOfTouches == 1))
+                    //if ((pg.State == UIGestureRecognizerState.Began) && (pg.NumberOfTouches == 1))
+                    {
+
+                        var p0 = pg.LocationInView (View);
+
+                        if (dx == 0)
+                        {
+                            dx = p0.X - this.View.Center.X;
+                        }
+
+                        if (dy == 0)
+                        {
+                            dy = p0.Y - this.View.Center.Y;
+                        }
+
+                        var p1 = new PointF (p0.X - dx, p0.Y - dy);
+
+                        this.View.Center = p1;
+                    } else if (pg.State == UIGestureRecognizerState.Ended) 
+                    {
+                        dx = 0;
+                        dy = 0;
+                    }
+                };
+
+            MovePadPanGesture = new UIPanGestureRecognizer(action);
+
+            // add the gesture recognizer to the view
+            this.View.AddGestureRecognizer(MovePadPanGesture);
         }
 
         #endregion
@@ -226,7 +268,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         public override void ViewDidLoad()
         {
-            base.ViewDidLoad();            
+            base.ViewDidLoad();  
+
+            this.NumberPadPanGestureRecognizer();
             // Some basic UI
             this.View.Layer.BorderColor = UIColor.Black.CGColor;
             this.View.Layer.BorderWidth = 2.0f;
@@ -238,6 +282,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // UI
             this.btnLocked.SetTitle("NumberPad-Lock".Aspylate(), UIControlState.Normal);
+            this.lblNumberPad.Text = "NumberPad-Title".Aspylate();
         }
 
         #endregion

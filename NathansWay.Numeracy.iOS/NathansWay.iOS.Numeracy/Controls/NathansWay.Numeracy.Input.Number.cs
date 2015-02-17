@@ -372,8 +372,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                     new RectangleF(
                         this.iOSGlobals.G__PntWindowLandscapeCenter.X, 
                         this.iOSGlobals.G__PntWindowLandscapeCenter.Y, 
-                        156, 
-                        256
+                        160, 
+                        260
                     )
                 );        
                 _numberpad.PadPushed += this.actHandlePadPush;

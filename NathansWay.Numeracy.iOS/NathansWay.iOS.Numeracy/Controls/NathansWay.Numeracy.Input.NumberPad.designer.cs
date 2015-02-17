@@ -16,55 +16,55 @@ namespace NathansWay.iOS.Numeracy.Controls
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn0 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn0 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn1 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn1 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn2 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn2 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn3 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn3 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn4 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn4 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn5 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn5 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn6 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn6 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn7 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn7 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn8 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn8 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btn9 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btn9 { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btnBack { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btnBack { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btnForward { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btnForward { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyButton btnLocked { get; set; }
+		NathansWay.iOS.Numeracy.ButtonNumberPad btnLocked { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -72,55 +72,55 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		[Action ("btn0Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn0Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn0Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn1Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn1Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn1Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn2Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn2Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn2Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn3Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn3Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn3Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn4Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn4Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn4Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn5Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn5Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn5Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn6Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn6Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn6Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn7Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn7Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn7Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn8Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn8Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn8Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btn9Touch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btn9Touch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btn9Touch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btnBackTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btnBackTouch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btnBackTouch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btnForwardTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btnForwardTouch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btnForwardTouch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		[Action ("btnLockedTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void btnLockedTouch (AspyRoad.iOSCore.AspyButton sender);
+		partial void btnLockedTouch (NathansWay.iOS.Numeracy.ButtonNumberPad sender);
 
 		void ReleaseDesignerOutlets ()
 		{

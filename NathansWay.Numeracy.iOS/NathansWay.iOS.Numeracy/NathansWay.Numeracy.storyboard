@@ -546,11 +546,11 @@
             <objects>
                 <viewController storyboardIdentifier="vcNumberPad" id="DGX-GF-oXm" customClass="vcNumberPad" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r7Y-Cc-khW" customClass="vNumberPad">
-                        <rect key="frame" x="0.0" y="0.0" width="156" height="252"/>
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="260"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbJ-CZ-nqo" userLabel="btn1" customClass="AspyButton" fixedFrame="YES" tag="1">
-                                <rect key="frame" x="2" y="24" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mbJ-CZ-nqo" userLabel="btn1" customClass="ButtonNumberPad" fixedFrame="YES" tag="1">
+                                <rect key="frame" x="4" y="28" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="1">
@@ -561,8 +561,8 @@
                                     <action selector="btn1Touch:" destination="DGX-GF-oXm" id="1048" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSn-BB-H4s" userLabel="btn2" customClass="AspyButton" fixedFrame="YES" tag="2">
-                                <rect key="frame" x="53" y="24" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="PSn-BB-H4s" userLabel="btn2" customClass="ButtonNumberPad" fixedFrame="YES" tag="2">
+                                <rect key="frame" x="55" y="28" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="2">
@@ -573,8 +573,8 @@
                                     <action selector="btn2Touch:" destination="DGX-GF-oXm" id="1049" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="46j-aE-7dd" userLabel="btn3" customClass="AspyButton" fixedFrame="YES" tag="3">
-                                <rect key="frame" x="104" y="24" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="46j-aE-7dd" userLabel="btn3" customClass="ButtonNumberPad" fixedFrame="YES" tag="3">
+                                <rect key="frame" x="106" y="28" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="3">
@@ -585,8 +585,8 @@
                                     <action selector="btn3Touch:" destination="DGX-GF-oXm" id="1050" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l8W-IL-1UF" userLabel="btn4" customClass="AspyButton" fixedFrame="YES" tag="4">
-                                <rect key="frame" x="2" y="75" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="l8W-IL-1UF" userLabel="btn4" customClass="ButtonNumberPad" fixedFrame="YES" tag="4">
+                                <rect key="frame" x="4" y="79" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="4">
@@ -597,8 +597,8 @@
                                     <action selector="btn4Touch:" destination="DGX-GF-oXm" id="1051" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29a-AN-xnO" userLabel="btn5" customClass="AspyButton" fixedFrame="YES" tag="5">
-                                <rect key="frame" x="53" y="75" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="29a-AN-xnO" userLabel="btn5" customClass="ButtonNumberPad" fixedFrame="YES" tag="5">
+                                <rect key="frame" x="55" y="79" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="5">
@@ -609,8 +609,8 @@
                                     <action selector="btn5Touch:" destination="DGX-GF-oXm" id="1052" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ady-BF-OV5" userLabel="btn7" customClass="AspyButton" fixedFrame="YES" tag="7">
-                                <rect key="frame" x="2" y="126" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ady-BF-OV5" userLabel="btn7" customClass="ButtonNumberPad" fixedFrame="YES" tag="7">
+                                <rect key="frame" x="4" y="130" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="7">
@@ -621,8 +621,8 @@
                                     <action selector="btn7Touch:" destination="DGX-GF-oXm" id="1054" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKx-if-diT" userLabel="btn8" customClass="AspyButton" fixedFrame="YES" tag="8">
-                                <rect key="frame" x="53" y="126" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="mKx-if-diT" userLabel="btn8" customClass="ButtonNumberPad" fixedFrame="YES" tag="8">
+                                <rect key="frame" x="55" y="130" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="8">
@@ -633,8 +633,8 @@
                                     <action selector="btn8Touch:" destination="DGX-GF-oXm" id="1056" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sCN-MB-CA3" userLabel="btn9" customClass="AspyButton" fixedFrame="YES" tag="9">
-                                <rect key="frame" x="104" y="126" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sCN-MB-CA3" userLabel="btn9" customClass="ButtonNumberPad" fixedFrame="YES" tag="9">
+                                <rect key="frame" x="106" y="130" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="9">
@@ -645,8 +645,8 @@
                                     <action selector="btn9Touch:" destination="DGX-GF-oXm" id="1057" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Yh-fD-v7Z" userLabel="btn0" customClass="AspyButton" fixedFrame="YES">
-                                <rect key="frame" x="53" y="177" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="5Yh-fD-v7Z" userLabel="btn0" customClass="ButtonNumberPad" fixedFrame="YES">
+                                <rect key="frame" x="55" y="181" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="0">
@@ -657,8 +657,8 @@
                                     <action selector="btn0Touch:" destination="DGX-GF-oXm" id="1059" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MYc-dk-mTS" userLabel="btnUp" customClass="AspyButton" fixedFrame="YES" tag="1">
-                                <rect key="frame" x="104" y="177" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MYc-dk-mTS" userLabel="btnUp" customClass="ButtonNumberPad" fixedFrame="YES" tag="1">
+                                <rect key="frame" x="106" y="181" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="›">
@@ -669,8 +669,8 @@
                                     <action selector="btnForwardTouch:" destination="DGX-GF-oXm" id="1060" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pyo-P9-o1e" userLabel="btnDown" customClass="AspyButton" fixedFrame="YES" tag="-1">
-                                <rect key="frame" x="2" y="177" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Pyo-P9-o1e" userLabel="btnDown" customClass="ButtonNumberPad" fixedFrame="YES" tag="-1">
+                                <rect key="frame" x="4" y="181" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="‹">
@@ -681,8 +681,8 @@
                                     <action selector="btnBackTouch:" destination="DGX-GF-oXm" id="1058" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1iY-a0-hmX" userLabel="btnLocked" customClass="AspyButton" fixedFrame="YES">
-                                <rect key="frame" x="2" y="228" width="152" height="24"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1iY-a0-hmX" userLabel="btnLocked" customClass="ButtonNumberPad" fixedFrame="YES">
+                                <rect key="frame" x="4" y="232" width="152" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
@@ -693,8 +693,8 @@
                                     <action selector="btnLockedTouch:" destination="DGX-GF-oXm" id="1061" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9m-W3-AES" userLabel="btn6" customClass="AspyButton" fixedFrame="YES" tag="6">
-                                <rect key="frame" x="104" y="75" width="50" height="50"/>
+                            <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="u9m-W3-AES" userLabel="btn6" customClass="ButtonNumberPad" fixedFrame="YES" tag="6">
+                                <rect key="frame" x="106" y="79" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="44"/>
                                 <state key="normal" title="6">
@@ -706,9 +706,9 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number Pad" lineBreakMode="tailTruncation" minimumFontSize="10" id="1064" fixedFrame="YES" textAlignment="center" customClass="AspyLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="156" height="21"/>
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -720,7 +720,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="156" height="252"/>
+                    <size key="freeformSize" width="160" height="260"/>
                     <connections>
                         <outlet property="btn1" destination="mbJ-CZ-nqo" id="name-outlet-mbJ-CZ-nqo"/>
                         <outlet property="btn2" destination="PSn-BB-H4s" id="name-outlet-PSn-BB-H4s"/>
