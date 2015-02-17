@@ -28,9 +28,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bInEditMode;
         private int createdcount;
 
-        private float r = 0;
+        //private float r = 0;
         private float dx = 0;
         private float dy = 0;
+        private PointF lastPoint;
 
         #endregion
         
@@ -205,37 +206,45 @@ namespace NathansWay.iOS.Numeracy.Controls
             UIPanGestureRecognizer MovePadPanGesture = null;
 
             Action<UIPanGestureRecognizer> action = (pg) => 
-                { 
-                    if ((pg.State == UIGestureRecognizerState.Began || pg.State == UIGestureRecognizerState.Changed) && (pg.NumberOfTouches == 1))
-                    //if ((pg.State == UIGestureRecognizerState.Began) && (pg.NumberOfTouches == 1))
+                {
+                    var p0 = pg.LocationInView (this.View);
+                    var p1 = this.lblNumberPad.Center;
+
+                    //if (pg.State == UIGestureRecognizerState.Began)
+                    //{
+                    //    lastPoint = this.View.Center;
+                    //}
+                    //if ((pg.State == UIGestureRecognizerState.Began || pg.State == UIGestureRecognizerState.Changed) && (pg.NumberOfTouches == 1))
+                    if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches == 1))
                     {
+                        //                        if (dx == 0)
+                        //                        {
+                        //                            dx = p0.X - this.View.Center.X;
+                        //                        }
+                        //
+                        //                        if (dy == 0)
+                        //                        {
+                        //                            dy = p0.Y - this.View.Center.Y;
+                        //                        }
+                        //
+                        // if the gesture hits in the view of the label
+                        // then move the view
+                        var p2 = new PointF (p1.X + p0.X, p1.Y + p0.Y);
+                        //var p1 = new PointF (this.View.Center.X - p0.X, this.View.Center.Y - p0.Y);
 
-                        var p0 = pg.LocationInView (View);
-
-                        if (dx == 0)
-                        {
-                            dx = p0.X - this.View.Center.X;
-                        }
-
-                        if (dy == 0)
-                        {
-                            dy = p0.Y - this.View.Center.Y;
-                        }
-
-                        var p1 = new PointF (p0.X - dx, p0.Y - dy);
-
-                        this.View.Center = p1;
-                    } else if (pg.State == UIGestureRecognizerState.Ended) 
-                    {
-                        dx = 0;
-                        dy = 0;
-                    }
+                        this.View.Center = p2;
+                    } 
+//                    else if (pg.State == UIGestureRecognizerState.Ended) 
+//                    {
+//                        dx = 0;
+//                        dy = 0;
+//                    }
                 };
 
             MovePadPanGesture = new UIPanGestureRecognizer(action);
 
             // add the gesture recognizer to the view
-            this.View.AddGestureRecognizer(MovePadPanGesture);
+            this.lblNumberPad.AddGestureRecognizer(MovePadPanGesture);
         }
 
         #endregion

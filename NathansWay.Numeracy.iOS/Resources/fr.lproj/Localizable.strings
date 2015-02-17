@@ -1,3 +1,6 @@
-﻿/* VC CtrlNumberPad */
+﻿/* French */
+
+/* VC CtrlNumberPad */
 "NumberPad-Locked"="Fermé";
 "NumberPad-Lock"="Bloquer"; 
+"NumberPad-Title"="NombrePad Edit";
