@@ -26,12 +26,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bDec;
         private bool _bLocked;
         private bool _bInEditMode;
-        private int createdcount;
+        private float _fAlphaLevel;
+        private float _fOldAlphaLevel;
+        // Geometry variables for dragging
+        //private float dx = 0;
+        //private float dy = 0;
+        private PointF _pLastPoint;
+        private PointF _p6;
+        private bool _bHitLabel;
 
-        //private float r = 0;
-        private float dx = 0;
-        private float dy = 0;
-        private PointF lastPoint;
 
         #endregion
         
@@ -66,7 +69,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bDec = false;
             this._bLocked = false;
             this._bInEditMode = false;
-            this.createdcount++;
+            this._fAlphaLevel = 1.0f;
+            this._fOldAlphaLevel = 1.0f;
         }
 
         private void _padpushed (int _intPad)
@@ -117,7 +121,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             this._padpushed(this._intPadValue);
         }
-        
+
         // Yeah its repetitive, but quick!
         partial void btn0Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
@@ -207,44 +211,47 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             Action<UIPanGestureRecognizer> action = (pg) => 
                 {
-                    var p0 = pg.LocationInView (this.View);
-                    var p1 = this.lblNumberPad.Center;
 
-                    //if (pg.State == UIGestureRecognizerState.Began)
-                    //{
-                    //    lastPoint = this.View.Center;
-                    //}
-                    //if ((pg.State == UIGestureRecognizerState.Began || pg.State == UIGestureRecognizerState.Changed) && (pg.NumberOfTouches == 1))
-                    if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches == 1))
+                    if (pg.State == UIGestureRecognizerState.Began)
                     {
-                        //                        if (dx == 0)
-                        //                        {
-                        //                            dx = p0.X - this.View.Center.X;
-                        //                        }
-                        //
-                        //                        if (dy == 0)
-                        //                        {
-                        //                            dy = p0.Y - this.View.Center.Y;
-                        //                        }
-                        //
-                        // if the gesture hits in the view of the label
-                        // then move the view
-                        var p2 = new PointF (p1.X + p0.X, p1.Y + p0.Y);
-                        //var p1 = new PointF (this.View.Center.X - p0.X, this.View.Center.Y - p0.Y);
+                        this._fOldAlphaLevel = this.View.Alpha;
+                        // Set the display to half opacity
+                        this.SetAlphaLevel = 0.5f;
+                        
+                        this._bHitLabel = false;
+                        this._pLastPoint = this.View.Center;
+                        this._p6 = pg.LocationInView (this.View);
+                        if (this.lblNumberPad.PointInside(this._p6, null))
+                        {
+                            this._bHitLabel = true;
+                        }
+                    }
 
-                        this.View.Center = p2;
+                    if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches < 3) && this._bHitLabel)
+                    {
+                        var p0 = pg.LocationInView (this.View);
+
+                        // To stop the jerky movement when first moving we only want to capture the finger movement,
+                        // not the initial point of touch also
+                        var x = p0.X - this._p6.X;
+                        var y = p0.Y - this._p6.Y;
+
+                        var p1 = new PointF (this.View.Center.X + x, this.View.Center.Y + y);
+                        this.View.Center = p1;
                     } 
-//                    else if (pg.State == UIGestureRecognizerState.Ended) 
-//                    {
-//                        dx = 0;
-//                        dy = 0;
-//                    }
+
+                    if (pg.State == UIGestureRecognizerState.Ended)
+                    {
+                        this.SetAlphaLevel = this._fOldAlphaLevel;
+                        this._bHitLabel = false;
+                    }
                 };
 
             MovePadPanGesture = new UIPanGestureRecognizer(action);
 
             // add the gesture recognizer to the view
-            this.lblNumberPad.AddGestureRecognizer(MovePadPanGesture);
+            this.View.AddGestureRecognizer(MovePadPanGesture);
+
         }
 
         #endregion
@@ -269,6 +276,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         public bool Locked
         {
             get { return this._bLocked; }
+        }
+
+        public float SetAlphaLevel
+        {
+            get { return this._fAlphaLevel; }
+            set 
+            { 
+                this._fAlphaLevel = value; 
+                this.View.Alpha = value;
+            }
         }
 
         #endregion
