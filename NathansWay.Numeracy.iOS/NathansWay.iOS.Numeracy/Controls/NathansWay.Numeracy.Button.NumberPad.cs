@@ -52,12 +52,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides 
 
-//		public override void Draw (RectangleF rect)
-//		{
-//            //DrawButtonNumberPad (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, rect);
-//			base.Draw (rect);
-//		}
-
 		public override void ApplyUI ()
 		{ 
 			base.ApplyUI ();
@@ -67,11 +61,6 @@ namespace NathansWay.iOS.Numeracy
 		#endregion
 
 		#region Private Members
-
-//        private void DrawButtonNumberPad(UIColor labelTextColor, RectangleF buttonFrame)
-//		{
-//
-//		}
 
 
 		#endregion

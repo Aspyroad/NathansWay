@@ -75,7 +75,19 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Public Members
 
-		#endregion
+        public void DisplayNumberPad(PointF pLocation)
+        {
+            // Set the pad view position
+            this.AddAndDisplayController(
+                this._vcNumberPad.Value, 
+                new RectangleF(
+                    pLocation.X, 
+                    pLocation.Y, 
+                    160, 
+                    260
+                )
+            );
+        }
 
 		#region Overrides
 

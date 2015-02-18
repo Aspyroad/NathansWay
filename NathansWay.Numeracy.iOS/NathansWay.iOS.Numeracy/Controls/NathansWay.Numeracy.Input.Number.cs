@@ -356,7 +356,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._bIsInEditMode = true;
 
-
             // Create an instance of Numberpad if its null
             // TODO : this doesnt work right, we need to check if its been added to the container??
           
@@ -366,16 +365,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Set the value local to numbad
                 this._numberpad.PadValue = this.CurrentValue;
 
-                // Set the pad view position
-                this._viewcontollercontainer.AddAndDisplayController(
-                    this._numberpad, 
-                    new RectangleF(
-                        this.iOSGlobals.G__PntWindowLandscapeCenter.X, 
-                        this.iOSGlobals.G__PntWindowLandscapeCenter.Y, 
-                        160, 
-                        260
-                    )
-                );        
+                // Main Controller is now responsible for all top level Vc's
+                this._viewcontollercontainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
                 _numberpad.PadPushed += this.actHandlePadPush;
             }
             // Let numpad know that a control is in editmode
