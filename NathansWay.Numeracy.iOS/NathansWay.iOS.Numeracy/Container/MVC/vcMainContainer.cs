@@ -24,6 +24,8 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcCtrlNumberText> _vcCtrlNumberText1;
         public Lazy<vcCtrlNumberText> _vcCtrlNumberText2;
 
+        private bool _bNumberPadLoaded;
+
 		#endregion
 
 		#region Constructors
@@ -77,17 +79,46 @@ namespace NathansWay.iOS.Numeracy
 
         public void DisplayNumberPad(PointF pLocation)
         {
-            // Set the pad view position
-            this.AddAndDisplayController(
-                this._vcNumberPad.Value, 
-                new RectangleF(
-                    pLocation.X, 
-                    pLocation.Y, 
-                    160, 
-                    260
-                )
-            );
+            if (!this.NumberPadLoaded)
+            {
+                // Set the pad view position
+                this.AddAndDisplayController(
+                    this._vcNumberPad.Value, 
+                    new RectangleF(
+                        pLocation.X, 
+                        pLocation.Y, 
+                        160, 
+                        260
+                    )
+
+                );
+            }
+            else
+            {
+                this._vcNumberPad.Value.View.Hidden = false;
+            }
+
         }
+
+        public bool NumberPadLoaded
+        {
+            get
+            { 
+                var x = Array.IndexOf(this.ChildViewControllers, this._vcNumberPad.Value);
+                if (x > -1)
+                {
+                    this._bNumberPadLoaded = true;
+                    return true;
+                }
+                else
+                {
+                    this._bNumberPadLoaded = false;
+                    return false;
+                }
+            }
+        }
+
+        #endregion
 
 		#region Overrides
 
@@ -132,6 +163,11 @@ namespace NathansWay.iOS.Numeracy
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 		}
+
+        public override void DidReceiveMemoryWarning()
+        {
+            base.DidReceiveMemoryWarning();
+        }
 
 		#endregion
 	}

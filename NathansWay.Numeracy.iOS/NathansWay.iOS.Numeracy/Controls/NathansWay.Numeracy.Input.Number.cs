@@ -84,10 +84,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this._numberpad.PadPushed -= this.actHandlePadPush;
                     this._numberpad.PadLockPushed -= this.actHandlePadLock;
                     this._pickerdelegate.psValueChanged -= this.ehValueChanged; 
-                    // Destroy our picker delegate links
-                    this._pickerdelegate = null;
-                    this._pickersource = null;
+                    this._numberpad = null;
                 }
+                // Destroy our picker delegate links
+                this._pickerdelegate = null;
+                this._pickersource = null;
             }
         }
 
@@ -248,17 +249,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Prevent the user double tapping
             if (this.IsInEditMode)
             {
-                // User is cancelling the edit - backout
-                this.IsInEditMode = false;
-
+                // Apply UI for edit
+                this.UI_ToggleTextEdit();
                 if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
                 {
 
                 }
                 else // Numpad
                 {
-
+                    if (!this._numberpad.Locked)
+                    {
+                        this.CloseNumPad();
+                    }
                 }
+                // User is cancelling the edit - backout
+                this.IsInEditMode = false;
                 // Exit
                 return; 
             }
@@ -379,8 +384,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void EditNumPad()
         {
-            this.IsInEditMode = true;
-
             // Create an instance of Numberpad if its null
             // TODO : this doesnt work right, we need to check if its been added to the container??
           
@@ -392,19 +395,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 
                 // Main Controller is now responsible for all top level Vc's
                 this._viewcontollercontainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
-                _numberpad.PadPushed += this.actHandlePadPush;
             }
+            if (!this._numberpad.Locked)
+            {
+
+                this._numberpad.View.Hidden = false;
+            }
+            this._numberpad.PadPushed += this.actHandlePadPush;
+            this._numberpad.PadLockPushed += this.actHandlePadLock;
+            this.IsInEditMode = true;
         }
 
         protected void CloseNumPad()
         {
-            _numberpad.PadPushed -= this.actHandlePadPush;
-            _numberpad.PadLockPushed -= this.actHandlePadLock;
-            // Remove the numberpad from the Maincontainer
-            if (this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-            {
-                this._numberpad = null;
-            }
+            this._numberpad.PadPushed -= this.actHandlePadPush;
+            this._numberpad.PadLockPushed -= this.actHandlePadLock;
+            this._numberpad.View.Hidden = true;
         }
 
         // Touch and Input
@@ -485,20 +491,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.IsInEditMode)
             {
                 this.postEdit(intPadValue);
+                this.UI_ToggleTextEdit();
+                this.IsInEditMode = false; 
             }
 
             if (!this._numberpad.Locked)
             {
-                _numberpad.PadPushed -= this.actHandlePadPush;
-                _numberpad.PadLockPushed -= this.actHandlePadLock;
-                // Remove the numberpad from the Maincontainer
-                if (this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-                {
-                    this._numberpad = null;
-                }
+                this.CloseNumPad();
             }
-
-            this.IsInEditMode = false; 
         }
 
         protected void HandlePadLock(int intPadValue)
