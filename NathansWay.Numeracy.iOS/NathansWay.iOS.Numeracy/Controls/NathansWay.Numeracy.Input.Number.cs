@@ -43,7 +43,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected int _intPrevValue;
         protected int _intCurrentValue;
-        protected bool _bIsInEditMode;
+        private bool _bIsInEditMode;
         protected bool _bPickerToTop;
 
         private UIColor _preEditColor;
@@ -70,6 +70,29 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
+        #region Deconstructors
+
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+
+            if (disposing)
+            {
+                if (this._numberpad != null)
+                {
+                    // Unhook any delegates
+                    this._numberpad.PadPushed -= this.actHandlePadPush;
+                    this._numberpad.PadLockPushed -= this.actHandlePadLock;
+                    this._pickerdelegate.psValueChanged -= this.ehValueChanged; 
+                    // Destroy our picker delegate links
+                    this._pickerdelegate = null;
+                    this._pickersource = null;
+                }
+            }
+        }
+
+        #endregion
+
         #region Overrides
         
         public override void DidReceiveMemoryWarning()
@@ -81,20 +104,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;//this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;  //this._numeracySettings.NumberCombo.EditMode;
                         
             // Set initital values
             this.preEdit();
             
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(ValueChanged);    
+            ehValueChanged = new Action(HandlePickerChanged);    
 
             this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
-
-            // By default we want the picker hidden until the textbox is tapped.
-            //this.View.SendSubviewToBack(this.pkNumberPicker);
-            //this.pkNumberPicker.Hidden = true;
                         
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
@@ -124,16 +143,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
         }
 
-        public override void ViewDidLayoutSubviews()
-        {
-            base.ViewDidLayoutSubviews();
-            //if (pkNumberPicker != null)
-            //{
-                //this.pkNumberPicker.Delegate.Selected(pkNumberPicker, 0, 0);
-                //this.pkNumberPicker.Delegate.Selected(pkNumberPicker, _intCurrentValue, _intCurrentValue);
-            //}
-        }
-
         #endregion
         
         #region Public Properties
@@ -141,6 +150,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         public bool IsInEditMode
         {
             get { return this._bIsInEditMode; }
+            set 
+            {
+                this._bIsInEditMode = value;
+                if (this._numberpad != null)
+                {
+                    this._numberpad.InEditMode = value;
+                }
+            }
         }
 
         public bool PickerToTop
@@ -225,21 +242,31 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bPickerToTop = false;
         }
 
+        // Partials
         partial void txtTouchedDown(UITextField sender)
         {
             // Prevent the user double tapping
-            if (this._bIsInEditMode)
+            if (this.IsInEditMode)
             {
+                // User is cancelling the edit - backout
+                this.IsInEditMode = false;
+
+                if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
+                {
+
+                }
+                else // Numpad
+                {
+
+                }
                 // Exit
                 return; 
             }
 
             // Begin Editing
             this.preEdit();
-            // Graphically highlight the text control so we know its selected
-            this._preEditColor = txtNumber.BackgroundColor;
-            txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
-            txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
+            // Apply UI for edit
+            this.UI_ToggleTextEdit();
 
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
@@ -253,7 +280,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         partial void btnUpTouch(UIButton sender)
         {
-            this._bIsInEditMode = true;
+            this.IsInEditMode = true;
 
             if (this._intCurrentValue < 9)
             {
@@ -265,12 +292,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             this.txtNumber.Text = this._intCurrentValue.ToString();
 
-            this._bIsInEditMode = false;
+            this.IsInEditMode = false;
         }
 
         partial void btnDownTouch(UIButton sender)
         {
-            this._bIsInEditMode = true; 
+            this.IsInEditMode = true; 
 
             if (this._intCurrentValue > 0)
             {
@@ -282,9 +309,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             this.txtNumber.Text = this._intCurrentValue.ToString();
 
-            this._bIsInEditMode = false;
+            this.IsInEditMode = false;
         }
 
+        // Setup editing
         protected void preEdit()
         {
             // Store the original value
@@ -306,14 +334,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
             this._intCurrentValue = _intValue; 
             this.txtNumber.Text = _intValue.ToString();
-
-            txtNumber.BackgroundColor = this._preEditColor;
-            txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
         }
 
         protected void EditScroll()
         {
-            this._bIsInEditMode = true;
+            this.IsInEditMode = true;
 
             // Reset our view positions. 
             if (this._bPickerToTop)
@@ -354,7 +379,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void EditNumPad()
         {
-            this._bIsInEditMode = true;
+            this.IsInEditMode = true;
 
             // Create an instance of Numberpad if its null
             // TODO : this doesnt work right, we need to check if its been added to the container??
@@ -369,56 +394,20 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._viewcontollercontainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
                 _numberpad.PadPushed += this.actHandlePadPush;
             }
-            // Let numpad know that a control is in editmode
-            this._numberpad.InEditMode = true;
-
         }
 
-        protected void HandlePadPush(int intPadValue)
+        protected void CloseNumPad()
         {
-            if (this._bIsInEditMode)
+            _numberpad.PadPushed -= this.actHandlePadPush;
+            _numberpad.PadLockPushed -= this.actHandlePadLock;
+            // Remove the numberpad from the Maincontainer
+            if (this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
             {
-                this.postEdit(intPadValue);
+                this._numberpad = null;
             }
-
-            if (!this._numberpad.Locked)
-            {
-                _numberpad.PadPushed -= this.actHandlePadPush;
-                _numberpad.PadLockPushed -= this.actHandlePadLock;
-                // Remove the numberpad from the Maincontainer
-                if (this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
-                {
-                    this._numberpad = null;
-                }
-            }
-            else
-            {
-                // Take numpad out of editmode also
-                this._numberpad.InEditMode = false;
-            }
-
-            this._bIsInEditMode = false; 
-
-
         }
 
-        protected void HandlePadLock(int intPadValue)
-        {
-
-        }
-
-        protected void ValueChanged()
-        {
-            this.postEdit(this._pickerdelegate.SelectedItemInt);
-
-            this.NumberTextSize.SetPickerPositionNormal();
-            // Reset the new frames - these are value types
-            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
-            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
-
-            this._bIsInEditMode = false;
-        }
-
+        // Touch and Input
         protected void txtSingleTapGestureRecognizer()
         {            
             // create a new tap gesture
@@ -444,9 +433,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             NSAction action = () => 
                 { 
-                    if ( this._bIsInEditMode )
+                    if ( this.IsInEditMode )
                     {
-                        this.ValueChanged();
+                        this.HandlePickerChanged();
                         this.View.Frame = NumberTextSize._rectCtrlNumberText;
                         this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
                         this.pkNumberPicker.Delegate = null;
@@ -469,6 +458,64 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // add the gesture recognizer to the view
             this.pkNumberPicker.AddGestureRecognizer(singleTapGesture);
+        }
+
+        // UI Methods
+        protected void UI_ToggleTextEdit()
+        {
+            if (!this.IsInEditMode)
+            {
+                // Graphically highlight the text control so we know its selected
+                this._preEditColor = txtNumber.BackgroundColor;
+                txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
+                txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
+            }
+            else
+            {
+                txtNumber.BackgroundColor = this._preEditColor;
+                txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
+            }
+
+
+        }
+
+        // Action Delegates
+        protected void HandlePadPush(int intPadValue)
+        {
+            if (this.IsInEditMode)
+            {
+                this.postEdit(intPadValue);
+            }
+
+            if (!this._numberpad.Locked)
+            {
+                _numberpad.PadPushed -= this.actHandlePadPush;
+                _numberpad.PadLockPushed -= this.actHandlePadLock;
+                // Remove the numberpad from the Maincontainer
+                if (this._viewcontollercontainer.RemoveControllers(this._numberpad.AspyTag1))
+                {
+                    this._numberpad = null;
+                }
+            }
+
+            this.IsInEditMode = false; 
+        }
+
+        protected void HandlePadLock(int intPadValue)
+        {
+
+        }
+
+        protected void HandlePickerChanged()
+        {
+            this.postEdit(this._pickerdelegate.SelectedItemInt);
+
+            this.NumberTextSize.SetPickerPositionNormal();
+            // Reset the new frames - these are value types
+            this.View.Frame = this.NumberTextSize._rectCtrlNumberText;
+            this.txtNumber.Frame = this.NumberTextSize._rectTxtNumber;
+
+            this.IsInEditMode = false;
         }
 
         #endregion    
