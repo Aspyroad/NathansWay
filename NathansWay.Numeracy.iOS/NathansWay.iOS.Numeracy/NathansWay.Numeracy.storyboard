@@ -705,13 +705,13 @@
                                     <action selector="btn6Touch:" destination="DGX-GF-oXm" id="1053" eventType="touchUpInside"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number Pad" lineBreakMode="tailTruncation" minimumFontSize="10" id="1064" fixedFrame="YES" textAlignment="center" customClass="AspyLabel">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="25"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Number Pad" lineBreakMode="tailTruncation" minimumFontSize="10" id="1064" fixedFrame="YES" textAlignment="center" customClass="AspyLabel" alpha="1" shadowOffsetHeight="0" shadowOffsetWidth="0">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1"/>
+                                <color key="backgroundColor" colorSpace="calibratedRGB" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
+                                <nil key="highlightedColor" colorSpace="calibratedRGB" red="0" green="0" blue="0" alpha="1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

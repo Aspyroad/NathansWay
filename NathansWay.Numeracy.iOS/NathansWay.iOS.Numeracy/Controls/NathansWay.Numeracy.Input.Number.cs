@@ -25,19 +25,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         public NumberSize NumberTextSize;
 
         protected AspyPickerView pkNumberPicker;
+        protected UIView _mainView;
 
         protected PickerDelegate _pickerdelegate;
         protected PickerSource _pickersource;
         protected txtNumberDelegate _txtNumberDelegate;
-        protected Action ehValueChanged;
+
         protected List<string> items = new List<string>();
         protected E__NumberComboEditMode _currentEditMode;
+        private UIColor _preEditColor;
+
         protected vcNumberPad _numberpad;
         protected vcMainContainer _viewcontollercontainer;
+
+        protected Action ehValueChanged;
         protected Action<int> actHandlePadPush;
         protected Action<int> actHandlePadLock;
-        protected UIView _mainView;
-        protected bool _bAutoPickerPositionOn;
 
         protected G__UnitPlacement _tensUnit;
 
@@ -45,8 +48,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected int _intCurrentValue;
         private bool _bIsInEditMode;
         protected bool _bPickerToTop;
-
-        private UIColor _preEditColor;
+        protected bool _bAutoPickerPositionOn;
 
         #endregion
 
@@ -503,7 +505,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePadLock(int intPadValue)
         {
-
+            if (!this._bIsInEditMode)
+            {
+                this.CloseNumPad();
+            }
         }
 
         protected void HandlePickerChanged()
