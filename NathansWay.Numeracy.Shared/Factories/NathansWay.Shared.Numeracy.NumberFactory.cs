@@ -1,17 +1,7 @@
 ﻿// System
 using System;
-using System.Drawing;
 using System.Collections.Generic;
-// Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
-// Aspyroad
-using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
-// Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
+// NathansWay
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Factories
@@ -34,8 +24,20 @@ namespace NathansWay.iOS.Numeracy.Factories
         #endregion
 
         #region Public Members
+        // Diveded by symbol (opt + /)
+        // ([1/2] + [3/4]) - (3) =
+        // (2 + 5) =
+        // (347 ÷ 54) =
 
-        // CreateNumber (length)
+        // UICreateNumber (int length)
+
+        // UICreateFraction (string strFraction)
+
+        // UICreateOperator (string strOperator)
+
+        // UICreate
+
+
 
         #endregion
 

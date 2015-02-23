@@ -104,6 +104,8 @@
     <Compile Include="BusinessLayer\ViewModels\Nathansway.Shared.BUS.ExpressionBuilder.cs" />
     <Compile Include="BusinessLayer\ViewModels\NathansWay.Shared.BUS.PropertyChanged.Base.cs" />
     <Compile Include="Utilities\NathansWay.Shared.Util.TypeExtensions.cs" />
+    <Compile Include="Factories\NathansWay.Shared.Numeracy.NumberFactory.cs" />
+    <Compile Include="Contracts\UserInterface\INathansWay.Shared.UINumberFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -119,6 +121,7 @@
     <Folder Include="Contracts\UserInterface\" />
     <Folder Include="UserInterface\" />
     <Folder Include="BusinessLayer\Services\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net">
