@@ -20,6 +20,7 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
+using NathansWay.iOS.Numeracy.Factories;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 
@@ -52,7 +53,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private List<NSObject> _applicationObservers;
 		private ToolFactory ToolBuilder;
-
+        private ExpressionFactory ExpressionBuilder;
 		#endregion
 
 		#region Overrides
@@ -128,9 +129,12 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 
+            // Application Services
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
+            // Build a NumberFactory
+            ExpressionBuilder = new ExpressionFactory(new NumberFactoryClient());
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();

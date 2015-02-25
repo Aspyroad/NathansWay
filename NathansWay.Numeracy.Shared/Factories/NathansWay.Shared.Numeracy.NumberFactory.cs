@@ -6,7 +6,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Factories
 {
-    public class NumberFactory
+    public class ExpressionFactory
     {
         #region Class Variables
 
@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy.Factories
 
         #region Contructors
 
-        public NumberFactory(IUINumberFactoryClient UIPlatform)
+        public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
             this._UIPlatormClient = UIPlatform;
         }
@@ -63,10 +63,22 @@ namespace NathansWay.iOS.Numeracy.Factories
         private IDictionary<G__MathChar, string> SplitExpression(string _expression)
         {
             Dictionary<G__MathChar, string> _dict = new Dictionary<G__MathChar, string>();
+            // Seperator
+            char[] sepArray = {','};
+
+            string[] x = _expression.Split(sepArray);
+
+            foreach (string s in x)
+            {
+                // Do you stuff!
+                // case statement going through all
+                // G__MathChar ??
 
 
 
 
+
+            }
             return _dict;
         }
 

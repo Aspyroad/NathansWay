@@ -16,7 +16,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Factories
 {
-    public class UINumberFactory : IUINumberFactoryClient
+    public class UINumberFactory 
     {
         #region Class Variables
 

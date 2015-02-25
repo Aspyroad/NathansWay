@@ -356,7 +356,8 @@ namespace NathansWay.Shared
         Addition = 7,
         Negative = 8,
         Multiply = 9,
-        Decimal = 10
+        Decimal = 10,
+        NotFound = 99
     }
 
     public static class G__MathChars
@@ -375,17 +376,17 @@ namespace NathansWay.Shared
             {".", G__MathChar.Decimal}
         };
 
-        public static string GetLevel(G__MathChar x)
+        public static G__MathChar GetLevel(string x)
         {
             // Try to get the result in the static Dictionary
-            string result;
+            G__MathChar result;
             if (_dict.TryGetValue(x, out result))
             {
                 return result;
             }
             else
             {
-                return null;
+                return G__MathChar.NotFound;
             }
         }
     }
