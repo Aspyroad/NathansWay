@@ -343,5 +343,51 @@ namespace NathansWay.Shared
 	}
 
 	#endregion
+
+    public enum G__MathChar : int
+    {
+        Value = 0,
+        BraceRoundLeft = 1,
+        BraceRoundRight = 2,
+        BraceSquareLeft = 3,
+        BraceSquareRight = 4,
+        DivisionFraction = 5,
+        Division = 6,
+        Addition = 7,
+        Negative = 8,
+        Multiply = 9,
+        Decimal = 10
+    }
+
+    public static class G__MathChars
+    {
+        static Dictionary<string, G__MathChar> _dict = new Dictionary<string, G__MathChar>
+        {
+            {"(", G__MathChar.BraceRoundLeft},
+            {")", G__MathChar.BraceRoundRight},
+            {"[", G__MathChar.BraceSquareLeft},
+            {"]", G__MathChar.BraceSquareRight},
+            {"/", G__MathChar.DivisionFraction},
+            {"÷", G__MathChar.Division},
+            {"+", G__MathChar.Addition},
+            {"-", G__MathChar.Negative},
+            {"x", G__MathChar.Multiply},
+            {".", G__MathChar.Decimal}
+        };
+
+        public static string GetLevel(G__MathChar x)
+        {
+            // Try to get the result in the static Dictionary
+            string result;
+            if (_dict.TryGetValue(x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
 }
 

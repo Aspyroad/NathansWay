@@ -18,7 +18,7 @@ namespace NathansWay.iOS.Numeracy.Factories
         public event BuildCompletedEventHandler BuildCompleted;
 
         protected G__UnitPlacement _tensUnit;
-        protected List<string> _lsSplitExpression;
+        protected IList<string> _lsSplitExpression;
 
         protected IUINumberFactoryClient _UIPlatormClient;
 
@@ -35,7 +35,7 @@ namespace NathansWay.iOS.Numeracy.Factories
 
         #region Public Members
         // Diveded by symbol (opt + /)
-        // ([1/2] + [3/4]) - (3) =
+        // (,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6
         // (2 + 5) =
         // (347 ÷ 54) =
 
@@ -60,13 +60,14 @@ namespace NathansWay.iOS.Numeracy.Factories
 
         #region Private Members
 
-        private List<string> SplitExpression(string _expression)
+        private IDictionary<G__MathChar, string> SplitExpression(string _expression)
         {
-            List<string> _list = new List<string>();
+            Dictionary<G__MathChar, string> _dict = new Dictionary<G__MathChar, string>();
 
 
 
-            return _list;
+
+            return _dict;
         }
 
         #endregion
