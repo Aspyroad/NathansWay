@@ -4,7 +4,7 @@ using System.Collections.Generic;
 // NathansWay
 using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy.Factories
+namespace NathansWay.Shared.Factories
 {
     public class ExpressionFactory
     {
@@ -19,8 +19,12 @@ namespace NathansWay.iOS.Numeracy.Factories
 
         protected G__UnitPlacement _tensUnit;
         protected IList<string> _lsSplitExpression;
+        protected List<KeyValuePair<G__MathChar, string>> _lsDecodedExpression;
 
         protected IUINumberFactoryClient _UIPlatormClient;
+
+        // Seperator
+        private readonly char[] sepArray = {','};
 
         #endregion
 
@@ -29,6 +33,7 @@ namespace NathansWay.iOS.Numeracy.Factories
         public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
             this._UIPlatormClient = UIPlatform;
+            this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
         }
 
         #endregion
@@ -36,14 +41,50 @@ namespace NathansWay.iOS.Numeracy.Factories
         #region Public Members
         // Diveded by symbol (opt + /)
         // (,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6
-        // (2 + 5) =
-        // (347 ÷ 54) =
 
         public void CreateExpression (string _expression)
         {
+            this.SplitExpression(_expression);
+            for (int i = 0; i < this._lsDecodedExpression.Count; i++) // Loop with for.
+            {
+                var x = this._lsDecodedExpression[i];
+                string y;
+
+                switch ((G__MathChar)x.Key)
+                {
+                    case (G__MathChar.BraceRoundLeft):
+                        {
+                            this._UIPlatormClient.UICreateBrace(false);
+                        }
+                        break;
+                    case (G__MathChar.BraceSquareLeft):
+                        {
+                            // Fraction Start
+                        }
+                        break;
+                    default :
+                        {
+                            y = "Nope";
+                        }
+                        break;
+                }
 
 
 
+
+
+            }
+        }
+
+        public List<KeyValuePair<G__MathChar, string>> SplitExpression(string _expression)
+        {
+            string[] x = _expression.Split(sepArray);
+            //foreach (string s in x)
+            for (int i = 0; i < x.Length; i++) // Loop with for.
+            {
+                this._lsDecodedExpression.Add(new KeyValuePair<G__MathChar, string>(G__MathChars.GetCharType(x[i]), x[i]));
+            }
+            return this._lsDecodedExpression;
         }
 
         #endregion
@@ -60,27 +101,6 @@ namespace NathansWay.iOS.Numeracy.Factories
 
         #region Private Members
 
-        private IDictionary<G__MathChar, string> SplitExpression(string _expression)
-        {
-            Dictionary<G__MathChar, string> _dict = new Dictionary<G__MathChar, string>();
-            // Seperator
-            char[] sepArray = {','};
-
-            string[] x = _expression.Split(sepArray);
-
-            foreach (string s in x)
-            {
-                // Do you stuff!
-                // case statement going through all
-                // G__MathChar ??
-
-
-
-
-
-            }
-            return _dict;
-        }
 
         #endregion
     }

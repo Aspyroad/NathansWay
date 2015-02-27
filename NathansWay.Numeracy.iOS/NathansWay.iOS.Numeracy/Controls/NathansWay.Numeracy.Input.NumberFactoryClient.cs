@@ -13,6 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
+using NathansWay.Shared.Factories;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {

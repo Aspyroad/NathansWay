@@ -14,7 +14,7 @@ using AspyRoad.iOSCore.UISettings;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy.Factories
+namespace NathansWay.Shared.Numeracy.Factories
 {
     public class UINumberFactory 
     {

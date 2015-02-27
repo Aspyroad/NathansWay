@@ -9,6 +9,12 @@ using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.Controls;
+// Shared
+using NathansWay.Shared.Factories;
+using NathansWay.Shared;
+using NathansWay.Shared.Utilities;
+
+
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -25,6 +31,7 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcCtrlNumberText> _vcCtrlNumberText2;
 
         private bool _bNumberPadLoaded;
+        private ExpressionFactory _ef;
 
 		#endregion
 
@@ -143,14 +150,18 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
-            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
+            //this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
+            //this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
 
-            _vcCtrlNumberText1.Value.PickerToTop = false;
-            _vcCtrlNumberText2.Value.PickerToTop = true;
+            //_vcCtrlNumberText1.Value.PickerToTop = false;
+            //_vcCtrlNumberText2.Value.PickerToTop = true;
 
             //_vcCtrlNumberText.Value.NumberTextSize.SetScale(0);
 			// ***********************************************
+
+            // Testing
+            this._ef = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
+            _ef.CreateExpression("(,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6");
 		}
 
 		public override void ViewDidLayoutSubviews ()

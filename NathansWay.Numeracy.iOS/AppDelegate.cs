@@ -20,7 +20,7 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
-using NathansWay.iOS.Numeracy.Factories;
+using NathansWay.Shared.Factories;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 
@@ -135,6 +135,7 @@ namespace NathansWay.iOS.Numeracy
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
             // Build a NumberFactory
             ExpressionBuilder = new ExpressionFactory(new NumberFactoryClient());
+            iOSCoreServiceContainer.Register<ExpressionFactory> (this.ExpressionBuilder);
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
