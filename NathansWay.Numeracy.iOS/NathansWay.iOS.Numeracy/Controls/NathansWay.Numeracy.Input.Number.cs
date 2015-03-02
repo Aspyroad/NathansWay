@@ -869,142 +869,141 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        #region UIPickerViewModel Implementation
-
-        /// <summary>
-        /// Overridden UIPickerViewModel - Serves as the datasource for the picklist
-        /// </summary>
-//        protected class PickerDataModel : UIPickerViewModel 
-//        {
-//            #region Class Variables
-//
-//            protected int selectedIndex = 0;
-//
-//            #endregion
-//
-//            #region Events
-//
-//            public event EventHandler<EventArgs> ValueChanged;
-//
-//            #endregion
-//
-//            #region Constructor
-//
-//            public PickerDataModel ()
-//            {
-//            }
-//
-//            #endregion
-//
-//            #region Public Variables
-//
-//            public List<string> Items
-//            {
-//                get { return items; }
-//                set { items = value; }
-//            }
-//
-//            /// <summary>
-//            /// The current selected item
-//            /// </summary>
-//            public string SelectedItem
-//            {
-//                get { return items[selectedIndex]; }
-//            }
-//
-//            #endregion
-//
-//            #region Overrides
-//
-//            /// <summary>
-//            /// Called by the picker to determine how many rows are in a given spinner item
-//            /// </summary>
-//            public override int GetRowsInComponent (UIPickerView picker, int component)
-//            {
-//                return items.Count;
-//            }
-//
-//            /// <summary>
-//            /// called by the picker to get the text for a particular row in a particular 
-//            /// spinner item
-//            /// </summary>
-//            public override string GetTitle (UIPickerView picker, int row, int component)
-//            {
-//                return items[row];
-//            }
-//
-//            /// <summary>
-//            /// Called by the picker to get the number of spinner items
-//            /// </summary>
-//            public override int GetComponentCount (UIPickerView picker)
-//            {
-//                return 1;
-//            }
-//
-//            /// <summary>
-//            /// called when a row is selected in the spinner
-//            /// </summary>
-//            public override void Selected (UIPickerView picker, int row, int component)
-//            {
-//                selectedIndex = row;
-//                if (this.ValueChanged != null)
-//                {
-//                    this.ValueChanged (this, new EventArgs ());
-//                }   
-//            }
-//
-//            /// <summary>
-//            /// This is called for ever item in the picker source
-//            /// </summary>
-//            public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
-//            {
-//                // NOTE: Don't call the base implementation on a Model class
-//                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
-//                throw new NotImplementedException();
-//            }
-//
-//            #endregion
-//        } 
-
-        #endregion
-
-        #region VCSettings
-
-        //  public class vcs_numbercombo : VcSettings
-        //  {
-        //      private E__NumberComboEditMode _editmode;
-        //
-        //      public vcs_numbercombo (IAspyGlobals iOSGlobals)
-        //      {
-        //          this.VcTag = 102;
-        //          this.VcName = "VC_CtrlNumberCombo";
-        //
-        //          this.FrameSize = 
-        //              new RectangleF 
-        //              (
-        //                  0,
-        //                  0,
-        //                  54,
-        //                  68
-        //              );
-        //          this.HasBorder = true;
-        //          this.BackColor = UIColor.White;
-        //          this.BorderColor = UIColor.Brown;
-        //          this.BorderSize = 4.0f;
-        //
-        //      }
-        //
-        //      public E__NumberComboEditMode EditMode 
-        //      {
-        //          get { return _editmode; }
-        //          set { _editmode = value; }
-        //      }
-        //  }
-
-        #endregion
-
     }
 
+    #region UIPickerViewModel Implementation
+
+    /// <summary>
+    /// Overridden UIPickerViewModel - Serves as the datasource for the picklist
+    /// </summary>
+    //        protected class PickerDataModel : UIPickerViewModel 
+    //        {
+    //            #region Class Variables
+    //
+    //            protected int selectedIndex = 0;
+    //
+    //            #endregion
+    //
+    //            #region Events
+    //
+    //            public event EventHandler<EventArgs> ValueChanged;
+    //
+    //            #endregion
+    //
+    //            #region Constructor
+    //
+    //            public PickerDataModel ()
+    //            {
+    //            }
+    //
+    //            #endregion
+    //
+    //            #region Public Variables
+    //
+    //            public List<string> Items
+    //            {
+    //                get { return items; }
+    //                set { items = value; }
+    //            }
+    //
+    //            /// <summary>
+    //            /// The current selected item
+    //            /// </summary>
+    //            public string SelectedItem
+    //            {
+    //                get { return items[selectedIndex]; }
+    //            }
+    //
+    //            #endregion
+    //
+    //            #region Overrides
+    //
+    //            /// <summary>
+    //            /// Called by the picker to determine how many rows are in a given spinner item
+    //            /// </summary>
+    //            public override int GetRowsInComponent (UIPickerView picker, int component)
+    //            {
+    //                return items.Count;
+    //            }
+    //
+    //            /// <summary>
+    //            /// called by the picker to get the text for a particular row in a particular 
+    //            /// spinner item
+    //            /// </summary>
+    //            public override string GetTitle (UIPickerView picker, int row, int component)
+    //            {
+    //                return items[row];
+    //            }
+    //
+    //            /// <summary>
+    //            /// Called by the picker to get the number of spinner items
+    //            /// </summary>
+    //            public override int GetComponentCount (UIPickerView picker)
+    //            {
+    //                return 1;
+    //            }
+    //
+    //            /// <summary>
+    //            /// called when a row is selected in the spinner
+    //            /// </summary>
+    //            public override void Selected (UIPickerView picker, int row, int component)
+    //            {
+    //                selectedIndex = row;
+    //                if (this.ValueChanged != null)
+    //                {
+    //                    this.ValueChanged (this, new EventArgs ());
+    //                }   
+    //            }
+    //
+    //            /// <summary>
+    //            /// This is called for ever item in the picker source
+    //            /// </summary>
+    //            public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
+    //            {
+    //                // NOTE: Don't call the base implementation on a Model class
+    //                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+    //                throw new NotImplementedException();
+    //            }
+    //
+    //            #endregion
+    //        } 
+
+    #endregion
+
+    #region VCSettings
+
+    //  public class vcs_numbercombo : VcSettings
+    //  {
+    //      private E__NumberComboEditMode _editmode;
+    //
+    //      public vcs_numbercombo (IAspyGlobals iOSGlobals)
+    //      {
+    //          this.VcTag = 102;
+    //          this.VcName = "VC_CtrlNumberCombo";
+    //
+    //          this.FrameSize = 
+    //              new RectangleF 
+    //              (
+    //                  0,
+    //                  0,
+    //                  54,
+    //                  68
+    //              );
+    //          this.HasBorder = true;
+    //          this.BackColor = UIColor.White;
+    //          this.BorderColor = UIColor.Brown;
+    //          this.BorderSize = 4.0f;
+    //
+    //      }
+    //
+    //      public E__NumberComboEditMode EditMode 
+    //      {
+    //          get { return _editmode; }
+    //          set { _editmode = value; }
+    //      }
+    //  }
+
+    #endregion
 
 }
 

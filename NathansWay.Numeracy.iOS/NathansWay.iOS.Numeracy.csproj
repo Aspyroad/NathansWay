@@ -213,6 +213,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcNumberContainer.cs" />
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumberFactory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.NumberFactoryClient.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcFractionContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
