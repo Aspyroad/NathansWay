@@ -29,6 +29,14 @@ namespace NathansWay.Shared
 		Assesment = 3
 	}
 
+    public enum G__NumberDisplaySize : int
+    {
+        Normal = 1,
+        Medium = 2,
+        Large = 3
+    }
+
+
 	#region Filtering
 
 	public enum G__ExpressionType 
