@@ -45,7 +45,5 @@ namespace NathansWay.Shared.Utilities
         /// Full database Path.
         /// </summary>
         string GS__FullDbPath { get; set; }
-
-        struct GS__
     }
 }

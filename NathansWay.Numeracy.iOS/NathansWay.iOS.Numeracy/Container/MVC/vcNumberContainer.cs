@@ -86,7 +86,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public FractionSize FractSize
+        public NumberContainerSize NumSize
         {
             get { return this._containerSize; }
             set { this._containerSize = value; }
@@ -121,13 +121,13 @@ namespace NathansWay.iOS.Numeracy
             get { return this._bPickerToTop; }
         }
 
-        public int PrevValue
+        public double PrevValue
         {
             get { return this._dblPrevValue; }
-            set { this._dblPrevValue = value; }
+            //set { this._dblPrevValue = value; }
         }
 
-        public int CurrentValue
+        public double CurrentValue
         {
             get { return this._dblCurrentValue; }
             set { this._dblCurrentValue = value; }          
@@ -170,7 +170,8 @@ namespace NathansWay.iOS.Numeracy
         // Decimal Place Width
         public float _fDecimalPlaceWidth;
 
-        public G__
+        public vcMainContainer _vcmc;
+        public _iOSDimensions _globalSizes;
 
         #endregion
 
@@ -188,8 +189,9 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
+            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            this._globalSizes = this._vcmc.GS__iOSDimensions;
             _pStartPoint = _vc.View.Frame.Location;
-
             this.RefreshDisplay();
         }
 
@@ -213,7 +215,7 @@ namespace NathansWay.iOS.Numeracy
             {
                 case (G__NumberDisplaySize.Normal):
                 {
-                    this._fNumberContainerHeight = 60.0f;
+                    this._fNumberContainerHeight = this._globalSizes._fCtrlNumberTextHeight;
                     this._fTxtNumberHeight = 10.0f;
                     this._fDecimalPlaceHeight = 60.0f;
                     this._fNumberContainerWidth = 46.0f;
@@ -244,72 +246,29 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public void SetDenominatorPosition ()
+        public void SetAllNumberPositions ()
         {
-            this._rectCtrlNumberText = new RectangleF
-                (
-                    this._pStartPoint.X, 
-                    (this._pStartPoint.Y - this._fNumberPickerHeight), 
-                    this._fGlobalWidth, 
-                    (this._fNumberPickerHeight + this._fTxtNumberHeight)
-                );
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    0.0f, 
-                    this._fGlobalWidth, 
-                    this._fNumberPickerHeight
-                );
-            this._rectTxtNumber = new RectangleF
-                (
-                    0.0f, 
-                    (this._fNumberPickerHeight), 
-                    this._fGlobalWidth,
-                    this._fTxtNumberHeight
-                );
-        }
-
-        public void SetNumeratorPosition ()
-        {
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    this._fCtrlNumberTextHeight, 
-                    this._fGlobalWidth, 
-                    this._fNumberPickerHeight
-                );
-            this._rectCtrlNumberText = new RectangleF
-                (
-                    this._pStartPoint.X, 
-                    this._pStartPoint.Y, 
-                    this._fGlobalWidth, 
-                    (this._fNumberPickerHeight + this._fCtrlNumberTextHeight)
-                );
-        }
-
-        public void SetDividerPosition ()
-        {
-            this._rectLabelPickerView = new RectangleF
-                (
-                    0.0f,
-                    0.0f,
-                    this._sLabelPickerViewSize.Width,
-                    this._sLabelPickerViewSize.Height
-                );
-            this._rectCtrlNumberText = new RectangleF
-                (
-                    this._pStartPoint.X, 
-                    this._pStartPoint.Y, 
-                    this._fGlobalWidth, 
-                    this._fTxtNumberHeight
-                );
-            this._rectTxtNumber = new RectangleF
-                (
-                    0.0f, 
-                    0.0f, 
-                    this._fGlobalWidth,
-                    this._fTxtNumberHeight
-                ); 
+//            this._rectCtrlNumberText = new RectangleF
+//                (
+//                    this._pStartPoint.X, 
+//                    (this._pStartPoint.Y - this._fNumberPickerHeight), 
+//                    this._fGlobalWidth, 
+//                    (this._fNumberPickerHeight + this._fTxtNumberHeight)
+//                );
+//            this._rectNumberPicker = new RectangleF
+//                (
+//                    0.0f, 
+//                    0.0f, 
+//                    this._fGlobalWidth, 
+//                    this._fNumberPickerHeight
+//                );
+//            this._rectTxtNumber = new RectangleF
+//                (
+//                    0.0f, 
+//                    (this._fNumberPickerHeight), 
+//                    this._fGlobalWidth,
+//                    this._fTxtNumberHeight
+//                );
         }
 
         public void SetScale (int _scale)

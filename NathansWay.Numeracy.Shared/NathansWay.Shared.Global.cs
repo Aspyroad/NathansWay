@@ -18,15 +18,12 @@ namespace NathansWay.Shared.Utilities
         protected string androidDatabasePath;   
         protected string fulldbPath;
 
-        public readonly _iOSDimensions GS__iOSDimensions;
-
         #endregion
 
         #region Contructors
 
         public SharedGlobal()
         {
-            this.GS__iOSDimensions = new _iOSDimensions();
         }
 
         #endregion
@@ -83,31 +80,6 @@ namespace NathansWay.Shared.Utilities
             get { return fulldbPath; }
             set { fulldbPath = value; }
         }
-        #endregion   
-
-        #region Structs
-
-        // iOS dimensions
-        // Heights and widths of the initial number text box.
-        // 
-        public struct _iOSDimensions
-        {
-            public float _fCtrlNumberTextHeight;
-            public float _fNumberPickerHeight;
-            public float _fTxtNumberHeight;
-            public float _fUpDownButtonHeight;
-            public float _fGlobalWidth;
-
-            public _iOSDimensions ()
-            {
-                this._fCtrlNumberTextHeight = 60.0f;
-                this._fNumberPickerHeight = 200.0f;
-                this._fTxtNumberHeight = 60.0f;
-                this._fUpDownButtonHeight = 30.0f;
-                this._fGlobalWidth = 46.0f;
-            }
-        }
-
         #endregion
 
     }   

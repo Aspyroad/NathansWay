@@ -23,31 +23,34 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private NumberSize _numberSize;
 
-        protected AspyPickerView pkNumberPicker;
-        protected UIView _mainView;
+        private AspyPickerView pkNumberPicker;
+        //private UIView _mainView;
 
-        protected PickerDelegate _pickerdelegate;
-        protected PickerSource _pickersource;
-        protected txtNumberDelegate _txtNumberDelegate;
+        private PickerDelegate _pickerdelegate;
+        private PickerSource _pickersource;
+        private txtNumberDelegate _txtNumberDelegate;
+        private UITapGestureRecognizer singleTapGesture;
 
-        protected List<string> items = new List<string>();
-        protected E__NumberComboEditMode _currentEditMode;
+        private List<string> items = new List<string>();
+        private E__NumberComboEditMode _currentEditMode;
         private UIColor _preEditColor;
 
-        protected vcNumberPad _numberpad;
-        protected vcMainContainer _viewcontollercontainer;
+        private vcNumberPad _numberpad;
+        private vcMainContainer _viewcontollercontainer;
 
-        protected Action ehValueChanged;
-        protected Action<int> actHandlePadPush;
-        protected Action<int> actHandlePadLock;
+        private Action ehValueChanged;
+        private Action<int> actHandlePadPush;
+        private Action<int> actHandlePadLock;
 
-        protected G__UnitPlacement _tensUnit;
+        private G__UnitPlacement _tensUnit;
 
-        protected int _intPrevValue;
-        protected int _intCurrentValue;
+        private int _intPrevValue;
+        private int _intCurrentValue;
         private bool _bIsInEditMode;
-        protected bool _bPickerToTop;
-        protected bool _bAutoPickerPositionOn;
+        private bool _bPickerToTop;
+
+        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
+        private bool _bAutoPickerPositionOn;
         // Global size variable for resizing class.
         private G__NumberDisplaySize _displaySize;
 
@@ -137,6 +140,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidAppear(animated);
             this._numberSize = new NumberSize(this, 0);
+
+            // Grab a reference to the root view conntroller
+            this._viewcontollercontainer = this._numberSize._vcmc;
+
             this._numberSize.SetPickerPositionNormalOff();
             this.View.Frame = this._numberSize._rectCtrlNumberText;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
@@ -163,7 +170,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 this._displaySize = value;
-                this._numberSize.RefreshDisplay();
+                if (this._numberSize != null)
+                {
+                    this._numberSize.RefreshDisplay();
+                }
             }
         }
 
@@ -242,9 +252,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			//base.Initialize ();
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_CtrlNumberText";
-
-            this._viewcontollercontainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-              
+                          
             this.actHandlePadPush = new Action<int>(HandlePadPush);
             this.actHandlePadLock = new Action<int>(HandlePadLock);
 
@@ -259,6 +267,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
+            singleTapGesture = null;
             this._bPickerToTop = false;
         }
 
@@ -272,7 +281,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.UI_ToggleTextEdit();
                 if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
                 {
-
+                    this._pickerdelegate.SelectedItemInt = this._intPrevValue;
+                    this.HandlePickerChanged();
+                    this.CloseNumberPicker();
                 }
                 else // Numpad
                 {
@@ -432,6 +443,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberpad.View.Hidden = true;
         }
 
+        protected void CloseNumberPicker()
+        {
+            this.View.Frame = _numberSize._rectCtrlNumberText;
+            this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
+            this.singleTapGesture = null;
+            this.pkNumberPicker.Delegate = null;
+            //this.pkNumberPicker.DataSource = null;
+            this.pkNumberPicker.RemoveFromSuperview();
+            this.pkNumberPicker = null;
+        }
+
         // Touch and Input
         protected void txtSingleTapGestureRecognizer()
         {            
@@ -453,20 +475,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void pkSingleTapGestureRecognizer()
         {
-            // create a new tap gesture
-            UITapGestureRecognizer singleTapGesture = null;
-
             NSAction action = () => 
                 { 
                     if ( this.IsInEditMode )
                     {
                         this.HandlePickerChanged();
-                        this.View.Frame = _numberSize._rectCtrlNumberText;
-                        this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
-                        this.pkNumberPicker.Delegate = null;
-                        //this.pkNumberPicker.DataSource = null;
-                        this.pkNumberPicker.RemoveFromSuperview();
-                        this.pkNumberPicker = null;
+                        this.CloseNumberPicker();
                     }
                 };
 
@@ -530,12 +544,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            this.postEdit(this._pickerdelegate.SelectedItemInt);
+            if (_intCurrentValue != this._pickerdelegate.SelectedItemInt)
+            {
+                this.postEdit(this._pickerdelegate.SelectedItemInt);
+            }
 
             this._numberSize.SetPickerPositionNormalOff();
             // Reset the new frames - these are value types
             this.View.Frame = this._numberSize._rectCtrlNumberText;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+
+            this.UI_ToggleTextEdit();
 
             this.IsInEditMode = false;
         }
@@ -601,6 +620,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public int SelectedItemInt
             {
                 get { return selectedIndex; }
+                set { selectedIndex = value; }
             }
 
             public int CurrentValue
@@ -779,6 +799,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Label SizeF
         public SizeF _sLabelPickerViewSize;
 
+        public vcMainContainer _vcmc;
+        public _iOSDimensions _globalSizes;
+
         #endregion
 
         #region Constructors
@@ -801,6 +824,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
+            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            this._globalSizes = this._vcmc.GS__iOSDimensions;
             _pStartPoint = _vc.View.Frame.Location;
             this.RefreshDisplay ();
         }
@@ -811,18 +836,28 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetHeightWidth ()
         {
+            //            this._sLabelPickerViewSize = new SizeF(130f, 60f);
+            //            // All Initial Values
+            //            this._fCtrlNumberTextHeight = 60.0f;
+            //            this._fNumberPickerHeight = 200.0f;
+            //            this._fTxtNumberHeight = 60.0f;
+            //            this._fUpDownButtonHeight = 30.0f;
+            //            // Global width for all heights.
+            //            this._fGlobalWidth = 46.0f;
+
             switch (_vc.DisplaySize)
             {
                 case (G__NumberDisplaySize.Normal):
                 {
-                    this._sLabelPickerViewSize = new SizeF(130f, 60f);
+                    this._sLabelPickerViewSize = 
+                        new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);
                     // All Initial Values
-                    this._fCtrlNumberTextHeight = 60.0f;
-                    this._fNumberPickerHeight = 200.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fUpDownButtonHeight = 30.0f;
+                    this._fCtrlNumberTextHeight = this._globalSizes._fCtrlNumberTextHeight;
+                    this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
+                    this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
+                    this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
                     // Global width for all heights.
-                    this._fGlobalWidth = 46.0f;
+                    this._fGlobalWidth = this._globalSizes._fGlobalWidth;
                 }
                 break;
                 case (G__NumberDisplaySize.Medium):

@@ -33,27 +33,34 @@ namespace NathansWay.iOS.Numeracy
         private bool _bNumberPadLoaded;
         private ExpressionFactory _ef;
 
+        // Number text box dimensions for iOS
+        public readonly _iOSDimensions GS__iOSDimensions;
+
 		#endregion
 
 		#region Constructors
 
 		public vcMainContainer ()
 		{
+            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
+            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (IntPtr h) : base (h)
 		{
+            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (NSCoder coder) : base (coder)
 		{
+            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
@@ -150,18 +157,24 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            //this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
-            //this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
 
-            //_vcCtrlNumberText1.Value.PickerToTop = false;
-            //_vcCtrlNumberText2.Value.PickerToTop = true;
+            // Number Text Testing
+            _vcCtrlNumberText1.Value.DisplaySize = G__NumberDisplaySize.Normal;
+            _vcCtrlNumberText2.Value.DisplaySize = G__NumberDisplaySize.Normal;
+            _vcCtrlNumberText1.Value.PickerToTop = false;
+            _vcCtrlNumberText2.Value.PickerToTop = true;
+
+            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
+            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
+
+
 
             //_vcCtrlNumberText.Value.NumberTextSize.SetScale(0);
 			// ***********************************************
 
             // Testing
-            this._ef = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
-            _ef.CreateExpression("(,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6");
+            //this._ef = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
+            //_ef.CreateExpression("(,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6");
 		}
 
 		public override void ViewDidLayoutSubviews ()
@@ -182,4 +195,38 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 	}
+
+    #region Structs
+
+    // iOS dimensions
+    // Heights and widths of the initial number text box.
+    public struct _iOSDimensions
+    {
+        //this.AspyTag1 = 600102;
+        //this.AspyName = "VC_CtrlNumberText";
+        public float _sLabelPickerViewHeight;
+        public float _sLabelPickerViewWidth;
+
+        public float _fCtrlNumberTextHeight;
+        public float _fNumberPickerHeight;
+        public float _fTxtNumberHeight;
+        public float _fUpDownButtonHeight;
+        public float _fGlobalWidth;
+
+        public _iOSDimensions ()
+        {
+            //this.AspyTag1 = 600102;
+            //this.AspyName = "VC_CtrlNumberText";
+            this._sLabelPickerViewWidth = 130.0f;
+            this._sLabelPickerViewHeight = 60.0f;
+
+            this._fCtrlNumberTextHeight = 60.0f;
+            this._fNumberPickerHeight = 200.0f;
+            this._fTxtNumberHeight = 60.0f;
+            this._fUpDownButtonHeight = 30.0f;
+            this._fGlobalWidth = 46.0f;
+        }
+    }
+
+    #endregion
 }

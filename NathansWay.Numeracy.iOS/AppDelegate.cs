@@ -129,7 +129,7 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 
-            // Application Services
+            // Application Services, Factories
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
