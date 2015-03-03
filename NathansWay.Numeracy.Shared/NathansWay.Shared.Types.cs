@@ -219,6 +219,8 @@ namespace NathansWay.Shared
 
 	}
 
+
+
 	#region Operator Logic 
 
 	public enum G__MathOperator
@@ -352,6 +354,8 @@ namespace NathansWay.Shared
 
 	#endregion
 
+    #region MathCharacters
+
     public enum G__MathChar : int
     {
         Value = 0,
@@ -399,5 +403,7 @@ namespace NathansWay.Shared
             }
         }
     }
+
+    #endregion
 }
 

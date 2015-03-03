@@ -192,18 +192,6 @@ namespace NathansWay.iOS.Numeracy
 
         public void SetHeightWidth ()
         {
-
-            // Initial Text Number Sizes *********************
-            // All Initial Values
-            //            this._fCtrlNumberTextHeight = 60.0f;
-            //            this._fNumberPickerHeight = 200.0f;
-            //            this._fTxtNumberHeight = 60.0f;
-            //            this._fUpDownButtonHeight = 30.0f;
-            //            // Global width for all heights.
-            //            this._fGlobalWidth = 46.0f;
-            //            switch (_vc.DisplaySize)
-            // ***********************************************
-
             switch (_vc.DisplaySize)
             {
                 case (G__NumberDisplaySize.Normal):
