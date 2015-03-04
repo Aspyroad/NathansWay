@@ -495,7 +495,7 @@
                             <textField autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="8" borderStyle="line" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="55" id="ZkA-q6-0eC" userLabel="txtNumber">
                                 <rect key="frame" x="0.0" y="0.0" width="46" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="55"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="55"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" keyboardAppearance="alert"/>
                                 <connections>
                                     <action selector="txtTouchedDown:" destination="h98-CJ-chy" eventType="touchDown" id="1017"/>
