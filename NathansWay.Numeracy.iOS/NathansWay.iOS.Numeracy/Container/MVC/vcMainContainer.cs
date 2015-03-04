@@ -159,13 +159,13 @@ namespace NathansWay.iOS.Numeracy
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
 
             // Number Text Testing
-            _vcCtrlNumberText1.Value.DisplaySize = G__NumberDisplaySize.Normal;
-            _vcCtrlNumberText2.Value.DisplaySize = G__NumberDisplaySize.Normal;
+            _vcCtrlNumberText1.Value.DisplaySize = G__NumberDisplaySize.Large;
+            _vcCtrlNumberText2.Value.DisplaySize = G__NumberDisplaySize.Large;
             _vcCtrlNumberText1.Value.PickerToTop = false;
             _vcCtrlNumberText2.Value.PickerToTop = true;
 
-            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 400, 46, 60));
-            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(250, 400, 46, 60));
+            this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 600, 46, 60));
+            this.AddAndDisplayController(_vcCtrlNumberText2.Value, new RectangleF(300, 600, 46, 60));
 
 
 
@@ -207,11 +207,13 @@ namespace NathansWay.iOS.Numeracy
         public float _sLabelPickerViewHeight;
         public float _sLabelPickerViewWidth;
 
-        public float _fCtrlNumberTextHeight;
+        public float _fMainNumberHeight;
         public float _fNumberPickerHeight;
         public float _fTxtNumberHeight;
         public float _fUpDownButtonHeight;
         public float _fGlobalWidth;
+
+        public UIFont _globalFont;
 
         public _iOSDimensions ()
         {
@@ -220,11 +222,12 @@ namespace NathansWay.iOS.Numeracy
             this._sLabelPickerViewWidth = 130.0f;
             this._sLabelPickerViewHeight = 60.0f;
 
-            this._fCtrlNumberTextHeight = 60.0f;
+            this._fMainNumberHeight = 60.0f;
             this._fNumberPickerHeight = 200.0f;
             this._fTxtNumberHeight = 60.0f;
             this._fUpDownButtonHeight = 30.0f;
             this._fGlobalWidth = 46.0f;
+            this._globalFont = UIFont.FromName("Arial", 55.0f);
         }
     }
 

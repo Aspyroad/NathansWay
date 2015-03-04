@@ -215,7 +215,7 @@ namespace NathansWay.iOS.Numeracy
             {
                 case (G__NumberDisplaySize.Normal):
                 {
-                    this._fNumberContainerHeight = this._globalSizes._fCtrlNumberTextHeight;
+                    this._fNumberContainerHeight = this._globalSizes._fMainNumberHeight;
                     this._fTxtNumberHeight = 10.0f;
                     this._fDecimalPlaceHeight = 60.0f;
                     this._fNumberContainerWidth = 46.0f;
