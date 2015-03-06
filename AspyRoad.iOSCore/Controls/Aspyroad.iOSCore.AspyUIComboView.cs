@@ -337,6 +337,7 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI ()
         {
             #region UI for prior iOS7
+
             if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 // Just in case the _picker isnt drawn
@@ -353,10 +354,6 @@ namespace AspyRoad.iOSCore
                         }
                     }
                 }
-            }
-            else
-            {
-                //this.BackgroundColor = UIColor.Brown;
             }
 
             #endregion

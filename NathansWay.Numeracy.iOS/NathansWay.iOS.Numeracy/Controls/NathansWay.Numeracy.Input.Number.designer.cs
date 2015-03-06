@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		MonoTouch.UIKit.UIButton btnUp { get; set; }
 
 		[Outlet]
-		public MonoTouch.UIKit.UITextField txtNumber { get; private set; }
+        public AspyRoad.iOSCore.AspyTextField txtNumber { get; private set; }
 
 		[Action ("btnDownTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -33,7 +33,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		[Action ("txtTouchedDown:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void txtTouchedDown (UITextField sender);
+		partial void txtTouchedDown (AspyRoad.iOSCore.AspyTextField sender);
 
 		void ReleaseDesignerOutlets ()
 		{

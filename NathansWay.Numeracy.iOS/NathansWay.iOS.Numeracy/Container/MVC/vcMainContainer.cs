@@ -160,8 +160,8 @@ namespace NathansWay.iOS.Numeracy
 
             // Number Text Testing
             _vcCtrlNumberText1.Value.DisplaySize = G__NumberDisplaySize.Large;
-            _vcCtrlNumberText2.Value.DisplaySize = G__NumberDisplaySize.Large;
-            _vcCtrlNumberText1.Value.PickerToTop = false;
+            _vcCtrlNumberText2.Value.DisplaySize = G__NumberDisplaySize.Medium;
+            _vcCtrlNumberText1.Value.PickerToTop = true;
             _vcCtrlNumberText2.Value.PickerToTop = true;
 
             this.AddAndDisplayController(_vcCtrlNumberText1.Value, new RectangleF(200, 600, 46, 60));
@@ -223,7 +223,7 @@ namespace NathansWay.iOS.Numeracy
             this._sLabelPickerViewHeight = 60.0f;
 
             this._fMainNumberHeight = 60.0f;
-            this._fNumberPickerHeight = 200.0f;
+            this._fNumberPickerHeight = 180.0f;
             this._fTxtNumberHeight = 60.0f;
             this._fUpDownButtonHeight = 30.0f;
             this._fGlobalWidth = 46.0f;

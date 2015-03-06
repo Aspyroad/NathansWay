@@ -116,7 +116,7 @@ namespace NathansWay.Shared
 			TextBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(240.0f, 240.0f, 240.0f, 255.0f)); // Black
-			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			TextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 20.0f, 255.0f)); // Black
 
 			// Slider View
 			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black

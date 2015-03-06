@@ -117,7 +117,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
                         
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(HandlePickerChanged);    
+            ehValueChanged = new Action(HandlePickerChanged);
+
+            // Apply some UI to the texbox
+            this.txtNumber.HasBorder = true;
+            this.txtNumber.HasRoundedCorners = true;
+            this.txtNumber.ApplyUI();
 
             this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
@@ -266,7 +271,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // Partials
-        partial void txtTouchedDown(UITextField sender)
+        partial void txtTouchedDown(AspyTextField sender)
         {
             // Prevent the user double tapping
             if (this.IsInEditMode)
@@ -299,7 +304,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
             {
-                this.EditScroll();
+                this.EditNumberPicker();
             }
             else
             {
@@ -365,7 +370,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = _intValue.ToString();
         }
 
-        protected void EditScroll()
+        protected void EditNumberPicker()
         {
             this.IsInEditMode = true;
 
@@ -384,6 +389,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(_numberSize._rectNumberPicker);
+            this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
+            this.pkNumberPicker.Layer.BorderWidth = 1.0f;
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
@@ -676,28 +683,32 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
 
-                //TODO Make UI label lazy load also change the background colour when selected. 
-
                 if (pickerView.SelectedRowInComponent(component) == row)
                 {
-                    _lblPickerView.BackgroundColor = UIColor.Brown; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+                    _lblPickerView.BackgroundColor = UIColor.White; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
                 else
                 {
-                    _lblPickerView.BackgroundColor = UIColor.Clear; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+                    _lblPickerView.BackgroundColor = UIColor.LightGray; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
 
-                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
-                {
+                //                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+                //                {
+                //
+                //                    _lblPickerView.TextColor = UIColor.White;                   
+                //                    _lblPickerView.Font = UIFont.SystemFontOfSize(50f);
+                //                }
+                //                else
+                //                {
+                //                    _lblPickerView.TextColor = UIColor.Black;
+                //                    _lblPickerView.Font = UIFont.SystemFontOfSize(55f);
+                //                }
 
-                    _lblPickerView.TextColor = UIColor.White;                   
-                    _lblPickerView.Font = UIFont.SystemFontOfSize(50f);
-                }
-                else
-                {
-                    _lblPickerView.TextColor = UIColor.Black;
-                    _lblPickerView.Font = UIFont.SystemFontOfSize(55f);
-                }
+                // Apply UI
+                _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
+                _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                _lblPickerView.Layer.BorderWidth = 1.0f;
+                _lblPickerView.Font = this._numberSize._globalFont;
 
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
                 _lblPickerView.Text = this._items[row];
@@ -893,14 +904,18 @@ namespace NathansWay.iOS.Numeracy.Controls
                 break;
                 case (G__NumberDisplaySize.Medium):
                 {
-                    this._sLabelPickerViewSize = new SizeF(130f, 60f);
+                    this._sLabelPickerViewSize = 
+                        new SizeF((this._globalSizes._sLabelPickerViewWidth * 1.5f), (this._globalSizes._sLabelPickerViewHeight));
                     // All Initial Values
-                    this._fMainNumberHeight = 60.0f;
-                    this._fNumberPickerHeight = 200.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fUpDownButtonHeight = 30.0f;
+                    this._fMainNumberHeight = (this._globalSizes._fMainNumberHeight * 1.5f);
+                    this._fNumberPickerHeight = (this._globalSizes._fNumberPickerHeight);
+                    this._fTxtNumberHeight = (this._globalSizes._fTxtNumberHeight * 1.5f);
+                    this._fUpDownButtonHeight = (this._globalSizes._fUpDownButtonHeight * 1.5f);
                     // Global width for all heights.
-                    this._fGlobalWidth = 46.0f;
+                    this._fGlobalWidth = (this._globalSizes._fGlobalWidth * 1.5f);
+                    // Font
+                    //this._globalFont = this._globalFont.WithSize(110.0f);
+                    this._globalFont = UIFont.BoldSystemFontOfSize(77.5f);
                 }
                 break;
                 case (G__NumberDisplaySize.Large):
@@ -909,7 +924,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         new SizeF((this._globalSizes._sLabelPickerViewWidth * 2), (this._globalSizes._sLabelPickerViewHeight));
                     // All Initial Values
                     this._fMainNumberHeight = (this._globalSizes._fMainNumberHeight * 2);
-                    this._fNumberPickerHeight = (this._globalSizes._fNumberPickerHeight * 2);
+                    this._fNumberPickerHeight = (this._globalSizes._fNumberPickerHeight);
                     this._fTxtNumberHeight = (this._globalSizes._fTxtNumberHeight * 2);
                     this._fUpDownButtonHeight = (this._globalSizes._fUpDownButtonHeight * 2);
                     // Global width for all heights.
