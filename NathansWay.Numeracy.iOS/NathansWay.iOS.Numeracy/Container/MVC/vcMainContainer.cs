@@ -34,7 +34,9 @@ namespace NathansWay.iOS.Numeracy
         private ExpressionFactory _ef;
 
         // Number text box dimensions for iOS
-        public readonly _iOSDimensions GS__iOSDimensions;
+        public readonly _iOSDimensionsNormal GS__iOSDimensionsNormal;
+        public readonly _iOSDimensionsMedium GS__iOSDimensionsMedium;
+        public readonly _iOSDimensionsLarge GS__iOSDimensionsLarge;
 
 		#endregion
 
@@ -42,25 +44,21 @@ namespace NathansWay.iOS.Numeracy
 
 		public vcMainContainer ()
 		{
-            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
-            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (IntPtr h) : base (h)
 		{
-            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
 		public vcMainContainer (NSCoder coder) : base (coder)
 		{
-            this.GS__iOSDimensions = new _iOSDimensions();
 			Initialize ();
 		}
 
@@ -73,6 +71,10 @@ namespace NathansWay.iOS.Numeracy
 			base.Initialize();
 
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+
+            this.GS__iOSDimensionsNormal = new _iOSDimensionsNormal();
+            this.GS__iOSDimensionsMedium = new _iOSDimensionsMedium();
+            this.GS__iOSDimensionsLarge = new _iOSDimensionsLarge();
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
@@ -200,7 +202,7 @@ namespace NathansWay.iOS.Numeracy
 
     // iOS dimensions
     // Heights and widths of the initial number text box.
-    public struct _iOSDimensions
+    public struct _iOSDimensionsNormal
     {
         //this.AspyTag1 = 600102;
         //this.AspyName = "VC_CtrlNumberText";
@@ -215,7 +217,7 @@ namespace NathansWay.iOS.Numeracy
 
         public UIFont _globalFont;
 
-        public _iOSDimensions ()
+        public _iOSDimensionsNormal ()
         {
             //this.AspyTag1 = 600102;
             //this.AspyName = "VC_CtrlNumberText";
@@ -230,6 +232,69 @@ namespace NathansWay.iOS.Numeracy
             this._globalFont = UIFont.FromName("Arial", 55.0f);
         }
     }
+    public struct _iOSDimensionsMedium
+    {
+        //this.AspyTag1 = 600102;
+        //this.AspyName = "VC_CtrlNumberText";
+        public float _sLabelPickerViewHeight;
+        public float _sLabelPickerViewWidth;
+
+        public float _fMainNumberHeight;
+        public float _fNumberPickerHeight;
+        public float _fTxtNumberHeight;
+        public float _fUpDownButtonHeight;
+        public float _fGlobalWidth;
+
+        public UIFont _globalFont;
+
+        public _iOSDimensionsMedium ()
+        {
+            //this.AspyTag1 = 600102;
+            //this.AspyName = "VC_CtrlNumberText";
+            this._sLabelPickerViewWidth = 195.0f;
+            this._sLabelPickerViewHeight = 60.0f;
+
+            this._fMainNumberHeight = 90.0f;
+            this._fNumberPickerHeight = 180.0f; // Stays the same
+            this._fTxtNumberHeight = 90.0f;
+            this._fUpDownButtonHeight = 45.0f;
+            this._fGlobalWidth = 69.0f;
+            this._globalFont = UIFont.FromName("Arial", 77.5f);
+
+        }
+    }
+
+    public struct _iOSDimensionsLarge
+    {
+        //this.AspyTag1 = 600102;
+        //this.AspyName = "VC_CtrlNumberText";
+        public float _sLabelPickerViewHeight;
+        public float _sLabelPickerViewWidth;
+
+        public float _fMainNumberHeight;
+        public float _fNumberPickerHeight;
+        public float _fTxtNumberHeight;
+        public float _fUpDownButtonHeight;
+        public float _fGlobalWidth;
+
+        public UIFont _globalFont;
+
+        public _iOSDimensionsLarge ()
+        {
+            //this.AspyTag1 = 600102;
+            //this.AspyName = "VC_CtrlNumberText";
+            this._sLabelPickerViewWidth = 260.0f;
+            this._sLabelPickerViewHeight = 60.0f;
+
+            this._fMainNumberHeight = 120.0f;
+            this._fNumberPickerHeight = 360.0f;
+            this._fTxtNumberHeight = 120.0f;
+            this._fUpDownButtonHeight = 60.0f;
+            this._fGlobalWidth = 102.0f;
+            this._globalFont = UIFont.FromName("Arial", 110.0f);
+        }
+    }
+
 
     #endregion
 }

@@ -166,7 +166,7 @@ namespace NathansWay.iOS.Numeracy
         public float _fGlobalWidth;
 
         public vcMainContainer _vcmc;
-        public _iOSDimensions _globalSizes;
+        public _iOSDimensionsNormal _globalSizes;
 
         #endregion
 
@@ -185,7 +185,7 @@ namespace NathansWay.iOS.Numeracy
         private void Initialize()
         {
             this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = this._vcmc.GS__iOSDimensions;
+            this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
             _pStartPoint = _vc.View.Frame.Location;
             this.RefreshDisplay();
         }

@@ -827,7 +827,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public UIFont _globalFont;
 
         public vcMainContainer _vcmc;
-        public _iOSDimensions _globalSizes;
+        public _iOSDimensionsNormal _globalSizesNormal;
+        public _iOSDimensionsMedium _globalSizesMedium;
+        public _iOSDimensionsLarge _globalSizesLarge;
 
         #endregion
 
@@ -852,19 +854,19 @@ namespace NathansWay.iOS.Numeracy.Controls
         private void Initialize()
         {
             this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = this._vcmc.GS__iOSDimensions;
+            this._globalSizesNormal = this._vcmc.GS__iOSDimensionsNormal;
 
             this._sLabelPickerViewSize = 
-                new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);
+                new SizeF(this._globalSizesNormal._sLabelPickerViewWidth, this._globalSizesNormal._sLabelPickerViewHeight);
             // All Initial Values
-            this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
-            this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
-            this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
-            this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
+            this._fMainNumberHeight = this._globalSizesNormal._fMainNumberHeight;
+            this._fNumberPickerHeight = this._globalSizesNormal._fNumberPickerHeight;
+            this._fTxtNumberHeight = this._globalSizesNormal._fTxtNumberHeight;
+            this._fUpDownButtonHeight = this._globalSizesNormal._fUpDownButtonHeight;
             // Global width for all heights.
-            this._fGlobalWidth = this._globalSizes._fGlobalWidth;
+            this._fGlobalWidth = this._globalSizesNormal._fGlobalWidth;
             // Font
-            this._globalFont = this._globalSizes._globalFont;
+            this._globalFont = this._globalSizesNormal._globalFont;
         }
 
         #endregion
@@ -889,30 +891,30 @@ namespace NathansWay.iOS.Numeracy.Controls
                 case (G__NumberDisplaySize.Normal):
                 {
                     this._sLabelPickerViewSize = 
-                        new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);
+                        new SizeF(this._globalSizesNormal._sLabelPickerViewWidth, this._globalSizesNormal._sLabelPickerViewHeight);
                     // All Initial Values
-                    this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
-                    this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
-                    this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
-                    this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
+                    this._fMainNumberHeight = this._globalSizesNormal._fMainNumberHeight;
+                    this._fNumberPickerHeight = this._globalSizesNormal._fNumberPickerHeight;
+                    this._fTxtNumberHeight = this._globalSizesNormal._fTxtNumberHeight;
+                    this._fUpDownButtonHeight = this._globalSizesNormal._fUpDownButtonHeight;
                     // Global width for all heights.
-                    this._fGlobalWidth = this._globalSizes._fGlobalWidth;
+                    this._fGlobalWidth = this._globalSizesNormal._fGlobalWidth;
                     // Font
-                    this._globalFont = this._globalSizes._globalFont;
+                    this._globalFont = this._globalSizesNormal._globalFont;
 
                 }
                 break;
                 case (G__NumberDisplaySize.Medium):
                 {
                     this._sLabelPickerViewSize = 
-                        new SizeF((this._globalSizes._sLabelPickerViewWidth * 1.5f), (this._globalSizes._sLabelPickerViewHeight));
+                        new SizeF((this._globalSizesMedium._sLabelPickerViewWidth * 1.5f), (this._globalSizesMedium._sLabelPickerViewHeight));
                     // All Initial Values
-                    this._fMainNumberHeight = (this._globalSizes._fMainNumberHeight * 1.5f);
-                    this._fNumberPickerHeight = (this._globalSizes._fNumberPickerHeight);
-                    this._fTxtNumberHeight = (this._globalSizes._fTxtNumberHeight * 1.5f);
-                    this._fUpDownButtonHeight = (this._globalSizes._fUpDownButtonHeight * 1.5f);
+                    this._fMainNumberHeight = (this._globalSizesMedium._fMainNumberHeight * 1.5f);
+                    this._fNumberPickerHeight = (this._globalSizesMedium._fNumberPickerHeight);
+                    this._fTxtNumberHeight = (this._globalSizesMedium._fTxtNumberHeight * 1.5f);
+                    this._fUpDownButtonHeight = (this._globalSizesMedium._fUpDownButtonHeight * 1.5f);
                     // Global width for all heights.
-                    this._fGlobalWidth = (this._globalSizes._fGlobalWidth * 1.5f);
+                    this._fGlobalWidth = (this._globalSizesMedium._fGlobalWidth * 1.5f);
                     // Font
                     //this._globalFont = this._globalFont.WithSize(110.0f);
                     this._globalFont = UIFont.BoldSystemFontOfSize(77.5f);
@@ -921,14 +923,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 case (G__NumberDisplaySize.Large):
                 {
                     this._sLabelPickerViewSize = 
-                        new SizeF((this._globalSizes._sLabelPickerViewWidth * 2), (this._globalSizes._sLabelPickerViewHeight));
+                        new SizeF((this.__globalSizesMedium._sLabelPickerViewWidth * 2), (this.__globalSizesMedium._sLabelPickerViewHeight));
                     // All Initial Values
-                    this._fMainNumberHeight = (this._globalSizes._fMainNumberHeight * 2);
-                    this._fNumberPickerHeight = (this._globalSizes._fNumberPickerHeight);
-                    this._fTxtNumberHeight = (this._globalSizes._fTxtNumberHeight * 2);
-                    this._fUpDownButtonHeight = (this._globalSizes._fUpDownButtonHeight * 2);
+                    this._fMainNumberHeight = (this.__globalSizesMedium._fMainNumberHeight * 2);
+                    this._fNumberPickerHeight = (this.__globalSizesMedium._fNumberPickerHeight);
+                    this._fTxtNumberHeight = (this.__globalSizesMedium._fTxtNumberHeight * 2);
+                    this._fUpDownButtonHeight = (this.__globalSizesMedium._fUpDownButtonHeight * 2);
                     // Global width for all heights.
-                    this._fGlobalWidth = (this._globalSizes._fGlobalWidth * 2);
+                    this._fGlobalWidth = (this.__globalSizesMedium._fGlobalWidth * 2);
                     // Font
                     //this._globalFont = this._globalFont.WithSize(110.0f);
                     this._globalFont = UIFont.BoldSystemFontOfSize(110.0f);
