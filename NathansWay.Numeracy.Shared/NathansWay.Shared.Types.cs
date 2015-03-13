@@ -36,7 +36,6 @@ namespace NathansWay.Shared
         Large = 3
     }
 
-
 	#region Filtering
 
 	public enum G__ExpressionType 
@@ -219,8 +218,6 @@ namespace NathansWay.Shared
 
 	}
 
-
-
 	#region Operator Logic 
 
 	public enum G__MathOperator
@@ -361,15 +358,13 @@ namespace NathansWay.Shared
         Value = 0,
         BraceRoundLeft = 1,
         BraceRoundRight = 2,
-        BraceSquareLeft = 3,
-        BraceSquareRight = 4,
-        DivisionFraction = 5,
-        Division = 6,
-        Addition = 7,
-        Negative = 8,
-        Multiply = 9,
-        Decimal = 10,
-        Equals = 11
+        Fraction = 3,
+        Division = 4,
+        Addition = 5,
+        Negative = 6,
+        Multiply = 7,
+        Decimal = 8,
+        Equals = 9
     }
 
     public static class G__MathChars
@@ -378,9 +373,7 @@ namespace NathansWay.Shared
         {
             {"(", G__MathChar.BraceRoundLeft},
             {")", G__MathChar.BraceRoundRight},
-            {"[", G__MathChar.BraceSquareLeft},
-            {"]", G__MathChar.BraceSquareRight},
-            {"/", G__MathChar.DivisionFraction},
+            {"[", G__MathChar.Fraction},
             {"÷", G__MathChar.Division},
             {"+", G__MathChar.Addition},
             {"-", G__MathChar.Negative},

@@ -40,7 +40,7 @@ namespace NathansWay.Shared.Factories
 
         #region Public Members
         // Diveded by symbol (opt + /)
-        // (,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6
+        // (,[1/2],+,[3/4],),-,(,3,),=,789.6
 
         public void CreateExpression (string _expression)
         {
@@ -52,27 +52,32 @@ namespace NathansWay.Shared.Factories
 
                 switch ((G__MathChar)x.Key)
                 {
+                    case (G__MathChar.Value): // Most common first ??
+                    {
+                        // Build a number
+
+                    }
+                    break;
                     case (G__MathChar.BraceRoundLeft):
-                        {
-                            this._UIPlatormClient.UICreateBrace(false);
-                        }
-                        break;
-                    case (G__MathChar.BraceSquareLeft):
-                        {
-                            // Fraction Start
-                        }
-                        break;
+                    {
+                        this._UIPlatormClient.UICreateBrace(false);
+                    }
+                    break;
+                    case (G__MathChar.Fraction):
+                    {
+                        // Fraction Start
+                        // Always jumps 4 places
+                        // [10/24]
+                        // this._lsDecodedExpression
+                    }
+                    break;
+
                     default :
                         {
                             y = "Nope";
                         }
                         break;
                 }
-
-
-
-
-
             }
         }
 

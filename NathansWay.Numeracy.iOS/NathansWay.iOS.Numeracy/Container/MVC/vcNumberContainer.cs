@@ -12,6 +12,7 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
@@ -36,6 +37,8 @@ namespace NathansWay.iOS.Numeracy
         private int _intIntegralPlaces;
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
+
+        private List<vcCtrlNumberText> _lcNumberTextBoxs;
 
         private NumberContainerSize _containerSize;
         private G__NumberDisplaySize _displaySize; 
@@ -77,8 +80,9 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public void AddNumberText()
+        public void AddNumberText(double _value)
         {
+
 
         }
 
