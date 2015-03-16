@@ -69,8 +69,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-        public vcCtrlNumberText()
-        {
+        public vcCtrlNumberText(int _number)
+        {0
+            // Default constructor supply our initial value
+            this._intCurrentValue = _number;
             Initialize_();
         }
 
@@ -923,14 +925,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 case (G__NumberDisplaySize.Large):
                 {
                     this._sLabelPickerViewSize = 
-                        new SizeF((this.__globalSizesMedium._sLabelPickerViewWidth * 2), (this.__globalSizesMedium._sLabelPickerViewHeight));
+                        new SizeF((this._globalSizesMedium._sLabelPickerViewWidth * 2), (this.__globalSizesMedium._sLabelPickerViewHeight));
                     // All Initial Values
-                    this._fMainNumberHeight = (this.__globalSizesMedium._fMainNumberHeight * 2);
-                    this._fNumberPickerHeight = (this.__globalSizesMedium._fNumberPickerHeight);
-                    this._fTxtNumberHeight = (this.__globalSizesMedium._fTxtNumberHeight * 2);
-                    this._fUpDownButtonHeight = (this.__globalSizesMedium._fUpDownButtonHeight * 2);
+                    this._fMainNumberHeight = (this._globalSizesMedium._fMainNumberHeight * 2);
+                    this._fNumberPickerHeight = (this._globalSizesMedium._fNumberPickerHeight);
+                    this._fTxtNumberHeight = (this._globalSizesMedium._fTxtNumberHeight * 2);
+                    this._fUpDownButtonHeight = (this._globalSizesMedium._fUpDownButtonHeight * 2);
                     // Global width for all heights.
-                    this._fGlobalWidth = (this.__globalSizesMedium._fGlobalWidth * 2);
+                    this._fGlobalWidth = (this._globalSizesMedium._fGlobalWidth * 2);
                     // Font
                     //this._globalFont = this._globalFont.WithSize(110.0f);
                     this._globalFont = UIFont.BoldSystemFontOfSize(110.0f);

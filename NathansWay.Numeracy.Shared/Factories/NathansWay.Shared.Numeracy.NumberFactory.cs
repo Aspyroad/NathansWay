@@ -92,6 +92,18 @@ namespace NathansWay.Shared.Factories
             return this._lsDecodedExpression;
         }
 
+        public void CreateNumber (string _strNumber)
+        {
+            _UIPlatormClient.UICreateNumber(_strNumber);
+        }
+
+        public void CreateFraction (string _strFraction)
+        {
+            _UIPlatormClient.UICreateFraction(_strFraction);
+        }
+
+
+
         #endregion
 
         #region Public Properties

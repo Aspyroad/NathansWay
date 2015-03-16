@@ -24,6 +24,8 @@ namespace NathansWay.iOS.Numeracy
 
         private G__UnitPlacement _tensUnit;
 
+        private string _strCurrentValue;
+
         private double _dblPrevValue;
         private double _dblCurrentValue;
 
@@ -38,7 +40,7 @@ namespace NathansWay.iOS.Numeracy
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
 
-        private List<vcCtrlNumberText> _lcNumberTextBoxs;
+        private List<vcCtrlNumberText> _lsNumbers;
 
         private NumberContainerSize _containerSize;
         private G__NumberDisplaySize _displaySize; 
@@ -47,8 +49,10 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public vcNumberContainer ()
+        public vcNumberContainer (string _strValue, G__NumberDisplaySize _ds)
         {
+            this._strCurrentValue = _strValue;
+            this._displaySize = _ds;
             Initialize ();
         }
 
@@ -74,16 +78,38 @@ namespace NathansWay.iOS.Numeracy
         protected override void Initialize()
         {
             base.Initialize();
+            _lsNumbers = new List<vcCtrlNumberText>();
         }
 
         #endregion
 
         #region Public Members
 
-        public void AddNumberText(double _value)
+        public void CreateNumber(string _value)
         {
+            // Loop through _value
+            // 01 243.675 12 1.4 789008
+            for (int i = 0; i < _value.Length; i++)
+            {
+                if (_value[i] != ".")
+                {
+                    // Create a number box
+                    _lsNumbers.Add(new vcCtrlNumberText(Convert.ToInt16(_value[i])));
+                    this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
+                }
+                else
+                {
 
 
+                }
+            }
+        }
+
+        public void ChangeSize(G__NumberDisplaySize _ds)
+        {
+            this._displaySize = _ds;
+
+            // Resizing code here
         }
 
         #endregion
@@ -194,7 +220,7 @@ namespace NathansWay.iOS.Numeracy
         private void Initialize()
         {
             this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
+            //this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
             _pStartPoint = _vc.View.Frame.Location;
             this.RefreshDisplay();
         }
@@ -220,8 +246,7 @@ namespace NathansWay.iOS.Numeracy
                 case (G__NumberDisplaySize.Normal):
                 {
                     this._fNumberContainerHeight = this._globalSizes._fMainNumberHeight;
-                    this._fTxtNumberHeight = 10.0f;
-                    this._fDecimalPlaceHeight = 60.0f;
+                    this._fDecimalPlaceHeight = this._globalSizes._fMainNumberHeight;
                     this._fNumberContainerWidth = 46.0f;
                     this._fTxtNumberWidth = 1.0f;
                     this._fDecimalPlaceWidth = 1.0f;

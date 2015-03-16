@@ -14,7 +14,7 @@ namespace NathansWay.Shared
         // All write there output into the UIOuput object
         // For example in iOS this would be a collection of beggining to end vc's for an expression.
         // Simply pop them off the stack and into the container vc
-        void UICreateNumber (int intLength);
+        void UICreateNumber (string intNumber);
         void UICreateFraction (string strFraction);
         void UICreatOperator (string strOperator);
         void UICreateBrace (bool bIsRight);

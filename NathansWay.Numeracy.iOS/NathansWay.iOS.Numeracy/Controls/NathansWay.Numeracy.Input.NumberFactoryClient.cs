@@ -25,7 +25,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
-
         #region Constructors
 
         public NumberFactoryClient()
@@ -50,7 +49,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Simply pop them off the stack and into the container vc
         public void UICreateNumber (int intLength)
         {
-            var x = new vcCtrlNumberText();
+            var x = new vcNumberContainer();
 
             // Build the number here ... 
 
@@ -68,7 +67,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 
         }
-
         public void PrintUIOutput (object ViewObjectScreen)
         {
 
