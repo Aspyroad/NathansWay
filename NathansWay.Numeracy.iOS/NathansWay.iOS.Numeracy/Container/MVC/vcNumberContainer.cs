@@ -81,6 +81,8 @@ namespace NathansWay.iOS.Numeracy
             _lsNumbers = new List<vcCtrlNumberText>();
         }
 
+
+
         #endregion
 
         #region Public Members
@@ -99,7 +101,7 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-
+                    // Create a 
 
                 }
             }

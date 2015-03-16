@@ -14,15 +14,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 	[Register ("vcCtrlNumberText")]
 	partial class vcCtrlNumberText
 	{
-		[Outlet]
-		MonoTouch.UIKit.UIButton btnDown { get; set; }
-
-		[Outlet]
-		MonoTouch.UIKit.UIButton btnUp { get; set; }
-
-		[Outlet]
-        public AspyRoad.iOSCore.AspyTextField txtNumber { get; private set; }
-
 		[Action ("btnDownTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		partial void btnDownTouch (UIButton sender);
