@@ -49,6 +49,11 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
+        public vcNumberContainer ()
+        {
+            Initialize ();
+        }
+
         public vcNumberContainer (string _strValue, G__NumberDisplaySize _ds)
         {
             this._strCurrentValue = _strValue;
@@ -93,7 +98,7 @@ namespace NathansWay.iOS.Numeracy
             // 01 243.675 12 1.4 789008
             for (int i = 0; i < _value.Length; i++)
             {
-                if (_value[i] != ".")
+                if (_value[i] != Convert.ToChar("."))
                 {
                     // Create a number box
                     _lsNumbers.Add(new vcCtrlNumberText(Convert.ToInt16(_value[i])));

@@ -78,6 +78,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
+        public vcCtrlNumberText(int _value)
+        {
+            this._intCurrentValue = _value;
+            // Default constructor supply our initial value
+            Initialize_();
+        }
+
         #endregion
 
         #region Deconstructors
@@ -133,6 +140,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Alpha = 0.5f;
             this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
             this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
+            this.btnDown.Hidden = true;
+            this.btnUp.Hidden = true;
 
             // Apply some UI to the texbox
             this.txtNumber.HasBorder = true;
@@ -851,9 +860,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public UIFont _globalFont;
 
         public vcMainContainer _vcmc;
-        public _iOSDimensionsNormal _globalSizesNormal;
-        public _iOSDimensionsMedium _globalSizesMedium;
-        public _iOSDimensionsLarge _globalSizesLarge;
+        public _iOSDimensions _globalSizes;
 
         #endregion
 
@@ -878,7 +885,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private void Initialize()
         {
             this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizesNormal = this._vcmc.GS__iOSDimensionsNormal;
+            this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
 
             this._sLabelPickerViewSize = 
                 new SizeF(this._globalSizesNormal._sLabelPickerViewWidth, this._globalSizesNormal._sLabelPickerViewHeight);

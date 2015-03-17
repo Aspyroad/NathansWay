@@ -47,7 +47,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // All write there output into the UIOuput object
         // For example in iOS this would be a collection of beggining to end vc's for an expression.
         // Simply pop them off the stack and into the container vc
-        public void UICreateNumber (int intLength)
+        public void UICreateNumber (string strLength)
         {
             var x = new vcNumberContainer();
 
