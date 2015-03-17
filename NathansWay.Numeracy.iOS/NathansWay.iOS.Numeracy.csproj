@@ -186,7 +186,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonTableCell.designer.cs">
       <DependentUpon>vLessonTableCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcMainContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Label.Bordered.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.LabelStyle.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.cs" />
@@ -214,6 +213,7 @@
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumberFactory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.NumberFactoryClient.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcFractionContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\iOSNumberDimensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

@@ -78,9 +78,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-        public vcCtrlNumberText(int _value)
+        public vcCtrlNumberText(int _value, G__NumberDisplaySize _size)
         {
             this._intCurrentValue = _value;
+            this._numberSize = _size;
             // Default constructor supply our initial value
             Initialize_();
         }
@@ -853,14 +854,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         public float _fGlobalWidth;
         // Up Down button height
         public float _fUpDownButtonHeight;
-        // Label SizeF
-        public SizeF _sLabelPickerViewSize;
 
         // Font Size
         public UIFont _globalFont;
 
         public vcMainContainer _vcmc;
-        public _iOSDimensions _globalSizes;
+        public iOSNumberDimensions _globalSizes;
 
         #endregion
 
@@ -885,19 +884,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private void Initialize()
         {
             this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
-
-            this._sLabelPickerViewSize = 
-                new SizeF(this._globalSizesNormal._sLabelPickerViewWidth, this._globalSizesNormal._sLabelPickerViewHeight);
-            // All Initial Values
-            this._fMainNumberHeight = this._globalSizesNormal._fMainNumberHeight;
-            this._fNumberPickerHeight = this._globalSizesNormal._fNumberPickerHeight;
-            this._fTxtNumberHeight = this._globalSizesNormal._fTxtNumberHeight;
-            this._fUpDownButtonHeight = this._globalSizesNormal._fUpDownButtonHeight;
-            // Global width for all heights.
-            this._fGlobalWidth = this._globalSizesNormal._fGlobalWidth;
-            // Font
-            this._globalFont = this._globalSizesNormal._globalFont;
+            this._globalSizes = new iOSNumberDimensions(_vc.DisplaySize);
         }
 
         #endregion
@@ -907,56 +894,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         public void SetHeightWidth ()
         {
             _pStartPoint = _vc.View.Frame.Location;
-
-            switch (_vc.DisplaySize)
-            {
-                case (G__NumberDisplaySize.Normal):
-                {
-                    this._sLabelPickerViewSize = 
-                        new SizeF(this._globalSizesNormal._sLabelPickerViewWidth, this._globalSizesNormal._sLabelPickerViewHeight);
-                    // All Initial Values
-                    this._fMainNumberHeight = this._globalSizesNormal._fMainNumberHeight;
-                    this._fNumberPickerHeight = this._globalSizesNormal._fNumberPickerHeight;
-                    this._fTxtNumberHeight = this._globalSizesNormal._fTxtNumberHeight;
-                    this._fUpDownButtonHeight = this._globalSizesNormal._fUpDownButtonHeight;
-                    // Global width for all heights.
-                    this._fGlobalWidth = this._globalSizesNormal._fGlobalWidth;
-                    // Font
-                    this._globalFont = this._globalSizesNormal._globalFont;
-
-                }
-                break;
-                case (G__NumberDisplaySize.Medium):
-                {
-                    this._sLabelPickerViewSize = 
-                        new SizeF((this._globalSizesMedium._sLabelPickerViewWidth), (this._globalSizesMedium._sLabelPickerViewHeight));
-                    // All Initial Values
-                    this._fMainNumberHeight = (this._globalSizesMedium._fMainNumberHeight);
-                    this._fNumberPickerHeight = (this._globalSizesMedium._fNumberPickerHeight);
-                    this._fTxtNumberHeight = (this._globalSizesMedium._fTxtNumberHeight );
-                    this._fUpDownButtonHeight = (this._globalSizesMedium._fUpDownButtonHeight);
-                    // Global width for all heights.
-                    this._fGlobalWidth = (this._globalSizesMedium._fGlobalWidth);
-                    // Font
-                    this._globalFont = this._globalSizesMedium._globalFont;
-                }
-                break;
-                case (G__NumberDisplaySize.Large):
-                {
-                    this._sLabelPickerViewSize = 
-                        new SizeF((this._globalSizesLarge._sLabelPickerViewWidth), (this._globalSizesLarge._sLabelPickerViewHeight));
-                    // All Initial Values
-                    this._fMainNumberHeight = (this._globalSizesLarge._fMainNumberHeight);
-                    this._fNumberPickerHeight = (this._globalSizesLarge._fNumberPickerHeight);
-                    this._fTxtNumberHeight = (this._globalSizesLarge._fTxtNumberHeight);
-                    this._fUpDownButtonHeight = (this._globalSizesLarge._fUpDownButtonHeight);
-                    // Global width for all heights.
-                    this._fGlobalWidth = (this._globalSizesLarge._fGlobalWidth);
-                    // Font
-                    this._globalFont = this._globalSizesLarge._globalFont;
-                }
-                break;
-            }
+            this._sLabelPickerViewSize = 
+                new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);                     
+            // All Initial Values
+                this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
+            this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
+            this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
+            this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
+            // Global width for all heights.
+            this._fGlobalWidth = this._globalSizes._fGlobalWidth;
+            // Font
+            this._globalFont = this._globalSizes._globalFont;
         }
 
         public void SetPickerPositionTopOn ()

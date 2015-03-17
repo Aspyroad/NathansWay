@@ -33,11 +33,6 @@ namespace NathansWay.iOS.Numeracy
         private bool _bNumberPadLoaded;
         private ExpressionFactory _ef;
 
-        // Number text box dimensions for iOS
-        public  _iOSDimensionsNormal GS__iOSDimensionsNormal;
-        public  _iOSDimensionsMedium GS__iOSDimensionsMedium;
-        public  _iOSDimensionsLarge GS__iOSDimensionsLarge;
-
 		#endregion
 
 		#region Constructors
@@ -71,10 +66,6 @@ namespace NathansWay.iOS.Numeracy
 			base.Initialize();
 
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
-
-            this.GS__iOSDimensionsNormal = new _iOSDimensionsNormal();
-            this.GS__iOSDimensionsMedium = new _iOSDimensionsMedium();
-            this.GS__iOSDimensionsLarge = new _iOSDimensionsLarge();
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
@@ -206,7 +197,7 @@ namespace NathansWay.iOS.Numeracy
 
     // iOS dimensions
     // Heights and widths of the initial number text box.
-    public class _iOSDimensions
+    public struct iOSNumberDimensions
     {
         //this.AspyTag1 = 600102;
         //this.AspyName = "VC_CtrlNumberText";
@@ -218,54 +209,56 @@ namespace NathansWay.iOS.Numeracy
         public float _fTxtNumberHeight;
         public float _fUpDownButtonHeight;
         public float _fGlobalWidth;
-
+        // Label SizeF
+        //public SizeF _sLabelPickerViewSize;
+        // Font for textbox
         public UIFont _globalFont;
 
-        public _iOSDimensions (G__NumberDisplaySize _size)
+        public iOSNumberDimensions (G__NumberDisplaySize _size)
         {
-            //this.AspyTag1 = 600102;
-            //this.AspyName = "VC_CtrlNumberText";
-
-            if (_size == G__NumberDisplaySize.Normal)
+            switch (_size)
             {
-                this._sLabelPickerViewWidth = 130.0f;
-                this._sLabelPickerViewHeight = 60.0f;
+                case (G__NumberDisplaySize.Normal):
+                {
+                    this._sLabelPickerViewWidth = 130.0f;
+                    this._sLabelPickerViewHeight = 60.0f;
 
-                this._fMainNumberHeight = 60.0f;
-                this._fNumberPickerHeight = 180.0f;
-                this._fTxtNumberHeight = 60.0f;
-                this._fUpDownButtonHeight = 30.0f;
-                this._fGlobalWidth = 46.0f;
-                this._globalFont = UIFont.FromName("Arial", 55.0f);
-            }
-            else if (_size == G__NumberDisplaySize.Medium)
-            {
-                //this.AspyTag1 = 600102;
-                //this.AspyName = "VC_CtrlNumberText";
-                this._sLabelPickerViewWidth = 195.0f;
-                this._sLabelPickerViewHeight = 60.0f;
+                    this._fMainNumberHeight = 60.0f;
+                    this._fNumberPickerHeight = 180.0f;
+                    this._fTxtNumberHeight = 60.0f;
+                    this._fUpDownButtonHeight = 30.0f;
+                    this._fGlobalWidth = 46.0f;
+                    this._globalFont = UIFont.FromName("Arial", 55.0f);
+                }
+                break;
+                case (G__NumberDisplaySize.Medium):
+                {
+                    this._sLabelPickerViewWidth = 195.0f;
+                    this._sLabelPickerViewHeight = 60.0f;
 
-                this._fMainNumberHeight = 90.0f;
-                this._fNumberPickerHeight = 180.0f; // Stays the same
-                this._fTxtNumberHeight = 90.0f;
-                this._fUpDownButtonHeight = 45.0f;
-                this._fGlobalWidth = 69.0f;
-                this._globalFont = UIFont.FromName("Arial", 77.5f);
-            }
-            else // Large
-            {
-                //this.AspyTag1 = 600102;
-                //this.AspyName = "VC_CtrlNumberText";
-                this._sLabelPickerViewWidth = 260.0f;
-                this._sLabelPickerViewHeight = 60.0f;
+                    this._fMainNumberHeight = 90.0f;
+                    this._fNumberPickerHeight = 180.0f; // Stays the same
+                    this._fTxtNumberHeight = 90.0f;
+                    this._fUpDownButtonHeight = 45.0f;
+                    this._fGlobalWidth = 69.0f;
+                    this._globalFont = UIFont.FromName("Arial", 77.5f);
+                }
+                break;
+                case (G__NumberDisplaySize.Large):
+                {
+                    this._sLabelPickerViewWidth = 260.0f;
+                    this._sLabelPickerViewHeight = 60.0f;
 
-                this._fMainNumberHeight = 120.0f;
-                this._fNumberPickerHeight = 360.0f;
-                this._fTxtNumberHeight = 120.0f;
-                this._fUpDownButtonHeight = 60.0f;
-                this._fGlobalWidth = 102.0f;
-                this._globalFont = UIFont.FromName("Arial", 110.0f);
+                    this._fMainNumberHeight = 120.0f;
+                    this._fNumberPickerHeight = 360.0f;
+                    this._fTxtNumberHeight = 120.0f;
+                    this._fUpDownButtonHeight = 60.0f;
+                    this._fGlobalWidth = 102.0f;
+                    this._globalFont = UIFont.FromName("Arial", 110.0f);
+                }
+                break;
             }
+            //this._sLabelPickerViewSize = new SizeF(this._sLabelPickerViewWidth, this._sLabelPickerViewHeight);
         }
     }
 
