@@ -195,72 +195,7 @@ namespace NathansWay.iOS.Numeracy
 
     #region Size Classes
 
-    // iOS dimensions
-    // Heights and widths of the initial number text box.
-    public struct iOSNumberDimensions
-    {
-        //this.AspyTag1 = 600102;
-        //this.AspyName = "VC_CtrlNumberText";
-        public float _sLabelPickerViewHeight;
-        public float _sLabelPickerViewWidth;
 
-        public float _fMainNumberHeight;
-        public float _fNumberPickerHeight;
-        public float _fTxtNumberHeight;
-        public float _fUpDownButtonHeight;
-        public float _fGlobalWidth;
-        // Label SizeF
-        //public SizeF _sLabelPickerViewSize;
-        // Font for textbox
-        public UIFont _globalFont;
-
-        public iOSNumberDimensions (G__NumberDisplaySize _size)
-        {
-            switch (_size)
-            {
-                case (G__NumberDisplaySize.Normal):
-                {
-                    this._sLabelPickerViewWidth = 130.0f;
-                    this._sLabelPickerViewHeight = 60.0f;
-
-                    this._fMainNumberHeight = 60.0f;
-                    this._fNumberPickerHeight = 180.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fUpDownButtonHeight = 30.0f;
-                    this._fGlobalWidth = 46.0f;
-                    this._globalFont = UIFont.FromName("Arial", 55.0f);
-                }
-                break;
-                case (G__NumberDisplaySize.Medium):
-                {
-                    this._sLabelPickerViewWidth = 195.0f;
-                    this._sLabelPickerViewHeight = 60.0f;
-
-                    this._fMainNumberHeight = 90.0f;
-                    this._fNumberPickerHeight = 180.0f; // Stays the same
-                    this._fTxtNumberHeight = 90.0f;
-                    this._fUpDownButtonHeight = 45.0f;
-                    this._fGlobalWidth = 69.0f;
-                    this._globalFont = UIFont.FromName("Arial", 77.5f);
-                }
-                break;
-                case (G__NumberDisplaySize.Large):
-                {
-                    this._sLabelPickerViewWidth = 260.0f;
-                    this._sLabelPickerViewHeight = 60.0f;
-
-                    this._fMainNumberHeight = 120.0f;
-                    this._fNumberPickerHeight = 360.0f;
-                    this._fTxtNumberHeight = 120.0f;
-                    this._fUpDownButtonHeight = 60.0f;
-                    this._fGlobalWidth = 102.0f;
-                    this._globalFont = UIFont.FromName("Arial", 110.0f);
-                }
-                break;
-            }
-            //this._sLabelPickerViewSize = new SizeF(this._sLabelPickerViewWidth, this._sLabelPickerViewHeight);
-        }
-    }
 
 
 

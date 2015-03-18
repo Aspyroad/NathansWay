@@ -182,33 +182,6 @@ namespace NathansWay.iOS.Numeracy
     public class NumberContainerSize
     {
         #region Class Variables
-        // X Horizontal
-        // Y Vertical
-        // Starting point when the control is created
-        public PointF _pStartPoint;
-        // Parent VC
-        private vcNumberContainer _vc;
-        // Number Textbox 
-        public RectangleF _rectNumberText;
-        // Main frame for the container
-        public RectangleF _rectNumberContainerFrame;
-
-        // Full Control height
-        public float _fNumberContainerHeight;
-        // Text Box Height
-        public float _fTxtNumberHeight;
-        // Decimal Place Height
-        public float _fDecimalPlaceHeight;
-
-        // Full Control Width
-        public float _fNumberContainerWidth;
-        // Text Box Width
-        public float _fTxtNumberWidth;
-        // Decimal Place Width
-        public float _fDecimalPlaceWidth;
-
-        public vcMainContainer _vcmc;
-        public _iOSDimensionsNormal _globalSizes;
 
         #endregion
 
@@ -238,83 +211,15 @@ namespace NathansWay.iOS.Numeracy
 
         public void SetHeightWidth ()
         {
-            // Initial Text Number Sizes *********************
-            // All Initial Values
-            //            this._fCtrlNumberTextHeight = 60.0f;
-            //            this._fNumberPickerHeight = 200.0f;
-            //            this._fTxtNumberHeight = 60.0f;
-            //            this._fUpDownButtonHeight = 30.0f;
-            //            // Global width for all heights.
-            //            this._fGlobalWidth = 46.0f;
-            // ***********************************************
 
-            switch (_vc.DisplaySize)
-            {
-                case (G__NumberDisplaySize.Normal):
-                {
-                    this._fNumberContainerHeight = this._globalSizes._fMainNumberHeight;
-                    this._fDecimalPlaceHeight = this._globalSizes._fMainNumberHeight;
-                    this._fNumberContainerWidth = 46.0f;
-                    this._fTxtNumberWidth = 1.0f;
-                    this._fDecimalPlaceWidth = 1.0f;
-                }
-                break;
-                case (G__NumberDisplaySize.Medium):
-                {
-                    this._fNumberContainerHeight = 60.0f;
-                    this._fTxtNumberHeight = 10.0f;
-                    this._fDecimalPlaceHeight = 60.0f;
-                    this._fNumberContainerWidth = 46.0f;
-                    this._fTxtNumberWidth = 1.0f;
-                    this._fDecimalPlaceWidth = 1.0f;
-                }
-                break;
-                case (G__NumberDisplaySize.Large):
-                {
-                    this._fNumberContainerHeight = 60.0f;
-                    this._fTxtNumberHeight = 10.0f;
-                    this._fDecimalPlaceHeight = 60.0f;
-                    this._fNumberContainerWidth = 46.0f;
-                    this._fTxtNumberWidth = 1.0f;
-                    this._fDecimalPlaceWidth = 1.0f;
-                }
-                break;
-            }
         }
 
         public void SetAllNumberPositions ()
         {
-//            this._rectCtrlNumberText = new RectangleF
-//                (
-//                    this._pStartPoint.X, 
-//                    (this._pStartPoint.Y - this._fNumberPickerHeight), 
-//                    this._fGlobalWidth, 
-//                    (this._fNumberPickerHeight + this._fTxtNumberHeight)
-//                );
-//            this._rectNumberPicker = new RectangleF
-//                (
-//                    0.0f, 
-//                    0.0f, 
-//                    this._fGlobalWidth, 
-//                    this._fNumberPickerHeight
-//                );
-//            this._rectTxtNumber = new RectangleF
-//                (
-//                    0.0f, 
-//                    (this._fNumberPickerHeight), 
-//                    this._fGlobalWidth,
-//                    this._fTxtNumberHeight
-//                );
         }
 
         public void SetScale (int _scale)
         {
-            //            var x = _vc.txtNumber.Font.PointSize;
-            //            x = x + 50.0f;
-            //            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-            //
-            //            _vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
         public void RefreshDisplay ()

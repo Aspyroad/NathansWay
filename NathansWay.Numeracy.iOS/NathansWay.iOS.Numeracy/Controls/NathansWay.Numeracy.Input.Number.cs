@@ -857,6 +857,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Font Size
         public UIFont _globalFont;
+        // Label 
+        public SizeF _sLabelPickerViewSize;
+       
 
         public vcMainContainer _vcmc;
         public iOSNumberDimensions _globalSizes;

@@ -152,18 +152,14 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainWorkSpace.cs">
       <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
-      <DependentUpon>vwWorkSpace.xib</DependentUpon>
-    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs">
       <DependentUpon>vwMainGame.xib</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
       <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs">
-      <DependentUpon>vwWorkSpace.xib</DependentUpon>
-    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.designer.cs">
       <DependentUpon>vcLessonMenu.cs</DependentUpon>
@@ -213,7 +209,7 @@
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumberFactory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.NumberFactoryClient.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcFractionContainer.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\iOSNumberDimensions.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\vcMainContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
@@ -260,7 +256,6 @@
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
   </ItemGroup>
 </Project>
