@@ -31,7 +31,6 @@ namespace NathansWay.iOS.Numeracy
         public vcCtrlNumberText _vcCtrlNumberText2;
 
         private bool _bNumberPadLoaded;
-        private ExpressionFactory _ef;
 
 		#endregion
 
@@ -159,8 +158,8 @@ namespace NathansWay.iOS.Numeracy
             _vcCtrlNumberText1.PickerToTop = true;
             _vcCtrlNumberText2.PickerToTop = true;
 
-            this.AddAndDisplayController(_vcCtrlNumberText1, );
-            this.AddAndDisplayController(_vcCtrlNumberText2, new RectangleF(300, 600, 46, 60));
+            //this.AddAndDisplayController(_vcCtrlNumberText1);
+            //this.AddAndDisplayController(_vcCtrlNumberText2, new RectangleF(300, 600, 46, 60));
 
             this._vcCtrlNumberText1.NumSize.RefreshDisplay();
 

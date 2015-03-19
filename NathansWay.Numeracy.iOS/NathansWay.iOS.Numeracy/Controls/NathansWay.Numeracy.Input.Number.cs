@@ -843,16 +843,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF _rectDownButton;
         // Label Frame for the Picker View
         public RectangleF _rectMainNumberWithPicker;
-//        // Full Control height
-//        public float _fMainNumberHeight;
-//        // Number picker height
-//        public float _fNumberPickerHeight;
-//        // Text Box Height
-//        public float _fTxtNumberHeight;
-//        // Width is global to the control
-//        public float _fGlobalWidth;
-//        // Up Down button height
-//        public float _fUpDownButtonHeight;
 
         // Font Size
         public UIFont _globalFont;
@@ -863,15 +853,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructors
 
-        public NumberSize(vcCtrlNumberText vc)
+        public NumberSize()
         {
-            //_vc = vc;
-            Initialize();
-        }
-
-        public NumberSize(vcCtrlNumberText vc, int _scale)
-        {
-            //_vc = vc;
             Initialize();
         }
 
@@ -881,8 +864,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = new iOSNumberDimensions(_vc.DisplaySize);
+
         }
 
         #endregion
@@ -891,18 +873,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetHeightWidth ()
         {
-            //this.StartPoint = _vc.View.Frame.Location;
-//            this._sLabelPickerViewSize = 
-//                new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);                     
-//            // All Initial Values
-//                this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
-//            this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
-//            this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
-//            this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
-//            // Global width for all heights.
-//            this._fGlobalWidth = this._globalSizes._fGlobalWidth;
-//            // Font
-//            this._globalFont = this._globalSizes._globalFont;
+
         }
 
         public void SetPickerPositionTopOn ()
@@ -941,10 +912,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 );
             this.RectMainFrame = new RectangleF
                 (
-                    this._pStartPoint.X, 
-                    this._pStartPoint.Y, 
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
                     this.GlobalSize.GlobalNumberWidth,
-                    (this.GlobalSize.NumberPickerHeight + this._fMainNumberHeight)
+                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.MainNumberHeight)
                 );
         }
 
@@ -972,13 +943,13 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 0.0f,
                 this.GlobalSize.GlobalNumberWidth,
-                this._fUpDownButtonHeight
+                this.GlobalSize.UpDownButtonHeight
             );
             this._rectDownButton = new RectangleF(
                 0.0f,
-                this._fUpDownButtonHeight,
+                this.GlobalSize.UpDownButtonHeight,
                 this.GlobalSize.GlobalNumberWidth,
-                this._fUpDownButtonHeight
+                this.GlobalSize.UpDownButtonHeight
             );
 
         }

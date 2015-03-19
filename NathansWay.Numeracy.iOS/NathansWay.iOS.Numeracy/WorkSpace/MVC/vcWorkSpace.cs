@@ -13,6 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.Shared.Factories;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -22,7 +23,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		#region Private Variables
 		
-
+        private ExpressionFactory _ef;
 
 		#endregion
 
@@ -106,15 +107,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Constructors
 
-        public WorkSpaceSize(AspyViewController vc)
+        public WorkSpaceSize()
         {
-            _vcParent = vc;
-            Initialize();
-        }
-
-        public WorkSpaceSize(AspyViewController vc, int _scale)
-        {
-            _vcParent = vc;
             Initialize();
         }
 
@@ -124,8 +118,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void Initialize()
         {
-            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = new iOSNumberDimensions(_vcParent.DisplaySize);
         }
 
         #endregion
@@ -154,8 +146,5 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
     }
-
-
-
 }
 
