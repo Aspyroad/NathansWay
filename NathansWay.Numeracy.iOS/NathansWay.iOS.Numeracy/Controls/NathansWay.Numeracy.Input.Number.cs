@@ -824,19 +824,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
-    public class NumberSize
+    public class NumberSize : SizeBase
     {
         #region Class Variables
         // X Horizontal
         // Y Vertical
-        // Starting point when the control is created
-        public PointF _pStartPoint;
+//        // Starting point when the control is created
+//        public PointF _pStartPoint;
         // Parent VC
-        private vcCtrlNumberText _vc;
         // Number Picker Spinner Control
         public RectangleF _rectNumberPicker;
-        // Main Control Frame
-        public RectangleF _rectMainNumberFrame;
+//        // Main Control Frame
+//        public RectangleF _rectMainNumberFrame;
         // Text Box Frame
         public RectangleF _rectTxtNumber;
         // Up Down Button Frames, usually the same
@@ -844,25 +843,21 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF _rectDownButton;
         // Label Frame for the Picker View
         public RectangleF _rectMainNumberWithPicker;
-        // Full Control height
-        public float _fMainNumberHeight;
-        // Number picker height
-        public float _fNumberPickerHeight;
-        // Text Box Height
-        public float _fTxtNumberHeight;
-        // Width is global to the control
-        public float _fGlobalWidth;
-        // Up Down button height
-        public float _fUpDownButtonHeight;
+//        // Full Control height
+//        public float _fMainNumberHeight;
+//        // Number picker height
+//        public float _fNumberPickerHeight;
+//        // Text Box Height
+//        public float _fTxtNumberHeight;
+//        // Width is global to the control
+//        public float _fGlobalWidth;
+//        // Up Down button height
+//        public float _fUpDownButtonHeight;
 
         // Font Size
         public UIFont _globalFont;
         // Label 
         public SizeF _sLabelPickerViewSize;
-       
-
-        public vcMainContainer _vcmc;
-        public iOSNumberDimensions _globalSizes;
 
         #endregion
 
@@ -870,13 +865,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public NumberSize(vcCtrlNumberText vc)
         {
-            _vc = vc;
+            //_vc = vc;
             Initialize();
         }
 
         public NumberSize(vcCtrlNumberText vc, int _scale)
         {
-            _vc = vc;
+            //_vc = vc;
             Initialize();
         }
 
@@ -896,42 +891,42 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetHeightWidth ()
         {
-            _pStartPoint = _vc.View.Frame.Location;
-            this._sLabelPickerViewSize = 
-                new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);                     
-            // All Initial Values
-                this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
-            this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
-            this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
-            this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
-            // Global width for all heights.
-            this._fGlobalWidth = this._globalSizes._fGlobalWidth;
-            // Font
-            this._globalFont = this._globalSizes._globalFont;
+            //this.StartPoint = _vc.View.Frame.Location;
+//            this._sLabelPickerViewSize = 
+//                new SizeF(this._globalSizes._sLabelPickerViewWidth, this._globalSizes._sLabelPickerViewHeight);                     
+//            // All Initial Values
+//                this._fMainNumberHeight = this._globalSizes._fMainNumberHeight;
+//            this._fNumberPickerHeight = this._globalSizes._fNumberPickerHeight;
+//            this._fTxtNumberHeight = this._globalSizes._fTxtNumberHeight;
+//            this._fUpDownButtonHeight = this._globalSizes._fUpDownButtonHeight;
+//            // Global width for all heights.
+//            this._fGlobalWidth = this._globalSizes._fGlobalWidth;
+//            // Font
+//            this._globalFont = this._globalSizes._globalFont;
         }
 
         public void SetPickerPositionTopOn ()
         {
-            this._rectMainNumberFrame = new RectangleF
+            this.RectMainFrame = new RectangleF
                 (
-                    this._pStartPoint.X, 
-                    (this._pStartPoint.Y - this._fNumberPickerHeight), 
-                    this._fGlobalWidth, 
-                    (this._fNumberPickerHeight + this._fTxtNumberHeight)
+                    this.StartPoint.X, 
+                    (this.StartPoint.Y - this.GlobalSize.NumberPickerHeight), 
+                    this.GlobalSize.GlobalNumberWidth, 
+                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.TxtNumberHeight)
                 );
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
                     0.0f, 
-                    this._fGlobalWidth, 
-                    this._fNumberPickerHeight
+                    this.GlobalSize.GlobalNumberWidth,
+                    this.GlobalSize.NumberPickerHeight
                 );
             this._rectTxtNumber = new RectangleF
                 (
                     0.0f, 
-                    (this._fNumberPickerHeight), 
-                    this._fGlobalWidth,
-                    this._fTxtNumberHeight
+                    (this.GlobalSize.NumberPickerHeight), 
+                    this.GlobalSize.GlobalNumberWidth,
+                    this.GlobalSize.TxtNumberHeight
                 );
         }
 
@@ -940,16 +935,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
-                    this._fMainNumberHeight, 
-                    this._fGlobalWidth, 
-                    this._fNumberPickerHeight
+                    this.GlobalSize.MainNumberHeight, 
+                    this.GlobalSize.GlobalNumberWidth,
+                    this.GlobalSize.NumberPickerHeight
                 );
-            this._rectMainNumberFrame = new RectangleF
+            this.RectMainFrame = new RectangleF
                 (
                     this._pStartPoint.X, 
                     this._pStartPoint.Y, 
-                    this._fGlobalWidth, 
-                    (this._fNumberPickerHeight + this._fMainNumberHeight)
+                    this.GlobalSize.GlobalNumberWidth,
+                    (this.GlobalSize.NumberPickerHeight + this._fMainNumberHeight)
                 );
         }
 
@@ -961,28 +956,28 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this._rectMainNumberFrame = new RectangleF(
-                this._pStartPoint.X, 
-                this._pStartPoint.Y, 
-                this._fGlobalWidth, 
-                this._fTxtNumberHeight
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.GlobalSize.GlobalNumberWidth, 
+                this.GlobalSize.TxtNumberHeight
             );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 0.0f, 
-                this._fGlobalWidth,
-                this._fTxtNumberHeight
+                this.GlobalSize.GlobalNumberWidth,
+                this.GlobalSize.TxtNumberHeight
             );
             this._rectUpButton = new RectangleF(
                 0.0f,
                 0.0f,
-                this._fGlobalWidth,
+                this.GlobalSize.GlobalNumberWidth,
                 this._fUpDownButtonHeight
             );
             this._rectDownButton = new RectangleF(
                 0.0f,
                 this._fUpDownButtonHeight,
-                this._fGlobalWidth,
+                this.GlobalSize.GlobalNumberWidth,
                 this._fUpDownButtonHeight
             );
 
@@ -990,11 +985,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetScale (int _scale)
         {
-            var x = _vc.txtNumber.Font.PointSize;
-            x = x + 50.0f;
+            //var x = _vc.txtNumber.Font.PointSize;
+            //x = x + 50.0f;
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
 
-            _vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
+            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 

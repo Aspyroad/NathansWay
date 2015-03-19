@@ -29,7 +29,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF RectMainFrame { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
-        public iOSNumberDim GlobalNumberSizes { get; set; }
+        public iOSNumberDim GlobalSize { get; set; }
 
         #endregion
 
@@ -38,6 +38,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public SizeBase()
         {
             Initialize();
+            GlobalSize = iOSNumberDim.Instance;
+            GlobalSize.Size = G__NumberDisplaySize.Normal;           
         }
 
         #endregion
@@ -46,8 +48,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            //this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            //this._globalSizes = new iOSNumberDimensions(_vcParent.DisplaySize);
+            this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            iOSNumberDim.Size = G__NumberDisplaySize.Normal;
         }
 
         #endregion
@@ -96,14 +98,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return _instance; }
         }
-        public static G__NumberDisplaySize Size
+
+        public G__NumberDisplaySize Size
         {
             set
             {
                 this._size = value; 
             }
         }
-        public static float LabelPickerViewHeight
+
+        public float LabelPickerViewHeight
         {
             get
             {
@@ -121,7 +125,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static float LabelPickerViewWidth
+        public float LabelPickerViewWidth
         {
             get
             {
@@ -141,7 +145,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //                }
             }
         }
-        public static float MainNumberHeight
+        public float MainNumberHeight
         {
             get
             {
@@ -159,7 +163,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static float NumberPickerHeight
+        public float NumberPickerHeight
         {
             get
             {
@@ -177,7 +181,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static float TxtNumberHeight
+        public float TxtNumberHeight
         {
             get
             {
@@ -195,7 +199,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static float UpDownButtonHeight
+        public float UpDownButtonHeight
         {
             get
             {
@@ -213,7 +217,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static float GlobalNumberWidth
+        public float GlobalNumberWidth
         {
             get
             {
@@ -231,14 +235,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public static SizeF LabelPickerViewSize
+        public SizeF LabelPickerViewSize
         {
             get
             {
                 return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
             }
         }
-        public static UIFont GlobalNumberFont
+        public UIFont GlobalNumberFont
         {
             get
             {
