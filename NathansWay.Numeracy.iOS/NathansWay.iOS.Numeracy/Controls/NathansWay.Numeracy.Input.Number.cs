@@ -78,10 +78,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-        public vcCtrlNumberText(int _value, G__NumberDisplaySize _size)
+        public vcCtrlNumberText(int _value)
         {
             this._intCurrentValue = _value;
-            this._numberSize = _size;
             // Default constructor supply our initial value
             Initialize_();
         }
@@ -153,9 +152,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Delegate = this._txtNumberDelegate;
 
             // Sizing class
-            this._numberSize = new NumberSize(this, 0);
-            // Grab a reference to the root view conntroller
-            this._viewcontollercontainer = this._numberSize._vcmc;
+            this._numberSize = new NumberSize();
                                     
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
@@ -419,7 +416,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
             // Reset the new frames - these are value types
-            this.View.Frame = this._numberSize._rectMainNumberFrame;
+            this.View.Frame = this._numberSize.RectMainFrame;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(_numberSize._rectNumberPicker);
@@ -485,7 +482,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void CloseNumberPicker()
         {
-            this.View.Frame = _numberSize._rectMainNumberFrame;
+            this.View.Frame = _numberSize.RectMainFrame;
             this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
             this.singleTapGesture = null;
             this.pkNumberPicker.Delegate = null;
@@ -561,7 +558,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberSize.RefreshDisplay();
             this.txtNumber.Font = this.NumSize._globalFont;
 
-            this.View.Frame = this._numberSize._rectMainNumberFrame;
+            this.View.Frame = this._numberSize.RectMainFrame;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
             this.btnDown.Frame = this._numberSize._rectDownButton;
             this.btnUp.Frame =  this._numberSize._rectUpButton;
@@ -605,7 +602,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this._numberSize.SetPickerPositionNormalOff();
             // Reset the new frames - these are value types
-            this.View.Frame = this._numberSize._rectMainNumberFrame;
+            this.View.Frame = this._numberSize.RectMainFrame;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
 
             this.UI_ToggleTextEdit();
@@ -656,7 +653,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-
             }
             
             #endregion
@@ -869,12 +865,32 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
-        #region Public Members
+        #region Public Abstract Members
 
         public void SetHeightWidth ()
         {
 
         }
+
+        public void SetScale (int _scale)
+        {
+            //var x = _vc.txtNumber.Font.PointSize;
+            //x = x + 50.0f;
+            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
+
+            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
+            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
+        }
+
+        public void RefreshDisplay ()
+        {
+            this.SetHeightWidth();
+            this.SetPickerPositionNormalOff();
+        }
+
+        #endregion
+
+        #region Public Members
 
         public void SetPickerPositionTopOn ()
         {
@@ -952,22 +968,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSize.UpDownButtonHeight
             );
 
-        }
-
-        public void SetScale (int _scale)
-        {
-            //var x = _vc.txtNumber.Font.PointSize;
-            //x = x + 50.0f;
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-
-            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-        }
-
-        public void RefreshDisplay ()
-        {
-            this.SetHeightWidth();
-            this.SetPickerPositionNormalOff();
         }
 
         #endregion

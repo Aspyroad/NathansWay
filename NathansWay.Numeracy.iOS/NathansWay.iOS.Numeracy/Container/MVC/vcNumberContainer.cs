@@ -102,7 +102,7 @@ namespace NathansWay.iOS.Numeracy
                 {
                     // Create a number box
                     _lsNumbers.Add(new vcCtrlNumberText(Convert.ToInt16(_value[i])));
-                    this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
+                    //this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
                 }
                 else
                 {
@@ -189,7 +189,7 @@ namespace NathansWay.iOS.Numeracy
 
         public NumberContainerSize(vcNumberContainer vc)
         {
-            _vc = vc;
+            //_vc = vc;
             Initialize();
         }
 
@@ -199,9 +199,7 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            //this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
-            _pStartPoint = _vc.View.Frame.Location;
+
             this.RefreshDisplay();
         }
 

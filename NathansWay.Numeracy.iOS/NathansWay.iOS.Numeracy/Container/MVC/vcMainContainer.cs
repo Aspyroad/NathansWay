@@ -9,10 +9,12 @@ using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
 // Shared
 using NathansWay.Shared.Factories;
 using NathansWay.Shared;
 using NathansWay.Shared.Utilities;
+
 
 
 
@@ -26,6 +28,7 @@ namespace NathansWay.iOS.Numeracy
 		public UIStoryboard _storyBoard;
 		public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
+        public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
         public vcCtrlNumberText _vcCtrlNumberText1;
         public vcCtrlNumberText _vcCtrlNumberText2;
@@ -69,10 +72,10 @@ namespace NathansWay.iOS.Numeracy
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
-            //_vcCtrlNumberText1 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
+            _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
             //_vcCtrlNumberText2 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
-            _vcCtrlNumberText1 = new vcCtrlNumberText(new RectangleF(200, 600, 46, 60));
-            _vcCtrlNumberText2 = new vcCtrlNumberText();
+            //_vcCtrlNumberText1 = new vcCtrlNumberText(new RectangleF(200, 600, 46, 60));
+            //_vcCtrlNumberText2 = new vcCtrlNumberText();
 
 			//laborController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<LaborController>());
 			//expenseController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<ExpenseController>());
@@ -151,17 +154,18 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
+            this.AddAndDisplayController(_vcWorkSpace.Value);
 
             // Number Text Testing
-            _vcCtrlNumberText1.DisplaySize = G__NumberDisplaySize.Large;
-            _vcCtrlNumberText2.DisplaySize = G__NumberDisplaySize.Medium;
-            _vcCtrlNumberText1.PickerToTop = true;
-            _vcCtrlNumberText2.PickerToTop = true;
+            //_vcCtrlNumberText1.DisplaySize = G__NumberDisplaySize.Large;
+            //_vcCtrlNumberText2.DisplaySize = G__NumberDisplaySize.Medium;
+            //_vcCtrlNumberText1.PickerToTop = true;
+            //_vcCtrlNumberText2.PickerToTop = true;
 
             //this.AddAndDisplayController(_vcCtrlNumberText1);
             //this.AddAndDisplayController(_vcCtrlNumberText2, new RectangleF(300, 600, 46, 60));
 
-            this._vcCtrlNumberText1.NumSize.RefreshDisplay();
+            //this._vcCtrlNumberText1.NumSize.RefreshDisplay();
 
 
 

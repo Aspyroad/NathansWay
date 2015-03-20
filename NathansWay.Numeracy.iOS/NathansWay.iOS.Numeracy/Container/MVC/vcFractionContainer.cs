@@ -10,9 +10,12 @@ using MonoTouch.CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
-// Nathansway
+// Nathansway iOS
 using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.iOS.Numeracy.Controls;
+// NathansWay Shared
 using NathansWay.Shared;
+
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -74,7 +77,7 @@ namespace NathansWay.iOS.Numeracy
             base.ViewDidAppear(animated);
 
             this._fractSize = new FractionSize(this);
-            this.View.Frame = this._fractSize._rectFractionFrame;
+            this.View.Frame = this._fractSize.RectMainFrame;
 
         }
 
@@ -137,36 +140,17 @@ namespace NathansWay.iOS.Numeracy
         #endregion
     }
 
-    public class FractionSize
+    public class FractionSize : SizeBase
     {
         #region Class Variables
         // X Horizontal
         // Y Vertical
-        // Starting point when the control is created
-        public PointF _pStartPoint;
         // Parent VC
         private vcFractionContainer _vc;
-        // Number TextboxContainer Numerator
-        public RectangleF _rectNumeratorTxt;
-        // Number TextboxContainer Denominator
-        public RectangleF _rectDenominatorTxt;
+
         // Fraction divider line frame
         public RectangleF _rectDivider;
-        // Main frame for the container
-        public RectangleF _rectFractionFrame;
 
-        // Full Control height
-        public float _fFractionHeight;
-        // Number picker height
-        public float _fDividerHeight;
-        // Text Box Height
-        public float _fTxtNumberHeight;
-
-        // Width is global to the control
-        public float _fGlobalWidth;
-
-        public vcMainContainer _vcmc;
-        public _iOSDimensionsNormal _globalSizes;
 
         #endregion
 
@@ -184,10 +168,7 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this._vcmc = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._globalSizes = this._vcmc.GS__iOSDimensionsNormal;
-            _pStartPoint = _vc.View.Frame.Location;
-            this.RefreshDisplay();
+
         }
 
         #endregion
@@ -196,36 +177,7 @@ namespace NathansWay.iOS.Numeracy
 
         public void SetHeightWidth ()
         {
-            switch (_vc.DisplaySize)
-            {
-                case (G__NumberDisplaySize.Normal):
-                {
-                    // All Initial Values
-                    this._fFractionHeight = 60.0f;
-                    this._fDividerHeight = 10.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fGlobalWidth = 46.0f;
-                }
-                break;
-                case (G__NumberDisplaySize.Medium):
-                {
-                    // All Initial Values
-                    this._fFractionHeight = 60.0f;
-                    this._fDividerHeight = 10.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fGlobalWidth = 46.0f;
-                }
-                break;
-                case (G__NumberDisplaySize.Large):
-                {
-                    // All Initial Values
-                    this._fFractionHeight = 60.0f;
-                    this._fDividerHeight = 10.0f;
-                    this._fTxtNumberHeight = 60.0f;
-                    this._fGlobalWidth = 46.0f;
-                }
-                break;
-            }
+
         }
 
         public void SetDenominatorPosition ()

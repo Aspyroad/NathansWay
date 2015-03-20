@@ -82,17 +82,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			
-    		this.View.Frame = 
-    			new RectangleF 
-    			(
-    				1.0f,
-    				((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) ,
-    				400,
-    				(iOSGlobals.G__RectWindowLandscape.Height / 4) 
-    			);
-
 		}
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            // ***********************************************************
+            // TODO : Remove test code for sizing
+
+            this.View.BackgroundColor = UIColor.Blue;
+            this.View.Frame = 
+                new RectangleF 
+                (
+                    1.0f,
+                    ((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) ,
+                    1022.0f,
+                    (iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
+                );
+            // ***********************************************************
+        }
 
 		#endregion
 	}
@@ -122,7 +131,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-        #region Public Members
+        #region Public Abstract Members
 
         public void SetHeightWidth ()
         {

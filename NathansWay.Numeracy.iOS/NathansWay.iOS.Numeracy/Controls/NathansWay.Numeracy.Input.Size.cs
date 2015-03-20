@@ -37,20 +37,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeBase()
         {
-            Initialize();
-            GlobalSize = iOSNumberDim.Instance;
-            GlobalSize.Size = G__NumberDisplaySize.Normal;           
+            this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            // Set up our singleton size class
+            this.GlobalSize = iOSNumberDim.Instance;
+            // Set default init to normal size
+            this.GlobalSize.Size = G__NumberDisplaySize.Normal;          
         }
 
         #endregion
 
         #region Private Members
 
-        private void Initialize()
-        {
-            this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            iOSNumberDim.Size = G__NumberDisplaySize.Normal;
-        }
 
         #endregion
 
@@ -71,7 +68,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
-    // iOS Dimensions
+    // iOS Dimensions Singleton
     // Heights and widths of the initial number text box.
     // Most sizes are calculated from these values.
     public sealed class iOSNumberDim
@@ -106,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._size = value; 
             }
         }
-
+        // Number Text Box
         public float LabelPickerViewHeight
         {
             get
@@ -260,6 +257,45 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+        // Fraction
+        public float FractionHeight
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 60.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 195.0f;
+                }
+                else // Large
+                {
+                    return 260.0f;
+                }
+            }
+        }
+        public float DividerHeight
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 10.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 195.0f;
+                }
+                else // Large
+                {
+                    return 260.0f;
+                }
+            }
+        }
+
+
 
         #endregion
     }
