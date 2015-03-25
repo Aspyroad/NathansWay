@@ -54,10 +54,9 @@ namespace NathansWay.iOS.Numeracy
             Initialize ();
         }
 
-        public vcNumberContainer (string _strValue, G__NumberDisplaySize _ds)
+        public vcNumberContainer (string _strValue)
         {
             this._strCurrentValue = _strValue;
-            this._displaySize = _ds;
             Initialize ();
         }
 

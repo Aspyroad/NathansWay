@@ -14,6 +14,7 @@ using AspyRoad.iOSCore.UISettings;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.Shared.Factories;
+using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -23,7 +24,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		#region Private Variables
 		
-        private ExpressionFactory _ef;
+        private ExpressionFactory _expressionFactory;
+        private NumberFactoryClient _numberFactoryClient;
+
+        private EntityLesson _wsLesson;
+        private EntityLessonResults _wsLessonResults;
+        private EntityLessonDetail _wsLessonDetail;
+        private EntityLessonDetailResults _wsLessonDetailResults;
+
+        public string strTestExpression;
 
 		#endregion
 
@@ -52,15 +61,55 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		protected override void Initialize()
 		{
 			base.Initialize ();
-			this.AspyTag1 = 22;
+			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
 
-			// Create our settings class
-			//this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
-			//this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
+            this.strTestExpression = "12,+,1,=,13";
+
+            this._numberFactoryClient = new NumberFactoryClient();
+            this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
+
+            this.LoadExpression(this.strTestExpression);
 		}
 
 		#endregion
+
+        #region Public Members
+
+        public void LoadExpression(string _strExpression)
+        {
+            var bSuccess = this._expressionFactory.CreateExpression(_strExpression);
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public EntityLesson WsLesson
+        {
+            get { return _wsLesson; }
+            set { WsLesson = value; }
+        }
+
+        public EntityLessonResults WsLessonResults
+        {
+            get { return _wsLessonResults; }
+            set { WsLessonResults = value; }
+        }
+
+        public EntityLessonDetail WsLessonDetail
+        {
+            get { return _wsLessonDetail; }
+            set { WsLessonDetail = value; }
+        }
+
+        public EntityLessonDetailResults WsLessonDetailResults
+        {
+            get { return _wsLessonDetailResults; }
+            set { WsLessonDetailResults = value; }
+        }
+
+        #endregion
 
 		#region Overrides
 

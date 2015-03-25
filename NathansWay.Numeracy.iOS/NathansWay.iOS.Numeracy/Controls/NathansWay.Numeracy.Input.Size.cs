@@ -18,18 +18,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 {
     public abstract class SizeBase
     {
-        #region Class Variables
-        // X Horizontal
-        // Y Vertical
-        // Starting point when the control is created 
-        public PointF StartPoint { get; set; }
-        // Parent VC
-        public AspyViewController VcParent { get; set; }
-        // Main Control Frame
-        public RectangleF RectMainFrame { get; set; }
+        #region Events
 
-        public vcMainContainer VcMainContainer { get; set; }
-        public iOSNumberDim GlobalSize { get; set; }
+        public event EventHandler<EventArgs> Resizing;
+
+        #endregion
+
+        #region Class Variables
+
+        private G__NumberDisplaySize _displaySize;
 
         #endregion
 
@@ -63,6 +60,54 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void RefreshDisplay ()
         {
+            this.SetHeightWidth();
+        }
+
+        //The event-invoking method that derived classes can override. 
+        protected virtual void OnResize(EventArgs e)
+        {
+            // Globally called 
+            this.RefreshDisplay();
+
+            // Make a temporary copy of the event to avoid possibility of 
+            // a race condition if the last subscriber unsubscribes 
+            // immediately after the null check and before the event is raised.
+            EventHandler<EventArgs> handler = Resizing;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+
+
+        #endregion
+
+        #region Public Properties
+
+        // X Horizontal
+        // Y Vertical
+        // Starting point when the control is created 
+        public PointF StartPoint { get; set; }
+        // Parent VC
+        public AspyViewController VcParent { get; set; }
+        // Main Control Frame
+        public RectangleF RectMainFrame { get; set; }
+
+        public vcMainContainer VcMainContainer { get; set; }
+        public iOSNumberDim GlobalSize { get; set; }
+        public G__NumberDisplaySize DisplaySize
+        { 
+            get; 
+            set
+            {
+                this._displaySize = value;
+                this.GlobalSize.Size = value;
+                if (this.Resizing != null)
+                {
+                    this.Resizing(this, new EventArgs());
+                }
+            }
         }
 
         #endregion
@@ -294,8 +339,25 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-
-
+        // Decimal
+        public float DecimalWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 23.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 43.0f;
+                }
+                else // Large
+                {
+                    return 51.0f;
+                }
+            }
+        }
 
         #endregion
     }

@@ -30,7 +30,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public NumberFactoryClient()
         {
 
-
         }
 
         #endregion

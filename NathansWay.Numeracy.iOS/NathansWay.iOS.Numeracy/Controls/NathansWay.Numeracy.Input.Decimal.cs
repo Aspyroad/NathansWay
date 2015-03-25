@@ -17,68 +17,38 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.Controls
 {
 
-    public partial class vcCtrlNumberText : AspyViewController
+    public partial class vcCtrlDecimalText : AspyViewController
     {
         #region Class Variables
 
-        private NumberSize _numberSize;
+        private DecimalSize _decimalSize;
         // UI Components
-        //      [Outlet]
-        public UIButton btnDown { get; private set; }
-        public UIButton btnUp { get; private set; }
-        public AspyTextField txtNumber { get; private set; }
-        public AspyPickerView pkNumberPicker { get; private set; }
+        public AspyTextField txtDecimal { get; private set; }
 
-        private PickerDelegate _pickerdelegate;
-        private PickerSource _pickersource;
-        private txtNumberDelegate _txtNumberDelegate;
-        private UITapGestureRecognizer singleTapGesture;
-
-        private List<string> items = new List<string>();
-        private E__NumberComboEditMode _currentEditMode;
-        private UIColor _preEditColor;
-
-        private vcNumberPad _numberpad;
         private vcMainContainer _viewcontollercontainer;
-
-        private Action ehValueChanged;
-        private Action<int> actHandlePadPush;
-        private Action<int> actHandlePadLock;
-
-        private G__UnitPlacement _tensUnit;
-
-        private int _intPrevValue;
-        private int _intCurrentValue;
-        private bool _bIsInEditMode;
-        private bool _bPickerToTop;
-
-        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
-        private bool _bAutoPickerPositionOn;
-        // Global size variable for resizing class.
-        private G__NumberDisplaySize _displaySize;
 
         #endregion
 
         #region Constructors
 
-        public vcCtrlNumberText (IntPtr h) : base (h)
+        public vcCtrlDecimalText (IntPtr h) : base (h)
         {
             Initialize_();
         }
 
         [Export("initWithCoder:")]
-        public vcCtrlNumberText (NSCoder coder) : base(coder)
+        public vcCtrlDecimalText (NSCoder coder) : base(coder)
         {
             Initialize_();
         }
 
-        public vcCtrlNumberText()
+        public vcCtrlDecimalText()
         {
             // Default constructor supply our initial value
             Initialize_();
         }
 
-        public vcCtrlNumberText(int _value)
+        public vcCtrlDecimalText(int _value)
         {
             this._intCurrentValue = _value;
             // Default constructor supply our initial value
@@ -95,22 +65,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (disposing)
             {
-                if (this._numberpad != null)
-                {
-                    // Unhook any delegates
-                    this._numberpad.PadPushed -= this.actHandlePadPush;
-                    this._numberpad.PadLockPushed -= this.actHandlePadLock;
-                    this._pickerdelegate.psValueChanged -= this.ehValueChanged; 
-                    this._numberpad = null;
-                }
-                // Destroy our picker delegate links
-                this._pickerdelegate = null;
-                this._pickersource = null;
 
-                // Unhook
-                this.txtNumber.TouchDown -= txtTouchedDown;
-                this.btnUp.TouchUpInside -= btnUpTouch;
-                this.btnDown.TouchUpInside -= btnDownTouch;
             }
         }
 
@@ -128,42 +83,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
 
             // Set initital values
-            this.preEdit();
-
-            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
-                        
-            // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(HandlePickerChanged);
-
-            // UpDown Buttons
-            this.btnDown.Alpha = 0.5f;
-            this.btnUp.Alpha = 0.5f;
-            this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
-            this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
-            this.btnDown.Hidden = true;
-            this.btnUp.Hidden = true;
 
             // Apply some UI to the texbox
-            this.txtNumber.HasBorder = true;
-            this.txtNumber.HasRoundedCorners = true;
-            this.txtNumber.ApplyUI();
-
-            this._txtNumberDelegate = new txtNumberDelegate();
-            this.txtNumber.Delegate = this._txtNumberDelegate;
+            this.txtDecimal.HasBorder = true;
+            this.txtDecimal.HasRoundedCorners = true;
+            this.txtDecimal.ApplyUI();
 
             // Sizing class
-            this._numberSize = new NumberSize();
-                                    
-            //            pickerDataModel = new PickerDataModel();
-            //            this.pkNumberPicker.Source = pickerDataModel;
-            //            this.pkNumberPicker.Center = this.txtNumber.Center ;           
-            //            this.pkNumberPicker.ValueChanged += (s, e) =>
-            //            {
-            //                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-            //            };  
-            //
-            //            // set our initial selection on the label
-            //            this.txtNumber.Text = pickerDataModel.SelectedItem;
+            this._decimalSize = new DecimalSize();
+
 
         }
 
@@ -179,7 +107,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Public Properties
 
-        public NumberSize NumSize
+        public Size Size
         {
             get { return this._numberSize; }
             set { this._numberSize = value; }
@@ -279,12 +207,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.btnDown = new UIButton();
             this.btnUp = new UIButton();
-            this.txtNumber = new AspyTextField();
+            this.txtDecimal = new AspyTextField();
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
             this.btnUp.TouchUpInside += btnUpTouch;
-            this.txtNumber.TouchDown += txtTouchedDown;
+            this.txtDecimal.TouchDown += txtTouchedDown;
 
             items.Add("0");
             items.Add("1");
@@ -355,7 +283,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._intCurrentValue = 0;
             }
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+            this.txtDecimal.Text = this._intCurrentValue.ToString();
 
             this.IsInEditMode = false;
         }
@@ -372,7 +300,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._intCurrentValue = 9;
             }
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+            this.txtDecimal.Text = this._intCurrentValue.ToString();
 
             this.IsInEditMode = false;
         }
@@ -381,24 +309,24 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void preEdit()
         {
             // Store the original value
-            if (this.txtNumber.Text.Length > 0)
+            if (this.txtDecimal.Text.Length > 0)
             {
-                this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+                this._intPrevValue = Convert.ToInt32(this.txtDecimal.Text);
                 this._intCurrentValue = this._intPrevValue;
             }
             else
             {
                 this._intPrevValue = 0;
                 this._intCurrentValue = 0;
-                this.txtNumber.Text = "0";
+                this.txtDecimal.Text = "0";
             }
         }
 
         protected void postEdit(int _intValue)
         {
-            this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            this._intPrevValue = Convert.ToInt32(this.txtDecimal.Text);
             this._intCurrentValue = _intValue; 
-            this.txtNumber.Text = _intValue.ToString();
+            this.txtDecimal.Text = _intValue.ToString();
         }
 
         protected void EditNumberPicker()
@@ -417,7 +345,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Reset the new frames - these are value types
             this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+            this.txtDecimal.Frame = this._numberSize._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(_numberSize._rectNumberPicker);
             this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
@@ -507,7 +435,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             singleTapGesture.NumberOfTouchesRequired = 1;
             singleTapGesture.NumberOfTapsRequired = 1;
             // add the gesture recognizer to the view
-            txtNumber.AddGestureRecognizer(singleTapGesture);
+            txtDecimal.AddGestureRecognizer(singleTapGesture);
         }
 
         protected void pkSingleTapGestureRecognizer()
@@ -542,24 +470,24 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (!this.IsInEditMode)
             {
                 // Graphically highlight the text control so we know its selected
-                this._preEditColor = txtNumber.BackgroundColor;
-                txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
-                txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
+                this._preEditColor = txtDecimal.BackgroundColor;
+                txtDecimal.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
+                txtDecimal.TextColor = AspyUtilities.AlphaHalfer(txtDecimal.TextColor);
             }
             else
             {
-                txtNumber.BackgroundColor = this._preEditColor;
-                txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
+                txtDecimal.BackgroundColor = this._preEditColor;
+                txtDecimal.TextColor = AspyUtilities.AlphaRestorer(txtDecimal.TextColor);  
             }
         }
 
         protected void UI_SetSize()
         {
             this._numberSize.RefreshDisplay();
-            this.txtNumber.Font = this.NumSize._globalFont;
+            this.txtDecimal.Font = this.NumSize._globalFont;
 
             this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+            this.txtDecimal.Frame = this._numberSize._rectTxtNumber;
             this.btnDown.Frame = this._numberSize._rectDownButton;
             this.btnUp.Frame =  this._numberSize._rectUpButton;
 
@@ -603,7 +531,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberSize.SetPickerPositionNormalOff();
             // Reset the new frames - these are value types
             this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+            this.txtDecimal.Frame = this._numberSize._rectTxtNumber;
 
             this.UI_ToggleTextEdit();
 
@@ -820,36 +748,23 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
-    public class NumberSize : SizeBase
+    public class DecimalSize : SizeBase
     {
         #region Class Variables
         // X Horizontal
         // Y Vertical
-//        // Starting point when the control is created
-//        public PointF _pStartPoint;
-        // Parent VC
-        // Number Picker Spinner Control
-        public RectangleF _rectNumberPicker;
-//        // Main Control Frame
-//        public RectangleF _rectMainNumberFrame;
+
         // Text Box Frame
-        public RectangleF _rectTxtNumber;
-        // Up Down Button Frames, usually the same
-        public RectangleF _rectUpButton;
-        public RectangleF _rectDownButton;
-        // Label Frame for the Picker View
-        public RectangleF _rectMainNumberWithPicker;
+        public RectangleF _rectTxtDecimal;
 
         // Font Size
         public UIFont _globalFont;
-        // Label 
-        public SizeF _sLabelPickerViewSize;
 
         #endregion
 
         #region Constructors
 
-        public NumberSize()
+        public DecimalSize()
         {
             Initialize();
         }
@@ -863,12 +778,25 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
+        private RectangleF SetMainFrame()
+        {
+            return new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    (this.GlobalSize.GlobalNumberWidth/2), 
+                    this.GlobalSize.MainNumberHeight
+                );
+
+        }
+
         #endregion
 
-        #region Public Abstract Members
+        #region Overrides
 
         public override void SetHeightWidth ()
         {
+            
         }
 
         public void SetScale (int _scale)
@@ -881,7 +809,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-        public override  void RefreshDisplay ()
+        public void RefreshDisplay ()
         {
             this.SetHeightWidth();
             this.SetPickerPositionNormalOff();
@@ -891,83 +819,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public void SetPickerPositionTopOn ()
-        {
-            this.RectMainFrame = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    (this.StartPoint.Y - this.GlobalSize.NumberPickerHeight), 
-                    this.GlobalSize.GlobalNumberWidth, 
-                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.TxtNumberHeight)
-                );
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    0.0f, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.NumberPickerHeight
-                );
-            this._rectTxtNumber = new RectangleF
-                (
-                    0.0f, 
-                    (this.GlobalSize.NumberPickerHeight), 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.TxtNumberHeight
-                );
-        }
-
-        public void SetPickerPositionBottomOn ()
-        {
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    this.GlobalSize.MainNumberHeight, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.NumberPickerHeight
-                );
-            this.RectMainFrame = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.MainNumberHeight)
-                );
-        }
-
-        public void SetPickerPositionNormalOff ()
-        {
-            this._rectMainNumberWithPicker = new RectangleF(
-                0.0f,
-                0.0f,
-                this._sLabelPickerViewSize.Width,
-                this._sLabelPickerViewSize.Height
-            );
-            this.RectMainFrame = new RectangleF(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.GlobalSize.GlobalNumberWidth, 
-                this.GlobalSize.TxtNumberHeight
-            );
-            this._rectTxtNumber = new RectangleF(
-                0.0f, 
-                0.0f, 
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.TxtNumberHeight
-            );
-            this._rectUpButton = new RectangleF(
-                0.0f,
-                0.0f,
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.UpDownButtonHeight
-            );
-            this._rectDownButton = new RectangleF(
-                0.0f,
-                this.GlobalSize.UpDownButtonHeight,
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.UpDownButtonHeight
-            );
-
-        }
 
         #endregion
     }

@@ -42,7 +42,7 @@ namespace NathansWay.Shared.Factories
         // Diveded by symbol (opt + /)
         // (,[1/2],+,[3/4],),-,(,3,),=,789.6
 
-        public void CreateExpression (string _expression)
+        public bool CreateExpression (string _expression)
         {
             this.SplitExpression(_expression);
             for (int i = 0; i < this._lsDecodedExpression.Count; i++) // Loop with for.
@@ -55,7 +55,7 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Value): // Most common first ??
                     {
                         // Build a number
-
+                        this._UIPlatormClient.UICreateNumber(x.Value);
                     }
                     break;
                     case (G__MathChar.BraceRoundLeft):
@@ -79,6 +79,8 @@ namespace NathansWay.Shared.Factories
                         break;
                 }
             }
+
+            return true;
         }
 
         public List<KeyValuePair<G__MathChar, string>> SplitExpression(string _expression)
