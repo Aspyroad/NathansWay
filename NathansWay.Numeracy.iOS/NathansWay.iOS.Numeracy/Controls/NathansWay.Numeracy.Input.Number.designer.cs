@@ -12,7 +12,7 @@ using System.CodeDom.Compiler;
 namespace NathansWay.iOS.Numeracy.Controls
 {
 	[Register ("vcCtrlNumberText")]
-	partial class vcCtrlNumberText
+	partial class vcNumberText
 	{
 		[Action ("btnDownTouch:")]
 		[GeneratedCode ("iOS Designer", "1.0")]

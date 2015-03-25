@@ -30,8 +30,8 @@ namespace NathansWay.iOS.Numeracy
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
-        public vcCtrlNumberText _vcCtrlNumberText1;
-        public vcCtrlNumberText _vcCtrlNumberText2;
+        public vcNumberText _vcCtrlNumberText1;
+        public vcNumberText _vcCtrlNumberText2;
 
         private bool _bNumberPadLoaded;
 

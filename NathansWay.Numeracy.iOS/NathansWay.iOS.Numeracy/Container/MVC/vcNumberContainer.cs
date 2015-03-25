@@ -40,7 +40,7 @@ namespace NathansWay.iOS.Numeracy
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
 
-        private List<vcCtrlNumberText> _lsNumbers;
+        private List<vcNumberText> _lsNumbers;
 
         private NumberContainerSize _containerSize;
         private G__NumberDisplaySize _displaySize; 
@@ -82,7 +82,7 @@ namespace NathansWay.iOS.Numeracy
         protected override void Initialize()
         {
             base.Initialize();
-            _lsNumbers = new List<vcCtrlNumberText>();
+            _lsNumbers = new List<vcNumberText>();
         }
 
 
@@ -100,7 +100,7 @@ namespace NathansWay.iOS.Numeracy
                 if (_value[i] != Convert.ToChar("."))
                 {
                     // Create a number box
-                    _lsNumbers.Add(new vcCtrlNumberText(Convert.ToInt16(_value[i])));
+                    _lsNumbers.Add(new vcNumberText(Convert.ToInt16(_value[i])));
                     //this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
                 }
                 else

@@ -12,6 +12,12 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register ("AspyViewContainer")]	
 	public class AspyViewContainer : AspyViewController
 	{
+        #region Events
+
+        public event EventHandler<ResizeEventArgs> TextSizeChange;
+
+        #endregion
+
 		#region Class Variables
 
 		#endregion
@@ -47,6 +53,18 @@ namespace AspyRoad.iOSCore
 			base.Initialize();		
 		}
 
+        protected virtual void OnSizeChange(object sender, ResizeEventArgs e)
+        {
+            //Override to do more shit then this...
+            //AspyViewController s = (AspyViewController)sender;
+
+            EventHandler<ResizeEventArgs> handler = TextSizeChange;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
 		#endregion
 
 		#region Public Members
@@ -77,6 +95,12 @@ namespace AspyRoad.iOSCore
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 		}
+
+        // TODO : Method in here to call to activate the event
+
+        // TODO : Methos to subscribe to my event? Override an add view controller method?
+        //
+
 
 		#region Autorotation for iOS 6 or newer
 

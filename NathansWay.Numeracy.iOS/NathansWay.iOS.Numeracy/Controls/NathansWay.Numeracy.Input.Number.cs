@@ -17,7 +17,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.Controls
 {
 
-    public partial class vcCtrlNumberText : AspyViewController
+    public partial class vcNumberText : AspyViewContainer
     {
         #region Class Variables
 
@@ -61,24 +61,24 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructors
 
-        public vcCtrlNumberText (IntPtr h) : base (h)
+        public vcNumberText (IntPtr h) : base (h)
         {
             Initialize_();
         }
 
         [Export("initWithCoder:")]
-        public vcCtrlNumberText (NSCoder coder) : base(coder)
+        public vcNumberText (NSCoder coder) : base(coder)
         {
             Initialize_();
         }
 
-        public vcCtrlNumberText()
+        public vcNumberText()
         {
             // Default constructor supply our initial value
             Initialize_();
         }
 
-        public vcCtrlNumberText(int _value)
+        public vcNumberText(int _value)
         {
             this._intCurrentValue = _value;
             // Default constructor supply our initial value

@@ -64,19 +64,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         //The event-invoking method that derived classes can override. 
-        protected virtual void OnResize(EventArgs e)
+        public virtual void OnResize(EventArgs e)
         {
-            // Globally called 
-            this.RefreshDisplay();
-
             // Make a temporary copy of the event to avoid possibility of 
             // a race condition if the last subscriber unsubscribes 
             // immediately after the null check and before the event is raised.
-            EventHandler<EventArgs> handler = Resizing;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+
         }
 
 
