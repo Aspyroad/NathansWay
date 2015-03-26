@@ -101,6 +101,12 @@ namespace AspyRoad.iOSCore
         // TODO : Methos to subscribe to my event? Override an add view controller method?
         //
 
+        public override void AddAndDisplayController(AspyViewController _newController)
+        {
+            
+            base.AddAndDisplayController(_newController);
+        }
+
 
 		#region Autorotation for iOS 6 or newer
 
