@@ -113,7 +113,7 @@ namespace AspyRoad.iOSCore
 		/// </summary>
 		/// <returns><c>true</c>If the VC is added to the parent children array,<c>false</c> otherwise.</returns>
 		/// <param name="_newController">_new controller.</param>
-		public void AddAndDisplayController (AspyViewController _newController, RectangleF _frame)
+		public virtual void AddAndDisplayController (AspyViewController _newController, RectangleF _frame)
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subview
@@ -122,7 +122,7 @@ namespace AspyRoad.iOSCore
 			_newController.DidMoveToParentViewController (this);
 		}
 
-		public void AddAndDisplayController (AspyViewController _newController)
+		public virtual void AddAndDisplayController (AspyViewController _newController)
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subviews
@@ -131,7 +131,7 @@ namespace AspyRoad.iOSCore
 			_newController.DidMoveToParentViewController (this);
 		}
 
-		public void AddController (UIViewController _newController)
+		public virtual void AddController (UIViewController _newController)
 		{
 			this.AddChildViewController (_newController);
 			_newController.DidMoveToParentViewController (this);
@@ -142,7 +142,7 @@ namespace AspyRoad.iOSCore
 		/// </summary>
 		/// <returns><c>true</c>, if controllers was removed, <c>false</c> otherwise.</returns>
 		/// <param name="_AspyTag">_ aspy tag.</param>
-		public bool RemoveControllers (int _AspyTag)
+		public virtual bool RemoveControllers (int _AspyTag)
 		{
 			bool _return = false;
 			// Find the controller with the same string name
@@ -183,7 +183,7 @@ namespace AspyRoad.iOSCore
 		/// <returns><c>true</c>, if VC instance was removed, <c>false</c> otherwise.</returns>
 		/// <param name="VCType">VC type.</param>
 		/// <param name="VCInstance">VC instance.</param>
-		public bool RemoveVCInstance (int VCType, int VCInstance)
+		public virtual bool RemoveVCInstance (int VCType, int VCInstance)
 		{
 			bool _return = false;
 			// Find the controller with the same string name
