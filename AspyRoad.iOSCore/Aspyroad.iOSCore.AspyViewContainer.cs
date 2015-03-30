@@ -13,7 +13,7 @@ namespace AspyRoad.iOSCore
 	public class AspyViewContainer : AspyViewController
 	{
         #region Events
-
+        // Eventhandler both event and delegate
         public event EventHandler<ResizeEventArgs> TextSizeChange;
 
         #endregion
@@ -53,11 +53,12 @@ namespace AspyRoad.iOSCore
 			base.Initialize();		
 		}
 
-        protected virtual void OnSizeChange(object sender, ResizeEventArgs e)
-        {
-            //Override to do more shit then this...
-            //AspyViewController s = (AspyViewController)sender;
+		#endregion
 
+        #region Delegates
+
+        protected virtual void OnSizeChange(ResizeEventArgs e)
+        {
             EventHandler<ResizeEventArgs> handler = TextSizeChange;
             if (handler != null)
             {
@@ -65,9 +66,12 @@ namespace AspyRoad.iOSCore
             }
         }
 
-		#endregion
+        #endregion
+
+        public void 
 
 		#region Public Members
+
 
 		#endregion
 

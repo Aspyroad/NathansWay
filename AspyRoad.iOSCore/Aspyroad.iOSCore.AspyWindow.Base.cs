@@ -235,9 +235,6 @@ namespace AspyRoad.iOSCore
 			//this.ViewWithTag (666).Frame = new RectangleF (PointF.Empty, this.Frame.Size);
 		}
 
-
-
-
 		#endregion	
 	}	
 	
