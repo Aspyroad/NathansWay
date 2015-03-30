@@ -13,6 +13,8 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+// NathansWay Shared..
+// TODO : get rid of this reference???
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
@@ -99,8 +101,23 @@ namespace NathansWay.iOS.Numeracy
             {
                 if (_value[i] != Convert.ToChar("."))
                 {
+                    // PROCESS - BUILD NUMBER
                     // Create a number box
-                    _lsNumbers.Add(new vcNumberText(Convert.ToInt16(_value[i])));
+                    var newnumber = new vcNumberText(Convert.ToInt16(_value[i]));
+                    // Add our numbers to our internal list counter.
+                    _lsNumbers.Add(newnumber);
+                    // Set its display size to the NumberContainers size.
+                    newnumber.DisplaySize = this._displaySize;
+                    // Find out new numbers display co-ordinates
+                    ;
+                    // Resize NumberContainer
+                    ;
+                    // Set newnumbers frame. (Override the frame property to include a resize call??)
+                    ;
+                    // Maybe ?? Call resize methods in newnumber but I think this is its responsability.
+                    ;
+                    // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
+                    this.TextSizeChange += newnumber.OnSizeChange(new ResizeEventArgs());
                     //this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
                 }
                 else

@@ -175,6 +175,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.UI_SetSize();
         }
 
+        public override void OnSizeChange(ResizeEventArgs e)
+        {
+            // Resize code goes here.  
+            //var x = (AspyViewContainer)s;
+
+            //base.OnSizeChange(e);
+        }
+
         #endregion
         
         #region Public Properties
