@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcFraction () : base ("vwNumberCombo", null)
+        public vcFraction () 
         {
             Initialize();
         }

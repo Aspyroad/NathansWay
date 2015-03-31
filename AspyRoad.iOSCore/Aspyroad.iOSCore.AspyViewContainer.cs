@@ -66,15 +66,14 @@ namespace AspyRoad.iOSCore
 
         #region Delegates
 
-        protected virtual void OnSizeChange()
-        {
-
-        }
-
         #endregion         
 
 		#region Public Members
 
+        public virtual void OnSizeChange()
+        {
+
+        }
 
 		#endregion
 

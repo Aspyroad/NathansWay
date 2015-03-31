@@ -110,19 +110,12 @@ namespace NathansWay.iOS.Numeracy
                     newnumber.NumSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
                     // Set its display size to the NumberContainers size.                
                     newnumber.NumSize.DisplaySize = this.ContainerSize.DisplaySize;
-                    // Set our current height
-                    this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Set our current width
-                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.TxtNumberWidth;
-                    // Find out new numbers display co-ordinates
-                    ;
-                    // Resize NumberContainer
-                    ;
-                    // Maybe ?? Call resize methods in newnumber but I think this is its responsability.
-                    ;
+                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.GlobalNumberWidth;
+                    // Set our current height - not here as this is always the same...saves loop time
+                    // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-                    this.TextSizeChange += newnumber.OnSizeChange(new ResizeEventArgs());
-                    //this.NumSize._fNumberContainerWidth += _lsNumbers[_lsNumbers.Count].NumSize._fGlobalWidth;
+                    this.TextSizeChange += newnumber.OnSizeChange();
                 }
                 else
                 {
@@ -130,13 +123,9 @@ namespace NathansWay.iOS.Numeracy
 
                 }
             }
-        }
 
-        public void ChangeSize(G__NumberDisplaySize _ds)
-        {
-            this._displaySize = _ds;
-
-            // Resizing code here
+            // Set our current height
+            this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
         }
 
         #endregion

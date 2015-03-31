@@ -78,8 +78,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-
-
         #endregion
 
         #region Public Properties
@@ -119,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public iOSNumberDim GlobalSize { get; set; }
         public G__NumberDisplaySize DisplaySize
         { 
-            get; 
+            get { return this._displaySize; } 
             set
             {
                 this._displaySize = value;
