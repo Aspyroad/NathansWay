@@ -27,6 +27,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
 
         private G__NumberDisplaySize _displaySize;
+        // Current sizing
+        private float _fCurrentWidth = 0.0f;
+        private float _fCurrentHeight = 0.0f;
+        // Old Sizing
+        private float _fOldWidth = 0.0f;
+        private float _fOldHeight = 0.0f;
 
         #endregion
 
@@ -86,6 +92,28 @@ namespace NathansWay.iOS.Numeracy.Controls
         public AspyViewController VcParent { get; set; }
         // Main Control Frame
         public RectangleF RectMainFrame { get; set; }
+        // General Width and Height Variables
+        public float CurrentWidth 
+        { 
+            get { return this._fCurrentWidth; } 
+            set
+            {
+                this._fOldWidth = this._fCurrentWidth; 
+                this._fCurrentWidth = value;
+            } 
+        }
+        public float OldWidth { get; set; }
+
+        public float CurrentHeigth 
+        { 
+            get { return this._fCurrentHeight; } 
+            set
+            {
+                this._fOldHeight = this._fCurrentHeight; 
+                this._fCurrentHeight = value;
+            } 
+        }
+        public float OldHeight { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
         public iOSNumberDim GlobalSize { get; set; }

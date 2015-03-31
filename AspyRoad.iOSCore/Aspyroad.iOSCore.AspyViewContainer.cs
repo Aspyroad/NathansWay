@@ -53,11 +53,7 @@ namespace AspyRoad.iOSCore
 			base.Initialize();		
 		}
 
-		#endregion
-
-        #region Delegates
-
-        protected virtual void OnSizeChange(ResizeEventArgs e)
+        protected void FireTextSizeChange(ResizeEventArgs e)
         {
             EventHandler<ResizeEventArgs> handler = TextSizeChange;
             if (handler != null)
@@ -66,9 +62,16 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        #endregion
+		#endregion
 
-        public void 
+        #region Delegates
+
+        protected virtual void OnSizeChange()
+        {
+
+        }
+
+        #endregion         
 
 		#region Public Members
 
@@ -106,8 +109,7 @@ namespace AspyRoad.iOSCore
         //
 
         public override void AddAndDisplayController(AspyViewController _newController)
-        {
-            
+        {            
             base.AddAndDisplayController(_newController);
         }
 

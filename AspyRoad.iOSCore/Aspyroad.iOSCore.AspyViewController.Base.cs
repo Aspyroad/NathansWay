@@ -19,7 +19,7 @@ namespace AspyRoad.iOSCore
 		public IAspyGlobals iOSGlobals;
 		protected iOSUIManager iOSUIAppearance; 
         // Event subscribing
-        private bool Subscribe_TextSizeChange;
+        //private bool Subscribe_TextSizeChange;
 
 		// Tags for id
 		private int _AspyTag1;
@@ -62,7 +62,7 @@ namespace AspyRoad.iOSCore
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            this.Subscribe_TextSizeChange = false;
+            //this.Subscribe_TextSizeChange = false;
 		}
 
 		#endregion

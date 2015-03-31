@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy
         private List<vcNumberText> _lsNumbers;
 
         private NumberContainerSize _containerSize;
-        private G__NumberDisplaySize _displaySize; 
+        //private G__NumberDisplaySize _displaySize; 
 
         #endregion
 
@@ -87,8 +87,6 @@ namespace NathansWay.iOS.Numeracy
             _lsNumbers = new List<vcNumberText>();
         }
 
-
-
         #endregion
 
         #region Public Members
@@ -106,13 +104,19 @@ namespace NathansWay.iOS.Numeracy
                     var newnumber = new vcNumberText(Convert.ToInt16(_value[i]));
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newnumber);
-                    // Set its display size to the NumberContainers size.
-                    newnumber.DisplaySize = this._displaySize;
+
+                    // SIZING
+                    // Set our StartPoint
+                    newnumber.NumSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
+                    // Set its display size to the NumberContainers size.                
+                    newnumber.NumSize.DisplaySize = this.ContainerSize.DisplaySize;
+                    // Set our current height
+                    this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
+                    // Set our current width
+                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.TxtNumberWidth;
                     // Find out new numbers display co-ordinates
                     ;
                     // Resize NumberContainer
-                    ;
-                    // Set newnumbers frame. (Override the frame property to include a resize call??)
                     ;
                     // Maybe ?? Call resize methods in newnumber but I think this is its responsability.
                     ;
@@ -139,7 +143,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public NumberContainerSize NumSize
+        public NumberContainerSize ContainerSize
         {
             get { return this._containerSize; }
             set { this._containerSize = value; }
@@ -150,6 +154,7 @@ namespace NathansWay.iOS.Numeracy
             get { return this._displaySize; }
             set
             {
+                this._containerSize.DisplaySize = value;
                 this._displaySize = value;
                 this._containerSize.RefreshDisplay();
             }
@@ -195,9 +200,11 @@ namespace NathansWay.iOS.Numeracy
         #endregion
     }
 
-    public class NumberContainerSize
+    public class NumberContainerSize : SizeBase
     {
         #region Class Variables
+
+
 
         #endregion
 
@@ -239,7 +246,6 @@ namespace NathansWay.iOS.Numeracy
         public void RefreshDisplay ()
         {
             this.SetHeightWidth();
-
         }
 
         #endregion
