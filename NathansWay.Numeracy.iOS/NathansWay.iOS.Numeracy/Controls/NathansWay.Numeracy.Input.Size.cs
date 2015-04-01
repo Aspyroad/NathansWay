@@ -20,7 +20,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Events
 
-        public event EventHandler<EventArgs> Resizing;
+        public event Action Resizing;
 
         #endregion
 
@@ -122,10 +122,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._displaySize = value;
                 this.GlobalSize.Size = value;
-                if (this.Resizing != null)
-                {
-                    this.Resizing(this, new EventArgs());
-                }
+
             }
         }
 

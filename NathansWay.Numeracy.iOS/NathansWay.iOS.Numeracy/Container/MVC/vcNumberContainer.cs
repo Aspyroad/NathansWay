@@ -26,13 +26,14 @@ namespace NathansWay.iOS.Numeracy
 
         private G__UnitPlacement _tensUnit;
 
-        private string _strCurrentValue;
+        private string _strPrevValue = "0";
+        private string _strCurrentValue = "0";
 
-        private double _dblPrevValue;
-        private double _dblCurrentValue;
+        private double _dblPrevValue = 0;
+        private double _dblCurrentValue = 0;
 
         private bool _bIsInEditMode;
-        private bool _bPickerToTop;
+        //private bool _bPickerToTop;
 
         // Display a decimal place?
         private bool _bShowDecimal;
@@ -44,8 +45,7 @@ namespace NathansWay.iOS.Numeracy
 
         private List<vcNumberText> _lsNumbers;
 
-        private NumberContainerSize _containerSize;
-        //private G__NumberDisplaySize _displaySize; 
+        private SizeNumberContainer _containerSize;
 
         #endregion
 
@@ -58,7 +58,9 @@ namespace NathansWay.iOS.Numeracy
 
         public vcNumberContainer (string _strValue)
         {
-            this._strCurrentValue = _strValue;
+            this.StrCurrentValue = _strValue;
+            this.DblCurrentValue = Convert.ToDouble(_strValue);
+
             Initialize ();
         }
 
@@ -107,15 +109,15 @@ namespace NathansWay.iOS.Numeracy
 
                     // SIZING
                     // Set our StartPoint
-                    newnumber.NumSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
+                    newnumber.NumberSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
                     // Set its display size to the NumberContainers size.                
-                    newnumber.NumSize.DisplaySize = this.ContainerSize.DisplaySize;
+                    newnumber.NumberSize.DisplaySize = this.ContainerSize.DisplaySize;
                     // Set our current width
                     this._containerSize.CurrentWidth += this._containerSize.GlobalSize.GlobalNumberWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-                    this.TextSizeChange += newnumber.OnSizeChange();
+                    this.TextSizeChange += newnumber.ActTextSizeChange;
                 }
                 else
                 {
@@ -130,9 +132,22 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Overrides
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            // Sizing class
+            this._containerSize = new SizeNumberContainer();
+            // Create our number
+            this.CreateNumber(this._strCurrentValue);
+        }
+
+        #endregion
+
         #region Public Properties
 
-        public NumberContainerSize ContainerSize
+        public SizeNumberContainer ContainerSize
         {
             get { return this._containerSize; }
             set { this._containerSize = value; }
@@ -140,11 +155,10 @@ namespace NathansWay.iOS.Numeracy
 
         public G__NumberDisplaySize DisplaySize
         {
-            get { return this._displaySize; }
+            get { return this._containerSize.DisplaySize; }
             set
             {
                 this._containerSize.DisplaySize = value;
-                this._displaySize = value;
                 this._containerSize.RefreshDisplay();
             }
         }
@@ -158,26 +172,24 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public bool PickerToTop
+        public string StrCurrentValue
         {
+            get { return this._strCurrentValue; }
             set 
             { 
-                this._bPickerToTop = value;
-                //this.NumberTextSize.SetPickerPositionTop();
+                this._strPrevValue = this._strCurrentValue; 
+                this._strCurrentValue = value; 
             }
-            get { return this._bPickerToTop; }
         }
 
-        public double PrevValue
-        {
-            get { return this._dblPrevValue; }
-            //set { this._dblPrevValue = value; }
-        }
-
-        public double CurrentValue
+        public double DblCurrentValue
         {
             get { return this._dblCurrentValue; }
-            set { this._dblCurrentValue = value; }          
+            set 
+            { 
+                this._dblPrevValue = this._dblCurrentValue;
+                this._dblCurrentValue = value; 
+            }          
         }
 
         public G__UnitPlacement UnitLength
@@ -189,7 +201,7 @@ namespace NathansWay.iOS.Numeracy
         #endregion
     }
 
-    public class NumberContainerSize : SizeBase
+    public class SizeNumberContainer : SizeBase
     {
         #region Class Variables
 
@@ -199,9 +211,8 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public NumberContainerSize(vcNumberContainer vc)
+        public SizeNumberContainer()
         {
-            //_vc = vc;
             Initialize();
         }
 

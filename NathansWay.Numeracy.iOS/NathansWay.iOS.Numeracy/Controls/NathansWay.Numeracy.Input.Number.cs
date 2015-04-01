@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        private NumberSize _numberSize;
+        private SizeNumber _numberSize;
         // UI Components
         //      [Outlet]
         public UIButton btnDown { get; private set; }
@@ -152,7 +152,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Delegate = this._txtNumberDelegate;
 
             // Sizing class
-            this._numberSize = new NumberSize();
+            this._numberSize = new SizeNumber();
                                     
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
@@ -175,19 +175,20 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.UI_SetSize();
         }
 
+        #endregion
+
+        #region Public Members
+
         public override void OnSizeChange()
         {
-            // Resize code goes here.  
-            //var x = (AspyViewContainer)s;
-
-            //base.OnSizeChange(e);
+            var x = 10;
         }
 
         #endregion
         
         #region Public Properties
 
-        public NumberSize NumSize
+        public SizeNumber NumberSize
         {
             get { return this._numberSize; }
             set { this._numberSize = value; }
@@ -564,7 +565,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void UI_SetSize()
         {
             this._numberSize.RefreshDisplay();
-            this.txtNumber.Font = this.NumSize._globalFont;
+            this.txtNumber.Font = this.NumberSize._globalFont;
 
             this.View.Frame = this._numberSize.RectMainFrame;
             this.txtNumber.Frame = this._numberSize._rectTxtNumber;
@@ -630,7 +631,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private List<string> _items;
             protected iOSUIManager iOSUIAppearance;
             protected int _intCurrentValue;
-            protected NumberSize _numberSize;
+            protected SizeNumber _numberSize;
 
             #endregion
 
@@ -647,7 +648,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 Initialize();
             }
             
-            public PickerDelegate(List<string> Items,  NumberSize _ns)
+            public PickerDelegate(List<string> Items,  SizeNumber _ns)
             {
                 this._numberSize = _ns;
                 Initialize();
@@ -828,7 +829,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
-    public class NumberSize : SizeBase
+    public class SizeNumber : SizeBase
     {
         #region Class Variables
         // X Horizontal
@@ -857,7 +858,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructors
 
-        public NumberSize()
+        public SizeNumber()
         {
             Initialize();
         }

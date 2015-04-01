@@ -13,12 +13,14 @@ namespace AspyRoad.iOSCore
 	public class AspyViewContainer : AspyViewController
 	{
         #region Events
-        // Eventhandler both event and delegate
-        public event EventHandler<ResizeEventArgs> TextSizeChange;
+
+        public event Action TextSizeChange;
 
         #endregion
 
 		#region Class Variables
+
+        private Action _actTextSizeChanged;
 
 		#endregion
 
@@ -50,15 +52,16 @@ namespace AspyRoad.iOSCore
 
 		protected override void Initialize ()
 		{
+            this._actTextSizeChanged = new Action(OnSizeChange);
 			base.Initialize();		
 		}
 
-        protected void FireTextSizeChange(ResizeEventArgs e)
+        protected void FireTextSizeChange()
         {
-            EventHandler<ResizeEventArgs> handler = TextSizeChange;
+            Action handler = TextSizeChange;
             if (handler != null)
             {
-                handler(this, e);
+                handler();
             }
         }
 
@@ -76,6 +79,16 @@ namespace AspyRoad.iOSCore
         }
 
 		#endregion
+
+        #region Public Properties
+
+        public Action ActTextSizeChange
+        {
+            get { return _actTextSizeChanged; }
+            set { this._actTextSizeChanged = value; }
+        }
+
+        #endregion
 
 		#region Overrides
 

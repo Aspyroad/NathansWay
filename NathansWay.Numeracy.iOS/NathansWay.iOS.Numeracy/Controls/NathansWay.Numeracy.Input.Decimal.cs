@@ -21,13 +21,13 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        private DecimalSize _decimalSize;
+        private SizeDecimal _decimalSize;
         // UI Components
         public AspyTextField txtDecimal { get; private set; }
 
         private vcMainContainer _viewcontollercontainer;
 
-        private NumberSize _numberSize;
+        private SizeNumber _numberSize;
 
         private int _intPrevValue;
         private int _intCurrentValue;
@@ -102,7 +102,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtDecimal.ApplyUI();
 
             // Sizing class
-            this._decimalSize = new DecimalSize();
+            this._decimalSize = new SizeDecimal();
 
 
         }
@@ -111,15 +111,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidAppear(bool animated)
         {
             base.ViewDidAppear(animated);
-
-            this.UI_SetSize();
         }
 
         #endregion
         
         #region Public Properties
 
-        public Size DecimalSize
+        public SizeDecimal DecimalSize
         {
             get { return this._decimalSize; }
             set { this._decimalSize = value; }
@@ -143,7 +141,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
     }
 
-    public class DecimalSize : SizeBase
+    public class SizeDecimal : SizeBase
     {
         #region Class Variables
         // X Horizontal
@@ -159,7 +157,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructors
 
-        public DecimalSize()
+        public SizeDecimal()
         {
             Initialize();
         }
