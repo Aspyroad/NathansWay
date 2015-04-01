@@ -87,6 +87,11 @@ namespace NathansWay.iOS.Numeracy
         {
             base.Initialize();
             _lsNumbers = new List<vcNumberText>();
+
+            // Sizing class
+            this._containerSize = new SizeNumberContainer();
+            // Create our number
+            this.CreateNumber(this._strCurrentValue);
         }
 
         #endregion
@@ -137,10 +142,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Sizing class
-            this._containerSize = new SizeNumberContainer();
-            // Create our number
-            this.CreateNumber(this._strCurrentValue);
+
         }
 
         #endregion
