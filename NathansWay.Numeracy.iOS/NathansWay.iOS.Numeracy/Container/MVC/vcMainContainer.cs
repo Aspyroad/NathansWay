@@ -63,10 +63,8 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Members
 
-		protected override void Initialize ()
+		private void Initialize ()
 		{
-			base.Initialize();
-
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
 
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);

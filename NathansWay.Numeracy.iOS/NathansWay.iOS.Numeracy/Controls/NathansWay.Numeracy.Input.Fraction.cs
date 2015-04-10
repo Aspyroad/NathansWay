@@ -35,9 +35,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        protected override void Initialize()
+        private void Initialize()
         {
-            base.Initialize();
+            //base.Initialize();
+            this.AspyTag1 = 60023;
+            this.AspyName = "VC_Fraction";
         }
 
         #endregion

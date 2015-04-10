@@ -61,9 +61,9 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Variables
 
-        protected override void Initialize()
+        private void Initialize()
         {
-            base.Initialize();
+            //base.Initialize();
             this._displaySize = G__NumberDisplaySize.Normal;
         }
 

@@ -111,9 +111,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        protected override void Initialize ()
+        private void Initialize ()
         {
-            base.Initialize ();
+            //base.Initialize ();
 
             this.strTextValue = "";
 

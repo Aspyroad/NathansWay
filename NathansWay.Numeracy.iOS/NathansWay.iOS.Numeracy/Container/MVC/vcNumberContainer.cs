@@ -26,11 +26,11 @@ namespace NathansWay.iOS.Numeracy
 
         private G__UnitPlacement _tensUnit;
 
-        private string _strPrevValue = "0";
-        private string _strCurrentValue = "0";
+        private string _strPrevValue;
+        private string _strCurrentValue;
 
-        private double _dblPrevValue = 0;
-        private double _dblCurrentValue = 0;
+        private double _dblPrevValue;
+        private double _dblCurrentValue;
 
         private bool _bIsInEditMode;
         //private bool _bPickerToTop;
@@ -83,13 +83,17 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Variables
 
-        protected override void Initialize()
+        private void Initialize()
         {
-            base.Initialize();
+            //base.Initialize();
             _lsNumbers = new List<vcNumberText>();
 
             // Sizing class
             this._containerSize = new SizeNumberContainer();
+
+            // Set the size - Normally done in the factory?
+            this.ContainerSize.DisplaySize = G__NumberDisplaySize.Normal;
+
             // Create our number
             this.CreateNumber(this._strCurrentValue);
         }
@@ -104,11 +108,14 @@ namespace NathansWay.iOS.Numeracy
             // 01 243.675 12 1.4 789008
             for (int i = 0; i < _value.Length; i++)
             {
+                // The Amazing Conversion Of Doctor Parasis!
+                var ch = Convert.ToInt16(_value[i].ToString());
+                // Check if its a dot
                 if (_value[i] != Convert.ToChar("."))
                 {
                     // PROCESS - BUILD NUMBER
                     // Create a number box
-                    var newnumber = new vcNumberText(Convert.ToInt16(_value[i]));
+                    var newnumber = new vcNumberText(Convert.ToInt16(ch));
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newnumber);
 
@@ -139,11 +146,10 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-
-        }
+//        public override void ViewDidLoad()
+//        {
+//            base.ViewDidLoad();
+//        }
 
         #endregion
 
@@ -234,7 +240,6 @@ namespace NathansWay.iOS.Numeracy
 
         public void SetHeightWidth ()
         {
-
         }
 
         public void SetAllNumberPositions ()

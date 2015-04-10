@@ -57,12 +57,11 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		protected virtual void Initialize ()
+		private void Initialize ()
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            //this.Subscribe_TextSizeChange = false;
 		}
 
 		#endregion

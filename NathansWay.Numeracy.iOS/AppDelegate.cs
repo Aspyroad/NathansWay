@@ -284,7 +284,7 @@ namespace NathansWay.iOS.Numeracy
 		private void SetUpUI()
 		{
 			_numeracyUIManager = new iOSUIManager (iOSGlobals);
-
+            // Views
 			_numeracyUIManager.AddVC (6001, "VC_MenuStart");
 			_numeracyUIManager.AddVC (6002, "VC_Student");
 			_numeracyUIManager.AddVC (6003, "VC_LessonMenu");
@@ -292,11 +292,11 @@ namespace NathansWay.iOS.Numeracy
 			_numeracyUIManager.AddVC (6005, "VC_Settings");
 			_numeracyUIManager.AddVC (6006, "VC_Teacher");
 			_numeracyUIManager.AddVC (6007, "VC_ToolBox");
-			//_numeracyUIManager.AddVC (7, "VC_Tools");
-			// WorkSpace
+			// Containers
 			_numeracyUIManager.AddVC (60020, "VC_MainGame");
 			_numeracyUIManager.AddVC (60021, "VC_MainWorkSpace"); 
 			_numeracyUIManager.AddVC (60022, "VC_WorkSpace");
+            _numeracyUIManager.AddVC (60023, "VC_Fraction");
 			// Controls 
 			_numeracyUIManager.AddVC (600100, "VC_NumberPad");
 			_numeracyUIManager.AddVC (600101, "VC_FractionCombo");

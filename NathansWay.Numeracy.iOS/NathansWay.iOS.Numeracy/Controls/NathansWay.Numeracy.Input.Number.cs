@@ -150,9 +150,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
-
-            // Sizing class
-            this._numberSize = new SizeNumber();
                                     
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
@@ -289,6 +286,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnDown = new UIButton();
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
+            // Sizing class
+            this._numberSize = new SizeNumber();
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
@@ -880,7 +879,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
-        public void SetScale (int _scale)
+        public override void SetScale (int _scale)
         {
             //var x = _vc.txtNumber.Font.PointSize;
             //x = x + 50.0f;
@@ -890,10 +889,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-        public override  void RefreshDisplay ()
+        public override void RefreshDisplay ()
         {
             this.SetHeightWidth();
             this.SetPickerPositionNormalOff();
+        }       
+
+        public override RectangleF SetMainFrame ()
+        {
+            return new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    (this.GlobalSize.GlobalNumberWidth), 
+                    this.GlobalSize.MainNumberHeight
+                );
         }
 
         #endregion

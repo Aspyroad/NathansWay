@@ -29,7 +29,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public NumberFactoryClient()
         {
-
+            this._UIOutput = new List<object>();
         }
 
         #endregion
@@ -51,7 +51,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcNumberContainer(strValue);
 
             // Build the number here ... 
-
             _UIOutput.Add(x as object);
         }
         public void UICreateFraction (string strFraction)

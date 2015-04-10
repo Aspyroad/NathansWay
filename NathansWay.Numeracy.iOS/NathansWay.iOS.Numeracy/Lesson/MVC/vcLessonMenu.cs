@@ -93,9 +93,9 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 
-        protected override void Initialize ()
+        private void Initialize ()
         {
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 6003;
 			this.AspyName = "VC_LessonMenu";
 

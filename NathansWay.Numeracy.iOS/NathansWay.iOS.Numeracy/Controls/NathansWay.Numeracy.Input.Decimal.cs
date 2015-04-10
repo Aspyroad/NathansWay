@@ -16,7 +16,6 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-
     public partial class vcDecimalText : AspyViewController
     {
         #region Class Variables
@@ -60,13 +59,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-        public vcDecimalText(int _value)
-        {
-            this._intCurrentValue = _value;
-            // Default constructor supply our initial value
-            Initialize_();
-        }
-
         #endregion
 
         #region Deconstructors
@@ -99,10 +91,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply some UI to the texbox
             this.txtDecimal.HasBorder = true;
             this.txtDecimal.HasRoundedCorners = true;
+            this.txtDecimal.Text = ".";
+            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtDecimal.TextAlignment = UITextAlignment.Center;
             this.txtDecimal.ApplyUI();
 
-            // Sizing class
-            this._decimalSize = new SizeDecimal();
 
 
         }
@@ -129,13 +122,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         protected void Initialize_ ()
         {
-			//base.Initialize ();
-			this.AspyTag1 = 600102;
+            //base.Initialize ();
+            this.AspyTag1 = 600102;
             this.AspyName = "VC_DecimalText";
+
+            // Sizing class
+            this._decimalSize = new SizeDecimal();
         }
-
-
-
 
         #endregion       
 
@@ -157,7 +150,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructors
 
-        public SizeDecimal()
+        public SizeDecimal() : base ()
+        {
+            Initialize();
+        }
+
+        public SizeDecimal(AspyViewController _vc) : base (_vc)
         {
             Initialize();
         }
@@ -171,23 +169,18 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        private RectangleF SetMainFrame()
-        {
-            return new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    (this.GlobalSize.GlobalNumberWidth/2), 
-                    this.GlobalSize.MainNumberHeight
-                );
-        }
-
         #endregion
 
         #region Overrides
 
         public override void SetHeightWidth ()
-        {            
+        { 
+            // Set the main frame
+            if (this.VcParent != null)
+            {
+                this.VcParent.View.Frame = this.SetMainFrame();
+
+            }
         }
 
         public override void SetScale (int _scale)
@@ -197,6 +190,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void RefreshDisplay ()
         {
             this.SetHeightWidth();
+        }
+
+        public override RectangleF SetMainFrame ()
+        {
+            return new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    (this.GlobalSize.DecimalWidth), 
+                    this.GlobalSize.MainNumberHeight
+                );
         }
 
         #endregion

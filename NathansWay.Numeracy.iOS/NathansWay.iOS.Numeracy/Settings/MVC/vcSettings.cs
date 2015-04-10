@@ -32,10 +32,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#region Overrides
         
-		protected override  void Initialize ()
+		private void Initialize ()
 		{
-			base.Initialize ();
-			this.AspyTag1 = 4;
+			//base.Initialize ();
+			this.AspyTag1 = 6005;
 			this.AspyName = "VC_Settings";
 		}
 

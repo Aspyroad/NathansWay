@@ -58,9 +58,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#region Private Members
 
-		protected override void Initialize()
+		private void Initialize()
 		{
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
 

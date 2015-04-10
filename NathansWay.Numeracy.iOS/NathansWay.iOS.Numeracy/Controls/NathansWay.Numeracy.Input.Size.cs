@@ -27,6 +27,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
 
         private G__NumberDisplaySize _displaySize;
+        private AspyViewController _vcParent;
         // Current sizing
         private float _fCurrentWidth = 0.0f;
         private float _fCurrentHeight = 0.0f;
@@ -40,17 +41,27 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeBase()
         {
-            this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            // Set up our singleton size class
-            this.GlobalSize = iOSNumberDim.Instance;
-            // Set default init to normal size
-            this.GlobalSize.Size = G__NumberDisplaySize.Normal;          
+            this.Initialize(); 
+        }
+
+        public SizeBase(AspyViewController _vc)
+        {
+            this._vcParent = _vc;
+            this.Initialize(); 
         }
 
         #endregion
 
         #region Private Members
 
+        protected void Initialize ()
+        {
+            this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            // Set up our singleton size class
+            this.GlobalSize = iOSNumberDim.Instance;
+            // Set default init to normal size
+            this.GlobalSize.Size = G__NumberDisplaySize.Normal; 
+        }
 
         #endregion
 
@@ -66,7 +77,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void RefreshDisplay ()
         {
-            this.SetHeightWidth();
         }
 
         //The event-invoking method that derived classes can override. 
@@ -75,7 +85,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Make a temporary copy of the event to avoid possibility of 
             // a race condition if the last subscriber unsubscribes 
             // immediately after the null check and before the event is raised.
+        }
 
+        public virtual RectangleF SetMainFrame()
+        {
         }
 
         #endregion

@@ -50,10 +50,9 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		protected override void Initialize ()
+		private void Initialize ()
 		{
             this._actTextSizeChanged = new Action(OnSizeChange);
-			base.Initialize();		
 		}
 
         protected void FireTextSizeChange()

@@ -76,9 +76,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#region Private Members
 
-        protected override void Initialize ()
+        private void Initialize ()
         {  
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 1;
 			this.AspyName = "VC_Menu";
         }

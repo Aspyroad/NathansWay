@@ -46,10 +46,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#region Private Members
 
-		protected override void Initialize()
+		private void Initialize()
 		{
-			base.Initialize ();
-			this.AspyTag1 = 20;
+			//base.Initialize ();
+			this.AspyTag1 = 60020;
 			this.AspyName = "VC_MainGame";
 
 			// Create our settings class

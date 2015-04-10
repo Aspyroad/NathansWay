@@ -60,11 +60,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
                 
-        protected override void Initialize ()
+        private void Initialize ()
         {
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 600100; 
-            this.AspyName = "VC_CtrlNumberPad";
+            this.AspyName = "VC_NumberPad";
+
             this._bInc = false;
             this._bDec = false;
             this._bLocked = false;

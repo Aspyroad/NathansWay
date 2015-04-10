@@ -76,9 +76,9 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		protected override void Initialize ()
+		private void Initialize ()
 		{
-			base.Initialize ();
+			//base.Initialize ();
 			this.AspyTag1 = 103;
 			this.AspyName = "VC_CtrlComboBox";
 		}
