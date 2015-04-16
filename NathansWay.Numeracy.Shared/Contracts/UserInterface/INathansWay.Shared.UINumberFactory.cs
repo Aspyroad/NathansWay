@@ -9,7 +9,9 @@ namespace NathansWay.Shared
     public interface IUINumberFactoryClient
     {
         // Global Display Output object
-        List<object> UIOutput { get; set; }
+        List<object> UIInternalOutput { get; set; }
+        G__NumberDisplaySize UIDisplaySize { get; set; }
+
         // Functions
         // All write there output into the UIOuput object
         // For example in iOS this would be a collection of beggining to end vc's for an expression.

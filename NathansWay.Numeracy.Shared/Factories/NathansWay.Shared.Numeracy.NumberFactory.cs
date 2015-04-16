@@ -21,10 +21,14 @@ namespace NathansWay.Shared.Factories
         protected IList<string> _lsSplitExpression;
         protected List<KeyValuePair<G__MathChar, string>> _lsDecodedExpression;
 
-        protected IUINumberFactoryClient _UIPlatormClient;
+        protected IUINumberFactoryClient _UIPlatformClient;
 
         // Seperator
         private readonly char[] sepArray = {','};
+
+        // Main output object
+        private List<object> _UIOutput;
+        private G__NumberDisplaySize _UIDisplaySize;
 
         #endregion
 
@@ -32,7 +36,9 @@ namespace NathansWay.Shared.Factories
 
         public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
-            this._UIPlatormClient = UIPlatform;
+            this._UIOutput = new List<object>();
+            this.FactoryClient = UIPlatform;
+
             this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
         }
 
@@ -55,12 +61,12 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Value): // Most common first ??
                     {
                         // Build a number
-                        this._UIPlatormClient.UICreateNumber(x.Value);
+                        this._UIPlatformClient.UICreateNumber(x.Value);
                     }
                     break;
                     case (G__MathChar.BraceRoundLeft):
                     {
-                        this._UIPlatormClient.UICreateBrace(false);
+                        this._UIPlatformClient.UICreateBrace(false);
                     }
                     break;
                     case (G__MathChar.Fraction):
@@ -96,12 +102,12 @@ namespace NathansWay.Shared.Factories
 
         public void CreateNumber (string _strNumber)
         {
-            _UIPlatormClient.UICreateNumber(_strNumber);
+            _UIPlatformClient.UICreateNumber(_strNumber);
         }
 
         public void CreateFraction (string _strFraction)
         {
-            _UIPlatormClient.UICreateFraction(_strFraction);
+            _UIPlatformClient.UICreateFraction(_strFraction);
         }
 
 
@@ -112,8 +118,29 @@ namespace NathansWay.Shared.Factories
 
         public IUINumberFactoryClient FactoryClient
         {
-            get { return _UIPlatormClient; }
-            set { _UIPlatormClient = value; }
+            get { return _UIPlatformClient; }
+            set 
+            { 
+                this._UIPlatformClient = value;
+                this._UIPlatformClient.UIInternalOutput = this._UIOutput;
+            }
+        }
+
+        // Global Display Output object
+        public List<object> UIOutput
+        { 
+            get { return this._UIOutput; }
+            set { this._UIOutput = value; }
+        }
+
+        public G__NumberDisplaySize UIDisplaySize
+        { 
+            get { return this._UIDisplaySize; }
+            set 
+            { 
+                this._UIDisplaySize = value;
+                this._UIPlatformClient.UIDisplaySize = value;
+            }
         }
 
         #endregion

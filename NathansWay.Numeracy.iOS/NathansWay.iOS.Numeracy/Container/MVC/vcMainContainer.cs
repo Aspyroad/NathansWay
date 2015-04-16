@@ -16,8 +16,6 @@ using NathansWay.Shared;
 using NathansWay.Shared.Utilities;
 
 
-
-
 namespace NathansWay.iOS.Numeracy
 {
 	[MonoTouch.Foundation.Register ("vcMainContainer")]	

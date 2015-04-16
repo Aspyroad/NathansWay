@@ -87,9 +87,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // immediately after the null check and before the event is raised.
         }
 
-        public virtual RectangleF SetMainFrame()
-        {
-        }
+        public abstract RectangleF SetMainFrame();
 
         #endregion
 

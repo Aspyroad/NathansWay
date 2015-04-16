@@ -16,8 +16,8 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-
-    public partial class vcNumberText : AspyViewContainer
+    [Register ("vcNumberText")]
+    public class vcNumberText : AspyViewContainer
     {
         #region Class Variables
 
@@ -63,26 +63,26 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcNumberText (IntPtr h) : base (h)
         {
-            Initialize_();
+            Initialize();
         }
 
         [Export("initWithCoder:")]
         public vcNumberText (NSCoder coder) : base(coder)
         {
-            Initialize_();
+            Initialize();
         }
 
         public vcNumberText()
         {
             // Default constructor supply our initial value
-            Initialize_();
+            Initialize();
         }
 
         public vcNumberText(int _value)
         {
             this._intCurrentValue = _value;
             // Default constructor supply our initial value
-            Initialize_();
+            Initialize();
         }
 
         #endregion
@@ -178,7 +178,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void OnSizeChange()
         {
-            var x = 10;
+            //var x = 10;
         }
 
         #endregion
@@ -274,9 +274,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
         
-        protected void Initialize_ ()
+        protected void Initialize ()
         {
-			//base.Initialize ();
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_CtrlNumberText";
                           
@@ -287,7 +286,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this._numberSize = new SizeNumber();
+            this._numberSize = new SizeNumber(this);
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
@@ -859,6 +858,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeNumber()
         {
+            Initialize();
+        }
+
+        public SizeNumber(AspyViewController _vc) : base (_vc)
+        {
+            this.VcParent = _vc;
             Initialize();
         }
 

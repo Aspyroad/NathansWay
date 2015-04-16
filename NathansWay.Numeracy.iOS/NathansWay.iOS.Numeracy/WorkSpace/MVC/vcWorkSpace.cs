@@ -20,7 +20,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcWorkSpace")]
-	public class vcWorkSpace : AspyViewController
+	public class vcWorkSpace : AspyViewContainer
 	{
 		#region Private Variables
 		
@@ -31,6 +31,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonResults _wsLessonResults;
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
+
+        private SizeWorkSpace _workSpaceSize;
 
         public string strTestExpression;
 
@@ -64,10 +66,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
 
-            this.strTestExpression = "12,+,1,=,13";
+            this._workSpaceSize = new SizeWorkSpace(this);
+
+            this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
+            this._expressionFactory.UIDisplaySize = G__NumberDisplaySize.Normal;
 
             this.LoadExpression(this.strTestExpression);
 		}
@@ -79,6 +84,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadExpression(string _strExpression)
         {
             var bSuccess = this._expressionFactory.CreateExpression(_strExpression);
+            var s = this._expressionFactory.UIOutput;
+            var x = 1;
         }
 
         #endregion
@@ -155,7 +162,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#endregion
 	}
 
-    public class WorkSpaceSize : SizeBase
+    public class SizeWorkSpace : SizeBase
     {
         #region Class Variables
         // X Horizontal
@@ -165,8 +172,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Constructors
 
-        public WorkSpaceSize()
+        public SizeWorkSpace()
         {
+            Initialize();
+        }
+
+        public SizeWorkSpace(AspyViewController _vc) : base (_vc)
+        {
+            this.VcParent = _vc;
             Initialize();
         }
 
@@ -200,6 +213,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void RefreshDisplay ()
         {
 
+        }
+
+        public override RectangleF SetMainFrame ()
+        {
+            return new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    0,
+                    0
+                );
         }
 
         #endregion

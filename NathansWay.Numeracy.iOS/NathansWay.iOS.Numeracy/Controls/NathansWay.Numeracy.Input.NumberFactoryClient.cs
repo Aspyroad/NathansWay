@@ -22,6 +22,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Private Variables
 
         private List<object> _UIOutput;
+        private G__NumberDisplaySize _UIDisplaySize;
 
         #endregion
 
@@ -29,17 +30,31 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public NumberFactoryClient()
         {
-            this._UIOutput = new List<object>();
+        }
+
+        public NumberFactoryClient(List<object> _lsOutput)
+        {   
+            this._UIOutput = _lsOutput;
         }
 
         #endregion
 
+        #region Public Properties
+
         // Global Display Output object
-        public List<object> UIOutput
+        public List<object> UIInternalOutput
         { 
-            get { return _UIOutput; }
+            get { return this._UIOutput; }
             set { this._UIOutput = value; }
         }
+
+        public G__NumberDisplaySize UIDisplaySize
+        { 
+            get { return this._UIDisplaySize; }
+            set { this._UIDisplaySize = value; }
+        }
+
+        #endregion
 
         #region Public Members
         // Functions
@@ -49,7 +64,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public void UICreateNumber (string strValue)
         {
             var x = new vcNumberContainer(strValue);
-
+            // Set the size
+            x.ContainerSize.DisplaySize = this._UIDisplaySize;
             // Build the number here ... 
             _UIOutput.Add(x as object);
         }

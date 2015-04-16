@@ -43,7 +43,7 @@ namespace NathansWay.iOS.Numeracy
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
 
-        private List<vcNumberText> _lsNumbers;
+        private List<AspyViewContainer> _lsNumbers;
 
         private SizeNumberContainer _containerSize;
 
@@ -86,7 +86,7 @@ namespace NathansWay.iOS.Numeracy
         private void Initialize()
         {
             //base.Initialize();
-            _lsNumbers = new List<vcNumberText>();
+            _lsNumbers = new List<AspyViewContainer>();
 
             // Sizing class
             this._containerSize = new SizeNumberContainer();
@@ -109,13 +109,15 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < _value.Length; i++)
             {
                 // The Amazing Conversion Of Doctor Parasis!
-                var ch = Convert.ToInt16(_value[i].ToString());
+                var ch = _value[i].ToString();
                 // Check if its a dot
-                if (_value[i] != Convert.ToChar("."))
+                if (ch != ".")
                 {
+                    // The Amazing Conversion Of Doctor Parasis!
+                    int intCh = Convert.ToInt16(ch);
                     // PROCESS - BUILD NUMBER
                     // Create a number box
-                    var newnumber = new vcNumberText(Convert.ToInt16(ch));
+                    var newnumber = new vcNumberText(intCh);
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newnumber);
 
@@ -133,8 +135,23 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-                    // Create a 
+                    // PROCESS - BUILD DECIMAL
+                    // Create a decimal box
+                    var newdecimal = new vcDecimalText();
+                    // Add our numbers to our internal list counter.
+                    _lsNumbers.Add(newdecimal);
 
+                    // SIZING
+                    // Set our StartPoint
+                    newdecimal.DecimalSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
+                    // Set its display size to the NumberContainers size.                
+                    newdecimal.DecimalSize.DisplaySize = this.ContainerSize.DisplaySize;
+                    // Set our current width
+                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.DecimalWidth;
+                    // Set our current height - not here as this is always the same...saves loop time
+                    // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
+                    // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
+                    this.TextSizeChange += newdecimal.ActTextSizeChange;
                 }
             }
 
@@ -220,7 +237,13 @@ namespace NathansWay.iOS.Numeracy
         #region Constructors
 
         public SizeNumberContainer()
+        {           
+            Initialize();
+        }
+
+        public SizeNumberContainer(AspyViewController _vc) : base (_vc)
         {
+            this.VcParent = _vc;
             Initialize();
         }
 
@@ -230,29 +253,49 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-
             this.RefreshDisplay();
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override void SetHeightWidth ()
+        { 
+            // Set the main frame
+            if (this.VcParent != null)
+            {
+                this.VcParent.View.Frame = this.SetMainFrame();
+
+            }
+        }
+
+        public override void SetScale (int _scale)
+        {
+        }
+
+        public override void RefreshDisplay ()
+        {
+            this.SetHeightWidth();
+        }
+
+        public override RectangleF SetMainFrame ()
+        {
+            return new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    0, 
+                    0
+                );
         }
 
         #endregion
 
         #region Public Members
 
-        public void SetHeightWidth ()
-        {
-        }
-
         public void SetAllNumberPositions ()
         {
-        }
-
-        public void SetScale (int _scale)
-        {
-        }
-
-        public void RefreshDisplay ()
-        {
-            this.SetHeightWidth();
         }
 
         #endregion
