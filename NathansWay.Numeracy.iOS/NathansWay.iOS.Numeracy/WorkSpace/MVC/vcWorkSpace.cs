@@ -20,7 +20,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcWorkSpace")]
-	public class vcWorkSpace : AspyViewContainer
+	public class vcWorkSpace : BaseContainer
 	{
 		#region Private Variables
 		

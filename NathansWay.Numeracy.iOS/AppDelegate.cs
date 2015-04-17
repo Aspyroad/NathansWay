@@ -40,13 +40,11 @@ namespace NathansWay.iOS.Numeracy
 		private UIStoryboard storyboard;
 		private AspyWindow window;
 		private vcMainContainer _mainContainer;
-		//private UINavigationController _mainNav;
-		//private vcMenuStart _menuStart;
-		private vcLessonMenu _menuStart;
-
+        // Global classes loaded into services
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
 		private iOSUIManager _numeracyUIManager;
+        private iOSNumberDimensions NumberDimensions;
 		// Database
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
@@ -130,6 +128,9 @@ namespace NathansWay.iOS.Numeracy
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
 
             // Application Services, Factories
+            // Dimensions Class
+            NumberDimensions = new iOSNumberDimensions(NathansWay.Shared.G__NumberDisplaySize.Normal);
+            iOSCoreServiceContainer.Register<iOSNumberDimensions> (this.NumberDimensions);
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);

@@ -20,7 +20,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("vcNumberContainer")] 
-    public class vcNumberContainer : AspyViewContainer
+    public class vcNumberContainer : BaseContainer
     {
         #region Class Variables
 
@@ -43,7 +43,7 @@ namespace NathansWay.iOS.Numeracy
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
 
-        private List<AspyViewContainer> _lsNumbers;
+        private List<BaseContainer> _lsNumbers;
 
         private SizeNumberContainer _containerSize;
 
@@ -86,7 +86,7 @@ namespace NathansWay.iOS.Numeracy
         private void Initialize()
         {
             //base.Initialize();
-            _lsNumbers = new List<AspyViewContainer>();
+            _lsNumbers = new List<BaseContainer>();
 
             // Sizing class
             this._containerSize = new SizeNumberContainer();

@@ -20,7 +20,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("vcFractionContainer")] 
-    public class vcFractionContainer : AspyViewContainer
+    public class vcFractionContainer : BaseContainer
     {
         #region Class Variables
 

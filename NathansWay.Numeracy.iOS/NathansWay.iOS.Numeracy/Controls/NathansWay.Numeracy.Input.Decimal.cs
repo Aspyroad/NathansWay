@@ -16,7 +16,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-    public class vcDecimalText : AspyViewContainer
+    public class vcDecimalText : BaseContainer
     {
         #region Class Variables
 

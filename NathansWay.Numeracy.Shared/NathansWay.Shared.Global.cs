@@ -80,9 +80,7 @@ namespace NathansWay.Shared.Utilities
             get { return fulldbPath; }
             set { fulldbPath = value; }
         }
+
         #endregion
 
-    }   
-
-}
-
+    }  

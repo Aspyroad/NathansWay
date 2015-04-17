@@ -1,16 +1,23 @@
 ﻿// System
 using System;
 using System.Drawing;
-
-// Monotouch
+using System.Collections.Generic;
+// Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using MonoTouch.CoreAnimation;
+using MonoTouch.CoreGraphics;
+// Aspyroad
+using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
+// Nathansway
+using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.iOS.Numeracy.Controls;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspyViewContainer")]	
-	public class AspyViewContainer : AspyViewController
+	[MonoTouch.Foundation.Register ("BaseContainer")]	
+	public class BaseContainer : AspyViewController
 	{
         #region Events
 
@@ -26,22 +33,22 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 
-		public AspyViewContainer ()
+		public BaseContainer ()
 		{
 			Initialize ();
 		}
 
-		public AspyViewContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
+		public BaseContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
 			Initialize ();
 		}
 
-		public AspyViewContainer (IntPtr h) : base (h)
+		public BaseContainer (IntPtr h) : base (h)
 		{
 			Initialize ();
 		}
 
-		public AspyViewContainer (NSCoder coder) : base (coder)
+		public BaseContainer (NSCoder coder) : base (coder)
 		{
 			Initialize ();
 		}
