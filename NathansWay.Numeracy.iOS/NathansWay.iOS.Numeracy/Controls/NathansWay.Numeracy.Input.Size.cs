@@ -140,7 +140,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
-    public sealed class iOSNumberDimensions
+    public sealed class iOSNumberDimensions : IUINumberDimensions
     {
         #region Private Variables
 
@@ -385,8 +385,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
     }
-
-
     // Great example of a singleton
 //    public sealed class iOSNumberDim
 //    {

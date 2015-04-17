@@ -71,8 +71,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
-            this._expressionFactory.UIDisplaySize = G__NumberDisplaySize.Normal;
+            this._expressionFactory = new ExpressionFactory(_numberFactoryClient, this.GlobalSize.Size);
 
             this.LoadExpression(this.strTestExpression);
 		}

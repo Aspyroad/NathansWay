@@ -23,7 +23,7 @@ namespace NathansWay.Shared.Factories
 
         protected IUINumberFactoryClient _UIPlatformClient;
 
-        // Seperator
+        // Separator
         private readonly char[] sepArray = {','};
 
         // Main output object
@@ -32,12 +32,13 @@ namespace NathansWay.Shared.Factories
 
         #endregion
 
-        #region Contructors
+        #region Constructors
 
-        public ExpressionFactory(IUINumberFactoryClient UIPlatform)
+        public ExpressionFactory(IUINumberFactoryClient UIPlatform, G__NumberDisplaySize _size)
         {
             this._UIOutput = new List<object>();
             this.FactoryClient = UIPlatform;
+            this.UIDisplaySize = _size;
 
             this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
         }

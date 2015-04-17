@@ -64,9 +64,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public void UICreateNumber (string strValue)
         {
             var x = new vcNumberContainer(strValue);
-            // Set the size
-            x.ContainerSize.DisplaySize = this._UIDisplaySize;
-            // Build the number here ... 
             _UIOutput.Add(x as object);
         }
         public void UICreateFraction (string strFraction)

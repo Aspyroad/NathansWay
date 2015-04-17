@@ -135,8 +135,8 @@ namespace NathansWay.iOS.Numeracy
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
             // Build a NumberFactory
-            ExpressionBuilder = new ExpressionFactory(new NumberFactoryClient());
-            iOSCoreServiceContainer.Register<ExpressionFactory> (this.ExpressionBuilder);
+            //ExpressionBuilder = new ExpressionFactory(new NumberFactoryClient());
+            //iOSCoreServiceContainer.Register<ExpressionFactory> (this.ExpressionBuilder);
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();

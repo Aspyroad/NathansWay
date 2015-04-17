@@ -28,6 +28,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
         private Action _actTextSizeChanged;
+        protected iOSNumberDimensions GlobalSize;
 
 		#endregion
 
@@ -60,6 +61,7 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{
             this._actTextSizeChanged = new Action(OnSizeChange);
+            this.GlobalSize = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
 		}
 
         protected void FireTextSizeChange()

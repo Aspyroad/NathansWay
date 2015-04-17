@@ -5,7 +5,7 @@ namespace NathansWay.Shared.Utilities
     public class SharedGlobal : ISharedGlobal
     {
         
-        #region PrivateVariables
+        #region Private Variables
 
 		protected string rootPath;
         protected string folderNameLibrary;
@@ -82,5 +82,6 @@ namespace NathansWay.Shared.Utilities
         }
 
         #endregion
+    }
 
-    }  
+}
