@@ -71,7 +71,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient, this.GlobalSize.Size);
+            this._expressionFactory = new ExpressionFactory(_numberFactoryClient, this.GlobalSizeDimensions.Size);
 
             this.LoadExpression(this.strTestExpression);
 		}
@@ -84,7 +84,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             var bSuccess = this._expressionFactory.CreateExpression(_strExpression);
             var s = this._expressionFactory.UIOutput;
-            var x = 1;
+            //var x = 1;
         }
 
         #endregion
@@ -143,19 +143,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
 
-            // ***********************************************************
-            // TODO : Remove test code for sizing
-
             this.View.BackgroundColor = UIColor.Blue;
-            this.View.Frame = 
-                new RectangleF 
-                (
-                    1.0f,
-                    ((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3) ,
-                    1022.0f,
-                    (iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
-                );
-            // ***********************************************************
+            this._workSpaceSize.SetHeightWidth();
         }
 
 		#endregion
@@ -196,6 +185,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void SetHeightWidth ()
         {
+            this.SetMainFrame();
 
         }
 
@@ -214,15 +204,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        public override RectangleF SetMainFrame ()
+        public override void SetMainFrame ()
         {
-            return new RectangleF
+            if (this.VcParent.View != null)
+            {
+                this.VcParent.View.Frame = new RectangleF
                 (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    0,
-                    0
+                    1.0f,
+                    ((this.VcParent.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
+                    1022.0f,
+                    (this.VcParent.iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
                 );
+            }
         }
 
         #endregion

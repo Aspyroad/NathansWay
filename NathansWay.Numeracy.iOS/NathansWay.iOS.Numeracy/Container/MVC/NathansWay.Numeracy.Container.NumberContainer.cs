@@ -241,9 +241,9 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
-        public SizeNumberContainer(AspyViewController _vc) : base (_vc)
+        public SizeNumberContainer(BaseContainer _vc) : base (_vc)
         {
-            this.VcParent = _vc;
+            this.ParentContainer = _vc;
             Initialize();
         }
 
@@ -262,12 +262,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void SetHeightWidth ()
         { 
-            // Set the main frame
-            if (this.VcParent != null)
-            {
-                this.VcParent.View.Frame = this.SetMainFrame();
-
-            }
+            this.SetMainFrame();
         }
 
         public override void SetScale (int _scale)
@@ -279,15 +274,9 @@ namespace NathansWay.iOS.Numeracy
             this.SetHeightWidth();
         }
 
-        public override RectangleF SetMainFrame ()
+        public override void SetMainFrame ()
         {
-            return new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    0, 
-                    0
-                );
+
         }
 
         #endregion

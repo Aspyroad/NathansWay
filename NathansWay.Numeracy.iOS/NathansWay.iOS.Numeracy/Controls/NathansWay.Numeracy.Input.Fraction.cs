@@ -264,15 +264,9 @@ namespace NathansWay.iOS.Numeracy
             this.SetNumeratorPosition();
         }
 
-        public override RectangleF SetMainFrame ()
+        public override void SetMainFrame ()
         {
-            return new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    0,
-                    0
-                );
+
         }
 
         #endregion

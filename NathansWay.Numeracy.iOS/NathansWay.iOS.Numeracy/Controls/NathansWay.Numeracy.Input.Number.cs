@@ -286,7 +286,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this._numberSize = new SizeNumber(this);
+            this.SizeClass = new SizeNumber(this) as SizeNumber;
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
@@ -900,15 +900,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SetPickerPositionNormalOff();
         }       
 
-        public override RectangleF SetMainFrame ()
+        public override void SetMainFrame ()
         {
-            return new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    (this.GlobalSize.GlobalNumberWidth), 
-                    this.GlobalSize.MainNumberHeight
-                );
+            if (this.VcParent.View != null)
+            {
+                this.VcParent.View.Frame = new RectangleF
+                    (
+                        this.StartPoint.X, 
+                        this.StartPoint.Y, 
+                        (this.GlobalSize.GlobalNumberWidth), 
+                        this.GlobalSize.MainNumberHeight
+                    );
+            }
         }
 
         #endregion

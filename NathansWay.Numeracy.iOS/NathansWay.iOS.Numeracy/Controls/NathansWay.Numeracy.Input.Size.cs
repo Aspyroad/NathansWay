@@ -27,7 +27,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
 
         private G__NumberDisplaySize _displaySize;
-        private AspyViewController _vcParent;
+        private BaseContainer _parentContainer;
         // Current sizing
         private float _fCurrentWidth = 0.0f;
         private float _fCurrentHeight = 0.0f;
@@ -44,9 +44,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.Initialize(); 
         }
 
-        public SizeBase(AspyViewController _vc)
+        public SizeBase(BaseContainer _container)
         {
-            this._vcParent = _vc;
+            this._parentContainer = _container;
             this.Initialize(); 
         }
 
@@ -58,9 +58,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             // Set up our singleton size class
-            this.GlobalSize = iOSNumberDimensions.Instance;
+            //this.GlobalSize = iOSNumberDimensions.Instance;
             // Set default init to normal size
-            this.GlobalSize.Size = G__NumberDisplaySize.Normal; 
+            //this.GlobalSize.Size = G__NumberDisplaySize.Normal; 
         }
 
         #endregion
@@ -87,7 +87,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // immediately after the null check and before the event is raised.
         }
 
-        public abstract RectangleF SetMainFrame();
+        public abstract void SetMainFrame();
 
         #endregion
 
@@ -97,10 +97,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
         // Starting point when the control is created 
         public PointF StartPoint { get; set; }
-        // Parent VC
-        public AspyViewController VcParent { get; set; }
+        // Parent Container
+        public BaseContainer ParentContainer
+        { 
+            get { return this._parentContainer; }
+            set { this._parentContainer = value; }
+        }
         // Main Control Frame
         public RectangleF RectMainFrame { get; set; }
+
         // General Width and Height Variables
         public float CurrentWidth 
         { 
@@ -125,7 +130,21 @@ namespace NathansWay.iOS.Numeracy.Controls
         public float OldHeight { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
-        public iOSNumberDimensions GlobalSize { get; set; }
+        public iOSNumberDimensions GlobalSize
+        { 
+            get
+            {
+                if (this.ParentContainer != null)
+                {
+                    return this.ParentContainer.GlobalSizeDimensions; 
+                }
+                else
+                {
+                    return iOSCoreServiceContainer.Resolve<iOSNumberDimensions>();
+                }
+            }
+        }
+
         public G__NumberDisplaySize DisplaySize
         { 
             get { return this._displaySize; } 
@@ -301,31 +320,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public SizeF LabelPickerViewSize
-        {
-            get
-            {
-                return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
-            }
-        }
-        public UIFont GlobalNumberFont
-        {
-            get
-            {
-                if (this._size == G__NumberDisplaySize.Normal)
-                {
-                    return UIFont.FromName("Arial", 55.0f);
-                }
-                else if (this._size == G__NumberDisplaySize.Medium)
-                {
-                    return UIFont.FromName("Arial", 77.5f);
-                }
-                else // Large
-                {
-                    return UIFont.FromName("Arial", 110.0f);
-                }
-            }
-        }
         // Fraction
         public float FractionHeight
         {
@@ -379,6 +373,33 @@ namespace NathansWay.iOS.Numeracy.Controls
                 else // Large
                 {
                     return 51.0f;
+                }
+            }
+        }
+
+        // iOS Specific
+        public SizeF LabelPickerViewSize
+        {
+            get
+            {
+                return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
+            }
+        }
+        public UIFont GlobalNumberFont
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return UIFont.FromName("Arial", 55.0f);
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return UIFont.FromName("Arial", 77.5f);
+                }
+                else // Large
+                {
+                    return UIFont.FromName("Arial", 110.0f);
                 }
             }
         }
