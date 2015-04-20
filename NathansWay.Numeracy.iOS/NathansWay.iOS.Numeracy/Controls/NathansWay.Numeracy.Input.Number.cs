@@ -861,9 +861,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public SizeNumber(AspyViewController _vc) : base (_vc)
+        public SizeNumber(BaseContainer _vc) : base (_vc)
         {
-            this.VcParent = _vc;
+            this.ParentContainer = _vc;
             Initialize();
         }
 
@@ -902,14 +902,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetMainFrame ()
         {
-            if (this.VcParent.View != null)
+            if (this.ParentContainer.View != null)
             {
-                this.VcParent.View.Frame = new RectangleF
+                this.ParentContainer.View.Frame = new RectangleF
                     (
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
-                        (this.GlobalSize.GlobalNumberWidth), 
-                        this.GlobalSize.MainNumberHeight
+                        (this.GlobalSizeDimensions.GlobalNumberWidth), 
+                        this.GlobalSizeDimensions.MainNumberHeight
                     );
             }
         }
@@ -923,23 +923,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.RectMainFrame = new RectangleF
                 (
                     this.StartPoint.X, 
-                    (this.StartPoint.Y - this.GlobalSize.NumberPickerHeight), 
-                    this.GlobalSize.GlobalNumberWidth, 
-                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.TxtNumberHeight)
+                    (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                    this.GlobalSizeDimensions.GlobalNumberWidth, 
+                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
                 );
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
                     0.0f, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.NumberPickerHeight
+                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this._rectTxtNumber = new RectangleF
                 (
                     0.0f, 
-                    (this.GlobalSize.NumberPickerHeight), 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.TxtNumberHeight
+                    (this.GlobalSizeDimensions.NumberPickerHeight), 
+                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.GlobalSizeDimensions.TxtNumberHeight
                 );
         }
 
@@ -948,16 +948,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
-                    this.GlobalSize.MainNumberHeight, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    this.GlobalSize.NumberPickerHeight
+                    this.GlobalSizeDimensions.MainNumberHeight, 
+                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this.RectMainFrame = new RectangleF
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this.GlobalSize.GlobalNumberWidth,
-                    (this.GlobalSize.NumberPickerHeight + this.GlobalSize.MainNumberHeight)
+                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.MainNumberHeight)
                 );
         }
 
@@ -972,26 +972,26 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.RectMainFrame = new RectangleF(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
-                this.GlobalSize.GlobalNumberWidth, 
-                this.GlobalSize.TxtNumberHeight
+                this.GlobalSizeDimensions.GlobalNumberWidth, 
+                this.GlobalSizeDimensions.TxtNumberHeight
             );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 0.0f, 
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.TxtNumberHeight
+                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.GlobalSizeDimensions.TxtNumberHeight
             );
             this._rectUpButton = new RectangleF(
                 0.0f,
                 0.0f,
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.UpDownButtonHeight
+                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.GlobalSizeDimensions.UpDownButtonHeight
             );
             this._rectDownButton = new RectangleF(
                 0.0f,
-                this.GlobalSize.UpDownButtonHeight,
-                this.GlobalSize.GlobalNumberWidth,
-                this.GlobalSize.UpDownButtonHeight
+                this.GlobalSizeDimensions.UpDownButtonHeight,
+                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.GlobalSizeDimensions.UpDownButtonHeight
             );
 
         }

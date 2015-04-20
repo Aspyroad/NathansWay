@@ -196,8 +196,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                     (
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
-                        (this.GlobalSize.DecimalWidth), 
-                        this.GlobalSize.MainNumberHeight
+                        (this.GlobalSizeDimensions.DecimalWidth), 
+                        this.GlobalSizeDimensions.MainNumberHeight
                     );
 
             }

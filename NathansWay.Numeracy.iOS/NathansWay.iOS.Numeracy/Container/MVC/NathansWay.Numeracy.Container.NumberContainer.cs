@@ -127,7 +127,7 @@ namespace NathansWay.iOS.Numeracy
                     // Set its display size to the NumberContainers size.                
                     newnumber.NumberSize.DisplaySize = this.ContainerSize.DisplaySize;
                     // Set our current width
-                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.GlobalNumberWidth;
+                    this._containerSize.CurrentWidth += this._containerSize.GlobalSizeDimensions.GlobalNumberWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -147,7 +147,7 @@ namespace NathansWay.iOS.Numeracy
                     // Set its display size to the NumberContainers size.                
                     newdecimal.DecimalSize.DisplaySize = this.ContainerSize.DisplaySize;
                     // Set our current width
-                    this._containerSize.CurrentWidth += this._containerSize.GlobalSize.DecimalWidth;
+                    this._containerSize.CurrentWidth += this._containerSize.GlobalSizeDimensions.DecimalWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -156,7 +156,7 @@ namespace NathansWay.iOS.Numeracy
             }
 
             // Set our current height
-            this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
+            this._containerSize.CurrentHeigth = this._containerSize.GlobalSizeDimensions.TxtNumberHeight;
         }
 
         #endregion

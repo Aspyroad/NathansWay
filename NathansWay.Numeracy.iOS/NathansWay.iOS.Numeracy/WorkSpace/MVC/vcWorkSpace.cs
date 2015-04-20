@@ -71,7 +71,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient, this.GlobalSizeDimensions.Size);
+            this._expressionFactory = new ExpressionFactory(_numberFactoryClient,
+                this._workSpaceSize.GlobalSizeDimensions.Size);
 
             this.LoadExpression(this.strTestExpression);
 		}
@@ -144,7 +145,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewWillAppear(animated);
 
             this.View.BackgroundColor = UIColor.Blue;
-            this._workSpaceSize.SetHeightWidth();
         }
 
 		#endregion
@@ -165,9 +165,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             Initialize();
         }
 
-        public SizeWorkSpace(AspyViewController _vc) : base (_vc)
+        public SizeWorkSpace(BaseContainer _vc) : base (_vc)
         {
-            this.VcParent = _vc;
+            this.ParentContainer = _vc;
             Initialize();
         }
 
@@ -183,13 +183,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Abstract Members
 
-        public void SetHeightWidth ()
+        public override void SetHeightWidth ()
         {
             this.SetMainFrame();
 
         }
 
-        public void SetScale (int _scale)
+        public override void SetScale (int _scale)
         {
             //var x = _vc.txtNumber.Font.PointSize;
             //x = x + 50.0f;
@@ -199,21 +199,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-        public void RefreshDisplay ()
+        public override void RefreshDisplay ()
         {
 
         }
 
         public override void SetMainFrame ()
         {
-            if (this.VcParent.View != null)
+            if (this.ParentContainer.View != null)
             {
-                this.VcParent.View.Frame = new RectangleF
+                this.ParentContainer.View.Frame = new RectangleF
                 (
                     1.0f,
-                    ((this.VcParent.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
+                    ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
                     1022.0f,
-                    (this.VcParent.iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
+                    (this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
                 );
             }
         }

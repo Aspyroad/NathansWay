@@ -16,6 +16,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
+    [MonoTouch.Foundation.Register ("SizeBase")]
     public abstract class SizeBase
     {
         #region Events
@@ -26,9 +27,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Class Variables
 
-        private G__NumberDisplaySize _displaySize;
+        // 
+        private iOSNumberDimensions _globalSizeDimensions;
         private BaseContainer _parentContainer;
-        // Current sizing
+        // Current Sizing
         private float _fCurrentWidth = 0.0f;
         private float _fCurrentHeight = 0.0f;
         // Old Sizing
@@ -57,10 +59,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void Initialize ()
         {
             this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            // Set up our singleton size class
-            //this.GlobalSize = iOSNumberDimensions.Instance;
-            // Set default init to normal size
-            //this.GlobalSize.Size = G__NumberDisplaySize.Normal; 
+            this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
         }
 
         #endregion
@@ -130,30 +129,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         public float OldHeight { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
-        public iOSNumberDimensions GlobalSize
+
+        public iOSNumberDimensions GlobalSizeDimensions
         { 
-            get
-            {
-                if (this.ParentContainer != null)
-                {
-                    return this.ParentContainer.GlobalSizeDimensions; 
-                }
-                else
-                {
-                    return iOSCoreServiceContainer.Resolve<iOSNumberDimensions>();
-                }
-            }
+            get { return this._globalSizeDimensions; }
         }
 
         public G__NumberDisplaySize DisplaySize
         { 
-            get { return this._displaySize; } 
-            set
-            {
-                this._displaySize = value;
-                this.GlobalSize.Size = value;
-
-            }
+            get { return this._globalSizeDimensions.Size; } 
+            set { this._globalSizeDimensions.Size = value; }
         }
 
         #endregion
@@ -163,9 +148,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Private Variables
 
-        // Default Normal size
         private G__NumberDisplaySize _size;
-        // private static readonly iOSNumberDim _instance = new iOSNumberDim();
 
         #endregion
 
@@ -186,10 +169,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public G__NumberDisplaySize Size
         {
-            set
-            {
-                this._size = value; 
-            }
+            get { return this._size; }
+            set { this._size = value; }
         }
         // Number Text Box
         public float LabelPickerViewHeight
