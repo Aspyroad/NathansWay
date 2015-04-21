@@ -28,7 +28,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
         private Action _actTextSizeChanged;
-        protected SizeBase SizeClass;
+        private SizeBase _sizeClass;
 
 		#endregion
 
@@ -95,6 +95,13 @@ namespace AspyRoad.iOSCore
             set { this._actTextSizeChanged = value; }
         }
 
+        public SizeBase SizeClass
+        {
+            get { return this._sizeClass; }
+            set { this._sizeClass = value; }
+
+        }
+
         #endregion
 
 		#region Overrides
@@ -103,7 +110,10 @@ namespace AspyRoad.iOSCore
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
-            this.SizeClass.SetHeightWidth();
+            if (this._sizeClass != null)
+            {
+                this._sizeClass.SetHeightWidth();
+            }
 		}
 
 		public override void ViewDidAppear (bool animated)

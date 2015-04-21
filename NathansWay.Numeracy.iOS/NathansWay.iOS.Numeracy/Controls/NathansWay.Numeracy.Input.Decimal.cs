@@ -127,7 +127,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.AspyName = "VC_DecimalText";
 
             // Sizing class
-            this._decimalSize = new SizeDecimal(this);
+            this.SizeClass = new SizeDecimal(this) as SizeDecimal;
+            //new SizeNumber(this) as SizeNumber
         }
 
         #endregion       
@@ -197,7 +198,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
                         (this.GlobalSizeDimensions.DecimalWidth), 
-                        this.GlobalSizeDimensions.MainNumberHeight
+                        this.GlobalSizeDimensions.GlobalNumberHeight
                     );
 
             }

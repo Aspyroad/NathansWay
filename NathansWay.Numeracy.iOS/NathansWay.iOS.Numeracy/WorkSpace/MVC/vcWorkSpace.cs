@@ -32,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        private SizeWorkSpace _workSpaceSize;
+        //private SizeWorkSpace _workSpaceSize;
 
         public string strTestExpression;
 
@@ -66,13 +66,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
 
-            this._workSpaceSize = new SizeWorkSpace(this);
+            //this._workSpaceSize = new SizeWorkSpace(this);
+            this.SizeClass = new SizeWorkSpace(this) as SizeWorkSpace;
 
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient,
-                this._workSpaceSize.GlobalSizeDimensions.Size);
+                this.SizeClass.GlobalSizeDimensions.Size);
 
             this.LoadExpression(this.strTestExpression);
 		}

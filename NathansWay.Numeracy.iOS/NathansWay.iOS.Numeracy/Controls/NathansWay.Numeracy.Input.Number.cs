@@ -873,7 +873,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-
+            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         #endregion
@@ -909,7 +910,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
                         (this.GlobalSizeDimensions.GlobalNumberWidth), 
-                        this.GlobalSizeDimensions.MainNumberHeight
+                        this.GlobalSizeDimensions.GlobalNumberHeight
                     );
             }
         }
@@ -948,7 +949,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
-                    this.GlobalSizeDimensions.MainNumberHeight, 
+                    this.GlobalSizeDimensions.GlobalNumberHeight, 
                     this.GlobalSizeDimensions.GlobalNumberWidth,
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
@@ -957,7 +958,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
                     this.GlobalSizeDimensions.GlobalNumberWidth,
-                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.MainNumberHeight)
+                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.GlobalNumberHeight)
                 );
         }
 

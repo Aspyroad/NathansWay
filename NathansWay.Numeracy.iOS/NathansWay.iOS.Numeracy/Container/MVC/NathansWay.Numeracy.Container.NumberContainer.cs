@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy
 
         private List<BaseContainer> _lsNumbers;
 
-        private SizeNumberContainer _containerSize;
+        //private SizeNumberContainer SizeClass;
 
         #endregion
 
@@ -81,7 +81,7 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Private Variables
+        #region Private Members
 
         private void Initialize()
         {
@@ -89,10 +89,7 @@ namespace NathansWay.iOS.Numeracy
             _lsNumbers = new List<BaseContainer>();
 
             // Sizing class
-            this._containerSize = new SizeNumberContainer();
-
-            // Set the size - Normally done in the factory?
-            this.ContainerSize.DisplaySize = G__NumberDisplaySize.Normal;
+            this.SizeClass = new SizeNumberContainer() as SizeNumberContainer;           
 
             // Create our number
             this.CreateNumber(this._strCurrentValue);
@@ -123,11 +120,9 @@ namespace NathansWay.iOS.Numeracy
 
                     // SIZING
                     // Set our StartPoint
-                    newnumber.NumberSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
-                    // Set its display size to the NumberContainers size.                
-                    newnumber.NumberSize.DisplaySize = this.ContainerSize.DisplaySize;
+                    newnumber.SizeClass.StartPoint = new PointF(0.0f, this.SizeClass.CurrentWidth);
                     // Set our current width
-                    this._containerSize.CurrentWidth += this._containerSize.GlobalSizeDimensions.GlobalNumberWidth;
+                    this.SizeClass.CurrentWidth += newnumber.SizeClass.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -143,11 +138,9 @@ namespace NathansWay.iOS.Numeracy
 
                     // SIZING
                     // Set our StartPoint
-                    newdecimal.DecimalSize.StartPoint = new PointF(0.0f, this._containerSize.CurrentWidth);
-                    // Set its display size to the NumberContainers size.                
-                    newdecimal.DecimalSize.DisplaySize = this.ContainerSize.DisplaySize;
+                    newdecimal.DecimalSize.StartPoint = new PointF(0.0f, this.SizeClass.CurrentWidth);
                     // Set our current width
-                    this._containerSize.CurrentWidth += this._containerSize.GlobalSizeDimensions.DecimalWidth;
+                    this.SizeClass.CurrentWidth += this.SizeClass.GlobalSizeDimensions.DecimalWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -156,7 +149,7 @@ namespace NathansWay.iOS.Numeracy
             }
 
             // Set our current height
-            this._containerSize.CurrentHeigth = this._containerSize.GlobalSizeDimensions.TxtNumberHeight;
+            this.SizeClass.CurrentHeigth = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
         }
 
         #endregion
@@ -172,19 +165,13 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public SizeNumberContainer ContainerSize
-        {
-            get { return this._containerSize; }
-            set { this._containerSize = value; }
-        }
-
         public G__NumberDisplaySize DisplaySize
         {
-            get { return this._containerSize.DisplaySize; }
+            get { return this.SizeClass.DisplaySize; }
             set
             {
-                this._containerSize.DisplaySize = value;
-                this._containerSize.RefreshDisplay();
+                this.SizeClass.DisplaySize = value;
+                this.SizeClass.RefreshDisplay();
             }
         }
 

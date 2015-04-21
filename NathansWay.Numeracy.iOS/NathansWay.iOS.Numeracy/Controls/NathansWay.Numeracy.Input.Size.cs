@@ -100,7 +100,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public BaseContainer ParentContainer
         { 
             get { return this._parentContainer; }
-            set { this._parentContainer = value; }
+            set 
+            { 
+                this._parentContainer = value;
+                //this._parentContainer.SizeClass = (SizeBase)value; 
+            }
         }
         // Main Control Frame
         public RectangleF RectMainFrame { get; set; }
@@ -211,7 +215,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //                }
             }
         }
-        public float MainNumberHeight
+        public float GlobalNumberHeight
         {
             get
             {
