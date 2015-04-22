@@ -135,19 +135,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(HandlePickerChanged);
 
-            // UpDown Buttons
-            this.btnDown.Alpha = 0.5f;
-            this.btnUp.Alpha = 0.5f;
-            this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
-            this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
-            this.btnDown.Hidden = true;
-            this.btnUp.Hidden = true;
-
-            // Apply some UI to the texbox
-            this.txtNumber.HasBorder = true;
-            this.txtNumber.HasRoundedCorners = true;
-            this.txtNumber.ApplyUI();
-
             this._txtNumberDelegate = new txtNumberDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
                                     
@@ -191,18 +178,20 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._numberSize = value; }
         }
 
-        public G__NumberDisplaySize DisplaySize
-        {
-            get { return this._displaySize; }
-            set
-            {
-                this._displaySize = value;
-                if (this._numberSize != null)
-                {
-                    this._numberSize.RefreshDisplay();
-                }
-            }
-        }
+//        // No longer needed??
+//        // We set size in the sizclass now.
+//        public G__NumberDisplaySize DisplaySize
+//        {
+//            get { return this._displaySize; }
+//            set
+//            {
+//                this._displaySize = value;
+//                if (this._numberSize != null)
+//                {
+//                    this._numberSize.RefreshDisplay();
+//                }
+//            }
+//        }
 
         public bool IsInEditMode
         {
@@ -286,7 +275,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this.SizeClass = new SizeNumber(this) as SizeNumber;
+            this._numberSize = new SizeNumber(this);
+            this.SizeClass = this._numberSize;
+
+            // UpDown Buttons
+            this.btnDown.Alpha = 0.5f;
+            this.btnUp.Alpha = 0.5f;
+            this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
+            this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
+            this.btnDown.Hidden = true;
+            this.btnUp.Hidden = true;
+
+            // Apply some UI to the texbox
+            this.SizeClass.SetNumberFont(this.txtNumber);
+            this.txtNumber.HasBorder = true;
+            this.txtNumber.HasRoundedCorners = true;
+            this.txtNumber.ApplyUI();
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
@@ -562,7 +566,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void UI_SetSize()
         {
-            this._numberSize.RefreshDisplay();
+            //this._numberSize.RefreshDisplay();
             this.txtNumber.Font = this.NumberSize._globalFont;
 
             this.View.Frame = this._numberSize.RectMainFrame;
@@ -745,7 +749,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
                 _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
                 _lblPickerView.Layer.BorderWidth = 1.0f;
-                _lblPickerView.Font = this._numberSize._globalFont;
+                _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
 
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
                 _lblPickerView.Text = this._items[row];
@@ -871,10 +875,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        private void Initialize()
+        private void Initialize ()
         {
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
-            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         #endregion
@@ -883,6 +885,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetHeightWidth ()
         {
+            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         public override void SetScale (int _scale)
@@ -897,23 +901,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void RefreshDisplay ()
         {
-            this.SetHeightWidth();
+            // Common width/height/frame settings from Dimensions class
+            base.RefreshDisplay();
+            // Inherited specific
             this.SetPickerPositionNormalOff();
         }       
-
-        public override void SetMainFrame ()
-        {
-            if (this.ParentContainer.View != null)
-            {
-                this.ParentContainer.View.Frame = new RectangleF
-                    (
-                        this.StartPoint.X, 
-                        this.StartPoint.Y, 
-                        (this.GlobalSizeDimensions.GlobalNumberWidth), 
-                        this.GlobalSizeDimensions.GlobalNumberHeight
-                    );
-            }
-        }
 
         #endregion
 

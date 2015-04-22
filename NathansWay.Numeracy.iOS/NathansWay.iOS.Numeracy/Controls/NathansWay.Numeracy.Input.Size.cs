@@ -66,6 +66,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
+        public void SetNumberFont (AspyTextField _txt)
+        {
+            _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
+        }
+
         public virtual void SetHeightWidth ()
         {
         }
@@ -76,6 +81,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void RefreshDisplay ()
         {
+            this.SetHeightWidth();
+            this.SetMainFrame();
         }
 
         //The event-invoking method that derived classes can override. 
@@ -86,7 +93,20 @@ namespace NathansWay.iOS.Numeracy.Controls
             // immediately after the null check and before the event is raised.
         }
 
-        public abstract void SetMainFrame();
+        public virtual void SetMainFrame()
+        {
+            if (this.ParentContainer != null)
+            {
+                this.ParentContainer.View.Frame = 
+                    new RectangleF
+                    (
+                        this.StartPoint.X, 
+                        this.StartPoint.Y, 
+                        this.CurrentWidth, 
+                        this.CurrentHeigth
+                    );
+            }
+        }
 
         #endregion
 

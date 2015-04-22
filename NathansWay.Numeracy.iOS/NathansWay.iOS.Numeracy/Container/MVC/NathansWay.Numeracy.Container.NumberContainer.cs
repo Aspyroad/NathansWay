@@ -140,7 +140,7 @@ namespace NathansWay.iOS.Numeracy
                     // Set our StartPoint
                     newdecimal.DecimalSize.StartPoint = new PointF(0.0f, this.SizeClass.CurrentWidth);
                     // Set our current width
-                    this.SizeClass.CurrentWidth += this.SizeClass.GlobalSizeDimensions.DecimalWidth;
+                    this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.

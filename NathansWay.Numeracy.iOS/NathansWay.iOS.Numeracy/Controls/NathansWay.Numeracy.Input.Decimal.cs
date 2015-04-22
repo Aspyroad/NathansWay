@@ -144,9 +144,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Text Box Frame
         public RectangleF _rectTxtDecimal;
 
-        // Font Size
-        public UIFont _globalFont;
-
         #endregion
 
         #region Constructors
@@ -167,7 +164,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-
         }
 
         #endregion
@@ -176,33 +172,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetHeightWidth ()
         { 
-
+            this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
+            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         public override void SetScale (int _scale)
         {
-        }
-
-        public override void RefreshDisplay ()
-        {
-            this.SetHeightWidth();
-        }
-
-        public override void SetMainFrame ()
-        {
-            if (this.ParentContainer != null)
-            {
-                this.ParentContainer.View.Frame = 
-                    new RectangleF
-                    (
-                        this.StartPoint.X, 
-                        this.StartPoint.Y, 
-                        (this.GlobalSizeDimensions.DecimalWidth), 
-                        this.GlobalSizeDimensions.GlobalNumberHeight
-                    );
-
-            }
-
         }
 
         #endregion
