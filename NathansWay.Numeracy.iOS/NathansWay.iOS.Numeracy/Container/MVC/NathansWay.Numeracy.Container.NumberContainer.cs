@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy
 
         private List<BaseContainer> _lsNumbers;
 
-        //private SizeNumberContainer SizeClass;
+        private SizeNumberContainer _sizeClass;
 
         #endregion
 
@@ -89,7 +89,7 @@ namespace NathansWay.iOS.Numeracy
             _lsNumbers = new List<BaseContainer>();
 
             // Sizing class
-            this.SizeClass = new SizeNumberContainer() as SizeNumberContainer;           
+            this._sizeClass = new SizeNumberContainer();           
 
             // Create our number
             this.CreateNumber(this._strCurrentValue);
@@ -117,12 +117,11 @@ namespace NathansWay.iOS.Numeracy
                     var newnumber = new vcNumberText(intCh);
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newnumber);
-
-                    // SIZING
-                    // Set our StartPoint
-                    newnumber.SizeClass.StartPoint = new PointF(0.0f, this.SizeClass.CurrentWidth);
+                    // Sizing
+                    // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
+                    newnumber.NumberSize.RefreshDisplay(new PointF(0.0f, this._sizeClass.CurrentWidth));
                     // Set our current width
-                    this.SizeClass.CurrentWidth += newnumber.SizeClass.CurrentWidth;
+                    this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -135,10 +134,9 @@ namespace NathansWay.iOS.Numeracy
                     var newdecimal = new vcDecimalText();
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newdecimal);
-
-                    // SIZING
-                    // Set our StartPoint
-                    newdecimal.DecimalSize.StartPoint = new PointF(0.0f, this.SizeClass.CurrentWidth);
+                    // Sizing
+                    // The Space Madness!
+                    newdecimal.DecimalSize.RefreshDisplay(new PointF(0.0f, this.SizeClass.CurrentWidth));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
@@ -156,23 +154,24 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-//        public override void ViewDidLoad()
-//        {
-//            base.ViewDidLoad();
-//        }
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+        }
 
         #endregion
 
         #region Public Properties
 
-        public G__NumberDisplaySize DisplaySize
+        public SizeNumberContainer NumberContainerSize 
         {
-            get { return this.SizeClass.DisplaySize; }
-            set
-            {
-                this.SizeClass.DisplaySize = value;
-                this.SizeClass.RefreshDisplay();
-            }
+            get { return this._sizeClass; }
+        }
+
+        public SizeBase SizeClass
+        {
+            get { return (SizeBase)this._sizeClass; }
         }
 
         public bool IsInEditMode
@@ -240,7 +239,6 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this.RefreshDisplay();
         }
 
         #endregion
@@ -249,21 +247,22 @@ namespace NathansWay.iOS.Numeracy
 
         public override void SetHeightWidth ()
         { 
-            this.SetMainFrame();
+            // Dont call base...
         }
 
         public override void SetScale (int _scale)
         {
+            base.SetScale(_scale);
         }
 
-        public override void RefreshDisplay ()
+        public override void RefreshDisplay (PointF _startPoint)
         {
-            this.SetHeightWidth();
+            base.RefreshDisplay(_startPoint);
         }
 
         public override void SetMainFrame ()
         {
-
+            base.SetMainFrame();
         }
 
         #endregion

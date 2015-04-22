@@ -32,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        //private SizeWorkSpace _workSpaceSize;
+        private SizeWorkSpace _sizeClass;
 
         public string strTestExpression;
 
@@ -67,13 +67,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_WorkSpace";
 
             //this._workSpaceSize = new SizeWorkSpace(this);
-            this.SizeClass = new SizeWorkSpace(this) as SizeWorkSpace;
+            this._sizeClass = new SizeWorkSpace(this);
 
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient,
-                this.SizeClass.GlobalSizeDimensions.Size);
+                this._sizeClass.GlobalSizeDimensions.Size);
 
             this.LoadExpression(this.strTestExpression);
 		}
@@ -86,7 +86,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             var bSuccess = this._expressionFactory.CreateExpression(_strExpression);
             var s = this._expressionFactory.UIOutput;
-            //var x = 1;
+            var b = (vcNumberContainer)s[0];
+            var x = 1;
         }
 
         #endregion
@@ -200,7 +201,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-        public override void RefreshDisplay ()
+        public override void RefreshDisplay (PointF _startPoint)
         {
 
         }

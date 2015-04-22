@@ -20,13 +20,11 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        private SizeDecimal _decimalSize;
+        private SizeDecimal _sizeClass;
         // UI Components
         public AspyTextField txtDecimal { get; private set; }
 
         private vcMainContainer _viewcontollercontainer;
-
-        private SizeNumber _numberSize;
 
         private int _intPrevValue;
         private int _intCurrentValue;
@@ -101,9 +99,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // Is only called when the viewcontroller first lays out its views
-        public override void ViewDidAppear(bool animated)
+        public override void ViewWillAppear(bool animated)
         {
-            base.ViewDidAppear(animated);
+            base.ViewWillAppear(animated);
+
         }
 
         #endregion
@@ -112,8 +111,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeDecimal DecimalSize
         {
-            get { return this._decimalSize; }
-            set { this._decimalSize = value; }
+            get { return this._sizeClass; }
+            set { this._sizeClass = value; }
+        }
+
+        public SizeBase SizeClass
+        {
+            get { return (SizeBase)this._sizeClass; }
+            //set { this._sizeClass = value; }
         }
 
         #endregion
@@ -127,8 +132,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.AspyName = "VC_DecimalText";
 
             // Sizing class
-            this.SizeClass = new SizeDecimal(this) as SizeDecimal;
-            //new SizeNumber(this) as SizeNumber
+            this._sizeClass = new SizeDecimal(this);
         }
 
         #endregion       

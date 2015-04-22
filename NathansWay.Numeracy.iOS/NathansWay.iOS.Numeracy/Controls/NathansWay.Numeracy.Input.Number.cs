@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        private SizeNumber _numberSize;
+        private SizeNumber _sizeClass;
         // UI Components
         //      [Outlet]
         public UIButton btnDown { get; private set; }
@@ -152,11 +152,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // Is only called when the viewcontroller first lays out its views
-        public override void ViewDidAppear(bool animated)
+        public override void ViewWillAppear(bool animated)
         {
-            base.ViewDidAppear(animated);
+            base.ViewWillAppear(animated);
 
-            this.UI_SetSize();
         }
 
         #endregion
@@ -174,24 +173,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeNumber NumberSize
         {
-            get { return this._numberSize; }
-            set { this._numberSize = value; }
+            get { return this._sizeClass; }
+            set { this._sizeClass = value; }
         }
 
-//        // No longer needed??
-//        // We set size in the sizclass now.
-//        public G__NumberDisplaySize DisplaySize
-//        {
-//            get { return this._displaySize; }
-//            set
-//            {
-//                this._displaySize = value;
-//                if (this._numberSize != null)
-//                {
-//                    this._numberSize.RefreshDisplay();
-//                }
-//            }
-//        }
+        public SizeBase SizeClass
+        {
+            get { return (SizeBase)this._sizeClass; }
+            //set { this._sizeClass = value; }
+        }
 
         public bool IsInEditMode
         {
@@ -258,7 +248,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        
+                        
         #endregion
 
         #region Private Members
@@ -275,8 +265,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this._numberSize = new SizeNumber(this);
-            this.SizeClass = this._numberSize;
+            this._sizeClass = new SizeNumber(this);
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.5f;
@@ -419,24 +408,24 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Reset our view positions. 
             if (this._bPickerToTop)
             {
-                this._numberSize.SetPickerPositionTopOn();
+                this._sizeClass.SetPickerPositionTopOn();
             }
             else
             {
-                this._numberSize.SetPickerPositionBottomOn();
+                this._sizeClass.SetPickerPositionBottomOn();
             }
 
             // Reset the new frames - these are value types
-            this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+            this.View.Frame = this._sizeClass.RectMainFrame;
+            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
             // Create the picker class
-            this.pkNumberPicker = new AspyPickerView(_numberSize._rectNumberPicker);
+            this.pkNumberPicker = new AspyPickerView(_sizeClass._rectNumberPicker);
             this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
             this.pkNumberPicker.Layer.BorderWidth = 1.0f;
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
-            this._pickerdelegate = new PickerDelegate(this.items, this._numberSize);
+            this._pickerdelegate = new PickerDelegate(this.items, this._sizeClass);
             this._pickersource = new PickerSource(this.items);
             // Wire up the value change method
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
@@ -493,7 +482,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void CloseNumberPicker()
         {
-            this.View.Frame = _numberSize.RectMainFrame;
+            this.View.Frame = _sizeClass.RectMainFrame;
             this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
             this.singleTapGesture = null;
             this.pkNumberPicker.Delegate = null;
@@ -566,18 +555,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void UI_SetSize()
         {
-            //this._numberSize.RefreshDisplay();
-            this.txtNumber.Font = this.NumberSize._globalFont;
-
-            this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
-            this.btnDown.Frame = this._numberSize._rectDownButton;
-            this.btnUp.Frame =  this._numberSize._rectUpButton;
-
-
-            //this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
-            //this.txtNumber.SetNeedsDisplay();
-
+            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
+            this.btnDown.Frame = this._sizeClass._rectDownButton;
+            this.btnUp.Frame =  this._sizeClass._rectUpButton;
         }
 
         // Action Delegates
@@ -611,10 +591,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.postEdit(this._pickerdelegate.SelectedItemInt);
             }
 
-            this._numberSize.SetPickerPositionNormalOff();
+            this._sizeClass.SetPickerPositionNormalOff();
             // Reset the new frames - these are value types
-            this.View.Frame = this._numberSize.RectMainFrame;
-            this.txtNumber.Frame = this._numberSize._rectTxtNumber;
+            this.View.Frame = this._sizeClass.RectMainFrame;
+            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
 
             this.UI_ToggleTextEdit();
 
@@ -850,6 +830,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF _rectDownButton;
         // Label Frame for the Picker View
         public RectangleF _rectMainNumberWithPicker;
+        // Parent Container
+        private vcNumberText _vcChild;
 
         // Font Size
         public UIFont _globalFont;
@@ -877,6 +859,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
+            this._vcChild = (vcNumberText)this.ParentContainer;
         }
 
         #endregion
@@ -899,13 +882,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-        public override void RefreshDisplay ()
+        public override void RefreshDisplay (PointF _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
-            base.RefreshDisplay();
+            base.RefreshDisplay(_startPoint);
             // Inherited specific
             this.SetPickerPositionNormalOff();
-        }       
+        }  
+
+        public override void SetMainFrame()
+        {
+            base.SetMainFrame();
+            this._vcChild.txtNumber.Frame = this._rectTxtNumber;
+            this._vcChild.btnDown.Frame = this._rectDownButton;
+            this._vcChild.btnUp.Frame =  this._rectUpButton;
+        }
 
         #endregion
 

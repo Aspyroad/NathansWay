@@ -36,6 +36,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Old Sizing
         private float _fOldWidth = 0.0f;
         private float _fOldHeight = 0.0f;
+        // Startpoint
+        //private PointF _startPoint;
 
         #endregion
 
@@ -79,8 +81,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
-        public virtual void RefreshDisplay ()
+        public virtual void RefreshDisplay (PointF _startPoint)
         {
+            this.StartPoint = _startPoint;
             this.SetHeightWidth();
             this.SetMainFrame();
         }
@@ -115,7 +118,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         // X Horizontal
         // Y Vertical
         // Starting point when the control is created 
-        public PointF StartPoint { get; set; }
+        public PointF StartPoint 
+        { 
+            get; 
+            set; 
+        }
         // Parent Container
         public BaseContainer ParentContainer
         { 
@@ -166,6 +173,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         #endregion
+
     }
 
     public sealed class iOSNumberDimensions : IUINumberDimensions
@@ -411,6 +419,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
     }
+
     // Great example of a singleton
 //    public sealed class iOSNumberDim
 //    {
