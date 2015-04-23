@@ -181,6 +181,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Private Variables
 
         private G__NumberDisplaySize _size;
+        private IAspyGlobals _iOSGlobals;
 
         #endregion
 
@@ -190,9 +191,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {            
         }
 
-        public iOSNumberDimensions (G__NumberDisplaySize size)
+        public iOSNumberDimensions (G__NumberDisplaySize size, IAspyGlobals iOSGlobals)
         { 
             this._size = size;
+            this._iOSGlobals = iOSGlobals;
         }
 
         #endregion
@@ -203,6 +205,43 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return this._size; }
             set { this._size = value; }
+        }
+        // Global WorkSpace
+        public float GlobalWorkSpaceHeight
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return ((this._iOSGlobals.G__RectWindowLandscape.Height / 4) - 1);
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 0.0f;
+                }
+                else // Large
+                {
+                    return 0.0f;
+                }
+            }
+        }
+        public float GlobalWorkSpaceWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 1022.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 1022.0f;
+                }
+                else // Large
+                {
+                    return 1022.0f;
+                }
+            }
         }
         // Number Text Box
         public float LabelPickerViewHeight

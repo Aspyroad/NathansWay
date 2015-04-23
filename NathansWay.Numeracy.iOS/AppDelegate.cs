@@ -23,7 +23,7 @@ using NathansWay.iOS.Numeracy.ToolBox;
 using NathansWay.Shared.Factories;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
-
+using NathansWay.Shared;
 using NathansWay.Shared.MonoToolz;
 
 namespace NathansWay.iOS.Numeracy
@@ -129,7 +129,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Application Services, Factories
             // Dimensions Class
-            NumberDimensions = new iOSNumberDimensions(NathansWay.Shared.G__NumberDisplaySize.Normal);
+            NumberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Normal, this.iOSGlobals);
             iOSCoreServiceContainer.Register<iOSNumberDimensions> (this.NumberDimensions);
 			// Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();

@@ -75,7 +75,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient,
                 this._sizeClass.GlobalSizeDimensions.Size);
 
-            this.LoadExpression(this.strTestExpression);
+            //this.LoadExpression(this.strTestExpression);
 		}
 
 		#endregion
@@ -84,10 +84,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadExpression(string _strExpression)
         {
-            var bSuccess = this._expressionFactory.CreateExpression(_strExpression);
-            var s = this._expressionFactory.UIOutput;
-            var b = (vcNumberContainer)s[0];
-            var x = 1;
+            this._expressionFactory.CreateExpression(_strExpression);
+
+            for (int i = 0; i < this._expressionFactory.UIOutput.Count; i++) // Loop with for.
+            {
+                var x = (BaseContainer)this._expressionFactory.UIOutput[i];
+                // TODO : We need to call RefreshDisplay on x here!!
+                this.AddAndDisplayController(x);
+            }
         }
 
         #endregion
@@ -145,7 +149,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            // Temp creation of size for workspace
+            var _point = new PointF( 1.0f, ((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._sizeClass.RefreshDisplay(_point);
 
+            this.LoadExpression(this.strTestExpression);
+            // Pretty UI to see the view
             this.View.BackgroundColor = UIColor.Blue;
         }
 
@@ -183,41 +192,32 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-        #region Public Abstract Members
+        #region Overrides
 
         public override void SetHeightWidth ()
         {
-            this.SetMainFrame();
-
+            this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
+            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
         }
 
         public override void SetScale (int _scale)
         {
+            base.SetScale(_scale);
             //var x = _vc.txtNumber.Font.PointSize;
             //x = x + 50.0f;
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-
             //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
         public override void RefreshDisplay (PointF _startPoint)
         {
-
+            base.RefreshDisplay(_startPoint);
         }
 
         public override void SetMainFrame ()
         {
-            if (this.ParentContainer.View != null)
-            {
-                this.ParentContainer.View.Frame = new RectangleF
-                (
-                    1.0f,
-                    ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
-                    1022.0f,
-                    (this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height / 4) - 1 
-                );
-            }
+            base.SetMainFrame();
         }
 
         #endregion

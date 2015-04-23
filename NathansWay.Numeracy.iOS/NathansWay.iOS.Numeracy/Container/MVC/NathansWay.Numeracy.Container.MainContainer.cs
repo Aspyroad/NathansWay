@@ -140,6 +140,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
+            this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -150,7 +151,7 @@ namespace NathansWay.iOS.Numeracy
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcWorkSpace.Value);
+
 
             // Number Text Testing
             //_vcCtrlNumberText1.DisplaySize = G__NumberDisplaySize.Large;

@@ -257,10 +257,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_CtrlNumberText";
-                          
+            // Event delegates              
             this.actHandlePadPush = new Action<int>(HandlePadPush);
             this.actHandlePadLock = new Action<int>(HandlePadLock);
-
+            // Local controls
             this.btnDown = new UIButton();
             this.btnUp = new UIButton();
             this.txtNumber = new AspyTextField();
@@ -816,13 +816,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
         // X Horizontal
         // Y Vertical
-//        // Starting point when the control is created
-//        public PointF _pStartPoint;
-        // Parent VC
+
         // Number Picker Spinner Control
         public RectangleF _rectNumberPicker;
-//        // Main Control Frame
-//        public RectangleF _rectMainNumberFrame;
         // Text Box Frame
         public RectangleF _rectTxtNumber;
         // Up Down Button Frames, usually the same
@@ -864,7 +860,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
-        #region Public Abstract Members
+        #region Overrides
 
         public override void SetHeightWidth ()
         {
@@ -877,7 +873,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             //var x = _vc.txtNumber.Font.PointSize;
             //x = x + 50.0f;
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-
             //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
@@ -892,7 +887,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetMainFrame()
         {
+            // Set main VC Frame
             base.SetMainFrame();
+            // Set local frames to the VC
             this._vcChild.txtNumber.Frame = this._rectTxtNumber;
             this._vcChild.btnDown.Frame = this._rectDownButton;
             this._vcChild.btnUp.Frame =  this._rectUpButton;

@@ -84,25 +84,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
 
-            // Set initital values
-
-            // Apply some UI to the texbox
-            this.txtDecimal.HasBorder = true;
-            this.txtDecimal.HasRoundedCorners = true;
-            this.txtDecimal.Text = ".";
-            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtDecimal.TextAlignment = UITextAlignment.Center;
-            this.txtDecimal.ApplyUI();
-
-
-
         }
 
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-
         }
 
         #endregion
@@ -133,6 +120,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Sizing class
             this._sizeClass = new SizeDecimal(this);
+
+            // Create textbox
+            this.txtDecimal = new AspyTextField();
+            // Apply some UI to the textbox
+            this.txtDecimal.HasBorder = true;
+            this.txtDecimal.HasRoundedCorners = true;
+            this.txtDecimal.Text = ".";
+            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtDecimal.TextAlignment = UITextAlignment.Center;
+            this.txtDecimal.ApplyUI();
         }
 
         #endregion       
@@ -147,6 +144,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Text Box Frame
         public RectangleF _rectTxtDecimal;
+        // Parent Container
+        private vcDecimalText _vcChild;
 
         #endregion
 
@@ -182,6 +181,19 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetScale (int _scale)
         {
+        }
+
+        public override void SetMainFrame()
+        {
+            // Set main VC Frame
+            base.SetMainFrame();
+            // Set local frames to the VC
+            this._rectTxtDecimal = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.GlobalSizeDimensions.DecimalWidth,
+                this.GlobalSizeDimensions.TxtNumberHeight
+            );
         }
 
         #endregion

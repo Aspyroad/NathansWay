@@ -17,6 +17,7 @@ namespace NathansWay.Shared.Factories
         public event BuildStartedEventHandler BuildStarted;
         public event BuildCompletedEventHandler BuildCompleted;
 
+
         protected G__UnitPlacement _tensUnit;
         protected IList<string> _lsSplitExpression;
         protected List<KeyValuePair<G__MathChar, string>> _lsDecodedExpression;
@@ -29,6 +30,7 @@ namespace NathansWay.Shared.Factories
         // Main output object
         private List<object> _UIOutput;
         private G__NumberDisplaySize _UIDisplaySize;
+        private bool _bExpressionLoadedOk;
 
         #endregion
 
@@ -49,7 +51,7 @@ namespace NathansWay.Shared.Factories
         // Diveded by symbol (opt + /)
         // (,[1/2],+,[3/4],),-,(,3,),=,789.6
 
-        public bool CreateExpression (string _expression)
+        public void CreateExpression (string _expression)
         {
             this.SplitExpression(_expression);
             for (int i = 0; i < this._lsDecodedExpression.Count; i++) // Loop with for.
@@ -87,7 +89,7 @@ namespace NathansWay.Shared.Factories
                 }
             }
 
-            return true;
+            this._bExpressionLoadedOk = true;
         }
 
         public List<KeyValuePair<G__MathChar, string>> SplitExpression(string _expression)
