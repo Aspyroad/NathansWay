@@ -21,9 +21,8 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        private SizeNumber _sizeClass;
         // UI Components
-        //      [Outlet]
+        // 
         public UIButton btnDown { get; private set; }
         public UIButton btnUp { get; private set; }
         public AspyTextField txtNumber { get; private set; }
@@ -54,8 +53,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
         private bool _bAutoPickerPositionOn;
-        // Global size variable for resizing class.
-        private G__NumberDisplaySize _displaySize;
 
         #endregion
 
@@ -173,14 +170,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeNumber NumberSize
         {
-            get { return this._sizeClass; }
-            set { this._sizeClass = value; }
-        }
-
-        public SizeBase SizeClass
-        {
-            get { return (SizeBase)this._sizeClass; }
-            //set { this._sizeClass = value; }
+            get { return (SizeNumber)this._sizeClass; }
         }
 
         public bool IsInEditMode
@@ -408,24 +398,24 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Reset our view positions. 
             if (this._bPickerToTop)
             {
-                this._sizeClass.SetPickerPositionTopOn();
+                this.NumberSize.SetPickerPositionTopOn();
             }
             else
             {
-                this._sizeClass.SetPickerPositionBottomOn();
+                this.NumberSize.SetPickerPositionBottomOn();
             }
 
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeClass.RectMainFrame;
-            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
+            this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
             // Create the picker class
-            this.pkNumberPicker = new AspyPickerView(_sizeClass._rectNumberPicker);
+            this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
             this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
             this.pkNumberPicker.Layer.BorderWidth = 1.0f;
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
-            this._pickerdelegate = new PickerDelegate(this.items, this._sizeClass);
+            this._pickerdelegate = new PickerDelegate(this.items, this.NumberSize);
             this._pickersource = new PickerSource(this.items);
             // Wire up the value change method
             this._pickerdelegate.psValueChanged += this.ehValueChanged; 
@@ -555,9 +545,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void UI_SetSize()
         {
-            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
-            this.btnDown.Frame = this._sizeClass._rectDownButton;
-            this.btnUp.Frame =  this._sizeClass._rectUpButton;
+            this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
+            this.btnDown.Frame = this.NumberSize._rectDownButton;
+            this.btnUp.Frame =  this.NumberSize._rectUpButton;
         }
 
         // Action Delegates
@@ -591,10 +581,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.postEdit(this._pickerdelegate.SelectedItemInt);
             }
 
-            this._sizeClass.SetPickerPositionNormalOff();
+            this.NumberSize.SetPickerPositionNormalOff();
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeClass.RectMainFrame;
-            this.txtNumber.Frame = this._sizeClass._rectTxtNumber;
+            this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
 
             this.UI_ToggleTextEdit();
 

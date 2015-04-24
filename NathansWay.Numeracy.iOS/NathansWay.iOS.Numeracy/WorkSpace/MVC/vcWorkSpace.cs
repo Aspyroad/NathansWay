@@ -32,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        private SizeWorkSpace _sizeClass;
+        //private SizeWorkSpace _sizeClass;
 
         public string strTestExpression;
 
@@ -98,6 +98,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
+        public SizeNumberContainer NumberContainerSize 
+        {
+            get { return (SizeNumberContainer)this._sizeClass; }
+        }
+
         public EntityLesson WsLesson
         {
             get { return _wsLesson; }
@@ -149,9 +154,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            // Temp creation of size for workspace
-            var _point = new PointF( 1.0f, ((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._sizeClass.RefreshDisplay(_point);
 
             this.LoadExpression(this.strTestExpression);
             // Pretty UI to see the view

@@ -28,8 +28,8 @@ namespace NathansWay.iOS.Numeracy
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
-        public vcNumberText _vcCtrlNumberText1;
-        public vcNumberText _vcCtrlNumberText2;
+        //public vcNumberText _vcCtrlNumberText1;
+        //public vcNumberText _vcCtrlNumberText2;
 
         private bool _bNumberPadLoaded;
 
@@ -140,13 +140,17 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
-            this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewDidAppear (animated);
+
+            var _pointF = new PointF(1.0f, 1.0f); //((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+            this.AddAndDisplayController(_vcWorkSpace.Value);
+            var x = 1;
 
 			// ***********************************************
 			// Load our initial vc

@@ -28,6 +28,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
         private Action _actTextSizeChanged;
+        protected SizeBase _sizeClass;
 
 		#endregion
 
@@ -92,6 +93,11 @@ namespace AspyRoad.iOSCore
         {
             get { return _actTextSizeChanged; }
             set { this._actTextSizeChanged = value; }
+        }
+
+        public SizeBase SizeClass
+        {
+            get { return this._sizeClass; }
         }
 
         #endregion

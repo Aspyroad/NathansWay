@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy
 
         private List<BaseContainer> _lsNumbers;
 
-        private SizeNumberContainer _sizeClass;
+        //private SizeNumberContainer _sizeClass;
 
         #endregion
 
@@ -166,12 +166,7 @@ namespace NathansWay.iOS.Numeracy
 
         public SizeNumberContainer NumberContainerSize 
         {
-            get { return this._sizeClass; }
-        }
-
-        public SizeBase SizeClass
-        {
-            get { return (SizeBase)this._sizeClass; }
+            get { return (SizeNumberContainer)this._sizeClass; }
         }
 
         public bool IsInEditMode
