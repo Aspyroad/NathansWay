@@ -58,7 +58,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        protected void Initialize ()
+        private void Initialize ()
         {
             this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();

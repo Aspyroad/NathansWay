@@ -133,7 +133,9 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// White backing for out app
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
-            this.View.BackgroundColor = UIColor.Purple;
+            this.View.BackgroundColor = UIColor.Yellow;
+
+
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -147,15 +149,13 @@ namespace NathansWay.iOS.Numeracy
 			// Always correct bounds and frame
 			base.ViewDidAppear (animated);
 
-            var _pointF = new PointF(1.0f, ((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
             this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
-            var x = 1;
 
 			// ***********************************************
 			// Load our initial vc
 			// this.AddAndDisplayController(_vcLessonMenu.Value);
-
 
             // Number Text Testing
             //_vcCtrlNumberText1.DisplaySize = G__NumberDisplaySize.Large;

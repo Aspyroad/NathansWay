@@ -149,7 +149,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
-            this.View
 		}
 
 		public override void ViewDidLoad()
