@@ -81,10 +81,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
+        /// <summary>
+        /// Calls all functions to set and position the parent class
+        /// </summary>
+        /// <param name="_startPoint">Start point.</param>
         public virtual void RefreshDisplay (PointF _startPoint)
         {
-            // TODO : Morph this functionality!
-            // It needs to check the global position - G__NumberDisplayPosition
+            
 
             // Here we get reference to the parent frame,
             // Then...
@@ -92,6 +95,48 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Grab the center of the parent and add half the local currentheight
 
             this.StartPoint = _startPoint;
+            this.SetHeightWidth();
+            this.SetMainFrame();
+        }
+
+        /// <summary>
+        /// Calls all functions to set and position the parent class
+        /// But it also looks at a global position (top,center,bottom)
+        /// This is mainly used by parent classes of number,fraction,operator etc. classes.
+        /// </summary>
+        /// <param name="_XPos">X Coordinate (Horizontal).</param>
+        public virtual void RefreshDisplayAndPosition (float _XPos)
+        {         
+            // Here we get reference to the parent frame,
+            // Then...
+            // We set the top position based on the centers 
+            // Grab the center of the parent and add half the local currentheight
+            float _YPos;
+
+            switch (this.GlobalSizeDimensions.Position)
+            {
+                case (G__NumberDisplayPosition.Center): // Most common first ??
+                {
+                    _YPos = ((this._parentContainer.SizeClass.CurrentHeigth / 2.0f) + (this._fCurrentHeight / 2.0f));
+                }
+                break;
+                case (G__NumberDisplayPosition.Top):
+                {
+                    _YPos = 0.0f;
+                }
+                break;
+                default : // G__NumberDisplayPosition.Bottom
+                {
+                    _YPos = (this._parentContainer.SizeClass.CurrentHeigth - this._fCurrentHeight);
+                }
+                break;
+            }
+            // Here we get reference to the parent frame,
+            // Then...
+            // We set the top position based on the centers 
+            // Grab the center of the parent and add half the local currentheight
+
+            this.StartPoint = new PointF(_XPos, _YPos);
             this.SetHeightWidth();
             this.SetMainFrame();
         }
