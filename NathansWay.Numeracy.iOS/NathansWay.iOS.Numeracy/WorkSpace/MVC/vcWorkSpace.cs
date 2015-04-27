@@ -72,8 +72,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.strTestExpression = "1.2,+,1,=,13";
 
             this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient,
-                this._sizeClass.GlobalSizeDimensions.Size);
+            this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
 
             //this.LoadExpression(this.strTestExpression);
 		}
@@ -85,14 +84,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadExpression(string _strExpression)
         {
             this._expressionFactory.CreateExpression(_strExpression);
+        }
 
-            for (int i = 0; i < this._expressionFactory.UIOutput.Count; i++) // Loop with for.
+        public void ShowExpression(List<object> UIInternalOutput)
+        {
+            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
-                var x = (BaseContainer)this._expressionFactory.UIOutput[i];
+                var x = (BaseContainer)UIInternalOutput[i];
                 // TODO : We need to call RefreshDisplay on x here!!
-                this.AddAndDisplayController(x);
+                //x.SizeClass.RefreshDisplay();
+                this.AddAndDisplayController(x, x.View.Frame);
             }
         }
+
+
 
         #endregion
 
@@ -143,7 +148,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void LoadView()
 		{
-			base.LoadView();            
+			base.LoadView(); 
+            this.View
 		}
 
 		public override void ViewDidLoad()

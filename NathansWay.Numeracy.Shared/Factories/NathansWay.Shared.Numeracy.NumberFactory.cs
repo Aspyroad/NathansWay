@@ -36,11 +36,10 @@ namespace NathansWay.Shared.Factories
 
         #region Constructors
 
-        public ExpressionFactory(IUINumberFactoryClient UIPlatform, G__NumberDisplaySize _size)
+        public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
             this._UIOutput = new List<object>();
             this.FactoryClient = UIPlatform;
-            this.UIDisplaySize = _size;
 
             this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
         }
@@ -134,16 +133,6 @@ namespace NathansWay.Shared.Factories
         { 
             get { return this._UIOutput; }
             set { this._UIOutput = value; }
-        }
-
-        public G__NumberDisplaySize UIDisplaySize
-        { 
-            get { return this._UIDisplaySize; }
-            set 
-            { 
-                this._UIDisplaySize = value;
-                this._UIPlatformClient.UIDisplaySize = value;
-            }
         }
 
         #endregion

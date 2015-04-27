@@ -83,6 +83,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void RefreshDisplay (PointF _startPoint)
         {
+            // TODO : Morph this functionality!
+            // It needs to check the global position - G__NumberDisplayPosition
+
+            // Here we get reference to the parent frame,
+            // Then...
+            // We set the top position based on the centers 
+            // Grab the center of the parent and add half the local currentheight
+
             this.StartPoint = _startPoint;
             this.SetHeightWidth();
             this.SetMainFrame();
@@ -91,9 +99,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         //The event-invoking method that derived classes can override. 
         public virtual void OnResize(EventArgs e)
         {
-            // Make a temporary copy of the event to avoid possibility of 
-            // a race condition if the last subscriber unsubscribes 
-            // immediately after the null check and before the event is raised.
+
         }
 
         public virtual void SetMainFrame()
@@ -181,6 +187,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Private Variables
 
         private G__NumberDisplaySize _size;
+        private G__NumberDisplayPosition _position;
         private IAspyGlobals _iOSGlobals;
 
         #endregion
@@ -195,6 +202,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this._size = size;
             this._iOSGlobals = iOSGlobals;
+            this._position = G__NumberDisplayPosition.Center;
         }
 
         #endregion
@@ -206,6 +214,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._size; }
             set { this._size = value; }
         }
+
+        public G__NumberDisplayPosition Position
+        {
+            get { return this._position; }
+            set { this._position = value; }
+        }
+
         // Global WorkSpace
         public float GlobalWorkSpaceHeight
         {
@@ -268,18 +283,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 // Constant
                 return 60.0f;
-                //                if (this._size == G__NumberDisplaySize.Normal)
-                //                {
-                //                    return 60.0f;
-                //                }
-                //                else if (this._size == G__NumberDisplaySize.Medium)
-                //                {
-                //                    return 60.0f;
-                //                }
-                //                else // Large
-                //                {
-                //                    return 60.0f;
-                //                }
             }
         }
         public float GlobalNumberHeight

@@ -147,9 +147,9 @@ namespace NathansWay.iOS.Numeracy
 			// Always correct bounds and frame
 			base.ViewDidAppear (animated);
 
-            var _pointF = new PointF(1.0f, 1.0f); //((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            var _pointF = new PointF(1.0f, ((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
-            this.AddAndDisplayController(_vcWorkSpace.Value);
+            this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
             var x = 1;
 
 			// ***********************************************

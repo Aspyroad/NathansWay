@@ -35,6 +35,12 @@ namespace NathansWay.Shared
         Medium = 2,
         Large = 3
     }
+    public enum G__NumberDisplayPosition : int
+    {
+        Top = 1,
+        Center = 2,
+        Bottom = 3
+    }
 
 	#region Filtering
 

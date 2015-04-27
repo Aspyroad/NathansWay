@@ -10,7 +10,6 @@ namespace NathansWay.Shared
     {
         // Global Display Output object
         List<object> UIInternalOutput { get; set; }
-        G__NumberDisplaySize UIDisplaySize { get; set; }
 
         // Functions
         // All write there output into the UIOuput object

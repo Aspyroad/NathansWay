@@ -22,7 +22,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Private Variables
 
         private List<object> _UIOutput;
-        private G__NumberDisplaySize _UIDisplaySize;
 
         #endregion
 
@@ -46,12 +45,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             get { return this._UIOutput; }
             set { this._UIOutput = value; }
-        }
-
-        public G__NumberDisplaySize UIDisplaySize
-        { 
-            get { return this._UIDisplaySize; }
-            set { this._UIDisplaySize = value; }
         }
 
         #endregion
