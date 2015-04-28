@@ -134,24 +134,22 @@ namespace NathansWay.iOS.Numeracy
 			// White backing for out app
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
             this.View.BackgroundColor = UIColor.Yellow;
-
-
 		}
 
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
+
+            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+            this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
 		}
 
 		public override void ViewDidAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewDidAppear (animated);
-
-            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
-            this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
 
 			// ***********************************************
 			// Load our initial vc
@@ -167,7 +165,6 @@ namespace NathansWay.iOS.Numeracy
             //this.AddAndDisplayController(_vcCtrlNumberText2, new RectangleF(300, 600, 46, 60));
 
             //this._vcCtrlNumberText1.NumSize.RefreshDisplay();
-
 
 
             //_vcCtrlNumberText.Value.NumberTextSize.SetScale(0);

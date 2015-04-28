@@ -74,7 +74,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
 
-            //this.LoadExpression(this.strTestExpression);
+
 		}
 
 		#endregion
@@ -88,12 +88,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void ShowExpression(List<object> UIInternalOutput)
         {
+            // Local horizontal position. Do we need a buffer.
+            float _XPos = 0.0f;
+                
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
-                var x = (BaseContainer)UIInternalOutput[i];
-                // TODO : We need to call RefreshDisplay on x here!!
-                //x.SizeClass.RefreshDisplay();
-                this.AddAndDisplayController(x, x.View.Frame);
+                var _control = (BaseContainer)UIInternalOutput[i];
+
+                _control.SizeClass.RefreshDisplayAndPosition(_XPos);
+                this.AddAndDisplayController(_control, _control.View.Frame);
+                _XPos = _XPos + _control.SizeClass.CurrentWidth;
             }
         }
 
@@ -161,6 +165,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewWillAppear(animated);
 
             this.LoadExpression(this.strTestExpression);
+            this.ShowExpression(_expressionFactory.UIOutput);
             // Pretty UI to see the view
             this.View.BackgroundColor = UIColor.Blue;
         }

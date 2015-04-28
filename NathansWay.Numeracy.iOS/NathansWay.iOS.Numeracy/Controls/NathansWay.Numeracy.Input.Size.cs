@@ -112,12 +112,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             // We set the top position based on the centers 
             // Grab the center of the parent and add half the local currentheight
             float _YPos;
+            var p = this.VcMainContainer._vcWorkSpace.Value.SizeClass.CurrentHeigth;
 
             switch (this.GlobalSizeDimensions.Position)
             {
                 case (G__NumberDisplayPosition.Center): // Most common first ??
                 {
-                    _YPos = ((this._parentContainer.SizeClass.CurrentHeigth / 2.0f) + (this._fCurrentHeight / 2.0f));
+                    _YPos = ((p / 2.0f) + (this._fCurrentHeight / 2.0f));
                 }
                 break;
                 case (G__NumberDisplayPosition.Top):
@@ -127,7 +128,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 break;
                 default : // G__NumberDisplayPosition.Bottom
                 {
-                    _YPos = (this._parentContainer.SizeClass.CurrentHeigth - this._fCurrentHeight);
+                    _YPos = (p - this._fCurrentHeight);
                 }
                 break;
             }
