@@ -67,13 +67,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_WorkSpace";
 
             //this._workSpaceSize = new SizeWorkSpace(this);
-            this._sizeClass = new SizeWorkSpace(this);
-
-            this.strTestExpression = "1.2,+,1,=,13";
+            this._sizeClass = new SizeWorkSpace(this);           
 
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
-
 
 		}
 
@@ -89,7 +86,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void ShowExpression(List<object> UIInternalOutput)
         {
             // Local horizontal position. Do we need a buffer.
-            float _XPos = 0.0f;
+            float _XPos = 2.0f;
                 
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
@@ -97,7 +94,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
                 _control.SizeClass.RefreshDisplayAndPosition(_XPos);
                 this.AddAndDisplayController(_control, _control.View.Frame);
-                _XPos = _XPos + _control.SizeClass.CurrentWidth;
+                _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;
             }
         }
 
@@ -110,6 +107,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public SizeNumberContainer NumberContainerSize 
         {
             get { return (SizeNumberContainer)this._sizeClass; }
+        }
+
+        public ExpressionFactory ExpressionObject
+        {
+            get { return _expressionFactory; }
+            set { _expressionFactory = value; }
         }
 
         public EntityLesson WsLesson
@@ -140,11 +143,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#region Overrides
 
-		public override void WillMoveToParentViewController (UIViewController parent)
-		{
-			base.WillMoveToParentViewController (parent);
-		}
-
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
@@ -164,10 +162,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
 
-            this.LoadExpression(this.strTestExpression);
-            this.ShowExpression(_expressionFactory.UIOutput);
+            //this.LoadExpression(this.strTestExpression);
+            //this.ShowExpression(_expressionFactory.UIOutput);
             // Pretty UI to see the view
             this.View.BackgroundColor = UIColor.Blue;
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            //this.View.BackgroundColor = UIColor.Black;
         }
 
 		#endregion

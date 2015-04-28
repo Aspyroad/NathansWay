@@ -87,12 +87,12 @@ namespace NathansWay.iOS.Numeracy
         {
             //base.Initialize();
             _lsNumbers = new List<BaseContainer>();
-
             // Sizing class
-            this._sizeClass = new SizeNumberContainer();           
+            this._sizeClass = new SizeNumberContainer(this);
 
             // Create our number
             this.CreateNumber(this._strCurrentValue);
+
         }
 
         #endregion
@@ -119,13 +119,14 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newnumber);
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-                    newnumber.NumberSize.RefreshDisplay(new PointF(0.0f, this._sizeClass.CurrentWidth));
+                    newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
                     this.TextSizeChange += newnumber.ActTextSizeChange;
+                    this.AddAndDisplayController(newnumber, newnumber.View.Frame);
                 }
                 else
                 {
@@ -136,13 +137,14 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.RefreshDisplay(new PointF(0.0f, this.SizeClass.CurrentWidth));
+                    newdecimal.DecimalSize.RefreshDisplay(new PointF(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
                     this.TextSizeChange += newdecimal.ActTextSizeChange;
+                    this.AddAndDisplayController(newdecimal, newdecimal.View.Frame);
                 }
             }
 
@@ -159,6 +161,13 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
 
         }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.View.BackgroundColor = UIColor.Black;
+        }
+
 
         #endregion
 

@@ -27,7 +27,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Class Variables
 
-        // 
         private iOSNumberDimensions _globalSizeDimensions;
         private BaseContainer _parentContainer;
         // Current Sizing
@@ -118,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 case (G__NumberDisplayPosition.Center): // Most common first ??
                 {
-                    _YPos = ((p / 2.0f) + (this._fCurrentHeight / 2.0f));
+                    _YPos = ((p / 2.0f) - (this._fCurrentHeight / 2.0f));
                 }
                 break;
                 case (G__NumberDisplayPosition.Top):
@@ -465,15 +464,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 23.0f;
+                    return 16.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 43.0f;
+                    return 32.0f;
                 }
                 else // Large
                 {
-                    return 51.0f;
+                    return 38.0f;
                 }
             }
         }

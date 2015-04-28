@@ -82,7 +82,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
+            // Add subview
+            this.View.AddSubview(this.txtDecimal);
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -117,11 +118,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create textbox
             this.txtDecimal = new AspyTextField();
             // Apply some UI to the textbox
+            this.SizeClass.SetNumberFont(this.txtDecimal);
             this.txtDecimal.HasBorder = true;
-            this.txtDecimal.HasRoundedCorners = true;
+            this.txtDecimal.HasRoundedCorners = false;
             this.txtDecimal.Text = ".";
             this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtDecimal.TextAlignment = UITextAlignment.Center;
+
             this.txtDecimal.ApplyUI();
         }
 
@@ -167,6 +170,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
+        public override void RefreshDisplay(PointF _startPoint)
+        {
+            base.RefreshDisplay(_startPoint);
+
+            // Set local frames to the VC
+            this._rectTxtDecimal = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.CurrentWidth,
+                this.CurrentHeigth
+            );
+            this._vcChild.txtDecimal.Frame = this._rectTxtDecimal;
+        }
+
         public override void SetHeightWidth ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
@@ -182,13 +199,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Set main VC Frame
             base.SetMainFrame();
-            // Set local frames to the VC
-            this._rectTxtDecimal = new RectangleF(
-                0.0f, 
-                0.0f, 
-                this.GlobalSizeDimensions.DecimalWidth,
-                this.GlobalSizeDimensions.TxtNumberHeight
-            );
         }
 
         #endregion

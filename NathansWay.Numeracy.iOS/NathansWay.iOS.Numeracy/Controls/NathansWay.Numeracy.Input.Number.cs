@@ -38,6 +38,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private UIColor _preEditColor;
 
         private vcNumberPad _numberpad;
+        private SizeNumber _sizeNumber;
         private vcMainContainer _viewcontollercontainer;
 
         private Action ehValueChanged;
@@ -123,6 +124,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // Add subviews - controls
+            this.View.AddSubview(this.txtNumber);
+            //this.View.AddSubview(this.btnUp);
+            //this.View.AddSubview(this.btnDown);
 
             // Set initital values
             this.preEdit();
@@ -152,7 +157,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
+            this.btnDown.Frame = this._sizeNumber._rectDownButton;
+            this.btnUp.Frame =  this._sizeNumber._rectUpButton;
+        }
 
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.View.BackgroundColor = UIColor.Black;
         }
 
         #endregion
@@ -251,11 +264,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.actHandlePadPush = new Action<int>(HandlePadPush);
             this.actHandlePadLock = new Action<int>(HandlePadLock);
             // Local controls
-            this.btnDown = new UIButton();
-            this.btnUp = new UIButton();
+            this.btnDown = new AspyButton();
+            this.btnUp = new AspyButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this._sizeClass = new SizeNumber(this);
+            this._sizeClass = new SizeNumber(this) as SizeNumber;
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.5f;
@@ -267,8 +280,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Apply some UI to the texbox
             this.SizeClass.SetNumberFont(this.txtNumber);
+            this.txtNumber.Text = this._intCurrentValue.ToString();
             this.txtNumber.HasBorder = true;
-            this.txtNumber.HasRoundedCorners = true;
+            this.txtNumber.HasRoundedCorners = false;
+            this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtNumber.TextAlignment = UITextAlignment.Center;
             this.txtNumber.ApplyUI();
 
             // Wire up our events
@@ -541,13 +557,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 txtNumber.BackgroundColor = this._preEditColor;
                 txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
             }
-        }
-
-        protected void UI_SetSize()
-        {
-            this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
-            this.btnDown.Frame = this.NumberSize._rectDownButton;
-            this.btnUp.Frame =  this.NumberSize._rectUpButton;
         }
 
         // Action Delegates
@@ -875,16 +884,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SetPickerPositionNormalOff();
         }  
 
-        public override void SetMainFrame()
-        {
-            // Set main VC Frame
-            base.SetMainFrame();
-            // Set local frames to the VC
-            this._vcChild.txtNumber.Frame = this._rectTxtNumber;
-            this._vcChild.btnDown.Frame = this._rectDownButton;
-            this._vcChild.btnUp.Frame =  this._rectUpButton;
-        }
-
         #endregion
 
         #region Public Members
@@ -966,6 +965,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             );
 
         }
+
+        #endregion
+
+        #region Public Properties
+
+//        public RectangleF RectTxtNumber
+//        {
+//            get { return this._rectTxtNumber; }
+//        }
+//        public RectangleF RectUpButton
+//        {
+//            get { return this._rectUpButton; }
+//        }
+//        public RectangleF RectDownButton
+//        {
+//            get { return this._rectDownButton; }
+//        }
 
         #endregion
     }

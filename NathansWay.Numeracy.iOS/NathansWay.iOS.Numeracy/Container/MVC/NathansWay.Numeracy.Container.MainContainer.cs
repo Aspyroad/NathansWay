@@ -143,7 +143,14 @@ namespace NathansWay.iOS.Numeracy
 
             var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+
+
+            var strTestExpression = "1.2";
+            this._vcWorkSpace.Value.LoadExpression(strTestExpression);
+            this._vcWorkSpace.Value.ShowExpression(this._vcWorkSpace.Value.ExpressionObject.UIOutput);
+
             this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
+            var x = 1;
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -189,6 +196,12 @@ namespace NathansWay.iOS.Numeracy
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            //this.View.BackgroundColor = UIColor.Black;
         }
 
 		#endregion

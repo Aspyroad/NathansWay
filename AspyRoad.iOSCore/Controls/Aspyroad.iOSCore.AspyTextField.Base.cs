@@ -91,7 +91,7 @@ namespace AspyRoad.iOSCore
             }
             if (this._bHasRoundedCorners)
             {
-                this.Layer.CornerRadius = 6.0f;
+                this.Layer.CornerRadius = 3.0f;
             }
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
