@@ -132,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set initital values
             this.preEdit();
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditUpDown;  //this._numeracySettings.NumberCombo.EditMode;
                         
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(HandlePickerChanged);
@@ -159,10 +159,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
 
             // The absolute best spot to set frames!
+            // Main frame is called in ViewWillAppear Container Base
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
-            this._sizeNumber.SetMainFrame();
         }
 
         #endregion
@@ -437,7 +437,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-
+            // TODO : swap the picker view to vcMainContainer??? 
+            // This may fix the bounds problem when trying to touch.
             this.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
@@ -862,23 +863,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetHeightWidth ()
         {
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
-            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
-        }
-
-        public override void SetScale (int _scale)
-        {
-            //var x = _vc.txtNumber.Font.PointSize;
-            //x = x + 50.0f;
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
+            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         public override void RefreshDisplay (PointF _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
             base.RefreshDisplay(_startPoint);
-            // Inherited specific
+            // Other Frames
             this.SetPickerPositionNormalOff();
         }  
 
@@ -892,21 +884,21 @@ namespace NathansWay.iOS.Numeracy.Controls
                 (
                     this.StartPoint.X, 
                     (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
-                    this.GlobalSizeDimensions.GlobalNumberWidth, 
+                    this.CurrentWidth, 
                     (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
                 );
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
                     0.0f, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.CurrentWidth,
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this._rectTxtNumber = new RectangleF
                 (
                     0.0f, 
                     (this.GlobalSizeDimensions.NumberPickerHeight), 
-                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.CurrentWidth,
                     this.GlobalSizeDimensions.TxtNumberHeight
                 );
         }
@@ -916,16 +908,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectNumberPicker = new RectangleF
                 (
                     0.0f, 
-                    this.GlobalSizeDimensions.GlobalNumberHeight, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.CurrentHeight, 
+                    this.CurrentWidth,
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this.RectMainFrame = new RectangleF
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth,
-                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.GlobalNumberHeight)
+                    this.CurrentWidth,
+                    (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
                 );
         }
 
@@ -940,25 +932,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.RectMainFrame = new RectangleF(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
-                this.GlobalSizeDimensions.GlobalNumberWidth, 
+                this.CurrentWidth, 
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 0.0f, 
-                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
             this._rectUpButton = new RectangleF(
                 0.0f,
                 0.0f,
-                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.CurrentWidth,
                 this.GlobalSizeDimensions.UpDownButtonHeight
             );
             this._rectDownButton = new RectangleF(
                 0.0f,
                 this.GlobalSizeDimensions.UpDownButtonHeight,
-                this.GlobalSizeDimensions.GlobalNumberWidth,
+                this.CurrentWidth,
                 this.GlobalSizeDimensions.UpDownButtonHeight
             );
 

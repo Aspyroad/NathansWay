@@ -82,14 +82,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Add subview
+            // Add subviews
             this.View.AddSubview(this.txtDecimal);
         }
 
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
+            // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
+            // Other Frames
+            this.txtDecimal.Frame = this.DecimalSize._rectTxtDecimal;
         }
 
         #endregion
@@ -175,19 +178,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.RefreshDisplay(_startPoint);
 
             // Set local frames to the VC
-            this._rectTxtDecimal = new RectangleF(
-                0.0f, 
-                0.0f, 
-                this.CurrentWidth,
-                this.CurrentHeigth
-            );
-            this._vcChild.txtDecimal.Frame = this._rectTxtDecimal;
+            this.SetRectTxtDecimal();
         }
 
         public override void SetHeightWidth ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
-            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalNumberHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         public override void SetScale (int _scale)
@@ -205,6 +202,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
+        public void SetRectTxtDecimal()
+        {
+            this._rectTxtDecimal = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.CurrentWidth,
+                this.CurrentHeight
+            );
+        }
 
         #endregion
     }

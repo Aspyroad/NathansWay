@@ -32,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        private string _strTestExpression;
+        private string _strExpression;
 
 		#endregion
 
@@ -51,7 +51,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public vcWorkSpace(string _expression) 
         {   
-            this._strTestExpression = _expression;
+            // TODO : Not sure about this? Bitch to build at init...without Startpoint?
+            this._strExpression = _expression;
             Initialize();
         }
 
@@ -86,8 +87,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._expressionFactory.CreateExpression(_strExpression);
         }
 
-        public void ShowExpression(List<object> UIInternalOutput)
+        public void BuildExpression(List<object> UIInternalOutput)
         {
+            if (this.SizeClass.CurrentHeight <= 0.0f)
+            {
+                // Cant set sizes without WorkSpace Startpoint
+                return;
+            }
+
             // Local horizontal position. Do we need a buffer.
             float _XPos = 2.0f;
                 
@@ -95,7 +102,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
 
-                _control.SizeClass.RefreshDisplayAndPosition(_XPos);
+                _control.SizeClass.RefreshDisplayAndPosition(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
                 _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;
             }
@@ -110,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public ExpressionFactory ExpressionObject
+        public ExpressionFactory ExpressFactory
         {
             get { return _expressionFactory; }
             set { _expressionFactory = value; }
@@ -140,10 +147,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { WsLessonDetailResults = value; }
         }
 
-        public string TestExpression 
+        public string ExpressionString 
         { 
-            get { return this._strTestExpression; } 
-            set { this._strTestExpression = value; }
+            get { return this._strExpression; } 
+            set 
+            { 
+                this._strExpression = value; 
+                // Build our expression
+                this.LoadExpression(value);
+                this.BuildExpression(this._expressionFactory.UIOutput);
+            }
         }
 
         #endregion
@@ -158,6 +171,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
+            this.View.BackgroundColor = UIColor.Blue;
 		}
 
 		public override void ViewDidLoad()
@@ -165,8 +179,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.ViewDidLoad();
 
             // Build our expression
-            this.LoadExpression(this._strTestExpression);
-            this.ShowExpression(_expressionFactory.UIOutput);
+            this.LoadExpression(this._strExpression);
+            this.BuildExpression(_expressionFactory.UIOutput);
 		}
 
         public override void ViewWillAppear(bool animated)
@@ -213,7 +227,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void SetHeightWidth ()
         {
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
-            this.CurrentHeigth = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
         }
 
         #endregion

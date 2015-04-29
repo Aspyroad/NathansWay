@@ -76,8 +76,19 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
+        public virtual void SetHeightWidth (float _width, float _height)
+        {
+            this.CurrentWidth = _width;
+            this.CurrentHeight = _height;
+        }
+
         public virtual void SetScale (int _scale)
         {
+            //var x = _vc.txtNumber.Font.PointSize;
+            //x = x + 50.0f;
+            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
+            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
+            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
         /// <summary>
@@ -95,7 +106,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.StartPoint = _startPoint;
             this.SetHeightWidth();
-            this.SetMainFrame();
+            //this.SetMainFrame();
         }
 
         /// <summary>
@@ -104,14 +115,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// This is mainly used by parent classes of number,fraction,operator etc. classes.
         /// </summary>
         /// <param name="_XPos">X Coordinate (Horizontal).</param>
-        public virtual void RefreshDisplayAndPosition (float _XPos)
+        public virtual void RefreshDisplayAndPosition (float _XPos, float _vcHeight)
         {         
             // Here we get reference to the parent frame,
             // Then...
             // We set the top position based on the centers 
             // Grab the center of the parent and add half the local currentheight
             float _YPos;
-            var p = this.VcMainContainer._vcWorkSpace.SizeClass.CurrentHeigth;
+            float p = _vcHeight;
 
             switch (this.GlobalSizeDimensions.Position)
             {
@@ -157,7 +168,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
                         this.CurrentWidth, 
-                        this.CurrentHeigth
+                        this.CurrentHeight
                     );
             }
         }
@@ -199,7 +210,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         public float OldWidth { get; set; }
 
-        public float CurrentHeigth 
+        public float CurrentHeight 
         { 
             get { return this._fCurrentHeight; } 
             set
@@ -233,7 +244,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private G__NumberDisplaySize _size;
         private G__NumberDisplayPosition _position;
-        private IAspyGlobals _iOSGlobals;
+        public IAspyGlobals _iOSGlobals { get; set; }
 
         #endregion
 

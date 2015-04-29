@@ -149,7 +149,7 @@ namespace NathansWay.iOS.Numeracy
             }
 
             // Set our current height
-            this.SizeClass.CurrentHeigth = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
+            this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
         }
 
         #endregion

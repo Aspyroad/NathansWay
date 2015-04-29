@@ -76,8 +76,11 @@ namespace NathansWay.iOS.Numeracy
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
+            // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
 
+            // Set any other frames here.
+            // Like denominator etc
         }
 
         #endregion
@@ -151,9 +154,9 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public FractionSize(vcFractionContainer vc)
+        public FractionSize(BaseContainer vc)
         {
-            _vc = vc;
+            this.ParentContainer = vc;
             Initialize();
         }
 
@@ -173,17 +176,6 @@ namespace NathansWay.iOS.Numeracy
         public override void SetHeightWidth ()
         {
             base.SetHeightWidth();
-        }
-
-        public override void SetScale (int _scale)
-        {
-            base.SetScale(_scale);
-            //            var x = _vc.txtNumber.Font.PointSize;
-            //            x = x + 50.0f;
-            //            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-            //
-            //            _vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
        
         public override void RefreshDisplay (PointF _startPoint)

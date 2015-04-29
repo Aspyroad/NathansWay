@@ -29,11 +29,8 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
 
-        //public vcWorkSpace _vcWorkSpace;
-        //public vcNumberText _vcCtrlNumberText1;
-        //public vcNumberText _vcCtrlNumberText2;
-
         private bool _bNumberPadLoaded;
+        //private 
 
 		#endregion
 
@@ -71,10 +68,6 @@ namespace NathansWay.iOS.Numeracy
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
-
-            //_vcCtrlNumberText2 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
-            //_vcCtrlNumberText1 = new vcCtrlNumberText(new RectangleF(200, 600, 46, 60));
-            //_vcCtrlNumberText2 = new vcCtrlNumberText();
 
 		}
 
@@ -132,9 +125,10 @@ namespace NathansWay.iOS.Numeracy
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
             this.View.BackgroundColor = UIColor.Yellow;
 
-            _vcWorkSpace = new vcWorkSpace();
             var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+            // Now we can build our WorkSpace
+            this._vcWorkSpace.Value.ExpressionString = "23.655";
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -143,13 +137,7 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 
 
-
-
-            var strTestExpression = "1.2";
-            this._vcWorkSpace.Value.LoadExpression(strTestExpression);
-            this._vcWorkSpace.Value.ShowExpression(this._vcWorkSpace.Value.ExpressionObject.UIOutput);
-
-            this.AddAndDisplayController(_vcWorkSpace);
+            this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
 		public override void ViewDidAppear (bool animated)
@@ -190,6 +178,10 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
+
+            // Sizing class
+            this._sizeClass = new MainContainerSize(this);
+            this._sizeClass.RefreshDisplay(new PointF(0.0f, 0.0f));
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -208,9 +200,49 @@ namespace NathansWay.iOS.Numeracy
 
     #region Size Classes
 
+    public class MainContainerSize : SizeBase
+    {
+        #region Class Variables
+        // X Horizontal
+        // Y Vertical
+        // Parent VC
+
+        #endregion
+
+        #region Constructors
+
+        public MainContainerSize(BaseContainer vc)
+        {
+            this.ParentContainer = vc;
+            Initialize();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void Initialize()
+        {            
+        }
+
+        #endregion
+
+        #region Overrides Members
+
+        public override void SetHeightWidth()
+        {
+            this.CurrentHeight = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Height;
+            this.CurrentWidth = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Width;
+        }
+
+        #endregion
+
+        #region Public Members
 
 
 
+        #endregion
+    }
 
     #endregion
 }
