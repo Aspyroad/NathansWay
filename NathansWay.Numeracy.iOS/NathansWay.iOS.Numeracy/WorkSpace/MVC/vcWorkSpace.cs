@@ -32,9 +32,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        //private SizeWorkSpace _sizeClass;
-
-        public string strTestExpression;
+        private string _strTestExpression;
 
 		#endregion
 
@@ -51,6 +49,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			Initialize();
 		}
 
+        public vcWorkSpace(string _expression) 
+        {   
+            this._strTestExpression = _expression;
+            Initialize();
+        }
+
 		public vcWorkSpace() 
 		{   
 			Initialize();
@@ -66,7 +70,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
 
-            //this._workSpaceSize = new SizeWorkSpace(this);
             this._sizeClass = new SizeWorkSpace(this);           
 
             this._numberFactoryClient = new NumberFactoryClient();
@@ -93,20 +96,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 var _control = (BaseContainer)UIInternalOutput[i];
 
                 _control.SizeClass.RefreshDisplayAndPosition(_XPos);
-                this.AddAndDisplayController(_control, _control.View.Frame);
+                this.AddAndDisplayController(_control);
                 _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;
             }
         }
-
-
 
         #endregion
 
         #region Public Properties
 
-        public SizeNumberContainer NumberContainerSize 
+        public SizeWorkSpace WorkSpaceSize 
         {
-            get { return (SizeNumberContainer)this._sizeClass; }
+            get { return (SizeWorkSpace)this._sizeClass; }
         }
 
         public ExpressionFactory ExpressionObject
@@ -139,6 +140,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { WsLessonDetailResults = value; }
         }
 
+        public string TestExpression 
+        { 
+            get { return this._strTestExpression; } 
+            set { this._strTestExpression = value; }
+        }
+
         #endregion
 
 		#region Overrides
@@ -156,22 +163,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+            // Build our expression
+            this.LoadExpression(this._strTestExpression);
+            this.ShowExpression(_expressionFactory.UIOutput);
 		}
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-
-            //this.LoadExpression(this.strTestExpression);
-            //this.ShowExpression(_expressionFactory.UIOutput);
-            // Pretty UI to see the view
-            this.View.BackgroundColor = UIColor.Blue;
-        }
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            //this.View.BackgroundColor = UIColor.Black;
         }
 
 		#endregion
@@ -214,26 +214,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
             this.CurrentHeigth = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
-        }
-
-        public override void SetScale (int _scale)
-        {
-            base.SetScale(_scale);
-            //var x = _vc.txtNumber.Font.PointSize;
-            //x = x + 50.0f;
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-        }
-
-        public override void RefreshDisplay (PointF _startPoint)
-        {
-            base.RefreshDisplay(_startPoint);
-        }
-
-        public override void SetMainFrame ()
-        {
-            base.SetMainFrame();
         }
 
         #endregion

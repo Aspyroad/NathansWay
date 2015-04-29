@@ -109,8 +109,6 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-
-
 		#region Public Container Members
 
 		/// <summary>
@@ -131,7 +129,7 @@ namespace AspyRoad.iOSCore
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subviews
-			_newController.View.Frame = this.View.Bounds;
+			//_newController.View.Frame = this.View.Bounds;
 			this.View.AddSubview (_newController.View);
 			_newController.DidMoveToParentViewController (this);
 		}

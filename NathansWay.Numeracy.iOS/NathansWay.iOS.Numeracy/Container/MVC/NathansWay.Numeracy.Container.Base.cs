@@ -108,6 +108,8 @@ namespace AspyRoad.iOSCore
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
+            // TODO : Testing here, try and set ALL objects from here.
+            this.SizeClass.SetMainFrame();
 		}
 
 		public override void ViewDidLayoutSubviews ()

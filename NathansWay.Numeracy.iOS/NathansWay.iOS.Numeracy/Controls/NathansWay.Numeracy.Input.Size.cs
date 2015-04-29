@@ -111,7 +111,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // We set the top position based on the centers 
             // Grab the center of the parent and add half the local currentheight
             float _YPos;
-            var p = this.VcMainContainer._vcWorkSpace.Value.SizeClass.CurrentHeigth;
+            var p = this.VcMainContainer._vcWorkSpace.SizeClass.CurrentHeigth;
 
             switch (this.GlobalSizeDimensions.Position)
             {
@@ -138,7 +138,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.StartPoint = new PointF(_XPos, _YPos);
             this.SetHeightWidth();
-            this.SetMainFrame();
+            //this.SetMainFrame();
         }
 
         //The event-invoking method that derived classes can override. 

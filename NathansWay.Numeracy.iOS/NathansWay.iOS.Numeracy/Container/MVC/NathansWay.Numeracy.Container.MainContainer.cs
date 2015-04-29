@@ -28,6 +28,8 @@ namespace NathansWay.iOS.Numeracy
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
+
+        //public vcWorkSpace _vcWorkSpace;
         //public vcNumberText _vcCtrlNumberText1;
         //public vcNumberText _vcCtrlNumberText2;
 
@@ -69,15 +71,11 @@ namespace NathansWay.iOS.Numeracy
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
+
             //_vcCtrlNumberText2 = new Lazy<vcCtrlNumberText>(() => this._storyBoard.InstantiateViewController("vcCtrlNumberText") as vcCtrlNumberText);
             //_vcCtrlNumberText1 = new vcCtrlNumberText(new RectangleF(200, 600, 46, 60));
             //_vcCtrlNumberText2 = new vcCtrlNumberText();
 
-			//laborController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<LaborController>());
-			//expenseController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<ExpenseController>());
-			//documentController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<DocumentController>());
-			//confirmationController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<ConfirmationController>());
-			//historyController = new Lazy<UIViewController>(() => Storyboard.InstantiateViewController<HistoryController>());
 		}
 
 		#endregion
@@ -97,7 +95,6 @@ namespace NathansWay.iOS.Numeracy
                         160, 
                         260
                     )
-
                 );
             }
             else
@@ -134,6 +131,10 @@ namespace NathansWay.iOS.Numeracy
 			// White backing for out app
 			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
             this.View.BackgroundColor = UIColor.Yellow;
+
+            _vcWorkSpace = new vcWorkSpace();
+            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
 		}
 
 		public override void ViewWillAppear (bool animated)
@@ -141,16 +142,14 @@ namespace NathansWay.iOS.Numeracy
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
 
-            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+
 
 
             var strTestExpression = "1.2";
             this._vcWorkSpace.Value.LoadExpression(strTestExpression);
             this._vcWorkSpace.Value.ShowExpression(this._vcWorkSpace.Value.ExpressionObject.UIOutput);
 
-            this.AddAndDisplayController(_vcWorkSpace.Value, _vcWorkSpace.Value.View.Frame);
-            var x = 1;
+            this.AddAndDisplayController(_vcWorkSpace);
 		}
 
 		public override void ViewDidAppear (bool animated)

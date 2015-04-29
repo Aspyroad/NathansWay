@@ -126,8 +126,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
             // Add subviews - controls
             this.View.AddSubview(this.txtNumber);
-            //this.View.AddSubview(this.btnUp);
-            //this.View.AddSubview(this.btnDown);
+            this.View.AddSubview(this.btnUp);
+            this.View.AddSubview(this.btnDown);
 
             // Set initital values
             this.preEdit();
@@ -157,15 +157,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+
+            // The absolute best spot to set frames!
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
-        }
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            this.View.BackgroundColor = UIColor.Black;
+            this._sizeNumber.SetMainFrame();
         }
 
         #endregion
@@ -268,7 +265,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp = new AspyButton();
             this.txtNumber = new AspyTextField();
             // Sizing class
-            this._sizeClass = new SizeNumber(this) as SizeNumber;
+            this._sizeClass = new SizeNumber(this);
+            this._sizeNumber = (SizeNumber)this._sizeClass;
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.5f;
@@ -304,7 +302,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
 
             singleTapGesture = null;
-            this._bPickerToTop = false;
+            this._bPickerToTop = true;
         }
 
         // Partials
