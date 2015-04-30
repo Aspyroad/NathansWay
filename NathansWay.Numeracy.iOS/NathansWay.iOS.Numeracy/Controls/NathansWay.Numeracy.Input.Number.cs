@@ -39,7 +39,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private vcNumberPad _numberpad;
         private SizeNumber _sizeNumber;
-        private vcMainContainer _viewcontollercontainer;
+        private vcMainContainer _vcMainContainer;
 
         private Action ehValueChanged;
         private Action<int> actHandlePadPush;
@@ -132,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set initital values
             this.preEdit();
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditUpDown;  //this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;  //this._numeracySettings.NumberCombo.EditMode;
                         
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(HandlePickerChanged);
@@ -267,6 +267,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Sizing class
             this._sizeClass = new SizeNumber(this);
             this._sizeNumber = (SizeNumber)this._sizeClass;
+            this._vcMainContainer = this._sizeClass.VcMainContainer;
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.5f;
@@ -461,12 +462,12 @@ namespace NathansWay.iOS.Numeracy.Controls
           
             if (this._numberpad == null)
             {
-                this._numberpad = this._viewcontollercontainer._vcNumberPad.Value;
+                this._numberpad = this._vcMainContainer._vcNumberPad.Value;
                 // Set the value local to numbad
                 this._numberpad.PadValue = this.CurrentValue;
 
                 // Main Controller is now responsible for all top level Vc's
-                this._viewcontollercontainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
+                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
             }
             if (!this._numberpad.Locked)
             {

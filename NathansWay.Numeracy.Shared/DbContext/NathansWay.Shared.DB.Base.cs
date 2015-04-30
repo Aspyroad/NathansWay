@@ -126,7 +126,7 @@ namespace NathansWay.Shared.DB
 			}, cancellationToken);
 		}
 
-		public class InitializeData<IBusEntity> where IBusEntity : new()
+		public class InitializeData<IBusEntity> where IBusEntity : class, new()
 		{
 			public InitializeData (IBusEntity _enititytable, SQLiteAsyncConnection _connection, CancellationToken _cancellationToken)
 			{

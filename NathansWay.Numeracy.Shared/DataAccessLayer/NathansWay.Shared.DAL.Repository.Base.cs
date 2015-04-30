@@ -23,7 +23,7 @@ using NathansWay.Shared.DB;
 
 namespace NathansWay.Shared.DAL.Repository
 {
-	public class NWRepository<T> : IRepository<T> where T : IBusEntity, new()
+	public class NWRepository<T> : IRepository<T> where T : class, IBusEntity, new()
     {
 		//protected static object locker = new object ();  
 		protected ISharedGlobal _sharedGlobal;
@@ -59,11 +59,11 @@ namespace NathansWay.Shared.DAL.Repository
 		/// </summary>
 		/// <returns>A Task TResult List IEntity</returns>
 		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
-		public Task<List<T>> SelectAllAsync () 
+        public Task<List<T>> SelectAllAsync ()
 		{			
             var Conn = _db.GetAsyncConnection ();
 			return Conn
-				.Table<T> ()
+                .Table<T> () 
 				.OrderBy(_predicateOrderBy)
 				//.OrderBy (i => i.SEQ)
 				.ToListAsync();
