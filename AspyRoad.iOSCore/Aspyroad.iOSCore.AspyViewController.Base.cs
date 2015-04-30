@@ -129,7 +129,8 @@ namespace AspyRoad.iOSCore
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subviews
-			//_newController.View.Frame = this.View.Bounds;
+            // Took the frame assign out, cant see a need for it.
+			//_newController.View.Frame = this.View.Frame;
 			this.View.AddSubview (_newController.View);
 			_newController.DidMoveToParentViewController (this);
 		}
@@ -225,11 +226,11 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			View.Tag = _AspyTag1;
+			this.View.Tag = _AspyTag1;
 			// Copy the original tag number to tag2
 			// There are times with multiple controls where we need different tag numbers
 			// But we can always get the global control tag from tag2
-			_AspyTag2 = _AspyTag1;
+			this._AspyTag2 = _AspyTag1;
 		}			
 
 		// These puppies cost me a lot of time. DAYS!

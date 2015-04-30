@@ -131,8 +131,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Set initital values
             this.preEdit();
-
-            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;  //this._numeracySettings.NumberCombo.EditMode;
                         
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(HandlePickerChanged);
@@ -256,7 +254,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void Initialize ()
         {
 			this.AspyTag1 = 600102;
-            this.AspyName = "VC_CtrlNumberText";
+            this.AspyName = "VC_NumberText";
             // Event delegates              
             this.actHandlePadPush = new Action<int>(HandlePadPush);
             this.actHandlePadLock = new Action<int>(HandlePadLock);
@@ -302,6 +300,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
+            this.CurrentEditMode = E__NumberComboEditMode.EditUpDown;  //this._numeracySettings.NumberCombo.EditMode;
             singleTapGesture = null;
             this._bPickerToTop = true;
         }

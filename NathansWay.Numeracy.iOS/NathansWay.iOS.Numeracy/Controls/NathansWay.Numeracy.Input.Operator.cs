@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
 
         // UI Components
-        public AspyTextField txtDecimal { get; private set; }
+        public AspyTextField txtOperator { get; private set; }
 
         private vcMainContainer _viewcontollercontainer;
 
@@ -83,7 +83,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
             // Add subviews
-            this.View.AddSubview(this.txtDecimal);
+            this.View.AddSubview(this.txtOperator);
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -92,7 +92,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.txtDecimal.Frame = this.DecimalSize._rectTxtDecimal;
+            this.txtOperator.Frame = this.DecimalSize._rectTxtDecimal;
         }
 
         #endregion
@@ -112,50 +112,50 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void Initialize_ ()
         {
             //base.Initialize ();
-            this.AspyTag1 = 600102;
+            this.AspyTag1 = 600105;
             this.AspyName = "VC_DecimalText";
 
             // Sizing class
-            this._sizeClass = new SizeDecimal(this);
+            this._sizeClass = new SizeOperator(this);
 
             // Create textbox
-            this.txtDecimal = new AspyTextField();
+            this.txtOperator = new AspyTextField();
             // Apply some UI to the textbox
-            this.SizeClass.SetNumberFont(this.txtDecimal);
-            this.txtDecimal.HasBorder = true;
-            this.txtDecimal.HasRoundedCorners = false;
-            this.txtDecimal.Text = ".";
-            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtDecimal.TextAlignment = UITextAlignment.Center;
+            this.SizeClass.SetNumberFont(this.txtOperator);
+            this.txtOperator.HasBorder = true;
+            this.txtOperator.HasRoundedCorners = false;
+            this.txtOperator.Text = ".";
+            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
-            this.txtDecimal.ApplyUI();
+            this.txtOperator.ApplyUI();
         }
 
         #endregion       
 
     }
 
-    public class SizeDecimal : SizeBase
+    public class SizeOperator : SizeBase
     {
         #region Class Variables
         // X Horizontal
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectTxtDecimal;
+        public RectangleF _rectTxtOperator;
         // Parent Container
-        private vcDecimalText _vcChild;
+        //private vcOperatorText _vcChild;
 
         #endregion
 
         #region Constructors
 
-        public SizeDecimal() : base ()
+        public SizeOperator() : base ()
         {
             Initialize();
         }
 
-        public SizeDecimal(BaseContainer _vc) : base (_vc)
+        public SizeOperator(BaseContainer _vc) : base (_vc)
         {
             Initialize();
         }
@@ -166,7 +166,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            this._vcChild = (vcDecimalText)this.ParentContainer;
+            //this._vcChild = (vcOperatorText)this.ParentContainer;
         }
 
         #endregion
@@ -178,33 +178,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.RefreshDisplay(_startPoint);
 
             // Set local frames to the VC
-            this.SetRectTxtDecimal();
+            this.SetRectTxtOperator();
         }
 
         public override void SetHeightWidth ()
         { 
-            this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
+            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
-        }
-
-        public override void SetScale (int _scale)
-        {
-            base.SetScale(_scale);
-        }
-
-        public override void SetMainFrame()
-        {
-            // Set main VC Frame
-            base.SetMainFrame();
         }
 
         #endregion
 
         #region Public Members
 
-        public void SetRectTxtDecimal()
+        public void SetRectTxtOperator()
         {
-            this._rectTxtDecimal = new RectangleF(
+            this._rectTxtOperator = new RectangleF(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,

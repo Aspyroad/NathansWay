@@ -295,15 +295,16 @@ namespace NathansWay.iOS.Numeracy
 			_numeracyUIManager.AddVC (6007, "VC_ToolBox");
 			// Containers
 			_numeracyUIManager.AddVC (60020, "VC_MainGame");
-			_numeracyUIManager.AddVC (60021, "VC_MainWorkSpace"); 
+			_numeracyUIManager.AddVC (60021, "VC_GlobalWorkSpace"); 
 			_numeracyUIManager.AddVC (60022, "VC_WorkSpace");
-            _numeracyUIManager.AddVC (60023, "VC_FractionContainer");
+            _numeracyUIManager.AddVC (60023, "VC_MainContainer");
 			// Controls 
 			_numeracyUIManager.AddVC (600100, "VC_NumberPad");
 			_numeracyUIManager.AddVC (600101, "VC_FractionCombo");
             _numeracyUIManager.AddVC (600102, "VC_NumberText");
 			_numeracyUIManager.AddVC (600103, "VC_ComboBox");
             _numeracyUIManager.AddVC (600104, "VC_DecimalText");
+            _numeracyUIManager.AddVC (600105, "VC_OperatorText");
 
 
 			// Register app/user settings

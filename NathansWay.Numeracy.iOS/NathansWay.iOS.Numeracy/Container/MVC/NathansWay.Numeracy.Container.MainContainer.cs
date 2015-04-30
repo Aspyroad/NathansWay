@@ -62,16 +62,18 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Initialize ()
 		{
+            this.AspyTag1 = 60023;
+            this.AspyName = "VC_MainContainer";
+            // Storyboard reference
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
-
+            // Vc's
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
+        }
 
-		}
-
-		#endregion
+        #endregion
 
 		#region Public Members
 
@@ -119,60 +121,18 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-		public override void LoadView ()
-		{
-			// White backing for out app
-			this.View = new UIView (iOSGlobals.G__RectWindowLandscape);
-            this.View.BackgroundColor = UIColor.Yellow;
-
-            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
-            // Now we can build our WorkSpace
-            this._vcWorkSpace.Value.ExpressionString = "23.655";
-		}
-
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
 
-
+            // Local view sizing UI etc
+            this.View.BackgroundColor = UIColor.Yellow;
+            this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
+            // Add any views or vc's
             this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
-		public override void ViewDidAppear (bool animated)
-		{
-			// Always correct bounds and frame
-			base.ViewDidAppear (animated);
-
-			// ***********************************************
-			// Load our initial vc
-			// this.AddAndDisplayController(_vcLessonMenu.Value);
-
-            // Number Text Testing
-            //_vcCtrlNumberText1.DisplaySize = G__NumberDisplaySize.Large;
-            //_vcCtrlNumberText2.DisplaySize = G__NumberDisplaySize.Medium;
-            //_vcCtrlNumberText1.PickerToTop = true;
-            //_vcCtrlNumberText2.PickerToTop = true;
-
-            //this.AddAndDisplayController(_vcCtrlNumberText1);
-            //this.AddAndDisplayController(_vcCtrlNumberText2, new RectangleF(300, 600, 46, 60));
-
-            //this._vcCtrlNumberText1.NumSize.RefreshDisplay();
-
-
-            //_vcCtrlNumberText.Value.NumberTextSize.SetScale(0);
-			// ***********************************************
-
-            // Testing
-            //this._ef = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
-            //_ef.CreateExpression("(,[,1,/,2,],+,[,3,/,4,],),-,(,3,),=,789.6");
-		}
-
-		public override void ViewDidLayoutSubviews ()
-		{
-			base.ViewDidLayoutSubviews ();
-		}
 
 		public override void ViewDidLoad ()
 		{
@@ -182,6 +142,11 @@ namespace NathansWay.iOS.Numeracy
             // Sizing class
             this._sizeClass = new MainContainerSize(this);
             this._sizeClass.RefreshDisplay(new PointF(0.0f, 0.0f));
+
+            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+            // Now we can build our WorkSpace
+            this._vcWorkSpace.Value.ExpressionString = "23.655";
 		}
 
         public override void DidReceiveMemoryWarning()

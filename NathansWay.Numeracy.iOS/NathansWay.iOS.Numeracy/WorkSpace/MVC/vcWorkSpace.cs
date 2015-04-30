@@ -177,10 +177,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
-            // Build our expression
-            //this.LoadExpression(this._strExpression);
-            //this.BuildExpression(_expressionFactory.UIOutput);
 		}
 
         public override void ViewWillAppear(bool animated)
