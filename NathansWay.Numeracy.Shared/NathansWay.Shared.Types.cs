@@ -42,6 +42,12 @@ namespace NathansWay.Shared
         Bottom = 3
     }
 
+    public enum G__Significance : int
+    {
+        Significant = 1,
+        InSignificant = 2
+    }
+
 	#region Filtering
 
 	public enum G__ExpressionType 

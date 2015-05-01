@@ -63,7 +63,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 
         }
-        public void UICreatOperator (string strOperator)
+        public void UICreatOperator (G__MathChar _mathChar)
         {
 
         }

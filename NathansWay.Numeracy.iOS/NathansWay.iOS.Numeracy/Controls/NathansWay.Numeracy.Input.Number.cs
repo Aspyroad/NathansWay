@@ -46,6 +46,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private Action<int> actHandlePadLock;
 
         private G__UnitPlacement _tensUnit;
+        private G__Significance _significance;
 
         private int _intPrevValue;
         private int _intCurrentValue;
@@ -220,6 +221,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return _tensUnit; }
             set { _tensUnit = value; }
+        }
+
+        public G__Significance Significance
+        {
+            get { return this._significance; }
+            set { this._significance = value; }
         }
 
         public E__NumberComboEditMode CurrentEditMode

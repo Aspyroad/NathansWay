@@ -71,19 +71,20 @@ namespace NathansWay.Shared.Factories
                         this._UIPlatformClient.UICreateBrace(false);
                     }
                     break;
-                    case (G__MathChar.Fraction):
+                    case (G__MathChar.BraceRoundRight):
                     {
-                        // Fraction Start
-                        // Always jumps 4 places
-                        // [10/24]
-                        // this._lsDecodedExpression
+                        this._UIPlatformClient.UICreateBrace(true);
                     }
                     break;
-
+                    case (G__MathChar.Fraction):
+                    {
+                        this._UIPlatformClient.UICreateFraction(x.Value);
+                    }
+                    break;
                     default :
-                        {
-                            y = "Nope";
-                        }
+                    {
+                        this._UIPlatformClient.UICreatOperator()
+                    }
                         break;
                 }
             }

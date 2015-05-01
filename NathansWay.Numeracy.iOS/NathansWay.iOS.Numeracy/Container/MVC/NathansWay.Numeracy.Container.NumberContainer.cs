@@ -45,6 +45,9 @@ namespace NathansWay.iOS.Numeracy
 
         private List<BaseContainer> _lsNumbers;
 
+        private string[] _delimiters = { "." };
+
+        //string[] result = text.Split(delimiters,StringSplitOptions.RemoveEmptyEntries);
         //private SizeNumberContainer _sizeClass;
 
         #endregion
@@ -81,6 +84,21 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Deconstruction
+
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+
+            if (disposing)
+            {                
+                // TODO : Loop thru this._lsNumbers remove all numbers from the number container
+
+            }
+        }
+
+        #endregion
+
         #region Private Members
 
         private void Initialize()
@@ -101,8 +119,23 @@ namespace NathansWay.iOS.Numeracy
 
         public void CreateNumber(string _value)
         {
-            // Loop through _value
-            // 01 243.675 12 1.4 789008
+            // Locals
+            int _sig = 0;
+            int _insig = 0;
+            string[] _result;
+            bool _hitDecimal = false;
+
+            // Tens allocation 
+            _result = _value.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
+            // There should only ever be two
+            if (_result.Length > 2)
+            {
+                // TODO : Raise an error. This should never be any greater then two dimensions
+            }
+            _sig = _result[0].Length;
+            //_insig = _result[1].Length; not needed?
+
+            // Main creation loop
             for (int i = 0; i < _value.Length; i++)
             {
                 // The Amazing Conversion Of Doctor Parasis!
@@ -115,6 +148,25 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
+
+                    #region Set Tens Unit
+
+                    if (_hitDecimal)
+                    {
+                        // We are now looking at insignificant numbers
+                        _insig++;
+                        newnumber.Significance = G__Significance.InSignificant;
+                        newnumber.TensUnit = (G__UnitPlacement)_insig;
+                    }
+                    else
+                    {
+                        newnumber.Significance = G__Significance.Significant;
+                        newnumber.TensUnit = (G__UnitPlacement)_sig;
+                        _sig--;
+                    }
+
+                    #endregion
+
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newnumber);
                     // Sizing
@@ -130,6 +182,7 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
+                    _hitDecimal = true;
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
@@ -151,6 +204,8 @@ namespace NathansWay.iOS.Numeracy
             // Set our current height
             this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
         }
+
+
 
         #endregion
 
