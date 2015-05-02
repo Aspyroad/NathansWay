@@ -305,6 +305,7 @@ namespace NathansWay.iOS.Numeracy
 			_numeracyUIManager.AddVC (600103, "VC_ComboBox");
             _numeracyUIManager.AddVC (600104, "VC_DecimalText");
             _numeracyUIManager.AddVC (600105, "VC_OperatorText");
+            _numeracyUIManager.AddVC (600106, "VC_BraceText");
 
 
 			// Register app/user settings

@@ -133,7 +133,6 @@ namespace NathansWay.iOS.Numeracy
             this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
-
 		public override void ViewDidLoad ()
 		{
 			// Random depending on various factors while loading (rotation etc) bounds and frame
@@ -154,16 +153,8 @@ namespace NathansWay.iOS.Numeracy
             base.DidReceiveMemoryWarning();
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            //this.View.BackgroundColor = UIColor.Black;
-        }
-
 		#endregion
-	}
-
-    #region Size Classes
+	}        
 
     public class MainContainerSize : SizeBase
     {
@@ -208,6 +199,4 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
     }
-
-    #endregion
 }

@@ -16,47 +16,41 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-    public class vcOperatorText : BaseContainer
+    public class vcBraceText : BaseContainer
     {
         #region Class Variables
 
         // UI Components
-        public AspyTextField txtOperator { get; private set; }
+        public AspyTextField txtBrace { get; private set; }
 
         private vcMainContainer _viewcontollercontainer;
-
-        private int _intPrevValue;
-        private int _intCurrentValue;
-        private bool _bIsInEditMode;
-        private bool _bPickerToTop;
-
-        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
-        private bool _bAutoPickerPositionOn;
-        // Global size variable for resizing class.
-        private G__NumberDisplaySize _displaySize;
+        private bool _isRight;
 
         #endregion
 
         #region Constructors
 
-        public vcOperatorText (IntPtr h) : base (h)
+        public vcBraceText (IntPtr h) : base (h)
         {
             Initialize_();
         }
 
         [Export("initWithCoder:")]
-        public vcOperatorText (NSCoder coder) : base(coder)
+        public vcBraceText (NSCoder coder) : base(coder)
         {
             Initialize_();
         }
 
-        public vcOperatorText ()
+        public vcBraceText()
         {
-            // Default constructor supply our initial value
             Initialize_();
         }
 
-
+        public vcBraceText(bool isright)
+        {
+            this._isRight = isright;
+            Initialize_();
+        }
 
         #endregion
 
@@ -85,7 +79,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
             // Add subviews
-            this.View.AddSubview(this.txtOperator);
+            this.View.AddSubview(this.txtBrace);
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -94,16 +88,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.txtOperator.Frame = this.DecimalSize._rectTxtDecimal;
+            this.txtBrace.Frame = this.DecimalSize._recttxtBrace;
         }
 
         #endregion
         
         #region Public Properties
 
-        public SizeDecimal DecimalSize
+        public SizeBrace DecimalSize
         {
-            get { return (SizeDecimal)this._sizeClass; }
+            get { return (SizeBrace)this._sizeClass; }
             //set { this._sizeClass = value; }
         }
 
@@ -114,52 +108,61 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void Initialize_ ()
         {
             //base.Initialize ();
-            this.AspyTag1 = 600105;
-            this.AspyName = "VC_DecimalText";
+            this.AspyTag1 = 600106;
+            this.AspyName = "VC_BraceText";
 
             // Sizing class
-            this._sizeClass = new SizeOperator(this);
+            this._sizeClass = new SizeBrace(this);
 
             // Create textbox
-            this.txtOperator = new AspyTextField();
+            this.txtBrace = new AspyTextField();
             // Apply some UI to the textbox
-            this.SizeClass.SetNumberFont(this.txtOperator);
-            this.txtOperator.HasBorder = true;
-            this.txtOperator.HasRoundedCorners = false;
-            this.txtOperator.Text = ".";
-            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtOperator.TextAlignment = UITextAlignment.Center;
-
-            this.txtOperator.ApplyUI();
+            this.SizeClass.SetNumberFont(this.txtBrace);
+            this.txtBrace.HasBorder = true;
+            this.txtBrace.HasRoundedCorners = false;
+            // Left or right brace
+            if (this._isRight)
+            {
+                this.txtBrace.Text = ")";
+            }
+            else
+            {
+                this.txtBrace.Text = "(";
+            }
+            // Center text
+            this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtBrace.TextAlignment = UITextAlignment.Center;
+            // Prettiness
+            this.txtBrace.ApplyUI();
         }
 
         #endregion       
 
     }
 
-    public class SizeOperator : SizeBase
+    public class SizeBrace : SizeBase
     {
         #region Class Variables
         // X Horizontal
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectTxtOperator;
+        public RectangleF _recttxtBrace;
         // Parent Container
-        //private vcOperatorText _vcChild;
+        //private vcBraceText _vcChild;
 
         #endregion
 
         #region Constructors
 
-        public SizeOperator() : base ()
+        public SizeBrace() : base ()
         {
-            Initialize();
+            //Initialize();
         }
 
-        public SizeOperator(BaseContainer _vc) : base (_vc)
+        public SizeBrace(BaseContainer _vc) : base (_vc)
         {
-            Initialize();
+            //Initialize();
         }
 
         #endregion
@@ -168,7 +171,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            //this._vcChild = (vcOperatorText)this.ParentContainer;
+            //this._vcChild = (vcDecimalText)this.ParentContainer;
         }
 
         #endregion
@@ -180,22 +183,33 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.RefreshDisplay(_startPoint);
 
             // Set local frames to the VC
-            this.SetRectTxtOperator();
+            this.SetRecttxtBrace();
         }
 
         public override void SetHeightWidth ()
         { 
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            this.CurrentWidth = this.GlobalSizeDimensions.BraceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+        }
+
+        public override void SetScale (int _scale)
+        {
+            base.SetScale(_scale);
+        }
+
+        public override void SetMainFrame()
+        {
+            // Set main VC Frame
+            base.SetMainFrame();
         }
 
         #endregion
 
         #region Public Members
 
-        public void SetRectTxtOperator()
+        public void SetRecttxtBrace()
         {
-            this._rectTxtOperator = new RectangleF(
+            this._recttxtBrace = new RectangleF(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,

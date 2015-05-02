@@ -61,15 +61,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         public void UICreateFraction (string strFraction)
         {
-
+            var x = new vcFractionContainer(strFraction);
+            _UIOutput.Add(x as object);
         }
-        public void UICreatOperator (G__MathChar _mathChar)
+        public void UICreatOperator (G__MathChar mathChar)
         {
-
+            var x = new vcOperatorText(mathChar);
+            _UIOutput.Add(x as object);
         }
         public void UICreateBrace (bool bIsRight)
         {
-
+            var x = new vcBraceText(bIsRight);
+            _UIOutput.Add(x as object);
         }
         public void PrintUIOutput (object ViewObjectScreen)
         {

@@ -60,7 +60,8 @@ namespace NathansWay.Shared.Factories
 
                 switch ((G__MathChar)x.Key)
                 {
-                    case (G__MathChar.Value): // Most common first ??
+                    // Most common
+                    case (G__MathChar.Value):
                     {
                         // Build a number
                         this._UIPlatformClient.UICreateNumber(x.Value);
@@ -83,9 +84,9 @@ namespace NathansWay.Shared.Factories
                     break;
                     default :
                     {
-                        this._UIPlatformClient.UICreatOperator()
+                        this._UIPlatformClient.UICreatOperator(x.Key);
                     }
-                        break;
+                    break;
                 }
             }
 

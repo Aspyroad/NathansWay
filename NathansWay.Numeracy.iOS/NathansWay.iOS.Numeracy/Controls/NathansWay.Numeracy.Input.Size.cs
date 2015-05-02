@@ -487,6 +487,44 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+        // Brace
+        public float BraceWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 16.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 32.0f;
+                }
+                else // Large
+                {
+                    return 38.0f;
+                }
+            }
+        }
+        // Operator
+        public float OperatorWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 16.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 32.0f;
+                }
+                else // Large
+                {
+                    return 38.0f;
+                }
+            }
+        }
 
         // iOS Specific
         public SizeF LabelPickerViewSize
