@@ -201,12 +201,12 @@
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.NumberFactoryClient.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Size.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Decimal.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Fraction.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.Base.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.MainContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.NumberContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Operator.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Brace.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.FractionContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

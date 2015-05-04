@@ -78,6 +78,12 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Private Variables
+
+        private void BuildFraction
+
+        #endregion
+
         #region Overrides
 
         // Is only called when the viewcontroller first lays out its views
@@ -151,6 +157,9 @@ namespace NathansWay.iOS.Numeracy
         // Y Vertical
         // Parent VC
         private vcFractionContainer _vc;
+
+        // Widths Heights
+        public float _
 
         // Fraction divider line frame
         public RectangleF _rectDivider;
@@ -229,23 +238,23 @@ namespace NathansWay.iOS.Numeracy
             this._rectTxtNumerator = new RectangleF
                 (
                     0.0f, 
-                    this._fCtrlNumberTextHeight, 
-                    this._fGlobalWidth, 
+                    0.0f, 
+                    this.GlobalSizeDimensions.GlobalNumberWidth, 
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this._rectTxtDenominator = new RectangleF
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this._fGlobalWidth, 
+                    this.GlobalSizeDimensions.Gl, 
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this._rectDivider = new RectangleF
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this._fGlobalWidth, 
-                    (this._fNumberPickerHeight + this._fCtrlNumberTextHeight)
+                    this.GlobalSizeDimensions.
+                    this.GlobalSizeDimensions.
                 );
         }
 
