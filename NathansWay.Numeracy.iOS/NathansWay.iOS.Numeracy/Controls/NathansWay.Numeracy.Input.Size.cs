@@ -513,15 +513,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 16.0f;
+                    return 46.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 32.0f;
+                    return 96.0f;
                 }
                 else // Large
                 {
-                    return 38.0f;
+                    return 102.0f;
                 }
             }
         }

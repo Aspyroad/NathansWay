@@ -114,8 +114,6 @@ namespace NathansWay.Shared.Factories
             _UIPlatformClient.UICreateFraction(_strFraction);
         }
 
-
-
         #endregion
 
         #region Public Properties

@@ -24,16 +24,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public AspyTextField txtOperator { get; private set; }
 
         private vcMainContainer _viewcontollercontainer;
-
-        private int _intPrevValue;
-        private int _intCurrentValue;
-        private bool _bIsInEditMode;
-        private bool _bPickerToTop;
-
-        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
-        private bool _bAutoPickerPositionOn;
-        // Global size variable for resizing class.
-        private G__NumberDisplaySize _displaySize;
+        private G__MathChar _operatorType;
 
         #endregion
 
@@ -52,7 +43,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcOperatorText ()
         {
-            // Default constructor supply our initial value
+            Initialize_();
+        }
+
+        public vcOperatorText (G__MathChar operatortype)
+        {
+            this._operatorType = operatortype;
             Initialize_();
         }
 
@@ -94,16 +90,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.txtOperator.Frame = this.DecimalSize._rectTxtDecimal;
+            this.txtOperator.Frame = this.OperatorSize._rectTxtOperator;
         }
 
         #endregion
         
         #region Public Properties
 
-        public SizeDecimal DecimalSize
+        public SizeOperator OperatorSize
         {
-            get { return (SizeDecimal)this._sizeClass; }
+            get { return (SizeOperator)this._sizeClass; }
             //set { this._sizeClass = value; }
         }
 
@@ -154,12 +150,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeOperator() : base ()
         {
-            Initialize();
+            //Initialize();
         }
 
         public SizeOperator(BaseContainer _vc) : base (_vc)
-        {
-            Initialize();
+        {            
+            //Initialize();
         }
 
         #endregion
@@ -185,7 +181,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetHeightWidth ()
         { 
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 

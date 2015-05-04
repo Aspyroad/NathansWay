@@ -307,7 +307,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditUpDown;  //this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;  //this._numeracySettings.NumberCombo.EditMode;
             singleTapGesture = null;
             this._bPickerToTop = true;
         }

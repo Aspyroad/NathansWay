@@ -309,21 +309,6 @@ namespace NathansWay.iOS.Numeracy
             // Dont call base...
         }
 
-        public override void SetScale (int _scale)
-        {
-            base.SetScale(_scale);
-        }
-
-        public override void RefreshDisplay (PointF _startPoint)
-        {
-            base.RefreshDisplay(_startPoint);
-        }
-
-        public override void SetMainFrame ()
-        {
-            base.SetMainFrame();
-        }
-
         #endregion
 
         #region Public Members

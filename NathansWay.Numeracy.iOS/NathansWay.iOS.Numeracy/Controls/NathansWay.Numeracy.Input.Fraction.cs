@@ -31,7 +31,8 @@ namespace NathansWay.iOS.Numeracy
         private double _dblDenominatorCurrentValue;
 
         private FractionSize _sizeClass;
-        private G__NumberDisplaySize _displaySize;
+        // TODO : ****
+        private string _x;
 
         #endregion
 
@@ -39,6 +40,12 @@ namespace NathansWay.iOS.Numeracy
 
         public vcFractionContainer ()
         {
+            Initialize ();
+        }
+
+        public vcFractionContainer (string _expression)
+        {
+            this._x = _expression;
             Initialize ();
         }
 
@@ -119,7 +126,6 @@ namespace NathansWay.iOS.Numeracy
                 this._dblNumeratorPrevValue = this._dblNumeratorCurrentValue; 
                 this._dblNumeratorCurrentValue = value;
             }
-
         }
 
         public double DenominatorValue
@@ -148,7 +154,8 @@ namespace NathansWay.iOS.Numeracy
 
         // Fraction divider line frame
         public RectangleF _rectDivider;
-
+        public RectangleF _rectTxtNumerator;
+        public RectangleF _rectTxtDenominator;
 
         #endregion
 
@@ -182,9 +189,9 @@ namespace NathansWay.iOS.Numeracy
         {
             base.RefreshDisplay(_startPoint);
             // Extra Functionality
-            this.SetDenominatorPosition();
-            this.SetDividerPosition();
             this.SetNumeratorPosition();
+            this.SetDividerPosition();
+            this.SetDenominatorPosition();
         }
 
         #endregion
@@ -218,20 +225,28 @@ namespace NathansWay.iOS.Numeracy
 
         public void SetNumeratorPosition ()
         {
-            //            this._rectNumberPicker = new RectangleF
-            //                (
-            //                    0.0f, 
-            //                    this._fCtrlNumberTextHeight, 
-            //                    this._fGlobalWidth, 
-            //                    this._fNumberPickerHeight
-            //                );
-            //            this._rectCtrlNumberText = new RectangleF
-            //                (
-            //                    this._pStartPoint.X, 
-            //                    this._pStartPoint.Y, 
-            //                    this._fGlobalWidth, 
-            //                    (this._fNumberPickerHeight + this._fCtrlNumberTextHeight)
-            //                );
+            // We can technically create all rects here as this must always be called first
+            this._rectTxtNumerator = new RectangleF
+                (
+                    0.0f, 
+                    this._fCtrlNumberTextHeight, 
+                    this._fGlobalWidth, 
+                    this.GlobalSizeDimensions.NumberPickerHeight
+                );
+            this._rectTxtDenominator = new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    this._fGlobalWidth, 
+                    this.GlobalSizeDimensions.NumberPickerHeight
+                );
+            this._rectDivider = new RectangleF
+                (
+                    this.StartPoint.X, 
+                    this.StartPoint.Y, 
+                    this._fGlobalWidth, 
+                    (this._fNumberPickerHeight + this._fCtrlNumberTextHeight)
+                );
         }
 
         public void SetDividerPosition ()
