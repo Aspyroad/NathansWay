@@ -24,15 +24,16 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Class Variables
 
-        private double _dblNumeratorPrevValue;
-        private double _dblNumeratorCurrentValue;
+        private int _dblNumeratorPrevValue;
+        private int _dblNumeratorCurrentValue;
 
-        private double _dblDenominatorPrevValue;
-        private double _dblDenominatorCurrentValue;
+        private int _dblDenominatorPrevValue;
+        private int _dblDenominatorCurrentValue;
 
         private FractionSize _sizeClass;
-        // TODO : ****
-        private string _x;
+
+        private string _strFractionExpression;
+        private string[] _delimiters = { "/" };
 
         #endregion
 
@@ -45,7 +46,7 @@ namespace NathansWay.iOS.Numeracy
 
         public vcFractionContainer (string _expression)
         {
-            this._x = _expression;
+            this._strFractionExpression = _expression;
             Initialize ();
         }
 
@@ -74,13 +75,15 @@ namespace NathansWay.iOS.Numeracy
             this.AspyName = "VC_FractionContainer";
 
             this._sizeClass = new FractionSize(this);
+            this.CreateFraction();
+
         }
 
         #endregion
 
         #region Private Variables
 
-        private void BuildFraction
+
 
         #endregion
 
@@ -107,6 +110,51 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Private Members
+
+        private void CreateFraction()
+        {
+            // Locals
+            string _numerator;
+            string _denominator;
+            string[] _result;
+
+            // Tens allocation 
+            _result = this._strFractionExpression.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
+            // There should only ever be two
+            if (_result.Length > 2)
+            {
+                // TODO : Raise an error. This should never be any greater then two dimensions
+            }
+
+            this.NumeratorValue = Convert.ToInt16(_result[0].ToString);
+            this.DenominatorValue = Convert.ToInt16(_result[1].ToString);
+
+            // PROCESS - BUILD NUMBER
+            // Create a number box
+            var numberText_Numerator = new vcNumberText(this.NumeratorValue);
+            var numberText_Denominator = new vcNumberText(this.DenominatorValue);
+
+            // Placement
+            numberText_Numerator.NumberSize.RefreshDisplay(new PointF(0.0f, 0.0f));
+
+            // Add our numbers to our internal list counter.
+            //_lsNumbers.Add(newnumber);
+            // Sizing
+            // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
+            newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+            // Set our current width
+            this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
+            // Set our current height - not here as this is always the same...saves loop time
+            // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
+            // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
+            this.TextSizeChange += newnumber.ActTextSizeChange;
+            this.AddAndDisplayController(newnumber, newnumber.View.Frame);
+
+        }
+
+        #endregion
+
         #region Public Properties
 
         public FractionSize FractSize
@@ -121,7 +169,7 @@ namespace NathansWay.iOS.Numeracy
             //set { this._sizeClass = value; }
         }
 
-        public double NumeratorValue
+        public int NumeratorValue
         {
             get 
             { 
@@ -134,7 +182,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public double DenominatorValue
+        public int DenominatorValue
         {
             get 
             { 
@@ -159,7 +207,7 @@ namespace NathansWay.iOS.Numeracy
         private vcFractionContainer _vc;
 
         // Widths Heights
-        public float _
+        //public float _
 
         // Fraction divider line frame
         public RectangleF _rectDivider;
@@ -246,15 +294,15 @@ namespace NathansWay.iOS.Numeracy
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this.GlobalSizeDimensions.Gl, 
+                    this.GlobalSizeDimensions.GlobalNumberWidth, 
                     this.GlobalSizeDimensions.NumberPickerHeight
                 );
             this._rectDivider = new RectangleF
                 (
                     this.StartPoint.X, 
                     this.StartPoint.Y, 
-                    this.GlobalSizeDimensions.
-                    this.GlobalSizeDimensions.
+                    this.GlobalSizeDimensions.GlobalNumberWidth,
+                    this.GlobalSizeDimensions.GlobalNumberHeight
                 );
         }
 

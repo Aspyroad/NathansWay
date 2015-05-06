@@ -385,7 +385,7 @@ namespace NathansWay.Shared
         {
             {"(", G__MathChar.BraceRoundLeft},
             {")", G__MathChar.BraceRoundRight},
-            {"[", G__MathChar.Fraction},
+            {"F", G__MathChar.Fraction},
             {"÷", G__MathChar.Division},
             {"+", G__MathChar.Addition},
             {"-", G__MathChar.Negative},

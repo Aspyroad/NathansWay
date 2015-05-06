@@ -436,9 +436,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
+                // GlobalNumberHeight + DividerHeight + GlobalNumberHeight
                 if (this._size == G__NumberDisplaySize.Normal)
-                {
-                    return 60.0f;
+                {                    
+                    return 130.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -446,7 +447,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else // Large
                 {
-                    return 260.0f;
+                    return 262.0f;
                 }
             }
         }
@@ -460,11 +461,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 195.0f;
+                    return 15.0f;
                 }
                 else // Large
                 {
-                    return 260.0f;
+                    return 22.0f;
                 }
             }
         }

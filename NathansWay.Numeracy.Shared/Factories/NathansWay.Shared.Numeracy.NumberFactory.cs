@@ -48,7 +48,7 @@ namespace NathansWay.Shared.Factories
 
         #region Public Members
         // Diveded by symbol (opt + /)
-        // (,[1/2],+,[3/4],),-,(,3,),=,789.6
+        // (,[1/2,+,[3/4],),-,(,3,),=,789.6
 
         public void CreateExpression (string _expression)
         {
@@ -79,7 +79,8 @@ namespace NathansWay.Shared.Factories
                     break;
                     case (G__MathChar.Fraction):
                     {
-                        this._UIPlatformClient.UICreateFraction(x.Value);
+                        i++;
+                        this._UIPlatformClient.UICreateFraction(this._lsDecodedExpression[i].Value);
                     }
                     break;
                     default :
