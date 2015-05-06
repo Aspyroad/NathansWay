@@ -67,7 +67,7 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Private Variables
+        #region Private Members
 
         private void Initialize()
         {
@@ -75,7 +75,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyName = "VC_FractionContainer";
 
             this._sizeClass = new FractionSize(this);
-            this.CreateFraction();
+            //this.CreateFraction();
 
         }
 
@@ -127,8 +127,8 @@ namespace NathansWay.iOS.Numeracy
                 // TODO : Raise an error. This should never be any greater then two dimensions
             }
 
-            this.NumeratorValue = Convert.ToInt16(_result[0].ToString);
-            this.DenominatorValue = Convert.ToInt16(_result[1].ToString);
+            this.NumeratorValue = Convert.ToInt16(_result[0].ToString());
+            this.DenominatorValue = Convert.ToInt16(_result[1].ToString());
 
             // PROCESS - BUILD NUMBER
             // Create a number box
@@ -142,14 +142,14 @@ namespace NathansWay.iOS.Numeracy
             //_lsNumbers.Add(newnumber);
             // Sizing
             // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-            newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+            //newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
             // Set our current width
-            this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
+            //this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
             // Set our current height - not here as this is always the same...saves loop time
             // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
             // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-            this.TextSizeChange += newnumber.ActTextSizeChange;
-            this.AddAndDisplayController(newnumber, newnumber.View.Frame);
+            //this.TextSizeChange += newnumber.ActTextSizeChange;
+            //this.AddAndDisplayController(newnumber, newnumber.View.Frame);
 
         }
 
