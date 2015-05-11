@@ -23,6 +23,9 @@ namespace NathansWay.iOS.Numeracy
     public class vcFractionContainer : BaseContainer
     {
         #region Class Variables
+        // View - Custom Drawing
+        private vFractionContainer  _vFractionContainer;
+
 
         private int _dblNumeratorPrevValue;
         private int _dblNumeratorCurrentValue;
@@ -89,14 +92,18 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+        public override void LoadView()
+        {
+            this._vFractionContainer = new vFractionContainer (new RectangleF(0.0f,0.0f,0.0f,0.0f));
+            this.View = this._vFractionContainer;
+
+        }
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
 
-            // Set any other frames here.
-            // Like denominator etc
         }
 
 
@@ -151,10 +158,9 @@ namespace NathansWay.iOS.Numeracy
             // Math.Max returns the largest or if equal, the value of the variables inputed
             this.SizeClass.CurrentWidth = 
                 Math.Max(numberText_Numerator.SizeClass.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
-            
 
-
-
+            // Check if the current width is greater
+            numberText_Numerator.NumberSize.StartPoint = new PointF((this.SizeClass.CurrentWidth/2) - (numberText_Numerator.NumberSize.CurrentWidth/2), ) 
             // Add our numbers to our internal list counter.
             //_lsNumbers.Add(newnumber);
             // Sizing
@@ -170,16 +176,6 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-        private void DrawFractionDivider(RectangleF rectDivider)
-        {
-            //// Color Declarations
-            var color = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-
-            //// Rectangle Drawing
-            var rectanglePath = UIBezierPath.FromRect(rectDivider);
-            color.SetFill();
-            rectanglePath.Fill();
-        }
 
         #endregion
 

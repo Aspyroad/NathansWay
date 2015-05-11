@@ -91,7 +91,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
 			//base.LoadView();
 			this._vMenuStart = new vMenuStart (this.iOSGlobals.G__RectWindowLandscape);
-			this.View = _vMenuStart;
+			this.View = this._vMenuStart;
 		}
 
 		public override void ViewDidAppear (bool animated)
