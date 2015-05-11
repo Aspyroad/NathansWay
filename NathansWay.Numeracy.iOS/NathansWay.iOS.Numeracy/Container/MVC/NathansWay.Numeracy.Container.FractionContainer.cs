@@ -75,7 +75,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyName = "VC_FractionContainer";
 
             this._sizeClass = new FractionSize(this);
-            //this.CreateFraction();
+            this.CreateFraction();
 
         }
 
@@ -99,6 +99,8 @@ namespace NathansWay.iOS.Numeracy
             // Like denominator etc
         }
 
+
+
         #endregion
 
         #region Public Members
@@ -119,14 +121,16 @@ namespace NathansWay.iOS.Numeracy
             string _denominator;
             string[] _result;
 
-            // Tens allocation 
+            // SPLIT STRING
+            // Split the denominator and numerator apart
             _result = this._strFractionExpression.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
             // There should only ever be two
             if (_result.Length > 2)
             {
+                // More then one delimitor.
                 // TODO : Raise an error. This should never be any greater then two dimensions
             }
-
+            // Set our values in fraction variables
             this.NumeratorValue = Convert.ToInt16(_result[0].ToString());
             this.DenominatorValue = Convert.ToInt16(_result[1].ToString());
 
@@ -135,8 +139,21 @@ namespace NathansWay.iOS.Numeracy
             var numberText_Numerator = new vcNumberText(this.NumeratorValue);
             var numberText_Denominator = new vcNumberText(this.DenominatorValue);
 
-            // Placement
+            // SET POSITIONS
+            // Numerator at the top 0, 0
             numberText_Numerator.NumberSize.RefreshDisplay(new PointF(0.0f, 0.0f));
+
+            // Denominator at the bottom 0 ,numerator height + fraction divider height
+            numberText_Denominator.NumberSize.RefreshDisplay(
+                new PointF(0.0f, this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionHeight));
+            
+            // Grab the width - we need the largest.
+            // Math.Max returns the largest or if equal, the value of the variables inputed
+            this.SizeClass.CurrentWidth = 
+                Math.Max(numberText_Numerator.SizeClass.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
+            
+
+
 
             // Add our numbers to our internal list counter.
             //_lsNumbers.Add(newnumber);
@@ -151,6 +168,17 @@ namespace NathansWay.iOS.Numeracy
             //this.TextSizeChange += newnumber.ActTextSizeChange;
             //this.AddAndDisplayController(newnumber, newnumber.View.Frame);
 
+        }
+
+        private void DrawFractionDivider(RectangleF rectDivider)
+        {
+            //// Color Declarations
+            var color = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRect(rectDivider);
+            color.SetFill();
+            rectanglePath.Fill();
         }
 
         #endregion
@@ -239,7 +267,10 @@ namespace NathansWay.iOS.Numeracy
 
         public override void SetHeightWidth ()
         {
-            base.SetHeightWidth();
+            // Width is assigned during the fraction creation as the number widths must be known
+            this.CurrentHeight = this.GlobalSizeDimensions.FractionHeight;
+            // or 
+            // this.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionHeight);
         }
        
         public override void RefreshDisplay (PointF _startPoint)

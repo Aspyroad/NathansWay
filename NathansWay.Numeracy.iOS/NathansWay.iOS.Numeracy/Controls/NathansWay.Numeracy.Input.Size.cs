@@ -469,6 +469,24 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+        public float DividerPosY
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 60.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 90.0f;
+                }
+                else // Large
+                {
+                    return 120.0f;
+                }
+            }
+        }
         // Decimal
         public float DecimalWidth
         {
@@ -535,6 +553,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
             }
         }
+
         public UIFont GlobalNumberFont
         {
             get
