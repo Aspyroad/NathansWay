@@ -159,8 +159,13 @@ namespace NathansWay.iOS.Numeracy
             this.SizeClass.CurrentWidth = 
                 Math.Max(numberText_Numerator.SizeClass.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
 
-            // Check if the current width is greater
-            numberText_Numerator.NumberSize.StartPoint = new PointF((this.SizeClass.CurrentWidth/2) - (numberText_Numerator.NumberSize.CurrentWidth/2), ) 
+            // This centers our number text boxes
+            numberText_Numerator.NumberSize.StartPoint = 
+                new PointF((this.SizeClass.CurrentWidth / 2) - (numberText_Numerator.NumberSize.CurrentWidth / 2), numberText_Numerator.NumberSize.StartPoint.Y);
+            numberText_Denominator.NumberSize.StartPoint = 
+                new PointF((this.SizeClass.CurrentWidth / 2) - (numberText_Denominator.NumberSize.CurrentWidth / 2), numberText_Denominator.NumberSize.StartPoint.Y);
+
+
             // Add our numbers to our internal list counter.
             //_lsNumbers.Add(newnumber);
             // Sizing
@@ -276,6 +281,11 @@ namespace NathansWay.iOS.Numeracy
             this.SetNumeratorPosition();
             this.SetDividerPosition();
             this.SetDenominatorPosition();
+        }
+
+        public override void RefreshDisplayAndPosition(float _XPos, float _vcHeight)
+        {
+            base.RefreshDisplayAndPosition(_XPos, _vcHeight);
         }
 
         #endregion

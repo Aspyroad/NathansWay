@@ -83,7 +83,6 @@ namespace NathansWay.iOS.Numeracy
         }
 
 		#endregion
-
     }
 }
 
