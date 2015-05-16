@@ -20,7 +20,8 @@ namespace NathansWay.Shared
         float GlobalNumberWidth { get; }
         // Fraction
         float FractionHeight { get; }
-        float DividerHeight { get; }
+        float FractionDividerHeight { get; }
+        float FractionDividerPosY { get; }
         // Decimal
         float DecimalWidth { get; }
     }

@@ -173,9 +173,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void RefreshDisplay(PointF _startPoint)
+        public override void SetPositions(PointF _startPoint)
         {
-            base.RefreshDisplay(_startPoint);
+            base.SetPositions(_startPoint);
 
             // Set local frames to the VC
             this.SetRectTxtDecimal();
@@ -192,10 +192,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetScale(_scale);
         }
 
-        public override void SetMainFrame()
+        public override void SetFrames()
         {
             // Set main VC Frame
-            base.SetMainFrame();
+            base.SetFrames();
         }
 
         #endregion

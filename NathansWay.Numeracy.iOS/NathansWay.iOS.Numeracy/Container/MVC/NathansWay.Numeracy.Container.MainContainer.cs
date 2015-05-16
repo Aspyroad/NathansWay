@@ -140,10 +140,10 @@ namespace NathansWay.iOS.Numeracy
 
             // Sizing class
             this._sizeClass = new MainContainerSize(this);
-            this._sizeClass.RefreshDisplay(new PointF(0.0f, 0.0f));
+            this._sizeClass.SetPositions(new PointF(0.0f, 0.0f));
 
             var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._vcWorkSpace.Value.SizeClass.RefreshDisplay(_pointF);
+            this._vcWorkSpace.Value.SizeClass.SetPositions(_pointF);
             // Now we can build our WorkSpace
             this._vcWorkSpace.Value.ExpressionString = "(,23.655,+,F,3/15,)";
 		}

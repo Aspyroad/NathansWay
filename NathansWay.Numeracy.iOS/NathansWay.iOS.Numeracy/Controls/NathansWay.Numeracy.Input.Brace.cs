@@ -178,12 +178,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void RefreshDisplay(PointF _startPoint)
+        public override void SetPositions(PointF _startPoint)
         {
-            base.RefreshDisplay(_startPoint);
+            base.SetPositions(_startPoint);
 
             // Set local frames to the VC
-            this.SetRecttxtBrace();
+            this.SetRects();
         }
 
         public override void SetHeightWidth ()
@@ -197,18 +197,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetScale(_scale);
         }
 
-        public override void SetMainFrame()
+        public override void SetFrames()
         {
             // Set main VC Frame
-            base.SetMainFrame();
+            base.SetFrames();
         }
 
         #endregion
 
         #region Public Members
 
-        public void SetRecttxtBrace()
-        {
+        public void SetRects()
+        {            
             this._recttxtBrace = new RectangleF(
                 0.0f, 
                 0.0f, 

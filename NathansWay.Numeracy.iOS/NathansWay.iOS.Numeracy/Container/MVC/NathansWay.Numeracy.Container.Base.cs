@@ -95,7 +95,7 @@ namespace AspyRoad.iOSCore
             set { this._actTextSizeChanged = value; }
         }
 
-        public SizeBase SizeClass
+        public virtual SizeBase SizeClass
         {
             get { return this._sizeClass; }
         }
@@ -109,7 +109,7 @@ namespace AspyRoad.iOSCore
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
             // TODO : Testing here, try and set ALL objects from here.
-            this.SizeClass.SetMainFrame();
+            this.SizeClass.SetFrames();
 		}
 
 		public override void ViewDidLayoutSubviews ()

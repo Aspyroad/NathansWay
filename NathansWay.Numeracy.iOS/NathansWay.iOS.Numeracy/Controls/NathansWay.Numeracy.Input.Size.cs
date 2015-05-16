@@ -26,15 +26,23 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Class Variables
-
+        // Global Dimension Sizes
         private iOSNumberDimensions _globalSizeDimensions;
-        private BaseContainer _parentContainer;
+        // Positioning globals
+        protected G__NumberDisplayPositionY _displayPositionY;
+        protected G__NumberDisplayPositionX _displayPositionX;
+        // Set Relational Position Also
+        protected bool _setRelationPosY;
+        protected bool _setRelationPosX;
+        // Parent container reference
+        protected BaseContainer _parentContainer;
         // Current Sizing
-        private float _fCurrentWidth = 0.0f;
-        private float _fCurrentHeight = 0.0f;
+        protected float _fCurrentWidth = 0.0f;
+        protected float _fCurrentHeight = 0.0f;
         // Old Sizing
-        private float _fOldWidth = 0.0f;
-        private float _fOldHeight = 0.0f;
+        protected float _fOldWidth = 0.0f;
+        protected float _fOldHeight = 0.0f;
+
         // Startpoint
         //private PointF _startPoint;
 
@@ -61,6 +69,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.VcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
+            // By default we want to center, but this can be changed by children.
+            this.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            this.DisplayPositionY = G__NumberDisplayPositionY.Center;
         }
 
         #endregion
@@ -95,7 +106,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// Calls all functions to set and position the parent class
         /// </summary>
         /// <param name="_startPoint">Start point.</param>
-        public virtual void RefreshDisplay (PointF _startPoint)
+        public virtual void SetPositions (PointF _startPoint)
         {
             
 
@@ -110,42 +121,72 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         /// <summary>
-        /// Calls all functions to set and position the parent class
-        /// But it also looks at a global position (top,center,bottom)
-        /// This is mainly used by parent classes of number,fraction,operator etc. classes.
+        /// Calls all functions to set and position with reference to the parent class
+        /// But it also looks at a global position (top, center, bottom)
+        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
         /// </summary>
         /// <param name="_XPos">X Coordinate (Horizontal).</param>
-        public virtual void RefreshDisplayAndPosition (float _XPos, float _vcHeight)
+        /// <param name="_vcHeight">Parent Vc Height</param>
+        public virtual void RefreshDisplayAndPositionY (float _XPos, float _vcHeight)
         {         
-            // Here we get reference to the parent frame,
-            // Then...
-            // We set the top position based on the centers 
-            // Grab the center of the parent and add half the local currentheight
             float _YPos;
             float p = _vcHeight;
 
-            switch (this.GlobalSizeDimensions.Position)
+            // ** Vertical Center
+            switch (this.DisplayPositionY)
             {
-                case (G__NumberDisplayPosition.Center): // Most common first ??
+                case (G__NumberDisplayPositionY.Center): // Most common first ??
                 {
                     _YPos = ((p / 2.0f) - (this._fCurrentHeight / 2.0f));
                 }
                 break;
-                case (G__NumberDisplayPosition.Top):
+                case (G__NumberDisplayPositionY.Top):
                 {
                     _YPos = 0.0f;
                 }
                 break;
-                default : // G__NumberDisplayPosition.Bottom
+                default : // G__NumberDisplayPositionY.Bottom
                 {
                     _YPos = (p - this._fCurrentHeight);
                 }
                 break;
             }
-            // Here we get reference to the parent frame,
-            // Then...
-            // We set the top position based on the centers 
-            // Grab the center of the parent and add half the local currentheight
+
+            this.StartPoint = new PointF(_XPos, _YPos);
+            this.SetHeightWidth();
+            //this.SetMainFrame();
+        }
+
+        /// <summary>
+        /// Calls all functions to set and position the parent class
+        /// But it also looks at a global position (left, center, right)
+        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
+        /// </summary>
+        /// <param name="_YPos">Y Coordinate (Vertical).</param>
+        /// <param name="_vcWidth">Parent VC Width</param>
+        public virtual void RefreshDisplayAndPositionX (float _YPos, float _vcWidth)
+        {         
+            float _XPos;
+            float p = _vcWidth;
+
+            switch (this.DisplayPositionX)
+            {
+                case (G__NumberDisplayPositionX.Center): // Most common first ??
+                {
+                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
+                }
+                break;
+                case (G__NumberDisplayPositionX.Left):
+                {
+                    _XPos = 0.0f;
+                }
+                break;
+                default : // G__NumberDisplayPosition.Right
+                {
+                    _XPos = (p - this._fCurrentWidth);
+                }
+                break;
+            }
 
             this.StartPoint = new PointF(_XPos, _YPos);
             this.SetHeightWidth();
@@ -157,8 +198,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 
         }
-
-        public virtual void SetMainFrame()
+        // Should be called ONLY in viewdidload or viewwillload
+        public virtual void SetFrames()
         {
             if (this.ParentContainer != null)
             {
@@ -234,6 +275,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._globalSizeDimensions.Size = value; }
         }
 
+        public G__NumberDisplayPositionY DisplayPositionY
+        { 
+            get { return this._displayPositionY; } 
+            set { this._displayPositionY = value; }
+        }
+
+        public G__NumberDisplayPositionX DisplayPositionX
+        { 
+            get { return this._displayPositionX; } 
+            set { this._displayPositionX = value; }
+        }
+
         #endregion
 
     }
@@ -243,7 +296,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Private Variables
 
         private G__NumberDisplaySize _size;
-        private G__NumberDisplayPosition _position;
+        private G__NumberDisplayPositionY _positionY;
+        private G__NumberDisplayPositionX _positionX;
         public IAspyGlobals _iOSGlobals { get; set; }
 
         #endregion
@@ -258,7 +312,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this._size = size;
             this._iOSGlobals = iOSGlobals;
-            this._position = G__NumberDisplayPosition.Center;
+            this._positionY = G__NumberDisplayPositionY.Center;
         }
 
         #endregion
@@ -271,10 +325,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._size = value; }
         }
 
-        public G__NumberDisplayPosition Position
+        public G__NumberDisplayPositionY PositionY
         {
-            get { return this._position; }
-            set { this._position = value; }
+            get { return this._positionY; }
+            set { this._positionY = value; }
+        }
+
+        public G__NumberDisplayPositionX PositionX
+        {
+            get { return this._positionX; }
+            set { this._positionX = value; }
         }
 
         // Global WorkSpace
@@ -451,7 +511,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public float DividerHeight
+        public float FractionDividerHeight
         {
             get
             {
@@ -469,7 +529,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        public float DividerPosY
+        public float FractionDividerPosY
         {
             get
             {

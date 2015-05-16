@@ -25,6 +25,7 @@ namespace NathansWay.iOS.Numeracy
         #region Class Variables
         // View - Custom Drawing
         private vFractionContainer  _vFractionContainer;
+        private vcMainContainer _vcMainContainer;
 
 
         private int _dblNumeratorPrevValue;
@@ -33,7 +34,7 @@ namespace NathansWay.iOS.Numeracy
         private int _dblDenominatorPrevValue;
         private int _dblDenominatorCurrentValue;
 
-        private FractionSize _sizeClass;
+        private FractionSize _sizeFraction;
 
         private string _strFractionExpression;
         private string[] _delimiters = { "/" };
@@ -77,7 +78,11 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 60023;
             this.AspyName = "VC_FractionContainer";
 
+            // Sizing Class
             this._sizeClass = new FractionSize(this);
+            this._sizeFraction = (FractionSize)this._sizeClass;
+            this._vcMainContainer = this._sizeClass.VcMainContainer;
+
             this.CreateFraction();
 
         }
@@ -85,7 +90,6 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Private Variables
-
 
 
         #endregion
@@ -112,10 +116,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public void AddNumberText()
-        {
-
-        }
 
         #endregion
 
@@ -143,41 +143,29 @@ namespace NathansWay.iOS.Numeracy
 
             // PROCESS - BUILD NUMBER
             // Create a number box
-            var numberText_Numerator = new vcNumberText(this.NumeratorValue);
-            var numberText_Denominator = new vcNumberText(this.DenominatorValue);
+            var numberText_Numerator = new vcNumberContainer(_result[0].ToString());
+            var numberText_Denominator = new vcNumberContainer(_result[1].ToString());
 
             // SET POSITIONS
             // Numerator at the top 0, 0
-            numberText_Numerator.NumberSize.RefreshDisplay(new PointF(0.0f, 0.0f));
+            numberText_Numerator.SizeClass.SetPositions(new PointF(0.0f, 0.0f));
 
             // Denominator at the bottom 0 ,numerator height + fraction divider height
-            numberText_Denominator.NumberSize.RefreshDisplay(
-                new PointF(0.0f, this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionHeight));
+            numberText_Denominator.NumberContainerSize.SetPositions(
+                new PointF(0.0f, this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionDividerHeight));
             
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
             this.SizeClass.CurrentWidth = 
-                Math.Max(numberText_Numerator.SizeClass.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
+                Math.Max(numberText_Numerator.NumberContainerSize.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
 
-            // This centers our number text boxes
-            numberText_Numerator.NumberSize.StartPoint = 
-                new PointF((this.SizeClass.CurrentWidth / 2) - (numberText_Numerator.NumberSize.CurrentWidth / 2), numberText_Numerator.NumberSize.StartPoint.Y);
-            numberText_Denominator.NumberSize.StartPoint = 
-                new PointF((this.SizeClass.CurrentWidth / 2) - (numberText_Denominator.NumberSize.CurrentWidth / 2), numberText_Denominator.NumberSize.StartPoint.Y);
+            numberText_Numerator.NumberContainerSize.RefreshDisplayAndPositionX(
+                numberText_Numerator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
+            numberText_Denominator.NumberContainerSize.RefreshDisplayAndPositionX(
+                numberText_Denominator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
 
+            var x = 1;
 
-            // Add our numbers to our internal list counter.
-            //_lsNumbers.Add(newnumber);
-            // Sizing
-            // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-            //newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-            // Set our current width
-            //this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
-            // Set our current height - not here as this is always the same...saves loop time
-            // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
-            // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-            //this.TextSizeChange += newnumber.ActTextSizeChange;
-            //this.AddAndDisplayController(newnumber, newnumber.View.Frame);
 
         }
 
@@ -186,17 +174,17 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public FractionSize FractSize
+        public FractionSize FractionSize
         {
-            get { return this._sizeClass; }
+            get { return (FractionSize)this._sizeClass; }
             set { this._sizeClass = value; }
         }
 
-        public SizeBase SizeClass
-        {
-            get { return (SizeBase)this._sizeClass; }
-            //set { this._sizeClass = value; }
-        }
+//        public SizeBase SizeClass
+//        {
+//            get { return (SizeBase)this._sizeClass; }
+//            //set { this._sizeClass = value; }
+//        }
 
         public int NumeratorValue
         {
@@ -235,9 +223,6 @@ namespace NathansWay.iOS.Numeracy
         // Parent VC
         private vcFractionContainer _vc;
 
-        // Widths Heights
-        //public float _
-
         // Fraction divider line frame
         public RectangleF _rectDivider;
         public RectangleF _rectTxtNumerator;
@@ -259,7 +244,7 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-
+            // Anything child specific to init
         }
 
         #endregion
@@ -269,23 +254,17 @@ namespace NathansWay.iOS.Numeracy
         public override void SetHeightWidth ()
         {
             // Width is assigned during the fraction creation as the number widths must be known
+            // this.CurrentWidth = (width of the largest number)
             this.CurrentHeight = this.GlobalSizeDimensions.FractionHeight;
-            // or 
-            // this.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionHeight);
         }
        
-        public override void RefreshDisplay (PointF _startPoint)
+        public override void SetPositions (PointF _startPoint)
         {
-            base.RefreshDisplay(_startPoint);
+            base.SetPositions(_startPoint);
             // Extra Functionality
             this.SetNumeratorPosition();
             this.SetDividerPosition();
             this.SetDenominatorPosition();
-        }
-
-        public override void RefreshDisplayAndPosition(float _XPos, float _vcHeight)
-        {
-            base.RefreshDisplayAndPosition(_XPos, _vcHeight);
         }
 
         #endregion

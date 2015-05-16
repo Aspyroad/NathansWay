@@ -171,7 +171,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newnumber);
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-                    newnumber.NumberSize.RefreshDisplay(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
@@ -190,7 +190,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.RefreshDisplay(new PointF(this.SizeClass.CurrentWidth, 0.0f));
+                    newdecimal.DecimalSize.SetPositions(new PointF(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time

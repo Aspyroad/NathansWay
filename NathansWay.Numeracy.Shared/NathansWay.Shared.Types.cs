@@ -35,7 +35,21 @@ namespace NathansWay.Shared
         Medium = 2,
         Large = 3
     }
-    public enum G__NumberDisplayPosition : int
+    public enum G__NumberDisplayPositionY : int
+    {
+        Top = 1,
+        Center = 2,
+        Bottom = 3
+    }
+
+    public enum G__NumberDisplayPositionX : int
+    {
+        Right = 1,
+        Center = 2,
+        Left = 3
+    }
+
+    public enum G__NumberPickerPosition : int
     {
         Top = 1,
         Center = 2,

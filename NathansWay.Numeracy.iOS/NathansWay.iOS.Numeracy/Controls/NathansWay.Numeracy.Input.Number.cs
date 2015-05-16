@@ -30,6 +30,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
+        private G__NumberPickerPosition _pickerPosition;
         private txtNumberDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
 
@@ -179,7 +180,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeNumber NumberSize
         {
-            get { return (SizeNumber)this._sizeClass; }
+            get { return this._sizeNumber; }
         }
 
         public bool IsInEditMode
@@ -873,10 +874,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
-        public override void RefreshDisplay (PointF _startPoint)
+        public override void SetPositions (PointF _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
-            base.RefreshDisplay(_startPoint);
+            base.SetPositions(_startPoint);
             // Other Frames
             this.SetPickerPositionNormalOff();
         }  
@@ -887,45 +888,40 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionTopOn ()
         {
-            this.RectMainFrame = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
-                    this.CurrentWidth, 
-                    (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
-                );
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    0.0f, 
-                    this.CurrentWidth,
-                    this.GlobalSizeDimensions.NumberPickerHeight
-                );
-            this._rectTxtNumber = new RectangleF
-                (
-                    0.0f, 
-                    (this.GlobalSizeDimensions.NumberPickerHeight), 
-                    this.CurrentWidth,
-                    this.GlobalSizeDimensions.TxtNumberHeight
-                );
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.CurrentWidth, 
+                (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
+            );
+            this._rectNumberPicker = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.NumberPickerHeight
+            );
+            this._rectTxtNumber = new RectangleF(
+                0.0f, 
+                (this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.TxtNumberHeight
+            );
         }
 
-        public void SetPickerPositionBottomOn ()
+        public void SetPickerPositionBottomOn()
         {
-            this._rectNumberPicker = new RectangleF
-                (
-                    0.0f, 
-                    this.CurrentHeight, 
-                    this.CurrentWidth,
-                    this.GlobalSizeDimensions.NumberPickerHeight
-                );
-            this.RectMainFrame = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    this.CurrentWidth,
-                    (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
-                );
+            this._rectNumberPicker = new RectangleF(
+                0.0f, 
+                this.CurrentHeight, 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.NumberPickerHeight
+            );
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.CurrentWidth,
+                (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
+            );
         }
 
         public void SetPickerPositionNormalOff ()
