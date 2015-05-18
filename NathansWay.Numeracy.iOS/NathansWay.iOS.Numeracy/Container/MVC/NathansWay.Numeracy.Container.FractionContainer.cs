@@ -159,9 +159,13 @@ namespace NathansWay.iOS.Numeracy
             this.SizeClass.CurrentWidth = 
                 Math.Max(numberText_Numerator.NumberContainerSize.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
 
-            numberText_Numerator.NumberContainerSize.RefreshDisplayAndPositionX(
+            // Set the NumberContainers to be centered "horizontally" inside the fraction control
+            numberText_Numerator.NumberContainerSize.SetRelationPosX = true;
+            numberText_Denominator.NumberContainerSize.SetRelationPosX = true;
+
+            numberText_Numerator.NumberContainerSize.SetPositions(
                 numberText_Numerator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
-            numberText_Denominator.NumberContainerSize.RefreshDisplayAndPositionX(
+            numberText_Denominator.NumberContainerSize.SetPositions(
                 numberText_Denominator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
 
             var x = 1;

@@ -102,7 +102,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
 
-                _control.SizeClass.RefreshDisplayAndPositionX(_XPos, this.SizeClass.CurrentHeight);
+                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
                 _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;
             }

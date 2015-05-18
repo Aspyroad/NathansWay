@@ -72,6 +72,76 @@ namespace NathansWay.iOS.Numeracy.Controls
             // By default we want to center, but this can be changed by children.
             this.DisplayPositionX = G__NumberDisplayPositionX.Center;
             this.DisplayPositionY = G__NumberDisplayPositionY.Center;
+            this._setRelationPosX = false;
+            this._setRelationPosY = false;
+        }
+
+        /// <summary>
+        /// Calls all functions to set and position with reference to the parent class
+        /// But it also looks at a global position (top, center, bottom)
+        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
+        /// </summary>
+        /// <param name="_XPos">X Coordinate (Horizontal).</param>
+        /// <param name="_vcHeight">Parent Vc Height</param>
+        private PointF RefreshDisplayAndPositionY (float _XPos, float _vcHeight)
+        {         
+            float _YPos;
+            float p = _vcHeight;
+            // ** Vertical Center
+            switch (this.DisplayPositionY)
+            {
+                case (G__NumberDisplayPositionY.Center): // Most common first ??
+                {
+                    _YPos = ((p / 2.0f) - (this._fCurrentHeight / 2.0f));
+                }
+                break;
+                case (G__NumberDisplayPositionY.Top):
+                {
+                    _YPos = 0.0f;
+                }
+                break;
+                default : // G__NumberDisplayPositionY.Bottom
+                {
+                    _YPos = (p - this._fCurrentHeight);
+                }
+                break;
+            }
+
+            return new PointF(_XPos, _YPos);
+        }
+
+        /// <summary>
+        /// Calls all functions to set and position the parent class
+        /// But it also looks at a global position (left, center, right)
+        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
+        /// </summary>
+        /// <param name="_YPos">Y Coordinate (Vertical).</param>
+        /// <param name="_vcWidth">Parent VC Width</param>
+        private PointF RefreshDisplayAndPositionX (float _YPos, float _vcWidth)
+        {         
+            float _XPos;
+            float p = _vcWidth;
+            // ** Horizontal Center
+            switch (this.DisplayPositionX)
+            {
+                case (G__NumberDisplayPositionX.Center): // Most common first ??
+                {
+                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
+                }
+                break;
+                case (G__NumberDisplayPositionX.Left):
+                {
+                    _XPos = 0.0f;
+                }
+                break;
+                default : // G__NumberDisplayPosition.Right
+                {
+                    _XPos = (p - this._fCurrentWidth);
+                }
+                break;
+            }
+
+            return new PointF(_XPos, _YPos);
         }
 
         #endregion
@@ -104,93 +174,61 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         /// <summary>
         /// Calls all functions to set and position the parent class
+        /// SetPositions should be used to
+        /// 1. Set the StartPoint (PointF)
+        /// 2. Set the Height and Widths of the control
+        /// It should NOT be called to set frame objects
         /// </summary>
         /// <param name="_startPoint">Start point.</param>
         public virtual void SetPositions (PointF _startPoint)
         {
-            
+            PointF _point;
 
-            // Here we get reference to the parent frame,
-            // Then...
-            // We set the top position based on the centers 
-            // Grab the center of the parent and add half the local currentheight
+            if (this._setRelationPosX)
+            {
+                _point = this.RefreshDisplayAndPositionX(_startPoint.X, _startPoint.Y);  
+                this.StartPoint = _point;
+            }
+            if (this._setRelationPosY)
+            {
+                _point = this.RefreshDisplayAndPositionY(_startPoint.X, _startPoint.Y); 
+                this.StartPoint = _point;
+            }
 
-            this.StartPoint = _startPoint;
+            if (_point == null)
+            {
+                this.StartPoint = _startPoint;
+            }
+
             this.SetHeightWidth();
-            //this.SetMainFrame();
         }
 
         /// <summary>
-        /// Calls all functions to set and position with reference to the parent class
-        /// But it also looks at a global position (top, center, bottom)
-        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
+        /// Overload 1 Calls all functions to set and position the parent class
         /// </summary>
-        /// <param name="_XPos">X Coordinate (Horizontal).</param>
-        /// <param name="_vcHeight">Parent Vc Height</param>
-        public virtual void RefreshDisplayAndPositionY (float _XPos, float _vcHeight)
-        {         
-            float _YPos;
-            float p = _vcHeight;
-
-            // ** Vertical Center
-            switch (this.DisplayPositionY)
+        /// <param name="_posX">_posX</param>
+        /// <param name="_posY">_posY</param>
+        public virtual void SetPositions (float _posX, float _posY)
+        {
+            PointF _point;
+            if (this._setRelationPosX)
             {
-                case (G__NumberDisplayPositionY.Center): // Most common first ??
-                {
-                    _YPos = ((p / 2.0f) - (this._fCurrentHeight / 2.0f));
-                }
-                break;
-                case (G__NumberDisplayPositionY.Top):
-                {
-                    _YPos = 0.0f;
-                }
-                break;
-                default : // G__NumberDisplayPositionY.Bottom
-                {
-                    _YPos = (p - this._fCurrentHeight);
-                }
-                break;
+                _point = this.RefreshDisplayAndPositionX(_posX, _posY); 
+                this.StartPoint = _point;
             }
 
-            this.StartPoint = new PointF(_XPos, _YPos);
-            this.SetHeightWidth();
-            //this.SetMainFrame();
-        }
-
-        /// <summary>
-        /// Calls all functions to set and position the parent class
-        /// But it also looks at a global position (left, center, right)
-        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
-        /// </summary>
-        /// <param name="_YPos">Y Coordinate (Vertical).</param>
-        /// <param name="_vcWidth">Parent VC Width</param>
-        public virtual void RefreshDisplayAndPositionX (float _YPos, float _vcWidth)
-        {         
-            float _XPos;
-            float p = _vcWidth;
-
-            switch (this.DisplayPositionX)
+            if (this._setRelationPosY)
             {
-                case (G__NumberDisplayPositionX.Center): // Most common first ??
-                {
-                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
-                }
-                break;
-                case (G__NumberDisplayPositionX.Left):
-                {
-                    _XPos = 0.0f;
-                }
-                break;
-                default : // G__NumberDisplayPosition.Right
-                {
-                    _XPos = (p - this._fCurrentWidth);
-                }
-                break;
+                _point = this.RefreshDisplayAndPositionY(_posX, _posY); 
+                this.StartPoint = _point;
             }
 
-            this.StartPoint = new PointF(_XPos, _YPos);
+            if (_point == null)
+            {
+                this.StartPoint = new PointF(_posX, _posY);
+            }
+
             this.SetHeightWidth();
-            //this.SetMainFrame();
         }
 
         //The event-invoking method that derived classes can override. 
@@ -201,6 +239,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Should be called ONLY in viewdidload or viewwillload
         public virtual void SetFrames()
         {
+            // Geneerally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
             {
                 this.ParentContainer.View.Frame = 
@@ -238,7 +277,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         // Main Control Frame
         public RectangleF RectMainFrame { get; set; }
-
         // General Width and Height Variables
         public float CurrentWidth 
         { 
@@ -285,6 +323,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             get { return this._displayPositionX; } 
             set { this._displayPositionX = value; }
+        }
+
+        public bool SetRelationPosY
+        {
+            get { return this._setRelationPosY; }
+            set { this._setRelationPosY = value; }
+        }
+        public bool SetRelationPosX
+        {
+            get { return this._setRelationPosX; }
+            set { this._setRelationPosX = value; }
         }
 
         #endregion
