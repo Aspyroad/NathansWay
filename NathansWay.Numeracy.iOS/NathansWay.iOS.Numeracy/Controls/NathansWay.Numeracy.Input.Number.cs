@@ -270,9 +270,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnDown = new AspyButton();
             this.btnUp = new AspyButton();
             this.txtNumber = new AspyTextField();
-            // Sizing class
-            this._sizeClass = new SizeNumber(this);
-            this._sizeNumber = (SizeNumber)this._sizeClass;
+            // Size class Init
+            this._sizeNumber = new SizeNumber(this);
+            this._sizeClass = this._sizeNumber;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
 
             // UpDown Buttons

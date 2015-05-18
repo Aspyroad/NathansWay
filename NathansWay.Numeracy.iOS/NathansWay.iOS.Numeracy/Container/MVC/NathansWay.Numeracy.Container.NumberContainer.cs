@@ -214,13 +214,14 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.View.BackgroundColor = UIColor.Clear;
 
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
-            this.View.BackgroundColor = UIColor.Black;
+            this.View.BackgroundColor = UIColor.Clear;
         }
 
 

@@ -33,6 +33,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetailResults _wsLessonDetailResults;
 
         private string _strExpression;
+        private SizeWorkSpace _sizeWorkSpace;
 
 		#endregion
 
@@ -67,15 +68,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		private void Initialize()
 		{
-			//base.Initialize ();
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
-
-            this._sizeClass = new SizeWorkSpace(this);           
-
+            // Size Class Init
+            this._sizeWorkSpace = new SizeWorkSpace(this);
+            this._sizeClass = this._sizeWorkSpace;
+            // Factory Classes for expression building
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
-
 		}
 
 		#endregion

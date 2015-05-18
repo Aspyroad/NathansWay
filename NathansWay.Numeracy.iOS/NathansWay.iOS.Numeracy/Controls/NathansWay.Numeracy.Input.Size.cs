@@ -117,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// </summary>
         /// <param name="_YPos">Y Coordinate (Vertical).</param>
         /// <param name="_vcWidth">Parent VC Width</param>
-        private PointF RefreshDisplayAndPositionX (float _YPos, float _vcWidth)
+        private PointF RefreshDisplayAndPositionX (float _vcWidth, float _YPos)
         {         
             float _XPos;
             float p = _vcWidth;
@@ -184,22 +184,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             PointF _point;
 
-            if (this._setRelationPosX)
-            {
-                _point = this.RefreshDisplayAndPositionX(_startPoint.X, _startPoint.Y);  
-                this.StartPoint = _point;
-            }
-            if (this._setRelationPosY)
-            {
-                _point = this.RefreshDisplayAndPositionY(_startPoint.X, _startPoint.Y); 
-                this.StartPoint = _point;
-            }
-
-            if (_point == null)
+            if (!this._setRelationPosX && !this._setRelationPosY)
             {
                 this.StartPoint = _startPoint;
             }
-
+            else
+            {
+                if (this._setRelationPosX)
+                {
+                    _point = this.RefreshDisplayAndPositionX(_startPoint.X, _startPoint.Y);  
+                }
+                else // (this._setRelationPosY) MUST BE TRUE
+                {
+                    _point = this.RefreshDisplayAndPositionY(_startPoint.X, _startPoint.Y);
+                }
+                this.StartPoint = _point;
+            }
             this.SetHeightWidth();
         }
 
@@ -211,23 +211,23 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetPositions (float _posX, float _posY)
         {
             PointF _point;
-            if (this._setRelationPosX)
+
+            if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                _point = this.RefreshDisplayAndPositionX(_posX, _posY); 
+                new PointF(_posX, _posY);
+            }
+            else
+            {
+                if (this._setRelationPosX)
+                {
+                    _point = this.RefreshDisplayAndPositionX(_posX, _posY);  
+                }
+                else // (this._setRelationPosY) MUST BE TRUE
+                {
+                    _point = this.RefreshDisplayAndPositionY(_posX, _posY);
+                }
                 this.StartPoint = _point;
             }
-
-            if (this._setRelationPosY)
-            {
-                _point = this.RefreshDisplayAndPositionY(_posX, _posY); 
-                this.StartPoint = _point;
-            }
-
-            if (_point == null)
-            {
-                this.StartPoint = new PointF(_posX, _posY);
-            }
-
             this.SetHeightWidth();
         }
 
@@ -325,12 +325,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._displayPositionX = value; }
         }
 
-        public bool SetRelationPosY
+        public bool SetCenterRelativeParentVcPosY
         {
             get { return this._setRelationPosY; }
             set { this._setRelationPosY = value; }
         }
-        public bool SetRelationPosX
+        public bool SetCenterRelativeParentVcPosX
         {
             get { return this._setRelationPosX; }
             set { this._setRelationPosX = value; }

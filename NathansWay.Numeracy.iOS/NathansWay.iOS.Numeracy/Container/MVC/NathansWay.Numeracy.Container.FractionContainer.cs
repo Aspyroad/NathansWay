@@ -36,6 +36,9 @@ namespace NathansWay.iOS.Numeracy
 
         private FractionSize _sizeFraction;
 
+        private vcNumberContainer numberText_Numerator;
+        private vcNumberContainer numberText_Denominator;
+
         private string _strFractionExpression;
         private string[] _delimiters = { "/" };
 
@@ -79,12 +82,11 @@ namespace NathansWay.iOS.Numeracy
             this.AspyName = "VC_FractionContainer";
 
             // Sizing Class
-            this._sizeClass = new FractionSize(this);
-            this._sizeFraction = (FractionSize)this._sizeClass;
+            this._sizeFraction = new FractionSize(this);
+            this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
 
             this.CreateFraction();
-
         }
 
         #endregion
@@ -98,19 +100,19 @@ namespace NathansWay.iOS.Numeracy
 
         public override void LoadView()
         {
-            this._vFractionContainer = new vFractionContainer (new RectangleF(0.0f,0.0f,0.0f,0.0f));
+            this._vFractionContainer = new vFractionContainer();
             this.View = this._vFractionContainer;
 
         }
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
+            this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
 
+
         }
-
-
 
         #endregion
 
@@ -124,8 +126,6 @@ namespace NathansWay.iOS.Numeracy
         private void CreateFraction()
         {
             // Locals
-            string _numerator;
-            string _denominator;
             string[] _result;
 
             // SPLIT STRING
@@ -143,34 +143,28 @@ namespace NathansWay.iOS.Numeracy
 
             // PROCESS - BUILD NUMBER
             // Create a number box
-            var numberText_Numerator = new vcNumberContainer(_result[0].ToString());
-            var numberText_Denominator = new vcNumberContainer(_result[1].ToString());
-
-            // SET POSITIONS
-            // Numerator at the top 0, 0
-            numberText_Numerator.SizeClass.SetPositions(new PointF(0.0f, 0.0f));
-
-            // Denominator at the bottom 0 ,numerator height + fraction divider height
-            numberText_Denominator.NumberContainerSize.SetPositions(
-                new PointF(0.0f, this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + this.SizeClass.GlobalSizeDimensions.FractionDividerHeight));
+            this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
+            this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
             
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
             this.SizeClass.CurrentWidth = 
-                Math.Max(numberText_Numerator.NumberContainerSize.CurrentWidth, numberText_Denominator.SizeClass.CurrentWidth);
+                Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
-            numberText_Numerator.NumberContainerSize.SetRelationPosX = true;
-            numberText_Denominator.NumberContainerSize.SetRelationPosX = true;
+            this.numberText_Numerator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
+            this.numberText_Denominator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
 
-            numberText_Numerator.NumberContainerSize.SetPositions(
-                numberText_Numerator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
-            numberText_Denominator.NumberContainerSize.SetPositions(
-                numberText_Denominator.NumberContainerSize.CurrentWidth, this.SizeClass.CurrentWidth);
+            // Grab the vertical drop for denominator
+            var _ypos = this.numberText_Numerator.NumberContainerSize.CurrentHeight + this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
-            var x = 1;
+            this.numberText_Numerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
+            this.numberText_Denominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
 
+            this.AddAndDisplayController(this.numberText_Numerator);
+            this.AddAndDisplayController(this.numberText_Denominator);
 
+            // var x = 1;
         }
 
 
@@ -226,11 +220,7 @@ namespace NathansWay.iOS.Numeracy
         // Y Vertical
         // Parent VC
         private vcFractionContainer _vc;
-
-        // Fraction divider line frame
-        public RectangleF _rectDivider;
-        public RectangleF _rectTxtNumerator;
-        public RectangleF _rectTxtDenominator;
+        private RectangleF _rectFractionDivider; 
 
         #endregion
 
@@ -262,93 +252,21 @@ namespace NathansWay.iOS.Numeracy
             this.CurrentHeight = this.GlobalSizeDimensions.FractionHeight;
         }
        
-        public override void SetPositions (PointF _startPoint)
-        {
-            base.SetPositions(_startPoint);
-            // Extra Functionality
-            this.SetNumeratorPosition();
-            this.SetDividerPosition();
-            this.SetDenominatorPosition();
-        }
-
         #endregion
 
-        #region Public Members
+        #region Public Properties
 
-        public void SetDenominatorPosition ()
+        public RectangleF RectDividerFrame
         {
-            //            this._rectCtrlNumberText = new RectangleF
-            //                (
-            //                    this._pStartPoint.X, 
-            //                    (this._pStartPoint.Y - this._fNumberPickerHeight), 
-            //                    this._fGlobalWidth, 
-            //                    (this._fNumberPickerHeight + this._fTxtNumberHeight)
-            //                );
-            //            this._rectNumberPicker = new RectangleF
-            //                (
-            //                    0.0f, 
-            //                    0.0f, 
-            //                    this._fGlobalWidth, 
-            //                    this._fNumberPickerHeight
-            //                );
-            //            this._rectTxtNumber = new RectangleF
-            //                (
-            //                    0.0f, 
-            //                    (this._fNumberPickerHeight), 
-            //                    this._fGlobalWidth,
-            //                    this._fTxtNumberHeight
-            //                );
-        }
-
-        public void SetNumeratorPosition ()
-        {
-            // We can technically create all rects here as this must always be called first
-            this._rectTxtNumerator = new RectangleF
-                (
+            get
+            {
+                return new RectangleF(
+                    this.GlobalSizeDimensions.GlobalNumberHeight, 
                     0.0f, 
-                    0.0f, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth, 
-                    this.GlobalSizeDimensions.NumberPickerHeight
+                    this.GlobalSizeDimensions.FractionHeight, 
+                    this.CurrentWidth
                 );
-            this._rectTxtDenominator = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth, 
-                    this.GlobalSizeDimensions.NumberPickerHeight
-                );
-            this._rectDivider = new RectangleF
-                (
-                    this.StartPoint.X, 
-                    this.StartPoint.Y, 
-                    this.GlobalSizeDimensions.GlobalNumberWidth,
-                    this.GlobalSizeDimensions.GlobalNumberHeight
-                );
-        }
-
-        public void SetDividerPosition ()
-        {
-            //            this._rectLabelPickerView = new RectangleF
-            //                (
-            //                    0.0f,
-            //                    0.0f,
-            //                    this._sLabelPickerViewSize.Width,
-            //                    this._sLabelPickerViewSize.Height
-            //                );
-            //            this._rectCtrlNumberText = new RectangleF
-            //                (
-            //                    this._pStartPoint.X, 
-            //                    this._pStartPoint.Y, 
-            //                    this._fGlobalWidth, 
-            //                    this._fTxtNumberHeight
-            //                );
-            //            this._rectTxtNumber = new RectangleF
-            //                (
-            //                    0.0f, 
-            //                    0.0f, 
-            //                    this._fGlobalWidth,
-            //                    this._fTxtNumberHeight
-            //                ); 
+            }
         }
 
         #endregion
