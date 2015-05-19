@@ -214,6 +214,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            //this.View.Layer.Opacity = 0.5f;
             this.View.BackgroundColor = UIColor.Clear;
 
         }
@@ -221,7 +222,7 @@ namespace NathansWay.iOS.Numeracy
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
-            this.View.BackgroundColor = UIColor.Clear;
+
         }
 
 

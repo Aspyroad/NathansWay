@@ -59,8 +59,8 @@ namespace NathansWay.iOS.Numeracy
         private void DrawFractionDivider(RectangleF rectDivider)
         {
             //// Color Declarations
-            var color = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-
+            //var color = UIColor.FromRGBA(100.000f, 0.000f, 0.000f, 1.000f);
+            var color = UIColor.Black.CGColor;
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRect(rectDivider);
             color.SetFill();

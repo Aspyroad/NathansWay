@@ -102,7 +102,6 @@ namespace NathansWay.iOS.Numeracy
         {
             this._vFractionContainer = new vFractionContainer();
             this.View = this._vFractionContainer;
-
         }
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
@@ -110,8 +109,7 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
-
-
+            //this.View.BackgroundColor = UIColor.Clear;
         }
 
         #endregion
