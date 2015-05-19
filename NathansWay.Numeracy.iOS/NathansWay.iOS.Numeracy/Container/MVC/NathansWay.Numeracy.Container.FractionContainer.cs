@@ -109,7 +109,7 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
-            //this.View.BackgroundColor = UIColor.Clear;
+            this.View.BackgroundColor = UIColor.Clear;
         }
 
         #endregion
@@ -258,11 +258,12 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
-                return new RectangleF(
-                    this.GlobalSizeDimensions.GlobalNumberHeight, 
-                    0.0f, 
-                    this.GlobalSizeDimensions.FractionHeight, 
-                    this.CurrentWidth
+                return new RectangleF(                    
+                    2.0f, 
+                    (this.GlobalSizeDimensions.GlobalNumberHeight + 2.0f), 
+                    (this.CurrentWidth - 4.0f),
+                    (this.GlobalSizeDimensions.FractionDividerHeight - 4.0f)
+
                 );
             }
         }

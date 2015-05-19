@@ -58,7 +58,6 @@
     <Compile Include="Aspyroad.iOSCore.AspyView.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyViewController.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyWindow.Base.cs" />
-    <Compile Include="Aspyroad.iOSCore.AspyViewSettings.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyFactories.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTypes.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyAppDel.Base.cs" />

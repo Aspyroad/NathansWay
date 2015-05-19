@@ -528,7 +528,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 46.0f;
+                    return 40.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {

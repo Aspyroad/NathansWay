@@ -75,7 +75,7 @@ namespace NathansWay.Shared
 
 		public UIGlobalTheme()
 		{
-
+            // ALL Alpha Values are between 0-1 NOT 0-255!
 			VcName = "Global";
 			VcTag = 999;
 
@@ -85,7 +85,7 @@ namespace NathansWay.Shared
 			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
 			FontSize = 17.0f;
 			//FontSizeiOS7 = 20.0f;
-			FontColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 00.0f, 0.3f)); // Black
 
 			// UIButton
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(50.0f, 50.0f, 50.0f, 255.0f)); // Black
