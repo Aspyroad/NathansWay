@@ -171,7 +171,9 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newnumber);
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                    //newnumber.SizeClass.SetCenterRelativeParentVcPosX = true;
+                    //newnumber.SizeClass.SetCenterRelativeParentVcPosY = true;
+                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 1.0f));
                     // Set our current width
                     this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
                     // Set our current height - not here as this is always the same...saves loop time
@@ -305,15 +307,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void SetHeightWidth ()
         { 
-            // Dont call base...
-        }
-
-        #endregion
-
-        #region Public Members
-
-        public void SetAllNumberPositions ()
-        {
+            // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }
 
         #endregion

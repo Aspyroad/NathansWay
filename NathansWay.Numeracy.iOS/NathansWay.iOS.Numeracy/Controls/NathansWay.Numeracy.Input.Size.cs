@@ -83,28 +83,57 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// </summary>
         /// <param name="_XPos">X Coordinate (Horizontal).</param>
         /// <param name="_vcHeight">Parent Vc Height</param>
-        private PointF RefreshDisplayAndPositionY (float _XPos, float _vcHeight)
+        private PointF RefreshDisplayAndPosition (float _XWidth, float _YHeight)
         {         
-            float _YPos;
-            float p = _vcHeight;
+            float _YPos = _YHeight;
+            float _XPos = _XWidth;
+            float Y = _YHeight;
+            float X = _XWidth;
+            PointF _startPos;
+
             // ** Vertical Center
-            switch (this.DisplayPositionY)
+            if (this._setRelationPosY)
             {
-                case (G__NumberDisplayPositionY.Center): // Most common first ??
+                switch (this.DisplayPositionY)
                 {
-                    _YPos = ((p / 2.0f) - (this._fCurrentHeight / 2.0f));
+                    case (G__NumberDisplayPositionY.Center): // Most common first ??
+                    {
+                        _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
+                    }
+                    break;
+                    case (G__NumberDisplayPositionY.Top):
+                    {
+                        _YPos = 0.0f;
+                    }
+                    break;
+                    default : // G__NumberDisplayPositionY.Bottom
+                    {
+                        _YPos = (Y - this._fCurrentHeight);
+                    }
+                    break;
                 }
-                break;
-                case (G__NumberDisplayPositionY.Top):
+            }
+            // ** Horizontal Center
+            if (this._setRelationPosX) 
+            {
+                switch (this.DisplayPositionX)
                 {
-                    _YPos = 0.0f;
+                    case (G__NumberDisplayPositionX.Center): // Most common first ??
+                    {
+                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
+                    }
+                    break;
+                    case (G__NumberDisplayPositionX.Left):
+                    {
+                        _XPos = 0.0f;
+                    }
+                    break;
+                    default : // G__NumberDisplayPosition.Right
+                    {
+                        _XPos = (X - this._fCurrentWidth);
+                    }
+                    break;
                 }
-                break;
-                default : // G__NumberDisplayPositionY.Bottom
-                {
-                    _YPos = (p - this._fCurrentHeight);
-                }
-                break;
             }
 
             return new PointF(_XPos, _YPos);
@@ -117,32 +146,32 @@ namespace NathansWay.iOS.Numeracy.Controls
         /// </summary>
         /// <param name="_YPos">Y Coordinate (Vertical).</param>
         /// <param name="_vcWidth">Parent VC Width</param>
-        private PointF RefreshDisplayAndPositionX (float _vcWidth, float _YPos)
-        {         
-            float _XPos;
-            float p = _vcWidth;
-            // ** Horizontal Center
-            switch (this.DisplayPositionX)
-            {
-                case (G__NumberDisplayPositionX.Center): // Most common first ??
-                {
-                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
-                }
-                break;
-                case (G__NumberDisplayPositionX.Left):
-                {
-                    _XPos = 0.0f;
-                }
-                break;
-                default : // G__NumberDisplayPosition.Right
-                {
-                    _XPos = (p - this._fCurrentWidth);
-                }
-                break;
-            }
-
-            return new PointF(_XPos, _YPos);
-        }
+        //        private PointF RefreshDisplayAndPositionX (float _vcWidth, float _YPos)
+//        {         
+//            float _XPos;
+//            float p = _vcWidth;
+//            // ** Horizontal Center
+//            switch (this.DisplayPositionX)
+//            {
+//                case (G__NumberDisplayPositionX.Center): // Most common first ??
+//                {
+//                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
+//                }
+//                break;
+//                case (G__NumberDisplayPositionX.Left):
+//                {
+//                    _XPos = 0.0f;
+//                }
+//                break;
+//                default : // G__NumberDisplayPosition.Right
+//                {
+//                    _XPos = (p - this._fCurrentWidth);
+//                }
+//                break;
+//            }
+//
+//            return new PointF(_XPos, _YPos);
+//        }
 
         #endregion
 
@@ -190,14 +219,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                if (this._setRelationPosX)
-                {
-                    _point = this.RefreshDisplayAndPositionX(_startPoint.X, _startPoint.Y);  
-                }
-                else // (this._setRelationPosY) MUST BE TRUE
-                {
-                    _point = this.RefreshDisplayAndPositionY(_startPoint.X, _startPoint.Y);
-                }
+                _point = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y);   
                 this.StartPoint = _point;
             }
             this.SetHeightWidth();
@@ -218,14 +240,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                if (this._setRelationPosX)
-                {
-                    _point = this.RefreshDisplayAndPositionX(_posX, _posY);  
-                }
-                else // (this._setRelationPosY) MUST BE TRUE
-                {
-                    _point = this.RefreshDisplayAndPositionY(_posX, _posY);
-                }
+                _point = this.RefreshDisplayAndPosition(_posX, _posY);
                 this.StartPoint = _point;
             }
             this.SetHeightWidth();
