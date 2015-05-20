@@ -18,7 +18,6 @@ namespace AspyRoad.iOSCore
 	[MonoTouch.Foundation.Register("AspyView")]	
 	public class AspyView : UIView
 	{
-
 		#region Class Variables
 
         protected IAspyGlobals iOSGlobals;

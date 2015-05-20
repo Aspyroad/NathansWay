@@ -95,13 +95,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 return;
             }
 
-            // Local horizontal position. Do we need a buffer.
+            // TODO : Local horizontal position. Do we need a buffer/padding??
             float _XPos = 2.0f;
                 
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
 
+                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
                 _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;

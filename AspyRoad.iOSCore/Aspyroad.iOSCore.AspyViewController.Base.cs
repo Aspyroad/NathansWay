@@ -26,8 +26,13 @@ namespace AspyRoad.iOSCore
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
-		private string _viewClass;
-
+        // UI styles
+        protected bool _bHasBorder;
+        protected bool _bHasRoundedCorners;
+        protected float _fCornerRadius;
+        protected float _fBorderWidth;
+        protected UIColor colorBorderColor;
+        private bool _bHasNoBorderInContainer;
 
 		#endregion
 
@@ -62,11 +67,17 @@ namespace AspyRoad.iOSCore
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            // UI
+            this._bHasNoBorderInContainer = false;
+            this._bHasBorder = false;
+            this._bHasRoundedCorners = false;
+            this._fBorderWidth = 0.5f;
+            this._fCornerRadius = 3.0f;
 		}
 
 		#endregion
 
-		#region Public Members
+		#region Public Properties
 
 		public int AspyTag1
 		{
@@ -98,13 +109,64 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-		public void ApplyUIAppearance ()
-		{
+        public bool HasBorder
+        {
+            get { return this._bHasBorder; }
+            set 
+            { 
+                if (this._bHasNoBorderInContainer == false)
+                {
+                    this._bHasBorder = value; 
+                }
+            }
+        }
 
-			// Query the UIManager, see if theres a tag with its own UI
-			// If so load it
+        public bool HasRoundedCorners
+        {
+            get { return this._bHasRoundedCorners; }
+            set { this._bHasRoundedCorners = value; }
+        }
 
+        public float BorderWidth
+        {
+            get { return this._fBorderWidth; }
+            set { this._fBorderWidth = value; }
+        }
 
+        public float CornerRadius
+        {
+            get { return this._fCornerRadius; }
+            set { this._fCornerRadius = value; }
+        }
+
+        public bool HasNoBorderInContainer
+        {
+            get { return this._bHasNoBorderInContainer; }
+            set
+            {
+                if (value == true)
+                {
+                    this._bHasBorder = false;
+                    this.View.Layer.BorderWidth = 0.0f;
+                    this._bHasNoBorderInContainer = value;
+                }
+                else
+                {
+                    // This isnt our responsibility?
+                    // this._bHasBorder = false;
+                    // this.View.Layer.BorderWidth = 0.0f;
+                    this._bHasNoBorderInContainer = value;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Public Members
+
+		public virtual void ApplyUI ()
+		{            
+            this.colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value;
 		}
 
 		#endregion
@@ -231,6 +293,7 @@ namespace AspyRoad.iOSCore
 			// There are times with multiple controls where we need different tag numbers
 			// But we can always get the global control tag from tag2
 			this._AspyTag2 = _AspyTag1;
+            this.ApplyUI();
 		}			
 
 		// These puppies cost me a lot of time. DAYS!

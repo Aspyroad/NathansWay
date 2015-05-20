@@ -145,7 +145,7 @@ namespace NathansWay.iOS.Numeracy
             var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.SetPositions(_pointF);
             // Now we can build our WorkSpace
-            this._vcWorkSpace.Value.ExpressionString = "F,3/15";
+            this._vcWorkSpace.Value.ExpressionString = "F,1/2,F,1/2,3.6,F,1/10";
 		}
 
         public override void DidReceiveMemoryWarning()

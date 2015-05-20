@@ -23,6 +23,9 @@ namespace AspyRoad.iOSCore
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
 
+        protected float _fCornerRadius;
+        protected float _fBorderWidth;
+
         protected UIColor colorBorderColor;
 
         #endregion
@@ -56,9 +59,12 @@ namespace AspyRoad.iOSCore
 		private void Initialize_Base()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            // UI
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-		}
+            this._fBorderWidth = 0.5f;
+            this._fCornerRadius = 3.0f;
+        }
 
         #endregion
 
@@ -76,6 +82,18 @@ namespace AspyRoad.iOSCore
             set { this._bHasRoundedCorners = value; }
         }
 
+        public float BorderWidth
+        {
+            get { return this._fBorderWidth; }
+            set { this._fBorderWidth = value; }
+        }
+
+        public float CornerRadius
+        {
+            get { return this._fCornerRadius; }
+            set { this._fCornerRadius = value; }
+        }
+
 
         #endregion
 
@@ -86,12 +104,12 @@ namespace AspyRoad.iOSCore
             // Border
             if (this._bHasBorder)
             {
-                this.Layer.BorderWidth = 0.5f;
+                this.Layer.BorderWidth = this._fBorderWidth;
                 this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             }
             if (this._bHasRoundedCorners)
             {
-                this.Layer.CornerRadius = 3.0f;
+                this.Layer.CornerRadius = this._fCornerRadius;
             }
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;

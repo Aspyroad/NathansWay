@@ -148,6 +148,7 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
+                    newnumber.HasNoBorderInContainer = true;
 
                     #region Set Tens Unit
 
@@ -173,9 +174,9 @@ namespace NathansWay.iOS.Numeracy
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
                     //newnumber.SizeClass.SetCenterRelativeParentVcPosX = true;
                     //newnumber.SizeClass.SetCenterRelativeParentVcPosY = true;
-                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 1.0f));
+                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                     // Set our current width
-                    this._sizeClass.CurrentWidth += newnumber.NumberSize.CurrentWidth;
+                    this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth - 0.0f);
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -188,6 +189,8 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
+                    newdecimal.HasNoBorderInContainer = true;
+
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newdecimal);
                     // Sizing
@@ -207,8 +210,6 @@ namespace NathansWay.iOS.Numeracy
             this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
         }
 
-
-
         #endregion
 
         #region Overrides
@@ -216,6 +217,11 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+        }
+
+        public override void ApplyUI()
+        {
+            this.HasBorder = true;
             this.View.BackgroundColor = UIColor.Clear;
         }
 

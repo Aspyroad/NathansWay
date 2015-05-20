@@ -77,19 +77,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         /// <summary>
-        /// Calls all functions to set and position with reference to the parent class
-        /// But it also looks at a global position (top, center, bottom)
-        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
+        /// Refreshs the display dimensions and positions the view.
         /// </summary>
-        /// <param name="_XPos">X Coordinate (Horizontal).</param>
-        /// <param name="_vcHeight">Parent Vc Height</param>
+        /// <returns>The display and position.</returns>
+        /// <param name="_XWidth">X width.</param>
+        /// <param name="_YHeight">Y height.</param>
         private PointF RefreshDisplayAndPosition (float _XWidth, float _YHeight)
         {         
             float _YPos = _YHeight;
             float _XPos = _XWidth;
             float Y = _YHeight;
             float X = _XWidth;
-            PointF _startPos;
 
             // ** Vertical Center
             if (this._setRelationPosY)
@@ -212,7 +210,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetPositions (PointF _startPoint)
         {
             PointF _point;
-
+            this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
                 this.StartPoint = _startPoint;
@@ -222,7 +220,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _point = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y);   
                 this.StartPoint = _point;
             }
-            this.SetHeightWidth();
+            //this.SetHeightWidth();
         }
 
         /// <summary>
@@ -233,7 +231,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetPositions (float _posX, float _posY)
         {
             PointF _point;
-
+            this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
                 new PointF(_posX, _posY);
@@ -243,7 +241,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _point = this.RefreshDisplayAndPosition(_posX, _posY);
                 this.StartPoint = _point;
             }
-            this.SetHeightWidth();
+            //this.SetHeightWidth();
         }
 
         //The event-invoking method that derived classes can override. 

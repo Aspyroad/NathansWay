@@ -276,8 +276,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vcMainContainer = this._sizeClass.VcMainContainer;
 
             // UpDown Buttons
-            this.btnDown.Alpha = 0.5f;
-            this.btnUp.Alpha = 0.5f;
+            this.btnDown.Alpha = 0.6f;
+            this.btnUp.Alpha = 0.6f;
             this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
             this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
             this.btnDown.Hidden = true;
@@ -287,7 +287,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
             this.txtNumber.Text = this._intCurrentValue.ToString();
             this.txtNumber.HasBorder = true;
-            this.txtNumber.HasRoundedCorners = false;
+            this.txtNumber.BorderWidth = 0.5f;
+            this.txtNumber.HasRoundedCorners = true;
+            this.txtNumber.CornerRadius = 3.0f;
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
             this.txtNumber.ApplyUI();

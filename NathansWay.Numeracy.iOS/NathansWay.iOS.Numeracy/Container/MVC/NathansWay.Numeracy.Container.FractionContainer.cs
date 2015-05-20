@@ -109,12 +109,12 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
-            this.View.BackgroundColor = UIColor.Clear;
         }
 
         #endregion
 
         #region Public Members
+
 
 
         #endregion
@@ -143,6 +143,8 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
+            this.numberText_Numerator.HasNoBorderInContainer = true;
+            this.numberText_Denominator.HasNoBorderInContainer = true;
             
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
@@ -207,6 +209,17 @@ namespace NathansWay.iOS.Numeracy
                 this._dblDenominatorCurrentValue = value;
             }
         }
+
+        #endregion
+
+        #region Overrides
+
+        public override void ApplyUI()
+        {
+            this.HasBorder = true;
+            this.View.BackgroundColor = UIColor.Clear;
+        }
+
 
         #endregion
     }
