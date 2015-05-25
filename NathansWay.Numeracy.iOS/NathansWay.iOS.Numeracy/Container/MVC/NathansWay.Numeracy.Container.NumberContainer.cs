@@ -222,7 +222,8 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             this.HasBorder = true;
-            this.View.BackgroundColor = UIColor.Green;
+            this.View.BackgroundColor = UIColor.Clear;
+            this.View.Layer.BorderColor = UIColor.Red.CGColor;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

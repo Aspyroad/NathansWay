@@ -182,22 +182,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void SetHeightWidth ()
         {
-            if (this._parentContainer.HasBorder)
-            {
-                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
-                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
-            }
+//            if (this._parentContainer.HasBorder)
+//            {
+//                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
+//                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
+//            }
         }
 
         public virtual void SetHeightWidth (float _width, float _height)
         {
             this._fCurrentWidth = _width;
             this._fCurrentHeight = _height;
-            if (this.ParentContainer.HasBorder)
-            {
-                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
-                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
-            }
+//            if (this.ParentContainer.HasBorder)
+//            {
+//                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
+//                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
+//            }
         }
 
         public virtual void SetScale (int _scale)
