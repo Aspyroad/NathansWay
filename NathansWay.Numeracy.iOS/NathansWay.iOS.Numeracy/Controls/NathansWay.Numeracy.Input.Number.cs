@@ -286,10 +286,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply some UI to the texbox
             this.SizeClass.SetNumberFont(this.txtNumber);
             this.txtNumber.Text = this._intCurrentValue.ToString();
-            this.txtNumber.HasBorder = true;
-            this.txtNumber.BorderWidth = 0.5f;
+            this.txtNumber.HasBorder = false;
+            //this.txtNumber.BorderWidth = 0.5f;
             this.txtNumber.HasRoundedCorners = true;
-            this.txtNumber.CornerRadius = 3.0f;
+            this.txtNumber.CornerRadius = 2.0f;
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
             this.txtNumber.ApplyUI();
@@ -874,6 +874,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            base.SetHeightWidth();
         }
 
         public override void SetPositions (PointF _startPoint)

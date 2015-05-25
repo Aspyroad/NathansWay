@@ -85,9 +85,10 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
-            // DOnt call base, we will override this and set it ourselves.
-            // base.ApplyUI()
+            // Dont call base, we will override this and set it ourselves.
+            //base.ApplyUI();
             this.Layer.BackgroundColor = UIColor.Clear.CGColor;
+            this.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
         }
 
 		#endregion

@@ -190,6 +190,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.BraceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            base.SetHeightWidth();
         }
 
         public override void SetScale (int _scale)

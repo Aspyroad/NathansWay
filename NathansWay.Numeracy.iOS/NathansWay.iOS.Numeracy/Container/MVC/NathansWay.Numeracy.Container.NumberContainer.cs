@@ -110,7 +110,6 @@ namespace NathansWay.iOS.Numeracy
 
             // Create our number
             this.CreateNumber(this._strCurrentValue);
-
         }
 
         #endregion
@@ -148,7 +147,8 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
-                    newnumber.HasNoBorderInContainer = true;
+                    newnumber.HasBorder = true;
+
 
                     #region Set Tens Unit
 
@@ -189,7 +189,7 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
-                    newdecimal.HasNoBorderInContainer = true;
+                    newdecimal.HasBorder = false;
 
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newdecimal);
@@ -222,7 +222,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             this.HasBorder = true;
-            this.View.BackgroundColor = UIColor.Clear;
+            this.View.BackgroundColor = UIColor.Green;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

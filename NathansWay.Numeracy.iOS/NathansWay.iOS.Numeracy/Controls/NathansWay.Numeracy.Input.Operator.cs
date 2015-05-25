@@ -183,6 +183,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            base.SetHeightWidth();
         }
 
         #endregion

@@ -127,7 +127,7 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 
             // Local view sizing UI etc
-            this.View.BackgroundColor = UIColor.Yellow;
+            this.View.BackgroundColor = UIColor.Blue;
             this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
             // Add any views or vc's
             this.AddAndDisplayController(_vcWorkSpace.Value);
@@ -145,7 +145,7 @@ namespace NathansWay.iOS.Numeracy
             var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
             this._vcWorkSpace.Value.SizeClass.SetPositions(_pointF);
             // Now we can build our WorkSpace
-            this._vcWorkSpace.Value.ExpressionString = "F,1/2,F,1/2,3.6,F,1/10";
+            this._vcWorkSpace.Value.ExpressionString = "10,2,3";
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -189,6 +189,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this.CurrentHeight = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Height;
             this.CurrentWidth = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Width;
+            base.SetHeightWidth();
         }
 
         #endregion

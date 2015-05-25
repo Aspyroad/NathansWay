@@ -31,8 +31,7 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
-        protected UIColor colorBorderColor;
-        private bool _bHasNoBorderInContainer;
+        //protected UIColor colorBorderColor;
 
 		#endregion
 
@@ -68,10 +67,9 @@ namespace AspyRoad.iOSCore
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             // UI
-            this._bHasNoBorderInContainer = false;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._fBorderWidth = 0.5f;
+            this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
 		}
 
@@ -114,10 +112,15 @@ namespace AspyRoad.iOSCore
             get { return this._bHasBorder; }
             set 
             { 
-                if (this._bHasNoBorderInContainer == false)
+                if (value == false)
                 {
-                    this._bHasBorder = value; 
+                    this.View.Layer.BorderWidth = 0.0f;
                 }
+                else
+                {
+                    this.View.Layer.BorderWidth = this._fBorderWidth;   
+                }
+                this._bHasBorder = value; 
             }
         }
 
@@ -130,7 +133,19 @@ namespace AspyRoad.iOSCore
         public float BorderWidth
         {
             get { return this._fBorderWidth; }
-            set { this._fBorderWidth = value; }
+            set 
+            { 
+                // Only set if HasBorder = true
+                if (this._bHasBorder)
+                {
+                    this._fBorderWidth = value; 
+                }
+                else
+                {
+                    this._fBorderWidth = 0.0f;
+                }
+                this.View.Layer.BorderWidth = _fBorderWidth;
+            }
         }
 
         public float CornerRadius
@@ -139,34 +154,13 @@ namespace AspyRoad.iOSCore
             set { this._fCornerRadius = value; }
         }
 
-        public bool HasNoBorderInContainer
-        {
-            get { return this._bHasNoBorderInContainer; }
-            set
-            {
-                if (value == true)
-                {
-                    this._bHasBorder = false;
-                    this.View.Layer.BorderWidth = 0.0f;
-                    this._bHasNoBorderInContainer = value;
-                }
-                else
-                {
-                    // This isnt our responsibility?
-                    // this._bHasBorder = false;
-                    // this.View.Layer.BorderWidth = 0.0f;
-                    this._bHasNoBorderInContainer = value;
-                }
-            }
-        }
-
         #endregion
 
         #region Public Members
 
 		public virtual void ApplyUI ()
 		{            
-            this.colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value;
+            
 		}
 
 		#endregion

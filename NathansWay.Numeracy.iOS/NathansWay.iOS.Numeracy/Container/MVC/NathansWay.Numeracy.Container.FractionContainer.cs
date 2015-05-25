@@ -2,29 +2,34 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
+
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreAnimation;
 using MonoTouch.CoreGraphics;
+
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
+
 // Nathansway iOS
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+
 // NathansWay Shared
 using NathansWay.Shared;
 
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("vcFractionContainer")] 
+    [MonoTouch.Foundation.Register("vcFractionContainer")] 
     public class vcFractionContainer : BaseContainer
     {
         #region Class Variables
+
         // View - Custom Drawing
-        private vFractionContainer  _vFractionContainer;
+        private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
 
 
@@ -46,31 +51,34 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public vcFractionContainer ()
+        public vcFractionContainer()
         {
-            Initialize ();
+            Initialize();
         }
 
-        public vcFractionContainer (string _expression)
+        public vcFractionContainer(string _expression)
         {
             this._strFractionExpression = _expression;
-            Initialize ();
+            Initialize();
         }
 
-        public vcFractionContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
+        public vcFractionContainer(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
         {
-            Initialize ();
+            Initialize();
         }
 
-        public vcFractionContainer (IntPtr h) : base (h)
+        public vcFractionContainer(IntPtr h)
+            : base(h)
         {
-            Initialize ();
+            Initialize();
         }
 
-        public vcFractionContainer (NSCoder coder) : base (coder)
+        public vcFractionContainer(NSCoder coder)
+            : base(coder)
         {
-            Initialize ();
-        }   
+            Initialize();
+        }
 
         #endregion
 
@@ -91,17 +99,13 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Private Variables
-
-
-        #endregion
-
         #region Overrides
 
         public override void LoadView()
         {
             this._vFractionContainer = new vFractionContainer();
             this.View = this._vFractionContainer;
+
         }
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
@@ -109,6 +113,9 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
+
+            this.ApplyUI();
+            var x = 1;
         }
 
         #endregion
@@ -128,7 +135,7 @@ namespace NathansWay.iOS.Numeracy
 
             // SPLIT STRING
             // Split the denominator and numerator apart
-            _result = this._strFractionExpression.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
+            _result = this._strFractionExpression.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
             // There should only ever be two
             if (_result.Length > 2)
             {
@@ -143,13 +150,12 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
-            this.numberText_Numerator.HasNoBorderInContainer = true;
-            this.numberText_Denominator.HasNoBorderInContainer = true;
+            this.numberText_Numerator.HasBorder = false;
+            this.numberText_Denominator.HasBorder = false;
             
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
-            this.SizeClass.CurrentWidth = 
-                Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
+            this.SizeClass.CurrentWidth = Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
             this.numberText_Numerator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
@@ -178,19 +184,13 @@ namespace NathansWay.iOS.Numeracy
             set { this._sizeClass = value; }
         }
 
-//        public SizeBase SizeClass
-//        {
-//            get { return (SizeBase)this._sizeClass; }
-//            //set { this._sizeClass = value; }
-//        }
-
         public int NumeratorValue
         {
-            get 
+            get
             { 
                 return this._dblNumeratorCurrentValue; 
             }
-            set 
+            set
             { 
                 this._dblNumeratorPrevValue = this._dblNumeratorCurrentValue; 
                 this._dblNumeratorCurrentValue = value;
@@ -199,11 +199,11 @@ namespace NathansWay.iOS.Numeracy
 
         public int DenominatorValue
         {
-            get 
+            get
             { 
                 return this._dblDenominatorCurrentValue; 
             }
-            set 
+            set
             { 
                 this._dblDenominatorPrevValue = this._dblDenominatorCurrentValue; 
                 this._dblDenominatorCurrentValue = value;
@@ -217,9 +217,8 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             this.HasBorder = true;
-            this.View.BackgroundColor = UIColor.Clear;
+            //this.View.BackgroundColor = UIColor.Clear;
         }
-
 
         #endregion
     }
@@ -227,11 +226,12 @@ namespace NathansWay.iOS.Numeracy
     public class FractionSize : SizeBase
     {
         #region Class Variables
+
         // X Horizontal
         // Y Vertical
         // Parent VC
         private vcFractionContainer _vc;
-        private RectangleF _rectFractionDivider; 
+        private RectangleF _rectFractionDivider;
 
         #endregion
 
@@ -256,13 +256,14 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides Members
 
-        public override void SetHeightWidth ()
+        public override void SetHeightWidth()
         {
             // Width is assigned during the fraction creation as the number widths must be known
             // this.CurrentWidth = (width of the largest number)
             this.CurrentHeight = this.GlobalSizeDimensions.FractionHeight;
+            base.SetHeightWidth();
         }
-       
+
         #endregion
 
         #region Public Properties
@@ -271,7 +272,7 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
-                return new RectangleF(                    
+                return new RectangleF(
                     2.0f, 
                     (this.GlobalSizeDimensions.GlobalNumberHeight + 2.0f), 
                     (this.CurrentWidth - 4.0f),

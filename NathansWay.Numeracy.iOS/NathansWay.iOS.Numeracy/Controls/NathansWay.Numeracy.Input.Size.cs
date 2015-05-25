@@ -182,12 +182,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void SetHeightWidth ()
         {
+            if (this._parentContainer.HasBorder)
+            {
+                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
+                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
+            }
         }
 
         public virtual void SetHeightWidth (float _width, float _height)
         {
-            this.CurrentWidth = _width;
-            this.CurrentHeight = _height;
+            this._fCurrentWidth = _width;
+            this._fCurrentHeight = _height;
+            if (this.ParentContainer.HasBorder)
+            {
+                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
+                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
+            }
         }
 
         public virtual void SetScale (int _scale)
@@ -210,10 +220,23 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetPositions (PointF _startPoint)
         {
             PointF _point;
+            var x = 0.0f; //this._globalSizeDimensions.BorderNumberWidth;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                this.StartPoint = _startPoint;
+                if (this.ParentContainer.HasBorder)
+                {
+                    this.StartPoint = new PointF(
+                        //x + _startPoint.X, 
+                        _startPoint.X,
+                        x + _startPoint.Y
+                        //_startPoint.Y
+                    );
+                }
+                else
+                {                
+                    this.StartPoint = _startPoint;
+                }
             }
             else
             {
@@ -663,6 +686,25 @@ namespace NathansWay.iOS.Numeracy.Controls
                 else // Large
                 {
                     return 102.0f;
+                }
+            }
+        }
+        // Border Width
+        public float BorderNumberWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 1.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 2.0f;
+                }
+                else // Large
+                {
+                    return 3.0f;
                 }
             }
         }
