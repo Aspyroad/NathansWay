@@ -248,6 +248,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             get; 
             set; 
         }
+        // Position of view with reference to Window.
+        public PointF StartPointInWindow
+        {
+            get
+            {
+                return this.ParentContainer.View.ConvertPointToView(
+                    this.ParentContainer.View.Frame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
+            }
+        }
         // Parent Container
         public BaseContainer ParentContainer
         { 

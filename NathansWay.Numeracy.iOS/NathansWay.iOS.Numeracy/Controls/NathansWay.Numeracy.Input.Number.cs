@@ -52,10 +52,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         private int _intPrevValue;
         private int _intCurrentValue;
         private bool _bIsInEditMode;
-        private bool _bPickerToTop;
-
-        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
-        private bool _bAutoPickerPositionOn;
 
         #endregion
 
@@ -196,15 +192,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public bool PickerToTop
-        {
-            set 
-            { 
-                this._bPickerToTop = value;
-                //this.NumberTextSize.SetPickerPositionTop();
-            }
-            get { return this._bPickerToTop; }
-        }
+//        public bool PickerToTop
+//        {
+//            set 
+//            { 
+//                this._bPickerToTop = value;
+//                //this.NumberTextSize.SetPickerPositionTop();
+//            }
+//            get { return this._bPickerToTop; }
+//        }
 
         public int PrevValue
         {
@@ -312,7 +308,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
             singleTapGesture = null;
-            this._bPickerToTop = true;
+            //this._bPickerToTop = true;
         }
 
         // Partials
@@ -420,18 +416,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.IsInEditMode = true;
 
             // Reset our view positions. 
-            if (this._bPickerToTop)
-            {
-                this.NumberSize.SetPickerPositionTopOn();
-            }
-            else
-            {
-                this.NumberSize.SetPickerPositionBottomOn();
-            }
+            this.NumberSize.AutoSetPickerPosition ();
 
             // Reset the new frames - these are value types
-            this.View.Frame = this._sizeClass.RectMainFrame;
-            this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
+            this.View.Frame = this._sizeNumber.RectMainFrame;
+            this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
             this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
@@ -895,19 +884,30 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
+        public void AutoSetPickerPosition ()
+        {
+            // Check if the height is 
+            if ((this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight) > 0)
+            {
+                this.SetPickerPositionTopOn();
+            }
+            else
+            {
+                this.SetPickerPositionBottomOn();
+            }
+        }
+
         public void SetPickerPositionTopOn ()
         {
-            var x = this.ParentContainer.View.ConvertPointToView(this.ParentContainer.View.Frame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
-
             this.RectMainFrame = new RectangleF(
                 this.StartPoint.X, 
-                (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.StartPoint.Y, 
                 this.CurrentWidth, 
                 (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
             );
             this._rectNumberPicker = new RectangleF(
-                x.X, 
-                x.Y, 
+                this.StartPointInWindow.X, 
+                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
@@ -928,8 +928,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public void SetPickerPositionBottomOn()
         {
             this._rectNumberPicker = new RectangleF(
-                0.0f, 
-                this.CurrentHeight, 
+                this.StartPointInWindow.X,
+                (this.StartPointInWindow.Y + this.CurrentHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );

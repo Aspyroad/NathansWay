@@ -101,7 +101,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
-
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
