@@ -107,6 +107,7 @@ namespace NathansWay.iOS.Numeracy
             _lsNumbers = new List<BaseContainer>();
             // Sizing class
             this._sizeClass = new SizeNumberContainer(this);
+            this.HasBorder = true;
 
             // Create our number
             this.CreateNumber(this._strCurrentValue);
@@ -123,6 +124,7 @@ namespace NathansWay.iOS.Numeracy
             int _insig = 0;
             string[] _result;
             bool _hitDecimal = false;
+            this._sizeClass.CurrentWidth = 0.0f;
 
             // Tens allocation 
             _result = _value.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
@@ -147,8 +149,11 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
-                    newnumber.HasBorder = true;
-
+                    if (_sig > 1)
+                    {
+                        newnumber.NumberSize.SetAsMultiNumberText = true;
+                    }
+                    newnumber.HasBorder = false;
 
                     #region Set Tens Unit
 
@@ -172,11 +177,20 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newnumber);
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
-                    //newnumber.SizeClass.SetCenterRelativeParentVcPosX = true;
-                    //newnumber.SizeClass.SetCenterRelativeParentVcPosY = true;
-                    newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-                    // Set our current width
-                    this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth - 0.0f);
+                    // Set our current width - and shorten if there is more then one number
+                    if (_lsNumbers.Count > 1)
+                    {
+                        newnumber.NumberSize.SetAsMultiNumberText = true;
+                        newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
+                    }
+                    else
+                    {
+                        newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
+
+                    }
+
                     // Set our current height - not here as this is always the same...saves loop time
                     // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
                     // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
@@ -217,13 +231,16 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            //this.ApplyUI();
         }
 
         public override void ApplyUI()
         {
+            this.BorderWidth = 1.0f;
             this.HasBorder = true;
+            this.HasRoundedCorners = true;
             this.View.BackgroundColor = UIColor.Clear;
-            this.View.Layer.BorderColor = UIColor.Red.CGColor;
+            //this.View.Layer.BorderColor = UIColor.Red.CGColor;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

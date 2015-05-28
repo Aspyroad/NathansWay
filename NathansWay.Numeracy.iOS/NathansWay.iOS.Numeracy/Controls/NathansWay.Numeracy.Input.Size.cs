@@ -42,9 +42,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Old Sizing
         protected float _fOldWidth = 0.0f;
         protected float _fOldHeight = 0.0f;
-
-        // Startpoint
-        //private PointF _startPoint;
+        // Is part of a container with more then one text number e.g. 12 or 10 etc
+        // These need to be thinner in the container to look more natural
+        protected bool _bMultiNumberText;
 
         #endregion
 
@@ -74,6 +74,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.DisplayPositionY = G__NumberDisplayPositionY.Center;
             this._setRelationPosX = false;
             this._setRelationPosY = false;
+            this._bMultiNumberText = false;
         }
 
         /// <summary>
@@ -134,42 +135,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
 
-            return new PointF(_XPos, _YPos);
+            return new PointF((float)Math.Round(_XPos), (float)Math.Round(_YPos));
         }
-
-        /// <summary>
-        /// Calls all functions to set and position the parent class
-        /// But it also looks at a global position (left, center, right)
-        /// This is mainly used by parent classes of number, fraction, operator etc. classes.
-        /// </summary>
-        /// <param name="_YPos">Y Coordinate (Vertical).</param>
-        /// <param name="_vcWidth">Parent VC Width</param>
-        //        private PointF RefreshDisplayAndPositionX (float _vcWidth, float _YPos)
-//        {         
-//            float _XPos;
-//            float p = _vcWidth;
-//            // ** Horizontal Center
-//            switch (this.DisplayPositionX)
-//            {
-//                case (G__NumberDisplayPositionX.Center): // Most common first ??
-//                {
-//                    _XPos = ((p / 2.0f) - (this._fCurrentWidth / 2.0f));
-//                }
-//                break;
-//                case (G__NumberDisplayPositionX.Left):
-//                {
-//                    _XPos = 0.0f;
-//                }
-//                break;
-//                default : // G__NumberDisplayPosition.Right
-//                {
-//                    _XPos = (p - this._fCurrentWidth);
-//                }
-//                break;
-//            }
-//
-//            return new PointF(_XPos, _YPos);
-//        }
 
         #endregion
 
@@ -193,11 +160,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._fCurrentWidth = _width;
             this._fCurrentHeight = _height;
-//            if (this.ParentContainer.HasBorder)
-//            {
-//                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
-//                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
-//            }
         }
 
         public virtual void SetScale (int _scale)
@@ -220,30 +182,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetPositions (PointF _startPoint)
         {
             PointF _point;
-            var x = 0.0f; //this._globalSizeDimensions.BorderNumberWidth;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                if (this.ParentContainer.HasBorder)
-                {
-                    this.StartPoint = new PointF(
-                        //x + _startPoint.X, 
-                        _startPoint.X,
-                        x + _startPoint.Y
-                        //_startPoint.Y
-                    );
-                }
-                else
-                {                
                     this.StartPoint = _startPoint;
-                }
             }
             else
             {
                 _point = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y);   
                 this.StartPoint = _point;
             }
-            //this.SetHeightWidth();
         }
 
         /// <summary>
@@ -257,14 +205,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                new PointF(_posX, _posY);
+                _point = new PointF(_posX, _posY);
             }
             else
             {
                 _point = this.RefreshDisplayAndPosition(_posX, _posY);
-                this.StartPoint = _point;
             }
-            //this.SetHeightWidth();
+            this.StartPoint = _point;
         }
 
         //The event-invoking method that derived classes can override. 
@@ -272,10 +219,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 
         }
-        // Should be called ONLY in viewdidload or viewwillload
+        // Should be called ONLY in viewdidload or viewwillappear
         public virtual void SetFrames()
         {
-            // Geneerally we will ALWAYS want to set the mainframe for this control in base
+            // Generally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
             {
                 this.ParentContainer.View.Frame = 
@@ -308,7 +255,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             set 
             { 
                 this._parentContainer = value;
-                //this._parentContainer.SizeClass = (SizeBase)value; 
             }
         }
         // Main Control Frame
@@ -372,6 +318,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._setRelationPosX = value; }
         }
 
+        public bool SetAsMultiNumberText
+        {
+            get { return this._bMultiNumberText; }
+            set { this._bMultiNumberText = value; }
+        }
+
         #endregion
 
     }
@@ -422,7 +374,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._positionX = value; }
         }
 
-        // Global WorkSpace
+        #region Global WorkSpace
+
         public float GlobalWorkSpaceHeight
         {
             get
@@ -459,7 +412,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Number Text Box
+
+        #endregion
+
+        #region Number Text Box
+
         public float LabelPickerViewHeight
         {
             get
@@ -558,6 +515,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+
+        #endregion
+
+        #region Global Widths
+
         public float GlobalNumberWidth
         {
             get
@@ -576,7 +538,29 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Fraction
+        public float MultipleNumberWidth
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 34.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 86.0f;
+                }
+                else // Large
+                {
+                    return 90.0f;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Fraction
+
         public float FractionHeight
         {
             get
@@ -632,7 +616,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Decimal
+
+        #endregion
+
+        #region Operators Braces Decimals
+
         public float DecimalWidth
         {
             get
@@ -651,7 +639,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Brace
         public float BraceWidth
         {
             get
@@ -670,7 +657,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Operator
         public float OperatorWidth
         {
             get
@@ -689,7 +675,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-        // Border Width
+
+        #endregion
+
+        #region Border Width
+
         public float BorderNumberWidth
         {
             get
@@ -709,7 +699,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        // iOS Specific
+        #endregion
+
+        #region iOS Specific
+
         public SizeF LabelPickerViewSize
         {
             get
@@ -736,6 +729,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+
+        #endregion
 
         #endregion
     }

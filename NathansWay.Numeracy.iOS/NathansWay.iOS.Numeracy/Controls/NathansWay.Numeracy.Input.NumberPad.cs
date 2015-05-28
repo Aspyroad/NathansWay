@@ -298,9 +298,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();  
 
             this.NumberPadPanGestureRecognizer();
-            // Some basic UI
-            this.View.Layer.BorderColor = UIColor.Black.CGColor;
-            this.View.Layer.BorderWidth = 2.0f;
+
+            // UI
+            this.HasBorder = true;
         }
 
         public override void ViewDidLayoutSubviews()

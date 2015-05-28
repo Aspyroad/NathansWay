@@ -70,7 +70,7 @@ namespace AspyRoad.iOSCore
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
-            this._fCornerRadius = 3.0f;
+            this._fCornerRadius = 2.5f;
 		}
 
 		#endregion
@@ -127,25 +127,24 @@ namespace AspyRoad.iOSCore
         public bool HasRoundedCorners
         {
             get { return this._bHasRoundedCorners; }
-            set { this._bHasRoundedCorners = value; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.View.Layer.CornerRadius = 0.0f;
+                }
+                else
+                {
+                    this.View.Layer.CornerRadius = this._fCornerRadius;   
+                }
+                this._bHasRoundedCorners = value; 
+            }
         }
 
         public float BorderWidth
         {
             get { return this._fBorderWidth; }
-            set 
-            { 
-                // Only set if HasBorder = true
-                if (this._bHasBorder)
-                {
-                    this._fBorderWidth = value; 
-                }
-                else
-                {
-                    this._fBorderWidth = 0.0f;
-                }
-                this.View.Layer.BorderWidth = _fBorderWidth;
-            }
+            set { this._fBorderWidth = value; }
         }
 
         public float CornerRadius
@@ -288,7 +287,13 @@ namespace AspyRoad.iOSCore
 			// But we can always get the global control tag from tag2
 			this._AspyTag2 = _AspyTag1;
             this.ApplyUI();
-		}			
+		}	
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            //this.ApplyUI();
+        }
 
 		// These puppies cost me a lot of time. DAYS!
 		// But they are totally important when it comes to designing landscape only apps.

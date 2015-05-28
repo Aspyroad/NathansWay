@@ -310,7 +310,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditNumPad;  //this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
             singleTapGesture = null;
             this._bPickerToTop = true;
         }
@@ -449,7 +449,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO : swap the picker view to vcMainContainer??? 
             // This may fix the bounds problem when trying to touch.
-            this.View.AddSubview(pkNumberPicker);
+            this._vcMainContainer.View.AddSubview(pkNumberPicker);
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
@@ -872,9 +872,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetHeightWidth ()
         {
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            if (this._bMultiNumberText)
+            {
+                this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
+            }
+            else
+            {
+                this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+            }
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
-            base.SetHeightWidth();
         }
 
         public override void SetPositions (PointF _startPoint)
@@ -891,6 +897,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionTopOn ()
         {
+            var x = this.ParentContainer.View.ConvertPointToView(this.ParentContainer.View.Frame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
+
             this.RectMainFrame = new RectangleF(
                 this.StartPoint.X, 
                 (this.StartPoint.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
@@ -898,11 +906,17 @@ namespace NathansWay.iOS.Numeracy.Controls
                 (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
             );
             this._rectNumberPicker = new RectangleF(
-                0.0f, 
-                0.0f, 
+                x.X, 
+                x.Y, 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
+//            this._rectNumberPicker = new RectangleF(
+//                0.0f, 
+//                0.0f, 
+//                this.CurrentWidth,
+//                this.GlobalSizeDimensions.NumberPickerHeight
+//            );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 (this.GlobalSizeDimensions.NumberPickerHeight), 
