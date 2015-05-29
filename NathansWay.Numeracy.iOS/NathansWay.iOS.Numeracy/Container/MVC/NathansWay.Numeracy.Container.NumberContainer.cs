@@ -33,7 +33,6 @@ namespace NathansWay.iOS.Numeracy
         private double _dblCurrentValue;
 
         private bool _bIsInEditMode;
-        //private bool _bPickerToTop;
 
         // Display a decimal place?
         private bool _bShowDecimal;
@@ -103,12 +102,9 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            //base.Initialize();
             _lsNumbers = new List<BaseContainer>();
             // Sizing class
             this._sizeClass = new SizeNumberContainer(this);
-            this.HasBorder = true;
-
             // Create our number
             this.CreateNumber(this._strCurrentValue);
         }
@@ -188,7 +184,6 @@ namespace NathansWay.iOS.Numeracy
                     {
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
-
                     }
 
                     // Set our current height - not here as this is always the same...saves loop time
@@ -231,16 +226,13 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            //this.ApplyUI();
         }
 
         public override void ApplyUI()
         {
-            this.BorderWidth = 1.0f;
             this.HasBorder = true;
-            this.HasRoundedCorners = true;
-            this.View.BackgroundColor = UIColor.Clear;
-            //this.View.Layer.BorderColor = UIColor.Red.CGColor;
+            //this.HasRoundedCorners = true;
+            this.SetBGColor = UIColor.Purple.CGColor;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

@@ -104,7 +104,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
-                _XPos = _XPos + 1.0f + _control.SizeClass.CurrentWidth;
+                _XPos = _XPos + 2.0f + _control.SizeClass.CurrentWidth;
             }
         }
 

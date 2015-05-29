@@ -108,13 +108,8 @@ namespace AspyRoad.iOSCore
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
-            // TODO : Testing here, try and set ALL objects from here.
+            // Set all control frames
             this.SizeClass.SetFrames();
-		}
-
-		public override void ViewDidLayoutSubviews ()
-		{
-			base.ViewDidLayoutSubviews ();
 		}
 
 		#region Autorotation for iOS 6 or newer

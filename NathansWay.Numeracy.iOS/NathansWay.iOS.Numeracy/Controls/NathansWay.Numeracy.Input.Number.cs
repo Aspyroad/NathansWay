@@ -423,8 +423,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
-            this.pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
+            this.pkNumberPicker.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
             this.pkNumberPicker.Layer.BorderWidth = 1.0f;
+            this.pkNumberPicker.Layer.CornerRadius = 2.5f;
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates

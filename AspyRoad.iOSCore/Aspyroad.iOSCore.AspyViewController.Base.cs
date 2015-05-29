@@ -5,6 +5,7 @@ using System.Drawing;
 // Monotouch
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
 
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
@@ -31,7 +32,8 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
-        //protected UIColor colorBorderColor;
+        protected CGColor _colorBorderColor;
+        protected CGColor _colorBGColor;
 
 		#endregion
 
@@ -70,7 +72,9 @@ namespace AspyRoad.iOSCore
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
-            this._fCornerRadius = 2.5f;
+            this._fCornerRadius = 3.0f;
+            this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
+            this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
 		}
 
 		#endregion
@@ -138,6 +142,16 @@ namespace AspyRoad.iOSCore
                     this.View.Layer.CornerRadius = this._fCornerRadius;   
                 }
                 this._bHasRoundedCorners = value; 
+            }
+        }
+
+        public CGColor SetBGColor
+        {
+            get { return this._colorBGColor; }
+            set 
+            { 
+                this._colorBGColor = value;
+                this.View.Layer.BackgroundColor = this._colorBGColor;   
             }
         }
 
@@ -292,7 +306,7 @@ namespace AspyRoad.iOSCore
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            //this.ApplyUI();
+            this.ApplyUI();
         }
 
 		// These puppies cost me a lot of time. DAYS!

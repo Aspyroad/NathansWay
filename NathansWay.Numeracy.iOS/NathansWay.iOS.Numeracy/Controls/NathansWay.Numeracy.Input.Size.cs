@@ -421,6 +421,24 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
+        public float GlobalWorkSpaceNumberSpacing
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 2.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 4.0f;
+                }
+                else // Large
+                {
+                    return 6.0f;
+                }
+            }
+        }
 
         #endregion
 

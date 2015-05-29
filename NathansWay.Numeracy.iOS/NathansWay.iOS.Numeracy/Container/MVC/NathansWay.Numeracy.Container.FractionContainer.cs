@@ -93,7 +93,7 @@ namespace NathansWay.iOS.Numeracy
             this._sizeFraction = new FractionSize(this);
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
-
+            // Build the fraction
             this.CreateFraction();
         }
 
@@ -113,9 +113,6 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
-
-            this.ApplyUI();
-            var x = 1;
         }
 
         #endregion
@@ -150,8 +147,6 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
-            this.numberText_Numerator.HasBorder = false;
-            this.numberText_Denominator.HasBorder = false;
             
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
@@ -166,11 +161,11 @@ namespace NathansWay.iOS.Numeracy
 
             this.numberText_Numerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
             this.numberText_Denominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
-
+            this.numberText_Numerator.HasBorder = false;
+            this.numberText_Denominator.HasBorder = false;
             this.AddAndDisplayController(this.numberText_Numerator);
             this.AddAndDisplayController(this.numberText_Denominator);
 
-            // var x = 1;
         }
 
 
@@ -216,8 +211,10 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
+            this.SetBGColor = UIColor.Clear.CGColor;
+            this.View.BackgroundColor = UIColor.Clear;
             this.HasBorder = true;
-            //this.View.BackgroundColor = UIColor.Clear;
+            this.HasRoundedCorners = true;
         }
 
         #endregion

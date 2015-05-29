@@ -122,9 +122,7 @@ namespace AspyRoad.iOSCore
 		#region Virtual Members
 
 		public virtual void ApplyUI()
-		{
-			// We use values as colors are lazy loaded
-			this.Layer.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
+	    {
 		}
 
 		#endregion
@@ -136,6 +134,7 @@ namespace AspyRoad.iOSCore
 
             iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> (); 
 			iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            // Better to do UI changes from VC? Ive shifted most there now
 			//this.ApplyUI ();
 
             #if DEBUG

@@ -78,17 +78,9 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw(RectangleF rect)
         {
-            this.ApplyUI();
+            // Custom draws
             DrawFractionDivider(this._rectFractionDivider);
             base.Draw (rect);
-        }
-
-        public override void ApplyUI()
-        {
-            // Dont call base, we will override this and set it ourselves.
-            //base.ApplyUI();
-            this.Layer.BackgroundColor = UIColor.Clear.CGColor;
-            this.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
         }
 
 		#endregion
