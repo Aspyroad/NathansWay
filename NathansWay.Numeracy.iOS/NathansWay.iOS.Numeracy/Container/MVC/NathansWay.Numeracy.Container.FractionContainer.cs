@@ -161,8 +161,7 @@ namespace NathansWay.iOS.Numeracy
 
             this.numberText_Numerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
             this.numberText_Denominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
-            this.numberText_Numerator.HasBorder = false;
-            this.numberText_Denominator.HasBorder = false;
+
             this.AddAndDisplayController(this.numberText_Numerator);
             this.AddAndDisplayController(this.numberText_Denominator);
 
@@ -211,9 +210,9 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
-            this.SetBGColor = UIColor.Clear.CGColor;
-            this.View.BackgroundColor = UIColor.Clear;
+            this.SetBGColor = UIColor.Clear;
             this.HasBorder = true;
+            //this.CornerRadius = 3.0f;
             this.HasRoundedCorners = true;
         }
 
@@ -269,11 +268,13 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
+                var y = ((this.GlobalSizeDimensions.FractionHeight / 2) - (this.GlobalSizeDimensions.FractionDividerHeight / 2));
+                var width = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.FractionDividerPadding));
                 return new RectangleF(
-                    2.0f, 
-                    (this.GlobalSizeDimensions.GlobalNumberHeight + 2.0f), 
-                    (this.CurrentWidth - 4.0f),
-                    (this.GlobalSizeDimensions.FractionDividerHeight - 4.0f)
+                    this.GlobalSizeDimensions.FractionDividerPadding, 
+                    (float)Math.Round(y),
+                    (width),
+                    (this.GlobalSizeDimensions.FractionDividerHeight)
 
                 );
             }

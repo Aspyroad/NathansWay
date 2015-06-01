@@ -33,7 +33,7 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected CGColor _colorBorderColor;
-        protected CGColor _colorBGColor;
+        protected UIColor _colorBGColor;
 
 		#endregion
 
@@ -74,7 +74,7 @@ namespace AspyRoad.iOSCore
             this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
             this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
-            this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.CGColor;
+            this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
 		#endregion
@@ -145,13 +145,13 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public CGColor SetBGColor
+        public UIColor SetBGColor
         {
             get { return this._colorBGColor; }
             set 
             { 
                 this._colorBGColor = value;
-                this.View.Layer.BackgroundColor = this._colorBGColor;   
+                this.View.BackgroundColor = this._colorBGColor;   
             }
         }
 
@@ -300,7 +300,7 @@ namespace AspyRoad.iOSCore
 			// There are times with multiple controls where we need different tag numbers
 			// But we can always get the global control tag from tag2
 			this._AspyTag2 = _AspyTag1;
-            this.ApplyUI();
+            //this.ApplyUI();
 		}	
 
         public override void ViewWillAppear(bool animated)

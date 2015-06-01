@@ -557,7 +557,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 96.0f;
+                    return 54.0f;
                 }
                 else // Large
                 {
@@ -613,7 +613,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 10.0f;
+                    return 6.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -622,6 +622,24 @@ namespace NathansWay.iOS.Numeracy.Controls
                 else // Large
                 {
                     return 22.0f;
+                }
+            }
+        }
+        public float FractionDividerPadding
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 4.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 8.0f;
+                }
+                else // Large
+                {
+                    return 12.0f;
                 }
             }
         }
