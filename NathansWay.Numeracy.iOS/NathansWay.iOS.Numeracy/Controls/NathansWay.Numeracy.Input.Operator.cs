@@ -25,6 +25,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private vcMainContainer _viewcontollercontainer;
         private G__MathChar _operatorType;
+        private string _strOperator;
+        private SizeOperator _sizeOperator;
+        private TextControlDelegate _txtOperatorDelegate;
 
         #endregion
 
@@ -46,9 +49,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-        public vcOperatorText (G__MathChar operatortype)
+        public vcOperatorText (G__MathChar operatortype, string strOperator)
         {
             this._operatorType = operatortype;
+            this._strOperator = strOperator;
             Initialize_();
         }
 
@@ -82,6 +86,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
             // Add subviews
             this.View.AddSubview(this.txtOperator);
+            // Delegate wireups (prevents the control from being edited)
+            this._txtOperatorDelegate = new TextControlDelegate();
+            this.txtOperator.Delegate = this._txtOperatorDelegate;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -89,7 +96,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
-            // Other Frames
+
+            // Not needed this is now done in AspyViewController base...
             this.txtOperator.Frame = this.OperatorSize._rectTxtOperator;
         }
 
@@ -109,27 +117,27 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         protected void Initialize_ ()
         {
-            //base.Initialize ();
             this.AspyTag1 = 600105;
             this.AspyName = "VC_DecimalText";
 
             // Sizing class
-            this._sizeClass = new SizeOperator(this);
+            this._sizeOperator = new SizeOperator(this);
+            this._sizeClass = this._sizeOperator;
 
             // Create textbox
             this.txtOperator = new AspyTextField();
             // Apply some UI to the textbox
             this.SizeClass.SetNumberFont(this.txtOperator);
-            this.txtOperator.HasBorder = true;
-            this.txtOperator.HasRoundedCorners = false;
-            this.txtOperator.Text = ".";
+            this.txtOperator.HasBorder = false;
+            this.txtOperator.HasRoundedCorners = true;
+            this.txtOperator.Text = _strOperator;
             this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtOperator.TextAlignment = UITextAlignment.Center;
 
-            this.txtOperator.ApplyUI();
+            //this.txtOperator.ApplyUI();
         }
 
-        #endregion       
+        #endregion 
 
     }
 

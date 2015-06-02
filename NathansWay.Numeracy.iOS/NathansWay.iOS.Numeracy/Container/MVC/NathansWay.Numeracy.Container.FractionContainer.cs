@@ -210,10 +210,8 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
+            // Local UI
             this.SetBGColor = UIColor.Clear;
-            this.HasBorder = true;
-            //this.CornerRadius = 3.0f;
-            this.HasRoundedCorners = true;
         }
 
         #endregion

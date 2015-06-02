@@ -30,10 +30,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bIsInEditMode;
         private bool _bPickerToTop;
 
-        // TODO : This may be cool? Let it decide top or bottom for the licker...wouldnt be to hard to query the Aspywindow sizes.
-        private bool _bAutoPickerPositionOn;
-        // Global size variable for resizing class.
-        private G__NumberDisplaySize _displaySize;
+        private SizeDecimal _sizeDecimal;
+        private TextControlDelegate _txtDecimalDelegate;
 
         #endregion
 
@@ -84,6 +82,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
             // Add subviews
             this.View.AddSubview(this.txtDecimal);
+            // Delegate wireups (prevents the control from being edited)
+            this._txtDecimalDelegate = new TextControlDelegate();
+            this.txtDecimal.Delegate = this._txtDecimalDelegate;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -116,14 +117,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.AspyName = "VC_DecimalText";
 
             // Sizing class
-            this._sizeClass = new SizeDecimal(this);
+            this._sizeDecimal = new SizeDecimal(this);
+            this._sizeClass = this._sizeDecimal;
 
             // Create textbox
             this.txtDecimal = new AspyTextField();
             // Apply some UI to the textbox
             this.SizeClass.SetNumberFont(this.txtDecimal);
-            this.txtDecimal.HasBorder = true;
-            this.txtDecimal.HasRoundedCorners = false;
+            this.txtDecimal.HasBorder = false;
+            this.txtDecimal.HasRoundedCorners = true;
             this.txtDecimal.Text = ".";
             this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtDecimal.TextAlignment = UITextAlignment.Center;

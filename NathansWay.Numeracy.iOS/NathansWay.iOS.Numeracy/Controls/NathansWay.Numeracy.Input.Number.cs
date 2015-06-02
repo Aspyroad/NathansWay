@@ -31,7 +31,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
         private G__NumberPickerPosition _pickerPosition;
-        private txtNumberDelegate _txtNumberDelegate;
+        private TextControlDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
 
         private List<string> items = new List<string>();
@@ -133,7 +133,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up our eventhandler to "valuechanged" member
             ehValueChanged = new Action(HandlePickerChanged);
 
-            this._txtNumberDelegate = new txtNumberDelegate();
+            this._txtNumberDelegate = new TextControlDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
                                     
             //            pickerDataModel = new PickerDataModel();
@@ -796,14 +796,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             }  
             
             #endregion
-        }
-
-        protected class txtNumberDelegate : UITextFieldDelegate
-        {
-            public override bool ShouldBeginEditing(UITextField textField)
-            {
-                return false;
-            }            
         }
 
         #endregion

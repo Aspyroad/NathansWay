@@ -56,8 +56,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Simply pop them off the stack and into the container vc
         public void UICreateNumber (string strValue)
         {
+            // Create a number
             var x = new vcNumberContainer(strValue);
-            // UI If needed
+            // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
             // Add to output
@@ -65,23 +66,32 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         public void UICreateFraction (string strFraction)
         {
+            // Create a fraction
             var x = new vcFractionContainer(strFraction);
-            _UIOutput.Add(x as object);
-        }
-        public void UICreatOperator (G__MathChar mathChar)
-        {
-            var x = new vcOperatorText(mathChar);
-            // UI If needed
+            // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
+            // Add to output
+            _UIOutput.Add(x as object);
+        }
+        public void UICreatOperator (G__MathChar mathChar, string strChar)
+        {
+            // Create an operator
+            var x = new vcOperatorText(mathChar, strChar);
+            // UI
+            x.HasBorder = true;
+            x.HasRoundedCorners = true;
+            // Add to output
             _UIOutput.Add(x as object);
         }
         public void UICreateBrace (bool bIsRight)
         {
+            // Create a brace (left or right parameter boolean)
             var x = new vcBraceText(bIsRight);
-            // UI If needed
+            // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
+            // Add to output
             _UIOutput.Add(x as object);
         }
         public void PrintUIOutput (object ViewObjectScreen)

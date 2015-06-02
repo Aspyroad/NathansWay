@@ -85,7 +85,7 @@ namespace NathansWay.Shared.Factories
                     break;
                     default :
                     {
-                        this._UIPlatformClient.UICreatOperator(x.Key);
+                        this._UIPlatformClient.UICreatOperator(x.Key, x.Value);
                     }
                     break;
                 }
