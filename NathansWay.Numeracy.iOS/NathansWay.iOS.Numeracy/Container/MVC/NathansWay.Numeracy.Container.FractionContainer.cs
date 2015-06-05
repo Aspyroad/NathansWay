@@ -167,7 +167,6 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-
         #endregion
 
         #region Public Properties

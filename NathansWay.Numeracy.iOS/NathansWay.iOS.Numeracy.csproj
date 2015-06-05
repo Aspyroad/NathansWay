@@ -211,6 +211,9 @@
       <DependentUpon>NathansWay.Numeracy.Container.FractionContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.TextBoxDelegate.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.vOperator.cs">
+      <DependentUpon>NathansWay.Numeracy.Input.Operator.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

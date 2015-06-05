@@ -102,6 +102,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+                // This call only calls the BASE SetPositions not any derives
+                // You may need to call any frame creation methods in the 
+                // controls ViewWillApppear method
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
                 _XPos = _XPos + 2.0f + _control.SizeClass.CurrentWidth;

@@ -22,6 +22,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // UI Components
         public AspyTextField txtOperator { get; private set; }
+        public vOperator _vOperator;
 
         private vcMainContainer _viewcontollercontainer;
         private G__MathChar _operatorType;
@@ -81,6 +82,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.DidReceiveMemoryWarning();
         }
 
+        public override void LoadView()
+        {
+            this._vOperator = new vOperator();
+            this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
+            this._vOperator.MathOperator = this._operatorType;
+            this.View = this._vOperator;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -96,9 +105,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
-
-            // Not needed this is now done in AspyViewController base...
-            this.txtOperator.Frame = this.OperatorSize._rectTxtOperator;
+            this.View.BackgroundColor = UIColor.Clear;
+            this.HasBorder = false;
+            //this._sizeOperator.SetRectTxtOperator();
+            //this.txtOperator.Frame = this.OperatorSize._rectTxtOperator;
         }
 
         #endregion
@@ -107,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public SizeOperator OperatorSize
         {
-            get { return (SizeOperator)this._sizeClass; }
+            get { return this._sizeOperator; }
             //set { this._sizeClass = value; }
         }
 
@@ -148,9 +158,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
+        // TODO: No longer needed ?
         public RectangleF _rectTxtOperator;
-        // Parent Container
-        //private vcOperatorText _vcChild;
+        public float _scale;        
 
         #endregion
 
@@ -172,7 +182,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            //this._vcChild = (vcOperatorText)this.ParentContainer;
         }
 
         #endregion
@@ -191,7 +200,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
-            base.SetHeightWidth();
         }
 
         #endregion
