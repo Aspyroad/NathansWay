@@ -149,11 +149,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void SetHeightWidth ()
         {
-//            if (this._parentContainer.HasBorder)
-//            {
-//                this._fCurrentWidth = (this._fCurrentWidth + (this._globalSizeDimensions.BorderNumberWidth * 2));
-//                this._fCurrentHeight = (this._fCurrentHeight + (this._globalSizeDimensions.BorderNumberWidth * 2));
-//            }
         }
 
         public virtual void SetHeightWidth (float _width, float _height)
@@ -212,6 +207,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _point = this.RefreshDisplayAndPosition(_posX, _posY);
             }
             this.StartPoint = _point;
+        }
+
+        public virtual void SetOtherPositions ()
+        {
         }
 
         //The event-invoking method that derived classes can override. 
@@ -708,7 +707,26 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 50.0f;
+                    return 42.0f;
+                }
+                else if (this._size == G__NumberDisplaySize.Medium)
+                {
+                    return 96.0f;
+                }
+                else // Large
+                {
+                    return 102.0f;
+                }
+            }
+        }
+
+        public float OperatorGraphicWidthAndHeight
+        {
+            get
+            {
+                if (this._size == G__NumberDisplaySize.Normal)
+                {
+                    return 38.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {

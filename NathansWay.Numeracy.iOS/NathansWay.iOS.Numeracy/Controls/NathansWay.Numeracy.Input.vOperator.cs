@@ -20,7 +20,9 @@ namespace NathansWay.iOS.Numeracy
         #region Private Variables
 
         //private G__MathChar _mathOperator;
-        //private float _fScale;
+        private float _fScale;
+        private float _fOperatorStartpointX;
+        private float _fOperatorStartpointY;
 
         #endregion
         
@@ -68,6 +70,18 @@ namespace NathansWay.iOS.Numeracy
             set;
         }
 
+        public float OperatorStartpointX
+        {
+            //get;
+            set { this._fOperatorStartpointX = value; }
+        }
+
+        public float OperatorStartpointY
+        {
+            //get;
+            set { this._fOperatorStartpointY = value; }
+        }
+
         #endregion
 
         #region Overrides
@@ -76,7 +90,7 @@ namespace NathansWay.iOS.Numeracy
         {
             // Custom draws
             DrawOperator();
-
+            // Base
             base.Draw (rect);
         }
 
@@ -132,57 +146,48 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var operatorColor = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 1.000f);
-            var fontColor = UIColor.Black;
-            var operatorBg = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.260f);
+            var operatorColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fontColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var operatorBg = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.000f);
+
+            //// Rectangle Drawing
+            operatorBg.SetFill();
+           // rectanglePath.Fill();
+            fontColor.SetStroke();
 
             //// Addition Drawing
             context.SaveState();
-            context.ScaleCTM(this.ImageScale, this.ImageScale);
+            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
 
-
-
-            //// Rectangle Drawing
-            var rectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(0.0f, 0.0f, 40.0f, 40.0f), 5.0f);
-            operatorBg.SetFill();
-            rectanglePath.Fill();
-            fontColor.SetStroke();
-            rectanglePath.LineWidth = 1.0f;
-            rectanglePath.Stroke();
-
-
-            //// Addition Drawing
             UIBezierPath additionPath = new UIBezierPath();
-            additionPath.MoveTo(new PointF(35.85f, 24.01f));
-            additionPath.AddLineTo(new PointF(24.01f, 24.01f));
-            additionPath.AddLineTo(new PointF(24.01f, 35.85f));
-            additionPath.AddCurveToPoint(new PointF(21.85f, 38.0f), new PointF(24.01f, 37.04f), new PointF(23.05f, 38.0f));
-            additionPath.AddLineTo(new PointF(18.15f, 38.0f));
-            additionPath.AddCurveToPoint(new PointF(15.99f, 35.85f), new PointF(16.95f, 38.0f), new PointF(15.99f, 37.04f));
-            additionPath.AddLineTo(new PointF(15.99f, 24.01f));
-            additionPath.AddLineTo(new PointF(4.15f, 24.01f));
-            additionPath.AddCurveToPoint(new PointF(2.0f, 21.85f), new PointF(2.96f, 24.01f), new PointF(2.0f, 23.05f));
-            additionPath.AddLineTo(new PointF(2.0f, 18.15f));
-            additionPath.AddCurveToPoint(new PointF(4.15f, 15.99f), new PointF(2.0f, 16.95f), new PointF(2.96f, 15.99f));
-            additionPath.AddLineTo(new PointF(15.99f, 15.99f));
-            additionPath.AddLineTo(new PointF(15.99f, 4.15f));
-            additionPath.AddCurveToPoint(new PointF(18.15f, 2.0f), new PointF(15.99f, 2.96f), new PointF(16.95f, 2.0f));
-            additionPath.AddLineTo(new PointF(21.85f, 2.0f));
-            additionPath.AddCurveToPoint(new PointF(24.01f, 4.15f), new PointF(23.05f, 2.0f), new PointF(24.01f, 2.96f));
-            additionPath.AddLineTo(new PointF(24.01f, 15.99f));
-            additionPath.AddLineTo(new PointF(35.85f, 15.99f));
-            additionPath.AddCurveToPoint(new PointF(38.0f, 18.15f), new PointF(37.04f, 15.99f), new PointF(38.0f, 16.95f));
-            additionPath.AddLineTo(new PointF(38.0f, 21.85f));
-            additionPath.AddCurveToPoint(new PointF(35.85f, 24.01f), new PointF(38.0f, 22.99f), new PointF(37.04f, 24.01f));
+            additionPath.MoveTo(new PointF(35.0f, 23.0f));
+            additionPath.AddLineTo(new PointF(23.0f, 23.0f));
+            additionPath.AddLineTo(new PointF(23.0f, 35.0f));
+            additionPath.AddCurveToPoint(new PointF(21.0f, 37.0f), new PointF(23.0f, 36.0f), new PointF(22.0f, 37.0f));
+            additionPath.AddLineTo(new PointF(17.0f, 37.0f));
+            additionPath.AddCurveToPoint(new PointF(15.0f, 35.0f), new PointF(16.0f, 37.0f), new PointF(15.0f, 36.0f));
+            additionPath.AddLineTo(new PointF(15.0f, 23.0f));
+            additionPath.AddLineTo(new PointF(3.0f, 23.0f));
+            additionPath.AddCurveToPoint(new PointF(1.0f, 21.0f), new PointF(2.0f, 23.0f), new PointF(1.0f, 22.0f));
+            additionPath.AddLineTo(new PointF(1.0f, 17.0f));
+            additionPath.AddCurveToPoint(new PointF(3.0f, 15.0f), new PointF(1.0f, 16.0f), new PointF(2.0f, 15.0f));
+            additionPath.AddLineTo(new PointF(15.0f, 15.0f));
+            additionPath.AddLineTo(new PointF(15.0f, 3.0f));
+            additionPath.AddCurveToPoint(new PointF(17.0f, 1.0f), new PointF(15.0f, 2.0f), new PointF(16.0f, 1.0f));
+            additionPath.AddLineTo(new PointF(21.0f, 1.0f));
+            additionPath.AddCurveToPoint(new PointF(23.0f, 3.0f), new PointF(22.0f, 1.0f), new PointF(23.0f, 2.0f));
+            additionPath.AddLineTo(new PointF(23.0f, 15.0f));
+            additionPath.AddLineTo(new PointF(35.0f, 15.0f));
+            additionPath.AddCurveToPoint(new PointF(37.0f, 17.0f), new PointF(36.0f, 15.0f), new PointF(37.0f, 16.0f));
+            additionPath.AddLineTo(new PointF(37.0f, 21.0f));
+            additionPath.AddCurveToPoint(new PointF(35.0f, 23.0f), new PointF(37.0f, 22.0f), new PointF(36.0f, 23.0f));
             additionPath.ClosePath();
             additionPath.MiterLimit = 4.0f;
 
-
             operatorColor.SetFill();
             additionPath.Fill();
-            fontColor.SetStroke();
-            additionPath.LineWidth = 1.5f;
-            additionPath.Stroke();
+
+            context.RestoreState();
 
 
 

@@ -239,7 +239,6 @@ namespace NathansWay.iOS.Numeracy
             base.TouchesBegan(touches, evt);
         }
 
-
         #endregion
 
         #region Public Properties

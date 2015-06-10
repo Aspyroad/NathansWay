@@ -87,6 +87,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vOperator = new vOperator();
             this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
             this._vOperator.MathOperator = this._operatorType;
+            this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
+            this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;
             this.View = this._vOperator;
         }
 
@@ -103,12 +105,21 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
-            // Base Container will call ALL main vc setframes.
+            // Call to the derived sizeclass setotherpositions()
+            this.OperatorSize.SetOtherPositions();
+            // Set drawn graphic positions
+            this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
+            this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;
+            // Base Container will call vc set mainframe.
             base.ViewWillAppear(animated);
+        }
+
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
+
             this.View.BackgroundColor = UIColor.Clear;
-            this.HasBorder = false;
-            //this._sizeOperator.SetRectTxtOperator();
-            //this.txtOperator.Frame = this.OperatorSize._rectTxtOperator;
+            this.HasBorder = true;
         }
 
         #endregion
@@ -160,7 +171,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Text Box Frame
         // TODO: No longer needed ?
         public RectangleF _rectTxtOperator;
-        public float _scale;        
+        public float _scale;
+        private float _fOperatorStartpointX;
+        private float _fOperatorStartpointY;
 
         #endregion
 
@@ -188,12 +201,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void SetPositions(PointF _startPoint)
+        public override void SetOtherPositions()
         {
-            base.SetPositions(_startPoint);
-
             // Set local frames to the VC
             this.SetRectTxtOperator();
+            this.SetGraphicDrawPoint();
         }
 
         public override void SetHeightWidth ()
@@ -214,6 +226,28 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth,
                 this.CurrentHeight
             );
+        }
+
+        public void SetGraphicDrawPoint()
+        {
+            this._fOperatorStartpointX = ((this._fCurrentWidth / 2.0f) - (this.GlobalSizeDimensions.OperatorGraphicWidthAndHeight / 2.0f));
+            this._fOperatorStartpointY = ((this._fCurrentHeight / 2.0f) - (this.GlobalSizeDimensions.OperatorGraphicWidthAndHeight / 2.0f));
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public float OperatorStartpointX
+        {
+            get { return this._fOperatorStartpointX; }
+            set { this._fOperatorStartpointX = value; }
+        }
+
+        public float OperatorStartpointY
+        {
+            get { return this._fOperatorStartpointY; }
+            set { this._fOperatorStartpointY = value; }
         }
 
         #endregion

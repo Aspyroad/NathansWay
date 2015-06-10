@@ -106,6 +106,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // You may need to call any frame creation methods in the 
                 // controls ViewWillApppear method
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
+                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
                 _XPos = _XPos + 2.0f + _control.SizeClass.CurrentWidth;
             }

@@ -97,34 +97,6 @@ namespace NathansWay.iOS.Numeracy
             this.CreateFraction();
         }
 
-        #endregion
-
-        #region Overrides
-
-        public override void LoadView()
-        {
-            this._vFractionContainer = new vFractionContainer();
-            this.View = this._vFractionContainer;
-
-        }
-        // Is only called when the viewcontroller first lays out its views
-        public override void ViewWillAppear(bool animated)
-        {
-            this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
-            // Base Container will call ALL setframes.
-            base.ViewWillAppear(animated);
-        }
-
-        #endregion
-
-        #region Public Members
-
-
-
-        #endregion
-
-        #region Private Members
-
         private void CreateFraction()
         {
             // Locals
@@ -147,7 +119,7 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
-            
+
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
             this.SizeClass.CurrentWidth = Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
@@ -166,6 +138,38 @@ namespace NathansWay.iOS.Numeracy
             this.AddAndDisplayController(this.numberText_Denominator);
 
         }
+
+        #endregion
+
+        #region Overrides
+
+        public override void LoadView()
+        {
+            this._vFractionContainer = new vFractionContainer();
+            this.View = this._vFractionContainer;
+
+        }
+        // Is only called when the viewcontroller first lays out its views
+        public override void ViewWillAppear(bool animated)
+        {
+            // Set its poisiton
+            //this.FractionSize.SetPositions(this.SizeClass.StartPoint);
+            this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
+            // Base Container will call ALL setframes.
+            base.ViewWillAppear(animated);
+        }
+
+        public override void ApplyUI()
+        {
+            // Local UI
+            this.SetBGColor = UIColor.Clear;
+        }
+
+        #endregion
+
+        #region Public Members
+
+
 
         #endregion
 
@@ -205,15 +209,6 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Overrides
-
-        public override void ApplyUI()
-        {
-            // Local UI
-            this.SetBGColor = UIColor.Clear;
-        }
-
-        #endregion
     }
 
     public class FractionSize : SizeBase
