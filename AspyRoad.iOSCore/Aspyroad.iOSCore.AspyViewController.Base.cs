@@ -32,7 +32,7 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
-        protected CGColor _colorBorderColor;
+        protected UIColor _colorBorderColor;
         protected UIColor _colorBGColor;
 
 		#endregion
@@ -73,7 +73,7 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
-            this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
+            //this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
             this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -152,6 +152,15 @@ namespace AspyRoad.iOSCore
             { 
                 this._colorBGColor = value;
                 this.View.BackgroundColor = this._colorBGColor;   
+            }
+        }
+        public UIColor SetBorderColor
+        {
+            get { return this._colorBorderColor; }
+            set 
+            { 
+                this._colorBGColor = value;
+                this.View.Layer.BorderColor = this._colorBGColor.CGColor;   
             }
         }
 

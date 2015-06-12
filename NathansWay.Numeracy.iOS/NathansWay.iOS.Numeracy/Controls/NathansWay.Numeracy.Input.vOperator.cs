@@ -136,7 +136,44 @@ namespace NathansWay.iOS.Numeracy
 
         public void DrawMultiply()
         {
+            //// General Declarations
+            var context = UIGraphics.GetCurrentContext();
 
+            //// Color Declarations
+            var fillColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+
+            //// Addition Drawing
+            context.SaveState();
+            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+
+            //// Bezier Drawing
+            UIBezierPath bezierPath = new UIBezierPath();
+            bezierPath.MoveTo(new PointF(25.46f, 22.92f));
+            bezierPath.AddCurveToPoint(new PointF(25.46f, 25.58f), new PointF(26.18f, 23.64f), new PointF(26.18f, 24.85f));
+            bezierPath.AddLineTo(new PointF(25.58f, 25.46f));
+            bezierPath.AddCurveToPoint(new PointF(22.93f, 25.46f), new PointF(24.86f, 26.18f), new PointF(23.65f, 26.18f));
+            bezierPath.AddLineTo(new PointF(15.03f, 17.54f));
+            bezierPath.AddLineTo(new PointF(7.13f, 25.46f));
+            bezierPath.AddCurveToPoint(new PointF(4.47f, 25.46f), new PointF(6.4f, 26.18f), new PointF(5.2f, 26.18f));
+            bezierPath.AddLineTo(new PointF(4.6f, 25.58f));
+            bezierPath.AddCurveToPoint(new PointF(4.6f, 22.92f), new PointF(3.88f, 24.85f), new PointF(3.88f, 23.64f));
+            bezierPath.AddLineTo(new PointF(12.5f, 15.0f));
+            bezierPath.AddLineTo(new PointF(4.54f, 7.08f));
+            bezierPath.AddCurveToPoint(new PointF(4.54f, 4.42f), new PointF(3.82f, 6.36f), new PointF(3.82f, 5.15f));
+            bezierPath.AddLineTo(new PointF(4.42f, 4.54f));
+            bezierPath.AddCurveToPoint(new PointF(7.07f, 4.54f), new PointF(5.14f, 3.82f), new PointF(6.35f, 3.82f));
+            bezierPath.AddLineTo(new PointF(14.97f, 12.46f));
+            bezierPath.AddLineTo(new PointF(22.87f, 4.54f));
+            bezierPath.AddCurveToPoint(new PointF(25.52f, 4.54f), new PointF(23.59f, 3.82f), new PointF(24.8f, 3.82f));
+            bezierPath.AddLineTo(new PointF(25.4f, 4.42f));
+            bezierPath.AddCurveToPoint(new PointF(25.4f, 7.08f), new PointF(26.12f, 5.15f), new PointF(26.12f, 6.36f));
+            bezierPath.AddLineTo(new PointF(17.56f, 15.0f));
+            bezierPath.AddLineTo(new PointF(25.46f, 22.92f));
+            bezierPath.ClosePath();
+            bezierPath.MiterLimit = 4.0f;
+
+            fillColor.SetFill();
+            bezierPath.Fill();
         }
 
         public void DrawAddition()
@@ -146,66 +183,96 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var operatorColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-            var fontColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
-            var operatorBg = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.000f);
-
-            //// Rectangle Drawing
-            operatorBg.SetFill();
-           // rectanglePath.Fill();
-            fontColor.SetStroke();
+            var color = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
 
             //// Addition Drawing
             context.SaveState();
             context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
 
-            UIBezierPath additionPath = new UIBezierPath();
-            additionPath.MoveTo(new PointF(35.0f, 23.0f));
-            additionPath.AddLineTo(new PointF(23.0f, 23.0f));
-            additionPath.AddLineTo(new PointF(23.0f, 35.0f));
-            additionPath.AddCurveToPoint(new PointF(21.0f, 37.0f), new PointF(23.0f, 36.0f), new PointF(22.0f, 37.0f));
-            additionPath.AddLineTo(new PointF(17.0f, 37.0f));
-            additionPath.AddCurveToPoint(new PointF(15.0f, 35.0f), new PointF(16.0f, 37.0f), new PointF(15.0f, 36.0f));
-            additionPath.AddLineTo(new PointF(15.0f, 23.0f));
-            additionPath.AddLineTo(new PointF(3.0f, 23.0f));
-            additionPath.AddCurveToPoint(new PointF(1.0f, 21.0f), new PointF(2.0f, 23.0f), new PointF(1.0f, 22.0f));
-            additionPath.AddLineTo(new PointF(1.0f, 17.0f));
-            additionPath.AddCurveToPoint(new PointF(3.0f, 15.0f), new PointF(1.0f, 16.0f), new PointF(2.0f, 15.0f));
-            additionPath.AddLineTo(new PointF(15.0f, 15.0f));
-            additionPath.AddLineTo(new PointF(15.0f, 3.0f));
-            additionPath.AddCurveToPoint(new PointF(17.0f, 1.0f), new PointF(15.0f, 2.0f), new PointF(16.0f, 1.0f));
-            additionPath.AddLineTo(new PointF(21.0f, 1.0f));
-            additionPath.AddCurveToPoint(new PointF(23.0f, 3.0f), new PointF(22.0f, 1.0f), new PointF(23.0f, 2.0f));
-            additionPath.AddLineTo(new PointF(23.0f, 15.0f));
-            additionPath.AddLineTo(new PointF(35.0f, 15.0f));
-            additionPath.AddCurveToPoint(new PointF(37.0f, 17.0f), new PointF(36.0f, 15.0f), new PointF(37.0f, 16.0f));
-            additionPath.AddLineTo(new PointF(37.0f, 21.0f));
-            additionPath.AddCurveToPoint(new PointF(35.0f, 23.0f), new PointF(37.0f, 22.0f), new PointF(36.0f, 23.0f));
-            additionPath.ClosePath();
-            additionPath.MiterLimit = 4.0f;
 
-            operatorColor.SetFill();
-            additionPath.Fill();
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(13.0f, 2.0f, 4.0f, 26.0f), 2.0f);
+            color.SetFill();
+            rectanglePath.Fill();
 
+
+            //// Rectangle 2 Drawing
+            var rectangle2Path = UIBezierPath.FromRoundedRect(new RectangleF(2.0f, 13.0f, 26.0f, 4.0f), 2.0f);
+            color.SetFill();
+            rectangle2Path.Fill();
             context.RestoreState();
-
-
 
         }
 
         public void DrawSubtraction()
         {
+            //// General Declarations
+            var context = UIGraphics.GetCurrentContext();
+
+            //// Color Declarations
+            var fillColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+
+            //// Addition Drawing
+            context.SaveState();
+            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(4.0f, 13.0f, 22.0f, 4.0f), 2.0f);
+            fillColor.SetFill();
+            rectanglePath.Fill();
 
         }
 
         public void DrawDivision()
         {
+            //// General Declarations
+            var context = UIGraphics.GetCurrentContext();
 
+            //// Color Declarations
+            var fillcolor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+
+            //// Addition Drawing
+            context.SaveState();
+            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRoundedRect(new RectangleF(3.0f, 13.0f, 24.0f, 4.0f), 2.0f);
+            fillcolor.SetFill();
+            rectanglePath.Fill();
+
+
+            //// Oval1 Drawing
+            var oval1Path = UIBezierPath.FromOval(new RectangleF(12.0f, 5.0f, 6.0f, 6.0f));
+            fillcolor.SetFill();
+            oval1Path.Fill();
+
+
+            //// Oval2 Drawing
+            var oval2Path = UIBezierPath.FromOval(new RectangleF(12.0f, 19.0f, 6.0f, 6.0f));
+            fillcolor.SetFill();
+            oval2Path.Fill();
         }
 
         public void DrawEquals()
         {
+            //// General Declarations
+            var context = UIGraphics.GetCurrentContext();
 
+            //// Color Declarations
+            var fillcolor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+
+            //// Addition Drawing
+            context.SaveState();
+            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            //// Rect1 Drawing
+            var rect1Path = UIBezierPath.FromRoundedRect(new RectangleF(4.0f, 10.0f, 22.0f, 4.0f), 2.0f);
+            fillcolor.SetFill();
+            rect1Path.Fill();
+
+
+            //// Rect2 Drawing
+            var rect2Path = UIBezierPath.FromRoundedRect(new RectangleF(4.0f, 16.0f, 22.0f, 4.0f), 2.0f);
+            fillcolor.SetFill();
+            rect2Path.Fill();
         }
 
         // Greater than etc

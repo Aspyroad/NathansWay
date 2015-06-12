@@ -96,10 +96,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ViewDidLoad();
             // Add subviews
-            this.View.AddSubview(this.txtOperator);
+            //this.View.AddSubview(this.txtOperator);
             // Delegate wireups (prevents the control from being edited)
-            this._txtOperatorDelegate = new TextControlDelegate();
-            this.txtOperator.Delegate = this._txtOperatorDelegate;
+            //this._txtOperatorDelegate = new TextControlDelegate();
+            //this.txtOperator.Delegate = this._txtOperatorDelegate;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -116,14 +116,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void ApplyUI()
         {
-            base.ApplyUI();
+            //base.ApplyUI();
 
             this.View.BackgroundColor = UIColor.Clear;
+            this.SetBorderColor = UIColor.Red;
             this.HasBorder = true;
         }
 
         #endregion
-        
+
         #region Public Properties
 
         public SizeOperator OperatorSize
@@ -146,14 +147,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeClass = this._sizeOperator;
 
             // Create textbox
-            this.txtOperator = new AspyTextField();
-            // Apply some UI to the textbox
-            this.SizeClass.SetNumberFont(this.txtOperator);
-            this.txtOperator.HasBorder = false;
-            this.txtOperator.HasRoundedCorners = true;
-            this.txtOperator.Text = _strOperator;
-            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtOperator.TextAlignment = UITextAlignment.Center;
+//            this.txtOperator = new AspyTextField();
+//            // Apply some UI to the textbox
+//            this.SizeClass.SetNumberFont(this.txtOperator);
+//            this.txtOperator.HasBorder = false;
+//            this.txtOperator.HasRoundedCorners = true;
+//            this.txtOperator.Text = _strOperator;
+//            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+//            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
             //this.txtOperator.ApplyUI();
         }
