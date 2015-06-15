@@ -892,18 +892,21 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionTopOn ()
         {
-            this.RectMainFrame = new RectangleF(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                (this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
-            );
             this._rectNumberPicker = new RectangleF(
                 this.StartPointInWindow.X, 
                 (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
+
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.CurrentWidth, 
+                (this.GlobalSizeDimensions.TxtNumberHeight)
+                //(this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
+            );
+
 //            this._rectNumberPicker = new RectangleF(
 //                0.0f, 
 //                0.0f, 

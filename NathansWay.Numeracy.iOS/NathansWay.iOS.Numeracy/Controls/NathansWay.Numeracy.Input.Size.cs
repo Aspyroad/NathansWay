@@ -251,9 +251,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public PointF StartPointInWindow
         {
             get
-            {
-                return this.ParentContainer.View.ConvertPointToView(
-                    this.ParentContainer.View.Frame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
+            {                
+                return this.ParentContainer.ParentViewController.View.ConvertPointToView(
+                    this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
             }
         }
         // Parent Container
