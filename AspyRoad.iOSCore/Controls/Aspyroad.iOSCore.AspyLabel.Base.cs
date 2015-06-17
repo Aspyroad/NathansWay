@@ -60,8 +60,8 @@ namespace AspyRoad.iOSCore
 		public virtual void ApplyUI ()
 		{
 			// Apply label font color
-			this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
-			this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
+			//this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
+			//this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
 		}
 
 		#endregion

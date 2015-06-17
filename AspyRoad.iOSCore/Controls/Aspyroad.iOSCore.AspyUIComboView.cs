@@ -326,8 +326,8 @@ namespace AspyRoad.iOSCore
         public override void Draw(RectangleF rect)
         {
             base.Draw(rect);
-            //this.BackgroundColor = UIColor.Clear;
-            this.ApplyUI();
+            //this.BackgroundColor = UIColor.Black;
+            //this.ApplyUI();
         }
 
 		#endregion
@@ -349,7 +349,7 @@ namespace AspyRoad.iOSCore
                     {
                         if (v.GetType() != typeof(UITableView))
                         {
-                            v.Alpha = 0.2f;
+                            v.Alpha = 0.9f;
                             //v.Hidden = true;
                         }
                     }

@@ -424,8 +424,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
             this.pkNumberPicker.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
-            this.pkNumberPicker.Layer.BorderWidth = 1.0f;
+            this.pkNumberPicker.Layer.BorderWidth = 3.0f;
             this.pkNumberPicker.Layer.CornerRadius = 2.5f;
+            this.pkNumberPicker.BackgroundColor = UIColor.DarkGray;
+
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
@@ -449,7 +451,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // this.txtNumber.TextColor = "";
 
             this.View.BringSubviewToFront(this.pkNumberPicker);
-            this.pkNumberPicker.ApplyUI();
+            //this.pkNumberPicker.ApplyUI();
 
             this.pkNumberPicker.Select(this._intCurrentValue, 0, false);
         }
@@ -711,18 +713,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                     _lblPickerView.BackgroundColor = UIColor.LightGray; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
 
-                //                if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
-                //                {
-                //
-                //                    _lblPickerView.TextColor = UIColor.White;                   
-                //                    _lblPickerView.Font = UIFont.SystemFontOfSize(50f);
-                //                }
-                //                else
-                //                {
-                //                    _lblPickerView.TextColor = UIColor.Black;
-                //                    _lblPickerView.Font = UIFont.SystemFontOfSize(55f);
-                //                }
-
                 // Apply UI
                 _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
                 _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
@@ -807,8 +797,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         // X Horizontal
         // Y Vertical
 
-        // Number Picker Spinner Control
-        public RectangleF _rectNumberPicker;
         // Text Box Frame
         public RectangleF _rectTxtNumber;
         // Up Down Button Frames, usually the same
@@ -816,6 +804,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF _rectDownButton;
         // Label Frame for the Picker View
         public RectangleF _rectMainNumberWithPicker;
+        // Number Picker Spinner Control
+        public RectangleF _rectNumberPicker;
         // Parent Container
         private vcNumberText _vcChild;
 
@@ -904,15 +894,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 (this.GlobalSizeDimensions.TxtNumberHeight)
-                //(this.GlobalSizeDimensions.NumberPickerHeight + this.GlobalSizeDimensions.TxtNumberHeight)
             );
 
-//            this._rectNumberPicker = new RectangleF(
-//                0.0f, 
-//                0.0f, 
-//                this.CurrentWidth,
-//                this.GlobalSizeDimensions.NumberPickerHeight
-//            );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 (this.GlobalSizeDimensions.NumberPickerHeight), 

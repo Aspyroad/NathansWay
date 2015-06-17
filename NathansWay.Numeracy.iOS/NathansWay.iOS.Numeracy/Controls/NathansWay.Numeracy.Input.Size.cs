@@ -45,6 +45,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
         protected bool _bMultiNumberText;
+        // PointF location with respect to the Window and ContainerController
+        protected PointF _ptStartPointInWindow;
+
 
         #endregion
 
@@ -187,6 +190,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _point = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y);   
                 this.StartPoint = _point;
             }
+
         }
 
         /// <summary>
@@ -235,6 +239,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+
         #endregion
 
         #region Public Properties
@@ -252,11 +257,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {                
-                return this.ParentContainer.ParentViewController.View.ConvertPointToView(
+                return this.ParentContainer.View.ConvertPointToView(
                     this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
             }
         }
-        // Parent Container
+         // Parent Container
         public BaseContainer ParentContainer
         { 
             get { return this._parentContainer; }
@@ -570,7 +575,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 34.0f;
+                    return 36.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
