@@ -85,7 +85,7 @@ namespace NathansWay.Shared
 			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
 			FontSize = 17.0f;
 			//FontSizeiOS7 = 20.0f;
-			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 00.0f, 0.9f)); // Black
+			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
 
 			// UIButton
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(50.0f, 50.0f, 50.0f, 255.0f)); // Black
@@ -132,7 +132,6 @@ namespace NathansWay.Shared
 			ViewTableSeperatorColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
 
 			// UITableVIewCell
-
 			ViewCellSelectedColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 250.0f)); // 
 			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 250.0f)); // 
 			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 210.0f)); // Orange less alpha

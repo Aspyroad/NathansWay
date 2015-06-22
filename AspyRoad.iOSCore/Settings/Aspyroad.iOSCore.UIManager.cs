@@ -295,6 +295,7 @@ namespace AspyRoad.iOSCore.UISettings
         #endregion
 
 		#region UIButton
+
 		public Lazy<UIColor> ButtonNormalBGUIColor
 		{ 
 			get

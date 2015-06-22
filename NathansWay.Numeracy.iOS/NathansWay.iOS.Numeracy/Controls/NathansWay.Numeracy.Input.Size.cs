@@ -252,12 +252,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             get; 
             set; 
         }
-        // Position of view with reference to Window.
+        // Position of Parent vc view with reference to Window.
         public PointF StartPointInWindow
         {
             get
             {                
-                return this.ParentContainer.View.ConvertPointToView(
+                return this.ParentContainer.ParentViewController.View.ConvertPointToView(
                     this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
             }
         }
@@ -768,6 +768,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         #endregion
+
+
 
         #region iOS Specific
 

@@ -127,7 +127,7 @@ namespace NathansWay.iOS.Numeracy
             // There should only ever be two
             if (_result.Length > 2)
             {
-                // TODO : Raise an error. This should never be any greater then two dimensions
+                // TODO : Debug only : Raise an error. This should never be any greater then two dimensions
             }
             _sig = _result[0].Length;
             //_insig = _result[1].Length; not needed?
@@ -145,7 +145,7 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
-                    if (_sig > 1)
+                    if (_sig > 1 || _result.Length > 1)
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
                     }

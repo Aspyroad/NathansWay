@@ -423,10 +423,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             // Create the picker class
             this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
-            this.pkNumberPicker.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
-            this.pkNumberPicker.Layer.BorderWidth = 3.0f;
-            this.pkNumberPicker.Layer.CornerRadius = 2.5f;
-            this.pkNumberPicker.BackgroundColor = UIColor.DarkGray;
+            //this.pkNumberPicker.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
+            //this.pkNumberPicker.Layer.BorderWidth = 3.0f;
+            //this.pkNumberPicker.Layer.CornerRadius = 2.5f;
+            //this.pkNumberPicker.BackgroundColor = UIColor.DarkGray;
 
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
@@ -443,6 +443,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             // This may fix the bounds problem when trying to touch.
             this._vcMainContainer.View.AddSubview(pkNumberPicker);
 
+            // Testing
+            // These are drawn by the system, lines etc for picker UI
+            //pkNumberPicker.Subviews[0].Hidden = true;
+            //pkNumberPicker.Subviews[1].Hidden = true;
+            //pkNumberPicker.Subviews[2].Hidden = true;
+
+            // TODO : Im guessing there will be some pre ios7 UI changes needed??
+            pkNumberPicker.Layer.BackgroundColor = UIColor.LightGray.CGColor;
+            pkNumberPicker.Layer.CornerRadius = 8.0f;
+            // I found that you must set corner radius first, then BG for proper appearance
+            pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
+            pkNumberPicker.Layer.BorderWidth = 2.0f;
+
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
 
@@ -450,10 +463,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // No, I think its best to dim the text? 
             // this.txtNumber.TextColor = "";
 
-            this.View.BringSubviewToFront(this.pkNumberPicker);
+            //this.View.BringSubviewToFront(this.pkNumberPicker);
             //this.pkNumberPicker.ApplyUI();
 
-            this.pkNumberPicker.Select(this._intCurrentValue, 0, false);
+            //this.pkNumberPicker.Select(this._intCurrentValue, 0, false);
         }
 
         protected void EditNumPad()
@@ -717,6 +730,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
                 _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
                 _lblPickerView.Layer.BorderWidth = 1.0f;
+                _lblPickerView.Layer.CornerRadius = 3.0f;
                 _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
 
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
