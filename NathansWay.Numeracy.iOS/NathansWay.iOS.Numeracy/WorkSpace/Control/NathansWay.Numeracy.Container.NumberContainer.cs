@@ -174,7 +174,7 @@ namespace NathansWay.iOS.Numeracy
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
                     // Set our current width - and shorten if there is more then one number
-                    if (_lsNumbers.Count > 1)
+                    if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
@@ -230,8 +230,9 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
-            //this.HasBorder = true;
-            //this.HasRoundedCorners = true;
+            this.HasBorder = true;
+            this.HasRoundedCorners = true;
+            //this.SetBGColor = UIColor.Brown;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

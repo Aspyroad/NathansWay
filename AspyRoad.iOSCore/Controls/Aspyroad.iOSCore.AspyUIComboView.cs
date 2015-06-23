@@ -326,8 +326,7 @@ namespace AspyRoad.iOSCore
         public override void Draw(RectangleF rect)
         {
             base.Draw(rect);
-            //this.BackgroundColor = UIColor.Black;
-            //this.ApplyUI();
+            this.ApplyUI();
         }
 
 		#endregion
@@ -343,16 +342,49 @@ namespace AspyRoad.iOSCore
                 // Just in case the _picker isnt drawn
                 if (this.Subviews.GetUpperBound (0) > 0)
                 {
-                    // Clear all crap UI from pickerview prior to iOS7
-                    // This clears all pickerview background
+                    this.BackgroundColor = UIColor.Cyan;
+
                     foreach (UIView v in this.Subviews)
                     {
-                        if (v.GetType() != typeof(UITableView))
+                        if (v.GetType() != typeof(UITableView))                     
                         {
-                            v.Alpha = 0.9f;
-                            //v.Hidden = true;
+                            //v.Alpha = 0.9f;
+                            v.Hidden = true;
+                        }                                             
+                        else
+                        {
+                            v.Frame = new RectangleF(
+                                0.0f,
+                                v.Frame.Y,
+                                40.0f,
+                                v.Frame.Height
+                            );
                         }
-                    }
+                   }
+                
+
+//                    for (int i = 0; i < this.Subviews.GetUpperBound (0); i++)
+//                    {
+//                        if (this.Subviews[i].GetType() != typeof(UITableView))                        
+//                        {
+//                            this.Subviews[i].Hidden = 0.0f;
+//                        }                        
+////                        else
+////                        {
+////                            this.Subviews[i].Frame = new RectangleF(
+////                                0.0f,
+////                                this.Subviews[i].Frame.Y,
+////                                40.0f,
+////                                this.Subviews[i].Frame.Height
+////                            );
+////                        }
+//                    }
+
+                   //var v = new UIView(this.Frame);
+                    //v.Tag = 1;
+                    //this.AddSubview(v);
+                    //this.ViewWithTag(1).Layer.BackgroundColor = UIColor.White.CGColor;
+                    //this.BringSubviewToFront(v);
                 }
             }
 

@@ -227,8 +227,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Generally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
-            {
-                this.ParentContainer.View.Frame = 
+            {                 
+                this.ParentContainer.View.Frame =
                     new RectangleF
                     (
                         this.StartPoint.X, 
@@ -236,6 +236,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                         this.CurrentWidth, 
                         this.CurrentHeight
                     );
+                // Set the vc view to the MainRectFrame
+                //this.ParentContainer.View.Frame = this.RectMainFrame;
             }
         }
 
@@ -258,7 +260,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             get
             {                
                 return this.ParentContainer.ParentViewController.View.ConvertPointToView(
-                    this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow);
+                    this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow.RootViewController.View);
             }
         }
          // Parent Container

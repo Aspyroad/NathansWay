@@ -73,6 +73,7 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
+
             //this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
             this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
@@ -154,6 +155,7 @@ namespace AspyRoad.iOSCore
                 this.View.BackgroundColor = this._colorBGColor;   
             }
         }
+
         public UIColor SetBorderColor
         {
             get { return this._colorBorderColor; }
@@ -309,7 +311,8 @@ namespace AspyRoad.iOSCore
 			// There are times with multiple controls where we need different tag numbers
 			// But we can always get the global control tag from tag2
 			this._AspyTag2 = _AspyTag1;
-            //this.ApplyUI();
+            // This has been added for iOS7 and below as it screws view sizes
+            this.View.AutosizesSubviews = false;
 		}	
 
         public override void ViewWillAppear(bool animated)

@@ -283,7 +283,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
             this.txtNumber.Text = this._intCurrentValue.ToString();
             this.txtNumber.HasBorder = false;
-            //this.txtNumber.BorderWidth = 0.5f;
+            this.txtNumber.BorderWidth = 0.5f;
             this.txtNumber.HasRoundedCorners = true;
             this.txtNumber.CornerRadius = 2.0f;
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
@@ -450,11 +450,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             //pkNumberPicker.Subviews[2].Hidden = true;
 
             // TODO : Im guessing there will be some pre ios7 UI changes needed??
-            pkNumberPicker.Layer.BackgroundColor = UIColor.LightGray.CGColor;
-            pkNumberPicker.Layer.CornerRadius = 8.0f;
-            // I found that you must set corner radius first, then BG for proper appearance
-            pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
-            pkNumberPicker.Layer.BorderWidth = 2.0f;
+            if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            {
+                pkNumberPicker.BackgroundColor = UIColor.LightGray;
+                pkNumberPicker.Layer.CornerRadius = 8.0f;
+                // I found that you must set corner radius first, then BG for proper appearance
+                pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
+                pkNumberPicker.Layer.BorderWidth = 1.0f;
+            }
+            else
+            {
+                pkNumberPicker.BackgroundColor = UIColor.White;
+                pkNumberPicker.Layer.CornerRadius = 8.0f;
+                pkNumberPicker.ClipsToBounds = true;
+                // I found that you must set corner radius first, then BG for proper appearance
+                pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
+                pkNumberPicker.Layer.BorderWidth = 1.0f;
+            }
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
@@ -720,19 +732,24 @@ namespace NathansWay.iOS.Numeracy.Controls
                 if (pickerView.SelectedRowInComponent(component) == row)
                 {
                     _lblPickerView.BackgroundColor = UIColor.White; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+                    _lblPickerView.Layer.BorderColor = UIColor.Orange.CGColor;
+                    _lblPickerView.Layer.BorderWidth = 2.0f;
+                    _lblPickerView.Layer.CornerRadius = 8.0f;
                 }
                 else
                 {
-                    _lblPickerView.BackgroundColor = UIColor.LightGray; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+                    _lblPickerView.BackgroundColor = UIColor.LightGray;
+                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                    _lblPickerView.Layer.BorderWidth = 1.0f;
+                    _lblPickerView.Layer.CornerRadius = 8.0f;
+                    //_lblPickerView.Alpha = 0.3f;
+                    //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
 
-                // Apply UI
+                // Apply global UI
                 _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
-                _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
-                _lblPickerView.Layer.BorderWidth = 1.0f;
-                _lblPickerView.Layer.CornerRadius = 3.0f;
-                _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
 
+                _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
                 _lblPickerView.Text = this._items[row];
                 return _lblPickerView;
