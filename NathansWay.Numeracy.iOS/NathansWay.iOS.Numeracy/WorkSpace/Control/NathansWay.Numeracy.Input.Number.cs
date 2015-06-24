@@ -421,13 +421,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeNumber.RectMainFrame;
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
-            // Create the picker class
-            this.pkNumberPicker = new AspyPickerView(this.NumberSize._rectNumberPicker);
-            //this.pkNumberPicker.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
-            //this.pkNumberPicker.Layer.BorderWidth = 3.0f;
-            //this.pkNumberPicker.Layer.CornerRadius = 2.5f;
-            //this.pkNumberPicker.BackgroundColor = UIColor.DarkGray;
 
+            // Create the picker class
+            this.pkNumberPicker = new NumberPickerView(this.NumberSize._rectNumberPicker);
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
@@ -439,34 +435,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-            // TODO : swap the picker view to vcMainContainer??? 
+            // Done : swap the picker view to vcMainContainer??? 
             // This may fix the bounds problem when trying to touch.
             this._vcMainContainer.View.AddSubview(pkNumberPicker);
-
-            // Testing
-            // These are drawn by the system, lines etc for picker UI
-            //pkNumberPicker.Subviews[0].Hidden = true;
-            //pkNumberPicker.Subviews[1].Hidden = true;
-            //pkNumberPicker.Subviews[2].Hidden = true;
-
-            // TODO : Im guessing there will be some pre ios7 UI changes needed??
-            if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
-            {
-                pkNumberPicker.BackgroundColor = UIColor.LightGray;
-                pkNumberPicker.Layer.CornerRadius = 8.0f;
-                // I found that you must set corner radius first, then BG for proper appearance
-                pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
-                pkNumberPicker.Layer.BorderWidth = 1.0f;
-            }
-            else
-            {
-                pkNumberPicker.BackgroundColor = UIColor.White;
-                pkNumberPicker.Layer.CornerRadius = 8.0f;
-                pkNumberPicker.ClipsToBounds = true;
-                // I found that you must set corner radius first, then BG for proper appearance
-                pkNumberPicker.Layer.BorderColor = UIColor.Black.CGColor;
-                pkNumberPicker.Layer.BorderWidth = 1.0f;
-            }
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();

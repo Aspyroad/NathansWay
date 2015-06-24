@@ -273,6 +273,7 @@ namespace AspyRoad.iOSCore
         #region Private Variables
 
         protected iOSUIManager iOSUIAppearance; 
+        protected UIView iOS7TableView;
 
         #endregion
 
@@ -320,7 +321,6 @@ namespace AspyRoad.iOSCore
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            //this.ApplyUI();
         }
 
         public override void Draw(RectangleF rect)
@@ -335,64 +335,32 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI ()
         {
+            // Thowing this here? 
+            this.ClipsToBounds = false;
+
             #region UI for prior iOS7
 
             if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
-                // Just in case the _picker isnt drawn
+                // This removes all the CRAP views apple used in pickerviews prior to iOS7
                 if (this.Subviews.GetUpperBound (0) > 0)
                 {
-                    this.BackgroundColor = UIColor.Cyan;
-
                     foreach (UIView v in this.Subviews)
                     {
                         if (v.GetType() != typeof(UITableView))                     
                         {
-                            //v.Alpha = 0.9f;
                             v.Hidden = true;
                         }                                             
                         else
                         {
-                            v.Frame = new RectangleF(
-                                0.0f,
-                                v.Frame.Y,
-                                40.0f,
-                                v.Frame.Height
-                            );
+                            iOS7TableView = v;
                         }
-                   }
-                
-
-//                    for (int i = 0; i < this.Subviews.GetUpperBound (0); i++)
-//                    {
-//                        if (this.Subviews[i].GetType() != typeof(UITableView))                        
-//                        {
-//                            this.Subviews[i].Hidden = 0.0f;
-//                        }                        
-////                        else
-////                        {
-////                            this.Subviews[i].Frame = new RectangleF(
-////                                0.0f,
-////                                this.Subviews[i].Frame.Y,
-////                                40.0f,
-////                                this.Subviews[i].Frame.Height
-////                            );
-////                        }
-//                    }
-
-                   //var v = new UIView(this.Frame);
-                    //v.Tag = 1;
-                    //this.AddSubview(v);
-                    //this.ViewWithTag(1).Layer.BackgroundColor = UIColor.White.CGColor;
-                    //this.BringSubviewToFront(v);
+                    }                
                 }
             }
 
             #endregion
 
-            // Apply label font color
-            //this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
-            //this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
         }
 
         #endregion
