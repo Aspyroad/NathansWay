@@ -273,7 +273,10 @@ namespace AspyRoad.iOSCore
         #region Private Variables
 
         protected iOSUIManager iOSUIAppearance; 
-        protected UIView iOS7TableView;
+        protected UIView _iOS7TableView;
+
+        // Hide an draw code prior to iOS7
+        protected bool _bHideiOS7UI;
 
         #endregion
 
@@ -312,37 +315,14 @@ namespace AspyRoad.iOSCore
 		private void Initialize()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            // Can see no reason why this should ever be false as Apple do!
+            this.ClipsToBounds = true;
+            // Default to true
+            this._bHideiOS7UI = true;
 		}
 
-		#endregion
-
-		#region Overrides
-
-        public override void AwakeFromNib()
+        private void HideDefaultDrawCode ()
         {
-            base.AwakeFromNib();
-        }
-
-        public override void Draw(RectangleF rect)
-        {
-            base.Draw(rect);
-        }
-
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-            this.ApplyUI();
-        }
-
-		#endregion
-
-        #region Virtual Members
-
-        public virtual void ApplyUI ()
-        {
-            // Thowing this here? 
-            this.ClipsToBounds = true;
-
             #region UI for prior iOS7
 
             if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
@@ -358,7 +338,8 @@ namespace AspyRoad.iOSCore
                         }                                             
                         else
                         {
-                            iOS7TableView = v;
+                            _iOS7TableView = v;
+                            v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
                         }
                     }                
                 }
@@ -366,6 +347,50 @@ namespace AspyRoad.iOSCore
 
             #endregion
 
+
+        }
+
+		#endregion
+
+		#region Overrides
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+        }
+
+        public override void Draw(RectangleF rect)
+        {
+            base.Draw(rect);
+            // This hides all the drawn UI Apple inserts into the pickerview...crap!
+            if (this._bHideiOS7UI)
+            {
+                this.HideDefaultDrawCode();
+            }
+        }
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            this.ApplyUI();
+        }
+
+		#endregion
+
+        #region Public Properties
+
+        public bool HideiOS7UI
+        {
+            get { return _bHideiOS7UI; }
+            set { this._bHideiOS7UI = value; }
+        }
+
+        #endregion
+
+        #region Virtual Members
+
+        public virtual void ApplyUI ()
+        {
         }
 
         #endregion
