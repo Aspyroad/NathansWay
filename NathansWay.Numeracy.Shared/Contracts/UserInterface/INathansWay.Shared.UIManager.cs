@@ -97,6 +97,16 @@ namespace NathansWay.Shared
 		Lazy<G__Color> ViewCellBGColor { get; set; }
 		Lazy<G__Color> ViewCellBGColorTransition { get; set; }
 		Lazy<G__Color> ViewCellBGTint { get; set; }
+
+        // Workspace
+//        Lazy<G__Color> NumberSelectedColor { get; set; }
+//        Lazy<G__Color> NumberBGColor { get; set; }
+//        Lazy<G__Color> PositiveBGColor { get; set; }
+//        Lazy<G__Color> PositiveBorderColor { get; set; }
+//        Lazy<G__Color> NegativeBGColor { get; set; }
+//        Lazy<G__Color> NegativeBorderColor { get; set; }
+//        Lazy<G__Color> PickerBGColor { get; set; }
+//        Lazy<G__Color> PickerSelectedColor { get; set; }
 	}
 
 }

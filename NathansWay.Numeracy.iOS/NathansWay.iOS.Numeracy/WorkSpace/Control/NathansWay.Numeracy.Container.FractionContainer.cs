@@ -129,7 +129,10 @@ namespace NathansWay.iOS.Numeracy
             this.numberText_Denominator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
 
             // Grab the vertical drop for denominator
-            var _ypos = this.numberText_Numerator.NumberContainerSize.CurrentHeight + this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
+            var _ypos = 
+                this.numberText_Numerator.NumberContainerSize.CurrentHeight + 
+                this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
+                this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
             this.numberText_Numerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
             this.numberText_Denominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);

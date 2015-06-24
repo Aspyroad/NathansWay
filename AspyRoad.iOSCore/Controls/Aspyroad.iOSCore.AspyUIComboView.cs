@@ -326,6 +326,11 @@ namespace AspyRoad.iOSCore
         public override void Draw(RectangleF rect)
         {
             base.Draw(rect);
+        }
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
             this.ApplyUI();
         }
 
@@ -336,7 +341,7 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI ()
         {
             // Thowing this here? 
-            this.ClipsToBounds = false;
+            this.ClipsToBounds = true;
 
             #region UI for prior iOS7
 

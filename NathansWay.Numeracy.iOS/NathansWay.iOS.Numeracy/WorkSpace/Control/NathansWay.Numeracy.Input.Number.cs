@@ -283,7 +283,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
             this.txtNumber.Text = this._intCurrentValue.ToString();
             this.txtNumber.HasBorder = false;
-            this.txtNumber.BorderWidth = 0.5f;
+            this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
             this.txtNumber.CornerRadius = 2.0f;
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
@@ -699,6 +699,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
             {
                 UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
+                _lblPickerView.ClipsToBounds = true;
 
                 if (pickerView.SelectedRowInComponent(component) == row)
                 {
@@ -709,7 +710,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
-                    _lblPickerView.BackgroundColor = UIColor.LightGray;
+                    _lblPickerView.BackgroundColor = UIColor.Gray;
                     _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
                     _lblPickerView.Layer.BorderWidth = 1.0f;
                     _lblPickerView.Layer.CornerRadius = 8.0f;
