@@ -98,15 +98,24 @@ namespace NathansWay.Shared
 		Lazy<G__Color> ViewCellBGColorTransition { get; set; }
 		Lazy<G__Color> ViewCellBGTint { get; set; }
 
-        // Workspace
-//        Lazy<G__Color> NumberSelectedColor { get; set; }
-//        Lazy<G__Color> NumberBGColor { get; set; }
-//        Lazy<G__Color> PositiveBGColor { get; set; }
-//        Lazy<G__Color> PositiveBorderColor { get; set; }
-//        Lazy<G__Color> NegativeBGColor { get; set; }
-//        Lazy<G__Color> NegativeBorderColor { get; set; }
-//        Lazy<G__Color> PickerBGColor { get; set; }
-//        Lazy<G__Color> PickerSelectedColor { get; set; }
+        // UIPickerView
+        Lazy<G__Color> PkViewBGColor { get; set; }
+        Lazy<G__Color> PKViewSelectedColor { get; set; }
+        // UIPickerViewLabel
+        string PkViewLabelFontName { get; set; }
+        Lazy<G__Color> PkViewLabelHighLightedTextColor { get; set; }
+        Lazy<G__Color> PkViewLabelTextColor { get; set; }
+        Lazy<G__Color> PkViewLabelHighLightedBGColor { get; set; }
+        Lazy<G__Color> PkViewLabelBGColor { get; set; }
+
+        // Various
+        Lazy<G__Color> PositiveBGColor { get; set; }
+        Lazy<G__Color> PositiveTextColor { get; set; }
+        Lazy<G__Color> PositiveBorderColor { get; set; }
+        Lazy<G__Color> NegativeBGColor { get; set; }
+        Lazy<G__Color> NegativeTextColor { get; set; }
+        Lazy<G__Color> NegativeBorderColor { get; set; }
+
 	}
 
 }

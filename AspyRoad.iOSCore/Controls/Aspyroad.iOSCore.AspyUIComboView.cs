@@ -346,8 +346,6 @@ namespace AspyRoad.iOSCore
             }
 
             #endregion
-
-
         }
 
 		#endregion
@@ -367,12 +365,6 @@ namespace AspyRoad.iOSCore
             {
                 this.HideDefaultDrawCode();
             }
-        }
-
-        public override void MovedToSuperview()
-        {
-            base.MovedToSuperview();
-            this.ApplyUI();
         }
 
 		#endregion

@@ -58,6 +58,12 @@ public class NumberPickerView : AspyPickerView
 
     #region Overrides Members
 
+    public override void MovedToSuperview()
+    {
+        base.MovedToSuperview();
+        this.ApplyUI();
+    }
+
     public override void ApplyUI ()
     {
         // Must call base as it populates iOS7TableView
@@ -72,10 +78,10 @@ public class NumberPickerView : AspyPickerView
         }
         else
         {
+            this.BackgroundColor = UIColor.White;
             this.Layer.CornerRadius = 8.0f;
             this.Layer.BorderColor = UIColor.Black.CGColor;
             this.Layer.BorderWidth = 1.0f;
-            this.BackgroundColor = UIColor.White;
         }
     }
 

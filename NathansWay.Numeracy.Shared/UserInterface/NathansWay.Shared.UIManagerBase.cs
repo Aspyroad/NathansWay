@@ -161,23 +161,41 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _textcolor;
 
 		// Slider View
-		protected Lazy<G__Color> _maxtracktintcolor { get; set; }
-		protected Lazy<G__Color> _mintracktintcolor { get; set; }
-		protected Lazy<G__Color> _thumbcolor { get; set; }
-		protected string _thumbstrimage { get; set; }
+        protected Lazy<G__Color> _maxtracktintcolor;
+        protected Lazy<G__Color> _mintracktintcolor;
+        protected Lazy<G__Color> _thumbcolor;
+        protected string _thumbstrimage;
 
 		// UITableView
-		public Lazy<G__Color> _viewtablebgcolor { get; set; }
-		public Lazy<G__Color> _viewtablesectionindexbgcolor { get; set; }
-		public Lazy<G__Color> _viewtablesectionindexcolor { get; set; }
-		public Lazy<G__Color> _viewtablesectionindextrackingcolor { get; set; }
-		public Lazy<G__Color> _viewtableseperatorcolor { get; set; }
+        protected Lazy<G__Color> _viewtablebgcolor;
+        protected Lazy<G__Color> _viewtablesectionindexbgcolor;
+        protected Lazy<G__Color> _viewtablesectionindexcolor;
+        protected Lazy<G__Color> _viewtablesectionindextrackingcolor;
+        protected Lazy<G__Color> _viewtableseperatorcolor;
 
 		// UITableViewCell - view
-		public Lazy<G__Color> _viewcellselectedcolor { get; set; }
-		public Lazy<G__Color> _viewcellbgcolor { get; set; }
-		public Lazy<G__Color> _viewcellbgcolortransition { get; set; }
-		public Lazy<G__Color> _viewcellbgtint { get; set; }
+        protected Lazy<G__Color> _viewcellselectedcolor;
+        protected Lazy<G__Color> _viewcellbgcolor;
+        protected Lazy<G__Color> _viewcellbgcolortransition;
+        protected Lazy<G__Color> _viewcellbgtint;
+
+        // UIPickerView
+        protected Lazy<G__Color> _pkviewbgcolor;
+        protected Lazy<G__Color> _pkviewselectedcolor;
+        // PickerLabel
+        protected string _pkviewlabelfontname;
+        protected Lazy<G__Color> _pkviewlabelhighlightedtextcolor;
+        protected Lazy<G__Color> _pkviewlabeltextcolor;
+        protected Lazy<G__Color> _pkviewlabelhighlightedbgcolor;
+        protected Lazy<G__Color> _pkviewlabelbgcolor;
+
+        // Various
+        protected Lazy<G__Color> _positivebgcolor;
+        protected Lazy<G__Color> _positivetextcolor;
+        protected Lazy<G__Color> _positivebordercolor;
+        protected Lazy<G__Color> _negativebgcolor;
+        protected Lazy<G__Color> _negativetextcolor;
+        protected Lazy<G__Color> _negativebordercolor;
 
 		#endregion
 
@@ -193,40 +211,8 @@ namespace NathansWay.Shared
 		#region Private Members
 
 		protected virtual void Initialize ()
-		{
-		}
-
-//		private void AssignGlobals()
-//		{
-//			// Tags
-//			VcName = g.VcName;
-//			VcTag = g.VcTag;
-//			// Fonts
-//			FontName = g.FontName;
-//			FontBoldName = g.FontBoldName;
-//			FontSize = g.FontSize;
-//			_FontColor = g._FontColor;
-//			// Buttons
-//			_ButtonNormalBGColor = g._ButtonNormalBGColor;
-//			_ButtonPressedBGColor = g._ButtonPressedBGColor;
-//			_ButtonNormalTitleColor = g._ButtonNormalTitleColor;
-//			_ButtonPressedTitleColor = g._ButtonPressedTitleColor;
-//			_ButtonNormalBGImage = g._ButtonNormalBGImage;
-//			_ButtonPressedBGImage = g._ButtonPressedBGImage;
-//			ButtonFontName = g.ButtonFontName;
-//			// View
-//			_ViewBGColor = g._ViewBGColor;
-//			_ViewBGTint = g._ViewBGTint;
-//			// Labels
-//			LabelFontName = g.LabelFontName;
-//			_LabelHighLightedTextColor = g._LabelHighLightedTextColor;
-//			_LabelTextColor = g._LabelTextColor;
-//			// TextViews
-//			_TextBGColor = g._TextBGColor;
-//			_TextBGTint = g._TextBGTint;
-//			_TextHighLightedTextColor = g._TextHighLightedTextColor;
-//			_TextColor = g._TextColor;
-//		}
+        {
+        }
 
 		#endregion
 
@@ -326,6 +312,7 @@ namespace NathansWay.Shared
 			get { return _buttonfontname;}
 			set { _buttonfontname = value; }
 		}
+
 		// UIView
 		public Lazy<G__Color> ViewBGColor 
 		{ 
@@ -342,6 +329,7 @@ namespace NathansWay.Shared
 			get { return _viewbgtint; }
 			set { _viewbgtint = value; } 
 		} 
+
 		// UILabel
 		public string LabelFontName 
 		{ 
@@ -369,7 +357,6 @@ namespace NathansWay.Shared
             set { _labelbgcolor = value; } 
         } 
 
-
 		// UITextViews
 		public Lazy<G__Color> TextBGColor		
 		{ 
@@ -396,6 +383,7 @@ namespace NathansWay.Shared
 			get { return _textcolor; }
 			set { _textcolor = value; } 
 		}
+
 		// UISlider
 		public Lazy<G__Color> MaxTrackTintColor 	
 		{ 
@@ -466,6 +454,76 @@ namespace NathansWay.Shared
 			get{ return _viewcellbgtint; }
 			set{ _viewcellbgtint = value; }
 		}
+
+        // UIPickerView
+        public Lazy<G__Color> PkViewBGColor 
+        { 
+            get{ return this._pkviewbgcolor; } 
+            set{ this._pkviewbgcolor = value; } 
+        }
+        public Lazy<G__Color> PKViewSelectedColor 
+        {             
+            get{ return this._pkviewselectedcolor; } 
+            set{ this._pkviewselectedcolor = value; }  
+        }
+        // UIPickerViewLabel
+        public string PkViewLabelFontName 
+        {             
+            get{ return this._pkviewlabelfontname; } 
+            set{ this._pkviewlabelfontname = value; }  
+        }
+        public Lazy<G__Color> PkViewLabelHighLightedTextColor 
+        {             
+            get{ return this._pkviewlabelhighlightedtextcolor; } 
+            set{ this._pkviewlabelhighlightedtextcolor = value; }  
+        }
+        public Lazy<G__Color> PkViewLabelTextColor 
+        {             
+            get{ return this._pkviewlabeltextcolor; } 
+            set{ this._pkviewlabeltextcolor = value; } 
+        }
+        public Lazy<G__Color> PkViewLabelHighLightedBGColor 
+        {             
+            get{ return this._pkviewlabelhighlightedbgcolor; } 
+            set{ this._pkviewlabelhighlightedbgcolor = value; }  
+        }
+        public Lazy<G__Color> PkViewLabelBGColor 
+        {             
+            get{ return this._pkviewlabelbgcolor; } 
+            set{ this._pkviewlabelbgcolor = value; }  
+        }
+
+        // Various
+        public Lazy<G__Color> PositiveBGColor 
+        {             
+            get{ return this._positivebgcolor; } 
+            set{ this._positivebgcolor = value; }  
+        }
+        public Lazy<G__Color> PositiveTextColor 
+        {             
+            get{ return this._positivetextcolor; } 
+            set{ this._positivetextcolor = value; }  
+        }
+        public Lazy<G__Color> PositiveBorderColor 
+        {             
+            get{ return this._positivebordercolor; } 
+            set{ this._positivebordercolor = value; }  
+        }
+        public Lazy<G__Color> NegativeBGColor 
+        {             
+            get{ return this._negativebgcolor; } 
+            set{ this._negativebgcolor = value; }  
+        }
+        public Lazy<G__Color> NegativeTextColor 
+        {             
+            get{ return this._negativetextcolor; } 
+            set{ this._negativetextcolor = value; }  
+        }
+        public Lazy<G__Color> NegativeBorderColor 
+        {             
+            get{ return this._negativebordercolor; } 
+            set{ this._negativebordercolor = value; }  
+        }
 
 		#endregion
 	}
