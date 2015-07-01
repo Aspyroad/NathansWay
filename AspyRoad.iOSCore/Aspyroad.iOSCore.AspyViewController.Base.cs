@@ -18,7 +18,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
-		protected iOSUIManager iOSUIAppearance; 
+		//protected iOSUIManager iOSUIAppearance; 
         // Event subscribing
         //private bool Subscribe_TextSizeChange;
 
@@ -67,15 +67,12 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+			//this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             // UI
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
-
-            //this._colorBorderColor = this.iOSUIAppearance.GlobaliOSTheme.FontUIColor.Value.CGColor;
-            this._colorBGColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
 		#endregion
