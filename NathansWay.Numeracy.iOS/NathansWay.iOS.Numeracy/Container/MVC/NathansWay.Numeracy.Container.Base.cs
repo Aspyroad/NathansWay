@@ -17,7 +17,7 @@ using NathansWay.iOS.Numeracy.Controls;
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register ("BaseContainer")]	
-	public class BaseContainer : AspyViewController
+	public class BaseContainer : NWViewController
 	{
         #region Events
 

@@ -13,9 +13,12 @@ using AspyRoad.iOSCore;
 namespace NathansWay.iOS.Numeracy.Menu
 {
 	[MonoTouch.Foundation.Register ("vMenuStart")]
-    public class vMenuStart : AspyView
+    public class vMenuStart : NWView
 	{
 		#region Private Variables
+
+        private UIColor colorMainBackGroundEnd;
+        private UIColor colorMainBackGroundStart;
 
 		#endregion
 
@@ -196,6 +199,7 @@ namespace NathansWay.iOS.Numeracy.Menu
         #endregion
 
 		#region Public Members
+
 		#endregion
 
 		#region Overrides

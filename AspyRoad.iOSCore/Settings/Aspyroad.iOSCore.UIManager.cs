@@ -114,7 +114,7 @@ namespace AspyRoad.iOSCore.UISettings
 		public iOSUITheme (IAspyGlobals _iOSGlobals)
 		{
 			this._iosglobals = _iOSGlobals;
-			Initialize ();
+			//Initialize ();
 		}
 
 		public iOSUITheme (IAspyGlobals _iOSGlobals, IUITheme _sharedGlobal)
@@ -122,7 +122,7 @@ namespace AspyRoad.iOSCore.UISettings
 			this._iosglobals = _iOSGlobals;
 			this.g = _sharedGlobal;
 
-			Initialize ();
+			//Initialize ();
 			AssignGlobals ();
 		}
 
@@ -191,9 +191,26 @@ namespace AspyRoad.iOSCore.UISettings
 			ViewCellSelectedColor = g.ViewCellSelectedColor;
 			ViewCellBGColor = g.ViewCellBGColor;
 			ViewCellBGColorTransition = g.ViewCellBGColorTransition;
-			ViewCellBGTint = g.ViewBGTint;
+			ViewCellBGTint = g.ViewCellBGTint;
 
-			// Apply global appearnce
+            // UIPickerView
+            PkViewBGColor = g.PkViewBGColor;
+            PKViewSelectedColor = g.PKViewSelectedColor;
+            // UIPickerViewLabel
+            PkViewLabelFontName = g.PkViewLabelFontName;
+            PkViewLabelHighLightedTextColor = g.PkViewLabelHighLightedTextColor;
+            PkViewLabelTextColor = g.PkViewLabelTextColor;
+            PkViewLabelHighLightedBGColor = g.PkViewLabelHighLightedBGColor;
+
+            // Various
+            PositiveBGColor = g.PositiveBGColor;
+            PositiveTextColor = g.PositiveTextColor;
+            PositiveBorderColor = g.PositiveBorderColor;
+            NegativeBGColor = g.NegativeBGColor;
+            NegativeTextColor = g.NegativeTextColor;
+            NegativeBorderColor = g.NegativeBorderColor;
+
+            // Apply global appearnce
 			this.ApplyGlobalAppearance ();
 
 		}
@@ -244,7 +261,7 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 
 		/// <summary>
-		/// iOS was a major UI change
+		/// iOS 7 was a major UI change
 		/// </summary>
 		/// <value><c>true</c> if this instance is iOS7 or greater; otherwise, <c>false</c>.</value>
 		public bool IsiOS7
@@ -263,6 +280,8 @@ namespace AspyRoad.iOSCore.UISettings
 				return i;			
 			}
 		}
+
+        #endregion
 
         #region UIFont
 		public UIFont FontOfSize (float size)
@@ -366,9 +385,11 @@ namespace AspyRoad.iOSCore.UISettings
 		{
 			return UIFont.FromName (this.ButtonFontName, size);
 		}
+
         #endregion
 
 		#region UIView
+
 		public Lazy<UIColor> ViewBGUIColor
 		{ 
 			get
@@ -392,9 +413,11 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_viewbgtint);
 			} 
 		}
+
         #endregion
 
         #region UILabel
+
 		public UIFont LabelFont (float size)
 		{
 			return UIFont.FromName (this.LabelFontName, size);
@@ -431,9 +454,11 @@ namespace AspyRoad.iOSCore.UISettings
                 return this.convertUIColor(_labelbgcolor);
             } 
         }
+
         #endregion
 
 		#region UITextViews
+
 		public Lazy<UIColor> TextBGUIColor
 		{ 
 			get
@@ -473,9 +498,11 @@ namespace AspyRoad.iOSCore.UISettings
 				return this.convertUIColor(_textcolor);
 			} 
 		}
+
         #endregion
 
 		#region UISliderViews
+
 		public Lazy<UIColor> MaxTrackTintUIColor
 		{ 
 			get
@@ -508,6 +535,7 @@ namespace AspyRoad.iOSCore.UISettings
 
 			}
 		}
+
         #endregion
 
 		#region UIViewTable
@@ -589,6 +617,119 @@ namespace AspyRoad.iOSCore.UISettings
 		}
 
 		#endregion 
+
+        #region UIPickerView
+
+        public Lazy<UIColor> PkViewBGUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(_pkviewbgcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> PKViewSelectedUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_pkviewselectedcolor); 
+            } 
+        }
+
+        #endregion
+
+        #region UIPickerViewLabel
+
+        public UIFont PkViewLabelFont (float size)
+        {             
+            return UIFont.FromName (this._pkviewlabelfontname, size);
+        }
+
+        public Lazy<UIColor> ePkViewLabelHighLightedTextUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_pkviewlabelhighlightedtextcolor);
+            } 
+        }
+
+        public Lazy<UIColor> ePkViewLabelTextUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_pkviewlabeltextcolor);
+            } 
+        }
+
+        public Lazy<UIColor> ePkViewLabelHighLightedBGUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_pkviewlabelhighlightedbgcolor);
+            } 
+        }
+
+        public Lazy<UIColor> ePkViewLabelBGUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_pkviewlabelbgcolor);
+            } 
+        }
+
+        #endregion
+
+        #region Various
+
+        public Lazy<UIColor> ePositiveBGUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_positivebgcolor); 
+            } 
+ 
+        }
+
+        public Lazy<UIColor> PositiveTextUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_positivetextcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> PositiveBorderUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_positivebordercolor); 
+            } 
+        }
+
+        public Lazy<UIColor> NegativeBGUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_negativebgcolor);
+            } 
+        }
+
+        public Lazy<UIColor> NegativeTextUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_negativetextcolor); 
+            } 
+
+        }
+
+        public Lazy<UIColor> NegativeBorderUIColor 
+        {             
+            get
+            { 
+                return this.convertUIColor(_negativebordercolor);
+            } 
+        }
 
 		#endregion
 	}

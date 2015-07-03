@@ -62,6 +62,13 @@ namespace NathansWay.Shared
         InSignificant = 2
     }
 
+    public enum G__AnswerState : int
+    {
+        Correct = 1,
+        InCorrect = 2,
+        Null = 3
+    }
+
 	#region Filtering
 
 	public enum G__ExpressionType 

@@ -18,7 +18,7 @@ using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
 {
-    public partial class vcLessonMenu : AspyViewController
+    public partial class vcLessonMenu : NWViewController
     {
 
 		#region Private Variables
@@ -95,16 +95,15 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize ()
         {
-			//base.Initialize ();
 			this.AspyTag1 = 6003;
 			this.AspyName = "VC_LessonMenu";
-
+            // Grab a ref to our data class
 			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
-
         }
 			
 		#region Overrides
 
+        // UIView Overs
 		public override void LoadView ()
 		{
 			base.LoadView ();
@@ -172,21 +171,21 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 		}
 
+        // NW Overs
+        public override void ApplyUI ()
+        {
+            this.lblFilter.ApplyUI ();
+            this.Setup_ViewBackGroundUpperLeftRight ();
+
+            // TableViews
+            //this.tvLessonMain.BackgroundView = null;
+            this.tvLessonMain.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+        }
+
+
 		#endregion
 
 		#region Private Members
-
-
-		public void ApplyUI ()
-		{
-			this._vLessonMenu.SetupUI ();
-			this.lblFilter.ApplyUI ();
-			this.Setup_ViewBackGroundUpperLeftRight ();
-
-			// TableViews
-			//this.tvLessonMain.BackgroundView = null;
-			this.tvLessonMain.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
-		}
 
 		private void ScrolledToBottom (object sender, EventArgs e)
 		{		
@@ -194,9 +193,7 @@ namespace NathansWay.iOS.Numeracy
             // Go get more rows!~
 		}
 
-
 		// Control Setup
-
 
 		// Bezier Curves on the background blocks
 		private void Setup_ViewBackGroundUpperLeftRight()
@@ -218,7 +215,6 @@ namespace NathansWay.iOS.Numeracy
 			});
 
 		}
-
         private void LoadLessonsFilteredAsync ()
         {
             lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 

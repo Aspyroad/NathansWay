@@ -109,8 +109,6 @@ namespace NathansWay.Shared
 		#endregion
 	}
 
-
-
 	public class UIThemeBase : IUITheme
 	{
 

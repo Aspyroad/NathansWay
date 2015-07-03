@@ -13,7 +13,7 @@ using AspyRoad.iOSCore;
 namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("vLessonMenu")]
-    public partial class vLessonMenu : AspyView
+    public partial class vLessonMenu : NWView
 	{
 		#region Private Variables
 
@@ -47,7 +47,6 @@ namespace NathansWay.iOS.Numeracy
 		
         private void Initialize()
         {
-			this.Tag = 6003;
         }
 
 		#endregion
@@ -64,12 +63,7 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
-		}
-
-		#endregion
+        #endregion
 	}
 }
 

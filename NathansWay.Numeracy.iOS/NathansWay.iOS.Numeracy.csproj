@@ -217,8 +217,8 @@
       <DependentUpon>NathansWay.Numeracy.Input.Operator.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberPicker.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Base\Aspyroad.iOSCore.AspyView.Base.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

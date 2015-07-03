@@ -42,6 +42,12 @@ namespace NathansWay.iOS.Numeracy
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
 
+        // On the right of equals
+        private bool _bIsAnswer;
+
+        // Number is correct/Incorrect/Null-Empty
+        private G__AnswerState _answerState;
+
         private List<BaseContainer> _lsNumbers;
 
         private string[] _delimiters = { "." };

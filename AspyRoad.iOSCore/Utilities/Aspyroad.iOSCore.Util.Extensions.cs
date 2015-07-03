@@ -5,9 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// NathansWayShared
-using NathansWay.Shared;
-
 // Monotouch
 using MonoTouch.UIKit;
 using MonoTouch.Foundation;
@@ -20,10 +17,6 @@ namespace AspyRoad.iOSCore
     /// <summary>
     /// Class containing helper extension methods
     /// </summary>
-//    public static class AspyExtensions 
-//	{
-//
-//    }
 
     public static class LocalizationExtensions
     {

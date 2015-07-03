@@ -53,7 +53,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-
         #endregion
 
         #region Public Properties
@@ -279,9 +278,6 @@ namespace NathansWay.iOS.Numeracy
 
 
         #endregion
-
-
-
     }
 }
 
