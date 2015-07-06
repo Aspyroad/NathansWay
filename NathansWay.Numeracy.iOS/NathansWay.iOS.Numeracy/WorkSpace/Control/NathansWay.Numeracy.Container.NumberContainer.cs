@@ -236,8 +236,8 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
-            this.HasBorder = false;
-            this.HasRoundedCorners = true;
+            //this.HasBorder = false;
+            //this.HasRoundedCorners = true;
             //this.SetBGColor = UIColor.Brown;
         }
 
