@@ -13,8 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
-// NathansWay Shared..
-// TODO : get rid of this reference???
+// NathansWay Shared
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
@@ -41,12 +40,6 @@ namespace NathansWay.iOS.Numeracy
         private int _intIntegralPlaces;
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
-
-        // On the right of equals
-        private bool _bIsAnswer;
-
-        // Number is correct/Incorrect/Null-Empty
-        private G__AnswerState _answerState;
 
         private List<BaseContainer> _lsNumbers;
 
@@ -155,7 +148,10 @@ namespace NathansWay.iOS.Numeracy
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
                     }
+                    // Number UI
                     newnumber.HasBorder = false;
+                    // Number Logic
+                    newnumber.IsAnswer = this.IsAnswer;
 
                     #region Set Tens Unit
 
@@ -204,7 +200,10 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
+                    // Decimal UI
                     newdecimal.HasBorder = false;
+                    // Decimal Logic
+                    newdecimal.IsAnswer = this.IsAnswer;
 
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newdecimal);

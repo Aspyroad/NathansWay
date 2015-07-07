@@ -13,8 +13,10 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+// NathansWay Shared
+using NathansWay.Shared;
 
-namespace AspyRoad.iOSCore
+namespace NathansWay.iOS.Numeracy
 {
 	[MonoTouch.Foundation.Register ("BaseContainer")]	
 	public class BaseContainer : NWViewController
@@ -29,6 +31,12 @@ namespace AspyRoad.iOSCore
 
         private Action _actTextSizeChanged;
         protected SizeBase _sizeClass;
+
+        // On the right of equals
+        protected bool _bIsAnswer;
+
+        // Number is correct/Incorrect/Null-Empty
+        protected G__AnswerState _answerState;
 
 		#endregion
 
@@ -98,6 +106,24 @@ namespace AspyRoad.iOSCore
         public virtual SizeBase SizeClass
         {
             get { return this._sizeClass; }
+        }
+
+        public bool IsAnswer
+        {
+            get { return this._bIsAnswer; }
+            set 
+            {
+                this._bIsAnswer = value;
+            }
+        }
+
+        public G__AnswerState AnswerState
+        {
+            get { return this._answerState; }
+            set 
+            {
+                this._answerState = value;
+            }
         }
 
         #endregion

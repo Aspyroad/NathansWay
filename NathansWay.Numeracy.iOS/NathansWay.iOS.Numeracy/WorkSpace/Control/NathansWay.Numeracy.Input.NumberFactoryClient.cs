@@ -23,6 +23,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private List<object> _UIOutput;
 
+        //private bool _bIsAnswer;
+
         #endregion
 
         #region Constructors
@@ -47,6 +49,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._UIOutput = value; }
         }
 
+        public bool IsAnswer 
+        { 
+            get; 
+            set; 
+        }
+
         #endregion
 
         #region Public Members
@@ -54,20 +62,24 @@ namespace NathansWay.iOS.Numeracy.Controls
         // All write there output into the UIOuput object
         // For example in iOS this would be a collection of beggining to end vc's for an expression.
         // Simply pop them off the stack and into the container vc
-        public void UICreateNumber (string strValue, bool bIsAnswer)
+        public void UICreateNumber (string strValue)
         {
             // Create a number
             var x = new vcNumberContainer(strValue);
+            // Logic
+            x.IsAnswer = this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
             // Add to output
             _UIOutput.Add(x as object);
         }
-        public void UICreateFraction (string strFraction, bool bIsAnswer)
+        public void UICreateFraction (string strFraction)
         {
             // Create a fraction
             var x = new vcFractionContainer(strFraction);
+            // Logic
+            x.IsAnswer = this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
@@ -84,7 +96,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             // We must check if this is an equals, in which case the next number/fraction should be an answer type
             if (mathChar == G__MathChar.Equals)
             {
-                this.
+                // The next numbercontainer/fractioncontainer will be the answer
+                this.IsAnswer = true;
+            }
+            else
+            {
+                this.IsAnswer = false;
             }
             // Add to output
             _UIOutput.Add(x as object);

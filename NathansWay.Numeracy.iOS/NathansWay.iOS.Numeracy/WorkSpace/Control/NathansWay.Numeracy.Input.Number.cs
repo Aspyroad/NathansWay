@@ -281,7 +281,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Apply some UI to the texbox
             this.SizeClass.SetNumberFont(this.txtNumber);
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+
             this.txtNumber.HasBorder = false;
             this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
@@ -390,6 +390,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Setup editing
         protected void preEdit()
         {
+            if (this._bIsAnswer)
+            {   
+                //this.txtNumber.Text = this._intCurrentValue.ToString();
+            }
+            else
+            {
+                this.txtNumber.Text = this._intCurrentValue.ToString();
+            }
+
             // Store the original value
             if (this.txtNumber.Text.Length > 0)
             {
@@ -554,6 +563,16 @@ namespace NathansWay.iOS.Numeracy.Controls
                 txtNumber.BackgroundColor = this._preEditColor;
                 txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
             }
+        }
+
+        protected void UI_ToggleIsAnswer()
+        {
+            
+        }
+
+        protected void UI_ToggleIsCorrect()
+        {
+            
         }
 
         // Action Delegates

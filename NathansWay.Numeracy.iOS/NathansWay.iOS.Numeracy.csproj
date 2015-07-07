@@ -105,6 +105,7 @@
     <None Include="Entitlements.plist" />
     <None Include="RELEASE-NOTES.txt" />
     <None Include="packages.config" />
+    <None Include="UISettingColors.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
       <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.designer.cs">
       <DependentUpon>vcLessonMenu.cs</DependentUpon>
@@ -219,6 +219,8 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberPicker.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkWidget.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

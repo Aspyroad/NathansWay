@@ -32,11 +32,6 @@ namespace NathansWay.Shared.Factories
         private G__NumberDisplaySize _UIDisplaySize;
         private bool _bExpressionLoadedOk;
 
-        // Equals/Answer check
-        // Answers miust be treated different (hidden, different color)
-        private bool _bIsAnswer;
-
-
         #endregion
 
         #region Constructors
@@ -45,8 +40,6 @@ namespace NathansWay.Shared.Factories
         {
             this._UIOutput = new List<object>();
             this.FactoryClient = UIPlatform;
-            this._bIsAnswer = false;
-
             this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
         }
 
@@ -70,7 +63,7 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Value):
                     {
                         // Build a number
-                        this._UIPlatformClient.UICreateNumber(x.Value, this._bIsAnswer);
+                        this._UIPlatformClient.UICreateNumber(x.Value);
                     }
                     break;
                     case (G__MathChar.BraceRoundLeft):
@@ -86,7 +79,7 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Fraction):
                     {
                         i++;
-                        this._UIPlatformClient.UICreateFraction(this._lsDecodedExpression[i].Value, this._bIsAnswer);
+                        this._UIPlatformClient.UICreateFraction(this._lsDecodedExpression[i].Value);
                     }
                     break;
                     default :
@@ -111,14 +104,14 @@ namespace NathansWay.Shared.Factories
             return this._lsDecodedExpression;
         }
 
-        public void CreateNumber (string _strNumber, bool bIsAnswer)
+        public void CreateNumber (string _strNumber)
         {
-            _UIPlatformClient.UICreateNumber(_strNumber, bIsAnswer);
+            _UIPlatformClient.UICreateNumber(_strNumber);
         }
 
-        public void CreateFraction (string _strFraction, bool bIsAnswer)
+        public void CreateFraction (string _strFraction)
         {
-            _UIPlatformClient.UICreateFraction(_strFraction, bIsAnswer);
+            _UIPlatformClient.UICreateFraction(_strFraction);
         }
 
         #endregion
