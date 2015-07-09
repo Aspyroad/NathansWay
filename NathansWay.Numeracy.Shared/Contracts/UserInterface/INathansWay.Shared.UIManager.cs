@@ -115,6 +115,9 @@ namespace NathansWay.Shared
         Lazy<G__Color> NegativeBGColor { get; set; }
         Lazy<G__Color> NegativeTextColor { get; set; }
         Lazy<G__Color> NegativeBorderColor { get; set; }
+        Lazy<G__Color> NeutralBGColor { get; set; }
+        Lazy<G__Color> NeutralTextColor { get; set; }
+        Lazy<G__Color> NeutralBorderColor { get; set; }
 
 	}
 

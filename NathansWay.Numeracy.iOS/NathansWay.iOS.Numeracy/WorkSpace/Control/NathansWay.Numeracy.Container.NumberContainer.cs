@@ -105,7 +105,17 @@ namespace NathansWay.iOS.Numeracy
             // Sizing class
             this._sizeClass = new SizeNumberContainer(this);
             // Create our number
-            this.CreateNumber(this._strCurrentValue);
+            //this.CreateNumber(this._strCurrentValue);
+        }
+
+        protected void UI_ToggleIsAnswer()
+        {
+            // UI Changes
+        }
+
+        protected void UI_ToggleIsCorrect()
+        {
+            // UI Changes
         }
 
         #endregion
@@ -228,6 +238,13 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            // Create our number
+            this.CreateNumber(this._strCurrentValue);
+        }
+
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -235,6 +252,8 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
+            this.UI_ToggleIsAnswer();
+            this.UI_ToggleIsCorrect();
             //this.HasBorder = false;
             //this.HasRoundedCorners = true;
             //this.SetBGColor = UIColor.Brown;
@@ -244,6 +263,8 @@ namespace NathansWay.iOS.Numeracy
         {
             base.TouchesBegan(touches, evt);
         }
+
+
 
         #endregion
 

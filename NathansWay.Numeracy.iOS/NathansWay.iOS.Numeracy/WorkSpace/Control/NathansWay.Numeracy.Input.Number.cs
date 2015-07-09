@@ -159,8 +159,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
+
         }
 
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
+            this.UI_ToggleIsAnswer();
+            this.UI_ToggleIsCorrect();
+        }
+            
         #endregion
 
         #region Public Members
@@ -274,14 +282,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UpDown Buttons
             this.btnDown.Alpha = 0.6f;
             this.btnUp.Alpha = 0.6f;
+
+            // TODO : Should these come from UIAppearance
             this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
             this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
+            // ****
+
             this.btnDown.Hidden = true;
             this.btnUp.Hidden = true;
 
             // Apply some UI to the texbox
             this.SizeClass.SetNumberFont(this.txtNumber);
 
+            this.txtNumber.Text = this._intCurrentValue.ToString();
             this.txtNumber.HasBorder = false;
             this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
@@ -390,14 +403,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Setup editing
         protected void preEdit()
         {
-            if (this._bIsAnswer)
-            {   
-                //this.txtNumber.Text = this._intCurrentValue.ToString();
-            }
-            else
-            {
-                this.txtNumber.Text = this._intCurrentValue.ToString();
-            }
+
 
             // Store the original value
             if (this.txtNumber.Text.Length > 0)
@@ -567,7 +573,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void UI_ToggleIsAnswer()
         {
-            
+            if (this._bIsAnswer)
+            {
+                // Clear the number
+                this.txtNumber.Text = "";
+            }
+            else
+            {
+                this.txtNumber.Text = this._intCurrentValue.ToString();
+            }
         }
 
         protected void UI_ToggleIsCorrect()

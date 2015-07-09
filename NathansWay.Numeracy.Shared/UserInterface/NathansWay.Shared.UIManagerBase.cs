@@ -195,13 +195,17 @@ namespace NathansWay.Shared
         protected Lazy<G__Color> _negativetextcolor;
         protected Lazy<G__Color> _negativebordercolor;
 
+        protected Lazy<G__Color> _neutralbgcolor;
+        protected Lazy<G__Color> _neutraltextcolor;
+        protected Lazy<G__Color> _neutralbordercolor;
+
 		#endregion
 
 		#region Constructors
 
 		public UIThemeBase ()
 		{
-			Initialize ();
+			//this.Initialize ();
 		}
 
 		#endregion
@@ -521,6 +525,22 @@ namespace NathansWay.Shared
         {             
             get{ return this._negativebordercolor; } 
             set{ this._negativebordercolor = value; }  
+        }
+
+        public Lazy<G__Color> NeutralBGColor 
+        { 
+            get{ return this._neutralbgcolor; } 
+            set{ this._neutralbgcolor= value; } 
+        }
+        public Lazy<G__Color> NeutralTextColor 
+        { 
+            get{ return this._neutraltextcolor; } 
+            set{ this._neutraltextcolor = value; } 
+        }
+        public Lazy<G__Color> NeutralBorderColor 
+        { 
+            get{ return this._neutralbordercolor; } 
+            set{ this._neutralbordercolor = value; } 
         }
 
 		#endregion

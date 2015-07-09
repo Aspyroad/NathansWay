@@ -209,6 +209,9 @@ namespace AspyRoad.iOSCore.UISettings
             NegativeBGColor = g.NegativeBGColor;
             NegativeTextColor = g.NegativeTextColor;
             NegativeBorderColor = g.NegativeBorderColor;
+            NeutralBGColor = g.NeutralBGColor;
+            NeutralBorderColor = g.NeutralBorderColor;
+            NeutralTextColor = g.NeutralTextColor;
 
             // Apply global appearnce
 			this.ApplyGlobalAppearance ();
@@ -728,6 +731,30 @@ namespace AspyRoad.iOSCore.UISettings
             get
             { 
                 return this.convertUIColor(_negativebordercolor);
+            } 
+        }
+
+        public Lazy<UIColor> NeutralBGUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._neutralbgcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> NeutralTextUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._neutraltextcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> NeutralBorderUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._neutralbordercolor); 
             } 
         }
 
