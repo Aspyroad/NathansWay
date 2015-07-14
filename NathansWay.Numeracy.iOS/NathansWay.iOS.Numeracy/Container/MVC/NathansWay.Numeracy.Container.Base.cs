@@ -23,13 +23,15 @@ namespace NathansWay.iOS.Numeracy
 	{
         #region Events
 
-        public event Action TextSizeChange;
+        public event EventHandler eTextSizeChange;
+        public event EventHandler eValueChange;
 
         #endregion
 
 		#region Class Variables
 
-        private Action _actTextSizeChanged;
+        protected Action _actTextSizeChanged;
+
         protected SizeBase _sizeClass;
 
         // On the right of equals
@@ -68,16 +70,28 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Initialize ()
 		{
-            this._actTextSizeChanged = new Action(OnSizeChange);
 		}
+
+        protected void FireValueChange()
+        {
+            // Thread safety.
+            var x = this.eValueChange;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
 
         protected void FireTextSizeChange()
         {
-            Action handler = TextSizeChange;
-            if (handler != null)
+            // Thread safety.
+            var x = this.eTextSizeChange;
+            // Check for null before firing.
+            if (x != null)
             {
-                handler();
-            }
+                x (this, new EventArgs ());
+            }   
         }
 
 		#endregion
@@ -88,9 +102,12 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Public Members
 
-        public virtual void OnSizeChange()
+        public virtual void HandleValueChange(object s, EventArgs e)
         {
+        }
 
+        public virtual void HandleTextSizeChange(object s, EventArgs e)
+        {
         }
 
 		#endregion

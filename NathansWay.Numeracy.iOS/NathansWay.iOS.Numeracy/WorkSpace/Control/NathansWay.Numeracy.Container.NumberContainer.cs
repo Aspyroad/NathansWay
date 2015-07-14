@@ -27,11 +27,14 @@ namespace NathansWay.iOS.Numeracy
 
         private string _strPrevValue;
         private string _strCurrentValue;
+        private string _strAnswerValue;
 
         private double _dblPrevValue;
         private double _dblCurrentValue;
+        private double _dblAnswerValue;
 
         private bool _bIsInEditMode;
+        private bool _bIsCorrect;
 
         // Display a decimal place?
         private bool _bShowDecimal;
@@ -115,8 +118,14 @@ namespace NathansWay.iOS.Numeracy
 
         protected void UI_ToggleIsCorrect()
         {
-            // UI Changes
+            //this.txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            //this.txtNumber.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            // We have to set the border on the parent.
+            this.ParentViewController.View.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+
         }
+
+
 
         #endregion
 
@@ -198,10 +207,10 @@ namespace NathansWay.iOS.Numeracy
                         this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
 
-                    // Set our current height - not here as this is always the same...saves loop time
-                    // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
-                    // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-                    this.TextSizeChange += newnumber.ActTextSizeChange;
+                    // Event Hooks
+                    this.eTextSizeChange += newnumber.HandleValueChange
+
+                    // Add control
                     this.AddAndDisplayController(newnumber, newnumber.View.Frame);
                 }
                 else
@@ -222,10 +231,9 @@ namespace NathansWay.iOS.Numeracy
                     newdecimal.DecimalSize.SetPositions(new PointF(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
-                    // Set our current height - not here as this is always the same...saves loop time
-                    // this._containerSize.CurrentHeigth = this._containerSize.GlobalSize.TxtNumberHeight;
-                    // Hook our  number box resizing code to the NumberContainers TextSizeChange event.
-                    this.TextSizeChange += newdecimal.ActTextSizeChange;
+
+                    // Event Hooks
+                    this.eTextSizeChange += newdecimal.ActTextSizeChange;
                     this.AddAndDisplayController(newdecimal, newdecimal.View.Frame);
                 }
             }
@@ -263,8 +271,6 @@ namespace NathansWay.iOS.Numeracy
         {
             base.TouchesBegan(touches, evt);
         }
-
-
 
         #endregion
 

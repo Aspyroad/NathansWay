@@ -175,9 +175,9 @@ namespace NathansWay.Shared
             NegativeBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             NegativeTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            NeutralBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            NeutralTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+            NeutralBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 200.0f, 200.0f, 255.0f)); // Black
+            NeutralTextColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 255.0f, 255.0f)); // Black
+            NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 255.0f, 255.0f)); // Black
 
 		}
 

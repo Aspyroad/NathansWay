@@ -22,12 +22,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
 
         // UI Components
-        // 
         public UIButton btnDown { get; private set; }
         public UIButton btnUp { get; private set; }
         public AspyTextField txtNumber { get; private set; }
         public AspyPickerView pkNumberPicker { get; private set; }
-
+        // Picker Delegates
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
         private G__NumberPickerPosition _pickerPosition;
@@ -42,7 +41,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private SizeNumber _sizeNumber;
         private vcMainContainer _vcMainContainer;
 
-        private Action ehValueChanged;
+        //private Action ehValueChanged;
         private Action<int> actHandlePadPush;
         private Action<int> actHandlePadLock;
 
@@ -159,14 +158,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
-
         }
 
         public override void ApplyUI()
         {
             base.ApplyUI();
             this.UI_ToggleIsAnswer();
-            this.UI_ToggleIsCorrect();
         }
             
         #endregion
@@ -422,6 +419,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void postEdit(int _intValue)
         {
             this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            if (this._intPrevValue !=_intValue)
+            {
+                // Fire a value change event
+                this.FireValueChange();
+            }
             this._intCurrentValue = _intValue; 
             this.txtNumber.Text = _intValue.ToString();
         }
@@ -445,7 +447,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate = new PickerDelegate(this.items, this.NumberSize);
             this._pickersource = new PickerSource(this.items);
             // Wire up the value change method
-            this._pickerdelegate.psValueChanged += this.ehValueChanged; 
+            this._pickerdelegate.psValueChanged += this.ehValueChange; 
             // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
@@ -573,10 +575,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void UI_ToggleIsAnswer()
         {
-            if (this._bIsAnswer)
+            // If the question has just loaded - no answer but is an answer number
+            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.Null))
             {
                 // Clear the number
                 this.txtNumber.Text = "";
+                this.txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+                this.txtNumber.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+                // We have to set the border on the parent.
+                this.ParentViewController.View.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
             }
             else
             {
@@ -584,10 +591,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void UI_ToggleIsCorrect()
-        {
-            
-        }
+        // Event Wireups
 
         // Action Delegates
         protected void HandlePadPush(int intPadValue)
