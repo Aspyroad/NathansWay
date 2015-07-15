@@ -210,6 +210,7 @@ namespace NathansWay.iOS.Numeracy
 
                     // Event Hooks
                     newnumber.eValueChange += this.HandleValueChange;
+                    newnumber.eTextSizeChange += this.HandleTextSizeChange;
 
                     // Add control
                     this.AddAndDisplayController(newnumber, newnumber.View.Frame);
@@ -245,6 +246,24 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Delegates
+
+        // Delegate Overrides
+
+        public override void HandleValueChange(object s, EventArgs e)
+        {
+            base.HandleValueChange(s, e);
+
+            // Loop through this._lsNumbers
+        }
+
+        public override void HandleTextSizeChange(object s, EventArgs e)
+        {
+            base.HandleTextSizeChange(s, e);
+        }
+
+        #endregion
+
         #region Overrides
 
         public override void ViewDidLoad()
@@ -268,13 +287,7 @@ namespace NathansWay.iOS.Numeracy
             //this.SetBGColor = UIColor.Brown;
         }
 
-        // Delegate
-        public override void HandleValueChange(object s, EventArgs e)
-        {
-            base.HandleValueChange(s, e);
-        }
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
         }
