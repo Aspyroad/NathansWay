@@ -41,7 +41,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private SizeNumber _sizeNumber;
         private vcMainContainer _vcMainContainer;
 
-        //private Action ehValueChanged;
+        private Action ePickerChanged;
         private Action<int> actHandlePadPush;
         private Action<int> actHandlePadLock;
 
@@ -95,7 +95,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // Unhook any delegates
                     this._numberpad.PadPushed -= this.actHandlePadPush;
                     this._numberpad.PadLockPushed -= this.actHandlePadLock;
-                    this._pickerdelegate.psValueChanged -= this.ehValueChanged; 
+                    this._pickerdelegate.psValueChanged -= this.ePickerChanged; 
                     this._numberpad = null;
                 }
                 // Destroy our picker delegate links
@@ -130,7 +130,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.preEdit();
                         
             // Wire up our eventhandler to "valuechanged" member
-            ehValueChanged = new Action(HandlePickerChanged);
+            ePickerChanged = new Action(HandlePickerChanged);
 
             this._txtNumberDelegate = new TextControlDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
@@ -169,11 +169,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Public Members
-
-        public override void OnSizeChange()
-        {
-            //var x = 10;
-        }
 
         #endregion
         
@@ -447,7 +442,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate = new PickerDelegate(this.items, this.NumberSize);
             this._pickersource = new PickerSource(this.items);
             // Wire up the value change method
-            this._pickerdelegate.psValueChanged += this.ehValueChange; 
+            this._pickerdelegate.psValueChanged += this.ePickerChanged; 
             // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;

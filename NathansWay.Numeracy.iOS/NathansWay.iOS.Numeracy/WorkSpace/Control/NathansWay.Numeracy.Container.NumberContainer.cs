@@ -94,7 +94,8 @@ namespace NathansWay.iOS.Numeracy
             if (disposing)
             {                
                 // TODO : Loop thru this._lsNumbers remove all numbers from the number container
-
+                // Remove the event hook up for value change
+                // Remove the possible event hook to sizechange.
             }
         }
 
@@ -208,7 +209,7 @@ namespace NathansWay.iOS.Numeracy
                     }
 
                     // Event Hooks
-                    this.eTextSizeChange += newnumber.HandleValueChange
+                    newnumber.eValueChange += this.HandleValueChange;
 
                     // Add control
                     this.AddAndDisplayController(newnumber, newnumber.View.Frame);
@@ -233,7 +234,7 @@ namespace NathansWay.iOS.Numeracy
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 
                     // Event Hooks
-                    this.eTextSizeChange += newdecimal.ActTextSizeChange;
+                    // No value change is needed as this is readonly?
                     this.AddAndDisplayController(newdecimal, newdecimal.View.Frame);
                 }
             }
@@ -265,6 +266,12 @@ namespace NathansWay.iOS.Numeracy
             //this.HasBorder = false;
             //this.HasRoundedCorners = true;
             //this.SetBGColor = UIColor.Brown;
+        }
+
+        // Delegate
+        public override void HandleValueChange(object s, EventArgs e)
+        {
+            base.HandleValueChange(s, e);
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
