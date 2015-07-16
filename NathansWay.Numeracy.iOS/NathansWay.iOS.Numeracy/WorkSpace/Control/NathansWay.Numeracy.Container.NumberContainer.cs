@@ -25,14 +25,6 @@ namespace NathansWay.iOS.Numeracy
 
         private G__UnitPlacement _tensUnit;
 
-        private string _strPrevValue;
-        private string _strCurrentValue;
-        private string _strAnswerValue;
-
-        private double _dblPrevValue;
-        private double _dblCurrentValue;
-        private double _dblAnswerValue;
-
         private bool _bIsInEditMode;
         private bool _bIsCorrect;
 
@@ -48,9 +40,6 @@ namespace NathansWay.iOS.Numeracy
 
         private string[] _delimiters = { "." };
 
-        //string[] result = text.Split(delimiters,StringSplitOptions.RemoveEmptyEntries);
-        //private SizeNumberContainer _sizeClass;
-
         #endregion
 
         #region Constructors
@@ -62,8 +51,9 @@ namespace NathansWay.iOS.Numeracy
 
         public vcNumberContainer (string _strValue)
         {
-            this.StrCurrentValue = _strValue;
-            this.DblCurrentValue = Convert.ToDouble(_strValue);
+            this._dblPrevValue = 0;
+            this._dblAnswerValue = 0;
+            this.CurrentValue = Convert.ToDouble(_strValue);
 
             Initialize ();
         }
@@ -142,7 +132,7 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass.CurrentWidth = 0.0f;
 
             // Tens allocation 
-            _result = _value.Split(_delimiters,StringSplitOptions.RemoveEmptyEntries);
+            _result = _value.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
             // There should only ever be two
             if (_result.Length > 2)
             {
@@ -252,9 +242,18 @@ namespace NathansWay.iOS.Numeracy
 
         public override void HandleValueChange(object s, EventArgs e)
         {
-            base.HandleValueChange(s, e);
+            string _strVal = "";
+
+            // No need to call base as yet
+            // base.HandleValueChange(s, e);
 
             // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _strVal += _Number.CurrentValueStr;
+            }
+
+            this.CurrentValue = Convert.ToDouble(_strVal);
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)
@@ -270,7 +269,7 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
             // Create our number
-            this.CreateNumber(this._strCurrentValue);
+            this.CreateNumber(this.CurrentValueStr);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -287,7 +286,7 @@ namespace NathansWay.iOS.Numeracy
             //this.SetBGColor = UIColor.Brown;
         }
 
-        override void TouchesBegan(NSSet touches, UIEvent evt)
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
         }
@@ -308,26 +307,6 @@ namespace NathansWay.iOS.Numeracy
             {
                 this._bIsInEditMode = value;
             }
-        }
-
-        public string StrCurrentValue
-        {
-            get { return this._strCurrentValue; }
-            set 
-            { 
-                this._strPrevValue = this._strCurrentValue; 
-                this._strCurrentValue = value; 
-            }
-        }
-
-        public double DblCurrentValue
-        {
-            get { return this._dblCurrentValue; }
-            set 
-            { 
-                this._dblPrevValue = this._dblCurrentValue;
-                this._dblCurrentValue = value; 
-            }          
         }
 
         public G__UnitPlacement UnitLength

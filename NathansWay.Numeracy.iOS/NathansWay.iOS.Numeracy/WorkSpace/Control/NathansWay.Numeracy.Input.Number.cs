@@ -48,8 +48,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         private G__UnitPlacement _tensUnit;
         private G__Significance _significance;
 
-        private int _intPrevValue;
-        private int _intCurrentValue;
         private bool _bIsInEditMode;
 
         #endregion
@@ -75,7 +73,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcNumberText(int _value)
         {
-            this._intCurrentValue = _value;
+            this.CurrentValue = Convert.ToDouble(_value);
             // Default constructor supply our initial value
             Initialize();
         }
@@ -192,28 +190,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-//        public bool PickerToTop
-//        {
-//            set 
-//            { 
-//                this._bPickerToTop = value;
-//                //this.NumberTextSize.SetPickerPositionTop();
-//            }
-//            get { return this._bPickerToTop; }
-//        }
-
-        public int PrevValue
-        {
-            get { return this._intPrevValue; }
-            set { this._intPrevValue = value; }
-        }
-        
-        public int CurrentValue
-        {
-            get { return this._intCurrentValue; }
-            set { this._intCurrentValue = value; }          
-        }
-
         public G__UnitPlacement TensUnit
         {
             get { return _tensUnit; }
@@ -286,7 +262,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply some UI to the texbox
             this.SizeClass.SetNumberFont(this.txtNumber);
 
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+            this.txtNumber.Text = this.CurrentValueStr.Trim();
             this.txtNumber.HasBorder = false;
             this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
@@ -326,7 +302,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.UI_ToggleTextEdit();
                 if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
                 {
-                    this._pickerdelegate.SelectedItemInt = this._intPrevValue;
+                    this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
                     this.HandlePickerChanged();
                     this.CloseNumberPicker();
                 }
@@ -362,15 +338,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.IsInEditMode = true;
 
-            if (this._intCurrentValue < 9)
+            if (this._dblCurrentValue < 9)
             {
-                this._intCurrentValue = this._intCurrentValue + 1;
+                this._dblCurrentValue = this._dblCurrentValue + 1;
             }
             else
             {
-                this._intCurrentValue = 0;
+                this._dblCurrentValue = 0;
             }
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+            this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
 
             this.IsInEditMode = false;
         }
@@ -379,15 +355,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.IsInEditMode = true; 
 
-            if (this._intCurrentValue > 0)
+            if (this._dblCurrentValue > 0)
             {
-                this._intCurrentValue = this._intCurrentValue - 1;
+                this._dblCurrentValue = this._dblCurrentValue - 1;
             }
             else
             {
-                this._intCurrentValue = 9;
+                this._dblCurrentValue = 9;
             }
-            this.txtNumber.Text = this._intCurrentValue.ToString();
+            this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
 
             this.IsInEditMode = false;
         }
@@ -400,27 +376,27 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Store the original value
             if (this.txtNumber.Text.Length > 0)
             {
-                this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-                this._intCurrentValue = this._intPrevValue;
+                this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text);
+                this._dblCurrentValue = this._dblPrevValue;
             }
             else
             {
-                this._intPrevValue = 0;
-                this._intCurrentValue = 0;
+                this._dblPrevValue = 0;
+                this._dblCurrentValue = 0;
                 this.txtNumber.Text = "0";
             }
         }
 
         protected void postEdit(int _intValue)
         {
-            this._intPrevValue = Convert.ToInt32(this.txtNumber.Text);
-            if (this._intPrevValue !=_intValue)
+            this._dblPrevValue = Convert.ToInt32(this.txtNumber.Text);
+            if (this._dblPrevValue != Convert.ToDouble(_intValue))
             {
                 // Fire a value change event
                 this.FireValueChange();
             }
-            this._intCurrentValue = _intValue; 
-            this.txtNumber.Text = _intValue.ToString();
+            this._dblCurrentValue = Convert.ToDouble(_intValue); 
+            this.txtNumber.Text = _intValue.ToString().Trim();
         }
 
         protected void EditNumberPicker()
@@ -473,7 +449,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._numberpad = this._vcMainContainer._vcNumberPad.Value;
                 // Set the value local to numbad
-                this._numberpad.PadValue = this.CurrentValue;
+                this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
                 // Main Controller is now responsible for all top level Vc's
                 this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
@@ -582,7 +558,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this.txtNumber.Text = this._intCurrentValue.ToString();
+                this.txtNumber.Text = this.CurrentValueStr;
             }
         }
 
@@ -614,7 +590,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            if (_intCurrentValue != this._pickerdelegate.SelectedItemInt)
+            if (Convert.ToInt16(_dblCurrentValue) != this._pickerdelegate.SelectedItemInt)
             {
                 this.postEdit(this._pickerdelegate.SelectedItemInt);
             }

@@ -40,6 +40,13 @@ namespace NathansWay.iOS.Numeracy
         // Number is correct/Incorrect/Null-Empty
         protected G__AnswerState _answerState;
 
+        protected double _dblPrevValue;
+        protected double _dblCurrentValue;
+        protected double _dblAnswerValue;
+
+        protected string _strPrevValue;
+        protected string _strCurrentValue;
+
 		#endregion
 
 		#region Constructors
@@ -70,6 +77,8 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Initialize ()
 		{
+            this._strPrevValue = "";
+            this._strCurrentValue = "";
 		}
 
         protected void FireValueChange()
@@ -77,7 +86,7 @@ namespace NathansWay.iOS.Numeracy
             // Thread safety.
             var x = this.eValueChange;
             // Check for null before firing.
-            if (x != null)
+             if (x != null)
             {
                 x (this, new EventArgs ());
             }   
@@ -123,6 +132,67 @@ namespace NathansWay.iOS.Numeracy
         public virtual SizeBase SizeClass
         {
             get { return this._sizeClass; }
+        }
+
+        public double PrevValue
+        {
+            get { return this._dblPrevValue; }
+            set 
+            { 
+                this._dblPrevValue = value; 
+                this._strPrevValue = value.ToString();
+            }
+        }
+
+        public double CurrentValue
+        {
+            get { return this._dblCurrentValue; }
+            set
+            {
+                // Set our previous value
+                this._dblPrevValue = this._dblCurrentValue; 
+                // Standard sets
+                this._dblCurrentValue = value; 
+                this._strCurrentValue = value.ToString();
+            }          
+        }
+
+        public double AnswerValue
+        {
+            get { return this._dblAnswerValue; }
+            set { this._dblAnswerValue = value; }          
+        }
+
+        public string CurrentValueStr
+        {
+            get 
+            { 
+                return this._strCurrentValue.ToString(); 
+            }
+            set 
+            {
+                this._strCurrentValue = value;
+            }
+        }
+
+        public string PrevValueStr
+        {
+            get 
+            { 
+                return this._dblPrevValue.ToString(); 
+            }
+            set 
+            {
+                this._strPrevValue = value;
+            }
+        }
+
+        public string AnswerValueStr
+        {
+            get 
+            { 
+                return this._dblAnswerValue.ToString(); 
+            }
         }
 
         public bool IsAnswer

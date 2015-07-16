@@ -128,6 +128,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtDecimal.HasBorder = false;
             this.txtDecimal.HasRoundedCorners = true;
             this.txtDecimal.Text = ".";
+            // Assign the text to the current value for conversions
+            this.CurrentValueStr = ".";
             this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtDecimal.TextAlignment = UITextAlignment.Center;
 
