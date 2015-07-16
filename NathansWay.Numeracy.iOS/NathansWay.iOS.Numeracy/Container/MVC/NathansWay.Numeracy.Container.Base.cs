@@ -46,6 +46,7 @@ namespace NathansWay.iOS.Numeracy
 
         protected string _strPrevValue;
         protected string _strCurrentValue;
+        protected double _strAnswerValue;
 
 		#endregion
 
@@ -79,6 +80,10 @@ namespace NathansWay.iOS.Numeracy
 		{
             this._strPrevValue = "";
             this._strCurrentValue = "";
+            this._dblPrevValue = 0;
+            this._dblCurrentValue = 0;
+            this._dblAnswerValue = 0;
+            this._answerState = G__AnswerState.InCorrect;
 		}
 
         protected void FireValueChange()
@@ -201,12 +206,27 @@ namespace NathansWay.iOS.Numeracy
             set 
             {
                 this._bIsAnswer = value;
+                // Set the Answer as the current value.
+                this._dblAnswerValue = this._dblCurrentValue;
+                this._strAnswerValue = this._strCurrentValue;
             }
         }
 
         public G__AnswerState AnswerState
         {
-            get { return this._answerState; }
+            get 
+            {
+                if (this._dblAnswerValue == this._dblCurrentValue)
+                {
+                    this._answerState = G__AnswerState.Correct;
+                }
+                else
+                {
+                    this._answerState = G__AnswerState.InCorrect;
+                }
+
+                return this._answerState;
+            }
             set 
             {
                 this._answerState = value;

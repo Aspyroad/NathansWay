@@ -244,9 +244,6 @@ namespace NathansWay.iOS.Numeracy
         {
             string _strVal = "";
 
-            // No need to call base as yet
-            // base.HandleValueChange(s, e);
-
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers) 
             {
@@ -254,6 +251,8 @@ namespace NathansWay.iOS.Numeracy
             }
 
             this.CurrentValue = Convert.ToDouble(_strVal);
+
+            // Check if its the answer
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)
