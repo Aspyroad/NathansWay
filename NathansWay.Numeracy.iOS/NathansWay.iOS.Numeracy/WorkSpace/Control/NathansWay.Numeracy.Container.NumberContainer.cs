@@ -95,28 +95,15 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
+            this.AspyTag1 = 600107;
+            this.AspyName = "VC_NumberContainer";
+            // Number list - numbers within this container
             _lsNumbers = new List<BaseContainer>();
             // Sizing class
             this._sizeClass = new SizeNumberContainer(this);
-            // Create our number
-            //this.CreateNumber(this._strCurrentValue);
+            // Define the container type
+            this._containerType = G__ContainerType.Number;
         }
-
-        protected void UI_ToggleIsAnswer()
-        {
-            // UI Changes
-        }
-
-        protected void UI_ToggleIsCorrect()
-        {
-            //this.txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            //this.txtNumber.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-            // We have to set the border on the parent.
-            this.ParentViewController.View.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
-
-        }
-
-
 
         #endregion
 
@@ -253,6 +240,10 @@ namespace NathansWay.iOS.Numeracy
             this.CurrentValue = Convert.ToDouble(_strVal);
 
             // Check if its the answer
+            if (this._dblAnswerValue == this._dblCurrentValue)
+            {
+                this._bIsCorrect = true;
+            }
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)

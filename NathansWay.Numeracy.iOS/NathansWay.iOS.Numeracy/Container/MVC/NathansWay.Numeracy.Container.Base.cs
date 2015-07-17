@@ -36,8 +36,9 @@ namespace NathansWay.iOS.Numeracy
 
         // On the right of equals
         protected bool _bIsAnswer;
+        protected G__ContainerType _containerType;
 
-        // Number is correct/Incorrect/Null-Empty
+        // Number is Correct/Incorrect
         protected G__AnswerState _answerState;
 
         protected double _dblPrevValue;
@@ -46,7 +47,7 @@ namespace NathansWay.iOS.Numeracy
 
         protected string _strPrevValue;
         protected string _strCurrentValue;
-        protected double _strAnswerValue;
+        protected string _strAnswerValue;
 
 		#endregion
 
@@ -80,10 +81,13 @@ namespace NathansWay.iOS.Numeracy
 		{
             this._strPrevValue = "";
             this._strCurrentValue = "";
+            this._strAnswerValue = "";
             this._dblPrevValue = 0;
             this._dblCurrentValue = 0;
             this._dblAnswerValue = 0;
             this._answerState = G__AnswerState.InCorrect;
+            this._containerType = G__ContainerType.Container;
+            this._bIsAnswer = false;
 		}
 
         protected void FireValueChange()
@@ -122,6 +126,25 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void HandleTextSizeChange(object s, EventArgs e)
         {
+        }
+       
+        protected virtual void UI_ToggleIsAnswer()
+        {
+            if (this.AnswerState == G__AnswerState.Correct)
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+            }
+            else // AnswerState is incorrect
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+            }
+        }
+
+        protected virtual void UI_ToggleIsCorrect()
+        {
+
         }
 
 		#endregion
@@ -244,6 +267,22 @@ namespace NathansWay.iOS.Numeracy
             // Set all control frames
             this.SizeClass.SetFrames();
 		}
+
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
+
+            if (this._bIsAnswer)
+            {
+                this.UI_ToggleIsAnswer();
+            }
+            else
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+            }
+
+        }
 
 		#region Autorotation for iOS 6 or newer
 

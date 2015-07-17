@@ -65,8 +65,15 @@ namespace NathansWay.Shared
     public enum G__AnswerState : int
     {
         Correct = 1,
-        InCorrect = 2,
-        Null = 3
+        InCorrect = 2
+    }
+
+    public enum G__ContainerType : int
+    {
+        Number = 1,
+        Fraction = 2,
+        Operator = 3,
+        Container = 4
     }
 
 	#region Filtering

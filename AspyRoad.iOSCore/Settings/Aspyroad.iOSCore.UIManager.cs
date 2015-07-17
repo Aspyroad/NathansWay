@@ -684,7 +684,7 @@ namespace AspyRoad.iOSCore.UISettings
 
         #region Various
 
-        public Lazy<UIColor> ePositiveBGUIColor 
+        public Lazy<UIColor> PositiveBGUIColor 
         {             
             get
             { 

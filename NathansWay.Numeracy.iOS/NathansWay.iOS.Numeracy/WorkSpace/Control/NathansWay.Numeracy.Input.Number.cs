@@ -235,6 +235,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 			this.AspyTag1 = 600102;
             this.AspyName = "VC_NumberText";
+            // Define the container type
+            this._containerType = G__ContainerType.Number;
             // Event delegates              
             this.actHandlePadPush = new Action<int>(HandlePadPush);
             this.actHandlePadLock = new Action<int>(HandlePadLock);
