@@ -85,7 +85,8 @@ namespace NathansWay.iOS.Numeracy
             this._dblPrevValue = 0;
             this._dblCurrentValue = 0;
             this._dblAnswerValue = 0;
-            this._answerState = G__AnswerState.InCorrect;
+            // Set answer state - default
+            this._answerState = G__AnswerState.UnAttempted;
             this._containerType = G__ContainerType.Container;
             this._bIsAnswer = false;
 		}
@@ -130,21 +131,28 @@ namespace NathansWay.iOS.Numeracy
        
         protected virtual void UI_ToggleIsAnswer()
         {
+            // set the default
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+        }
+
+        protected virtual void UI_ToggleAnswerState()
+        {
             if (this.AnswerState == G__AnswerState.Correct)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             }
-            else // AnswerState is incorrect
+            else if (this.AnswerState == G__AnswerState.InCorrect)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             }
-        }
-
-        protected virtual void UI_ToggleIsCorrect()
-        {
-
+            else
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+            }
         }
 
 		#endregion
@@ -274,12 +282,11 @@ namespace NathansWay.iOS.Numeracy
 
             if (this._bIsAnswer)
             {
-                this.UI_ToggleIsAnswer();
+                this.UI_ToggleAnswerState();
             }
             else
             {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+
             }
 
         }

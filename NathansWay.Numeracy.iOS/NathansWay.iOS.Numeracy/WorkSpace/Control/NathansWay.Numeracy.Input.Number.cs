@@ -290,8 +290,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
 
             this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
-            singleTapGesture = null;
-            //this._bPickerToTop = true;
+            this.singleTapGesture = null;
         }
 
         // Partials
@@ -546,22 +545,28 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void UI_ToggleIsAnswer()
+        protected override void UI_ToggleIsAnswer()
         {
+            base.UI_ToggleIsAnswer();
             // If the question has just loaded - no answer but is an answer number
-            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.Null))
+            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
             {
                 // Clear the number
                 this.txtNumber.Text = "";
                 this.txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
                 this.txtNumber.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
                 // We have to set the border on the parent.
-                this.ParentViewController.View.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+
             }
             else
             {
                 this.txtNumber.Text = this.CurrentValueStr;
             }
+        }
+
+        protected override void UI_ToggleAnswerState()
+        {
+            base.UI_ToggleAnswerState();
         }
 
         // Event Wireups

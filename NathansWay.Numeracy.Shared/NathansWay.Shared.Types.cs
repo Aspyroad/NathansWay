@@ -65,7 +65,8 @@ namespace NathansWay.Shared
     public enum G__AnswerState : int
     {
         Correct = 1,
-        InCorrect = 2
+        InCorrect = 2,
+        UnAttempted = 3
     }
 
     public enum G__ContainerType : int

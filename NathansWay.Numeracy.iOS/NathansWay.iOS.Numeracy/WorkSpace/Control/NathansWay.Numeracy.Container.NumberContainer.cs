@@ -270,7 +270,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             this.UI_ToggleIsAnswer();
-            this.UI_ToggleIsCorrect();
+            this.UI_ToggleAnswerState();
             //this.HasBorder = false;
             //this.HasRoundedCorners = true;
             //this.SetBGColor = UIColor.Brown;
