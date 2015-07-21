@@ -267,14 +267,11 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-        public override void ApplyUI()
-        {
-            this.UI_StandardNumber();
-            this.UI_ToggleAnswerState();
-            //this.HasBorder = false;
-            //this.HasRoundedCorners = true;
-            //this.SetBGColor = UIColor.Brown;
-        }
+//        public override void ApplyUI()
+//        {
+//            this.UI_StandardNumber();
+//            this.UI_ToggleAnswerState();
+//        }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {

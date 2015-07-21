@@ -32,8 +32,10 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
+        protected float _fFontSize;
         protected UIColor _colorBorderColor;
         protected UIColor _colorBGColor;
+        protected UIColor _colorFontColor;
 
 		#endregion
 
@@ -73,6 +75,7 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
+            this._fFontSize = UIFont.SystemFontSize;
 		}
 
 		#endregion
@@ -143,7 +146,7 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public UIColor SetBGColor
+        public virtual UIColor SetBGColor
         {
             get { return this._colorBGColor; }
             set 
@@ -153,7 +156,7 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public UIColor SetBorderColor
+        public virtual UIColor SetBorderColor
         {
             get { return this._colorBorderColor; }
             set 
@@ -161,6 +164,12 @@ namespace AspyRoad.iOSCore
                 this._colorBGColor = value;
                 this.View.Layer.BorderColor = this._colorBGColor.CGColor;   
             }
+        }
+
+        public virtual UIColor SetFontColor
+        {
+            get { return this._colorFontColor; }
+            set { this._colorFontColor = value; }
         }
 
         public float BorderWidth
@@ -181,7 +190,6 @@ namespace AspyRoad.iOSCore
 
 		public virtual void ApplyUI ()
 		{            
-            
 		}
 
 		#endregion

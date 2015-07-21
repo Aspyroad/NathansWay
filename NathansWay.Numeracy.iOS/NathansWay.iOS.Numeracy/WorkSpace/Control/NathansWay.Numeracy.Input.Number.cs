@@ -158,18 +158,34 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
         }
 
-        public override void ApplyUI()
+        protected override void UI_StandardNumber()
         {
-            base.ApplyUI();
-            this.UI_StandardNumber();
+            base.UI_StandardNumber();
+            // If the question has just loaded - no answer but is an answer number
+            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
+            {
+                // Clear the number
+                this.txtNumber.Text = "";
+                this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+                this.txtNumber.TextColor = this.SetBGColor;
+                // We have to set the border on the parent.
+
+            }
+            else
+            {
+                this.txtNumber.Text = this.CurrentValueStr;
+            }
         }
-            
+
+        protected override void UI_ToggleAnswerState()
+        {
+            base.UI_ToggleAnswerState();
+            this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+            this.txtNumber.TextColor = this.SetBGColor;
+        }
+
         #endregion
 
-        #region Public Members
-
-        #endregion
-        
         #region Public Properties
 
         public SizeNumber NumberSize
@@ -545,29 +561,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected override void UI_StandardNumber()
-        {
-            base.UI_StandardNumber();
-            // If the question has just loaded - no answer but is an answer number
-            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
-            {
-                // Clear the number
-                this.txtNumber.Text = "";
-                this.txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-                this.txtNumber.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-                // We have to set the border on the parent.
 
-            }
-            else
-            {
-                this.txtNumber.Text = this.CurrentValueStr;
-            }
-        }
-
-        protected override void UI_ToggleAnswerState()
-        {
-            base.UI_ToggleAnswerState();
-        }
 
         // Event Wireups
 
