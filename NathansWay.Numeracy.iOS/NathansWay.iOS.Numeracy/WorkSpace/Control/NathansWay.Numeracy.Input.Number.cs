@@ -161,7 +161,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI()
         {
             base.ApplyUI();
-            this.UI_ToggleIsAnswer();
+            this.UI_StandardNumber();
         }
             
         #endregion
@@ -545,9 +545,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected override void UI_ToggleIsAnswer()
+        protected override void UI_StandardNumber()
         {
-            base.UI_ToggleIsAnswer();
+            base.UI_StandardNumber();
             // If the question has just loaded - no answer but is an answer number
             if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
             {

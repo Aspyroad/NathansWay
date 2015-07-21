@@ -129,26 +129,29 @@ namespace NathansWay.iOS.Numeracy
         {
         }
        
-        protected virtual void UI_ToggleIsAnswer()
+        protected virtual void UI_StandardNumber()
         {
-            // set the default
+            // Not sure about this one. 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
         }
 
         protected virtual void UI_ToggleAnswerState()
         {
+            // **** Correct
             if (this.AnswerState == G__AnswerState.Correct)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             }
+            // **** Incorrect
             else if (this.AnswerState == G__AnswerState.InCorrect)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             }
-            else
+            // **** Unattempted
+            else 
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
@@ -286,7 +289,7 @@ namespace NathansWay.iOS.Numeracy
             }
             else
             {
-
+                this.UI_StandardNumber();
             }
 
         }

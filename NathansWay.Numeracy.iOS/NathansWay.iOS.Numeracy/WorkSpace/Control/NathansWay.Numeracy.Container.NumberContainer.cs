@@ -269,7 +269,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI()
         {
-            this.UI_ToggleIsAnswer();
+            this.UI_StandardNumber();
             this.UI_ToggleAnswerState();
             //this.HasBorder = false;
             //this.HasRoundedCorners = true;
