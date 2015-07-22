@@ -267,12 +267,6 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-//        public override void ApplyUI()
-//        {
-//            this.UI_StandardNumber();
-//            this.UI_ToggleAnswerState();
-//        }
-
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);

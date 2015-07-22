@@ -166,6 +166,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 // Clear the number
                 this.txtNumber.Text = "";
+                // TODO : Should this be special?? No Answer yet, its new, we should signify that in UI in some way.
+
                 this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
                 this.txtNumber.TextColor = this.SetBGColor;
                 // We have to set the border on the parent.
@@ -355,34 +357,39 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.IsInEditMode = true;
 
+            double x;
+
             if (this._dblCurrentValue < 9)
             {
-                this._dblCurrentValue = this._dblCurrentValue + 1;
+                x = this._dblCurrentValue + 1;
             }
             else
             {
-                this._dblCurrentValue = 0;
+                x = 0;
             }
-            this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
-
+            //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
             this.IsInEditMode = false;
+            this.postEdit(x);
         }
 
         private void btnDownTouch(object sender, EventArgs e)
         {
             this.IsInEditMode = true; 
 
+            double x;
+
             if (this._dblCurrentValue > 0)
             {
-                this._dblCurrentValue = this._dblCurrentValue - 1;
+                x = this._dblCurrentValue - 1;
             }
             else
             {
-                this._dblCurrentValue = 9;
+                x = 9;
             }
-            this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
+            //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
 
             this.IsInEditMode = false;
+            this.postEdit(x);
         }
 
         // Setup editing
@@ -404,16 +411,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void postEdit(int _intValue)
+        protected void postEdit(double _dblValue)
         {
-            this._dblPrevValue = Convert.ToInt32(this.txtNumber.Text);
-            if (this._dblPrevValue != Convert.ToDouble(_intValue))
+            this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
+            if (this._dblPrevValue != _dblValue)
             {
+                this._dblCurrentValue = _dblValue; 
                 // Fire a value change event
                 this.FireValueChange();
+                this.txtNumber.Text = _dblValue.ToString().Trim();
+                this.ApplyUI();
             }
-            this._dblCurrentValue = Convert.ToDouble(_intValue); 
-            this.txtNumber.Text = _intValue.ToString().Trim();
+
         }
 
         protected void EditNumberPicker()
@@ -560,8 +569,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
             }
         }
-
-
 
         // Event Wireups
 
