@@ -158,9 +158,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
         }
 
-        protected override void UI_StandardNumber()
-        {
-            base.UI_StandardNumber();
+        protected override void UI_ToggleAnswerState()
+        {            
+            base.UI_ToggleAnswerState();
+
             // If the question has just loaded - no answer but is an answer number
             if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
             {
@@ -177,11 +178,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.txtNumber.Text = this.CurrentValueStr;
             }
-        }
 
-        protected override void UI_ToggleAnswerState()
-        {
-            base.UI_ToggleAnswerState();
             this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             this.txtNumber.TextColor = this.SetBGColor;
         }
@@ -422,7 +419,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.txtNumber.Text = _dblValue.ToString().Trim();
                 this.ApplyUI();
             }
-
         }
 
         protected void EditNumberPicker()

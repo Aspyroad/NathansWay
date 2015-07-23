@@ -244,6 +244,7 @@ namespace NathansWay.iOS.Numeracy
             set 
             {
                 this._bIsAnswer = value;
+                this.AnswerState = G__AnswerState.UnAttempted;
                 // Set the Answer as the current value.
                 this._dblAnswerValue = this._dblCurrentValue;
                 this._strAnswerValue = this._strCurrentValue;
@@ -254,15 +255,22 @@ namespace NathansWay.iOS.Numeracy
         {
             get 
             {
-                if (this._dblAnswerValue == this._dblCurrentValue)
+                if (this._bIsAnswer)
                 {
-                    this._answerState = G__AnswerState.Correct;
+                    if ((this._dblAnswerValue == this._dblCurrentValue) ||
+                        (this._answerState != G__AnswerState.UnAttempted))
+                    {
+                        this._answerState = G__AnswerState.Correct;
+                    }
+                    else
+                    {
+                        this._answerState = G__AnswerState.InCorrect;
+                    }
                 }
                 else
                 {
-                    this._answerState = G__AnswerState.InCorrect;
+                    this._answerState = G__AnswerState.UnAttempted;
                 }
-
                 return this._answerState;
             }
             set 
@@ -286,16 +294,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             base.ApplyUI();
-
-            if (this._bIsAnswer)
-            {
-                this.UI_ToggleAnswerState();
-            }
-            else
-            {
-                this.UI_StandardNumber();
-            }
-
+            this.UI_ToggleAnswerState();
         }
 
 		#region Autorotation for iOS 6 or newer
