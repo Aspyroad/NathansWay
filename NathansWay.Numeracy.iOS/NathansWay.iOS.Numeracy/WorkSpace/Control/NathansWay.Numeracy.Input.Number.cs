@@ -40,6 +40,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private vcNumberPad _numberpad;
         private SizeNumber _sizeNumber;
         private vcMainContainer _vcMainContainer;
+        private vcNumberContainer _vcNumberContainer;
 
         private Action ePickerChanged;
         private Action<int> actHandlePadPush;
@@ -158,29 +159,30 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
         }
 
-        protected override void UI_ToggleAnswerState()
+        protected override void UI_ToggleAnswerState(G__AnswerState _as)
         {            
-            base.UI_ToggleAnswerState();
+            base.UI_ToggleAnswerState(this._vcNumberContainer.AnswerState);
 
             // If the question has just loaded - no answer but is an answer number
-            if ((this._bIsAnswer) && (this.AnswerState == G__AnswerState.UnAttempted))
+            if (this._bIsAnswer)
             {
-                // Clear the number
-                this.txtNumber.Text = "";
-                // TODO : Should this be special?? No Answer yet, its new, we should signify that in UI in some way.
+                if ((this._vcNumberContainer.AnswerState == G__AnswerState.UnAttempted))
+                {
+                    // Clear the number
+                    this.txtNumber.Text = "";
+                    // TODO : Should this be special?? No Answer yet, its new, we should signify that in UI in some way.
 
-                this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
-                this.txtNumber.TextColor = this.SetBGColor;
-                // We have to set the border on the parent.
 
-            }
-            else
-            {
-                this.txtNumber.Text = this.CurrentValueStr;
+                }
+                else
+                {
+                    this.txtNumber.Text = this.CurrentValueStr;
+                }
             }
 
             this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             this.txtNumber.TextColor = this.SetBGColor;
+
         }
 
         #endregion
@@ -239,6 +241,18 @@ namespace NathansWay.iOS.Numeracy.Controls
                         this.btnUp.Hidden = false;
                         break;
                 }
+            }
+        }
+
+        public vcNumberContainer MyNumberContainer
+        {
+            get
+            {
+                return _vcNumberContainer;
+            }
+            set
+            {
+                _vcNumberContainer = value;
             }
         }
                         
@@ -411,9 +425,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void postEdit(double _dblValue)
         {
             this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
-            if (this._dblPrevValue != _dblValue)
+            //if (this._dblPrevValue != _dblValue)
             {
-                this._dblCurrentValue = _dblValue; 
+                this.CurrentValue = _dblValue; 
                 // Fire a value change event
                 this.FireValueChange();
                 this.txtNumber.Text = _dblValue.ToString().Trim();

@@ -43,11 +43,16 @@ namespace NathansWay.iOS.Numeracy
 
         protected double _dblPrevValue;
         protected double _dblCurrentValue;
-        protected double _dblAnswerValue;
+        protected double _dblOriginalValue;
 
         protected string _strPrevValue;
         protected string _strCurrentValue;
-        protected string _strAnswerValue;
+        protected string _strOriginalValue;
+
+        // This is always true the first time we load, after any attempt
+        // to change the value, it gets set to false.
+        private bool _bInitialLoad;
+        private bool _bIsCorrect;
 
 		#endregion
 
@@ -81,14 +86,15 @@ namespace NathansWay.iOS.Numeracy
 		{
             this._strPrevValue = "";
             this._strCurrentValue = "";
-            this._strAnswerValue = "";
+            this._strOriginalValue = "";
             this._dblPrevValue = 0;
             this._dblCurrentValue = 0;
-            this._dblAnswerValue = 0;
+            this._dblOriginalValue = 0;
             // Set answer state - default
             this._answerState = G__AnswerState.UnAttempted;
             this._containerType = G__ContainerType.Container;
             this._bIsAnswer = false;
+            this._bInitialLoad = true;
 		}
 
         protected void FireValueChange()
@@ -128,6 +134,29 @@ namespace NathansWay.iOS.Numeracy
         public virtual void HandleTextSizeChange(object s, EventArgs e)
         {
         }
+
+        public void CheckCorrect ()
+        {            
+            if ((this._dblOriginalValue == this._dblCurrentValue))
+            {
+                this.AnswerState = G__AnswerState.Correct;
+                this._bIsCorrect = true;
+            }
+            else
+            {
+                if (this._bInitialLoad)
+                {
+                    this.AnswerState = G__AnswerState.UnAttempted;
+                    this._bIsCorrect = false;
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                    this._bIsCorrect = false;
+                }
+
+            }
+        }
        
         protected virtual void UI_StandardNumber()
         {
@@ -137,29 +166,14 @@ namespace NathansWay.iOS.Numeracy
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
-        protected virtual void UI_ToggleAnswerState()
+        // Both of these types mean the same thing, the ? is just C# shorthand.
+        // private void Example(int? arg1, Nullable<int> arg2)
+        protected virtual void UI_ToggleAnswerState(G__AnswerState _as)
         {
-            // **** Correct
-            if (this.AnswerState == G__AnswerState.Correct)
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
-            }
-            // **** Incorrect
-            else if (this.AnswerState == G__AnswerState.InCorrect)
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
-            }
-            // **** Unattempted
-            else 
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-            }
+            //            if (!_as.HasValue)
+            //            {
+            //                _as = this.AnswerState;
+            //            }
         }
 
 		#endregion
@@ -183,7 +197,7 @@ namespace NathansWay.iOS.Numeracy
             set 
             { 
                 this._dblPrevValue = value; 
-                this._strPrevValue = value.ToString();
+                this._strPrevValue = value.ToString().Trim();
             }
         }
 
@@ -196,14 +210,14 @@ namespace NathansWay.iOS.Numeracy
                 this._dblPrevValue = this._dblCurrentValue; 
                 // Standard sets
                 this._dblCurrentValue = value; 
-                this._strCurrentValue = value.ToString();
+                this._strCurrentValue = value.ToString().Trim();
             }          
         }
 
-        public double AnswerValue
+        public double OriginalValue
         {
-            get { return this._dblAnswerValue; }
-            set { this._dblAnswerValue = value; }          
+            get { return this._dblOriginalValue; }
+            set { this._dblOriginalValue = value; }          
         }
 
         public string CurrentValueStr
@@ -230,11 +244,11 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public string AnswerValueStr
+        public string OriginalValueStr
         {
             get 
             { 
-                return this._dblAnswerValue.ToString(); 
+                return this._dblOriginalValue.ToString(); 
             }
         }
 
@@ -244,10 +258,10 @@ namespace NathansWay.iOS.Numeracy
             set 
             {
                 this._bIsAnswer = value;
-                this.AnswerState = G__AnswerState.UnAttempted;
+                //this.AnswerState = G__AnswerState.UnAttempted;
                 // Set the Answer as the current value.
-                this._dblAnswerValue = this._dblCurrentValue;
-                this._strAnswerValue = this._strCurrentValue;
+                this._dblOriginalValue = this._dblCurrentValue;
+                this._strOriginalValue = this._strCurrentValue;
             }
         }
 
@@ -255,27 +269,23 @@ namespace NathansWay.iOS.Numeracy
         {
             get 
             {
-                if (this._bIsAnswer)
-                {
-                    if ((this._dblAnswerValue == this._dblCurrentValue) ||
-                        (this._answerState != G__AnswerState.UnAttempted))
-                    {
-                        this._answerState = G__AnswerState.Correct;
-                    }
-                    else
-                    {
-                        this._answerState = G__AnswerState.InCorrect;
-                    }
-                }
-                else
-                {
-                    this._answerState = G__AnswerState.UnAttempted;
-                }
                 return this._answerState;
             }
             set 
             {
                 this._answerState = value;
+            }
+        }
+
+        public bool IsInitialLoad
+        {
+            get
+            {
+                return this._bInitialLoad;
+            }
+            set
+            {
+                this._bInitialLoad = value;
             }
         }
 
@@ -294,7 +304,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             base.ApplyUI();
-            this.UI_ToggleAnswerState();
+            this.UI_ToggleAnswerState(this.AnswerState);
         }
 
 		#region Autorotation for iOS 6 or newer

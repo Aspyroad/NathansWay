@@ -26,7 +26,6 @@ namespace NathansWay.iOS.Numeracy
         private G__UnitPlacement _tensUnit;
 
         private bool _bIsInEditMode;
-        private bool _bIsCorrect;
 
         // Display a decimal place?
         private bool _bShowDecimal;
@@ -52,7 +51,7 @@ namespace NathansWay.iOS.Numeracy
         public vcNumberContainer (string _strValue)
         {
             this._dblPrevValue = 0;
-            this._dblAnswerValue = 0;
+            this._dblOriginalValue = 0;
             this.CurrentValue = Convert.ToDouble(_strValue);
 
             Initialize ();
@@ -141,6 +140,13 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberText(intCh);
+                    newnumber.MyNumberContainer = this;
+                    if (this.IsAnswer)
+                    { 
+                        this.CurrentValue = 0;
+                        newnumber.CurrentValue = 0;
+                    }
+
                     if (_sig > 1 || _result.Length > 1)
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
@@ -225,25 +231,25 @@ namespace NathansWay.iOS.Numeracy
 
         #region Delegates
 
-        // Delegate Overrides
-
         public override void HandleValueChange(object s, EventArgs e)
         {
             string _strVal = "";
+
+            // Once in here we are past an inital load, and a user has input a value
+            // We must reset our intital load variable to false
+            this.IsInitialLoad = false;
 
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers) 
             {
                 _strVal += _Number.CurrentValueStr;
+                _Number.IsInitialLoad = false;               
             }
 
             this.CurrentValue = Convert.ToDouble(_strVal);
+            // If this is an answer type, check it
+            this.CheckCorrect();
 
-            // Check if its the answer
-            if (this._dblAnswerValue == this._dblCurrentValue)
-            {
-                this._bIsCorrect = true;
-            }
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)
@@ -255,11 +261,37 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+        protected override void UI_ToggleAnswerState(G__AnswerState _as)
+        {
+            base.UI_ToggleAnswerState(_as);
+            // **** Correct
+            if (_as == G__AnswerState.Correct)
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            }
+            // **** Incorrect
+            else if (_as == G__AnswerState.InCorrect)
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            }
+            // **** Unattempted
+            else 
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            }
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             // Create our number
-            this.CreateNumber(this.CurrentValueStr);
+            this.CreateNumber(this.OriginalValueStr);
         }
 
         public override void ViewWillAppear(bool animated)
