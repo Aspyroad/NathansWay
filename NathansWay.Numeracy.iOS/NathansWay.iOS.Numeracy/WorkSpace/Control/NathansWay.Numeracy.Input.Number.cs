@@ -157,8 +157,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
-
-            //this.UI_ToggleAnswerState();
+            // Set the initial state
+            this.UI_ToggleAnswerState();
         }
 
         protected override void UI_ToggleAnswerState()
@@ -425,8 +425,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
             this.CurrentValue = _dblValue; 
-            // Fire a value change event
+            // Fire a value change event (student has obviously tried to answer the question) 
+            // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
+            // Make any changes to UI on this object also (textbox bg etc)
             this.UI_ToggleAnswerState();
         }
 
