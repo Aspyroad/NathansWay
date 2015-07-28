@@ -249,6 +249,7 @@ namespace NathansWay.iOS.Numeracy
             this.CurrentValue = Convert.ToDouble(_strVal);
             // If this is an answer type, check it
             this.CheckCorrect();
+            this.UI_ToggleAnswerState();
 
         }
 
@@ -261,18 +262,17 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        protected override void UI_ToggleAnswerState(G__AnswerState _as)
+        protected override void UI_ToggleAnswerState()
         {
-            base.UI_ToggleAnswerState(_as);
             // **** Correct
-            if (_as == G__AnswerState.Correct)
+            if (this.AnswerState == G__AnswerState.Correct)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
                 this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
             }
             // **** Incorrect
-            else if (_as == G__AnswerState.InCorrect)
+            else if (this.AnswerState == G__AnswerState.InCorrect)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;

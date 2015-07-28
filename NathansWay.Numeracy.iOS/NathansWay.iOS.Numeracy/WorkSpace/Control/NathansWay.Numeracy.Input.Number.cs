@@ -157,12 +157,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
+
+            //this.UI_ToggleAnswerState();
         }
 
-        protected override void UI_ToggleAnswerState(G__AnswerState _as)
-        {            
-            base.UI_ToggleAnswerState(this._vcNumberContainer.AnswerState);
-
+        protected override void UI_ToggleAnswerState()
+        {
             // If the question has just loaded - no answer but is an answer number
             if (this._bIsAnswer)
             {
@@ -170,9 +170,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     // Clear the number
                     this.txtNumber.Text = "";
-                    // TODO : Should this be special?? No Answer yet, its new, we should signify that in UI in some way.
-
-
+                    // TODO : Should this be special?? 
+                    // No Answer yet, its new, we should signify that in UI in some way.
                 }
                 else
                 {
@@ -425,14 +424,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void postEdit(double _dblValue)
         {
             this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
-            //if (this._dblPrevValue != _dblValue)
-            {
-                this.CurrentValue = _dblValue; 
-                // Fire a value change event
-                this.FireValueChange();
-                this.txtNumber.Text = _dblValue.ToString().Trim();
-                this.ApplyUI();
-            }
+            this.CurrentValue = _dblValue; 
+            // Fire a value change event
+            this.FireValueChange();
+            this.UI_ToggleAnswerState();
         }
 
         protected void EditNumberPicker()

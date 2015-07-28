@@ -154,7 +154,6 @@ namespace NathansWay.iOS.Numeracy
                     this.AnswerState = G__AnswerState.InCorrect;
                     this._bIsCorrect = false;
                 }
-
             }
         }
        
@@ -168,7 +167,7 @@ namespace NathansWay.iOS.Numeracy
 
         // Both of these types mean the same thing, the ? is just C# shorthand.
         // private void Example(int? arg1, Nullable<int> arg2)
-        protected virtual void UI_ToggleAnswerState(G__AnswerState _as)
+        protected virtual void UI_ToggleAnswerState()
         {
             //            if (!_as.HasValue)
             //            {
@@ -304,7 +303,6 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             base.ApplyUI();
-            this.UI_ToggleAnswerState(this.AnswerState);
         }
 
 		#region Autorotation for iOS 6 or newer
