@@ -82,6 +82,28 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Deconstruction
+
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+
+            if (disposing)
+            {                
+                // Remove the event hook up for value change
+                // Remove the possible event hook to sizechange.
+                this.numberText_Numerator.eValueChange -= this.HandleValueChange;
+                this.numberText_Numerator.eTextSizeChange -= this.HandleTextSizeChange;
+                this.numberText_Denominator.eValueChange -= this.HandleValueChange;
+                this.numberText_Denominator.eTextSizeChange -= this.HandleTextSizeChange;
+                // Clear its parent
+                this.numberText_Numerator.MyFractionContainer = null;
+                this.numberText_Denominator.MyFractionContainer = null;
+            }
+        }
+
+        #endregion
+
         #region Private Members
 
         private void Initialize()
@@ -93,6 +115,7 @@ namespace NathansWay.iOS.Numeracy
             this._sizeFraction = new FractionSize(this);
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
+            this._containerType = G__ContainerType.Fraction;
             // Build the fraction
             this.CreateFraction();
         }
@@ -119,6 +142,14 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
+            // Event hooks
+            this.numberText_Numerator.eValueChange += this.HandleValueChange;
+            this.numberText_Numerator.eTextSizeChange += this.HandleTextSizeChange;
+            this.numberText_Denominator.eValueChange += this.HandleValueChange;
+            this.numberText_Denominator.eTextSizeChange += this.HandleTextSizeChange;
+            // Set the this as the parent of Num and Den
+            this.numberText_Numerator.MyFractionContainer = this;
+            this.numberText_Denominator.MyFractionContainer = this;
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
@@ -162,10 +193,67 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-        public override void ApplyUI()
+        public override void HandleValueChange(object s, EventArgs e)
         {
-            // Local UI
-            this.SetBGColor = UIColor.Clear;
+            // Fire this objects FireValueChange for bubbleup
+            this.FireValueChange();
+
+            // Once in here we are past an inital load, and a user has input a value
+            // We must reset our intital load variable to false
+            this.IsInitialLoad = false;
+
+            // If this is an answer type, check it
+            this.CheckCorrect();
+            this.UI_StandardNumber();
+            this.UI_ToggleAnswerState();
+        }
+
+        //        public override void ApplyUI()
+        //        {
+        //            // Local UI
+        //            this.SetBGColor = UIColor.Clear;
+        //        }
+
+        public override void CheckCorrect ()
+        {            
+            // TODO : Check if this fraction is the answer
+            // Compare against the original value
+            // No need to call base it for basic compares
+            if (this.numberText_Denominator.IsCorrect && this.numberText_Numerator.IsCorrect)
+            {
+                this.AnswerState = G__AnswerState.Correct;
+                this._bIsCorrect = true;
+            }
+            else
+            {
+                if (this._bInitialLoad)
+                {
+                    this.AnswerState = G__AnswerState.UnAttempted;
+                    this._bIsCorrect = false;
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                    this._bIsCorrect = false;
+                }
+            }
+        }
+
+        protected override void UI_StandardNumber()
+        {
+            // Not sure about this one. 
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+        }
+
+        protected virtual void UI_ToggleAnswerState()
+        {            
+            if (this._bIsAnswer)
+            {
+
+            }
+
         }
 
         #endregion

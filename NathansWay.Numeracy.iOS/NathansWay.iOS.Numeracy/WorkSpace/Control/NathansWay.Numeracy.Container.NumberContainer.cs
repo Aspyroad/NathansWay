@@ -24,20 +24,18 @@ namespace NathansWay.iOS.Numeracy
         #region Class Variables
 
         private G__UnitPlacement _tensUnit;
-
         private bool _bIsInEditMode;
-
         // Display a decimal place?
         private bool _bShowDecimal;
-
         // Number of "whole" (left side) number places
         private int _intIntegralPlaces;
         // Number of "decimal" (right side) number places
         private int _intFractionalPlaces;
-
+        // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
-
         private string[] _delimiters = { "." };
+        // If this Number Container is in a fraction, we set its parent fraction.
+        private vcFractionContainer _vcFractionContainer;
 
         #endregion
 
@@ -82,9 +80,15 @@ namespace NathansWay.iOS.Numeracy
 
             if (disposing)
             {                
-                // TODO : Loop thru this._lsNumbers remove all numbers from the number container
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
+                foreach (vcNumberText _Number in this._lsNumbers) 
+                {
+                    // Event Hooks
+                    _Number.eValueChange -= this.HandleValueChange;
+                    _Number.eTextSizeChange -= this.HandleTextSizeChange;
+                    _Number.MyNumberContainer = null;
+                }
             }
         }
 
@@ -233,6 +237,9 @@ namespace NathansWay.iOS.Numeracy
 
         public override void HandleValueChange(object s, EventArgs e)
         {
+            // Fire this objects FireValueChange for bubbleup
+            this.FireValueChange();
+
             string _strVal = "";
 
             // Once in here we are past an inital load, and a user has input a value
@@ -326,6 +333,18 @@ namespace NathansWay.iOS.Numeracy
         {
             get { return this._tensUnit; }
             set { this._tensUnit = value; }
+        }
+
+        public vcFractionContainer MyFractionContainer
+        {
+            get
+            {
+                return _vcFractionContainer;
+            }
+            set
+            {
+                _vcFractionContainer = value;
+            }
         }
 
         #endregion

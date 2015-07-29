@@ -51,8 +51,8 @@ namespace NathansWay.iOS.Numeracy
 
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
-        private bool _bInitialLoad;
-        private bool _bIsCorrect;
+        protected bool _bInitialLoad;
+        protected bool _bIsCorrect;
 
 		#endregion
 
@@ -135,7 +135,7 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
-        public void CheckCorrect ()
+        public virtual void CheckCorrect ()
         {            
             if ((this._dblOriginalValue == this._dblCurrentValue))
             {
@@ -262,6 +262,11 @@ namespace NathansWay.iOS.Numeracy
                 this._dblOriginalValue = this._dblCurrentValue;
                 this._strOriginalValue = this._strCurrentValue;
             }
+        }
+
+        public bool IsCorrect
+        {
+            get { return _bIsCorrect; }
         }
 
         public G__AnswerState AnswerState
