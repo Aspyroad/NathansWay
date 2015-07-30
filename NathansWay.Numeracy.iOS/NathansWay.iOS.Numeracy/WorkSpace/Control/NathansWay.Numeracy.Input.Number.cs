@@ -181,7 +181,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             this.txtNumber.TextColor = this.SetBGColor;
-
         }
 
         #endregion
@@ -367,7 +366,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.IsInEditMode = true;
 
-            double x;
+            Nullable<double> x;
 
             if (this._dblCurrentValue < 9)
             {
@@ -386,7 +385,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.IsInEditMode = true; 
 
-            double x;
+            Nullable<double> x;
 
             if (this._dblCurrentValue > 0)
             {
@@ -421,7 +420,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void postEdit(double _dblValue)
+        protected void postEdit(Nullable<double> _dblValue)
         {
             this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
             this.CurrentValue = _dblValue; 

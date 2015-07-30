@@ -33,11 +33,13 @@ namespace NathansWay.iOS.Numeracy
         private vcMainContainer _vcMainContainer;
 
 
-        private int _dblNumeratorPrevValue;
-        private int _dblNumeratorCurrentValue;
+        private Nullable<double> _dblNumeratorPrevValue;
+        private Nullable<double> _dblNumeratorCurrentValue;
+        private Nullable<double> _dblNumeratorOriginalValue;
 
-        private int _dblDenominatorPrevValue;
-        private int _dblDenominatorCurrentValue;
+        private Nullable<double> _dblDenominatorPrevValue;
+        private Nullable<double> _dblDenominatorCurrentValue;
+        private Nullable<double> _dblDenominatorOriginalValue;
 
         private FractionSize _sizeFraction;
 
@@ -110,7 +112,6 @@ namespace NathansWay.iOS.Numeracy
         {
             this.AspyTag1 = 60023;
             this.AspyName = "VC_FractionContainer";
-
             // Sizing Class
             this._sizeFraction = new FractionSize(this);
             this._sizeClass = this._sizeFraction;
@@ -135,8 +136,8 @@ namespace NathansWay.iOS.Numeracy
                 // TODO : Raise an error. This should never be any greater then two dimensions
             }
             // Set our values in fraction variables
-            this.NumeratorValue = Convert.ToInt16(_result[0].ToString());
-            this.DenominatorValue = Convert.ToInt16(_result[1].ToString());
+            this.NumeratorValue = Convert.ToDouble(_result[0].ToString());
+            this.DenominatorValue = Convert.ToDouble(_result[1].ToString());
 
             // PROCESS - BUILD NUMBER
             // Create a number box
@@ -272,7 +273,7 @@ namespace NathansWay.iOS.Numeracy
             set { this._sizeClass = value; }
         }
 
-        public int NumeratorValue
+        public Nullable<double> NumeratorValue
         {
             get
             { 
@@ -282,10 +283,11 @@ namespace NathansWay.iOS.Numeracy
             { 
                 this._dblNumeratorPrevValue = this._dblNumeratorCurrentValue; 
                 this._dblNumeratorCurrentValue = value;
+
             }
         }
 
-        public int DenominatorValue
+        public Nullable<double> DenominatorValue
         {
             get
             { 

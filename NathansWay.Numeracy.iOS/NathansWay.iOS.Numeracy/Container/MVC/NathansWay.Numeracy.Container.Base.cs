@@ -41,9 +41,9 @@ namespace NathansWay.iOS.Numeracy
         // Number is Correct/Incorrect
         protected G__AnswerState _answerState;
 
-        protected double _dblPrevValue;
-        protected double _dblCurrentValue;
-        protected double _dblOriginalValue;
+        protected Nullable<double> _dblPrevValue;
+        protected Nullable<double> _dblCurrentValue;
+        protected Nullable<double> _dblOriginalValue;
 
         protected string _strPrevValue;
         protected string _strCurrentValue;
@@ -190,7 +190,7 @@ namespace NathansWay.iOS.Numeracy
             get { return this._sizeClass; }
         }
 
-        public double PrevValue
+        public Nullable<double> PrevValue
         {
             get { return this._dblPrevValue; }
             set 
@@ -200,7 +200,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public double CurrentValue
+        public Nullable<double> CurrentValue
         {
             get { return this._dblCurrentValue; }
             set
@@ -213,7 +213,7 @@ namespace NathansWay.iOS.Numeracy
             }          
         }
 
-        public double OriginalValue
+        public Nullable<double> OriginalValue
         {
             get { return this._dblOriginalValue; }
             set { this._dblOriginalValue = value; }          

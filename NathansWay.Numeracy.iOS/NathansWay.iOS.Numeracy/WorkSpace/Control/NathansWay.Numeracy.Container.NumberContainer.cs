@@ -48,9 +48,9 @@ namespace NathansWay.iOS.Numeracy
 
         public vcNumberContainer (string _strValue)
         {
-            this._dblPrevValue = 0;
-            this._dblOriginalValue = 0;
-            this.CurrentValue = Convert.ToDouble(_strValue);
+            this._dblPrevValue = null;
+            this._dblOriginalValue = Convert.ToDouble(_strValue);
+            this.CurrentValue = this._dblOriginalValue;
 
             Initialize ();
         }
@@ -147,8 +147,8 @@ namespace NathansWay.iOS.Numeracy
                     newnumber.MyNumberContainer = this;
                     if (this.IsAnswer)
                     { 
-                        this.CurrentValue = 0;
-                        newnumber.CurrentValue = 0;
+                        this.CurrentValue = null;
+                        newnumber.CurrentValue = null;
                     }
 
                     if (_sig > 1 || _result.Length > 1)
