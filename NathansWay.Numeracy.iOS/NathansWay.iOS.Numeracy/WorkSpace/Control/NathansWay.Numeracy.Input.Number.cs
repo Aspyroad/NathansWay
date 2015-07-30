@@ -158,7 +158,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
             // Set the initial state
-            this.UI_ToggleAnswerState();
+            this.ApplyUI();
+            //this.UI_ToggleAnswerState();
         }
 
         protected override void UI_ToggleAnswerState()
@@ -179,8 +180,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
 
-            this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
-            this.txtNumber.TextColor = this.SetBGColor;
+            //this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+            //this.txtNumber.TextColor = this.SetBGColor;
         }
 
         #endregion
@@ -323,6 +324,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Partials
         private void txtTouchedDown(object sender, EventArgs e)
         {
+            if (this._bReadOnly)
+            {
+                // Exit as this control cannot be modified
+                return;
+            }
             // Prevent the user double tapping
             if (this.IsInEditMode)
             {
@@ -428,7 +434,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
             // Make any changes to UI on this object also (textbox bg etc)
-            this.UI_ToggleAnswerState();
+            this.ApplyUI();
         }
 
         protected void EditNumberPicker()

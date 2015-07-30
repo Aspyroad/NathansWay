@@ -117,8 +117,7 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
-            // Build the fraction
-            this.CreateFraction();
+
         }
 
         private void CreateFraction()
@@ -181,15 +180,18 @@ namespace NathansWay.iOS.Numeracy
         public override void LoadView()
         {
             this._vFractionContainer = new vFractionContainer();
+            this.View = null;
             this.View = this._vFractionContainer;
-
         }
+
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             // Set its poisiton
             //this.FractionSize.SetPositions(this.SizeClass.StartPoint);
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
+            // Build the fraction
+            this.CreateFraction();
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
         }
@@ -205,8 +207,7 @@ namespace NathansWay.iOS.Numeracy
 
             // If this is an answer type, check it
             this.CheckCorrect();
-            this.UI_StandardNumber();
-            this.UI_ToggleAnswerState();
+            this.ApplyUI();
         }
 
         //        public override void ApplyUI()
@@ -214,7 +215,7 @@ namespace NathansWay.iOS.Numeracy
         //            // Local UI
         //            this.SetBGColor = UIColor.Clear;
         //        }
-
+        // Must override CheckCorrect to handle a fraction type
         public override void CheckCorrect ()
         {            
             // TODO : Check if this fraction is the answer
@@ -240,22 +241,20 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        protected override void UI_StandardNumber()
+        protected override void UI_ToggleReadOnlyState()
         {
             // Not sure about this one. 
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            base.UI_ToggleReadOnlyState();
+            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
-        protected virtual void UI_ToggleAnswerState()
-        {            
-            if (this._bIsAnswer)
-            {
-
-            }
-
+        protected override void UI_ToggleAnswerState()
+        {
+            base.UI_ToggleAnswerState();
         }
+
 
         #endregion
 
@@ -283,7 +282,6 @@ namespace NathansWay.iOS.Numeracy
             { 
                 this._dblNumeratorPrevValue = this._dblNumeratorCurrentValue; 
                 this._dblNumeratorCurrentValue = value;
-
             }
         }
 

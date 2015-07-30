@@ -212,6 +212,9 @@ namespace AspyRoad.iOSCore.UISettings
             NeutralBGColor = g.NeutralBGColor;
             NeutralBorderColor = g.NeutralBorderColor;
             NeutralTextColor = g.NeutralTextColor;
+            ReadOnlyBGColor = g.ReadOnlyBGColor;
+            ReadOnlyBorderColor = g.ReadOnlyBorderColor;
+            ReadOnlyTextColor = g.ReadOnlyTextColor;
 
             // Apply global appearnce
 			this.ApplyGlobalAppearance ();
@@ -755,6 +758,29 @@ namespace AspyRoad.iOSCore.UISettings
             get
             { 
                 return this.convertUIColor(this._neutralbordercolor); 
+            } 
+        }
+        public Lazy<UIColor> ReadOnlyBGUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._readonlybgcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> ReadOnlyTextUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._readonlytextcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> ReadOnlyBorderUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._readonlybordercolor); 
             } 
         }
 

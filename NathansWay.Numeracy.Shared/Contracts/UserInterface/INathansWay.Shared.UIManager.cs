@@ -118,7 +118,17 @@ namespace NathansWay.Shared
         Lazy<G__Color> NeutralBGColor { get; set; }
         Lazy<G__Color> NeutralTextColor { get; set; }
         Lazy<G__Color> NeutralBorderColor { get; set; }
+        Lazy<G__Color> ReadOnlyBGColor { get; set; }
+        Lazy<G__Color> ReadOnlyTextColor { get; set; }
+        Lazy<G__Color> ReadOnlyBorderColor { get; set; }
 
 	}
+
+    /* To Update follow me er the other side thee may see
+     * 1. Open Shared - UserInterface/UIManagerBase.cs
+     * 2. Open Shared - UserInterface/UIGlobalTheme.cs
+     * 3. Open iOSCore - Settings/UIManager.cs
+     * 4. Open Shared - UserInterface/UIGlobalTheme.cs
+     */
 
 }

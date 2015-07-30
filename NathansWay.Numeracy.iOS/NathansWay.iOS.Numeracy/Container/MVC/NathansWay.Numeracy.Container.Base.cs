@@ -37,6 +37,7 @@ namespace NathansWay.iOS.Numeracy
         // On the right of equals
         protected bool _bIsAnswer;
         protected G__ContainerType _containerType;
+        protected bool _bReadOnly;
 
         // Number is Correct/Incorrect
         protected G__AnswerState _answerState;
@@ -156,13 +157,18 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
         }
+
+        protected virtual void UI_ToggleNormalState()
+        {
+            
+        }
        
-        protected virtual void UI_StandardNumber()
+        protected virtual void UI_ToggleReadOnlyState()
         {
             // Not sure about this one. 
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
         // Both of these types mean the same thing, the ? is just C# shorthand.
@@ -308,6 +314,15 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             base.ApplyUI();
+
+            if (this._bReadOnly)
+            {
+                this.UI_ToggleReadOnlyState();
+            }
+            else
+            {
+                this.UI_ToggleAnswerState();
+            }
         }
 
 		#region Autorotation for iOS 6 or newer

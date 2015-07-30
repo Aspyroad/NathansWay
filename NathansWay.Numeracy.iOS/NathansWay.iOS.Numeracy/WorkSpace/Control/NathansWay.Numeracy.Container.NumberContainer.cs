@@ -256,7 +256,7 @@ namespace NathansWay.iOS.Numeracy
             this.CurrentValue = Convert.ToDouble(_strVal);
             // If this is an answer type, check it
             this.CheckCorrect();
-            this.UI_ToggleAnswerState();
+            this.ApplyUI();
 
         }
 
@@ -292,6 +292,12 @@ namespace NathansWay.iOS.Numeracy
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
                 this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             }
+        }
+
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
+
         }
 
         public override void ViewDidLoad()

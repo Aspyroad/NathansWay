@@ -194,10 +194,12 @@ namespace NathansWay.Shared
         protected Lazy<G__Color> _negativebgcolor;
         protected Lazy<G__Color> _negativetextcolor;
         protected Lazy<G__Color> _negativebordercolor;
-
         protected Lazy<G__Color> _neutralbgcolor;
         protected Lazy<G__Color> _neutraltextcolor;
         protected Lazy<G__Color> _neutralbordercolor;
+        protected Lazy<G__Color> _readonlybgcolor;
+        protected Lazy<G__Color> _readonlytextcolor;
+        protected Lazy<G__Color> _readonlybordercolor;
 
 		#endregion
 
@@ -526,7 +528,6 @@ namespace NathansWay.Shared
             get{ return this._negativebordercolor; } 
             set{ this._negativebordercolor = value; }  
         }
-
         public Lazy<G__Color> NeutralBGColor 
         { 
             get{ return this._neutralbgcolor; } 
@@ -541,6 +542,21 @@ namespace NathansWay.Shared
         { 
             get{ return this._neutralbordercolor; } 
             set{ this._neutralbordercolor = value; } 
+        }
+        public Lazy<G__Color> ReadOnlyBGColor 
+        { 
+            get{ return this._readonlybgcolor; } 
+            set{ this._readonlybgcolor= value; } 
+        }
+        public Lazy<G__Color> ReadOnlyTextColor 
+        { 
+            get{ return this._readonlytextcolor; } 
+            set{ this._readonlytextcolor = value; } 
+        }
+        public Lazy<G__Color> ReadOnlyBorderColor 
+        { 
+            get{ return this._readonlybordercolor; } 
+            set{ this._readonlybordercolor = value; } 
         }
 
 		#endregion
