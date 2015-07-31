@@ -57,7 +57,7 @@ namespace NathansWay.iOS.Numeracy
 		#region Drawn Graphics
 
         private void DrawFractionDivider(RectangleF rectDivider)
-        {
+        {            
             //// Color Declarations
             var x = this.iOSUIAppearance.GlobaliOSTheme.FontColor.Value;
             var color = UIColor.FromRGBA(x.Red, x.Green, x.Blue, x.Alpha);
@@ -78,8 +78,9 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw(RectangleF rect)
         {
+            this.BackgroundColor = UIColor.Clear;
             // Custom draws
-            DrawFractionDivider(this._rectFractionDivider);
+            //DrawFractionDivider(this._rectFractionDivider);
             base.Draw (rect);
         }
 

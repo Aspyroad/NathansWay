@@ -117,7 +117,8 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
-
+            // Build the fraction
+            this.CreateFraction();
         }
 
         private void CreateFraction()
@@ -180,8 +181,9 @@ namespace NathansWay.iOS.Numeracy
         public override void LoadView()
         {
             this._vFractionContainer = new vFractionContainer();
-            this.View = null;
+            //this.View = null;
             this.View = this._vFractionContainer;
+            this._vFractionContainer.BackgroundColor = UIColor.Clear;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -190,8 +192,7 @@ namespace NathansWay.iOS.Numeracy
             // Set its poisiton
             //this.FractionSize.SetPositions(this.SizeClass.StartPoint);
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
-            // Build the fraction
-            this.CreateFraction();
+
             // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
         }
@@ -253,6 +254,12 @@ namespace NathansWay.iOS.Numeracy
         protected override void UI_ToggleAnswerState()
         {
             base.UI_ToggleAnswerState();
+        }
+
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
+            //this.View.BackgroundColor = UIColor.Clear;
         }
 
 

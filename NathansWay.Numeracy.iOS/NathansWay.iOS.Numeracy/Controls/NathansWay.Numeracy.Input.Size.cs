@@ -601,7 +601,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // GlobalNumberHeight + DividerHeight + GlobalNumberHeight
                 if (this._size == G__NumberDisplaySize.Normal)
                 {                    
-                    return 130.0f;
+                    return 128.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -619,7 +619,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 6.0f;
+                    return 4.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -637,7 +637,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 4.0f;
+                    return 6.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -655,7 +655,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 60.0f;
+                    return 64.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
@@ -714,7 +714,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 40.0f;
+                    return 32.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {

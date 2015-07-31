@@ -108,7 +108,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
                 //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
                 this.AddAndDisplayController(_control);
-                _XPos = _XPos + 2.0f + _control.SizeClass.CurrentWidth;
+                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
             }
         }
 

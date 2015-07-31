@@ -106,6 +106,13 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = new SizeNumberContainer(this);
             // Define the container type
             this._containerType = G__ContainerType.Number;
+
+            // Create our number
+            // Its important to remember "where" this is called.
+            // I moved it to ViewDidLoad and it broke fraction...why?
+            // Because fraction relies upon width, and if this is called 
+            // in viewdidload its width is never known until viewing
+            this.CreateNumber(this.OriginalValueStr);
         }
 
         #endregion
@@ -303,8 +310,7 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Create our number
-            this.CreateNumber(this.OriginalValueStr);
+
         }
 
         public override void ViewWillAppear(bool animated)
