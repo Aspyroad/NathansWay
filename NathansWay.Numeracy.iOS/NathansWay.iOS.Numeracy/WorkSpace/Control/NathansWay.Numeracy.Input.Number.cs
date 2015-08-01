@@ -158,8 +158,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame =  this._sizeNumber._rectUpButton;
             // Set the initial state
-            this.ApplyUI();
-            //this.UI_ToggleAnswerState();
         }
 
         protected override void UI_ToggleAnswerState()
@@ -178,9 +176,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.txtNumber.Text = this.CurrentValueStr;
                 }
+                this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             }
 
-            //this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+
             //this.txtNumber.TextColor = this.SetBGColor;
         }
 
@@ -435,6 +434,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.FireValueChange();
             // Make any changes to UI on this object also (textbox bg etc)
             this.ApplyUI();
+            // TODO: PROBLEM and bug
+            // UI_ToggleTextEdit() is being called straight after this as this is being fired inside
+            // PickerValuechanged!!
         }
 
         protected void EditNumberPicker()

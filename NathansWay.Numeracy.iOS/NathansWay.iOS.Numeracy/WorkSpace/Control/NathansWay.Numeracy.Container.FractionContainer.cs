@@ -121,7 +121,7 @@ namespace NathansWay.iOS.Numeracy
             this.CreateFraction();
         }
 
-        private void CreateFraction()
+        public void CreateFraction()
         {
             // Locals
             string[] _result;
@@ -143,6 +143,12 @@ namespace NathansWay.iOS.Numeracy
             // Create a number box
             this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
             this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
+            // AnswerType
+            this.numberText_Numerator.IsAnswer = this.IsAnswer;
+            this.numberText_Denominator.IsAnswer = this.IsAnswer;
+            // Create the numbers
+            this.numberText_Numerator.CreateNumber();
+            this.numberText_Denominator.CreateNumber();
             // Event hooks
             this.numberText_Numerator.eValueChange += this.HandleValueChange;
             this.numberText_Numerator.eTextSizeChange += this.HandleTextSizeChange;
@@ -259,9 +265,8 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI()
         {
             base.ApplyUI();
-            //this.View.BackgroundColor = UIColor.Clear;
+            this.View.BackgroundColor = UIColor.Clear;
         }
-
 
         #endregion
 

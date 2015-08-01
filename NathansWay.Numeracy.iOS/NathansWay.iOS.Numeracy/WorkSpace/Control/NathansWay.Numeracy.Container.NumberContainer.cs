@@ -24,6 +24,7 @@ namespace NathansWay.iOS.Numeracy
         #region Class Variables
 
         private G__UnitPlacement _tensUnit;
+        private string _strInitialValue;
         private bool _bIsInEditMode;
         // Display a decimal place?
         private bool _bShowDecimal;
@@ -48,6 +49,7 @@ namespace NathansWay.iOS.Numeracy
 
         public vcNumberContainer (string _strValue)
         {
+            this._strInitialValue = _strValue;
             this._dblPrevValue = null;
             this._dblOriginalValue = Convert.ToDouble(_strValue);
             this.CurrentValue = this._dblOriginalValue;
@@ -106,20 +108,13 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = new SizeNumberContainer(this);
             // Define the container type
             this._containerType = G__ContainerType.Number;
-
-            // Create our number
-            // Its important to remember "where" this is called.
-            // I moved it to ViewDidLoad and it broke fraction...why?
-            // Because fraction relies upon width, and if this is called 
-            // in viewdidload its width is never known until viewing
-            this.CreateNumber(this.OriginalValueStr);
         }
 
         #endregion
 
         #region Public Members
 
-        public void CreateNumber(string _value)
+        public void CreateNumber()
         {
             // Locals
             int _sig = 0;
@@ -129,7 +124,7 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass.CurrentWidth = 0.0f;
 
             // Tens allocation 
-            _result = _value.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
+            _result = _strInitialValue.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
             // There should only ever be two
             if (_result.Length > 2)
             {
@@ -139,10 +134,10 @@ namespace NathansWay.iOS.Numeracy
             //_insig = _result[1].Length; not needed?
 
             // Main creation loop
-            for (int i = 0; i < _value.Length; i++)
+            for (int i = 0; i < _strInitialValue.Length; i++)
             {
                 // The Amazing Conversion Of Doctor Parasis!
-                var ch = _value[i].ToString();
+                var ch = _strInitialValue[i].ToString();
                 // Check if its a dot
                 if (ch != ".")
                 {

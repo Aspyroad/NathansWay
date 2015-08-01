@@ -68,6 +68,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcNumberContainer(strValue);
             // Logic
             x.IsAnswer = this.IsAnswer;
+            // Create the number
+            x.CreateNumber();
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
