@@ -21,6 +21,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		protected iOSUIManager iOSUIAppearance;
+        public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
 
 		#endregion
 
@@ -74,10 +75,5 @@ namespace AspyRoad.iOSCore
 
 		#endregion	
 
-        #region Overrides
-
-        //public override 
-
-        #endregion
 	}	
 }

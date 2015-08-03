@@ -1,17 +1,4 @@
-﻿using System;
-
-namespace NathansWay.iOS.Numeracy
-{
-	   
-    public enum E__NumberComboEditMode
-    {
-        EditScroll = 1,
-        EditUpDown = 2,
-        EditNumPad = 3       
-    }
-
-	public enum E__FontNamesiOS
-	{
+﻿
 //		AcademyEngravedLetPlain = 1,
 //		AmericanTypewriter-CondensedLight = 2,
 //		AmericanTypewriter-Light = 3,
@@ -175,8 +162,5 @@ namespace NathansWay.iOS.Numeracy
 //		Verdana-BoldItalic
 //		ZapfDingbatsITC
 //		Zapfino
-	}
-	   
-}
 
 

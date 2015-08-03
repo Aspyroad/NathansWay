@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public UIButton btnUp { get; private set; }
         public AspyTextField txtNumber { get; private set; }
         public AspyPickerView pkNumberPicker { get; private set; }
+        public vNumberContainer _View;
         // Picker Delegates
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
@@ -117,6 +118,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.DidReceiveMemoryWarning();
         }
 
+        public override void LoadView()
+        {
+            base.LoadView();
+            //this._View = new vNumberContainer();
+            //this.View = this._View;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -176,11 +184,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.txtNumber.Text = this.CurrentValueStr;
                 }
-                this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             }
-
-
-            //this.txtNumber.TextColor = this.SetBGColor;
         }
 
         #endregion
@@ -316,7 +320,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
-            this.CurrentEditMode = E__NumberComboEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
+            // TODO : change this to point to the global app settings class
+            this.CurrentEditMode = G__NumberEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
             this.singleTapGesture = null;
         }
 
@@ -570,6 +575,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         // UI Methods
         protected void UI_ToggleTextEdit()
         {
+            this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+            //this.txtNumber.TextColor = this.SetBGColor;
+
             if (!this.IsInEditMode)
             {
                 // Graphically highlight the text control so we know its selected

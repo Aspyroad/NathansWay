@@ -38,27 +38,27 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Class Variables
-		private UITapGestureRecognizer _tapGesture = null;
-		private UISwipeGestureRecognizer _swipeGesture = null;
-		private UIPinchGestureRecognizer _pinchGesture = null;
-		private UIPanGestureRecognizer _panGesture = null;
-		private UIRotationGestureRecognizer _rotorGesture = null;
-		private UILongPressGestureRecognizer _longGesture = null;		
+//		private UITapGestureRecognizer _tapGesture = null;
+//		private UISwipeGestureRecognizer _swipeGesture = null;
+//		private UIPinchGestureRecognizer _pinchGesture = null;
+//		private UIPanGestureRecognizer _panGesture = null;
+//		private UIRotationGestureRecognizer _rotorGesture = null;
+//		private UILongPressGestureRecognizer _longGesture = null;		
 		#endregion
 
 		#region Constructors
 		
 		public AspyWindow ()
 		{
-			Initialize ();
+			//Initialize ();
 		}
 		public AspyWindow (IntPtr handle) : base(handle)
 		{
-			Initialize ();
+			//Initialize ();
 		}
 		public AspyWindow (RectangleF myRect) : base(myRect)
 		{	
-			Initialize ();		
+			//Initialize ();		
 		}
 			
 		#endregion
@@ -70,30 +70,30 @@ namespace AspyRoad.iOSCore
 
 		#region Public Variables
 
-		public UISwipeGestureRecognizer swipeGesture
-		{
-			get { return this._swipeGesture; }
-		}
-		public UITapGestureRecognizer tapGesture
-		{
-			get { return this._tapGesture; }
-		}
-		public UIPinchGestureRecognizer pinchGesture
-		{
-			get { return this._pinchGesture; }
-		}
-		public UIPanGestureRecognizer panGesture
-		{
-			get { return this._panGesture; }
-		}
-		public UIRotationGestureRecognizer rotorGesture
-		{
-			get { return this._rotorGesture; }
-		}
-		public UILongPressGestureRecognizer longGesture
-		{
-			get { return this._longGesture; }
-		}
+//		public UISwipeGestureRecognizer swipeGesture
+//		{
+//			get { return this._swipeGesture; }
+//		}
+//		public UITapGestureRecognizer tapGesture
+//		{
+//			get { return this._tapGesture; }
+//		}
+//		public UIPinchGestureRecognizer pinchGesture
+//		{
+//			get { return this._pinchGesture; }
+//		}
+//		public UIPanGestureRecognizer panGesture
+//		{
+//			get { return this._panGesture; }
+//		}
+//		public UIRotationGestureRecognizer rotorGesture
+//		{
+//			get { return this._rotorGesture; }
+//		}
+//		public UILongPressGestureRecognizer longGesture
+//		{
+//			get { return this._longGesture; }
+//		}
 
 		#endregion
 		
@@ -113,66 +113,66 @@ namespace AspyRoad.iOSCore
 			} 
 		}
 
-		private UIGestureRecognizer CreateGestureType (G__GestureTypes gestype, NSAction gestureAction)
-		{
-			UIGestureRecognizer returnedGesture;
-
-			switch (gestype)
-			{			
-				case G__GestureTypes.UITap: //Tap
-				{
-					this._tapGesture = new UITapGestureRecognizer(gestureAction);
-					returnedGesture = this._tapGesture;		
-					break;			
-				}
-				case G__GestureTypes.UIPinch: //Pinch
-				{
-					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
-					returnedGesture = this._pinchGesture;	
-					break;
-				}
-				case G__GestureTypes.UIPan: //Pan
-				{
-					this._panGesture = new UIPanGestureRecognizer(gestureAction);
-					returnedGesture = this._panGesture;	
-					break;
-				}
-				case G__GestureTypes.UISwipe: //Swipe
-				{
-					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
-					returnedGesture = this._swipeGesture;	
-					break;
-				}
-				case G__GestureTypes.UIRotation: //Rotation
-				{
-					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
-					returnedGesture = this._rotorGesture;	
-					break;
-				}
-				case G__GestureTypes.UILongPress: //Longpress
-				{
-					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
-					returnedGesture = this._longGesture;	
-					break;
-				}
-				default:
-				{
-					returnedGesture = null;
-					break;
-				}					
-			}
-
-			if (returnedGesture == null)
-			{
-				throw new NullReferenceException("Error creating gesture in - " + this.Description);
-			}
-			else
-			{
-				return returnedGesture;
-			}
-		}
-		
-		#endregion
+//		private UIGestureRecognizer CreateGestureType (G__GestureTypes gestype, NSAction gestureAction)
+//		{
+//			UIGestureRecognizer returnedGesture;
+//
+//			switch (gestype)
+//			{			
+//				case G__GestureTypes.UITap: //Tap
+//				{
+//					this._tapGesture = new UITapGestureRecognizer(gestureAction);
+//					returnedGesture = this._tapGesture;		
+//					break;			
+//				}
+//				case G__GestureTypes.UIPinch: //Pinch
+//				{
+//					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
+//					returnedGesture = this._pinchGesture;	
+//					break;
+//				}
+//				case G__GestureTypes.UIPan: //Pan
+//				{
+//					this._panGesture = new UIPanGestureRecognizer(gestureAction);
+//					returnedGesture = this._panGesture;	
+//					break;
+//				}
+//				case G__GestureTypes.UISwipe: //Swipe
+//				{
+//					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
+//					returnedGesture = this._swipeGesture;	
+//					break;
+//				}
+//				case G__GestureTypes.UIRotation: //Rotation
+//				{
+//					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
+//					returnedGesture = this._rotorGesture;	
+//					break;
+//				}
+//				case G__GestureTypes.UILongPress: //Longpress
+//				{
+//					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
+//					returnedGesture = this._longGesture;	
+//					break;
+//				}
+//				default:
+//				{
+//					returnedGesture = null;
+//					break;
+//				}					
+//			}
+//
+//			if (returnedGesture == null)
+//			{
+//				throw new NullReferenceException("Error creating gesture in - " + this.Description);
+//			}
+//			else
+//			{
+//				return returnedGesture;
+//			}
+//		}
+//		
+        #endregion
 
 		#region Public Members
 
@@ -215,7 +215,7 @@ namespace AspyRoad.iOSCore
 //			base.SendEvent (evt);
 //		}
 
-		public void WireUpGestureToWindow(G__GestureTypes gestype, NSAction gestureAction)
+/*		public void WireUpGestureToWindow(G__GestureTypes gestype, NSAction gestureAction)
 		{
 			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
 		}	
@@ -223,7 +223,7 @@ namespace AspyRoad.iOSCore
 		public void RemoveGestureFromWindow(G__GestureTypes gestype)
 		{
 
-		}	
+		}*/	
 
 		#endregion	
 		
@@ -259,26 +259,5 @@ namespace AspyRoad.iOSCore
 			
 		#endregion	
 	}
-	
-	#region Testcode
-	
 
-			
-	//		public override void MakeKeyWindow ()  
-	//		{		
-	//			RectangleF myFrame;
-	//			SevenButton myButton;
-	//			myFrame = new RectangleF (50, 50, 100, 100);
-	//					
-	//			myButton = new SevenButton();
-	//			myButton.Draw (myFrame);
-	//			myButton.SetBackGroundColor (UIColor.DarkGray);				
-	//						
-	//			var myVC = this.RootViewController;	
-	//			myVC.View.AddSubview (myButton);
-	//		    base.MakeKeyWindow ();
-	//		
-	
-
-	#endregion
 }

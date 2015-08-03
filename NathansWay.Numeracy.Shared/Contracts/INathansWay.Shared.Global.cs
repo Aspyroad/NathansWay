@@ -5,6 +5,8 @@ namespace NathansWay.Shared.Utilities
 {
     public interface ISharedGlobal
     {	
+        // Prefix GS = global shared settings
+
 		/// <summary>
 		/// Path to Root Application.
 		/// </summary>

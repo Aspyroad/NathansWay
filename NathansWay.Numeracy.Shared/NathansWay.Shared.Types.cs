@@ -62,6 +62,13 @@ namespace NathansWay.Shared
         InSignificant = 2
     }
 
+    public enum G__NumberEditMode
+    {
+        EditScroll = 1,
+        EditUpDown = 2,
+        EditNumPad = 3       
+    }
+
     public enum G__AnswerState : int
     {
         Correct = 1,

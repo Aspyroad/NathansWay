@@ -88,7 +88,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Add to output
             _UIOutput.Add(x as object);
         }
-        public void UICreatOperator (G__MathChar mathChar, string strChar)
+        public void UICreateOperator (G__MathChar mathChar, string strChar)
         {
             // Create an operator
             var x = new vcOperatorText(mathChar, strChar);

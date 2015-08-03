@@ -25,6 +25,7 @@ namespace NathansWay.iOS.Numeracy
 
         public event EventHandler eTextSizeChange;
         public event EventHandler eValueChange;
+        public event EventHandler eControlSelected;
 
         #endregion
 
@@ -324,6 +325,7 @@ namespace NathansWay.iOS.Numeracy
                 this.UI_ToggleAnswerState();
             }
         }
+
 
 		#region Autorotation for iOS 6 or newer
 

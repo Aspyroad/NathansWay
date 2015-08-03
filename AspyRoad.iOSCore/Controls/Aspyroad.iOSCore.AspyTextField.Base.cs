@@ -116,6 +116,14 @@ namespace AspyRoad.iOSCore
 
         }
 
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            // Keep the responder chain moving...
+            // This essentially keeps the events propagating to the top
+            this.NextResponder.TouchesBegan(touches, evt);
+        }
+
         #endregion
 	}
 }

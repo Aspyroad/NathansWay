@@ -106,6 +106,7 @@
     <None Include="RELEASE-NOTES.txt" />
     <None Include="packages.config" />
     <None Include="UISettingColors.txt" />
+    <None Include="UIFontNames.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -113,7 +114,6 @@
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy.Types.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.cs" />

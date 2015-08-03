@@ -38,6 +38,9 @@ namespace NathansWay.iOS.Numeracy
         // If this Number Container is in a fraction, we set its parent fraction.
         private vcFractionContainer _vcFractionContainer;
 
+        // Test our own view for touch ops
+        private NWView _vNumberContainer;
+
         #endregion
 
         #region Constructors
@@ -302,10 +305,18 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
+        public override void LoadView()
+        {
+            //base.LoadView();
+            this._vNumberContainer = new vNumberContainer();
+            this.View = this._vNumberContainer;
+
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
+            this.View.UserInteractionEnabled = true;
         }
 
         public override void ViewWillAppear(bool animated)
@@ -317,6 +328,7 @@ namespace NathansWay.iOS.Numeracy
         {
             base.TouchesBegan(touches, evt);
         }
+
 
         #endregion
 
@@ -357,10 +369,72 @@ namespace NathansWay.iOS.Numeracy
         #endregion
     }
 
+    public class vNumberContainer : NWView
+    {
+        #region Constructors
+
+        public vNumberContainer () : base ()
+        {
+            //Initialize();
+        }
+
+        public vNumberContainer (RectangleF frame) : base (frame)
+        {
+            //Initialize();
+        }
+
+        public vNumberContainer (IntPtr h) : base (h) 
+        {
+            //Initialize();            
+        }
+
+        [Export("initWithCoder:")]
+        public vNumberContainer (NSCoder coder) : base(coder)
+        {
+            //Initialize();
+        }
+
+        #endregion 
+
+        #region Overrides
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+
+            UITouch touch = touches.AnyObject as UITouch;
+
+            if (touch != null) 
+            {
+                //SetNeedsDisplay ();
+            }
+            //this.NextResponder.TouchesBegan(touches, evt);
+        }
+//
+//        public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesMoved (touches, evt);
+//
+//        }
+//
+//        public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesEnded (touches, evt);
+//
+//            UITouch touch = touches.AnyObject as UITouch;
+//
+//            if (touch != null) 
+//            {
+//                //SetNeedsDisplay ();
+//            }
+//        }
+
+        #endregion
+    }
+
     public class SizeNumberContainer : SizeBase
     {
         #region Class Variables
-
 
 
         #endregion

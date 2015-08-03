@@ -18,7 +18,7 @@ namespace NathansWay.Shared
         // Simply pop them off the stack and into the container vc
         void UICreateNumber (string intNumber);
         void UICreateFraction (string strFraction);
-        void UICreatOperator (G__MathChar mathChar, string strChar);
+        void UICreateOperator (G__MathChar mathChar, string strChar);
         void UICreateBrace (bool bIsRight);
 
         void PrintUIOutput (object ViewObjectScreen);

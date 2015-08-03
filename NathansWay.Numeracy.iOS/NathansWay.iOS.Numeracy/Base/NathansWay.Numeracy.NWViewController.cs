@@ -19,6 +19,7 @@ namespace AspyRoad.iOSCore
 
 		protected iOSUIManager iOSUIAppearance;
 
+
 		#endregion
 
 		#region Constructors
