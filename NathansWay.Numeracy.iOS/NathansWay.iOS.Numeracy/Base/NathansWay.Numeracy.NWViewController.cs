@@ -10,6 +10,10 @@ using MonoTouch.CoreGraphics;
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
 
+// Shared
+using NathansWay.Shared;
+using NathansWay.Shared.Utilities;
+
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register ("NWViewController")]	
@@ -18,9 +22,9 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		protected iOSUIManager iOSUIAppearance;
+        protected IAppSettings NumberAppSettings;
 
-
-		#endregion
+        #endregion
 
 		#region Constructors
 
@@ -51,6 +55,7 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.NumberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
 		}
 
 		#endregion

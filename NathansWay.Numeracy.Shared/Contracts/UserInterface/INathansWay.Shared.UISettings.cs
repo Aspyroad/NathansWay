@@ -7,7 +7,7 @@ using System;
 
 namespace NathansWay.Shared
 {
-	public interface IUISettings
+	public interface IAppSettings
 	{
         // Prefix GA = global application settings
 

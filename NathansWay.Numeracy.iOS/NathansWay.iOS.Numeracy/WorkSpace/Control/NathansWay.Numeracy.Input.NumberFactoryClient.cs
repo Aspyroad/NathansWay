@@ -36,6 +36,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public NumberFactoryClient(List<object> _lsOutput)
         {   
             this._UIOutput = _lsOutput;
+            this.IsAnswer = false;
+            this.IsReadOnly = true;
+                
         }
 
         #endregion
@@ -55,6 +58,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             set; 
         }
 
+        public bool IsReadOnly
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Public Members
@@ -68,6 +77,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcNumberContainer(strValue);
             // Logic
             x.IsAnswer = this.IsAnswer;
+            x.IsReadOnly = this.IsReadOnly;
             // Create the number
             x.CreateNumber();
             // UI
@@ -82,6 +92,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcFractionContainer(strFraction);
             // Logic
             x.IsAnswer = this.IsAnswer;
+            x.IsReadOnly = this.IsReadOnly;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
@@ -100,10 +111,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 // The next numbercontainer/fractioncontainer will be the answer
                 this.IsAnswer = true;
+                this.IsReadOnly = false;
             }
             else
             {
                 this.IsAnswer = false;
+                this.IsReadOnly = true;
             }
             // Add to output
             _UIOutput.Add(x as object);

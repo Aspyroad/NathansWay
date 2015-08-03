@@ -39,7 +39,7 @@ namespace NathansWay.iOS.Numeracy
         private vcFractionContainer _vcFractionContainer;
 
         // Test our own view for touch ops
-        private NWView _vNumberContainer;
+        // private NWView _vNumberContainer;
 
         #endregion
 
@@ -203,6 +203,7 @@ namespace NathansWay.iOS.Numeracy
                     // Event Hooks
                     newnumber.eValueChange += this.HandleValueChange;
                     newnumber.eTextSizeChange += this.HandleTextSizeChange;
+                    newnumber.eControlSelected += this.HandleControlSelectedChange;
 
                     // Add control
                     this.AddAndDisplayController(newnumber, newnumber.View.Frame);
@@ -262,12 +263,22 @@ namespace NathansWay.iOS.Numeracy
             // If this is an answer type, check it
             this.CheckCorrect();
             this.ApplyUI();
-
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)
         {
             base.HandleTextSizeChange(s, e);
+        }
+
+        public override void HandleControlSelectedChange(object s, EventArgs e)
+        {
+            // base.HandleControlSelectedChange(s, e);
+            if (this.Selected)
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            }
         }
 
         #endregion
@@ -299,6 +310,17 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        protected override void UI_ToggleReadOnlyState()
+        {
+            //base.UI_ToggleReadOnlyState();
+            if (this._bReadOnly)
+            {
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            }
+        }
+
         public override void ApplyUI()
         {
             base.ApplyUI();
@@ -307,10 +329,9 @@ namespace NathansWay.iOS.Numeracy
 
         public override void LoadView()
         {
-            //base.LoadView();
-            this._vNumberContainer = new vNumberContainer();
-            this.View = this._vNumberContainer;
-
+            base.LoadView();
+            //this._vNumberContainer = new vNumberContainer();
+            //this.View = this._vNumberContainer;
         }
 
         public override void ViewDidLoad()
@@ -327,8 +348,18 @@ namespace NathansWay.iOS.Numeracy
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
+
+            this.Touched = true;
+            this.Selected = true;
+            this.ApplyUI();
         }
 
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+
+            this.Touched = false;
+        }
 
         #endregion
 

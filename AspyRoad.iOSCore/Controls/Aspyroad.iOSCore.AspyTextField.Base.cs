@@ -28,6 +28,8 @@ namespace AspyRoad.iOSCore
 
         protected UIColor colorBorderColor;
 
+        protected bool _bAllowNextResponder;
+
         #endregion
        
 		#region Contructors
@@ -64,37 +66,65 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 0.5f;
             this._fCornerRadius = 3.0f;
+            this._bAllowNextResponder = false;
+
+
         }
 
         #endregion
 
         #region Public Properties
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has border.
+        /// </summary>
+        /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
             get { return this._bHasBorder; }
             set { this._bHasBorder = value; }
         }
-
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has rounded corners.
+        /// </summary>
+        /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
             get { return this._bHasRoundedCorners; }
             set { this._bHasRoundedCorners = value; }
         }
-
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
+        /// <value>The width of the border.</value>
         public float BorderWidth
         {
             get { return this._fBorderWidth; }
             set { this._fBorderWidth = value; }
         }
-
+        /// <summary>
+        /// Gets or sets the corner radius.
+        /// </summary>
+        /// <value>The corner radius.</value>
         public float CornerRadius
         {
             get { return this._fCornerRadius; }
             set { this._fCornerRadius = value; }
         }
-
-
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow next responder touch events.
+        /// </summary>
+        /// <value><c>true</c> if allow next responder; otherwise, <c>false</c>.</value>
+        public bool AllowNextResponder
+        {
+            get
+            {
+                return _bAllowNextResponder;
+            }
+            set
+            {
+                _bAllowNextResponder = value;
+            }
+        }
         #endregion
 
         #region Public Members
@@ -119,9 +149,34 @@ namespace AspyRoad.iOSCore
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
-            // Keep the responder chain moving...
-            // This essentially keeps the events propagating to the top
-            this.NextResponder.TouchesBegan(touches, evt);
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                this.NextResponder.TouchesBegan(touches, evt);
+            }
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                this.NextResponder.TouchesEnded(touches, evt);
+            }
+        }
+
+        public override void TouchesMoved(NSSet touches, UIEvent evt)
+        {
+            base.TouchesMoved(touches, evt);
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                this.NextResponder.TouchesMoved(touches, evt);
+            }
         }
 
         #endregion

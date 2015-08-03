@@ -43,6 +43,7 @@ namespace NathansWay.iOS.Numeracy
         // Global classes loaded into services
 		private IAspyGlobals iOSGlobals;
 		private ISharedGlobal SharedGlobals;
+        private IAppSettings NumberAppSettings;
 		private iOSUIManager _numeracyUIManager;
         private iOSNumberDimensions NumberDimensions;
 		// Database
@@ -73,6 +74,9 @@ namespace NathansWay.iOS.Numeracy
 			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
 			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
+            // Create our application settings. These are settings that are global to Numbers Application only.
+            this.NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
+
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
@@ -92,7 +96,9 @@ namespace NathansWay.iOS.Numeracy
 
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
-			//this._numeracyUIManager.NumberCombo.EditMode = E__NumberComboEditMode.EditNumPad;
+            // TODO : These will need to be loaded from a database as they will be different for each student
+            this.NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this.NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
 
 			// Set AspyiOSCore global         variables here....		
 			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -119,19 +125,21 @@ namespace NathansWay.iOS.Numeracy
 			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
 			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
+
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
 			SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
-
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
+            // Register our Numberappwide setings
+            SharedServiceContainer.Register<IAppSettings> (this.NumberAppSettings);
 
             // Application Services, Factories
             // Dimensions Class
             NumberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Normal, this.iOSGlobals);
             iOSCoreServiceContainer.Register<iOSNumberDimensions> (this.NumberDimensions);
-			// Build a ToolBoxFactory
+            // Build a ToolBoxFactory
 			ToolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
             // Build a NumberFactory

@@ -35,7 +35,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private UITapGestureRecognizer singleTapGesture;
 
         private List<string> items = new List<string>();
-        private E__NumberComboEditMode _currentEditMode;
+        private G__NumberEditMode _currentEditMode;
         private UIColor _preEditColor;
 
         private vcNumberPad _numberpad;
@@ -221,7 +221,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._significance = value; }
         }
 
-        public E__NumberComboEditMode CurrentEditMode
+        public G__NumberEditMode CurrentEditMode
         {
             get { return this._currentEditMode; }
             set
@@ -230,15 +230,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
                 switch (this._currentEditMode)
                 {
-                    case (E__NumberComboEditMode.EditScroll):    
+                    case (G__NumberEditMode.EditScroll):    
                         this.btnDown.Hidden = true;
                         this.btnUp.Hidden = true;
                         break;
-                    case (E__NumberComboEditMode.EditNumPad):
+                    case (G__NumberEditMode.EditNumPad):
                         this.btnDown.Hidden = true;
                         this.btnUp.Hidden = true;
                         break;
-                    case (E__NumberComboEditMode.EditUpDown):
+                    case (G__NumberEditMode.EditUpDown):
                         this.btnDown.Hidden = false;
                         this.btnUp.Hidden = false;
                         break;
@@ -296,6 +296,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
+            this.txtNumber.AllowNextResponder = true;
             this.txtNumber.HasBorder = false;
             this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
@@ -321,7 +322,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
 
             // TODO : change this to point to the global app settings class
-            this.CurrentEditMode = G__NumberEditMode.EditScroll;  //this._numeracySettings.NumberCombo.EditMode;
+            this.CurrentEditMode = this.NumberAppSettings.GA__NumberEditMode;
             this.singleTapGesture = null;
         }
 
@@ -338,7 +339,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 // Apply UI for edit
                 this.UI_ToggleTextEdit();
-                if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
+                if (this._currentEditMode == G__NumberEditMode.EditScroll)
                 {
                     this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
                     this.HandlePickerChanged();
@@ -362,7 +363,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply UI for edit
             this.UI_ToggleTextEdit();
 
-            if (this._currentEditMode == E__NumberComboEditMode.EditScroll)
+            if (this._currentEditMode == G__NumberEditMode.EditScroll)
             {
                 this.EditNumberPicker();
             }
@@ -1016,6 +1017,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
     }
 
+
     #region UIPickerViewModel Implementation
 
     /// <summary>
@@ -1149,6 +1151,4 @@ namespace NathansWay.iOS.Numeracy.Controls
     //  }
 
     #endregion
-
 }
-

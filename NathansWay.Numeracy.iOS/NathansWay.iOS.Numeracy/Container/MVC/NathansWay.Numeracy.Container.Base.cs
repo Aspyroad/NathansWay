@@ -55,6 +55,8 @@ namespace NathansWay.iOS.Numeracy
         // to change the value, it gets set to false.
         protected bool _bInitialLoad;
         protected bool _bIsCorrect;
+        protected bool _bTouched;
+        protected bool _bSelected;
 
 		#endregion
 
@@ -121,6 +123,17 @@ namespace NathansWay.iOS.Numeracy
             }   
         }
 
+        protected void FireControlSelected()
+        {
+            // Thread safety.
+            var x = this.eControlSelected;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
+
 		#endregion
 
         #region Delegates
@@ -134,6 +147,10 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public virtual void HandleTextSizeChange(object s, EventArgs e)
+        {
+        }
+
+        public virtual void HandleControlSelectedChange(object s, EventArgs e)
         {
         }
 
@@ -190,6 +207,34 @@ namespace NathansWay.iOS.Numeracy
         {
             get { return _actTextSizeChanged; }
             set { this._actTextSizeChanged = value; }
+        }
+
+        public bool Touched
+        {
+            get
+            {
+                return _bTouched;
+            }
+            set
+            {
+                _bTouched = value;
+            }
+        }
+
+        public bool Selected
+        {
+            get
+            {
+                return _bSelected;
+            }
+            set
+            {
+                if (value)
+                {
+                   
+                }
+                _bSelected = value;
+            }
         }
 
         public virtual SizeBase SizeClass
@@ -276,6 +321,18 @@ namespace NathansWay.iOS.Numeracy
             get { return _bIsCorrect; }
         }
 
+        public bool IsReadOnly
+        {
+            get
+            {
+                return _bReadOnly;
+            }
+            set
+            {
+                _bReadOnly = value;
+            }
+        }
+
         public G__AnswerState AnswerState
         {
             get 
@@ -324,6 +381,12 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.UI_ToggleAnswerState();
             }
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.FireControlSelected();
         }
 
 
