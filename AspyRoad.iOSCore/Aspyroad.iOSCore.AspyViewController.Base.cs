@@ -74,7 +74,7 @@ namespace AspyRoad.iOSCore
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
             this._fBorderWidth = 1.0f;
-            this._fCornerRadius = 3.0f;
+            this._fCornerRadius = 4.0f;
             this._fFontSize = UIFont.SystemFontSize;
 		}
 

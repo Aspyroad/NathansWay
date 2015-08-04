@@ -129,6 +129,7 @@ namespace NathansWay.iOS.Numeracy
             // Local view sizing UI etc
             this.View.BackgroundColor = UIColor.Blue;
             this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
+
             // Add any views or vc's
             this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
@@ -146,7 +147,7 @@ namespace NathansWay.iOS.Numeracy
             this._vcWorkSpace.Value.SizeClass.SetPositions(_pointF);
             // Now we can build our WorkSpace
             //this._vcWorkSpace.Value.ExpressionString = "F,1/4,+,F,1/4,=,F,1/2";
-            this._vcWorkSpace.Value.ExpressionString = "1,+,F,1/2,=,1";
+            //this._vcWorkSpace.Value.ExpressionString = "1,+,F,1/2,=,1";
             // "F,1/2,+,F,1/2,=,1";
 		}
 
