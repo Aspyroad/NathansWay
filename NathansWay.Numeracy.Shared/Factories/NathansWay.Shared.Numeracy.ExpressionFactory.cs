@@ -8,8 +8,6 @@ namespace NathansWay.Shared.Factories
 {
     public class ExpressionFactory
     {
-
-
         #region Events
 
         public delegate void BuildStartedEventHandler (Object sender, EventArgs e);
@@ -54,9 +52,17 @@ namespace NathansWay.Shared.Factories
         #endregion
 
         #region Public Members
-        // Diveded by symbol (opt + /)
-        // (F,1/2,+,F,3/4,),-,(,3,),=,789.6
+        // Divided-by symbol = (opt + /)
+        // Syntax
+        // Fraction eg = "F,1/2" this will display a half
+        // Method eg = "M,1,+,1,=,2,M,2,+,2,=,4
+        // Bracing eg = "1,+,(,F,1/2,+,F,1/2,),=,2"
 
+        /// <summary>
+        /// Creates the main expression equation, this is displ.
+        /// </summary>
+        /// <returns>The expression equation.</returns>
+        /// <param name="_expression">Expression.</param>
         public List<object> CreateExpressionEquation (string _expression)
         {
             this.SplitExpressionEquation(_expression);
@@ -100,13 +106,14 @@ namespace NathansWay.Shared.Factories
             return this._UIPlatformClient.UIInternalOutput;
         }
 
-        public void CreateExpressionMethod (string _expression)
+        public List<List<object>> CreateExpressionMethod (string _expression)
         {
             this.SplitExpressionMethod(_expression);
             for (int i = 0; i < this._lsDecodedExpressionMethod.Count; i++) // Loop with for.
             {                
                 this._UIOutputMethods.Add(CreateExpressionEquation(this._lsDecodedExpressionMethod[i]));
             }
+            return this._UIOutputMethods;
         }
 
         public List<KeyValuePair<G__MathChar, string>> SplitExpressionEquation (string _expression)
@@ -131,6 +138,8 @@ namespace NathansWay.Shared.Factories
             return this._lsDecodedExpressionMethod;
         }
 
+        #region Seperate Creation Functions
+
         public void CreateNumber (string _strNumber)
         {
             _UIPlatformClient.UICreateNumber(_strNumber);
@@ -140,6 +149,8 @@ namespace NathansWay.Shared.Factories
         {
             _UIPlatformClient.UICreateFraction(_strFraction);
         }
+
+        #endregion
 
         #endregion
 
@@ -168,6 +179,27 @@ namespace NathansWay.Shared.Factories
 
         #region Private Members
 
+        protected void FireBuildStartedEvent()
+        {
+            // Thread safety.
+            var x = this.BuildStarted;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
+
+        protected void FireBuildCompletedEvent()
+        {
+            // Thread safety.
+            var x = this.BuildCompleted;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
 
         #endregion
     }
