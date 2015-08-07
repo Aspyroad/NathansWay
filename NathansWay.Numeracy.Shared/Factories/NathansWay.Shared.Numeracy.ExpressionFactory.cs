@@ -8,29 +8,36 @@ namespace NathansWay.Shared.Factories
 {
     public class ExpressionFactory
     {
-        #region Class Variables
 
-        // Delegates
+
+        #region Events
+
         public delegate void BuildStartedEventHandler (Object sender, EventArgs e);
         public delegate void BuildCompletedEventHandler (Object sender, EventArgs e);
 
         public event BuildStartedEventHandler BuildStarted;
         public event BuildCompletedEventHandler BuildCompleted;
 
+        #endregion
+
+        #region Class Variables
 
         protected G__UnitPlacement _tensUnit;
         protected IList<string> _lsSplitExpression;
-        protected List<KeyValuePair<G__MathChar, string>> _lsDecodedExpression;
+        protected List<KeyValuePair<G__MathChar, string>> _lsDecodedExpressionEquation;
+        protected List<string> _lsDecodedExpressionMethod;
 
         protected IUINumberFactoryClient _UIPlatformClient;
 
-        // Separator
+        // Separators
         private readonly char[] sepArray = {','};
+        private readonly char[] sepMethodArray = {'M'};
 
         // Main output object
-        private List<object> _UIOutput;
+        private List<object> _UIOutputEquation;
+        private List<List<object>> _UIOutputMethods;
         private G__NumberDisplaySize _UIDisplaySize;
-        private bool _bExpressionLoadedOk;
+        private int _intMethodCount;
 
         #endregion
 
@@ -38,9 +45,10 @@ namespace NathansWay.Shared.Factories
 
         public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
-            this._UIOutput = new List<object>();
+            this._UIOutputEquation = new List<object>();
             this.FactoryClient = UIPlatform;
-            this._lsDecodedExpression = new List<KeyValuePair<G__MathChar, string>>();
+            this._lsDecodedExpressionEquation = new List<KeyValuePair<G__MathChar, string>>();
+            this._intMethodCount = 0;
         }
 
         #endregion
@@ -49,12 +57,12 @@ namespace NathansWay.Shared.Factories
         // Diveded by symbol (opt + /)
         // (F,1/2,+,F,3/4,),-,(,3,),=,789.6
 
-        public void CreateExpression (string _expression)
+        public List<object> CreateExpressionEquation (string _expression)
         {
-            this.SplitExpression(_expression);
-            for (int i = 0; i < this._lsDecodedExpression.Count; i++) // Loop with for.
+            this.SplitExpressionEquation(_expression);
+            for (int i = 0; i < this._lsDecodedExpressionEquation.Count; i++) // Loop with for.
             {
-                var x = this._lsDecodedExpression[i];
+                var x = this._lsDecodedExpressionEquation[i];
                 string y;
 
                 switch ((G__MathChar)x.Key)
@@ -79,7 +87,7 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Fraction):
                     {
                         i++;
-                        this._UIPlatformClient.UICreateFraction(this._lsDecodedExpression[i].Value);
+                        this._UIPlatformClient.UICreateFraction(this._lsDecodedExpressionEquation[i].Value);
                     }
                     break;
                     default :
@@ -89,19 +97,38 @@ namespace NathansWay.Shared.Factories
                     break;
                 }
             }
-
-            this._bExpressionLoadedOk = true;
+            return this._UIPlatformClient.UIInternalOutput;
         }
 
-        public List<KeyValuePair<G__MathChar, string>> SplitExpression(string _expression)
+        public void CreateExpressionMethod (string _expression)
+        {
+            this.SplitExpressionMethod(_expression);
+            for (int i = 0; i < this._lsDecodedExpressionMethod.Count; i++) // Loop with for.
+            {                
+                this._UIOutputMethods.Add(CreateExpressionEquation(this._lsDecodedExpressionMethod[i]));
+            }
+        }
+
+        public List<KeyValuePair<G__MathChar, string>> SplitExpressionEquation (string _expression)
         {
             string[] x = _expression.Split(sepArray);
             //foreach (string s in x)
             for (int i = 0; i < x.Length; i++) // Loop with for.
             {
-                this._lsDecodedExpression.Add(new KeyValuePair<G__MathChar, string>(G__MathChars.GetCharType(x[i]), x[i]));
+                this._lsDecodedExpressionEquation.Add(new KeyValuePair<G__MathChar, string>(G__MathChars.GetCharType(x[i]), x[i]));
             }
-            return this._lsDecodedExpression;
+            return this._lsDecodedExpressionEquation;
+        }
+
+        public List<string> SplitExpressionMethod (string _expression)
+        {
+            string[] x = _expression.Split(sepMethodArray);
+
+            for (int i = 0; i < x.Length; i++) // Loop with for.
+            {
+                this._lsDecodedExpressionMethod.Add(x[i]);
+            }
+            return this._lsDecodedExpressionMethod;
         }
 
         public void CreateNumber (string _strNumber)
@@ -121,18 +148,20 @@ namespace NathansWay.Shared.Factories
         public IUINumberFactoryClient FactoryClient
         {
             get { return _UIPlatformClient; }
-            set 
-            { 
-                this._UIPlatformClient = value;
-                this._UIPlatformClient.UIInternalOutput = this._UIOutput;
-            }
+            set { this._UIPlatformClient = value; }
         }
 
         // Global Display Output object
-        public List<object> UIOutput
+        public List<object> UIOutputEquation
         { 
-            get { return this._UIOutput; }
-            set { this._UIOutput = value; }
+            get { return this._UIOutputEquation; }
+            set { this._UIOutputEquation = value; }
+        }
+            
+        public List<List<object>> UIOutputMethods
+        { 
+            get { return this._UIOutputMethods; }
+            set { this._UIOutputMethods = value; }
         }
 
         #endregion

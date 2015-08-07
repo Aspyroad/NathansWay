@@ -35,6 +35,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
 
+        private List<vcWorkWidget> _lsWorkWidgets;
+
 		#endregion
 
 		#region Constructors
@@ -50,10 +52,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			Initialize();
 		}
 
-        public vcWorkSpace(string _expression) 
-        {   
-            // TODO : Not sure about this? Bitch to build at init...without Startpoint?
-            this._strExpression = _expression;
+        public vcWorkSpace(EntityLesson _entLesson, EntityLessonDetail _LessonDetail) 
+        {
+            _wsLesson = _entLesson;
+            _wsLessonDetail = _LessonDetail;
             Initialize();
         }
 
@@ -74,9 +76,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
             // Factory Classes for expression building
+            // Number factory client is platform specific.
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
-
 
 		}
 
@@ -84,16 +86,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Members
 
-        public void BuildExpressionWidget(List<object> UIInternalOutput)
+        public void LoadLessonData(int _entLessonSeq)
         {
-            if (this.SizeClass.CurrentHeight <= 0.0f)
-            {
-                // Cant set sizes without WorkSpace Startpoint
-                return;
-            }
+            
+        }
 
-            // TODO : Local horizontal position. Do we need a buffer/padding??
-            float _XPos = 2.0f;
+        public void LoadLessonExpression()
+        {
+            /* 
+             *  Grab the lesson dataset
+             *  Grab the lesson detail dataset
+             *  Create a lesson and lesson detail results records
+             * 
+             *  Load the current lesson and lesson detail into widgets
+             * 
+             *  
+             *  If the user cancels half way thru the lesson we need to close off
+             *  the lesson result sets. Shoudl they be able to pause them and reload?
+             *  I think this may be needed, what id the kid has an episode/toilet etc
+             * */
+            
+        }
+
+        public void BuildExpressionEquationWidget()
+        {
+            float _XPos = this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceNumberSpacing;
                 
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
@@ -109,6 +126,32 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
+        public void BuildExpressionMethodWidgets()
+        {
+            if (this.SizeClass.CurrentHeight <= 0.0f)
+            {
+                // TODO : Is this needed
+                // Cant set sizes without WorkSpace Startpoint
+                // I have no idea why I wpuld be here if it wasnt created?
+                return;
+            }
+
+            // TODO : Local horizontal position. Do we need a buffer/padding??
+            float _XPos = 2.0f;
+
+            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
+            {
+                var _control = (BaseContainer)UIInternalOutput[i];
+                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+                // This call only calls the BASE SetPositions not any derives
+                // You may need to call any frame creation methods in the 
+                // controls ViewWillApppear method
+                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
+                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
+                this.AddAndDisplayController(_control);
+                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
+            }
+        }
         #endregion
 
         #region Public Properties
@@ -180,7 +223,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.ViewDidLoad();
             // UI
             this.HasRoundedCorners = true;
-
+            this.CornerRadius = 5.0f;
             this.HasBorder = true;
 		}
 

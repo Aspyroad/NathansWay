@@ -76,6 +76,12 @@ namespace NathansWay.Shared
         UnAttempted = 3
     }
 
+    public enum G__WorkWidgetType : int
+    {
+        Equation = 1,
+        Method = 2
+    }
+
     public enum G__ContainerType : int
     {
         Number = 1,
@@ -412,7 +418,8 @@ namespace NathansWay.Shared
         Negative = 6,
         Multiply = 7,
         Decimal = 8,
-        Equals = 9
+        Equals = 9,
+        Method = 10
     }
 
     public static class G__MathChars
@@ -427,7 +434,8 @@ namespace NathansWay.Shared
             {"-", G__MathChar.Negative},
             {"x", G__MathChar.Multiply},
             {".", G__MathChar.Decimal},
-            {"=", G__MathChar.Equals}
+            {"=", G__MathChar.Equals},
+            {"M", G__MathChar.Method}
         };
 
         public static G__MathChar GetCharType(string x)

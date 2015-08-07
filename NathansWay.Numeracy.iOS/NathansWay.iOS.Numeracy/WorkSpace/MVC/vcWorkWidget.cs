@@ -24,6 +24,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		#region Private Variables
 		
+        private G__WorkWidgetType _workWidgetType;
         private ExpressionFactory _expressionFactory;
         private NumberFactoryClient _numberFactoryClient;
 
@@ -84,7 +85,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadExpression(string _strExpression)
         {
-            this._expressionFactory.CreateExpression(_strExpression);
+            this._expressionFactory.CreateExpressionEquation(_strExpression);
         }
 
         public void BuildExpression(List<object> UIInternalOutput)
@@ -159,7 +160,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._strExpression = value; 
                 // Build our expression
                 this.LoadExpression(value);
-                this.BuildExpression(this._expressionFactory.UIOutput);
+                this.BuildExpression(this._expressionFactory.UIOutputEquation);
             }
         }
 

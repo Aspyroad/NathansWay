@@ -133,7 +133,7 @@ namespace NathansWay.Shared.DAL.Repository
 
         #endregion
 
-        #region Public Variables
+        #region Public Members
 
         #region DataTasks
 
