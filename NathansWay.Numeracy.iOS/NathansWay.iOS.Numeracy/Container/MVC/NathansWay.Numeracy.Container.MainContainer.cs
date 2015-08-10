@@ -30,7 +30,12 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcNumberPad> _vcNumberPad;
 
         private bool _bNumberPadLoaded;
-        //private 
+
+        #region MemoryViewPoints
+
+        private PointF _pVcWorkSpacePosition;
+
+        #endregion
 
 		#endregion
 
@@ -77,6 +82,8 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Public Members
 
+        #region DisplayMethods
+
         public void DisplayNumberPad(PointF pLocation)
         {
             if (!this.NumberPadLoaded)
@@ -98,6 +105,18 @@ namespace NathansWay.iOS.Numeracy
             }
 
         }
+
+        public void DisplayWorkSpace(AspyViewController _vcSending)
+        {
+
+
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Public Properties
 
         public bool NumberPadLoaded
         {

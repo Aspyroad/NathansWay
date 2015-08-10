@@ -19,8 +19,7 @@ namespace NathansWay.iOS.Numeracy
 	{
 		#region Private Variables
 		 
-
-		#endregion
+        #endregion
 
 		#region Constructors
 
@@ -28,12 +27,39 @@ namespace NathansWay.iOS.Numeracy
 		{
 		}
 
+        public vLessonTableCell () : base ()
+        {
+        }
+
+        public vLessonTableCell (RectangleF _rect) : base (_rect)
+        {
+        }
+
+        public vLessonTableCell (UITableViewCellStyle _style, string _str) : base (_style, _str)
+        {
+        }
+
 		#endregion
+
+        #region DeConstructor
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (disposing)
+            {
+                this.btnStartLesson.TouchUpInside -= OnClick_btnbtnStartLesson;
+            }
+        }
+
+        #endregion
 
 		#region Public Methods
 
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
+            this._vcParent = controller;
 			this.lblLessonName.Text = lesson.NameLesson;
 			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
 			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
@@ -47,11 +73,26 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Variables
 
+        private void OnClick_btnbtnStartLesson (object sender, EventArgs e)
+        {
+            var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            x.DisplayWorkSpace(this._vcParent);
+        } 
+
 		#endregion
 
 		#region Overrides
 
-        public override 
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            this.btnStartLesson.TouchUpInside += OnClick_btnbtnStartLesson;
+        }
+
+        public override void LayoutSubviews()
+        {
+            base.LayoutSubviews();
+        }
 
 		#endregion
 

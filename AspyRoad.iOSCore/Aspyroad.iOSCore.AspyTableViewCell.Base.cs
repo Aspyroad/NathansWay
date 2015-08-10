@@ -17,6 +17,7 @@ namespace AspyRoad.iOSCore
 		#region Private Variables
 
 		protected iOSUIManager iOSUIAppearance;
+        protected AspyViewController _vcParent;
 		protected int _indexValue;
 
 		#endregion
@@ -24,8 +25,7 @@ namespace AspyRoad.iOSCore
 		#region Constructors
 
 		public AspyTableViewCell (IntPtr handle) : base (handle)
-		{
-			Initialize ();
+		{			
 		}
 
 		#endregion
@@ -36,7 +36,7 @@ namespace AspyRoad.iOSCore
 		{ 
 			_indexValue = 0;
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			ApplyUI ();
+			this.ApplyUI ();
 		}
 
 		private void AlternateCellColor ()
@@ -61,7 +61,7 @@ namespace AspyRoad.iOSCore
 			set 
 			{ 
 				_indexValue = value;
-				AlternateCellColor ();
+				this.AlternateCellColor ();
 			}
 		}
 
@@ -72,7 +72,7 @@ namespace AspyRoad.iOSCore
 			this.SelectedBackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
 			// Setup normal color
 			this.BackgroundView = new UIView ();
-			AlternateCellColor ();
+			this.AlternateCellColor ();
 		}
 
 		#endregion
@@ -82,6 +82,7 @@ namespace AspyRoad.iOSCore
 		public override void AwakeFromNib ()
 		{
 			base.AwakeFromNib ();
+            this.Initialize ();
 		}
 
 		#endregion
