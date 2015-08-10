@@ -41,6 +41,23 @@ namespace NathansWay.Shared.Factories
 
         #region Constructors
 
+        /// <summary>
+        /// Creates the main expression equation, this is displ.
+        /// Divided-by symbol = (opt + /)
+        /// Syntax
+        /// * Standard Equations
+        /// Simple comma seperated values
+        /// eg 1,+,1,=,2 || 12.45,x,234.11,=,1200.98
+        /// * Fractions
+        /// An F placed in front of a fraction tells the factory its a fraction
+        /// Fraction eg = "F,1/2" this will display a half
+        /// * Methods
+        /// These are used to help problem solving in stages, all values are writable
+        /// Every new M denots a Method section "Numlet"
+        /// Method eg = "M,1,+,1,=,2,M,2,+,2,=,4
+        /// Bracing eg = "1,+,(,F,1/2,+,F,1/2,),=,2"
+        /// </summary>
+
         public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
             this._UIOutputEquation = new List<object>();
@@ -52,14 +69,9 @@ namespace NathansWay.Shared.Factories
         #endregion
 
         #region Public Members
-        // Divided-by symbol = (opt + /)
-        // Syntax
-        // Fraction eg = "F,1/2" this will display a half
-        // Method eg = "M,1,+,1,=,2,M,2,+,2,=,4
-        // Bracing eg = "1,+,(,F,1/2,+,F,1/2,),=,2"
 
         /// <summary>
-        /// Creates the main expression equation, this is displ.
+        /// Creates the expression equation.
         /// </summary>
         /// <returns>The expression equation.</returns>
         /// <param name="_expression">Expression.</param>
@@ -105,7 +117,11 @@ namespace NathansWay.Shared.Factories
             }
             return this._UIPlatformClient.UIInternalOutput;
         }
-
+        /// <summary>
+        /// Creates the expression method.
+        /// </summary>
+        /// <returns>The expression method.</returns>
+        /// <param name="_expression">Expression.</param>
         public List<List<object>> CreateExpressionMethod (string _expression)
         {
             this.SplitExpressionMethod(_expression);
@@ -115,7 +131,11 @@ namespace NathansWay.Shared.Factories
             }
             return this._UIOutputMethods;
         }
-
+        /// <summary>
+        /// Splits the expression equation.
+        /// </summary>
+        /// <returns>The expression equation.</returns>
+        /// <param name="_expression">Expression.</param>
         public List<KeyValuePair<G__MathChar, string>> SplitExpressionEquation (string _expression)
         {
             string[] x = _expression.Split(sepArray);
@@ -126,7 +146,11 @@ namespace NathansWay.Shared.Factories
             }
             return this._lsDecodedExpressionEquation;
         }
-
+        /// <summary>
+        /// Splits the expression method.
+        /// </summary>
+        /// <returns>The expression method.</returns>
+        /// <param name="_expression">Expression.</param>
         public List<string> SplitExpressionMethod (string _expression)
         {
             string[] x = _expression.Split(sepMethodArray);

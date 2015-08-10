@@ -51,12 +51,16 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-        //		public override void AwakeFromNib ()
-        //		{
-        //			base.AwakeFromNib ();
-        //		}
+        public override 
 
 		#endregion
+
+        #region EventHandlers
+
+
+
+
+        #endregion
 	}
 }
 

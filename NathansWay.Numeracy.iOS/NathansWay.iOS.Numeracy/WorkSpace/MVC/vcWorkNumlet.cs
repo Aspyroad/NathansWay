@@ -19,8 +19,8 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[Register("vcWorkWidget")]
-	public class vcWorkWidget : BaseContainer
+	[Register("vcWorkNumlet")]
+	public class vcWorkNumlet : BaseContainer
 	{
 		#region Private Variables
 		
@@ -40,25 +40,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#region Constructors
 
-        public vcWorkWidget(IntPtr h) : base(h)
+        public vcWorkNumlet(IntPtr h) : base(h)
 		{
 			Initialize();
 		}
 
 		[Export("initWithCoder:")]
-        public vcWorkWidget(NSCoder coder) : base(coder)
+        public vcWorkNumlet(NSCoder coder) : base(coder)
 		{
 			Initialize();
 		}
 
-        public vcWorkWidget(string _expression) 
-        {   
-            // TODO : Not sure about this? Bitch to build at init...without Startpoint?
+        public vcWorkNumlet(string _expression) 
+        {            
             this._strExpression = _expression;
             Initialize();
         }
 
-        public vcWorkWidget() 
+        public vcWorkNumlet() 
 		{   
 			Initialize();
 		}

@@ -37,22 +37,26 @@ namespace NathansWay.iOS.Numeracy
 	{
 		#region Private Members
 
-		private UIStoryboard storyboard;
-		private AspyWindow window;
+        // ViewControllers
+        private UIStoryboard _storyBoard;
+		private AspyWindow _window;
 		private vcMainContainer _mainContainer;
         // Global classes loaded into services
-		private IAspyGlobals iOSGlobals;
-		private ISharedGlobal SharedGlobals;
-        private IAppSettings NumberAppSettings;
+		private IAspyGlobals _iOSGlobals;
+        private ISharedGlobal _sharedGlobals;
+        private IAppSettings _NumberAppSettings;
 		private iOSUIManager _numeracyUIManager;
-        private iOSNumberDimensions NumberDimensions;
+        private iOSNumberDimensions _numberDimensions;
 		// Database
 		private ISQLitePlatform _iOSSQLitePLatform;
 		private NumeracyDB _DbContext;
-
+        // Notifications
 		private List<NSObject> _applicationObservers;
-		private ToolFactory ToolBuilder;
-        private ExpressionFactory ExpressionBuilder;
+        // Factories
+		private ToolFactory _toolBuilder;
+        private ExpressionFactory _expressionFactory;
+        //private IUINumberFactoryClient _numberFactoryClient;
+
 		#endregion
 
 		#region Overrides
@@ -69,26 +73,26 @@ namespace NathansWay.iOS.Numeracy
 			#region Setup
 			// Setup services and globals for iOS
 			// Create iOSCore globals
-			this.iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
+			this._iOSGlobals = new AspyRoad.iOSCore.AspyGlobals();
 			// Create our appwide user setup settings
 			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
-			this.SharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
+			this._sharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
             // Create our application settings. These are settings that are global to Numbers Application only.
-            this.NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
+            this._NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
 
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
-			this.SharedGlobals.GS__RootAppPath = Environment.CurrentDirectory; 
+			this._sharedGlobals.GS__RootAppPath = Environment.CurrentDirectory; 
 			// Db Name
-			this.SharedGlobals.GS__DatabaseName = "Nathansway.db3";
+			this._sharedGlobals.GS__DatabaseName = "Nathansway.db3";
 			// Documents folder
-			this.SharedGlobals.GS__DocumentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
+			this._sharedGlobals.GS__DocumentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); 
 			// Library folder
-			this.SharedGlobals.GS__FolderNameLibrary = Path.Combine (this.SharedGlobals.GS__DocumentsPath, "../Library/"); 
+			this._sharedGlobals.GS__FolderNameLibrary = Path.Combine (this._sharedGlobals.GS__DocumentsPath, "../Library/"); 
 			// Full db path
-			this.SharedGlobals.GS__FullDbPath = Path.Combine(this.SharedGlobals.GS__DocumentsPath, this.SharedGlobals.GS__DatabaseName);
+			this._sharedGlobals.GS__FullDbPath = Path.Combine(this._sharedGlobals.GS__DocumentsPath, this._sharedGlobals.GS__DatabaseName);
 			// Copy the database if needed
 			// For building we ALWAYS copy the db as we need to capture build changes.
 			//this.CopyDb();
@@ -97,54 +101,54 @@ namespace NathansWay.iOS.Numeracy
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
-            this.NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
-            this.NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
+            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
 
 			// Set AspyiOSCore global         variables here....		
-			this.iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
-			this.iOSGlobals.G__InitializeAllViewOrientation = true;
-			this.iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
-			this.iOSGlobals.G__ShouldAutorotate = false;
-			this.iOSGlobals.G__SegueingAnimationDuration = 0.8;
-			this.iOSGlobals.G__PrefersStatusBarHidden = true;
+			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
+			this._iOSGlobals.G__InitializeAllViewOrientation = true;
+			this._iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
+			this._iOSGlobals.G__ShouldAutorotate = false;
+			this._iOSGlobals.G__SegueingAnimationDuration = 0.8;
+			this._iOSGlobals.G__PrefersStatusBarHidden = true;
 
 			// Orientation handlers two types depending on iOS version
 			// iOS 6 and above >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			this.iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.Landscape;
+			this._iOSGlobals.G__6_SupportedOrientationMasks = UIInterfaceOrientationMask.Landscape;
 			// You can use bitwise operators on these
 			// NOTE : I couldnt get the bitwise versions to compare, not sure why, so I assume that Lanscapeleft and right are the same
 			// Doesnt really matter as its only for iOS5.
 			// in the autorotate function for iOS5
 			// Eg  = UIInterfaceOrientation.LandscapeRight | UIInterfaceOrientation.LandscapeLeft
 			// iOS 5 and below >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-			this.iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeLeft;
+			this._iOSGlobals.G__5_SupportedOrientation = UIInterfaceOrientation.LandscapeLeft;
 
 			// Register any Shared services needed
-			SharedServiceContainer.Register<ISharedGlobal>(this.SharedGlobals);
+			SharedServiceContainer.Register<ISharedGlobal>(this._sharedGlobals);
 			// Set Sqlite db Platform
 			this._iOSSQLitePLatform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
 			// Set up a database context
-			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this.SharedGlobals.GS__FullDbPath);
+			this._DbContext = new NumeracyDB(this._iOSSQLitePLatform, this._sharedGlobals.GS__FullDbPath);
 
 			// Platform lib needed by the constructor for SQLite Shared
 			SharedServiceContainer.Register<ISQLitePlatform>(this._iOSSQLitePLatform);
 			// Register the database connection
 			SharedServiceContainer.Register<INWDatabaseContext>(this._DbContext);
 			// Register any iOS services needed		
-			iOSCoreServiceContainer.Register<IAspyGlobals> (this.iOSGlobals);
+			iOSCoreServiceContainer.Register<IAspyGlobals> (this._iOSGlobals);
             // Register our Numberappwide setings
-            SharedServiceContainer.Register<IAppSettings> (this.NumberAppSettings);
+            SharedServiceContainer.Register<IAppSettings> (this._NumberAppSettings);
 
             // Application Services, Factories
             // Dimensions Class
-            NumberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Normal, this.iOSGlobals);
-            iOSCoreServiceContainer.Register<iOSNumberDimensions> (this.NumberDimensions);
+            _numberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Normal, this._iOSGlobals);
+            iOSCoreServiceContainer.Register<iOSNumberDimensions> (this._numberDimensions);
             // Build a ToolBoxFactory
-			ToolBuilder = new ToolFactory();
-			iOSCoreServiceContainer.Register<ToolFactory> (this.ToolBuilder);
+	        _toolBuilder = new ToolFactory();
+			iOSCoreServiceContainer.Register<ToolFactory> (this._toolBuilder);
             // Build a NumberFactory
-            //ExpressionBuilder = new ExpressionFactory(new NumberFactoryClient());
-            //iOSCoreServiceContainer.Register<ExpressionFactory> (this.ExpressionBuilder);
+            this._expressionFactory = new ExpressionFactory(new NumberFactoryClient());
+            iOSCoreServiceContainer.Register<ExpressionFactory> (this._expressionFactory);
 
 			// ** Note how to retrieve from services.
 			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
@@ -175,13 +179,13 @@ namespace NathansWay.iOS.Numeracy
 			//Setup UIManager
 			this.SetUpUI();
 			// Setup the window
-			window = new AspyWindow(UIScreen.MainScreen.Bounds);
+			_window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Register our window
-			iOSCoreServiceContainer.Register<AspyWindow> (window);
+			iOSCoreServiceContainer.Register<AspyWindow> (_window);
 
 			// Load our storyboard and setup our UIWindow and first view controller
-			storyboard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
-			iOSCoreServiceContainer.Register<UIStoryboard> (storyboard);
+			_storyBoard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+			iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);
 
 			// Setup view controllers
 			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 
@@ -197,9 +201,9 @@ namespace NathansWay.iOS.Numeracy
             iOSCoreServiceContainer.Register<vcMainContainer> (_mainContainer);
 
 			//window.MakeKeyAndVisible();
-			window.RootViewController = _mainContainer;
+			_window.RootViewController = _mainContainer;
 			//window.RootViewController = _menuStart;
-			window.MakeKeyAndVisible();
+			_window.MakeKeyAndVisible();
 			//_mainController.AddAndDisplayController(_menuStart);
 
 			//window.MakeKeyAndVisible();
@@ -292,7 +296,7 @@ namespace NathansWay.iOS.Numeracy
 
 		private void SetUpUI()
 		{
-			_numeracyUIManager = new iOSUIManager (iOSGlobals);
+			_numeracyUIManager = new iOSUIManager (_iOSGlobals);
             // Views
 			_numeracyUIManager.AddVC (6001, "VC_MenuStart");
 			_numeracyUIManager.AddVC (6002, "VC_Student");
@@ -325,21 +329,21 @@ namespace NathansWay.iOS.Numeracy
 
 		private void CopyDb ()
 		{
-			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"/Content/Db/", this.SharedGlobals.GS__DatabaseName);
+			string rootDbPath = Path.Combine(this._sharedGlobals.GS__RootAppPath, @"/Content/Db/", this._sharedGlobals.GS__DatabaseName);
 
-			if (File.Exists(this.SharedGlobals.GS__FullDbPath) == false) 
+			if (File.Exists(this._sharedGlobals.GS__FullDbPath) == false) 
 			{
-				File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath);
+				File.Copy(rootDbPath, this._sharedGlobals.GS__FullDbPath);
 			} 
 		}
 
 		private void ExplcitCopyDb ()
 		{
-			string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, @"Content/Db", this.SharedGlobals.GS__DatabaseName);
+			string rootDbPath = Path.Combine(this._sharedGlobals.GS__RootAppPath, @"Content/Db", this._sharedGlobals.GS__DatabaseName);
 			//string rootDbPath = Path.Combine(this.SharedGlobals.GS__RootAppPath, this.SharedGlobals.GS__DatabaseName);
 			//try
 			{
-				File.Copy(rootDbPath, this.SharedGlobals.GS__FullDbPath, true);
+				File.Copy(rootDbPath, this._sharedGlobals.GS__FullDbPath, true);
 			}
 			//catch (Exception ex)
 			{

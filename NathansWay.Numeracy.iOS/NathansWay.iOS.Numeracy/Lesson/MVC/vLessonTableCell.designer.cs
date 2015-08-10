@@ -16,6 +16,10 @@ namespace NathansWay.iOS.Numeracy
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyButton btnStartLesson { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		AspyRoad.iOSCore.AspyLabel lblEdit { get; set; }
 
 		[Outlet]
@@ -32,14 +36,14 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyLabel lblStart { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		AspyRoad.iOSCore.AspyLabel lblType { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnStartLesson != null) {
+				btnStartLesson.Dispose ();
+				btnStartLesson = null;
+			}
 			if (lblEdit != null) {
 				lblEdit.Dispose ();
 				lblEdit = null;
@@ -55,10 +59,6 @@ namespace NathansWay.iOS.Numeracy
 			if (lblOperator != null) {
 				lblOperator.Dispose ();
 				lblOperator = null;
-			}
-			if (lblStart != null) {
-				lblStart.Dispose ();
-				lblStart = null;
 			}
 			if (lblType != null) {
 				lblType.Dispose ();

@@ -92,14 +92,6 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		#endregion
-
-        private void Initialize ()
-        {
-			this.AspyTag1 = 6003;
-			this.AspyName = "VC_LessonMenu";
-            // Grab a ref to our data class
-			lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
-        }
 			
 		#region Overrides
 
@@ -183,6 +175,14 @@ namespace NathansWay.iOS.Numeracy
 		#endregion
 
 		#region Private Members
+
+        private void Initialize ()
+        {
+            this.AspyTag1 = 6003;
+            this.AspyName = "VC_LessonMenu";
+            // Grab a ref to our data class
+            lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
+        }
 
 		private void ScrolledToBottom (object sender, EventArgs e)
 		{		

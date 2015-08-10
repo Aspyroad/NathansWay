@@ -23,19 +23,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public class vcWorkSpace : BaseContainer
 	{
 		#region Private Variables
-		
+		// Factory Ref
         private ExpressionFactory _expressionFactory;
-        private NumberFactoryClient _numberFactoryClient;
-
+        //private NumberFactoryClient _numberFactoryClient;
+        // Db
         private EntityLesson _wsLesson;
         private EntityLessonResults _wsLessonResults;
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
-
+        // 
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
 
-        private List<vcWorkWidget> _lsWorkWidgets;
+        private List<vcWorkNumlet> _lsWorkWidgets;
 
 		#endregion
 
@@ -77,8 +77,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeWorkSpace;
             // Factory Classes for expression building
             // Number factory client is platform specific.
-            this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
+            this._expressionFactory = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
 
 		}
 
@@ -88,7 +87,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadLessonData(int _entLessonSeq)
         {
-            
+           /* here we need to grab/create result sets from the model 
         }
 
         public void LoadLessonExpression()
@@ -99,22 +98,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
              *  Create a lesson and lesson detail results records
              * 
              *  Load the current lesson and lesson detail into widgets
-             * 
+             *  This includes both equation and methods
              *  
              *  If the user cancels half way thru the lesson we need to close off
              *  the lesson result sets. Shoudl they be able to pause them and reload?
              *  I think this may be needed, what id the kid has an episode/toilet etc
-             * */
+             * 
+            */
             
         }
-
-        public void BuildExpressionEquationWidget()
+        /// <summary>
+        /// Builds a numlet.
+        /// </summary>
+        public void BuildNumlet()
         {
             float _XPos = this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceNumberSpacing;
+            var x = this._expressionFactory.UIOutputEquation;
                 
-            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
+            for (int i = 0; i < x.Count; i++) // Loop with for.
             {
-                var _control = (BaseContainer)UIInternalOutput[i];
+                var _control = (BaseContainer)x[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
                 // This call only calls the BASE SetPositions not any derives
                 // You may need to call any frame creation methods in the 
@@ -126,31 +129,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public void BuildExpressionMethodWidgets()
+        public void BuildMethodNumlets()
         {
-            if (this.SizeClass.CurrentHeight <= 0.0f)
-            {
-                // TODO : Is this needed
-                // Cant set sizes without WorkSpace Startpoint
-                // I have no idea why I wpuld be here if it wasnt created?
-                return;
-            }
-
             // TODO : Local horizontal position. Do we need a buffer/padding??
-            float _XPos = 2.0f;
-
-            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
-            {
-                var _control = (BaseContainer)UIInternalOutput[i];
-                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
-                // This call only calls the BASE SetPositions not any derives
-                // You may need to call any frame creation methods in the 
-                // controls ViewWillApppear method
-                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
-                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
-                this.AddAndDisplayController(_control);
-                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
-            }
+//            float _XPos = 2.0f;
+//            var x = this._expressionFactory.UIOutputEquation;
+//
+//            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
+//            {
+//                var _control = (BaseContainer)UIInternalOutput[i];
+//                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+//                // This call only calls the BASE SetPositions not any derives
+//                // You may need to call any frame creation methods in the 
+//                // controls ViewWillApppear method
+//                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
+//                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
+//                this.AddAndDisplayController(_control);
+//                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
+//            }
         }
         #endregion
 
