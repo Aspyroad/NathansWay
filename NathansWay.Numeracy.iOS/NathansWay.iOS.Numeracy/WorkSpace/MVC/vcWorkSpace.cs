@@ -211,7 +211,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.Blue;
 		}
 
 		public override void ViewDidLoad()

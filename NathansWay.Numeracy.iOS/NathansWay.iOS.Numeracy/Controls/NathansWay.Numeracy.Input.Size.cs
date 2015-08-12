@@ -183,12 +183,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                    this.StartPoint = _startPoint;
+                this.StartPoint = _startPoint;
             }
             else
             {
-                _point = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y);   
-                this.StartPoint = _point;
+                this.StartPoint = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y); 
             }
 
         }

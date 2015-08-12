@@ -14,10 +14,12 @@ using NathansWay.iOS.Numeracy.UISettings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register ("vcMainWorkSpace")]
-	public partial class vcMainWorkSpace : AspyViewController
+    public partial class vcMainWorkSpace : NWViewController
     {
 		#region Private Variables
-		//private NumeracySettings _numeracySettings;
+
+        private vcWorkSpace _vcWorkSpace;
+        private vcMainGame _vcMainGame;
 
 		#endregion
 
@@ -45,9 +47,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void Initialize()
         {
-			//base.Initialize ();
 			this.AspyTag1 = 60021;
 			this.AspyName = "VC_MainWorkSpace";
+
+            this._vcMainGame = new vcMainGame();
+            this._vcWorkSpace = new vcWorkSpace();
         }
 
         #endregion
@@ -67,17 +71,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            this.View.BackgroundColor = UIColor.Clear;
+            this.View.Frame = 
+                new RectangleF 
+                (
+                    0,
+                    0,
+                    iOSGlobals.G__RectWindowLandscape.Width,
+                    iOSGlobals.G__RectWindowLandscape.Height
+                );
+            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            this._vcWorkSpace.SizeClass.SetPositions(_pointF);
 
-						//this.View.BackgroundColor = UIColor.White;
-			
-						this.View.Frame = 
-							new RectangleF 
-							(
-								0,
-								((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3),
-								iOSGlobals.G__RectWindowLandscape.Width,
-								(iOSGlobals.G__RectWindowLandscape.Height / 4)
-							);
+            this.AddAndDisplayController(this._vcMainGame);
+            this.AddAndDisplayController(this._vcWorkSpace);
         }
 		
 		#endregion

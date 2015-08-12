@@ -17,10 +17,10 @@ using NathansWay.iOS.Numeracy.UISettings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcMainGame")]
-	public partial class vcMainGame : AspyViewController
+    public partial class vcMainGame : NWViewController
 	{
 		#region Private Variables
-		//private NumeracySettings _numeracySettings;
+
 
 		#endregion
 
@@ -75,15 +75,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.ViewDidLoad ();
 
-			//this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.DarkGray;
 
 			this.View.Frame = 
 				new RectangleF 
 				(
-					0,
-					0,
-					iOSGlobals.G__RectWindowLandscape.Width,
-					((iOSGlobals.G__RectWindowLandscape.Height / 4) * 3)
+					2,
+					2,
+                    (iOSGlobals.G__RectWindowLandscape.Width - 2),
+                    (iOSGlobals.G__RectWindowLandscape.Height - 2)
 				);
 		}
 

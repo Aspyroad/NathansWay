@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy
 		public UIStoryboard _storyBoard;
 		public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
-        public Lazy<vcWorkSpace> _vcWorkSpace;
+        public Lazy<vcMainWorkSpace> _vcMainWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
 
         private bool _bNumberPadLoaded;
@@ -81,15 +81,19 @@ namespace NathansWay.iOS.Numeracy
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
-            _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
+            _vcMainWorkSpace = new Lazy<vcMainWorkSpace>(() => new vcMainWorkSpace() as vcMainWorkSpace);
 
             this._dblAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
         }
 
-        private void ChangeContentTo (AspyViewController _newvc, AspyViewController _oldvc)
+        private void ChangeContentTo (AspyViewController _newvc, AspyViewController _oldvc, UIViewAnimationOptions _animationOptions)
         {
+            // This works fine like this...
+
+
             this._vcNew = _newvc;
             this._vcOld = _oldvc;
+            //this._vcOld.View.AddSubview(this._vcNew.View);
             this._transitionComplete = new UICompletionHandler(this.TransitionComplete);
             this._animation = new NSAction(delegate()
                 {
@@ -99,16 +103,16 @@ namespace NathansWay.iOS.Numeracy
 
             // Shouldnt need to set frame sizes as these are knowns
             //_oldVC.View.Frame = _newVC.View.Frame;
-
             this._vcOld.WillMoveToParentViewController(null);
             this.AddChildViewController(this._vcNew);
+
             // Let the container perform the transition
             this.Transition
             (
                 _vcOld,
                 _vcNew,
                 this._dblAnimationDuration,
-                UIViewAnimationOptions.TransitionFlipFromLeft,
+                _animationOptions,
                 this._animation,
                 this._transitionComplete
             );
@@ -153,8 +157,8 @@ namespace NathansWay.iOS.Numeracy
 
         public void DisplayWorkSpace(AspyViewController _vcSending)
         {
-            var _vc = this._vcWorkSpace.Value;
-            this.ChangeContentTo(_vc, _vcSending);
+            var _vc = this._vcMainWorkSpace.Value;
+            this.ChangeContentTo(_vc, _vcSending, UIViewAnimationOptions.TransitionFlipFromLeft);
         }
 
         #endregion
@@ -208,8 +212,6 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = new MainContainerSize(this);
             this._sizeClass.SetPositions(new PointF(0.0f, 0.0f));
 
-            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
-            this._vcWorkSpace.Value.SizeClass.SetPositions(_pointF);
             // Now we can build our WorkSpace
             //this._vcWorkSpace.Value.ExpressionString = "F,1/4,+,F,1/4,=,F,1/2";
             //this._vcWorkSpace.Value.ExpressionString = "1,+,F,1/2,=,1";

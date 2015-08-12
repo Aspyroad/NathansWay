@@ -150,18 +150,16 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.iOS.Numeracy.UISettings.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainGame.cs">
-      <DependentUpon>vwMainGame.xib</DependentUpon>
+      <DependentUpon>vcMainGame.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vMainWorkSpace.cs">
-      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
+      <DependentUpon>vcMainWorkSpace.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs">
-      <DependentUpon>vwMainGame.xib</DependentUpon>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vWorkSpace.cs">
+      <DependentUpon>vcWorkSpace.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs">
-      <DependentUpon>vwMainWorkSpace.xib</DependentUpon>
-    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainGame.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcMainWorkSpace.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vcLessonMenu.designer.cs">
       <DependentUpon>vcLessonMenu.cs</DependentUpon>
@@ -266,8 +264,6 @@
     <BundleResource Include="Resources\es.lproj\Localizable.strings" />
   </ItemGroup>
   <ItemGroup>
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainGame.xib" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vwMainWorkSpace.xib" />
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
   </ItemGroup>
 </Project>
