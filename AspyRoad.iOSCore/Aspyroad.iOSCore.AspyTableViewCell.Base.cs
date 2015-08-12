@@ -28,6 +28,18 @@ namespace AspyRoad.iOSCore
 		{			
 		}
 
+        public AspyTableViewCell () : base ()
+        {
+        }
+
+        public AspyTableViewCell (RectangleF _rect) : base (_rect)
+        {
+        }
+
+        public AspyTableViewCell (UITableViewCellStyle _style, string _str) : base (_style, _str)
+        {
+        }
+
 		#endregion
 
 		#region Private Methods

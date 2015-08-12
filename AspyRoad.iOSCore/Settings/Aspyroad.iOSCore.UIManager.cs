@@ -65,7 +65,7 @@ namespace AspyRoad.iOSCore.UISettings
 
 			//Peform an animation, note that null is not allowed as a callback, so I use delegate { }
 			if (animated)
-				UIView.Transition (window, .3, UIViewAnimationOptions.TransitionCrossDissolve, delegate { }, delegate { });
+				UIView.Transition(window, .3, UIViewAnimationOptions.TransitionCrossDissolve, delegate { }, delegate { });
 		}
 
 		public string ToiOS7Path(string path)

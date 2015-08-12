@@ -30,6 +30,12 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcNumberPad> _vcNumberPad;
 
         private bool _bNumberPadLoaded;
+        private NSAction _animation;
+        private UICompletionHandler _transitionComplete;
+        private double _dblAnimationDuration; 
+
+        internal AspyViewController _vcOld;
+        internal AspyViewController _vcNew;
 
         #region MemoryViewPoints
 
@@ -76,6 +82,45 @@ namespace NathansWay.iOS.Numeracy
 			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcWorkSpace = new Lazy<vcWorkSpace>(() => new vcWorkSpace());
+
+            this._dblAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
+        }
+
+        private void ChangeContentTo (AspyViewController _newvc, AspyViewController _oldvc)
+        {
+            this._vcNew = _newvc;
+            this._vcOld = _oldvc;
+            this._transitionComplete = new UICompletionHandler(this.TransitionComplete);
+            this._animation = new NSAction(delegate()
+                {
+                    //this._vcOld.View.Alpha = 0;
+                    //this._vcNew.View.Alpha = 1;
+                });
+
+            // Shouldnt need to set frame sizes as these are knowns
+            //_oldVC.View.Frame = _newVC.View.Frame;
+
+            this._vcOld.WillMoveToParentViewController(null);
+            this.AddChildViewController(this._vcNew);
+            // Let the container perform the transition
+            this.Transition
+            (
+                _vcOld,
+                _vcNew,
+                this._dblAnimationDuration,
+                UIViewAnimationOptions.TransitionFlipFromLeft,
+                this._animation,
+                this._transitionComplete
+            );
+
+        }
+
+        private void TransitionComplete (bool finished)
+        {
+            this._vcOld.RemoveFromParentViewController();
+            this._vcNew.DidMoveToParentViewController(this);
+            this._vcNew = null;
+            this._vcOld = null;
         }
 
         #endregion
@@ -108,8 +153,8 @@ namespace NathansWay.iOS.Numeracy
 
         public void DisplayWorkSpace(AspyViewController _vcSending)
         {
-
-
+            var _vc = this._vcWorkSpace.Value;
+            this.ChangeContentTo(_vc, _vcSending);
         }
 
         #endregion
@@ -146,7 +191,7 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 
             // Local view sizing UI etc
-            this.View.BackgroundColor = UIColor.Blue;
+            this.View.BackgroundColor = UIColor.White;
             this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
 
             // Add any views or vc's

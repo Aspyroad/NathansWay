@@ -87,7 +87,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadLessonData(int _entLessonSeq)
         {
-           /* here we need to grab/create result sets from the model 
+           /* here we need to grab/create result sets from the model  */
         }
 
         public void LoadLessonExpression()

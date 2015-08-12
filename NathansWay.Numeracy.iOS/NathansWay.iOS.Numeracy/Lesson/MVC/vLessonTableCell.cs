@@ -105,3 +105,27 @@ namespace NathansWay.iOS.Numeracy
 	}
 }
 
+
+//- (void)changeContentTo:(UIViewController *)controller
+//{
+//    UIViewController *newController = controller;
+//    UIViewController *oldController = ... // grab reference of current child from `self.childViewControllers or from some property where you stored it
+//
+//        newController.view.frame = oldController.view.frame;
+//
+//    [oldController willMoveToParentViewController:nil];
+//    [self addChildViewController:newController];
+//
+//    [self transitionFromViewController:oldController
+//        toViewController:newController
+//        duration:1.0
+//        options:UIViewAnimationOptionTransitionCrossDissolve
+//        animations:^{
+//            // no further animations required
+//        }
+//        completion:^(BOOL finished) {
+//            [oldController removeFromParentViewController];
+//            [newController didMoveToParentViewController:self];
+//        }];
+//}
+
