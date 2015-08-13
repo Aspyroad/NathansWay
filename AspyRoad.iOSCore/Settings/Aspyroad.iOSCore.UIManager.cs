@@ -57,15 +57,26 @@ namespace AspyRoad.iOSCore.UISettings
 			var window = _iOSGlobals.G__MainWindow;
 
 			//Return if it's already the root controller
-			if (window.RootViewController == controller)
-				return;
+            if (window.RootViewController == controller)
+            {
+                return;
+            }
 
 			//Set the root controller
 			window.RootViewController = controller;
 
 			//Peform an animation, note that null is not allowed as a callback, so I use delegate { }
-			if (animated)
-				UIView.Transition(window, .3, UIViewAnimationOptions.TransitionCrossDissolve, delegate { }, delegate { });
+            if (animated)
+            {
+                UIView.Transition
+                (
+                    window, 
+                    0.3, 
+                    UIViewAnimationOptions.TransitionCrossDissolve, 
+                    delegate {}, 
+                    delegate {}
+                );
+            }
 		}
 
 		public string ToiOS7Path(string path)

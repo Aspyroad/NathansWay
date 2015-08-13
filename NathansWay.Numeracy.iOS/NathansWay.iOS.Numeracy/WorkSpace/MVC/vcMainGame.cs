@@ -17,7 +17,7 @@ using NathansWay.iOS.Numeracy.UISettings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcMainGame")]
-    public partial class vcMainGame : NWViewController
+    public partial class vcMainGame : BaseContainer
 	{
 		#region Private Variables
 
@@ -75,15 +75,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.ViewDidLoad ();
 
-            this.View.BackgroundColor = UIColor.DarkGray;
+            this.HasRoundedCorners = true;
+            this.CornerRadius = 5.0f;
+            this.HasBorder = true;
+
+            this.View.BackgroundColor = UIColor.LightGray;
 
 			this.View.Frame = 
 				new RectangleF 
 				(
 					2,
 					2,
-                    (iOSGlobals.G__RectWindowLandscape.Width - 2),
-                    (iOSGlobals.G__RectWindowLandscape.Height - 2)
+                    (iOSGlobals.G__RectWindowLandscape.Width - 4),
+                    (iOSGlobals.G__RectWindowLandscape.Height - 4)
 				);
 		}
 

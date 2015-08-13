@@ -80,7 +80,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     iOSGlobals.G__RectWindowLandscape.Width,
                     iOSGlobals.G__RectWindowLandscape.Height
                 );
-            var _pointF = new PointF(1.0f,((this.iOSGlobals.G__RectWindowLandscape.Height / 4) * 3));
+            
+            var y = (this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight);
+            var _pointF = new PointF(2.0f, y);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF);
 
             this.AddAndDisplayController(this._vcMainGame);

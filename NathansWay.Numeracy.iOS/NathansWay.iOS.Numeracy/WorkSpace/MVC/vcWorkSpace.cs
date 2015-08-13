@@ -104,8 +104,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
              *  the lesson result sets. Shoudl they be able to pause them and reload?
              *  I think this may be needed, what id the kid has an episode/toilet etc
              * 
-            */
-            
+            */            
         }
         /// <summary>
         /// Builds a numlet.

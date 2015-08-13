@@ -89,15 +89,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 1022.0f;
+                    return 1020.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 1022.0f;
+                    return 1020.0f;
                 }
                 else // Large
                 {
-                    return 1022.0f;
+                    return 1020.0f;
                 }
             }
         }
@@ -107,15 +107,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return 2.0f;
+                    return 4.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
-                    return 4.0f;
+                    return 8.0f;
                 }
                 else // Large
                 {
-                    return 6.0f;
+                    return 16.0f;
                 }
             }
         }
