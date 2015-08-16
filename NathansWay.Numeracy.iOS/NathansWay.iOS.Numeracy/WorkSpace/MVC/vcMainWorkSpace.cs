@@ -14,7 +14,7 @@ using NathansWay.iOS.Numeracy.UISettings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register ("vcMainWorkSpace")]
-    public partial class vcMainWorkSpace : NWViewController
+    public class vcMainWorkSpace : NWViewController
     {
 		#region Private Variables
 
@@ -65,13 +65,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void LoadView()
 		{
-			base.LoadView();            
-		}
+			base.LoadView(); 
+
+        }
+		
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             this.View.BackgroundColor = UIColor.Clear;
+            this.View.UserInteractionEnabled = false;
             this.View.Frame = 
                 new RectangleF 
                 (
@@ -81,14 +84,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     iOSGlobals.G__RectWindowLandscape.Height
                 );
             
-            var y = (this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight);
-            var _pointF = new PointF(2.0f, y);
+            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
+            var _pointF = new PointF(4.0f, y);
+            var _pointF2 = new PointF(2.0f, 2.0f);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF);
+            this._vcMainGame.SizeClass.SetPositions(_pointF2);
 
             this.AddAndDisplayController(this._vcMainGame);
             this.AddAndDisplayController(this._vcWorkSpace);
         }
-		
+
 		#endregion
     }
 }        

@@ -17,10 +17,11 @@ using NathansWay.iOS.Numeracy.UISettings;
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register("vcMainGame")]
-    public partial class vcMainGame : BaseContainer
+    public class vcMainGame : BaseContainer
 	{
 		#region Private Variables
 
+        private SizeMainGame _sizeMainGame;
 
 		#endregion
 
@@ -52,9 +53,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyTag1 = 60020;
 			this.AspyName = "VC_MainGame";
 
-			// Create our settings class
-			//this._numeracySettings = (NumeracySettings)this.iOSUIAppearance;
-			//this._vcSettings = this._numeracySettings.FindVCSettings (this.AspyTag1);
+            this._sizeMainGame = new SizeMainGame(this);
+            this._sizeClass = this._sizeMainGame;
+
 		}
 
 		#endregion
@@ -74,23 +75,59 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad ();
+		}
+
+        public override void ApplyUI()
+        {
+            base.ApplyUI();
 
             this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
-
             this.View.BackgroundColor = UIColor.LightGray;
-
-			this.View.Frame = 
-				new RectangleF 
-				(
-					2,
-					2,
-                    (iOSGlobals.G__RectWindowLandscape.Width - 4),
-                    (iOSGlobals.G__RectWindowLandscape.Height - 4)
-				);
-		}
-
+        }
 		#endregion
 	}
+
+    public class SizeMainGame : SizeBase
+    {
+        #region Class Variables
+        // X Horizontal
+        // Y Vertical
+
+        #endregion
+
+        #region Constructors
+
+        public SizeMainGame()
+        {
+            Initialize();
+        }
+
+        public SizeMainGame(BaseContainer _vc) : base (_vc)
+        {
+            this.ParentContainer = _vc;
+            Initialize();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void Initialize()
+        {
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override void SetHeightWidth ()
+        {
+            this.CurrentWidth = (this.VcMainContainer.iOSGlobals.G__RectWindowLandscape.Width - 4);
+            this.CurrentHeight = (this.VcMainContainer.iOSGlobals.G__RectWindowLandscape.Height - 4);
+        }
+
+        #endregion
+    }
 }
