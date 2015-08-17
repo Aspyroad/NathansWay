@@ -20,6 +20,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
+        private vcMainContainer _vcMainContainer;
 
 		#endregion
 
@@ -51,7 +52,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_MainWorkSpace";
 
             this._vcMainGame = new vcMainGame();
-            this._vcWorkSpace = new vcWorkSpace();
+            this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            this._vcWorkSpace = this._vcMainContainer._vcWorkSpace.Value;
         }
 
         #endregion
