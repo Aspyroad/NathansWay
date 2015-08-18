@@ -72,6 +72,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
                     return ((this._iOSGlobals.G__RectWindowLandscape.Height / 4) - 4);
+                    //return 170.0f;
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
