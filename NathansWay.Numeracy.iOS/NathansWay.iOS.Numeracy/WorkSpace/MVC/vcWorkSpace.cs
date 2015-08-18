@@ -26,11 +26,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		// Factory Ref
         private ExpressionFactory _expressionFactory;
         //private NumberFactoryClient _numberFactoryClient;
-        // Db
-        private EntityLesson _wsLesson;
-        private EntityLessonResults _wsLessonResults;
-        private EntityLessonDetail _wsLessonDetail;
-        private EntityLessonDetailResults _wsLessonDetailResults;
         // 
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
@@ -52,17 +47,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			Initialize();
 		}
 
-        public vcWorkSpace(EntityLesson _entLesson, EntityLessonDetail _LessonDetail) 
+        public vcWorkSpace() 
         {
-            _wsLesson = _entLesson;
-            _wsLessonDetail = _LessonDetail;
             Initialize();
         }
-
-		public vcWorkSpace() 
-		{   
-			Initialize();
-		}
 
 		#endregion
 
@@ -78,7 +66,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Factory Classes for expression building
             // Number factory client is platform specific.
             this._expressionFactory = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
-
 		}
 
 		#endregion
@@ -160,30 +147,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return _expressionFactory; }
             set { _expressionFactory = value; }
-        }
-
-        public EntityLesson WsLesson
-        {
-            get { return _wsLesson; }
-            set { WsLesson = value; }
-        }
-
-        public EntityLessonResults WsLessonResults
-        {
-            get { return _wsLessonResults; }
-            set { WsLessonResults = value; }
-        }
-
-        public EntityLessonDetail WsLessonDetail
-        {
-            get { return _wsLessonDetail; }
-            set { WsLessonDetail = value; }
-        }
-
-        public EntityLessonDetailResults WsLessonDetailResults
-        {
-            get { return _wsLessonDetailResults; }
-            set { WsLessonDetailResults = value; }
         }
 
         public string ExpressionString 

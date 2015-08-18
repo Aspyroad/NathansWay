@@ -308,7 +308,9 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-
+        // TODO: IM SWAPPING ApplyUI() it should be in ViewWillAppear.
+        // I want it in ViewDidLoad()
+        // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
 
 		public override void ViewDidLoad ()
 		{
@@ -320,12 +322,15 @@ namespace AspyRoad.iOSCore
 			this._AspyTag2 = _AspyTag1;
             // This has been added for iOS7 and below as it screws view sizes
             this.View.AutosizesSubviews = false;
+            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
+            this.ApplyUI();
 		}	
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.ApplyUI();
+            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
+            //this.ApplyUI();
         }
 
 		// These puppies cost me a lot of time. DAYS!

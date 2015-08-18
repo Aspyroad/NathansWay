@@ -10,6 +10,12 @@ using AspyRoad.iOSCore;
 //NathansWay
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.UISettings;
+// Nathansway
+using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.Shared.Factories;
+using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -21,6 +27,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
         private vcMainContainer _vcMainContainer;
+
+        // Db
+        private EntityLesson _wsLesson;
+        private EntityLessonResults _wsLessonResults;
+        private EntityLessonDetail _wsLessonDetail;
+        private EntityLessonDetailResults _wsLessonDetailResults;
 
 		#endregion
 
@@ -68,9 +80,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
-
-        }
-		
+        }		
 
         public override void ViewDidLoad()
         {
@@ -97,5 +107,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
 		#endregion
+
+        #region Public Properties
+
+        public EntityLesson WsLesson
+        {
+            get { return _wsLesson; }
+            set { WsLesson = value; }
+        }
+
+        public EntityLessonResults WsLessonResults
+        {
+            get { return _wsLessonResults; }
+            set { WsLessonResults = value; }
+        }
+
+        public EntityLessonDetail WsLessonDetail
+        {
+            get { return _wsLessonDetail; }
+            set { WsLessonDetail = value; }
+        }
+
+        public EntityLessonDetailResults WsLessonDetailResults
+        {
+            get { return _wsLessonDetailResults; }
+            set { WsLessonDetailResults = value; }
+        }
+
+        #endregion
     }
 }        

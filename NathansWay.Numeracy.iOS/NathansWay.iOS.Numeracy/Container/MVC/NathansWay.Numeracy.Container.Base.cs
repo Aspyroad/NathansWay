@@ -361,12 +361,19 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
+
+        // TODO: IM SWAPPING [this.SizeClass.SetFrames()] it should be in ViewWillAppear.
+        // I want it in ViewDidLoad()
+        // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
+
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
+
+            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             // Set all control frames
-            this.SizeClass.SetFrames();
+            //this.SizeClass.SetFrames();
 		}
 
         public override void ApplyUI()
@@ -381,6 +388,14 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.UI_ToggleAnswerState();
             }
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+
+            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
+            this.SizeClass.SetFrames();
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

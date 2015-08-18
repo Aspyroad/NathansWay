@@ -19,7 +19,7 @@ using NathansWay.Shared.Utilities;
 namespace NathansWay.iOS.Numeracy
 {
 	[MonoTouch.Foundation.Register ("vcMainContainer")]	
-	public class vcMainContainer : BaseContainer
+    public class vcMainContainer : NWViewController
 	{
 		#region Class Variables
 
@@ -76,6 +76,12 @@ namespace NathansWay.iOS.Numeracy
 		{
             this.AspyTag1 = 60023;
             this.AspyName = "VC_MainContainer";
+
+            // Size Class Init
+            //this._sizeMainContainer = new SizeMainContainer(this);
+            //this._sizeClass = this._sizeMainContainer;
+
+
             // Storyboard reference
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
             // Vc's
@@ -210,9 +216,12 @@ namespace NathansWay.iOS.Numeracy
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 
-            // Sizing class
-            this._sizeClass = new MainContainerSize(this);
-            this._sizeClass.SetPositions(new PointF(0.0f, 0.0f));
+            this.View.Frame = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.iOSGlobals.G__RectWindowLandscape.Height,
+                this.iOSGlobals.G__RectWindowLandscape.Width
+            );
 
             // Now we can build our WorkSpace
             //this._vcWorkSpace.Value.ExpressionString = "F,1/4,+,F,1/4,=,F,1/2";
@@ -226,50 +235,5 @@ namespace NathansWay.iOS.Numeracy
         }
 
 		#endregion
-	}        
-
-    public class MainContainerSize : SizeBase
-    {
-        #region Class Variables
-        // X Horizontal
-        // Y Vertical
-        // Parent VC
-
-        #endregion
-
-        #region Constructors
-
-        public MainContainerSize(BaseContainer vc)
-        {
-            this.ParentContainer = vc;
-            Initialize();
-        }
-
-        #endregion
-
-        #region Private Members
-
-        private void Initialize()
-        {            
-        }
-
-        #endregion
-
-        #region Overrides Members
-
-        public override void SetHeightWidth()
-        {
-            this.CurrentHeight = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Height;
-            this.CurrentWidth = this.GlobalSizeDimensions._iOSGlobals.G__RectWindowLandscape.Width;
-            base.SetHeightWidth();
-        }
-
-        #endregion
-
-        #region Public Members
-
-
-
-        #endregion
-    }
+	}
 }
