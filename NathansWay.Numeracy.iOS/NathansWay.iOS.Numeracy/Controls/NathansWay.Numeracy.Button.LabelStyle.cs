@@ -75,9 +75,10 @@ namespace NathansWay.iOS.Numeracy
 
 		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
 		{
+            var context = UIGraphics.GetCurrentContext();
 			//// Rectangle Drawing
 			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 8.0f);
+			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
 			if (this.IsPressed || this.HoldState)
 			{
 				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
@@ -89,9 +90,12 @@ namespace NathansWay.iOS.Numeracy
 			//UIColor.Clear.SetFill();
 			rectanglePath.Fill();
 			labelTextColor.SetStroke();
-			rectanglePath.LineWidth = 3.0f;
+			rectanglePath.LineWidth = 2.0f;
 			rectanglePath.Stroke();
 			labelTextColor.SetFill();
+
+            context.SaveState();
+            context.ClipToRect(rectangleRect);
 		}
 
 
