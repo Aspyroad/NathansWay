@@ -195,8 +195,8 @@ namespace NathansWay.iOS.Numeracy
 		// Bezier Curves on the background blocks
 		private void Setup_ViewBackGroundUpperLeftRight()
 		{
-			this.imBgUpperLeft.Layer.CornerRadius = 10.0f;
-			this.imBgUpperRight.Layer.CornerRadius = 10.0f;
+			this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
+			this.imBgUpperRight.Layer.CornerRadius = 8.0f;
 		}
 
 		// Data 
