@@ -140,10 +140,6 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyLabel lblType { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		UITableView tvLessonDetail { get; set; }
 
 		[Outlet]
@@ -239,10 +235,6 @@ namespace NathansWay.iOS.Numeracy
 			if (btnTypeMixed != null) {
 				btnTypeMixed.Dispose ();
 				btnTypeMixed = null;
-			}
-			if (lblType != null) {
-				lblType.Dispose ();
-				lblType = null;
 			}
 			if (tvLessonDetail != null) {
 				tvLessonDetail.Dispose ();

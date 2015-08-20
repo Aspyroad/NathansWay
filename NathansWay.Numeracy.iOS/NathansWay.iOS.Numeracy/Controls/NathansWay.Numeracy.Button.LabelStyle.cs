@@ -81,7 +81,8 @@ namespace NathansWay.iOS.Numeracy
 			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
 			if (this.IsPressed || this.HoldState)
 			{
-				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
+                labelTextColor.SetFill();
+				//UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
 			}
 			else
 			{

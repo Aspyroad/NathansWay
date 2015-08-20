@@ -112,12 +112,12 @@ namespace NathansWay.Shared
 			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
 
 			// UIButton
-			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(50.0f, 50.0f, 50.0f, 255.0f)); // Black
+			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
 			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 120.0f)); // Black
 			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			ButtonNormalSVGColor = new Lazy<G__Color> (() => new G__Color(190.0f, 112.0f, 0.0f, 255.0f)); // Same as Backgroubnd View
-			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 210.0f)); // Black
-			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 210.0f)); // Black
+			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 0.0f)); // Black
 			ButtonNormalBGStrImage = "";
 			ButtonPressedBGStrImage = "";
 			ButtonFontName = "HelveticaNeue-Medium";
@@ -149,7 +149,7 @@ namespace NathansWay.Shared
 			ThumbStrImage = "";
 
 			// UITableVIew
-			ViewTableBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 130.0f)); // 
+			ViewTableBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 0.0f)); // 
 			ViewTableSectionIndexBGColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
 			ViewTableSectionIndexColor = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // 
 			ViewTableSectionIndexTrackingColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); //
@@ -157,7 +157,7 @@ namespace NathansWay.Shared
 
 			// UITableVIewCell
 			ViewCellSelectedColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 250.0f)); // 
-			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 80.0f)); // 
+			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 100.0f)); // 
 			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 100.0f)); // Orange less alpha
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
