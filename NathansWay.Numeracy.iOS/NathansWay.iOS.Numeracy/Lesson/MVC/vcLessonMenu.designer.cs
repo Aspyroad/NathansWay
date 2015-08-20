@@ -120,6 +120,10 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		ButtonOrderBy btnQuestions { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		ButtonLabelStyle btnTypeBasic { get; set; }
 
 		[Outlet]
@@ -133,6 +137,10 @@ namespace NathansWay.iOS.Numeracy
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		ButtonLabelStyle btnTypeMixed { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyLabel lblType { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -212,6 +220,10 @@ namespace NathansWay.iOS.Numeracy
 				btnOpSubtract.Dispose ();
 				btnOpSubtract = null;
 			}
+			if (btnQuestions != null) {
+				btnQuestions.Dispose ();
+				btnQuestions = null;
+			}
 			if (btnTypeBasic != null) {
 				btnTypeBasic.Dispose ();
 				btnTypeBasic = null;
@@ -227,6 +239,10 @@ namespace NathansWay.iOS.Numeracy
 			if (btnTypeMixed != null) {
 				btnTypeMixed.Dispose ();
 				btnTypeMixed = null;
+			}
+			if (lblType != null) {
+				lblType.Dispose ();
+				lblType = null;
 			}
 			if (tvLessonDetail != null) {
 				tvLessonDetail.Dispose ();

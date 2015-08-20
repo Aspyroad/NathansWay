@@ -35,7 +35,6 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			//ApplyUI ();
 		}
 
 		#endregion

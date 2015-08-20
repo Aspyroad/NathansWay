@@ -157,8 +157,8 @@ namespace NathansWay.Shared
 
 			// UITableVIewCell
 			ViewCellSelectedColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 250.0f)); // 
-			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 250.0f)); // 
-			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 210.0f)); // Orange less alpha
+			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 80.0f)); // 
+			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 100.0f)); // Orange less alpha
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
             // UIPickerView
