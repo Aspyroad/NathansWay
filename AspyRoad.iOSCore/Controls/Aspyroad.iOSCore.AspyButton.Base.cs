@@ -15,11 +15,11 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton
 	{
-		// Privates
-        private RectangleF labRect;
-        private RectangleF imgRect;
-		private bool _isPressed;
-		private bool _holdState;
+		// Privates Logic
+        private bool _bIsPressed;
+        private bool _bHoldState;
+        private bool _bApplyUI;
+        private bool _bApplyPressedUI;
 		// Protected
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
@@ -30,34 +30,35 @@ namespace AspyRoad.iOSCore
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
         protected UIColor colorBorderColor;
-
-
+        private RectangleF labRect;
+        private RectangleF imgRect;
 
         // Required for the Xamarin iOS Desinger
         public AspyButton () : base()
         {
-			Initialize_Base();
+			Initialize();
         }
         public AspyButton (IntPtr handle) : base(handle)
         {
-			Initialize_Base();
+			Initialize();
         }       
         public AspyButton (RectangleF myFrame)  : base (myFrame)
         { 
-			Initialize_Base();    
+			Initialize();    
         }
         public AspyButton (UIButtonType type) : base (type)
         {
-			Initialize_Base();
+			Initialize();
         }
 
-		private void Initialize_Base()
+		private void Initialize()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			this._holdState = false;
-			this._isPressed = false;
+			this._bHoldState = false;
+			this._bIsPressed = false;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
+            this._bApplyUI = true;
 		}
         
 		#region Private Members
@@ -150,16 +151,22 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
+        public bool ApplyPressedUI
+        {
+            get{ return this._bApplyPressedUI; }
+            set{ _bApplyPressedUI = value; }
+        }
+
 		public bool IsPressed
 		{
-			get{ return _isPressed; }
-			set{ _isPressed = value; }
+			get{ return _bIsPressed; }
+			set{ _bIsPressed = value; }
 		}
 
 		public bool HoldState
 		{
-			get{ return _holdState; }
-			set{ _holdState = value; }
+			get{ return _bHoldState; }
+			set{ _bHoldState = value; }
 		}
 
         public bool HasRounderCorners
@@ -183,12 +190,19 @@ namespace AspyRoad.iOSCore
             }
 
         }
+
 		#endregion
 
 		#region Virtual Members
 
 		public virtual void ApplyUI()
 		{
+            // TODO : Trial flag to abandon UI calls if needed
+            if (!this._bApplyUI)
+            {
+                return;
+            }
+
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
 			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
 			this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
@@ -205,9 +219,21 @@ namespace AspyRoad.iOSCore
             {
                 this.Layer.CornerRadius = 6.0f;
             }
-
-            //this.SetNeedsDisplay();
 		}
+
+        public virtual void ApplyPressed()
+        {
+            if (this.IsPressed || this.HoldState)
+            {
+
+
+            }
+            else
+            {
+
+            }  
+        }
+
 
 		#endregion
 
@@ -236,20 +262,21 @@ namespace AspyRoad.iOSCore
 		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
 		{
 			SetNeedsDisplay ();
-			_isPressed = true;
+			_bIsPressed = true;
+            var x = this.State;
 			return base.BeginTracking (uitouch, uievent);
 		}
 
 		public override void EndTracking (UITouch uitouch, UIEvent uievent)
 		{
-			if (_isPressed && Enabled)
+			if (_bIsPressed && Enabled)
 			{
 				if (Tapped != null)
 				{
 					Tapped (this);
 				}
 			}
-			_isPressed = false;
+			_bIsPressed = false;
 			SetNeedsDisplay ();
 			base.EndTracking (uitouch, uievent);
 		}
@@ -259,11 +286,11 @@ namespace AspyRoad.iOSCore
 			var touch = uievent.AllTouches.AnyObject as UITouch;
 			if (Bounds.Contains (touch.LocationInView (this)))
 			{
-				_isPressed = true;
+				_bIsPressed = true;
 			}
 			else
 			{
-				_isPressed = false;
+				_bIsPressed = false;
 			}
 			return base.ContinueTracking (uitouch, uievent);
 		}

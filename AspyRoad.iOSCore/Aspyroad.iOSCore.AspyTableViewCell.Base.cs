@@ -59,7 +59,7 @@ namespace AspyRoad.iOSCore
 			}
 			else
 			{
-				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+				//this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
 			}
 		}
 
@@ -82,8 +82,10 @@ namespace AspyRoad.iOSCore
 			// Set the background selected view color
 			this.SelectedBackgroundView = new UIView ();
 			this.SelectedBackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
+
 			// Setup normal color
-			this.BackgroundView = new UIView ();
+		    this.BackgroundView = new UIView ();
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
 			this.AlternateCellColor ();
 		}
 
