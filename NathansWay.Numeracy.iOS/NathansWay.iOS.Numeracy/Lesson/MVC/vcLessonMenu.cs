@@ -199,7 +199,8 @@ namespace NathansWay.iOS.Numeracy
 			this.imBgUpperRight.Layer.CornerRadius = 8.0f;
 		}
 
-		// Data 
+		#region Data 
+
 		private void LoadLessonsInit ()
 		{
 
@@ -232,6 +233,8 @@ namespace NathansWay.iOS.Numeracy
                         });
                 });
         }
+
+        #endregion 
 
 		#endregion
 
@@ -528,23 +531,10 @@ namespace NathansWay.iOS.Numeracy
             {
 
                 var lessonDetail = this.vmLesson.LessonDetail [indexPath.Row];
-
                 var cell = tableView.DequeueReusableCell ("LessonDetailCell") as vLessonDetailTableCell;
                 cell.IndexValue = indexPath.Row;
                 cell.SetLessonDetailCell (vclessonmenu, lessonDetail, indexPath);
-
-
-
-
-                // Work ios 7  and below what about 8??
-                //cell.BackgroundColor = UIColor.Brown;//iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
                 return cell;
-                //              UITableViewCell cell = tableView.DequeueReusableCell (cellIdentifier);
-                //              // if there are no cells to reuse, create a new one
-                //              if (cell == null)
-                //                  cell = new UITableViewCell (UITableViewCellStyle.Default, cellIdentifier);
-                //              cell.TextLabel.Text = tableItems[indexPath.Row];
-                //              return cell;
             }
 
             public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
@@ -554,13 +544,6 @@ namespace NathansWay.iOS.Numeracy
                 //var lesson = this.vmLesson.Lessons [indexPath.Row];
 
             }
-
-            //          public override void WillDisplay (UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
-            //          {
-            //              // NOTE: Don't call the base implementation on a Model class
-            //              // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
-            //              throw new NotImplementedException ();
-            //          }
 
             #endregion
         }

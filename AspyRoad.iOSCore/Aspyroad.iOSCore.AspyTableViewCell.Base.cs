@@ -19,6 +19,7 @@ namespace AspyRoad.iOSCore
 		protected iOSUIManager iOSUIAppearance;
         protected AspyViewController _vcParent;
 		protected int _indexValue;
+        protected bool _bAlternateGridBGColor;
 
 		#endregion
 
@@ -48,19 +49,20 @@ namespace AspyRoad.iOSCore
 		{ 
 			_indexValue = 0;
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this._bAlternateGridBGColor = true;
 			this.ApplyUI ();
 		}
 
 		private void AlternateCellColor ()
 		{
-			if (AspyUtilities.IsOdd(_indexValue))
+            if (AspyUtilities.IsOdd(_indexValue) && this._bAlternateGridBGColor)
 			{
 				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColorTransition.Value;
 			}
-			else
-			{
-				//this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
-			}
+            else
+            {
+                this.BackgroundView.BackgroundColor = UIColor.Clear;                    
+            }
 		}
 
 		#endregion
@@ -100,5 +102,16 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
+
+        #region Public Properties
+
+        public bool AlternateGridBGColor
+        {
+            get { return this._bAlternateGridBGColor; }
+            set { this._bAlternateGridBGColor = value; }
+        }
+
+
+        #endregion
 	}
 }

@@ -87,12 +87,7 @@ namespace NathansWay.iOS.Numeracy
         {
             base.AwakeFromNib();
             this.btnStartLesson.TouchUpInside += OnClick_btnbtnStartLesson;
-        }
-
-        public override void LayoutSubviews()
-        {
-            base.LayoutSubviews();
-        }
+        }            
 
 		#endregion
 
