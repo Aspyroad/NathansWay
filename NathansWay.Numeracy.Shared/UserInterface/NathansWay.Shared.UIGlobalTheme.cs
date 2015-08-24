@@ -149,7 +149,7 @@ namespace NathansWay.Shared
 			ThumbStrImage = "";
 
 			// UITableVIew
-			ViewTableBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 0.0f)); // 
+			ViewTableBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 40.0f)); // 
 			ViewTableSectionIndexBGColor = new Lazy<G__Color> (() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
 			ViewTableSectionIndexColor = new Lazy<G__Color> (() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // 
 			ViewTableSectionIndexTrackingColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); //

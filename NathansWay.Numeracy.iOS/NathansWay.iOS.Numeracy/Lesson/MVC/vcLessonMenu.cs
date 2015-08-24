@@ -165,10 +165,8 @@ namespace NathansWay.iOS.Numeracy
         {
             this.lblFilter.ApplyUI ();
             this.Setup_ViewBackGroundUpperLeftRight ();
-
-            // TableViews
-            //this.tvLessonMain.BackgroundView = null;
-            this.tvLessonMain.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+            //this.tvLessonMain.ApplyUI ();
+            //this.tvLessonDetail.ApplyUI ();
         }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
@@ -68,8 +68,8 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
-                            <tableView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="728">
-                                <rect key="frame" x="742" y="168" width="280" height="594"/>
+                            <tableView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="728" customClass="AspyTableView">
+                                <rect key="frame" x="742" y="166" width="280" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -81,7 +81,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Equation" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="998" customClass="AspyLabel">
-                                                    <rect key="frame" x="8" y="-1" width="280" height="40"/>
+                                                    <rect key="frame" x="0.0" y="3" width="280" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -120,7 +120,7 @@
                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="709">
+                            <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="709" customClass="AspyTableView">
                                 <rect key="frame" x="2" y="166" width="737" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -187,7 +187,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Filter" lineBreakMode="tailTruncation" minimumFontSize="10" id="927" customClass="AspyLabel" alpha="0.06" textAlignment="center">
+                            <label autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.059999999999999998" contentMode="left" fixedFrame="YES" text="Filter" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="927" customClass="AspyLabel">
                                 <rect key="frame" x="80" y="2" width="308" height="124"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -290,7 +290,7 @@
                                 <rect key="frame" x="759" y="50" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Back To Menu                      &gt;"/>
+                                <state key="normal" title="Back To Menu                      >"/>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="986" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="456" y="6" width="55" height="56"/>
@@ -328,7 +328,7 @@
                                 <state key="normal" title="+ —"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="1" green="0.49803921568627452" blue="0" alpha="1"/>
+                        <color key="backgroundColor" red="1" green="0.49803921568627452" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
@@ -358,6 +358,7 @@
                         <outlet property="btnOpMultSub" destination="V08-HT-Ky9" id="name-outlet-V08-HT-Ky9"/>
                         <outlet property="btnOpMultiply" destination="h8Y-6c-e8J" id="name-outlet-h8Y-6c-e8J"/>
                         <outlet property="btnOpSubtract" destination="2ZY-n5-0zu" id="name-outlet-2ZY-n5-0zu"/>
+                        <outlet property="btnQuestions" destination="Qze-hg-T5I" id="name-outlet-Qze-hg-T5I"/>
                         <outlet property="btnTypeBasic" destination="RtK-Pf-shO" id="name-outlet-RtK-Pf-shO"/>
                         <outlet property="btnTypeFractions" destination="bQ1-lQ-sw4" id="name-outlet-bQ1-lQ-sw4"/>
                         <outlet property="btnTypeGroups" destination="oPa-Yf-jgw" id="name-outlet-oPa-Yf-jgw"/>
@@ -370,7 +371,6 @@
                         <outlet property="tvLessonDetail" destination="728" id="name-outlet-728"/>
                         <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
                         <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
-                        <outlet property="btnQuestions" destination="Qze-hg-T5I" id="name-outlet-Qze-hg-T5I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -643,7 +643,7 @@
                             <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TWY-au-o8H" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="974" y="30" width="40" height="156"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="&gt;">
+                                <state key="normal" title=">">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -671,12 +671,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <resources>
-        <image name="Content/AppImages/Exit.png" width="128" height="128"/>
-        <image name="Content/AppImages/Kids.png" width="128" height="128"/>
-        <image name="Content/AppImages/Spanner.png" width="128" height="128"/>
-        <image name="Content/AppImages/Teacher.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox.png" width="128" height="128"/>
-        <image name="Content/AppImages/Toolbox_.png" width="128" height="128"/>
-    </resources>
 </document>

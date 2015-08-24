@@ -15,6 +15,7 @@ namespace AspyRoad.iOSCore
 	// Aspy Delegates
 	public delegate void ScrolledToBottomEventHandler (Object sender, EventArgs e);
 
+    [MonoTouch.Foundation.Register ("AspyTableViewSource")]
 	public class AspyTableViewSource : UITableViewSource 
 	{
 		#region Private Variables

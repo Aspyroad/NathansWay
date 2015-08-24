@@ -12,6 +12,7 @@ using AspyRoad.iOSCore.UISettings;
 
 namespace AspyRoad.iOSCore
 {
+    [MonoTouch.Foundation.Register ("AspyTableView")]
 	public class AspyTableView : UITableView
 	{
 		#region Private Variables
@@ -23,10 +24,17 @@ namespace AspyRoad.iOSCore
 
 		#region Constructors
 
-		public AspyTableView (IntPtr handle) : base (handle)
-		{
-			Initialize ();
-		}
+        public AspyTableView (IntPtr handle) : base (handle)
+        {           
+        }
+
+        public AspyTableView () : base ()
+        {
+        }
+
+        public AspyTableView (RectangleF _rect) : base (_rect)
+        {
+        }
 
 		#endregion
 
@@ -35,15 +43,16 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            //this.ApplyUI();
 		}
 
 		#endregion
 
 		#region Public Methods
 
-		public virtual void ApplyUI ()
+		public void ApplyUI ()
 		{
-
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
 		}
 
 		#endregion
@@ -53,6 +62,8 @@ namespace AspyRoad.iOSCore
 		public override void AwakeFromNib ()
 		{
 			base.AwakeFromNib ();
+            this.Initialize ();
+
 		}
 
 		//		- (void)scrollViewDidScroll:(UIScrollView *)scrollView 

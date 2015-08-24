@@ -12,6 +12,7 @@ using AspyRoad.iOSCore.UISettings;
 
 namespace AspyRoad.iOSCore
 {
+    [MonoTouch.Foundation.Register ("AspyTableViewCell")]
 	public class AspyTableViewCell : UITableViewCell
 	{
 		#region Private Variables
