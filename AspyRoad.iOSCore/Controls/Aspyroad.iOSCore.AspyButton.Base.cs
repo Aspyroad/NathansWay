@@ -15,18 +15,16 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton
 	{
-		// Privates Logic
+		// Logic
         private bool _bIsPressed;
         private bool _bHoldState;
         private bool _bApplyUI;
         private bool _bApplyPressedUI;
-		// Protected
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
 		protected UIColor colorNormalSVGColor;
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
-        // UI styles
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
         protected UIColor colorBorderColor;
@@ -149,7 +147,7 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-		#region Public Members
+		#region Public Properties
 
         public bool ApplyPressedUI
         {
@@ -175,7 +173,6 @@ namespace AspyRoad.iOSCore
             set
             {
                 this._bHasRoundedCorners = value;
-                //this.ApplyUI();
             }
   
         }
@@ -186,7 +183,6 @@ namespace AspyRoad.iOSCore
             set
             {
                 this._bHasBorder = value;
-                //this.ApplyUI();
             }
 
         }
@@ -203,6 +199,7 @@ namespace AspyRoad.iOSCore
                 return;
             }
 
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
 			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
 			this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
@@ -225,13 +222,13 @@ namespace AspyRoad.iOSCore
         {
             if (this.IsPressed || this.HoldState)
             {
-
-
+                this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
             }
             else
             {
-
+                this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             }  
+            this.SetNeedsDisplay();
         }
 
 
@@ -260,10 +257,9 @@ namespace AspyRoad.iOSCore
 		}
 
 		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
-		{
-			SetNeedsDisplay ();
+		{			
 			_bIsPressed = true;
-            var x = this.State;
+            this.ApplyPressed();
 			return base.BeginTracking (uitouch, uievent);
 		}
 
@@ -277,7 +273,7 @@ namespace AspyRoad.iOSCore
 				}
 			}
 			_bIsPressed = false;
-			SetNeedsDisplay ();
+            this.ApplyPressed();
 			base.EndTracking (uitouch, uievent);
 		}
 
@@ -297,23 +293,5 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-        //        public override void Draw(RectangleF myFrame)
-        //        {   
-        //
-        //            UIColor background;
-        //            background = UIColor.Black;
-        //
-        //            CGContext context = UIGraphics.GetCurrentContext ();
-        //
-        //            var bounds = Bounds;
-        //
-        //            RectangleF nb = bounds.Inset (0, 0);
-        //            background.SetFill ();
-        //            context.FillRect (nb);          
-        //
-        //            nb = bounds.Inset (1, 1);
-        //            background.SetFill ();
-        //            context.FillRect (nb);
-        //        }
     }
 }

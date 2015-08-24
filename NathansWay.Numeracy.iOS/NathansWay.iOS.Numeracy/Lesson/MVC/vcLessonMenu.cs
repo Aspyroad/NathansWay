@@ -163,10 +163,21 @@ namespace NathansWay.iOS.Numeracy
         // NW Overs
         public override void ApplyUI ()
         {
-            this.lblFilter.ApplyUI ();
-            this.Setup_ViewBackGroundUpperLeftRight ();
-            //this.tvLessonMain.ApplyUI ();
-            //this.tvLessonDetail.ApplyUI ();
+            // Apply UI to the imagebackgrounds behind the filter buttons
+            this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
+            this.imBgUpperRight.Layer.CornerRadius = 8.0f;
+            this.imBgUpperLeft.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
+            this.imBgUpperRight.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
+            this.imBgUpperLeft.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
+            this.imBgUpperRight.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
+            this.imBgUpperLeft.Layer.BorderWidth = 0.5f;
+            this.imBgUpperRight.Layer.BorderWidth = 0.5f;
+            // Change the label filter text color to a cooler value
+            this.lblFilter.TextColor = UIColor.Black;
+            this.lblLevel.TextColor = UIColor.Black;
+            //
+            this.tvLessonMain.ApplyUI ();
+            this.tvLessonDetail.ApplyUI ();
         }
 
 
@@ -186,15 +197,6 @@ namespace NathansWay.iOS.Numeracy
 		{		
 			Console.WriteLine ("Im at the bottom");
             // Go get more rows!~
-		}
-
-		// Control Setup
-
-		// Bezier Curves on the background blocks
-		private void Setup_ViewBackGroundUpperLeftRight()
-		{
-			this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
-			this.imBgUpperRight.Layer.CornerRadius = 8.0f;
 		}
 
 		#region Data 

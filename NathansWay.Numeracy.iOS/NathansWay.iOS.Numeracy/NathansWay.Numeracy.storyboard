@@ -50,10 +50,9 @@
                                     <color key="titleShadowColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" alpha="0.39999999999999963" contentMode="scaleToFill" fixedFrame="YES" id="934">
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" alpha="1" contentMode="scaleToFill" fixedFrame="YES" id="934">
                                 <rect key="frame" x="2" y="2" width="736" height="122"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0999999999999997" contentMode="left" fixedFrame="YES" text="Level" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="Cbo-pO-OhT" customClass="AspyLabel">
                                 <rect key="frame" x="464" y="28" width="261" height="70"/>
@@ -63,13 +62,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" alpha="0.39999999999999997" contentMode="scaleToFill" fixedFrame="YES" id="941">
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" alpha="1" contentMode="scaleToFill" fixedFrame="YES" id="941">
                                 <rect key="frame" x="742" y="2" width="280" height="122"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <tableView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="728" customClass="AspyTableView">
-                                <rect key="frame" x="742" y="166" width="280" height="598"/>
+                                <rect key="frame" x="742" y="168" width="280" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -121,7 +119,7 @@
                                 </state>
                             </button>
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="709" customClass="AspyTableView">
-                                <rect key="frame" x="2" y="166" width="737" height="598"/>
+                                <rect key="frame" x="2" y="168" width="737" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                 <prototypes>
@@ -290,7 +288,7 @@
                                 <rect key="frame" x="759" y="50" width="246" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Back To Menu                      >"/>
+                                <state key="normal" title="Back To Menu                      &gt;"/>
                             </button>
                             <button autoresizesSubviews="NO" opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="986" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="456" y="6" width="55" height="56"/>
@@ -643,7 +641,7 @@
                             <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TWY-au-o8H" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="974" y="30" width="40" height="156"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title=">">
+                                <state key="normal" title="&gt;">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -671,4 +669,12 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <resources>
+        <image name="Content/AppImages/Exit.png" width="128" height="128"/>
+        <image name="Content/AppImages/Kids.png" width="128" height="128"/>
+        <image name="Content/AppImages/Spanner.png" width="128" height="128"/>
+        <image name="Content/AppImages/Teacher.png" width="128" height="128"/>
+        <image name="Content/AppImages/Toolbox.png" width="128" height="128"/>
+        <image name="Content/AppImages/Toolbox_.png" width="128" height="128"/>
+    </resources>
 </document>

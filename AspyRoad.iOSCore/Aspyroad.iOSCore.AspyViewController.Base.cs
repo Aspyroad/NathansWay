@@ -36,6 +36,7 @@ namespace AspyRoad.iOSCore
         protected UIColor _colorBorderColor;
         protected UIColor _colorBGColor;
         protected UIColor _colorFontColor;
+        private bool _bApplyUI;
 
 		#endregion
 
@@ -76,6 +77,7 @@ namespace AspyRoad.iOSCore
             //this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
             this._fFontSize = UIFont.SystemFontSize;
+            this._bApplyUI = true;
 		}
 
 		#endregion

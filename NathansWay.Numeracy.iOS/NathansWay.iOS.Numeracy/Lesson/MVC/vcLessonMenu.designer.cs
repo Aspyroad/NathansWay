@@ -140,11 +140,11 @@ namespace NathansWay.iOS.Numeracy
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITableView tvLessonDetail { get; set; }
+		AspyRoad.iOSCore.AspyTableView tvLessonDetail { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		UITableView tvLessonMain { get; set; }
+		AspyRoad.iOSCore.AspyTableView tvLessonMain { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{

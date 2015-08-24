@@ -7,6 +7,7 @@ using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
 using MonoTouch.CoreAnimation;
 // AspyRoad
+using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 
 
@@ -43,16 +44,19 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            //this.ApplyUI();
 		}
 
 		#endregion
 
 		#region Public Methods
 
-		public void ApplyUI ()
+		public virtual void ApplyUI ()
 		{
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+            this.SeparatorColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSeperatorUIColor.Value;
+            this.SectionIndexColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexUIColor.Value;
+            this.SectionIndexBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexBGUIColor.Value;
+            this.SectionIndexTrackingBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexTrackingUIColor.Value;
 		}
 
 		#endregion
@@ -63,27 +67,7 @@ namespace AspyRoad.iOSCore
 		{
 			base.AwakeFromNib ();
             this.Initialize ();
-
 		}
-
-		//		- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
-		//		{
-		//			CGFloat offsetY = scrollView.contentOffset.y;
-		//			CGFloat scrollHeight = scrollView.frame.size.height;
-		//			CGFloat botomInset = scrollView.contentInset.bottom;
-		//			CGFloat bottomScrollY = offsetY + scrollHeight - bottomInset;
-		//			CGFloat fuzzFactor = 3;
-		//			CGFloat boundary = scrollView.contentSize.height-fuzzFactor;
-		//			if (bottomScrollY >= boundary && !self.scrolledToBottom) 
-		//			{
-		//				self.scrolledToBottom = YES;
-		//				NSLog(@"Scrolled to the bottom");
-		//			} 
-		//			else if (bottomScrollY < boundary ) 
-		//			{
-		//				self.scrolledToBottom = NO;
-		//			}
-		//		}
 
 		#endregion
 	}

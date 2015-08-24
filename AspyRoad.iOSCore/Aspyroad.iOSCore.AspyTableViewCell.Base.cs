@@ -20,7 +20,7 @@ namespace AspyRoad.iOSCore
 		protected iOSUIManager iOSUIAppearance;
         protected AspyViewController _vcParent;
 		protected int _indexValue;
-        protected bool _bAlternateGridBGColor;
+        protected bool _bHasAlternateGridBGColor;
 
 		#endregion
 
@@ -50,13 +50,14 @@ namespace AspyRoad.iOSCore
 		{ 
 			_indexValue = 0;
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            this._bAlternateGridBGColor = true;
+            // Default alternating color?
+            this._bHasAlternateGridBGColor = false;
 			this.ApplyUI ();
 		}
 
 		private void AlternateCellColor ()
 		{
-            if (AspyUtilities.IsOdd(_indexValue) && this._bAlternateGridBGColor)
+            if (AspyUtilities.IsOdd(_indexValue) && this._bHasAlternateGridBGColor)
 			{
 				this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColorTransition.Value;
 			}
@@ -70,18 +71,9 @@ namespace AspyRoad.iOSCore
 
 		#region Public Methods
 
-		public int IndexValue 
-		{
-			get { return _indexValue; }
-			set 
-			{ 
-				_indexValue = value;
-				this.AlternateCellColor ();
-			}
-		}
-
 		public virtual void ApplyUI ()
 		{
+            
 			// Set the background selected view color
 			this.SelectedBackgroundView = new UIView ();
 			this.SelectedBackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellSelectedUIColor.Value;
@@ -89,6 +81,8 @@ namespace AspyRoad.iOSCore
 			// Setup normal color
 		    this.BackgroundView = new UIView ();
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+            this.TintColor = this.iOSUIAppearance.GlobaliOSTheme.ViewCellBGUITint.Value;
+
 			this.AlternateCellColor ();
 		}
 
@@ -106,10 +100,20 @@ namespace AspyRoad.iOSCore
 
         #region Public Properties
 
-        public bool AlternateGridBGColor
+        public bool HasAlternateGridBGColor
         {
-            get { return this._bAlternateGridBGColor; }
-            set { this._bAlternateGridBGColor = value; }
+            get { return this._bHasAlternateGridBGColor; }
+            set { this._bHasAlternateGridBGColor = value; }
+        }
+
+        public int IndexValue 
+        {
+            get { return _indexValue; }
+            set 
+            { 
+                _indexValue = value;
+                this.AlternateCellColor ();
+            }
         }
 
 
