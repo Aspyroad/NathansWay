@@ -56,7 +56,6 @@ namespace AspyRoad.iOSCore
 			this._bIsPressed = false;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._bApplyUI = true;
 		}
         
 		#region Private Members

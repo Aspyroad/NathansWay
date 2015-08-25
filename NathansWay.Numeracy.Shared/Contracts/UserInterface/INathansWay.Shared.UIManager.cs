@@ -26,8 +26,11 @@ namespace NathansWay.Shared
 
 		void AddVC (int aspytag1, string aspyname);
 
-		//void ApplyGlobalUITheme ();
+    }
 
+    public interface IUIApply
+    {
+        
     }
 
 	public interface IUITheme

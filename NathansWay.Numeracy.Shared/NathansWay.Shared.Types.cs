@@ -90,6 +90,13 @@ namespace NathansWay.Shared
         Container = 4
     }
 
+    public enum G__ApplyUIStaging : int
+    {
+        DoNotApply = 1,
+        ViewDidLoad = 2,
+        ViewWillAppear = 3
+    }
+
 	#region Filtering
 
 	public enum G__ExpressionType 
