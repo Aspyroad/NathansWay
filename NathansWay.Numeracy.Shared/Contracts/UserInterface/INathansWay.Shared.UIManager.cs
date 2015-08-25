@@ -28,11 +28,6 @@ namespace NathansWay.Shared
 
     }
 
-    public interface IUIApply
-    {
-        
-    }
-
 	public interface IUITheme
 	{
 		// Platform Specific Only
@@ -63,10 +58,16 @@ namespace NathansWay.Shared
 		string ButtonPressedBGStrImage { get; set; }
 		string ButtonFontName { get; set; }
 
+        float ButtonCornerRadius { get; set; }
+        float ButtonBorderWidth { get; set; }
+
 		// Views/Forms
 		Lazy<G__Color> ViewBGColor { get; set; }
 		Lazy<G__Color> ViewBGColorTransition { get; set; }
 		Lazy<G__Color> ViewBGTint { get; set; }
+
+        float ViewCornerRadius { get; set; }
+        float ViewBorderWidth { get; set; }
 
 		// Label
 		string LabelFontName { get; set; }
@@ -75,12 +76,18 @@ namespace NathansWay.Shared
         Lazy<G__Color> LabelHighLightedBGColor { get; set; }
         Lazy<G__Color> LabelBGColor { get; set; }
 
+        float LabelCornerRadius { get; set; }
+        float LabelBorderWidth { get; set; }
+
 		// TextViews
 		Lazy<G__Color> TextBGColor { get; set; }
 		Lazy<G__Color> TextBGTint { get; set; }
 		Lazy<G__Color> TextHighLightedTextColor { get; set; }
         Lazy<G__Color> TextHighLightedBGColor { get; set; }
 		Lazy<G__Color> TextColor { get; set; }
+
+        float TextCornerRadius { get; set; }
+        float TextBorderWidth { get; set; }
 
 		// Slider View
 		Lazy<G__Color> MaxTrackTintColor { get; set; }

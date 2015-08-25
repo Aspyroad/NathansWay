@@ -79,6 +79,7 @@
     <Compile Include="Aspyroad.iOSCore.AspyTableViewSource.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTableViewCell.Base.cs" />
     <Compile Include="Aspyroad.iOSCore.AspyTableView.Base.cs" />
+    <Compile Include="Contracts\IAspyroad.iOSCore.UIApplication.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MVC\ARTouchOverlayView.xib" />

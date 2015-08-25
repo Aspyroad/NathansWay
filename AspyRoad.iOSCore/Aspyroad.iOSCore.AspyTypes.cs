@@ -18,5 +18,12 @@ namespace AspyRoad.iOSCore
 		Landscape = 1,
 		Both = 2
 	}
+
+    public enum G__ApplyUI : int
+    {
+        DoNotApply = 1,
+        ViewDidLoad = 2,
+        ViewWillAppear = 3
+    }
 }
 

@@ -18,8 +18,6 @@ namespace AspyRoad.iOSCore
 		// Logic
         private bool _bIsPressed;
         private bool _bHoldState;
-        private bool _bApplyUI;
-        private bool _bApplyPressedUI;
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
 		protected UIColor colorNormalSVGColor;
@@ -148,12 +146,6 @@ namespace AspyRoad.iOSCore
 
 		#region Public Properties
 
-        public bool ApplyPressedUI
-        {
-            get{ return this._bApplyPressedUI; }
-            set{ _bApplyPressedUI = value; }
-        }
-
 		public bool IsPressed
 		{
 			get{ return _bIsPressed; }
@@ -192,12 +184,6 @@ namespace AspyRoad.iOSCore
 
 		public virtual void ApplyUI()
 		{
-            // TODO : Trial flag to abandon UI calls if needed
-            if (!this._bApplyUI)
-            {
-                return;
-            }
-
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
 			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;

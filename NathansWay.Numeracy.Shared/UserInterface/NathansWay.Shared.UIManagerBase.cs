@@ -138,11 +138,17 @@ namespace NathansWay.Shared
 		protected string _buttonnormalbgstrimage;
 		protected string _buttonpressedbgstrimage;
 		protected string _buttonfontname;
+        // ----
+        protected float _buttoncornerradius;
+        protected float _buttonborderwidth;
 
 		// UIView
 		protected Lazy<G__Color> _viewbgcolor;
 		protected Lazy<G__Color> _viewbgcolortransition;
 		protected Lazy<G__Color> _viewbgtint;
+        // ----
+        protected float _viewcornerradius;
+        protected float _viewborderwidth;
 
 		// UILabel
 		protected string _labelfontname;
@@ -150,6 +156,9 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _labeltextcolor;
         protected Lazy<G__Color> _labelhighlightedbgcolor;
         protected Lazy<G__Color> _labelbgcolor;
+        // -----
+        protected float _labelcornerradius;
+        protected float _labelborderwidth;
 
 		// UITextViews
 		protected Lazy<G__Color> _textbgcolor;
@@ -157,6 +166,9 @@ namespace NathansWay.Shared
 		protected Lazy<G__Color> _texthighlightedtextcolor;
         protected Lazy<G__Color> _texthighlightedbgcolor;
 		protected Lazy<G__Color> _textcolor;
+
+        protected float _textcornerradius;
+        protected float _textborderwidth;
 
 		// Slider View
         protected Lazy<G__Color> _maxtracktintcolor;
@@ -316,6 +328,16 @@ namespace NathansWay.Shared
 			get { return _buttonfontname;}
 			set { _buttonfontname = value; }
 		}
+        public float ButtonCornerRadius
+        {
+            get { return _buttoncornerradius; }
+            set { _buttoncornerradius = value; }
+        }
+        public float ButtonBorderWidth
+        {
+            get { return _buttonborderwidth; }
+            set { _buttonborderwidth = value; }
+        }
 
 		// UIView
 		public Lazy<G__Color> ViewBGColor 
@@ -332,7 +354,18 @@ namespace NathansWay.Shared
 		{ 
 			get { return _viewbgtint; }
 			set { _viewbgtint = value; } 
-		} 
+		}
+        public float ViewCornerRadius
+        {
+            get { return _viewcornerradius; }
+            set { _viewcornerradius = value; }
+        }
+        public float ViewBorderWidth
+        {
+            get { return _viewborderwidth; }
+            set { _viewborderwidth = value; }
+        }
+
 
 		// UILabel
 		public string LabelFontName 
@@ -360,6 +393,16 @@ namespace NathansWay.Shared
             get { return _labelbgcolor; }
             set { _labelbgcolor = value; } 
         } 
+        public float LabelCornerRadius
+        {
+            get { return _labelcornerradius; }
+            set { _labelcornerradius = value; }
+        }
+        public float LabelBorderWidth
+        {
+            get { return _labelborderwidth; }
+            set { _labelborderwidth = value; }
+        }
 
 		// UITextViews
 		public Lazy<G__Color> TextBGColor		
@@ -387,6 +430,17 @@ namespace NathansWay.Shared
 			get { return _textcolor; }
 			set { _textcolor = value; } 
 		}
+        public float TextCornerRadius
+        {
+            get { return _textcornerradius; }
+            set { _textcornerradius = value; }
+        }
+        public float TextBorderWidth
+        {
+            get { return _textborderwidth; }
+            set { _textborderwidth = value; }
+        }
+
 
 		// UISlider
 		public Lazy<G__Color> MaxTrackTintColor 	

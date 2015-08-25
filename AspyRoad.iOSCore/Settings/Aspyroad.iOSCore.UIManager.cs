@@ -171,22 +171,30 @@ namespace AspyRoad.iOSCore.UISettings
 			ButtonNormalBGStrImage = g.ButtonNormalBGStrImage;
 			ButtonPressedBGStrImage = g.ButtonPressedBGStrImage;
 			ButtonFontName = g.ButtonFontName;
+            ButtonBorderWidth = g.ButtonCornerRadius;
+            ButtonCornerRadius = g.ButtonBorderWidth;
 			// View
 			ViewBGColor = g.ViewBGColor;
 			ViewBGColorTransition = g.ViewBGColorTransition;
 			ViewBGTint = g.ViewBGTint;
+            ViewBorderWidth = g.ViewCornerRadius;
+            ViewCornerRadius = g.ViewBorderWidth;
 			// Labels
 			LabelFontName = g.LabelFontName;
 			LabelHighLightedTextColor = g.LabelHighLightedTextColor;
 			LabelTextColor = g.LabelTextColor;
             LabelHighLightedBGColor = g.LabelHighLightedBGColor;
             LabelBGColor = g.LabelBGColor;
+            LabelBorderWidth = g.LabelCornerRadius;
+            LabelCornerRadius = g.LabelBorderWidth;
 			// TextViews
 			TextBGColor = g.TextBGColor;
 			TextBGTint = g.TextBGTint;
 			TextHighLightedTextColor = g.TextHighLightedTextColor;
             TextHighLightedBGColor = g.TextHighLightedBGColor;
 			TextColor = g.TextColor;
+            TextBorderWidth = g.TextCornerRadius;
+            TextCornerRadius = g.TextBorderWidth;
 			// Slider
 			MaxTrackTintColor = g.MaxTrackTintColor;
 			MinTrackTintColor = g.MinTrackTintColor;

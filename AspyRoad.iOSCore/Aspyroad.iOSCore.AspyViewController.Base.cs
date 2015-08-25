@@ -1,6 +1,7 @@
 // System
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 
 // Monotouch
 using MonoTouch.Foundation;
@@ -10,10 +11,11 @@ using MonoTouch.CoreGraphics;
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
 
+
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register ("AspyViewController")]	
-	public class AspyViewController : UIViewController
+	public class AspyViewController : UIViewController, IUIApply
 	{
 		#region Class Variables
 
@@ -27,16 +29,18 @@ namespace AspyRoad.iOSCore
 		private int _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
-        // UI styles
+
+        // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
+        protected G__ApplyUI _applyUIWhen;
+        // UIViewSpecific
         protected float _fFontSize;
         protected UIColor _colorBorderColor;
         protected UIColor _colorBGColor;
         protected UIColor _colorFontColor;
-        private bool _bApplyUI;
 
 		#endregion
 
@@ -77,7 +81,6 @@ namespace AspyRoad.iOSCore
             //this._fBorderWidth = 1.0f;
             this._fCornerRadius = 3.0f;
             this._fFontSize = UIFont.SystemFontSize;
-            this._bApplyUI = true;
 		}
 
 		#endregion
@@ -114,6 +117,38 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
+        public virtual UIColor SetBGColor
+        {
+            get { return this._colorBGColor; }
+            set 
+            { 
+                this._colorBGColor = value;
+                this.View.BackgroundColor = this._colorBGColor;   
+            }
+        }
+
+        public virtual UIColor SetBorderColor
+        {
+            get { return this._colorBorderColor; }
+            set 
+            { 
+                this._colorBGColor = value;
+                this.View.Layer.BorderColor = this._colorBGColor.CGColor;   
+            }
+        }
+
+        public virtual UIColor SetFontColor
+        {
+            get { return this._colorFontColor; }
+            set { this._colorFontColor = value; }
+        }
+
+        public G__ApplyUI ApplyUIWhen
+        {
+            get { return this._applyUIWhen; }
+            set { this._applyUIWhen = value; }
+        }
+
         public bool HasBorder
         {
             get { return this._bHasBorder; }
@@ -148,32 +183,6 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public virtual UIColor SetBGColor
-        {
-            get { return this._colorBGColor; }
-            set 
-            { 
-                this._colorBGColor = value;
-                this.View.BackgroundColor = this._colorBGColor;   
-            }
-        }
-
-        public virtual UIColor SetBorderColor
-        {
-            get { return this._colorBorderColor; }
-            set 
-            { 
-                this._colorBGColor = value;
-                this.View.Layer.BorderColor = this._colorBGColor.CGColor;   
-            }
-        }
-
-        public virtual UIColor SetFontColor
-        {
-            get { return this._colorFontColor; }
-            set { this._colorFontColor = value; }
-        }
-
         public float BorderWidth
         {
             get { return this._fBorderWidth; }
@@ -190,9 +199,12 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-		public virtual void ApplyUI ()
-		{            
+		public virtual void ApplyUI (G__ApplyUI _smartApply)
+		{  
+
 		}
+
+
 
 		#endregion
 
@@ -325,12 +337,13 @@ namespace AspyRoad.iOSCore
             // This has been added for iOS7 and below as it screws view sizes
             this.View.AutosizesSubviews = false;
             // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
-            this.ApplyUI();
+            this.ApplyUI(G__ApplyUI.ViewDidLoad);
 		}	
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.ApplyUI(G__ApplyUI.ViewWillAppear);
             // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             //this.ApplyUI();
         }
