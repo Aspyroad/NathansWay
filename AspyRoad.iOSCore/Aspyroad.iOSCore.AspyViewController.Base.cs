@@ -140,6 +140,7 @@ namespace AspyRoad.iOSCore
             set { this._colorFontColor = value; }
         }
 
+        // IUIApply
         public G__ApplyUI ApplyUIWhere
         {
             get { return this._applyUIWhere; }

@@ -13,7 +13,7 @@ using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
     [MonoTouch.Foundation.Register ("AspyButton")]
-    public class AspyButton : UIButton
+    public class AspyButton : UIButton, IUIApply
 	{
 		// Logic
         private bool _bIsPressed;
@@ -23,13 +23,19 @@ namespace AspyRoad.iOSCore
 		protected UIColor colorNormalSVGColor;
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
-        protected bool _bHasBorder;
-        protected bool _bHasRoundedCorners;
         protected UIColor colorBorderColor;
         private RectangleF labRect;
         private RectangleF imgRect;
 
-        // Required for the Xamarin iOS Desinger
+        // UIApplication Variables
+        protected bool _bHasBorder;
+        protected bool _bHasRoundedCorners;
+        protected float _fCornerRadius;
+        protected float _fBorderWidth;
+        protected G__ApplyUI _applyUIWhere;
+
+        #region Constructors
+
         public AspyButton () : base()
         {
 			Initialize();
@@ -47,16 +53,24 @@ namespace AspyRoad.iOSCore
 			Initialize();
         }
 
-		private void Initialize()
-		{ 
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-			this._bHoldState = false;
-			this._bIsPressed = false;
-            this._bHasBorder = false;
-            this._bHasRoundedCorners = false;
-		}
+        #endregion
         
 		#region Private Members
+
+        private void Initialize()
+        { 
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this._bHoldState = false;
+            this._bIsPressed = false;
+            // UIApply
+            this._bHasBorder = false;
+            this._bHasRoundedCorners = false;
+            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
+            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+        }
+
+        #region IconSetters
 		        
         protected void _iconLeftlabelRight()
         {
@@ -115,7 +129,7 @@ namespace AspyRoad.iOSCore
                 this._iconLeftlabelRight();
             }
         }
-        
+
         protected void _iconDownlabelTop()
         {
             //TODO: Need to protect against a failed image load??
@@ -142,6 +156,8 @@ namespace AspyRoad.iOSCore
             }
         }
 
+        #endregion
+
 		#endregion
 
 		#region Public Properties
@@ -158,48 +174,89 @@ namespace AspyRoad.iOSCore
 			set{ _bHoldState = value; }
 		}
 
-        public bool HasRounderCorners
+        // IUIApply
+        public G__ApplyUI ApplyUIWhere
         {
-            get { return this._bHasRoundedCorners; }
-            set
-            {
-                this._bHasRoundedCorners = value;
-            }
-  
+            get { return this._applyUIWhere; }
+            set { this._applyUIWhere = value; }
         }
 
         public bool HasBorder
         {
             get { return this._bHasBorder; }
-            set
-            {
-                this._bHasBorder = value;
+            set 
+            { 
+                if (value == false)
+                {
+                    this.Layer.BorderWidth = 0.0f;
+                }
+                else
+                {
+                    this.Layer.BorderWidth = this._fBorderWidth;   
+                }
+                this._bHasBorder = value; 
             }
+        }
 
+        public bool HasRoundedCorners
+        {
+            get { return this._bHasRoundedCorners; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.Layer.CornerRadius = 0.0f;
+                }
+                else
+                {
+                    this.Layer.CornerRadius = this._fCornerRadius;   
+                }
+                this._bHasRoundedCorners = value; 
+            }
+        }
+
+        public float BorderWidth
+        {
+            get { return this._fBorderWidth; }
+            set { this._fBorderWidth = value; }
+        }
+
+        public float CornerRadius
+        {
+            get { return this._fCornerRadius; }
+            set { this._fCornerRadius = value; }
         }
 
 		#endregion
 
 		#region Virtual Members
 
-		public virtual void ApplyUI()
+		public virtual void ApplyUI(G__ApplyUI _applywhere)
 		{
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
-			this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-			this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
-			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
-
-            // Border
-            if (this._bHasBorder)
-            {
-                this.Layer.BorderWidth = 0.5f;
-                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            if (_applywhere != this._applyUIWhere)
+            {   
+                return;
             }
-            if (this._bHasRoundedCorners)
+            else
             {
-                this.Layer.CornerRadius = 6.0f;
+                this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
+                this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+                this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
+                this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+                this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
+
+                // Border
+                if (this._bHasBorder)
+                {
+                    this.Layer.BorderWidth = this._fBorderWidth;
+                    this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+                }
+                // RoundedCorners
+                if (this._bHasRoundedCorners)
+                {
+                    this.Layer.CornerRadius = this._fCornerRadius;
+                }
             }
 		}
 
@@ -208,10 +265,12 @@ namespace AspyRoad.iOSCore
             if (this.IsPressed || this.HoldState)
             {
                 this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+                this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Normal);
             }
             else
             {
                 this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+                this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
             }  
             this.SetNeedsDisplay();
         }
@@ -219,15 +278,14 @@ namespace AspyRoad.iOSCore
 
 		#endregion
 
-		/// <summary>
-		/// Invoked when the user touches 
-		/// </summary>
+        #region Delegates
+
 		public event Action<UIButton> Tapped;
 
+        #endregion
+
 		#region Overrides
-		/// <summary>
-		/// Whether the button is rendered enabled or not.
-		/// </summary>
+
 		public override bool Enabled 
 		{ 
 			get 

@@ -18,23 +18,24 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleToolBox () : base()
 		{
-			Init_ButtonStyleToolBox ();
+			Initialize ();
 		}
 		public ButtonStyleToolBox (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleToolBox ();
+			Initialize ();
 		}       
 		public ButtonStyleToolBox (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleToolBox ();
+			Initialize ();
 		}
 		public ButtonStyleToolBox (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleToolBox ();
+			Initialize ();
 		} 
 
-		private void Init_ButtonStyleToolBox()
+		private void Initialize()
 		{
+            ApplyUI (G__ApplyUI.DoNotApply);
 		}
 
 		#endregion
@@ -43,13 +44,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (RectangleF rect)
 		{
-			ApplyUI ();
+
 			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
+        public override void ApplyUI (G__ApplyUI _applywhere)
 		{
-			base.ApplyUI ();
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -57,7 +58,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		#region Draw Methods
 
-		private void DrawFToolBox(RectangleF frame, UIColor colorGradientButtonMainStart, UIColor colorGradientButtonMainEnd, UIColor colorNormalSVGColor, bool isTapped)
+		private void DrawFToolBox (RectangleF frame, 
+                                    UIColor colorGradientButtonMainStart, 
+                                    UIColor colorGradientButtonMainEnd, 
+                                    UIColor colorNormalSVGColor, 
+                                    bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -210,9 +215,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLesson (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
+        public override void ApplyUI (G__ApplyUI _applywhere)
+        {
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -335,9 +340,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFTeacher (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
+        public override void ApplyUI (G__ApplyUI _applywhere)
+        {
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -475,9 +480,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFStudent (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
+        public override void ApplyUI (G__ApplyUI _applywhere)
+        {
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -641,9 +646,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLessonEdit (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
+        public override void ApplyUI (G__ApplyUI _applywhere)
+        {
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
@@ -805,9 +810,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFVisuals (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
+        public override void ApplyUI (G__ApplyUI _applywhere)
+        {
+            base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
