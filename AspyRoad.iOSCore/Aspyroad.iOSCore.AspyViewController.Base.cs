@@ -35,12 +35,12 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
-        protected G__ApplyUI _applyUIWhen;
+        protected G__ApplyUI _applyUIWhere;
         // UIViewSpecific
-        protected float _fFontSize;
         protected UIColor _colorBorderColor;
         protected UIColor _colorBGColor;
         protected UIColor _colorFontColor;
+        protected UIColor _colorBGTransisition;
 
 		#endregion
 
@@ -78,9 +78,6 @@ namespace AspyRoad.iOSCore
             // UI
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            //this._fBorderWidth = 1.0f;
-            this._fCornerRadius = 3.0f;
-            this._fFontSize = UIFont.SystemFontSize;
 		}
 
 		#endregion
@@ -143,10 +140,10 @@ namespace AspyRoad.iOSCore
             set { this._colorFontColor = value; }
         }
 
-        public G__ApplyUI ApplyUIWhen
+        public G__ApplyUI ApplyUIWhere
         {
-            get { return this._applyUIWhen; }
-            set { this._applyUIWhen = value; }
+            get { return this._applyUIWhere; }
+            set { this._applyUIWhere = value; }
         }
 
         public bool HasBorder
@@ -199,12 +196,13 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-		public virtual void ApplyUI (G__ApplyUI _smartApply)
-		{  
-
+		public virtual void ApplyUI (G__ApplyUI _applywhere)
+		{
+            if (_applywhere != this._applyUIWhere)
+            {
+                return;
+            }
 		}
-
-
 
 		#endregion
 
@@ -343,10 +341,11 @@ namespace AspyRoad.iOSCore
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.ApplyUI(G__ApplyUI.ViewWillAppear);
             // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
-            //this.ApplyUI();
+            this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
+
+        #region Rotation StatusBar
 
 		// These puppies cost me a lot of time. DAYS!
 		// But they are totally important when it comes to designing landscape only apps.
@@ -428,6 +427,8 @@ namespace AspyRoad.iOSCore
 		}
 
 		#endregion
+
+        #endregion
 
 		#endregion		
 	}

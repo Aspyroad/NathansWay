@@ -135,6 +135,33 @@ namespace NathansWay.iOS.Numeracy
             this._vcOld = null;
         }
 
+        private void TransitionController (UIViewController controller, bool animated = true)
+        {
+            var window = this.iOSGlobals.G__MainWindow;
+
+            //Return if it's already the root controller
+            if (window.RootViewController == controller)
+            {
+                return;
+            }
+
+            //Set the root controller
+            window.RootViewController = controller;
+
+            //Peform an animation, note that null is not allowed as a callback, so I use delegate { }
+            if (animated)
+            {
+                UIView.Transition
+                (
+                    window, 
+                    0.3, 
+                    UIViewAnimationOptions.TransitionCrossDissolve, 
+                    delegate {}, 
+                    delegate {}
+                );
+            }
+        }
+
         #endregion
 
 		#region Public Members

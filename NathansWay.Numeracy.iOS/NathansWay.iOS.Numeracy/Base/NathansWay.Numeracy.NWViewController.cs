@@ -56,12 +56,15 @@ namespace AspyRoad.iOSCore
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             this.NumberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
+
+            // Set common UI variables
+            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ViewBorderWidth;
+            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
 		}
 
 		#endregion
 
 	    #region Public Properties
-
 
         #endregion
 
@@ -70,6 +73,13 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
+
+        public override void ApplyUI(G__ApplyUI _applywhere)
+        {
+            base.ApplyUI(_applywhere);
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion		
 	}

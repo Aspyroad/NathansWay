@@ -114,13 +114,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
         }
 
-        public override void ApplyUI()
+        public override void ApplyUI(G__ApplyUI _applywhere)
         {
-            //base.ApplyUI();
+            base.ApplyUI(_applywhere);
 
+            // TODO: these need to be repaired and set for globalUI!!!
             this.View.BackgroundColor = UIColor.Clear;
             this.SetBorderColor = UIColor.Red;
-            this.HasBorder = true;
         }
 
         #endregion

@@ -77,14 +77,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.ViewDidLoad ();
 		}
 
-        public override void ApplyUI()
+        public override void ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI();
+            base.ApplyUI(_applywhere);
 
             this.HasRoundedCorners = true;
-            this.CornerRadius = 5.0f;
             this.HasBorder = true;
-            this.View.BackgroundColor = UIColor.LightGray;
+            this.View.TintColor = UIColor.LightGray;
         }
 		#endregion
 	}

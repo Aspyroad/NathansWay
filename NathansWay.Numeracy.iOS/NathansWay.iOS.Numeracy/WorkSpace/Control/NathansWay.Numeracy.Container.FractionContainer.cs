@@ -117,6 +117,9 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
+            // UI
+            // Always fire UIApply in ViewWillAppear
+            this._applyUIWhere = G__ApplyUI.ViewWillAppear;
             // Build the fraction
             this.CreateFraction();
         }
@@ -214,7 +217,7 @@ namespace NathansWay.iOS.Numeracy
 
             // If this is an answer type, check it
             this.CheckCorrect();
-            this.ApplyUI();
+            this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
 
         //        public override void ApplyUI()
@@ -262,16 +265,15 @@ namespace NathansWay.iOS.Numeracy
             base.UI_ToggleAnswerState();
         }
 
-        public override void ApplyUI()
+        public override void ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI();
+            base.ApplyUI(_applywhere);
             this.View.BackgroundColor = UIColor.Clear;
         }
 
         #endregion
 
         #region Public Members
-
 
 
         #endregion

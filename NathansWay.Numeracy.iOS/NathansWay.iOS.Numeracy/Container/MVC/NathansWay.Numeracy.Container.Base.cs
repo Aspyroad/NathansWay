@@ -99,6 +99,10 @@ namespace NathansWay.iOS.Numeracy
             this._containerType = G__ContainerType.Container;
             this._bIsAnswer = false;
             this._bInitialLoad = true;
+            // UI
+            // Most objects from BaseContainer need to be drawn at ViewWillAppear
+            // This can obviously be changed for individual controls at their .ctor
+            this._applyUIWhere = G__ApplyUI.ViewWillAppear;
 		}
 
         protected void FireValueChange()
@@ -376,9 +380,9 @@ namespace NathansWay.iOS.Numeracy
             //this.SizeClass.SetFrames();
 		}
 
-        public override void ApplyUI()
+        public override void ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI();
+            base.ApplyUI(_applywhere);
 
             if (this._bReadOnly)
             {

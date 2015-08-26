@@ -439,7 +439,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
             // Make any changes to UI on this object also (textbox bg etc)
-            this.ApplyUI();
+            this.ApplyUI(this._applyUIWhere);
             // TODO: PROBLEM and bug
             // UI_ToggleTextEdit() is being called straight after this as this is being fired inside
             // PickerValuechanged!!

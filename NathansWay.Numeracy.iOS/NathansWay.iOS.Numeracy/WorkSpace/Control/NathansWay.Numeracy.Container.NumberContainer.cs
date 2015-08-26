@@ -262,7 +262,7 @@ namespace NathansWay.iOS.Numeracy
             this.CurrentValue = Convert.ToDouble(_strVal);
             // If this is an answer type, check it
             this.CheckCorrect();
-            this.ApplyUI();
+            this.ApplyUI(this._applyUIWhere);
         }
 
         public override void HandleTextSizeChange(object s, EventArgs e)
@@ -321,17 +321,10 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void ApplyUI()
+        public override void ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI();
+            base.ApplyUI(_applywhere);
 
-        }
-
-        public override void LoadView()
-        {
-            base.LoadView();
-            //this._vNumberContainer = new vNumberContainer();
-            //this.View = this._vNumberContainer;
         }
 
         public override void ViewDidLoad()
@@ -340,24 +333,18 @@ namespace NathansWay.iOS.Numeracy
             this.View.UserInteractionEnabled = true;
         }
 
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-        }
-
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
 
             this.Touched = true;
             this.Selected = true;
-            this.ApplyUI();
+            this.ApplyUI(this._applyUIWhere);
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)
         {
             base.TouchesEnded(touches, evt);
-
             this.Touched = false;
         }
 

@@ -112,8 +112,6 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-			// Setup visuals
-			this.ApplyUI ();
 
 			// Register Events
 			// Level Buttons
@@ -161,8 +159,9 @@ namespace NathansWay.iOS.Numeracy
 		}
 
         // NW Overs
-        public override void ApplyUI ()
+        public override void ApplyUI (G__ApplyUI _applywhere)
         {
+            base.ApplyUI(_applywhere);
             // Apply UI to the imagebackgrounds behind the filter buttons
             this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
             this.imBgUpperRight.Layer.CornerRadius = 8.0f;
@@ -191,6 +190,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyName = "VC_LessonMenu";
             // Grab a ref to our data class
             lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
+            this._applyUIWhere = G__ApplyUI.ViewDidLoad;
         }
 
 		private void ScrolledToBottom (object sender, EventArgs e)
