@@ -13,7 +13,7 @@ using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
 	[MonoTouch.Foundation.Register ("AspyLabel")]
-	public class AspyLabel : UILabel
+    public class AspyLabel : UILabel, IUIApply
 	{
 		#region Private Variables
 
@@ -23,6 +23,7 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
+        protected G__ApplyUI _applyUIWhere;
 
 		#endregion
 
@@ -52,11 +53,13 @@ namespace AspyRoad.iOSCore
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();	
 
-            // UI
-            //this.Highlighted = true;
+            this._fBorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+            this._fCornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this.ApplyUI ();
+            this.ApplyUI (this._applyUIWhere);
 		}
 
 		#endregion
@@ -68,7 +71,7 @@ namespace AspyRoad.iOSCore
 
 		#region Virtual Members
 
-		public virtual void ApplyUI ()
+        public virtual void ApplyUI (G__ApplyUI _applywhere)
 		{
 			// Apply label font color
 			this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
@@ -78,18 +81,24 @@ namespace AspyRoad.iOSCore
             // Border
             if (this._bHasBorder)
             {
-                this.Layer.BorderWidth = 0.5f;
+                this.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
                 this.Layer.BorderColor =  iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
             }
             if (this._bHasRoundedCorners)
             {
-                this.Layer.CornerRadius = 6.0f;
+                this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             }
 		}
 
 		#endregion
 
         #region Public Properties
+
+        public G__ApplyUI ApplyUIWhere
+        {
+            get { return this._applyUIWhere; }
+            set { this._applyUIWhere = value; }
+        }
 
         public bool HasBorder
         {

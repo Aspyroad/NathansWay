@@ -13,7 +13,7 @@ using MonoTouch.ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
     [MonoTouch.Foundation.Register ("AspyTextField")]
-	public class AspyTextField : UITextField
+    public class AspyTextField : UITextField, IUIApply
 	{
         #region Variables
 
@@ -22,9 +22,9 @@ namespace AspyRoad.iOSCore
         // UI styles
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-
         protected float _fCornerRadius;
         protected float _fBorderWidth;
+        protected G__ApplyUI _applyUIWhere;
 
         protected UIColor colorBorderColor;
 
@@ -36,44 +36,44 @@ namespace AspyRoad.iOSCore
 
 		public AspyTextField (IntPtr handle) : base(handle)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyTextField (NSCoder coder) : base(coder)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyTextField (RectangleF frame) : base(frame)
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		public AspyTextField () : base ()
 		{
-			Initialize_Base ();
+			Initialize ();
 		}
 
 		#endregion
 
 		#region Private Members
 
-		private void Initialize_Base()
+		private void Initialize()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            // UI
+            // UIApply
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._fBorderWidth = 0.5f;
-            this._fCornerRadius = 3.0f;
+            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bAllowNextResponder = false;
-
-
         }
 
         #endregion
 
         #region Public Properties
+
         /// <summary>
         /// Gets or sets a value indicating whether this instance has border.
         /// </summary>
@@ -81,8 +81,20 @@ namespace AspyRoad.iOSCore
         public bool HasBorder
         {
             get { return this._bHasBorder; }
-            set { this._bHasBorder = value; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.Layer.BorderWidth = 0.0f;
+                }
+                else
+                {
+                    this.Layer.BorderWidth = this._fBorderWidth;   
+                }
+                this._bHasBorder = value; 
+            }
         }
+
         /// <summary>
         /// Gets or sets a value indicating whether this instance has rounded corners.
         /// </summary>
@@ -90,8 +102,20 @@ namespace AspyRoad.iOSCore
         public bool HasRoundedCorners
         {
             get { return this._bHasRoundedCorners; }
-            set { this._bHasRoundedCorners = value; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.Layer.CornerRadius = 0.0f;
+                }
+                else
+                {
+                    this.Layer.CornerRadius = this._fCornerRadius;   
+                }
+                this._bHasRoundedCorners = value; 
+            }
         }
+
         /// <summary>
         /// Gets or sets the width of the border.
         /// </summary>
@@ -101,6 +125,7 @@ namespace AspyRoad.iOSCore
             get { return this._fBorderWidth; }
             set { this._fBorderWidth = value; }
         }
+
         /// <summary>
         /// Gets or sets the corner radius.
         /// </summary>
@@ -110,6 +135,7 @@ namespace AspyRoad.iOSCore
             get { return this._fCornerRadius; }
             set { this._fCornerRadius = value; }
         }
+
         /// <summary>
         /// Gets or sets a value indicating whether to allow next responder touch events.
         /// </summary>
@@ -129,20 +155,19 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-        public virtual void ApplyUI()
+        public virtual void ApplyUI(G__ApplyUI _applywhere)
         {
-            // Border
-            if (this._bHasBorder)
+            if (_applywhere != this._applyUIWhere)
             {
-                this.Layer.BorderWidth = this._fBorderWidth;
-                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                return;
             }
-            if (this._bHasRoundedCorners)
-            {
-                this.Layer.CornerRadius = this._fCornerRadius;
-            }
+
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
+            this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
+
+            //this.Sele
 
         }
 

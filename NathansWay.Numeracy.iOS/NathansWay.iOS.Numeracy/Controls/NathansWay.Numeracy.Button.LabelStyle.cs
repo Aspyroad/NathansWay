@@ -42,8 +42,11 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		private void Initialize()
-		{ 
-			this.ApplyUI ();
+		{
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.HasBorder = true;
+            this.HasRoundedCorners = true;
+            this.ApplyUI (this._applyUIWhere);
 		}
 
 		#endregion
@@ -56,19 +59,10 @@ namespace NathansWay.iOS.Numeracy
 			base.Draw (rect);
 		}
 
-		public override void ApplyUI ()
+        public override void ApplyUI (G__ApplyUI _applywhere)
 		{
-            this.HasBorder = true;
-            this.HasRounderCorners = true;
-			base.ApplyUI ();
+            base.ApplyUI (_applywhere);
 		}
-
-//		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
-//		{
-//			//var touch = uievent.AllTouches.AnyObject as UITouch;
-//			IsPressed = false;	
-//			return base.ContinueTracking (uitouch, uievent);
-//		}
 
 		#endregion
 

@@ -23,40 +23,40 @@ namespace NathansWay.iOS.Numeracy
 		// Required for the Xamarin iOS Desinger
         public ButtonNumberPad () : base()
 		{
-            Init_ButtonNumberPad();
+            Initialize();
 		}
 
         public ButtonNumberPad (IntPtr handle) : base(handle)
 		{
-            Init_ButtonNumberPad();
+            Initialize();
 		} 
 
         public ButtonNumberPad (RectangleF myFrame)  : base (myFrame)
 		{ 
-            Init_ButtonNumberPad();    
+            Initialize();    
 		}
 
         public ButtonNumberPad (UIButtonType type) : base (type)
 		{
-            Init_ButtonNumberPad();
+            Initialize();
 		}
 
-        private void Init_ButtonNumberPad()
+        private void Initialize()
 		{ 
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.HasBorder = true;
-            this.HasRounderCorners = true;
-			this.ApplyUI ();
+            this.HasRoundedCorners = true;
+            this.ApplyUI (this._applyUIWhere);
 		}
 
 		#endregion
 
 		#region Overrides 
 
-		public override void ApplyUI ()
-		{ 
-			base.ApplyUI ();
-			this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-		}
+        //		public override void ApplyUI (G__ApplyUI _applywhere)
+        //		{ 
+        //			base.ApplyUI (_applywhere);
+        //		}
 
 		#endregion
 

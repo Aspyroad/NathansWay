@@ -33,18 +33,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 			Initialize ();
 		} 
 
-		private void Initialize()
-		{
-            ApplyUI (G__ApplyUI.DoNotApply);
-		}
-
 		#endregion
+
+        #region Private Members
+
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
 
 		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-
 			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
@@ -184,34 +188,37 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleLesson () : base()
 		{
-			Init_ButtonStyleLesson ();
+			Initialize ();
 		}
 		public ButtonStyleLesson (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleLesson ();
+			Initialize ();
 		}       
 		public ButtonStyleLesson (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleLesson ();
+			Initialize ();
 		}
 		public ButtonStyleLesson (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleLesson ();
+			Initialize ();
 		} 
-
-		private void Init_ButtonStyleLesson ()
-		{
-		}
-
 
 		#endregion
 
-		#region Overrides
+        #region Private Members
 
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
+
+		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-			this.ApplyUI ();
 			DrawFLesson (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
@@ -311,32 +318,37 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleTeacher () : base()
 		{
-			Init_ButtonStyleTeacher ();
+			Initialize ();
 		}
 		public ButtonStyleTeacher (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleTeacher ();
+			Initialize ();
 		}       
 		public ButtonStyleTeacher (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleTeacher ();
+			Initialize ();
 		}
 		public ButtonStyleTeacher (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleTeacher ();
+			Initialize ();
 		} 
 
 		#endregion
 
-		#region Overrides
+        #region Private Members
 
-		private void Init_ButtonStyleTeacher ()
-		{
-		}
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
+
+		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-			ApplyUI ();
 			DrawFTeacher (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
@@ -451,32 +463,37 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleStudent () : base()
 		{
-			Init_ButtonStyleStudent ();
+			Initialize ();
 		}
 		public ButtonStyleStudent (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleStudent ();
+			Initialize ();
 		}       
 		public ButtonStyleStudent (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleStudent ();
+			Initialize ();
 		}
 		public ButtonStyleStudent (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleStudent ();
+			Initialize ();
 		} 
 
-		private void Init_ButtonStyleStudent ()
-		{
-		}
-
 		#endregion
+
+        #region Private Members
+
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
 
 		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-			ApplyUI ();
 			DrawFStudent (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
@@ -617,32 +634,37 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleLessonBuilder () : base()
 		{
-			Init_ButtonStyleLessonBuilder ();
+			Initialize ();
 		}
 		public ButtonStyleLessonBuilder (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleLessonBuilder ();
+			Initialize ();
 		}       
 		public ButtonStyleLessonBuilder (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleLessonBuilder ();
+			Initialize ();
 		}
 		public ButtonStyleLessonBuilder (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleLessonBuilder ();
+			Initialize ();
 		} 
 
-		private void Init_ButtonStyleLessonBuilder ()
-		{
-		}
-
 		#endregion
+
+        #region Private Members
+
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
 
 		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-			ApplyUI ();
 			DrawFLessonEdit (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
@@ -781,32 +803,37 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public ButtonStyleVisuals () : base()
 		{
-			Init_ButtonStyleVisuals ();
+			Initialize ();
 		}
 		public ButtonStyleVisuals (IntPtr handle) : base(handle)
 		{
-			Init_ButtonStyleVisuals ();
+			Initialize ();
 		}       
 		public ButtonStyleVisuals (RectangleF myFrame)  : base (myFrame)
 		{   
-			Init_ButtonStyleVisuals ();
+			Initialize ();
 		}
 		public ButtonStyleVisuals (UIButtonType type) : base (type)
 		{
-			Init_ButtonStyleVisuals ();
+			Initialize ();
 		} 
 
-		private void Init_ButtonStyleVisuals ()
-		{
-		}
-
 		#endregion
+
+        #region Private Members
+
+        private void Initialize ()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.ApplyUI(this._applyUIWhere);
+        }
+
+        #endregion
 
 		#region Overrides
 
 		public override void Draw (RectangleF rect)
 		{
-			ApplyUI ();
 			DrawFVisuals (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 

@@ -146,8 +146,8 @@ namespace NathansWay.Shared
 			LabelTextColor = new Lazy<G__Color> (() => new G__Color(150.0f, 150.0f, 150.0f, 255.0f)); // Black 
             LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
             LabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
-            LabelCornerRadius = 0.0f;
-            LabelBorderWidth = 0.0f;
+            LabelCornerRadius = 0.5f;
+            LabelBorderWidth = 6.0f;
 
 			// UITextViews
 			TextBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
@@ -155,8 +155,8 @@ namespace NathansWay.Shared
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(240.0f, 240.0f, 240.0f, 255.0f)); // Black
 			TextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            TextBorderWidth = 0.0f;
-            TextCornerRadius = 0.0f;
+            TextBorderWidth = 0.5f;
+            TextCornerRadius = 3.0f;
 
 			// Slider View
 			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
