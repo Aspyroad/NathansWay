@@ -140,13 +140,20 @@ namespace AspyRoad.iOSCore
             set { this._colorFontColor = value; }
         }
 
-        // IUIApply
+        /// <summary>
+        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
+        /// </summary>
+        /// <value>The apply user interface where.</value>
         public G__ApplyUI ApplyUIWhere
         {
             get { return this._applyUIWhere; }
             set { this._applyUIWhere = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
             get { return this._bHasBorder; }
@@ -160,10 +167,19 @@ namespace AspyRoad.iOSCore
                 {
                     this.View.Layer.BorderWidth = this._fBorderWidth;   
                 }
+
+                if (this._bHasBorder)
+                { 
+                    this.View.SetNeedsDisplay();
+                }
                 this._bHasBorder = value; 
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
             get { return this._bHasRoundedCorners; }
@@ -177,20 +193,48 @@ namespace AspyRoad.iOSCore
                 {
                     this.View.Layer.CornerRadius = this._fCornerRadius;   
                 }
-                this._bHasRoundedCorners = value; 
+
+                if (this._bHasRoundedCorners)
+                {
+                    this.View.SetNeedsDisplay();
+                }
+                this._bHasRoundedCorners = value;
             }
         }
 
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
+        /// <value>The width of the border.</value>
         public float BorderWidth
         {
             get { return this._fBorderWidth; }
-            set { this._fBorderWidth = value; }
+            set 
+            { 
+                if (this._bHasBorder)
+                {
+                    this.View.SetNeedsDisplay();
+                }
+                this._fBorderWidth = value; 
+
+            }
         }
 
+        /// <summary>
+        /// Gets or sets the corner radius.
+        /// </summary>
+        /// <value>The corner radius.</value>
         public float CornerRadius
         {
             get { return this._fCornerRadius; }
-            set { this._fCornerRadius = value; }
+            set 
+            {
+                if (this._bHasRoundedCorners)
+                {
+                    this.View.SetNeedsDisplay();
+                }
+                this._fCornerRadius = value; 
+            }
         }
 
         #endregion
