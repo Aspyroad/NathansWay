@@ -133,7 +133,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtBrace.TextAlignment = UITextAlignment.Center;
             // Prettiness
-            this.txtBrace.ApplyUI();
+            this.txtBrace.ApplyUI(this._applyUIWhere);
         }
 
         #endregion       

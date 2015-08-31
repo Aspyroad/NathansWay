@@ -81,6 +81,11 @@ namespace AspyRoad.iOSCore
 			//base.Initialize ();
 			this.AspyTag1 = 103;
 			this.AspyName = "VC_CtrlComboBox";
+
+            // Global UI TESTING
+            _fontSize = 30.0f;
+            _fontName = "HelveticaNeue-Light";
+            _pickerRowHeight = (_fontSize + 20.0f);
 		}
 
 		#endregion
@@ -126,19 +131,14 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-		public override void LoadView ()
-		{
-			this.View = new AspyView (_aspyComboBoxFrame);
-		}
+        public override void ApplyUI(G__ApplyUI _applywhere)
+        {
+            base.ApplyUI(_applywhere);
+        }
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
-			// Global UI TESTING
-			_fontSize = 30.0f;
-			_fontName = "HelveticaNeue-Light";
-			_pickerRowHeight = (_fontSize + 20.0f);
 
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
 

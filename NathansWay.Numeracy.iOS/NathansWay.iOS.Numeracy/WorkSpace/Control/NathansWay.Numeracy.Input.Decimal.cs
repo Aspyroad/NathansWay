@@ -133,7 +133,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtDecimal.TextAlignment = UITextAlignment.Center;
 
-            this.txtDecimal.ApplyUI();
+            this.txtDecimal.ApplyUI(this._applyUIWhere);
         }
 
         #endregion       

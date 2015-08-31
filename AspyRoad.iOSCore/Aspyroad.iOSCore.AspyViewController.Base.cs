@@ -20,7 +20,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
-		//protected iOSUIManager iOSUIAppearance; 
+        //protected iOSUIManager iOSUIAppearance; 
         // Event subscribing
         //private bool Subscribe_TextSizeChange;
 
@@ -247,7 +247,16 @@ namespace AspyRoad.iOSCore
             {
                 return;
             }
+            if (this.iOSGlobals.G__iOSVersion.Major < 7)
+            {
+                this.ApplyUI6();
+                return;
+            }
 		}
+
+        public virtual void ApplyUI6()
+        {            
+        }
 
 		#endregion
 

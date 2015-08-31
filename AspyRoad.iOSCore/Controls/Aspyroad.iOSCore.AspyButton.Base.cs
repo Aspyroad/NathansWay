@@ -60,6 +60,7 @@ namespace AspyRoad.iOSCore
         private void Initialize()
         { 
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            // Logic
             this._bHoldState = false;
             this._bIsPressed = false;
             // UIApply
@@ -270,6 +271,7 @@ namespace AspyRoad.iOSCore
                 this._fCornerRadius = value; 
             }
         }
+
 		#endregion
 
 		#region Virtual Members
@@ -305,7 +307,7 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyPressed()
         {
-            if (this.IsPressed || this.HoldState)
+            if (this.Highlighted)
             {
                 this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
                 this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Normal);
@@ -315,7 +317,6 @@ namespace AspyRoad.iOSCore
                 this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
                 this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
             }  
-            this.SetNeedsDisplay();
         }
 
 
@@ -329,53 +330,66 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-		public override bool Enabled 
-		{ 
-			get 
-			{
-				return base.Enabled;
-			}
-			set 
-			{
-				base.Enabled = value;
-				SetNeedsDisplay ();
-			}
-		}
+        public override bool Highlighted
+        {
+            get
+            {
+                return base.Highlighted;
+            }
+            set
+            {
+                base.Highlighted = value;
+                this.ApplyPressed();
+            }
+        }
 
-		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
-		{			
-			_bIsPressed = true;
-            this.ApplyPressed();
-			return base.BeginTracking (uitouch, uievent);
-		}
-
-		public override void EndTracking (UITouch uitouch, UIEvent uievent)
-		{
-			if (_bIsPressed && Enabled)
-			{
-				if (Tapped != null)
-				{
-					Tapped (this);
-				}
-			}
-			_bIsPressed = false;
-            this.ApplyPressed();
-			base.EndTracking (uitouch, uievent);
-		}
-
-		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
-		{
-			var touch = uievent.AllTouches.AnyObject as UITouch;
-			if (Bounds.Contains (touch.LocationInView (this)))
-			{
-				_bIsPressed = true;
-			}
-			else
-			{
-				_bIsPressed = false;
-			}
-			return base.ContinueTracking (uitouch, uievent);
-		}
+//		public override bool Enabled 
+//		{ 
+//			get 
+//			{
+//				return base.Enabled;
+//			}
+//			set 
+//			{
+//				base.Enabled = value;
+//				SetNeedsDisplay ();
+//			}
+//		}
+//
+//		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
+//		{			
+//			_bIsPressed = true;
+//            this.ApplyPressed();
+//			return base.BeginTracking (uitouch, uievent);
+//		}
+//
+//		public override void EndTracking (UITouch uitouch, UIEvent uievent)
+//		{
+//			if (_bIsPressed && Enabled)
+//			{
+//				if (Tapped != null)
+//				{
+//					Tapped (this);
+//				}
+//			}
+//			_bIsPressed = false;
+//            this.ApplyPressed();
+//			base.EndTracking (uitouch, uievent);
+//		}
+//
+//		public override bool ContinueTracking (UITouch uitouch, UIEvent uievent)
+//		{
+//			var touch = uievent.AllTouches.AnyObject as UITouch;
+//			if (Bounds.Contains (touch.LocationInView (this)))
+//			{
+//				_bIsPressed = true;
+//			}
+//			else
+//			{
+//				_bIsPressed = false;
+//			}
+//			return base.ContinueTracking (uitouch, uievent);
+//		}
 
 		#endregion
 

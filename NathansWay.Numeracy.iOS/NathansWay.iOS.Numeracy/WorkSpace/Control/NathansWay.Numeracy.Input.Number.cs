@@ -298,12 +298,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.CurrentValueStr.Trim();
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.HasBorder = false;
-            this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasRoundedCorners = true;
-            this.txtNumber.CornerRadius = 2.0f;
+
+            // TODO: These may need to be seperate from global values
+            //this.txtNumber.BorderWidth = 1.0f;
+            //this.txtNumber.CornerRadius = 2.0f;
+
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
-            this.txtNumber.ApplyUI();
+            this.txtNumber.ApplyUI(this._applyUIWhere);
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;

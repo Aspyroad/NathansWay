@@ -44,20 +44,16 @@ namespace NathansWay.iOS.Numeracy
 		private void Initialize()
 		{
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
+
             this.HasBorder = true;
             this.HasRoundedCorners = true;
+            this.HoldState = true;
             this.ApplyUI (this._applyUIWhere);
 		}
 
 		#endregion
 
 		#region Overrides 
-
-		public override void Draw (RectangleF rect)
-		{
-			//DrawButtonLabelStyle (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, rect);
-			base.Draw (rect);
-		}
 
         public override void ApplyUI (G__ApplyUI _applywhere)
 		{
@@ -76,14 +72,12 @@ namespace NathansWay.iOS.Numeracy
 			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
 			if (this.IsPressed || this.HoldState)
 			{
-                //labelTextColor.SetFill();
-				//UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
+				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
 			}
 			else
 			{
 				UIColor.Clear.SetFill ();
 			}
-			//UIColor.Clear.SetFill();
 			rectanglePath.Fill();
 			labelTextColor.SetStroke();
 			rectanglePath.LineWidth = 2.0f;
@@ -93,7 +87,6 @@ namespace NathansWay.iOS.Numeracy
             context.SaveState();
             context.ClipToRect(rectangleRect);
 		}
-
 
 		#endregion
 	}

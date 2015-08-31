@@ -202,9 +202,9 @@ namespace AspyRoad.iOSCore
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
             this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
 
-            //this.Sele
-
         }
+
+        #region Responder Chain Interrupt
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
@@ -238,6 +238,8 @@ namespace AspyRoad.iOSCore
                 this.NextResponder.TouchesMoved(touches, evt);
             }
         }
+
+        #endregion
 
         #endregion
 	}

@@ -33,15 +33,11 @@ namespace AspyRoad.iOSCore
 			Initialize();
 		}
 
-		protected virtual void Initialize()
+		private void Initialize()
 		{            
 		}
 
-		public UIColor TextColor 
-		{
-			set {}
-		}
-
+        // As yet unused
 
 	}
 }

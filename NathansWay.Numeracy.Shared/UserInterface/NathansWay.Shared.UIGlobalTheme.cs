@@ -122,15 +122,15 @@ namespace NathansWay.Shared
 			// UIButton
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 10.0f)); // Black
 			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 120.0f)); // Black
-			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			ButtonPressedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 100.0f)); // Black
 			ButtonNormalSVGColor = new Lazy<G__Color> (() => new G__Color(190.0f, 112.0f, 0.0f, 255.0f)); // Same as Backgroubnd View
 			ButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 210.0f)); // Black
 			ButtonPressedTitleColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 0.0f)); // Black
 			ButtonNormalBGStrImage = "";
 			ButtonPressedBGStrImage = "";
 			ButtonFontName = "HelveticaNeue-Medium";
-            ButtonBorderWidth = 0.0f;
-            ButtonCornerRadius = 0.0f;
+            ButtonBorderWidth = 1.0f;
+            ButtonCornerRadius = 3.0f;
 
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
@@ -155,8 +155,8 @@ namespace NathansWay.Shared
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(240.0f, 240.0f, 240.0f, 255.0f)); // Black
 			TextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            TextBorderWidth = 0.5f;
-            TextCornerRadius = 3.0f;
+            TextBorderWidth = 1.0f;
+            TextCornerRadius = 2.0f;
 
 			// Slider View
 			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black

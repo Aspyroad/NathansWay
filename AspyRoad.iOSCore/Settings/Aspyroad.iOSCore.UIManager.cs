@@ -144,8 +144,8 @@ namespace AspyRoad.iOSCore.UISettings
 			ButtonNormalBGStrImage = g.ButtonNormalBGStrImage;
 			ButtonPressedBGStrImage = g.ButtonPressedBGStrImage;
 			ButtonFontName = g.ButtonFontName;
-            ButtonBorderWidth = g.ButtonCornerRadius;
-            ButtonCornerRadius = g.ButtonBorderWidth;
+            ButtonBorderWidth = g.ButtonBorderWidth;
+            ButtonCornerRadius = g.ButtonCornerRadius;
 			// View
 			ViewBGColor = g.ViewBGColor;
 			ViewBGColorTransition = g.ViewBGColorTransition;
