@@ -78,7 +78,6 @@ namespace AspyRoad.iOSCore
 
 		private void Initialize ()
 		{
-			//base.Initialize ();
 			this.AspyTag1 = 103;
 			this.AspyName = "VC_CtrlComboBox";
 
@@ -86,11 +85,58 @@ namespace AspyRoad.iOSCore
             _fontSize = 30.0f;
             _fontName = "HelveticaNeue-Light";
             _pickerRowHeight = (_fontSize + 20.0f);
+
+            #region TextBox
+
+            // UI Creation
+            _pickerTxtField = new AspyTextField (this._aspyLabelFrame);
+            // Delegates
+            this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
+            this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
+            // Visual Attributes For TextBox
+            _pickerTxtField.TextAlignment = UITextAlignment.Center;
+
+            #endregion
+
+            #region PickerViewModel
+
+            // Model Creation
+            _pickerModel = new AspyPickerViewModel ();
+            // Wireup our event
+            _pickerValueChanged = new Action<object, EventArgs>(valuechanged);
+            this._pickerModel.ValueChanged += valuechanged;
+            // Fill our pickerviewmodel with data
+            this.SetItems (null);
+
+            #endregion
+
+            #region PickerView
+            // Here we use all the same sizes as the text box but we adjust the Y cord 
+            // to allow for and center the height of the picker
+            _pickerView = new AspyPickerView 
+                (
+                    new RectangleF 
+                    (   
+                        _aspyLabelFrame.X, 
+                        (_aspyLabelFrame.Y - 59.0f),
+                        _aspyComboBoxFrame.Width,
+                        _aspyComboBoxFrame.Height
+                    )
+                );
+            // By default we want the picker hidden until the textbox is tapped.
+            _pickerView.Hidden = true;
+
+            //_pickerView.DataSource = _pickerModel;
+            _pickerView.Model = _pickerModel;
+
+            #endregion
 		}
 
 		#endregion
 
-		#region Public Members
+
+
+        #region Public Properties
 
 		public float FontSize
 		{
@@ -108,6 +154,10 @@ namespace AspyRoad.iOSCore
 		{
 			set { _pickerRowHeight = value; }
 		}
+
+        #endregion
+
+        #region Public Members
 
 		public void SetItems (List<string> _items)
 		{
@@ -134,66 +184,30 @@ namespace AspyRoad.iOSCore
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
+
+            // Visual Attributes For PickerView
+            _pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
+            _pickerTxtField.TextColor = UIColor.Black;
+            _pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
+
+            // Visual Attributes For PickerView
+            _pickerModel.FontSize = _fontSize;
+            _pickerModel.FontName = _fontName;
+        }
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
         }
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
 
+            // Set sizing. Cant be done at init.
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
-
-			#region TextBox
-
-			// UI Creation
-			_pickerTxtField = new AspyTextField (this._aspyLabelFrame);
-			// Delegates
-			this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
-			this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
-			// Visual Attributes For TextBox
-			_pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
-			_pickerTxtField.TextColor = UIColor.Black;
-			//_pickerTxtField.BackgroundColor = UIColor.White;
-			_pickerTxtField.Layer.CornerRadius = 5;
-			_pickerTxtField.Layer.BorderWidth = 1;
-			_pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
-			_pickerTxtField.TextAlignment = UITextAlignment.Center;
-
-			#endregion
-
-			#region PickerViewModel
-			// Model Creation
-			_pickerModel = new AspyPickerViewModel ();
-			// Visual Attributes For PickerView
-			_pickerModel.FontSize = _fontSize;
-			_pickerModel.FontName = _fontName;
-			_pickerModel.LabelFrame = this._aspyLabelFrame;
-			// Wireup our event
-			_pickerValueChanged = new Action<object, EventArgs>(valuechanged);
-			this._pickerModel.ValueChanged += valuechanged;
-			// Fill our pickerviewmodel with data
-			this.SetItems (null);
-			#endregion
-
-			#region PickerView
-			// Here we use all the same sizes as the text box but we adjust the Y cord 
-			// to allow for and center the height of the picker
-			_pickerView = new AspyPickerView 
-				(
-					new RectangleF 
-					(	
-						_aspyLabelFrame.X, 
-						(_aspyLabelFrame.Y - 59.0f),
-						_aspyComboBoxFrame.Width,
-						_aspyComboBoxFrame.Height
-					)
-				);
-			// By default we want the picker hidden until the textbox is tapped.
-			_pickerView.Hidden = true;
-
-			//_pickerView.DataSource = _pickerModel;
-			_pickerView.Model = _pickerModel;
-
-			#endregion
+            this._pickerTxtField.Frame = this._aspyLabelFrame;
+            _pickerModel.LabelFrame = this._aspyLabelFrame;
 
 			this.View.AddSubview (_pickerTxtField);
 			this.View.AddSubview (_pickerView);
