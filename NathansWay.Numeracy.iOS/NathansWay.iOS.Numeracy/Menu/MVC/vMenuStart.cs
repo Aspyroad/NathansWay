@@ -17,9 +17,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 	{
 		#region Private Variables
 
-        private UIColor colorMainBackGroundEnd;
-        private UIColor colorMainBackGroundStart;
-
 		#endregion
 
 		#region Constructors
@@ -64,9 +61,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var context = UIGraphics.GetCurrentContext();
 
 			// Color Declarations
-			var colorTextWhiteFade = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.392f);
-			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.561f);
-			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.594f);
+			var colorTextWhiteFade = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.4f);
+			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.55f);
+			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.6f);
 
 			// Gradient Declarations
 			var gradientBackGroundColors = new CGColor [] {colorMainBackGroundStart.CGColor, colorMainBackGroundStart.CGColor, colorMainBackGroundEnd.CGColor};
@@ -75,10 +72,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 			// Shadow Declarations
 			var colorTextNathansWayShadow = colorTextOuterShadowColor.CGColor;
-			var colorTextNathansWayShadowOffset = new SizeF(-38.1f, -11.1f);
+			var colorTextNathansWayShadowOffset = new SizeF(-38.0f, -11.0f);
 			var colorTextNathansWayShadowBlurRadius = 5.0f;
 			var colorTextNumbersShadow = colorTextNumbersShadowColor.CGColor;
-			var colorTextNumbersShadowOffset = new SizeF(26.1f, 15.1f);
+			var colorTextNumbersShadowOffset = new SizeF(26.0f, 15.0f);
 			var colorTextNumbersShadowBlurRadius = 5.0f;
 
 			// Variable Declarations
@@ -183,14 +180,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			// TeacherFrame Drawing
-			var teacherFramePath = UIBezierPath.FromRoundedRect(new RectangleF(75.0f, 180.0f, 401.0f, 44.0f), 6.0f);
+			var teacherFramePath = UIBezierPath.FromRoundedRect(new RectangleF(76.0f, 180.0f, 400.0f, 44.0f), 6.0f);
 			colorTextWhiteFade.SetStroke();
 			teacherFramePath.LineWidth = 1.0f;
 			teacherFramePath.Stroke();
 
 
 			// StudentFrame Drawing
-			var studentFramePath = UIBezierPath.FromRoundedRect(new RectangleF(549.5f, 179.5f, 401.0f, 44.0f), 6.0f);
+			var studentFramePath = UIBezierPath.FromRoundedRect(new RectangleF(550.0f, 180.0f, 400.0f, 44.0f), 6.0f);
 			colorTextWhiteFade.SetStroke();
 			studentFramePath.LineWidth = 1.0f;
 			studentFramePath.Stroke();
@@ -206,48 +203,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		public override void Draw(RectangleF rect)
 		{
-			base.ApplyUI ();
-			DrawCanvasMain (this.colorMainBackGroundStart, this.colorMainBackGroundEnd, rect);
+            var colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            var colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
+			DrawCanvasMain (colorMainBackGroundStart, colorMainBackGroundEnd, rect);
 		}
-
-		public override void ApplyUI ()
-		{
-			base.ApplyUI ();
-			// We use values as colors are lazy loaded
-			this.colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-			this.colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
-		}
-
-		#endregion
-
-		#region Touches
-
-        // TODO : Do these really need to be here??
-
-		public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
-		{
-			base.TouchesMoved (touches, evt);
-
-			UITouch touch = touches.AnyObject as UITouch;
-
-			if (touch != null) 
-			{
-				//SetNeedsDisplay ();
-			}
-		}
-
-		public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
-		{
-			base.TouchesEnded (touches, evt);
-
-			UITouch touch = touches.AnyObject as UITouch;
-
-			if (touch != null) 
-			{
-				//SetNeedsDisplay ();
-			}
-		}
-
 
 		#endregion
     }

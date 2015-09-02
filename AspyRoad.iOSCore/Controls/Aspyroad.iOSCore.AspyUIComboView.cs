@@ -89,12 +89,13 @@ namespace AspyRoad.iOSCore
             #region TextBox
 
             // UI Creation
-            _pickerTxtField = new AspyTextField (this._aspyLabelFrame);
+            _pickerTxtField = new AspyTextField ();
             // Delegates
             this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
             this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
             // Visual Attributes For TextBox
             _pickerTxtField.TextAlignment = UITextAlignment.Center;
+            _pickerTxtField.Text = "Hi Dude";
 
             #endregion
 
@@ -110,31 +111,44 @@ namespace AspyRoad.iOSCore
 
             #endregion
 
-            #region PickerView
-            // Here we use all the same sizes as the text box but we adjust the Y cord 
-            // to allow for and center the height of the picker
+
+		}
+
+        private void EditNumberPicker()
+        {
             _pickerView = new AspyPickerView 
                 (
-                    new RectangleF 
-                    (   
-                        _aspyLabelFrame.X, 
-                        (_aspyLabelFrame.Y - 59.0f),
-                        _aspyComboBoxFrame.Width,
-                        _aspyComboBoxFrame.Height
-                    )
+                    this._pickerTxtField.Frame
                 );
-            // By default we want the picker hidden until the textbox is tapped.
-            _pickerView.Hidden = true;
 
             //_pickerView.DataSource = _pickerModel;
             _pickerView.Model = _pickerModel;
 
+            this.View.AddSubview (_pickerView);
+
+            #region UI for prior iOS7
+//            // Just in case the _picker isnt drawn
+//            if (_pickerView.Subviews.GetUpperBound (0) > 0)
+//            {
+//                if (this.iOSGlobals.G__iOSVersion.Major < 7)
+//                {
+//                    _pickerView.BackgroundColor = UIColor.Clear;
+//                    // Clear all crap UI from pickerview prior to iOS7
+//                    // This clears all pickerview background
+//                    foreach (UIView v in _pickerView.Subviews)
+//                    {
+//                        if (v.GetType() != typeof(UITableView))
+//                        {
+//                            v.Alpha = 0.5f;
+//                        }
+//                    }
+//                }
+//            }
+
             #endregion
-		}
+        }
 
 		#endregion
-
-
 
         #region Public Properties
 
@@ -161,6 +175,7 @@ namespace AspyRoad.iOSCore
 
 		public void SetItems (List<string> _items)
 		{
+            // Obviously for testing
 			if (_items == null)
 			{
 				var x = new List<string> ();
@@ -174,7 +189,6 @@ namespace AspyRoad.iOSCore
 			{
 				this._pickerModel.Items = _items;
 			}
-
 		}
 
 		#endregion
@@ -206,39 +220,15 @@ namespace AspyRoad.iOSCore
 
             // Set sizing. Cant be done at init.
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
-            this._pickerTxtField.Frame = this._aspyLabelFrame;
+            this._pickerTxtField.Frame = new RectangleF (76.0f, 180.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
             _pickerModel.LabelFrame = this._aspyLabelFrame;
 
 			this.View.AddSubview (_pickerTxtField);
-			this.View.AddSubview (_pickerView);
-			this.View.SendSubviewToBack(_pickerView);
-			this.View.BringSubviewToFront (_pickerTxtField);
 		}			
 
 		public override void ViewDidAppear (bool animated)
 		{
 			base.ViewDidAppear (animated);
-
-			#region UI for prior iOS7
-			// Just in case the _picker isnt drawn
-			if (_pickerView.Subviews.GetUpperBound (0) > 0)
-			{
-				if (this.iOSGlobals.G__iOSVersion.Major < 7)
-				{
-					_pickerView.BackgroundColor = UIColor.Clear;
-					// Clear all crap UI from pickerview prior to iOS7
-					// This clears all pickerview background
-					foreach (UIView v in _pickerView.Subviews)
-					{
-						if (v.GetType() != typeof(UITableView))
-						{
-							v.Alpha = 0.5f;
-						}
-					}
-				}
-			}
-
-			#endregion
 		}
 					
 		#endregion
@@ -249,7 +239,7 @@ namespace AspyRoad.iOSCore
 		{
 			// Clear the text when picker to make it clearer
 			this._pickerTxtField.Text = "";
-			this._pickerView.Hidden = false;
+            this.EditNumberPicker();
 			this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
@@ -270,12 +260,10 @@ namespace AspyRoad.iOSCore
 		{
 			this._pickerTxtField.Text = this._pickerModel.SelectedItem;
 			this.View.SendSubviewToBack(this._pickerTxtField);
-			this._pickerView.Hidden = true; 
 
 			// UI - Reverse text field half clear white to show it is being edited
 			this._pickerTxtField.BackgroundColor = UIColor.Clear;
 			this._pickerTxtField.Alpha = 1.0f;
-
 		}
 
 		#endregion

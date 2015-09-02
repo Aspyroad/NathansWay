@@ -234,7 +234,8 @@ namespace NathansWay.iOS.Numeracy
             this.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
 
             // Add any views or vc's
-            this.AddAndDisplayController(_vcLessonMenu.Value);
+            //this.AddAndDisplayController(_vcLessonMenu.Value);
+            this.AddAndDisplayController(_vcMainMenu.Value);
             //this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
