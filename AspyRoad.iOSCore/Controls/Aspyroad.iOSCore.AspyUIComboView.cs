@@ -70,6 +70,7 @@ namespace AspyRoad.iOSCore
 
 			//Do this because the ViewModel hangs around for the lifetime of the app
 			this._pickerTxtField.TouchDown -= pickerTxtField_TouchDown;
+            this._pickerModel.ValueChanged -= valuechanged;
 		}
 
 		#endregion
