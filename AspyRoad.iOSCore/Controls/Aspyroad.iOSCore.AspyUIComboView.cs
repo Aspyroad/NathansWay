@@ -118,7 +118,13 @@ namespace AspyRoad.iOSCore
         {
             _pickerView = new AspyPickerView 
                 (
-                    this._pickerTxtField.Frame
+                    new RectangleF(
+                        this._pickerTxtField.Frame.X,
+                        this._pickerTxtField.Frame.Y - 56,
+                        this._pickerTxtField.Frame.Width,
+                        this._pickerTxtField.Frame.Height)
+                        
+                        
                 );
 
             //_pickerView.DataSource = _pickerModel;
@@ -181,10 +187,10 @@ namespace AspyRoad.iOSCore
 
             // Visual Attributes For PickerView
             _pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
-            _pickerTxtField.TextColor = UIColor.Black;
+            //_pickerTxtField.TextColor = UIColor.Black;
             _pickerTxtField.CornerRadius = 5.0f;
             _pickerTxtField.HasRoundedCorners = true;
-            _pickerTxtField.HasBorder = true;
+            //_pickerTxtField.HasBorder = true;
 
             // Visual Attributes For PickerView
             _pickerModel.FontSize = _fontSize;
@@ -200,10 +206,11 @@ namespace AspyRoad.iOSCore
 		{
 			base.ViewDidLoad ();
 
-            // Set sizing. Cant be done at init.
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             this._pickerTxtField.Frame = new RectangleF (76.0f, 180.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
             _pickerModel.LabelFrame = this._aspyLabelFrame;
+            // Set sizing. Cant be done at init.
+            // this.View.Frame = this._aspyComboBoxFrame;
 
 			this.View.AddSubview (_pickerTxtField);
 		}			
@@ -244,7 +251,7 @@ namespace AspyRoad.iOSCore
 			this.View.SendSubviewToBack(this._pickerTxtField);
 
 			// UI - Reverse text field half clear white to show it is being edited
-			this._pickerTxtField.BackgroundColor = UIColor.Clear;
+			this._pickerTxtField.BackgroundColor = UIColor.White;
 			this._pickerTxtField.Alpha = 1.0f;
 		}
 
@@ -344,6 +351,7 @@ namespace AspyRoad.iOSCore
         public override void Draw(RectangleF rect)
         {
             base.Draw(rect);
+            this.BackgroundColor = UIColor.Black;
             // This hides all the drawn UI Apple inserts into the pickerview...crap!
             if (this._bHideiOS7UI)
             {
@@ -397,11 +405,13 @@ namespace AspyRoad.iOSCore
 
 		public AspyPickerViewModel ()
         {
+            this.Initialize();
         }
 
 		public AspyPickerViewModel (List<string> _dataList)
 		{
 			this._items = _dataList;
+            this.Initialize();
 		}
 
         #endregion
@@ -458,7 +468,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override int GetRowsInComponent (UIPickerView picker, int component)
         {
-            return _items.Count;
+            return this._items.Count;
         }
 
         /// <summary>
@@ -467,7 +477,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override string GetTitle (UIPickerView picker, int row, int component)
         {
-            return _items[row];
+            return this._items[row];
         }
 
         /// <summary>
