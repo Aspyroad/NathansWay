@@ -112,7 +112,6 @@ namespace AspyRoad.iOSCore
 
             #endregion
 
-
 		}
 
         private void EditNumberPicker()
@@ -126,27 +125,7 @@ namespace AspyRoad.iOSCore
             _pickerView.Model = _pickerModel;
 
             this.View.AddSubview (_pickerView);
-
-            #region UI for prior iOS7
-//            // Just in case the _picker isnt drawn
-//            if (_pickerView.Subviews.GetUpperBound (0) > 0)
-//            {
-//                if (this.iOSGlobals.G__iOSVersion.Major < 7)
-//                {
-//                    _pickerView.BackgroundColor = UIColor.Clear;
-//                    // Clear all crap UI from pickerview prior to iOS7
-//                    // This clears all pickerview background
-//                    foreach (UIView v in _pickerView.Subviews)
-//                    {
-//                        if (v.GetType() != typeof(UITableView))
-//                        {
-//                            v.Alpha = 0.5f;
-//                        }
-//                    }
-//                }
-//            }
-
-            #endregion
+            this.View.BringSubviewToFront(_pickerView);
         }
 
 		#endregion
@@ -203,7 +182,9 @@ namespace AspyRoad.iOSCore
             // Visual Attributes For PickerView
             _pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
             _pickerTxtField.TextColor = UIColor.Black;
-            _pickerTxtField.Layer.BorderColor = UIColor.White.CGColor;
+            _pickerTxtField.CornerRadius = 5.0f;
+            _pickerTxtField.HasRoundedCorners = true;
+            _pickerTxtField.HasBorder = true;
 
             // Visual Attributes For PickerView
             _pickerModel.FontSize = _fontSize;
@@ -425,28 +406,23 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #region Private Variables
+        #region Private Members
 
         protected virtual void Initialize()
         {
             _rowHeight = 50.0f;
         }
 
-
-
         #endregion
 
-        #region Public Variables
+        #region Public Properties
 
         public List<string> Items
         {
             get { return _items; }
             set { _items = value; }
         }
-
-        /// <summary>
-        /// The current selected item
-        /// </summary>
+            
         public string SelectedItem
         {
             get { return _items[selectedIndex]; }
