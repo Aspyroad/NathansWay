@@ -28,6 +28,9 @@ namespace AspyRoad.iOSCore
 		private string _fontName;
 		private RectangleF _aspyComboBoxFrame;
 		private RectangleF _aspyLabelFrame;
+        private float _fPickerYOffset;
+        // Tap Delegates
+        private UITapGestureRecognizer singleTapGesture;
 
 		#endregion
 
@@ -83,29 +86,30 @@ namespace AspyRoad.iOSCore
 			this.AspyName = "VC_CtrlComboBox";
 
             // Global UI TESTING
-            _fontSize = 30.0f;
-            _fontName = "HelveticaNeue-Light";
-            _pickerRowHeight = (_fontSize + 20.0f);
+            this._fontSize = 30.0f;
+            this._fontName = "HelveticaNeue-Light";
+            this._pickerRowHeight = (_fontSize + 20.0f);
+            this._fPickerYOffset = 59.0f;
 
             #region TextBox
 
             // UI Creation
-            _pickerTxtField = new AspyTextField ();
+            this._pickerTxtField = new AspyTextField ();
             // Delegates
-            this._pickerTxtField.TouchDown += pickerTxtField_TouchDown;
+            this._pickerTxtField.TouchDown += this.pickerTxtField_TouchDown;
             this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
             // Visual Attributes For TextBox
-            _pickerTxtField.TextAlignment = UITextAlignment.Center;
-            _pickerTxtField.Text = "Hi Dude";
+            this._pickerTxtField.TextAlignment = UITextAlignment.Center;
+            this._pickerTxtField.Text = "Teacher";
 
             #endregion
 
             #region PickerViewModel
 
             // Model Creation
-            _pickerModel = new AspyPickerViewModel ();
+            this._pickerModel = new AspyPickerViewModel ();
             // Wireup our event
-            _pickerValueChanged = new Action<object, EventArgs>(valuechanged);
+            this._pickerValueChanged = new Action<object, EventArgs>(valuechanged);
             this._pickerModel.ValueChanged += valuechanged;
             // Fill our pickerviewmodel with data
             this.SetItems (null);
@@ -116,22 +120,66 @@ namespace AspyRoad.iOSCore
 
         private void EditNumberPicker()
         {
-            _pickerView = new AspyPickerView 
+            this._pickerView = new AspyPickerView 
                 (
                     new RectangleF(
                         this._pickerTxtField.Frame.X,
-                        this._pickerTxtField.Frame.Y - 56,
+                        this._pickerTxtField.Frame.Y - this._fPickerYOffset,
                         this._pickerTxtField.Frame.Width,
                         this._pickerTxtField.Frame.Height)
                         
                         
                 );
+            this._pickerView.UserInteractionEnabled = true;
+            this._pickerView.ShowSelectionIndicator = true;
+            this._pickerView.Model = this._pickerModel;
 
-            //_pickerView.DataSource = _pickerModel;
-            _pickerView.Model = _pickerModel;
+            this.View.AddSubview (this._pickerView);
+            this.View.BringSubviewToFront(this._pickerView);
+            // Wire up tapgesture to 
+            this.pkSingleTapGestureRecognizer();
+        }
 
-            this.View.AddSubview (_pickerView);
-            this.View.BringSubviewToFront(_pickerView);
+        protected void CloseNumberPicker()
+        {
+            this._pickerView.RemoveGestureRecognizer(singleTapGesture);
+            this.singleTapGesture = null;
+            this._pickerView.Delegate = null;
+            this._pickerView.RemoveFromSuperview();
+            this._pickerView = null;
+        }
+
+        protected void HandlePickerChanged()
+        {
+            this._pickerTxtField.Text = this._pickerModel.SelectedItem;
+            this.View.SendSubviewToBack(this._pickerTxtField);
+
+            // UI - Reverse text field half clear white to show it is being edited
+            //this._pickerTxtField.BackgroundColor = UIColor.White;
+            //this._pickerTxtField.Alpha = 1.0f;
+        }
+
+        protected void pkSingleTapGestureRecognizer()
+        {
+            NSAction action = () => 
+                { 
+                    this.HandlePickerChanged();
+                    this.CloseNumberPicker();
+                };
+
+            singleTapGesture = new UITapGestureRecognizer(action);
+
+            singleTapGesture.NumberOfTouchesRequired = 1;
+            singleTapGesture.NumberOfTapsRequired = 1;
+
+            // This is needed for ios 7 >
+            singleTapGesture.ShouldRecognizeSimultaneously = delegate
+                {
+                    return true;
+                };
+
+            // add the gesture recognizer to the view
+            this._pickerView.AddGestureRecognizer(singleTapGesture);
         }
 
 		#endregion
@@ -140,19 +188,25 @@ namespace AspyRoad.iOSCore
 
 		public float FontSize
 		{
-			get { return _fontSize;	}
-			set { _fontSize = value; }
+			get { return this._fontSize;	}
+			set { this._fontSize = value; }
 		}
+
+        public float PickerYOffset
+        {
+            get { return this._fPickerYOffset; }
+            set { this._fPickerYOffset = value; }
+        }
 
 		public string FontName
 		{
-			get { return _fontName; }
-			set { _fontName = value; }
+			get { return this._fontName; }
+			set { this._fontName = value; }
 		}
 
 		public float PickerRowHeight
 		{
-			set { _pickerRowHeight = value; }
+			set { this._pickerRowHeight = value; }
 		}
 
         #endregion
@@ -193,8 +247,9 @@ namespace AspyRoad.iOSCore
             //_pickerTxtField.HasBorder = true;
 
             // Visual Attributes For PickerView
-            _pickerModel.FontSize = _fontSize;
-            _pickerModel.FontName = _fontName;
+            _pickerModel.FontSize = this._fontSize;
+            _pickerModel.FontName = this._fontName;
+            _pickerModel.RowHeight = this._pickerRowHeight;
         }
 
         public override void ApplyUI6()
@@ -247,12 +302,7 @@ namespace AspyRoad.iOSCore
 
 		private void valuechanged(object s, System.EventArgs e)
 		{
-			this._pickerTxtField.Text = this._pickerModel.SelectedItem;
-			this.View.SendSubviewToBack(this._pickerTxtField);
 
-			// UI - Reverse text field half clear white to show it is being edited
-			this._pickerTxtField.BackgroundColor = UIColor.White;
-			this._pickerTxtField.Alpha = 1.0f;
 		}
 
 		#endregion
@@ -420,7 +470,7 @@ namespace AspyRoad.iOSCore
 
         protected virtual void Initialize()
         {
-            _rowHeight = 50.0f;
+            //_rowHeight = 50.0f;
         }
 
         #endregion
@@ -494,6 +544,7 @@ namespace AspyRoad.iOSCore
         public override void Selected (UIPickerView picker, int row, int component)
         {
             selectedIndex = row;
+            picker.ReloadComponent(component);
             if (this.ValueChanged != null)
             {
                 this.ValueChanged (this, new EventArgs ());

@@ -686,11 +686,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             
             #endregion
             
-            #region Public Members
+            #region Public Properties
 
-            /// <summary>
-            /// The current selected item
-            /// </summary>
             public string SelectedItemStr
             {
                 get { return this._items[selectedIndex]; }
