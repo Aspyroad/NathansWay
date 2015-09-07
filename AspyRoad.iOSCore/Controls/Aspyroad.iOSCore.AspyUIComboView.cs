@@ -18,6 +18,7 @@ namespace AspyRoad.iOSCore
 		// Main UI views
 		private AspyPickerView _pickerView;
 		private AspyTextField _pickerTxtField;
+        private string _strPickerText;
 		// Data Model
 		private AspyPickerViewModel _pickerModel;
 		// Event data for change
@@ -126,20 +127,27 @@ namespace AspyRoad.iOSCore
                         this._pickerTxtField.Frame.X,
                         this._pickerTxtField.Frame.Y - this._fPickerYOffset,
                         this._pickerTxtField.Frame.Width,
-                        this._pickerTxtField.Frame.Height)
-                        
+                        this._pickerTxtField.Frame.Height)                        
                         
                 );
             this._pickerView.UserInteractionEnabled = true;
             this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
 
-            this._pickerModel.SelectedItemInt = 
+            this._pickerModel.SelectedItemInt = this.GetSelectedItem(this._strPickerText);
+            this._pickerView.Select(this._pickerModel.SelectedItemInt, 0, true);
 
             this.View.AddSubview (this._pickerView);
             this.View.BringSubviewToFront(this._pickerView);
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
+        }
+
+        protected int GetSelectedItem(string _currentSelection)
+        {
+            int x;
+            x = this._pickerModel.Items.IndexOf(_currentSelection);
+            return x;            
         }
 
         protected void CloseNumberPicker()
@@ -157,8 +165,8 @@ namespace AspyRoad.iOSCore
             this.View.SendSubviewToBack(this._pickerTxtField);
 
             // UI - Reverse text field half clear white to show it is being edited
-            //this._pickerTxtField.BackgroundColor = UIColor.White;
-            //this._pickerTxtField.Alpha = 1.0f;
+            this._pickerTxtField.BackgroundColor = UIColor.Clear;
+            this._pickerTxtField.Alpha = 1.0f;
         }
 
         protected void pkSingleTapGestureRecognizer()
@@ -283,7 +291,7 @@ namespace AspyRoad.iOSCore
 
 		private void pickerTxtField_TouchDown (object sender, EventArgs e)
 		{
-			// Clear the text when picker to make it clearer
+            this._strPickerText = this._pickerTxtField.Text;
 			this._pickerTxtField.Text = "";
             this.EditNumberPicker();
 			this.View.BringSubviewToFront(this._pickerView);
