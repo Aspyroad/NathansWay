@@ -134,6 +134,8 @@ namespace AspyRoad.iOSCore
             this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
 
+            this._pickerModel.SelectedItemInt = 
+
             this.View.AddSubview (this._pickerView);
             this.View.BringSubviewToFront(this._pickerView);
             // Wire up tapgesture to 
@@ -507,6 +509,12 @@ namespace AspyRoad.iOSCore
         {
             get { return _rowHeight; }
             set { _rowHeight = value; }
+        }
+
+        public int SelectedItemInt
+        {
+            get { return selectedIndex; }
+            set { selectedIndex = value; }
         }
 
         #endregion

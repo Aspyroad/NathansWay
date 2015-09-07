@@ -742,7 +742,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
                 if (pickerView.SelectedRowInComponent(component) == row)
                 {
-                    _lblPickerView.BackgroundColor = UIColor.White; //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
+                    _lblPickerView.BackgroundColor = UIColor.White; 
                     _lblPickerView.Layer.BorderColor = UIColor.Orange.CGColor;
                     _lblPickerView.Layer.BorderWidth = 2.0f;
                     _lblPickerView.Layer.CornerRadius = 8.0f;
@@ -753,8 +753,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                     _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
                     _lblPickerView.Layer.BorderWidth = 1.0f;
                     _lblPickerView.Layer.CornerRadius = 8.0f;
-                    //_lblPickerView.Alpha = 0.3f;
-                    //iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleColor;
                 }
 
                 // Apply global UI
