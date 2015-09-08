@@ -137,10 +137,12 @@ namespace NathansWay.iOS.Numeracy.Menu
 			// Add ComboBoxes MuthaFucka!
 			this.cmbTeacher = new AspyComboBox (new RectangleF (75.0f, 180.0f, 400.0f, 44.0f));
 			this.cmbTeacher.AspyTag1 = 1031;
+            this.cmbTeacher.Text = "Teacher";
 			this.View.AddSubview (this.cmbTeacher.View);
 
             this.cmbStudent = new AspyComboBox (new RectangleF (550.0f, 180.0f, 400.0f, 44.0f));
             this.cmbStudent.AspyTag1 = 1032;
+            this.cmbStudent.Text = "Student";
             this.View.AddSubview (this.cmbStudent.View);
 
 		}

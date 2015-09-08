@@ -101,7 +101,6 @@ namespace AspyRoad.iOSCore
             this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
             // Visual Attributes For TextBox
             this._pickerTxtField.TextAlignment = UITextAlignment.Center;
-            this._pickerTxtField.Text = "Teacher";
 
             #endregion
 
@@ -222,6 +221,16 @@ namespace AspyRoad.iOSCore
 		{
 			set { this._pickerRowHeight = value; }
 		}
+
+        /// <summary>
+        /// Gets or sets the text for the Combo Display.
+        /// </summary>
+        /// <value>Text string.</value>
+        public string Text
+        {
+            get { return this._pickerTxtField.Text; }
+            set { this._pickerTxtField.Text = value; }
+        }
 
         #endregion
 
