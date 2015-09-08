@@ -80,13 +80,13 @@ namespace AspyRoad.iOSCore
 			var context = UIGraphics.GetCurrentContext ();
 
 			//// Color Declarations
-			var colorGradientEasyToHardColor = UIColor.FromRGBA (0.190f, 0.581f, 0.177f, 1.000f);
-			var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.808f, 0.000f, 0.000f, 0.784f);
+			var colorGradientEasyToHardColor = UIColor.FromRGBA (0.19f, 0.58f, 0.17f, 1.0f);
+			var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.8f, 0.0f, 0.0f, 0.78f);
 
 			//// Gradient Declarations
 			var colorGradientEasyToHardColors = new CGColor [] {
 				colorGradientEasyToHardColor.CGColor,
-				UIColor.FromRGBA (0.499f, 0.290f, 0.089f, 0.892f).CGColor,
+				UIColor.FromRGBA (0.5f, 0.3f, 0.09f, 0.9f).CGColor,
 				colorGradientEasyToHardColor2.CGColor
 			};
 			var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
@@ -140,13 +140,13 @@ namespace AspyRoad.iOSCore
 				var colorSpace = CGColorSpace.CreateDeviceRGB ();
 
 				//// Color Declarations
-				var colorGradientEasyToHardColor = UIColor.FromRGBA (0.190f, 0.581f, 0.177f, 1.000f);
-				var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.808f, 0.000f, 0.000f, 0.784f);
+				var colorGradientEasyToHardColor = UIColor.FromRGBA (0.2f, 0.58f, 0.17f, 1.0f);
+				var colorGradientEasyToHardColor2 = UIColor.FromRGBA (0.8f, 0.000f, 0.000f, 0.8f);
 
 				//// Gradient Declarations
 				var colorGradientEasyToHardColors = new CGColor [] {
 					colorGradientEasyToHardColor.CGColor,
-					UIColor.FromRGBA (0.499f, 0.290f, 0.089f, 0.892f).CGColor,
+					UIColor.FromRGBA (0.5f, 0.3f, 0.09f, 0.9f).CGColor,
 					colorGradientEasyToHardColor2.CGColor
 				};
 				var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };

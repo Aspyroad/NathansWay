@@ -101,7 +101,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			// textLogoNathansWay Drawing
-			RectangleF textLogoNathansWayRect = new RectangleF(0.0f, -0.0f, 350.0f, 70.0f);
+			RectangleF textLogoNathansWayRect = new RectangleF(0.0f, 0.0f, 350.0f, 70.0f);
 			{
 				var textContent = "nathansway";
 				context.SaveState();
@@ -116,7 +116,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			// textNumberDisplay Drawing
-			RectangleF textNumberDisplayRect = new RectangleF(94.0f, 44.0f, 329.0f, 74.0f);
+			RectangleF textNumberDisplayRect = new RectangleF(94.0f, 44.0f, 330.0f, 74.0f);
 			{
 				var textContent = "1234567890";
 				context.SaveState();
@@ -131,43 +131,43 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			// textNumbers Drawing
-			RectangleF textNumbersRect = new RectangleF(85.0f, 27.0f, 227.0f, 65.0f);
+			RectangleF textNumbersRect = new RectangleF(86.0f, 28.0f, 228.0f, 66.0f);
 			UIColor.White.SetFill();
 			new NSString(strAppName).DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 
 
 			// templateButtonLesson Drawing
-			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 255.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 256.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonLessonPath.Fill();
 
 
 			// templateButtonToolBox Drawing
-			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 255.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 256.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonToolBoxPath.Fill();
 
 
 			// templateButtonTeacher Drawing
-			var templateButtonTeacherPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 415.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonTeacherPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 416.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonTeacherPath.Fill();
 
 
 			// templateButtonStudent Drawing
-			var templateButtonStudentPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 415.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonStudentPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 416.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonStudentPath.Fill();
 
 
 			// templateButtonLessonEdit Drawing
-			var templateButtonLessonEditPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 575.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonLessonEditPath = UIBezierPath.FromRoundedRect(new RectangleF(50.0f, 576.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonLessonEditPath.Fill();
 
 
 			// templateButtonVisuals Drawing
-			var templateButtonVisualsPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 575.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonVisualsPath = UIBezierPath.FromRoundedRect(new RectangleF(526.0f, 576.0f, 448.0f, 150.0f), 24.0f);
 			UIColor.White.SetFill();
 			templateButtonVisualsPath.Fill();
 

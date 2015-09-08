@@ -147,6 +147,10 @@ namespace AspyRoad.iOSCore
         {
             int x;
             x = this._pickerModel.Items.IndexOf(_currentSelection);
+            if (x == -1)
+            {
+                x = 0;
+            }
             return x;            
         }
 
@@ -271,8 +275,9 @@ namespace AspyRoad.iOSCore
 		{
 			base.ViewDidLoad ();
 
+            this.View.Frame = this._aspyComboBoxFrame;
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
-            this._pickerTxtField.Frame = new RectangleF (76.0f, 180.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
+            this._pickerTxtField.Frame = new RectangleF (1.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
             _pickerModel.LabelFrame = this._aspyLabelFrame;
             // Set sizing. Cant be done at init.
             // this.View.Frame = this._aspyComboBoxFrame;
