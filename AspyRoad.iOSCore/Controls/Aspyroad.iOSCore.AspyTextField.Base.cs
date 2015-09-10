@@ -190,18 +190,28 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-        public virtual void ApplyUI(G__ApplyUI _applywhere)
+
+        public virtual void ApplyUI (G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
                 return;
             }
+            if (!this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            {
+                this.ApplyUI6();
+                return;
+            }
 
+            // ApplUI here
             this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
             this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
+        }
 
+        public virtual void ApplyUI6()
+        {            
         }
 
         #region Responder Chain Interrupt

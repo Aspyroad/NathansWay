@@ -54,6 +54,11 @@ public class NumberPickerView : AspyPickerView
 
     #region Private Members
 
+    private void Initialize()
+    {
+        this._applyUIWhere = G__ApplyUI.ViewWillAppear;
+    }
+
     #endregion
 
     #region Overrides Members
@@ -61,13 +66,13 @@ public class NumberPickerView : AspyPickerView
     public override void MovedToSuperview()
     {
         base.MovedToSuperview();
-        this.ApplyUI();
+        this.ApplyUI(this._applyUIWhere);
     }
 
-    public override void ApplyUI ()
+    public override void ApplyUI (G__ApplyUI _applywhere)
     {
         // Must call base as it populates iOS7TableView
-        base.ApplyUI();
+        base.ApplyUI(_applywhere);
 
         if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
         {

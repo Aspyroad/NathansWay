@@ -92,6 +92,8 @@ namespace AspyRoad.iOSCore
             this._pickerRowHeight = (_fontSize + 20.0f);
             this._fPickerYOffset = 59.0f;
 
+            this._applyUIWhere = G__ApplyUI.ViewDidLoad;
+
             #region TextBox
 
             // UI Creation
@@ -111,6 +113,7 @@ namespace AspyRoad.iOSCore
             // Wireup our event
             this._pickerValueChanged = new Action<object, EventArgs>(valuechanged);
             this._pickerModel.ValueChanged += valuechanged;
+            //this._pickerModel.
             // Fill our pickerviewmodel with data
             this.SetItems (null);
 
@@ -283,14 +286,12 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-
+            // Pickers frame
             this.View.Frame = this._aspyComboBoxFrame;
+            // Rest
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             this._pickerTxtField.Frame = new RectangleF (1.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
             _pickerModel.LabelFrame = this._aspyLabelFrame;
-            // Set sizing. Cant be done at init.
-            // this.View.Frame = this._aspyComboBoxFrame;
-
 			this.View.AddSubview (_pickerTxtField);
 		}			
 
@@ -311,8 +312,8 @@ namespace AspyRoad.iOSCore
 			this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-			this._pickerTxtField.BackgroundColor = UIColor.White;
-			this._pickerTxtField.Alpha = 0.5f;
+			//this._pickerTxtField.BackgroundColor = UIColor.White;
+			//this._pickerTxtField.Alpha = 0.5f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -333,15 +334,21 @@ namespace AspyRoad.iOSCore
 	}
 	
     [MonoTouch.Foundation.Register ("AspyPickerView")] 
-    public class AspyPickerView : UIPickerView  
+    public class AspyPickerView : UIPickerView, IUIApply  
     {
+        public iOSUIManager iOSUIAppearance;
+        public IAspyGlobals iOSGlobals;
+
         #region Private Variables
 
-        protected iOSUIManager iOSUIAppearance; 
+        // UIApplication Variables
+        protected bool _bHasBorder;
+        protected bool _bHasRoundedCorners;
+        protected float _fCornerRadius;
+        protected float _fBorderWidth;
+        protected G__ApplyUI _applyUIWhere;
+        // Pre iOS7 TableView
         protected UIView _iOS7TableView;
-
-        // Hide an draw code prior to iOS7
-        protected bool _bHideiOS7UI;
 
         #endregion
 
@@ -380,38 +387,10 @@ namespace AspyRoad.iOSCore
 		private void Initialize()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
             // Can see no reason why this should ever be false as Apple do!
             this.ClipsToBounds = true;
-            // Default to true
-            this._bHideiOS7UI = true;
 		}
-
-        private void HideDefaultDrawCode ()
-        {
-            #region UI for prior iOS7
-
-            if (!iOSUIAppearance.GlobaliOSTheme.IsiOS7)
-            {
-                // This removes all the CRAP views apple used in pickerviews prior to iOS7
-                if (this.Subviews.GetUpperBound (0) > 0)
-                {
-                    foreach (UIView v in this.Subviews)
-                    {
-                        if (v.GetType() != typeof(UITableView))                     
-                        {
-                            v.Hidden = true;
-                        }                                             
-                        else
-                        {
-                            _iOS7TableView = v;
-                            v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
-                        }
-                    }                
-                }
-            }
-
-            #endregion
-        }
 
 		#endregion
 
@@ -422,33 +401,158 @@ namespace AspyRoad.iOSCore
             base.AwakeFromNib();
         }
 
-        public override void Draw(RectangleF rect)
+        public override void MovedToSuperview()
         {
-            base.Draw(rect);
-            this.BackgroundColor = UIColor.Black;
-            // This hides all the drawn UI Apple inserts into the pickerview...crap!
-            if (this._bHideiOS7UI)
-            {
-                this.HideDefaultDrawCode();
-            }
+            base.MovedToSuperview();
+            this.ApplyUI(this._applyUIWhere);
         }
 
 		#endregion
 
         #region Public Properties
 
-        public bool HideiOS7UI
+        /// <summary>
+        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
+        /// </summary>
+        /// <value>The apply user interface where.</value>
+        public G__ApplyUI ApplyUIWhere
         {
-            get { return _bHideiOS7UI; }
-            set { this._bHideiOS7UI = value; }
+            get { return this._applyUIWhere; }
+            set { this._applyUIWhere = value; }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
+        public bool HasBorder
+        {
+            get { return this._bHasBorder; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.Layer.BorderWidth = 0.0f;
+                }
+                else
+                {
+                    this.Layer.BorderWidth = this._fBorderWidth;   
+                }
+
+                if (this._bHasBorder)
+                { 
+                    this.SetNeedsDisplay();
+                }
+                this._bHasBorder = value; 
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
+        public bool HasRoundedCorners
+        {
+            get { return this._bHasRoundedCorners; }
+            set 
+            { 
+                if (value == false)
+                {
+                    this.CornerRadius = 0.0f;
+                }
+                else
+                {
+                    this.CornerRadius = this._fCornerRadius;   
+                }
+
+                if (this._bHasRoundedCorners)
+                {
+                    this.SetNeedsDisplay();
+                }
+                this._bHasRoundedCorners = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
+        /// <value>The width of the border.</value>
+        public float BorderWidth
+        {
+            get { return this._fBorderWidth; }
+            set 
+            { 
+                if (this._bHasBorder)
+                {
+                    this.SetNeedsDisplay();
+                }
+                this._fBorderWidth = value; 
+
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the corner radius.
+        /// </summary>
+        /// <value>The corner radius.</value>
+        public float CornerRadius
+        {
+            get { return this._fCornerRadius; }
+            set 
+            {
+                if (this._bHasRoundedCorners)
+                {
+                    this.SetNeedsDisplay();
+                }
+                this._fCornerRadius = value; 
+            }
         }
 
         #endregion
 
         #region Virtual Members
 
-        public virtual void ApplyUI ()
+        public virtual void ApplyUI (G__ApplyUI _applywhere)
         {
+            if (_applywhere != this._applyUIWhere)
+            {
+                return;
+            }
+            if (this.iOSGlobals.G__iOSVersion.Major < 7)
+            {
+                this.ApplyUI6();
+                return;
+            }
+
+            // UI Code here
+        }
+
+        public virtual void ApplyUI6()
+        {
+            // UI Code here pre iOS7
+            // This removes all the CRAP views apple used in pickerviews prior to iOS7
+            if (this.Subviews.GetUpperBound (0) > 0)
+            {
+                foreach (UIView v in this.Subviews)
+                {
+                    if (v.GetType() != typeof(UITableView))                     
+                    {
+                        v.Hidden = true;
+                    }                                             
+                    else
+                    {
+                        _iOS7TableView = v;
+                        v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
+                        v.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+                        v.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                        v.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+                    }
+                }                
+            }
+
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value ;
+            this.BackgroundColor.ColorWithAlpha(0.4f);
+
         }
 
         #endregion
@@ -462,10 +566,10 @@ namespace AspyRoad.iOSCore
 		protected List<string> _items;
 		protected float _fontSize;
 		protected string _fontName;
-		protected RectangleF _labelFrame;
+        protected RectangleF _labelFrame;
+        protected iOSUIManager iOSUIAppearance;
 
         protected float _rowHeight;
-
 
         #endregion
 
@@ -494,7 +598,7 @@ namespace AspyRoad.iOSCore
 
         protected virtual void Initialize()
         {
-            //_rowHeight = 50.0f;
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
         }
 
         #endregion
@@ -586,14 +690,34 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
         {
-			AspyLabel lbl = new AspyLabel(_labelFrame);
-			lbl.TextColor = UIColor.Black;
-			lbl.Font = UIFont.FromName(_fontName, _fontSize);
-			lbl.TextAlignment = UITextAlignment.Center;
-			lbl.Text = this._items[row];
+            AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
+            // Common UI
+            _lblPickerView.BackgroundColor = UIColor.Clear;
+            _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
+            _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
+            _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
+            _lblPickerView.TextAlignment = UITextAlignment.Center;
+            _lblPickerView.Text = this._items[row];
+
+            // If Selected UI
+            if (picker.SelectedRowInComponent(component) == row)
+            {
+                // TODO: Do we need specific UI for the label based on pre iOS7?
+                _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
+                _lblPickerView.Layer.BorderColor = UIColor.Clear.CGColor;
+                _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+                _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            }
+            else
+            {
+                _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+                _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            }
+
 			// Thrown in for < iOS7
-			lbl.BackgroundColor = UIColor.Clear;
-            return lbl;
+            //_lblPickerView.BackgroundColor = UIColor.Clear;
+            return _lblPickerView;
         }
 
 		public override float GetRowHeight (UIPickerView picker, int component)

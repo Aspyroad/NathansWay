@@ -78,7 +78,7 @@ namespace AspyRoad.iOSCore
         {
             base.ApplyUI(_applywhere);
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-            this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
         }
 
 		#endregion		

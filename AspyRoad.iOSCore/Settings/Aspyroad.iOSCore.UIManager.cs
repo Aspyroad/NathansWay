@@ -150,24 +150,24 @@ namespace AspyRoad.iOSCore.UISettings
 			ViewBGColor = g.ViewBGColor;
 			ViewBGColorTransition = g.ViewBGColorTransition;
 			ViewBGTint = g.ViewBGTint;
-            ViewBorderWidth = g.ViewCornerRadius;
-            ViewCornerRadius = g.ViewBorderWidth;
+            ViewBorderWidth = g.ViewBorderWidth;
+            ViewCornerRadius = g.ViewCornerRadius;
 			// Labels
 			LabelFontName = g.LabelFontName;
 			LabelHighLightedTextColor = g.LabelHighLightedTextColor;
 			LabelTextColor = g.LabelTextColor;
             LabelHighLightedBGColor = g.LabelHighLightedBGColor;
             LabelBGColor = g.LabelBGColor;
-            LabelBorderWidth = g.LabelCornerRadius;
-            LabelCornerRadius = g.LabelBorderWidth;
+            LabelBorderWidth = g.LabelBorderWidth;
+            LabelCornerRadius = g.LabelCornerRadius;
 			// TextViews
 			TextBGColor = g.TextBGColor;
 			TextBGTint = g.TextBGTint;
 			TextHighLightedTextColor = g.TextHighLightedTextColor;
             TextHighLightedBGColor = g.TextHighLightedBGColor;
 			TextColor = g.TextColor;
-            TextBorderWidth = g.TextCornerRadius;
-            TextCornerRadius = g.TextBorderWidth;
+            TextBorderWidth = g.TextBorderWidth;
+            TextCornerRadius = g.TextCornerRadius;
 			// Slider
 			MaxTrackTintColor = g.MaxTrackTintColor;
 			MinTrackTintColor = g.MinTrackTintColor;
@@ -643,7 +643,7 @@ namespace AspyRoad.iOSCore.UISettings
             return UIFont.FromName (this._pkviewlabelfontname, size);
         }
 
-        public Lazy<UIColor> ePkViewLabelHighLightedTextUIColor 
+        public Lazy<UIColor> PkViewLabelHighLightedTextUIColor 
         {             
             get
             { 
@@ -651,7 +651,7 @@ namespace AspyRoad.iOSCore.UISettings
             } 
         }
 
-        public Lazy<UIColor> ePkViewLabelTextUIColor 
+        public Lazy<UIColor> PkViewLabelTextUIColor 
         {             
             get
             { 
@@ -659,7 +659,7 @@ namespace AspyRoad.iOSCore.UISettings
             } 
         }
 
-        public Lazy<UIColor> ePkViewLabelHighLightedBGUIColor 
+        public Lazy<UIColor> PkViewLabelHighLightedBGUIColor 
         {             
             get
             { 
@@ -667,7 +667,7 @@ namespace AspyRoad.iOSCore.UISettings
             } 
         }
 
-        public Lazy<UIColor> ePkViewLabelBGUIColor 
+        public Lazy<UIColor> PkViewLabelBGUIColor 
         {             
             get
             { 
