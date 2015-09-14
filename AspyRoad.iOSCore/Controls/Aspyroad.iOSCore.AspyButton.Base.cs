@@ -282,28 +282,43 @@ namespace AspyRoad.iOSCore
             {   
                 return;
             }
+            if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            {
+                this.ApplyUI7();
+            }
             else
             {
-                this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
-                this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-                this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
-                this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-                this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
-
-                // Border
-                if (this._bHasBorder)
-                {
-                    this.Layer.BorderWidth = this._fBorderWidth;
-                    this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
-                }
-                // RoundedCorners
-                if (this._bHasRoundedCorners)
-                {
-                    this.Layer.CornerRadius = this._fCornerRadius;
-                }
+                this.ApplyUI6();
             }
+
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
+            this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
+
+            // Border
+            if (this._bHasBorder)
+            {
+                this.Layer.BorderWidth = this._fBorderWidth;
+                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            }
+            // RoundedCorners
+            if (this._bHasRoundedCorners)
+            {
+                this.Layer.CornerRadius = this._fCornerRadius;
+            }
+
 		}
+
+        public virtual void ApplyUI6()
+        {            
+        }
+
+        public virtual void ApplyUI7()
+        {            
+        }
 
         public virtual void ApplyPressed()
         {

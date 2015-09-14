@@ -247,14 +247,23 @@ namespace AspyRoad.iOSCore
             {
                 return;
             }
-            if (this.iOSGlobals.G__iOSVersion.Major < 7)
+
+            if (this.iOSGlobals.G__IsiOS7)
+            {
+                this.ApplyUI7();
+            }
+            else
             {
                 this.ApplyUI6();
-                return;
             }
+            // Common UI
 		}
 
         public virtual void ApplyUI6()
+        {            
+        }
+
+        public virtual void ApplyUI7()
         {            
         }
 

@@ -38,6 +38,8 @@ namespace AspyRoad.iOSCore
 		
 		bool G__IsRetina { get; }
 
+        bool G__IsiOS7 { get; }
+
 		Version G__iOSVersion { get; }
 
 		bool G__PrefersStatusBarHidden { get; set; }

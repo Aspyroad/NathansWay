@@ -73,7 +73,20 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI (G__ApplyUI _applywhere)
 		{
-			// Apply label font color
+            if (_applywhere != this._applyUIWhere)
+            {
+                return;
+            }
+            if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            {
+                this.ApplyUI7();
+            }
+            else
+            {
+                this.ApplyUI6();
+            }
+
+            // Common UI
 			this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
 			this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
@@ -89,6 +102,14 @@ namespace AspyRoad.iOSCore
                 this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             }
 		}
+
+        public virtual void ApplyUI7 ()
+        {
+        }
+
+        public virtual void ApplyUI6 ()
+        {
+        }
 
 		#endregion
 

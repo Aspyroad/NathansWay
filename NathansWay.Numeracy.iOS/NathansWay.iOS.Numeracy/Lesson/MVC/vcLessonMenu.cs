@@ -88,6 +88,8 @@ namespace NathansWay.iOS.Numeracy
 				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
 				// Tableview Source
 				this.lessonMenuSource.ScrolledToBottom -= ScrolledToBottom;
+                // BackToMenu
+                this.btnBackToMenu.TouchUpInside -= OnClick_btnBackToMenu;
 			}
 		}
 
@@ -177,9 +179,10 @@ namespace NathansWay.iOS.Numeracy
             // Change the label filter text color to a cooler value
             this.lblFilter.TextColor = UIColor.Black;
             this.lblLevel.TextColor = UIColor.Black;
-            //
-            this.tvLessonMain.ApplyUI ();
-            this.tvLessonDetail.ApplyUI ();
+
+            // Im going to try and call these from MovedToSuperView inside the tv classes.
+            this.tvLessonMain.ApplyUI (_applywhere);
+            this.tvLessonDetail.ApplyUI (_applywhere);
         }
 
 

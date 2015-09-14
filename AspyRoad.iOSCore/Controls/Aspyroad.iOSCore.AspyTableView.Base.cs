@@ -1,76 +1,62 @@
 ﻿// System
 using System;
 using System.Drawing;
+// Mono
+using MonoTouch.Foundation;
+using MonoTouch.UIKit;
+using MonoTouch.CoreGraphics;
+using MonoTouch.CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
-// Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+
 
 namespace AspyRoad.iOSCore
 {
-    [MonoTouch.Foundation.Register ("AspyTextField")]
-    public class AspyTextField : UITextField, IUIApply
+    [MonoTouch.Foundation.Register ("AspyTableView")]
+    public class AspyTableView : UITableView, IUIApply
 	{
-        #region Variables
+		#region Private Variables
 
-        protected iOSUIManager iOSUIAppearance; 
+		protected iOSUIManager iOSUIAppearance;
+		protected bool bScrolledToBottom;
 
-        // UI styles
+        // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
 
-        protected UIColor colorBorderColor;
+		#endregion
 
-        protected bool _bAllowNextResponder;
+		#region Constructors
 
-        #endregion
-       
-		#region Contructors
+        public AspyTableView (IntPtr handle) : base (handle)
+        {
+            this.Initialize ();
+        }
 
-		public AspyTextField (IntPtr handle) : base(handle)
-		{
-			Initialize ();
-		}
+        public AspyTableView () : base ()
+        {
+            this.Initialize ();
+        }
 
-		public AspyTextField (NSCoder coder) : base(coder)
-		{
-			Initialize ();
-		}
-
-		public AspyTextField (RectangleF frame) : base(frame)
-		{
-			Initialize ();
-		}
-
-		public AspyTextField () : base ()
-		{
-			Initialize ();
-		}
+        public AspyTableView (RectangleF _rect) : base (_rect)
+        {
+            this.Initialize ();
+        }
 
 		#endregion
 
-		#region Private Members
+		#region Private Methods
 
-		private void Initialize()
-		{
-            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            // UIApply
-            this._bHasBorder = false;
-            this._bHasRoundedCorners = false;
-            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this._bAllowNextResponder = false;
-        }
+		private void Initialize ()
+		{ 
+			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+		}
 
-        #endregion
+		#endregion
 
         #region Public Properties
 
@@ -171,28 +157,12 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether to allow next responder touch events.
-        /// </summary>
-        /// <value><c>true</c> if allow next responder; otherwise, <c>false</c>.</value>
-        public bool AllowNextResponder
-        {
-            get
-            {
-                return _bAllowNextResponder;
-            }
-            set
-            {
-                _bAllowNextResponder = value;
-            }
-        }
         #endregion
 
-        #region Public Members
-
+		#region Public Methods
 
         public virtual void ApplyUI (G__ApplyUI _applywhere)
-        {
+		{
             if (_applywhere != this._applyUIWhere)
             {
                 return;
@@ -206,58 +176,37 @@ namespace AspyRoad.iOSCore
                 this.ApplyUI6();
             }
             // Common UI
-            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
-            this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
-        }
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+            this.SeparatorColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSeperatorUIColor.Value;
+		}
 
         public virtual void ApplyUI6()
         {  
         }
 
-        public virtual void ApplyUI7 ()
+        public virtual void ApplyUI7()
         {
-            this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
+            this.SectionIndexColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexUIColor.Value;
+            this.SectionIndexBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexBGUIColor.Value;
+            this.SectionIndexTrackingBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexTrackingUIColor.Value;
         }
 
-        #region Responder Chain Interrupt
+		#endregion
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
+		#region Overrides
+
+        //		public override void AwakeFromNib ()
+        //		{
+        //			base.AwakeFromNib ();
+        //            this.Initialize ();
+        //		}
+
+        public override void MovedToSuperview()
         {
-            base.TouchesBegan(touches, evt);
-
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                this.NextResponder.TouchesBegan(touches, evt);
-            }
+            base.MovedToSuperview();
+            this.ApplyUI(this._applyUIWhere);
         }
 
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                this.NextResponder.TouchesEnded(touches, evt);
-            }
-        }
-
-        public override void TouchesMoved(NSSet touches, UIEvent evt)
-        {
-            base.TouchesMoved(touches, evt);
-
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                this.NextResponder.TouchesMoved(touches, evt);
-            }
-        }
-
-        #endregion
-
-        #endregion
+		#endregion
 	}
 }
-

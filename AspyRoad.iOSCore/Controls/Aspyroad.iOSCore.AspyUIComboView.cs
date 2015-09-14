@@ -523,16 +523,20 @@ namespace AspyRoad.iOSCore
             {
                 return;
             }
-            if (this.iOSGlobals.G__iOSVersion.Major < 7)
+            if (this.iOSGlobals.G__IsiOS7)
+            {
+                this.ApplyUI7();
+            }
+            else
             {
                 this.ApplyUI6();
-                return;
             }
 
-            // UI Code here
+            // Global UI Code here
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
         }
 
-        public virtual void ApplyUI6()
+        public virtual void ApplyUI6 ()
         {
             // UI Code here pre iOS7
             // HACK: This removes all the CRAP views apple used in pickerviews prior to iOS7
@@ -554,8 +558,10 @@ namespace AspyRoad.iOSCore
                     }
                 }                
             }
+        }
 
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
+        public virtual void ApplyUI7 ()
+        {
         }
 
         #endregion

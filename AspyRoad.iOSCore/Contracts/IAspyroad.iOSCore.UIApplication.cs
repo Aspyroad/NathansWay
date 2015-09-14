@@ -17,6 +17,8 @@ namespace AspyRoad.iOSCore
         float BorderWidth { get; set; }
         G__ApplyUI ApplyUIWhere { get; set; }
         // Methods
+        void ApplyUI7 ();
+        void ApplyUI6 ();
         void ApplyUI (G__ApplyUI _applywhere);
 
     }

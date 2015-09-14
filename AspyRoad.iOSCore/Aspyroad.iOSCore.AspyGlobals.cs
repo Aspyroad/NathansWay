@@ -19,6 +19,7 @@ namespace AspyRoad.iOSCore
 		private bool __IsRetina;
 		private bool __IsiPad;
 		private bool __PrefersStatusBarHidden;
+        private bool __IsiOS7;
 		private Version __VersionNumber;
 		
         private bool _ShouldAutoRotate;
@@ -154,6 +155,21 @@ namespace AspyRoad.iOSCore
 			get { return _vcContainer; }
 			set { _vcContainer = value; }
 		}
+
+        public bool G__IsiOS7
+        {
+            get
+            {
+                if (this.__VersionNumber.Major < 7)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
 
         // Finish 
         // ***********************************************************************************
