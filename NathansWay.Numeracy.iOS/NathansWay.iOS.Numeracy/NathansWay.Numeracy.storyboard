@@ -9,13 +9,17 @@
         <scene sceneID="vxW-M0-OXp">
             <objects>
                 <viewController storyboardIdentifier="vcMenuStart" title="Menu" modalTransitionStyle="crossDissolve" id="JYt-to-IEW" customClass="vcMenuStart" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" title="Title" id="571"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <keyCommands>
+                    </keyCommands>
+                    <connections>
+                        <segue destination="612" kind="custom" id="1095" customClass="AspySlidingRightSegue" identifier="sgMenuToLessons"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1111" y="-1956"/>
+            <point key="canvasLocation" x="369" y="-1981"/>
         </scene>
         <!--ToolBox-->
         <scene sceneID="Nod-Wj-smM">
@@ -361,7 +365,6 @@
                         <outlet property="btnTypeFractions" destination="bQ1-lQ-sw4" id="name-outlet-bQ1-lQ-sw4"/>
                         <outlet property="btnTypeGroups" destination="oPa-Yf-jgw" id="name-outlet-oPa-Yf-jgw"/>
                         <outlet property="btnTypeMixed" destination="Wxx-8D-mCK" id="name-outlet-Wxx-8D-mCK"/>
-                        <outlet property="grSwipeBack2Menu" destination="649" id="name-outlet-649"/>
                         <outlet property="imBgUpperLeft" destination="934" id="name-outlet-934"/>
                         <outlet property="imBgUpperRight" destination="941" id="name-outlet-941"/>
                         <outlet property="lblFilter" destination="927" id="name-outlet-927"/>
@@ -369,12 +372,12 @@
                         <outlet property="tvLessonDetail" destination="728" id="name-outlet-728"/>
                         <outlet property="tvLessonMain" destination="709" id="name-outlet-709"/>
                         <outlet property="vLessonMenu" destination="HHF-DQ-RDH" id="name-outlet-HHF-DQ-RDH"/>
+                        <segue destination="JYt-to-IEW" kind="custom" id="1099" customClass="AspySlidingLeftSegue" identifier="sgLessonsToMenu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="615" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="649"/>
             </objects>
-            <point key="canvasLocation" x="-28" y="-1956"/>
+            <point key="canvasLocation" x="-833" y="-1863"/>
         </scene>
         <!--Lesson-->
         <scene sceneID="625">
@@ -385,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="631" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1062" y="-1956"/>
+            <point key="canvasLocation" x="1502" y="-1971"/>
         </scene>
         <!--Vc Number Pad-->
         <scene sceneID="M4W-6j-fu5">
@@ -586,7 +589,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMP-Xb-87g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1543" y="-1329"/>
+            <point key="canvasLocation" x="-78" y="-304"/>
         </scene>
         <!--WorkSpace-->
         <scene sceneID="7oq-J8-nky">
@@ -661,7 +664,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpQ-dq-Kfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-24" y="-1076"/>
+            <point key="canvasLocation" x="126" y="-231"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

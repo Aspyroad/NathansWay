@@ -81,7 +81,9 @@ namespace AspyRoad.iOSCore
 			// Setup normal color
 		    this.BackgroundView = new UIView ();
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
-            this.TintColor = this.iOSUIAppearance.GlobaliOSTheme.ViewCellBGUITint.Value;
+
+            // TODO: Apply UI6 needed HERE!!!! Tint is new to iOS 7 UI
+            //this.TintColor = this.iOSUIAppearance.GlobaliOSTheme.ViewCellBGUITint.Value;
 
 			this.AlternateCellColor ();
 		}

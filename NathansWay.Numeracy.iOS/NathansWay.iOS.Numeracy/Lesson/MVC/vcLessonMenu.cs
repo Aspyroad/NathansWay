@@ -137,7 +137,10 @@ namespace NathansWay.iOS.Numeracy
 			this.btnOpMultiply.TouchUpInside += OnClick_btnOpMultiply;
 			this.btnOpMultSub.TouchUpInside += OnClick_btnOpDivMulti;
 			this.btnOpSubtract.TouchUpInside += OnClick_btnOpSubtract;
-			// LessonMain TableView
+            // BackToMenu
+            this.btnBackToMenu.TouchUpInside += OnClick_btnBackToMenu;
+
+            // LessonMain TableView
 			// Setup tableview source
 			this.lessonMenuSource = new LessonMenuTableSource (this);
 			this.lessonMenuSource.ScrolledToBottom += ScrolledToBottom;
@@ -433,8 +436,16 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-		#endregion
+        #region Navigation
 
+        void OnClick_btnBackToMenu (object sender, EventArgs e)
+        {
+            this.PerformSegue("sgLessonsToMenu", sender as NSObject);
+        }
+
+        #endregion
+
+		#endregion
 
 		public class LessonMenuTableSource : AspyTableViewSource
 		{

@@ -153,12 +153,12 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		private void btnMenuLessons_touchupinside (object sender, EventArgs e)
 		{
-			this.PerformSegue("sgMenu2Lessons", sender as NSObject);
+			this.PerformSegue("sgMenuToLessons", sender as NSObject);
 		}
 
 		private void btnMenuToolbox_touchupinside (object sender, EventArgs e)
 		{
-			this.PerformSegue("sgToolbox2Menu", sender as NSObject);
+			//this.PerformSegue("sgToolbox2Menu", sender as NSObject);
 		}
 
 		private void btnMenuTeacher_touchupinside (object sender, EventArgs e)

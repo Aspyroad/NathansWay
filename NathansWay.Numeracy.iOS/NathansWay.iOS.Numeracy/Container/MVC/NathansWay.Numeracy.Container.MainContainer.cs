@@ -86,7 +86,7 @@ namespace NathansWay.iOS.Numeracy
 			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
             // Vc's
 			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
-			_vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
+            _vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             _vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace);
             _vcMainWorkSpace = new Lazy<vcMainWorkSpace>(() => new vcMainWorkSpace() as vcMainWorkSpace);

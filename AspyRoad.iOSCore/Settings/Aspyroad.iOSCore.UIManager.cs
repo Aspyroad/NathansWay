@@ -193,6 +193,7 @@ namespace AspyRoad.iOSCore.UISettings
             PkViewLabelHighLightedTextColor = g.PkViewLabelHighLightedTextColor;
             PkViewLabelTextColor = g.PkViewLabelTextColor;
             PkViewLabelHighLightedBGColor = g.PkViewLabelHighLightedBGColor;
+            PkViewLabelBGColor = g.PkViewLabelBGColor; 
 
             // Various
             PositiveBGColor = g.PositiveBGColor;

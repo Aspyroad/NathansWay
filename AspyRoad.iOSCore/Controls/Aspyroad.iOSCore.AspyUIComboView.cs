@@ -32,6 +32,7 @@ namespace AspyRoad.iOSCore
         private float _fPickerYOffset;
         // Tap Delegates
         private UITapGestureRecognizer singleTapGesture;
+        // 
 
 		#endregion
 
@@ -89,7 +90,7 @@ namespace AspyRoad.iOSCore
             // Global UI TESTING
             this._fontSize = 30.0f;
             this._fontName = "HelveticaNeue-Light";
-            this._pickerRowHeight = (_fontSize + 20.0f);
+            this._pickerRowHeight = (_fontSize + 13.0f);
             this._fPickerYOffset = 59.0f;
 
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
@@ -136,8 +137,8 @@ namespace AspyRoad.iOSCore
             this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
 
-            this._pickerModel.SelectedItemInt = this.GetSelectedItem(this._strPickerText);
-            this._pickerView.Select(this._pickerModel.SelectedItemInt, 0, true);
+            this._pickerModel.SelectedIndex = this.GetSelectedItem(this._strPickerText);
+            this._pickerView.Select(this._pickerModel.SelectedIndex, 0, false);
 
             this.View.AddSubview (this._pickerView);
             this.View.BringSubviewToFront(this._pickerView);
@@ -148,6 +149,7 @@ namespace AspyRoad.iOSCore
         protected int GetSelectedItem(string _currentSelection)
         {
             int x;
+            // IndexOf returns -1 if the value isnt found
             x = this._pickerModel.Items.IndexOf(_currentSelection);
             if (x == -1)
             {
@@ -168,7 +170,7 @@ namespace AspyRoad.iOSCore
         protected void HandlePickerChanged()
         {
             this._pickerTxtField.Text = this._pickerModel.SelectedItem;
-            this.View.SendSubviewToBack(this._pickerTxtField);
+            //this.View.SendSubviewToBack(this._pickerTxtField);
 
             // UI - Reverse text field half clear white to show it is being edited
             this._pickerTxtField.BackgroundColor = UIColor.Clear;
@@ -248,6 +250,9 @@ namespace AspyRoad.iOSCore
 				x.Add ("John Brown");
 				x.Add ("Sahara Pipeline");
 				x.Add ("Widebrow Montgumery");
+                x.Add ("Ian Queermun");
+                x.Add ("Ian Assluveer");
+                x.Add ("Yep, Ians gay!");
 				this._pickerModel.Items = x;
 
 			}
@@ -309,11 +314,11 @@ namespace AspyRoad.iOSCore
             this._strPickerText = this._pickerTxtField.Text;
 			this._pickerTxtField.Text = "";
             this.EditNumberPicker();
-			this.View.BringSubviewToFront(this._pickerView);
+			//this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-			//this._pickerTxtField.BackgroundColor = UIColor.White;
-			//this._pickerTxtField.Alpha = 0.5f;
+			this._pickerTxtField.BackgroundColor = UIColor.White;
+			this._pickerTxtField.Alpha = 0.5f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -530,7 +535,7 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI6()
         {
             // UI Code here pre iOS7
-            // This removes all the CRAP views apple used in pickerviews prior to iOS7
+            // HACK: This removes all the CRAP views apple used in pickerviews prior to iOS7
             if (this.Subviews.GetUpperBound (0) > 0)
             {
                 foreach (UIView v in this.Subviews)
@@ -550,9 +555,7 @@ namespace AspyRoad.iOSCore
                 }                
             }
 
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value ;
-            this.BackgroundColor.ColorWithAlpha(0.4f);
-
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
         }
 
         #endregion
@@ -562,13 +565,12 @@ namespace AspyRoad.iOSCore
     {
         #region Class Variables
 
-        protected int selectedIndex = 0;
+        protected int selectedIndex;
 		protected List<string> _items;
 		protected float _fontSize;
 		protected string _fontName;
         protected RectangleF _labelFrame;
         protected iOSUIManager iOSUIAppearance;
-
         protected float _rowHeight;
 
         #endregion
@@ -599,6 +601,7 @@ namespace AspyRoad.iOSCore
         protected virtual void Initialize()
         {
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.selectedIndex = 0;
         }
 
         #endregion
@@ -637,7 +640,7 @@ namespace AspyRoad.iOSCore
             set { _rowHeight = value; }
         }
 
-        public int SelectedItemInt
+        public int SelectedIndex
         {
             get { return selectedIndex; }
             set { selectedIndex = value; }
@@ -656,7 +659,7 @@ namespace AspyRoad.iOSCore
         }
 
         /// <summary>
-        /// called by the picker to get the text for a particular row in a particular 
+        /// Called by the picker to get the text for a particular row in a particular 
         /// spinner item
         /// </summary>
         public override string GetTitle (UIPickerView picker, int row, int component)
@@ -677,7 +680,7 @@ namespace AspyRoad.iOSCore
         /// </summary>
         public override void Selected (UIPickerView picker, int row, int component)
         {
-            selectedIndex = row;
+            this.selectedIndex = row;
             picker.ReloadComponent(component);
             if (this.ValueChanged != null)
             {
@@ -688,35 +691,32 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// This is called for ever item in the picker source
         /// </summary>
-        public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
+        public override UIView GetView(UIPickerView picker, int row, int component, UIView _view)
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             // Common UI
-            _lblPickerView.BackgroundColor = UIColor.Clear;
+            _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+            _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            //_lblPickerView.BackgroundColor = UIColor.Clear;
+            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
             _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
             _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
             _lblPickerView.TextAlignment = UITextAlignment.Center;
             _lblPickerView.Text = this._items[row];
 
-            // If Selected UI
-            if (picker.SelectedRowInComponent(component) == row)
+            // If Selected UI 
+            // if (picker.SelectedRowInComponent(component) == row)
+            // Replaced this call as we keep the vmodel open and only close the picker itself
+            if (row == this.selectedIndex)
             {
                 // TODO: Do we need specific UI for the label based on pre iOS7?
                 _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
-                _lblPickerView.Layer.BorderColor = UIColor.Clear.CGColor;
-                _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-                _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             }
             else
             {
-                _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
-                _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-                _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+                _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
             }
-
-			// Thrown in for < iOS7
-            //_lblPickerView.BackgroundColor = UIColor.Clear;
             return _lblPickerView;
         }
 
