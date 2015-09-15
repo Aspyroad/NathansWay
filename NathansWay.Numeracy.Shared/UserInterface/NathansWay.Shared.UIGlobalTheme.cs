@@ -185,8 +185,8 @@ namespace NathansWay.Shared
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";
             PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 150.0f, 255.0f, 255.0f)); // Black
-            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 100.0f)); // Black
+            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 50.0f)); // Black
 
             // Various

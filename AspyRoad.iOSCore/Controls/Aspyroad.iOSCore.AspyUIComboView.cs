@@ -90,7 +90,7 @@ namespace AspyRoad.iOSCore
             // Global UI TESTING
             this._fontSize = 30.0f;
             this._fontName = "HelveticaNeue-Light";
-            this._pickerRowHeight = (_fontSize + 13.0f);
+            this._pickerRowHeight = (_fontSize + 14.0f);
             this._fPickerYOffset = 59.0f;
 
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
@@ -295,7 +295,7 @@ namespace AspyRoad.iOSCore
             this.View.Frame = this._aspyComboBoxFrame;
             // Rest
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
-            this._pickerTxtField.Frame = new RectangleF (1.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);;
+            this._pickerTxtField.Frame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             _pickerModel.LabelFrame = this._aspyLabelFrame;
 			this.View.AddSubview (_pickerTxtField);
 		}			
@@ -352,8 +352,11 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+
         // Pre iOS7 TableView
         protected UIView _iOS7TableView;
+
+        protected UIColor _pkBorderColor;
 
         #endregion
 
@@ -395,6 +398,7 @@ namespace AspyRoad.iOSCore
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
             // Can see no reason why this should ever be false as Apple do!
             this.ClipsToBounds = true;
+            this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.1f);
 		}
 
 		#endregion
@@ -553,7 +557,7 @@ namespace AspyRoad.iOSCore
                         _iOS7TableView = v;
                         v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
                         v.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-                        v.Layer.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                        v.Layer.BorderColor = this._pkBorderColor.CGColor;
                         v.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
                     }
                 }                
@@ -562,6 +566,9 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7 ()
         {
+            this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            this.Layer.BorderColor = this._pkBorderColor.CGColor;
+            this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
         }
 
         #endregion
@@ -704,7 +711,7 @@ namespace AspyRoad.iOSCore
             _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
             _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             //_lblPickerView.BackgroundColor = UIColor.Clear;
-            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.1f).CGColor;
             _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
             _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
             _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
