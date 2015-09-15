@@ -24,6 +24,7 @@ namespace AspyRoad.iOSCore
 		// Event data for change
 		private Action<object, EventArgs> _pickerValueChanged;
 		// UI Appearance
+        public iOSUIManager iOSUIAppearance;
 		private float _fontSize;
 		private float _pickerRowHeight;
 		private string _fontName;
@@ -94,6 +95,7 @@ namespace AspyRoad.iOSCore
             this._fPickerYOffset = 59.0f;
 
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 
             #region TextBox
 
@@ -104,6 +106,10 @@ namespace AspyRoad.iOSCore
             this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
             // Visual Attributes For TextBox
             this._pickerTxtField.TextAlignment = UITextAlignment.Center;
+            this._pickerTxtField.HasBorder = true;
+            this._pickerTxtField.HasRoundedCorners = true;
+            this._pickerTxtField.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
+            this._pickerTxtField.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
 
             #endregion
 
@@ -273,9 +279,10 @@ namespace AspyRoad.iOSCore
             // Visual Attributes For PickerView
             _pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
             //_pickerTxtField.TextColor = UIColor.Black;
-            _pickerTxtField.CornerRadius = 5.0f;
+            _pickerTxtField.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
             _pickerTxtField.HasRoundedCorners = true;
-            //_pickerTxtField.HasBorder = true;
+            _pickerTxtField.HasBorder = true;
+            _pickerTxtField.BorderWidth  = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
 
             // Visual Attributes For PickerView
             _pickerModel.FontSize = this._fontSize;
@@ -708,8 +715,10 @@ namespace AspyRoad.iOSCore
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             // Common UI
-            _lblPickerView.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-            _lblPickerView.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            _lblPickerView.HasBorder = true;
+            _lblPickerView.HasRoundedCorners = true;
+            _lblPickerView.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+            _lblPickerView.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             //_lblPickerView.BackgroundColor = UIColor.Clear;
             _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.1f).CGColor;
             _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
@@ -724,7 +733,7 @@ namespace AspyRoad.iOSCore
             if (row == this.selectedIndex)
             {
                 // TODO: Do we need specific UI for the label based on pre iOS7?
-                _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
+               _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
             }
             else
             {

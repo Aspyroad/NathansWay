@@ -147,7 +147,7 @@ namespace NathansWay.Shared
 			LabelTextColor = new Lazy<G__Color> (() => new G__Color(150.0f, 150.0f, 150.0f, 255.0f)); // Black 
             LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
             LabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
-            LabelCornerRadius = 6.0f;
+            LabelCornerRadius = 10.0f;
             LabelBorderWidth = 1.0f;
 
 			// UITextViews
@@ -157,7 +157,7 @@ namespace NathansWay.Shared
             TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(240.0f, 240.0f, 240.0f, 255.0f)); // Black
 			TextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             TextBorderWidth = 1.0f;
-            TextCornerRadius = 2.0f;
+            TextCornerRadius = 6.0f;
 
 			// Slider View
 			MaxTrackTintColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
@@ -180,7 +180,7 @@ namespace NathansWay.Shared
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
             // UIPickerView
-            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 30.0f)); // Black
+            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 100.0f)); // Black
             PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";
