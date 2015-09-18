@@ -295,7 +295,7 @@ namespace NathansWay.iOS.Numeracy
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intLevelHoldState) as ButtonLabelStyle;
 			if (tmpBtnViewOld != null)
 			{
-				tmpBtnViewOld.HoldState = false;
+                tmpBtnViewOld.ApplyUIUnHeld();
 				tmpBtnViewOld.SetNeedsDisplay ();
 			}
 

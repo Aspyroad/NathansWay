@@ -50,8 +50,9 @@ namespace NathansWay.iOS.Numeracy
 
 		public override void Draw (RectangleF rect)
 		{
-			DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
+            DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
 			base.Draw (rect);
+            this.IsPressed = false;
 		}
 
         public override void ApplyUI (G__ApplyUI _applywhere)
@@ -68,7 +69,7 @@ namespace NathansWay.iOS.Numeracy
 				UIColor colorButtonBGStart, 
 				UIColor colorButtonBGEnd, 
 				//UIColor labelTextColor, 
-				bool isTapped, 
+				bool bIsPressed, 
 				//string labelText, 
 				RectangleF buttonFrame
 			)
@@ -76,10 +77,21 @@ namespace NathansWay.iOS.Numeracy
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
 			var context = UIGraphics.GetCurrentContext();
-
+            CGGradient colorWhenTapped;
 
 			//// Variable Declarations
-			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorButtonBGEnd.CGColor, colorButtonBGStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorButtonBGStart.CGColor, colorButtonBGEnd.CGColor});
+            // Paintcode uses a ternairy operator here, dont like them, converted to if
+            // var colorWhenTapped = bIsTapped ? : 
+            if (bIsPressed)
+            {
+                colorWhenTapped =  new CGGradient(colorSpace, new CGColor [] {colorButtonBGEnd.CGColor, colorButtonBGStart.CGColor});
+            }
+            else
+            {
+                colorWhenTapped = new CGGradient(colorSpace, new CGColor [] { colorButtonBGStart.CGColor, colorButtonBGEnd.CGColor });
+            }
+
+
 
 			//// Rectangle Drawing
 			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);

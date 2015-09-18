@@ -41,16 +41,6 @@ namespace NathansWay.iOS.Numeracy
 			Initialize();
 		}
 
-		private void Initialize()
-		{
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-
-            this.HasBorder = true;
-            this.HasRoundedCorners = true;
-            this.HoldState = true;
-            this.ApplyUI (this._applyUIWhere);
-		}
-
 		#endregion
 
 		#region Overrides 
@@ -60,9 +50,30 @@ namespace NathansWay.iOS.Numeracy
             base.ApplyUI (_applywhere);
 		}
 
+        public override void ApplyUIHeld()
+        {
+            base.ApplyUIHeld();
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+        }
+
+        public override void ApplyUIUnHeld()
+        {
+            base.ApplyUIUnHeld();
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+        }
+
 		#endregion
 
 		#region Private Members
+
+        private void Initialize()
+        {
+            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this.HasBorder = true;
+            this.HasRoundedCorners = true;
+            this.EnableHold = true;
+            this.ApplyUI (this._applyUIWhere);
+        }
 
 		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
 		{

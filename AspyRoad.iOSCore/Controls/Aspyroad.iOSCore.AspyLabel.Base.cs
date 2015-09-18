@@ -24,6 +24,7 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+        protected bool _bAutoApplyUI;
 
 		#endregion
 
@@ -49,9 +50,18 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		protected virtual void Initialize()
-		{
-			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();	
+		#endregion
+
+		#region Public Members
+
+
+		#endregion
+
+        #region Private Members
+
+        private void Initialize ()
+        {
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();    
 
             this._fBorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
             this._fCornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
@@ -59,15 +69,25 @@ namespace AspyRoad.iOSCore
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this.ApplyUI (this._applyUIWhere);
-		}
+            this._bAutoApplyUI = false;
 
-		#endregion
+            this.ClipsToBounds = true;
+        }
+  
+        #endregion
 
-		#region Public Members
+        #region Overrides
 
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            if (this._bAutoApplyUI)
+            {
+                this.ApplyUI(this._applyUIWhere);
+            }
+        }
 
-		#endregion
+        #endregion
 
 		#region Virtual Members
 
@@ -165,6 +185,12 @@ namespace AspyRoad.iOSCore
         {
             get { return this._fCornerRadius; }
             set { this._fCornerRadius = value; }
+        }
+
+        public bool AutoApplyUI
+        {
+            get { return this._bAutoApplyUI; }
+            set { this._bAutoApplyUI = value; }
         }
 
         #endregion

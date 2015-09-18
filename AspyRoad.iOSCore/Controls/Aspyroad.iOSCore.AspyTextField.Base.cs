@@ -25,6 +25,7 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+        protected bool _bAutoApplyUI;
 
         protected UIColor colorBorderColor;
 
@@ -67,6 +68,7 @@ namespace AspyRoad.iOSCore
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this._bAutoApplyUI = false;
             this._bAllowNextResponder = false;
         }
 
@@ -186,10 +188,10 @@ namespace AspyRoad.iOSCore
                 _bAllowNextResponder = value;
             }
         }
+
         #endregion
 
         #region Public Members
-
 
         public virtual void ApplyUI (G__ApplyUI _applywhere)
         {
@@ -256,6 +258,19 @@ namespace AspyRoad.iOSCore
         }
 
         #endregion
+
+        #endregion
+
+        #region Overrides
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            if (this._bAutoApplyUI)
+            {
+                this.ApplyUI(this._applyUIWhere);
+            }
+        }
 
         #endregion
 	}

@@ -170,6 +170,8 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+        protected bool _bAutoApplyUI;
+
 
         public IAspyGlobals iOSGlobals;
 
@@ -279,6 +281,12 @@ namespace AspyRoad.iOSCore
             }
         }
 
+        public bool AutoApplyUI
+        {
+            get { return this._bAutoApplyUI; }
+            set { this._bAutoApplyUI = value; }
+        }
+
         #endregion
 
         #region Public Members
@@ -306,6 +314,19 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7()
         {            
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override void MovedToSuperview()
+        {
+            base.MovedToSuperview();
+            if (this._bAutoApplyUI)
+            {
+                this.ApplyUI(this._applyUIWhere);
+            }
         }
 
         #endregion
