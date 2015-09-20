@@ -52,7 +52,6 @@ namespace NathansWay.iOS.Numeracy
 		{
             DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
 			base.Draw (rect);
-            this.IsPressed = false;
 		}
 
         public override void ApplyUI (G__ApplyUI _applywhere)

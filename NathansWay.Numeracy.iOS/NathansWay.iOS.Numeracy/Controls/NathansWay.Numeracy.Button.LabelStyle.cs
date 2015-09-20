@@ -52,14 +52,16 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUIHeld()
         {
-            base.ApplyUIHeld();
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+            // Must call base last.
+            base.ApplyUIHeld();
         }
 
         public override void ApplyUIUnHeld()
         {
-            base.ApplyUIUnHeld();
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            // Must call base last
+            base.ApplyUIUnHeld();
         }
 
 		#endregion

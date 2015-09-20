@@ -64,7 +64,7 @@ namespace AspyRoad.iOSCore
 
             if (disposing)
             {
-                this.TouchUpInside -= btnthis_touchupinside;
+                //this.TouchUpInside -= btnthis_touchupinside;
             }
         }
 
@@ -77,6 +77,7 @@ namespace AspyRoad.iOSCore
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             // Logic
             this._bHoldState = false;
+            this._bEnableHold = false;
             this._bIsPressed = false;
             // UIApply
             this._bHasBorder = false;
@@ -84,7 +85,7 @@ namespace AspyRoad.iOSCore
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.TouchUpInside += btnthis_touchupinside;
+            //this.TouchUpInside += btnthis_touchupinside;
         }
 
         #region IconSetters
@@ -313,7 +314,7 @@ namespace AspyRoad.iOSCore
                 this.ApplyUI6();
             }
 
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
             this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
@@ -342,7 +343,7 @@ namespace AspyRoad.iOSCore
         {            
         }
 
-        public virtual void ApplyPressed()
+        public virtual void ApplyPressed(bool _isPressed)
         {
             this._bIsPressed = true;
 
@@ -357,17 +358,20 @@ namespace AspyRoad.iOSCore
                     this.ApplyUIHeld();
                 }
             }
-            this.SetNeedsDisplay();
         }
 
+        // Must call this base last.
         public virtual void ApplyUIHeld()
         {
             this._bHoldState = true;
+            this.SetNeedsDisplay();
         }
 
+        // Must call this base last.
         public virtual void ApplyUIUnHeld()
         {
             this._bHoldState = false;
+            this.SetNeedsDisplay();
         }
 
 
@@ -377,7 +381,7 @@ namespace AspyRoad.iOSCore
 
         private void btnthis_touchupinside (object sender, EventArgs e)
         {
-            this.ApplyPressed();
+            //this.ApplyPressed();
         }
 
         public event Action<UIButton> Tapped;
@@ -401,8 +405,7 @@ namespace AspyRoad.iOSCore
 
 		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
 		{			
-			_bIsPressed = true;
-            this.ApplyPressed();
+            this.ApplyPressed(true);
 			return base.BeginTracking (uitouch, uievent);
 		}
 
@@ -415,8 +418,7 @@ namespace AspyRoad.iOSCore
 					Tapped (this);
 				}
 			}
-			_bIsPressed = false;
-            this.ApplyPressed();
+            this.ApplyPressed(false);
 			base.EndTracking (uitouch, uievent);
 		}
 
@@ -425,11 +427,11 @@ namespace AspyRoad.iOSCore
 			var touch = uievent.AllTouches.AnyObject as UITouch;
 			if (Bounds.Contains (touch.LocationInView (this)))
 			{
-				_bIsPressed = true;
+				this._bIsPressed = true;
 			}
 			else
 			{
-				_bIsPressed = false;
+				this._bIsPressed = false;
 			}
 			return base.ContinueTracking (uitouch, uievent);
 		}

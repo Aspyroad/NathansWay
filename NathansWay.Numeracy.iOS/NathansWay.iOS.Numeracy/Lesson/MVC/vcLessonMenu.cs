@@ -296,19 +296,20 @@ namespace NathansWay.iOS.Numeracy
 			if (tmpBtnViewOld != null)
 			{
                 tmpBtnViewOld.ApplyUIUnHeld();
-				tmpBtnViewOld.SetNeedsDisplay ();
 			}
 
             // Handle toggle functionality
             if (this.intLevelHoldState == btnLevelButton.Tag)
             {
                 this.intLevelHoldState = 0;
-                this.lessonViewModel.ValMathLevel = G__MathLevel.All;
             }
             else
             {
                 this.intLevelHoldState = btnLevelButton.Tag;
-                btnLevelButton.HoldState = true;
+                if (tmpBtnViewOld != null)
+                {
+                    tmpBtnViewOld.ApplyUIHeld();
+                }
                 // Set the viewmodel/repo filter
                 this.lessonViewModel.ValMathLevel = _mathLevel;
             }
