@@ -135,8 +135,19 @@ namespace AspyRoad.iOSCore
                         this._pickerTxtField.Frame.Height)                        
                         
                 );
+            this.View.Frame =                 
+                (
+                    new RectangleF(
+                        this.View.Frame.X,
+                        this.View.Frame.Y,
+                        this._pickerTxtField.Frame.Width,
+                        this._pickerTxtField.Frame.Height + 100.0f)                        
+
+                );
+                //this._pickerView.Frame;
+            this.View.ClipsToBounds = true;
             this._pickerView.UserInteractionEnabled = true;
-            this._pickerView.ShowSelectionIndicator = true;
+            //this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
 
             this._pickerModel.SelectedIndex = this.GetSelectedItem(this._strPickerText);
@@ -295,6 +306,12 @@ namespace AspyRoad.iOSCore
 
         public override void ApplyUI6()
         {
+            base.ApplyUI6();
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
         }
 
 		public override void ViewDidLoad ()
@@ -302,6 +319,8 @@ namespace AspyRoad.iOSCore
 			base.ViewDidLoad ();
             // Pickers frame
             this.View.Frame = this._aspyComboBoxFrame;
+            //this.View.ClipsToBounds = true;
+
             // Rest
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             this._pickerTxtField.Frame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
@@ -326,8 +345,8 @@ namespace AspyRoad.iOSCore
 			//this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-			this._pickerTxtField.BackgroundColor = UIColor.White;
-			this._pickerTxtField.Alpha = 0.5f;
+			//this._pickerTxtField.BackgroundColor = UIColor.White;
+			//this._pickerTxtField.Alpha = 0.5f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -565,9 +584,11 @@ namespace AspyRoad.iOSCore
                     {
                         _iOS7TableView = v;
                         v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
-                        v.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-                        v.Layer.BorderColor = this._pkBorderColor.CGColor;
+
+                        //v.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+                        //v.Layer.BorderColor = this._pkBorderColor.CGColor;
                         v.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+                        v.ClipsToBounds = true;
                     }
                 }                
             }

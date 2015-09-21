@@ -345,7 +345,7 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyPressed(bool _isPressed)
         {
-            this._bIsPressed = true;
+            this._bIsPressed = _isPressed;
 
             if (this._bEnableHold)
             {
@@ -418,7 +418,7 @@ namespace AspyRoad.iOSCore
 					Tapped (this);
 				}
 			}
-            this.ApplyPressed(false);
+            //this.ApplyPressed(false);
 			base.EndTracking (uitouch, uievent);
 		}
 

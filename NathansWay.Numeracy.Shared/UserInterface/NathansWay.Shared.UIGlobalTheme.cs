@@ -136,7 +136,7 @@ namespace NathansWay.Shared
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
 			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 140.0f, 100.0f, 255.0f)); // Orange
-			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Orange less alpha
+			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(100.0f, 150.0f, 130.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 200.0f, 255.0f, 255.0f)); // Black 
             ViewBorderWidth = 1.0f;
             ViewCornerRadius = 5.0f;

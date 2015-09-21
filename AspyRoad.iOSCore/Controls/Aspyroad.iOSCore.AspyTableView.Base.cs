@@ -54,6 +54,7 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.ClipsToBounds = true;
 		}
 
 		#endregion

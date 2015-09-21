@@ -298,22 +298,19 @@ namespace NathansWay.iOS.Numeracy
                 tmpBtnViewOld.ApplyUIUnHeld();
 			}
 
-            // Handle toggle functionality
+            // If - handle toggle functionality if the button is the same
+            // Else - set the new button state
             if (this.intLevelHoldState == btnLevelButton.Tag)
             {
                 this.intLevelHoldState = 0;
+                _mathLevel = G__MathLevel.All;
             }
             else
             {
                 this.intLevelHoldState = btnLevelButton.Tag;
-                if (tmpBtnViewOld != null)
-                {
-                    tmpBtnViewOld.ApplyUIHeld();
-                }
-                // Set the viewmodel/repo filter
-                this.lessonViewModel.ValMathLevel = _mathLevel;
             }
             // Refresh/re-query the view
+            this.lessonViewModel.ValMathLevel = _mathLevel;
             this.LoadLessonsFilteredAsync();
 		}
 
@@ -350,36 +347,26 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Turn off the old button
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intOpHoldState) as ButtonLabelStyle;
-			if (tmpBtnViewOld != null)
-			{
-				tmpBtnViewOld.HoldState = false;
-				tmpBtnViewOld.SetNeedsDisplay ();
-			}
+            if (tmpBtnViewOld != null)
+            {
+                tmpBtnViewOld.ApplyUIUnHeld();
+            }
 
-            // Handle toggle functionality
+            // If - handle toggle functionality if the button is the same
+            // Else - set the new button state
             if (this.intOpHoldState == btnOpButton.Tag)
             {
                 this.intOpHoldState = 0;
-                this.lessonViewModel.ValMathOperator = G__MathOperator.All;
+                _mathOperator = G__MathOperator.All;
             }
             else
             {
                 this.intOpHoldState = btnOpButton.Tag;
                 btnOpButton.HoldState = true;
-                // Set the viewmodel/repo filter
-                this.lessonViewModel.ValMathOperator = _mathOperator;
             }
+            this.lessonViewModel.ValMathOperator = _mathOperator;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
-
-//			this.intOpHoldState = btnOpButton.Tag;
-//			btnOpButton.HoldState = true;
-//
-//            // Set the viewmodel/repo filter
-//            this.lessonViewModel.ValMathOperator = _mathOperator;
-//            // Refresh/re-query the view
-//            this.LoadLessonsFiltered();
-
 		}
 
         #endregion
@@ -407,36 +394,27 @@ namespace NathansWay.iOS.Numeracy
 		{
 			// Turn off the old button
 			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intTypeHoldState) as ButtonLabelStyle;
-			if (tmpBtnViewOld != null)
-			{
-				tmpBtnViewOld.HoldState = false;
-				tmpBtnViewOld.SetNeedsDisplay ();
-			}
+            if (tmpBtnViewOld != null)
+            {
+                tmpBtnViewOld.ApplyUIUnHeld();
+            }
 
             // Handle toggle functionality
             if (this.intTypeHoldState == btnTypeButton.Tag)
             {
                 this.intTypeHoldState = 0;
-                this.lessonViewModel.ValMathType = G__MathType.All;
+                _mathType = G__MathType.All;
             }
             else
             {
                 this.intTypeHoldState = btnTypeButton.Tag;
                 btnTypeButton.HoldState = true;
-                // Set the viewmodel/repo filter
-                this.lessonViewModel.ValMathType = _mathType;
             }
+            // Set the viewmodel/repo filter
+            this.lessonViewModel.ValMathType = _mathType;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
-
-//			this.intTypeHoldState = btnTypeButton.Tag;
-//			btnTypeButton.HoldState = true;
-//
-//            // Set the viewmodel/repo filter
-//            this.lessonViewModel.ValMathType = _mathType;
-//            // Refresh/re-query the view
-//            this.LoadLessonsFiltered();
-		}
+    	}
 
         #endregion
 
