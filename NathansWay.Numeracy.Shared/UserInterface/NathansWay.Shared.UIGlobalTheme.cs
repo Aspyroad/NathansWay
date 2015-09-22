@@ -180,7 +180,7 @@ namespace NathansWay.Shared
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
             // UIPickerView
-            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 100.0f)); // Black
+            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 20.0f)); // Black
             PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";

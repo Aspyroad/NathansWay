@@ -24,7 +24,8 @@ namespace AspyRoad.iOSCore
         DoNotApply = 1,
         ViewDidLoad = 2,
         ViewWillAppear = 3,
-        AlwaysApply = 4
+        LoadView = 4,
+        AlwaysApply = 5
     }
 }
 

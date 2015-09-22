@@ -135,19 +135,8 @@ namespace AspyRoad.iOSCore
                         this._pickerTxtField.Frame.Height)                        
                         
                 );
-            this.View.Frame =                 
-                (
-                    new RectangleF(
-                        this.View.Frame.X,
-                        this.View.Frame.Y,
-                        this._pickerTxtField.Frame.Width,
-                        this._pickerTxtField.Frame.Height + 100.0f)                        
-
-                );
-                //this._pickerView.Frame;
-            this.View.ClipsToBounds = true;
             this._pickerView.UserInteractionEnabled = true;
-            //this._pickerView.ShowSelectionIndicator = true;
+            this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
 
             this._pickerModel.SelectedIndex = this.GetSelectedItem(this._strPickerText);
@@ -271,13 +260,12 @@ namespace AspyRoad.iOSCore
 			{
 				var x = new List<string> ();
 				x.Add ("John");
-				x.Add ("Peter ");
+				x.Add ("Peter");
 				x.Add ("Tony");
                 x.Add ("Ian");
                 x.Add ("Steve");
                 x.Add ("Paul");
 				this._pickerModel.Items = x;
-
 			}
 			else
 			{
@@ -319,7 +307,6 @@ namespace AspyRoad.iOSCore
 			base.ViewDidLoad ();
             // Pickers frame
             this.View.Frame = this._aspyComboBoxFrame;
-            //this.View.ClipsToBounds = true;
 
             // Rest
 			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
@@ -342,11 +329,11 @@ namespace AspyRoad.iOSCore
             this._strPickerText = this._pickerTxtField.Text;
 			this._pickerTxtField.Text = "";
             this.EditNumberPicker();
-			//this.View.BringSubviewToFront(this._pickerView);
+			this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-			//this._pickerTxtField.BackgroundColor = UIColor.White;
-			//this._pickerTxtField.Alpha = 0.5f;
+			this._pickerTxtField.BackgroundColor = UIColor.White;
+			this._pickerTxtField.Alpha = 0.5f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -380,6 +367,12 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+
+        // Frames
+        protected RectangleF _rectSuperView;
+        protected RectangleF _rectTempSuperView;
+
+
 
         // Pre iOS7 TableView
         protected UIView _iOS7TableView;
@@ -428,6 +421,20 @@ namespace AspyRoad.iOSCore
             this.ClipsToBounds = true;
             this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
 		}
+
+        private RectangleF SetFrames()
+        {
+            // Ref to AspyComboBox view - this views super
+            this._rectSuperView = this.Superview.Frame;
+            return               
+                (
+                    new RectangleF(
+                        (this._rectSuperView.X - this.Frame.X),
+                        (this._rectSuperView.Y - this.Frame.Y),
+                        this.Frame.Width,
+                        this.Frame.Height)
+                );
+        }
 
 		#endregion
 
@@ -566,6 +573,10 @@ namespace AspyRoad.iOSCore
 
             // Global UI Code here
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
+
+            this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            this.Layer.BorderColor = this._pkBorderColor.CGColor;
+            this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
         }
 
         public virtual void ApplyUI6 ()
@@ -583,12 +594,17 @@ namespace AspyRoad.iOSCore
                     else
                     {
                         _iOS7TableView = v;
-                        v.Frame = new RectangleF(0.0f, 0.0f, this.Frame.Width, this.Frame.Height);
-
-                        //v.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-                        //v.Layer.BorderColor = this._pkBorderColor.CGColor;
+                        // Match the actual table view frame to our ComboBox frame 
+                        // minus the offset for other garbage views in <ios7 (11.0)
+                        v.Frame = (
+                                new RectangleF(
+                                    v.Frame.X - 11.0f,
+                                    v.Frame.Y,
+                                    this.Frame.Width,
+                                    v.Frame.Height)
+                        );
                         v.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
-                        v.ClipsToBounds = true;
+                        v.ClipsToBounds = false;
                     }
                 }                
             }
@@ -744,13 +760,12 @@ namespace AspyRoad.iOSCore
         public override UIView GetView(UIPickerView picker, int row, int component, UIView _view)
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
-
             // Common UI
             _lblPickerView.HasBorder = true;
             _lblPickerView.HasRoundedCorners = true;
             //_lblPickerView.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
             //_lblPickerView.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
-            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.5f).CGColor;
+            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.2f).CGColor;
             _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
             _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
             _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;

@@ -256,15 +256,18 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
-            // Common UI
+            // Common UI here in derives
+            // *****
 		}
 
         public virtual void ApplyUI6()
-        {            
+        { 
+            // <iOS7 only
         }
 
         public virtual void ApplyUI7()
-        {            
+        {  
+            // >iOS7 only
         }
 
 		#endregion
@@ -386,6 +389,12 @@ namespace AspyRoad.iOSCore
         // TODO: IM SWAPPING ApplyUI() it should be in ViewWillAppear.
         // I want it in ViewDidLoad()
         // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
+
+        public override void LoadView()
+        {
+            base.LoadView();
+            this.ApplyUI(G__ApplyUI.LoadView);
+        }
 
 		public override void ViewDidLoad ()
 		{

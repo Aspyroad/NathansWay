@@ -53,6 +53,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyTag1 = 60020;
 			this.AspyName = "VC_MainGame";
 
+            this._applyUIWhere = G__ApplyUI.LoadView;
+
             this._sizeMainGame = new SizeMainGame(this);
             this._sizeClass = this._sizeMainGame;
 
@@ -69,7 +71,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void LoadView()
 		{
-			base.LoadView();            
+			base.LoadView();
+
 		}
 
 		public override void ViewDidLoad()
@@ -83,8 +86,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this.HasRoundedCorners = true;
             this.HasBorder = true;
+            this.View.BackgroundColor = UIColor.Green;
+        }
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
             this.View.TintColor = UIColor.LightGray;
         }
+
 		#endregion
 	}
 
