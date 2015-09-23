@@ -15,6 +15,9 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton, IUIApply
 	{
+
+        #region Private Variables
+
 		// Logic
         private bool _bHoldState;
         private bool _bEnableHold;
@@ -34,6 +37,8 @@ namespace AspyRoad.iOSCore
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
+
+        #endregion
 
         #region Constructors
 
@@ -374,8 +379,7 @@ namespace AspyRoad.iOSCore
             this.SetNeedsDisplay();
         }
 
-
-		#endregion
+        #endregion
 
         #region Delegates
 

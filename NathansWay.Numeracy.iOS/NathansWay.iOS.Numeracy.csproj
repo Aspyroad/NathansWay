@@ -26,14 +26,13 @@
     <MtouchArch>i386</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
-    <CodesignProvision>4ba75e09-0dcc-4ead-920f-81bde060a745</CodesignProvision>
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
