@@ -581,7 +581,7 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#endregion
 
-		#region UIViewTableCell
+		#region UIViewCell
 
 		public Lazy<UIColor> ViewCellSelectedUIColor
 		{ 
@@ -753,6 +753,7 @@ namespace AspyRoad.iOSCore.UISettings
                 return this.convertUIColor(this._neutralbordercolor); 
             } 
         }
+
         public Lazy<UIColor> ReadOnlyBGUIColor 
         { 
             get

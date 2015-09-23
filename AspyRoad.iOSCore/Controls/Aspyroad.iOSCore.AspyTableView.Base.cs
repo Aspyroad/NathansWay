@@ -182,7 +182,8 @@ namespace AspyRoad.iOSCore
 		}
 
         public virtual void ApplyUI6()
-        {  
+        {
+
         }
 
         public virtual void ApplyUI7()
