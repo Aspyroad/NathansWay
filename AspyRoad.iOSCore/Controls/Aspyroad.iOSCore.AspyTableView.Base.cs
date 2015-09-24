@@ -54,7 +54,7 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            this.ClipsToBounds = true;
+            //this.ClipsToBounds = true;
 		}
 
 		#endregion
@@ -177,17 +177,19 @@ namespace AspyRoad.iOSCore
                 this.ApplyUI6();
             }
             // Common UI
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
-            this.SeparatorColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSeperatorUIColor.Value;
+            //this.BackgroundColor = UIColor.Clear;
+            //this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
+            //this.SeparatorColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSeperatorUIColor.Value;
 		}
 
         public virtual void ApplyUI6()
         {
-
+            //this.BackgroundColor = UIColor.Clear;
         }
 
         public virtual void ApplyUI7()
         {
+            //this.BackgroundColor = UIColor.Clear;
             this.SectionIndexColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexUIColor.Value;
             this.SectionIndexBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexBGUIColor.Value;
             this.SectionIndexTrackingBackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSectionIndexTrackingUIColor.Value;

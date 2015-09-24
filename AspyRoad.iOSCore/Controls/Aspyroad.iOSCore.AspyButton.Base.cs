@@ -91,6 +91,9 @@ namespace AspyRoad.iOSCore
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             //this.TouchUpInside += btnthis_touchupinside;
+
+            // Set the default BG color
+            UIButton.GetAppearance<AspyButton>().BackgroundColor = UIColor.Clear;
         }
 
         #region IconSetters

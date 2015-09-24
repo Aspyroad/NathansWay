@@ -93,9 +93,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region EventHandlers
 
-
-
-
         #endregion
 	}
 }

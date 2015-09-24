@@ -61,6 +61,8 @@ namespace AspyRoad.iOSCore
             // Default alternating color?
             this._bHasAlternateGridBGColor = true;
             this._bAutoApplyUI = true;
+
+            UITableViewCell.GetAppearance<AspyTableViewCell>().BackgroundColor = UIColor.Clear;
 		}
 
 		private void AlternateCellColor ()
@@ -97,7 +99,7 @@ namespace AspyRoad.iOSCore
 
             // Setup normal color
             this.BackgroundView = new UIView ();
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
+            this.BackgroundView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ViewCellBGUIColor.Value;
 
             this.AlternateCellColor ();
         }
@@ -108,7 +110,7 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7()
         { 
-            this.TintColor = this.iOSUIAppearance.GlobaliOSTheme.ViewCellBGUITint.Value;
+            //this.TintColor = this.iOSUIAppearance.GlobaliOSTheme.ViewCellBGUITint.Value;
         }
 
 		#endregion
