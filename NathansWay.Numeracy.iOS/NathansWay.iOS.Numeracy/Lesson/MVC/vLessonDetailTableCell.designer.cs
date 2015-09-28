@@ -14,16 +14,8 @@ namespace NathansWay.iOS.Numeracy
 	[Register ("vLessonDetailTableCell")]
 	partial class vLessonDetailTableCell
 	{
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyLabel lblEquation { get; set; }
-
 		void ReleaseDesignerOutlets ()
 		{
-			if (lblEquation != null) {
-				lblEquation.Dispose ();
-				lblEquation = null;
-			}
 		}
 	}
 }

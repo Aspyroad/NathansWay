@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetailResults _wsLessonDetailResults;
 
         private string _strExpression;
-        private SizeWorkWidget _sizeWorkWidget;
+        private SizeWorkNumlet _sizeWorkNumlet;
 
 		#endregion
 
@@ -69,10 +69,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		private void Initialize()
 		{
 			this.AspyTag1 = 60024;
-			this.AspyName = "VC_WorkWidget";
+			this.AspyName = "VC_WorkNumlet";
             // Size Class Init
-            this._sizeWorkWidget = new SizeWorkWidget(this);
-            this._sizeClass = this._sizeWorkWidget;
+            this._sizeWorkNumlet = new SizeWorkNumlet(this);
+            this._sizeClass = this._sizeWorkNumlet;
             // Factory Classes for expression building
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
@@ -116,9 +116,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public SizeWorkWidget WorkWidgetSize 
+        public SizeWorkNumlet WorkWidgetSize 
         {
-            get { return (SizeWorkWidget)this._sizeClass; }
+            get { return (SizeWorkNumlet)this._sizeClass; }
         }
 
         public ExpressionFactory ExpressFactory
@@ -191,7 +191,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#endregion
 	}
 
-    public class SizeWorkWidget : SizeBase
+    public class SizeWorkNumlet : SizeBase
     {
         #region Class Variables
 
@@ -202,12 +202,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Constructors
 
-        public SizeWorkWidget()
+        public SizeWorkNumlet()
         {
             Initialize();
         }
 
-        public SizeWorkWidget(BaseContainer _vc) : base (_vc)
+        public SizeWorkNumlet(BaseContainer _vc) : base (_vc)
         {
             this.ParentContainer = _vc;
             Initialize();

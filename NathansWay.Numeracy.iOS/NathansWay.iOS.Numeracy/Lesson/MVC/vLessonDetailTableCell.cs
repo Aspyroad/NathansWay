@@ -33,19 +33,11 @@ namespace NathansWay.iOS.Numeracy
 		#region Public Methods
 
 		public void SetLessonDetailCell (vcLessonMenu controller, EntityLessonDetail lessonDetail, NSIndexPath indexPath)
-		{
-            this.lblEquation.Text = lessonDetail.Equation;
-                      
-//			this.lblLessonName.Text = lesson.NameLesson;
-//			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
-//			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
-//
-//			// Set the level bar length
-//			this.lblLevel.LevelWidth = (float)lesson.Difficulty;
-//			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
-		}
+		{           
+            //this.lblEquation.Text = lessonDetail.Equation;
+        }
 
-		#endregion
+        #endregion
 
 		#region Private Variables
 
