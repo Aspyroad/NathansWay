@@ -7,6 +7,7 @@ using AspyRoad.iOSCore.UISettings;
 // Monotouch
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
+using MonoTouch.CoreAnimation;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 
@@ -22,6 +23,8 @@ namespace AspyRoad.iOSCore
         private bool _bHoldState;
         private bool _bEnableHold;
         private bool _bIsPressed;
+        private bool _bRedrawOnTapStart;
+        private bool _bRedrawOnTapFinish;
 		// UI Variables
 		protected iOSUIManager iOSUIAppearance; 
 		protected UIColor colorNormalSVGColor;
@@ -84,16 +87,27 @@ namespace AspyRoad.iOSCore
             this._bHoldState = false;
             this._bEnableHold = false;
             this._bIsPressed = false;
+            this._bRedrawOnTapStart = false;
+            this._bRedrawOnTapFinish = false;
             // UIApply
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            //this.TouchUpInside += btnthis_touchupinside;
 
-            // Set the default BG color
+            // Set the default BG color - Globally sets all UIButtons to this set
             UIButton.GetAppearance<AspyButton>().BackgroundColor = UIColor.Clear;
+        }
+
+        protected void ClipDrawingToFrame(RectangleF _frame, UIBezierPath _maskPath)
+        {
+            // Create the shape layer and set its path
+            CAShapeLayer maskLayer = new CAShapeLayer();
+            maskLayer.Frame = _frame;
+            maskLayer.Path = _maskPath.CGPath;
+            // Set the newly created shape layer as the mask for the image view's layer
+            this.Layer.Mask = maskLayer;
         }
 
         #region IconSetters
@@ -198,6 +212,18 @@ namespace AspyRoad.iOSCore
         {
             get{ return _bIsPressed; }
             set{ _bIsPressed = value; }
+        }
+
+        public bool RedrawOnTapStart
+        {
+            get{ return this._bRedrawOnTapStart; }
+            set{ this._bRedrawOnTapStart = value; }
+        }
+
+        public bool RedrawOnTapFinish
+        {
+            get{ return this._bRedrawOnTapFinish; }
+            set{ this._bRedrawOnTapFinish = value; }
         }
 
         public bool EnableHold
@@ -382,16 +408,28 @@ namespace AspyRoad.iOSCore
             this.SetNeedsDisplay();
         }
 
+        public virtual void TapStart ()
+        {
+            if (this._bRedrawOnTapStart)
+            {
+                this.SetNeedsDisplay();
+            }
+        }
+
+        public virtual void TapFinish ()
+        {
+            if (this._bRedrawOnTapFinish)
+            {
+                this.SetNeedsDisplay();
+            }
+        }
+
         #endregion
 
         #region Delegates
 
-        private void btnthis_touchupinside (object sender, EventArgs e)
-        {
-            //this.ApplyPressed();
-        }
-
-        public event Action<UIButton> Tapped;
+        public event Action<UIButton> TapStarted;
+        public event Action<UIButton> TapFinished;
 
         #endregion
 
@@ -411,21 +449,27 @@ namespace AspyRoad.iOSCore
 		}
 
 		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
-		{			
+		{	
+            // Fire internal virtual TapStart for override methods
+            this.TapStart();
+            // Apply holding logic
             this.ApplyPressed(true);
 			return base.BeginTracking (uitouch, uievent);
 		}
 
 		public override void EndTracking (UITouch uitouch, UIEvent uievent)
 		{
+            // Fire internal virtual TapFinish for override methods
+            this.TapFinish();
+            // Fire our tapstarted event
+            if (TapFinished != null)
+            {
+                TapFinished (this);
+            }
 			if (_bIsPressed && Enabled)
 			{
-				if (Tapped != null)
-				{
-					Tapped (this);
-				}
+                this._bIsPressed = false;
 			}
-            //this.ApplyPressed(false);
 			base.EndTracking (uitouch, uievent);
 		}
 

@@ -109,7 +109,7 @@ namespace NathansWay.iOS.Numeracy
 			this._iOSGlobals.G__InitializeAllViewOrientation = true;
 			this._iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
 			this._iOSGlobals.G__ShouldAutorotate = false;
-			this._iOSGlobals.G__SegueingAnimationDuration = 0.5;
+			this._iOSGlobals.G__SegueingAnimationDuration = 0.2;
 			this._iOSGlobals.G__PrefersStatusBarHidden = true;
 
 			// Orientation handlers two types depending on iOS version

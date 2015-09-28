@@ -59,7 +59,8 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUIUnHeld()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.BackgroundColor = UIColor.Clear;
             // Must call base last
             base.ApplyUIUnHeld();
         }

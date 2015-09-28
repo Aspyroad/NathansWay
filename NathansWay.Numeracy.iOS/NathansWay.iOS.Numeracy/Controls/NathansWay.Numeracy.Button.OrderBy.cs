@@ -39,11 +39,6 @@ namespace NathansWay.iOS.Numeracy
 			Initialize();
 		}
 
-		private void Initialize()
-		{ 
-            this.ApplyUI (G__ApplyUI.AlwaysApply);
-		}
-
 		#endregion
 
 		#region Overrides 
@@ -62,6 +57,13 @@ namespace NathansWay.iOS.Numeracy
 		#endregion
 
 		#region Private Members
+
+        private void Initialize()
+        { 
+            this.ApplyUI (G__ApplyUI.AlwaysApply);
+            this.RedrawOnTapStart = true;
+            this.RedrawOnTapFinish = true;
+        }
 
 		private void DrawButtonBase 
 			( 

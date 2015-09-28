@@ -6,6 +6,7 @@ using AspyRoad.iOSCore;
 // MonoTouch
 using MonoTouch.UIKit;
 using MonoTouch.CoreGraphics;
+using MonoTouch.CoreAnimation;
 using MonoTouch.Foundation;
 using MonoTouch.ObjCRuntime;
 
@@ -72,8 +73,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
 			var context = UIGraphics.GetCurrentContext();
 
+
 			//// Color Declarations
-			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
+			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.8f);
 
 			//// Shadow Declarations
 			var shadowTextTitle = colorGradientButtonMainStart.CGColor;
@@ -101,8 +103,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 			colorTextGradient.SetFill();
 			new NSString("ToolBox\n").DrawString(RectangleF.Inflate(toolBoxRect, 0.0f, -7.0f), UIFont.FromName("GillSans-Light", 40.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 			context.RestoreState();
-
-
 
 			//// Groups
 			{
@@ -136,7 +136,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorNormalSVGColor.SetFill();
 					spannerPath.Fill();
-
 
 					//// ScrewDriverHandle Drawing
 					UIBezierPath screwDriverHandlePath = new UIBezierPath();
@@ -174,6 +173,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorNormalSVGColor.SetFill();
 					screwDriverTipPath.Fill();
+
+                    this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath); 
+
+//                    // Create the shape layer and set its path
+//                    CAShapeLayer maskLayer = new CAShapeLayer();
+//                    maskLayer.Frame = frame;
+//                    maskLayer.Path = mainSurfaceRectanglePath.CGPath;
+//
+//                    // Set the newly created shape layer as the mask for the image view's layer
+//                    this.Layer.Mask = maskLayer;
+
 				}
 			}
 		}
@@ -211,6 +221,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.ApplyUI(this._applyUIWhere);
+            this.RedrawOnTapStart = true;
+            this.RedrawOnTapFinish = true;
         }
 
         #endregion
@@ -306,6 +318,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 			colorNormalSVGColor.SetFill();
 			bezierPath.Fill();
+
+            this.ClipDrawingToFrame(frame, mainFrontPath); 
 		}
 
 		#endregion
@@ -450,6 +464,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				colorNormalSVGColor.SetFill();
 				dangleEndPath.Fill();
+
+                this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath); 
 			}
 		}
 
@@ -620,6 +636,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				colorNormalSVGColor.SetFill();
 				deskPath.Fill();
+
+                this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath);
 			}
 		}
 
@@ -789,6 +807,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 					colorNormalSVGColor.SetFill();
 					pencilBodyPath.Fill();
+
+                    this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath);
 				}
 			}
 		}
@@ -1098,6 +1118,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				colorNormalSVGColor.SetFill();
 				middleSlidePath.Fill();
+
+                this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath);
 			}
 		}
 
