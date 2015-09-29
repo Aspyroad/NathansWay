@@ -145,6 +145,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
+        public void SetNumberFont (AspyLabel _lbl)
+        {
+            _lbl.Font = this.GlobalSizeDimensions.GlobalNumberFont;
+        }
+        // Overload for textfield
         public void SetNumberFont (AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;

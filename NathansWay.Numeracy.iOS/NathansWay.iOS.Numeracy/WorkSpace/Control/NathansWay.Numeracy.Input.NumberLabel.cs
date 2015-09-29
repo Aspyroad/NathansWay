@@ -172,7 +172,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Text Box Frame
         public RectangleF _rectNumberLabel;
         // Parent Container
-        private vcNumberText _vcChild;
+        private vcNumberLabel _vcChild;
 
         // Font Size
         public UIFont _globalFont;

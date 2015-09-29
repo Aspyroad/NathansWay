@@ -81,7 +81,6 @@ namespace NathansWay.Shared.Factories
             for (int i = 0; i < this._lsDecodedExpressionEquation.Count; i++) // Loop with for.
             {
                 var x = this._lsDecodedExpressionEquation[i];
-                string y;
 
                 switch ((G__MathChar)x.Key)
                 {
