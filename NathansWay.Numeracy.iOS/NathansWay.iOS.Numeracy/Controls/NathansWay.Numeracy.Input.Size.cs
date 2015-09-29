@@ -44,7 +44,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected float _fOldHeight = 0.0f;
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
-        protected bool _bMultiNumberText;
+        protected bool _bMultiNumberLabel;
         // PointF location with respect to the Window and ContainerController
         protected PointF _ptStartPointInWindow;
 
@@ -77,7 +77,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.DisplayPositionY = G__NumberDisplayPositionY.Center;
             this._setRelationPosX = false;
             this._setRelationPosY = false;
-            this._bMultiNumberText = false;
+            this._bMultiNumberLabel = false;
         }
 
         /// <summary>
@@ -334,8 +334,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public bool SetAsMultiNumberText
         {
-            get { return this._bMultiNumberText; }
-            set { this._bMultiNumberText = value; }
+            get { return this._bMultiNumberLabel; }
+            set { this._bMultiNumberLabel = value; }
         }
 
         #endregion

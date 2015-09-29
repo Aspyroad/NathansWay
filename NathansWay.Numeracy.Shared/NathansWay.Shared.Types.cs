@@ -31,9 +31,12 @@ namespace NathansWay.Shared
 
     public enum G__NumberDisplaySize : int
     {
-        Normal = 1,
-        Medium = 2,
-        Large = 3
+        Small = 1,
+        Normal = 2,
+        Medium = 3,
+        Large = 4,
+        Huge = 5,
+        Massive = 6
     }
     public enum G__NumberDisplayPositionY : int
     {
@@ -87,7 +90,8 @@ namespace NathansWay.Shared
         Number = 1,
         Fraction = 2,
         Operator = 3,
-        Container = 4
+        Container = 4,
+        NumberLabel = 5
     }
 
 	#region Filtering

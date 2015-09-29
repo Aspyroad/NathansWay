@@ -884,7 +884,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetHeightWidth ()
         {
-            if (this._bMultiNumberText)
+            if (this._bMultiNumberLabel)
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
             }

@@ -320,6 +320,7 @@ namespace NathansWay.iOS.Numeracy
             _numeracyUIManager.AddVC (600105, "VC_OperatorText");
             _numeracyUIManager.AddVC (600106, "VC_BraceText");
             _numeracyUIManager.AddVC (600107, "VC_NumberContainer");
+            _numeracyUIManager.AddVC (600108, "VC_NumberLabel");
 
 
 			// Register app/user settings
