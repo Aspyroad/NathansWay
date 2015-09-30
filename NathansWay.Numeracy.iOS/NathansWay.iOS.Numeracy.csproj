@@ -187,16 +187,13 @@
       <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.NumberPad.cs" />
-    <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumberFactory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.Size.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.Base.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.MainContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.TextBoxDelegate.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.FractionContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.vFractionContainer.cs">
-      <DependentUpon>NathansWay.Numeracy.Container.FractionContainer.cs</DependentUpon>
+      <DependentUpon>NathansWay.Numeracy.Input.FractionContainer.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.NumberContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Brace.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Decimal.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Number.cs" />
@@ -208,9 +205,8 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.vNumberPad.cs">
       <DependentUpon>NathansWay.Numeracy.Input.NumberPad.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Operator.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.vOperator.cs">
-      <DependentUpon>NathansWay.Numeracy.Input.Operator.cs</DependentUpon>
+      <DependentUpon>NathansWay.Numeracy.Input.OperatorContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberPicker.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
@@ -219,7 +215,12 @@
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.Numeracy.UI.Dimensions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkNumlet.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberLabel.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.NumberLabelContainer.cs" />
+    <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumletFactory.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.OperatorContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberLabelContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.FractionContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkReadOnlyLabel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />

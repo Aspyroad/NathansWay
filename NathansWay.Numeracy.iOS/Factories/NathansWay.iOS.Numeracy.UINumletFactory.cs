@@ -12,21 +12,26 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
+using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
+// Shared
+using NathansWay.Shared.Factories;
+using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared;
 
-namespace NathansWay.Shared.Numeracy.Factories
+namespace NathansWay.iOS.Numeracy
 {
-    public class UINumberFactory 
+    public class UINumletFactory 
     {
         #region Class Variables
 
-        protected G__UnitPlacement _tensUnit;
+        
 
         #endregion
 
         #region Contructors
 
-        public UINumberFactory()
+        public UINumletFactory()
         {
 
         }
@@ -34,20 +39,8 @@ namespace NathansWay.Shared.Numeracy.Factories
         #endregion
 
         #region Public Members
-        // Diveded by symbol (opt + /)
-        // ([1/2] + [3/4]) - (3) =
-        // (2 + 5) =
-        // (347 ÷ 54) =
 
-        // UICreateNumber (int length)
-
-        // UICreateFraction (string strFraction)
-
-        // UICreateOperator (string strOperator)
-
-        // UICreate
-
-
+        public vcWorkNumlet CreateNumlet(string expression
 
         #endregion
 

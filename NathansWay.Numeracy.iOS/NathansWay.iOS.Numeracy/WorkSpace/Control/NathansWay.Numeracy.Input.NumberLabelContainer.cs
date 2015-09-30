@@ -137,7 +137,7 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     var newnumber = new vcNumberLabel(intCh);
-                    newnumber.MyNumberContainer = this;
+                    newnumber.MyNumberLabelContainer = this;
                     if (this.IsAnswer)
                     { 
                         this.CurrentValue = null;

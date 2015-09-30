@@ -69,6 +69,7 @@ namespace NathansWay.iOS.Numeracy
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+            // Falling rock style!
 
 			#region Setup
 			// Setup services and globals for iOS
@@ -209,8 +210,6 @@ namespace NathansWay.iOS.Numeracy
 			//window.MakeKeyAndVisible();
 
 			#endregion
-
-			//hammer.MainGame.Run ();
 
 			return true;
 		}
@@ -354,6 +353,5 @@ namespace NathansWay.iOS.Numeracy
 		}
 
 		#endregion
-
 	}
 }

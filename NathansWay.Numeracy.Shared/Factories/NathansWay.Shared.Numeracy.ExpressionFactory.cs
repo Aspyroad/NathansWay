@@ -88,7 +88,14 @@ namespace NathansWay.Shared.Factories
                     case (G__MathChar.Value):
                     {
                         // Build a number
-                        this._UIPlatformClient.UICreateNumber(x.Value);
+                        if (_readonly)
+                        {
+                            this._UIPlatformClient.UICreateNumberLabel(x.Value);
+                        }
+                        else
+                        {
+                            this._UIPlatformClient.UICreateNumber(x.Value);
+                        }
                     }
                     break;
                     case (G__MathChar.BraceRoundLeft):
@@ -126,7 +133,7 @@ namespace NathansWay.Shared.Factories
             this.SplitExpressionMethod(_expression);
             for (int i = 0; i < this._lsDecodedExpressionMethod.Count; i++) // Loop with for.
             {                
-                this._UIOutputMethods.Add(CreateExpressionEquation(this._lsDecodedExpressionMethod[i]));
+                this._UIOutputMethods.Add(CreateExpressionEquation(this._lsDecodedExpressionMethod[i], _readonly));
             }
             return this._UIOutputMethods;
         }

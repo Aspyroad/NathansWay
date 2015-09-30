@@ -30,7 +30,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
 
-        private List<vcWorkNumlet> _lsWorkWidgets;
+        private List<vcWorkNumlet> _lsWorkNumlets;
 
 		#endregion
 
@@ -155,9 +155,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set 
             { 
                 this._strExpression = value; 
-                // Build our expression
 
-                //this.BuildExpression(this._expressionFactory.UIOutput);
             }
         }
 

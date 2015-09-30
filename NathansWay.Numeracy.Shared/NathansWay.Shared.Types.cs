@@ -79,7 +79,7 @@ namespace NathansWay.Shared
         UnAttempted = 3
     }
 
-    public enum G__WorkWidgetType : int
+    public enum G__WorkNumletType : int
     {
         Equation = 1,
         Method = 2
