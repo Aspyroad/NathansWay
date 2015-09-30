@@ -86,6 +86,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Add to output
             _UIOutput.Add(x as object);
         }
+        public void UICreateNumberLabel (string strValue)
+        {
+            // Create a number
+            var x = new vcNumberLabelContainer(strValue);
+            // Logic
+            x.IsAnswer = this.IsAnswer;
+            x.IsReadOnly = this.IsReadOnly;
+            // Create the number
+            x.CreateNumber();
+            // UI
+            x.HasBorder = true;
+            x.HasRoundedCorners = true;
+            // Add to output
+            _UIOutput.Add(x as object);
+        }
         public void UICreateFraction (string strFraction)
         {
             // Create a fraction

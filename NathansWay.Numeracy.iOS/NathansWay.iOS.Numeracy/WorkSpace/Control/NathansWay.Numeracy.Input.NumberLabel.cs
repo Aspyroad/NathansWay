@@ -23,11 +23,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // UI Components
         public AspyLabel lblNumber { get; private set; }
-        public vNumberContainer _View;
 
         private SizeNumberLabel _sizeNumberLabel;
         private vcMainContainer _vcMainContainer;
-        private vcNumberContainer _vcNumberContainer;
+        private vcNumberLabelContainer _vcNumberLabelContainer;
 
         private G__UnitPlacement _tensUnit;
         private G__Significance _significance;
@@ -119,15 +118,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._significance = value; }
         }
 
-        public vcNumberContainer MyNumberContainer
+        public vcNumberLabelContainer MyNumberLabelContainer
         {
             get
             {
-                return _vcNumberContainer;
+                return _vcNumberLabelContainer;
             }
             set
             {
-                _vcNumberContainer = value;
+                _vcNumberLabelContainer = value;
             }
         }
                         

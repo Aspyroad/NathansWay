@@ -75,7 +75,7 @@ namespace NathansWay.Shared.Factories
         /// </summary>
         /// <returns>The expression equation.</returns>
         /// <param name="_expression">Expression.</param>
-        public List<object> CreateExpressionEquation (string _expression)
+        public List<object> CreateExpressionEquation (string _expression, bool _readonly)
         {
             this.SplitExpressionEquation(_expression);
             for (int i = 0; i < this._lsDecodedExpressionEquation.Count; i++) // Loop with for.
@@ -121,7 +121,7 @@ namespace NathansWay.Shared.Factories
         /// </summary>
         /// <returns>The expression method.</returns>
         /// <param name="_expression">Expression.</param>
-        public List<List<object>> CreateExpressionMethod (string _expression)
+        public List<List<object>> CreateExpressionMethod (string _expression, bool _readonly)
         {
             this.SplitExpressionMethod(_expression);
             for (int i = 0; i < this._lsDecodedExpressionMethod.Count; i++) // Loop with for.

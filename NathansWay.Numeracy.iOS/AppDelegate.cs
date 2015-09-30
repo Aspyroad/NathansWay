@@ -109,7 +109,7 @@ namespace NathansWay.iOS.Numeracy
 			this._iOSGlobals.G__InitializeAllViewOrientation = true;
 			this._iOSGlobals.G__ViewOrientation = G__Orientation.Landscape;
 			this._iOSGlobals.G__ShouldAutorotate = false;
-			this._iOSGlobals.G__SegueingAnimationDuration = 0.2;
+			this._iOSGlobals.G__SegueingAnimationDuration = 0.8;
 			this._iOSGlobals.G__PrefersStatusBarHidden = true;
 
 			// Orientation handlers two types depending on iOS version
@@ -321,6 +321,7 @@ namespace NathansWay.iOS.Numeracy
             _numeracyUIManager.AddVC (600106, "VC_BraceText");
             _numeracyUIManager.AddVC (600107, "VC_NumberContainer");
             _numeracyUIManager.AddVC (600108, "VC_NumberLabel");
+            _numeracyUIManager.AddVC (600109, "VC_NumberLabelContainer");
 
 
 			// Register app/user settings

@@ -23,18 +23,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public class vcWorkNumlet : BaseContainer
 	{
 		#region Private Variables
-		
+		// Control
         private G__WorkWidgetType _workWidgetType;
         private ExpressionFactory _expressionFactory;
+        private string _strExpression;
         private NumberFactoryClient _numberFactoryClient;
 
+        // Logic
+        private bool _bReadOnly;
+
+        // Data
         private EntityLesson _wsLesson;
         private EntityLessonResults _wsLessonResults;
         private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
-        private string _strExpression;
+        // UI
         private SizeWorkNumlet _sizeWorkNumlet;
+        private G__NumberDisplaySize _numberDisplaySize;
 
 		#endregion
 
@@ -84,11 +90,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadExpression(string _strExpression)
         {
-            this._expressionFactory.CreateExpressionEquation(_strExpression);
+            this._expressionFactory.CreateExpressionEquation(_strExpression, false);
+        }
+
+        public void LoadExpressionLabel(string _strExpression)
+        {
+            this._expressionFactory.CreateExpressionEquation(_strExpression, true);
         }
 
         public void BuildExpression(List<object> UIInternalOutput)
         {
+            // TODO : Where is this going to get set? Depending on size?
             if (this.SizeClass.CurrentHeight <= 0.0f)
             {
                 // Cant set sizes without WorkSpace Startpoint
@@ -97,11 +109,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // TODO : Local horizontal position. Do we need a buffer/padding??
             float _XPos = 2.0f;
-                
+
+            // TODO : We need to set this Numlets width somewhere???? Might be kindve important.    
             for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
             {
                 var _control = (BaseContainer)UIInternalOutput[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+
+                // TODO : Hook up the control resizing events so that all controls are messaged by this numlet
+
                 // This call only calls the BASE SetPositions not any derives
                 // You may need to call any frame creation methods in the 
                 // controls ViewWillApppear method
@@ -116,39 +132,39 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public SizeWorkNumlet WorkWidgetSize 
+        public SizeWorkNumlet WorkNumletSize 
         {
             get { return (SizeWorkNumlet)this._sizeClass; }
         }
 
         public ExpressionFactory ExpressFactory
         {
-            get { return _expressionFactory; }
-            set { _expressionFactory = value; }
+            get { return this._expressionFactory; }
+            set { this._expressionFactory = value; }
         }
 
         public EntityLesson WsLesson
         {
-            get { return _wsLesson; }
-            set { WsLesson = value; }
+            get { return this._wsLesson; }
+            set { this._wsLesson = value; }
         }
 
         public EntityLessonResults WsLessonResults
         {
-            get { return _wsLessonResults; }
-            set { WsLessonResults = value; }
+            get { return this._wsLessonResults; }
+            set { this._wsLessonResults = value; }
         }
 
         public EntityLessonDetail WsLessonDetail
         {
-            get { return _wsLessonDetail; }
-            set { WsLessonDetail = value; }
+            get { return this._wsLessonDetail; }
+            set { this._wsLessonDetail = value; }
         }
 
         public EntityLessonDetailResults WsLessonDetailResults
         {
-            get { return _wsLessonDetailResults; }
-            set { WsLessonDetailResults = value; }
+            get { return this._wsLessonDetailResults; }
+            set { this._wsLessonDetailResults = value; }
         }
 
         public string ExpressionString 
@@ -163,6 +179,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
+        public G__NumberDisplaySize  NumberDisplaySize
+        {
+            get { return this._numberDisplaySize; }
+            set 
+            { 
+                this._numberDisplaySize = value; 
+
+                // TODO : We need to message all controls under this numlet to let them know the size has changed.
+            }
+        }
+
+
         #endregion
 
 		#region Overrides
@@ -170,12 +198,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void DidReceiveMemoryWarning()
 		{
 			base.DidReceiveMemoryWarning();
-		}
-
-		public override void LoadView()
-		{
-			base.LoadView(); 
-            //this.View.BackgroundColor = UIColor.White;
 		}
 
 		public override void ViewDidLoad()
@@ -227,8 +249,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
+            // We have no fuckin idea how big this will be!!!!!
         }
 
         #endregion

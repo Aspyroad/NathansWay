@@ -17,6 +17,7 @@ namespace NathansWay.Shared
         // For example in iOS this would be a collection of beggining to end vc's for an expression.
         // Simply pop them off the stack and into the container vc
         void UICreateNumber (string intNumber);
+        void UICreateNumberLabel (string intNumber);
         void UICreateFraction (string strFraction);
         void UICreateOperator (G__MathChar mathChar, string strChar);
         void UICreateBrace (bool bIsRight);
