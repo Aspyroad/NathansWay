@@ -23,10 +23,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public class vcWorkSpaceLabel : BaseContainer
 	{
 		#region Private Variables
+
 		// Control
-        private ExpressionFactory _expressionFactory;
         private string _strExpression;
-        private NumberFactoryClient _numberFactoryClient;
+        private bool _bDataPassedIn = false;
 
         // Data
         private EntityLesson _wsLesson;
@@ -40,24 +40,34 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		#region Constructors
 
-        public vcWorkNumlet(IntPtr h) : base(h)
+        public vcWorkSpaceLabel (IntPtr h) : base(h)
 		{
 			Initialize();
 		}
 
 		[Export("initWithCoder:")]
-        public vcWorkNumlet(NSCoder coder) : base(coder)
+        public vcWorkSpaceLabel (NSCoder coder) : base(coder)
 		{
 			Initialize();
 		}
 
-        public vcWorkNumlet(string _expression) 
+        public vcWorkSpaceLabel (string _expression) 
         {            
             this._strExpression = _expression;
             Initialize();
         }
 
-        public vcWorkNumlet() 
+        public vcWorkSpaceLabel (EntityLesson wsLesson, EntityLessonDetail wsLessonDetail) 
+        {            
+            this._wsLesson = wsLesson;
+            this._wsLessonDetail = wsLessonDetail;
+            // Logic so we know this constructor was used
+            // This may not be needed but it "may" be handy in the future depending on "where I create this class
+            this._bDataPassedIn = true;
+            Initialize();
+        }
+         
+        public vcWorkSpaceLabel () 
 		{   
 			Initialize();
 		}
@@ -73,15 +83,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkSpaceLabel = new SizeWorkSpaceLabel(this);
             this._sizeClass = this._sizeWorkSpaceLabel;
-            // Factory Classes for expression building
-            this._numberFactoryClient = new NumberFactoryClient();
-            this._expressionFactory = new ExpressionFactory(_numberFactoryClient);
 		}
 
 		#endregion
 
         #region Public Members
 
+        public void CreateWorkSpace ()
+        {
+            // TODO : Implement the creatyion of workspace numlets and position them
+            throw new NotImplementedException();
+        }
 
         #endregion
 
@@ -114,7 +126,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // TODO : We need to message all controls under this numlet to let them know the size has changed.
             }
         }
-
 
         #endregion
 

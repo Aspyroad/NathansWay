@@ -54,7 +54,7 @@ namespace NathansWay.iOS.Numeracy
 		private List<NSObject> _applicationObservers;
         // Factories
 		private ToolFactory _toolBuilder;
-        private ExpressionFactory _expressionFactory;
+        private UINumletFactory _NumletFactory;
         //private IUINumberFactoryClient _numberFactoryClient;
 
 		#endregion
@@ -102,8 +102,10 @@ namespace NathansWay.iOS.Numeracy
 			// Apply user based app settings
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
+            // But not all need to be saved?
             this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
             this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
+            this._NumberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -147,12 +149,11 @@ namespace NathansWay.iOS.Numeracy
             // Build a ToolBoxFactory
 	        _toolBuilder = new ToolFactory();
 			iOSCoreServiceContainer.Register<ToolFactory> (this._toolBuilder);
-            // Build a NumberFactory
-            this._expressionFactory = new ExpressionFactory(new NumberFactoryClient());
-            iOSCoreServiceContainer.Register<ExpressionFactory> (this._expressionFactory);
 
-			// ** Note how to retrieve from services.
-			//this.iOSGlobals = ServiceContainer.Resolve<IAspyGlobals>();
+            // Build a NumletFactory
+            // Numlets are the most basic workspace, the contain any expression
+            // A workspace is made up of one to [n] numlets
+            iOSCoreServiceContainer.Register<UINumletFactory> (this._NumletFactory);
 
 			#endregion
 
