@@ -309,7 +309,7 @@ namespace NathansWay.iOS.Numeracy
 			_numeracyUIManager.AddVC (60021, "VC_GlobalWorkSpace"); 
 			_numeracyUIManager.AddVC (60022, "VC_WorkSpace");
             _numeracyUIManager.AddVC (60023, "VC_MainContainer");
-            _numeracyUIManager.AddVC (60024, "VC_WorkWidget");
+            _numeracyUIManager.AddVC (60024, "VC_WorkNumlet");
 			// Controls 
 			_numeracyUIManager.AddVC (600100, "VC_NumberPad");
 			_numeracyUIManager.AddVC (600101, "VC_FractionCombo");

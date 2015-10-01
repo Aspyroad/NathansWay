@@ -425,20 +425,5 @@ namespace NathansWay.iOS.Numeracy
 			
 		#endregion
 	}
-
-    // Special EventArgs class to hold info about resizing. 
-    public class ResizeEventArgs : EventArgs
-    {
-        private bool _activated;
-
-        public ResizeEventArgs()
-        {
-            this._activated = true;
-        }
-        public bool Activated
-        {
-            get { return _activated; }
-        }
-    }
 }
 

@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Events
 
-        public event Action Resizing;
+        public event EventHandler<EventArgs> Resizing;
 
         #endregion
 
@@ -158,7 +158,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public virtual void SetHeightWidth ()
         {
         }
-
+        // Overload to set at init
         public virtual void SetHeightWidth (float _width, float _height)
         {
             this._fCurrentWidth = _width;
@@ -222,7 +222,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         //The event-invoking method that derived classes can override. 
-        public virtual void OnResize(EventArgs e)
+        public virtual void OnResize(object s, ResizeEventArgs e)
         {
 
         }
@@ -341,6 +341,40 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return this._bMultiNumberLabel; }
             set { this._bMultiNumberLabel = value; }
+        }
+
+        #endregion
+    }
+
+    // EventArgs class to hold info about resizing. 
+    public class ResizeEventArgs : EventArgs
+    {
+        #region Private Variable
+
+        private bool _activated;
+        private G__NumberDisplaySize _numberDisplaySize;
+
+        #endregion
+
+        #region Constructor
+
+        public ResizeEventArgs()
+        {
+            this._activated = true;
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public bool Activated
+        {
+            get { return this._activated; }
+        }
+
+        public G__NumberDisplaySize NumberDisplaySize
+        {
+            get { return this._numberDisplaySize; }
         }
 
         #endregion
