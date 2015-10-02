@@ -25,8 +25,20 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Class Variables
 
+        // Shared Factory
         private ExpressionFactory _expressionFactory;
         private NumberFactoryClient _numberFactoryClient;
+
+        // UI
+        private List<object> _uiOutputEquation;
+        private List<List<object>> _uiOutputMethods;
+        private iOSNumberDimensions _globalSizeDimensions;
+        private G__NumberDisplaySize _numberDisplaySize;
+        private float _fNumberSpacing;
+
+        // Logic
+
+
 
         #endregion
 
@@ -37,55 +49,57 @@ namespace NathansWay.iOS.Numeracy
             // Factory Classes for expression building
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(this._numberFactoryClient);
+            this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
         }
 
         #endregion
 
         #region Public Members
 
+        // TODO : Create an Entity class with 
+        //        private EntityLesson _wsLesson;
+        //        private EntityLessonResults _wsLessonResults;
+        //        private EntityLessonDetail _wsLessonDetail;
+        //        private EntityLessonDetailResults _wsLessonDetailResults;
+        // All being members, it will be easier to pass this one object as a set.
+
         public vcWorkNumlet CreateNumlet(string expression)
         {
-            return new vcWorkNumlet();
-        }
-
-        public void LoadExpression(string _strExpression)
-        {
-            this._expressionFactory.CreateExpressionEquation(_strExpression, false);
-        }
-
-        public void LoadExpressionLabel(string _strExpression)
-        {
-            this._expressionFactory.CreateExpressionEquation(_strExpression, true);
-        }
-
-        public void BuildExpression(List<object> UIInternalOutput)
-        {
-            // TODO : Where is this going to get set? Depending on size?
-            if (this.SizeClass.CurrentHeight <= 0.0f)
-            {
-                // Cant set sizes without WorkSpace Startpoint
-                return;
-            }
-
-            // TODO : Local horizontal position. Do we need a buffer/padding??
-            float _XPos = 2.0f;
+            var numlet = new vcWorkNumlet();
+            float _xPos = this._globalSizeDimensions.NumletNumberSpacing;
 
             // TODO : We need to set this Numlets width somewhere???? Might be kindve important.    
-            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
+            for (int i = 0; i < this._uiOutputEquation.Count; i++) // Loop with for.
             {
-                var _control = (BaseContainer)UIInternalOutput[i];
+                var _control = (BaseContainer)this._uiOutputEquation[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
 
                 // TODO : Hook up the control resizing events so that all controls are messaged by this numlet
 
-                // This call only calls the BASE SetPositions not any derives
-                // You may need to call any frame creation methods in the 
-                // controls ViewWillApppear method
-                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
+                // TODO : Do we need to set the ApplyUIWhere variable for each object?
+                // Most of these should ApplyUI in ViewWillAppear
+
+                _control.SizeClass.SetPositions(_xPos, this._globalSizeDimensions.NumletHeight);
                 //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
-                this.AddAndDisplayController(_control);
-                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
+                numlet.AddAndDisplayController(_control);
+                _xPos = _xPos + _control.SizeClass.CurrentWidth;
             }
+
+            return numlet;
+        }
+
+        public void ExpressionToUIEditable(string _strExpression)
+        {
+            this._uiOutputEquation = this._expressionFactory.CreateExpressionEquation(_strExpression, false);
+        }
+
+        public void ExpressionToUIReadOnly(string _strExpression)
+        {
+            this._uiOutputMethods = this._expressionFactory.CreateExpressionMethod(_strExpression, true);
+        }
+
+        public void BuildExpression(List<object> UIInternalOutput)
+        {
         }
 
         #endregion

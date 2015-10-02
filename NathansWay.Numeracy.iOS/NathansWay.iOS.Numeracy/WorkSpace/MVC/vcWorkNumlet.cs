@@ -91,12 +91,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkNumlet)this._sizeClass; }
         }
 
-        public ExpressionFactory ExpressFactory
-        {
-            get { return this._expressionFactory; }
-            set { this._expressionFactory = value; }
-        }
-
         public EntityLesson WsLesson
         {
             get { return this._wsLesson; }

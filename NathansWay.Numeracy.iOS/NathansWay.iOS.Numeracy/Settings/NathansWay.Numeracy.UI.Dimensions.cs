@@ -162,6 +162,101 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #endregion
 
+        #region Numlet 
+
+        public float NumletHeight
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 0.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 0.0f;
+                    }
+                }
+            }
+        }
+        public float NumletWidth
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 1016.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 1016.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 1020.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 1020.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 1020.0f;
+                    }
+                }
+            }
+        }
+        public float NumletNumberSpacing
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 4.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 4.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 8.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 16.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 32.0f;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region Number Text Box
 
         public float LabelPickerViewHeight
