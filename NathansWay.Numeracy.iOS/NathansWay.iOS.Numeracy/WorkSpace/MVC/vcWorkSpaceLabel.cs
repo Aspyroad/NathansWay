@@ -95,6 +95,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             throw new NotImplementedException();
         }
 
+        public void ChangeDisplaySize(G__NumberDisplaySize numberlabeldisplaysize)
+        {
+
+
+        }
+
         #endregion
 
         #region Public Properties
@@ -119,11 +125,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public G__NumberDisplaySize  NumberDisplaySize
         {
             get { return this._numberDisplaySize; }
-            set 
-            { 
-                this._numberDisplaySize = value; 
-
-                // TODO : We need to message all controls under this numlet to let them know the size has changed.
+            set
+            {
+                this.NumberAppSettings.GA__NumberLabelDisplaySize = value;
+                this.ChangeDisplaySize(value);
             }
         }
 

@@ -141,6 +141,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             return new PointF((float)Math.Round(_XPos), (float)Math.Round(_YPos));
         }
 
+        //The event-invoking method. This mehtod calls all sizeclass virtual
+        protected virtual void CallResizing(G__NumberDisplaySize numbersize)
+        {
+            // Thread safety.
+            var x = this.Resizing;
+            // Check for null before firing.
+            if (x != null)
+            {
+                var y = new ResizeEventArgs(numbersize);
+                x (this, y);
+            }
+            // Call the views refresh display - this should redraw all subviews also
+            this._parentContainer.View.SetNeedsDisplay();
+        }
+
+
         #endregion
 
         #region Public Members
@@ -149,15 +165,21 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             _lbl.Font = this.GlobalSizeDimensions.GlobalNumberFont;
         }
+
         // Overload for textfield
         public void SetNumberFont (AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
         }
 
+        #endregion
+
+        #region Virtual Members
+
         public virtual void SetHeightWidth ()
         {
         }
+
         // Overload to set at init
         public virtual void SetHeightWidth (float _width, float _height)
         {
@@ -221,11 +243,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
-        //The event-invoking method that derived classes can override. 
-        public virtual void OnResize(object s, ResizeEventArgs e)
-        {
-
-        }
         // Should be called ONLY in viewdidload or viewwillappear
         public virtual void SetFrames()
         {
@@ -245,6 +262,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+        public virtual void OnResize()
+        {
+
+        }
 
         #endregion
 
@@ -358,9 +379,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Constructor
 
-        public ResizeEventArgs()
+        public ResizeEventArgs(G__NumberDisplaySize numberDisplaySize)
         {
             this._activated = true;
+            this._numberDisplaySize = numberDisplaySize;
         }
 
         #endregion

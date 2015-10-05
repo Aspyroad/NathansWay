@@ -77,6 +77,9 @@ namespace NathansWay.Shared.Factories
         /// <param name="_expression">Expression.</param>
         public List<object> CreateExpressionEquation (string _expression, bool _readonly)
         {
+            // Fire our start event
+            this.FireBuildStartedEvent();
+
             this.SplitExpressionEquation(_expression);
             for (int i = 0; i < this._lsDecodedExpressionEquation.Count; i++) // Loop with for.
             {
@@ -121,6 +124,10 @@ namespace NathansWay.Shared.Factories
                     break;
                 }
             }
+
+            // Fire our finished event
+            this.FireBuildCompletedEvent();
+
             return this._UIPlatformClient.UIInternalOutput;
         }
         /// <summary>
@@ -130,11 +137,18 @@ namespace NathansWay.Shared.Factories
         /// <param name="_expression">Expression.</param>
         public List<List<object>> CreateExpressionMethod (string _expression, bool _readonly)
         {
+            // Fire our start event
+            this.FireBuildStartedEvent();
+
             this.SplitExpressionMethod(_expression);
             for (int i = 0; i < this._lsDecodedExpressionMethod.Count; i++) // Loop with for.
             {                
                 this._UIOutputMethods.Add(CreateExpressionEquation(this._lsDecodedExpressionMethod[i], _readonly));
             }
+
+            // Fire our finished event
+            this.FireBuildCompletedEvent();
+
             return this._UIOutputMethods;
         }
         /// <summary>

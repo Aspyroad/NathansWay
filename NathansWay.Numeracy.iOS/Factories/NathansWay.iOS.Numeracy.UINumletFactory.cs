@@ -23,6 +23,17 @@ namespace NathansWay.iOS.Numeracy
 {
     public class UINumletFactory 
     {
+
+        #region Events
+
+        public delegate void BuildStartedEventHandler (Object sender, EventArgs e);
+        public delegate void BuildCompletedEventHandler (Object sender, EventArgs e);
+
+        public event BuildStartedEventHandler BuildStarted;
+        public event BuildCompletedEventHandler BuildCompleted;
+
+        #endregion
+
         #region Class Variables
 
         // Shared Factory
@@ -109,6 +120,28 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Private Members
+
+        protected void FireBuildStartedEvent()
+        {
+            // Thread safety.
+            var x = this.BuildStarted;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
+
+        protected void FireBuildCompletedEvent()
+        {
+            // Thread safety.
+            var x = this.BuildCompleted;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x (this, new EventArgs ());
+            }   
+        }
 
         #endregion
     }

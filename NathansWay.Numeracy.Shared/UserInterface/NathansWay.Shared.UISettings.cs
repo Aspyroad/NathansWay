@@ -8,6 +8,7 @@ namespace NathansWay.Shared
 	{
         #region Private Variables
 
+        private G__NumberDisplaySize _GA__NumberLabelDisplaySize;
         private G__NumberDisplaySize _GA__NumberDisplaySize;
         private G__NumberEditMode _GA__NumberEditMode;
 
@@ -33,6 +34,18 @@ namespace NathansWay.Shared
             set
             {
                 _GA__NumberDisplaySize = value;
+            }
+        }
+
+        public G__NumberDisplaySize GA__NumberLabelDisplaySize
+        {
+            get
+            {
+                return _GA__NumberLabelDisplaySize;
+            }
+            set
+            {
+                _GA__NumberLabelDisplaySize = value;
             }
         }
 

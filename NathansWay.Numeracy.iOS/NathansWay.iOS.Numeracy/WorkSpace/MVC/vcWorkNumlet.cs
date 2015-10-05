@@ -29,9 +29,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Data
         private EntityLesson _wsLesson;
-        private EntityLessonResults _wsLessonResults;
+        //private EntityLessonResults _wsLessonResults;
         private EntityLessonDetail _wsLessonDetail;
-        private EntityLessonDetailResults _wsLessonDetailResults;
+        //private EntityLessonDetailResults _wsLessonDetailResults;
 
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
@@ -97,11 +97,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { this._wsLesson = value; }
         }
 
-        public EntityLessonResults WsLessonResults
-        {
-            get { return this._wsLessonResults; }
-            set { this._wsLessonResults = value; }
-        }
+//        public EntityLessonResults WsLessonResults
+//        {
+//            get { return this._wsLessonResults; }
+//            set { this._wsLessonResults = value; }
+//        }
 
         public EntityLessonDetail WsLessonDetail
         {
@@ -109,35 +109,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { this._wsLessonDetail = value; }
         }
 
-        public EntityLessonDetailResults WsLessonDetailResults
-        {
-            get { return this._wsLessonDetailResults; }
-            set { this._wsLessonDetailResults = value; }
-        }
+//        public EntityLessonDetailResults WsLessonDetailResults
+//        {
+//            get { return this._wsLessonDetailResults; }
+//            set { this._wsLessonDetailResults = value; }
+//        }
 
         public string ExpressionString 
         { 
-            get { return this._strExpression; } 
-            set 
-            { 
-                this._strExpression = value; 
-                // Build our expression
-                this.LoadExpression(value);
-                this.BuildExpression(this._expressionFactory.UIOutputEquation);
-            }
+            get { return this._wsLessonDetail.Equation.ToString(); } 
         }
-
-        public G__NumberDisplaySize  NumberDisplaySize
-        {
-            get { return this._numberDisplaySize; }
-            set 
-            { 
-                this._numberDisplaySize = value; 
-
-                // TODO : We need to message all controls under this numlet to let them know the size has changed.
-            }
-        }
-
 
         #endregion
 
