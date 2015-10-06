@@ -29,7 +29,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // 
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
-
         private List<vcWorkNumlet> _lsWorkNumlets;
 
 		#endregion

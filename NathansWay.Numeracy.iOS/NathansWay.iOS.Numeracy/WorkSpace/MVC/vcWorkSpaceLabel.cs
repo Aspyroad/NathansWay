@@ -31,6 +31,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Data
         private EntityLesson _wsLesson;
         private EntityLessonDetail _wsLessonDetail;
+        // There is no need for results here
 
         // UI
         private SizeWorkSpaceLabel _sizeWorkSpaceLabel;

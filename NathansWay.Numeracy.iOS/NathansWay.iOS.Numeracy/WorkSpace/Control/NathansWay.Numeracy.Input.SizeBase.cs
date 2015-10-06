@@ -142,15 +142,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         //The event-invoking method. This mehtod calls all sizeclass virtual
-        protected virtual void CallResizing()
+        protected virtual void CallResizing(ResizeEventArgs _sizeargs)
         {
             // Thread safety.
             var x = this.Resizing;
             // Check for null before firing.
             if (x != null)
             {
-                var y = new ResizeEventArgs(numbersize);
-                x (this, y);
+                x (this, _sizeargs);
             }
             // Call the views refresh display - this should redraw all subviews also
             this._parentContainer.View.SetNeedsDisplay();
