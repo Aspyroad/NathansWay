@@ -127,7 +127,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return this._numberDisplaySize; }
             set
             {
-                this.NumberAppSettings.GA__NumberLabelDisplaySize = value;
+                this._numberAppSettings.GA__NumberLabelDisplaySize = value;
                 this.ChangeDisplaySize(value);
             }
         }

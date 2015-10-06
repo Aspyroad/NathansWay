@@ -74,18 +74,33 @@ namespace NathansWay.iOS.Numeracy
         //        private EntityLessonDetailResults _wsLessonDetailResults;
         // All being members, it will be easier to pass this one object as a set.
 
-        public vcWorkNumlet CreateNumlet(string expression)
+        public vcWorkNumlet CreateNumlet(string expression, G__NumberDisplaySize numbersize)
         {
             var numlet = new vcWorkNumlet();
+            G__NumberDisplaySize _displaySize;
+            ResizeEventArgs _resizeArgs;
             float _xPos = this._globalSizeDimensions.NumletNumberSpacing;
 
             // TODO : We need to set this Numlets width somewhere???? Might be kindve important.    
             for (int i = 0; i < this._uiOutputEquation.Count; i++) // Loop with for.
             {
+                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
 
-                // TODO : Hook up the control resizing events so that all controls are messaged by this numlet
+                // Small control means so we can feed it a different value from default
+                if (numbersize == numlet.NumberAppSettings.GA__NumberDisplaySize)
+                {
+                    _displaySize = numbersize;
+                }
+                else
+                {
+                    _displaySize = numlet.NumberAppSettings.GA__NumberDisplaySize;
+                }
+                _resizeArgs = new ResizeEventArgs(_displaySize );
+
+                // Hook up the control resizing events so that all controls are messaged by this numlet
+                numlet.SizeClass.Resizing += _control.SizeClass.OnResize(this, _resizeArgs);
 
                 // TODO : Do we need to set the ApplyUIWhere variable for each object?
                 // Most of these should ApplyUI in ViewWillAppear

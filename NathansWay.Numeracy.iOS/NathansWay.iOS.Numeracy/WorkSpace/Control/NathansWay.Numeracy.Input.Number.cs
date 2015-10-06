@@ -325,7 +325,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("9");
 
             // TODO : change this to point to the global app settings class
-            this.CurrentEditMode = this.NumberAppSettings.GA__NumberEditMode;
+            this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
             this.singleTapGesture = null;
         }
 

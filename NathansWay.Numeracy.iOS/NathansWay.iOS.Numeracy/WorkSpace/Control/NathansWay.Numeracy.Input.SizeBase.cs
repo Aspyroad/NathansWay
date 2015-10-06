@@ -21,11 +21,12 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Events
 
-        public event EventHandler<EventArgs> Resizing;
+        public event EventHandler<ResizeEventArgs> Resizing;
 
         #endregion
 
         #region Class Variables
+
         // Global Dimension Sizes
         private iOSNumberDimensions _globalSizeDimensions;
         // Positioning globals
@@ -47,7 +48,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected bool _bMultiNumberLabel;
         // PointF location with respect to the Window and ContainerController
         protected PointF _ptStartPointInWindow;
-
 
         #endregion
 
@@ -142,7 +142,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         //The event-invoking method. This mehtod calls all sizeclass virtual
-        protected virtual void CallResizing(G__NumberDisplaySize numbersize)
+        protected virtual void CallResizing()
         {
             // Thread safety.
             var x = this.Resizing;
@@ -262,9 +262,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public virtual void OnResize()
+        public virtual void OnResize(object s, ResizeEventArgs _args)
         {
-
         }
 
         #endregion

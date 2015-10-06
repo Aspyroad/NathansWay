@@ -22,7 +22,7 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		protected iOSUIManager iOSUIAppearance;
-        protected IAppSettings NumberAppSettings;
+        protected IAppSettings _numberAppSettings;
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace AspyRoad.iOSCore
 		private void Initialize ()
 		{
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            this.NumberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
+            this._numberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
 
             // Set common UI variables
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ViewBorderWidth;
@@ -65,6 +65,11 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 	    #region Public Properties
+
+        public IAppSettings NumberAppSettings
+        {
+            get { return this._numberAppSettings; }
+        }
 
         #endregion
 
@@ -78,7 +83,13 @@ namespace AspyRoad.iOSCore
         {
             base.ApplyUI(_applywhere);
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-            //this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
+            // New to iOS 7
+            this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
         }
 
 		#endregion		
