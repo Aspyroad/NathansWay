@@ -82,7 +82,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return ((this._iOSGlobals.G__RectWindowLandscape.Height / 4) - 4);
+                        return 0.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -177,7 +177,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 0.0f;
+                        return 150.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {

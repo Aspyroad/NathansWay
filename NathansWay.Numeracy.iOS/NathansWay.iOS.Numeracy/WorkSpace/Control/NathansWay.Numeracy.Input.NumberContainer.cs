@@ -92,6 +92,7 @@ namespace NathansWay.iOS.Numeracy
                     // Event Hooks
                     _Number.eValueChange -= this.HandleValueChange;
                     _Number.eTextSizeChange -= this.HandleTextSizeChange;
+                    _Number.SizeClass.eResizing -= _Number.SizeClass.OnResize;
                     _Number.MyNumberContainer = null;
                 }
             }
@@ -148,7 +149,7 @@ namespace NathansWay.iOS.Numeracy
                     int intCh = Convert.ToInt16(ch);
                     // PROCESS - BUILD NUMBER
                     // Create a number box
-                    var newnumber = new vcNumberText(intCh);
+                    vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberContainer = this;
                     if (this.IsAnswer)
                     { 
@@ -192,18 +193,21 @@ namespace NathansWay.iOS.Numeracy
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-                        this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
+                        //this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
                     else
                     {
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-                        this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
+                        //this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
+
+                    this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
 
                     // Event Hooks
                     newnumber.eValueChange += this.HandleValueChange;
                     newnumber.eTextSizeChange += this.HandleTextSizeChange;
                     newnumber.eControlSelected += this.HandleControlSelectedChange;
+                    newnumber.SizeClass.eResizing += newnumber.SizeClass.OnResize;
 
                     // Add control
                     this.AddAndDisplayController(newnumber, newnumber.View.Frame);

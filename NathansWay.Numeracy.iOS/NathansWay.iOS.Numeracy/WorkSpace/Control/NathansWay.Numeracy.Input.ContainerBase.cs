@@ -144,7 +144,11 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion         
 
-		#region Public Members
+		#region Public Virtual
+
+        public virtual void OnResize ()
+        {            
+        }
 
         public virtual void HandleValueChange(object s, EventArgs e)
         {
@@ -179,6 +183,10 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
         }
+
+        #endregion
+
+        #region Private Virtual
 
         protected virtual void UI_ToggleNormalState()
         {

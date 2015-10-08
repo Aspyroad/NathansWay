@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		// Control
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
+        private List<BaseContainer> _lsContainers;
 
         // Data
         private EntityLesson _wsLesson;
@@ -64,6 +65,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		}
 
 		#endregion
+
+        #region Deconstruction
+
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+
+            if (disposing)
+            {                
+                // Remove the possible event hook to sizechange.
+                foreach (vcNumberText _Container in this._lsContainers) 
+                {
+                    // Event Hooks
+                    _Container.SizeClass.eResizing -= _Container.SizeClass.OnResize;
+                }
+            }
+        }
+
+        #endregion
 
 		#region Private Members
 

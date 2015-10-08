@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Events
 
-        public event EventHandler<ResizeEventArgs> Resizing;
+        public event EventHandler eResizing;
 
         #endregion
 
@@ -145,7 +145,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected virtual void CallResizing(ResizeEventArgs _sizeargs)
         {
             // Thread safety.
-            var x = this.Resizing;
+            var x = this.eResizing;
             // Check for null before firing.
             if (x != null)
             {
@@ -154,7 +154,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Call the views refresh display - this should redraw all subviews also
             this._parentContainer.View.SetNeedsDisplay();
         }
-
 
         #endregion
 
@@ -261,8 +260,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public virtual void OnResize(object s, ResizeEventArgs _args)
+        public virtual void OnResize(object s, EventArgs e)
         {
+            this._parentContainer.OnResize();
         }
 
         #endregion

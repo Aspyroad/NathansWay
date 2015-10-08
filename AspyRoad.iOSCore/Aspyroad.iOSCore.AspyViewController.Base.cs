@@ -406,14 +406,12 @@ namespace AspyRoad.iOSCore
 			this._AspyTag2 = _AspyTag1;
             // This has been added for iOS7 and below as it screws view sizes
             this.View.AutosizesSubviews = false;
-            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             this.ApplyUI(G__ApplyUI.ViewDidLoad);
 		}	
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
 

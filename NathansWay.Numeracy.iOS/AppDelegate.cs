@@ -54,7 +54,7 @@ namespace NathansWay.iOS.Numeracy
 		private List<NSObject> _applicationObservers;
         // Factories
 		private Lazy<ToolFactory> _toolBuilder;
-        private Lazy<UINumletFactory> _NumletFactory;
+        private Lazy<UINumberFactory> _NumletFactory;
 
 		#endregion
 
@@ -80,7 +80,7 @@ namespace NathansWay.iOS.Numeracy
 			this._sharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
             // Create our application settings. These are settings that are global to Numbers Application only.
             this._NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
-            this._NumletFactory = new Lazy<UINumletFactory>(() => new UINumletFactory());
+            this._NumletFactory = new Lazy<UINumberFactory>(() => new UINumberFactory());
 
 
 			// Set SharedGlobals for the Shared lib
@@ -146,14 +146,15 @@ namespace NathansWay.iOS.Numeracy
             // Dimensions Class
             this._numberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Normal, this._iOSGlobals);
             iOSCoreServiceContainer.Register<iOSNumberDimensions> (this._numberDimensions);
+
             // Build a ToolBoxFactory
             this._toolBuilder = new Lazy<ToolFactory> (() => new ToolFactory());
-			iOSCoreServiceContainer.Register<ToolFactory> (this._toolBuilder);
+			iOSCoreServiceContainer.Register<ToolFactory> (this._toolBuilder.Value);
 
             // Build a NumletFactory
             // Numlets are the most basic workspace, the contain any expression
             // A workspace is made up of one to [n] numlets
-            iOSCoreServiceContainer.Register<UINumletFactory> (this._NumletFactory);
+            iOSCoreServiceContainer.Register<UINumberFactory> (this._NumletFactory.Value);
 
 			#endregion
 
