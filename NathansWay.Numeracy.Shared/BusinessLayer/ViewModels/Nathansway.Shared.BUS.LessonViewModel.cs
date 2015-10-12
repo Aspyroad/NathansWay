@@ -36,6 +36,14 @@ namespace NathansWay.Shared.BUS.ViewModel
         // Lesson Detail Filters
         private int _valLessonSeq;
 
+        // For data selection and state
+        // Courtesy variable for storing the selected SEQ
+        private int _intFilterLessonSeq;
+        private int _intFilterLessonDetailSeq;
+        // Courtesy variable for storing the selected Row in a tableview/grid
+        private int _intFilterLessonRow;
+        private int _intFilterLessonDetailRow;
+
 		#endregion
 
 		#region Constructors
@@ -48,7 +56,47 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#endregion
 
-		#region GetterSetter
+		#region Public Properties
+
+        /// <summary>
+        /// Courtesy variable for storing the selected SEQ
+        /// </summary>
+        /// <value>The seq</value>
+        public int FilterLessonSeq
+        {
+            get { return this._intFilterLessonSeq; }
+            set { this._intFilterLessonSeq = value; }
+        }
+
+        /// <summary>
+        /// Courtesy variable for storing the selected Row in a tableview/grid
+        /// </summary>
+        /// <value>The row.</value>
+        public int FilterLessonRow
+        {
+            get { return this._intFilterLessonRow; }
+            set { this._intFilterLessonRow = value; }
+        }
+
+        /// <summary>
+        /// Courtesy variable for storing the selected SEQ
+        /// </summary>
+        /// <value>The seq</value>
+        public int FilterLessonDetailSeq
+        {
+            get { return this._intFilterLessonDetailSeq; }
+            set { this._intFilterLessonDetailSeq = value; }
+        }
+
+        /// <summary>
+        /// Courtesy variable for storing the selected Row in a tableview/grid
+        /// </summary>
+        /// <value>The row.</value>
+        public int FilterLessonDetailRow
+        {
+            get { return this._intFilterLessonDetailRow; }
+            set { this._intFilterLessonDetailRow = value; }
+        }
 
 		/// <summary>
 		/// List of Lessons
@@ -113,7 +161,7 @@ namespace NathansWay.Shared.BUS.ViewModel
             get { return _valLessonSeq; }
             set 
             { 
-                _valLessonSeq = value; 
+                this._intFilterLessonSeq = value; 
                 this.lessonDetailService.FilterLessonSeq.Value = value;
             }
         }

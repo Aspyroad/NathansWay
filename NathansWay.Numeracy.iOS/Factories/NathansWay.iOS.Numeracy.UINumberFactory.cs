@@ -82,20 +82,36 @@ namespace NathansWay.iOS.Numeracy
 
         public vcWorkSpace UILoadEquationWorking (EntityLesson entLesson, EntityLessonDetail entLessonDetail)
         {
+            // Fire start event
+            this.FireBuildStartedEvent();
+
             this._wsLesson = entLesson;
             this._wsLessonDetail = entLessonDetail;
 
             // Create our workspace object
             vcWorkSpace x = new vcWorkSpace();
+
+            // Fire completed event
+            this.FireBuildCompletedEvent();
+
             return x;
         }
 
         public vcWorkSpaceLabel UILoadEquationDisplay (EntityLesson entLesson, EntityLessonDetail entLessonDetail)
         {
+            // Fire start event
+            this.FireBuildStartedEvent();
+
             this._wsLesson = entLesson;
             this._wsLessonDetail = entLessonDetail;
 
-            return new vcWorkSpaceLabel();
+            // Create our workspace label object
+            vcWorkSpaceLabel x = new vcWorkSpaceLabel();
+
+            // Fire completed event
+            this.FireBuildCompletedEvent();
+
+            return x;
         }
 
         #endregion
@@ -132,8 +148,7 @@ namespace NathansWay.iOS.Numeracy
 
         private vcWorkNumlet CreateNumlet()
         {
-            // Fire start event
-            this.FireBuildStartedEvent();
+
 
             var numlet = new vcWorkNumlet();
             G__NumberDisplaySize _displaySize;
@@ -159,9 +174,6 @@ namespace NathansWay.iOS.Numeracy
             // Pad out the end
             numlet.SizeClass.CurrentWidth = _xPos + this._globalSizeDimensions.NumletNumberSpacing; 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
-
-            // Fire completed event
-            this.FireBuildCompletedEvent();
 
             // Return completed numnut!
             // Numlet has no size params set. SetPositions must be called before use!

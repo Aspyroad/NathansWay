@@ -18,6 +18,8 @@ namespace NathansWay.iOS.Numeracy
 	public partial class vLessonTableCell : AspyTableViewCell
 	{
 		#region Private Variables
+
+        private vcLessonMenu _vcLessonMenu;
 		 
         #endregion
 
@@ -59,24 +61,28 @@ namespace NathansWay.iOS.Numeracy
 
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
-            this._vcParent = controller;
+            this._vcLessonMenu = controller;
+            // Set the start buttons seq and row number for easy launching from the button
+            this.btnStartLesson.Seq = lesson.SEQ;
+            this.btnStartLesson.IndexRow = indexPath.Row;
+            // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
 			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
 			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
-
-			// Set the level bar length
 			this.lblLevel.LevelWidth = (float)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
 		}
 
 		#endregion
 
-		#region Private Variables
+		#region Delegates
 
         private void OnClick_btnbtnStartLesson (object sender, EventArgs e)
         {
+            // TODO: We need to check that lesson detail has been populated, 
+            // in otherwords they have selected a lesson
             var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            x.DisplayWorkSpace(this._vcParent);
+            x.LessonMenuToWorkSpace(this._vcLessonMenu);
         } 
 
 		#endregion

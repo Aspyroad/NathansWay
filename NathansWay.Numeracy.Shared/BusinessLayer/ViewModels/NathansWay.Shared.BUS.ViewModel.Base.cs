@@ -70,14 +70,40 @@ namespace NathansWay.Shared.BUS.ViewModel
 
 		#endregion
 
-		#region Privates
+		#region Privates Variables
 
 		private readonly List<string> errors = new List<string> ();
 		private bool isBusy = false;
 
+        // For data selection and state
+        // Courtesy variable for storing the selected SEQ
+        private int _intSeq;
+        // Courtesy variable for storing the selected Row in a tableview/grid
+        private int _intRow;
+
 		#endregion
 
-		#region Public Members
+        #region Public Properties
+
+        /// <summary>
+        /// Courtesy variable for storing the selected SEQ
+        /// </summary>
+        /// <value>The seq</value>
+        public int Seq
+        {
+            get { return this._intSeq; }
+            set { this._intSeq = value; }
+        }
+
+        /// <summary>
+        /// Courtesy variable for storing the selected Row in a tableview/grid
+        /// </summary>
+        /// <value>The row.</value>
+        public int Row
+        {
+            get { return this._intRow; }
+            set { this._intRow = value; }
+        }
 
 		/// <summary>
 		/// Returns true if the current state of the ViewModel is valid

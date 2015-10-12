@@ -23,10 +23,10 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Private Variables
 
-		private vLessonMenu _vLessonMenu;
-		private LessonViewModel lessonViewModel;
-		private AspyTableViewSource lessonMenuSource;
-        private AspyTableViewSource lesssonDetailMenuSource;
+        private vLessonMenu _vLessonMenu;
+        private LessonViewModel _vmLesson;
+		private AspyTableViewSource _srcLesson;
+        private AspyTableViewSource _srcLessonDetail;
 
 		// Lesson level hold state
 		// Used to let us know the current level filtering
@@ -87,7 +87,7 @@ namespace NathansWay.iOS.Numeracy
 				this.btnOpMultSub.TouchUpInside -= OnClick_btnOpDivMulti;
 				this.btnOpSubtract.TouchUpInside -= OnClick_btnOpSubtract;
 				// Tableview Source
-				this.lessonMenuSource.ScrolledToBottom -= ScrolledToBottom;
+				this._srcLesson.ScrolledToBottom -= ScrolledToBottom;
                 // BackToMenu
                 this.btnBackToMenu.TouchUpInside -= OnClick_btnBackToMenu;
 			}
@@ -144,14 +144,15 @@ namespace NathansWay.iOS.Numeracy
 
             // LessonMain TableView
 			// Setup tableview source
-			this.lessonMenuSource = new LessonMenuTableSource (this);
-			this.lessonMenuSource.ScrolledToBottom += ScrolledToBottom;
-			this.tvLessonMain.Source = this.lessonMenuSource;
+			this._srcLesson = new LessonMenuTableSource (this);
+			this._srcLesson.ScrolledToBottom += ScrolledToBottom;
+			this.tvLessonMain.Source = this._srcLesson;
+
             // LessonDetail TableView
             // Setup tableview source
-            this.lesssonDetailMenuSource = new LessonDetailMenuTableSource (this);
+            this._srcLessonDetail = new LessonDetailMenuTableSource (this);
             // No need to hook anything up to ScolledBottom.
-            this.tvLessonDetail.Source = this.lesssonDetailMenuSource;
+            this.tvLessonDetail.Source = this._srcLessonDetail;
 
 			// Load Initial lesson list
 			this.LoadLessonsInit ();
@@ -163,7 +164,6 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 		}
 
-        // NW Overs
         public override void ApplyUI (G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
@@ -185,7 +185,6 @@ namespace NathansWay.iOS.Numeracy
             this.tvLessonDetail.ApplyUI (_applywhere);
         }
 
-
 		#endregion
 
 		#region Private Members
@@ -195,7 +194,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 6003;
             this.AspyName = "VC_LessonMenu";
             // Grab a ref to our data class
-            lessonViewModel = SharedServiceContainer.Resolve<LessonViewModel>();
+            _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
         }
 
@@ -210,7 +209,7 @@ namespace NathansWay.iOS.Numeracy
 		private void LoadLessonsInit ()
 		{
 
-			lessonViewModel.LoadAllLessonsAsync ().ContinueWith (_ => 
+			_vmLesson.LoadAllLessonsAsync ().ContinueWith (_ => 
 			{
 				BeginInvokeOnMainThread (() => 
 				{
@@ -221,7 +220,7 @@ namespace NathansWay.iOS.Numeracy
 		}
         private void LoadLessonsFilteredAsync ()
         {
-            lessonViewModel.LoadFilteredLessonsAsync ().ContinueWith (_ => 
+            _vmLesson.LoadFilteredLessonsAsync ().ContinueWith (_ => 
                 {
                     BeginInvokeOnMainThread (() => 
                         {
@@ -231,10 +230,10 @@ namespace NathansWay.iOS.Numeracy
         }
         private void LoadLessonDetailFilteredAsync ()
         {
-            lessonViewModel.LoadLessonDetailAsync ().ContinueWith (_ => 
+            _vmLesson.LoadLessonDetailAsync ().ContinueWith (_ => 
                 {
                     BeginInvokeOnMainThread (() => 
-                        {
+                        {                            
                             this.tvLessonDetail.ReloadData ();
                         });
                 });
@@ -243,6 +242,15 @@ namespace NathansWay.iOS.Numeracy
         #endregion 
 
 		#endregion
+
+        #region Public Properties
+
+        public LessonViewModel vmLesson
+        {
+            get { return _vmLesson; }
+        }
+
+        #endregion
 
 		#region EventHandlers
 
@@ -310,7 +318,7 @@ namespace NathansWay.iOS.Numeracy
                 this.intLevelHoldState = btnLevelButton.Tag;
             }
             // Refresh/re-query the view
-            this.lessonViewModel.ValMathLevel = _mathLevel;
+            this._vmLesson.ValMathLevel = _mathLevel;
             this.LoadLessonsFilteredAsync();
 		}
 
@@ -364,7 +372,7 @@ namespace NathansWay.iOS.Numeracy
                 this.intOpHoldState = btnOpButton.Tag;
                 btnOpButton.HoldState = true;
             }
-            this.lessonViewModel.ValMathOperator = _mathOperator;
+            this._vmLesson.ValMathOperator = _mathOperator;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
 		}
@@ -411,7 +419,7 @@ namespace NathansWay.iOS.Numeracy
                 btnTypeButton.HoldState = true;
             }
             // Set the viewmodel/repo filter
-            this.lessonViewModel.ValMathType = _mathType;
+            this._vmLesson.ValMathType = _mathType;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
     	}
@@ -431,10 +439,10 @@ namespace NathansWay.iOS.Numeracy
 
 		public class LessonMenuTableSource : AspyTableViewSource
 		{
-			#region Private Variables
+			#region Public Properties
 
-			private vcLessonMenu vclessonmenu ;
-			private LessonViewModel vmLesson;
+            public vcLessonMenu vclessonmenu { get; set; }
+            public LessonViewModel vmLesson { get; set; }
 
 			#endregion
 
@@ -481,6 +489,7 @@ namespace NathansWay.iOS.Numeracy
                 //tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
                 var lesson = this.vmLesson.Lessons [indexPath.Row];
                 this.vmLesson.ValLessonSeq = lesson.SEQ;
+                this.vmLesson.Row = indexPath.Row;
                 this.vclessonmenu.LoadLessonDetailFilteredAsync();
             }
 
@@ -496,10 +505,10 @@ namespace NathansWay.iOS.Numeracy
 
         public class LessonDetailMenuTableSource : AspyTableViewSource
         {
-            #region Private Variables
+            #region Public Properties
 
-            private vcLessonMenu vclessonmenu ;
-            private LessonViewModel vmLesson;
+            public vcLessonMenu vclessonmenu { get; set; }
+            public LessonViewModel vmLesson { get; set; }
 
             #endregion
 

@@ -202,6 +202,18 @@ namespace AspyRoad.iOSCore
 
 		#region Public Properties
 
+        /// <summary>
+        /// Gets or sets the index row.
+        /// </summary>
+        /// <value>The index row.</value>
+        public int IndexRow { get; set; }
+
+        /// <summary>
+        /// Gets or sets a sequence, this is an int used for storing data sequences.
+        /// </summary>
+        /// <value>Seq</value>
+        public int Seq { get; set; }
+
 		public bool HoldState
 		{
 			get{ return _bHoldState; }

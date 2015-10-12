@@ -190,7 +190,8 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-        public void DisplayWorkSpace(AspyViewController _vcSending)
+        // Lesson Menu to Workspace
+        public void LessonMenuToWorkSpace(AspyViewController _vcSending)
         {
             var _vc = this._vcMainWorkSpace.Value;
             this.ChangeContentTo(_vc, _vcSending, UIViewAnimationOptions.TransitionFlipFromLeft);
