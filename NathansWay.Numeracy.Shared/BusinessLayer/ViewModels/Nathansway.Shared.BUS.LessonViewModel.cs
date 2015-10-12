@@ -29,19 +29,18 @@ namespace NathansWay.Shared.BUS.ViewModel
         private List<EntityLessonDetail> _lessonDetail;
 
         // Lesson Filter values, populated by UI calls
-        private G__MathType _valMathType;
-        private G__MathLevel _valMathLevel;
-        private G__MathOperator _valMathOperator;
+        private G__MathType _enuFilterMathType;
+        private G__MathLevel _enuFilterMathLevel;
+        private G__MathOperator _enuFilterMathOperator;
 
         // Lesson Detail Filters
-        private int _valLessonSeq;
-
         // For data selection and state
         // Courtesy variable for storing the selected SEQ
+        // THIS IS THE USERS RESPONSABILITY TO UPDATE!
         private int _intFilterLessonSeq;
         private int _intFilterLessonDetailSeq;
         // Courtesy variable for storing the selected Row in a tableview/grid
-        private int _intFilterLessonRow;
+        private int _intLessonRowNumber;
         private int _intFilterLessonDetailRow;
 
 		#endregion
@@ -59,23 +58,27 @@ namespace NathansWay.Shared.BUS.ViewModel
 		#region Public Properties
 
         /// <summary>
-        /// Courtesy variable for storing the selected SEQ
+        /// Filter variable for storing the selected SEQ and detail filter
         /// </summary>
         /// <value>The seq</value>
         public int FilterLessonSeq
         {
             get { return this._intFilterLessonSeq; }
-            set { this._intFilterLessonSeq = value; }
+            set 
+            { 
+                this._intFilterLessonSeq = value; 
+                this.lessonDetailService.FilterLessonSeq.Value = value;
+            }
         }
 
         /// <summary>
         /// Courtesy variable for storing the selected Row in a tableview/grid
         /// </summary>
         /// <value>The row.</value>
-        public int FilterLessonRow
+        public int LessonRowNumber
         {
-            get { return this._intFilterLessonRow; }
-            set { this._intFilterLessonRow = value; }
+            get { return this._intLessonRowNumber; }
+            set { this._intLessonRowNumber = value; }
         }
 
         /// <summary>
@@ -125,44 +128,33 @@ namespace NathansWay.Shared.BUS.ViewModel
         }
 
         // Lesson Filter Values
-        public G__MathType ValMathType
+        public G__MathType FilterMathType
         {
-            get  { return _valMathType; }
+            get  { return _enuFilterMathType; }
             set 
             {
-                _valMathType = value;
+                _enuFilterMathType = value;
                 this.lessonService.FilterMathType.Value = (int)value;
             }
         }
 
-        public G__MathLevel ValMathLevel
+        public G__MathLevel FilterMathLevel
         {
-            get  { return _valMathLevel; }
+            get  { return _enuFilterMathLevel; }
             set 
             {
-                _valMathLevel = value;
+                _enuFilterMathLevel = value;
                 this.lessonService.FilterMathLevel.Value = (int)value;
             }
         }
 
-        public G__MathOperator ValMathOperator
+        public G__MathOperator FilterMathOperator
         {
-            get  { return _valMathOperator; }
+            get  { return _enuFilterMathOperator; }
             set 
             {
-                _valMathOperator = value;
+                _enuFilterMathOperator = value;
                 this.lessonService.FilterMathOperator.Value = (int)value;
-            }
-        }
-
-        // LessonDetail Filter Values
-        public int ValLessonSeq
-        {
-            get { return _valLessonSeq; }
-            set 
-            { 
-                this._intFilterLessonSeq = value; 
-                this.lessonDetailService.FilterLessonSeq.Value = value;
             }
         }
 

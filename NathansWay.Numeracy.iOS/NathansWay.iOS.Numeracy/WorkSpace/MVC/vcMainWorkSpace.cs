@@ -15,6 +15,8 @@ using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.Shared.Factories;
 using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.BUS.ViewModel;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -29,9 +31,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcMainContainer _vcMainContainer;
 
         // Db
-        private EntityLesson _wsLesson;
+        private LessonViewModel _vmLesson;
         private EntityLessonResults _wsLessonResults;
-        private EntityLessonDetail _wsLessonDetail;
         private EntityLessonDetailResults _wsLessonDetailResults;
 
 		#endregion
@@ -65,6 +66,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._vcMainGame = new vcMainGame();
             this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
             this._vcWorkSpace = this._vcMainContainer._vcWorkSpace.Value;
         }
 
@@ -110,22 +112,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public EntityLesson WsLesson
-        {
-            get { return _wsLesson; }
-            set { WsLesson = value; }
-        }
 
         public EntityLessonResults WsLessonResults
         {
             get { return _wsLessonResults; }
             set { WsLessonResults = value; }
-        }
-
-        public EntityLessonDetail WsLessonDetail
-        {
-            get { return _wsLessonDetail; }
-            set { WsLessonDetail = value; }
         }
 
         public EntityLessonDetailResults WsLessonDetailResults

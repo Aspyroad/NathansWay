@@ -33,7 +33,8 @@ namespace NathansWay.iOS.Numeracy
 		#region Public Methods
 
 		public void SetLessonDetailCell (vcLessonMenu controller, EntityLessonDetail lessonDetail, NSIndexPath indexPath)
-		{           
+		{   
+            // TODO: Here is where we must build our numberlabel display
             //this.lblEquation.Text = lessonDetail.Equation;
         }
 

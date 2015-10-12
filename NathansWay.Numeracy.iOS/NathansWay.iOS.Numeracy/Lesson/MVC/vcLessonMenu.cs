@@ -318,7 +318,7 @@ namespace NathansWay.iOS.Numeracy
                 this.intLevelHoldState = btnLevelButton.Tag;
             }
             // Refresh/re-query the view
-            this._vmLesson.ValMathLevel = _mathLevel;
+            this._vmLesson.FilterMathLevel = _mathLevel;
             this.LoadLessonsFilteredAsync();
 		}
 
@@ -372,7 +372,7 @@ namespace NathansWay.iOS.Numeracy
                 this.intOpHoldState = btnOpButton.Tag;
                 btnOpButton.HoldState = true;
             }
-            this._vmLesson.ValMathOperator = _mathOperator;
+            this._vmLesson.FilterMathOperator = _mathOperator;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
 		}
@@ -419,7 +419,7 @@ namespace NathansWay.iOS.Numeracy
                 btnTypeButton.HoldState = true;
             }
             // Set the viewmodel/repo filter
-            this._vmLesson.ValMathType = _mathType;
+            this._vmLesson.FilterMathType = _mathType;
             // Refresh/re-query the view
             this.LoadLessonsFilteredAsync();
     	}
@@ -488,7 +488,7 @@ namespace NathansWay.iOS.Numeracy
                 //new UIAlertView("Row Selected", tableItems[indexPath.Row], null, "OK", null).Show();
                 //tableView.DeselectRow (indexPath, true); // iOS convention is to remove the highlight
                 var lesson = this.vmLesson.Lessons [indexPath.Row];
-                this.vmLesson.ValLessonSeq = lesson.SEQ;
+                this.vmLesson.FilterLessonSeq = lesson.SEQ;
                 this.vmLesson.Row = indexPath.Row;
                 this.vclessonmenu.LoadLessonDetailFilteredAsync();
             }
@@ -531,11 +531,14 @@ namespace NathansWay.iOS.Numeracy
 
             public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
             {
-
+                // TODO : Is this indexPath.Row in the detail viewmodel needed?
+                this.vmLesson.FilterLessonDetailRow = indexPath.Row;
+                //
                 var lessonDetail = this.vmLesson.LessonDetail [indexPath.Row];
                 var cell = tableView.DequeueReusableCell ("LessonDetailCell") as vLessonDetailTableCell;
                 cell.IndexValue = indexPath.Row;
                 cell.SetLessonDetailCell (vclessonmenu, lessonDetail, indexPath);
+                // return
                 return cell;
             }
 

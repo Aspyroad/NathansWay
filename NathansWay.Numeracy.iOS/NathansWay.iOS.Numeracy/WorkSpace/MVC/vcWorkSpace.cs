@@ -24,7 +24,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		#region Private Variables
 		// Factory Ref
-        private ExpressionFactory _expressionFactory;
+        private UINumberFactory _uiNumberFactory;
         //private NumberFactoryClient _numberFactoryClient;
         // 
         private string _strExpression;
@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeWorkSpace;
             // Factory Classes for expression building
             // Number factory client is platform specific.
-            this._expressionFactory = iOSCoreServiceContainer.Resolve<ExpressionFactory>();
+            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
 		}
 
 		#endregion
@@ -76,62 +76,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
            /* here we need to grab/create result sets from the model  */
         }
 
-        public void LoadLessonExpression()
+
+        public void GetNumlet()
         {
-            /* 
-             *  Grab the lesson dataset
-             *  Grab the lesson detail dataset
-             *  Create a lesson and lesson detail results records
-             * 
-             *  Load the current lesson and lesson detail into widgets
-             *  This includes both equation and methods
-             *  
-             *  If the user cancels half way thru the lesson we need to close off
-             *  the lesson result sets. Shoudl they be able to pause them and reload?
-             *  I think this may be needed, what id the kid has an episode/toilet etc
-             * 
-            */            
-        }
-        /// <summary>
-        /// Builds a numlet.
-        /// </summary>
-        public void BuildNumlet()
-        {
-            float _XPos = this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceNumberSpacing;
-            var x = this._expressionFactory.UIOutputEquation;
-                
-            for (int i = 0; i < x.Count; i++) // Loop with for.
-            {
-                var _control = (BaseContainer)x[i];
-                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
-                // This call only calls the BASE SetPositions not any derives
-                // You may need to call any frame creation methods in the 
-                // controls ViewWillApppear method
-                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
-                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
-                this.AddAndDisplayController(_control);
-                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
-            }
+
         }
 
-        public void BuildMethodNumlets()
+        public void GetMethodNumlets()
         {
-            // TODO : Local horizontal position. Do we need a buffer/padding??
-//            float _XPos = 2.0f;
-//            var x = this._expressionFactory.UIOutputEquation;
-//
-//            for (int i = 0; i < UIInternalOutput.Count; i++) // Loop with for.
-//            {
-//                var _control = (BaseContainer)UIInternalOutput[i];
-//                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
-//                // This call only calls the BASE SetPositions not any derives
-//                // You may need to call any frame creation methods in the 
-//                // controls ViewWillApppear method
-//                _control.SizeClass.SetPositions(_XPos, this.SizeClass.CurrentHeight);
-//                //_control.SizeClass.StartPoint = new PointF(_XPos, this.SizeClass.CurrentHeight);
-//                this.AddAndDisplayController(_control);
-//                _XPos = _XPos + 4.0f + _control.SizeClass.CurrentWidth;
-//            }
+
         }
         #endregion
 
@@ -142,11 +95,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public ExpressionFactory ExpressFactory
-        {
-            get { return _expressionFactory; }
-            set { _expressionFactory = value; }
-        }
 
         public string ExpressionString 
         { 

@@ -211,13 +211,12 @@ namespace NathansWay.iOS.Numeracy
                 if (x > -1)
                 {
                     this._bNumberPadLoaded = true;
-                    return true;
                 }
                 else
                 {
                     this._bNumberPadLoaded = false;
-                    return false;
                 }
+                return this._bNumberPadLoaded;
             }
         }
 

@@ -79,10 +79,24 @@ namespace NathansWay.iOS.Numeracy
 
         private void OnClick_btnbtnStartLesson (object sender, EventArgs e)
         {
-            // TODO: We need to check that lesson detail has been populated, 
-            // in otherwords they have selected a lesson
-            var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            x.LessonMenuToWorkSpace(this._vcLessonMenu);
+            // Check if the detailviewentity has been populated or selected.
+            // (It is possible that it may not have been, but we must have a lesson seq)
+            if (this._vcLessonMenu.vmLesson.LessonDetail == null)
+            {
+                this._vcLessonMenu.vmLesson.LoadLessonDetailAsync().ContinueWith(_ =>
+                    {
+                        BeginInvokeOnMainThread(() =>
+                            {                            
+                                var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+                                x.LessonMenuToWorkSpace(this._vcLessonMenu);
+                            });
+                    });            
+            }
+            else
+            {
+                var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+                x.LessonMenuToWorkSpace(this._vcLessonMenu);
+            }
         } 
 
 		#endregion
