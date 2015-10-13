@@ -585,7 +585,7 @@
         <!--WorkSpace-->
         <scene sceneID="7oq-J8-nky">
             <objects>
-                <viewController storyboardIdentifier="vcWorkSpace" title="WorkSpace" id="DcL-Dh-2cC" customClass="vcWorkSpace" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="vcWorkSpace" title="WorkSpace" id="DcL-Dh-2cC" customClass="vcWorkSpace" sceneMemberID="viewController" autoresizesArchivedViewToFullSize="NO">
                     <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="66U-lA-Zni" customClass="vWorkSpace">
                         <rect key="frame" x="0.0" y="0.0" width="1016" height="188"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

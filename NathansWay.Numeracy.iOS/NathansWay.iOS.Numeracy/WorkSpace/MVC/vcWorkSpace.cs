@@ -71,12 +71,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Members
 
-        public void LoadLessonData(int _entLessonSeq)
-        {
-           /* here we need to grab/create result sets from the model  */
-        }
-
-
         public void GetNumlet()
         {
 
@@ -86,6 +80,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
 
         }
+
         #endregion
 
         #region Public Properties
@@ -115,11 +110,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-		public override void LoadView()
-		{
-			base.LoadView(); 
-            //this.View.BackgroundColor = UIColor.Blue;
-		}
+//		public override void LoadView()
+//		{
+//			base.LoadView(); 
+//            //this.View.BackgroundColor = UIColor.Blue;
+//		}
 
 		public override void ViewDidLoad()
 		{

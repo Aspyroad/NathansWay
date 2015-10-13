@@ -50,7 +50,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             Initialize();
         }
 
-		public vcMainWorkSpace () : base("vwMainWorkSpace", null)
+		//public vcMainWorkSpace () : base("vMainWorkSpace", null)
+        public vcMainWorkSpace () : base()
         {   
 			Initialize();
         }
@@ -79,10 +80,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-		public override void LoadView()
-		{
-			base.LoadView(); 
-        }		
+//		public override void LoadView()
+//		{
+//			base.LoadView(); 
+//        }		
 
         public override void ViewDidLoad()
         {
@@ -101,11 +102,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             var _pointF = new PointF(4.0f, y);
             var _pointF2 = new PointF(2.0f, 2.0f);
-            this._vcWorkSpace.SizeClass.SetPositions(_pointF);
-            this._vcMainGame.SizeClass.SetPositions(_pointF2);
+            //this._vcWorkSpace.SizeClass.SetPositions(_pointF);
+            //this._vcMainGame.SizeClass.SetPositions(_pointF2);
 
-            this.AddAndDisplayController(this._vcMainGame);
-            this.AddAndDisplayController(this._vcWorkSpace);
+            //this.AddAndDisplayController(this._vcMainGame);
+            //this.AddAndDisplayController(this._vcWorkSpace);
         }
 
 		#endregion
