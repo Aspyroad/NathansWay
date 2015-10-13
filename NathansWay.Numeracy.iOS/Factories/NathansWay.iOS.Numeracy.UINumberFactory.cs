@@ -39,6 +39,7 @@ namespace NathansWay.iOS.Numeracy
         // Shared Factory
         private ExpressionFactory _expressionFactory;
         private NumberFactoryClient _numberFactoryClient;
+        public UIStoryboard _storyBoard;
 
         // UI
         private List<object> _uiOutputEquation;
@@ -65,6 +66,7 @@ namespace NathansWay.iOS.Numeracy
             this._numberFactoryClient = new NumberFactoryClient();
             this._expressionFactory = new ExpressionFactory(this._numberFactoryClient);
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
+            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
         }
 
         #endregion
@@ -89,12 +91,12 @@ namespace NathansWay.iOS.Numeracy
             this._wsLessonDetail = entLessonDetail;
 
             // Create our workspace object
-            vcWorkSpace x = new vcWorkSpace();
+            vcWorkSpace _vcWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
 
             // Fire completed event
             this.FireBuildCompletedEvent();
 
-            return x;
+            return _vcWorkSpace;
         }
 
         public vcWorkSpaceLabel UILoadEquationDisplay (EntityLesson entLesson, EntityLessonDetail entLessonDetail)

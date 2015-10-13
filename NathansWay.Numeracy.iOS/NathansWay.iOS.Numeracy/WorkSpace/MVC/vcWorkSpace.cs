@@ -110,11 +110,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-//		public override void LoadView()
-//		{
-//			base.LoadView(); 
-//            //this.View.BackgroundColor = UIColor.Blue;
-//		}
+		public override void LoadView()
+		{
+			base.LoadView(); 
+            //this.View.BackgroundColor = UIColor.Blue;
+		}
 
 		public override void ViewDidLoad()
 		{
