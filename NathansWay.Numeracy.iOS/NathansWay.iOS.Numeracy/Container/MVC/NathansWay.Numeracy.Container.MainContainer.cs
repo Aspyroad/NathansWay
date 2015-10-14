@@ -23,13 +23,17 @@ namespace NathansWay.iOS.Numeracy
 	{
 		#region Class Variables
 
+        // Application wide vcs
 		public UIStoryboard _storyBoard;
 		public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcMainWorkSpace> _vcMainWorkSpace;
-        public Lazy<vcWorkSpace> _vcWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
+        // Non lazy - created as needed
+        public vcWorkSpace _vcWorkSpace;
 
+        // Factory Ref
+        private UINumberFactory _uiNumberFactory;
         private bool _bNumberPadLoaded;
         private NSAction _animation;
         private UICompletionHandler _transitionComplete;
@@ -77,28 +81,24 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 60023;
             this.AspyName = "VC_MainContainer";
 
-            // Size Class Init
-            //this._sizeMainContainer = new SizeMainContainer(this);
-            //this._sizeClass = this._sizeMainContainer;
-
-
             // Storyboard reference
-			_storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+			this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
             // Vc's
-			_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
+            _vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
             _vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             // _vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace);
             _vcMainWorkSpace = new Lazy<vcMainWorkSpace>(() => new vcMainWorkSpace() as vcMainWorkSpace);
 
+            // Logic assigns 
             this._dblAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
+
+            // Factory Classes for expression building
+            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
         }
 
         private void ChangeContentTo (AspyViewController _newvc, AspyViewController _oldvc, UIViewAnimationOptions _animationOptions)
         {
-            // This works fine like this...
-
-
             this._vcNew = _newvc;
             this._vcOld = _oldvc;
             //this._vcOld.View.AddSubview(this._vcNew.View);
@@ -124,7 +124,6 @@ namespace NathansWay.iOS.Numeracy
                 this._animation,
                 this._transitionComplete
             );
-
         }
 
         private void TransitionComplete (bool finished)
@@ -191,10 +190,20 @@ namespace NathansWay.iOS.Numeracy
         }
 
         // Lesson Menu to Workspace
-        public void LessonMenuToWorkSpace(AspyViewController _vcSending)
+        public void LessonMenuToWorkSpace(vcLessonMenu _vcLessonMenu)
         {
             var _vc = this._vcMainWorkSpace.Value;
-            this.ChangeContentTo(_vc, _vcSending, UIViewAnimationOptions.TransitionFlipFromLeft);
+            // INPROGRESS: Build our workspace here...
+
+            // Step this fucker out
+            // Call the method to create the workspace
+            // TODO: create a lesson entity in lesson view model and assign it that particular entoty every time theres a seq/select/focus on that record
+            this._vcWorkSpace = this._uiNumberFactory.UILoadEquationWorking(_vcLessonMenu.vmLesson.)
+
+
+
+
+            this.ChangeContentTo(_vc, _vcLessonMenu, UIViewAnimationOptions.TransitionFlipFromLeft);
         }
 
         #endregion

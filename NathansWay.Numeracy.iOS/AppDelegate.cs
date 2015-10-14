@@ -80,8 +80,11 @@ namespace NathansWay.iOS.Numeracy
 			this._sharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
             // Create our application settings. These are settings that are global to Numbers Application only.
             this._NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
+            // Load our storyboard and setup our UIWindow and first view controller
+            _storyBoard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
+            iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);
+            // Number factory relies on Storyboard so load it first
             this._NumletFactory = new Lazy<UINumberFactory>(() => new UINumberFactory());
-
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
@@ -185,10 +188,6 @@ namespace NathansWay.iOS.Numeracy
 			_window = new AspyWindow(UIScreen.MainScreen.Bounds);
 			// Register our window
 			iOSCoreServiceContainer.Register<AspyWindow> (_window);
-
-			// Load our storyboard and setup our UIWindow and first view controller
-			_storyBoard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
-			iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);
 
 			// Setup view controllers
 			//_mainNavigator = storyboard.InstantiateInitialViewController() as UINavigationController; 

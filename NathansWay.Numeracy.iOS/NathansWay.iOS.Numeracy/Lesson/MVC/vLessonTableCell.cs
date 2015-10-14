@@ -20,6 +20,8 @@ namespace NathansWay.iOS.Numeracy
 		#region Private Variables
 
         private vcLessonMenu _vcLessonMenu;
+        // Create Action delegate for Method1.
+        private NSAction actOpenLesson;
 		 
         #endregion
 
@@ -75,28 +77,41 @@ namespace NathansWay.iOS.Numeracy
 
 		#endregion
 
+        #region Private Methods
+
+        private void OpenLesson()
+        {
+            var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            x.LessonMenuToWorkSpace(this._vcLessonMenu);
+        }
+
+
+
+        #endregion
+
 		#region Delegates
 
         private void OnClick_btnbtnStartLesson (object sender, EventArgs e)
         {
+            this.actOpenLesson = new NSAction (OpenLesson);
             // Check if the detailviewentity has been populated or selected.
             // (It is possible that it may not have been, but we must have a lesson seq)
             if (this._vcLessonMenu.vmLesson.LessonDetail == null)
             {
+                // Load with the correct seq value for this row/start
+                this._vcLessonMenu.vmLesson.FilterLessonSeq = this.btnStartLesson.Seq;
+                // Load the lesson detail entities
                 this._vcLessonMenu.vmLesson.LoadLessonDetailAsync().ContinueWith(_ =>
                     {
-                        BeginInvokeOnMainThread(() =>
-                            {                            
-                                var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-                                x.LessonMenuToWorkSpace(this._vcLessonMenu);
-                            });
+                        BeginInvokeOnMainThread(actOpenLesson);
                     });            
             }
             else
             {
-                var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-                x.LessonMenuToWorkSpace(this._vcLessonMenu);
+                this.actOpenLesson();
             }
+
+
         } 
 
 		#endregion

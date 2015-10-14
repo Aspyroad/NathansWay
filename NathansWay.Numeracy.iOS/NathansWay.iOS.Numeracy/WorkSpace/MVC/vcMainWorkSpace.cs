@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     {
 		#region Private Variables
 
+        // 
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
         private vcMainContainer _vcMainContainer;
@@ -68,7 +69,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcMainGame = new vcMainGame();
             this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
-            this._vcWorkSpace = this._vcMainContainer._vcWorkSpace.Value;
         }
 
         #endregion
@@ -99,13 +99,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     iOSGlobals.G__RectWindowLandscape.Height
                 );
             
-            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
-            var _pointF = new PointF(4.0f, y);
-            var _pointF2 = new PointF(2.0f, 2.0f);
-            this._vcWorkSpace.SizeClass.SetPositions(_pointF);
-            this._vcMainGame.SizeClass.SetPositions(_pointF2);
 
+            // TODO : What game will load first?
+            var _pointF2 = new PointF(2.0f, 2.0f);
+            this._vcMainGame.SizeClass.SetPositions(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
+
+            // TODO : Move this...ViewWillAppear?
+            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
+            var _pointF1 = new PointF(4.0f, y);
+            this._vcWorkSpace.SizeClass.SetPositions(_pointF1);
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 

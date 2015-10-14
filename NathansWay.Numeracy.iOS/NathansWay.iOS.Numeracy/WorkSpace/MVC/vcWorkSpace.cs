@@ -23,10 +23,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public class vcWorkSpace : BaseContainer
 	{
 		#region Private Variables
-		// Factory Ref
-        private UINumberFactory _uiNumberFactory;
-        //private NumberFactoryClient _numberFactoryClient;
-        // 
+
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
         private List<vcWorkNumlet> _lsWorkNumlets;
@@ -62,9 +59,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
-            // Factory Classes for expression building
-            // Number factory client is platform specific.
-            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
+
 		}
 
 		#endregion
