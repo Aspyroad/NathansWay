@@ -28,6 +28,8 @@ namespace NathansWay.Shared.BUS.ViewModel
 		private List<EntityLesson> _lessons;
         private List<EntityLessonDetail> _lessonDetail;
 
+        private EntityLesson _selectedEntityLesson;
+
         // Lesson Filter values, populated by UI calls
         private G__MathType _enuFilterMathType;
         private G__MathLevel _enuFilterMathLevel;
@@ -37,11 +39,11 @@ namespace NathansWay.Shared.BUS.ViewModel
         // For data selection and state
         // Courtesy variable for storing the selected SEQ
         // THIS IS THE USERS RESPONSABILITY TO UPDATE!
-        private int _intFilterLessonSeq;
-        private int _intFilterLessonDetailSeq;
+        private int _intFilterLessonSeq = 0;
+        private int _intFilterLessonDetailSeq = 0;
         // Courtesy variable for storing the selected Row in a tableview/grid
-        private int _intLessonRowNumber;
-        private int _intFilterLessonDetailRow;
+        private int _intLessonRowNumber = 0;
+        private int _intFilterLessonDetailRow = 0;
 
 		#endregion
 
@@ -79,6 +81,15 @@ namespace NathansWay.Shared.BUS.ViewModel
         {
             get { return this._intLessonRowNumber; }
             set { this._intLessonRowNumber = value; }
+        }
+
+        public EntityLesson SelectedLesson
+        {
+            // Return just one lesson
+            get
+            {
+                return (this._lessons.Find(lesson => lesson.SEQ == this._intFilterLessonSeq));
+            }
         }
 
         /// <summary>

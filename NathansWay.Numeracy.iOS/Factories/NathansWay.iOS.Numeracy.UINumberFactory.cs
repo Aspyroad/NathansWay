@@ -53,7 +53,7 @@ namespace NathansWay.iOS.Numeracy
         // Data
         private EntityLesson _wsLesson;
         //private EntityLessonResults _wsLessonResults;
-        private EntityLessonDetail _wsLessonDetail;
+        private List<EntityLessonDetail> _wsLessonDetail;
         //private EntityLessonDetailResults _wsLessonDetailResults;
 
         #endregion
@@ -82,7 +82,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public vcWorkSpace UILoadEquationWorking (EntityLesson entLesson, EntityLessonDetail entLessonDetail)
+        public vcWorkSpace UILoadEquation (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
         {
             // Fire start event
             this.FireBuildStartedEvent();
@@ -99,7 +99,7 @@ namespace NathansWay.iOS.Numeracy
             return _vcWorkSpace;
         }
 
-        public vcWorkSpaceLabel UILoadEquationDisplay (EntityLesson entLesson, EntityLessonDetail entLessonDetail)
+        public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
         {
             // Fire start event
             this.FireBuildStartedEvent();
@@ -132,7 +132,7 @@ namespace NathansWay.iOS.Numeracy
         //            set { this._wsLessonResults = value; }
         //        }
 
-        public EntityLessonDetail WsLessonDetail
+        public List<EntityLessonDetail> WsLessonDetail
         {
             get { return this._wsLessonDetail; }
             set { this._wsLessonDetail = value; }
@@ -200,37 +200,37 @@ namespace NathansWay.iOS.Numeracy
             this._uiOutputMethods = this._expressionFactory.CreateExpressionMethod(_strExpression, true);
         }
 
-        private string GetEquation()
-        {
-            #if DEBUG
-            if (this._wsLesson == null)
-            {
-                throw new NullReferenceException("UINumberFactory : Lesson Entity is null, check your assign");
-            }
-            if (this._wsLessonDetail == null)
-            {
-                throw new NullReferenceException("UINumberFactory : Lesson Detail Entity is null, check your assign");
-            }
-            #endif
-
-            return (this._wsLessonDetail.Equation.Trim());
-        }
-
-        private string GetResult()
-        {
-            #if DEBUG
-            if (this._wsLesson == null)
-            {
-                throw new NullReferenceException("UINumberFactory : Lesson Entity is null, check your assign");
-            }
-            if (this._wsLessonDetail == null)
-            {
-                throw new NullReferenceException("UINumberFactory : Lesson Detail Entity is null, check your assign");
-            }
-            #endif
-
-            return (this._wsLessonDetail.Result.Trim());
-        }
+        //        private string GetEquation(int Seq)
+        //        {
+        //            #if DEBUG
+        //            if (this._wsLesson == null)
+        //            {
+        //                throw new NullReferenceException("UINumberFactory : Lesson Entity is null, check your assign");
+        //            }
+        //            if (this._wsLessonDetail == null)
+        //            {
+        //                throw new NullReferenceException("UINumberFactory : Lesson Detail Entity is null, check your assign");
+        //            }
+        //            #endif
+        //
+        //            return (this._wsLessonDetail.Equation.Trim());
+        //        }
+        //
+        //        private string GetResult()
+        //        {
+        //            #if DEBUG
+        //            if (this._wsLesson == null)
+        //            {
+        //                throw new NullReferenceException("UINumberFactory : Lesson Entity is null, check your assign");
+        //            }
+        //            if (this._wsLessonDetail == null)
+        //            {
+        //                throw new NullReferenceException("UINumberFactory : Lesson Detail Entity is null, check your assign");
+        //            }
+        //            #endif
+        //
+        //            return (this._wsLessonDetail.Result.Trim());
+        //        }
 
         protected void FireBuildStartedEvent()
         {

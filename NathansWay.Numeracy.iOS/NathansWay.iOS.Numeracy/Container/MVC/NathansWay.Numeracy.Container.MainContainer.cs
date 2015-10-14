@@ -29,11 +29,7 @@ namespace NathansWay.iOS.Numeracy
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcMainWorkSpace> _vcMainWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
-        // Non lazy - created as needed
-        public vcWorkSpace _vcWorkSpace;
 
-        // Factory Ref
-        private UINumberFactory _uiNumberFactory;
         private bool _bNumberPadLoaded;
         private NSAction _animation;
         private UICompletionHandler _transitionComplete;
@@ -93,8 +89,6 @@ namespace NathansWay.iOS.Numeracy
             // Logic assigns 
             this._dblAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
 
-            // Factory Classes for expression building
-            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
         }
 
         private void ChangeContentTo (AspyViewController _newvc, AspyViewController _oldvc, UIViewAnimationOptions _animationOptions)
@@ -193,16 +187,8 @@ namespace NathansWay.iOS.Numeracy
         public void LessonMenuToWorkSpace(vcLessonMenu _vcLessonMenu)
         {
             var _vc = this._vcMainWorkSpace.Value;
-            // INPROGRESS: Build our workspace here...
-
-            // Step this fucker out
-            // Call the method to create the workspace
-            // TODO: create a lesson entity in lesson view model and assign it that particular entoty every time theres a seq/select/focus on that record
-            this._vcWorkSpace = this._uiNumberFactory.UILoadEquationWorking(_vcLessonMenu.vmLesson.)
-
-
-
-
+            _vc.WsLesson = _vcLessonMenu.vmLesson.SelectedLesson;
+            _vc.WsLessonDetail = _vcLessonMenu.vmLesson.LessonDetail;
             this.ChangeContentTo(_vc, _vcLessonMenu, UIViewAnimationOptions.TransitionFlipFromLeft);
         }
 

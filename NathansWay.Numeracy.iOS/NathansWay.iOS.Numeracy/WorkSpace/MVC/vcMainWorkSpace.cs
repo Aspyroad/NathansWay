@@ -1,15 +1,13 @@
 // System
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 // Monotouch
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.ObjCRuntime;
 //Aspyroad
 using AspyRoad.iOSCore;
-//NathansWay
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.iOS.Numeracy.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
@@ -19,22 +17,29 @@ using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared;
 
+
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	[Register ("vcMainWorkSpace")]
-    public class vcMainWorkSpace : NWViewController
+    public class vcMainWorkSpace : BaseContainer
     {
 		#region Private Variables
 
-        // 
+        // VC Controllers
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
         private vcMainContainer _vcMainContainer;
+        private UINumberFactory _uiNumberFactory;
 
         // Db
         private LessonViewModel _vmLesson;
         private EntityLessonResults _wsLessonResults;
-        private EntityLessonDetailResults _wsLessonDetailResults;
+        private List<EntityLessonDetailResults> _wsLessonDetailResults;
+        private EntityLesson _wsLesson;
+        private List<EntityLessonDetail> _wsLessonDetail;
+
+        // Sizing - May not be needed
+        private SizeMainWorkSpace _sizeMainWorkSpace;
 
 		#endregion
 
@@ -51,7 +56,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             Initialize();
         }
 
-		//public vcMainWorkSpace () : base("vMainWorkSpace", null)
         public vcMainWorkSpace () : base()
         {   
 			Initialize();
@@ -65,10 +69,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
 			this.AspyTag1 = 60021;
 			this.AspyName = "VC_MainWorkSpace";
+            // Size Class Init
+            this._sizeMainWorkSpace = new SizeMainWorkSpace(this);
+            this._sizeClass = this._sizeMainWorkSpace;
 
             this._vcMainGame = new vcMainGame();
             this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+
+            // Factory Classes for expression building
+            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
         }
 
         #endregion
@@ -80,15 +90,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-//		public override void LoadView()
-//		{
-//			base.LoadView(); 
-//        }		
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.View.BackgroundColor = UIColor.Clear;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.View.UserInteractionEnabled = false;
             this.View.Frame = 
                 new RectangleF 
@@ -100,22 +105,41 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 );
             
 
-            // TODO : What game will load first?
+            // TODO: WHERE DO WE ADD MAINGAME AND WORKSPACE??
+            this.CreateWorkSpace();
+        }
+
+		#endregion
+
+        #region Public Methods
+
+        public void CreateWorkSpace()
+        {
+            // INPROGRESS: Build our workspace here...
+            // Call the method to create the workspace
+            // TODO: create a lesson entity in lesson view model and assign it that particular entoty every time theres a seq/select/focus on that record
+            this._vcWorkSpace = this._uiNumberFactory.UILoadEquation(this.WsLesson, this._wsLessonDetail);
+            this.AddAndSetWorkSpace();
+        }
+
+        public void AddAndSetMainGame()
+        {
             var _pointF2 = new PointF(2.0f, 2.0f);
             this._vcMainGame.SizeClass.SetPositions(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
+        }
 
-            // TODO : Move this...ViewWillAppear?
-            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this._vcWorkSpace.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
+        public void AddAndSetWorkSpace()
+        {
+            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             var _pointF1 = new PointF(4.0f, y);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF1);
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 
-		#endregion
+        #endregion
 
         #region Public Properties
-
 
         public EntityLessonResults WsLessonResults
         {
@@ -123,10 +147,64 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { WsLessonResults = value; }
         }
 
-        public EntityLessonDetailResults WsLessonDetailResults
+        public List<EntityLessonDetailResults> WsLessonDetailResults
         {
-            get { return _wsLessonDetailResults; }
-            set { WsLessonDetailResults = value; }
+            get { return this._wsLessonDetailResults; }
+            set { this._wsLessonDetailResults = value; }
+        }
+
+        public EntityLesson WsLesson
+        {
+            get { return this._wsLesson; }
+            set { this._wsLesson = value; }
+        }
+
+        public List<EntityLessonDetail> WsLessonDetail
+        {
+            get { return this._wsLessonDetail; }
+            set { this._wsLessonDetail = value; }
+        }
+
+        #endregion
+    }
+
+    public class SizeMainWorkSpace : SizeBase
+    {
+        #region Class Variables
+        // X Horizontal
+        // Y Vertical
+
+        #endregion
+
+        #region Constructors
+
+        public SizeMainWorkSpace()
+        {
+            Initialize();
+        }
+
+        public SizeMainWorkSpace(BaseContainer _vc) : base (_vc)
+        {
+            this.ParentContainer = _vc;
+            Initialize();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void Initialize()
+        {
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override void SetHeightWidth ()
+        {
+            this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
+            this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
         }
 
         #endregion
