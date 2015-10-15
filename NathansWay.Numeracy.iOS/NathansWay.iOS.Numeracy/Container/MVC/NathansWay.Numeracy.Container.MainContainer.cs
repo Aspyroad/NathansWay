@@ -231,7 +231,6 @@ namespace NathansWay.iOS.Numeracy
             // Add any views or vc's
             //this.AddAndDisplayController(_vcLessonMenu.Value);
             this.AddAndDisplayController(_vcMainMenu.Value);
-            //this.AddAndDisplayController(_vcWorkSpace.Value);
 		}
 
 		public override void ViewDidLoad ()

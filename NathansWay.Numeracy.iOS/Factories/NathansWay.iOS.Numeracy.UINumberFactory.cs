@@ -51,10 +51,12 @@ namespace NathansWay.iOS.Numeracy
         // Logic
 
         // Data
+        // TODO: These MUST be all populated for this class to work do we need security
         private EntityLesson _wsLesson;
         //private EntityLessonResults _wsLessonResults;
         private List<EntityLessonDetail> _wsLessonDetail;
         //private EntityLessonDetailResults _wsLessonDetailResults;
+        private int _intLessonDetailSeq;
 
         #endregion
 
@@ -67,6 +69,7 @@ namespace NathansWay.iOS.Numeracy
             this._expressionFactory = new ExpressionFactory(this._numberFactoryClient);
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+            this._intLessonDetailSeq = 0;
         }
 
         #endregion
@@ -92,6 +95,11 @@ namespace NathansWay.iOS.Numeracy
 
             // Create our workspace object
             vcWorkSpace _vcWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
+
+            // Create our Nunmlet
+            // TODO: Get the SEQ lessondetail from lessondetail list
+            // 
+            // this.CreateNumlet(
 
             // Fire completed event
             this.FireBuildCompletedEvent();
@@ -119,6 +127,12 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Public Properties
+
+        public int LessonDetailSeq
+        {
+            get { return this._intLessonDetailSeq; }
+            set { this._intLessonDetailSeq = value; }
+        }
 
         public EntityLesson WsLesson
         {
@@ -148,14 +162,15 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private vcWorkNumlet CreateNumlet()
+        private vcWorkNumlet CreateNumlet(string _strExpression)
         {
-
-
+            // Create all our expression symbols, numbers etc
+            this.ExpressionToUIEditable(_strExpression);
+            // The actual numlet
             var numlet = new vcWorkNumlet();
             G__NumberDisplaySize _displaySize;
-            float _xPos = this._globalSizeDimensions.NumletNumberSpacing;
-            float _yPos = _xPos;
+            float _aPos = this._globalSizeDimensions.NumletNumberSpacing;
+            float _bPos = _aPos;
 
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
@@ -168,13 +183,13 @@ namespace NathansWay.iOS.Numeracy
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-                _control.SizeClass.SetPositions(_xPos, _yPos);
+                _control.SizeClass.SetPositions(_aPos, _bPos);
                 numlet.AddAndDisplayController(_control);
-                _xPos = _xPos + _control.SizeClass.CurrentWidth;
+                _aPos = _aPos + _control.SizeClass.CurrentWidth;
             }
 
             // Pad out the end
-            numlet.SizeClass.CurrentWidth = _xPos + this._globalSizeDimensions.NumletNumberSpacing; 
+            numlet.SizeClass.CurrentWidth = _aPos + this._globalSizeDimensions.NumletNumberSpacing; 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
             // Return completed numnut!
