@@ -69,7 +69,7 @@ namespace NathansWay.iOS.Numeracy
             this._expressionFactory = new ExpressionFactory(this._numberFactoryClient);
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
-            this._intLessonDetailSeq = 0;
+            this._intLessonDetailSeq = 1;
         }
 
         #endregion
@@ -98,8 +98,11 @@ namespace NathansWay.iOS.Numeracy
 
             // Create our Nunmlet
             // TODO: Get the SEQ lessondetail from lessondetail list
-            // 
-            // this.CreateNumlet(
+            EntityLessonDetail _eld = entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+            vcWorkNumlet _vcNumlet = this.CreateNumlet(_eld.Equation.ToString());
+            _vcNumlet.SizeClass.SetPositions(4.0f, 4.0f);
+            _vcWorkSpace.AddAndDisplayController(_vcNumlet);
+
 
             // Fire completed event
             this.FireBuildCompletedEvent();

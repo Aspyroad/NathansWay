@@ -31,10 +31,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public NumberFactoryClient()
         {
+            this._UIOutput = new List<object>();
+            this.IsAnswer = false;
+            this.IsReadOnly = true;
         }
 
         public NumberFactoryClient(List<object> _lsOutput)
         {   
+            
             this._UIOutput = _lsOutput;
             this.IsAnswer = false;
             this.IsReadOnly = true;

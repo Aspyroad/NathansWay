@@ -198,9 +198,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            // We have no fuckin idea how big this will be!!!!!
-            // No, we have no idea how LONG! this will be, 
-            // but we always know its height
+            //this.CurrentWidth = 0;
+            this.CurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }
 
         #endregion
