@@ -19,8 +19,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[Register("vcWorkSpace")]
-	public class vcWorkSpace : BaseContainer
+	public partial class vcWorkSpace : BaseContainer
 	{
 		#region Private Variables
 
@@ -49,6 +48,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
 		#endregion
+
+        #region Deconstructors
+
+        protected override void Dispose (bool disposing)
+        {
+            base.Dispose (disposing);
+
+            if (disposing)
+            {
+                //Do this because the ViewModel hangs around for the lifetime of the app
+                this.btnNextEquation.TouchUpInside -= OnClick_btnNextEquation;
+
+            }
+        }
+
+        #endregion
 
 		#region Private Members
 
@@ -118,6 +133,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
+            //
+            this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
 		}
 
         public override void ViewWillAppear(bool animated)
@@ -126,6 +143,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
 		#endregion
+
+        #region EventHandlers
+
+        private void OnClick_btnNextEquation (object sender, EventArgs e)
+        {
+            int x = 0;
+        }
+
+        #endregion
 	}
 
     public class SizeWorkSpace : SizeBase

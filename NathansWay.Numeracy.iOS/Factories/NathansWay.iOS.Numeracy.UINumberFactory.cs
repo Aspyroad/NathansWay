@@ -99,9 +99,12 @@ namespace NathansWay.iOS.Numeracy
             // Create our Nunmlet
             // TODO: Get the SEQ lessondetail from lessondetail list
             EntityLessonDetail _eld = entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+
+            // TODO: This needs to be a loop
             vcWorkNumlet _vcNumlet = this.CreateNumlet(_eld.Equation.ToString());
             _vcNumlet.SizeClass.SetPositions(4.0f, 4.0f);
             _vcWorkSpace.AddAndDisplayController(_vcNumlet);
+            // * Finish loop
 
 
             // Fire completed event
@@ -172,8 +175,9 @@ namespace NathansWay.iOS.Numeracy
             // The actual numlet
             var numlet = new vcWorkNumlet();
             G__NumberDisplaySize _displaySize;
-            float _aPos = this._globalSizeDimensions.NumletNumberSpacing;
-            float _bPos = _aPos;
+            float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+            float _xPos = _xSpacing;
+            float _yPos = _xPos;
 
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
@@ -186,13 +190,13 @@ namespace NathansWay.iOS.Numeracy
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-                _control.SizeClass.SetPositions(_aPos, _bPos);
+                _control.SizeClass.SetPositions(_xPos, _yPos);
                 numlet.AddAndDisplayController(_control);
-                _aPos = _aPos + _control.SizeClass.CurrentWidth;
+                _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
             }
 
             // Pad out the end
-            numlet.SizeClass.CurrentWidth = _aPos + this._globalSizeDimensions.NumletNumberSpacing; 
+            numlet.SizeClass.CurrentWidth = _xPos; 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
             // Return completed numnut!

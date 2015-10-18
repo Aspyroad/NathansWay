@@ -210,6 +210,9 @@
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.designer.cs">
+      <DependentUpon>vcWorkSpace.cs</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Settings\NathansWay.Numeracy.UI.Dimensions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkNumlet.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberLabel.cs" />

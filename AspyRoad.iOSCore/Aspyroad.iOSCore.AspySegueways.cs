@@ -57,25 +57,29 @@ namespace AspyRoad.iOSCore
 		protected void animateComplete(bool finished)
 		{
 			// Reposition our views into the center after the animations changed the center points
-			this.DestinationViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
 			this.SourceViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
-			// When we added the destination view as a subview of source, it inadvertenly adds DestinationVC as a child of Source VC!
+            this.DestinationViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
+			// When we added the destination view as a subview of source, remove it now.
 			this.SourceViewController.View.ViewWithTag (tmpTag).RemoveFromSuperview ();
+            // Remove the sorucevc from maincontainer/rootvc
+            this.SourceViewController.View.RemoveFromSuperview();
+            // Called to keep the view container pattern, supplied with null as it wont have a vc
+            this.SourceViewController.WillMoveToParentViewController(null);
+            this.SourceViewController.RemoveFromParentViewController ();
 
-			// Remove both source and destination from any Containers
-			this.DestinationViewController.WillMoveToParentViewController (null);
-			this.DestinationViewController.RemoveFromParentViewController ();
-			this.DestinationViewController.DidMoveToParentViewController (null);
-
-			this.SourceViewController.WillMoveToParentViewController (null);
-			this.SourceViewController.RemoveFromParentViewController ();
-			this.SourceViewController.DidMoveToParentViewController (null);
-
-			// Add the new view to the Root Container
 			this.DestinationViewController.WillMoveToParentViewController (iOSGlobals.G__MainWindow.RootViewController);
-			iOSGlobals.G__MainWindow.RootViewController.AddChildViewController(this.DestinationViewController);
+            iOSGlobals.G__MainWindow.RootViewController.AddChildViewController(this.DestinationViewController);
 			this.DestinationViewController.DidMoveToParentViewController(iOSGlobals.G__MainWindow.RootViewController);
+            // I always thought this got done by [addchildvc] call but apprently not, see below blog
 			iOSGlobals.G__MainWindow.RootViewController.View.AddSubview (this.DestinationViewController.View);
+
+            //            Adding and Removing a Child View Controller
+            //            In the simplest scenario, adding a child to a container controller takes three steps:
+            //            1. Call addChildViewController: on the parent and pass the child as the argument (for example, [self addChildViewController:childvc]).
+            //            2. Add the child controller’s view as a subview (for example, [self.view addSubview:childvc.view]).
+            //            3. Call didMoveToParentViewController: on the child with the parent as its argument (for example, [childvc didMoveToParentViewController:self]).
+            //            To remove a child view controller, the steps are almost (but not quite) mirrored:
+            //            1. You must call willMoveToParentViewController: on the child, passing nil as the argument (for example, [childvc willMoveToParentViewController:nil]).
 		}  
     }
 
@@ -164,6 +168,8 @@ namespace AspyRoad.iOSCore
                 _slider,
                 _animationcomplete
             );
+
+
             
             #region ObjCCode         
             // **************************************************************************
@@ -553,9 +559,6 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register("AspySpinthatwheelSegue")] 
     public class AspySpinthatwheelSegue : AspySegueBase
     {
-
-
-
         #region Construction
         // Def .ctr
         public AspySpinthatwheelSegue()

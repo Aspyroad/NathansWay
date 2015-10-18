@@ -638,6 +638,8 @@
                                 <state key="normal" title="&gt;">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2QH-PW-E96" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="847" y="2" width="167" height="26"/>
@@ -652,10 +654,13 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="1016" height="188"/>
+                    <connections>
+                        <outlet property="btnNextEquation" destination="TWY-au-o8H" id="name-outlet-TWY-au-o8H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpQ-dq-Kfy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-311" y="-891"/>
+            <point key="canvasLocation" x="-334" y="-967"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

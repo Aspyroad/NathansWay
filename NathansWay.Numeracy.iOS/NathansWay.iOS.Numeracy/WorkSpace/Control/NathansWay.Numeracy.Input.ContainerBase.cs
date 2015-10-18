@@ -385,7 +385,7 @@ namespace NathansWay.iOS.Numeracy
 
             // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             // Set all control frames
-            //this.SizeClass.SetFrames();
+            this.SizeClass.SetFrames();
 		}
 
         public override void ApplyUI(G__ApplyUI _applywhere)
@@ -407,7 +407,7 @@ namespace NathansWay.iOS.Numeracy
             base.ViewDidLoad();
 
             // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
-            this.SizeClass.SetFrames();
+            //this.SizeClass.SetFrames();
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

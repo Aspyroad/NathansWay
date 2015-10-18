@@ -177,7 +177,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 150.0f;
+                        return 130.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {

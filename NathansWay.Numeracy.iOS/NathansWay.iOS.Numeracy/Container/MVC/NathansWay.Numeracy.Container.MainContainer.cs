@@ -124,7 +124,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this._vcOld.RemoveFromParentViewController();
             this._vcNew.DidMoveToParentViewController(this);
-            this._vcNew = null;
+            //this._vcNew = null;
             this._vcOld = null;
         }
 

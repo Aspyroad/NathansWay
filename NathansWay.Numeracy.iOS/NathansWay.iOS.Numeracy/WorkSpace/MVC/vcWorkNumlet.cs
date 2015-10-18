@@ -157,6 +157,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.SizeClass.SetFrames();
+            this.View.BackgroundColor = UIColor.Purple;
         }
 
 		#endregion
@@ -198,8 +200,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            //this.CurrentWidth = 0;
-            this.CurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }
 
         #endregion

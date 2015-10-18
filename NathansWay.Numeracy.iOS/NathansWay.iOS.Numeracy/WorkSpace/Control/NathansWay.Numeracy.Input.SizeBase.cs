@@ -194,16 +194,29 @@ namespace NathansWay.iOS.Numeracy.Controls
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
+
+        /// <summary>
+        /// Calls all functions to set and position the parent class.
+        /// This overload takes 0 params. StartPoint MUST be set for correct operation
+        /// </summary>
+        public virtual void SetPositions ()
+        {
+            // StartPoint MUST be set when calling this
+            this.SetHeightWidth();
+
+        }
+
         /// <summary>
         /// Calls all functions to set and position the parent class
-        /// SetPositions should be used to
-        /// 1. Set the StartPoint (PointF)
-        /// 2. Set the Height and Widths of the control
-        /// It should NOT be called to set frame objects
         /// </summary>
         /// <param name="_startPoint">Start point.</param>
         public virtual void SetPositions (PointF _startPoint)
         {
+            // SetPositions should be used to
+            // 1. Set the StartPoint (PointF)
+            // 2. Set the Height and Widths of the control
+            // It should NOT be called to set frame objects
+
             PointF _point;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)

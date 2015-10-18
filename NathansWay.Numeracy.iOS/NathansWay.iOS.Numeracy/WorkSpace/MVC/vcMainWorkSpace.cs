@@ -93,20 +93,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-            this.View.UserInteractionEnabled = false;
-            this.View.Frame = 
-                new RectangleF 
-                (
-                    0,
-                    0,
-                    iOSGlobals.G__RectWindowLandscape.Width,
-                    iOSGlobals.G__RectWindowLandscape.Height
-                );
-            
+
+            this.View.UserInteractionEnabled = true;
+            this._applyUIWhere = G__ApplyUI.ViewDidLoad;
+            this.SizeClass.SetPositions(0.0f, 0.0f);
 
             // TODO: WHERE DO WE ADD MAINGAME AND WORKSPACE??
             this.CreateWorkSpace();
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+            //this._vcWorkSpace.SizeClass.SetPositions();
         }
 
 		#endregion
@@ -203,8 +202,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
+            //this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
+            //this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
+            this.CurrentWidth = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Width;
+            this.CurrentHeight = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height;
         }
 
         #endregion

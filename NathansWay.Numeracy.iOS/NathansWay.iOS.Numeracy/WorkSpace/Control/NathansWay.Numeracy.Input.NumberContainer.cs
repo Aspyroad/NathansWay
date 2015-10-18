@@ -210,7 +210,8 @@ namespace NathansWay.iOS.Numeracy
                     newnumber.SizeClass.eResizing += newnumber.SizeClass.OnResize;
 
                     // Add control
-                    this.AddAndDisplayController(newnumber, newnumber.View.Frame);
+                    //this.AddAndDisplayController(newnumber, newnumber.View.Frame);
+                    this.AddAndDisplayController(newnumber);
                 }
                 else
                 {

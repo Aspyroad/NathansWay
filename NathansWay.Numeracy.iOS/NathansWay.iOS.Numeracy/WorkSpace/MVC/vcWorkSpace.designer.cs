@@ -14,8 +14,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	[Register ("vcWorkSpace")]
 	partial class vcWorkSpace
 	{
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnNextEquation { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnNextEquation != null) {
+				btnNextEquation.Dispose ();
+				btnNextEquation = null;
+			}
 		}
 	}
 }
