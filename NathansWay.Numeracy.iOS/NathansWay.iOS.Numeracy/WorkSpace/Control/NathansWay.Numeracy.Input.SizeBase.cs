@@ -102,14 +102,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     case (G__NumberDisplayPositionY.Center): // Most common first ??
                     {
-                        if (this._fParentContainerHeight == 0.0f)
-                        {
-                            _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
-                        }
-                        else
-                        {
-                            _YPos = ((Y / 2.0f) - (this._fParentContainerHeight / 2.0f));
-                        }
+                        _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
                     }
                     break;
                     case (G__NumberDisplayPositionY.Top):

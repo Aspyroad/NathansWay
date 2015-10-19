@@ -69,6 +69,67 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #region Global WorkSpace
 
+        public float WorkSpaceCanvasHeight
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 156.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 0.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 0.0f;
+                    }
+                }
+            }
+        }
+        public float WorkSpaceCanvasWidth
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 0.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 928.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 928.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 928.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 928.0f;
+                    }
+                }
+            }
+        }
+
         public float GlobalWorkSpaceHeight
         {
             get

@@ -200,7 +200,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            //this._
+            this._fCurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }
 
         #endregion

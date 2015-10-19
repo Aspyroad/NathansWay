@@ -100,6 +100,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
+        public AspyView WorkSpaceCanvas 
+        {
+            get { return this.vCanvas; }
+            set { this.vCanvas = value; }
+        }
 
         public string ExpressionString 
         { 
@@ -133,6 +138,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
+            this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
             //
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
 		}
@@ -140,6 +146,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+        }
+
+        public override void ApplyUI(G__ApplyUI _applywhere)
+        {
+            base.ApplyUI(_applywhere);
+
+            this.vCanvas.BackgroundColor = UIColor.Green;
+        }
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
         }
 
 		#endregion

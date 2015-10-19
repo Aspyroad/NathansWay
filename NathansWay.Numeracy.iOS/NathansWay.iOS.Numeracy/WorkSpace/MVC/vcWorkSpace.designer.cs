@@ -18,11 +18,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		[GeneratedCode ("iOS Designer", "1.0")]
 		NathansWay.iOS.Numeracy.ButtonLabelStyle btnNextEquation { get; set; }
 
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyView vCanvas { get; set; }
+
 		void ReleaseDesignerOutlets ()
 		{
 			if (btnNextEquation != null) {
 				btnNextEquation.Dispose ();
 				btnNextEquation = null;
+			}
+			if (vCanvas != null) {
+				vCanvas.Dispose ();
+				vCanvas = null;
 			}
 		}
 	}
