@@ -172,8 +172,12 @@ namespace NathansWay.iOS.Numeracy
         {
             // Create all our expression symbols, numbers etc
             this.ExpressionToUIEditable(_strExpression);
-            // The actual numlet
+
+            // Setup the numlet
             var numlet = new vcWorkNumlet();
+            // Sizing
+            numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             float _xPos = _xSpacing;
@@ -183,6 +187,7 @@ namespace NathansWay.iOS.Numeracy
             {                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
                 _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+                _control.SizeClass.ParentContainer = numlet;
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;

@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected bool _setRelationPosY;
         protected bool _setRelationPosX;
         // Parent container reference
-        protected BaseContainer _parentContainer;
+        internal BaseContainer _parentContainer;
         // Current Sizing
         protected float _fCurrentWidth = 0.0f;
         protected float _fCurrentHeight = 0.0f;
@@ -46,6 +46,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
         protected bool _bMultiNumberLabel;
+        protected float _fParentContainerWidth;
+        protected float _fParentContainerHeight;
         // PointF location with respect to the Window and ContainerController
         protected PointF _ptStartPointInWindow;
 
@@ -100,7 +102,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     case (G__NumberDisplayPositionY.Center): // Most common first ??
                     {
-                        _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
+                        if (this._fParentContainerHeight == 0.0f)
+                        {
+                            _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
+                        }
+                        else
+                        {
+                            _YPos = ((Y / 2.0f) - (this._fParentContainerHeight / 2.0f));
+                        }
                     }
                     break;
                     case (G__NumberDisplayPositionY.Top):
@@ -305,6 +314,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._parentContainer; }
             set 
             { 
+                if (value.SizeClass != null)
+                {
+                    this._fParentContainerHeight = value.SizeClass.CurrentHeight;
+                    this._fParentContainerWidth = value.SizeClass.CurrentWidth;
+                }
                 this._parentContainer = value;
             }
         }

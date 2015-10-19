@@ -492,6 +492,11 @@ namespace NathansWay.iOS.Numeracy
             // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }
 
+        public override void SetPositions(float _posX, float _posY)
+        {
+            base.SetPositions(_posX, _posY);
+        }
+
         #endregion
     }
 }
