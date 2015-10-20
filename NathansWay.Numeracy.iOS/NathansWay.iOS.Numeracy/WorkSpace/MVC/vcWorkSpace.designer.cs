@@ -20,7 +20,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		AspyRoad.iOSCore.AspyView vCanvas { get; set; }
+		vWorkSpace vWorkSpace { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
@@ -28,9 +28,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 				btnNextEquation.Dispose ();
 				btnNextEquation = null;
 			}
-			if (vCanvas != null) {
-				vCanvas.Dispose ();
-				vCanvas = null;
+			if (vWorkSpace != null) {
+				vWorkSpace.Dispose ();
+				vWorkSpace = null;
 			}
 		}
 	}

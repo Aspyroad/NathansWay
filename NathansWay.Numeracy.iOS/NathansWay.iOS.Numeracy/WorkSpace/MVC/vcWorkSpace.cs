@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private string _strExpression;
         private SizeWorkSpace _sizeWorkSpace;
         private List<vcWorkNumlet> _lsWorkNumlets;
+        private AspyView _vCanvas;
 
 		#endregion
 
@@ -74,7 +75,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
-
+            RectangleF x = new RectangleF(
+                               44.0f,
+                               30.0f,
+                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
+                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
+                           );
+            this._vCanvas = new AspyView(x);
 		}
 
 		#endregion
@@ -100,10 +107,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public AspyView WorkSpaceCanvas 
+        public AspyView vCanvas 
         {
-            get { return this.vCanvas; }
-            set { this.vCanvas = value; }
+            get { return this._vCanvas; }
+            set { this._vCanvas = value; }
         }
 
         public string ExpressionString 
@@ -112,7 +119,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set 
             { 
                 this._strExpression = value; 
-
             }
         }
 
@@ -139,20 +145,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
             this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
-            //
+            this.View.AddSubview(this._vCanvas);
+            // Delegates
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
+
 		}
 
         public override void ViewWillAppear(bool animated)
         {
+            // TODO: test this
             base.ViewWillAppear(animated);
         }
 
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
-
+            // Global UI
             this.vCanvas.BackgroundColor = UIColor.Green;
+
+            this.vCanvas.HasRoundedCorners = true;
+            this.vCanvas.CornerRadius = 5.0f;
+
         }
 
         public override void ApplyUI6()

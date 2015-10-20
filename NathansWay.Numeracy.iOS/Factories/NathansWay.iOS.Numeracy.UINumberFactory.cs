@@ -101,8 +101,10 @@ namespace NathansWay.iOS.Numeracy
             EntityLessonDetail _eld = entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
 
             // TODO: This needs to be a loop
-            vcWorkNumlet _vcNumlet = this.CreateNumlet(_eld.Equation.ToString());
-            _vcNumlet.SizeClass.SetPositions(4.0f, 4.0f);
+            vcWorkNumlet _vcNumlet = this.CreateNumletExpression(_eld.Equation.ToString());
+            _vcNumlet.SizeClass.SetCenterRelativeParentVcPosY = true;
+            _vcNumlet.SizeClass.SetCenterRelativeParentVcPosX = true;
+            _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             _vcWorkSpace.AddChildViewController(_vcNumlet);
             _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
             // * Finish loop
@@ -169,15 +171,14 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private vcWorkNumlet CreateNumlet(string _strExpression)
+        private vcWorkNumlet CreateNumletExpression(string _strExpression)
         {
             // Create all our expression symbols, numbers etc
             this.ExpressionToUIEditable(_strExpression);
 
             // Setup the numlet
             var numlet = new vcWorkNumlet();
-            // Sizing
-            // numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+            numlet.NumletType = G__WorkNumletType.Equation;
 
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;

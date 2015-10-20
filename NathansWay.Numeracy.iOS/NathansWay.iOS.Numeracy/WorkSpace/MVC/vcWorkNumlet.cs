@@ -111,6 +111,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkNumlet)this._sizeClass; }
         }
 
+        public G__ExpressionType NumletType
+        {
+            get { return this._workNumletType;}
+            set { this._workNumletType = value;}
+        }
+
         public EntityLesson WsLesson
         {
             get { return this._wsLesson; }

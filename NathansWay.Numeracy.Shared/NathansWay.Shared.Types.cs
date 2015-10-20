@@ -82,7 +82,8 @@ namespace NathansWay.Shared
     public enum G__WorkNumletType : int
     {
         Equation = 1,
-        Method = 2
+        Method = 2,
+        Answer = 3
     }
 
     public enum G__ContainerType : int
