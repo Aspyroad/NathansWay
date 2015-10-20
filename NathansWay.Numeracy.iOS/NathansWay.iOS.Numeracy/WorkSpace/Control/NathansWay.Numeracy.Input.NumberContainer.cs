@@ -336,6 +336,7 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
             this.View.UserInteractionEnabled = true;
+            this.View.ClipsToBounds = true;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

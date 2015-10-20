@@ -118,13 +118,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.DidReceiveMemoryWarning();
         }
 
-        public override void LoadView()
-        {
-            base.LoadView();
-            //this._View = new vNumberContainer();
-            //this.View = this._View;
-        }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();

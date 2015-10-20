@@ -94,6 +94,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkNumlet = new SizeWorkNumlet(this);
             this._sizeClass = this._sizeWorkNumlet;
+            this.HasRoundedCorners = true;
 		}
 
 		#endregion
@@ -111,7 +112,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkNumlet)this._sizeClass; }
         }
 
-        public G__ExpressionType NumletType
+        public G__WorkNumletType NumletType
         {
             get { return this._workNumletType;}
             set { this._workNumletType = value;}
@@ -166,6 +167,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetFrames();
             this.View.BackgroundColor = UIColor.Purple;
         }
+
+        public override void ApplyUI(G__ApplyUI _applywhere)
+        {
+            base.ApplyUI(_applywhere);
+
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
+        }
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
+        }
+
+
+
 
 		#endregion
 	}

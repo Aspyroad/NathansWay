@@ -81,7 +81,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                                this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
                                this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
                            );
-            this._vCanvas = new AspyView(x);
+            this._vCanvas = new NWView(x);
 		}
 
 		#endregion
