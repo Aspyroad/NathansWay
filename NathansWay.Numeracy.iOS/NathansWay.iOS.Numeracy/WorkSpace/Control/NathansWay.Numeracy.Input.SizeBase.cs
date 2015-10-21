@@ -103,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._setRelationPosY = false;
             this._setMiddleLeftPosX = false;
             this._setMiddleRightPosX = false;
-            this._fPaddingPositional = 0.0f;
+            this._fPaddingPositional = 2.0f;
 
             this._bMultiNumberLabel = false;
         }
@@ -172,9 +172,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 switch (this.DisplayPositionX)
                 {
-                    case (G__NumberDisplayPositionX.Center): // Most common first ??
+                    case (G__NumberDisplayPositionX.Right): // Most common first ??
                     {
-                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 4.0f));
+                        _XPos = ((X / 2.0f) - (this._fCurrentWidth + this._fPaddingPositional));
                     }
                     break;
                     case (G__NumberDisplayPositionX.Left):
@@ -182,11 +182,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                         _XPos = this._fPaddingPositional;
                     }
                     break;
-                    default : // G__NumberDisplayPosition.Right
+                    default : // G__NumberDisplayPositionX.Center
                     {
-                        _XPos = (X - this._fCurrentWidth);
-                        // REMEMBER: We may need to pad the control to padded from the center of the parent?
-                        //_XPos = ((X - this._fCurrentWidth) - this._fPaddingPositional)
+                        _XPos = ((X / 4.0f) - (this._fCurrentWidth / 2.0f));    
                     }
                     break;
                 }
@@ -196,19 +194,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 switch (this.DisplayPositionX)
                 {
-                    case (G__NumberDisplayPositionX.Center): // Most common first ??
+                    case (G__NumberDisplayPositionX.Right): // Most common first ??
                     {
-                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
+                        _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
                     }
                     break;
                     case (G__NumberDisplayPositionX.Left):
                     {
-                        _XPos = 0.0f;
+                        _XPos = ((X / 2.0f) + this._fPaddingPositional);
                     }
                     break;
-                    default : // G__NumberDisplayPosition.Right
+                    default : // G__NumberDisplayPositionX.Center
                     {
-                        _XPos = (X - this._fCurrentWidth);
+                        _XPos = (((X / 2.0f) + (X / 4.0f)) - (this._fCurrentWidth / 4.0f));    
                     }
                     break;
                 }
@@ -328,7 +326,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
         }
 
-        // Should be called ONLY in viewdidload or viewwillappear
+        // Should be called ONLY in viewdidload or viewwillappear (where frames are known)
         public virtual void SetFrames()
         {
             // Generally we will ALWAYS want to set the mainframe for this control in base
@@ -450,13 +448,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public bool SetCenterAndLeftRelativeParentViewPosX
         {
-            get { return this._setRelationPosY; }
-            set { this._setRelationPosY = value; }
+            get { return this._setMiddleLeftPosX; }
+            set { this._setMiddleLeftPosX = value; }
         }
         public bool SetCenterAndRightRelativeParentViewPosX
         {
-            get { return this._setRelationPosX; }
-            set { this._setRelationPosX = value; }
+            get { return this._setMiddleRightPosX; }
+            set { this._setMiddleRightPosX = value; }
         }
 
         public bool SetAsMultiNumberText

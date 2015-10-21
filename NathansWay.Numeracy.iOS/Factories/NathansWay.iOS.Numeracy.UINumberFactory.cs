@@ -103,7 +103,8 @@ namespace NathansWay.iOS.Numeracy
             // TODO: This needs to be a loop
             vcWorkNumlet _vcNumlet = this.CreateNumletExpression(_eld.Equation.ToString());
             _vcNumlet.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumlet.SizeClass.SetCenterRelativeParentViewPosX = true;
+            _vcNumlet.SizeClass.SetCenterAndRightRelativeParentViewPosX = true;
+            _vcNumlet.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
             _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             _vcWorkSpace.AddChildViewController(_vcNumlet);
             _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
