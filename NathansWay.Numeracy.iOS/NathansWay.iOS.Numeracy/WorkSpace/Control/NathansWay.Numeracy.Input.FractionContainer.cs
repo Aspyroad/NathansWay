@@ -166,8 +166,8 @@ namespace NathansWay.iOS.Numeracy
             this.SizeClass.CurrentWidth = Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
-            this.numberText_Numerator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
-            this.numberText_Denominator.NumberContainerSize.SetCenterRelativeParentVcPosX = true;
+            this.numberText_Numerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
+            this.numberText_Denominator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
 
             // Grab the vertical drop for denominator
             var _ypos = 

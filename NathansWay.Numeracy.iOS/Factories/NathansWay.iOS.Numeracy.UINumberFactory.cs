@@ -102,8 +102,8 @@ namespace NathansWay.iOS.Numeracy
 
             // TODO: This needs to be a loop
             vcWorkNumlet _vcNumlet = this.CreateNumletExpression(_eld.Equation.ToString());
-            _vcNumlet.SizeClass.SetCenterRelativeParentVcPosY = true;
-            _vcNumlet.SizeClass.SetCenterRelativeParentVcPosX = true;
+            _vcNumlet.SizeClass.SetCenterRelativeParentViewPosY = true;
+            _vcNumlet.SizeClass.SetCenterRelativeParentViewPosX = true;
             _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             _vcWorkSpace.AddChildViewController(_vcNumlet);
             _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
@@ -188,7 +188,7 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
-                _control.SizeClass.SetCenterRelativeParentVcPosY = true;
+                _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;

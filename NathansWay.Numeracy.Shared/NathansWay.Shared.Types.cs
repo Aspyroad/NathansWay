@@ -49,7 +49,9 @@ namespace NathansWay.Shared
     {
         Right = 1,
         Center = 2,
-        Left = 3
+        Left = 3,
+        MiddleRight = 4,
+        MIddleLeft = 5
     }
 
     public enum G__NumberPickerPosition : int

@@ -29,12 +29,33 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Global Dimension Sizes
         private iOSNumberDimensions _globalSizeDimensions;
-        // Positioning globals
+
+        /* 
+         * Positioning globals
+         * Explantation
+         * _displayPositionY - specify if you want the client positioned Top,Center,Bottom of a parent.
+         * _displayPositionX - specify if you want the client positioned Left,Center,Right of the parent.
+         * _setRelationPosY - Boolean set the specified _displayPositionY across the full height of the parent.
+         * _setRelationPosX - Boolean set the specified _displayPositionX across the full width of the parent.
+         * _setMiddleLeftPosX - Boolean set the specified _displayPositionX to the left side of the middle width of the parent.
+         * _setMiddleRightPosX - Boolean set the specified _displayPositionX to the right side of the middle width of the parent.
+        */
+
         protected G__NumberDisplayPositionY _displayPositionY;
         protected G__NumberDisplayPositionX _displayPositionX;
-        // Set Relational Position Also
+        // Set Relational Position
+        // These set a size client in the middle of a container
         protected bool _setRelationPosY;
         protected bool _setRelationPosX;
+        // Set either right or left positioned to the center 
+        // This is used by the workspace canvas and numlets but may be handy
+        protected bool _setMiddleLeftPosX;
+        protected bool _setMiddleRightPosX;
+        // Global sizeclass padding variable for extreme left right top bottom placement.
+        protected float _fPaddingPositional;
+
+
+
         // Parent container reference
         internal BaseContainer _parentContainer;
         // Current Sizing
@@ -77,8 +98,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             // By default we want to center, but this can be changed by children.
             this.DisplayPositionX = G__NumberDisplayPositionX.Center;
             this.DisplayPositionY = G__NumberDisplayPositionY.Center;
+
             this._setRelationPosX = false;
             this._setRelationPosY = false;
+            this._setMiddleLeftPosX = false;
+            this._setMiddleRightPosX = false;
+            this._fPaddingPositional = 0.0f;
+
             this._bMultiNumberLabel = false;
         }
 
@@ -107,7 +133,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     break;
                     case (G__NumberDisplayPositionY.Top):
                     {
-                        _YPos = 0.0f;
+                        _YPos = this._fPaddingPositional;
                     }
                     break;
                     default : // G__NumberDisplayPositionY.Bottom
@@ -119,6 +145,54 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             // ** Horizontal Center
             if (this._setRelationPosX) 
+            {
+                switch (this.DisplayPositionX)
+                {
+                    case (G__NumberDisplayPositionX.Center): // Most common first ??
+                    {
+                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
+                    }
+                    break;
+                    case (G__NumberDisplayPositionX.Left):
+                    {
+                        _XPos = this._fPaddingPositional;
+                    }
+                    break;
+                    default : // G__NumberDisplayPosition.Right
+                    {
+                        _XPos = (X - this._fCurrentWidth);
+                    }
+                    break;
+                }
+            }
+
+            // TODO: Do we need these, I have now added two new enumerations middleleft middleright
+            // ** Horizontal Left of Center
+            if (this._setMiddleLeftPosX) 
+            {
+                switch (this.DisplayPositionX)
+                {
+                    case (G__NumberDisplayPositionX.Center): // Most common first ??
+                    {
+                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 4.0f));
+                    }
+                    break;
+                    case (G__NumberDisplayPositionX.Left):
+                    {
+                        _XPos = this._fPaddingPositional;
+                    }
+                    break;
+                    default : // G__NumberDisplayPosition.Right
+                    {
+                        _XPos = (X - this._fCurrentWidth);
+                        // REMEMBER: We may need to pad the control to padded from the center of the parent?
+                        //_XPos = ((X - this._fCurrentWidth) - this._fPaddingPositional)
+                    }
+                    break;
+                }
+            }
+            // ** Horizontal Right of Center
+            if (this._setMiddleRightPosX) 
             {
                 switch (this.DisplayPositionX)
                 {
@@ -196,7 +270,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
         }
 
-
         /// <summary>
         /// Calls all functions to set and position the parent class.
         /// This overload takes 0 params. StartPoint MUST be set for correct operation
@@ -205,7 +278,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // StartPoint MUST be set when calling this
             this.SetHeightWidth();
-
         }
 
         /// <summary>
@@ -365,12 +437,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._displayPositionX = value; }
         }
 
-        public bool SetCenterRelativeParentVcPosY
+        public bool SetCenterRelativeParentViewPosY
         {
             get { return this._setRelationPosY; }
             set { this._setRelationPosY = value; }
         }
-        public bool SetCenterRelativeParentVcPosX
+        public bool SetCenterRelativeParentViewPosX
+        {
+            get { return this._setRelationPosX; }
+            set { this._setRelationPosX = value; }
+        }
+
+        public bool SetCenterAndLeftRelativeParentViewPosX
+        {
+            get { return this._setRelationPosY; }
+            set { this._setRelationPosY = value; }
+        }
+        public bool SetCenterAndRightRelativeParentViewPosX
         {
             get { return this._setRelationPosX; }
             set { this._setRelationPosX = value; }
