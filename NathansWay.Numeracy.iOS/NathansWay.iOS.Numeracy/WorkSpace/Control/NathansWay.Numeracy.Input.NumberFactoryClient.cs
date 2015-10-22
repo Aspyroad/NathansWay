@@ -21,9 +21,6 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Private Variables
 
-        private List<object> _UIOutput;
-
-        //private bool _bIsAnswer;
 
         #endregion
 
@@ -31,15 +28,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public NumberFactoryClient()
         {
-            this._UIOutput = new List<object>();
             this.IsAnswer = false;
             this.IsReadOnly = true;
         }
 
         public NumberFactoryClient(List<object> _lsOutput)
-        {   
-            
-            this._UIOutput = _lsOutput;
+        {               
             this.IsAnswer = false;
             this.IsReadOnly = true;
                 
@@ -48,13 +42,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Public Properties
-
-        // Global Display Output object
-        public List<object> UIInternalOutput
-        { 
-            get { return this._UIOutput; }
-            set { this._UIOutput = value; }
-        }
 
         public bool IsAnswer 
         { 
@@ -75,7 +62,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // All write there output into the UIOuput object
         // For example in iOS this would be a collection of beggining to end vc's for an expression.
         // Simply pop them off the stack and into the container vc
-        public void UICreateNumber (string strValue)
+        public object UICreateNumber (string strValue)
         {
             // Create a number
             var x = new vcNumberContainer(strValue);
@@ -87,10 +74,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
-            // Add to output
-            _UIOutput.Add(x as object);
+
+            return (x as object);
         }
-        public void UICreateNumberLabel (string strValue)
+        public object UICreateNumberLabel (string strValue)
         {
             // Create a number
             var x = new vcNumberLabelContainer(strValue);
@@ -103,9 +90,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             x.HasBorder = true;
             x.HasRoundedCorners = true;
             // Add to output
-            _UIOutput.Add(x as object);
+            return (x as object);
         }
-        public void UICreateFraction (string strFraction)
+        public object UICreateFraction (string strFraction)
         {
             // Create a fraction
             var x = new vcFractionContainer(strFraction);
@@ -116,9 +103,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             x.HasBorder = true;
             x.HasRoundedCorners = true;
             // Add to output
-            _UIOutput.Add(x as object);
+            return (x as object);
         }
-        public void UICreateOperator (G__MathChar mathChar, string strChar)
+        public object UICreateOperator (G__MathChar mathChar, string strChar)
         {
             // Create an operator
             var x = new vcOperatorText(mathChar, strChar);
@@ -138,9 +125,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.IsReadOnly = true;
             }
             // Add to output
-            _UIOutput.Add(x as object);
+            return (x as object);
         }
-        public void UICreateBrace (bool bIsRight)
+        public object UICreateBrace (bool bIsRight)
         {
             // Create a brace (left or right parameter boolean)
             var x = new vcBraceText(bIsRight);
@@ -148,15 +135,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             x.HasBorder = true;
             x.HasRoundedCorners = true;
             // Add to output
-            _UIOutput.Add(x as object);
+            return (x as object);
         }
         public void PrintUIOutput (object ViewObjectScreen)
         {
 
-        }
-        public void ClearOutput ()
-        {
-            this._UIOutput = null;
         }
 
         #endregion

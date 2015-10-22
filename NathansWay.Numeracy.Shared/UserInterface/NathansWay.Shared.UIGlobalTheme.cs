@@ -116,7 +116,7 @@ namespace NathansWay.Shared
 			//FontNameiOS7 = "HelveticaNeue-Light";
 			FontBoldName = "HelveticaNeue-Bold";
 			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
-			FontSize = 17.0f;
+			FontSize = 20.0f;
 			//FontSizeiOS7 = 20.0f;
 			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
 

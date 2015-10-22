@@ -371,7 +371,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 60.0f;
+                        return 80.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -431,7 +431,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 60.0f;
+                        return 80.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -461,7 +461,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 30.0f;
+                        return 40.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -496,7 +496,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 40.0f;
+                        return 60.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -848,7 +848,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
             {
                 if (this._size == G__NumberDisplaySize.Normal)
                 {
-                    return UIFont.FromName("Arial", 55.0f);
+                    return UIFont.FromName("Arial", 76.0f);
                 }
                 else if (this._size == G__NumberDisplaySize.Medium)
                 {
