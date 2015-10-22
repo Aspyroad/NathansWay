@@ -156,7 +156,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         public void ClearOutput ()
         {
-
+            this._UIOutput = null;
         }
 
         #endregion

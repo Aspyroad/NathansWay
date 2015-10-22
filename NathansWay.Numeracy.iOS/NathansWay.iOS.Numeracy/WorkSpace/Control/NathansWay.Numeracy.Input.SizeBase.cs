@@ -103,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._setRelationPosY = false;
             this._setMiddleLeftPosX = false;
             this._setMiddleRightPosX = false;
-            this._fPaddingPositional = 2.0f;
+            this._fPaddingPositional = 1.0f;
 
             this._bMultiNumberLabel = false;
         }
@@ -446,15 +446,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._setRelationPosX = value; }
         }
 
-        public bool SetCenterAndLeftRelativeParentViewPosX
+        public bool SetLeftRelativeMiddleParentViewPosX
         {
             get { return this._setMiddleLeftPosX; }
             set { this._setMiddleLeftPosX = value; }
         }
-        public bool SetCenterAndRightRelativeParentViewPosX
+        public bool SetRightRelativeMiddleParentViewPosX
         {
             get { return this._setMiddleRightPosX; }
             set { this._setMiddleRightPosX = value; }
+        }
+
+        public float PaddingPositional
+        {
+            get { return this._fPaddingPositional; }
+            set { this._fPaddingPositional = value; }
         }
 
         public bool SetAsMultiNumberText

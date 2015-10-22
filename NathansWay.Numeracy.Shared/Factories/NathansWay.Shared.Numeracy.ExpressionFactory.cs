@@ -80,6 +80,10 @@ namespace NathansWay.Shared.Factories
             // Fire our start event
             this.FireBuildStartedEvent();
 
+            this._UIPlatformClient.ClearOutput();
+
+            List<object> _lsOutput;
+
             this.SplitExpressionEquation(_expression);
             for (int i = 0; i < this._lsDecodedExpressionEquation.Count; i++) // Loop with for.
             {

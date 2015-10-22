@@ -117,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // INPROGRESS: Build our workspace here...
             // Call the method to create the workspace
             // TODO: create a lesson entity in lesson view model and assign it that particular entoty every time theres a seq/select/focus on that record
-            this._vcWorkSpace = this._uiNumberFactory.UILoadEquation(this.WsLesson, this._wsLessonDetail);
+            this._vcWorkSpace = this._uiNumberFactory.UILoadExpression(this.WsLesson, this._wsLessonDetail);
             this.AddAndSetWorkSpace();
         }
 

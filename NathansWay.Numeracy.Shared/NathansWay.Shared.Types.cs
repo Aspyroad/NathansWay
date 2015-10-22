@@ -85,7 +85,7 @@ namespace NathansWay.Shared
     {
         Equation = 1,
         Method = 2,
-        Answer = 3
+        Result = 3
     }
 
     public enum G__ContainerType : int

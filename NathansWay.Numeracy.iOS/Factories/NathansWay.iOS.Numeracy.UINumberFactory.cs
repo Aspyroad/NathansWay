@@ -43,7 +43,9 @@ namespace NathansWay.iOS.Numeracy
 
         // UI
         private List<object> _uiOutputEquation;
+        private List<object> _uiOutputResult;
         private List<List<object>> _uiOutputMethods;
+
         private iOSNumberDimensions _globalSizeDimensions;
         private G__NumberDisplaySize _numberDisplaySize;
         private float _fNumberSpacing;
@@ -85,11 +87,21 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public vcWorkSpace UILoadEquation (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
+        public vcWorkSpace UILoadExpression (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
         {
             // Fire start event
             this.FireBuildStartedEvent();
 
+            // Expression breakdown
+            string _strEquation = "";
+            string _strMethods = "";
+            string _strResult = "";
+
+            vcWorkNumlet _vcNumletEquation;
+            List<vcWorkNumlet> _vcNumletMethods;
+            vcWorkNumlet _vcNumletResult;
+
+            // Entities data
             this._wsLesson = entLesson;
             this._wsLessonDetail = entLessonDetail;
 
@@ -99,16 +111,49 @@ namespace NathansWay.iOS.Numeracy
             // Create our Nunmlet
             // TODO: Get the SEQ lessondetail from lessondetail list
             EntityLessonDetail _eld = entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+            // Assign data to local strings
+            _strEquation = _eld.Equation.ToString().Trim();
+            _strMethods = _eld.Method.ToString().Trim();
+            _strResult = _eld.Result.ToString().Trim();
 
-            // TODO: This needs to be a loop
-            vcWorkNumlet _vcNumlet = this.CreateNumletExpression(_eld.Equation.ToString());
-            _vcNumlet.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumlet.SizeClass.SetCenterAndRightRelativeParentViewPosX = true;
-            _vcNumlet.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
-            _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-            _vcWorkSpace.AddChildViewController(_vcNumlet);
-            _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
-            // * Finish loop
+            if (_strEquation.Length != 0)
+            {
+                _vcNumletEquation = this.CreateNumletEquation(_strEquation);
+                _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
+                _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
+                _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+                _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+                // Add the controller to workspace
+                _vcNumletEquation.WillMoveToParentViewController(_vcWorkSpace);
+                _vcWorkSpace.AddChildViewController(_vcNumletEquation);
+                _vcNumletEquation.DidMoveToParentViewController(_vcWorkSpace);
+                _vcWorkSpace.vCanvas.AddSubview(_vcNumletEquation.View);
+            }
+
+//            if (_strMethods.Length != 0)
+//            {
+//                vcWorkNumlet _vcNumlet = this.CreateNumletEquation(_strEquation);
+//                _vcNumlet.SizeClass.SetCenterRelativeParentViewPosY = true;
+//                _vcNumlet.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
+//                _vcNumlet.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+//                _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+//                _vcWorkSpace.AddChildViewController(_vcNumlet);
+//                _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
+//            }
+
+            if (_strResult.Length != 0)
+            {
+                _vcNumletResult = this.CreateNumletResult(_strResult);
+                _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
+                _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+                _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+                _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+                // Add the controller to workspace
+                _vcNumletResult.WillMoveToParentViewController(_vcWorkSpace);
+                _vcWorkSpace.AddChildViewController(_vcNumletResult);
+                _vcNumletResult.DidMoveToParentViewController(_vcWorkSpace);
+                _vcWorkSpace.vCanvas.AddSubview(_vcNumletResult.View);
+            }
 
 
             // Fire completed event
@@ -172,10 +217,10 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private vcWorkNumlet CreateNumletExpression(string _strExpression)
+        private vcWorkNumlet CreateNumletEquation(string _strEquation)
         {
             // Create all our expression symbols, numbers etc
-            this.ExpressionToUIEditable(_strExpression);
+            this.EquationStringToObjects(_strEquation);
 
             // Setup the numlet
             var numlet = new vcWorkNumlet();
@@ -211,13 +256,99 @@ namespace NathansWay.iOS.Numeracy
             return numlet;
         }
 
+//        private List<vcWorkNumlet> CreateNumletMethods(string _strExpression)
+//        {
+//            // Create all our expression symbols, numbers etc
+//            this.ExpressionToUIEditable(_strExpression);
+//
+//            // Setup the numlet
+//            var numlet = new vcWorkNumlet();
+//            numlet.NumletType = G__WorkNumletType.Equation;
+//
+//            G__NumberDisplaySize _displaySize;
+//            float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+//            float _xPos = _xSpacing;
+//            float _yPos = this._globalSizeDimensions.NumletHeight;
+//
+//            for (int i = 0; i < this._uiOutputEquation.Count; i++)
+//            {                
+//                var _control = (BaseContainer)this._uiOutputEquation[i];
+//                _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+//
+//                // Hook up the control resizing events so that all controls are messaged by this numlet
+//                numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+//
+//                // Most of these should ApplyUI in ViewWillAppear
+//                _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
+//
+//                _control.SizeClass.SetPositions(_xPos, _yPos);
+//                numlet.AddAndDisplayController(_control);
+//                _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
+//            }
+//
+//            // Pad out the end
+//            numlet.SizeClass.CurrentWidth = _xPos; 
+//            numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+//
+//            // Return completed numnut!
+//            // Numlet has no size params set. SetPositions must be called before use!
+//            return numlet;
+//        }
+
+        private vcWorkNumlet CreateNumletResult(string _strResult)
+        {
+            // Create all our expression symbols, numbers etc
+            // REMEMBER:  do we add the equals sign here?? Not sure
+            _strResult = ("=," + _strResult);
+            // Build...
+            this.ResultStringToObjects(_strResult);
+
+            // Setup the numlet
+            var numlet = new vcWorkNumlet();
+            numlet.NumletType = G__WorkNumletType.Result;
+
+            G__NumberDisplaySize _displaySize;
+            float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+            float _xPos = _xSpacing;
+            float _yPos = this._globalSizeDimensions.NumletHeight;
+
+            for (int i = 0; i < this._uiOutputResult.Count; i++)
+            {                
+                var _control = (BaseContainer)this._uiOutputResult[i];
+                _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+
+                // Hook up the control resizing events so that all controls are messaged by this numlet
+                numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+
+                // Most of these should ApplyUI in ViewWillAppear
+                _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
+
+                _control.SizeClass.SetPositions(_xPos, _yPos);
+                numlet.AddAndDisplayController(_control);
+                _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
+            }
+
+            // Pad out the end
+            numlet.SizeClass.CurrentWidth = _xPos; 
+            numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+
+            // Return completed numnut!
+            // Numlet has no size params set. SetPositions must be called before use!
+            return numlet;
+        }
+
         /// <summary>
         /// Builds an list<object> of our Equation from a string expression to an Editable UI.
         /// </summary>
         /// <param name="_strExpression">String expression.</param>
-        private void ExpressionToUIEditable(string _strExpression)
+        private void EquationStringToObjects(string _strExpression)
         {
             this._uiOutputEquation = this._expressionFactory.CreateExpressionEquation(_strExpression, false);
+        }
+
+        private void ResultStringToObjects(string _strResult)
+        {
+            this._uiOutputResult = this._expressionFactory.CreateExpressionEquation(_strResult, false);
         }
 
         /// <summary>
