@@ -16,7 +16,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnBackToLessons { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		NathansWay.iOS.Numeracy.ButtonLabelStyle btnNextEquation { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOption1 { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOption2 { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOption3 { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOptions { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -36,13 +56,41 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnStartStop { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnToolBox { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		vWorkSpace vWorkSpace { get; set; }
 
 		void ReleaseDesignerOutlets ()
 		{
+			if (btnBackToLessons != null) {
+				btnBackToLessons.Dispose ();
+				btnBackToLessons = null;
+			}
 			if (btnNextEquation != null) {
 				btnNextEquation.Dispose ();
 				btnNextEquation = null;
+			}
+			if (btnOption1 != null) {
+				btnOption1.Dispose ();
+				btnOption1 = null;
+			}
+			if (btnOption2 != null) {
+				btnOption2.Dispose ();
+				btnOption2 = null;
+			}
+			if (btnOption3 != null) {
+				btnOption3.Dispose ();
+				btnOption3 = null;
+			}
+			if (btnOptions != null) {
+				btnOptions.Dispose ();
+				btnOptions = null;
 			}
 			if (btnPrevEquation != null) {
 				btnPrevEquation.Dispose ();
@@ -59,6 +107,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			if (btnSizeNormal != null) {
 				btnSizeNormal.Dispose ();
 				btnSizeNormal = null;
+			}
+			if (btnStartStop != null) {
+				btnStartStop.Dispose ();
+				btnStartStop = null;
+			}
+			if (btnToolBox != null) {
+				btnToolBox.Dispose ();
+				btnToolBox = null;
 			}
 			if (vWorkSpace != null) {
 				vWorkSpace.Dispose ();

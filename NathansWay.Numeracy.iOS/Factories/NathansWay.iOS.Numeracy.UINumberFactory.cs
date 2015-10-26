@@ -97,62 +97,7 @@ namespace NathansWay.iOS.Numeracy
             _vcWorkSpace.WsLessonDetail = _vmLesson.LessonDetail;
             _vcWorkSpace.NumberFactory = this;
 
-            return _vcWorkSpace;
-        }
-
-
-        public vcWorkSpace UILoadExpression (EntityLessonDetail entLessonDetail)
-        {
-            // Fire start event
-            this.FireBuildStartedEvent();
-
-            // Expression breakdown
-            string _strEquation = "";
-            string _strMethods = "";
-            string _strResult = "";
-
-            vcWorkNumlet _vcNumletEquation;
-            List<vcWorkNumlet> _vcNumletMethods;
-            vcWorkNumlet _vcNumletResult;
-
-            // Entities data
-            this._wsLesson = entLesson;
-            this._wsLessonDetail = entLessonDetail;
-
-
-
-            // Create our Nunmlet
-            // TODO: Get the SEQ lessondetail from lessondetail list
-            EntityLessonDetail _eld = entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
-            // Assign data to local strings
-            _strEquation = _eld.Equation.ToString().Trim();
-            _strMethods = _eld.Method.ToString().Trim();
-            _strResult = _eld.Result.ToString().Trim();
-
-            if (_strEquation.Length != 0)
-            {
-
-            }
-
-//            if (_strMethods.Length != 0)
-//            {
-//                vcWorkNumlet _vcNumlet = this.CreateNumletEquation(_strEquation);
-//                _vcNumlet.SizeClass.SetCenterRelativeParentViewPosY = true;
-//                _vcNumlet.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
-//                _vcNumlet.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
-//                _vcNumlet.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-//                _vcWorkSpace.AddChildViewController(_vcNumlet);
-//                _vcWorkSpace.vCanvas.AddSubview(_vcNumlet.View);
-//            }
-
-            if (_strResult.Length != 0)
-            {
-
-            }
-
-
-            // Fire completed event
-            this.FireBuildCompletedEvent();
+            // TODO: Code here to load the first lesson detail automatically if needed goes here I think
 
             return _vcWorkSpace;
         }

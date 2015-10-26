@@ -47,6 +47,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Are we storing/recording results
         private bool _bRecordResults;
 
+        // Logic
+        private bool bLessonStarted;
+
 		#endregion
 
 		#region Constructors
@@ -122,13 +125,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadDataStrings()
         {
-            // TODO:
-            // Load the first seq
-            // If the seq is empty, grab th
-
-
-            EntityLessonDetail _eld = 
-                _v entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+            // TODO: Wank Ian
+            this._wsLessonDetail.Sort();
+            EntityLessonDetail _eld = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+            if (_eld.SEQ > -1)
+            {
+                _eld = _wsLessonDetail[0];
+            }
             // Assign data to local strings
             _strEquation = _eld.Equation.ToString().Trim();
             _strMethods = _eld.Method.ToString().Trim();
@@ -236,6 +239,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.AddSubview(this._vCanvas);
             // Delegates
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
+            this.btn
 		}
 
         public override void ViewWillAppear(bool animated)

@@ -10,7 +10,7 @@ using NathansWay.Shared.BUS.Services;
 
 namespace NathansWay.Shared.BUS.Entity
 {
-    public abstract class EntityBase : IBusEntity
+    public abstract class EntityBase : IBusEntity, IComparable<EntityBase>
     {
         
         protected int _seq;
@@ -59,6 +59,11 @@ namespace NathansWay.Shared.BUS.Entity
 			}
 			set { _datetmUpdated = value; }
 		}
+
+        public int CompareTo(EntityBase other)
+        {
+            return other.SEQ.CompareTo(this.SEQ);
+        }
 
     }
 }
