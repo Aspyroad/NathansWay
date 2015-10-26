@@ -33,10 +33,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Db
         private LessonViewModel _vmLesson;
-        private EntityLessonResults _wsLessonResults;
-        private List<EntityLessonDetailResults> _wsLessonDetailResults;
-        private EntityLesson _wsLesson;
-        private List<EntityLessonDetail> _wsLessonDetail;
+        private EntityLesson _wsSelectedLesson;
 
         // Sizing - May not be needed
         private SizeMainWorkSpace _sizeMainWorkSpace;
@@ -112,15 +109,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Methods
 
-        public void CreateWorkSpace()
-        {
-            // INPROGRESS: Build our workspace here...
-            // Call the method to create the workspace
-            // TODO: create a lesson entity in lesson view model and assign it that particular entoty every time theres a seq/select/focus on that record
-            this._vcWorkSpace = this._uiNumberFactory.UILoadExpression(this.WsLesson, this._wsLessonDetail);
-            this.AddAndSetWorkSpace();
-        }
-
         public void AddAndSetMainGame()
         {
             var _pointF2 = new PointF(2.0f, 2.0f);
@@ -130,6 +118,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void AddAndSetWorkSpace()
         {
+            this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace(this._vmLesson);
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             var _pointF1 = new PointF(4.0f, y);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF1);
@@ -140,29 +129,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public EntityLessonResults WsLessonResults
-        {
-            get { return _wsLessonResults; }
-            set { WsLessonResults = value; }
-        }
-
-        public List<EntityLessonDetailResults> WsLessonDetailResults
-        {
-            get { return this._wsLessonDetailResults; }
-            set { this._wsLessonDetailResults = value; }
-        }
-
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
-
-        public List<EntityLessonDetail> WsLessonDetail
-        {
-            get { return this._wsLessonDetail; }
-            set { this._wsLessonDetail = value; }
-        }
+//        public EntityLesson WsLesson
+//        {
+//            get { return this._wsLesson; }
+//            set { this._wsLesson = value; }
+//        }
+//
+//        public List<EntityLessonDetail> WsLessonDetail
+//        {
+//            get { return this._wsLessonDetail; }
+//            set { this._wsLessonDetail = value; }
+//        }
 
         #endregion
     }

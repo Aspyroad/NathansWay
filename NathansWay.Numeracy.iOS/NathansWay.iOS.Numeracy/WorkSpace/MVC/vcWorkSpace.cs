@@ -24,9 +24,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#region Private Variables
 
         private string _strExpression;
+        // Expression breakdown
+        private string _strEquation;
+        private string _strMethods;
+        private string _strResult;
+
         private SizeWorkSpace _sizeWorkSpace;
-        private List<vcWorkNumlet> _lsWorkNumlets;
+        private UINumberFactory _uiNumberFactory;
+
         private AspyView _vCanvas;
+        private vcWorkNumlet _vcNumletEquation;
+        private vcWorkNumlet _vcNumletResult;
+        private List<vcWorkNumlet> _vcNumletMethods;
+
+        // Data
+        private EntityLesson _wsLesson;
+        private EntityLessonResults _wsLessonResults;
+        private List<EntityLessonDetail> _wsLessonDetail;
+        private List<EntityLessonDetailResults> _wsLessonDetailResults;
+        // Selected lessons quetion position/number
+        private int _intLessonDetailSeq;
+        // Are we storing/recording results
+        private bool _bRecordResults;
 
 		#endregion
 
@@ -75,6 +94,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
+            // Create a frame for the workcanvas
             RectangleF x = new RectangleF(
                                44.0f,
                                30.0f,
@@ -82,18 +102,51 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                                this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
                            );
             this._vCanvas = new NWView(x);
+
+            this._strEquation = "";
+            this._strMethods = "";
+            this._strResult = "";
 		}
+
+        private void AddNumlets (vcWorkNumlet _myNumlet)
+        {
+            _myNumlet.WillMoveToParentViewController(this);
+            this.AddChildViewController(_vcNumletResult);
+            _myNumlet.DidMoveToParentViewController(this);
+            this.vCanvas.AddSubview(_vcNumletResult.View);
+        }
 
 		#endregion
 
         #region Public Members
 
-        public void GetNumlet()
+        public void LoadDataStrings()
+        {
+            // TODO:
+            // Load the first seq
+            // If the seq is empty, grab th
+
+
+            EntityLessonDetail _eld = 
+                _v entLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+            // Assign data to local strings
+            _strEquation = _eld.Equation.ToString().Trim();
+            _strMethods = _eld.Method.ToString().Trim();
+            _strResult = _eld.Result.ToString().Trim();
+        }
+
+
+        public void LoadNumletEquation()
         {
 
         }
 
-        public void GetMethodNumlets()
+        public void LoadNumletResult()
+        {
+
+        }
+
+        public void LoadMethodNumlets()
         {
 
         }
@@ -113,6 +166,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { this._vCanvas = value; }
         }
 
+        public UINumberFactory NumberFactory 
+        {
+            set { this._uiNumberFactory = value; }
+        }
+
         public string ExpressionString 
         { 
             get { return this._strExpression; } 
@@ -121,6 +179,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._strExpression = value; 
             }
         }
+
+        public int LessonDetailSeq
+        {
+            get { return this._intLessonDetailSeq; }
+            set { this._intLessonDetailSeq = value; }
+        }
+
+        public EntityLesson WsLesson
+        {
+            get { return this._wsLesson; }
+            set { this._wsLesson = value; }
+        }
+
+        //        public EntityLessonResults WsLessonResults
+        //        {
+        //            get { return this._wsLessonResults; }
+        //            set { this._wsLessonResults = value; }
+        //        }
+
+        public List<EntityLessonDetail> WsLessonDetail
+        {
+            get { return this._wsLessonDetail; }
+            set { this._wsLessonDetail = value; }
+        }
+
+        //        public EntityLessonDetailResults WsLessonDetailResults
+        //        {
+        //            get { return this._wsLessonDetailResults; }
+        //            set { this._wsLessonDetailResults = value; }
+        //        }
 
         #endregion
 
@@ -148,12 +236,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.AddSubview(this._vCanvas);
             // Delegates
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
-
 		}
 
         public override void ViewWillAppear(bool animated)
         {
-            // TODO: test this
             base.ViewWillAppear(animated);
         }
 
@@ -165,7 +251,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this.vCanvas.HasRoundedCorners = true;
             this.vCanvas.CornerRadius = 5.0f;
-
         }
 
         public override void ApplyUI6()

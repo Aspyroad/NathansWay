@@ -17,6 +17,7 @@ using NathansWay.iOS.Numeracy.WorkSpace;
 // Shared
 using NathansWay.Shared.Factories;
 using NathansWay.Shared.BUS.Entity;
+using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
@@ -87,7 +88,20 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public vcWorkSpace UILoadExpression (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
+        public vcWorkSpace UILoadWorkSpace (LessonViewModel _vmLesson)
+        {
+            // Create our workspace object
+            vcWorkSpace _vcWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
+            // Load the lesson detail for the selected lesson
+            _vcWorkSpace.WsLesson = _vmLesson.SelectedLesson;
+            _vcWorkSpace.WsLessonDetail = _vmLesson.LessonDetail;
+            _vcWorkSpace.NumberFactory = this;
+
+            return _vcWorkSpace;
+        }
+
+
+        public vcWorkSpace UILoadExpression (EntityLessonDetail entLessonDetail)
         {
             // Fire start event
             this.FireBuildStartedEvent();
@@ -105,8 +119,7 @@ namespace NathansWay.iOS.Numeracy
             this._wsLesson = entLesson;
             this._wsLessonDetail = entLessonDetail;
 
-            // Create our workspace object
-            vcWorkSpace _vcWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
+
 
             // Create our Nunmlet
             // TODO: Get the SEQ lessondetail from lessondetail list
@@ -118,16 +131,7 @@ namespace NathansWay.iOS.Numeracy
 
             if (_strEquation.Length != 0)
             {
-                _vcNumletEquation = this.CreateNumletEquation(_strEquation);
-                _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
-                _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
-                _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
-                _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-                // Add the controller to workspace
-                _vcNumletEquation.WillMoveToParentViewController(_vcWorkSpace);
-                _vcWorkSpace.AddChildViewController(_vcNumletEquation);
-                _vcNumletEquation.DidMoveToParentViewController(_vcWorkSpace);
-                _vcWorkSpace.vCanvas.AddSubview(_vcNumletEquation.View);
+
             }
 
 //            if (_strMethods.Length != 0)
@@ -143,16 +147,7 @@ namespace NathansWay.iOS.Numeracy
 
             if (_strResult.Length != 0)
             {
-                _vcNumletResult = this.CreateNumletResult(_strResult);
-                _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
-                _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-                _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-                _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-                // Add the controller to workspace
-                _vcNumletResult.WillMoveToParentViewController(_vcWorkSpace);
-                _vcWorkSpace.AddChildViewController(_vcNumletResult);
-                _vcNumletResult.DidMoveToParentViewController(_vcWorkSpace);
-                _vcWorkSpace.vCanvas.AddSubview(_vcNumletResult.View);
+
             }
 
 
@@ -160,6 +155,36 @@ namespace NathansWay.iOS.Numeracy
             this.FireBuildCompletedEvent();
 
             return _vcWorkSpace;
+        }
+
+        public vcWorkNumlet GetResultNumlet(string _strResult)
+        {
+
+            var _vcNumletResult = this.CreateNumletResult(_strResult);
+            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
+            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            // Add the controller to workspace
+//            _vcNumletResult.WillMoveToParentViewController(_vcWorkSpace);
+//            _vcWorkSpace.AddChildViewController(_vcNumletResult);
+//            _vcNumletResult.DidMoveToParentViewController(_vcWorkSpace);
+//            _vcWorkSpace.vCanvas.AddSubview(_vcNumletResult.View);
+        }
+
+        public vcWorkNumlet GetEquationNumlet(string _strEquation)
+        {
+            
+            var _vcNumletEquation = this.CreateNumletEquation(_strEquation);
+            _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
+            _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
+            _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+            _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            // Add the controller to workspace
+//            _vcNumletEquation.WillMoveToParentViewController(_vcWorkSpace);
+//            _vcWorkSpace.AddChildViewController(_vcNumletEquation);
+//            _vcNumletEquation.DidMoveToParentViewController(_vcWorkSpace);
+//            _vcWorkSpace.vCanvas.AddSubview(_vcNumletEquation.View);
         }
 
         public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)

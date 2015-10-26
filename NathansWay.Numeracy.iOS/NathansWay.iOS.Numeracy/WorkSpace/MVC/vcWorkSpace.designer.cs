@@ -20,6 +20,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnPrevEquation { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnSizeHuge { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnSizeLarge { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnSizeNormal { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		vWorkSpace vWorkSpace { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -27,6 +43,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			if (btnNextEquation != null) {
 				btnNextEquation.Dispose ();
 				btnNextEquation = null;
+			}
+			if (btnPrevEquation != null) {
+				btnPrevEquation.Dispose ();
+				btnPrevEquation = null;
+			}
+			if (btnSizeHuge != null) {
+				btnSizeHuge.Dispose ();
+				btnSizeHuge = null;
+			}
+			if (btnSizeLarge != null) {
+				btnSizeLarge.Dispose ();
+				btnSizeLarge = null;
+			}
+			if (btnSizeNormal != null) {
+				btnSizeNormal.Dispose ();
+				btnSizeNormal = null;
 			}
 			if (vWorkSpace != null) {
 				vWorkSpace.Dispose ();
