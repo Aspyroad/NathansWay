@@ -187,8 +187,6 @@ namespace NathansWay.iOS.Numeracy
         public void LessonMenuToWorkSpace(vcLessonMenu _vcLessonMenu)
         {
             var _vc = this._vcMainWorkSpace.Value;
-            _vc.WsLesson = _vcLessonMenu.vmLesson.SelectedLesson;
-            _vc.WsLessonDetail = _vcLessonMenu.vmLesson.LessonDetail;
             this.ChangeContentTo(_vc, _vcLessonMenu, UIViewAnimationOptions.TransitionFlipFromLeft);
         }
 

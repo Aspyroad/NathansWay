@@ -689,7 +689,7 @@
                         <outlet property="btnBackToLessons" destination="1120" id="name-outlet-1120"/>
                         <outlet property="btnOptions" destination="Pts-rM-MJg" id="name-outlet-Pts-rM-MJg"/>
                         <outlet property="btnToolBox" destination="cag-ln-GWa" id="name-outlet-cag-ln-GWa"/>
-                        <outlet property="btnOption1" destination="1N6-Jx-U0q" id="name-outlet-1N6-Jx-U0q"/>
+                        <outlet property="btnMethods" destination="1N6-Jx-U0q" id="name-outlet-1N6-Jx-U0q"/>
                         <outlet property="btnOption2" destination="9N0-DI-D33" id="name-outlet-9N0-DI-D33"/>
                         <outlet property="btnOption3" destination="Ho1-ee-a5I" id="name-outlet-Ho1-ee-a5I"/>
                     </connections>

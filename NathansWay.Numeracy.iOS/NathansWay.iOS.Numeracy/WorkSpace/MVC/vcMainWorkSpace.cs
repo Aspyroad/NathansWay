@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetPositions(0.0f, 0.0f);
 
             // TODO: WHERE DO WE ADD MAINGAME AND WORKSPACE??
-            this.CreateWorkSpace();
+            this.AddAndSetWorkSpace();
         }
 
         public override void ViewWillAppear(bool animated)

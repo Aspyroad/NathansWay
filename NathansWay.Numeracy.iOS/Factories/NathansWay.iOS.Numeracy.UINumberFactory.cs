@@ -114,6 +114,7 @@ namespace NathansWay.iOS.Numeracy
 //            _vcWorkSpace.AddChildViewController(_vcNumletResult);
 //            _vcNumletResult.DidMoveToParentViewController(_vcWorkSpace);
 //            _vcWorkSpace.vCanvas.AddSubview(_vcNumletResult.View);
+            return _vcNumletResult;
         }
 
         public vcWorkNumlet GetEquationNumlet(string _strEquation)
@@ -128,6 +129,7 @@ namespace NathansWay.iOS.Numeracy
 //            _vcWorkSpace.AddChildViewController(_vcNumletEquation);
 //            _vcNumletEquation.DidMoveToParentViewController(_vcWorkSpace);
 //            _vcWorkSpace.vCanvas.AddSubview(_vcNumletEquation.View);
+            return _vcNumletEquation;
         }
 
         public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)

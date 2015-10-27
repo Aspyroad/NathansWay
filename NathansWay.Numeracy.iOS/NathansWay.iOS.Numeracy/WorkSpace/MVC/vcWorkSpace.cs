@@ -250,22 +250,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasBorder = true;
             this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
             this.View.AddSubview(this._vCanvas);
-            // Delegates
+            this._vCanvas.Hidden = true;
+
+            // Delegate hookups
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
             this.btnPrevEquation.TouchUpInside += OnClick_btnPrevEquation;
+
             this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
             this.btnSizeLarge.TouchUpInside += OnClick_btnSizeLarge;
             this.btnSizeHuge.TouchUpInside += OnClick_btnSizeHuge;
+
             this.btnStartStop.TouchUpInside += OnClick_btnStartStop;
             this.btnBackToLessons.TouchUpInside += OnClick_btnBackToLessons;
+
             this.btnOptions.TouchUpInside += OnClick_btnOptions;
             this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
-            this.btnOption1.TouchUpInside += OnClick_btnOption1;
+            this.btnMethods.TouchUpInside += OnClick_btnMethods;
             this.btnOption2.TouchUpInside += OnClick_btnOption2;
             this.btnOption3.TouchUpInside += OnClick_btnOption3;
 		}
-
-
 
         public override void ViewWillAppear(bool animated)
         {
@@ -355,7 +358,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void OnClick_btnOption1 (object sender, EventArgs e)
+        private void OnClick_btnMethods (object sender, EventArgs e)
         {
 
         }

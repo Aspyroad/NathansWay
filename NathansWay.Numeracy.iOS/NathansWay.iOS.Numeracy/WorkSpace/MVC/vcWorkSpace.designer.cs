@@ -20,11 +20,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnNextEquation { get; set; }
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnMethods { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOption1 { get; set; }
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnNextEquation { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -72,13 +72,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 				btnBackToLessons.Dispose ();
 				btnBackToLessons = null;
 			}
+			if (btnMethods != null) {
+				btnMethods.Dispose ();
+				btnMethods = null;
+			}
 			if (btnNextEquation != null) {
 				btnNextEquation.Dispose ();
 				btnNextEquation = null;
-			}
-			if (btnOption1 != null) {
-				btnOption1.Dispose ();
-				btnOption1 = null;
 			}
 			if (btnOption2 != null) {
 				btnOption2.Dispose ();
