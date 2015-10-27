@@ -104,7 +104,6 @@ namespace NathansWay.iOS.Numeracy
 
         public vcWorkNumlet GetResultNumlet(string _strResult)
         {
-
             var _vcNumletResult = this.CreateNumletResult(_strResult);
             _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
             _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
@@ -118,8 +117,7 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public vcWorkNumlet GetEquationNumlet(string _strEquation)
-        {
-            
+        {            
             var _vcNumletEquation = this.CreateNumletEquation(_strEquation);
             _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
             _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;

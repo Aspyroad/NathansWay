@@ -42,13 +42,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonResults _wsLessonResults;
         private List<EntityLessonDetail> _wsLessonDetail;
         private List<EntityLessonDetailResults> _wsLessonDetailResults;
+        // Data and state
+        private EntityLessonDetail _currentLessonDetail;
         // Selected lessons quetion position/number
         private int _intLessonDetailSeq;
         // Are we storing/recording results
         private bool _bRecordResults;
 
         // Logic
-        private bool bLessonStarted;
+        private bool _bLessonStarted;
 
 		#endregion
 
@@ -127,26 +129,37 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Wank Ian
             this._wsLessonDetail.Sort();
-            EntityLessonDetail _eld = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
-            if (_eld.SEQ > -1)
+
+            if (!this._bLessonStarted)
             {
-                _eld = _wsLessonDetail[0];
+                this._currentLessonDetail = _wsLessonDetail[0];
+            }
+            else
+            {
+                if (this._intLessonDetailSeq > -1)
+                {
+                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+                }
+                else
+                {
+                    this._currentLessonDetail = _wsLessonDetail[0];
+                }
             }
             // Assign data to local strings
-            _strEquation = _eld.Equation.ToString().Trim();
-            _strMethods = _eld.Method.ToString().Trim();
-            _strResult = _eld.Result.ToString().Trim();
+            this._strEquation = this._currentLessonDetail.Equation.ToString().Trim();
+            this._strMethods = this._currentLessonDetail.Method.ToString().Trim();
+            this._strResult = this._currentLessonDetail.Result.ToString().Trim();
         }
 
 
         public void LoadNumletEquation()
         {
-
+            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
         }
 
         public void LoadNumletResult()
         {
-
+            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
         }
 
         public void LoadMethodNumlets()
@@ -239,8 +252,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.AddSubview(this._vCanvas);
             // Delegates
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
-            this.btn
+            this.btnPrevEquation.TouchUpInside += OnClick_btnPrevEquation;
+            this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
+            this.btnSizeLarge.TouchUpInside += OnClick_btnSizeLarge;
+            this.btnSizeHuge.TouchUpInside += OnClick_btnSizeHuge;
+            this.btnStartStop.TouchUpInside += OnClick_btnStartStop;
+            this.btnBackToLessons.TouchUpInside += OnClick_btnBackToLessons;
+            this.btnOptions.TouchUpInside += OnClick_btnOptions;
+            this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
+            this.btnOption1.TouchUpInside += OnClick_btnOption1;
+            this.btnOption2.TouchUpInside += OnClick_btnOption2;
+            this.btnOption3.TouchUpInside += OnClick_btnOption3;
 		}
+
+
 
         public override void ViewWillAppear(bool animated)
         {
@@ -273,7 +298,66 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnNextEquation (object sender, EventArgs e)
         {
-            int x = 0;
+            // TODO: change this._intLessonDetailSeq 
+            // Forward one
+            // Load numlets
+        }
+
+        private void OnClick_btnPrevEquation (object sender, EventArgs e)
+        {
+            // TODO: change this._intLessonDetailSeq 
+            // Back one
+            // Load numlets
+        }
+
+        private void OnClick_btnToolBox (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnOptions (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnBackToLessons (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnStartStop (object sender, EventArgs e)    
+        {
+
+        }
+
+        private void OnClick_btnSizeNormal (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnSizeLarge (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnSizeHuge (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnOption3 (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnOption2 (object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnClick_btnOption1 (object sender, EventArgs e)
+        {
+
         }
 
         #endregion
