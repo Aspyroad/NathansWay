@@ -109,11 +109,6 @@ namespace NathansWay.iOS.Numeracy
             _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
             _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
             _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-            // Add the controller to workspace
-//            _vcNumletResult.WillMoveToParentViewController(_vcWorkSpace);
-//            _vcWorkSpace.AddChildViewController(_vcNumletResult);
-//            _vcNumletResult.DidMoveToParentViewController(_vcWorkSpace);
-//            _vcWorkSpace.vCanvas.AddSubview(_vcNumletResult.View);
             return _vcNumletResult;
         }
 
@@ -124,11 +119,6 @@ namespace NathansWay.iOS.Numeracy
             _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
             _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
             _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-            // Add the controller to workspace
-//            _vcNumletEquation.WillMoveToParentViewController(_vcWorkSpace);
-//            _vcWorkSpace.AddChildViewController(_vcNumletEquation);
-//            _vcNumletEquation.DidMoveToParentViewController(_vcWorkSpace);
-//            _vcWorkSpace.vCanvas.AddSubview(_vcNumletEquation.View);
             return _vcNumletEquation;
         }
 

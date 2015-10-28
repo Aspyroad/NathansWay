@@ -45,7 +45,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Data and state
         private EntityLessonDetail _currentLessonDetail;
         // Selected lessons quetion position/number
-        private int _intLessonDetailSeq;
+        private int _intLessonDetailCurrentSeq;
+        private int _intLessonDetailCurrentIndex;
+        private int _intLessonDetailCurrentCount;
         // Are we storing/recording results
         private bool _bRecordResults;
 
@@ -111,6 +113,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._strEquation = "";
             this._strMethods = "";
             this._strResult = "";
+
+            this._intLessonDetailCurrentSeq = 0;
+            this._intLessonDetailCurrentIndex = 0;
+            this._intLessonDetailCurrentCount = 0;
 		}
 
         private void AddNumlets (vcWorkNumlet _myNumlet)
@@ -118,7 +124,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             _myNumlet.WillMoveToParentViewController(this);
             this.AddChildViewController(_vcNumletResult);
             _myNumlet.DidMoveToParentViewController(this);
-            this.vCanvas.AddSubview(_vcNumletResult.View);
+            this.vCanvas.AddSubview(_myNumlet.View);
         }
 
 		#endregion
@@ -132,19 +138,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (!this._bLessonStarted)
             {
-                this._currentLessonDetail = _wsLessonDetail[0];
+                this._intLessonDetailCurrentCount = this._wsLessonDetail.Count;
+                this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
             }
             else
             {
-                if (this._intLessonDetailSeq > -1)
+                var x = (this._intLessonDetailCurrentIndex + 1);
+
+                if (x <= this._intLessonDetailCurrentCount)
                 {
-                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailSeq);
+                    this._currentLessonDetail = _wsLessonDetail[x];
+                    this._intLessonDetailCurrentIndex = x;
                 }
-                else
-                {
-                    this._currentLessonDetail = _wsLessonDetail[0];
-                }
+                //this._currentLessonDetail = _wsLessonDetail[];
+//                if (this._intLessonDetailCurrentSeq > -1)
+//                {
+//                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailCurrentSeq);
+//                }
+//                else
+//                {
+//                    this._currentLessonDetail = _wsLessonDetail[0];
+//                }
             }
+            // Logic
+            this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
+            //this._intLessonDetailCurrentIndex =
             // Assign data to local strings
             this._strEquation = this._currentLessonDetail.Equation.ToString().Trim();
             this._strMethods = this._currentLessonDetail.Method.ToString().Trim();
@@ -196,10 +214,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public int LessonDetailSeq
+        public int LessonDetailCurrentSeq
         {
-            get { return this._intLessonDetailSeq; }
-            set { this._intLessonDetailSeq = value; }
+            get { return this._intLessonDetailCurrentSeq; }
+            set { this._intLessonDetailCurrentSeq = value; }
+        }
+
+        public int LessonDetailCurrentIndex
+        {
+            get { return this._intLessonDetailCurrentIndex; }
+            set { this._intLessonDetailCurrentIndex = value; }
+        }
+
+        public int LessonDetailCurrentCount
+        {
+            get { return this._intLessonDetailCurrentCount; }
+            set { this._intLessonDetailCurrentCount = value; }
         }
 
         public EntityLesson WsLesson
@@ -330,7 +360,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnStartStop (object sender, EventArgs e)    
         {
-
+            if (!this._bLessonStarted)
+            {
+                this.vCanvas.Hidden = false;
+                this.LoadDataStrings();
+                this.LoadNumletEquation();
+                this.LoadNumletResult();
+                this.AddNumlets(this._vcNumletEquation);
+                this.AddNumlets(this._vcNumletResult);
+                this._bLessonStarted = true;
+            }
+            else
+            {
+                // Some sort of call here to go back to the menu
+            }
         }
 
         private void OnClick_btnSizeNormal (object sender, EventArgs e)
