@@ -52,7 +52,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private bool _bRecordResults;
 
         // Logic
-        private bool _bLessonStarted;
+        private G__LessonState _enumLessonState;
+        private bool _blessonFinished;
+
         private bool _bLoadMethods;
 
 		#endregion
@@ -118,6 +120,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._intLessonDetailCurrentSeq = 0;
             this._intLessonDetailCurrentIndex = 0;
             this._intLessonDetailCurrentCount = 0;
+
+            this._enumLessonState = G__LessonState.Ready;
 		}
 
         private void AddNumlet (vcWorkNumlet _myNumlet)
@@ -175,31 +179,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Wank Ian
             this._wsLessonDetail.Sort();
-
-//            if (!this._bLessonStarted)
-//            {
-//                this._intLessonDetailCurrentCount = this._wsLessonDetail.Count;
-//
-//            }
-//            else
-//            {
-//                if (this._intLessonDetailCurrentIndex <= this._intLessonDetailCurrentCount)
-//                {
-//                    this._currentLessonDetail = _wsLessonDetail[x];
-//                    this._intLessonDetailCurrentIndex = x;
-//                }
-//                //this._currentLessonDetail = _wsLessonDetail[];
-////                if (this._intLessonDetailCurrentSeq > -1)
-////                {
-////                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailCurrentSeq);
-////                }
-////                else
-////                {
-////                    this._currentLessonDetail = _wsLessonDetail[0];
-////                }
-//            }
-            // Logic
-
             this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
             this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
             //this._intLessonDetailCurrentIndex =
@@ -223,6 +202,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Check if we need to load them first to save time.
             // This must also be a loop
+        }
+
+        public void LoadAfterSizeChange()
+        {
+            //            if (!this._bLessonStarted)
+            //            {
+            //                this._intLessonDetailCurrentCount = this._wsLessonDetail.Count;
+            //
+            //            }
+            //            else
+            //            {
+            //                if (this._intLessonDetailCurrentIndex <= this._intLessonDetailCurrentCount)
+            //                {
+            //                    this._currentLessonDetail = _wsLessonDetail[x];
+            //                    this._intLessonDetailCurrentIndex = x;
+            //                }
+            //                //this._currentLessonDetail = _wsLessonDetail[];
+            ////                if (this._intLessonDetailCurrentSeq > -1)
+            ////                {
+            ////                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailCurrentSeq);
+            ////                }
+            ////                else
+            ////                {
+            ////                    this._currentLessonDetail = _wsLessonDetail[0];
+            ////                }
+            //            }
+            // Logic
         }
 
         #endregion
@@ -287,7 +293,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public List<EntityLessonDetail> WsLessonDetail
         {
             get { return this._wsLessonDetail; }
-            set { this._wsLessonDetail = value; }
+            set 
+            { 
+                this._wsLessonDetail = value; 
+                this._intLessonDetailCurrentCount = value.Count;
+            }
         }
 
         //        public EntityLessonDetailResults WsLessonDetailResults
@@ -373,10 +383,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: change this._intLessonDetailSeq 
             // Forward one
-            if (this._bLessonStarted)
+            if (this._enumLessonState == G__LessonState.Started)
             {
                 // Remove the old numlets
                 this._intLessonDetailCurrentIndex++;
+                // Have we gone over range
+                if (this._intLessonDetailCurrentIndex >= this._intLessonDetailCurrentCount)
+                {
+                    this._intLessonDetailCurrentIndex--;
+
+
+                }
                 this.DisplayExpression();
             }
         }
@@ -386,6 +403,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // TODO: change this._intLessonDetailSeq 
             // Back one
             // Load numlets
+            if (this._enumLessonState == G__LessonState.Started)
+            {
+                // Remove the old numlets
+                this._intLessonDetailCurrentIndex--;
+                // Have we gone over range
+                if (this._intLessonDetailCurrentIndex < 0)
+                {
+                    this._intLessonDetailCurrentIndex = 0;
+                }
+                this.DisplayExpression();
+            }
         }
 
         private void OnClick_btnToolBox (object sender, EventArgs e)
@@ -405,9 +433,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnStartStop (object sender, EventArgs e)    
         {            
-            if (!this._bLessonStarted)
+            if (this._enumLessonState == G__LessonState.Ready)
             {
-                this._bLessonStarted = true;
+                this._enumLessonState = G__LessonState.Started;
                 this.vCanvas.Hidden = false;
                 this.DisplayExpression();
             }

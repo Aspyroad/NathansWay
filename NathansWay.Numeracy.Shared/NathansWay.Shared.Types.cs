@@ -88,6 +88,14 @@ namespace NathansWay.Shared
         Result = 3
     }
 
+    public enum G__LessonState : int
+    {
+        Ready = 1,
+        Started = 2,
+        Paused = 3,
+        Finished = 4
+    }
+
     public enum G__ContainerType : int
     {
         Number = 1,
