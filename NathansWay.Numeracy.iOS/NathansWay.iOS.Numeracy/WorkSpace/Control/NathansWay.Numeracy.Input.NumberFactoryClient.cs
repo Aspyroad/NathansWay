@@ -66,9 +66,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create a number
             var x = new vcNumberContainer(strValue);
-            // Logic
-            x.IsAnswer = this.IsAnswer;
-            x.IsReadOnly = this.IsReadOnly;
             // Create the number
             x.CreateNumber();
             // UI
@@ -81,9 +78,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create a number
             var x = new vcNumberLabelContainer(strValue);
-            // Logic
-            x.IsAnswer = this.IsAnswer;
-            x.IsReadOnly = this.IsReadOnly;
             // Create the number
             x.CreateNumber();
             // UI
@@ -96,9 +90,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create a fraction
             var x = new vcFractionContainer(strFraction);
-            // Logic
-            x.IsAnswer = this.IsAnswer;
-            x.IsReadOnly = this.IsReadOnly;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
@@ -112,18 +103,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
-            // We must check if this is an equals, in which case the next number/fraction should be an answer type
-            if (mathChar == G__MathChar.Equals)
-            {
-                // The next numbercontainer/fractioncontainer will be the answer
-                this.IsAnswer = true;
-                this.IsReadOnly = false;
-            }
-            else
-            {
-                this.IsAnswer = false;
-                this.IsReadOnly = true;
-            }
             // Add to output
             return (x as object);
         }

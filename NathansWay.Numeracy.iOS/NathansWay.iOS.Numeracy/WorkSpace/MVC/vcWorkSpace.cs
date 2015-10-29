@@ -53,6 +53,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Logic
         private bool _bLessonStarted;
+        private bool _bLoadMethods;
 
 		#endregion
 
@@ -119,12 +120,51 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._intLessonDetailCurrentCount = 0;
 		}
 
-        private void AddNumlets (vcWorkNumlet _myNumlet)
+        private void AddNumlet (vcWorkNumlet _myNumlet)
         {
             _myNumlet.WillMoveToParentViewController(this);
-            this.AddChildViewController(_vcNumletResult);
+            this.AddChildViewController(_myNumlet);
             _myNumlet.DidMoveToParentViewController(this);
             this.vCanvas.AddSubview(_myNumlet.View);
+        }
+
+        private void RemoveNumlet (vcWorkNumlet _myNumlet)
+        {
+            _myNumlet.WillMoveToParentViewController(null);
+            _myNumlet.View.RemoveFromSuperview();
+            _myNumlet.RemoveFromParentViewController();
+            _myNumlet.DidMoveToParentViewController(null);            
+        }
+
+        private void RemoveMethodNumlets ()
+        {
+            // No point passing in this._vcMethodNumlets, its the only type of its kind in the class!
+        }
+
+        private void DisplayExpression ()
+        {
+            // If there are any Numlets present, remove them.
+
+            if (this._vcNumletEquation != null)
+            {
+                this.RemoveNumlet(this._vcNumletEquation);
+            }
+            if (this._vcNumletResult != null)
+            {
+                this.RemoveNumlet(this._vcNumletResult);
+            }
+            if (this._vcNumletMethods != null)
+            {
+                this.RemoveMethodNumlets();
+            }
+
+            this.LoadDataStrings();
+            this.LoadEquationNumlet();
+            this.LoadMethodNumlets();
+            this.LoadResultNumlet();
+
+            this.AddNumlet(this._vcNumletEquation);
+            this.AddNumlet(this._vcNumletResult);
         }
 
 		#endregion
@@ -136,31 +176,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // TODO: Wank Ian
             this._wsLessonDetail.Sort();
 
-            if (!this._bLessonStarted)
-            {
-                this._intLessonDetailCurrentCount = this._wsLessonDetail.Count;
-                this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
-            }
-            else
-            {
-                var x = (this._intLessonDetailCurrentIndex + 1);
-
-                if (x <= this._intLessonDetailCurrentCount)
-                {
-                    this._currentLessonDetail = _wsLessonDetail[x];
-                    this._intLessonDetailCurrentIndex = x;
-                }
-                //this._currentLessonDetail = _wsLessonDetail[];
-//                if (this._intLessonDetailCurrentSeq > -1)
+//            if (!this._bLessonStarted)
+//            {
+//                this._intLessonDetailCurrentCount = this._wsLessonDetail.Count;
+//
+//            }
+//            else
+//            {
+//                if (this._intLessonDetailCurrentIndex <= this._intLessonDetailCurrentCount)
 //                {
-//                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailCurrentSeq);
+//                    this._currentLessonDetail = _wsLessonDetail[x];
+//                    this._intLessonDetailCurrentIndex = x;
 //                }
-//                else
-//                {
-//                    this._currentLessonDetail = _wsLessonDetail[0];
-//                }
-            }
+//                //this._currentLessonDetail = _wsLessonDetail[];
+////                if (this._intLessonDetailCurrentSeq > -1)
+////                {
+////                    this._currentLessonDetail = _wsLessonDetail.Find(eld => eld.SEQ == this._intLessonDetailCurrentSeq);
+////                }
+////                else
+////                {
+////                    this._currentLessonDetail = _wsLessonDetail[0];
+////                }
+//            }
             // Logic
+
+            this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
             this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
             //this._intLessonDetailCurrentIndex =
             // Assign data to local strings
@@ -169,20 +209,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._strResult = this._currentLessonDetail.Result.ToString().Trim();
         }
 
-
-        public void LoadNumletEquation()
+        public void LoadEquationNumlet()
         {
             this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
         }
 
-        public void LoadNumletResult()
+        public void LoadResultNumlet()
         {
             this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
         }
 
         public void LoadMethodNumlets()
         {
-
+            // TODO: Check if we need to load them first to save time.
+            // This must also be a loop
         }
 
         #endregion
@@ -333,7 +373,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: change this._intLessonDetailSeq 
             // Forward one
-            // Load numlets
+            if (this._bLessonStarted)
+            {
+                // Remove the old numlets
+                this._intLessonDetailCurrentIndex++;
+                this.DisplayExpression();
+            }
         }
 
         private void OnClick_btnPrevEquation (object sender, EventArgs e)
@@ -359,16 +404,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         private void OnClick_btnStartStop (object sender, EventArgs e)    
-        {
+        {            
             if (!this._bLessonStarted)
             {
-                this.vCanvas.Hidden = false;
-                this.LoadDataStrings();
-                this.LoadNumletEquation();
-                this.LoadNumletResult();
-                this.AddNumlets(this._vcNumletEquation);
-                this.AddNumlets(this._vcNumletResult);
                 this._bLessonStarted = true;
+                this.vCanvas.Hidden = false;
+                this.DisplayExpression();
             }
             else
             {
