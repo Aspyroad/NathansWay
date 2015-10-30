@@ -102,7 +102,7 @@ namespace NathansWay.iOS.Numeracy
             return _vcWorkSpace;
         }
 
-        public vcWorkNumlet GetResultNumlet(string _strResult)
+        public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
         {
             var _vcNumletResult = this.CreateNumletResult(_strResult);
             _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
@@ -112,9 +112,9 @@ namespace NathansWay.iOS.Numeracy
             return _vcNumletResult;
         }
 
-        public vcWorkNumlet GetEquationNumlet(string _strEquation)
+        public vcWorkNumlet GetEquationNumlet(string _strEquation, bool _readonly)
         {            
-            var _vcNumletEquation = this.CreateNumletEquation(_strEquation);
+            var _vcNumletEquation = this.CreateNumletEquation(_strEquation, _readonly);
             _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
             _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
             _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
@@ -177,14 +177,15 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private vcWorkNumlet CreateNumletEquation(string _strEquation)
-        {
+        private vcWorkNumlet CreateNumletEquation(string _strEquation, bool _readonly)
+        {            
             // Create all our expression symbols, numbers etc
             this.EquationStringToObjects(_strEquation);
 
             // Setup the numlet
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Equation;
+            numlet.IsReadOnly = _readonly;
 
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
@@ -194,6 +195,7 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
+                _control.IsReadOnly = _readonly;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet

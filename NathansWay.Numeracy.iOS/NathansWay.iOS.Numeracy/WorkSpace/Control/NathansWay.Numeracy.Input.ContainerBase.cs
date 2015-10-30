@@ -205,10 +205,19 @@ namespace NathansWay.iOS.Numeracy
         // private void Example(int? arg1, Nullable<int> arg2)
         protected virtual void UI_ToggleAnswerState()
         {
-            //            if (!_as.HasValue)
-            //            {
-            //                _as = this.AnswerState;
-            //            }
+
+        }
+
+        protected  virtual void UIAfterEdit()
+        {
+            if (this._bReadOnly)
+            {
+                this.UI_ToggleReadOnlyState();
+            }
+            else
+            {
+                this.UI_ToggleAnswerState();
+            }
         }
 
 		#endregion
@@ -373,7 +382,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-
         // TODO: IM SWAPPING [this.SizeClass.SetFrames()] it should be in ViewWillAppear.
         // I want it in ViewDidLoad()
         // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
@@ -392,14 +400,7 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ApplyUI(_applywhere);
 
-            if (this._bReadOnly)
-            {
-                this.UI_ToggleReadOnlyState();
-            }
-            else
-            {
-                this.UI_ToggleAnswerState();
-            }
+
         }
 
         public override void ViewDidLoad()

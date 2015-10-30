@@ -54,6 +54,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Logic
         private G__LessonState _enumLessonState;
         private bool _blessonFinished;
+        // Readonly
+        private bool _bEquationReadOnly;
+        private bool _bResultReadonly;
+        private bool _bMethodsReadonly;
+
 
         private bool _bLoadMethods;
 
@@ -122,6 +127,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._intLessonDetailCurrentCount = 0;
 
             this._enumLessonState = G__LessonState.Ready;
+
+            this._bEquationReadOnly = true;
+            this._bResultReadonly = false;
+            this._bMethodsReadonly = true;
 		}
 
         private void AddNumlet (vcWorkNumlet _myNumlet)
@@ -178,10 +187,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadDataStrings()
         {
             // TODO: Wank Ian
+
+            // Both of these types mean the same thing, the ? is just C# shorthand.
+            // private void Example(int? arg1, Nullable<int> arg2)
+
             this._wsLessonDetail.Sort();
             this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
             this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
-            //this._intLessonDetailCurrentIndex =
+
             // Assign data to local strings
             this._strEquation = this._currentLessonDetail.Equation.ToString().Trim();
             this._strMethods = this._currentLessonDetail.Method.ToString().Trim();
@@ -190,12 +203,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadEquationNumlet()
         {
-            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
+            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation, this._bEquationReadOnly);
         }
 
         public void LoadResultNumlet()
         {
-            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
+            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
         }
 
         public void LoadMethodNumlets()
@@ -359,7 +372,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ApplyUI(_applywhere);
             // Global UI
-            this.vCanvas.BackgroundColor = UIColor.Green;
+            this.vCanvas.BackgroundColor = UIColor.White;
 
             this.vCanvas.HasRoundedCorners = true;
             this.vCanvas.CornerRadius = 5.0f;
