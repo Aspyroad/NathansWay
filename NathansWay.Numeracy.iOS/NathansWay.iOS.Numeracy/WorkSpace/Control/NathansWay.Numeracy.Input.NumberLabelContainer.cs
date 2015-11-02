@@ -226,7 +226,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Delegates
 
-        public override void HandleValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, EventArgs e)
         {
             // Fire this objects FireValueChange for bubbleup
             this.FireValueChange();
@@ -250,12 +250,12 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI(this._applyUIWhere);
         }
 
-        public override void HandleTextSizeChange(object s, EventArgs e)
+        public override void OnTextSizeChange(object s, EventArgs e)
         {
-            base.HandleTextSizeChange(s, e);
+            base.OnTextSizeChange(s, e);
         }
 
-        public override void HandleControlSelectedChange(object s, EventArgs e)
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {
             // base.HandleControlSelectedChange(s, e);
             if (this.Selected)

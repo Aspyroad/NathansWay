@@ -94,10 +94,10 @@ namespace NathansWay.iOS.Numeracy
             {                
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
-                this.numberText_Numerator.eValueChange -= this.HandleValueChange;
-                this.numberText_Numerator.eTextSizeChange -= this.HandleTextSizeChange;
-                this.numberText_Denominator.eValueChange -= this.HandleValueChange;
-                this.numberText_Denominator.eTextSizeChange -= this.HandleTextSizeChange;
+                this.numberText_Numerator.eValueChange -= this.OnValueChange;
+                this.numberText_Numerator.eTextSizeChange -= this.OnTextSizeChange;
+                this.numberText_Denominator.eValueChange -= this.OnValueChange;
+                this.numberText_Denominator.eTextSizeChange -= this.OnTextSizeChange;
                 // Clear its parent
                 this.numberText_Numerator.MyFractionContainer = null;
                 this.numberText_Denominator.MyFractionContainer = null;
@@ -153,10 +153,10 @@ namespace NathansWay.iOS.Numeracy
             this.numberText_Numerator.CreateNumber();
             this.numberText_Denominator.CreateNumber();
             // Event hooks
-            this.numberText_Numerator.eValueChange += this.HandleValueChange;
-            this.numberText_Numerator.eTextSizeChange += this.HandleTextSizeChange;
-            this.numberText_Denominator.eValueChange += this.HandleValueChange;
-            this.numberText_Denominator.eTextSizeChange += this.HandleTextSizeChange;
+            this.numberText_Numerator.eValueChange += this.OnValueChange;
+            this.numberText_Numerator.eTextSizeChange += this.OnTextSizeChange;
+            this.numberText_Denominator.eValueChange += this.OnValueChange;
+            this.numberText_Denominator.eTextSizeChange += this.OnTextSizeChange;
             // Set the this as the parent of Num and Den
             this.numberText_Numerator.MyFractionContainer = this;
             this.numberText_Denominator.MyFractionContainer = this;
@@ -206,7 +206,7 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-        public override void HandleValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, EventArgs e)
         {
             // Fire this objects FireValueChange for bubbleup
             this.FireValueChange();

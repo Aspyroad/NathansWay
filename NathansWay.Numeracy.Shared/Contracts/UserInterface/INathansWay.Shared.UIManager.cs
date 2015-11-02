@@ -131,6 +131,9 @@ namespace NathansWay.Shared
         Lazy<G__Color> ReadOnlyBGColor { get; set; }
         Lazy<G__Color> ReadOnlyTextColor { get; set; }
         Lazy<G__Color> ReadOnlyBorderColor { get; set; }
+        Lazy<G__Color> SelectedBGColor { get; set; }
+        Lazy<G__Color> SelectedTextColor { get; set; }
+        Lazy<G__Color> SelectedBorderColor { get; set; }
 
 	}
 

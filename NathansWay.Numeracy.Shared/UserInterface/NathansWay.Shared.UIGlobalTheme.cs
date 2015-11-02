@@ -101,6 +101,9 @@ namespace NathansWay.Shared
         public Lazy<G__Color> ReadOnlyBGColor { get; set; }
         public Lazy<G__Color> ReadOnlyTextColor { get; set; }
         public Lazy<G__Color> ReadOnlyBorderColor { get; set; }
+        public Lazy<G__Color> SelectedBGColor { get; set; }
+        public Lazy<G__Color> SelectedTextColor { get; set; }
+        public Lazy<G__Color> SelectedBorderColor { get; set; }
 
 		#endregion
 
@@ -202,6 +205,9 @@ namespace NathansWay.Shared
             ReadOnlyBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
             ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            SelectedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
+            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
 
 		}
 

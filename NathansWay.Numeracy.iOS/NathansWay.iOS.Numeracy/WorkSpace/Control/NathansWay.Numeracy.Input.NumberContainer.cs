@@ -90,8 +90,8 @@ namespace NathansWay.iOS.Numeracy
                 foreach (vcNumberText _Number in this._lsNumbers) 
                 {
                     // Event Hooks
-                    _Number.eValueChange -= this.HandleValueChange;
-                    _Number.eTextSizeChange -= this.HandleTextSizeChange;
+                    _Number.eValueChange -= this.OnValueChange;
+                    _Number.eTextSizeChange -= this.OnTextSizeChange;
                     _Number.SizeClass.eResizing -= _Number.SizeClass.OnResize;
                     _Number.MyNumberContainer = null;
                 }
@@ -163,8 +163,6 @@ namespace NathansWay.iOS.Numeracy
                     }
                     // Number UI
                     newnumber.HasBorder = false;
-                    // Number Logic
-                    newnumber.IsAnswer = this.IsAnswer;
 
                     #region Set Tens Unit
 
@@ -204,9 +202,9 @@ namespace NathansWay.iOS.Numeracy
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
 
                     // Event Hooks
-                    newnumber.eValueChange += this.HandleValueChange;
-                    newnumber.eTextSizeChange += this.HandleTextSizeChange;
-                    newnumber.eControlSelected += this.HandleControlSelectedChange;
+                    newnumber.eValueChange += this.OnValueChange;
+                    newnumber.eTextSizeChange += this.OnTextSizeChange;
+                    //newnumber.eControlSelected += this.HandleControlSelectedChange;
                     newnumber.SizeClass.eResizing += newnumber.SizeClass.OnResize;
 
                     // Add control
@@ -246,7 +244,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Delegates
 
-        public override void HandleValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, EventArgs e)
         {
             // Fire this objects FireValueChange for bubbleup
             this.FireValueChange();
@@ -270,20 +268,9 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI(this._applyUIWhere);
         }
 
-        public override void HandleTextSizeChange(object s, EventArgs e)
+        public override void OnTextSizeChange(object s, EventArgs e)
         {
-            base.HandleTextSizeChange(s, e);
-        }
-
-        public override void HandleControlSelectedChange(object s, EventArgs e)
-        {
-            // base.HandleControlSelectedChange(s, e);
-            if (this.Touched)
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-            }
+            base.OnTextSizeChange(s, e);
         }
 
         #endregion
@@ -365,6 +352,18 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 _vcFractionContainer = value;
+            }
+        }
+
+        public override bool IsAnswer
+        {
+            get
+            {
+                return base.IsAnswer;
+            }
+            set
+            {
+                base.IsAnswer = value;
             }
         }
 

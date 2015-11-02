@@ -65,6 +65,8 @@ namespace NathansWay.iOS.Numeracy
         protected string _strCurrentValue;
         protected string _strOriginalValue;
 
+        protected EventArgs _myEventArgs;
+
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
 
@@ -114,6 +116,7 @@ namespace NathansWay.iOS.Numeracy
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
+            this._myEventArgs = new EventArgs();
 		}
 
         protected void FireValueChange()
@@ -123,7 +126,7 @@ namespace NathansWay.iOS.Numeracy
             // Check for null before firing.
              if (x != null)
             {
-                x (this, new EventArgs ());
+                x (this, this._myEventArgs);
             }   
         }
 
@@ -134,7 +137,7 @@ namespace NathansWay.iOS.Numeracy
             // Check for null before firing.
             if (x != null)
             {
-                x (this, new EventArgs ());
+                x (this, this._myEventArgs);
             }   
         }
 
@@ -145,7 +148,7 @@ namespace NathansWay.iOS.Numeracy
             // Check for null before firing.
             if (x != null)
             {
-                x (this, new EventArgs ());
+                x (this, this._myEventArgs);
             }   
         }
 
@@ -161,18 +164,30 @@ namespace NathansWay.iOS.Numeracy
         {            
         }
 
-        public virtual void HandleValueChange(object s, EventArgs e)
+        public virtual void OnValueChange(object s, EventArgs e)
         {
         }
 
-        public virtual void HandleTextSizeChange(object s, EventArgs e)
+        public virtual void OnTextSizeChange(object s, EventArgs e)
         {
         }
 
-        public virtual void HandleControlSelectedChange(object s, EventArgs e)
+        public virtual void OnControlSelectedChange(object s, EventArgs e)
         {
         }
 
+        public virtual void OnControlSelectedChange()
+        {
+            if (this.Selected)
+            {
+                this.OnControlUnSelectedChange();
+            }
+        }
+
+        public virtual void OnControlUnSelectedChange()
+        {
+
+        }
 
         public virtual void CheckCorrect ()
         {            
@@ -226,6 +241,13 @@ namespace NathansWay.iOS.Numeracy
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
+        }
+
+        protected virtual void UI_SetViewSelected()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
 
 		#endregion
@@ -332,7 +354,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public bool IsAnswer
+        public virtual bool IsAnswer
         {
             get { return this._bIsAnswer; }
             set 
@@ -386,6 +408,12 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public G__ContainerType ContainerType
+        {
+            get { return this._containerType; }
+            set { this._containerType = value; }
+        }
+
         #endregion
 
 		#region Overrides
@@ -415,8 +443,11 @@ namespace NathansWay.iOS.Numeracy
         {
             base.TouchesBegan(touches, evt);
             this.Touched = true;
+            this.Selected = true;
+            // For inherited members bubble through inheritance
+            this.OnControlSelectedChange();
+            // If any controls want to subscribe
             this.FireControlSelected();
-            this.HandleControlSelectedChange(this, new EventArgs());
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)

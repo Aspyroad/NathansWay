@@ -102,7 +102,8 @@ namespace NathansWay.Shared
         Fraction = 2,
         Operator = 3,
         Container = 4,
-        NumberLabel = 5
+        NumberLabel = 5,
+        Decimal = 6
     }
 
 	#region Filtering

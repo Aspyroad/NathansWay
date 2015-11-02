@@ -208,6 +208,9 @@ namespace AspyRoad.iOSCore.UISettings
             ReadOnlyBGColor = g.ReadOnlyBGColor;
             ReadOnlyBorderColor = g.ReadOnlyBorderColor;
             ReadOnlyTextColor = g.ReadOnlyTextColor;
+            SelectedBGColor = g.SelectedBGColor;
+            SelectedBorderColor = g.SelectedBorderColor;
+            SelectedTextColor = g.SelectedTextColor;
 
             // Apply global appearnce
 			this.ApplyGlobalAppearance ();
@@ -775,6 +778,30 @@ namespace AspyRoad.iOSCore.UISettings
             get
             { 
                 return this.convertUIColor(this._readonlybordercolor); 
+            } 
+        }
+
+        public Lazy<UIColor> SelectedBGUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._selectedbgcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> SelectedTextUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._selectedtextcolor); 
+            } 
+        }
+
+        public Lazy<UIColor> SelectedBorderUIColor 
+        { 
+            get
+            { 
+                return this.convertUIColor(this._selectedbordercolor); 
             } 
         }
 

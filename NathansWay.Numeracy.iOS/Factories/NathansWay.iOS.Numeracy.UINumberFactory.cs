@@ -268,6 +268,7 @@ namespace NathansWay.iOS.Numeracy
             // Setup the numlet
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Result;
+            numlet.IsAnswer = true;
 
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
@@ -278,6 +279,13 @@ namespace NathansWay.iOS.Numeracy
             {                
                 var _control = (BaseContainer)this._uiOutputResult[i];
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+
+                if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Decimal))
+                {
+                    _control.IsInitialLoad = true;
+                    _control.IsAnswer = true;
+                    _control.CurrentValue = null;
+                }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;

@@ -212,6 +212,9 @@ namespace NathansWay.Shared
         protected Lazy<G__Color> _readonlybgcolor;
         protected Lazy<G__Color> _readonlytextcolor;
         protected Lazy<G__Color> _readonlybordercolor;
+        protected Lazy<G__Color> _selectedbgcolor;
+        protected Lazy<G__Color> _selectedtextcolor;
+        protected Lazy<G__Color> _selectedbordercolor;
 
 		#endregion
 
@@ -611,6 +614,21 @@ namespace NathansWay.Shared
         { 
             get{ return this._readonlybordercolor; } 
             set{ this._readonlybordercolor = value; } 
+        }
+        public Lazy<G__Color> SelectedBGColor 
+        { 
+            get{ return this._selectedbgcolor; } 
+            set{ this._selectedbgcolor= value; } 
+        }
+        public Lazy<G__Color> SelectedTextColor 
+        { 
+            get{ return this._selectedtextcolor; } 
+            set{ this._selectedtextcolor = value; } 
+        }
+        public Lazy<G__Color> SelectedBorderColor 
+        { 
+            get{ return this._selectedbordercolor; } 
+            set{ this._selectedbordercolor = value; } 
         }
 
 		#endregion
