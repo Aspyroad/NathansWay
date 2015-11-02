@@ -270,7 +270,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        protected override void UI_ToggleAnswerState()
+        protected override void UI_SetViewPositive()
         {
             // **** Correct
             if (this.AnswerState == G__AnswerState.Correct)

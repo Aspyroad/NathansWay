@@ -161,7 +161,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set the initial state
         }
 
-        protected override void UI_ToggleAnswerState()
+        protected override void UI_SetViewPositive()
         {
             // If the question has just loaded - no answer but is an answer number
             if (this._bIsAnswer)
@@ -434,8 +434,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Fire a value change event (student has obviously tried to answer the question) 
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
-            // Make any changes to UI on this object also (textbox bg etc)
-            this.UIAfterEdit();
+
             //this.ApplyUI(this._applyUIWhere);
             // TODO: PROBLEM and bug
             // UI_ToggleTextEdit() is being called straight after this as this is being fired inside

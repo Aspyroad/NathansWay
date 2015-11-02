@@ -278,7 +278,7 @@ namespace NathansWay.iOS.Numeracy
         public override void HandleControlSelectedChange(object s, EventArgs e)
         {
             // base.HandleControlSelectedChange(s, e);
-            if (this.Selected)
+            if (this.Touched)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
                 this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
@@ -290,46 +290,33 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        protected override void UI_ToggleAnswerState()
+        protected override void UI_SetViewPositive()
         {
             // **** Correct
             if (this.AnswerState == G__AnswerState.Correct)
             {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
             }
             // **** Incorrect
             else if (this.AnswerState == G__AnswerState.InCorrect)
             {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
             }
             // **** Unattempted
             else 
             {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             }
         }
 
-        protected override void UI_ToggleReadOnlyState()
+        protected override void UI_SetViewReadOnly()
         {
             //base.UI_ToggleReadOnlyState();
             if (this._bReadOnly)
             {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             }
         }
 
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
-
         }
 
         public override void ViewDidLoad()
@@ -339,20 +326,11 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-
-            this.Touched = true;
-            this.Selected = true;
-            this.ApplyUI(this._applyUIWhere);
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-            this.Touched = false;
-        }
+//        public override void TouchesBegan(NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesBegan(touches, evt);
+//            this.ApplyUI(this._applyUIWhere);
+//        }
 
         #endregion
 

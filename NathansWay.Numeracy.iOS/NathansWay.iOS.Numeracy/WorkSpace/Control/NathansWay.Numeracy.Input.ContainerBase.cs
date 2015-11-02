@@ -21,6 +21,9 @@ namespace NathansWay.iOS.Numeracy
 	[MonoTouch.Foundation.Register ("BaseContainer")]	
 	public class BaseContainer : NWViewController
 	{
+        // Both of these types mean the same thing, the ? is just C# shorthand.
+        // private void Example(int? arg1, Nullable<int> arg2)
+
         #region Events
 
         public event EventHandler eTextSizeChange;
@@ -36,9 +39,20 @@ namespace NathansWay.iOS.Numeracy
         protected SizeBase _sizeClass;
 
         // On the right of equals
-        protected bool _bIsAnswer;
+        // Known at load/build
         protected G__ContainerType _containerType;
+        // Known at load/build
+        protected bool _bIsAnswer;
+        // ?? Are equations readonly ?? possible teachers may want to change on the fly
         protected bool _bReadOnly;
+        // Known at load/build
+        protected bool _bInitialLoad;
+        // Known only after numbercontainer returns after a selection and val change
+        protected bool _bIsCorrect;
+        // Obviously when touched
+        protected bool _bTouched;
+        // Technically true when touched?
+        protected bool _bSelected;
 
         // Number is Correct/Incorrect
         protected G__AnswerState _answerState;
@@ -53,10 +67,7 @@ namespace NathansWay.iOS.Numeracy
 
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
-        protected bool _bInitialLoad;
-        protected bool _bIsCorrect;
-        protected bool _bTouched;
-        protected bool _bSelected;
+
 
 		#endregion
 
@@ -162,6 +173,7 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
+
         public virtual void CheckCorrect ()
         {            
             if ((this._dblOriginalValue == this._dblCurrentValue))
@@ -188,36 +200,32 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Virtual
 
-        protected virtual void UI_ToggleNormalState()
+        protected virtual void UI_SetViewNeutral()
         {
-            
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
        
-        protected virtual void UI_ToggleReadOnlyState()
+        protected virtual void UI_SetViewReadOnly()
         {
-            // Not sure about this one. 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
-        // Both of these types mean the same thing, the ? is just C# shorthand.
-        // private void Example(int? arg1, Nullable<int> arg2)
-        protected virtual void UI_ToggleAnswerState()
+        protected virtual void UI_SetViewPositive()
         {
-
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
-        protected  virtual void UIAfterEdit()
+        protected virtual void UI_SetViewNegative()
         {
-            if (this._bReadOnly)
-            {
-                this.UI_ToggleReadOnlyState();
-            }
-            else
-            {
-                this.UI_ToggleAnswerState();
-            }
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
         }
 
 		#endregion
@@ -382,9 +390,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-        // TODO: IM SWAPPING [this.SizeClass.SetFrames()] it should be in ViewWillAppear.
-        // I want it in ViewDidLoad()
-        // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
 
 		public override void ViewWillAppear (bool animated)
 		{
@@ -399,24 +404,26 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
-
-
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
-            //this.SizeClass.SetFrames();
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
+            this.Touched = true;
             this.FireControlSelected();
+            this.HandleControlSelectedChange(this, new EventArgs());
         }
 
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            this.Touched = false;
+        }
 
 		#region Autorotation for iOS 6 or newer
 

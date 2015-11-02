@@ -251,18 +251,18 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        protected override void UI_ToggleReadOnlyState()
+        protected override void UI_SetViewReadOnly()
         {
             // Not sure about this one. 
-            base.UI_ToggleReadOnlyState();
+            base.UI_SetViewReadOnly();
             //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
-        protected override void UI_ToggleAnswerState()
+        protected override void UI_SetViewPositive()
         {
-            base.UI_ToggleAnswerState();
+            base.UI_SetViewPositive();
         }
 
         public override void ApplyUI(G__ApplyUI _applywhere)
