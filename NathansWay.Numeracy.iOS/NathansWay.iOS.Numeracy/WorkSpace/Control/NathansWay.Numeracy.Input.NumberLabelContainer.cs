@@ -270,30 +270,30 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        protected override void UI_SetViewPositive()
-        {
-            // **** Correct
-            if (this.AnswerState == G__AnswerState.Correct)
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
-            }
-            // **** Incorrect
-            else if (this.AnswerState == G__AnswerState.InCorrect)
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
-            }
-            // **** Unattempted
-            else 
-            {
-                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-            }
-        }
+//        public override void UI_SetViewPositive()
+//        {
+//            // **** Correct
+//            if (this.AnswerState == G__AnswerState.Correct)
+//            {
+//                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+//                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+//                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+//            }
+//            // **** Incorrect
+//            else if (this.AnswerState == G__AnswerState.InCorrect)
+//            {
+//                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+//                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+//                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+//            }
+//            // **** Unattempted
+//            else 
+//            {
+//                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+//                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+//                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+//            }
+//        }
 
         public override void ApplyUI(G__ApplyUI _applywhere)
         {

@@ -274,6 +274,56 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+        public override void UI_SetViewSelected()
+        {
+            base.UI_SetViewSelected();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewSelected();              
+            }
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            base.UI_SetViewNeutral();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewNeutral();              
+            }
+        }
+
+        public override void UI_SetViewNegative()
+        {
+            base.UI_SetViewNegative();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewNegative();              
+            }
+        }
+
+        public override void UI_SetViewPositive()
+        {
+            base.UI_SetViewPositive();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewPositive();              
+            }
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            base.UI_SetViewReadOnly();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewReadOnly();              
+            }
+        }
+
         public override void OnControlSelectedChange()
         {
             // Let numlet know whos the boss
@@ -290,7 +340,7 @@ namespace NathansWay.iOS.Numeracy
             }
             if (this._bIsAnswer)
             {
-                this.UI_SetViewNeutral();
+                this.CheckCorrect();
             }
             this.View.SetNeedsDisplay();
         }

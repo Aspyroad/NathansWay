@@ -192,6 +192,7 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
+        // TODO: Fix this to include UI changes
         public virtual void CheckCorrect ()
         {            
             if ((this._dblOriginalValue == this._dblCurrentValue))
@@ -223,38 +224,38 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Virtual
 
-        protected virtual void UI_SetViewNeutral()
+        public virtual void UI_SetViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
        
-        protected virtual void UI_SetViewReadOnly()
+        public virtual void UI_SetViewReadOnly()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
+            this.View.BackgroundColor = UIColor.Green;//this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
-        protected virtual void UI_SetViewPositive()
+        public virtual void UI_SetViewPositive()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
-        protected virtual void UI_SetViewNegative()
+        public virtual void UI_SetViewNegative()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
         }
 
-        protected virtual void UI_SetViewSelected()
+        public virtual void UI_SetViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.View.BackgroundColor = UIColor.Green; //this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            this.View.BackgroundColor = UIColor.Yellow;//this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
 
