@@ -27,6 +27,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
         private List<BaseContainer> _lsContainers;
+        private BaseContainer _selectedContainer;
 
         // Data
         private EntityLesson _wsLesson;
@@ -116,6 +117,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._workNumletType;}
             set { this._workNumletType = value;}
+        }
+
+        // Used to provide UI etc changes on number/fraction selection
+        public BaseContainer SelectedContainer
+        {
+            get 
+            { 
+                // TODO: Some UI here for Numlet to change also ??
+                return this._selectedContainer; 
+            }
+            set
+            {
+                if (this._selectedContainer != null)
+                {
+                    this._selectedContainer.OnControlUnSelectedChange();
+                } 
+                this._selectedContainer = value;
+            }
         }
 
         public EntityLesson WsLesson

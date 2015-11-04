@@ -13,6 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
 using NathansWay.Shared;
 
@@ -35,8 +36,8 @@ namespace NathansWay.iOS.Numeracy
         // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
         private string[] _delimiters = { "." };
-        // If this Number Container is in a fraction, we set its parent fraction.
-        private vcFractionContainer _vcFractionContainer;
+        // Multinumber
+        private bool _bMultiNumbered;
 
         // Test our own view for touch ops
         // private NWView _vNumberContainer;
@@ -112,6 +113,8 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass = new SizeNumberContainer(this);
             // Define the container type
             this._containerType = G__ContainerType.Number;
+            this._bMultiNumbered = false;
+            this._bShowDecimal = false;
         }
 
         #endregion
@@ -151,11 +154,6 @@ namespace NathansWay.iOS.Numeracy
                     // Create a number box
                     vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberContainer = this;
-                    if (this.IsAnswer)
-                    { 
-                        this.CurrentValue = null;
-                        newnumber.CurrentValue = null;
-                    }
 
                     if (_sig > 1 || _result.Length > 1)
                     {
@@ -190,6 +188,7 @@ namespace NathansWay.iOS.Numeracy
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
                         newnumber.NumberSize.SetAsMultiNumberText = true;
+                        this._bMultiNumbered = true;
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                         //this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
@@ -219,8 +218,6 @@ namespace NathansWay.iOS.Numeracy
                     var newdecimal = new vcDecimalText();
                     // Decimal UI
                     newdecimal.HasBorder = false;
-                    // Decimal Logic
-                    newdecimal.IsAnswer = this.IsAnswer;
 
                     // Add our numbers to our internal list counter.
                     _lsNumbers.Add(newdecimal);
@@ -277,27 +274,34 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        protected override void UI_SetViewPositive()
+        public override void OnControlSelectedChange()
         {
-            // **** Correct
-            if (this.AnswerState == G__AnswerState.Correct)
-            {
-            }
-            // **** Incorrect
-            else if (this.AnswerState == G__AnswerState.InCorrect)
-            {
-            }
-            // **** Unattempted
-            else 
-            {
-            }
+            // Let numlet know whos the boss
+            this.MyNumletContainer.SelectedContainer = this;
+            this.UI_SetViewSelected();
+            this.View.SetNeedsDisplay();
         }
 
-        protected override void UI_SetViewReadOnly()
-        {
-            //base.UI_ToggleReadOnlyState();
+        public override void OnControlUnSelectedChange()
+        {            
             if (this._bReadOnly)
             {
+                this.UI_SetViewReadOnly();
+            }
+            if (this._bIsAnswer)
+            {
+                this.UI_SetViewNeutral();
+            }
+            this.View.SetNeedsDisplay();
+        }
+
+        public override void ClearValue()
+        {
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                this.CurrentValue = null;
+                _Number.CurrentValue = null;             
             }
         }
 
@@ -343,18 +347,6 @@ namespace NathansWay.iOS.Numeracy
             set { this._tensUnit = value; }
         }
 
-        public vcFractionContainer MyFractionContainer
-        {
-            get
-            {
-                return _vcFractionContainer;
-            }
-            set
-            {
-                _vcFractionContainer = value;
-            }
-        }
-
         public override bool IsAnswer
         {
             get
@@ -364,6 +356,35 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 base.IsAnswer = value;
+                // Loop through this._lsNumbers
+                if (this._lsNumbers != null)
+                {
+                    foreach (BaseContainer _Number in this._lsNumbers)
+                    {
+                        _Number.IsAnswer = value;
+                    }
+                }
+            }
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return base._bReadOnly;
+            }
+            set
+            {
+                base._bReadOnly = value;
+                // Loop through this._lsNumbers
+                if (this._lsNumbers != null)
+                {
+                    foreach (BaseContainer _Number in this._lsNumbers)
+                    {
+                        _Number.IsReadOnly = value;
+                    }
+                }
+
             }
         }
 

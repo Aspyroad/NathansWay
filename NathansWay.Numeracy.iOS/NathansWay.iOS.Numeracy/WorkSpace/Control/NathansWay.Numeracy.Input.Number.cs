@@ -161,25 +161,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set the initial state
         }
 
-        protected override void UI_SetViewPositive()
-        {
-            // If the question has just loaded - no answer but is an answer number
-            if (this._bIsAnswer)
-            {
-                if ((this._vcNumberContainer.AnswerState == G__AnswerState.UnAttempted))
-                {
-                    // Clear the number
-                    this.txtNumber.Text = "";
-                    // TODO : Should this be special?? 
-                    // No Answer yet, its new, we should signify that in UI in some way.
-                }
-                else
-                {
-                    this.txtNumber.Text = this.CurrentValueStr;
-                }
-            }
-        }
-
         #endregion
 
         #region Public Properties
@@ -248,6 +229,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 _vcNumberContainer = value;
+            }
+        }
+
+        public override bool IsAnswer
+        {
+            get
+            {
+                return base.IsAnswer;
+            }
+            set
+            {
+                base.IsAnswer = value;
+                if (value)
+                {
+                    this.txtNumber.Text = "";
+                }
             }
         }
                         
@@ -334,7 +331,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.IsInEditMode)
             {
                 // Apply UI for edit
-                this.UI_ToggleTextEdit();
+                //this.UI_ToggleTextEdit();
                 if (this._currentEditMode == G__NumberEditMode.EditScroll)
                 {
                     this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
@@ -357,7 +354,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Begin Editing
             this.preEdit();
             // Apply UI for edit
-            this.UI_ToggleTextEdit();
+            //this.UI_ToggleTextEdit();
 
             if (this._currentEditMode == G__NumberEditMode.EditScroll)
             {

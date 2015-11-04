@@ -13,6 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
 using NathansWay.Shared;
 
@@ -64,6 +65,13 @@ namespace NathansWay.iOS.Numeracy
         protected string _strPrevValue;
         protected string _strCurrentValue;
         protected string _strOriginalValue;
+
+        // Container classes
+        // Fraction and Numlet
+        // If this Container is in a Fraction, we set its parent fraction.
+        private vcFractionContainer _vcFractionContainer;
+        // If this Container is in a Numlet, we set its parent fraction.
+        private vcWorkNumlet _vcNumletContainer;
 
         protected EventArgs _myEventArgs;
 
@@ -178,15 +186,10 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void OnControlSelectedChange()
         {
-            if (this.Selected)
-            {
-                this.OnControlUnSelectedChange();
-            }
         }
 
         public virtual void OnControlUnSelectedChange()
         {
-
         }
 
         public virtual void CheckCorrect ()
@@ -209,6 +212,11 @@ namespace NathansWay.iOS.Numeracy
                     this._bIsCorrect = false;
                 }
             }
+        }
+
+        public virtual void ClearValue ()
+        {
+            
         }
 
         #endregion
@@ -246,7 +254,7 @@ namespace NathansWay.iOS.Numeracy
         protected virtual void UI_SetViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            this.View.BackgroundColor = UIColor.Green; //this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
 
@@ -312,7 +320,14 @@ namespace NathansWay.iOS.Numeracy
                 this._dblPrevValue = this._dblCurrentValue; 
                 // Standard sets
                 this._dblCurrentValue = value; 
-                this._strCurrentValue = value.ToString().Trim();
+                if (value == null)
+                {
+                    this._strCurrentValue = "";
+                }
+                else
+                {
+                    this._strCurrentValue = value.ToString().Trim();
+                }
             }          
         }
 
@@ -326,7 +341,7 @@ namespace NathansWay.iOS.Numeracy
         {
             get 
             { 
-                return this._strCurrentValue.ToString(); 
+                return this._strCurrentValue.ToString().Trim(); 
             }
             set 
             {
@@ -338,7 +353,7 @@ namespace NathansWay.iOS.Numeracy
         {
             get 
             { 
-                return this._dblPrevValue.ToString(); 
+                return this._dblPrevValue.ToString().Trim(); 
             }
             set 
             {
@@ -350,7 +365,7 @@ namespace NathansWay.iOS.Numeracy
         {
             get 
             { 
-                return this._dblOriginalValue.ToString(); 
+                return this._dblOriginalValue.ToString().Trim(); 
             }
         }
 
@@ -372,7 +387,7 @@ namespace NathansWay.iOS.Numeracy
             get { return _bIsCorrect; }
         }
 
-        public bool IsReadOnly
+        public virtual bool IsReadOnly
         {
             get
             {
@@ -414,10 +429,34 @@ namespace NathansWay.iOS.Numeracy
             set { this._containerType = value; }
         }
 
+
+        public vcFractionContainer MyFractionContainer
+        {
+            get
+            {
+                return this._vcFractionContainer;
+            }
+            set
+            {
+                this._vcFractionContainer = value;
+            }
+        }
+
+        public vcWorkNumlet MyNumletContainer
+        {
+            get
+            {
+                return this._vcNumletContainer;
+            }
+            set
+            {
+                this._vcNumletContainer = value;
+            }
+        }
+
         #endregion
 
 		#region Overrides
-
 
 		public override void ViewWillAppear (bool animated)
 		{

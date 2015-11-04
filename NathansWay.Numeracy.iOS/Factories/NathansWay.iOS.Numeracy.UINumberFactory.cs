@@ -198,6 +198,14 @@ namespace NathansWay.iOS.Numeracy
                 _control.IsReadOnly = _readonly;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
+                if (_control.ContainerType == G__ContainerType.Number)
+                {
+                    _control.MyNumletContainer = numlet;
+                    _control.IsInitialLoad = true;
+                    _control.IsAnswer = false;
+                    _control.IsReadOnly = true;
+                }
+
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
 
@@ -282,9 +290,10 @@ namespace NathansWay.iOS.Numeracy
 
                 if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Decimal))
                 {
+                    _control.MyNumletContainer = numlet;
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;
-                    _control.CurrentValue = null;
+                    _control.ClearValue();
                 }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet

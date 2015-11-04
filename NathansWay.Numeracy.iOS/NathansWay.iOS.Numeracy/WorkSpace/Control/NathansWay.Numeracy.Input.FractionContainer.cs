@@ -220,11 +220,6 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
 
-        //        public override void ApplyUI()
-        //        {
-        //            // Local UI
-        //            this.SetBGColor = UIColor.Clear;
-        //        }
         // Must override CheckCorrect to handle a fraction type
         public override void CheckCorrect ()
         {            
