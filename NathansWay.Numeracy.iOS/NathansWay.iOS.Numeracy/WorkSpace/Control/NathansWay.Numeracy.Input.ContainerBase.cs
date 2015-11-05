@@ -186,10 +186,13 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void OnControlSelectedChange()
         {
+            // MUST CALL BASE
+            //this.Selected = true;
         }
 
         public virtual void OnControlUnSelectedChange()
         {
+            //this.Selected = false;
         }
 
         // TODO: Fix this to include UI changes
@@ -289,10 +292,6 @@ namespace NathansWay.iOS.Numeracy
             }
             set
             {
-                if (value)
-                {
-                   
-                }
                 _bSelected = value;
             }
         }
@@ -483,9 +482,18 @@ namespace NathansWay.iOS.Numeracy
         {
             base.TouchesBegan(touches, evt);
             this.Touched = true;
-            this.Selected = true;
+            if (_bSelected)
+            {
+                this._bSelected = false;
+                this.OnControlUnSelectedChange();
+            }
+            else
+            {
+                this._bSelected = true;
+                this.OnControlSelectedChange();
+            }
             // For inherited members bubble through inheritance
-            this.OnControlSelectedChange();
+
             // If any controls want to subscribe
             this.FireControlSelected();
         }

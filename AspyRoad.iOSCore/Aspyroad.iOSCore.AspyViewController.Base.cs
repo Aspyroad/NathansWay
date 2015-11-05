@@ -24,6 +24,7 @@ namespace AspyRoad.iOSCore
         // Event subscribing
         //private bool Subscribe_TextSizeChange;
 
+
 		// Tags for id
 		private int _AspyTag1;
 		private int _AspyTag2;
@@ -41,6 +42,8 @@ namespace AspyRoad.iOSCore
         protected UIColor _colorBGColor;
         protected UIColor _colorFontColor;
         protected UIColor _colorBGTransisition;
+        // Test
+        protected bool _ApplyUIAboveBase;
 
 		#endregion
 
@@ -78,6 +81,7 @@ namespace AspyRoad.iOSCore
             // UI
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
+            this._ApplyUIAboveBase = false;
 		}
 
 		#endregion
@@ -245,7 +249,12 @@ namespace AspyRoad.iOSCore
 		{
             if (_applywhere != this._applyUIWhere)
             {
+                this._ApplyUIAboveBase = false;
                 return;
+            }
+            else
+            {
+                this._ApplyUIAboveBase = true;
             }
 
             if (this.iOSGlobals.G__IsiOS7)

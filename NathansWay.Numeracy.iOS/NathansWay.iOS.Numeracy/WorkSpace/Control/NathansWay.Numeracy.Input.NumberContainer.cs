@@ -325,7 +325,8 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public override void OnControlSelectedChange()
-        {
+        {           
+            //base.OnControlSelectedChange();
             // Let numlet know whos the boss
             this.MyNumletContainer.SelectedContainer = this;
             this.UI_SetViewSelected();
@@ -333,7 +334,8 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public override void OnControlUnSelectedChange()
-        {            
+        {  
+            //base.OnControlUnSelectedChange();
             if (this._bReadOnly)
             {
                 this.UI_SetViewReadOnly();
@@ -358,6 +360,14 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
+            if (this._bIsAnswer)
+            {
+                this.UI_SetViewNeutral();  
+            }
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            }
         }
 
         public override void ViewDidLoad()

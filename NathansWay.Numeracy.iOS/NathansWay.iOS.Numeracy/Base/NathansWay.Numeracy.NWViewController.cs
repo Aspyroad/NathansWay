@@ -82,7 +82,10 @@ namespace AspyRoad.iOSCore
         public override void ApplyUI(G__ApplyUI _applywhere)
         {
             base.ApplyUI(_applywhere);
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (this._ApplyUIAboveBase)
+            {
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            }
         }
 
         public override void ApplyUI7()
