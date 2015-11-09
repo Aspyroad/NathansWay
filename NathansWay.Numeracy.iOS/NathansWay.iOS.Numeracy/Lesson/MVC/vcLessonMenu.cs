@@ -164,25 +164,33 @@ namespace NathansWay.iOS.Numeracy
 			base.ViewWillAppear (animated);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
-            // Apply UI to the imagebackgrounds behind the filter buttons
-            this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
-            this.imBgUpperRight.Layer.CornerRadius = 8.0f;
-            this.imBgUpperLeft.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
-            this.imBgUpperRight.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
-            this.imBgUpperLeft.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
-            this.imBgUpperRight.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
-            this.imBgUpperLeft.Layer.BorderWidth = 0.5f;
-            this.imBgUpperRight.Layer.BorderWidth = 0.5f;
-            // Change the label filter text color to a cooler value
-            this.lblFilter.TextColor = UIColor.Black;
-            this.lblLevel.TextColor = UIColor.Black;
+            if (base.ApplyUI(_applywhere))
+            {
+                // Apply UI to the imagebackgrounds behind the filter buttons
+                this.imBgUpperLeft.Layer.CornerRadius = 8.0f;
+                this.imBgUpperRight.Layer.CornerRadius = 8.0f;
+                this.imBgUpperLeft.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
+                this.imBgUpperRight.Layer.BorderColor = UIColor.White.ColorWithAlpha(0.7f).CGColor;
+                this.imBgUpperLeft.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
+                this.imBgUpperRight.BackgroundColor = UIColor.White.ColorWithAlpha(0.1f);
+                this.imBgUpperLeft.Layer.BorderWidth = 0.5f;
+                this.imBgUpperRight.Layer.BorderWidth = 0.5f;
+                // Change the label filter text color to a cooler value
+                this.lblFilter.TextColor = UIColor.Black;
+                this.lblLevel.TextColor = UIColor.Black;
 
-            // Im going to try and call these from MovedToSuperView inside the tv classes.
-            this.tvLessonMain.ApplyUI (_applywhere);
-            this.tvLessonDetail.ApplyUI (_applywhere);
+                // Im going to try and call these from MovedToSuperView inside the tv classes.
+                this.tvLessonMain.ApplyUI(_applywhere);
+                this.tvLessonDetail.ApplyUI(_applywhere);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
 		#endregion

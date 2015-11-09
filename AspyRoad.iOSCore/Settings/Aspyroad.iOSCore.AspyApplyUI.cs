@@ -136,17 +136,22 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSGlobals.G__iOSVersion.Major < 7)
             {
                 this.ApplyUI6();
-                return;
             }
+            else
+            {
+                this.ApplyUI7();
+            }
+
+            return true;
         }
 
         public virtual void ApplyUI6()
@@ -289,13 +294,13 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #region Public Members
+        #region Virtual Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSGlobals.G__IsiOS7)
             //if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
@@ -306,6 +311,7 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
+            return true;
         }
 
         public virtual void ApplyUI6()

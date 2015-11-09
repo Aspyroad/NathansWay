@@ -53,10 +53,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
 		{
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion
@@ -234,8 +241,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLesson (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
+            
             base.ApplyUI (_applywhere);
 			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
@@ -366,10 +374,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFTeacher (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion
@@ -513,10 +528,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFStudent (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion
@@ -686,10 +708,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLessonEdit (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion
@@ -857,10 +886,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFVisuals (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
         {
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion

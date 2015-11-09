@@ -49,9 +49,9 @@ namespace NathansWay.iOS.Numeracy
 			base.Draw (rect);
 		}
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
 		{
-            base.ApplyUI (_applywhere);
+            return (base.ApplyUI(_applywhere));
 		}
 
 		#endregion

@@ -191,13 +191,13 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #region Public Members
+        #region Virtual Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
@@ -211,6 +211,7 @@ namespace AspyRoad.iOSCore
             this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
+            return true;
         }
 
         public virtual void ApplyUI6()

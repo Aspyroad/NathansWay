@@ -45,9 +45,9 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides 
 
-        public override void ApplyUI (G__ApplyUI _applywhere)
+        public override bool ApplyUI (G__ApplyUI _applywhere)
 		{
-            base.ApplyUI (_applywhere);
+            return (base.ApplyUI(_applywhere));
 		}
 
         public override void ApplyUIHeld()

@@ -277,19 +277,25 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
+            if (base.ApplyUI(_applywhere))
+            {
+                // Visual Attributes For PickerView
+                _pickerTxtField.Font = UIFont.FromName(_fontName, _fontSize);
+                _pickerTxtField.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
+                _pickerTxtField.HasRoundedCorners = true;
 
-            // Visual Attributes For PickerView
-            _pickerTxtField.Font = UIFont.FromName (_fontName, _fontSize);
-            _pickerTxtField.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
-            _pickerTxtField.HasRoundedCorners = true;
-
-            // Visual Attributes For PickerView
-            _pickerModel.FontSize = this._fontSize;
-            _pickerModel.FontName = this._fontName;
-            _pickerModel.RowHeight = this._pickerRowHeight;
+                // Visual Attributes For PickerView
+                _pickerModel.FontSize = this._fontSize;
+                _pickerModel.FontName = this._fontName;
+                _pickerModel.RowHeight = this._pickerRowHeight;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void ApplyUI6()
@@ -556,11 +562,11 @@ namespace AspyRoad.iOSCore
 
         #region Virtual Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSGlobals.G__IsiOS7)
             {
@@ -577,6 +583,8 @@ namespace AspyRoad.iOSCore
             this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this.Layer.BorderColor = this._pkBorderColor.CGColor;
             this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+
+            return true;
         }
 
         public virtual void ApplyUI6 ()

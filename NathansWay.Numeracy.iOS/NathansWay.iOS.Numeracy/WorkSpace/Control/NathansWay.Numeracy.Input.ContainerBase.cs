@@ -468,9 +468,16 @@ namespace NathansWay.iOS.Numeracy
             this.SizeClass.SetFrames();
 		}
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
+            if (base.ApplyUI(_applywhere))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void ViewDidLoad()

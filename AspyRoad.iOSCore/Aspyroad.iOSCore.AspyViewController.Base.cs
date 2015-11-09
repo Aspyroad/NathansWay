@@ -42,8 +42,6 @@ namespace AspyRoad.iOSCore
         protected UIColor _colorBGColor;
         protected UIColor _colorFontColor;
         protected UIColor _colorBGTransisition;
-        // Test
-        protected bool _ApplyUIAboveBase;
 
 		#endregion
 
@@ -81,7 +79,6 @@ namespace AspyRoad.iOSCore
             // UI
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._ApplyUIAboveBase = false;
 		}
 
 		#endregion
@@ -245,16 +242,11 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-		public virtual void ApplyUI (G__ApplyUI _applywhere)
+		public virtual bool ApplyUI (G__ApplyUI _applywhere)
 		{
             if (_applywhere != this._applyUIWhere)
             {
-                this._ApplyUIAboveBase = false;
-                return;
-            }
-            else
-            {
-                this._ApplyUIAboveBase = true;
+                return false;
             }
 
             if (this.iOSGlobals.G__IsiOS7)
@@ -267,6 +259,7 @@ namespace AspyRoad.iOSCore
             }
             // Common UI here in derives
             // *****
+            return true;
 		}
 
         public virtual void ApplyUI6()

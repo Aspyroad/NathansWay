@@ -91,11 +91,11 @@ namespace AspyRoad.iOSCore
 
 		#region Virtual Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
 		{
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
@@ -121,6 +121,8 @@ namespace AspyRoad.iOSCore
             {
                 this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
             }
+
+            return true;
 		}
 
         public virtual void ApplyUI7 ()

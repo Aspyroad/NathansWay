@@ -19,7 +19,7 @@ namespace AspyRoad.iOSCore
         // Methods
         void ApplyUI7 ();
         void ApplyUI6 ();
-        void ApplyUI (G__ApplyUI _applywhere);
+        bool ApplyUI (G__ApplyUI _applywhere);
 
     }
 }

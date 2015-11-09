@@ -160,13 +160,13 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-		#region Public Methods
+		#region Virtual Methods
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI (G__ApplyUI _applywhere)
 		{
             if (_applywhere != this._applyUIWhere)
             {
-                return;
+                return false;
             }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
@@ -177,9 +177,8 @@ namespace AspyRoad.iOSCore
                 this.ApplyUI6();
             }
             // Common UI
-            //this.BackgroundColor = UIColor.Clear;
-            //this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableBGUIColor.Value;
-            //this.SeparatorColor = this.iOSUIAppearance.GlobaliOSTheme.ViewTableSeperatorUIColor.Value;
+
+            return true;
 		}
 
         public virtual void ApplyUI6()
