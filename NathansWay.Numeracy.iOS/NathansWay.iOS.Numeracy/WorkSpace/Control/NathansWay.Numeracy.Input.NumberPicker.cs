@@ -72,20 +72,7 @@ public class NumberPickerView : AspyPickerView
     public override bool ApplyUI (G__ApplyUI _applywhere)
     {
         // Must call base as it populates iOS7TableView
-        if (base.ApplyUI(_applywhere))
-        {
-            if (iOSUIAppearance.GlobaliOSTheme.IsiOS7)
-            {
-
-            }
-            else
-            {
-                this.BackgroundColor = UIColor.White;
-                this.Layer.CornerRadius = 8.0f;
-                this.Layer.BorderColor = UIColor.Black.CGColor;
-                this.Layer.BorderWidth = 1.0f;
-            }
-        }
+        return (base.ApplyUI(_applywhere));
     }
 
     public override void ApplyUI7()
@@ -96,6 +83,14 @@ public class NumberPickerView : AspyPickerView
         this.Layer.BorderColor = UIColor.Black.CGColor;
         this.Layer.BorderWidth = 1.0f;
     } 
+
+    public override void ApplyUI6()
+    {
+        this.BackgroundColor = UIColor.White;
+        this.Layer.CornerRadius = 8.0f;
+        this.Layer.BorderColor = UIColor.Black.CGColor;
+        this.Layer.BorderWidth = 1.0f;
+    }
     
 
 

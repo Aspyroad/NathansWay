@@ -115,6 +115,7 @@ namespace NathansWay.iOS.Numeracy
             this._containerType = G__ContainerType.Number;
             this._bMultiNumbered = false;
             this._bShowDecimal = false;
+            this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
         #endregion
@@ -294,23 +295,23 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void UI_SetViewNegative()
+        public override void UI_SetViewInCorrect()
         {
-            base.UI_SetViewNegative();
+            base.UI_SetViewInCorrect();
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers) 
             {
-                _Number.UI_SetViewNegative();              
+                _Number.UI_SetViewInCorrect();              
             }
         }
 
-        public override void UI_SetViewPositive()
+        public override void UI_SetViewCorrect()
         {
-            base.UI_SetViewPositive();
+            base.UI_SetViewCorrect();
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers) 
             {
-                _Number.UI_SetViewPositive();              
+                _Number.UI_SetViewCorrect();              
             }
         }
 
@@ -326,7 +327,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void OnControlSelectedChange()
         {           
-            //base.OnControlSelectedChange();
+            base.OnControlSelectedChange();
             // Let numlet know whos the boss
             this.MyNumletContainer.SelectedContainer = this;
             this.UI_SetViewSelected();
@@ -335,7 +336,8 @@ namespace NathansWay.iOS.Numeracy
 
         public override void OnControlUnSelectedChange()
         {  
-            //base.OnControlUnSelectedChange();
+            base.OnControlUnSelectedChange();
+
             if (this._bReadOnly)
             {
                 this.UI_SetViewReadOnly();
@@ -357,16 +359,23 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
-            if (this._bIsAnswer)
+            if (base.ApplyUI(_applywhere))
             {
-                this.UI_SetViewNeutral();  
+                if (this._bIsAnswer)
+                {
+                    this.CheckCorrect();
+                }
+                if (this._bReadOnly)
+                {
+                    this.UI_SetViewReadOnly();
+                }
+                return true;
             }
-            if (this._bReadOnly)
+            else
             {
-                this.UI_SetViewReadOnly();
+                return false;
             }
         }
 
@@ -375,6 +384,32 @@ namespace NathansWay.iOS.Numeracy
             base.ViewDidLoad();
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.Touched = true;
+            if (_bSelected)
+            {
+                this._bSelected = false;
+                this.OnControlUnSelectedChange();
+            }
+            else
+            {
+                this._bSelected = true;
+                this.OnControlSelectedChange();
+            }
+            // For inherited members bubble through inheritance
+
+            // If any controls want to subscribe
+            //this.FireControlSelected();
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            this.Touched = false;
         }
 
 //        public override void TouchesBegan(NSSet touches, UIEvent evt)

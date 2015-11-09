@@ -395,7 +395,10 @@ namespace AspyRoad.iOSCore
         public override void LoadView()
         {
             base.LoadView();
-            this.ApplyUI(G__ApplyUI.LoadView);
+            if (this._applyUIWhere == G__ApplyUI.LoadView)
+            {
+                this.ApplyUI(G__ApplyUI.LoadView);
+            }
         }
 
 		public override void ViewDidLoad ()
@@ -408,13 +411,19 @@ namespace AspyRoad.iOSCore
 			this._AspyTag2 = _AspyTag1;
             // This has been added for iOS7 and below as it screws view sizes
             this.View.AutosizesSubviews = false;
-            this.ApplyUI(G__ApplyUI.ViewDidLoad);
+            if (this._applyUIWhere == G__ApplyUI.ViewDidLoad)
+            {
+                this.ApplyUI(G__ApplyUI.ViewDidLoad);
+            }
 		}	
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.ApplyUI(G__ApplyUI.ViewWillAppear);
+            if (this._applyUIWhere == G__ApplyUI.ViewWillAppear)
+            {
+                this.ApplyUI(G__ApplyUI.ViewWillAppear);
+            }
         }
 
         #region Rotation StatusBar

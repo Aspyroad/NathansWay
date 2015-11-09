@@ -161,6 +161,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set the initial state
         }
 
+        public override bool ApplyUI(G__ApplyUI _applywhere)
+        {
+            return false;
+        }
+
         #endregion
 
         #region Public Properties

@@ -186,6 +186,7 @@ namespace NathansWay.iOS.Numeracy
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Equation;
             numlet.IsReadOnly = _readonly;
+            numlet.OutputContainers = this._uiOutputEquation;
 
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
@@ -196,11 +197,11 @@ namespace NathansWay.iOS.Numeracy
             {                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
                 _control.IsReadOnly = _readonly;
+                _control.MyNumletContainer = numlet;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 if (_control.ContainerType == G__ContainerType.Number)
-                {
-                    _control.MyNumletContainer = numlet;
+                {                    
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = false;
                     _control.IsReadOnly = true;
@@ -286,11 +287,11 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < this._uiOutputResult.Count; i++)
             {                
                 var _control = (BaseContainer)this._uiOutputResult[i];
+                _control.MyNumletContainer = numlet;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Decimal))
                 {
-                    _control.MyNumletContainer = numlet;
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;
                     _control.ClearValue();

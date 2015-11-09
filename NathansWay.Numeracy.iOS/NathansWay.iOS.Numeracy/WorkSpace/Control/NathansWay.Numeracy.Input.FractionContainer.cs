@@ -260,10 +260,17 @@ namespace NathansWay.iOS.Numeracy
 //            base.UI_SetViewPositive();
 //        }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
-            this.View.BackgroundColor = UIColor.Clear;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.View.BackgroundColor = UIColor.Clear;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

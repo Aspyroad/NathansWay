@@ -295,13 +295,20 @@ namespace NathansWay.iOS.Numeracy
 //            }
 //        }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
+            if (base.ApplyUI(_applywhere))
+            {
 
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+                this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value; 
+                this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void ViewDidLoad()

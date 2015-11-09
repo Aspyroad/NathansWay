@@ -244,8 +244,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override bool ApplyUI (G__ApplyUI _applywhere)
         {
             
-            base.ApplyUI (_applywhere);
-			this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            if (base.ApplyUI(_applywhere))
+            {
+                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 		}
 
 		#endregion

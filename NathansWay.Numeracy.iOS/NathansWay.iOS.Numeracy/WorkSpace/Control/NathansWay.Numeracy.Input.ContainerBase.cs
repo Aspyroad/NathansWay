@@ -187,12 +187,12 @@ namespace NathansWay.iOS.Numeracy
         public virtual void OnControlSelectedChange()
         {
             // MUST CALL BASE
-            //this.Selected = true;
+            this._bSelected = true;
         }
 
         public virtual void OnControlUnSelectedChange()
         {
-            //this.Selected = false;
+            this._bSelected = false;
         }
 
         // TODO: Fix this to include UI changes
@@ -202,6 +202,7 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.AnswerState = G__AnswerState.Correct;
                 this._bIsCorrect = true;
+                this.UI_SetViewCorrect();
             }
             else
             {
@@ -209,11 +210,13 @@ namespace NathansWay.iOS.Numeracy
                 {
                     this.AnswerState = G__AnswerState.UnAttempted;
                     this._bIsCorrect = false;
+                    this.UI_SetViewNeutral();
                 }
                 else
                 {
                     this.AnswerState = G__AnswerState.InCorrect;
                     this._bIsCorrect = false;
+                    this.UI_SetViewInCorrect();
                 }
             }
         }
@@ -230,7 +233,7 @@ namespace NathansWay.iOS.Numeracy
         public virtual void UI_SetViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            this.View.BackgroundColor = UIColor.Brown; //this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
        
@@ -241,14 +244,14 @@ namespace NathansWay.iOS.Numeracy
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
-        public virtual void UI_SetViewPositive()
+        public virtual void UI_SetViewCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
-        public virtual void UI_SetViewNegative()
+        public virtual void UI_SetViewInCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
@@ -458,6 +461,18 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
+        public override UIColor SetBGColor
+        {
+            get
+            {
+                return base.SetBGColor;
+            }
+            set
+            {
+                base.SetBGColor = value;
+            }
+        }
+
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
@@ -485,31 +500,7 @@ namespace NathansWay.iOS.Numeracy
             base.ViewDidLoad();
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            this.Touched = true;
-            if (_bSelected)
-            {
-                this._bSelected = false;
-                this.OnControlUnSelectedChange();
-            }
-            else
-            {
-                this._bSelected = true;
-                this.OnControlSelectedChange();
-            }
-            // For inherited members bubble through inheritance
 
-            // If any controls want to subscribe
-            this.FireControlSelected();
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-            this.Touched = false;
-        }
 
 		#region Autorotation for iOS 6 or newer
 

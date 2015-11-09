@@ -368,14 +368,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewWillAppear(animated);
         }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
-            // Global UI
-            this.vCanvas.BackgroundColor = UIColor.White;
+            if (base.ApplyUI(_applywhere))
+            {
+                // Global UI
+                this.vCanvas.BackgroundColor = UIColor.White;
 
-            this.vCanvas.HasRoundedCorners = true;
-            this.vCanvas.CornerRadius = 5.0f;
+                this.vCanvas.HasRoundedCorners = true;
+                this.vCanvas.CornerRadius = 5.0f;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public override void ApplyUI6()

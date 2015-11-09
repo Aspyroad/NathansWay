@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		// Control
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
-        private List<BaseContainer> _lsContainers;
+        private List<object> _lsContainers;
         private BaseContainer _selectedContainer;
 
         // Data
@@ -108,6 +108,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
+        public List<object> OutputContainers
+        {
+            get { return this._lsContainers; }
+            set { this._lsContainers = value; }
+
+        }
+
         public SizeWorkNumlet WorkNumletSize 
         {
             get { return (SizeWorkNumlet)this._sizeClass; }
@@ -188,9 +195,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.BackgroundColor = UIColor.Purple;
         }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
+            if (base.ApplyUI(_applywhere))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
         }
 

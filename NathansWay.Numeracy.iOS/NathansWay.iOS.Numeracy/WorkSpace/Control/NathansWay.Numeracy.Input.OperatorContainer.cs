@@ -84,11 +84,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void LoadView()
         {
+            base.LoadView();
             this._vOperator = new vOperator();
             this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
             this._vOperator.MathOperator = this._operatorType;
             this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
             this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;
+            this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
 
@@ -114,13 +116,65 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
         }
 
-        public override void ApplyUI(G__ApplyUI _applywhere)
+        public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            base.ApplyUI(_applywhere);
+            if (base.ApplyUI(_applywhere))
+            {
+                if (this._bReadOnly)
+                {
+                    this.UI_SetViewReadOnly();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
-            // TODO: these need to be repaired and set for globalUI!!!
-            this.View.BackgroundColor = UIColor.Clear;
-            this.SetBorderColor = UIColor.Red;
+        public override void OnControlSelectedChange()
+        {           
+            base.OnControlSelectedChange();
+            // Let numlet know whos the boss
+            this.MyNumletContainer.SelectedContainer = this;
+            this.UI_SetViewSelected();
+            this.View.SetNeedsDisplay();
+        }
+
+        public override void OnControlUnSelectedChange()
+        {  
+            base.OnControlUnSelectedChange();
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            }
+            this.View.SetNeedsDisplay();
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.Touched = true;
+            if (_bSelected)
+            {
+                this._bSelected = false;
+                this.OnControlUnSelectedChange();
+            }
+            else
+            {
+                this._bSelected = true;
+                this.OnControlSelectedChange();
+            }
+            // For inherited members bubble through inheritance
+
+            // If any controls want to subscribe
+            //this.FireControlSelected();
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            this.Touched = false;
         }
 
         #endregion
@@ -156,7 +210,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 //            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
 //            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
-            //this.txtOperator.ApplyUI();
+            this._applyUIWhere = G__ApplyUI.ViewWillAppear;
+
         }
 
         #endregion 
