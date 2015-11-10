@@ -198,10 +198,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         public override void OnControlSelectedChange()
-        {           
+        {
             base.OnControlSelectedChange();
+
+            if (this.SelectedContainer != null)
+            {
+                //return;
+            }
+
             // Let WorkSpace know whos the boss
-            this.MyWorkSpaceContainer.SelectedContainer = this;
+            if (this.MyWorkSpaceContainer.SelectedContainer != this)
+            {
+                this.MyWorkSpaceContainer.SelectedContainer = this;
+            }
+
             this.View.BackgroundColor = UIColor.Gray;
             this.View.SetNeedsDisplay();
         }

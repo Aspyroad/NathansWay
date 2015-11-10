@@ -328,16 +328,35 @@ namespace NathansWay.iOS.Numeracy
         public override void OnControlSelectedChange()
         {           
             base.OnControlSelectedChange();
+
             // Let numlet know whos the boss
-            this.MyNumletContainer.SelectedContainer = this;
+            if (this.MyNumletContainer.SelectedContainer == null)
+            {
+                this.MyNumletContainer.SelectedContainer = this;
+            }
+            else
+            {
+                //if (this.MyNumletContainer.SelectedContainer != this)
+                //{
+                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
+                this.MyNumletContainer.SelectedContainer = this;
+                //}
+            }
+            // UI Changes
             this.UI_SetViewSelected();
-            this.View.SetNeedsDisplay();
+            // Display Refresh
+            //this.View.SetNeedsDisplay();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-
+            // Let numlet go if we are hitting the control again.
+//            if (this.MyNumletContainer.SelectedContainer == this)
+//            {               
+                this.MyNumletContainer.SelectedContainer = null;
+//            }
+            // UI Changes
             if (this._bReadOnly)
             {
                 this.UI_SetViewReadOnly();
@@ -346,7 +365,8 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.CheckCorrect();
             }
-            this.View.SetNeedsDisplay();
+            // Display refresh
+            //this.View.SetNeedsDisplay();
         }
 
         public override void ClearValue()

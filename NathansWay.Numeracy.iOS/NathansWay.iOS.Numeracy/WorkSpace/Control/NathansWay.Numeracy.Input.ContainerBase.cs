@@ -235,11 +235,11 @@ namespace NathansWay.iOS.Numeracy
             }
             set
             {
-                if (this._selectedContainer != null)
-                {
-                    // Deselect the current selected container
-                    this._selectedContainer.OnControlUnSelectedChange();
-                } 
+//                if (this._selectedContainer != null)
+//                {
+//                    // Deselect the current selected container
+//                    this._selectedContainer.OnControlUnSelectedChange();
+//                } 
                 this._selectedContainer = value;
             }
         }
