@@ -67,18 +67,21 @@ namespace NathansWay.iOS.Numeracy
         protected string _strOriginalValue;
 
         // Container classes
-        // Fraction and Numlet
-        // If this Container is in a Fraction, we set its parent fraction.
+        // Fraction, Numlet, WorkSpace
+        // If this Container is in a Fraction, we set its parent Fraction.
         private vcFractionContainer _vcFractionContainer;
-        // If this Container is in a Numlet, we set its parent fraction.
+        // If this Container is in a Numlet, we set its parent Numlet.
         private vcWorkNumlet _vcNumletContainer;
+        // If this Container is in a Workspace, we set its parent Workspace
+        private vcWorkSpace _vcWorkSpaceContainer;
+        // Currently selected container, this could be any basecontainer.
+        private BaseContainer _selectedContainer;
 
         protected EventArgs _myEventArgs;
 
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
-
-
+       
 		#endregion
 
 		#region Constructors
@@ -192,6 +195,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void OnControlUnSelectedChange()
         {
+            // MUST CALL BASE
             this._bSelected = false;
         }
 
@@ -218,6 +222,25 @@ namespace NathansWay.iOS.Numeracy
                     this._bIsCorrect = false;
                     this.UI_SetViewInCorrect();
                 }
+            }
+        }
+
+        // Used to provide UI etc changes on number/fraction selection
+        public BaseContainer SelectedContainer
+        {
+            get 
+            { 
+                // TODO: Some UI here for Numlet to change also ??
+                return this._selectedContainer; 
+            }
+            set
+            {
+                if (this._selectedContainer != null)
+                {
+                    // Deselect the current selected container
+                    this._selectedContainer.OnControlUnSelectedChange();
+                } 
+                this._selectedContainer = value;
             }
         }
 
@@ -457,28 +480,27 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        #endregion
-
-		#region Overrides
-
-        public override UIColor SetBGColor
+        public vcWorkSpace MyWorkSpaceContainer
         {
             get
             {
-                return base.SetBGColor;
+                return this._vcWorkSpaceContainer;
             }
             set
             {
-                base.SetBGColor = value;
+                this._vcWorkSpaceContainer = value;
             }
         }
+
+        #endregion
+
+		#region Overrides
 
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame
 			base.ViewWillAppear (animated);
 
-            // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
             // Set all control frames
             this.SizeClass.SetFrames();
 		}
@@ -499,8 +521,6 @@ namespace NathansWay.iOS.Numeracy
         {
             base.ViewDidLoad();
         }
-
-
 
 		#region Autorotation for iOS 6 or newer
 

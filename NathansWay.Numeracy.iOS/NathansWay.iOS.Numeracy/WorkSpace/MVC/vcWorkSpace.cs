@@ -177,7 +177,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.LoadResultNumlet();
 
             this.AddNumlet(this._vcNumletEquation);
+            this._vcNumletEquation.MyWorkSpaceContainer = this;
             this.AddNumlet(this._vcNumletResult);
+            this._vcNumletResult.MyWorkSpaceContainer = this;
         }
 
 		#endregion

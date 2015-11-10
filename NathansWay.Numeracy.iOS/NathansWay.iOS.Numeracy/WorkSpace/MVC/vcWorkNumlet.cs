@@ -27,7 +27,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
         private List<object> _lsContainers;
-        private BaseContainer _selectedContainer;
 
         // Data
         private EntityLesson _wsLesson;
@@ -112,7 +111,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._lsContainers; }
             set { this._lsContainers = value; }
-
         }
 
         public SizeWorkNumlet WorkNumletSize 
@@ -124,25 +122,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._workNumletType;}
             set { this._workNumletType = value;}
-        }
-
-        // Used to provide UI etc changes on number/fraction selection
-        public BaseContainer SelectedContainer
-        {
-            get 
-            { 
-                // TODO: Some UI here for Numlet to change also ??
-                return this._selectedContainer; 
-            }
-            set
-            {
-                if (this._selectedContainer != null)
-                {
-                    // Deselect the current selected container
-                    this._selectedContainer.OnControlUnSelectedChange();
-                } 
-                this._selectedContainer = value;
-            }
         }
 
         public EntityLesson WsLesson
@@ -218,8 +197,50 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ApplyUI6();
         }
 
+        public override void OnControlSelectedChange()
+        {           
+            base.OnControlSelectedChange();
+            // Let WorkSpace know whos the boss
+            this.MyWorkSpaceContainer.SelectedContainer = this;
+            this.View.BackgroundColor = UIColor.Gray;
+            this.View.SetNeedsDisplay();
+        }
 
+        public override void OnControlUnSelectedChange()
+        {  
+            base.OnControlUnSelectedChange();
+            this.View.BackgroundColor = UIColor.Purple;
+            if (this.SelectedContainer != null)
+            {
+                this.SelectedContainer.OnControlSelectedChange();
+            }
+        }
 
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+            this.Touched = true;
+            if (_bSelected)
+            {
+                this._bSelected = false;
+                this.OnControlUnSelectedChange();
+            }
+            else
+            {
+                this._bSelected = true;
+                this.OnControlSelectedChange();
+            }
+            // For inherited members bubble through inheritance
+
+            // If any controls want to subscribe
+            //this.FireControlSelected();
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            this.Touched = false;
+        }
 
 		#endregion
 	}
