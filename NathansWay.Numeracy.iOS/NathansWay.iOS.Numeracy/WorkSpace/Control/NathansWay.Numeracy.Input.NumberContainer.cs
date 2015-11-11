@@ -325,50 +325,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void OnControlSelectedChange()
-        {           
-            base.OnControlSelectedChange();
-
-            // Let numlet know whos the boss
-            if (this.MyNumletContainer.SelectedContainer == null)
-            {
-                this.MyNumletContainer.SelectedContainer = this;
-            }
-            else
-            {
-                //if (this.MyNumletContainer.SelectedContainer != this)
-                //{
-                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
-                this.MyNumletContainer.SelectedContainer = this;
-                //}
-            }
-            // UI Changes
-            this.UI_SetViewSelected();
-            // Display Refresh
-            //this.View.SetNeedsDisplay();
-        }
-
-        public override void OnControlUnSelectedChange()
-        {  
-            base.OnControlUnSelectedChange();
-            // Let numlet go if we are hitting the control again.
-//            if (this.MyNumletContainer.SelectedContainer == this)
-//            {               
-                this.MyNumletContainer.SelectedContainer = null;
-//            }
-            // UI Changes
-            if (this._bReadOnly)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            if (this._bIsAnswer)
-            {
-                this.CheckCorrect();
-            }
-            // Display refresh
-            //this.View.SetNeedsDisplay();
-        }
-
         public override void ClearValue()
         {
             // Loop through this._lsNumbers
@@ -406,6 +362,43 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
+        public override void OnControlSelectedChange()
+        {           
+            base.OnControlSelectedChange();
+
+            // Let numlet know whos the boss
+            if (this.MyNumletContainer.SelectedContainer == null)
+            {
+                this.MyNumletContainer.SelectedContainer = this;
+            }
+            else
+            {
+                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
+                this.MyNumletContainer.SelectedContainer = this;
+            }
+
+            this.MyNumletContainer.OnControlSelectedChange();
+            // UI Changes
+            this.UI_SetViewSelected();
+        }
+
+        public override void OnControlUnSelectedChange()
+        {  
+            base.OnControlUnSelectedChange();
+            // Let numlet go if we are hitting the control again.
+            this.MyNumletContainer.SelectedContainer = null;
+            this.MyNumletContainer.OnControlUnSelectedChange();
+            // UI Changes
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            }
+            if (this._bIsAnswer)
+            {
+                this.CheckCorrect();
+            }
+        }
+
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
@@ -420,7 +413,6 @@ namespace NathansWay.iOS.Numeracy
                 this._bSelected = true;
                 this.OnControlSelectedChange();
             }
-            // For inherited members bubble through inheritance
 
             // If any controls want to subscribe
             //this.FireControlSelected();

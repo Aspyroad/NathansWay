@@ -135,10 +135,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnControlSelectedChange()
         {           
             base.OnControlSelectedChange();
+
             // Let numlet know whos the boss
             if (this.MyNumletContainer.SelectedContainer == null)
             {
                 this.MyNumletContainer.SelectedContainer = this;
+
             }
             else
             {
@@ -148,24 +150,30 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.MyNumletContainer.SelectedContainer = this;
                 //}
             }
+            this.MyNumletContainer.OnControlSelectedChange();
             // UI Changes
             this.UI_SetViewSelected();
-            // Display refresh
-            this.View.SetNeedsDisplay();
+            // Display Refresh
+            //this.View.SetNeedsDisplay();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
             // Let numlet go if we are hitting the control again.
-//            if (this.MyNumletContainer.SelectedContainer == this)
-//            {               
-                this.MyNumletContainer.SelectedContainer = null;
-//            }
+            //            if (this.MyNumletContainer.SelectedContainer == this)
+            //            {               
+            this.MyNumletContainer.SelectedContainer = null;
+            this.MyNumletContainer.OnControlUnSelectedChange();
+            //            }
             // UI Changes
             if (this._bReadOnly)
             {
                 this.UI_SetViewReadOnly();
+            }
+            if (this._bIsAnswer)
+            {
+                this.CheckCorrect();
             }
             // Display refresh
             //this.View.SetNeedsDisplay();

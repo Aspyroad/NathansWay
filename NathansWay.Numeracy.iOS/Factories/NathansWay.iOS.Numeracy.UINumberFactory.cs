@@ -290,11 +290,17 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyNumletContainer = numlet;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
-                if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Decimal))
+                //if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Decimal))
+                if (_control.ContainerType == G__ContainerType.Number)
                 {
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;
+                    _control.IsReadOnly = false;
                     _control.ClearValue();
+                }
+                else
+                {
+                    _control.IsReadOnly = true;
                 }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet

@@ -201,55 +201,30 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.OnControlSelectedChange();
 
+            // Let WorkSpace know whos the boss
+            this.MyWorkSpaceContainer.SelectedContainer = this;
+
             if (this.SelectedContainer != null)
             {
-                //return;
+                this.SelectedContainer.OnControlUnSelectedChange();
             }
-
-            // Let WorkSpace know whos the boss
-            if (this.MyWorkSpaceContainer.SelectedContainer != this)
-            {
-                this.MyWorkSpaceContainer.SelectedContainer = this;
-            }
+            //this.MyNumletContainer.SelectedContainer = this;
 
             this.View.BackgroundColor = UIColor.Gray;
-            this.View.SetNeedsDisplay();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-            this.View.BackgroundColor = UIColor.Purple;
-            if (this.SelectedContainer != null)
-            {
-                this.SelectedContainer.OnControlSelectedChange();
-            }
-        }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-            this.Touched = true;
-            if (_bSelected)
+            if (this.SelectedContainer == null)
             {
-                this._bSelected = false;
-                this.OnControlUnSelectedChange();
+                this.View.BackgroundColor = UIColor.Purple;
             }
             else
             {
-                this._bSelected = true;
-                this.OnControlSelectedChange();
+                this.SelectedContainer = null;
             }
-            // For inherited members bubble through inheritance
-
-            // If any controls want to subscribe
-            //this.FireControlSelected();
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-            this.Touched = false;
         }
 
 		#endregion
