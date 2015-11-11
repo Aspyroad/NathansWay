@@ -137,35 +137,22 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.OnControlSelectedChange();
 
             // Let numlet know whos the boss
-            if (this.MyNumletContainer.SelectedContainer == null)
+            if (this.MyNumletContainer.SelectedContainer != null)
             {
-                this.MyNumletContainer.SelectedContainer = this;
-
-            }
-            else
-            {
-                //if (this.MyNumletContainer.SelectedContainer != this)
-                //{
                 this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
-                this.MyNumletContainer.SelectedContainer = this;
-                //}
             }
+            // Let Numlet know whos the boss
+            this.MyNumletContainer.SelectedContainer = this;
+            // Parent Call
             this.MyNumletContainer.OnControlSelectedChange();
             // UI Changes
             this.UI_SetViewSelected();
-            // Display Refresh
-            //this.View.SetNeedsDisplay();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-            // Let numlet go if we are hitting the control again.
-            //            if (this.MyNumletContainer.SelectedContainer == this)
-            //            {               
-            this.MyNumletContainer.SelectedContainer = null;
-            this.MyNumletContainer.OnControlUnSelectedChange();
-            //            }
+
             // UI Changes
             if (this._bReadOnly)
             {
@@ -175,8 +162,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.CheckCorrect();
             }
-            // Display refresh
-            //this.View.SetNeedsDisplay();
+
+            // Parent Call
+            this.MyNumletContainer.OnControlUnSelectedChange();
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

@@ -397,6 +397,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ApplyUI7();
         }
 
+        public override void OnControlSelectedChange()
+        {
+            base.OnControlSelectedChange();
+
+            // No parent Yet
+        }
+
+        public override void OnControlUnSelectedChange()
+        {  
+            base.OnControlUnSelectedChange();
+
+            // Clear ou the Child
+            this.SelectedContainer = null;
+
+            // No parent to call
+
+        }
+
 		#endregion
 
         #region EventHandlers

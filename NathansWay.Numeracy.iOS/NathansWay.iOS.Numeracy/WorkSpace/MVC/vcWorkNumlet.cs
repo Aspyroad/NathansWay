@@ -171,7 +171,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
             this.SizeClass.SetFrames();
-            this.View.BackgroundColor = UIColor.Purple;
+            this.View.BackgroundColor = UIColor.White;
+            this.HasBorder = true;
+            this.SetBorderColor = UIColor.Black;
+            this.BorderWidth = 5.0f;
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
@@ -201,30 +204,35 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.OnControlSelectedChange();
 
+            // Release any UI to children losing select
+            if (this.MyWorkSpaceContainer.SelectedContainer != null)
+            {
+                this.MyWorkSpaceContainer.SelectedContainer.OnControlUnSelectedChange();
+            }
+
             // Let WorkSpace know whos the boss
             this.MyWorkSpaceContainer.SelectedContainer = this;
 
-            if (this.SelectedContainer != null)
-            {
-                this.SelectedContainer.OnControlUnSelectedChange();
-            }
-            //this.MyNumletContainer.SelectedContainer = this;
-
+            // UI
             this.View.BackgroundColor = UIColor.Gray;
+
+            // Parent call 
+            this.MyWorkSpaceContainer.OnControlSelectedChange();
+
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
 
-            if (this.SelectedContainer == null)
-            {
-                this.View.BackgroundColor = UIColor.Purple;
-            }
-            else
-            {
-                this.SelectedContainer = null;
-            }
+            // UI Changes
+            this.View.BackgroundColor = UIColor.White;
+
+            // Clear out the child
+            this.SelectedContainer = null;
+
+            // Parent call 
+            this.MyWorkSpaceContainer.OnControlUnSelectedChange();
         }
 
 		#endregion
