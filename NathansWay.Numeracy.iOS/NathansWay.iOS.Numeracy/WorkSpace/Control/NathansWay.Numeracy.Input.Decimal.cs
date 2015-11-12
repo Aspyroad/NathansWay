@@ -25,10 +25,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private vcMainContainer _viewcontollercontainer;
 
-        private int _intPrevValue;
-        private int _intCurrentValue;
-        private bool _bIsInEditMode;
-        private bool _bPickerToTop;
+//        private int _intPrevValue;
+//        private int _intCurrentValue;
+//        private bool _bIsInEditMode;
+//        private bool _bPickerToTop;
 
         private SizeDecimal _sizeDecimal;
         private TextControlDelegate _txtDecimalDelegate;
@@ -213,7 +213,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectTxtDecimal = new RectangleF(
                 0.0f, 
                 0.0f, 
-                this.CurrentWidth,
+                (this.CurrentWidth),
                 this.CurrentHeight
             );
         }

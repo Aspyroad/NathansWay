@@ -279,7 +279,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnDown.Alpha = 0.6f;
             this.btnUp.Alpha = 0.6f;
 
-            // TODO : Should these come from UIAppearance
+            // TODO : Should these come from UIAppearance?
             this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
             this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
             // ****
@@ -425,14 +425,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._dblPrevValue = 0;
                 this._dblCurrentValue = 0;
-                this.txtNumber.Text = "0";
+                this.txtNumber.Text = "";
             }
         }
 
         protected void postEdit(Nullable<double> _dblValue)
         {
-            this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
+            if (this.txtNumber.Text.Length > 0)
+            {
+                this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
+            }
+            else
+            {
+                this._dblPrevValue = null;
+            }
+
             this.CurrentValue = _dblValue; 
+
+            // TODO: Should this be done here?
+            this.txtNumber.Text = this.CurrentValueStr;
             // Fire a value change event (student has obviously tried to answer the question) 
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
@@ -492,6 +503,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._numberpad == null)
             {
                 this._numberpad = this._vcMainContainer._vcNumberPad.Value;
+
                 // Set the value local to numbad
                 this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
@@ -503,6 +515,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
                 this._numberpad.View.Hidden = false;
             }
+
             this._numberpad.PadPushed += this.actHandlePadPush;
             this._numberpad.PadLockPushed += this.actHandlePadLock;
             this.IsInEditMode = true;

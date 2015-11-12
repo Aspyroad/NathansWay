@@ -262,8 +262,9 @@ namespace NathansWay.iOS.Numeracy
 
             this.CurrentValue = Convert.ToDouble(_strVal);
             // If this is an answer type, check it
-            this.CheckCorrect();
-            this.ApplyUI(this._applyUIWhere);
+            //this.CheckCorrect();
+            //this.ApplyUI(this._applyUIWhere);
+            this.OnControlUnSelectedChange();
         }
 
         public override void OnTextSizeChange(object s, EventArgs e)

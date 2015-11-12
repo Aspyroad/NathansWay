@@ -249,17 +249,13 @@ namespace NathansWay.iOS.Numeracy
             
         }
 
-        #endregion
-
-        #region Private Virtual
-
         public virtual void UI_SetViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = UIColor.Brown; //this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
-       
+
         public virtual void UI_SetViewReadOnly()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
@@ -287,6 +283,12 @@ namespace NathansWay.iOS.Numeracy
             this.View.BackgroundColor = UIColor.Yellow;//this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
+
+        #endregion
+
+        #region Private Virtual
+
+
 
 		#endregion
 

@@ -72,6 +72,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bInEditMode = false;
             this._fAlphaLevel = 1.0f;
             this._fOldAlphaLevel = 1.0f;
+            this.
         }
 
         private void _padpushed (int _intPad)
