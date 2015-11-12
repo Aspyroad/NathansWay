@@ -163,6 +163,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CheckCorrect();
             }
 
+            // Clear itself out the parent as not selected
+            this.MyNumletContainer.SelectedContainer = null;
+
             // Parent Call
             this.MyNumletContainer.OnControlUnSelectedChange();
         }

@@ -401,15 +401,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.OnControlSelectedChange();
 
-            // No parent Yet
+            // No parent to call
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-
-            // Clear ou the Child
-            this.SelectedContainer = null;
 
             // No parent to call
 

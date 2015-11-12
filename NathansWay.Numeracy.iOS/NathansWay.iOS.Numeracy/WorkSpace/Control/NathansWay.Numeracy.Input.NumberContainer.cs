@@ -366,18 +366,20 @@ namespace NathansWay.iOS.Numeracy
         {           
             base.OnControlSelectedChange();
 
-            // Let numlet know whos the boss
+            // Release any UI to children losing select
             if (this.MyNumletContainer.SelectedContainer != null)
             {
                 this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
             }
+
+            // Call Parent
+            this.MyNumletContainer.OnControlSelectedChange();
+
+            // Let WorkSpace know whos the boss
             this.MyNumletContainer.SelectedContainer = this;
 
             // UI Changes
             this.UI_SetViewSelected();
-
-            // Parent Call
-            this.MyNumletContainer.OnControlSelectedChange();
 
         }
 
@@ -394,6 +396,9 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.CheckCorrect();
             }
+
+            // Clear itself out the parent as not selected
+            this.MyNumletContainer.SelectedContainer = null;
 
             // Parent Call
             this.MyNumletContainer.OnControlUnSelectedChange();

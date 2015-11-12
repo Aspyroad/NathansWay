@@ -213,7 +213,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Let WorkSpace know whos the boss
             this.MyWorkSpaceContainer.SelectedContainer = this;
 
-            // UI
+            // UI Changes
             this.View.BackgroundColor = UIColor.Gray;
 
             // Parent call 
@@ -225,11 +225,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {  
             base.OnControlUnSelectedChange();
 
+            // Release any UI to children losing select
+            if (this.SelectedContainer != null)
+            {
+                this.SelectedContainer.OnControlUnSelectedChange();
+            }
+
             // UI Changes
             this.View.BackgroundColor = UIColor.White;
 
             // Clear out the child
-            this.SelectedContainer = null;
+            this.MyWorkSpaceContainer.SelectedContainer = null;
 
             // Parent call 
             this.MyWorkSpaceContainer.OnControlUnSelectedChange();
