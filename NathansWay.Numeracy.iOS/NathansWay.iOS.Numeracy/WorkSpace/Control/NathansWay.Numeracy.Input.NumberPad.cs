@@ -9,7 +9,7 @@ using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-    public partial class vcNumberPad : AspyViewController
+    public partial class vcNumberPad : NWViewController
     {
         
         #region Events
@@ -72,7 +72,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bInEditMode = false;
             this._fAlphaLevel = 1.0f;
             this._fOldAlphaLevel = 1.0f;
-            this.
+
+            this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
         private void _padpushed (int _intPad)
@@ -311,6 +312,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             this.btnLocked.SetTitle("NumberPad-Lock".Aspylate(), UIControlState.Normal);
             this.lblNumberPad.Text = "NumberPad-Title".Aspylate();
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
         }
 
         #endregion

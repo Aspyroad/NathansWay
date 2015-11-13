@@ -19,10 +19,11 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Private Variables
 
-        //private G__MathChar _mathOperator;
         private float _fScale;
         private float _fOperatorStartpointX;
         private float _fOperatorStartpointY;
+
+        private RectangleF _rectDecimalDraw;
 
         #endregion
         
@@ -33,8 +34,7 @@ namespace NathansWay.iOS.Numeracy
             //Initialize();
         }
 
-        public vDec
-        7imal (RectangleF frame) : base (frame)
+        public vDecimal (RectangleF frame) : base (frame)
         {
             this.Frame = frame;
         }
@@ -58,28 +58,18 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public G__MathChar MathOperator
-        {
-            get;
-            set;
-        }
-
         public float ImageScale
         {
             get;
             set;
         }
 
-        public float OperatorStartpointX
+        public RectangleF RectDecimalDraw
         {
-            //get;
-            set { this._fOperatorStartpointX = value; }
-        }
-
-        public float OperatorStartpointY
-        {
-            //get;
-            set { this._fOperatorStartpointY = value; }
+            set
+            {
+                this._rectDecimalDraw = value;
+            }
         }
 
         #endregion
@@ -89,7 +79,10 @@ namespace NathansWay.iOS.Numeracy
         public override void Draw(RectangleF rect)
         {
             // Custom draws
-            DrawDecimal();
+            if (this._rectDecimalDraw != null)
+            {
+                this.DrawDecimal();
+            }
             // Base
             base.Draw (rect);
         }
@@ -98,19 +91,16 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
        
-        // Custom draw class for our operators.
-        // Fonts just didnt cut it.
-
+        // Custom draw class for our decimal
+        // (Fonts just didnt cut it)
 
         public void DrawDecimal()
         {
-
-            //// Oval Drawing
-            var ovalPath = UIBezierPath.FromOval(new RectangleF(0.0f, 0.0f, 8.0f, 8.0f));
+            // Decimal Drawing
+            var ovalPath = UIBezierPath.FromOval(new RectangleF(this._rectDecimalDraw.X, this._rectDecimalDraw.Y, 8.0f, 8.0f));
             UIColor.Black.SetFill();
             ovalPath.Fill();
         }
-
 
         #endregion
     }

@@ -450,7 +450,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //this.ApplyUI(this._applyUIWhere);
             // TODO: PROBLEM and bug
-            // UI_ToggleTextEdit() is being called straight after this as this is being fired inside
+            //UI_ToggleTextEdit(); //is being called straight after this as this is being fired inside
             // PickerValuechanged!!
         }
 

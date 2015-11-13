@@ -20,18 +20,12 @@ namespace NathansWay.iOS.Numeracy.Controls
     {
         #region Class Variables
 
-        // UI Components
-        public AspyTextField txtDecimal { get; private set; }
-
+        // UI Components 
         private vcMainContainer _viewcontollercontainer;
-
-//        private int _intPrevValue;
-//        private int _intCurrentValue;
-//        private bool _bIsInEditMode;
-//        private bool _bPickerToTop;
-
+        private vDecimal _vDecimal;        
+        // Size Container
         private SizeDecimal _sizeDecimal;
-        private TextControlDelegate _txtDecimalDelegate;
+
 
         #endregion
 
@@ -77,14 +71,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.DidReceiveMemoryWarning();
         }
 
+        public override void LoadView()
+        {
+            this._vDecimal = new vDecimal();
+            //this.View = null;
+            this.View = this._vDecimal;
+            this._vDecimal.ImageScale = (float)this.SizeClass.DisplaySize;
+            //this._vDecimal.OperatorStartpointX = this._sizeDecimal.OperatorStartpointX;
+            //this._vDecimal.OperatorStartpointY = this._sizeDecimal.OperatorStartpointY;
+            this._vDecimal.ClipsToBounds = true;
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             // Add subviews
-            this.View.AddSubview(this.txtDecimal);
+            //this.View.AddSubview(this.txtDecimal);
             // Delegate wireups (prevents the control from being edited)
-            this._txtDecimalDelegate = new TextControlDelegate();
-            this.txtDecimal.Delegate = this._txtDecimalDelegate;
+            //this._txtDecimalDelegate = new TextControlDelegate();
+            //this.txtDecimal.Delegate = this._txtDecimalDelegate;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -94,7 +99,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
             // Other Frames
             this.DecimalSize.SetOtherPositions();
-            this.txtDecimal.Frame = this.DecimalSize._rectTxtDecimal;
+            this._vDecimal.RectDecimalDraw = this._sizeDecimal._rectDecimalDraw;
+            //this.View.Frame = this.DecimalSize._rectDecimal;
+        }
+
+        public override bool ApplyUI(G__ApplyUI _applywhere)
+        {
+            return false;
         }
 
         #endregion
@@ -121,21 +132,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeDecimal = new SizeDecimal(this);
             this._sizeClass = this._sizeDecimal;
 
-            // Create textbox
-            this.txtDecimal = new AspyTextField();
-            // Apply some UI to the textbox
-            this.SizeClass.SetNumberFont(this.txtDecimal);
-            this.txtDecimal.HasBorder = false;
-            this.txtDecimal.HasRoundedCorners = true;
-            this.txtDecimal.Text = ".";
-            // Assign the text to the current value for conversions
-            this.CurrentValueStr = ".";
-            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtDecimal.TextAlignment = UITextAlignment.Center;
+//            // Create textbox
+//            this.txtDecimal = new AspyTextField();
+//            // Apply some UI to the textbox
+//            this.SizeClass.SetNumberFont(this.txtDecimal);
+//            this.txtDecimal.HasBorder = false;
+//            this.txtDecimal.HasRoundedCorners = true;
+//            this.txtDecimal.Text = ".";
+//            // Assign the text to the current value for conversions
+//            this.CurrentValueStr = ".";
+//            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+//            this.txtDecimal.TextAlignment = UITextAlignment.Center;
 
             this.ContainerType = G__ContainerType.Decimal;
 
-            this.txtDecimal.ApplyUI(this._applyUIWhere);
+//            this.txtDecimal.ApplyUI(this._applyUIWhere);
         }
 
         #endregion       
@@ -149,7 +160,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectTxtDecimal;
+        public RectangleF _rectDecimal;
+        public RectangleF _rectDecimalDraw;
         // Parent Container
         private vcDecimalText _vcChild;
 
@@ -183,7 +195,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetOtherPositions()
         {
             // Set local frames to the VC
-            this.SetRectTxtDecimal();
+            this.SetRectDecimal();
+            this.SetRectDecimalDraw();
         }
 
         public override void SetHeightWidth ()
@@ -198,22 +211,29 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetScale(_scale);
         }
 
-        public override void SetFrames()
-        {
-            // Set main VC Frame
-            base.SetFrames();
-        }
-
         #endregion
 
         #region Public Members
 
-        public void SetRectTxtDecimal()
+        public void SetRectDecimalDraw()
         {
-            this._rectTxtDecimal = new RectangleF(
-                0.0f, 
-                0.0f, 
-                (this.CurrentWidth),
+            this._rectDecimalDraw = new RectangleF(
+                // TODO: Do we need to calculate this? Percentage of width?
+                (1.0f),
+                // TODO: Again calculate, percentage oh height
+                (this.GlobalSizeDimensions.GlobalNumberHeight - 20.0f),
+                // TODO: these should be in decimaltxt dimensions- settings
+                8.0f,
+                8.0f
+            );
+        }
+
+        public void SetRectDecimal()
+        {
+            this._rectDecimal = new RectangleF(
+                0,                  
+                0,
+                this.CurrentWidth,
                 this.CurrentHeight
             );
         }
