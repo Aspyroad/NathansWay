@@ -132,6 +132,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeDecimal = new SizeDecimal(this);
             this._sizeClass = this._sizeDecimal;
 
+            this._dblCurrentValue  = null;
+            this._dblPrevValue = null;
+            this._dblOriginalValue = null;
+            this._strCurrentValue = ".";
+            this._strOriginalValue = ".";
+            this._strPrevValue = ".";
+
+
 //            // Create textbox
 //            this.txtDecimal = new AspyTextField();
 //            // Apply some UI to the textbox

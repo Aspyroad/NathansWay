@@ -286,12 +286,6 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Private Virtual
-
-
-
-		#endregion
-
         #region Public Properties
 
         public Action ActTextSizeChange
@@ -339,23 +333,12 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public Nullable<double> CurrentValue
+        public virtual Nullable<double> CurrentValue
         {
             get { return this._dblCurrentValue; }
             set
             {
-                // Set our previous value
-                this._dblPrevValue = this._dblCurrentValue; 
-                // Standard sets
                 this._dblCurrentValue = value; 
-                if (value == null)
-                {
-                    this._strCurrentValue = "";
-                }
-                else
-                {
-                    this._strCurrentValue = value.ToString().Trim();
-                }
             }          
         }
 

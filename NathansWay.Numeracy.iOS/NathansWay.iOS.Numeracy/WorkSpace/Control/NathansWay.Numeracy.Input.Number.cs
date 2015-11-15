@@ -255,6 +255,30 @@ namespace NathansWay.iOS.Numeracy.Controls
                         
         #endregion
 
+        #region Override Public Properties
+
+        public override Nullable<double> CurrentValue
+        {
+            get { return this._dblCurrentValue; }
+            set
+            {
+                // Set our previous value
+                this._dblPrevValue = this._dblCurrentValue; 
+                // Standard sets
+                this._dblCurrentValue = value; 
+                if (value == null)
+                {
+                    this._strCurrentValue = "";
+                }
+                else
+                {
+                    this._strCurrentValue = value.ToString().Trim();
+                }
+            }          
+        }
+
+        #endregion
+
         #region Private Members
         
         protected void Initialize ()

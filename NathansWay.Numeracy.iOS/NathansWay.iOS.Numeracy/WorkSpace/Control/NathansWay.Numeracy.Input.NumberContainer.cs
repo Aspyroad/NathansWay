@@ -52,11 +52,11 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public vcNumberContainer (string _strValue)
-        {
+        {            
             this._strInitialValue = _strValue;
-            this._dblPrevValue = null;
             this._dblOriginalValue = Convert.ToDouble(_strValue);
             this.CurrentValue = this._dblOriginalValue;
+            this._dblPrevValue = null;
 
             Initialize ();
         }
