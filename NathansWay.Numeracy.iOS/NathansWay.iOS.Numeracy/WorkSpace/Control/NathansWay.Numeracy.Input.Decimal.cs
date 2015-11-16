@@ -108,6 +108,42 @@ namespace NathansWay.iOS.Numeracy.Controls
             return false;
         }
 
+        public override void UI_SetViewSelected()
+        {
+            base.UI_SetViewSelected();
+            // Number specific
+        }
+
+        public override void UI_SetViewNumberSelected()
+        {
+            base.UI_SetViewNumberSelected();
+            // Number specific
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            base.UI_SetViewNeutral();
+            // Number specific
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            base.UI_SetViewReadOnly();
+            // Number specific
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            base.UI_SetViewCorrect();
+            // Number specific
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            base.UI_SetViewInCorrect();
+            // Number specific
+        }
+
         #endregion
         
         #region Public Properties
@@ -139,22 +175,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._strOriginalValue = ".";
             this._strPrevValue = ".";
 
-
-//            // Create textbox
-//            this.txtDecimal = new AspyTextField();
-//            // Apply some UI to the textbox
-//            this.SizeClass.SetNumberFont(this.txtDecimal);
-//            this.txtDecimal.HasBorder = false;
-//            this.txtDecimal.HasRoundedCorners = true;
-//            this.txtDecimal.Text = ".";
-//            // Assign the text to the current value for conversions
-//            this.CurrentValueStr = ".";
-//            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-//            this.txtDecimal.TextAlignment = UITextAlignment.Center;
+            //            // Create textbox
+            //            this.txtDecimal = new AspyTextField();
+            //            // Apply some UI to the textbox
+            //            this.SizeClass.SetNumberFont(this.txtDecimal);
+            //            this.txtDecimal.HasBorder = false;
+            //            this.txtDecimal.HasRoundedCorners = true;
+            //            this.txtDecimal.Text = ".";
+            //            // Assign the text to the current value for conversions
+            //            this.CurrentValueStr = ".";
+            //            this.txtDecimal.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            //            this.txtDecimal.TextAlignment = UITextAlignment.Center;
 
             this.ContainerType = G__ContainerType.Decimal;
-
-//            this.txtDecimal.ApplyUI(this._applyUIWhere);
         }
 
         #endregion       

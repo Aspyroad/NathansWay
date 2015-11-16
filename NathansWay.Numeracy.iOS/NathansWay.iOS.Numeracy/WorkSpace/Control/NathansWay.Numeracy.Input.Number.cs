@@ -49,6 +49,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private G__UnitPlacement _tensUnit;
         private G__Significance _significance;
+        private int _intIdNumber;
 
         private bool _bIsInEditMode;
 
@@ -178,12 +179,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetViewNumberSelected()
         {
-            if (this.Selected)
-            {
                 base.UI_SetViewNumberSelected();
                 // Number specific
                 this.txtNumber.HasBorder = true;
-            }
         }
 
         public override void UI_SetViewNeutral()
@@ -212,6 +210,57 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.UI_SetViewInCorrect();
             // Number specific
             this.txtNumber.HasBorder = false;
+        }
+
+        #endregion
+
+        #region Public Members
+
+        public void TapText ()
+        {
+            if (this._bReadOnly)
+            {
+                // Exit as this control cannot be modified
+                return;
+            }
+            // Prevent the user double tapping
+            if (this.IsInEditMode)
+            {
+                if (this._currentEditMode == G__NumberEditMode.EditScroll)
+                {
+                    this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
+                    this.HandlePickerChanged();
+                    this.CloseNumberPicker();
+                }
+                else // Numpad
+                {
+                    if (!this._numberpad.Locked)
+                    {
+                        this.CloseNumPad();
+                    }
+                }
+                // User is cancelling the edit - backout
+                this.IsInEditMode = false;
+                this.Selected = false;
+
+                // Exit
+                return; 
+            }
+
+            // Begin Editing
+            this.preEdit();
+            this.IsInEditMode = true;
+            this.Selected = true;
+
+            if (this._currentEditMode == G__NumberEditMode.EditScroll)
+            {
+
+                this.EditNumberPicker();
+            }
+            else
+            {
+                this.EditNumPad();
+            }
         }
 
         #endregion
@@ -300,7 +349,13 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
         }
-                        
+
+        public int IDNumber
+        {
+            get { return this._intIdNumber; }
+            set { this._intIdNumber = value; }
+        }
+
         #endregion
 
         #region Override Public Properties
@@ -399,50 +454,24 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Partials
         private void txtTouchedDown(object sender, EventArgs e)
-        {
+        {  
             if (this._bReadOnly)
             {
-                // Exit as this control cannot be modified
                 return;
             }
-            // Prevent the user double tapping
-            if (this.IsInEditMode)
-            {
-                if (this._currentEditMode == G__NumberEditMode.EditScroll)
-                {
-                    this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
-                    this.HandlePickerChanged();
-                    this.CloseNumberPicker();
-                }
-                else // Numpad
-                {
-                    if (!this._numberpad.Locked)
-                    {
-                        this.CloseNumPad();
-                    }
-                }
-                // User is cancelling the edit - backout
-                this.IsInEditMode = false;
-                this.Selected = false;
-                // Exit
-                return; 
-            }
 
-            // Begin Editing
-            this.preEdit();
-            // Apply UI for edit
-            //this.UI_ToggleTextEdit();
+            if (this.MyNumberContainer.SelectedNumberText != null)
+            {
+                if ((this.MyNumberContainer.SelectedNumberText.IsInEditMode) && (this.MyNumberContainer.SelectedNumberText != this))
+                {
+                    this.MyNumberContainer.SelectedNumberText.TapText();
+                }
+            }
+            this.MyNumberContainer.SelectedNumberText = this;
 
-            if (this._currentEditMode == G__NumberEditMode.EditScroll)
-            {
-                this.EditNumberPicker();
-            }
-            else
-            {
-                this.EditNumPad();
-            }
+            this.TapText();
         }
-
+               
         private void btnUpTouch(object sender, EventArgs e)
         {
             this.IsInEditMode = true;
@@ -579,19 +608,19 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
                 // Main Controller is now responsible for all top level Vc's
-                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));  
-                // Hookups
-                this._numberpad.PadPushed += this.actHandlePadPush;
-                this._numberpad.PadLockPushed += this.actHandlePadLock;
+                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));
+                this._numberpad.InEditMode = true;
             }
+
+            this._numberpad.PadPushed += this.actHandlePadPush;
+            this._numberpad.PadLockPushed += this.actHandlePadLock;
+
             if (!this._numberpad.Locked)
             {
                 this._numberpad.View.Hidden = false;
             }
 
 
-            this.IsInEditMode = true;
-            this.Selected = true;
         }
 
         protected void CloseNumPad()

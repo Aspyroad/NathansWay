@@ -35,9 +35,14 @@ namespace NathansWay.iOS.Numeracy
         private int _intFractionalPlaces;
         // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
+        private List<vcNumberText> _lsNumbersOnly;
         private string[] _delimiters = { "." };
-        // Multinumber
+        // MultiNumber
         private bool _bMultiNumbered;
+        private vcNumberText _selectedNumberText;
+
+        //private vcNumberText _selectedNumberTextOld;
+
 
         // Test our own view for touch ops
         // private NWView _vNumberContainer;
@@ -108,7 +113,8 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 600107;
             this.AspyName = "VC_NumberContainer";
             // Number list - numbers within this container
-            _lsNumbers = new List<BaseContainer>();
+            this._lsNumbers = new List<BaseContainer>();
+            this._lsNumbersOnly = new List<vcNumberText>();
             // Sizing class
             this._sizeClass = new SizeNumberContainer(this);
             // Define the container type
@@ -155,6 +161,7 @@ namespace NathansWay.iOS.Numeracy
                     // Create a number box
                     vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberContainer = this;
+                    newnumber.IDNumber = i;
 
                     if (_sig > 1 || _result.Length > 1)
                     {
@@ -182,7 +189,9 @@ namespace NathansWay.iOS.Numeracy
                     #endregion
 
                     // Add our numbers to our internal list counter.
-                    _lsNumbers.Add(newnumber);
+                    this._lsNumbers.Add(newnumber);
+                    this._lsNumbersOnly.Add(newnumber);
+
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
                     // Set our current width - and shorten if there is more then one number
@@ -280,12 +289,11 @@ namespace NathansWay.iOS.Numeracy
         {
             base.UI_SetViewSelected();
             // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
+            foreach (vcNumberText _Number in this._lsNumbersOnly) 
             {
-                if (_Number.ContainerType == G__ContainerType.Number && _Number.Selected)
+                if (this.SelectedNumberText == _Number)
                 {     
-                    _Number.UI_SetViewNumberSelected();
-                        
+                    _Number.UI_SetViewNumberSelected();                        
                 }
                 else
                 {
@@ -376,6 +384,7 @@ namespace NathansWay.iOS.Numeracy
         {           
             base.OnControlSelectedChange();
 
+
             // Release any UI to children losing select
             if (this.MyNumletContainer.SelectedContainer != null)
             {
@@ -412,6 +421,9 @@ namespace NathansWay.iOS.Numeracy
 
             // Parent Call
             this.MyNumletContainer.OnControlUnSelectedChange();
+
+            this._selectedNumberText = null;
+
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -420,8 +432,18 @@ namespace NathansWay.iOS.Numeracy
             this.Touched = true;
             if (_bSelected)
             {
+                if (this._selectedNumberText != null)
+                {
+                    if (this._selectedNumberText.IsInEditMode)
+                    {
+                        this.UI_SetViewSelected();
+                        return;
+                    }
+                }
+                // This control can actually be selected multiple times.
                 this._bSelected = false;
                 this.OnControlUnSelectedChange();
+
             }
             else
             {
@@ -439,15 +461,18 @@ namespace NathansWay.iOS.Numeracy
             this.Touched = false;
         }
 
-//        public override void TouchesBegan(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesBegan(touches, evt);
-//            this.ApplyUI(this._applyUIWhere);
-//        }
-
         #endregion
 
         #region Public Properties
+
+        public vcNumberText SelectedNumberText 
+        { 
+            get { return this._selectedNumberText; } 
+            set 
+            { 
+                this._selectedNumberText = value; 
+            }
+        }
 
         public SizeNumberContainer NumberContainerSize 
         {
@@ -542,36 +567,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            base.TouchesBegan(touches, evt);
-
-            UITouch touch = touches.AnyObject as UITouch;
-
-            if (touch != null) 
-            {
-                //SetNeedsDisplay ();
-            }
-            //this.NextResponder.TouchesBegan(touches, evt);
-        }
-//
-//        public override void TouchesMoved (MonoTouch.Foundation.NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesMoved (touches, evt);
-//
-//        }
-//
-//        public override void TouchesEnded (MonoTouch.Foundation.NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesEnded (touches, evt);
-//
-//            UITouch touch = touches.AnyObject as UITouch;
-//
-//            if (touch != null) 
-//            {
-//                //SetNeedsDisplay ();
-//            }
-//        }
 
         #endregion
     }
