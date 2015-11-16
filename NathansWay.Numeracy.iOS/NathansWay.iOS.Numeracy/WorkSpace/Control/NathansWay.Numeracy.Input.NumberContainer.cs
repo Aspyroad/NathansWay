@@ -282,7 +282,16 @@ namespace NathansWay.iOS.Numeracy
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers) 
             {
-                _Number.UI_SetViewSelected();              
+                if (_Number.ContainerType == G__ContainerType.Number && _Number.Selected)
+                {     
+                    _Number.UI_SetViewNumberSelected();
+                        
+                }
+                else
+                {
+                    // Decimal or unselected number
+                    _Number.UI_SetViewSelected();              
+                }
             }
         }
 

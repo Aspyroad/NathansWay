@@ -227,7 +227,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._rectDecimalDraw = new RectangleF(
                 // TODO: Do we need to calculate this? Percentage of width?
-                (1.0f),
+                (4.0f),
                 // TODO: Again calculate, percentage oh height
                 (this.GlobalSizeDimensions.GlobalNumberHeight - 20.0f),
                 // TODO: these should be in decimaltxt dimensions- settings

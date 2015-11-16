@@ -284,6 +284,14 @@ namespace NathansWay.iOS.Numeracy
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
 
+        // For overriding in UINumber
+        public virtual void UI_SetViewNumberSelected()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            this.View.BackgroundColor = UIColor.White;//this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
+        }
+
         #endregion
 
         #region Public Properties

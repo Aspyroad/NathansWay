@@ -166,6 +166,54 @@ namespace NathansWay.iOS.Numeracy.Controls
             return false;
         }
 
+        public override void UI_SetViewSelected()
+        {
+            //if (this.Selected)
+            {
+                base.UI_SetViewSelected();
+                // Number specific
+                this.txtNumber.HasBorder = false;
+            }
+        }
+
+        public override void UI_SetViewNumberSelected()
+        {
+            if (this.Selected)
+            {
+                base.UI_SetViewNumberSelected();
+                // Number specific
+                this.txtNumber.HasBorder = true;
+            }
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            base.UI_SetViewNeutral();
+            // Number specific
+            this.txtNumber.HasBorder = false;
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            base.UI_SetViewReadOnly();
+            // Number specific
+            this.txtNumber.HasBorder = false;
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            base.UI_SetViewCorrect();
+            // Number specific
+            this.txtNumber.HasBorder = false;
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            base.UI_SetViewInCorrect();
+            // Number specific
+            this.txtNumber.HasBorder = false;
+        }
+
         #endregion
 
         #region Public Properties
@@ -315,6 +363,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
+            this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.HasBorder = false;
             this.txtNumber.HasRoundedCorners = true;
@@ -359,8 +408,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Prevent the user double tapping
             if (this.IsInEditMode)
             {
-                // Apply UI for edit
-                //this.UI_ToggleTextEdit();
                 if (this._currentEditMode == G__NumberEditMode.EditScroll)
                 {
                     this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
@@ -376,6 +423,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
+                this.Selected = false;
                 // Exit
                 return; 
             }
@@ -437,8 +485,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Setup editing
         protected void preEdit()
         {
-
-
             // Store the original value
             if (this.txtNumber.Text.Length > 0)
             {
@@ -481,6 +527,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void EditNumberPicker()
         {
             this.IsInEditMode = true;
+            this.Selected = true;
 
             // Reset our view positions. 
             this.NumberSize.AutoSetPickerPosition ();
@@ -532,17 +579,19 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
                 // Main Controller is now responsible for all top level Vc's
-                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));    
+                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));  
+                // Hookups
+                this._numberpad.PadPushed += this.actHandlePadPush;
+                this._numberpad.PadLockPushed += this.actHandlePadLock;
             }
             if (!this._numberpad.Locked)
             {
-
                 this._numberpad.View.Hidden = false;
             }
 
-            this._numberpad.PadPushed += this.actHandlePadPush;
-            this._numberpad.PadLockPushed += this.actHandlePadLock;
+
             this.IsInEditMode = true;
+            this.Selected = true;
         }
 
         protected void CloseNumPad()
@@ -611,7 +660,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // UI Methods
         protected void UI_ToggleTextEdit()
         {
-            this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
+            //this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             //this.txtNumber.TextColor = this.SetBGColor;
 
             if (!this.IsInEditMode)
@@ -636,7 +685,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.IsInEditMode)
             {
                 this.postEdit(intPadValue);
-                this.UI_ToggleTextEdit();
+                //this.UI_ToggleTextEdit();
                 this.IsInEditMode = false; 
             }
 
@@ -666,7 +715,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.Frame = this._sizeClass.RectMainFrame;
             this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
 
-            this.UI_ToggleTextEdit();
+            //this.UI_ToggleTextEdit();
 
             this.IsInEditMode = false;
         }
@@ -1046,7 +1095,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
     }
-
 
     #region UIPickerViewModel Implementation
 
