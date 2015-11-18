@@ -220,29 +220,34 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._bReadOnly)
             {
                 // Exit as this control cannot be modified
+                // ****************************************************** ExitPOINT
                 return;
             }
             // Prevent the user double tapping
             if (this.IsInEditMode)
             {
+                // Close anything thats activated by the touch
+                // Close the number picker
                 if (this._currentEditMode == G__NumberEditMode.EditScroll)
                 {
                     this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
                     this.HandlePickerChanged();
                     this.CloseNumberPicker();
                 }
-                else // Numpad
+                if (this._currentEditMode == G__NumberEditMode.EditNumPad)
                 {
                     if (!this._numberpad.Locked)
                     {
                         this.CloseNumPad();
                     }
                 }
+
+
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
                 this.Selected = false;
 
-                // Exit
+                // ****************************************************** ExitPOINT
                 return; 
             }
 
@@ -253,12 +258,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (this._currentEditMode == G__NumberEditMode.EditScroll)
             {
-
                 this.EditNumberPicker();
             }
-            else
+            if (this._currentEditMode == G__NumberEditMode.EditNumPad)
             {
                 this.EditNumPad();
+            }
+            if (this._currentEditMode == G__NumberEditMode.EditUpDown)
+            {
+                this.btnDown.Hidden = false;
+                this.btnUp.Hidden = false;
             }
         }
 
@@ -388,11 +397,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 base._bReadOnly = value;
-                if ((this._currentEditMode == G__NumberEditMode.EditUpDown) && (value == true))
-                {
-                    this.btnDown.Hidden = true;
-                    this.btnUp.Hidden = true;
-                }
+
             }
         }
 
@@ -551,6 +556,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // 3. We tap the updown buttons and the control then instantly displays result
             // 4. Control becomes unselected.
 
+            //TODO: CRASH HERE!!! MyNumletContainer is null! Why
             if (this.MyNumletContainer.SelectedContainer == null)
             {
                 this.MyNumletContainer.SelectedContainer = this;

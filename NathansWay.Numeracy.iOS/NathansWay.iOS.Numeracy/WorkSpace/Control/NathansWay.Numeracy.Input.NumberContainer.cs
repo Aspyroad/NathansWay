@@ -550,6 +550,27 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public override G__NumberEditMode CurrentEditMode
+        {
+            get 
+            { 
+                return base._currentEditMode; 
+            }
+            set
+            {
+                base._currentEditMode = value;
+                // Loop through this._lsNumbers
+                if (this._lsNumbers != null)
+                {
+                    foreach (BaseContainer _Number in this._lsNumbers)
+                    {
+                        _Number.CurrentEditMode = value;
+                    }
+                }
+
+            }
+        }
+
         #endregion
     }
 
