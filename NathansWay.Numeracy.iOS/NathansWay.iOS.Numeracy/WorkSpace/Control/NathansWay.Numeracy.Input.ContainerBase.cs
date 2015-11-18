@@ -77,6 +77,10 @@ namespace NathansWay.iOS.Numeracy
         // Currently selected container, this could be any basecontainer.
         private BaseContainer _selectedContainer;
 
+        // Current editing mode for this container
+        protected G__NumberEditMode _currentEditMode;
+        protected bool _bIsInEditMode;
+
         protected EventArgs _myEventArgs;
 
         // This is always true the first time we load, after any attempt
@@ -448,6 +452,26 @@ namespace NathansWay.iOS.Numeracy
             set { this._containerType = value; }
         }
 
+        public virtual G__NumberEditMode CurrentEditMode
+        {
+            get 
+            { 
+                return this._currentEditMode; 
+            }
+            set
+            {
+                this._currentEditMode = value;
+            }
+        }
+
+        public virtual bool IsInEditMode
+        {
+            get { return this._bIsInEditMode; }
+            set 
+            {
+                this._bIsInEditMode = value;
+            }
+        }
 
         public vcFractionContainer MyFractionContainer
         {

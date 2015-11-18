@@ -106,7 +106,7 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditUpDown;
             this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
             this._NumberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
 

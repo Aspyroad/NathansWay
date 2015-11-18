@@ -18,6 +18,7 @@ using NathansWay.iOS.Numeracy.WorkSpace;
 using NathansWay.Shared.Factories;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.BUS.ViewModel;
+using NathansWay.Shared.Utilities;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
@@ -50,6 +51,7 @@ namespace NathansWay.iOS.Numeracy
         private iOSNumberDimensions _globalSizeDimensions;
         private G__NumberDisplaySize _numberDisplaySize;
         private float _fNumberSpacing;
+        protected IAppSettings _numberAppSettings;
 
         // Logic
 
@@ -72,6 +74,7 @@ namespace NathansWay.iOS.Numeracy
             this._expressionFactory = new ExpressionFactory(this._numberFactoryClient);
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+            this._numberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
             this._intLessonDetailSeq = 1;
         }
 
@@ -296,6 +299,7 @@ namespace NathansWay.iOS.Numeracy
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;
                     _control.IsReadOnly = false;
+                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
                     _control.ClearValue();
                 }
                 else

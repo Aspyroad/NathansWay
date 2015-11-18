@@ -35,7 +35,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         private UITapGestureRecognizer singleTapGesture;
 
         private List<string> items = new List<string>();
-        private G__NumberEditMode _currentEditMode;
         private UIColor _preEditColor;
 
         private vcNumberPad _numberpad;
@@ -272,7 +271,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._sizeNumber; }
         }
 
-        public bool IsInEditMode
+        public override bool IsInEditMode
         {
             get { return this._bIsInEditMode; }
             set 
@@ -304,21 +303,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._currentEditMode = value;
 
-                switch (this._currentEditMode)
-                {
-                    case (G__NumberEditMode.EditScroll):    
-                        this.btnDown.Hidden = true;
-                        this.btnUp.Hidden = true;
-                        break;
-                    case (G__NumberEditMode.EditNumPad):
-                        this.btnDown.Hidden = true;
-                        this.btnUp.Hidden = true;
-                        break;
-                    case (G__NumberEditMode.EditUpDown):
-                        this.btnDown.Hidden = false;
-                        this.btnUp.Hidden = false;
-                        break;
-                }
+                //                switch (value)
+                //                {
+                //                    case (G__NumberEditMode.EditScroll):    
+                //                        this.btnDown.Hidden = true;
+                //                        this.btnUp.Hidden = true;
+                //                        break;
+                //                    case (G__NumberEditMode.EditNumPad):
+                //                        this.btnDown.Hidden = true;
+                //                        this.btnUp.Hidden = true;
+                //                        break;
+                //                    case (G__NumberEditMode.EditUpDown):
+                //                        this.btnDown.Hidden = false;
+                //                        this.btnUp.Hidden = false;
+                //                        break;
+                //                }
             }
         }
 
@@ -378,6 +377,23 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this._strCurrentValue = value.ToString().Trim();
                 }
             }          
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return base._bReadOnly;
+            }
+            set
+            {
+                base._bReadOnly = value;
+                if ((this._currentEditMode == G__NumberEditMode.EditUpDown) && (value == true))
+                {
+                    this.btnDown.Hidden = true;
+                    this.btnUp.Hidden = true;
+                }
+            }
         }
 
         #endregion
@@ -447,33 +463,43 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("8");
             items.Add("9");
 
-            // TODO : change this to point to the global app settings class
+            // TODO: We need to make the buttons in updown edit mode disabled for readonly.
+            // We also need to work on the UI for them.
             this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
             this.singleTapGesture = null;
         }
 
         // Partials
         private void txtTouchedDown(object sender, EventArgs e)
-        {  
+        {
+            // Rough but it works!
             if (this._bReadOnly)
             {
                 return;
             }
 
+            // Handle multinumber parent containers that this control will be a part of.
             if (this.MyNumberContainer.SelectedNumberText != null)
             {
                 if ((this.MyNumberContainer.SelectedNumberText.IsInEditMode) && (this.MyNumberContainer.SelectedNumberText != this))
                 {
                     this.MyNumberContainer.SelectedNumberText.TapText();
+                    this.MyNumberContainer.SelectedNumberText.UI_SetViewSelected();
                 }
             }
+            // Let the parent know this control has focus
             this.MyNumberContainer.SelectedNumberText = this;
-
+            // Handle the press
             this.TapText();
         }
                
         private void btnUpTouch(object sender, EventArgs e)
         {
+            this.CommonButtonCode();
+
+
+            return; 
+
             this.IsInEditMode = true;
 
             Nullable<double> x;
@@ -493,6 +519,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void btnDownTouch(object sender, EventArgs e)
         {
+            this.CommonButtonCode();
+
+            return;
+
             this.IsInEditMode = true; 
 
             Nullable<double> x;
@@ -509,6 +539,33 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.IsInEditMode = false;
             this.postEdit(x);
+        }
+
+        private void CommonButtonCode()
+        {
+            // Ok...why?
+            // When editmode is buttonupdown, the logic is as follows
+            // All numbertexts go into edit mode while in this state
+            // 1. When we select number container, first, the container goes into editmode and selected
+            // 2. We then show our updown buttons
+            // 3. We tap the updown buttons and the control then instantly displays result
+            // 4. Control becomes unselected.
+
+            if (this.MyNumletContainer.SelectedContainer == null)
+            {
+                this.MyNumletContainer.SelectedContainer = this;
+            }
+            else
+            {
+                if (this.MyNumletContainer.SelectedContainer != this.MyNumberContainer)
+                {
+                    this.MyNumberContainer.SelectedContainer = this.MyNumberContainer;
+                    this.MyNumberContainer.SelectedContainer.IsInEditMode = true;
+                    this.MyNumberContainer.SelectedContainer.UI_SetViewSelected();
+                }
+            }
+
+
         }
 
         // Setup editing
@@ -692,18 +749,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
             //this.txtNumber.TextColor = this.SetBGColor;
 
-            if (!this.IsInEditMode)
-            {
-                // Graphically highlight the text control so we know its selected
-                this._preEditColor = txtNumber.BackgroundColor;
-                txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
-                txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
-            }
-            else
-            {
-                txtNumber.BackgroundColor = this._preEditColor;
-                txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
-            }
+//            if (!this.IsInEditMode)
+//            {
+//                // Graphically highlight the text control so we know its selected
+//                this._preEditColor = txtNumber.BackgroundColor;
+//                txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
+//                txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
+//            }
+//            else
+//            {
+//                txtNumber.BackgroundColor = this._preEditColor;
+//                txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
+//            }
         }
 
         // Event Wireups

@@ -289,11 +289,18 @@ namespace NathansWay.iOS.Numeracy
         {
             base.UI_SetViewSelected();
             // Loop through this._lsNumbers
-            foreach (vcNumberText _Number in this._lsNumbersOnly) 
+            foreach (BaseContainer _Number in this._lsNumbers) 
             {
-                if (this.SelectedNumberText == _Number)
-                {     
-                    _Number.UI_SetViewNumberSelected();                        
+                if (_Number.ContainerType == G__ContainerType.Number)
+                {    
+                    if (this.SelectedNumberText == (vcNumberText)_Number)
+                    {     
+                        _Number.UI_SetViewNumberSelected();                        
+                    }
+                    else
+                    {
+                        _Number.UI_SetViewSelected();
+                    }
                 }
                 else
                 {
@@ -416,19 +423,27 @@ namespace NathansWay.iOS.Numeracy
                 this.CheckCorrect();
             }
 
+            // If there is a numbertext selected, clear it.
+            if (this._selectedNumberText != null)
+            {
+                if (this._selectedNumberText.IsInEditMode)
+                {
+                    this._selectedNumberText.TapText();
+                }
+                this._selectedNumberText = null;
+            }
+
             // Clear itself out the parent as not selected
             this.MyNumletContainer.SelectedContainer = null;
 
             // Parent Call
             this.MyNumletContainer.OnControlUnSelectedChange();
-
-            this._selectedNumberText = null;
-
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
+
             this.Touched = true;
             if (_bSelected)
             {
