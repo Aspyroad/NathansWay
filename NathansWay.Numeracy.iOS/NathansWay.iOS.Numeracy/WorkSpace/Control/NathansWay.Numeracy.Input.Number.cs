@@ -502,8 +502,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.CommonButtonCode();
 
-
-            return; 
+            //return; 
 
             this.IsInEditMode = true;
 
@@ -526,7 +525,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.CommonButtonCode();
 
-            return;
+            //return;
 
             this.IsInEditMode = true; 
 
@@ -556,7 +555,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // 3. We tap the updown buttons and the control then instantly displays result
             // 4. Control becomes unselected.
 
-            //TODO: CRASH HERE!!! MyNumletContainer is null! Why
             if (this.MyNumletContainer.SelectedContainer == null)
             {
                 this.MyNumletContainer.SelectedContainer = this;
@@ -570,8 +568,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.MyNumberContainer.SelectedContainer.UI_SetViewSelected();
                 }
             }
-
-
         }
 
         // Setup editing
@@ -608,7 +604,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.CurrentValueStr;
             // Fire a value change event (student has obviously tried to answer the question) 
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
-            this.FireValueChange();
+            //this.FireValueChange();
 
             //this.ApplyUI(this._applyUIWhere);
             // TODO: PROBLEM and bug

@@ -41,9 +41,6 @@ namespace NathansWay.iOS.Numeracy
         private bool _bMultiNumbered;
         private vcNumberText _selectedNumberText;
 
-        //private vcNumberText _selectedNumberTextOld;
-
-
         // Test our own view for touch ops
         // private NWView _vNumberContainer;
 
@@ -567,7 +564,26 @@ namespace NathansWay.iOS.Numeracy
                         _Number.CurrentEditMode = value;
                     }
                 }
+            }
+        }
 
+        public override vcWorkNumlet MyNumletContainer
+        {
+            get 
+            { 
+                return base._vcNumletContainer; 
+            }
+            set
+            {
+                base._vcNumletContainer = value;
+                // Loop through this._lsNumbers
+                if (this._lsNumbers != null)
+                {
+                    foreach (BaseContainer _Number in this._lsNumbers)
+                    {
+                        _Number.MyNumletContainer = value;
+                    }
+                }
             }
         }
 

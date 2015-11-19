@@ -69,13 +69,13 @@ namespace NathansWay.iOS.Numeracy
         // Container classes
         // Fraction, Numlet, WorkSpace
         // If this Container is in a Fraction, we set its parent Fraction.
-        private vcFractionContainer _vcFractionContainer;
+        protected vcFractionContainer _vcFractionContainer;
         // If this Container is in a Numlet, we set its parent Numlet.
-        private vcWorkNumlet _vcNumletContainer;
+        protected vcWorkNumlet _vcNumletContainer;
         // If this Container is in a Workspace, we set its parent Workspace
-        private vcWorkSpace _vcWorkSpaceContainer;
+        protected vcWorkSpace _vcWorkSpaceContainer;
         // Currently selected container, this could be any basecontainer.
-        private BaseContainer _selectedContainer;
+        protected BaseContainer _selectedContainer;
 
         // Current editing mode for this container
         protected G__NumberEditMode _currentEditMode;
@@ -405,7 +405,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public bool IsCorrect
+        public virtual bool IsCorrect
         {
             get { return _bIsCorrect; }
         }
@@ -473,7 +473,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public vcFractionContainer MyFractionContainer
+        public virtual vcFractionContainer MyFractionContainer
         {
             get
             {
@@ -485,7 +485,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public vcWorkNumlet MyNumletContainer
+        public virtual vcWorkNumlet MyNumletContainer
         {
             get
             {

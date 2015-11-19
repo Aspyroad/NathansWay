@@ -305,6 +305,7 @@ namespace NathansWay.iOS.Numeracy
                 else
                 {
                     _control.IsReadOnly = true;
+                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
                 }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet

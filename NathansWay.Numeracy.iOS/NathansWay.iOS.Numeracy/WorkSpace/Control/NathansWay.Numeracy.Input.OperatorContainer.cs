@@ -136,6 +136,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         {           
             base.OnControlSelectedChange();
 
+            // The equals sign will become a button for entry if the 
+            // Globaleditmode == EditUpDown
+            if (this._currentEditMode == G__NumberEditMode.EditUpDown)
+            {
+                if (this.MyNumletContainer.SelectedContainer != null)
+                {
+
+                }
+            }
+
             // Let numlet know whos the boss
             if (this.MyNumletContainer.SelectedContainer != null)
             {
