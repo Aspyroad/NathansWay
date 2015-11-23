@@ -171,17 +171,23 @@ namespace NathansWay.iOS.Numeracy
             this._numberTextNumerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
             this._numberTextDenominator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
 
+
+
             // Grab the vertical drop for denominator
             var _ypos = 
-                this._numberTextNumerator.NumberContainerSize.CurrentHeight + 
+                this._numberTextNumerator.NumberContainerSize.CurrentHeight - 16 + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
-            this._numberTextNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
+            // TODO: Fraction Y -8.0 neeeds to e a variable global
+            this._numberTextNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, -8.0f);
+            // ****
             this._numberTextDenominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
 
             this.AddAndDisplayController(this._numberTextNumerator);
             this.AddAndDisplayController(this._numberTextDenominator);
+
+            this.View.BringSubviewToFront(this.View);
 
         }
 
@@ -500,8 +506,7 @@ namespace NathansWay.iOS.Numeracy
             {
                 base._vcNumletContainer = value;
                 this._numberTextNumerator.MyNumletContainer = value;
-                this._numberTextDenominator.MyNumletContainer = value;
-                
+                this._numberTextDenominator.MyNumletContainer = value;                
             }
         }
 

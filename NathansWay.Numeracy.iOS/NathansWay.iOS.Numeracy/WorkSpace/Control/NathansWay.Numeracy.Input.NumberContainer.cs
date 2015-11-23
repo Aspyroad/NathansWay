@@ -495,7 +495,7 @@ namespace NathansWay.iOS.Numeracy
             get { return (SizeNumberContainer)this._sizeClass; }
         }
 
-        public bool IsInEditMode
+        public override bool IsInEditMode
         {
             get { return this._bIsInEditMode; }
             set 

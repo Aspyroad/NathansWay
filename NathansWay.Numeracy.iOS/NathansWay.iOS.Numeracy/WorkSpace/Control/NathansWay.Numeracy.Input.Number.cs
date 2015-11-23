@@ -466,7 +466,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.CornerRadius = 2.0f;
 
             this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
+            //this.txtNumber.Text
             this.txtNumber.ApplyUI(this._applyUIWhere);
 
             // Wire up our events
@@ -1086,7 +1088,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             }
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            if (this.ParentContainer.MyFractionContainer == null)
+            {
+                this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            }
+            else
+            {
+                this.CurrentHeight = this.GlobalSizeDimensions.FractionNumberHeight;
+            }
         }
 
         public override void SetPositions (PointF _startPoint)

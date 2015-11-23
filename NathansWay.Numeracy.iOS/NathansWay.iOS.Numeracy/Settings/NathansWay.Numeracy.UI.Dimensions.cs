@@ -238,7 +238,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 130.0f;
+                        return 140.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -298,7 +298,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 4.0f;
+                        return 6.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -496,11 +496,11 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 60.0f;
+                        return 46.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
-                        return 54.0f;
+                        return 46.0f;
                     }
                     case (G__NumberDisplaySize.Large):
                     {
@@ -526,7 +526,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 45.0f;
+                        return 44.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -561,7 +561,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 128.0f;
+                        return 138.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -592,7 +592,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 52.0f;
+                        return 72.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="OpenTK-1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -59,7 +60,6 @@
     <Compile Include="Common\ToolBox.Shared.Toolz.ParallaxingBg.cs" />
     <Compile Include="NathansWay.Shared.MonoToolz.Types.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
     <BundleResource Include="Resources\Content\Hammer\clouds1.png" />
