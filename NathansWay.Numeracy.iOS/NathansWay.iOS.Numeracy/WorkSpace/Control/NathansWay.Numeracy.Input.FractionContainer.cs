@@ -16,10 +16,10 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway iOS
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.iOS.Numeracy.WorkSpace;
 
 // NathansWay Shared
 using NathansWay.Shared;
-
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -28,7 +28,6 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Class Variables
 
-        // View - Custom Drawing
         private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
 
@@ -43,8 +42,8 @@ namespace NathansWay.iOS.Numeracy
 
         private FractionSize _sizeFraction;
 
-        private vcNumberContainer numberText_Numerator;
-        private vcNumberContainer numberText_Denominator;
+        private vcNumberContainer _numberTextNumerator;
+        private vcNumberContainer _numberTextDenominator;
 
         private string _strFractionExpression;
         private string[] _delimiters = { "/" };
@@ -64,20 +63,17 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
-        public vcFractionContainer(string nibName, NSBundle bundle)
-            : base(nibName, bundle)
+        public vcFractionContainer(string nibName, NSBundle bundle) : base(nibName, bundle)
         {
             Initialize();
         }
 
-        public vcFractionContainer(IntPtr h)
-            : base(h)
+        public vcFractionContainer(IntPtr h) : base(h)
         {
             Initialize();
         }
 
-        public vcFractionContainer(NSCoder coder)
-            : base(coder)
+        public vcFractionContainer(NSCoder coder) : base(coder)
         {
             Initialize();
         }
@@ -94,13 +90,13 @@ namespace NathansWay.iOS.Numeracy
             {                
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
-                this.numberText_Numerator.eValueChange -= this.OnValueChange;
-                this.numberText_Numerator.eTextSizeChange -= this.OnTextSizeChange;
-                this.numberText_Denominator.eValueChange -= this.OnValueChange;
-                this.numberText_Denominator.eTextSizeChange -= this.OnTextSizeChange;
+                this._numberTextNumerator.eValueChange -= this.OnValueChange;
+                this._numberTextNumerator.eTextSizeChange -= this.OnTextSizeChange;
+                this._numberTextDenominator.eValueChange -= this.OnValueChange;
+                this._numberTextDenominator.eTextSizeChange -= this.OnTextSizeChange;
                 // Clear its parent
-                this.numberText_Numerator.MyFractionContainer = null;
-                this.numberText_Denominator.MyFractionContainer = null;
+                this._numberTextNumerator.MyFractionContainer = null;
+                this._numberTextDenominator.MyFractionContainer = null;
             }
         }
 
@@ -124,7 +120,7 @@ namespace NathansWay.iOS.Numeracy
             this.CreateFraction();
         }
 
-        public void CreateFraction()
+        private void CreateFraction()
         {
             // Locals
             string[] _result;
@@ -144,42 +140,48 @@ namespace NathansWay.iOS.Numeracy
 
             // PROCESS - BUILD NUMBER
             // Create a number box
-            this.numberText_Numerator = new vcNumberContainer(_result[0].ToString());
-            this.numberText_Denominator = new vcNumberContainer(_result[1].ToString());
+            this._numberTextNumerator = new vcNumberContainer(_result[0].ToString());
+            this._numberTextDenominator = new vcNumberContainer(_result[1].ToString());
             // AnswerType
-            this.numberText_Numerator.IsAnswer = this.IsAnswer;
-            this.numberText_Denominator.IsAnswer = this.IsAnswer;
+            //this.numberText_Numerator.IsAnswer = this.IsAnswer;
+            //this.numberText_Denominator.IsAnswer = this.IsAnswer;
+
             // Create the numbers
-            this.numberText_Numerator.CreateNumber();
-            this.numberText_Denominator.CreateNumber();
+
+            // Set the fraction container parent of num and den
+            this._numberTextNumerator.MyFractionContainer = this;
+            this._numberTextDenominator.MyFractionContainer = this;
+
+            this._numberTextNumerator.CreateNumber();
+            this._numberTextDenominator.CreateNumber();
             // Event hooks
-            this.numberText_Numerator.eValueChange += this.OnValueChange;
-            this.numberText_Numerator.eTextSizeChange += this.OnTextSizeChange;
-            this.numberText_Denominator.eValueChange += this.OnValueChange;
-            this.numberText_Denominator.eTextSizeChange += this.OnTextSizeChange;
+            this._numberTextNumerator.eValueChange += this.OnValueChange;
+            this._numberTextNumerator.eTextSizeChange += this.OnTextSizeChange;
+            this._numberTextDenominator.eValueChange += this.OnValueChange;
+            this._numberTextDenominator.eTextSizeChange += this.OnTextSizeChange;
             // Set the this as the parent of Num and Den
-            this.numberText_Numerator.MyFractionContainer = this;
-            this.numberText_Denominator.MyFractionContainer = this;
+            this._numberTextNumerator.MyFractionContainer = this;
+            this._numberTextDenominator.MyFractionContainer = this;
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
-            this.SizeClass.CurrentWidth = Math.Max(this.numberText_Numerator.NumberContainerSize.CurrentWidth, this.numberText_Denominator.SizeClass.CurrentWidth);
+            this.SizeClass.CurrentWidth = Math.Max(this._numberTextNumerator.NumberContainerSize.CurrentWidth, this._numberTextDenominator.SizeClass.CurrentWidth);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
-            this.numberText_Numerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
-            this.numberText_Denominator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
+            this._numberTextNumerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
+            this._numberTextDenominator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
 
             // Grab the vertical drop for denominator
             var _ypos = 
-                this.numberText_Numerator.NumberContainerSize.CurrentHeight + 
+                this._numberTextNumerator.NumberContainerSize.CurrentHeight + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
-            this.numberText_Numerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
-            this.numberText_Denominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
+            this._numberTextNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
+            this._numberTextDenominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
 
-            this.AddAndDisplayController(this.numberText_Numerator);
-            this.AddAndDisplayController(this.numberText_Denominator);
+            this.AddAndDisplayController(this._numberTextNumerator);
+            this.AddAndDisplayController(this._numberTextDenominator);
 
         }
 
@@ -195,14 +197,10 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer.BackgroundColor = UIColor.Clear;
         }
 
-        // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
-            // Set its poisiton
-            //this.FractionSize.SetPositions(this.SizeClass.StartPoint);
+            // Set fraction "line" poisiton this is drawn in the vFraction
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
-
-            // Base Container will call ALL setframes.
             base.ViewWillAppear(animated);
         }
 
@@ -220,13 +218,12 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
 
-        // Must override CheckCorrect to handle a fraction type
         public override void CheckCorrect ()
         {            
             // TODO : Check if this fraction is the answer
             // Compare against the original value
             // No need to call base it for basic compares
-            if (this.numberText_Denominator.IsCorrect && this.numberText_Numerator.IsCorrect)
+            if (this._numberTextDenominator.IsCorrect && this._numberTextNumerator.IsCorrect)
             {
                 this.AnswerState = G__AnswerState.Correct;
                 this._bIsCorrect = true;
@@ -246,31 +243,164 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-//        protected override void UI_SetViewReadOnly()
-//        {
-//            // Not sure about this one. 
-//            base.UI_SetViewReadOnly();
-//            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-//            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-//            //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-//        }
-//
-//        protected override void UI_SetViewPositive()
-//        {
-//            base.UI_SetViewPositive();
-//        }
+        public override void UI_SetViewSelected()
+        {
+            base.UI_SetViewSelected();
+//            // Loop through this._lsNumbers
+//            foreach (BaseContainer _Number in this._lsNumbers) 
+//            {
+//                if (_Number.ContainerType == G__ContainerType.Number)
+//                {    
+//                    if (this.SelectedNumberText == (vcNumberText)_Number)
+//                    {     
+//                        _Number.UI_SetViewNumberSelected();                        
+//                    }
+//                    else
+//                    {
+//                        _Number.UI_SetViewSelected();
+//                    }
+//                }
+//                else
+//                {
+//                    // Decimal or unselected number
+//                    _Number.UI_SetViewSelected();              
+//                }
+//            }
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            base.UI_SetViewNeutral();
+            this._numberTextNumerator.UI_SetViewNeutral();
+            this._numberTextDenominator.UI_SetViewNeutral();
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            base.UI_SetViewInCorrect();
+            this._numberTextNumerator.UI_SetViewInCorrect();
+            this._numberTextDenominator.UI_SetViewInCorrect();
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            base.UI_SetViewCorrect();
+            this._numberTextNumerator.UI_SetViewCorrect();
+            this._numberTextDenominator.UI_SetViewCorrect();
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            base.UI_SetViewReadOnly();
+            this._numberTextNumerator.UI_SetViewReadOnly();
+            this._numberTextDenominator.UI_SetViewReadOnly();
+        }
+
+        public override void ClearValue()
+        {
+            this.CurrentValue = null;
+            this._numberTextNumerator.CurrentValue = null;
+            this._numberTextDenominator.CurrentValue = null;
+
+        }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
             if (base.ApplyUI(_applywhere))
             {
                 this.View.BackgroundColor = UIColor.Clear;
+                if (this._bIsAnswer)
+                {
+                    this.CheckCorrect();
+                }
+                if (this._bReadOnly)
+                {
+                    this.UI_SetViewReadOnly();
+                }
                 return true;
             }
             else
             {
                 return false;
             }
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+            this.View.UserInteractionEnabled = true;
+            this.View.ClipsToBounds = true;
+        }
+
+        public override void OnControlSelectedChange()
+        {           
+            base.OnControlSelectedChange();
+
+
+            // Release any UI to children losing select
+            if (this.MyNumletContainer.SelectedContainer != null)
+            {
+                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
+            }
+
+            // Call Parent
+            this.MyNumletContainer.OnControlSelectedChange();
+
+            // Let WorkSpace know whos the boss
+            this.MyNumletContainer.SelectedContainer = this;
+
+            // UI Changes
+            this.UI_SetViewSelected();
+        }
+
+        public override void OnControlUnSelectedChange()
+        {  
+            base.OnControlUnSelectedChange();
+
+            // UI Changes
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            }
+            if (this._bIsAnswer)
+            {
+                this.CheckCorrect();
+            }
+
+            // Clear itself out the parent as not selected
+            this.MyNumletContainer.SelectedContainer = null;
+
+            // Parent Call
+            this.MyNumletContainer.OnControlUnSelectedChange();
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+
+            this.Touched = true;
+            if (_bSelected)
+            {
+
+                // This control can actually be selected multiple times.
+                this._bSelected = false;
+                this.OnControlUnSelectedChange();
+
+            }
+            else
+            {
+                this._bSelected = true;
+                this.OnControlSelectedChange();
+            }
+
+            // If any controls want to subscribe
+            //this.FireControlSelected();
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+            this.Touched = false;
         }
 
         #endregion
@@ -313,6 +443,69 @@ namespace NathansWay.iOS.Numeracy
                 this._dblDenominatorCurrentValue = value;
             }
         }
+
+        #endregion
+
+        #region Override Public Properties
+
+        public override bool IsAnswer
+        {
+            get
+            {
+                return base.IsAnswer;
+            }
+            set
+            {
+                base.IsAnswer = value;
+                this._numberTextNumerator.IsAnswer = value;
+                this._numberTextDenominator.IsAnswer = value;
+            }
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return base._bReadOnly;
+            }
+            set
+            {
+                base._bReadOnly = value;
+                this._numberTextNumerator.IsReadOnly = value;
+                this._numberTextDenominator.IsReadOnly = value;
+            }
+        }
+
+        public override G__NumberEditMode CurrentEditMode
+        {
+            get 
+            { 
+                return base._currentEditMode; 
+            }
+            set
+            {
+                base._currentEditMode = value;
+                this._numberTextNumerator.CurrentEditMode = value;
+                this._numberTextDenominator.CurrentEditMode = value;
+            }
+        }
+
+        public override vcWorkNumlet MyNumletContainer
+        {
+            get 
+            { 
+                return base._vcNumletContainer; 
+            }
+            set
+            {
+                base._vcNumletContainer = value;
+                this._numberTextNumerator.MyNumletContainer = value;
+                this._numberTextDenominator.MyNumletContainer = value;
+                
+            }
+        }
+
+
 
         #endregion
 

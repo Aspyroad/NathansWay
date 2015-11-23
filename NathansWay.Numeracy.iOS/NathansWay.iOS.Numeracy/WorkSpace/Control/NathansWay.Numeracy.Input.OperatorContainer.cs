@@ -138,11 +138,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // The equals sign will become a button for entry if the 
             // Globaleditmode == EditUpDown
+            // The following of handles 
             if (this._currentEditMode == G__NumberEditMode.EditUpDown)
             {
                 if (this.MyNumletContainer.SelectedContainer != null)
                 {
-
+                    vcNumberContainer y = (vcNumberContainer)this.MyNumletContainer.SelectedContainer;
+                    if (y.SelectedNumberText != null)
+                    {
+                        y.SelectedNumberText.PostUpDownEdit();
+                    }
                 }
             }
 

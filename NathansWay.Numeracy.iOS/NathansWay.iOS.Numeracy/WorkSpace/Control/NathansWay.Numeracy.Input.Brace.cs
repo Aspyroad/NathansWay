@@ -124,14 +124,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._isRight)
             {
                 this.txtBrace.Text = ")";
+                this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
+                this.txtBrace.TextAlignment = UITextAlignment.Right;
             }
             else
             {
                 this.txtBrace.Text = "(";
+                this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
+                this.txtBrace.TextAlignment = UITextAlignment.Left;
             }
             // Center text
-            this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtBrace.TextAlignment = UITextAlignment.Center;
+
             // Prettiness
             this.txtBrace.ApplyUI(this._applyUIWhere);
         }

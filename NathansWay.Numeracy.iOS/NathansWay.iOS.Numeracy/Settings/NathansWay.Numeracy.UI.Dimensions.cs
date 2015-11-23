@@ -579,6 +579,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 // GlobalNumberHeight + DividerHeight + GlobalNumberHeight
             }
         }
+        public float FractionNumberHeight
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 60.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 52.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 90.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 120.0f;;
+                    }
+                    default : // Huge
+                    {
+                        return 240.0f;
+                    }
+                }
+            }
+        }
         public float FractionDividerHeight
         {
             get

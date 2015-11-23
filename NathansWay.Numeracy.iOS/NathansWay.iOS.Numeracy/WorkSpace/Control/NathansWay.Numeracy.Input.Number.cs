@@ -148,7 +148,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
-        // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -242,12 +241,12 @@ namespace NathansWay.iOS.Numeracy.Controls
                     }
                 }
 
-
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
                 this.Selected = false;
 
                 // ****************************************************** ExitPOINT
+                // Rough but easier
                 return; 
             }
 
@@ -266,9 +265,27 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             if (this._currentEditMode == G__NumberEditMode.EditUpDown)
             {
-                this.btnDown.Hidden = false;
-                this.btnUp.Hidden = false;
+                this.ShowUpDownButtons();
             }
+        }
+
+        public void ShowUpDownButtons()
+        {
+            this.btnDown.Hidden = false;
+            this.btnUp.Hidden = false;
+        }
+
+        public void HideUpDownButtons()
+        {
+            this.btnDown.Hidden = true;
+            this.btnUp.Hidden = true;
+        }
+
+        public void PostUpDownEdit()
+        {
+            this.HideUpDownButtons();
+            this.TapText();
+            this.FireValueChange();
         }
 
         #endregion
@@ -486,6 +503,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Handle multinumber parent containers that this control will be a part of.
             if (this.MyNumberContainer.SelectedNumberText != null)
             {
+                // Multiple numbertext (decimals, anything over single digits) containers in updown editmode 
+                // are a special case and need extra logic here and in numbercontainer and even numlet container
+                if ((this._currentEditMode == G__NumberEditMode.EditUpDown) && (this.MyNumberContainer.SelectedNumberText.IsInEditMode))
+                {
+                    this.MyNumberContainer.SelectedNumberText.HideUpDownButtons();
+                    // Finished
+                    this.IsInEditMode = false;
+                    this.Selected = false;
+
+                }
                 if ((this.MyNumberContainer.SelectedNumberText.IsInEditMode) && (this.MyNumberContainer.SelectedNumberText != this))
                 {
                     this.MyNumberContainer.SelectedNumberText.TapText();
@@ -517,7 +544,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 x = 0;
             }
             //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
-            this.IsInEditMode = false;
+            //this.IsInEditMode = false;
             this.postEdit(x);
         }
 
@@ -541,7 +568,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
 
-            this.IsInEditMode = false;
+            //this.IsInEditMode = false;
             this.postEdit(x);
         }
 
@@ -604,12 +631,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.CurrentValueStr;
             // Fire a value change event (student has obviously tried to answer the question) 
             // so numbercontainer (this objects parent) can check the answer and make any changes to UI
-            //this.FireValueChange();
-
-            //this.ApplyUI(this._applyUIWhere);
-            // TODO: PROBLEM and bug
-            //UI_ToggleTextEdit(); //is being called straight after this as this is being fired inside
-            // PickerValuechanged!!
+            if (this.CurrentEditMode != G__NumberEditMode.EditUpDown)
+            {
+                this.FireValueChange();
+            }
         }
 
         protected void EditNumberPicker()
@@ -773,8 +798,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.IsInEditMode)
             {
                 this.postEdit(intPadValue);
-                //this.UI_ToggleTextEdit();
                 this.IsInEditMode = false; 
+                this.Selected = false;
             }
 
             if (!this._numberpad.Locked)

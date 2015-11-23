@@ -41,9 +41,6 @@ namespace NathansWay.iOS.Numeracy
         private bool _bMultiNumbered;
         private vcNumberText _selectedNumberText;
 
-        // Test our own view for touch ops
-        // private NWView _vNumberContainer;
-
         #endregion
 
         #region Constructors
@@ -241,7 +238,14 @@ namespace NathansWay.iOS.Numeracy
             }
 
             // Set our current height
-            this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
+            if (this.MyFractionContainer == null)
+            {
+                this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.TxtNumberHeight;
+            }
+            else
+            {
+                this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.FractionNumberHeight;
+            }
         }
 
         #endregion
@@ -506,6 +510,10 @@ namespace NathansWay.iOS.Numeracy
             set { this._tensUnit = value; }
         }
 
+        #endregion
+
+        #region Override Public Properties
+
         public override bool IsAnswer
         {
             get
@@ -587,8 +595,29 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public override vcFractionContainer MyFractionContainer
+        {
+            get 
+            { 
+                return base._vcFractionContainer; 
+            }
+            set
+            {
+                base._vcFractionContainer = value;
+                // Loop through this._lsNumbers
+                if (this._lsNumbers != null)
+                {
+                    foreach (BaseContainer _Number in this._lsNumbers)
+                    {
+                        _Number.MyFractionContainer = value;
+                    }
+                }
+            }
+        }
+
         #endregion
     }
+
 
     public class vNumberContainer : NWView
     {
@@ -619,14 +648,12 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-
         #endregion
     }
 
     public class SizeNumberContainer : SizeBase
     {
         #region Class Variables
-
 
         #endregion
 
