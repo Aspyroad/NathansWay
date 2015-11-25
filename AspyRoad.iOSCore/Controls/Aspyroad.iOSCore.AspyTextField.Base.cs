@@ -26,6 +26,9 @@ namespace AspyRoad.iOSCore
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
+        protected PointF _pTextOffset;
+        protected bool _bApplyTextOffset;
+
 
         protected UIColor colorBorderColor;
 
@@ -70,6 +73,7 @@ namespace AspyRoad.iOSCore
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bAutoApplyUI = false;
             this._bAllowNextResponder = false;
+            this._bApplyTextOffset = false;
         }
 
         #endregion
@@ -189,11 +193,37 @@ namespace AspyRoad.iOSCore
             }
         }
 
+        public PointF TextOffset
+        {
+            get
+            {
+                return this._pTextOffset;
+            }
+            set
+            {
+//                if ((value.X > 0.0f) || (value.Y > 0.0f))
+//                {
+//                    this._bApplyTextOffset = true;
+//                }
+//                else
+//                {
+//                    this._bApplyTextOffset = false;
+//                }
+                this._pTextOffset = value;
+            }
+        }
+
+        public bool ApplyTextOffset
+        {
+            get { return this._bApplyTextOffset; }
+            set { this._bApplyTextOffset = value; }
+        }
+
         #endregion
 
         #region Virtual Members
 
-        public virtual bool ApplyUI (G__ApplyUI _applywhere)
+        public virtual bool ApplyUI(G__ApplyUI _applywhere)
         {
             if (_applywhere != this._applyUIWhere)
             {
@@ -218,10 +248,12 @@ namespace AspyRoad.iOSCore
         {  
         }
 
-        public virtual void ApplyUI7 ()
+        public virtual void ApplyUI7()
         {
             this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
         }
+
+        #endregion
 
         #region Responder Chain Interrupt
 
@@ -260,8 +292,6 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #endregion
-
         #region Overrides
 
         public override void MovedToSuperview()
@@ -273,7 +303,30 @@ namespace AspyRoad.iOSCore
             }
         }
 
+        // These are both overriden to change the location of the font
+        public override RectangleF TextRect(RectangleF forBounds)
+        {
+            RectangleF rectOrigValue = base.TextRect(forBounds);
+            // Only apply if we set it
+            if (this._bApplyTextOffset)
+            {
+                rectOrigValue.Offset(this._pTextOffset);
+            }
+            return rectOrigValue;
+        }
+
+        public override RectangleF EditingRect(RectangleF forBounds)
+        {
+            RectangleF rectOrigValue = base.EditingRect(forBounds);
+            // Only apply if we set it
+            if (this._bApplyTextOffset)
+            {
+                rectOrigValue.Offset(this._pTextOffset);
+            }
+            return rectOrigValue;
+        }
+
         #endregion
-	}
+    }
 }
 

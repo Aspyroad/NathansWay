@@ -152,6 +152,8 @@ namespace NathansWay.iOS.Numeracy
             this._numberTextNumerator.MyFractionContainer = this;
             this._numberTextDenominator.MyFractionContainer = this;
 
+            // TODO: Now set "some sort" of variable to tell numbertext that it needs to offset up as its part of a fraction
+
             this._numberTextNumerator.CreateNumber();
             this._numberTextDenominator.CreateNumber();
             // Event hooks
@@ -175,19 +177,19 @@ namespace NathansWay.iOS.Numeracy
 
             // Grab the vertical drop for denominator
             var _ypos = 
-                this._numberTextNumerator.NumberContainerSize.CurrentHeight - 16 + 
-                this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
+                this._numberTextNumerator.NumberContainerSize.CurrentHeight + 
+                //this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
             // TODO: Fraction Y -8.0 neeeds to e a variable global
-            this._numberTextNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, -8.0f);
+            this._numberTextNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
             // ****
             this._numberTextDenominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
 
             this.AddAndDisplayController(this._numberTextNumerator);
             this.AddAndDisplayController(this._numberTextDenominator);
 
-            this.View.BringSubviewToFront(this.View);
+            //this.View.BringSubviewToFront(this.View);
 
         }
 

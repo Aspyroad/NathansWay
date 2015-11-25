@@ -88,14 +88,23 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.txtBrace.Frame = this.DecimalSize._recttxtBrace;
+            this.txtBrace.BackgroundColor = UIColor.Clear;
+            this.View.BackgroundColor = UIColor.Clear;
+            //this.HasBorder = false;
+            this.txtBrace.Frame = this.BraceSize._recttxtBrace;
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+
         }
 
         #endregion
         
         #region Public Properties
 
-        public SizeBrace DecimalSize
+        public SizeBrace BraceSize
         {
             get { return (SizeBrace)this._sizeClass; }
             //set { this._sizeClass = value; }
@@ -107,7 +116,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         protected void Initialize_ ()
         {
-            //base.Initialize ();
             this.AspyTag1 = 600106;
             this.AspyName = "VC_BraceText";
 
@@ -118,25 +126,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtBrace = new AspyTextField();
             // Apply some UI to the textbox
             this.SizeClass.SetNumberFont(this.txtBrace);
-            this.txtBrace.HasBorder = true;
-            this.txtBrace.HasRoundedCorners = false;
+            //this.txtBrace.HasBorder = true;
+            //this.txtBrace.HasRoundedCorners = false;
             // Left or right brace
             if (this._isRight)
             {
-                this.txtBrace.Text = ")";
+                this.txtBrace.Text = "2";
                 this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
                 this.txtBrace.TextAlignment = UITextAlignment.Right;
             }
             else
             {
-                this.txtBrace.Text = "(";
+                this.txtBrace.Text = "2";
                 this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
                 this.txtBrace.TextAlignment = UITextAlignment.Left;
             }
             // Center text
 
             // Prettiness
-            this.txtBrace.ApplyUI(this._applyUIWhere);
+            //this.txtBrace.ApplyUI(this._applyUIWhere);
         }
 
         #endregion       
@@ -181,6 +189,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
+        public override void SetNumberFont(AspyTextField _txt)
+        {
+            //base.SetNumberFont(_txt);)
+            _txt.Font = this.GlobalSizeDimensions.GlobalBraceFont;
+        }
+
         public override void SetPositions(PointF _startPoint)
         {
             base.SetPositions(_startPoint);
@@ -192,7 +206,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetHeightWidth ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.BraceWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.BraceHeight;
             base.SetHeightWidth();
         }
 

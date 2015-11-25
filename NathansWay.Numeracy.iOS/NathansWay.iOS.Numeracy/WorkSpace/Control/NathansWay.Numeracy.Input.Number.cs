@@ -297,19 +297,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._sizeNumber; }
         }
 
-        public override bool IsInEditMode
-        {
-            get { return this._bIsInEditMode; }
-            set 
-            {
-                this._bIsInEditMode = value;
-                if (this._numberpad != null)
-                {
-                    this._numberpad.InEditMode = value;
-                }
-            }
-        }
-
         public G__UnitPlacement TensUnit
         {
             get { return _tensUnit; }
@@ -356,6 +343,36 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 _vcNumberContainer = value;
+            }
+        }
+
+        #endregion
+
+        #region Override Public Properties
+
+        public override vcFractionContainer MyFractionContainer
+        {
+            get
+            {
+                return _vcFractionContainer;
+            }
+            set
+            {
+                this._vcFractionContainer = value;
+                this.txtNumber.ApplyTextOffset = true;
+            }
+        }
+
+        public override bool IsInEditMode
+        {
+            get { return this._bIsInEditMode; }
+            set 
+            {
+                this._bIsInEditMode = value;
+                if (this._numberpad != null)
+                {
+                    this._numberpad.InEditMode = value;
+                }
             }
         }
 
@@ -461,14 +478,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.HasBorder = false;
             this.txtNumber.HasRoundedCorners = true;
 
+
             // TODO: These may need to be seperate from global values
             //this.txtNumber.BorderWidth = 1.0f;
             //this.txtNumber.CornerRadius = 2.0f;
 
-            this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-            this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
+            //this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
+            //this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
-            //this.txtNumber.Text
             this.txtNumber.ApplyUI(this._applyUIWhere);
 
             // Wire up our events
@@ -772,26 +789,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.AddGestureRecognizer(singleTapGesture);
         }
 
-        // UI Methods
-        protected void UI_ToggleTextEdit()
-        {
-            //this.txtNumber.BackgroundColor = this.ParentViewController.View.BackgroundColor;
-            //this.txtNumber.TextColor = this.SetBGColor;
-
-//            if (!this.IsInEditMode)
-//            {
-//                // Graphically highlight the text control so we know its selected
-//                this._preEditColor = txtNumber.BackgroundColor;
-//                txtNumber.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.TextHighLightedBGUIColor.Value;
-//                txtNumber.TextColor = AspyUtilities.AlphaHalfer(txtNumber.TextColor);
-//            }
-//            else
-//            {
-//                txtNumber.BackgroundColor = this._preEditColor;
-//                txtNumber.TextColor = AspyUtilities.AlphaRestorer(txtNumber.TextColor);  
-//            }
-        }
-
         // Event Wireups
 
         // Action Delegates
@@ -1088,14 +1085,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             }
-            if (this.ParentContainer.MyFractionContainer == null)
-            {
-                this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
-            }
-            else
-            {
-                this.CurrentHeight = this.GlobalSizeDimensions.FractionNumberHeight;
-            }
+            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
         public override void SetPositions (PointF _startPoint)
@@ -1179,7 +1169,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
-                0.0f, 
+                0.0f,
+                //this.GlobalSizeDimensions.TxtNumberHeightOffset, 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
             );

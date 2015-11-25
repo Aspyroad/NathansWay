@@ -129,7 +129,6 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
-
         public float GlobalWorkSpaceHeight
         {
             get
@@ -424,7 +423,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
             {
                 switch (this._size)
                 {
-                    // Most common
+                // Most common
                     case (G__NumberDisplaySize.Small):
                     {
                         return 60.0f;
@@ -439,11 +438,43 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Large):
                     {
-                        return 120.0f;;
+                        return 120.0f;
+                        ;
                     }
                     default : // Huge
                     {
                         return 240.0f;
+                    }
+                }
+            }
+        }
+        public float TxtNumberHeightOffset
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return -4.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return -12.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return -8.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return -8.0f;
+                        ;
+                    }
+                    default : // Huge
+                    {
+                        return -10.0f;
                     }
                 }
             }
@@ -496,7 +527,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 46.0f;
+                        return 60.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -526,7 +557,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 44.0f;
+                        return 52.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -561,7 +592,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 138.0f;
+                        return 134.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -592,7 +623,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 72.0f;
+                        return 64.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -652,7 +683,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 6.0f;
+                        return 4.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -747,7 +778,37 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
+                        return 60.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 32.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 38.0f;;
+                    }
+                    default : // Huge
+                    {
+                        return 76.0f;
+                    }
+                }
+            }
+        }
+        public float BraceHeight
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
                         return 16.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 120.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -850,7 +911,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Large):
                     {
-                        return 3.0f;;
+                        return 3.0f;
                     }
                     default : // Huge
                     {
@@ -871,22 +932,93 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
             }
         }
-
         public UIFont GlobalNumberFont
         {
             get
             {
-                if (this._size == G__NumberDisplaySize.Normal)
+                switch (this._size)
                 {
-                    return UIFont.FromName("Arial", 76.0f);
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return UIFont.FromName("Arial", 80.0f);
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    default : // Huge
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
                 }
-                else if (this._size == G__NumberDisplaySize.Medium)
+            }
+        }
+        public UIFont GlobalBraceFont
+        {
+            get
+            {
+                switch (this._size)
                 {
-                    return UIFont.FromName("Arial", 77.5f);
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return UIFont.FromName("Arial", 100.0f);
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
+                    default : // Huge
+                    {
+                        return UIFont.FromName("Arial", 76.0f);
+                    }
                 }
-                else // Large
+            }
+        }
+        public PointF GlobalTextOffset
+        {
+            get
+            {
+                switch (this._size)
                 {
-                    return UIFont.FromName("Arial", 110.0f);
+                // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return new PointF(0.0f, -2.0f);
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return new PointF(0.0f, -6.0f);
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return new PointF(0.0f, -6.0f);
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return new PointF(0.0f, -8.0f);
+                    }
+                    default : // Huge
+                    {
+                        return new PointF(0.0f, -10.0f);
+                    }
                 }
             }
         }
