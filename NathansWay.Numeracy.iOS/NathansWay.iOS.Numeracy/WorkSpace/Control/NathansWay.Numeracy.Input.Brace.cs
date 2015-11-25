@@ -131,13 +131,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Left or right brace
             if (this._isRight)
             {
-                this.txtBrace.Text = "2";
+                this.txtBrace.Text = ")";
                 this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Right;
                 this.txtBrace.TextAlignment = UITextAlignment.Right;
             }
             else
             {
-                this.txtBrace.Text = "2";
+                this.txtBrace.Text = "(";
                 this.txtBrace.HorizontalAlignment = UIControlContentHorizontalAlignment.Left;
                 this.txtBrace.TextAlignment = UITextAlignment.Left;
             }
@@ -219,6 +219,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Set main VC Frame
             base.SetFrames();
+            this._recttxtBrace = new RectangleF(
+                0.0f, 
+                0.0f, 
+                this.CurrentWidth,
+                this.CurrentHeight
+            );
         }
 
         #endregion
