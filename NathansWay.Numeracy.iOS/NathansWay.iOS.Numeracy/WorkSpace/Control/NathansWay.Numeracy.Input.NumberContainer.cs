@@ -270,7 +270,14 @@ namespace NathansWay.iOS.Numeracy
                 _Number.IsInitialLoad = false;               
             }
 
-            this.CurrentValue = Convert.ToDouble(_strVal);
+            if (_strVal.Length == 0 || _strVal == ".")
+            {
+                this.CurrentValue = null;
+            }
+            else
+            {
+                this.CurrentValue = Convert.ToDouble(_strVal);
+            }
             // If this is an answer type, check it
             //this.CheckCorrect();
             //this.ApplyUI(this._applyUIWhere);

@@ -257,14 +257,14 @@ namespace NathansWay.iOS.Numeracy
         public virtual void UI_SetViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = UIColor.Brown; //this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
 
         public virtual void UI_SetViewReadOnly()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            this.View.BackgroundColor = UIColor.Green;//this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 

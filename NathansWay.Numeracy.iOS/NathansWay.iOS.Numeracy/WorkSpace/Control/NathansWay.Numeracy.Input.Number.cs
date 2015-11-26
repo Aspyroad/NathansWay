@@ -1096,6 +1096,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SetPickerPositionNormalOff();
         }  
 
+        // Overload for textfield
+        public override void SetNumberFont (AspyTextField _txt)
+        {
+            _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
+            _txt.TextOffset = this.GlobalSizeDimensions.FractionTextOffset;
+        }
+
         #endregion
 
         #region Public Members
@@ -1170,7 +1177,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 0.0f,
-                //this.GlobalSizeDimensions.TxtNumberHeightOffset, 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
             );

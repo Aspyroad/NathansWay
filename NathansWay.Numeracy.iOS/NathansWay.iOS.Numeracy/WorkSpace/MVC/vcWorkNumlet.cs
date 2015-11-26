@@ -214,7 +214,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.MyWorkSpaceContainer.SelectedContainer = this;
 
             // UI Changes
-            this.View.BackgroundColor = UIColor.Gray;
+            this.View.BackgroundColor = UIColor.LightGray;
 
             // Parent call 
             this.MyWorkSpaceContainer.OnControlSelectedChange();

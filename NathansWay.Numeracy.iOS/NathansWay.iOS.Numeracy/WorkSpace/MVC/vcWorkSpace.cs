@@ -416,6 +416,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region EventHandlers
 
+        // TODO: These are interesting
+        // DO we store the results as we go?
+        // What happens as the user cycles through and then back? 
+        // Do we see the completed equations? With their answers?
+        // Do we go back and show this info but make it all readonly
+        // There is quite a bit of logic to do here....
+
+
         private void OnClick_btnNextEquation (object sender, EventArgs e)
         {
             // TODO: change this._intLessonDetailSeq 

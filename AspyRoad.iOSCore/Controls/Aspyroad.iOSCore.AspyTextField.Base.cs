@@ -29,7 +29,6 @@ namespace AspyRoad.iOSCore
         protected PointF _pTextOffset;
         protected bool _bApplyTextOffset;
 
-
         protected UIColor colorBorderColor;
 
         protected bool _bAllowNextResponder;

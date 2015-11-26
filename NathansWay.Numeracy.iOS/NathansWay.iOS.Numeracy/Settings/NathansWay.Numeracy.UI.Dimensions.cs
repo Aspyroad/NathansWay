@@ -623,7 +623,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 64.0f;
+                        return 65.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -730,6 +730,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
+        public PointF FractionTextOffset
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return new PointF(0.0f, -2.0f);
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return new PointF(0.0f, -6.0f);
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return new PointF(0.0f, -6.0f);
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return new PointF(0.0f, -8.0f);
+                    }
+                    default : // Huge
+                    {
+                        return new PointF(0.0f, -10.0f);
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -778,7 +808,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 20.0f;
+                        return 32.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -821,6 +851,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     default : // Huge
                     {
                         return 76.0f;
+                    }
+                }
+            }
+        }
+        public PointF BraceTextOffset
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return new PointF(0.0f, 0.0f);
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return new PointF(-2.0f, -8.0f);
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return new PointF(0.0f, 0.0f);
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return new PointF(0.0f, 0.0f);
+                    }
+                    default : // Huge
+                    {
+                        return new PointF(0.0f, 0.0f);
                     }
                 }
             }
@@ -975,7 +1035,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return UIFont.FromName("Arial", 100.0f);
+                        return UIFont.FromName("Helvetica-Light", 120.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -988,36 +1048,6 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     default : // Huge
                     {
                         return UIFont.FromName("Arial", 76.0f);
-                    }
-                }
-            }
-        }
-        public PointF GlobalTextOffset
-        {
-            get
-            {
-                switch (this._size)
-                {
-                // Most common
-                    case (G__NumberDisplaySize.Small):
-                    {
-                        return new PointF(0.0f, -2.0f);
-                    }
-                    case (G__NumberDisplaySize.Normal):
-                    {
-                        return new PointF(0.0f, -6.0f);
-                    }
-                    case (G__NumberDisplaySize.Medium):
-                    {
-                        return new PointF(0.0f, -6.0f);
-                    }
-                    case (G__NumberDisplaySize.Large):
-                    {
-                        return new PointF(0.0f, -8.0f);
-                    }
-                    default : // Huge
-                    {
-                        return new PointF(0.0f, -10.0f);
                     }
                 }
             }

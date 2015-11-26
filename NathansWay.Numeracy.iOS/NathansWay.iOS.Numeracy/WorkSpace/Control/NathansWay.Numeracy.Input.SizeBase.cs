@@ -237,16 +237,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Virtual Members
 
+        // Override for label formatting of font, size etc
         public virtual void SetNumberFont (AspyLabel _lbl)
         {
-            _lbl.Font = this.GlobalSizeDimensions.GlobalNumberFont;
         }
 
-        // Overload for textfield
+        // Override for text formatting of font, size etc
         public virtual void SetNumberFont (AspyTextField _txt)
         {
-            _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
-            _txt.TextOffset = this.GlobalSizeDimensions.GlobalTextOffset;
         }
 
         public virtual void SetHeightWidth ()
