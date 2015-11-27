@@ -293,7 +293,7 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyNumletContainer = numlet;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
-                if (_control.ContainerType == G__ContainerType.Number)
+                if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)
                 {
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;

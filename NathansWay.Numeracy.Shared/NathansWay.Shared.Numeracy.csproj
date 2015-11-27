@@ -64,7 +64,6 @@
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.BlockResults.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.LessonResults.cs" />
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UISettings.cs" />
-    <Compile Include="UserInterface\NathansWay.Shared.UISettings.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.ToolSettings.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.ToolSettings.cs" />
     <Compile Include="BusinessLayer\Entities\NathansWay.Shared.Entity.UISettings.cs" />
@@ -107,6 +106,7 @@
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UINumberFactory.cs" />
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UINumberDimensions.cs" />
     <Compile Include="Factories\NathansWay.Shared.Numeracy.ExpressionFactory.cs" />
+    <Compile Include="NathansWay.Shared.AppSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

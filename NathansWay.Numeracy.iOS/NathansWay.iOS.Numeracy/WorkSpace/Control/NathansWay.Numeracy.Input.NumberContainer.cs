@@ -26,7 +26,6 @@ namespace NathansWay.iOS.Numeracy
 
         private G__UnitPlacement _tensUnit;
         private string _strInitialValue;
-        private bool _bIsInEditMode;
         // Display a decimal place?
         private bool _bShowDecimal;
         // Number of "whole" (left side) number places
@@ -194,12 +193,10 @@ namespace NathansWay.iOS.Numeracy
                         newnumber.NumberSize.SetAsMultiNumberText = true;
                         this._bMultiNumbered = true;
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-                        //this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
                     else
                     {
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
-                        //this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
                     }
 
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);

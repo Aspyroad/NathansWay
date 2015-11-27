@@ -2,40 +2,46 @@
 using System;
 using System.Drawing;
 using System.Collections.Generic;
+
 // Mono
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.CoreAnimation;
 using MonoTouch.CoreGraphics;
+
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
+
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
-    [Register ("vcNumberText")]
+    [Register("vcNumberText")]
     public class vcNumberText : BaseContainer
     {
         #region Class Variables
 
         // UI Components
         public UIButton btnDown { get; private set; }
+
         public UIButton btnUp { get; private set; }
+
         public AspyTextField txtNumber { get; private set; }
+
         public AspyPickerView pkNumberPicker { get; private set; }
+
         public vNumberContainer _View;
         // Picker Delegates
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
-        private G__NumberPickerPosition _pickerPosition;
+        //private G__NumberPickerPosition _pickerPosition;
         private TextControlDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
 
         private List<string> items = new List<string>();
-        private UIColor _preEditColor;
 
         private vcNumberPad _numberpad;
         private SizeNumber _sizeNumber;
@@ -50,19 +56,19 @@ namespace NathansWay.iOS.Numeracy.Controls
         private G__Significance _significance;
         private int _intIdNumber;
 
-        private bool _bIsInEditMode;
-
         #endregion
 
         #region Constructors
 
-        public vcNumberText (IntPtr h) : base (h)
+        public vcNumberText(IntPtr h)
+            : base(h)
         {
             Initialize();
         }
 
         [Export("initWithCoder:")]
-        public vcNumberText (NSCoder coder) : base(coder)
+        public vcNumberText(NSCoder coder)
+            : base(coder)
         {
             Initialize();
         }
@@ -84,9 +90,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Deconstructors
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -112,7 +118,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Overrides
-        
+
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
@@ -156,7 +162,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Main frame is called in ViewWillAppear Container Base
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
-            this.btnUp.Frame =  this._sizeNumber._rectUpButton;
+            this.btnUp.Frame = this._sizeNumber._rectUpButton;
             // Set the initial state
         }
 
@@ -177,9 +183,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetViewNumberSelected()
         {
-                base.UI_SetViewNumberSelected();
-                // Number specific
-                this.txtNumber.HasBorder = true;
+            base.UI_SetViewNumberSelected();
+            // Number specific
+            this.txtNumber.HasBorder = true;
         }
 
         public override void UI_SetViewNeutral()
@@ -214,7 +220,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public void TapText ()
+        public void TapText()
         {
             if (this._bReadOnly)
             {
@@ -309,31 +315,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._significance = value; }
         }
 
-        public G__NumberEditMode CurrentEditMode
-        {
-            get { return this._currentEditMode; }
-            set
-            {
-                this._currentEditMode = value;
-
-                //                switch (value)
-                //                {
-                //                    case (G__NumberEditMode.EditScroll):    
-                //                        this.btnDown.Hidden = true;
-                //                        this.btnUp.Hidden = true;
-                //                        break;
-                //                    case (G__NumberEditMode.EditNumPad):
-                //                        this.btnDown.Hidden = true;
-                //                        this.btnUp.Hidden = true;
-                //                        break;
-                //                    case (G__NumberEditMode.EditUpDown):
-                //                        this.btnDown.Hidden = false;
-                //                        this.btnUp.Hidden = false;
-                //                        break;
-                //                }
-            }
-        }
-
         public vcNumberContainer MyNumberContainer
         {
             get
@@ -366,7 +347,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override bool IsInEditMode
         {
             get { return this._bIsInEditMode; }
-            set 
+            set
             {
                 this._bIsInEditMode = value;
                 if (this._numberpad != null)
@@ -438,10 +419,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Private Members
-        
-        protected void Initialize ()
+
+        protected void Initialize()
         {
-			this.AspyTag1 = 600102;
+            this.AspyTag1 = 600102;
             this.AspyName = "VC_NumberText";
             // Define the container type
             this._containerType = G__ContainerType.Number;
@@ -543,7 +524,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Handle the press
             this.TapText();
         }
-               
+
         private void btnUpTouch(object sender, EventArgs e)
         {
             this.CommonButtonCode();
@@ -662,7 +643,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.Selected = true;
 
             // Reset our view positions. 
-            this.NumberSize.AutoSetPickerPosition ();
+            this.NumberSize.AutoSetPickerPosition();
 
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeNumber.RectMainFrame;
@@ -750,7 +731,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // create a new tap gesture
             UITapGestureRecognizer singleTapGesture = null;
 
-            NSAction action = () => 
+            NSAction action = () =>
             { 
                 this.pkNumberPicker.Hidden = false;
             };
@@ -765,14 +746,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void pkSingleTapGestureRecognizer()
         {
-            NSAction action = () => 
-                { 
-                    if ( this.IsInEditMode )
-                    {
-                        this.HandlePickerChanged();
-                        this.CloseNumberPicker();
-                    }
-                };
+            NSAction action = () =>
+            { 
+                if (this.IsInEditMode)
+                {
+                    this.HandlePickerChanged();
+                    this.CloseNumberPicker();
+                }
+            };
 
             singleTapGesture = new UITapGestureRecognizer(action);
 
@@ -832,8 +813,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.IsInEditMode = false;
         }
 
-        #endregion    
-        
+        #endregion
+
         #region Delegate Classes
 
         protected class PickerDelegate : UIPickerViewDelegate
@@ -851,34 +832,34 @@ namespace NathansWay.iOS.Numeracy.Controls
             #region Events
 
             public event Action psValueChanged;
-            
+
             #endregion
-            
+
             #region Constructors
-            
+
             public PickerDelegate()
             {
                 Initialize();
             }
-            
-            public PickerDelegate(List<string> Items,  SizeNumber _ns)
+
+            public PickerDelegate(List<string> Items, SizeNumber _ns)
             {
                 this._numberSize = _ns;
                 Initialize();
                 this._items = Items;                
             }
-                        
+
             #endregion
 
             #region Private Members
-            
+
             private void Initialize()
             {
-                this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+                this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager>();
             }
-            
+
             #endregion
-            
+
             #region Public Properties
 
             public string SelectedItemStr
@@ -894,7 +875,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public int CurrentValue
             {
-                set 
+                set
                 { 
                     selectedIndex = value;
                 }
@@ -907,7 +888,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// Called when a row is selected in the spinner
             /// </summary>
-            public override void Selected (UIPickerView picker, int row, int component)
+            public override void Selected(UIPickerView picker, int row, int component)
             {
                 selectedIndex = row;
                 picker.ReloadComponent(component);
@@ -917,7 +898,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// Called by the picker to get the text for a particular row in a particular 
             /// spinner item
             /// </summary>
-            public override string GetTitle (UIPickerView picker, int row, int component)
+            public override string GetTitle(UIPickerView picker, int row, int component)
             {
                 return this._items[row];
             }
@@ -955,8 +936,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
                 _lblPickerView.Text = this._items[row];
                 return _lblPickerView;
-            } 
-            
+            }
+
             /// <Docs>To be added.</Docs>
             /// <summary>
             /// Returns a value for the height of our row
@@ -971,36 +952,36 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             #endregion
         }
-        
+
         protected class PickerSource : UIPickerViewDataSource
         {
             
             #region Class Variables
-            
+
             private List<string> _items;
-            
+
             #endregion
-            
+
             #region Constructors
-            
+
             public PickerSource()
             {
                 
             }
-            
+
             public PickerSource(List<string> Items)
             {
                 this._items = Items;                
             }
-                        
-            #endregion            
+
+            #endregion
 
             #region Overrides
 
             /// <summary>
             /// Called by the picker to determine how many rows are in a given spinner item
             /// </summary>
-            public override int GetRowsInComponent (UIPickerView picker, int component)
+            public override int GetRowsInComponent(UIPickerView picker, int component)
             {
                 int x = 0;
                 if (this._items != null)
@@ -1008,16 +989,16 @@ namespace NathansWay.iOS.Numeracy.Controls
                     x = this._items.Count;
                 }
                 return x;
-            } 
+            }
 
             /// <summary>
             /// called by the picker to get the number of spinner items
             /// </summary>
-            public override int GetComponentCount (UIPickerView picker)
+            public override int GetComponentCount(UIPickerView picker)
             {
                 return 1;
-            }  
-            
+            }
+
             #endregion
         }
 
@@ -1027,6 +1008,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     public class SizeNumber : SizeBase
     {
         #region Class Variables
+
         // X Horizontal
         // Y Vertical
 
@@ -1039,12 +1021,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public RectangleF _rectMainNumberWithPicker;
         // Number Picker Spinner Control
         public RectangleF _rectNumberPicker;
-        // Parent Container
-        private vcNumberText _vcChild;
-
         // Font Size
         public UIFont _globalFont;
-        // Label 
+        // Label
         public SizeF _sLabelPickerViewSize;
 
         #endregion
@@ -1056,7 +1035,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public SizeNumber(BaseContainer _vc) : base (_vc)
+        public SizeNumber(BaseContainer _vc)
+            : base(_vc)
         {
             this.ParentContainer = _vc;
             Initialize();
@@ -1066,16 +1046,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        private void Initialize ()
+        private void Initialize()
         {
-            this._vcChild = (vcNumberText)this.ParentContainer;
+            //this._vcChild = (vcNumberText)this.ParentContainer;
         }
 
         #endregion
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetHeightWidth()
         {
             if (this._bMultiNumberLabel)
             {
@@ -1088,16 +1068,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
         }
 
-        public override void SetPositions (PointF _startPoint)
+        public override void SetPositions(PointF _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
             base.SetPositions(_startPoint);
             // Other Frames
             this.SetPickerPositionNormalOff();
-        }  
+        }
 
         // Overload for textfield
-        public override void SetNumberFont (AspyTextField _txt)
+        public override void SetNumberFont(AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
             _txt.TextOffset = this.GlobalSizeDimensions.FractionTextOffset;
@@ -1107,7 +1087,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public void AutoSetPickerPosition ()
+        public void AutoSetPickerPosition()
         {
             // Check if the height is 
             if ((this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight) > 0)
@@ -1120,7 +1100,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public void SetPickerPositionTopOn ()
+        public void SetPickerPositionTopOn()
         {
             this._rectNumberPicker = new RectangleF(
                 this.StartPointInWindow.X, 
@@ -1160,8 +1140,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             );
         }
 
-        public void SetPickerPositionNormalOff ()
+        public void SetPickerPositionNormalOff()
         {
+
+            // TODO : We need to change these if its in a fraction...but whats the best way?
+
             this._rectMainNumberWithPicker = new RectangleF(
                 0.0f,
                 0.0f,
@@ -1174,23 +1157,23 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth, 
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
+            this._rectUpButton = new RectangleF(
+                0.0f,
+                0.0f,
+                this.CurrentWidth,
+                (this.CurrentHeight/2)
+            );
+            this._rectDownButton = new RectangleF(
+                0.0f,
+                (this.CurrentHeight/2),
+                this.CurrentWidth,
+                (this.CurrentHeight/2)
+            );
             this._rectTxtNumber = new RectangleF(
                 0.0f, 
                 0.0f,
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
-            );
-            this._rectUpButton = new RectangleF(
-                0.0f,
-                0.0f,
-                this.CurrentWidth,
-                this.GlobalSizeDimensions.UpDownButtonHeight
-            );
-            this._rectDownButton = new RectangleF(
-                0.0f,
-                this.GlobalSizeDimensions.UpDownButtonHeight,
-                this.CurrentWidth,
-                this.GlobalSizeDimensions.UpDownButtonHeight
             );
 
         }
@@ -1198,19 +1181,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Public Properties
-
-//        public RectangleF RectTxtNumber
-//        {
-//            get { return this._rectTxtNumber; }
-//        }
-//        public RectangleF RectUpButton
-//        {
-//            get { return this._rectUpButton; }
-//        }
-//        public RectangleF RectDownButton
-//        {
-//            get { return this._rectDownButton; }
-//        }
 
         #endregion
     }
@@ -1220,7 +1190,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     /// <summary>
     /// Overridden UIPickerViewModel - Serves as the datasource for the picklist
     /// </summary>
-    //        protected class PickerDataModel : UIPickerViewModel 
+    //        protected class PickerDataModel : UIPickerViewModel
     //        {
     //            #region Class Variables
     //
@@ -1271,7 +1241,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            }
     //
     //            /// <summary>
-    //            /// called by the picker to get the text for a particular row in a particular 
+    //            /// called by the picker to get the text for a particular row in a particular
     //            /// spinner item
     //            /// </summary>
     //            public override string GetTitle (UIPickerView picker, int row, int component)
@@ -1296,7 +1266,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //                if (this.ValueChanged != null)
     //                {
     //                    this.ValueChanged (this, new EventArgs ());
-    //                }   
+    //                }
     //            }
     //
     //            /// <summary>
@@ -1310,7 +1280,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            }
     //
     //            #endregion
-    //        } 
+    //        }
 
     #endregion
 
@@ -1325,8 +1295,8 @@ namespace NathansWay.iOS.Numeracy.Controls
     //          this.VcTag = 102;
     //          this.VcName = "VC_CtrlNumberCombo";
     //
-    //          this.FrameSize = 
-    //              new RectangleF 
+    //          this.FrameSize =
+    //              new RectangleF
     //              (
     //                  0,
     //                  0,
@@ -1340,7 +1310,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //
     //      }
     //
-    //      public E__NumberComboEditMode EditMode 
+    //      public E__NumberComboEditMode EditMode
     //      {
     //          get { return _editmode; }
     //          set { _editmode = value; }
