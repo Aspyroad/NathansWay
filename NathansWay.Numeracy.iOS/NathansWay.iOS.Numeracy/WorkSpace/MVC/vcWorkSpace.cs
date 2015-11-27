@@ -48,12 +48,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private int _intLessonDetailCurrentSeq;
         private int _intLessonDetailCurrentIndex;
         private int _intLessonDetailCurrentCount;
-        // Are we storing/recording results
-        private bool _bRecordResults;
 
         // Logic
         private G__LessonState _enumLessonState;
         private bool _blessonFinished;
+        // Are we storing/recording results
+        private bool _bRecordResults;
+        // Should the answer display as being correct/incorrect bg color
+        private bool _bDisplayAnswerStatusColor;
         // Readonly
         private bool _bEquationReadOnly;
         private bool _bResultReadonly;
@@ -94,7 +96,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 //Do this because the ViewModel hangs around for the lifetime of the app
                 this.btnNextEquation.TouchUpInside -= OnClick_btnNextEquation;
-
             }
         }
 
@@ -180,6 +181,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcNumletEquation.MyWorkSpaceContainer = this;
             this.AddNumlet(this._vcNumletResult);
             this._vcNumletResult.MyWorkSpaceContainer = this;
+        }
+
+        // TODO: These are interesting
+        // Do we store the results as we go?
+        // What happens as the user cycles through and then back? 
+        // Do we see the completed equations? With their answers?
+        // Do we go back and show this info but make it all readonly
+        // There is quite a bit of logic to do here....
+
+        private bool NextEquation ()
+        {
+            return (this._enumLessonState == G__LessonState.Started);
+        }
+
+        private bool PreviousEquation ()
+        {
+            return (this._enumLessonState == G__LessonState.Started);
         }
 
 		#endregion
@@ -333,7 +351,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
-            //this.View.BackgroundColor = UIColor.Blue;
 		}
 
 		public override void ViewDidLoad()
@@ -345,6 +362,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasBorder = true;
             this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
             this.View.AddSubview(this._vCanvas);
+            this._vCanvas.CornerRadius = 5.0f;
+
             this._vCanvas.Hidden = true;
 
             // Delegate hookups
@@ -416,19 +435,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region EventHandlers
 
-        // TODO: These are interesting
-        // DO we store the results as we go?
-        // What happens as the user cycles through and then back? 
-        // Do we see the completed equations? With their answers?
-        // Do we go back and show this info but make it all readonly
-        // There is quite a bit of logic to do here....
-
-
         private void OnClick_btnNextEquation (object sender, EventArgs e)
         {
             // TODO: change this._intLessonDetailSeq 
             // Forward one
-            if (this._enumLessonState == G__LessonState.Started)
+            if (this.NextEquation())
             {
                 // Remove the old numlets
                 this._intLessonDetailCurrentIndex++;
@@ -436,8 +447,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this._intLessonDetailCurrentIndex >= this._intLessonDetailCurrentCount)
                 {
                     this._intLessonDetailCurrentIndex--;
-
-
                 }
                 this.DisplayExpression();
             }
@@ -448,7 +457,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // TODO: change this._intLessonDetailSeq 
             // Back one
             // Load numlets
-            if (this._enumLessonState == G__LessonState.Started)
+            if (this.PreviousEquation())
             {
                 // Remove the old numlets
                 this._intLessonDetailCurrentIndex--;

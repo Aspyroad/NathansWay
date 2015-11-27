@@ -64,6 +64,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyLabel lblBackwardCount { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		AspyRoad.iOSCore.AspyLabel lblForwardCount { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
 		vWorkSpace vWorkSpace { get; set; }
 
 		void ReleaseDesignerOutlets ()
@@ -115,6 +123,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			if (btnToolBox != null) {
 				btnToolBox.Dispose ();
 				btnToolBox = null;
+			}
+			if (lblBackwardCount != null) {
+				lblBackwardCount.Dispose ();
+				lblBackwardCount = null;
+			}
+			if (lblForwardCount != null) {
+				lblForwardCount.Dispose ();
+				lblForwardCount = null;
 			}
 			if (vWorkSpace != null) {
 				vWorkSpace.Dispose ();

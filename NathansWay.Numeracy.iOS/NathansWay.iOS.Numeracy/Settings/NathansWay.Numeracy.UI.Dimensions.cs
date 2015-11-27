@@ -808,7 +808,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 32.0f;
+                        return 36.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -868,7 +868,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return new PointF(-2.0f, -8.0f);
+                        return new PointF(-6.0f, -8.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
