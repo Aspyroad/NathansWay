@@ -335,11 +335,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
-                return _vcFractionContainer;
+                return base.MyFractionContainer;
             }
             set
             {
-                this._vcFractionContainer = value;
+                base.MyFractionContainer = value;
                 this.txtNumber.ApplyTextOffset = true;
             }
         }
@@ -378,10 +378,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._intIdNumber; }
             set { this._intIdNumber = value; }
         }
-
-        #endregion
-
-        #region Override Public Properties
 
         public override Nullable<double> CurrentValue
         {
@@ -437,6 +433,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeNumber = new SizeNumber(this);
             this._sizeClass = this._sizeNumber;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
+            this._bIsFraction = false;
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.6f;
@@ -803,7 +800,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.postEdit(this._pickerdelegate.SelectedItemInt);
             }
 
-            this.NumberSize.SetPickerPositionNormalOff();
+            this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeClass.RectMainFrame;
             this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
@@ -1035,8 +1032,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public SizeNumber(BaseContainer _vc)
-            : base(_vc)
+        public SizeNumber(BaseContainer _vc) : base(_vc)
         {
             this.ParentContainer = _vc;
             Initialize();
@@ -1073,7 +1069,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Common width/height/frame settings from Dimensions class
             base.SetPositions(_startPoint);
             // Other Frames
-            this.SetPickerPositionNormalOff();
+            this.SetInitialPosition();
         }
 
         // Overload for textfield
@@ -1092,15 +1088,43 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Check if the height is 
             if ((this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight) > 0)
             {
-                this.SetPickerPositionTopOn();
+                if (this._bIsFraction)
+                {
+                    this.SetPickerPositionTopOnFraction();
+                }
+                else
+                {
+                    this.SetPickerPositionTopOn();
+                }
             }
             else
             {
-                this.SetPickerPositionBottomOn();
+                if (this._bIsFraction)
+                {
+                    this.SetPickerPositionBottomOnFraction();
+                }
+                else
+                {
+                    this.SetPickerPositionBottomOn();
+                }
             }
         }
 
-        public void SetPickerPositionTopOn()
+        public void SetInitialPosition()
+        {
+            if (this._bIsFraction)
+            {
+                this.SetPickerPositionNormalOffFraction();
+            }
+            else
+            {
+                this.SetPickerPositionNormalOff();
+            }
+        }
+
+        #region Normal
+
+        private void SetPickerPositionTopOn()
         {
             this._rectNumberPicker = new RectangleF(
                 this.StartPointInWindow.X, 
@@ -1124,7 +1148,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             );
         }
 
-        public void SetPickerPositionBottomOn()
+        private void SetPickerPositionBottomOn()
         {
             this._rectNumberPicker = new RectangleF(
                 this.StartPointInWindow.X,
@@ -1139,12 +1163,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
             );
         }
-
-        public void SetPickerPositionNormalOff()
+       
+        private void SetPickerPositionNormalOff()
         {
-
-            // TODO : We need to change these if its in a fraction...but whats the best way?
-
             this._rectMainNumberWithPicker = new RectangleF(
                 0.0f,
                 0.0f,
@@ -1174,9 +1195,88 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
+            ); 
+        }
+
+        #endregion
+
+        #region Fraction
+
+        public void SetPickerPositionTopOnFraction()
+        {
+            this._rectNumberPicker = new RectangleF(
+                this.StartPointInWindow.X, 
+                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.NumberPickerHeight
             );
 
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.CurrentWidth, 
+                (this.GlobalSizeDimensions.TxtNumberHeight)
+            );
+
+            this._rectTxtNumber = new RectangleF(
+                0.0f, 
+                (this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.TxtNumberHeight
+            );
         }
+
+        public void SetPickerPositionBottomOnFraction()
+        {
+            this._rectNumberPicker = new RectangleF(
+                this.StartPointInWindow.X,
+                (this.StartPointInWindow.Y + this.CurrentHeight), 
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.NumberPickerHeight
+            );
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.CurrentWidth,
+                (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
+            );
+        }
+
+        public void SetPickerPositionNormalOffFraction()
+        {
+            this._rectMainNumberWithPicker = new RectangleF(
+                0.0f,
+                0.0f,
+                this._sLabelPickerViewSize.Width,
+                this._sLabelPickerViewSize.Height
+            );
+            this.RectMainFrame = new RectangleF(
+                this.StartPoint.X, 
+                this.StartPoint.Y, 
+                this.CurrentWidth, 
+                this.GlobalSizeDimensions.FractionNumberHeight
+            );
+            this._rectUpButton = new RectangleF(
+                0.0f,
+                0.0f,
+                this.CurrentWidth,
+                (this.GlobalSizeDimensions.FractionNumberHeight/2)
+            );
+            this._rectDownButton = new RectangleF(
+                0.0f,
+                (this.GlobalSizeDimensions.FractionNumberHeight/2),
+                this.CurrentWidth,
+                (this.GlobalSizeDimensions.FractionNumberHeight/2)
+            );
+            this._rectTxtNumber = new RectangleF(
+                0.0f, 
+                0.0f,
+                this.CurrentWidth,
+                this.GlobalSizeDimensions.FractionNumberHeight
+            );
+        }
+
+        #endregion
 
         #endregion
 

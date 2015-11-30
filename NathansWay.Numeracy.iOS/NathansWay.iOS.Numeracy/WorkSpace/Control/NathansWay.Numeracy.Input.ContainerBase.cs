@@ -71,6 +71,7 @@ namespace NathansWay.iOS.Numeracy
         // Fraction, Numlet, WorkSpace
         // If this Container is in a Fraction, we set its parent Fraction.
         protected vcFractionContainer _vcFractionContainer;
+        protected bool _bIsFraction;
         // If this Container is in a Numlet, we set its parent Numlet.
         protected vcWorkNumlet _vcNumletContainer;
         // If this Container is in a Workspace, we set its parent Workspace
@@ -127,6 +128,7 @@ namespace NathansWay.iOS.Numeracy
             this._answerState = G__AnswerState.UnAttempted;
             this._containerType = G__ContainerType.Container;
             this._bIsAnswer = false;
+            this._bIsFraction = false;
             this._bInitialLoad = true;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
@@ -483,6 +485,11 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 this._vcFractionContainer = value;
+                if (value != null)
+                {
+                    this._bIsFraction = true;
+                    this.SizeClass.IsFaction = true;
+                }
             }
         }
 
@@ -508,6 +515,12 @@ namespace NathansWay.iOS.Numeracy
             {
                 this._vcWorkSpaceContainer = value;
             }
+        }
+
+        public bool IsFaction
+        {
+            get { return this._bIsFraction; }
+            set { this._bIsFraction = value; }
         }
 
         #endregion

@@ -54,8 +54,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Global sizeclass padding variable for extreme left right top bottom placement.
         protected float _fPaddingPositional;
 
-
-
         // Parent container reference
         internal BaseContainer _parentContainer;
         // Current Sizing
@@ -64,9 +62,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Old Sizing
         protected float _fOldWidth = 0.0f;
         protected float _fOldHeight = 0.0f;
+
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
         protected bool _bMultiNumberLabel;
+        // Is part of a fraction container, these need to have their height adjusted
+        protected bool _bIsFraction;
+
         protected float _fParentContainerWidth;
         protected float _fParentContainerHeight;
         // PointF location with respect to the Window and ContainerController
@@ -106,6 +108,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._fPaddingPositional = 1.0f;
 
             this._bMultiNumberLabel = false;
+            this._bIsFraction = false;
         }
 
         /// <summary>
@@ -462,10 +465,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._fPaddingPositional = value; }
         }
 
-        public bool SetAsMultiNumberText
+        public bool IsMultiNumberText
         {
             get { return this._bMultiNumberLabel; }
             set { this._bMultiNumberLabel = value; }
+        }
+
+        public bool IsFaction
+        {
+            get { return this._bIsFraction; }
+            set { this._bIsFraction = value; }
         }
 
         #endregion

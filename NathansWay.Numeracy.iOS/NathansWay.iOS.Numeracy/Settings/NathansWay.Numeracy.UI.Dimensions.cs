@@ -743,7 +743,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return new PointF(0.0f, -6.0f);
+                        return new PointF(0.0f, 2.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {

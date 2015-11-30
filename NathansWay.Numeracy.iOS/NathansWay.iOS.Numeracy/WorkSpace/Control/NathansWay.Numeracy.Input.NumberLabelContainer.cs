@@ -146,7 +146,7 @@ namespace NathansWay.iOS.Numeracy
 
                     if (_sig > 1 || _result.Length > 1)
                     {
-                        newnumber.NumberLabelSize.SetAsMultiNumberText = true;
+                        newnumber.NumberLabelSize.IsMultiNumberText = true;
                     }
                     // Number UI
                     newnumber.HasBorder = false;
@@ -178,7 +178,7 @@ namespace NathansWay.iOS.Numeracy
                     // Set our current width - and shorten if there is more then one number
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
-                        newnumber.NumberLabelSize.SetAsMultiNumberText = true;
+                        newnumber.NumberLabelSize.IsMultiNumberText = true;
                         newnumber.NumberLabelSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberLabelSize.CurrentWidth);
                     }

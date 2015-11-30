@@ -154,11 +154,13 @@ namespace NathansWay.iOS.Numeracy
                     // Create a number box
                     vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberContainer = this;
+                    // Set this here as we need to know of this is a fraction BEFORE we call SizeClass.SetPositions()
+                    newnumber.MyFractionContainer = this.MyFractionContainer;
                     newnumber.IDNumber = i;
 
                     if (_sig > 1 || _result.Length > 1)
                     {
-                        newnumber.NumberSize.SetAsMultiNumberText = true;
+                        newnumber.NumberSize.IsMultiNumberText = true;
                     }
                     // Number UI
                     newnumber.HasBorder = false;
@@ -190,7 +192,7 @@ namespace NathansWay.iOS.Numeracy
                     // Set our current width - and shorten if there is more then one number
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
-                        newnumber.NumberSize.SetAsMultiNumberText = true;
+                        newnumber.NumberSize.IsMultiNumberText = true;
                         this._bMultiNumbered = true;
                         newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
                     }
@@ -396,6 +398,13 @@ namespace NathansWay.iOS.Numeracy
         {           
             base.OnControlSelectedChange();
 
+            // Check if its a fraction based Number
+            if (this._bIsFraction)
+            {
+                this.MyFractionContainer.SelectedNumberContainer = this;
+
+
+            }
 
             // Release any UI to children losing select
             if (this.MyNumletContainer.SelectedContainer != null)
@@ -608,14 +617,22 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 base._vcFractionContainer = value;
-                // Loop through this._lsNumbers
-                if (this._lsNumbers != null)
+
+                if (value != null)
                 {
-                    foreach (BaseContainer _Number in this._lsNumbers)
-                    {
-                        _Number.MyFractionContainer = value;
-                    }
+                    this._bIsFraction = true;
+                    this.SizeClass.IsFaction = true;
                 }
+
+                // No point doing this, as the baseof sizeclass sets bFraction to true
+                // Loop through this._lsNumbers
+                //if (this._lsNumbers != null)
+                //{
+                //    foreach (BaseContainer _Number in this._lsNumbers)
+                //    {
+                //        _Number.MyFractionContainer = value;
+                //    }
+                //}
             }
         }
 
