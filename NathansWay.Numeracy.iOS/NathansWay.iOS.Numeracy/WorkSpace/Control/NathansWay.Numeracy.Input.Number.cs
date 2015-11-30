@@ -498,6 +498,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
             // Handle multinumber parent containers that this control will be a part of.
+            // This only captures multinumber containers, not fraction containers.
             if (this.MyNumberContainer.SelectedNumberText != null)
             {
                 // Multiple numbertext (decimals, anything over single digits) containers in updown editmode 

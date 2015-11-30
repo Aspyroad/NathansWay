@@ -395,14 +395,19 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public override void OnControlSelectedChange()
-        {           
+        {    
+            // Call base, no point really its empty as far as I know.
             base.OnControlSelectedChange();
 
             // Check if its a fraction based Number
             if (this._bIsFraction)
             {
-                this.MyFractionContainer.SelectedNumberContainer = this;
+                if (this.MyFractionContainer.SelectedNumberContainer != null)
+                {
+                    this.MyFractionContainer.SelectedNumberContainer.OnControlUnSelectedChange();
+                }
 
+                this.MyFractionContainer.SelectedNumberContainer = this;
 
             }
 
@@ -426,6 +431,23 @@ namespace NathansWay.iOS.Numeracy
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
+
+            // Check if its a fraction based Number
+            if (this._bIsFraction)
+            {
+                if (this.MyFractionContainer.SelectedNumberContainer != null)
+                {
+                    // If there is a numbertext selected, clear it.
+                    if (this.MyFractionContainer.SelectedNumberContainer._selectedNumberText != null)
+                    {
+                        if (this.MyFractionContainer.SelectedNumberContainer._selectedNumberText.IsInEditMode)
+                        {
+                            this.MyFractionContainer.SelectedNumberContainer._selectedNumberText.TapText();
+                        }
+                        this.MyFractionContainer.SelectedNumberContainer._selectedNumberText = null;
+                    }
+                }
+            }
 
             // UI Changes
             if (this._bReadOnly)
