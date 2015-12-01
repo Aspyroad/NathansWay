@@ -57,8 +57,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize_();
         }
 
-
-
         #endregion
 
         #region Deconstructors
@@ -136,20 +134,27 @@ namespace NathansWay.iOS.Numeracy.Controls
         {           
             base.OnControlSelectedChange();
 
-            // The equals sign will become a button for entry if the 
-            // Globaleditmode == EditUpDown
-            // The following of handles 
-            if (this._currentEditMode == G__NumberEditMode.EditUpDown)
+            // IF AN EQUALS WE NEED THIS TO BE A BUTTON TO CHECK THE RESULT.
+
+            if (this._operatorType == G__MathChar.Equals)
             {
-                if (this.MyNumletContainer.SelectedContainer != null)
+                // The equals sign will become a button for entry if the 
+                // Globaleditmode == EditUpDown
+                // The following of handles 
+                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
                 {
-                    vcNumberContainer y = (vcNumberContainer)this.MyNumletContainer.SelectedContainer;
-                    if (y.SelectedNumberText != null)
+                    if (this.MyNumletContainer.SelectedContainer != null)
                     {
-                        y.SelectedNumberText.PostUpDownEdit();
+                        vcNumberContainer y = (vcNumberContainer)this.MyNumletContainer.SelectedContainer;
+                        if (y.SelectedNumberText != null)
+                        {
+                            y.SelectedNumberText.PostUpDownEdit();
+                        }
                     }
-                }
+                }                
             }
+
+
 
             // Let numlet know whos the boss
             if (this.MyNumletContainer.SelectedContainer != null)

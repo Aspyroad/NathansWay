@@ -499,26 +499,26 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Handle multinumber parent containers that this control will be a part of.
             // This only captures multinumber containers, not fraction containers.
-            if (this.MyNumberContainer.SelectedNumberText != null)
-            {
-                // Multiple numbertext (decimals, anything over single digits) containers in updown editmode 
-                // are a special case and need extra logic here and in numbercontainer and even numlet container
-                if ((this._currentEditMode == G__NumberEditMode.EditUpDown) && (this.MyNumberContainer.SelectedNumberText.IsInEditMode))
-                {
-                    this.MyNumberContainer.SelectedNumberText.HideUpDownButtons();
-                    // Finished
-                    this.IsInEditMode = false;
-                    this.Selected = false;
-
-                }
-                if ((this.MyNumberContainer.SelectedNumberText.IsInEditMode) && (this.MyNumberContainer.SelectedNumberText != this))
-                {
-                    this.MyNumberContainer.SelectedNumberText.TapText();
-                    this.MyNumberContainer.SelectedNumberText.UI_SetViewSelected();
-                }
-            }
-            // Let the parent know this control has focus
-            this.MyNumberContainer.SelectedNumberText = this;
+//            if (this.MyNumberContainer.SelectedNumberText != null)
+//            {
+//                // Multiple numbertext (decimals, anything over single digits) containers in updown editmode 
+//                // are a special case and need extra logic here and in numbercontainer and even numlet container
+//                if ((this._currentEditMode == G__NumberEditMode.EditUpDown) && (this.MyNumberContainer.SelectedNumberText.IsInEditMode))
+//                {
+//                    this.MyNumberContainer.SelectedNumberText.HideUpDownButtons();
+//                    // Finished
+//                    this.IsInEditMode = false;
+//                    this.Selected = false;
+//
+//                }
+//                if ((this.MyNumberContainer.SelectedNumberText.IsInEditMode) && (this.MyNumberContainer.SelectedNumberText != this))
+//                {
+//                    this.MyNumberContainer.SelectedNumberText.TapText();
+//                    this.MyNumberContainer.SelectedNumberText.UI_SetViewSelected();
+//                }
+//            }
+//            // Let the parent know this control has focus
+//            this.MyNumberContainer.SelectedNumberText = this;
             // Handle the press
             this.TapText();
         }
@@ -667,14 +667,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
 
-            // Clear the text when picker to make it clearer
-            // No, I think its best to dim the text? 
-            // this.txtNumber.TextColor = "";
-
-            //this.View.BringSubviewToFront(this.pkNumberPicker);
-            //this.pkNumberPicker.ApplyUI();
-
-            //this.pkNumberPicker.Select(this._intCurrentValue, 0, false);
         }
 
         protected void EditNumPad()
