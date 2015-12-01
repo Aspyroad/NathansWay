@@ -87,6 +87,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
+        public override void LoadView()
+        {
+            base.LoadView();
+            this.AddAndSetWorkSpace();
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -96,7 +102,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetPositions(0.0f, 0.0f);
 
             // TODO: WHERE DO WE ADD MAINGAME AND WORKSPACE??
-            this.AddAndSetWorkSpace();
+            //this.AddAndSetWorkSpace();
         }
 
         public override void ViewWillAppear(bool animated)

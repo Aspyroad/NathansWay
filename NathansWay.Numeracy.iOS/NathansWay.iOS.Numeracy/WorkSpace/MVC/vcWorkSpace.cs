@@ -200,6 +200,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return (this._enumLessonState == G__LessonState.Started);
         }
 
+        private void SetWorkSpaceInitialPosition()
+        {
+            var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
+            var _pointF1 = new PointF(4.0f, y);
+            this.SizeClass.SetPositions(_pointF1);
+        }
+
 		#endregion
 
         #region Public Members
@@ -224,11 +231,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadEquationNumlet()
         {
             this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation, this._bEquationReadOnly);
+            this._vcNumletEquation.MyWorkSpaceContainer = this;
         }
 
         public void LoadResultNumlet()
         {
             this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
+            this._vcNumletResult.MyWorkSpaceContainer = this;
         }
 
         public void LoadMethodNumlets()
@@ -351,7 +360,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void LoadView()
 		{
 			base.LoadView(); 
+            this.SetWorkSpaceInitialPosition();
+            this.View.Layer.Opacity = 0.0f;
 		}
+
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+        }
 
 		public override void ViewDidLoad()
 		{
@@ -382,11 +398,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnMethods.TouchUpInside += OnClick_btnMethods;
             this.btnOption2.TouchUpInside += OnClick_btnOption2;
             this.btnOption3.TouchUpInside += OnClick_btnOption3;
+
 		}
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.View.Layer.Opacity = 1.0f;
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)

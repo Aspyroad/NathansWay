@@ -201,6 +201,7 @@ namespace NathansWay.iOS.Numeracy
                 var _control = (BaseContainer)this._uiOutputEquation[i];
                 _control.IsReadOnly = _readonly;
                 _control.MyNumletContainer = numlet;
+                //_control.MyWorkSpaceContainer = this._vcWorkSpace;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Fraction))

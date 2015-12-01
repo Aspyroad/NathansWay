@@ -106,6 +106,7 @@ namespace NathansWay.iOS.Numeracy
             // Shouldnt need to set frame sizes as these are knowns
             //_oldVC.View.Frame = _newVC.View.Frame;
             this._vcOld.WillMoveToParentViewController(null);
+            this._vcNew.WillMoveToParentViewController(this);
             this.AddChildViewController(this._vcNew);
 
             // Let the container perform the transition
