@@ -340,7 +340,7 @@ namespace NathansWay.iOS.Numeracy
             set { this._tensUnit = value; }
         }
 
-        public vcFractionContainer MyFractionContainer
+        public vcFractionContainer MyFractionParent
         {
             get
             {

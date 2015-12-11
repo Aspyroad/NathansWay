@@ -102,7 +102,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #region Public Members
 
 
-
         #endregion
 
         #region Public Properties
@@ -155,6 +154,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
+        #region Override Public Properties
+
+        #endregion
+
 		#region Overrides
 
 		public override void DidReceiveMemoryWarning()
@@ -203,42 +206,38 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange()
         {
             base.OnControlSelectedChange();
-
-            // Release any UI to children losing select
-            if (this.MyWorkSpaceContainer.SelectedContainer != null)
-            {
-                this.MyWorkSpaceContainer.SelectedContainer.OnControlUnSelectedChange();
-            }
-
-            // Let WorkSpace know whos the boss
-            this.MyWorkSpaceContainer.SelectedContainer = this;
-
-            // UI Changes
-            this.View.BackgroundColor = UIColor.LightGray;
-
-            // Parent call 
-            this.MyWorkSpaceContainer.OnControlSelectedChange();
-
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
+        }
 
-            // Release any UI to children losing select
-            if (this.SelectedContainer != null)
-            {
-                this.SelectedContainer.OnControlUnSelectedChange();
-            }
+        public override void UI_SetViewSelected()
+        {
+            this.View.BackgroundColor = UIColor.Gray;
+            //base.UI_SetViewSelected();
+        }
 
-            // UI Changes
+        public override void UI_SetViewNeutral()
+        {
+            base.UI_SetViewNeutral();
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            base.UI_SetViewInCorrect();
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            base.UI_SetViewCorrect();
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
             this.View.BackgroundColor = UIColor.White;
-
-            // Clear out the child
-            this.MyWorkSpaceContainer.SelectedContainer = null;
-
-            // Parent call 
-            this.MyWorkSpaceContainer.OnControlUnSelectedChange();
+            //base.UI_SetViewReadOnly();
         }
 
 		#endregion

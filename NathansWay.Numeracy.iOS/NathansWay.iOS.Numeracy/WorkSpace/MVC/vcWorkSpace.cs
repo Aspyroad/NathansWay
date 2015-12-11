@@ -178,9 +178,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.LoadResultNumlet();
 
             this.AddNumlet(this._vcNumletEquation);
-            this._vcNumletEquation.MyWorkSpaceContainer = this;
+            this._vcNumletEquation.MyWorkSpaceParent = this;
             this.AddNumlet(this._vcNumletResult);
-            this._vcNumletResult.MyWorkSpaceContainer = this;
+            this._vcNumletResult.MyWorkSpaceParent = this;
         }
 
         // TODO: These are interesting
@@ -231,13 +231,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadEquationNumlet()
         {
             this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation, this._bEquationReadOnly);
-            this._vcNumletEquation.MyWorkSpaceContainer = this;
+            //this._vcNumletEquation.MyWorkSpaceParent = this;
         }
 
         public void LoadResultNumlet()
         {
             this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
-            this._vcNumletResult.MyWorkSpaceContainer = this;
+            //this._vcNumletResult.MyWorkSpaceParent = this;
         }
 
         public void LoadMethodNumlets()
@@ -447,6 +447,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // No parent to call
 
+        }
+
+        public override void UI_SetViewSelected()
+        {
+            //base.UI_SetViewSelected();
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            //base.UI_SetViewNeutral();
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            //base.UI_SetViewInCorrect();
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            //base.UI_SetViewCorrect();
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            //base.UI_SetViewReadOnly();
         }
 
 		#endregion

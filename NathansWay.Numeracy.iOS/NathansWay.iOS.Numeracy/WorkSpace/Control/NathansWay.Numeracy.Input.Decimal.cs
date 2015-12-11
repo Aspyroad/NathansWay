@@ -105,18 +105,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            return false;
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            } 
+            if (this._bIsAnswer)
+            {
+                this.UI_SetViewNeutral();
+            }
+            return true;
         }
 
         public override void UI_SetViewSelected()
         {
             base.UI_SetViewSelected();
-            // Number specific
-        }
-
-        public override void UI_SetViewNumberSelected()
-        {
-            base.UI_SetViewNumberSelected();
             // Number specific
         }
 
@@ -135,13 +137,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_SetViewCorrect()
         {
             base.UI_SetViewCorrect();
-            // Number specific
         }
 
         public override void UI_SetViewInCorrect()
         {
             base.UI_SetViewInCorrect();
-            // Number specific
         }
 
         #endregion

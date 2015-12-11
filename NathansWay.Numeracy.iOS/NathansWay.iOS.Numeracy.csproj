@@ -221,12 +221,12 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.FractionContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpaceLabel.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.SizeBase.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.ContainerBase.cs" />
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UINumberFactory.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.vDecimal.cs">
       <DependentUpon>NathansWay.Numeracy.Input.Decimal.cs</DependentUpon>
     </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.ContainerBase.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.SizeBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>

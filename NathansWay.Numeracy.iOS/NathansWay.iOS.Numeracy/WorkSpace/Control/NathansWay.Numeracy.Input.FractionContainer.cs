@@ -97,8 +97,8 @@ namespace NathansWay.iOS.Numeracy
                 this._numberContainerDenominator.eValueChange -= this.OnValueChange;
                 this._numberContainerDenominator.eTextSizeChange -= this.OnTextSizeChange;
                 // Clear its parent
-                this._numberContainerNumerator.MyFractionContainer = null;
-                this._numberContainerDenominator.MyFractionContainer = null;
+                this._numberContainerNumerator.MyFractionParent = null;
+                this._numberContainerDenominator.MyFractionParent = null;
             }
         }
 
@@ -148,16 +148,18 @@ namespace NathansWay.iOS.Numeracy
             //this.numberText_Numerator.IsAnswer = this.IsAnswer;
             //this.numberText_Denominator.IsAnswer = this.IsAnswer;
 
-            // Create the numbers
-
             // Set the fraction container parent of num and den
-            this._numberContainerNumerator.MyFractionContainer = this;
-            this._numberContainerDenominator.MyFractionContainer = this;
+            this._numberContainerNumerator.MyFractionParent = this;
+            this._numberContainerDenominator.MyFractionParent = this;
+            // Immidiate parent for chaining 
+            this._numberContainerNumerator.MyImmediateParent = this;
+            this._numberContainerDenominator.MyImmediateParent = this;
 
-            // TODO: Now set "some sort" of variable to tell numbertext that it needs to offset up as its part of a fraction
+            // Create the numbers
+            this._numberContainerNumerator.CreateNumber(true);
+            this._numberContainerDenominator.CreateNumber(true);
 
-            this._numberContainerNumerator.CreateNumber();
-            this._numberContainerDenominator.CreateNumber();
+
             // Event hooks
             this._numberContainerNumerator.eValueChange += this.OnValueChange;
             this._numberContainerNumerator.eTextSizeChange += this.OnTextSizeChange;
@@ -197,7 +199,7 @@ namespace NathansWay.iOS.Numeracy
             this._vFractionContainer = new vFractionContainer();
             //this.View = null;
             this.View = this._vFractionContainer;
-            this._vFractionContainer.BackgroundColor = UIColor.Clear;
+
         }
 
         public override void ViewWillAppear(bool animated)
@@ -205,6 +207,7 @@ namespace NathansWay.iOS.Numeracy
             // Set fraction "line" poisiton this is drawn in the vFraction
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             base.ViewWillAppear(animated);
+
         }
 
         public override void OnValueChange(object s, EventArgs e)
@@ -218,7 +221,6 @@ namespace NathansWay.iOS.Numeracy
 
             // If this is an answer type, check it
             this.CheckCorrect();
-            this.ApplyUI(G__ApplyUI.ViewWillAppear);
         }
 
         public override void CheckCorrect ()
@@ -246,59 +248,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void UI_SetViewSelected()
-        {
-            base.UI_SetViewSelected();
-//            // Loop through this._lsNumbers
-//            foreach (BaseContainer _Number in this._lsNumbers) 
-//            {
-//                if (_Number.ContainerType == G__ContainerType.Number)
-//                {    
-//                    if (this.SelectedNumberText == (vcNumberText)_Number)
-//                    {     
-//                        _Number.UI_SetViewNumberSelected();                        
-//                    }
-//                    else
-//                    {
-//                        _Number.UI_SetViewSelected();
-//                    }
-//                }
-//                else
-//                {
-//                    // Decimal or unselected number
-//                    _Number.UI_SetViewSelected();              
-//                }
-//            }
-        }
-
-        public override void UI_SetViewNeutral()
-        {
-            base.UI_SetViewNeutral();
-            this._numberContainerNumerator.UI_SetViewNeutral();
-            this._numberContainerDenominator.UI_SetViewNeutral();
-        }
-
-        public override void UI_SetViewInCorrect()
-        {
-            base.UI_SetViewInCorrect();
-            this._numberContainerNumerator.UI_SetViewInCorrect();
-            this._numberContainerDenominator.UI_SetViewInCorrect();
-        }
-
-        public override void UI_SetViewCorrect()
-        {
-            base.UI_SetViewCorrect();
-            this._numberContainerNumerator.UI_SetViewCorrect();
-            this._numberContainerDenominator.UI_SetViewCorrect();
-        }
-
-        public override void UI_SetViewReadOnly()
-        {
-            base.UI_SetViewReadOnly();
-            this._numberContainerNumerator.UI_SetViewReadOnly();
-            this._numberContainerDenominator.UI_SetViewReadOnly();
-        }
-
         public override void ClearValue()
         {
             this.CurrentValue = null;
@@ -309,16 +258,16 @@ namespace NathansWay.iOS.Numeracy
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
+            // Note the calls to base for UI when initializing
             if (base.ApplyUI(_applywhere))
             {
-                this.View.BackgroundColor = UIColor.Clear;
-                if (this._bIsAnswer)
-                {
-                    this.CheckCorrect();
-                }
                 if (this._bReadOnly)
                 {
-                    this.UI_SetViewReadOnly();
+                    base.UI_SetViewReadOnly();
+                } 
+                if (this._bIsAnswer)
+                {
+                    base.UI_SetViewNeutral();
                 }
                 return true;
             }
@@ -338,80 +287,71 @@ namespace NathansWay.iOS.Numeracy
         public override void OnControlSelectedChange()
         {           
             base.OnControlSelectedChange();
-
-
-            // Release any UI to children losing select
-            if (this.MyNumletContainer.SelectedContainer != null)
-            {
-                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
-            }
-
-            // Call Parent
-            this.MyNumletContainer.OnControlSelectedChange();
-
-            // Let WorkSpace know whos the boss
-            // TODO: this would be much better to "pass", for example, 
-            // this.MyNumletContainer.OnControlSelectedChange (BaseContainer this)
-            this.MyNumletContainer.SelectedContainer = this;
-
-            // UI Changes
-            this.UI_SetViewSelected();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-
-            // UI Changes
-            if (this._bReadOnly)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            if (this._bIsAnswer)
-            {
-                this.CheckCorrect();
-            }
-
-            // Clear itself out the parent as not selected
-            this.MyNumletContainer.SelectedContainer = null;
-
-            // Parent Call
-            this.MyNumletContainer.OnControlUnSelectedChange();
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        public override void UI_SetViewSelected()
         {
-            base.TouchesBegan(touches, evt);
-
-            this.Touched = true;
-            if (_bSelected)
-            {
-
-                // This control can actually be selected multiple times.
-                this._bSelected = false;
-                this.OnControlUnSelectedChange();
-
-            }
-            else
-            {
-                this._bSelected = true;
-                this.OnControlSelectedChange();
-            }
-
-            // If any controls want to subscribe
-            //this.FireControlSelected();
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            //base.UI_SetViewSelected();
         }
 
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        public override void UI_SetViewNeutral()
         {
-            base.TouchesEnded(touches, evt);
-            this.Touched = false;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            //base.UI_SetViewNeutral();
         }
+
+        public override void UI_SetViewReadOnly()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            //base.UI_SetViewReadOnly();
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            //base.UI_SetViewCorrect();
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            //base.UI_SetViewInCorrect();
+        }
+
+//        public override void TouchesBegan(NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesBegan(touches, evt);
+//
+//            this.Touched = true;
+//            if (_bSelected)
+//            {
+//                // This control can actually be selected multiple times.
+//                this._bSelected = false;
+//                //this.OnControlUnSelectedChange();
+//            }
+//            else
+//            {
+//                this._bSelected = true;
+//                //this.OnControlSelectedChange();
+//            }
+//
+//            // If any controls want to subscribe
+//            //this.FireControlSelected();
+//        }
+//
+//        public override void TouchesEnded(NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesEnded(touches, evt);
+//            this.Touched = false;
+//        }
 
         #endregion
 
         #region Public Members
-
 
         #endregion
 
@@ -501,7 +441,21 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override vcWorkNumlet MyNumletContainer
+        public override vcWorkSpace MyWorkSpaceParent
+        {
+            get
+            {
+                return base.MyWorkSpaceParent;
+            }
+            set
+            {
+                base.MyWorkSpaceParent = value;
+                this._numberContainerNumerator.MyWorkSpaceParent = value;
+                this._numberContainerDenominator.MyWorkSpaceParent = value;
+            }
+        }
+
+        public override vcWorkNumlet MyNumletParent
         {
             get 
             { 
@@ -510,8 +464,8 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 base._vcNumletContainer = value;
-                this._numberContainerNumerator.MyNumletContainer = value;
-                this._numberContainerDenominator.MyNumletContainer = value;                
+                this._numberContainerNumerator.MyNumletParent = value;
+                this._numberContainerDenominator.MyNumletParent = value;                
             }
         }
 

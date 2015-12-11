@@ -17,6 +17,7 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
 using NathansWay.Shared;
+using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -67,15 +68,30 @@ namespace NathansWay.iOS.Numeracy
         protected string _strCurrentValue;
         protected string _strOriginalValue;
 
-        // Container classes
-        // Fraction, Numlet, WorkSpace
-        // If this Container is in a Fraction, we set its parent Fraction.
-        protected vcFractionContainer _vcFractionContainer;
-        protected bool _bIsFraction;
-        // If this Container is in a Numlet, we set its parent Numlet.
-        protected vcWorkNumlet _vcNumletContainer;
-        // If this Container is in a Workspace, we set its parent Workspace
+        // Container classes for parent/child modeling
+
+        // If this Container is in a Workspace.
         protected vcWorkSpace _vcWorkSpaceContainer;
+        protected bool _bHasWorkSpaceParent;
+        // If this Container is in a Numlet.
+        protected vcWorkNumlet _vcNumletContainer;
+        protected bool _bHasNumletParent;
+        // If this Container is in a Fraction.
+        protected vcFractionContainer _vcFractionContainer;
+        protected bool _bHasFractionParent;
+        // If this Container is in a Number Container.
+        protected vcNumberContainer _vcNumberContainer;
+        protected bool _bHasNumberParent;
+        // This containers closest parent.
+        protected BaseContainer _vcImmediateParent;
+        protected bool _bHasImmediateParent;
+
+        // This holds the selected NumberText or OperatorText. This is the lowest (highest?) level you can go.
+        protected vcNumberText _vcSelectedNumberText;
+        protected bool _bHasSelectedNumberText;
+        protected vcOperatorText _vcSelectedOperatorText;
+        protected bool _bHasSelectedOperatorText;
+
         // Currently selected container, this could be any basecontainer.
         protected BaseContainer _selectedContainer;
 
@@ -127,8 +143,14 @@ namespace NathansWay.iOS.Numeracy
             // Set answer state - default
             this._answerState = G__AnswerState.UnAttempted;
             this._containerType = G__ContainerType.Container;
+            // Logic
             this._bIsAnswer = false;
-            this._bIsFraction = false;
+            this._bHasFractionParent = false;
+            this._bHasNumletParent = false;
+            this._bHasNumberParent = false;
+            this._bHasWorkSpaceParent = false;
+            this._bHasSelectedNumberText = false;
+            this._bHasSelectedOperatorText = false;
             this._bInitialLoad = true;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
@@ -198,15 +220,35 @@ namespace NathansWay.iOS.Numeracy
         {
             // MUST CALL BASE
             this._bSelected = true;
+            if (this._bHasImmediateParent)
+            {
+                this.MyImmediateParent.OnControlSelectedChange();
+            }
+            this.UI_SetViewSelected();
         }
 
         public virtual void OnControlUnSelectedChange()
         {
             // MUST CALL BASE
             this._bSelected = false;
+            if (this._bHasImmediateParent)
+            {
+                this.MyImmediateParent.OnControlUnSelectedChange();
+            }
+            // There are some rules for an Unselect, as it must go back to [n] states
+            if (this._bReadOnly)
+            {
+                this.UI_SetViewReadOnly();
+            }
+            if (this._bIsAnswer)
+            {
+                this.UI_SetViewNeutral();
+            }
+
         }
 
         // TODO: Fix this to include UI changes
+        // This will only ever be called by hitting the equate sign
         public virtual void CheckCorrect ()
         {            
             if ((this._dblOriginalValue == this._dblCurrentValue))
@@ -229,25 +271,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bIsCorrect = false;
                     this.UI_SetViewInCorrect();
                 }
-            }
-        }
-
-        // Used to provide UI etc changes on number/fraction selection
-        public BaseContainer SelectedContainer
-        {
-            get 
-            { 
-                // TODO: Some UI here for Numlet to change also ??
-                return this._selectedContainer; 
-            }
-            set
-            {
-//                if (this._selectedContainer != null)
-//                {
-//                    // Deselect the current selected container
-//                    this._selectedContainer.OnControlUnSelectedChange();
-//                } 
-                this._selectedContainer = value;
             }
         }
 
@@ -287,15 +310,7 @@ namespace NathansWay.iOS.Numeracy
         public virtual void UI_SetViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.View.BackgroundColor = UIColor.Yellow;//this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
-        }
-
-        // For overriding in UINumber
-        public virtual void UI_SetViewNumberSelected()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.View.BackgroundColor = UIColor.White;//this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
         }
 
@@ -333,11 +348,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual SizeBase SizeClass
-        {
-            get { return this._sizeClass; }
-        }
-
         public Nullable<double> PrevValue
         {
             get { return this._dblPrevValue; }
@@ -346,15 +356,6 @@ namespace NathansWay.iOS.Numeracy
                 this._dblPrevValue = value; 
                 this._strPrevValue = value.ToString().Trim();
             }
-        }
-
-        public virtual Nullable<double> CurrentValue
-        {
-            get { return this._dblCurrentValue; }
-            set
-            {
-                this._dblCurrentValue = value; 
-            }          
         }
 
         public Nullable<double> OriginalValue
@@ -395,36 +396,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual bool IsAnswer
-        {
-            get { return this._bIsAnswer; }
-            set 
-            {
-                this._bIsAnswer = value;
-                //this.AnswerState = G__AnswerState.UnAttempted;
-                // Set the Answer as the current value.
-                this._dblOriginalValue = this._dblCurrentValue;
-                this._strOriginalValue = this._strCurrentValue;
-            }
-        }
-
-        public virtual bool IsCorrect
-        {
-            get { return _bIsCorrect; }
-        }
-
-        public virtual bool IsReadOnly
-        {
-            get
-            {
-                return _bReadOnly;
-            }
-            set
-            {
-                _bReadOnly = value;
-            }
-        }
-
         public G__AnswerState AnswerState
         {
             get 
@@ -455,6 +426,54 @@ namespace NathansWay.iOS.Numeracy
             set { this._containerType = value; }
         }
 
+        #endregion
+
+        #region Virtual Public Properties
+
+        public virtual SizeBase SizeClass
+        {
+            get { return this._sizeClass; }
+        }
+
+        public virtual Nullable<double> CurrentValue
+        {
+            get { return this._dblCurrentValue; }
+            set
+            {
+                this._dblCurrentValue = value; 
+            }          
+        }
+
+        public virtual bool IsAnswer
+        {
+            get { return this._bIsAnswer; }
+            set 
+            {
+                this._bIsAnswer = value;
+                //this.AnswerState = G__AnswerState.UnAttempted;
+                // Set the Answer as the current value.
+                this._dblOriginalValue = this._dblCurrentValue;
+                this._strOriginalValue = this._strCurrentValue;
+            }
+        }
+
+        public virtual bool IsCorrect
+        {
+            get { return _bIsCorrect; }
+        }
+
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                return _bReadOnly;
+            }
+            set
+            {
+                _bReadOnly = value;
+            }
+        }
+
         public virtual G__NumberEditMode CurrentEditMode
         {
             get 
@@ -476,36 +495,9 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual vcFractionContainer MyFractionContainer
-        {
-            get
-            {
-                return this._vcFractionContainer;
-            }
-            set
-            {
-                this._vcFractionContainer = value;
-                if (value != null)
-                {
-                    this._bIsFraction = true;
-                    this.SizeClass.IsFaction = true;
-                }
-            }
-        }
+        // Hierarchy
 
-        public virtual vcWorkNumlet MyNumletContainer
-        {
-            get
-            {
-                return this._vcNumletContainer;
-            }
-            set
-            {
-                this._vcNumletContainer = value;
-            }
-        }
-
-        public vcWorkSpace MyWorkSpaceContainer
+        public virtual vcWorkSpace MyWorkSpaceParent
         {
             get
             {
@@ -513,14 +505,176 @@ namespace NathansWay.iOS.Numeracy
             }
             set
             {
-                this._vcWorkSpaceContainer = value;
+                if (value != null)
+                {
+                    this._bHasWorkSpaceParent = true;
+                    this._vcWorkSpaceContainer = value;
+                }
+                else
+                {
+                    this._bHasWorkSpaceParent = false;
+                    this._vcWorkSpaceContainer = null;
+                }
+
             }
         }
 
-        public bool IsFaction
+        public virtual vcWorkNumlet MyNumletParent
         {
-            get { return this._bIsFraction; }
-            set { this._bIsFraction = value; }
+            get
+            {
+                return this._vcNumletContainer;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasNumletParent = true;
+                    this._vcNumletContainer = value;
+                }
+                else
+                {
+                    this._bHasNumletParent = false;
+                    this._vcNumletContainer = null;
+                }
+            }
+        }
+
+        public virtual vcFractionContainer MyFractionParent
+        {
+            get
+            {
+                return this._vcFractionContainer;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasFractionParent = true;
+                    this.SizeClass.IsFraction = true;
+                    this._vcFractionContainer = value;
+                }
+                else
+                {
+                    this._bHasFractionParent = false;
+                    this.SizeClass.IsFraction = false;
+                    this._vcFractionContainer = null;
+                }
+            }
+        }
+
+        public virtual vcNumberContainer MyNumberParent
+        {
+            get { return this._vcNumberContainer; }
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasNumberParent = true;
+                    this._vcNumberContainer = value;
+                }
+                else
+                {
+                    this._bHasNumberParent = false;
+                    this._vcNumberContainer = null;
+                }
+            }
+        }
+
+        public virtual vcNumberText SelectedNumberText
+        {
+            get { return this._vcSelectedNumberText;}
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasSelectedNumberText = true;
+                    this._vcSelectedNumberText = value;
+                }
+                else
+                {
+                    this._bHasSelectedNumberText = false;
+                    this._vcSelectedNumberText = null;
+                }
+
+            }
+        }
+
+        public virtual vcOperatorText SelectedOperatorText
+        {
+            get { return this._vcSelectedOperatorText;}
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasSelectedOperatorText = true;
+                    this._vcSelectedOperatorText = value;
+                }
+                else
+                {
+                    this._bHasSelectedOperatorText = false;
+                    this._vcSelectedOperatorText = null;
+                }
+
+            }
+        }
+
+        public virtual BaseContainer MyImmediateParent
+        {
+            get
+            {
+                return this._vcImmediateParent;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasImmediateParent = true;
+                    this._vcImmediateParent = value;
+                }
+                else
+                {
+                    this._bHasImmediateParent = false;
+                    this._vcImmediateParent = null;
+                }
+
+            }
+        }
+
+        public virtual bool HasFractionParent
+        {
+            get { return this._bHasFractionParent; }
+            set { this._bHasFractionParent = value; }
+        }
+
+        public virtual bool HasNumberParent
+        {
+            get { return this._bHasNumberParent; }
+            set { this._bHasNumberParent = value; }
+        }
+
+        public virtual bool HasNumletParent
+        {
+            get { return this._bHasNumletParent; }
+            set { this._bHasNumletParent = value; }
+        }
+
+        public virtual bool HasWorkSpaceParent
+        {
+            get { return this._bHasWorkSpaceParent; }
+            set { this._bHasWorkSpaceParent = value; }
+        }
+
+        public virtual bool HasSelectedNumberText
+        {
+            get { return this._bHasSelectedNumberText; }
+            set { this._bHasSelectedNumberText = value; }
+        }
+
+        public virtual bool HasSelectedOperatorText
+        {
+            get { return this._bHasSelectedOperatorText; }
+            set { this._bHasSelectedOperatorText = value; }
         }
 
         #endregion

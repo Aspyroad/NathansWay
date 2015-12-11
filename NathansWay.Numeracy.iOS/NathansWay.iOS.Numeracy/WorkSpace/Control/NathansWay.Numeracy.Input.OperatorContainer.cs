@@ -133,76 +133,29 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnControlSelectedChange()
         {           
             base.OnControlSelectedChange();
-
-            // IF AN EQUALS WE NEED THIS TO BE A BUTTON TO CHECK THE RESULT.
-
-            if (this._operatorType == G__MathChar.Equals)
-            {
-                // The equals sign will become a button for entry if the 
-                // Globaleditmode == EditUpDown
-                // The following of handles 
-                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
-                {
-                    if (this.MyNumletContainer.SelectedContainer != null)
-                    {
-                        vcNumberContainer y = (vcNumberContainer)this.MyNumletContainer.SelectedContainer;
-                        if (y.SelectedNumberText != null)
-                        {
-                            y.SelectedNumberText.PostUpDownEdit();
-                        }
-                    }
-                }                
-            }
-
-
-
-            // Let numlet know whos the boss
-            if (this.MyNumletContainer.SelectedContainer != null)
-            {
-                this.MyNumletContainer.SelectedContainer.OnControlUnSelectedChange();
-            }
-            // Let Numlet know whos the boss
-            this.MyNumletContainer.SelectedContainer = this;
-            // Parent Call
-            this.MyNumletContainer.OnControlSelectedChange();
-            // UI Changes
-            this.UI_SetViewSelected();
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-
-            // UI Changes
-            if (this._bReadOnly)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            if (this._bIsAnswer)
-            {
-                this.CheckCorrect();
-            }
-
-            // Clear itself out the parent as not selected
-            this.MyNumletContainer.SelectedContainer = null;
-
-            // Parent Call
-            this.MyNumletContainer.OnControlUnSelectedChange();
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
             base.TouchesBegan(touches, evt);
+
+            // TODO : Test if the asnwer is correct IF!! this is an equate
+
             this.Touched = true;
             if (_bSelected)
             {
                 this._bSelected = false;
-                this.OnControlUnSelectedChange();
+                //this.OnControlUnSelectedChange();
             }
             else
             {
                 this._bSelected = true;
-                this.OnControlSelectedChange();
+                //this.OnControlSelectedChange();
             }
             // For inherited members bubble through inheritance
 

@@ -130,8 +130,8 @@ namespace AspyRoad.iOSCore
             get { return this._colorBorderColor; }
             set 
             { 
-                this._colorBGColor = value;
-                this.View.Layer.BorderColor = this._colorBGColor.CGColor;   
+                this._colorBorderColor = value;
+                this.View.Layer.BorderColor = this._colorBorderColor.CGColor;   
             }
         }
 

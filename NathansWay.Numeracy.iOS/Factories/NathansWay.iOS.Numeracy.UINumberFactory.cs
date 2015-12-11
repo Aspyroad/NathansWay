@@ -47,6 +47,7 @@ namespace NathansWay.iOS.Numeracy
         private List<object> _uiOutputEquation;
         private List<object> _uiOutputResult;
         private List<List<object>> _uiOutputMethods;
+        private vcWorkSpace _vcCurrentWorkSpace;
 
         private iOSNumberDimensions _globalSizeDimensions;
         private G__NumberDisplaySize _numberDisplaySize;
@@ -94,15 +95,15 @@ namespace NathansWay.iOS.Numeracy
         public vcWorkSpace UILoadWorkSpace (LessonViewModel _vmLesson)
         {
             // Create our workspace object
-            vcWorkSpace _vcWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
+            this._vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
             // Load the lesson detail for the selected lesson
-            _vcWorkSpace.WsLesson = _vmLesson.SelectedLesson;
-            _vcWorkSpace.WsLessonDetail = _vmLesson.LessonDetail;
-            _vcWorkSpace.NumberFactory = this;
+            this._vcCurrentWorkSpace.WsLesson = _vmLesson.SelectedLesson;
+            this._vcCurrentWorkSpace.WsLessonDetail = _vmLesson.LessonDetail;
+            this._vcCurrentWorkSpace.NumberFactory = this;
 
             // TODO: Code here to load the first lesson detail automatically if needed goes here I think
 
-            return _vcWorkSpace;
+            return this._vcCurrentWorkSpace;
         }
 
         public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
@@ -189,8 +190,11 @@ namespace NathansWay.iOS.Numeracy
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Equation;
             numlet.IsReadOnly = _readonly;
+            // Set Parent
+            numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+            numlet.MyImmediateParent = this._vcCurrentWorkSpace;
             numlet.OutputContainers = this._uiOutputEquation;
-
+            // Sizing
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             float _xPos = _xSpacing;
@@ -199,9 +203,12 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
                 var _control = (BaseContainer)this._uiOutputEquation[i];
+                // Set Parents
+                _control.MyNumletParent = numlet;
+                _control.MyImmediateParent = numlet;
+                _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+
                 _control.IsReadOnly = _readonly;
-                _control.MyNumletContainer = numlet;
-                //_control.MyWorkSpaceContainer = this._vcWorkSpace;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Fraction))
@@ -282,7 +289,10 @@ namespace NathansWay.iOS.Numeracy
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Result;
             numlet.IsAnswer = true;
-
+            // Set Parent
+            numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+            numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+            // Sizing
             G__NumberDisplaySize _displaySize;
             float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             float _xPos = _xSpacing;
@@ -291,7 +301,10 @@ namespace NathansWay.iOS.Numeracy
             for (int i = 0; i < this._uiOutputResult.Count; i++)
             {                
                 var _control = (BaseContainer)this._uiOutputResult[i];
-                _control.MyNumletContainer = numlet;
+                // Set Parents
+                _control.MyNumletParent = numlet;
+                _control.MyImmediateParent = numlet;
+                _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)

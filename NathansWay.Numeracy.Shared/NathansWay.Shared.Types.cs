@@ -103,7 +103,8 @@ namespace NathansWay.Shared
         Operator = 3,
         Container = 4,
         NumberLabel = 5,
-        Decimal = 6
+        Decimal = 6,
+        NumberText = 7
     }
 
 	#region Filtering

@@ -22,14 +22,13 @@ namespace AspyRoad.iOSCore
         // UI styles
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
+        protected UIColor _colorBorderColor;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
         protected PointF _pTextOffset;
         protected bool _bApplyTextOffset;
-
-        protected UIColor colorBorderColor;
 
         protected bool _bAllowNextResponder;
 
@@ -173,6 +172,16 @@ namespace AspyRoad.iOSCore
                     this.SetNeedsDisplay();
                 }
                 this._fCornerRadius = value; 
+            }
+        }
+
+        public virtual UIColor SetBorderColor
+        {
+            get { return this._colorBorderColor; }
+            set 
+            { 
+                this._colorBorderColor = value;
+                this.Layer.BorderColor = value.CGColor;   
             }
         }
 

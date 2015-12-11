@@ -471,7 +471,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._bMultiNumberLabel = value; }
         }
 
-        public bool IsFaction
+        public bool IsFraction
         {
             get { return this._bIsFraction; }
             set { this._bIsFraction = value; }

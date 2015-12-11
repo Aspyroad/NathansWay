@@ -67,7 +67,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create a number
             var x = new vcNumberContainer(strValue);
             // Create the number
-            x.CreateNumber();
+            x.CreateNumber(false);
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
