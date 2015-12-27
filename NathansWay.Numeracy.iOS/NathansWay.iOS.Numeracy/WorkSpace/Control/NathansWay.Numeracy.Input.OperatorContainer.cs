@@ -122,6 +122,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.UI_SetViewReadOnly();
                 }
+                else
+                {
+                    this.UI_SetViewNeutral();
+                }
                 return true;
             }
             else
@@ -144,19 +148,45 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.TouchesBegan(touches, evt);
 
-            // TODO : Test if the asnwer is correct IF!! this is an equate
-
             this.Touched = true;
             if (_bSelected)
             {
                 this._bSelected = false;
-                //this.OnControlUnSelectedChange();
+                // Handle re-taping the same numbertext...toggle
+                this.MyWorkSpaceParent.SelectedOperatorText = null;
+                this.OnControlUnSelectedChange();
             }
             else
             {
                 this._bSelected = true;
-                //this.OnControlSelectedChange();
+
+                if (this.MyWorkSpaceParent.HasSelectedNumberText)
+                {
+                    var x = this.MyWorkSpaceParent.SelectedNumberText;
+                    if (x.IsInEditMode)
+                    {
+                        x.TapText();
+                    }
+                    x.OnControlUnSelectedChange();
+                    this.MyWorkSpaceParent.SelectedNumberText = null;
+                }
+                // User taps another operator
+                if (this.MyWorkSpaceParent.HasSelectedOperatorText)
+                {
+                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+                }
+                // Handle re-taping the same numbertext...toggle
+                this.MyWorkSpaceParent.SelectedOperatorText = this;
+                this.OnControlSelectedChange();
             }
+
+            // If this is an equals sign fire check correct
+            if (this._operatorType == G__MathChar.Equals)
+            {
+                this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
+            }
+
+
             // For inherited members bubble through inheritance
 
             // If any controls want to subscribe
@@ -203,7 +233,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 //            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
-
         }
 
         #endregion 

@@ -207,7 +207,6 @@ namespace NathansWay.iOS.Numeracy
             // Set fraction "line" poisiton this is drawn in the vFraction
             this._vFractionContainer.RectFractionDivider = this.FractionSize.RectDividerFrame;
             base.ViewWillAppear(animated);
-
         }
 
         public override void OnValueChange(object s, EventArgs e)
@@ -220,32 +219,7 @@ namespace NathansWay.iOS.Numeracy
             this.IsInitialLoad = false;
 
             // If this is an answer type, check it
-            this.CheckCorrect();
-        }
-
-        public override void CheckCorrect ()
-        {            
-            // TODO : Check if this fraction is the answer
-            // Compare against the original value
-            // No need to call base it for basic compares
-            if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
-            {
-                this.AnswerState = G__AnswerState.Correct;
-                this._bIsCorrect = true;
-            }
-            else
-            {
-                if (this._bInitialLoad)
-                {
-                    this.AnswerState = G__AnswerState.UnAttempted;
-                    this._bIsCorrect = false;
-                }
-                else
-                {
-                    this.AnswerState = G__AnswerState.InCorrect;
-                    this._bIsCorrect = false;
-                }
-            }
+            //this.CheckCorrect();
         }
 
         public override void ClearValue()
@@ -294,32 +268,92 @@ namespace NathansWay.iOS.Numeracy
             base.OnControlUnSelectedChange();
         }
 
+        public override void SetCorrectState ()
+        {            
+            // TODO : Check if this fraction is the answer
+            // Compare against the original value
+            // No need to call base it for basic compares
+
+            this._numberContainerDenominator.SetCorrectState();
+            this._numberContainerNumerator.SetCorrectState();
+
+            if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
+            {
+                this.AnswerState = G__AnswerState.Correct;
+                this._bIsCorrect = true;
+                //this.UI_SetViewCorrect();
+            }
+            else
+            {
+                if (this._bInitialLoad)
+                {
+                    this.AnswerState = G__AnswerState.UnAttempted;
+                    this._bIsCorrect = false;
+                    //this.UI_SetViewNeutral();
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                    this._bIsCorrect = false;
+                    //this.UI_SetViewInCorrect();
+                }
+            }
+        }
+
+        public override void UI_SetAnswerState()
+        {
+            this.SetCorrectState();
+
+            if (this._bIsCorrect)
+            {
+                this.UI_SetViewCorrect();
+                this._numberContainerDenominator.UI_SetViewCorrect();
+                this._numberContainerNumerator.UI_SetViewCorrect();
+            }
+            else
+            {
+                if (this._bInitialLoad)
+                {
+                    this.UI_SetViewNeutral();
+                    this._numberContainerDenominator.UI_SetViewNeutral();
+                    this._numberContainerNumerator.UI_SetViewNeutral();
+                }
+                else
+                {
+                    this.UI_SetViewInCorrect();
+                    this._numberContainerDenominator.UI_SetViewInCorrect();
+                    this._numberContainerNumerator.UI_SetViewInCorrect();
+                }
+            }
+
+        }
+
         public override void UI_SetViewSelected()
         {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             //base.UI_SetViewSelected();
         }
 
         public override void UI_SetViewNeutral()
         {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            //base.UI_SetViewNeutral();
+            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            base.UI_SetViewNeutral();
         }
 
         public override void UI_SetViewReadOnly()
         {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            //base.UI_SetViewReadOnly();
+            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            base.UI_SetViewReadOnly();
         }
 
         public override void UI_SetViewCorrect()
         {
-            //base.UI_SetViewCorrect();
+            base.UI_SetViewCorrect();
         }
 
         public override void UI_SetViewInCorrect()
         {
-            //base.UI_SetViewInCorrect();
+            base.UI_SetViewInCorrect();
         }
 
 //        public override void TouchesBegan(NSSet touches, UIEvent evt)

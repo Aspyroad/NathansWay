@@ -246,7 +246,7 @@ namespace NathansWay.iOS.Numeracy
 
             this.CurrentValue = Convert.ToDouble(_strVal);
             // If this is an answer type, check it
-            this.CheckCorrect();
+            this.SetCorrectState();
             this.ApplyUI(this._applyUIWhere);
         }
 

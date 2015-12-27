@@ -168,7 +168,7 @@ namespace NathansWay.iOS.Numeracy
                         newnumber.NumberSize.IsMultiNumberText = true;
                     }
                     // Number UI
-                    newnumber.HasBorder = false;
+                    //newnumber.HasBorder = false;
 
                     #region Set Tens Unit
 
@@ -192,6 +192,9 @@ namespace NathansWay.iOS.Numeracy
                     this._lsNumbers.Add(newnumber);
                     this._lsNumbersOnly.Add(newnumber);
 
+                    var _width = (this._sizeClass.CurrentWidth + (this._sizeClass.GlobalSizeDimensions.BorderNumberWidth * 1));
+                    var _height = this._sizeClass.GlobalSizeDimensions.BorderNumberWidth;
+
                     // Sizing
                     // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
                     // Set our current width - and shorten if there is more then one number
@@ -199,11 +202,11 @@ namespace NathansWay.iOS.Numeracy
                     {
                         newnumber.NumberSize.IsMultiNumberText = true;
                         this._bMultiNumbered = true;
-                        newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberSize.SetPositions(new PointF(_width, _height));
                     }
                     else
                     {
-                        newnumber.NumberSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberSize.SetPositions(new PointF(_width, _height));
                     }
 
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
@@ -241,14 +244,17 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
 
+            var _borderHeight = (2 * this._sizeClass.GlobalSizeDimensions.BorderNumberWidth);
+            this._sizeClass.CurrentWidth += (this._sizeClass.GlobalSizeDimensions.BorderNumberWidth * 2);
+
             // Set our current height
             if (this.MyFractionParent == null)
             {
-                this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight;
+                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + _borderHeight);
             }
             else
             {
-                this.SizeClass.CurrentHeight = this.SizeClass.GlobalSizeDimensions.FractionNumberHeight;
+                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.FractionNumberHeight + _borderHeight);
             }
         }
 
@@ -297,6 +303,64 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+
+//        public override void SetCorrectState ()
+//        {            
+//            // TODO : Check if this fraction is the answer
+//            // Compare against the original value
+//            // No need to call base it for basic compares
+//
+//            this._numberContainerDenominator.SetCorrectState();
+//            this._numberContainerNumerator.SetCorrectState();
+//
+//            if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
+//            {
+//                this.AnswerState = G__AnswerState.Correct;
+//                this._bIsCorrect = true;
+//                //this.UI_SetViewCorrect();
+//            }
+//            else
+//            {
+//                if (this._bInitialLoad)
+//                {
+//                    this.AnswerState = G__AnswerState.UnAttempted;
+//                    this._bIsCorrect = false;
+//                    //this.UI_SetViewNeutral();
+//                }
+//                else
+//                {
+//                    this.AnswerState = G__AnswerState.InCorrect;
+//                    this._bIsCorrect = false;
+//                    //this.UI_SetViewInCorrect();
+//                }
+//            }
+//        }
+
+//        public override void UI_SetAnswerState()
+//        {
+//            this.SetCorrectState();
+//
+//            if (this._bIsCorrect)
+//            {
+//                this._numberContainerDenominator.UI_SetViewCorrect();
+//                this._numberContainerNumerator.UI_SetViewCorrect();
+//            }
+//            else
+//            {
+//                if (this._bInitialLoad)
+//                {
+//                    this._numberContainerDenominator.UI_SetViewNeutral();
+//                    this._numberContainerNumerator.UI_SetViewNeutral();
+//                }
+//                else
+//                {
+//                    this._numberContainerDenominator.UI_SetViewInCorrect();
+//                    this._numberContainerNumerator.UI_SetViewInCorrect();
+//                }
+//            }
+//
+//        }
+
         public override void UI_SetViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
@@ -306,23 +370,39 @@ namespace NathansWay.iOS.Numeracy
         public override void UI_SetViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            //base.UI_SetViewNeutral();
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewNeutral();
+            }
         }
 
         public override void UI_SetViewReadOnly()
         {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            //base.UI_SetViewReadOnly();
+            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+
+            base.UI_SetViewReadOnly();
         }
 
         public override void UI_SetViewCorrect()
         {
-            //base.UI_SetViewCorrect();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewCorrect();
+            }
         }
 
         public override void UI_SetViewInCorrect()
         {
-            //base.UI_SetViewInCorrect();
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers) 
+            {
+                _Number.UI_SetViewInCorrect();
+            }
         }
 
         public override void ClearValue()
@@ -372,33 +452,6 @@ namespace NathansWay.iOS.Numeracy
         {  
             base.OnControlUnSelectedChange();
         }
-
-//        public override void TouchesBegan(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesBegan(touches, evt);
-//
-//            this.Touched = true;
-//            if (_bSelected)
-//            {
-//                this._bSelected = false;
-//                this.OnControlUnSelectedChange();
-//
-//            }
-//            else
-//            {
-//                this._bSelected = true;
-//                this.OnControlSelectedChange();
-//            }
-//
-//            // If any controls want to subscribe
-//            //this.FireControlSelected();
-//        }
-
-//        public override void TouchesEnded(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesEnded(touches, evt);
-//            this.Touched = false;
-//        }
 
         #endregion
 

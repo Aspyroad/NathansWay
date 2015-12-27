@@ -244,18 +244,16 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.UI_SetViewNeutral();
             }
-
         }
 
         // TODO: Fix this to include UI changes
         // This will only ever be called by hitting the equate sign
-        public virtual void CheckCorrect ()
+        public virtual void SetCorrectState ()
         {            
             if ((this._dblOriginalValue == this._dblCurrentValue))
             {
                 this.AnswerState = G__AnswerState.Correct;
                 this._bIsCorrect = true;
-                this.UI_SetViewCorrect();
             }
             else
             {
@@ -263,12 +261,31 @@ namespace NathansWay.iOS.Numeracy
                 {
                     this.AnswerState = G__AnswerState.UnAttempted;
                     this._bIsCorrect = false;
-                    this.UI_SetViewNeutral();
                 }
                 else
                 {
                     this.AnswerState = G__AnswerState.InCorrect;
                     this._bIsCorrect = false;
+                }
+            }
+        }
+
+        public virtual void UI_SetAnswerState()
+        {
+            this.SetCorrectState();
+
+            if (this._bIsCorrect)
+            {
+                this.UI_SetViewCorrect();
+            }
+            else
+            {
+                if (this._bInitialLoad)
+                {
+                    this.UI_SetViewNeutral();
+                }
+                else
+                {
                     this.UI_SetViewInCorrect();
                 }
             }

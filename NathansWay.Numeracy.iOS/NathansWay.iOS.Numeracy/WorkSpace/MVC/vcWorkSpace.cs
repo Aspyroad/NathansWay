@@ -132,6 +132,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._bEquationReadOnly = true;
             this._bResultReadonly = false;
             this._bMethodsReadonly = true;
+
+            this.HasSelectedNumberText = false;
+            this.HasSelectedOperatorText = false;
 		}
 
         private void AddNumlet (vcWorkNumlet _myNumlet)
@@ -205,6 +208,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             var _pointF1 = new PointF(4.0f, y);
             this.SizeClass.SetPositions(_pointF1);
+        }
+
+        private bool TouchInsideNumlets(UITouch _touch)
+        {
+            bool x = false;
+            PointF p1 = _touch.LocationInView(this.View);
+            PointF pNumletEquation = this._vcNumletEquation.View.ConvertPointFromView(p1, this.View);
+            PointF pNumletResult = this._vcNumletResult.View.ConvertPointFromView(p1, this.View);
+
+            if (this._vcNumletEquation.View.PointInside(pNumletEquation, null))
+            {
+                x = true;
+            }
+            if (this._vcNumletResult.View.PointInside(pNumletResult, null))
+            {
+                x = true;
+            }
+
+            if (this._vcNumletMethods != null)
+            {
+                foreach (BaseContainer _Numlet in this._vcNumletMethods) 
+                {
+                    PointF pNumletMethod = _Numlet.View.ConvertPointFromView(p1, this.View);
+                    if (this._vcNumletEquation.View.PointInside(pNumletEquation, null))
+                    {
+                        x = true;
+                    }
+                }
+            }
+            return x;
         }
 
 		#endregion
@@ -348,6 +381,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //            set { this._wsLessonDetailResults = value; }
         //        }
 
+        public vcWorkNumlet NumletEquation
+        {
+            get { return this._vcNumletEquation; }   
+        }
+        public vcWorkNumlet NumletResult
+        {
+            get { return this._vcNumletResult; }
+        }
+        public List<vcWorkNumlet> NumletMethods
+        {
+            get { return this._vcNumletMethods; }    
+        }
+
         #endregion
 
 		#region Overrides
@@ -472,6 +518,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void UI_SetViewReadOnly()
         {
             //base.UI_SetViewReadOnly();
+        }
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+
+            // Check if the touch is inside any active numlets
+            UITouch y = (UITouch)touches.AnyObject;
+            if (this.TouchInsideNumlets(y) != true)
+            {
+                if (this.HasSelectedNumberText)
+                {
+                    var x = this.SelectedNumberText;
+                    if (x.IsInEditMode)
+                    {
+                        x.TapText();
+                    }
+                    x.OnControlUnSelectedChange();
+                    this.SelectedNumberText = null;
+                }
+                // User taps another operator
+                if (this.HasSelectedOperatorText)
+                {
+                    this.SelectedOperatorText.OnControlUnSelectedChange();
+                    this.SelectedOperatorText = null;
+                }
+            }
         }
 
 		#endregion

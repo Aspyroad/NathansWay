@@ -309,10 +309,12 @@ namespace NathansWay.iOS.Numeracy
 
                 if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)
                 {
+                    numlet.ResultContainer = _control;
                     _control.IsInitialLoad = true;
                     _control.IsAnswer = true;
                     _control.IsReadOnly = false;
                     _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+
                     _control.ClearValue();
                 }
                 else

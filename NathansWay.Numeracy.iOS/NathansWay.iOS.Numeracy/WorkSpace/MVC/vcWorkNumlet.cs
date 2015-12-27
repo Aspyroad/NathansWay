@@ -38,6 +38,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private SizeWorkNumlet _sizeWorkNumlet;
         private G__NumberDisplaySize _numberDisplaySize;
 
+        // Result ref
+        private BaseContainer _resultContainer;
+
 		#endregion
 
 		#region Constructors
@@ -152,6 +155,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return this._wsLessonDetail.Equation.ToString(); } 
         }
 
+        public BaseContainer ResultContainer
+        {
+            get { return this._resultContainer; }
+            set { this._resultContainer = value; }
+        }
+
         #endregion
 
         #region Override Public Properties
@@ -190,7 +199,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 return false;
             }
-
         }
 
         public override void ApplyUI7()

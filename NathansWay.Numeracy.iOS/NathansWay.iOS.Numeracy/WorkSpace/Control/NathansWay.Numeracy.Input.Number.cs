@@ -124,6 +124,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // UI
+            this.View.ClipsToBounds = true;
+            this.HasRoundedCorners = true;
+            this.HasBorder = true;
+            this.txtNumber.HasBorder = false;
+            this.txtNumber.BackgroundColor = UIColor.Clear;
+
             // Add subviews - controls
             this.View.AddSubview(this.txtNumber);
             this.View.AddSubview(this.btnUp);
@@ -182,37 +189,26 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_SetViewSelected()
         {
             base.UI_SetViewSelected();
-            // Number specific
-            this.txtNumber.HasBorder = true;
-            this.txtNumber.SetBorderColor = this.SetBorderColor;
         }
 
         public override void UI_SetViewNeutral()
         {
             base.UI_SetViewNeutral();
-            // Number specific
-            this.txtNumber.HasBorder = false;
         }
 
         public override void UI_SetViewReadOnly()
         {
             base.UI_SetViewReadOnly();
-            // Number specific
-            this.txtNumber.HasBorder = false;
         }
 
         public override void UI_SetViewCorrect()
         {
             base.UI_SetViewCorrect();
-            // Number specific
-            this.txtNumber.HasBorder = false;
         }
 
         public override void UI_SetViewInCorrect()
         {
             base.UI_SetViewInCorrect();
-            // Number specific
-            this.txtNumber.HasBorder = false;
         }
 
         public override UIColor SetFontColor
@@ -224,7 +220,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 base.SetFontColor = value;
-                txtNumber.TextColor = value;
+                this.txtNumber.TextColor = value;
             }
         }
 
@@ -396,7 +392,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
 
-        protected void Initialize()
+        private void Initialize()
         {
             this.AspyTag1 = 600102;
             this.AspyName = "VC_NumberText";
@@ -431,8 +427,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.SizeClass.SetNumberFont(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
-            this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AllowNextResponder = true;
+            this.txtNumber.ClipsToBounds = true;
+
             this.txtNumber.HasBorder = false;
             this.txtNumber.HasRoundedCorners = true;
 
@@ -443,7 +440,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             //this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
-            this.txtNumber.ApplyUI(this._applyUIWhere);
+            //this.txtNumber.ApplyUI(this._applyUIWhere);
 
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
@@ -472,33 +469,59 @@ namespace NathansWay.iOS.Numeracy.Controls
             // FIRST!! We need to find ANY!!! selected number texts within the whole workspace and KILL them!
             if (this.MyWorkSpaceParent.HasSelectedNumberText)
             {
-                var x = this.MyWorkSpaceParent.SelectedNumberText;
-                if (x.IsInEditMode)
+                if (this.MyWorkSpaceParent.SelectedNumberText != this)
                 {
-                    x.TapText();
+                    var x = this.MyWorkSpaceParent.SelectedNumberText;
+                    if (x.IsInEditMode)
+                    {
+                        x.TapText();
+                    }
+                    x.OnControlUnSelectedChange();
+                    this.MyWorkSpaceParent.SelectedNumberText = null;
                 }
-                x.OnControlUnSelectedChange();
+                else
+                {                    
+                    if (this.MyWorkSpaceParent.SelectedNumberText == this)
+                    {
+                        // Handle retouch of the same control
+                    }
+                    else
+                    {
+                        //Once here we are now selecting this control
+                        this.MyWorkSpaceParent.SelectedNumberText = this;
+                        this.OnControlSelectedChange();
+                        // Is the control readonly, then return
+                        if (this._bReadOnly)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            this.TapText();
+                        }
+                    }
+                }
             }
-
-            // Handle re-taping the same numbertext...toggle
-            if (this.MyWorkSpaceParent.SelectedNumberText != this)
+            else
             {
+                // SECOND!! We need to see if any operators have been touched
+                if (this.MyWorkSpaceParent.HasSelectedOperatorText)
+                {
+                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+                    this.MyWorkSpaceParent.SelectedOperatorText = null;
+                }
+                // Once here we are now selectoing this control
                 this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange();
-            }
-            else
-            {
-                this.MyWorkSpaceParent.SelectedNumberText = null;
-            }               
-
-            // Instantly exit if this control is readonly
-            if (this._bReadOnly)
-            {
-                return;
-            }
-            else
-            {
-                this.TapText();
+                   // Is the control readonly, then return
+                if (this._bReadOnly)
+                {
+                    return;
+                }
+                else
+                {
+                    this.TapText();
+                }
             }
         }
 
@@ -622,7 +645,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
-
         }
 
         protected void EditNumPad()
@@ -649,8 +671,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._numberpad.View.Hidden = false;
             }
-
-
         }
 
         protected void CloseNumPad()
@@ -699,7 +719,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             singleTapGesture.NumberOfTouchesRequired = 1;
             singleTapGesture.NumberOfTapsRequired = 1;
             // add the gesture recognizer to the view
-            txtNumber.AddGestureRecognizer(singleTapGesture);
+            this.txtNumber.AddGestureRecognizer(singleTapGesture);
         }
 
         protected void pkSingleTapGestureRecognizer()
