@@ -227,6 +227,7 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.ContainerBase.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.SizeBase.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.SolveContainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>

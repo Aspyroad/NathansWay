@@ -126,6 +126,19 @@ namespace NathansWay.iOS.Numeracy
             return _vcNumletEquation;
         }
 
+        public vcWorkNumlet GetSolveNumlet(float _resultNumletWidth)
+        {
+            // This solver Numlet always sits to the left of the result numlet for the time being.
+            // Maybe its own position is needed on the extreme left of workspace.
+            var _vcNumletSolve = this.CreateNumletSolve();
+            _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
+            _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+            _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+            float w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
+            _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            return _vcNumletSolve;
+        }
+
         public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
         {
             // Fire start event
@@ -336,6 +349,41 @@ namespace NathansWay.iOS.Numeracy
 
             // Pad out the end
             numlet.SizeClass.CurrentWidth = _xPos; 
+            numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+
+            // Return completed numnut!
+            // Numlet has no size params set. SetPositions must be called before use!
+            return numlet;
+        }
+
+        private vcWorkNumlet CreateNumletSolve()
+        {
+            // Setup the numlet
+            var numlet = new vcWorkNumlet();
+            var _control = new vcSolveContainer();
+
+            numlet.NumletType = G__WorkNumletType.Solve;
+            numlet.IsAnswer = false;
+            // Set Parent
+            numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+            numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+            // Sizing
+            G__NumberDisplaySize _displaySize;
+            float _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+            float _xPos = _xSpacing;
+            float _yPos = (_xSpacing/2.0f);
+
+            // Hook up the control resizing events so that all controls are messaged by this numlet
+            numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+
+            // Most of these should ApplyUI in ViewWillAppear
+            _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
+
+            _control.SizeClass.SetPositions(_xPos, _yPos);
+            numlet.AddAndDisplayController(_control);
+
+            // Pad out the end
+            numlet.SizeClass.CurrentWidth = this._globalSizeDimensions.GlobalNumberWidth + (2 * _xSpacing); 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
             // Return completed numnut!

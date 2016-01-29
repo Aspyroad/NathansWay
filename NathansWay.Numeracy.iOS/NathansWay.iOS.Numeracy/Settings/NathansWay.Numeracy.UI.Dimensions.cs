@@ -219,6 +219,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
+        public float GlobalScale
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 1.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 2.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 3.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 4.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 5.0f;
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -514,6 +544,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #region Global Widths
 
+        public float GlobalScalingFactor
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 1.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 2.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 3.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 4.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 5.0f;
+                    }
+                }
+            }
+        }
         public float GlobalNumberWidth
         {
             get

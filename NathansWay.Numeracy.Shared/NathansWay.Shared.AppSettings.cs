@@ -11,6 +11,7 @@ namespace NathansWay.Shared
         private G__NumberDisplaySize _GA__NumberLabelDisplaySize;
         private G__NumberDisplaySize _GA__NumberDisplaySize;
         private G__NumberEditMode _GA__NumberEditMode;
+        private bool _GA__ShowAnswerNumlet;
 
         #endregion
 
@@ -58,6 +59,18 @@ namespace NathansWay.Shared
             set
             {
                 _GA__NumberEditMode = value;
+            }
+        }
+
+        public bool GA__ShowAnswerNumlet
+        {
+            get 
+            {
+                return this._GA__ShowAnswerNumlet;
+            }
+            set
+            {
+                _GA__ShowAnswerNumlet = value;   
             }
         }
 

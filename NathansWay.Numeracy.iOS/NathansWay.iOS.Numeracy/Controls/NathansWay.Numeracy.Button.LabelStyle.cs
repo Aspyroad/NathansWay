@@ -59,13 +59,19 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUIUnHeld()
         {
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             this.BackgroundColor = UIColor.Clear;
-            // Must call base last
             base.ApplyUIUnHeld();
         }
-
+            
 		#endregion
+
+        #region Virtuals
+
+        protected virtual void ExtraDrawing()
+        {
+        }
+
+        #endregion
 
 		#region Private Members
 
@@ -78,29 +84,29 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI (this._applyUIWhere);
         }
 
-		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
-		{
-            var context = UIGraphics.GetCurrentContext();
-			//// Rectangle Drawing
-			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
-			if (this.IsPressed || this.HoldState)
-			{
-				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
-			}
-			else
-			{
-				UIColor.Clear.SetFill ();
-			}
-			rectanglePath.Fill();
-			labelTextColor.SetStroke();
-			rectanglePath.LineWidth = 2.0f;
-			rectanglePath.Stroke();
-			labelTextColor.SetFill();
-
-            context.SaveState();
-            context.ClipToRect(rectangleRect);
-		}
+//		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
+//		{
+//            var context = UIGraphics.GetCurrentContext();
+//			//// Rectangle Drawing
+//			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
+//			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
+//			if (this.IsPressed || this.HoldState)
+//			{
+//				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
+//			}
+//			else
+//			{
+//				UIColor.Clear.SetFill ();
+//			}
+//			rectanglePath.Fill();
+//			labelTextColor.SetStroke();
+//			rectanglePath.LineWidth = 2.0f;
+//			rectanglePath.Stroke();
+//			labelTextColor.SetFill();
+//
+//            context.SaveState();
+//            context.ClipToRect(rectangleRect);
+//		}
 
 		#endregion
 	}

@@ -85,7 +85,8 @@ namespace NathansWay.Shared
     {
         Equation = 1,
         Method = 2,
-        Result = 3
+        Result = 3,
+        Solve = 4
     }
 
     public enum G__LessonState : int
@@ -104,7 +105,8 @@ namespace NathansWay.Shared
         Container = 4,
         NumberLabel = 5,
         Decimal = 6,
-        NumberText = 7
+        NumberText = 7,
+        SolveButton = 8
     }
 
 	#region Filtering

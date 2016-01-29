@@ -35,6 +35,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private AspyView _vCanvas;
         private vcWorkNumlet _vcNumletEquation;
         private vcWorkNumlet _vcNumletResult;
+        private vcWorkNumlet _vcNumletSolve;
         private List<vcWorkNumlet> _vcNumletMethods;
 
         // Data
@@ -161,7 +162,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private void DisplayExpression ()
         {
             // If there are any Numlets present, remove them.
-
+            // vcWorkSpace is lazy, these may be populated.
             if (this._vcNumletEquation != null)
             {
                 this.RemoveNumlet(this._vcNumletEquation);
@@ -174,16 +175,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 this.RemoveMethodNumlets();
             }
+            if (this._vcNumletSolve != null)
+            {
+                this.RemoveNumlet(this._vcNumletSolve);
+            }
 
             this.LoadDataStrings();
             this.LoadEquationNumlet();
             this.LoadMethodNumlets();
             this.LoadResultNumlet();
+            this.LoadSolveNumlet();
 
             this.AddNumlet(this._vcNumletEquation);
             this._vcNumletEquation.MyWorkSpaceParent = this;
             this.AddNumlet(this._vcNumletResult);
             this._vcNumletResult.MyWorkSpaceParent = this;
+            this.AddNumlet(this._vcNumletSolve);
+            this._vcNumletSolve.MyWorkSpaceParent = this;
         }
 
         // TODO: These are interesting
@@ -264,13 +272,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadEquationNumlet()
         {
             this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation, this._bEquationReadOnly);
-            //this._vcNumletEquation.MyWorkSpaceParent = this;
         }
 
         public void LoadResultNumlet()
         {
             this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
-            //this._vcNumletResult.MyWorkSpaceParent = this;
+        }
+
+        public void LoadSolveNumlet()
+        {
+            this._vcNumletSolve = this._uiNumberFactory.GetSolveNumlet(this._vcNumletResult.SizeClass.CurrentWidth);
         }
 
         public void LoadMethodNumlets()

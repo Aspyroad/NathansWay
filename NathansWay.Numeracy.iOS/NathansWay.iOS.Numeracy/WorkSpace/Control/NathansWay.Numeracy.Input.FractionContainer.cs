@@ -40,7 +40,7 @@ namespace NathansWay.iOS.Numeracy
         private Nullable<double> _dblDenominatorCurrentValue;
         private Nullable<double> _dblDenominatorOriginalValue;
 
-        private FractionSize _sizeFraction;
+        private SizeFraction _sizeFraction;
 
         private vcNumberContainer _numberContainerNumerator;
         private vcNumberContainer _numberContainerDenominator;
@@ -111,7 +111,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 60023;
             this.AspyName = "VC_FractionContainer";
             // Sizing Class
-            this._sizeFraction = new FractionSize(this);
+            this._sizeFraction = new SizeFraction(this);
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
@@ -391,9 +391,9 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public FractionSize FractionSize
+        public SizeFraction FractionSize
         {
-            get { return (FractionSize)this._sizeClass; }
+            get { return (SizeFraction)this._sizeClass; }
             set { this._sizeClass = value; }
         }
 
@@ -507,7 +507,7 @@ namespace NathansWay.iOS.Numeracy
 
     }
 
-    public class FractionSize : SizeBase
+    public class SizeFraction : SizeBase
     {
         #region Class Variables
 
@@ -521,7 +521,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public FractionSize(BaseContainer vc)
+        public SizeFraction(BaseContainer vc)
         {
             this.ParentContainer = vc;
             Initialize();
