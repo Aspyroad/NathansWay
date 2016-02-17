@@ -214,7 +214,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             }
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }
 
         public override void SetPositions (PointF _startPoint)

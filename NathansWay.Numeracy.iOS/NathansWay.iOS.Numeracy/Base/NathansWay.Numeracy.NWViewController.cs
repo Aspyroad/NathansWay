@@ -71,6 +71,11 @@ namespace AspyRoad.iOSCore
             get { return this._numberAppSettings; }
         }
 
+        public  iOSUIManager UIAppearance
+        {
+            get { return this.iOSUIAppearance; }
+        }
+
         #endregion
 
         #region Public Members

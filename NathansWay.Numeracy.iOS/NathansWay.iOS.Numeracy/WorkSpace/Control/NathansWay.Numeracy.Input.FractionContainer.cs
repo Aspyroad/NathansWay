@@ -159,7 +159,6 @@ namespace NathansWay.iOS.Numeracy
             this._numberContainerNumerator.CreateNumber(true);
             this._numberContainerDenominator.CreateNumber(true);
 
-
             // Event hooks
             this._numberContainerNumerator.eValueChange += this.OnValueChange;
             this._numberContainerNumerator.eTextSizeChange += this.OnTextSizeChange;
@@ -176,7 +175,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Grab the vertical drop for denominator
             var _ypos = 
-                this._numberContainerNumerator.NumberContainerSize.CurrentHeight + 
+                this._numberContainerNumerator.NumberContainerSize.CurrentHeight +
                 //this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 

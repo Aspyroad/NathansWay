@@ -288,7 +288,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetHeightWidth ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }
 
         #endregion

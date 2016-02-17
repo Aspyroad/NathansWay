@@ -243,7 +243,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetHeightWidth ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
             base.SetHeightWidth();
         }
 
@@ -262,7 +262,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // TODO: Do we need to calculate this? Percentage of width?
                 (4.0f),
                 // TODO: Again calculate, percentage oh height
-                (this.GlobalSizeDimensions.GlobalNumberHeight - 20.0f),
+                (this.GlobalSizeDimensions.NumberContainerHeight - 20.0f),
                 // TODO: these should be in decimaltxt dimensions- settings
                 8.0f,
                 8.0f

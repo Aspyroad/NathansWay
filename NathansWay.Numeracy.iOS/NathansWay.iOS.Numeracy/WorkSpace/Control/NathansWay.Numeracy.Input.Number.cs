@@ -127,7 +127,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             this.View.ClipsToBounds = true;
             this.HasRoundedCorners = true;
-            this.HasBorder = true;
+            //this.HasBorder = true;
             this.txtNumber.HasBorder = false;
             this.txtNumber.BackgroundColor = UIColor.Clear;
 
@@ -471,34 +471,41 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this.MyWorkSpaceParent.SelectedNumberText != this)
                 {
+                    // ** Selecting a different control than this one
                     var x = this.MyWorkSpaceParent.SelectedNumberText;
                     if (x.IsInEditMode)
                     {
                         x.TapText();
                     }
                     x.OnControlUnSelectedChange();
-                    this.MyWorkSpaceParent.SelectedNumberText = null;
+                    //this.MyWorkSpaceParent.SelectedNumberText = null;
+
+                    // Once here we are now selecting this control
+                    this.MyWorkSpaceParent.SelectedNumberText = this;
+                    this.OnControlSelectedChange();
+                    // Is the control readonly, then return
+                    if (this._bReadOnly)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        this.TapText();
+                    }
                 }
                 else
                 {                    
                     if (this.MyWorkSpaceParent.SelectedNumberText == this)
                     {
-                        // Handle retouch of the same control
-                    }
-                    else
-                    {
-                        //Once here we are now selecting this control
-                        this.MyWorkSpaceParent.SelectedNumberText = this;
-                        this.OnControlSelectedChange();
-                        // Is the control readonly, then return
-                        if (this._bReadOnly)
-                        {
-                            return;
-                        }
-                        else
+                        // ** Selecting the same control twice
+                        // If its not the answer toggle it back off
+                        if (this.IsAnswer)
                         {
                             this.TapText();
                         }
+                        this.OnControlUnSelectedChange();
+                        this.MyWorkSpaceParent.SelectedNumberText = null;
+
                     }
                 }
             }
@@ -510,7 +517,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
                     this.MyWorkSpaceParent.SelectedOperatorText = null;
                 }
-                // Once here we are now selectoing this control
+                // Once here we are now selecting this control
                 this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange();
                    // Is the control readonly, then return
@@ -1040,7 +1047,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
             }
-            this.CurrentHeight = this.GlobalSizeDimensions.GlobalNumberHeight;
+            // If this has a fraction parent resize them differently
+            if (this.IsFraction)
+            {
+                this.CurrentHeight = this.GlobalSizeDimensions.FractionNumberHeight;
+            }
+            else
+            {
+                this.CurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+            }
         }
 
         public override void SetPositions(PointF _startPoint)

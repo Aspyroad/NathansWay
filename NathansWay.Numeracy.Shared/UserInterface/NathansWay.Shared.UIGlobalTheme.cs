@@ -138,7 +138,7 @@ namespace NathansWay.Shared
 
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 140.0f, 0.0f, 255.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(50.0f, 50.0f, 50.0f, 255.0f)); // Orange
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(200.0f, 150.0f, 0.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 200.0f, 255.0f, 255.0f)); // Black 
             ViewBorderWidth = 1.0f;
@@ -203,7 +203,7 @@ namespace NathansWay.Shared
             NeutralTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
             NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             ReadOnlyBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
-            ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
             ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(100.0f, 240.0f, 0.0f, 255.0f)); // Black
             SelectedBGColor = new Lazy<G__Color> (() => new G__Color(5.0f, 100.0f, 100.0f, 255.0f)); // White
             SelectedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black

@@ -141,7 +141,7 @@ namespace NathansWay.iOS.Numeracy
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
 
-            this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this.SizeClass.GlobalSizeDimensions);
+            this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
             this.View.AddSubview(this.btnSolveButton);
         }
 
@@ -276,8 +276,11 @@ namespace NathansWay.iOS.Numeracy
         private float _y;
         private RectangleF _rectCross;
         private RectangleF _rectTick;
-        private PointF _pCrossCenter;
-        private PointF _pTickCenter;
+        private PointF _pBottomCenter;
+        private PointF _pTopCenter;
+        private PointF _pTrueCenter;
+        private PointF _pTrueBottomEdge;
+        private PointF _pTrueTopEdge;
 
         private UIColor _colorBGTick;
         private UIColor _colorBGCross;
@@ -288,7 +291,20 @@ namespace NathansWay.iOS.Numeracy
         private CAShapeLayer slTickBGLayer;
         private CAShapeLayer slTickPathLayer;
 
+        private CABasicAnimation _aniLayersToCenter;
+        private CABasicAnimation _aniLayersToCenterFade;
+        private CABasicAnimation _aniLayersToEdge;
+        private CABasicAnimation _aniLayersToEdgeFade;
+
+        //private CAAnimationGroup _animationGroupToCenter;
+        private CAAnimationGroup _animationGroupToEdge;
+
         private AnimateDelegate _myAnimateDelegate;
+        private iOSUIManager _myUIAppearance;
+        private iOSNumberDimensions _myGlobalDimensions;
+        private CAAnimationGroup _animationGroup;
+
+        private BaseContainer _vcParentContainer;
 
         #endregion
 
@@ -304,10 +320,12 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         } 
 
-        public ButtonSolve (RectangleF myFrame, iOSNumberDimensions _globaldimensions)  : base (myFrame)
+        public ButtonSolve (RectangleF myFrame, BaseContainer _parentContainer)  : base (myFrame)
         { 
             _rect = myFrame;
-            this.GlobalDimensions = _globaldimensions;
+            this._vcParentContainer = _parentContainer;
+            this._myUIAppearance = _parentContainer.UIAppearance;
+            this._myGlobalDimensions = _parentContainer.SizeClass.GlobalSizeDimensions;
             Initialize();    
         }
 
@@ -329,32 +347,38 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI (this._applyUIWhere);
 
             this._myAnimateDelegate = new AnimateDelegate();
+            //this._animationGroupToCenter = CAAnimationGroup.CreateAnimation ();
+            this._animationGroupToEdge = CAAnimationGroup.CreateAnimation ();
 
             // Get center of the bottom and top halfs of the button
             var f = (this._rect.Width / 2.0f);
             var g = (this._rect.Height / 4.0f);
             // Set the width of the graphic a little smaller like Brett's cock. (Measured in px)
-            var _width = (this._rect.Width - (4 * this.GlobalDimensions.BorderNumberWidth));
+            var _width = (this._rect.Width - (4 * this._myGlobalDimensions.BorderNumberWidth));
+            var _height = (this._rect.Height / 2);
 
-            this._pCrossCenter = new PointF(f, g);
-            this._pTickCenter = new PointF(f, (g * 3.0f));
+            this._pTopCenter = new PointF(f, g);
+            this._pBottomCenter = new PointF(f, (g * 3.0f));
+            this._pTrueCenter = new PointF(f, _height);
+            this._pTrueBottomEdge = new PointF(f, (this._rect.Height + g));
+            this._pTrueTopEdge = new PointF(f, (0.0f - g));
 
             this._rectCross = new RectangleF(0.0f, 0.0f, _width , _width );
             this._rectTick = new RectangleF(0.0f, 0.0f, _width , _width );
+
+            this._colorPaths = this._myUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+            this._colorBGTick = this._myUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+            this._colorBGCross = this._myUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
         }
 
-        public PointF ScaledPoint(CGLayer _layer, PointF _pIn)
+        private void ScaleLayerAffine(CALayer _layer, float _scale)
         {
-            float scaleFactor = 2.0f;
-            // Scaling the path ...
-
             //CGAffineTransform scaleTransform = 
             // Scale down the path first
             //scaleTransform = CGAffineTransform.Scale(scaleTransform, scaleFactor, scaleFactor);
             // Then translate the path to the upper left corner
             //scaleTransform = CGAffineTransform.MakeTranslation(_rect.Height, _rect.Width);
-
-            return new PointF(1.0f, 1.0f);
+            _layer.AffineTransform = CGAffineTransform.MakeScale(_scale, _scale);
         }
 
         private void DrawCross (RectangleF rect)
@@ -362,43 +386,49 @@ namespace NathansWay.iOS.Numeracy
             this.slCrossBGLayer = new CAShapeLayer();
             this.slCrossPathLayer = new CAShapeLayer();
 
+            //// BG Drawing
+            var bGPath = UIBezierPath.FromOval(rect);
+
+            slCrossBGLayer.Path = bGPath.CGPath;
+            slCrossBGLayer.FillColor = this._colorBGCross.CGColor;
+
             slCrossBGLayer.Bounds = rect;
             slCrossPathLayer.Bounds = rect;
 
-            slCrossBGLayer.Position = this._pCrossCenter;
-            slCrossPathLayer.Position = this._pCrossCenter;
-            //slCrossBGLayer.AnchorPoint = (new PointF(0.0f,0.0f));
-            //slCrossPathLayer.AnchorPoint = (new PointF(0.0f,0.0f));
-
-            //// Color Declarations
-            var white = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 1.000f);
-            var red = UIColor.FromRGBA(1.000f, 0.000f, 0.000f, 1.000f);
-
-            //// BG Drawing
-            var bGPath = UIBezierPath.FromOval(rect);
-            slCrossBGLayer.Path = bGPath.CGPath;
-            slCrossBGLayer.FillColor = red.CGColor;
+            slCrossBGLayer.Position = this._pBottomCenter;
+            slCrossPathLayer.Position = this._pBottomCenter;
 
             //// cross Drawing
             UIBezierPath crossPath = new UIBezierPath();
-            crossPath.MoveTo(new PointF(30.2f, 12.2f));
-            crossPath.AddLineTo(new PointF(27.2f, 9.4f));
-            crossPath.AddLineTo(new PointF(20.2f, 17.0f));
-            crossPath.AddLineTo(new PointF(13.0f, 9.6f));
-            crossPath.AddLineTo(new PointF(10.2f, 12.2f));
-            crossPath.AddLineTo(new PointF(17.6f, 19.6f));
-            crossPath.AddLineTo(new PointF(10.2f, 27.0f));
-            crossPath.AddLineTo(new PointF(13.0f, 29.4f));
-            crossPath.AddLineTo(new PointF(20.2f, 22.2f));
-            crossPath.AddLineTo(new PointF(27.6f, 29.4f));
-            crossPath.AddLineTo(new PointF(30.2f, 27.0f));
-            crossPath.AddLineTo(new PointF(23.0f, 19.4f));
-            crossPath.AddLineTo(new PointF(30.2f, 12.2f));
+            crossPath.MoveTo(new PointF(42.0f, 16.0f));
+            crossPath.AddLineTo(new PointF(38.0f, 12.0f));
+            crossPath.AddLineTo(new PointF(27.0f, 23.0f));
+            crossPath.AddLineTo(new PointF(16.0f, 12.0f));
+            crossPath.AddLineTo(new PointF(12.0f, 16.0f));
+            crossPath.AddLineTo(new PointF(23.0f, 27.0f));
+            crossPath.AddLineTo(new PointF(12.0f, 38.0f));
+            crossPath.AddLineTo(new PointF(16.0f, 42.0f));
+            crossPath.AddLineTo(new PointF(27.0f, 31.0f));
+            crossPath.AddLineTo(new PointF(38.0f, 42.0f));
+            crossPath.AddLineTo(new PointF(42.0f, 38.0f));
+            crossPath.AddLineTo(new PointF(31.0f, 27.0f));
+            crossPath.AddLineTo(new PointF(42.0f, 16.0f));
             crossPath.ClosePath();
             crossPath.MiterLimit = 4.0f;
 
             slCrossPathLayer.Path = crossPath.CGPath;
-            slCrossPathLayer.FillColor = white.CGColor;
+            slCrossPathLayer.FillColor = this._colorPaths.CGColor;
+
+            // Border
+            slCrossBGLayer.StrokeColor = this._colorPaths.CGColor;
+            slCrossBGLayer.LineWidth = 1.0f;
+
+
+            if (this._myGlobalDimensions.GlobalScalingFactor != 1.0f)
+            {
+                this.ScaleLayerAffine(this.slCrossBGLayer, this._myGlobalDimensions.GlobalScalingFactor);
+                this.ScaleLayerAffine(this.slCrossPathLayer, this._myGlobalDimensions.GlobalScalingFactor);
+            }
 
             this.Layer.AddSublayer(slCrossBGLayer);
             this.Layer.AddSublayer(slCrossPathLayer);
@@ -410,45 +440,132 @@ namespace NathansWay.iOS.Numeracy
             this.slTickBGLayer = new CAShapeLayer();
             this.slTickPathLayer = new CAShapeLayer();
 
-            slTickBGLayer.Frame = rect;
-            slTickPathLayer.Frame = rect;
-
             slTickBGLayer.Bounds = rect;
             slTickPathLayer.Bounds = rect;
-            slTickBGLayer.Position = (new PointF(0.0f, 0.0f));
-            slTickPathLayer.Position = (new PointF(9.6f, 60.0f));
-            slTickBGLayer.AnchorPoint = (new PointF(0.0f,0.0f));
-            slTickPathLayer.AnchorPoint = (new PointF(0.0f,0.0f));
 
-            //// Color Declarations
-            var white = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 1.000f);
-            var green = UIColor.FromRGBA(0.0f, 1.000f, 0.000f, 1.000f);
+            slTickBGLayer.Position = this._pTopCenter;
+            slTickPathLayer.Position = this._pTopCenter;
 
             //// BG Drawing
             var bGPath = UIBezierPath.FromOval(rect);
             slTickBGLayer.Path = bGPath.CGPath;
-            slTickBGLayer.FillColor = green.CGColor;
+            slTickBGLayer.FillColor = this._colorBGTick.CGColor;
+            // Border
+            //this._colorPaths.SetStroke();
+            //bGPath.LineWidth = this._myGlobalDimensions.BorderNumberWidth;
+            //bGPath.Stroke();
 
-
-            //// Bezier Drawing
+            //// tick Drawing
             UIBezierPath tickPath = new UIBezierPath();
-            tickPath.MoveTo(new PointF(9.0f, 26.0f));
-            tickPath.AddLineTo(new PointF(21.58f, 34.0f));
-            tickPath.AddLineTo(new PointF(32.0f, 10.0f));
-            tickPath.AddLineTo(new PointF(28.0f, 9.0f));
-            tickPath.AddLineTo(new PointF(20.0f, 28.0f));
-            tickPath.AddLineTo(new PointF(11.0f, 23.0f));
-            tickPath.AddLineTo(new PointF(9.0f, 26.0f));
+            tickPath.MoveTo(new PointF(10.0f, 35.0f));
+            tickPath.AddLineTo(new PointF(28.0f, 45.0f));
+            tickPath.AddLineTo(new PointF(44.0f, 13.0f));
+            tickPath.AddLineTo(new PointF(38.0f, 10.0f));
+            tickPath.AddLineTo(new PointF(25.0f, 36.0f));
+            tickPath.AddLineTo(new PointF(12.0f, 29.0f));
+            tickPath.AddLineTo(new PointF(10.0f, 35.0f));
             tickPath.ClosePath();
 
             slTickPathLayer.Path = tickPath.CGPath;
-            slTickPathLayer.FillColor = white.CGColor;
+            slTickPathLayer.FillColor = this._colorPaths.CGColor;
+
+            // Border
+            slTickBGLayer.StrokeColor = this._colorPaths.CGColor;
+            slTickBGLayer.LineWidth = 1.0f;
+
+            if (this._myGlobalDimensions.GlobalScalingFactor != 1.0f)
+            {
+                this.ScaleLayerAffine(this.slTickPathLayer, this._myGlobalDimensions.GlobalScalingFactor);
+                this.ScaleLayerAffine(this.slTickPathLayer, this._myGlobalDimensions.GlobalScalingFactor);
+            }
 
             this.Layer.AddSublayer(slTickBGLayer);
             this.Layer.AddSublayer(slTickPathLayer);
         }
 
-        private void StartTickToCenterAnimation()
+        private void LayersToCenter(CALayer _layer1, CALayer _layer2)
+        {
+            
+            var pt = _layer1.Position;
+            _layer1.Position = this._pTrueCenter;
+            _layer2.Position = this._pTrueCenter;
+
+            // ** Position Animation
+            _aniLayersToCenter = CABasicAnimation.FromKeyPath("position");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToCenter.RemovedOnCompletion = true;
+            _aniLayersToCenter.FillMode = CAFillMode.Forwards;
+            _aniLayersToCenter.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+            _aniLayersToCenter.Delegate = this._myAnimateDelegate;
+            _aniLayersToCenter.From = NSValue.FromCGPoint(pt);
+            _aniLayersToCenter.To = NSValue.FromCGPoint(this._pTrueCenter);
+            _aniLayersToCenter.Duration = 0.5f;
+
+//            // ** Fade Animation
+//            _aniLayersToCenterFade = CABasicAnimation.FromKeyPath("opacity");
+//            // ** These two set if the presentation layer will stay set in the final animated position
+//            _aniLayersToCenterFade.RemovedOnCompletion = true;
+//            _aniLayersToCenterFade.FillMode = CAFillMode.Forwards;
+//            _aniLayersToCenterFade.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+//            _aniLayersToCenterFade.Delegate = this._myAnimateDelegate;
+//            _aniLayersToCenterFade.From = NSNumber.FromFloat(1.0f);
+//            _aniLayersToCenterFade.To = NSNumber.FromFloat(0.0f);
+//            //_aniLayersToCenter.Duration = 0.5f;
+
+            _layer1.AddAnimation (this._aniLayersToCenter, "position");
+            _layer2.AddAnimation (this._aniLayersToCenter, "position");
+
+        }
+
+        private void LayersToEdge(CALayer _layer1, CALayer _layer2, G__NumberDisplayPositionY _direction)
+        {
+            var pt = _layer1.Position;
+            PointF x;
+
+            if (_direction == G__NumberDisplayPositionY.Top)
+            {                
+                _layer1.Position = this._pTrueTopEdge;
+                _layer2.Position = this._pTrueTopEdge;
+                x = this._pTrueTopEdge;
+            }
+            else
+            {
+                _layer1.Position = this._pTrueBottomEdge;
+                _layer2.Position = this._pTrueBottomEdge;
+                x = this._pTrueBottomEdge;
+            }
+
+            _aniLayersToEdge = CABasicAnimation.FromKeyPath ("position");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToEdge.RemovedOnCompletion = true;
+            _aniLayersToEdge.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdge.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+            _aniLayersToEdge.Delegate = this._myAnimateDelegate;
+            _aniLayersToEdge.From = NSValue.FromCGPoint (pt);
+            _aniLayersToEdge.To = NSValue.FromCGPoint (x);
+            //_aniLayersToEdge.Duration = 1.0f;
+            //_aniLayersToEdge.RepeatCount = 1.0f;
+
+            // ** Fade Animation
+            _aniLayersToEdgeFade = CABasicAnimation.FromKeyPath("opacity");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToEdgeFade.RemovedOnCompletion = true;
+            _aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdgeFade.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+            _aniLayersToEdgeFade.Delegate = this._myAnimateDelegate;
+            _aniLayersToEdgeFade.From = NSNumber.FromFloat(1.0f);
+            _aniLayersToEdgeFade.To = NSNumber.FromFloat(0.0f);
+            //_aniLayersToCenter.Duration = 1.0f;
+
+            var y = this.SpinLogo(_layer1, _layer2);
+
+            this._animationGroupToEdge.Duration = 0.5f;
+            this._animationGroupToEdge.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y};
+            _layer1.AddAnimation (this._animationGroupToEdge, null);
+            _layer2.AddAnimation (this._animationGroupToEdge, null);
+        }
+
+        private void ClearAllAnimations()
         {
             this.slCrossBGLayer.RemoveAllAnimations();
             this.slCrossPathLayer.RemoveAllAnimations();
@@ -456,73 +573,44 @@ namespace NathansWay.iOS.Numeracy
             this.slTickPathLayer.RemoveAllAnimations();  
         }
 
-        private void StartCrossToCenterAnimation()
+        private CAKeyFrameAnimation SpinLogo (CALayer _layer1, CALayer _layer2)
         {
-            this.slCrossBGLayer.RemoveAllAnimations();
-            this.slCrossPathLayer.RemoveAllAnimations();
-            this.slTickBGLayer.RemoveAllAnimations();
-            this.slTickPathLayer.RemoveAllAnimations(); 
-        }
-
-        public void StartTickCrossToCenter()
-        {
-            this.slCrossBGLayer.RemoveAllAnimations();
-            this.slCrossPathLayer.RemoveAllAnimations();
-            this.slTickBGLayer.RemoveAllAnimations();
-            this.slTickPathLayer.RemoveAllAnimations();   
-
-            // For basic paths one point to another then stop
-            CABasicAnimation _animation;
+            // Spins that wheel! 3D Style
 
             // Keyframes allow us to define an arbitrary number of points during the animation, 
             // and then let Core Animation fill in the so-called in-betweens.
-            //CAKeyFrameAnimation _animation;
+            // CAKeyFrameAnimation _animation;
 
-
-            _animation = CABasicAnimation.FromKeyPath("rotation.z");
-            _animation.Delegate = this._myAnimateDelegate;
-            _animation.Duration = 2.0f;
-            _animation.RepeatCount = 2.0f;
-
-            // ** These two set if the presentation layer will stay set in the final animated position
-            //_animation.RemovedOnCompletion = false;
-            //_animation.FillMode = CAFillMode.Forwards;
-            // But if we leave it this way there is overhead in drawing.
-            // The best approach is tpo update the position on the model layer when finished.
-
-            //_animation.AutoReverses = false;
-            _animation.TimingFunction = CAMediaTimingFunction.FromName (CAMediaTimingFunction.EaseInEaseOut);
-            //_animation.From = NSValue.\
-            //_animation.ByValue = ;
-            //_animation.To = NSValue.FromCGPoint (new PointF (150, 350));
-            _animation.Duration = 2;
-            // Add the animation to the layer??? AddAnimation()
-        }
-
-        public void SpinLogo ()
-        {
-            this.slCrossBGLayer.RemoveAllAnimations();
-            this.slCrossPathLayer.RemoveAllAnimations();
-            this.slTickBGLayer.RemoveAllAnimations();
-            this.slTickPathLayer.RemoveAllAnimations();  
-
-            // Spins that wheel! 3D Style
-
-            slCrossPathLayer.Transform = CATransform3D.MakeRotation ((float)Math.PI * 2, 0, 0, 1);
+            _layer1.Transform = CATransform3D.MakeRotation ((float)Math.PI * 2, 0, 0, 1);
+            _layer2.Transform = CATransform3D.MakeRotation ((float)Math.PI * 2, 0, 0, 1);
 
             CAKeyFrameAnimation animRotate = (CAKeyFrameAnimation)CAKeyFrameAnimation.FromKeyPath ("transform");
 
             animRotate.Values = new NSObject[] {
-                NSNumber.FromFloat (0f),
-                NSNumber.FromFloat ((float)Math.PI / 2f),
+                NSNumber.FromFloat (0.0f),
+                NSNumber.FromFloat ((float)Math.PI / 2.0f),
                 NSNumber.FromFloat ((float)Math.PI),
-                NSNumber.FromFloat ((float)Math.PI * 2)};
+                NSNumber.FromFloat ((float)Math.PI * 2.0f)};
 
             animRotate.ValueFunction = CAValueFunction.FromName (CAValueFunction.RotateX);
 
-            animRotate.Duration = 2;
+            animRotate.Duration = 0.5f;
+            animRotate.SetRepeatCount(2.0f);
+            float z = (0.5f / animRotate.GetRepeatCount());
+            animRotate.SetRepeatDuration(z);
+            return animRotate;
+        }
 
-            slCrossPathLayer.AddAnimation (animRotate, "transform");
+        private void AnimationCorrect()
+        {
+            this.LayersToCenter(slTickBGLayer, slTickPathLayer);
+            this.LayersToEdge(slCrossBGLayer, slCrossPathLayer, G__NumberDisplayPositionY.Bottom);
+        }
+
+        private void AnimationFalse()
+        {
+            this.LayersToCenter(slCrossBGLayer, slCrossPathLayer);
+            this.LayersToEdge(slTickBGLayer, slTickPathLayer, G__NumberDisplayPositionY.Top);
         }
 
         #endregion
@@ -534,33 +622,32 @@ namespace NathansWay.iOS.Numeracy
             base.Draw(rect);
 
             this.DrawCross(this._rectCross);
-            //this.DrawTick(this._rectTick);
-
-            //this.ScaledPoint(_rect.Location, _rect);
+            this.DrawTick(this._rectTick);
         }
 
         public override void TapStart()
         {
             base.TapStart();
-            SpinLogo();
+
+            if (!this._vcParentContainer.IsCorrect)
+            {
+                this.AnimationCorrect();
+            }
+            else
+            {
+
+
+            }
         }
 
         #endregion
 
         #region Public Properties
 
-        public iOSNumberDimensions GlobalDimensions
-        {
-            get;
-            set;
-        }
-
-
         #endregion
 
         public class AnimateDelegate : CAAnimationDelegate
-        {
-            
+        {            
             #region Contructors
 
             public AnimateDelegate() : base()

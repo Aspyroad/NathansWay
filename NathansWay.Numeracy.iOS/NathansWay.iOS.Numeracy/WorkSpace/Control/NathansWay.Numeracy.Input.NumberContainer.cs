@@ -250,7 +250,7 @@ namespace NathansWay.iOS.Numeracy
             // Set our current height
             if (this.MyFractionParent == null)
             {
-                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.GlobalNumberHeight + _borderHeight);
+                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.NumberContainerHeight + _borderHeight);
             }
             else
             {
