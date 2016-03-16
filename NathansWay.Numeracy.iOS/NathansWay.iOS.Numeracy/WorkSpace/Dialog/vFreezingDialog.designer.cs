@@ -9,10 +9,10 @@ using MonoTouch.UIKit;
 using System;
 using System.CodeDom.Compiler;
 
-namespace NathansWay.iOS.Numeracy.Menu
+namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[Register ("vStudent")]
-	partial class vStudent
+	[Register ("vFeezingDialog")]
+	partial class vFreezingDialog
 	{
 		void ReleaseDesignerOutlets ()
 		{

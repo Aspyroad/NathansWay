@@ -29,8 +29,9 @@ namespace NathansWay.iOS.Numeracy
 
         #region Events
 
-        public event EventHandler eTextSizeChange;
-        public event EventHandler eValueChange;
+        public event EventHandler eTextSizeChanged;
+        public event EventHandler eValueChanged;
+        public event EventHandler eValueUnChanged;
         public event EventHandler eControlSelected;
 
         #endregion
@@ -162,7 +163,7 @@ namespace NathansWay.iOS.Numeracy
         protected void FireValueChange()
         {
             // Thread safety.
-            var x = this.eValueChange;
+            var x = this.eValueChanged;
             // Check for null before firing.
              if (x != null)
             {
@@ -173,7 +174,7 @@ namespace NathansWay.iOS.Numeracy
         protected void FireTextSizeChange()
         {
             // Thread safety.
-            var x = this.eTextSizeChange;
+            var x = this.eTextSizeChanged;
             // Check for null before firing.
             if (x != null)
             {
@@ -200,15 +201,15 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Public Virtual
 
-        public virtual void OnResize ()
-        {            
-        }
+//        public virtual void OnResize ()
+//        {            
+//        }
 
         public virtual void OnValueChange(object s, EventArgs e)
         {
         }
 
-        public virtual void OnTextSizeChange(object s, EventArgs e)
+        public virtual void OnSizeChange(object s, EventArgs e)
         {
         }
 
@@ -270,6 +271,11 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public virtual void ClearValue ()
+        {
+            
+        }
+
         public virtual void UI_SetAnswerState()
         {
             this.SetCorrectState();
@@ -289,11 +295,6 @@ namespace NathansWay.iOS.Numeracy
                     this.UI_SetViewInCorrect();
                 }
             }
-        }
-
-        public virtual void ClearValue ()
-        {
-            
         }
 
         public virtual void UI_SetViewNeutral()
@@ -740,5 +741,8 @@ namespace NathansWay.iOS.Numeracy
 			
 		#endregion
 	}
+
+
+
 }
 

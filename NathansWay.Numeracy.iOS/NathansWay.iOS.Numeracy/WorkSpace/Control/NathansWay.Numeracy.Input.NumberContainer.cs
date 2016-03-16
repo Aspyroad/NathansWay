@@ -38,6 +38,11 @@ namespace NathansWay.iOS.Numeracy
         private string[] _delimiters = { "." };
         // MultiNumber
         private bool _bMultiNumbered;
+        private int _intMultiNumberTotalCount;
+        private int _intMultiNumberTotalSigCount;
+        private int _intMultiNumberTotalInSigCount;
+        private bool _bHasDecimal;
+
         private vcNumberText _selectedNumberText;
 
         #endregion
@@ -89,8 +94,8 @@ namespace NathansWay.iOS.Numeracy
                 foreach (vcNumberText _Number in this._lsNumbers) 
                 {
                     // Event Hooks
-                    _Number.eValueChange -= this.OnValueChange;
-                    _Number.eTextSizeChange -= this.OnTextSizeChange;
+                    _Number.eValueChanged -= this.OnValueChange;
+                    _Number.eTextSizeChanged -= this.OnSizeChange;
                     _Number.SizeClass.eResizing -= _Number.SizeClass.OnResize;
                     _Number.MyNumberParent = null;
                 }
@@ -113,7 +118,15 @@ namespace NathansWay.iOS.Numeracy
             // Define the container type
             this._containerType = G__ContainerType.Number;
             this._bMultiNumbered = false;
+            this._intMultiNumberTotalCount = 0;
+            this._intMultiNumberTotalInSigCount = 0;
+            this._intMultiNumberTotalSigCount = 0;
+
             this._bShowDecimal = false;
+            // Some basic UI
+            this.BorderWidth = 1.0f;
+            this.HasRoundedCorners = true;
+
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
 
         }
@@ -127,22 +140,20 @@ namespace NathansWay.iOS.Numeracy
             // Locals
             int _sig = 0;
             int _insig = 0;
+            int _loopCount = 0;
+
             string[] _result;
-            bool _hitDecimal = false;
+            this._bHasDecimal = false;
             this._sizeClass.CurrentWidth = 0.0f;
 
             // Tens allocation 
             _result = _strInitialValue.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
-            // There should only ever be two
-            if (_result.Length > 2)
-            {
-                // TODO : Debug only : Raise an error. This should never be any greater then two dimensions
-            }
+
             _sig = _result[0].Length;
-            //_insig = _result[1].Length; not needed?
+            this._intMultiNumberTotalCount = _strInitialValue.Length;
 
             // Main creation loop
-            for (int i = 0; i < _strInitialValue.Length; i++)
+            for (int i = 0; i < this._intMultiNumberTotalCount; i++)
             {
                 // The Amazing Conversion Of Doctor Parasis!
                 var ch = _strInitialValue[i].ToString();
@@ -156,34 +167,39 @@ namespace NathansWay.iOS.Numeracy
                     vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberParent = this;
                     newnumber.MyImmediateParent = this;
-
+                    newnumber.MutliNumberPosition = (this._intMultiNumberTotalCount - i);
                     if (_bIsFraction)
                     {
                         newnumber.MyFractionParent = this.MyFractionParent;
                     }
-                    newnumber.IDNumber = i;
-
                     if (_sig > 1 || _result.Length > 1)
                     {
                         newnumber.NumberSize.IsMultiNumberText = true;
+                        newnumber.IsMultiNumberedText = true;
                     }
-                    // Number UI
-                    //newnumber.HasBorder = false;
 
-                    #region Set Tens Unit
+                    #region Set Tens Units Positions
 
-                    if (_hitDecimal)
+                    if (this._bHasDecimal)
                     {
                         // We are now looking at insignificant numbers
                         _insig++;
                         newnumber.Significance = G__Significance.InSignificant;
                         newnumber.TensUnit = (G__UnitPlacement)_insig;
+
+                        // Set up some details about where the number fits in the multinumber
+                        newnumber.MutliNumberInSigPosition = _insig;
+                        this._intMultiNumberTotalInSigCount++;
                     }
                     else
                     {
                         newnumber.Significance = G__Significance.Significant;
                         newnumber.TensUnit = (G__UnitPlacement)_sig;
                         _sig--;
+
+                        // Set up some details aboout where the number fits in the nultinumber\
+                        newnumber.MutliNumberSigPosition = (_sig + 1);
+                        this._intMultiNumberTotalSigCount++;
                     }
 
                     #endregion
@@ -191,17 +207,19 @@ namespace NathansWay.iOS.Numeracy
                     // Add our numbers to our internal list counter.
                     this._lsNumbers.Add(newnumber);
                     this._lsNumbersOnly.Add(newnumber);
+                    // This is used to find
+                    newnumber.IndexNumber = this._lsNumbersOnly.Count;
 
-                    var _width = (this._sizeClass.CurrentWidth + (this._sizeClass.GlobalSizeDimensions.BorderNumberWidth * 1));
-                    var _height = this._sizeClass.GlobalSizeDimensions.BorderNumberWidth;
+                    // I was whacking in a border height and width but at this level its not important.
+                    //var _width = (this._sizeClass.CurrentWidth + (this._sizeClass.GlobalSizeDimensions.NumberBorderWidth * 1));
+                    var _width = (this._sizeClass.CurrentWidth);
+                    var _height = 0.0f; 
 
                     // Sizing
-                    // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1990)
+                    // "Ill turn off the gravity"- Stimpy (Ren And Stimpy 1992)
                     // Set our current width - and shorten if there is more then one number
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
-                        newnumber.NumberSize.IsMultiNumberText = true;
-                        this._bMultiNumbered = true;
                         newnumber.NumberSize.SetPositions(new PointF(_width, _height));
                     }
                     else
@@ -212,18 +230,18 @@ namespace NathansWay.iOS.Numeracy
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
 
                     // Event Hooks
-                    newnumber.eValueChange += this.OnValueChange;
-                    newnumber.eTextSizeChange += this.OnTextSizeChange;
+                    newnumber.eValueChanged += this.OnValueChange;
+                    newnumber.eTextSizeChanged += this.OnSizeChange;
                     //newnumber.eControlSelected += this.HandleControlSelectedChange;
                     newnumber.SizeClass.eResizing += newnumber.SizeClass.OnResize;
 
                     // Add control
-                    //this.AddAndDisplayController(newnumber, newnumber.View.Frame);
                     this.AddAndDisplayController(newnumber);
                 }
                 else
                 {
-                    _hitDecimal = true;
+                    //_hitDecimal = true;
+                    this._bHasDecimal = true;
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
@@ -244,18 +262,20 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
 
-            var _borderHeight = (2 * this._sizeClass.GlobalSizeDimensions.BorderNumberWidth);
-            this._sizeClass.CurrentWidth += (this._sizeClass.GlobalSizeDimensions.BorderNumberWidth * 2);
-
             // Set our current height
             if (this.MyFractionParent == null)
             {
-                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.NumberContainerHeight + _borderHeight);
+                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.NumberContainerHeight);
             }
             else
             {
-                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.FractionNumberHeight + _borderHeight);
+                this.SizeClass.CurrentHeight = (this.SizeClass.GlobalSizeDimensions.FractionNumberHeight); 
             }
+        }
+
+        public vcNumberText FindNumberTextByIndex(int _index)
+        {
+            return this._lsNumbersOnly.Find(z => z.IndexNumber == _index);
         }
 
         #endregion
@@ -288,88 +308,63 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.CurrentValue = Convert.ToDouble(_strVal);
             }
-            // If this is an answer type, check it
-            //this.CheckCorrect();
-            //this.ApplyUI(this._applyUIWhere);
-            this.OnControlUnSelectedChange();
+            // Edit : After a value change we may still need to keep editing, dont unselect.
+            //this.OnControlUnSelectedChange();
         }
 
-        public override void OnTextSizeChange(object s, EventArgs e)
+        public override void OnSizeChange(object s, EventArgs e)
         {
-            base.OnTextSizeChange(s, e);
+            base.OnSizeChange(s, e);
         }
 
         #endregion
 
         #region Overrides
 
-
-//        public override void SetCorrectState ()
-//        {            
-//            // TODO : Check if this fraction is the answer
-//            // Compare against the original value
-//            // No need to call base it for basic compares
-//
-//            this._numberContainerDenominator.SetCorrectState();
-//            this._numberContainerNumerator.SetCorrectState();
-//
-//            if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
-//            {
-//                this.AnswerState = G__AnswerState.Correct;
-//                this._bIsCorrect = true;
-//                //this.UI_SetViewCorrect();
-//            }
-//            else
-//            {
-//                if (this._bInitialLoad)
-//                {
-//                    this.AnswerState = G__AnswerState.UnAttempted;
-//                    this._bIsCorrect = false;
-//                    //this.UI_SetViewNeutral();
-//                }
-//                else
-//                {
-//                    this.AnswerState = G__AnswerState.InCorrect;
-//                    this._bIsCorrect = false;
-//                    //this.UI_SetViewInCorrect();
-//                }
-//            }
-//        }
-
-//        public override void UI_SetAnswerState()
-//        {
-//            this.SetCorrectState();
-//
-//            if (this._bIsCorrect)
-//            {
-//                this._numberContainerDenominator.UI_SetViewCorrect();
-//                this._numberContainerNumerator.UI_SetViewCorrect();
-//            }
-//            else
-//            {
-//                if (this._bInitialLoad)
-//                {
-//                    this._numberContainerDenominator.UI_SetViewNeutral();
-//                    this._numberContainerNumerator.UI_SetViewNeutral();
-//                }
-//                else
-//                {
-//                    this._numberContainerDenominator.UI_SetViewInCorrect();
-//                    this._numberContainerNumerator.UI_SetViewInCorrect();
-//                }
-//            }
-//
-//        }
-
         public override void UI_SetViewSelected()
         {
+            if (this.HasFractionParent)
+            {
+                if (this._bMultiNumbered)
+                {
+                    this.HasBorder = true;
+                }
+                else
+                {
+                    this.HasBorder = false;  
+                }
+            }
+            else
+            {
+                this.HasBorder = true;
+            }
+
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            //base.UI_SetViewSelected();
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
         public override void UI_SetViewNeutral()
         {
+            if (this.HasFractionParent)
+            {
+                if (this._bMultiNumbered)
+                {
+                    this.HasBorder = true;
+                }
+                else
+                {
+                    this.HasBorder = false;                
+                }
+            }
+            else
+            {
+                this.HasBorder = true;
+            }
+
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.White;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
 
@@ -382,9 +377,26 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewReadOnly()
         {
-            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            if (this.HasFractionParent)
+            {
+                if (this._bMultiNumbered && this.Selected)
+                {
+                    this.HasBorder = true;
+                }
+                else
+                {
+                    this.HasBorder = false;                
+                }
+            }
+            else
+            {
+                this.HasBorder = true;
+            }
 
-            base.UI_SetViewReadOnly();
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
         public override void UI_SetViewCorrect()
@@ -394,6 +406,11 @@ namespace NathansWay.iOS.Numeracy
             {
                 _Number.UI_SetViewCorrect();
             }
+
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
         public override void UI_SetViewInCorrect()
@@ -403,6 +420,10 @@ namespace NathansWay.iOS.Numeracy
             {
                 _Number.UI_SetViewInCorrect();
             }
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
         }
 
         public override void ClearValue()
@@ -445,6 +466,10 @@ namespace NathansWay.iOS.Numeracy
 
         public override void OnControlSelectedChange()
         {
+            if (this.AnswerState == G__AnswerState.InCorrect)
+            {
+                this.UI_SetViewNeutral();
+            }
             base.OnControlSelectedChange();
         }
 
@@ -475,6 +500,24 @@ namespace NathansWay.iOS.Numeracy
         {
             get { return this._tensUnit; }
             set { this._tensUnit = value; }
+        }
+
+        public int MutliNumberCount
+        {
+            get { return this._intMultiNumberTotalCount; }
+            set { this._intMultiNumberTotalCount = value; }
+        }
+
+        public int MutliNumberSigCount
+        {
+            get { return this._intMultiNumberTotalSigCount; }
+            set { this._intMultiNumberTotalSigCount = value; }
+        }
+
+        public int MutliNumberInSigCount
+        {
+            get { return this._intMultiNumberTotalInSigCount; }
+            set { this._intMultiNumberTotalInSigCount = value; }
         }
 
         #endregion

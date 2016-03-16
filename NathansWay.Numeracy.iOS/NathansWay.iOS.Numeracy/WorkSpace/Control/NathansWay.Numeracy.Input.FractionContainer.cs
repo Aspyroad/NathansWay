@@ -92,10 +92,10 @@ namespace NathansWay.iOS.Numeracy
             {                
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
-                this._numberContainerNumerator.eValueChange -= this.OnValueChange;
-                this._numberContainerNumerator.eTextSizeChange -= this.OnTextSizeChange;
-                this._numberContainerDenominator.eValueChange -= this.OnValueChange;
-                this._numberContainerDenominator.eTextSizeChange -= this.OnTextSizeChange;
+                this._numberContainerNumerator.eValueChanged -= this.OnValueChange;
+                this._numberContainerNumerator.eTextSizeChanged -= this.OnSizeChange;
+                this._numberContainerDenominator.eValueChanged -= this.OnValueChange;
+                this._numberContainerDenominator.eTextSizeChanged -= this.OnSizeChange;
                 // Clear its parent
                 this._numberContainerNumerator.MyFractionParent = null;
                 this._numberContainerDenominator.MyFractionParent = null;
@@ -160,14 +160,16 @@ namespace NathansWay.iOS.Numeracy
             this._numberContainerDenominator.CreateNumber(true);
 
             // Event hooks
-            this._numberContainerNumerator.eValueChange += this.OnValueChange;
-            this._numberContainerNumerator.eTextSizeChange += this.OnTextSizeChange;
-            this._numberContainerDenominator.eValueChange += this.OnValueChange;
-            this._numberContainerDenominator.eTextSizeChange += this.OnTextSizeChange;
+            this._numberContainerNumerator.eValueChanged += this.OnValueChange;
+            this._numberContainerNumerator.eTextSizeChanged += this.OnSizeChange;
+            this._numberContainerDenominator.eValueChanged += this.OnValueChange;
+            this._numberContainerDenominator.eTextSizeChanged += this.OnSizeChange;
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
-            this.SizeClass.CurrentWidth = Math.Max(this._numberContainerNumerator.NumberContainerSize.CurrentWidth, this._numberContainerDenominator.SizeClass.CurrentWidth);
+            this.SizeClass.CurrentWidth = 
+                Math.Max(this._numberContainerNumerator.NumberContainerSize.CurrentWidth, this._numberContainerDenominator.SizeClass.CurrentWidth)
+            + (2 * this.SizeClass.GlobalSizeDimensions.FractionNumberPadding);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
             this._numberContainerNumerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
@@ -176,13 +178,21 @@ namespace NathansWay.iOS.Numeracy
             // Grab the vertical drop for denominator
             var _ypos = 
                 this._numberContainerNumerator.NumberContainerSize.CurrentHeight +
-                //this.SizeClass.GlobalSizeDimensions.FractionDividerPadding + 
+                (this.SizeClass.GlobalSizeDimensions.FractionNumberPadding * 2) +
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
-            // TODO: Fraction Y -8.0 neeeds to e a variable global
-            this._numberContainerNumerator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, 0.0f);
+            // Set the number padding
+            this._numberContainerNumerator.NumberContainerSize.SetPositions
+            (
+                this.SizeClass.CurrentWidth, 
+                this.SizeClass.GlobalSizeDimensions.FractionNumberPadding
+            );
             // ****
-            this._numberContainerDenominator.NumberContainerSize.SetPositions(this.SizeClass.CurrentWidth, _ypos);
+            this._numberContainerDenominator.NumberContainerSize.SetPositions
+            (
+                this.SizeClass.CurrentWidth, 
+                (_ypos + this.SizeClass.GlobalSizeDimensions.NumberBorderWidth)
+            );
 
             this.AddAndDisplayController(this._numberContainerNumerator);
             this.AddAndDisplayController(this._numberContainerDenominator);
@@ -556,10 +566,12 @@ namespace NathansWay.iOS.Numeracy
             get
             {
                 var y = ((this.GlobalSizeDimensions.FractionHeight / 2) - (this.GlobalSizeDimensions.FractionDividerHeight / 2));
+                //var y = (this.GlobalSizeDimensions.FractionHeight / 2);
                 var width = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.FractionDividerPadding));
                 return new RectangleF(
                     this.GlobalSizeDimensions.FractionDividerPadding, 
-                    (float)Math.Round(y),
+                    //(float)Math.Round(y),
+                    y,
                     (width),
                     (this.GlobalSizeDimensions.FractionDividerHeight)
 

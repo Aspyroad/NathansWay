@@ -38,6 +38,7 @@ namespace NathansWay.Shared
         Huge = 5,
         Massive = 6
     }
+
     public enum G__NumberDisplayPositionY : int
     {
         Top = 1,

@@ -257,9 +257,9 @@ namespace NathansWay.iOS.Numeracy
 
         public RectangleF RectSolveButtonFrame()
         {
-            var x = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.BorderNumberWidth));
-            var y = (this.CurrentHeight - (2 * this.GlobalSizeDimensions.BorderNumberWidth));
-            var z = this.GlobalSizeDimensions.BorderNumberWidth;
+            var x = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.NumberBorderWidth));
+            var y = (this.CurrentHeight - (2 * this.GlobalSizeDimensions.NumberBorderWidth));
+            var z = this.GlobalSizeDimensions.NumberBorderWidth;
 
             return new RectangleF(z, z, x, y);
         }
@@ -354,7 +354,7 @@ namespace NathansWay.iOS.Numeracy
             var f = (this._rect.Width / 2.0f);
             var g = (this._rect.Height / 4.0f);
             // Set the width of the graphic a little smaller like Brett's cock. (Measured in px)
-            var _width = (this._rect.Width - (4 * this._myGlobalDimensions.BorderNumberWidth));
+            var _width = (this._rect.Width - (4 * this._myGlobalDimensions.NumberBorderWidth));
             var _height = (this._rect.Height / 2);
 
             this._pTopCenter = new PointF(f, g);

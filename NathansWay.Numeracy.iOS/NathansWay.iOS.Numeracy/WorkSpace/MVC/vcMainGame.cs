@@ -22,6 +22,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#region Private Variables
 
         private SizeMainGame _sizeMainGame;
+        private vcMainWorkSpace _vcMainWorkSpace;
 
 		#endregion
 

@@ -30,12 +30,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcMainGame _vcMainGame;
         private vcMainContainer _vcMainContainer;
         private UINumberFactory _uiNumberFactory;
+        private UIStoryboard _storyBoard;
+        // VC Dialogs
+        private Lazy<vcPositioningDialog> _vcPositioningDialog;
 
         // Db
         private LessonViewModel _vmLesson;
         private EntityLesson _wsSelectedLesson;
 
-        // Sizing - May not be needed
+        // Sizing
         private SizeMainWorkSpace _sizeMainWorkSpace;
 
 		#endregion
@@ -76,6 +79,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
+            // Storyboard reference
+            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
         }
 
         #endregion
@@ -90,7 +95,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void LoadView()
         {
             base.LoadView();
-            this.AddAndSetWorkSpace();
+            this.AddAndSet_WorkSpace();
         }
 
         public override void ViewDidLoad()
@@ -108,23 +113,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            //this._vcWorkSpace.SizeClass.SetPositions();
         }
 
 		#endregion
 
         #region Public Methods
 
-        public void AddAndSetMainGame()
+        public void AddAndSet_MainGame()
         {
             var _pointF2 = new PointF(2.0f, 2.0f);
             this._vcMainGame.SizeClass.SetPositions(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
         }
 
-        public void AddAndSetWorkSpace()
+        public void AddAndSet_WorkSpace()
         {
             this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace(this._vmLesson);
+            // Link to dad
+            this._vcWorkSpace.MainWorkSpace = this;
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             var _pointF1 = new PointF(4.0f, y);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF1);
@@ -185,8 +191,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetHeightWidth ()
         {
-            //this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
-            //this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
             this.CurrentWidth = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Width;
             this.CurrentHeight = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height;
         }

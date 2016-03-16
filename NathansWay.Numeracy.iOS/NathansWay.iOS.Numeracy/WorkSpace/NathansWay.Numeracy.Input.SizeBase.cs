@@ -14,7 +14,7 @@ using AspyRoad.iOSCore.UISettings;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy.Controls
+namespace NathansWay.iOS.Numeracy
 {
     [MonoTouch.Foundation.Register ("SizeBase")]
     public abstract class SizeBase
@@ -349,7 +349,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public virtual void OnResize(object s, EventArgs e)
         {
-            this._parentContainer.OnResize();
+            //this._parentContainer.OnResize();
         }
 
         #endregion

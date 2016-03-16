@@ -1,4 +1,4 @@
-// Core
+ // Core
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -106,9 +106,10 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
             this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
             this._NumberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
+            this._NumberAppSettings.GA__MoveToNextNumber = false;
             this._NumberAppSettings.GA__ShowAnswerNumlet = true;
 
 			// Set AspyiOSCore global         variables here....		
@@ -324,6 +325,9 @@ namespace NathansWay.iOS.Numeracy
             _numeracyUIManager.AddVC (600108, "VC_NumberLabel");
             _numeracyUIManager.AddVC (600109, "VC_NumberLabelContainer");
             _numeracyUIManager.AddVC (600110, "VC_SolveContainer");
+            // Dialogs
+            _numeracyUIManager.AddVC (666100, "VC_FreezingDialog");
+
 
 
 			// Register app/user settings

@@ -2,3 +2,9 @@
 "NumberPad-Locked"="Locked";
 "NumberPad-Lock"="Lock"; 
 "NumberPad-Title"="NumberPad Edit";
+
+/* VC PositioningDialog */
+"PositioningDialog-CenterQuestion"="Center Question";
+"PositioningDialog-CenterMethods"="Center Methods";
+"PositioningDialog-LockAnswer"="Lock And Dock Answer";
+"PositioningDialog-LockSolve"="Lock And Dock Solve Button";

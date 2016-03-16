@@ -62,7 +62,6 @@
     <Folder Include="NathansWay.iOS.Numeracy\Student\" />
     <Folder Include="NathansWay.iOS.Numeracy\Student\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\Teacher\" />
-    <Folder Include="NathansWay.iOS.Numeracy\Teacher\Teacher\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Hammer\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\" />
@@ -89,6 +88,8 @@
     <Folder Include="Factories\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\Control\" />
     <Folder Include="NathansWay.iOS.Numeracy\Base\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Teacher\MVC\" />
+    <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NathansWay.iOS.Numeracy\Exception\README.md" />
@@ -125,13 +126,6 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Student\MVC\vStudent.cs">
       <DependentUpon>vcStudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vcTeacher.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vcTeacher.designer.cs">
-      <DependentUpon>vcTeacher.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Teacher\Teacher\vTeacher.cs">
-      <DependentUpon>vcTeacher.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\Settings\MVC\vcSettings.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Settings\MVC\vcSettings.designer.cs">
@@ -228,6 +222,20 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.ContainerBase.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.SizeBase.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.SolveContainer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\MVC\vcTeacher.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\MVC\vcTeacher.designer.cs">
+      <DependentUpon>vcTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\Teacher\MVC\vTeacher.cs">
+      <DependentUpon>vcTeacher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vPositioningDialog.cs">
+      <DependentUpon>vcPositioningDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcPositioningDialog.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcPositioningDialog.designer.cs">
+      <DependentUpon>vcPositioningDialog.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>

@@ -33,10 +33,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private UINumberFactory _uiNumberFactory;
 
         private AspyView _vCanvas;
+        private vcMainWorkSpace _vcMainWorkSpace;
         private vcWorkNumlet _vcNumletEquation;
         private vcWorkNumlet _vcNumletResult;
         private vcWorkNumlet _vcNumletSolve;
+        private UIStoryboard _storyBoard;
         private List<vcWorkNumlet> _vcNumletMethods;
+        // VC Dialogs
+        private vcPositioningDialog _vcPositioningDialog;
 
         // Data
         private EntityLesson _wsLesson;
@@ -61,12 +65,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private bool _bEquationReadOnly;
         private bool _bResultReadonly;
         private bool _bMethodsReadonly;
-
+        private bool _bCenterMethod;
+        private bool _bCenterEquation;
+        private bool _bLockAnswerToRight;
+        private bool _bLockAnswerButtonToRight;
 
         private bool _bLoadMethods;
 
 		#endregion
-
+     
 		#region Constructors
 
 		public vcWorkSpace(IntPtr h) : base(h)
@@ -120,6 +127,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                            );
             this._vCanvas = new NWView(x);
 
+            // Storyboard reference
+            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+
             this._strEquation = "";
             this._strMethods = "";
             this._strResult = "";
@@ -136,6 +146,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this.HasSelectedNumberText = false;
             this.HasSelectedOperatorText = false;
+
 		}
 
         private void AddNumlet (vcWorkNumlet _myNumlet)
@@ -317,6 +328,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Logic
         }
 
+        public void AddAndDisplay_PositioningDialog(PointF _location)
+        {
+            this._vcPositioningDialog = this._storyBoard.InstantiateViewController("vcPositioningDialog") as vcPositioningDialog;
+            this._vcPositioningDialog.View.Center  = 
+                this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
+            this.MainWorkSpace.AddAndDisplayController(this._vcPositioningDialog);
+        }
+
         #endregion
 
         #region Public Properties
@@ -404,6 +423,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._vcNumletMethods; }    
         }
+        public vcMainWorkSpace MainWorkSpace
+        {
+            set { this._vcMainWorkSpace = value; }
+            get { return this._vcMainWorkSpace; }   
+        }
 
         #endregion
 
@@ -434,10 +458,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
             this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
+
+            // Virtual Canvas setup
             this.View.AddSubview(this._vCanvas);
             this._vCanvas.CornerRadius = 5.0f;
-
             this._vCanvas.Hidden = true;
+            this._vCanvas.ClipsToBounds = true;
 
             // Delegate hookups
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
@@ -454,7 +480,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
             this.btnMethods.TouchUpInside += OnClick_btnMethods;
             this.btnOption2.TouchUpInside += OnClick_btnOption2;
-            this.btnOption3.TouchUpInside += OnClick_btnOption3;
+            this.btnFreezing.TouchUpInside += OnClick_btnPositioning;
 
 		}
 
@@ -641,9 +667,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void OnClick_btnOption3 (object sender, EventArgs e)
+        private void OnClick_btnPositioning (object sender, EventArgs e)
         {
-
+            this.AddAndDisplay_PositioningDialog(this.btnFreezing.Center);
         }
 
         private void OnClick_btnOption2 (object sender, EventArgs e)

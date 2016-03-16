@@ -24,6 +24,10 @@ namespace NathansWay.Shared
         float FractionDividerPosY { get; }
         // Decimal
         float DecimalWidth { get; }
+        // Border Padding
+        float NumberBorderWidth { get; }
+        float NumberPaddingWidth { get; }
+
     }
 }
 

@@ -250,9 +250,9 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI(this._applyUIWhere);
         }
 
-        public override void OnTextSizeChange(object s, EventArgs e)
+        public override void OnSizeChange(object s, EventArgs e)
         {
-            base.OnTextSizeChange(s, e);
+            base.OnSizeChange(s, e);
         }
 
         public override void OnControlSelectedChange(object s, EventArgs e)

@@ -8,9 +8,11 @@ namespace NathansWay.Shared
 	{
         #region Private Variables
 
+        // All defs are explained in the interface
         private G__NumberDisplaySize _GA__NumberLabelDisplaySize;
         private G__NumberDisplaySize _GA__NumberDisplaySize;
         private G__NumberEditMode _GA__NumberEditMode;
+        private bool _GA__MoveToNextNumber;
         private bool _GA__ShowAnswerNumlet;
 
         #endregion
@@ -71,6 +73,17 @@ namespace NathansWay.Shared
             set
             {
                 _GA__ShowAnswerNumlet = value;   
+            }
+        }
+        public bool GA__MoveToNextNumber
+        {
+            get 
+            {
+                return this._GA__MoveToNextNumber;
+            }
+            set
+            {
+                this._GA__MoveToNextNumber = value;   
             }
         }
 

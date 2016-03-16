@@ -53,7 +53,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private G__UnitPlacement _tensUnit;
         private G__Significance _significance;
-        private int _intIdNumber;
+        private int _intIndexNumber;
+        private int _intMultiNumberPosition;
+        private int _intMultiNumberSigPosition;
+        private int _intMultiNumberInSigPosition;
+        private bool _bIsMultiNumberedText;
 
         #endregion
 
@@ -281,6 +285,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+        public void CallTouchedText()
+        {
+            this.txtTouchedDown(this, new EventArgs()); 
+        }
+
         #endregion
 
         #region Public Properties
@@ -300,6 +309,33 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return this._significance; }
             set { this._significance = value; }
+        }
+
+        public bool IsMultiNumberedText
+        {
+            get { return this._bIsMultiNumberedText; }
+            set
+            {
+                this._bIsMultiNumberedText = value; 
+            }
+        }
+
+        public int MutliNumberPosition
+        {
+            get { return this._intMultiNumberPosition; }
+            set { this._intMultiNumberPosition = value; }
+        }
+
+        public int MutliNumberSigPosition
+        {
+            get { return this._intMultiNumberSigPosition; }
+            set { this._intMultiNumberSigPosition = value; }
+        }
+
+        public int MutliNumberInSigPosition
+        {
+            get { return this._intMultiNumberInSigPosition; }
+            set { this._intMultiNumberInSigPosition = value; }
         }
 
         #endregion
@@ -349,10 +385,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public int IDNumber
+        public int IndexNumber
         {
-            get { return this._intIdNumber; }
-            set { this._intIdNumber = value; }
+            get { return this._intIndexNumber; }
+            set { this._intIndexNumber = value; }
         }
 
         public override Nullable<double> CurrentValue
@@ -410,6 +446,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeClass = this._sizeNumber;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._bHasFractionParent = false;
+
+            // Multinumber Position Data Set
+            this._intMultiNumberPosition = 0;
+            this._intMultiNumberSigPosition = 0;
+            this._intMultiNumberInSigPosition = 0;
 
             // UpDown Buttons
             this.btnDown.Alpha = 0.6f;
@@ -478,7 +519,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                         x.TapText();
                     }
                     x.OnControlUnSelectedChange();
-                    //this.MyWorkSpaceParent.SelectedNumberText = null;
 
                     // Once here we are now selecting this control
                     this.MyWorkSpaceParent.SelectedNumberText = this;
@@ -503,9 +543,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                         {
                             this.TapText();
                         }
-                        this.OnControlUnSelectedChange();
-                        this.MyWorkSpaceParent.SelectedNumberText = null;
-
+                        else
+                        {
+                            this.OnControlUnSelectedChange();
+                            this.MyWorkSpaceParent.SelectedNumberText = null;
+                        }
                     }
                 }
             }
@@ -602,22 +644,52 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         protected void postEdit(Nullable<double> _dblValue)
-        {
+        {            
+            Nullable<double> x = null;
+
             if (this.txtNumber.Text.Length > 0)
             {
-                this._dblPrevValue = Convert.ToDouble(this.txtNumber.Text.Trim());
+                x = Convert.ToDouble(this.txtNumber.Text.Trim());
             }
-            else
+
+            if (x != null)
             {
-                this._dblPrevValue = null;
+                // Value changed
+                if (this._dblPrevValue != _dblValue)
+                {
+                    this._dblPrevValue = x;
+                }
             }
+
+            // FIXED: Problem 1 TouchUpDown
+            // When we tap the control it gets selected - fine
+            // But, when in touch updown mode, the updown buttons hide the lower text control
+            // meaning its touchdown code isnt invoked
+            // So if you select a number and press for example up, all is fine, but when you press up again, 
+            // The control becomes unselected in appearance only, this is confusing.
+            // Fixed : Remove the call to OnControlUnselected() in NumberContainers FireValueChange()
+
+            // FIXED: Problem 2 Number Pad 
+            // When we are in number pad, and the user selects a "multi number" (With Hundreds, Tens etc)
+            // Once the user changes the first value, we want the the "next" text control to become selected 
+            // for editing
+
+            // FIXED: Problem 3 NumberPicker
+            // Similar to problem 2 except with numberpicker control
+            // It will just make editing more simple if with multinumbers we move to the next text control
+            // for easier editing.
+
+            // FIXED : Problem 4 MultiNumber Selections
+            // When checking the answer to (hitting equate buttons) a multinumber problem, if I get it wrong or right
+            // when I select one of the numbers, ALL the multinumbers should unselect back to Neutral
+
+            // TODO: Problem 5 Fraction Number Picker
+            // When selecting the 
+
+
 
             this.CurrentValue = _dblValue; 
-
-            // TODO: Should this be done here?
             this.txtNumber.Text = this.CurrentValueStr;
-            // Fire a value change event (student has obviously tried to answer the question) 
-            // so numbercontainer (this objects parent) can check the answer and make any changes to UI
             this.FireValueChange();
         }
 
@@ -663,7 +735,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._numberpad = this._vcMainContainer._vcNumberPad.Value;
 
-                // Set the value local to numbad
+                // Set the value local to numpad
                 this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
                 // Main Controller is now responsible for all top level Vc's
@@ -682,9 +754,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void CloseNumPad()
         {
-            this._numberpad.PadPushed -= this.actHandlePadPush;
-            this._numberpad.PadLockPushed -= this.actHandlePadLock;
-            this._numberpad.View.Hidden = true;
+            if (!this._numberpad.Locked)
+            {
+                this._numberpad.PadPushed -= this.actHandlePadPush;
+                this._numberpad.PadLockPushed -= this.actHandlePadLock;
+                this._numberpad.View.Hidden = true;
+            }
         }
 
         protected void CloseNumberPicker()
@@ -763,11 +838,31 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.postEdit(intPadValue);
                 this.IsInEditMode = false; 
                 this.Selected = false;
-            }
 
-            if (!this._numberpad.Locked)
-            {
-                this.CloseNumPad();
+                // If the active input method is numberpad (we are in here!), we need to "move"
+                // the cursor along the path of a multinumber.
+                // For example if we have 198 and the user selects 1, when they hit
+                // the keypad we want the next digit to be selected (9 in this example)
+//                if (this.IsMultiNumberedText)
+//                {
+//                    // Find if its position in relation to the whole number
+//                    // Backward search
+                if (this._numberAppSettings.GA__MoveToNextNumber &&  this.MutliNumberPosition > 1)                    
+                {
+                    // We are moving to the next text field.
+                    // We need to release these event hooks
+                    this._numberpad.PadPushed -= this.actHandlePadPush;
+                    this._numberpad.PadLockPushed -= this.actHandlePadLock;
+                    // Grab the next text field
+                    var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
+                    // Call it as being touched
+                    y.CallTouchedText();
+                }
+                else
+                {
+                    this.CloseNumPad();
+                }
+
             }
         }
 
@@ -781,19 +876,26 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            if (Convert.ToInt16(_dblCurrentValue) != this._pickerdelegate.SelectedItemInt)
-            {
+            // REMEMBER:  Dont think this is needed and cant see its use? As it was preventing selecting zero on first pick.
+            //if (Convert.ToInt16(_dblCurrentValue) != this._pickerdelegate.SelectedItemInt)
+            //{
                 this.postEdit(this._pickerdelegate.SelectedItemInt);
-            }
+            //}
 
             this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeClass.RectMainFrame;
             this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
 
-            //this.UI_ToggleTextEdit();
-
             this.IsInEditMode = false;
+
+            if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
+            {
+                // Grab the next text field
+                var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
+                // Call it as being touched
+                y.CallTouchedText();
+            }
         }
 
         #endregion

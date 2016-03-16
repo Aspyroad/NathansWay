@@ -199,15 +199,15 @@ namespace NathansWay.Shared
             NegativeBGColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Brick Red
             NegativeTextColor = new Lazy<G__Color> (() => new G__Color(92.0f, 0.0f, 0.0f, 255.0f)); // Black
             NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(153.0f, 0.0f, 21.0f, 255.0f)); // Dark Red
-            NeutralBGColor = new Lazy<G__Color> (() => new G__Color(220.0f, 120.0f, 220.0f, 255.0f)); // White
+            NeutralBGColor = new Lazy<G__Color> (() => new G__Color(220.0f, 220.0f, 220.0f, 255.0f)); // White
             NeutralTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
             NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             ReadOnlyBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
             ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
-            ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(100.0f, 240.0f, 0.0f, 255.0f)); // Black
-            SelectedBGColor = new Lazy<G__Color> (() => new G__Color(5.0f, 100.0f, 100.0f, 255.0f)); // White
-            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(100.0f, 0.0f, 0.0f, 255.0f)); // Black
+            ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            SelectedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
+            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(40.0f, 40.0f, 40.0f, 255.0f)); // Black
+            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
 
 		}
 

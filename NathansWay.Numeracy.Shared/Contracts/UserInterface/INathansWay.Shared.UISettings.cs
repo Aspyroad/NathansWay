@@ -36,6 +36,12 @@ namespace NathansWay.Shared
         /// <value><c>true</c> if G a show answer numlet; otherwise, <c>false</c>.</value>
         bool GA__ShowAnswerNumlet{ get; set; }
 
+        /// <summary>
+        /// Variable to assist edit mode, do we want the selection to jump to 
+        /// the next text box on a multinumbered text
+        ///<summary>
+        bool GA__MoveToNextNumber{ get; set; }
+
 	}
 
 

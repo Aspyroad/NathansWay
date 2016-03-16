@@ -237,7 +237,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 144.0f;
+                        return 146.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -370,7 +370,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 80.0f;
+                        return 74.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -557,7 +557,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 60.0f;
+                        return 56.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -576,6 +576,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
         }
         public float MultipleNumberWidth
         {
+            // Multiple numbers a little thinner to give more realestate
             get
             {
                 switch (this._size)
@@ -587,7 +588,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 52.0f;
+                        return 46.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -622,7 +623,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 140.0f;
+                        return 142.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -653,7 +654,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 68.0f;
+                        return 62.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -666,6 +667,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     default : // Huge
                     {
                         return 240.0f;
+                    }
+                }
+            }
+        }
+        public float FractionNumberPadding
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
+                        return 40.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 4.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 46.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 102.0f;;
+                    }
+                    default : // Huge
+                    {
+                        return 204.0f;
                     }
                 }
             }
@@ -713,7 +744,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return 0.0f;
+                        return 4.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -773,7 +804,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return new PointF(0.0f, 0.0f);
+                        return new PointF(0.0f, 2.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
@@ -978,9 +1009,9 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #endregion
 
-        #region Border Width
+        #region Border Padding Width
 
-        public float BorderNumberWidth
+        public float NumberPaddingWidth
         {
             get
             {
@@ -993,7 +1024,37 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
+                        return 2.0f;
+                    }
+                    case (G__NumberDisplaySize.Medium):
+                    {
+                        return 2.0f;
+                    }
+                    case (G__NumberDisplaySize.Large):
+                    {
+                        return 3.0f;
+                    }
+                    default : // Huge
+                    {
+                        return 6.0f;
+                    }
+                }
+            }
+        }
+        public float NumberBorderWidth
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__NumberDisplaySize.Small):
+                    {
                         return 1.0f;
+                    }
+                    case (G__NumberDisplaySize.Normal):
+                    {
+                        return 2.0f;
                     }
                     case (G__NumberDisplaySize.Medium):
                     {

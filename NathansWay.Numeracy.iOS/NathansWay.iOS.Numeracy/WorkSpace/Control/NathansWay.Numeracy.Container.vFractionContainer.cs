@@ -64,6 +64,7 @@ namespace NathansWay.iOS.Numeracy
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRect(rectDivider);
             color.SetFill();
+            //UIColor.Blue.SetFill();
             rectanglePath.Fill();
         }
 
@@ -79,8 +80,8 @@ namespace NathansWay.iOS.Numeracy
 		public override void Draw(RectangleF rect)
         {            
             // Custom draws
-            this.DrawFractionDivider(this._rectFractionDivider);
             base.Draw (rect);
+            this.DrawFractionDivider(this._rectFractionDivider);
         }
 
 		#endregion
