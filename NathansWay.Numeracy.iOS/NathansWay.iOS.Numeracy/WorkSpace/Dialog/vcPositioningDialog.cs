@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     {
 		#region Private Variables
 
+        private vcMainWorkSpace _vcMainWorkSpace;
 
 		#endregion
 
@@ -55,6 +56,35 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
 			this.AspyTag1 = 666100;
 			this.AspyName = "VC_PositioningDialog";
+
+        }
+
+        partial void OnTouch_btnCenterMethods(ButtonLabelStyle sender)
+        {
+            //throw new NotImplementedException();
+            //this._vcMainWorkSpace.CenterMethods();
+            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnCenterQuestion(ButtonLabelStyle sender)
+        {
+            //throw new NotImplementedException();
+
+            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
+        {
+            //throw new NotImplementedException();
+
+            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
+        {
+            //throw new NotImplementedException();
+
+            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         #endregion
@@ -83,6 +113,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
             this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
             this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
+
+            // Set the parent vc for type inference
+
+        }
+
+        public override void DidMoveToParentViewController(UIViewController parent)
+        {
+
+            base.DidMoveToParentViewController(parent);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -100,6 +139,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
+        public vcWorkSpace WorkSpaceParent
+        {
+            set { this._vcMainWorkSpace = value; }
+            get { return this._vcMainWorkSpace; }   
+        }
 
         #endregion
     }

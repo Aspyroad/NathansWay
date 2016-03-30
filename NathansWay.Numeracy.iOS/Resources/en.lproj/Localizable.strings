@@ -8,3 +8,15 @@
 "PositioningDialog-CenterMethods"="Center Methods";
 "PositioningDialog-LockAnswer"="Lock And Dock Answer";
 "PositioningDialog-LockSolve"="Lock And Dock Solve Button";
+
+/* VC WorkSpace */
+"WorkSpace-SizeNormal"="1";
+"WorkSpace-SizeLarge"="2";
+"WorkSpace-SizeHuge"="3";
+"WorkSpace-StartStop"="Start";
+"WorkSpace-BackToLessons"="Back To Lessons";
+"WorkSpace-Options"="Options";
+"WorkSpace-ToolBox"="ToolBox";
+"WorkSpace-Methods"="Methods";
+"WorkSpace-Option2"="NotUsed";
+"WorkSpace-Position"="Positions";

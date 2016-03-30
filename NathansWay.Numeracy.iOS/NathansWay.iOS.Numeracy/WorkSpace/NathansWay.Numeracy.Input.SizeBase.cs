@@ -51,6 +51,8 @@ namespace NathansWay.iOS.Numeracy
         // This is used by the workspace canvas and numlets but may be handy
         protected bool _setMiddleLeftPosX;
         protected bool _setMiddleRightPosX;
+        // Set Docked
+        protected bool _setDocked;
         // Global sizeclass padding variable for extreme left right top bottom placement.
         protected float _fPaddingPositional;
 

@@ -32,7 +32,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private SizeWorkSpace _sizeWorkSpace;
         private UINumberFactory _uiNumberFactory;
 
+        // Main workspace views and docking variables
         private AspyView _vCanvas;
+        private AspyView _vCanvasDocked;
+        private bool bDocked_SolveNumlet;
+        private bool bDocked_ResultNumlet;
+
         private vcMainWorkSpace _vcMainWorkSpace;
         private vcWorkNumlet _vcNumletEquation;
         private vcWorkNumlet _vcNumletResult;
@@ -331,9 +336,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void AddAndDisplay_PositioningDialog(PointF _location)
         {
             this._vcPositioningDialog = this._storyBoard.InstantiateViewController("vcPositioningDialog") as vcPositioningDialog;
-            this._vcPositioningDialog.View.Center  = 
-                this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
+            this._vcPositioningDialog.View.Center  = this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
             this.MainWorkSpace.AddAndDisplayController(this._vcPositioningDialog);
+        }
+
+        public void DockSolveNumlet()
+        {
+            this.bDocked_SolveNumlet = true;            
+        }
+
+        public void DockResultNumlet()
+        {
+            this.bDocked_ResultNumlet = true;
+        }
+
+        public void CenterMethods()
+        {
+            
+        }
+
+        public void CenterQuestion()
+        {
+
         }
 
         #endregion
@@ -452,6 +476,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void ViewDidLoad()
 		{
+
+            // FexoTabs 180 mgs
+
 			base.ViewDidLoad();
             // UI
             this.HasRoundedCorners = true;
@@ -465,23 +492,49 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvas.Hidden = true;
             this._vCanvas.ClipsToBounds = true;
 
-            // Delegate hookups
+            // Delegate hookups / Control UI setup etc
+            this.btnNextEquation.EnableHold = false;
             this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
+            //this.btnNextEquation.SetTitle("WorkSpace-NextEquation".Aspylate(), UIControlState.Normal);
+
             this.btnPrevEquation.TouchUpInside += OnClick_btnPrevEquation;
+            this.btnPrevEquation.EnableHold = false;
+            //this.btnPrevEquation.SetTitle("WorkSpace-PrevEquation".Aspylate(), UIControlState.Normal);
 
+
+
+            this.btnSizeNormal.EnableHold = false;
             this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
+            this.btnSizeNormal.SetTitle("WorkSpace-SizeNormal".Aspylate(), UIControlState.Normal);
+            this.btnSizeLarge.EnableHold = false;
             this.btnSizeLarge.TouchUpInside += OnClick_btnSizeLarge;
+            this.btnSizeLarge.SetTitle("WorkSpace-SizeLarge".Aspylate(), UIControlState.Normal);
+            this.btnSizeHuge.EnableHold = false;
             this.btnSizeHuge.TouchUpInside += OnClick_btnSizeHuge;
+            this.btnSizeHuge.SetTitle("WorkSpace-SizeHuge".Aspylate(), UIControlState.Normal);
 
+            this.btnStartStop.EnableHold = false;
             this.btnStartStop.TouchUpInside += OnClick_btnStartStop;
+            this.btnStartStop.SetTitle("WorkSpace-StartStop".Aspylate(), UIControlState.Normal);
+            this.btnBackToLessons.EnableHold = false;
             this.btnBackToLessons.TouchUpInside += OnClick_btnBackToLessons;
+            this.btnBackToLessons.SetTitle("WorkSpace-BackToLessons".Aspylate(), UIControlState.Normal);
 
+            this.btnOptions.EnableHold = false;
             this.btnOptions.TouchUpInside += OnClick_btnOptions;
+            this.btnOptions.SetTitle("WorkSpace-Options".Aspylate(), UIControlState.Normal);
+            this.btnToolBox.EnableHold = false;
             this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
+            this.btnToolBox.SetTitle("WorkSpace-ToolBox".Aspylate(), UIControlState.Normal);
+            this.btnMethods.EnableHold = false;
             this.btnMethods.TouchUpInside += OnClick_btnMethods;
+            this.btnMethods.SetTitle("WorkSpace-Methods".Aspylate(), UIControlState.Normal);
+            this.btnOption2.EnableHold = false;
             this.btnOption2.TouchUpInside += OnClick_btnOption2;
-            this.btnFreezing.TouchUpInside += OnClick_btnPositioning;
-
+            this.btnOption2.SetTitle("WorkSpace-Option2".Aspylate(), UIControlState.Normal);
+            this.btnPosition.EnableHold = false;
+            this.btnPosition.TouchUpInside += OnClick_btnPosition;
+            this.btnPosition.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
 		}
 
         public override void ViewWillAppear(bool animated)
@@ -520,16 +573,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange()
         {
             base.OnControlSelectedChange();
-
-            // No parent to call
         }
 
         public override void OnControlUnSelectedChange()
         {  
             base.OnControlUnSelectedChange();
-
-            // No parent to call
-
         }
 
         public override void UI_SetViewSelected()
@@ -590,6 +638,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnNextEquation (object sender, EventArgs e)
         {
+            bool bOverIndex = false;
+
             // TODO: change this._intLessonDetailSeq 
             // Forward one
             if (this.NextEquation())
@@ -600,13 +650,38 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this._intLessonDetailCurrentIndex >= this._intLessonDetailCurrentCount)
                 {
                     this._intLessonDetailCurrentIndex--;
+                    // Warn the user by changing the color of the button
+                    bOverIndex = true;
                 }
+
+                var x = ((this._intLessonDetailCurrentCount - 1) - this._intLessonDetailCurrentIndex);
+                // This holds the button on the last call, warning the user its the last question
+                if (x == 0)
+                {
+                    if (bOverIndex)
+                    {
+                        this.btnNextEquation.ApplyUI_Negative();
+                    }
+                    else
+                    {
+                        // Change the button UI to represent a push
+                        this.btnNextEquation.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+                    }
+                }
+
+
+                this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+                this.btnPrevEquation.SetTitle(this._intLessonDetailCurrentIndex.ToString(), UIControlState.Normal);
+                // Load the equation
                 this.DisplayExpression();
+                // Swap the other buttons UI to normal no matter what the condition
+                this.btnPrevEquation.ApplyUI_Normal();
             }
         }
 
         private void OnClick_btnPrevEquation (object sender, EventArgs e)
         {
+            bool bOverIndex = false;
             // TODO: change this._intLessonDetailSeq 
             // Back one
             // Load numlets
@@ -618,8 +693,30 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this._intLessonDetailCurrentIndex < 0)
                 {
                     this._intLessonDetailCurrentIndex = 0;
+                    bOverIndex = true;
                 }
+
+                var x = ((this._intLessonDetailCurrentCount - 1) - this._intLessonDetailCurrentIndex);
+                // This holds the button on the last call, warning the user its the last question
+                if (x == this._intLessonDetailCurrentCount -1)
+                {
+                    if (bOverIndex)
+                    {
+                        this.btnPrevEquation.ApplyUI_Negative();
+                    }
+                    else
+                    {
+                        // Change the button UI to represent a push
+                        this.btnPrevEquation.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+                    }
+                }
+
+                this.btnPrevEquation.SetTitle(this._intLessonDetailCurrentIndex.ToString(), UIControlState.Normal);
+                this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+                // Load the equation
                 this.DisplayExpression();
+                // Swap the other buttons UI to normal no matter what the condition
+                this.btnNextEquation.ApplyUI_Normal();
             }
         }
 
@@ -650,6 +747,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 // Some sort of call here to go back to the menu
             }
+
+            // Set the captions on the Next and Back buttons
+            var x = (this._intLessonDetailCurrentCount - 1);
+
+            this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+            this.btnPrevEquation.SetTitle("0", UIControlState.Normal);
+
         }
 
         private void OnClick_btnSizeNormal (object sender, EventArgs e)
@@ -667,9 +771,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void OnClick_btnPositioning (object sender, EventArgs e)
+        private void OnClick_btnPosition (object sender, EventArgs e)
         {
-            this.AddAndDisplay_PositioningDialog(this.btnFreezing.Center);
+            this.AddAndDisplay_PositioningDialog(this.btnPosition.Center);
         }
 
         private void OnClick_btnOption2 (object sender, EventArgs e)
@@ -688,6 +792,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     public class SizeWorkSpace : SizeBase
     {
         #region Class Variables
+
         // X Horizontal
         // Y Vertical
 

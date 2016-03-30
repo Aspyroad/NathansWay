@@ -306,6 +306,15 @@ namespace AspyRoad.iOSCore
 			_newController.DidMoveToParentViewController (this);
 		}
 
+        public virtual void RemoveViewControllerFromParent (UIViewController _childController)
+        {
+            _childController.WillMoveToParentViewController(null);
+            // Remove all views in this vc
+            _childController.View.RemoveFromSuperview ();
+            //Notify delegates
+            _childController.RemoveFromParentViewController ();
+        }
+
 		/// <summary>
 		/// Removes all instances from parent where AspyTag = ?
 		/// </summary>

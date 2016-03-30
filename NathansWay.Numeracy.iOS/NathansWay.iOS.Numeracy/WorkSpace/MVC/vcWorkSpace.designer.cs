@@ -20,10 +20,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnFreezing { get; set; }
-
-		[Outlet]
-		[GeneratedCode ("iOS Designer", "1.0")]
 		NathansWay.iOS.Numeracy.ButtonLabelStyle btnMethods { get; set; }
 
 		[Outlet]
@@ -37,6 +33,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
 		NathansWay.iOS.Numeracy.ButtonLabelStyle btnOptions { get; set; }
+
+		[Outlet]
+		[GeneratedCode ("iOS Designer", "1.0")]
+		NathansWay.iOS.Numeracy.ButtonLabelStyle btnPosition { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -80,10 +80,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 				btnBackToLessons.Dispose ();
 				btnBackToLessons = null;
 			}
-			if (btnFreezing != null) {
-				btnFreezing.Dispose ();
-				btnFreezing = null;
-			}
 			if (btnMethods != null) {
 				btnMethods.Dispose ();
 				btnMethods = null;
@@ -99,6 +95,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			if (btnOptions != null) {
 				btnOptions.Dispose ();
 				btnOptions = null;
+			}
+			if (btnPosition != null) {
+				btnPosition.Dispose ();
+				btnPosition = null;
 			}
 			if (btnPrevEquation != null) {
 				btnPrevEquation.Dispose ();

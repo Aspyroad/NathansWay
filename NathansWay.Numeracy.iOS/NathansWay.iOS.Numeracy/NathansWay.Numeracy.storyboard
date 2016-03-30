@@ -616,6 +616,7 @@
                             <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TWY-au-o8H" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="974" y="62" width="40" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -623,6 +624,7 @@
                             <button opaque="NO" tag="12" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cVp-A6-A5I" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="62" width="40" height="130"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
@@ -695,7 +697,7 @@
                     <size key="freeformSize" width="1016" height="200"/>
                     <connections>
                         <outlet property="btnBackToLessons" destination="1120" id="name-outlet-1120"/>
-                        <outlet property="btnFreezing" destination="Ho1-ee-a5I" id="name-outlet-Ho1-ee-a5I"/>
+                        <outlet property="btnPosition" destination="Ho1-ee-a5I" id="name-outlet-Ho1-ee-a5I"/>
                         <outlet property="btnMethods" destination="1N6-Jx-U0q" id="name-outlet-1N6-Jx-U0q"/>
                         <outlet property="btnNextEquation" destination="TWY-au-o8H" id="name-outlet-TWY-au-o8H"/>
                         <outlet property="btnOption2" destination="9N0-DI-D33" id="name-outlet-9N0-DI-D33"/>

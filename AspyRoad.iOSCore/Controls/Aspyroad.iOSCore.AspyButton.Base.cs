@@ -16,7 +16,6 @@ namespace AspyRoad.iOSCore
     [MonoTouch.Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton, IUIApply
 	{
-
         #region Private Variables
 
 		// Logic
@@ -367,6 +366,7 @@ namespace AspyRoad.iOSCore
             this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
             this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Highlighted);
 
+
             // Border
             if (this._bHasBorder)
             {
@@ -408,42 +408,22 @@ namespace AspyRoad.iOSCore
             }
         }
 
+        public virtual void ApplyUnPressed(bool _isPressed)
+        {
+            this._bIsPressed = _isPressed;
+        }
+
         // Must call this base last.
         public virtual void ApplyUIHeld()
         {
             this._bHoldState = true;
-            this.SetNeedsDisplay();
         }
 
         // Must call this base last.
         public virtual void ApplyUIUnHeld()
         {
             this._bHoldState = false;
-            this.SetNeedsDisplay();
         }
-
-        public virtual void TapStart ()
-        {
-            if (this._bRedrawOnTapStart)
-            {
-                this.SetNeedsDisplay();
-            }
-        }
-
-        public virtual void TapFinish ()
-        {
-            if (this._bRedrawOnTapFinish)
-            {
-                this.SetNeedsDisplay();
-            }
-        }
-
-        #endregion
-
-        #region Delegates
-
-        public event Action<UIButton> TapStarted;
-        public event Action<UIButton> TapFinished;
 
         #endregion
 
@@ -464,26 +444,13 @@ namespace AspyRoad.iOSCore
 
 		public override bool BeginTracking (UITouch uitouch, UIEvent uievent)
 		{	
-            // Fire internal virtual TapStart for override methods
-            this.TapStart();
-            // Apply holding logic
             this.ApplyPressed(true);
 			return base.BeginTracking (uitouch, uievent);
 		}
 
 		public override void EndTracking (UITouch uitouch, UIEvent uievent)
 		{
-            // Fire internal virtual TapFinish for override methods
-            this.TapFinish();
-            // Fire our tapstarted event
-            if (TapFinished != null)
-            {
-                TapFinished (this);
-            }
-			if (_bIsPressed && Enabled)
-			{
-                this._bIsPressed = false;
-			}
+            this.ApplyUnPressed(false);
 			base.EndTracking (uitouch, uievent);
 		}
 

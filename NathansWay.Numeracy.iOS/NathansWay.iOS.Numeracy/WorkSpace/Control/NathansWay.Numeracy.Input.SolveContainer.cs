@@ -142,7 +142,13 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
 
             this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
+            this.btnSolveButton.TouchUpInside += OnTouch_btnSolveButton;
             this.View.AddSubview(this.btnSolveButton);
+        }
+
+        private void OnTouch_btnSolveButton (object sender, EventArgs e)
+        {
+            this.btnSolveButton.AnimationCorrect();
         }
 
         public override void OnControlSelectedChange()
@@ -336,6 +342,11 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+        #region Public Members
+
+
+        #endregion
+
         #region Private Members
 
         private void Initialize()
@@ -400,21 +411,22 @@ namespace NathansWay.iOS.Numeracy
 
             //// cross Drawing
             UIBezierPath crossPath = new UIBezierPath();
-            crossPath.MoveTo(new PointF(42.0f, 16.0f));
-            crossPath.AddLineTo(new PointF(38.0f, 12.0f));
-            crossPath.AddLineTo(new PointF(27.0f, 23.0f));
-            crossPath.AddLineTo(new PointF(16.0f, 12.0f));
-            crossPath.AddLineTo(new PointF(12.0f, 16.0f));
-            crossPath.AddLineTo(new PointF(23.0f, 27.0f));
-            crossPath.AddLineTo(new PointF(12.0f, 38.0f));
-            crossPath.AddLineTo(new PointF(16.0f, 42.0f));
-            crossPath.AddLineTo(new PointF(27.0f, 31.0f));
-            crossPath.AddLineTo(new PointF(38.0f, 42.0f));
-            crossPath.AddLineTo(new PointF(42.0f, 38.0f));
-            crossPath.AddLineTo(new PointF(31.0f, 27.0f));
-            crossPath.AddLineTo(new PointF(42.0f, 16.0f));
+            crossPath.MoveTo(new PointF(35.85f, 12.39f));
+            crossPath.AddLineTo(new PointF(31.61f, 8.15f));
+            crossPath.AddLineTo(new PointF(22.0f, 18.09f));
+            crossPath.AddLineTo(new PointF(12.39f, 8.15f));
+            crossPath.AddLineTo(new PointF(8.15f, 12.39f));
+            crossPath.AddLineTo(new PointF(17.76f, 22.0f));
+            crossPath.AddLineTo(new PointF(8.15f, 31.61f));
+            crossPath.AddLineTo(new PointF(12.39f, 35.85f));
+            crossPath.AddLineTo(new PointF(22.0f, 26.24f));
+            crossPath.AddLineTo(new PointF(31.61f, 35.85f));
+            crossPath.AddLineTo(new PointF(35.85f, 31.61f));
+            crossPath.AddLineTo(new PointF(26.24f, 22.0f));
+            crossPath.AddLineTo(new PointF(35.85f, 12.39f));
             crossPath.ClosePath();
             crossPath.MiterLimit = 4.0f;
+
 
             slCrossPathLayer.Path = crossPath.CGPath;
             slCrossPathLayer.FillColor = this._colorPaths.CGColor;
@@ -455,15 +467,15 @@ namespace NathansWay.iOS.Numeracy
             //bGPath.LineWidth = this._myGlobalDimensions.BorderNumberWidth;
             //bGPath.Stroke();
 
-            //// tick Drawing
+            //// Bezier Drawing
             UIBezierPath tickPath = new UIBezierPath();
-            tickPath.MoveTo(new PointF(10.0f, 35.0f));
-            tickPath.AddLineTo(new PointF(28.0f, 45.0f));
-            tickPath.AddLineTo(new PointF(44.0f, 13.0f));
-            tickPath.AddLineTo(new PointF(38.0f, 10.0f));
-            tickPath.AddLineTo(new PointF(25.0f, 36.0f));
-            tickPath.AddLineTo(new PointF(12.0f, 29.0f));
-            tickPath.AddLineTo(new PointF(10.0f, 35.0f));
+            tickPath.MoveTo(new PointF(8.15f, 28.52f));
+            tickPath.AddLineTo(new PointF(22.81f, 36.67f));
+            tickPath.AddLineTo(new PointF(35.85f, 10.59f));
+            tickPath.AddLineTo(new PointF(30.96f, 8.15f));
+            tickPath.AddLineTo(new PointF(20.37f, 29.33f));
+            tickPath.AddLineTo(new PointF(9.78f, 23.63f));
+            tickPath.AddLineTo(new PointF(8.15f, 28.52f));
             tickPath.ClosePath();
 
             slTickPathLayer.Path = tickPath.CGPath;
@@ -484,8 +496,7 @@ namespace NathansWay.iOS.Numeracy
         }
 
         private void LayersToCenter(CALayer _layer1, CALayer _layer2)
-        {
-            
+        {            
             var pt = _layer1.Position;
             _layer1.Position = this._pTrueCenter;
             _layer2.Position = this._pTrueCenter;
@@ -494,7 +505,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToCenter = CABasicAnimation.FromKeyPath("position");
             // ** These two set if the presentation layer will stay set in the final animated position
             _aniLayersToCenter.RemovedOnCompletion = true;
-            _aniLayersToCenter.FillMode = CAFillMode.Forwards;
+            //_aniLayersToCenter.FillMode = CAFillMode.Forwards;
             _aniLayersToCenter.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
             _aniLayersToCenter.Delegate = this._myAnimateDelegate;
             _aniLayersToCenter.From = NSValue.FromCGPoint(pt);
@@ -538,7 +549,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToEdge = CABasicAnimation.FromKeyPath ("position");
             // ** These two set if the presentation layer will stay set in the final animated position
             _aniLayersToEdge.RemovedOnCompletion = true;
-            _aniLayersToEdge.FillMode = CAFillMode.Forwards;
+            //_aniLayersToEdge.FillMode = CAFillMode.Forwards;
             _aniLayersToEdge.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
             _aniLayersToEdge.Delegate = this._myAnimateDelegate;
             _aniLayersToEdge.From = NSValue.FromCGPoint (pt);
@@ -550,7 +561,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToEdgeFade = CABasicAnimation.FromKeyPath("opacity");
             // ** These two set if the presentation layer will stay set in the final animated position
             _aniLayersToEdgeFade.RemovedOnCompletion = true;
-            _aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
+            //_aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
             _aniLayersToEdgeFade.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
             _aniLayersToEdgeFade.Delegate = this._myAnimateDelegate;
             _aniLayersToEdgeFade.From = NSNumber.FromFloat(1.0f);
@@ -596,18 +607,20 @@ namespace NathansWay.iOS.Numeracy
 
             animRotate.Duration = 0.5f;
             animRotate.SetRepeatCount(2.0f);
+
+
             float z = (0.5f / animRotate.GetRepeatCount());
             animRotate.SetRepeatDuration(z);
             return animRotate;
         }
 
-        private void AnimationCorrect()
+        public void AnimationCorrect()
         {
             this.LayersToCenter(slTickBGLayer, slTickPathLayer);
             this.LayersToEdge(slCrossBGLayer, slCrossPathLayer, G__NumberDisplayPositionY.Bottom);
         }
 
-        private void AnimationFalse()
+        public void AnimationFalse()
         {
             this.LayersToCenter(slCrossBGLayer, slCrossPathLayer);
             this.LayersToEdge(slTickBGLayer, slTickPathLayer, G__NumberDisplayPositionY.Top);
@@ -625,19 +638,18 @@ namespace NathansWay.iOS.Numeracy
             this.DrawTick(this._rectTick);
         }
 
-        public override void TapStart()
-        {
-            base.TapStart();
-
+        public override void ApplyPressed(bool _isPressed)
+        {            
             if (!this._vcParentContainer.IsCorrect)
             {
-                this.AnimationCorrect();
+                //this.AnimationCorrect();
             }
             else
             {
 
-
             }
+            base.ApplyPressed(_isPressed);
+            //this.SetNeedsDisplay();
         }
 
         #endregion

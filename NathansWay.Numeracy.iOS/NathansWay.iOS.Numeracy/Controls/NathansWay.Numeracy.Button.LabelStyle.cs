@@ -59,8 +59,22 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUIUnHeld()
         {
-            this.BackgroundColor = UIColor.Clear;
+            //this.BackgroundColor = UIColor.Clear;
             base.ApplyUIUnHeld();
+        }
+
+        public override void ApplyPressed(bool _isPressed)
+        {
+            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
+            base.ApplyPressed(_isPressed);
+        }
+
+        public override void ApplyUnPressed(bool _isPressed)
+        {
+            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            base.ApplyUnPressed(_isPressed);
         }
             
 		#endregion
@@ -84,31 +98,53 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUI (this._applyUIWhere);
         }
 
-//		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
-//		{
-//            var context = UIGraphics.GetCurrentContext();
-//			//// Rectangle Drawing
-//			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-//			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
-//			if (this.IsPressed || this.HoldState)
-//			{
-//				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
-//			}
-//			else
-//			{
-//				UIColor.Clear.SetFill ();
-//			}
-//			rectanglePath.Fill();
-//			labelTextColor.SetStroke();
-//			rectanglePath.LineWidth = 2.0f;
-//			rectanglePath.Stroke();
-//			labelTextColor.SetFill();
-//
-//            context.SaveState();
-//            context.ClipToRect(rectangleRect);
-//		}
+        //		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
+        //		{
+        //            var context = UIGraphics.GetCurrentContext();
+        //			//// Rectangle Drawing
+        //			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
+        //			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
+        //			if (this.IsPressed || this.HoldState)
+        //			{
+        //				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
+        //			}
+        //			else
+        //			{
+        //				UIColor.Clear.SetFill ();
+        //			}
+        //			rectanglePath.Fill();
+        //			labelTextColor.SetStroke();
+        //			rectanglePath.LineWidth = 2.0f;
+        //			rectanglePath.Stroke();
+        //			labelTextColor.SetFill();
+        //
+        //            context.SaveState();
+        //            context.ClipToRect(rectangleRect);
+        //		}
 
 		#endregion
+
+        #region Public Members
+
+        public void ApplyUI_Negative()
+        {
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value; 
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value, UIControlState.Normal);
+        }
+
+        public void ApplyUI_Positive()
+        {
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;  
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value, UIControlState.Normal);
+        }
+
+        public void ApplyUI_Normal()
+        {
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+        }
+
+        #endregion
 	}
 }
 

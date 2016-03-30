@@ -56,6 +56,9 @@ namespace NathansWay.iOS.Numeracy
 
         // Logic
 
+        private bool bDocked_SolveNumlet;
+        private bool bDocked_ResultNumlet;
+
         // Data
         // TODO: These MUST be all populated for this class to work do we need security
         private EntityLesson _wsLesson;
@@ -106,16 +109,6 @@ namespace NathansWay.iOS.Numeracy
             return this._vcCurrentWorkSpace;
         }
 
-        public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
-        {
-            var _vcNumletResult = this.CreateNumletResult(_strResult);
-            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-            return _vcNumletResult;
-        }
-
         public vcWorkNumlet GetEquationNumlet(string _strEquation, bool _readonly)
         {            
             var _vcNumletEquation = this.CreateNumletEquation(_strEquation, _readonly);
@@ -126,16 +119,34 @@ namespace NathansWay.iOS.Numeracy
             return _vcNumletEquation;
         }
 
+        public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
+        {
+            var _vcNumletResult = this.CreateNumletResult(_strResult);
+            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
+            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            return _vcNumletResult;
+        }
+
         public vcWorkNumlet GetSolveNumlet(float _resultNumletWidth)
         {
             // This solver Numlet always sits to the left of the result numlet for the time being.
             // Maybe its own position is needed on the extreme left of workspace.
             var _vcNumletSolve = this.CreateNumletSolve();
-            _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-            _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-            float w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
-            _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+
+            if (bDocked_SolveNumlet)
+            {
+                
+            }
+            else
+            {
+                _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
+                _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+                _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+                float w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
+                _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            }
             return _vcNumletSolve;
         }
 
