@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -154,7 +154,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _recttxtBrace;
+        public CGRect _recttxtBrace;
         // Parent Container
         //private vcBraceText _vcChild;
 
@@ -191,7 +191,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             _txt.TextOffset = this.GlobalSizeDimensions.BraceTextOffset;
         }
 
-        public override void SetPositions(PointF _startPoint)
+        public override void SetPositions(CGPoint _startPoint)
         {
             base.SetPositions(_startPoint);
         }
@@ -203,7 +203,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetHeightWidth();
         }
 
-        public override void SetScale (int _scale)
+        public override void SetScale (nint _scale)
         {
             base.SetScale(_scale);
         }
@@ -212,7 +212,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Set main VC Frame
             base.SetFrames();
-            this._recttxtBrace = new RectangleF(
+            this._recttxtBrace = new CGRect(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,

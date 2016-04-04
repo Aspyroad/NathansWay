@@ -1,18 +1,18 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 
 // AspyRoad
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[MonoTouch.Foundation.Register("vMainGame")]
+	[Foundation.Register("vMainGame")]
 	public partial class vMainGame : AspyView
 	{
 		#region Constructors
@@ -22,7 +22,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.Initialize(); 
 		}
 
-		public vMainGame(RectangleF rf)
+		public vMainGame(CGRect rf)
 		{
 			this.Initialize();		
 		}

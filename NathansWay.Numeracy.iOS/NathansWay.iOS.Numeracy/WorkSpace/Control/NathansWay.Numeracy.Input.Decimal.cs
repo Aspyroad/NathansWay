@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -76,7 +76,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vDecimal = new vDecimal();
             //this.View = null;
             this.View = this._vDecimal;
-            this._vDecimal.ImageScale = (float)this.SizeClass.DisplaySize;
+            this._vDecimal.ImageScale = (nfloat)(int)this.SizeClass.DisplaySize;
             //this._vDecimal.OperatorStartpointX = this._sizeDecimal.OperatorStartpointX;
             //this._vDecimal.OperatorStartpointY = this._sizeDecimal.OperatorStartpointY;
             this._vDecimal.ClipsToBounds = true;
@@ -201,8 +201,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectDecimal;
-        public RectangleF _rectDecimalDraw;
+        public CGRect _rectDecimal;
+        public CGRect _rectDecimalDraw;
         // Parent Container
         private vcDecimalText _vcChild;
 
@@ -247,7 +247,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetHeightWidth();
         }
 
-        public override void SetScale (int _scale)
+        public override void SetScale (nint _scale)
         {
             base.SetScale(_scale);
         }
@@ -258,7 +258,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetRectDecimalDraw()
         {
-            this._rectDecimalDraw = new RectangleF(
+            this._rectDecimalDraw = new CGRect(
                 // TODO: Do we need to calculate this? Percentage of width?
                 (4.0f),
                 // TODO: Again calculate, percentage oh height
@@ -271,7 +271,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetRectDecimal()
         {
-            this._rectDecimal = new RectangleF(
+            this._rectDecimal = new CGRect(
                 0,                  
                 0,
                 this.CurrentWidth,

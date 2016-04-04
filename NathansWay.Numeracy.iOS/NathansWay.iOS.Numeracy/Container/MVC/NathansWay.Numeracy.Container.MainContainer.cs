@@ -1,9 +1,9 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 // AspyRoad
 using AspyRoad.iOSCore;
 // NathansWay
@@ -18,7 +18,7 @@ using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
 {
-	[MonoTouch.Foundation.Register ("vcMainContainer")]	
+	[Foundation.Register ("vcMainContainer")]	
     public class vcMainContainer : NWViewController
 	{
 		#region Class Variables
@@ -31,7 +31,7 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcNumberPad> _vcNumberPad;
 
         private bool _bNumberPadLoaded;
-        private NSAction _animation;
+        private Action _animation;
         private UICompletionHandler _transitionComplete;
         private double _dblAnimationDuration; 
 
@@ -40,7 +40,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region MemoryViewPoints
 
-        private PointF _pVcWorkSpacePosition;
+        private CGPoint _pVcWorkSpacePosition;
 
         #endregion
 
@@ -97,7 +97,7 @@ namespace NathansWay.iOS.Numeracy
             this._vcOld = _oldvc;
             //this._vcOld.View.AddSubview(this._vcNew.View);
             this._transitionComplete = new UICompletionHandler(this.TransitionComplete);
-            this._animation = new NSAction(delegate()
+            this._animation = new Action(delegate()
                 {
                     //this._vcOld.View.Alpha = 0;
                     //this._vcNew.View.Alpha = 1;
@@ -162,14 +162,14 @@ namespace NathansWay.iOS.Numeracy
 
         #region DisplayMethods
 
-        public void DisplayNumberPad(PointF pLocation)
+        public void DisplayNumberPad(CGPoint pLocation)
         {
             if (!this.NumberPadLoaded)
             {
                 // Set the pad view position
                 this.AddAndDisplayController(
                     this._vcNumberPad.Value, 
-                    new RectangleF(
+                    new CGRect(
                         pLocation.X, 
                         pLocation.Y, 
                         160, 
@@ -237,7 +237,7 @@ namespace NathansWay.iOS.Numeracy
 			// Random depending on various factors while loading (rotation etc) bounds and frame
 			base.ViewDidLoad ();
 
-            this.View.Frame = new RectangleF(
+            this.View.Frame = new CGRect(
                 0.0f, 
                 0.0f, 
                 this.iOSGlobals.G__RectWindowLandscape.Height,

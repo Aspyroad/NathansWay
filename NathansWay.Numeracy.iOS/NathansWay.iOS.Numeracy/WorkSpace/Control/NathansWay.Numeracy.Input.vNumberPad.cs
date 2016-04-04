@@ -1,9 +1,9 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 // Aspyroad
 using AspyRoad.iOSCore;
 
@@ -20,7 +20,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vNumberPad (RectangleF frame) : base (frame)
+        public vNumberPad (CGRect frame) : base (frame)
         {
             Initialize();
         }
@@ -41,7 +41,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		
         private void Initialize()
         {    
-            this.Frame = new RectangleF(100, 100, 190, 260);
+            this.Frame = new CGRect(100, 100, 190, 260);
         }
 
         #endregion

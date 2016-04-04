@@ -1,19 +1,19 @@
-﻿using System;
-using System.Drawing;
+using System;
+using CoreGraphics;
 using AspyRoad.iOSCore;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspyTextView")]
+	[Foundation.Register ("AspyTextView")]
 	public class AspyTextView : UITextView
 	{
 		private UIColor _textColor;
-		private RectangleF labRect;
-		private RectangleF imgRect;
+		private CGRect labRect;
+		private CGRect imgRect;
 
 		// Required for the Xamarin iOS Desinger
 		public AspyTextView () : base()
@@ -24,7 +24,7 @@ namespace AspyRoad.iOSCore
 		{
 			Initialize();
 		}       
-		public AspyTextView (RectangleF myFrame)  : base (myFrame)
+		public AspyTextView (CGRect myFrame)  : base (myFrame)
 		{ 
 			Initialize();    
 		}

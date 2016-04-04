@@ -1,13 +1,13 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
 
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -21,11 +21,11 @@ using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("BaseContainer")]	
+    [Foundation.Register ("BaseContainer")]	
 	public class BaseContainer : NWViewController
 	{
         // Both of these types mean the same thing, the ? is just C# shorthand.
-        // private void Example(int? arg1, Nullable<int> arg2)
+        // private void Example(nint? arg1, Nullable<nint> arg2)
 
         #region Events
 

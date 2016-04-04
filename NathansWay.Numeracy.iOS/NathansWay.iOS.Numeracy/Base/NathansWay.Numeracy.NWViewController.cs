@@ -1,11 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreGraphics;
 
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
@@ -16,7 +16,7 @@ using NathansWay.Shared.Utilities;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("NWViewController")]	
+	[Foundation.Register ("NWViewController")]	
     public class NWViewController : AspyViewController
 	{
 		#region Class Variables

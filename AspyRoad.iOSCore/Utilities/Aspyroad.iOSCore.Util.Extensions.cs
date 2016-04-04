@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 
 // AspyRoad
 using AspyRoad.iOSCore.UISettings;

@@ -1,13 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 
 // Aspyroad
 using AspyRoad.iOSCore;
@@ -23,7 +22,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register("vcSolveContainer")] 
+    [Foundation.Register("vcSolveContainer")] 
     public class vcSolveContainer : BaseContainer
     {
         #region Class Variables
@@ -261,13 +260,13 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public RectangleF RectSolveButtonFrame()
+        public CGRect RectSolveButtonFrame()
         {
             var x = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.NumberBorderWidth));
             var y = (this.CurrentHeight - (2 * this.GlobalSizeDimensions.NumberBorderWidth));
             var z = this.GlobalSizeDimensions.NumberBorderWidth;
 
-            return new RectangleF(z, z, x, y);
+            return new CGRect(z, z, x, y);
         }
 
         #endregion
@@ -277,16 +276,16 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Private Variables
 
-        private RectangleF _rect;
-        private float _x;
-        private float _y;
-        private RectangleF _rectCross;
-        private RectangleF _rectTick;
-        private PointF _pBottomCenter;
-        private PointF _pTopCenter;
-        private PointF _pTrueCenter;
-        private PointF _pTrueBottomEdge;
-        private PointF _pTrueTopEdge;
+        private CGRect _rect;
+        private nfloat _x;
+        private nfloat _y;
+        private CGRect _rectCross;
+        private CGRect _rectTick;
+        private CGPoint _pBottomCenter;
+        private CGPoint _pTopCenter;
+        private CGPoint _pTrueCenter;
+        private CGPoint _pTrueBottomEdge;
+        private CGPoint _pTrueTopEdge;
 
         private UIColor _colorBGTick;
         private UIColor _colorBGCross;
@@ -326,12 +325,13 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         } 
 
-        public ButtonSolve (RectangleF myFrame, BaseContainer _parentContainer)  : base (myFrame)
+        public ButtonSolve (CGRect myFrame, BaseContainer _parentContainer)  : base (myFrame)
         { 
             _rect = myFrame;
             this._vcParentContainer = _parentContainer;
             this._myUIAppearance = _parentContainer.UIAppearance;
             this._myGlobalDimensions = _parentContainer.SizeClass.GlobalSizeDimensions;
+
             Initialize();    
         }
 
@@ -368,21 +368,21 @@ namespace NathansWay.iOS.Numeracy
             var _width = (this._rect.Width - (4 * this._myGlobalDimensions.NumberBorderWidth));
             var _height = (this._rect.Height / 2);
 
-            this._pTopCenter = new PointF(f, g);
-            this._pBottomCenter = new PointF(f, (g * 3.0f));
-            this._pTrueCenter = new PointF(f, _height);
-            this._pTrueBottomEdge = new PointF(f, (this._rect.Height + g));
-            this._pTrueTopEdge = new PointF(f, (0.0f - g));
+            this._pTopCenter = new CGPoint(f, g);
+            this._pBottomCenter = new CGPoint(f, (g * 3.0f));
+            this._pTrueCenter = new CGPoint(f, _height);
+            this._pTrueBottomEdge = new CGPoint(f, (this._rect.Height + g));
+            this._pTrueTopEdge = new CGPoint(f, (0.0f - g));
 
-            this._rectCross = new RectangleF(0.0f, 0.0f, _width , _width );
-            this._rectTick = new RectangleF(0.0f, 0.0f, _width , _width );
+            this._rectCross = new CGRect(0.0f, 0.0f, _width , _width );
+            this._rectTick = new CGRect(0.0f, 0.0f, _width , _width );
 
             this._colorPaths = this._myUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
             this._colorBGTick = this._myUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this._colorBGCross = this._myUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
         }
 
-        private void ScaleLayerAffine(CALayer _layer, float _scale)
+        private void ScaleLayerAffine(CALayer _layer, nfloat _scale)
         {
             //CGAffineTransform scaleTransform = 
             // Scale down the path first
@@ -392,7 +392,7 @@ namespace NathansWay.iOS.Numeracy
             _layer.AffineTransform = CGAffineTransform.MakeScale(_scale, _scale);
         }
 
-        private void DrawCross (RectangleF rect)
+        private void DrawCross (CGRect rect)
         {
             this.slCrossBGLayer = new CAShapeLayer();
             this.slCrossPathLayer = new CAShapeLayer();
@@ -411,19 +411,19 @@ namespace NathansWay.iOS.Numeracy
 
             //// cross Drawing
             UIBezierPath crossPath = new UIBezierPath();
-            crossPath.MoveTo(new PointF(35.85f, 12.39f));
-            crossPath.AddLineTo(new PointF(31.61f, 8.15f));
-            crossPath.AddLineTo(new PointF(22.0f, 18.09f));
-            crossPath.AddLineTo(new PointF(12.39f, 8.15f));
-            crossPath.AddLineTo(new PointF(8.15f, 12.39f));
-            crossPath.AddLineTo(new PointF(17.76f, 22.0f));
-            crossPath.AddLineTo(new PointF(8.15f, 31.61f));
-            crossPath.AddLineTo(new PointF(12.39f, 35.85f));
-            crossPath.AddLineTo(new PointF(22.0f, 26.24f));
-            crossPath.AddLineTo(new PointF(31.61f, 35.85f));
-            crossPath.AddLineTo(new PointF(35.85f, 31.61f));
-            crossPath.AddLineTo(new PointF(26.24f, 22.0f));
-            crossPath.AddLineTo(new PointF(35.85f, 12.39f));
+            crossPath.MoveTo(new CGPoint(35.85f, 12.39f));
+            crossPath.AddLineTo(new CGPoint(31.61f, 8.15f));
+            crossPath.AddLineTo(new CGPoint(22.0f, 18.09f));
+            crossPath.AddLineTo(new CGPoint(12.39f, 8.15f));
+            crossPath.AddLineTo(new CGPoint(8.15f, 12.39f));
+            crossPath.AddLineTo(new CGPoint(17.76f, 22.0f));
+            crossPath.AddLineTo(new CGPoint(8.15f, 31.61f));
+            crossPath.AddLineTo(new CGPoint(12.39f, 35.85f));
+            crossPath.AddLineTo(new CGPoint(22.0f, 26.24f));
+            crossPath.AddLineTo(new CGPoint(31.61f, 35.85f));
+            crossPath.AddLineTo(new CGPoint(35.85f, 31.61f));
+            crossPath.AddLineTo(new CGPoint(26.24f, 22.0f));
+            crossPath.AddLineTo(new CGPoint(35.85f, 12.39f));
             crossPath.ClosePath();
             crossPath.MiterLimit = 4.0f;
 
@@ -447,7 +447,7 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-        private void DrawTick(RectangleF rect)
+        private void DrawTick(CGRect rect)
         {
             this.slTickBGLayer = new CAShapeLayer();
             this.slTickPathLayer = new CAShapeLayer();
@@ -469,13 +469,13 @@ namespace NathansWay.iOS.Numeracy
 
             //// Bezier Drawing
             UIBezierPath tickPath = new UIBezierPath();
-            tickPath.MoveTo(new PointF(8.15f, 28.52f));
-            tickPath.AddLineTo(new PointF(22.81f, 36.67f));
-            tickPath.AddLineTo(new PointF(35.85f, 10.59f));
-            tickPath.AddLineTo(new PointF(30.96f, 8.15f));
-            tickPath.AddLineTo(new PointF(20.37f, 29.33f));
-            tickPath.AddLineTo(new PointF(9.78f, 23.63f));
-            tickPath.AddLineTo(new PointF(8.15f, 28.52f));
+            tickPath.MoveTo(new CGPoint(8.15f, 28.52f));
+            tickPath.AddLineTo(new CGPoint(22.81f, 36.67f));
+            tickPath.AddLineTo(new CGPoint(35.85f, 10.59f));
+            tickPath.AddLineTo(new CGPoint(30.96f, 8.15f));
+            tickPath.AddLineTo(new CGPoint(20.37f, 29.33f));
+            tickPath.AddLineTo(new CGPoint(9.78f, 23.63f));
+            tickPath.AddLineTo(new CGPoint(8.15f, 28.52f));
             tickPath.ClosePath();
 
             slTickPathLayer.Path = tickPath.CGPath;
@@ -507,6 +507,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToCenter.RemovedOnCompletion = true;
             //_aniLayersToCenter.FillMode = CAFillMode.Forwards;
             _aniLayersToCenter.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+
             _aniLayersToCenter.Delegate = this._myAnimateDelegate;
             _aniLayersToCenter.From = NSValue.FromCGPoint(pt);
             _aniLayersToCenter.To = NSValue.FromCGPoint(this._pTrueCenter);
@@ -531,7 +532,7 @@ namespace NathansWay.iOS.Numeracy
         private void LayersToEdge(CALayer _layer1, CALayer _layer2, G__NumberDisplayPositionY _direction)
         {
             var pt = _layer1.Position;
-            PointF x;
+            CGPoint x;
 
             if (_direction == G__NumberDisplayPositionY.Top)
             {                
@@ -568,7 +569,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToEdgeFade.To = NSNumber.FromFloat(0.0f);
             //_aniLayersToCenter.Duration = 1.0f;
 
-            var y = this.SpinLogo(_layer1, _layer2);
+            var y = this.SpinLogo();
 
             this._animationGroupToEdge.Duration = 0.5f;
             this._animationGroupToEdge.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y};
@@ -584,7 +585,7 @@ namespace NathansWay.iOS.Numeracy
             this.slTickPathLayer.RemoveAllAnimations();  
         }
 
-        private CAKeyFrameAnimation SpinLogo (CALayer _layer1, CALayer _layer2)
+        private CAKeyFrameAnimation SpinLogo ()
         {
             // Spins that wheel! 3D Style
 
@@ -592,8 +593,8 @@ namespace NathansWay.iOS.Numeracy
             // and then let Core Animation fill in the so-called in-betweens.
             // CAKeyFrameAnimation _animation;
 
-            _layer1.Transform = CATransform3D.MakeRotation ((float)Math.PI * 2, 0, 0, 1);
-            _layer2.Transform = CATransform3D.MakeRotation ((float)Math.PI * 2, 0, 0, 1);
+            //_layer1.Transform = CATransform3D.MakeRotation ((nfloat)Math.PI * 2, 0, 0, 1);
+            //_layer2.Transform = CATransform3D.MakeRotation ((nfloat)Math.PI * 2, 0, 0, 1);
 
             CAKeyFrameAnimation animRotate = (CAKeyFrameAnimation)CAKeyFrameAnimation.FromKeyPath ("transform");
 
@@ -603,14 +604,10 @@ namespace NathansWay.iOS.Numeracy
                 NSNumber.FromFloat ((float)Math.PI),
                 NSNumber.FromFloat ((float)Math.PI * 2.0f)};
 
+            //Rotation axis
             animRotate.ValueFunction = CAValueFunction.FromName (CAValueFunction.RotateX);
 
-            animRotate.Duration = 0.5f;
-            animRotate.SetRepeatCount(2.0f);
-
-
-            float z = (0.5f / animRotate.GetRepeatCount());
-            animRotate.SetRepeatDuration(z);
+            animRotate.Duration = 0.1f;
             return animRotate;
         }
 
@@ -630,7 +627,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void Draw(RectangleF rect)
+        public override void Draw(CGRect rect)
         {
             base.Draw(rect);
 

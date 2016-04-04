@@ -1,11 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 //Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
@@ -121,7 +121,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void AddAndSet_MainGame()
         {
-            var _pointF2 = new PointF(2.0f, 2.0f);
+            var _pointF2 = new CGPoint(2.0f, 2.0f);
             this._vcMainGame.SizeClass.SetPositions(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
         }
@@ -132,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
-            var _pointF1 = new PointF(4.0f, y);
+            var _pointF1 = new CGPoint(4.0f, y);
             this._vcWorkSpace.SizeClass.SetPositions(_pointF1);
             this.AddAndDisplayController(this._vcWorkSpace);
         }

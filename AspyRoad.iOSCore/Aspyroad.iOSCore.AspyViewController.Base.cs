@@ -1,12 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Runtime.CompilerServices;
 
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
 
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
@@ -14,7 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspyViewController")]	
+	[Foundation.Register ("AspyViewController")]	
 	public class AspyViewController : UIViewController, IUIApply
 	{
 		#region Class Variables
@@ -26,16 +25,16 @@ namespace AspyRoad.iOSCore
 
 
 		// Tags for id
-		private int _AspyTag1;
-		private int _AspyTag2;
+		private nint _AspyTag1;
+		private nint _AspyTag2;
 		// String "name" of this vc controller
 		private string _AspyName;
 
         // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         // UIViewSpecific
         protected UIColor _colorBorderColor;
@@ -85,7 +84,7 @@ namespace AspyRoad.iOSCore
 
 		#region Public Properties
 
-		public int AspyTag1
+		public nint AspyTag1
 		{
 			get { return _AspyTag1; }
 			set { _AspyTag1 = value; }
@@ -103,7 +102,7 @@ namespace AspyRoad.iOSCore
 			}
 		}
 
-		public int AspyTag2
+		public nint AspyTag2
 		{
 			get { return _AspyTag2; }
 			set { _AspyTag2 = value; }
@@ -207,7 +206,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -225,7 +224,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 
@@ -281,7 +280,7 @@ namespace AspyRoad.iOSCore
 		/// </summary>
 		/// <returns><c>true</c>If the VC is added to the parent children array,<c>false</c> otherwise.</returns>
 		/// <param name="_newController">_new controller.</param>
-		public virtual void AddAndDisplayController (AspyViewController _newController, RectangleF _frame)
+		public virtual void AddAndDisplayController (AspyViewController _newController, CGRect _frame)
 		{
 			this.AddChildViewController (_newController);
 			// Add View and subview
@@ -320,7 +319,7 @@ namespace AspyRoad.iOSCore
 		/// </summary>
 		/// <returns><c>true</c>, if controllers was removed, <c>false</c> otherwise.</returns>
 		/// <param name="_AspyTag">_ aspy tag.</param>
-		public virtual bool RemoveControllers (int _AspyTag)
+		public virtual bool RemoveControllers (nint _AspyTag)
 		{
 			bool _return = false;
 			// Find the controller with the same string name
@@ -361,7 +360,7 @@ namespace AspyRoad.iOSCore
 		/// <returns><c>true</c>, if VC instance was removed, <c>false</c> otherwise.</returns>
 		/// <param name="VCType">VC type.</param>
 		/// <param name="VCInstance">VC instance.</param>
-		public virtual bool RemoveVCInstance (int VCType, int VCInstance)
+		public virtual bool RemoveVCInstance (nint VCType, nint VCInstance)
 		{
 			bool _return = false;
 			// Find the controller with the same string name

@@ -1,13 +1,13 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 
 // Aspyroad
 using AspyRoad.iOSCore;
@@ -23,7 +23,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register("vcFractionContainer")] 
+    [Foundation.Register("vcFractionContainer")] 
     public class vcFractionContainer : BaseContainer
     {
         #region Class Variables
@@ -167,9 +167,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
-            this.SizeClass.CurrentWidth = 
-                Math.Max(this._numberContainerNumerator.NumberContainerSize.CurrentWidth, this._numberContainerDenominator.SizeClass.CurrentWidth)
-            + (2 * this.SizeClass.GlobalSizeDimensions.FractionNumberPadding);
+            this.SizeClass.CurrentWidth = Math.Max((float)this._numberContainerNumerator.NumberContainerSize.CurrentWidth, (float)this._numberContainerDenominator.SizeClass.CurrentWidth) + (2 * this.SizeClass.GlobalSizeDimensions.FractionNumberPadding);
 
             // Set the NumberContainers to be centered "horizontally" inside the fraction control
             this._numberContainerNumerator.NumberContainerSize.SetCenterRelativeParentViewPosX = true;
@@ -524,7 +522,7 @@ namespace NathansWay.iOS.Numeracy
         // Y Vertical
         // Parent VC
         private vcFractionContainer _vc;
-        private RectangleF _rectFractionDivider;
+        private CGRect _rectFractionDivider;
 
         #endregion
 
@@ -561,16 +559,16 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public RectangleF RectDividerFrame
+        public CGRect RectDividerFrame
         {
             get
             {
                 var y = ((this.GlobalSizeDimensions.FractionHeight / 2) - (this.GlobalSizeDimensions.FractionDividerHeight / 2));
                 //var y = (this.GlobalSizeDimensions.FractionHeight / 2);
                 var width = (this.CurrentWidth - (2 * this.GlobalSizeDimensions.FractionDividerPadding));
-                return new RectangleF(
+                return new CGRect(
                     this.GlobalSizeDimensions.FractionDividerPadding, 
-                    //(float)Math.Round(y),
+                    //(nfloat)Math.Round(y),
                     y,
                     (width),
                     (this.GlobalSizeDimensions.FractionDividerHeight)

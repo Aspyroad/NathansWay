@@ -1,10 +1,10 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreMotion;
+using Foundation;
+using UIKit;
+using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
@@ -12,7 +12,7 @@ using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-	[MonoTouch.Foundation.Register ("vcMenuStart")]
+	[Foundation.Register ("vcMenuStart")]
     public class vcMenuStart : AspyViewController
 	{
 		#region Private Variables
@@ -110,37 +110,37 @@ namespace NathansWay.iOS.Numeracy.Menu
 			base.ViewDidLoad ();
 
 			// Add Menu Buttons
-			this.btnMenuLessons = new ButtonStyleLesson (new RectangleF(50.0f, 256.0f, 448.0f, 152.0f));
+			this.btnMenuLessons = new ButtonStyleLesson (new CGRect(50.0f, 256.0f, 448.0f, 152.0f));
 			this.btnMenuLessons.TouchUpInside += btnMenuLessons_touchupinside;
 			this.View.AddSubview (this.btnMenuLessons);
 
-			this.btnMenuToolbox = new ButtonStyleToolBox (new RectangleF(526.0f, 256.0f, 448.0f, 152.0f));
+			this.btnMenuToolbox = new ButtonStyleToolBox (new CGRect(526.0f, 256.0f, 448.0f, 152.0f));
 			this.btnMenuToolbox.TouchUpInside += btnMenuToolbox_touchupinside;
 			this.View.AddSubview (this.btnMenuToolbox);
 
-			this.btnMenuTeacher = new ButtonStyleTeacher (new RectangleF(50.0f, 416.0f, 448.0f, 152.0f));
+			this.btnMenuTeacher = new ButtonStyleTeacher (new CGRect(50.0f, 416.0f, 448.0f, 152.0f));
 			this.btnMenuTeacher.TouchUpInside += btnMenuTeacher_touchupinside;
 			this.View.AddSubview (this.btnMenuTeacher);
 
-			this.btnMenuStudent = new ButtonStyleStudent (new RectangleF(526.0f, 416.0f, 448.0f, 152.0f));
+			this.btnMenuStudent = new ButtonStyleStudent (new CGRect(526.0f, 416.0f, 448.0f, 152.0f));
 			this.btnMenuStudent.TouchUpInside += btnMenuStudent_touchupinside;
 			this.View.AddSubview (this.btnMenuStudent);
 
-			this.btnMenuLessonBuilder = new ButtonStyleLessonBuilder (new RectangleF(50.0f, 576.0f, 448.0f, 152.0f));
+			this.btnMenuLessonBuilder = new ButtonStyleLessonBuilder (new CGRect(50.0f, 576.0f, 448.0f, 152.0f));
 			this.btnMenuLessonBuilder.TouchUpInside += btnMenuLessonBuilder_touchupinside;
 			this.View.AddSubview (this.btnMenuLessonBuilder);
 
-			this.btnMenuVisuals = new ButtonStyleVisuals (new RectangleF(526.0f, 576.0f, 448.0f, 152.0f));
+			this.btnMenuVisuals = new ButtonStyleVisuals (new CGRect(526.0f, 576.0f, 448.0f, 152.0f));
 			this.btnMenuVisuals.TouchUpInside += btnMenuVisuals_touchupinside;
 			this.View.AddSubview (this.btnMenuVisuals);
 
 			// Add ComboBoxes MuthaFucka!
-			this.cmbTeacher = new AspyComboBox (new RectangleF (76.0f, 180.0f, 400.0f, 44.0f));
+			this.cmbTeacher = new AspyComboBox (new CGRect (76.0f, 180.0f, 400.0f, 44.0f));
 			this.cmbTeacher.AspyTag1 = 1031;
             this.cmbTeacher.Text = "Teacher";
 			this.View.AddSubview (this.cmbTeacher.View);
 
-            this.cmbStudent = new AspyComboBox (new RectangleF (550.0f, 180.0f, 400.0f, 44.0f));
+            this.cmbStudent = new AspyComboBox (new CGRect (550.0f, 180.0f, 400.0f, 44.0f));
             this.cmbStudent.AspyTag1 = 1032;
             this.cmbStudent.Text = "Student";
             this.View.AddSubview (this.cmbStudent.View);

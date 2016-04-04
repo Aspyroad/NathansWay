@@ -5,8 +5,8 @@
 // Manual changes to this file will not be maintained.
 //
 using System;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy.Menu
@@ -15,19 +15,19 @@ namespace NathansWay.iOS.Numeracy.Menu
 	partial class vcStudent
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn1 { get; set; }
+		UIKit.UIButton btn1 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn2 { get; set; }
+		UIKit.UIButton btn2 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn3 { get; set; }
+		UIKit.UIButton btn3 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn4 { get; set; }
+		UIKit.UIButton btn4 { get; set; }
 
 		[Action ("returnToStepOne:")]
-		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
+		partial void returnToStepOne (UIKit.UIStoryboardSegue segue);
 
 		void ReleaseDesignerOutlets ()
 		{

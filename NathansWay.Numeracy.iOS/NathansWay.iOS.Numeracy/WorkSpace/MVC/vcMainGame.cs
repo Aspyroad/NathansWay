@@ -1,11 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 
 //Aspyroad
 using AspyRoad.iOSCore;

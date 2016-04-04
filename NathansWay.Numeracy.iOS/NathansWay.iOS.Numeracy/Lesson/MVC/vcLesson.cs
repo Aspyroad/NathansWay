@@ -1,9 +1,9 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 

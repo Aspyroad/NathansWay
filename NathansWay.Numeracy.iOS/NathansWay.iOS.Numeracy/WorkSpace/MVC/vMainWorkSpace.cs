@@ -1,16 +1,16 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 // AspyRoad
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[MonoTouch.Foundation.Register ("vMainWorkSpace")]
+	[Foundation.Register ("vMainWorkSpace")]
 	public partial class vMainWorkSpace : AspyView
 	{
 
@@ -20,7 +20,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.Initialize (); 
 		}
 
-		public vMainWorkSpace (RectangleF frame) : base (frame)
+		public vMainWorkSpace (CGRect frame) : base (frame)
 		{
 			this.Initialize ();		
 		}

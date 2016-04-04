@@ -1,21 +1,21 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
-using MonoTouch.CoreAnimation;
+using UIKit;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
+using CoreAnimation;
 
 namespace AspyRoad.iOSCore
 {			
-	[MonoTouch.Foundation.Register("NWView")]	
+	[Foundation.Register("NWView")]	
 	public class NWView : AspyView
 	{
 		#region Class Variables
@@ -37,7 +37,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public NWView (RectangleF frame) : base(frame)
+		public NWView (CGRect frame) : base(frame)
 		{
 			Initialize ();
 		}

@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -18,7 +18,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("vcNumberLabelContainer")] 
+    [Foundation.Register ("vcNumberLabelContainer")] 
     public class vcNumberLabelContainer : BaseContainer
     {
         #region Class Variables
@@ -29,9 +29,9 @@ namespace NathansWay.iOS.Numeracy
         // Display a decimal place?
         private bool _bShowDecimal;
         // Number of "whole" (left side) number places
-        private int _intIntegralPlaces;
+        private nint _intIntegralPlaces;
         // Number of "decimal" (right side) number places
-        private int _intFractionalPlaces;
+        private nint _intFractionalPlaces;
         // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
         private string[] _delimiters = { "." };
@@ -179,12 +179,12 @@ namespace NathansWay.iOS.Numeracy
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
                         newnumber.NumberLabelSize.IsMultiNumberText = true;
-                        newnumber.NumberLabelSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberLabelSize.SetPositions(new CGPoint(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberLabelSize.CurrentWidth);
                     }
                     else
                     {
-                        newnumber.NumberLabelSize.SetPositions(new PointF(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberLabelSize.SetPositions(new CGPoint(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberLabelSize.CurrentWidth);
                     }
 
@@ -208,7 +208,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.SetPositions(new PointF(this.SizeClass.CurrentWidth, 0.0f));
+                    newdecimal.DecimalSize.SetPositions(new CGPoint(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 
@@ -325,14 +325,14 @@ namespace NathansWay.iOS.Numeracy
             get { return (SizeNumberContainer)this._sizeClass; }
         }
 
-        public bool IsInEditMode
-        {
-            get { return this._bIsInEditMode; }
-            set 
-            {
-                this._bIsInEditMode = value;
-            }
-        }
+//        public bool IsInEditMode
+//        {
+//            get { return this._bIsInEditMode; }
+//            set 
+//            {
+//                this._bIsInEditMode = value;
+//            }
+//        }
 
         public G__UnitPlacement UnitLength
         {
@@ -340,17 +340,17 @@ namespace NathansWay.iOS.Numeracy
             set { this._tensUnit = value; }
         }
 
-        public vcFractionContainer MyFractionParent
-        {
-            get
-            {
-                return _vcFractionContainer;
-            }
-            set
-            {
-                _vcFractionContainer = value;
-            }
-        }
+//        public vcFractionContainer MyFractionParent
+//        {
+//            get
+//            {
+//                return _vcFractionContainer;
+//            }
+//            set
+//            {
+//                _vcFractionContainer = value;
+//            }
+//        }
 
         #endregion
     }

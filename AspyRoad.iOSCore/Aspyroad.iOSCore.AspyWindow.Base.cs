@@ -9,10 +9,10 @@
 
 #region Includes
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
+using CoreGraphics;
+using Foundation;
+using UIKit;
+using Foundation;
 #endregion
 
 namespace AspyRoad.iOSCore
@@ -25,13 +25,13 @@ namespace AspyRoad.iOSCore
 		public UITouch UITouchObj { get; set; }
 		public UIGestureRecognizer gestureType { get; set; }
 		public string strGestureType { get; set; }
-		public int gestureCount { get; set; }
+		public nint gestureCount { get; set; }
 		public NSSet TouchSet { get; set; }
-		public int numTaps { get; set; }
+		public nint numTaps { get; set; }
 		public double TimeReached { get; set; }		
 	}
 
-	public class AspyWindow : MonoTouch.UIKit.UIWindow
+	public class AspyWindow : UIKit.UIWindow
 	{
 		#region Events
 		public event GlobalTouchEventHandler SomeonesTouchingMeInMySpecialPlace;
@@ -43,7 +43,7 @@ namespace AspyRoad.iOSCore
 //		private UIPinchGestureRecognizer _pinchGesture = null;
 //		private UIPanGestureRecognizer _panGesture = null;
 //		private UIRotationGestureRecognizer _rotorGesture = null;
-//		private UILongPressGestureRecognizer _longGesture = null;		
+//		private UILongPressGestureRecognizer _longGesture = null;	
 		#endregion
 
 		#region Constructors
@@ -56,7 +56,7 @@ namespace AspyRoad.iOSCore
 		{
 			//Initialize ();
 		}
-		public AspyWindow (RectangleF myRect) : base(myRect)
+		public AspyWindow (CGRect myRect) : base(myRect)
 		{	
 			//Initialize ();		
 		}
@@ -252,7 +252,7 @@ namespace AspyRoad.iOSCore
 		
 		}
 		
-		public AspyGesture (NSAction myAction) : base(myAction)
+		public AspyGesture (Action myAction) : base(myAction)
 		{	
 					
 		}

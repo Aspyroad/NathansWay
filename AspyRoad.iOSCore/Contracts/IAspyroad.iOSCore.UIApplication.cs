@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Xml;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ namespace AspyRoad.iOSCore
         // Properties
         bool HasBorder { get; set; }
         bool HasRoundedCorners { get; set; }
-        float CornerRadius { get; set; }
-        float BorderWidth { get; set; }
+        nfloat CornerRadius { get; set; }
+        nfloat BorderWidth { get; set; }
         G__ApplyUI ApplyUIWhere { get; set; }
         // Methods
         void ApplyUI7 ();

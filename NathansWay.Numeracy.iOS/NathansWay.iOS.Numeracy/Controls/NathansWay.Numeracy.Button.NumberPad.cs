@@ -1,13 +1,13 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 // MonoTouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -31,7 +31,7 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
 		} 
 
-        public ButtonNumberPad (RectangleF myFrame)  : base (myFrame)
+        public ButtonNumberPad (CGRect myFrame)  : base (myFrame)
 		{ 
             Initialize();    
 		}

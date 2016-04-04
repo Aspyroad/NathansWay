@@ -1,10 +1,10 @@
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 using AspyRoad.iOSCore;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
+using UIKit;
+using CoreGraphics;
+using Foundation;
 
 
 namespace AspyRoad.iOSCore
@@ -20,13 +20,13 @@ namespace AspyRoad.iOSCore
 
 		UIViewAutoresizing G__ViewAutoResize { get; set; }
 
-		RectangleF G__RectWindowLandscape { get; }
+		CGRect G__RectWindowLandscape { get; }
 		
-		RectangleF G__RectWindowPortait { get; }
+		CGRect G__RectWindowPortait { get; }
 
-        PointF G__PntWindowLandscapeCenter { get; }
+        CGPoint G__PntWindowLandscapeCenter { get; }
 
-        PointF G__PntWindowPortaitCenter { get; }
+        CGPoint G__PntWindowPortaitCenter { get; }
 
         UIInterfaceOrientationMask G__6_SupportedOrientationMasks { get; set; }
 
@@ -46,7 +46,7 @@ namespace AspyRoad.iOSCore
         
         G__Orientation G__ViewOrientation { get; set; }
 
-        Dictionary<string, int> G__ViewPool { get; set; }
+        Dictionary<string, nint> G__ViewPool { get; set; }
 
         double G__SegueingAnimationDuration { get; set; }				
     }

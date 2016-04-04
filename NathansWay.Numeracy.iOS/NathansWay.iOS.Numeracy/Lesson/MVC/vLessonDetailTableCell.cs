@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 // NathansWay

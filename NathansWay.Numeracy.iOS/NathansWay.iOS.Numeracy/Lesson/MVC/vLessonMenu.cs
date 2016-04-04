@@ -1,18 +1,18 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("vLessonMenu")]
+    [Foundation.Register ("vLessonMenu")]
     public partial class vLessonMenu : NWView
 	{
 		#region Private Variables
@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
-        public vLessonMenu (RectangleF frame) : base (frame)
+        public vLessonMenu (CGRect frame) : base (frame)
         {
             Initialize();
         }

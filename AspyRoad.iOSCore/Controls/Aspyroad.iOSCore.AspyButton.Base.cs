@@ -1,19 +1,19 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
+using Foundation;
+using ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-    [MonoTouch.Foundation.Register ("AspyButton")]
+    [Foundation.Register ("AspyButton")]
     public class AspyButton : UIButton, IUIApply
 	{
         #region Private Variables
@@ -30,14 +30,14 @@ namespace AspyRoad.iOSCore
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
         protected UIColor colorBorderColor;
-        private RectangleF labRect;
-        private RectangleF imgRect;
+        private CGRect labRect;
+        private CGRect imgRect;
 
         // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
 
         #endregion
@@ -52,7 +52,7 @@ namespace AspyRoad.iOSCore
         {
 			Initialize();
         }       
-        public AspyButton (RectangleF myFrame)  : base (myFrame)
+        public AspyButton (CGRect myFrame)  : base (myFrame)
         { 
 			Initialize();    
         }
@@ -99,7 +99,7 @@ namespace AspyRoad.iOSCore
             UIButton.GetAppearance<AspyButton>().BackgroundColor = UIColor.Clear;
         }
 
-        protected void ClipDrawingToFrame(RectangleF _frame, UIBezierPath _maskPath)
+        protected void ClipDrawingToFrame(CGRect _frame, UIBezierPath _maskPath)
         {
             // Create the shape layer and set its path
             CAShapeLayer maskLayer = new CAShapeLayer();
@@ -205,13 +205,13 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the index row.
         /// </summary>
         /// <value>The index row.</value>
-        public int IndexRow { get; set; }
+        public nint IndexRow { get; set; }
 
         /// <summary>
-        /// Gets or sets a sequence, this is an int used for storing data sequences.
+        /// Gets or sets a sequence, this is an nint used for storing data sequences.
         /// </summary>
         /// <value>Seq</value>
-        public int Seq { get; set; }
+        public nint Seq { get; set; }
 
 		public bool HoldState
 		{
@@ -309,7 +309,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -327,7 +327,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 

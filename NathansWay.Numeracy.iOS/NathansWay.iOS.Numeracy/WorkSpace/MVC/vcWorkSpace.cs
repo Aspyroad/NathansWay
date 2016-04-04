@@ -1,12 +1,11 @@
 ﻿// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -55,9 +54,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Data and state
         private EntityLessonDetail _currentLessonDetail;
         // Selected lessons quetion position/number
-        private int _intLessonDetailCurrentSeq;
-        private int _intLessonDetailCurrentIndex;
-        private int _intLessonDetailCurrentCount;
+        private nint _intLessonDetailCurrentSeq;
+        private nint _intLessonDetailCurrentIndex;
+        private nint _intLessonDetailCurrentCount;
 
         // Logic
         private G__LessonState _enumLessonState;
@@ -124,7 +123,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
             // Create a frame for the workcanvas
-            RectangleF x = new RectangleF(
+            CGRect x = new CGRect(
                                44.0f,
                                30.0f,
                                this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
@@ -230,16 +229,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private void SetWorkSpaceInitialPosition()
         {
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
-            var _pointF1 = new PointF(4.0f, y);
+            var _pointF1 = new CGPoint(4.0f, y);
             this.SizeClass.SetPositions(_pointF1);
         }
 
         private bool TouchInsideNumlets(UITouch _touch)
         {
             bool x = false;
-            PointF p1 = _touch.LocationInView(this.View);
-            PointF pNumletEquation = this._vcNumletEquation.View.ConvertPointFromView(p1, this.View);
-            PointF pNumletResult = this._vcNumletResult.View.ConvertPointFromView(p1, this.View);
+            CGPoint p1 = _touch.LocationInView(this.View);
+            CGPoint pNumletEquation = this._vcNumletEquation.View.ConvertPointFromView(p1, this.View);
+            CGPoint pNumletResult = this._vcNumletResult.View.ConvertPointFromView(p1, this.View);
 
             if (this._vcNumletEquation.View.PointInside(pNumletEquation, null))
             {
@@ -254,7 +253,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 foreach (BaseContainer _Numlet in this._vcNumletMethods) 
                 {
-                    PointF pNumletMethod = _Numlet.View.ConvertPointFromView(p1, this.View);
+                    CGPoint pNumletMethod = _Numlet.View.ConvertPointFromView(p1, this.View);
                     if (this._vcNumletEquation.View.PointInside(pNumletEquation, null))
                     {
                         x = true;
@@ -273,10 +272,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // TODO: Wank Ian
 
             // Both of these types mean the same thing, the ? is just C# shorthand.
-            // private void Example(int? arg1, Nullable<int> arg2)
+            // private void Example(nint? arg1, Nullable<nint> arg2)
 
             this._wsLessonDetail.Sort();
-            this._currentLessonDetail = _wsLessonDetail[this._intLessonDetailCurrentIndex];
+            this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
             this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
 
             // Assign data to local strings
@@ -333,7 +332,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Logic
         }
 
-        public void AddAndDisplay_PositioningDialog(PointF _location)
+        public void AddAndDisplay_PositioningDialog(CGPoint _location)
         {
             this._vcPositioningDialog = this._storyBoard.InstantiateViewController("vcPositioningDialog") as vcPositioningDialog;
             this._vcPositioningDialog.View.Center  = this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
@@ -389,19 +388,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public int LessonDetailCurrentSeq
+        public nint LessonDetailCurrentSeq
         {
             get { return this._intLessonDetailCurrentSeq; }
             set { this._intLessonDetailCurrentSeq = value; }
         }
 
-        public int LessonDetailCurrentIndex
+        public nint LessonDetailCurrentIndex
         {
             get { return this._intLessonDetailCurrentIndex; }
             set { this._intLessonDetailCurrentIndex = value; }
         }
 
-        public int LessonDetailCurrentCount
+        public nint LessonDetailCurrentCount
         {
             get { return this._intLessonDetailCurrentCount; }
             set { this._intLessonDetailCurrentCount = value; }
@@ -654,7 +653,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     bOverIndex = true;
                 }
 
-                var x = ((this._intLessonDetailCurrentCount - 1) - this._intLessonDetailCurrentIndex);
+                var x = ((this._intLessonDetailCurrentCount) - (this._intLessonDetailCurrentIndex + 1));
                 // This holds the button on the last call, warning the user its the last question
                 if (x == 0)
                 {
@@ -671,7 +670,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 
                 this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
-                this.btnPrevEquation.SetTitle(this._intLessonDetailCurrentIndex.ToString(), UIControlState.Normal);
+                this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex + 1).ToString(), UIControlState.Normal);
                 // Load the equation
                 this.DisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
@@ -690,15 +689,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // Remove the old numlets
                 this._intLessonDetailCurrentIndex--;
                 // Have we gone over range
-                if (this._intLessonDetailCurrentIndex < 0)
+                if (this._intLessonDetailCurrentIndex == -1)
                 {
-                    this._intLessonDetailCurrentIndex = 0;
+                    this._intLessonDetailCurrentIndex = 1;
                     bOverIndex = true;
                 }
 
-                var x = ((this._intLessonDetailCurrentCount - 1) - this._intLessonDetailCurrentIndex);
+                var x = ((this._intLessonDetailCurrentCount ) - (this._intLessonDetailCurrentIndex - 1));
                 // This holds the button on the last call, warning the user its the last question
-                if (x == this._intLessonDetailCurrentCount -1)
+                if (x == this._intLessonDetailCurrentCount)
                 {
                     if (bOverIndex)
                     {
@@ -711,7 +710,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     }
                 }
 
-                this.btnPrevEquation.SetTitle(this._intLessonDetailCurrentIndex.ToString(), UIControlState.Normal);
+                this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex - 1).ToString(), UIControlState.Normal);
                 this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
                 // Load the equation
                 this.DisplayExpression();
@@ -752,7 +751,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             var x = (this._intLessonDetailCurrentCount - 1);
 
             this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
-            this.btnPrevEquation.SetTitle("0", UIControlState.Normal);
+            this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
 
         }
 

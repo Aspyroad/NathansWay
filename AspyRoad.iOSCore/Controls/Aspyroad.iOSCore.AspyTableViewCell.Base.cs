@@ -1,32 +1,32 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore.UISettings;
 
 
 namespace AspyRoad.iOSCore
 {
-    [MonoTouch.Foundation.Register ("AspyTableViewCell")]
+    [Foundation.Register ("AspyTableViewCell")]
     public class AspyTableViewCell : UITableViewCell, IUIApply
 	{
 		#region Private Variables
 
 		protected iOSUIManager iOSUIAppearance;
         protected AspyViewController _vcParent;
-		protected int _indexValue;
+		protected nint _indexValue;
         protected bool _bHasAlternateGridBGColor;
 
         // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
 
@@ -42,7 +42,7 @@ namespace AspyRoad.iOSCore
         {
         }
 
-        public AspyTableViewCell (RectangleF _rect) : base (_rect)
+        public AspyTableViewCell (CGRect _rect) : base (_rect)
         {
         }
 
@@ -143,7 +143,7 @@ namespace AspyRoad.iOSCore
             set { this._bHasAlternateGridBGColor = value; }
         }
 
-        public int IndexValue 
+        public nint IndexValue 
         {
             get { return _indexValue; }
             set 
@@ -221,7 +221,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -239,7 +239,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 

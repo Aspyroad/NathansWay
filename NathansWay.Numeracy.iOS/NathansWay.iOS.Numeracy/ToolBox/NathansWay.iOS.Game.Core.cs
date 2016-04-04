@@ -1,7 +1,7 @@
 using System;
-using System.Drawing;
+using CoreGraphics;
 using Microsoft.Xna.Framework;
-using MonoTouch.UIKit;
+using UIKit;
 using AspyRoad.iOSCore;
 using NathansWay;
 
@@ -24,7 +24,7 @@ namespace NathansWay.iOS.Numeracy
 
 		// Takes a bounds rect object for the view frame.
 		// Not sure of Monogames view should be sized here or elsewhere?
-		public GameViewControl (RectangleF scrnBounds)
+		public GameViewControl (CGRect scrnBounds)
 		{
 			throw new NotImplementedException ();
 		}

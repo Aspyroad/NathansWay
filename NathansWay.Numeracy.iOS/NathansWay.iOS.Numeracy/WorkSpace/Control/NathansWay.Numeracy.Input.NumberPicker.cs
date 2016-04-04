@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -14,7 +14,7 @@ using AspyRoad.iOSCore.UISettings;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
 
-[MonoTouch.Foundation.Register ("NumberPickerView")] 
+[Foundation.Register ("NumberPickerView")] 
 public class NumberPickerView : AspyPickerView  
 {
     #region Private Variables
@@ -40,7 +40,7 @@ public class NumberPickerView : AspyPickerView
 
     }
 
-    public NumberPickerView (RectangleF frame) : base(frame)
+    public NumberPickerView (CGRect frame) : base(frame)
     {
 
     }

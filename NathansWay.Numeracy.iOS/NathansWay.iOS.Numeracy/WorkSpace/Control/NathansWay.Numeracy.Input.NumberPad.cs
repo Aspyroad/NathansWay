@@ -1,9 +1,9 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 // Aspyroad
 using AspyRoad.iOSCore;
 
@@ -14,25 +14,25 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         #region Events
         
-        public event Action<int> PadPushed;
-        public event Action<int> PadLockPushed;
+        public event Action<nint> PadPushed;
+        public event Action<nint> PadLockPushed;
         
         #endregion
         
         #region Private Variables
 
-        private int _intPadValue;
+        private nint _intPadValue;
         private bool _bInc;
         private bool _bDec;
         private bool _bLocked;
         private bool _bInEditMode;
-        private float _fAlphaLevel;
-        private float _fOldAlphaLevel;
+        private nfloat _fAlphaLevel;
+        private nfloat _fOldAlphaLevel;
         // Geometry variables for dragging
-        //private float dx = 0;
-        //private float dy = 0;
-        private PointF _pLastPoint;
-        private PointF _p6;
+        //private nfloat dx = 0;
+        //private nfloat dy = 0;
+        private CGPoint _pLastPoint;
+        private CGPoint _p6;
         private bool _bHitLabel;
 
 
@@ -76,7 +76,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
-        private void _padpushed (int _intPad)
+        private void _padpushed (nint _intPad)
         {          
             if (PadPushed != null)
             {
@@ -84,7 +84,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }            
         }
 
-        private void _padlockedpushed (int _intPad)
+        private void _padlockedpushed (nint _intPad)
         {          
             if (PadLockPushed != null)
             {
@@ -92,7 +92,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }            
         }
 
-        private void DealWithIt(int _intValue)
+        private void DealWithIt(nint _intValue)
         {
             if (this._bDec && this._bInEditMode)
             {
@@ -239,7 +239,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         var x = p0.X - this._p6.X;
                         var y = p0.Y - this._p6.Y;
 
-                        var p1 = new PointF (this.View.Center.X + x, this.View.Center.Y + y);
+                        var p1 = new CGPoint (this.View.Center.X + x, this.View.Center.Y + y);
                         this.View.Center = p1;
                     } 
 
@@ -261,7 +261,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public int PadValue
+        public nint PadValue
         {
             get { return this._intPadValue; }
             set { this._intPadValue = value; }
@@ -281,7 +281,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._bLocked; }
         }
 
-        public float SetAlphaLevel
+        public nfloat SetAlphaLevel
         {
             get { return this._fAlphaLevel; }
             set 

@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 // AspyRoad
 using AspyRoad.iOSCore.UISettings;
 
@@ -25,12 +25,12 @@ namespace AspyRoad.iOSCore
 		private Action<object, EventArgs> _pickerValueChanged;
 		// UI Appearance
         public iOSUIManager iOSUIAppearance;
-		private float _fontSize;
-		private float _pickerRowHeight;
+		private nfloat _fontSize;
+		private nfloat _pickerRowHeight;
 		private string _fontName;
-		private RectangleF _aspyComboBoxFrame;
-		private RectangleF _aspyLabelFrame;
-        private float _fPickerYOffset;
+		private CGRect _aspyComboBoxFrame;
+		private CGRect _aspyLabelFrame;
+        private nfloat _fPickerYOffset;
         // Tap Delegates
         private UITapGestureRecognizer singleTapGesture;
         // 
@@ -44,7 +44,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyComboBox (RectangleF _txtBoxFrame)
+		public AspyComboBox (CGRect _txtBoxFrame)
 		{
 			this._aspyComboBoxFrame = _txtBoxFrame; //new RectangleF(_txtBoxFrame.X,_txtBoxFrame.Y,_txtBoxFrame.Width,_txtBoxFrame.Height);
 
@@ -128,7 +128,7 @@ namespace AspyRoad.iOSCore
         {
             this._pickerView = new AspyPickerView 
                 (
-                    new RectangleF(
+                    new CGRect(
                         this._pickerTxtField.Frame.X,
                         this._pickerTxtField.Frame.Y - this._fPickerYOffset,
                         this._pickerTxtField.Frame.Width,
@@ -148,9 +148,9 @@ namespace AspyRoad.iOSCore
             this.pkSingleTapGestureRecognizer();
         }
 
-        protected int GetSelectedItem(string _currentSelection)
+        protected nint GetSelectedItem(string _currentSelection)
         {
-            int x;
+            nint x;
             // IndexOf returns -1 if the value isnt found
             x = this._pickerModel.Items.IndexOf(_currentSelection);
             if (x == -1)
@@ -181,7 +181,7 @@ namespace AspyRoad.iOSCore
 
         protected void pkSingleTapGestureRecognizer()
         {
-            NSAction action = () => 
+            Action action = () => 
                 { 
                     this.HandlePickerChanged();
                     this.CloseNumberPicker();
@@ -206,13 +206,13 @@ namespace AspyRoad.iOSCore
 
         #region Public Properties
 
-		public float FontSize
+		public nfloat FontSize
 		{
 			get { return this._fontSize;	}
 			set { this._fontSize = value; }
 		}
 
-        public float PickerYOffset
+        public nfloat PickerYOffset
         {
             get { return this._fPickerYOffset; }
             set { this._fPickerYOffset = value; }
@@ -224,7 +224,7 @@ namespace AspyRoad.iOSCore
 			set { this._fontName = value; }
 		}
 
-		public float PickerRowHeight
+		public nfloat PickerRowHeight
 		{
 			set { this._pickerRowHeight = value; }
 		}
@@ -315,8 +315,8 @@ namespace AspyRoad.iOSCore
             this.View.Frame = this._aspyComboBoxFrame;
 
             // Rest
-			this._aspyLabelFrame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
-            this._pickerTxtField.Frame = new RectangleF (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
+			this._aspyLabelFrame = new CGRect (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
+            this._pickerTxtField.Frame = new CGRect (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             _pickerModel.LabelFrame = this._aspyLabelFrame;
 			this.View.AddSubview (_pickerTxtField);
 		}			
@@ -359,7 +359,7 @@ namespace AspyRoad.iOSCore
 		#endregion
 	}
 	
-    [MonoTouch.Foundation.Register ("AspyPickerView")] 
+    [Foundation.Register ("AspyPickerView")] 
     public class AspyPickerView : UIPickerView, IUIApply  
     {
         public iOSUIManager iOSUIAppearance;
@@ -370,13 +370,13 @@ namespace AspyRoad.iOSCore
         // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
 
         // Frames
-        protected RectangleF _rectSuperView;
-        protected RectangleF _rectTempSuperView;
+        protected CGRect _rectSuperView;
+        protected CGRect _rectTempSuperView;
 
 
 
@@ -405,7 +405,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyPickerView (RectangleF frame) : base(frame)
+		public AspyPickerView (CGRect frame) : base(frame)
 		{
 			Initialize ();
 		}
@@ -428,13 +428,13 @@ namespace AspyRoad.iOSCore
             this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
 		}
 
-        private RectangleF SetFrames()
+        private CGRect SetFrames()
         {
             // Ref to AspyComboBox view - this views super
             this._rectSuperView = this.Superview.Frame;
             return               
                 (
-                    new RectangleF(
+                    new CGRect(
                         (this._rectSuperView.X - this.Frame.X),
                         (this._rectSuperView.Y - this.Frame.Y),
                         this.Frame.Width,
@@ -527,7 +527,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -545,7 +545,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 
@@ -605,7 +605,7 @@ namespace AspyRoad.iOSCore
                         // Match the actual table view frame to our ComboBox frame 
                         // minus the offset for other garbage views in <ios7 (11.0)
                         v.Frame = (
-                                new RectangleF(
+                                new CGRect(
                                     v.Frame.X - 11.0f,
                                     v.Frame.Y,
                                     this.Frame.Width,
@@ -639,13 +639,13 @@ namespace AspyRoad.iOSCore
     {
         #region Class Variables
 
-        protected int selectedIndex;
+        protected nint selectedIndex;
 		protected List<string> _items;
-		protected float _fontSize;
+		protected nfloat _fontSize;
 		protected string _fontName;
-        protected RectangleF _labelFrame;
+        protected CGRect _labelFrame;
         protected iOSUIManager iOSUIAppearance;
-        protected float _rowHeight;
+        protected nfloat _rowHeight;
 
         #endregion
 
@@ -690,10 +690,10 @@ namespace AspyRoad.iOSCore
             
         public string SelectedItem
         {
-            get { return _items[selectedIndex]; }
+            get { return _items[(int)selectedIndex]; }
         }
 
-		public float FontSize
+		public nfloat FontSize
 		{
 			set { _fontSize = value; }
 		}
@@ -703,18 +703,18 @@ namespace AspyRoad.iOSCore
 			set { _fontName = value; }
 		}
 
-		public RectangleF LabelFrame
+		public CGRect LabelFrame
 		{
 			set { _labelFrame = value; }
 		}
 
-        public float RowHeight
+        public nfloat RowHeight
         {
             get { return _rowHeight; }
             set { _rowHeight = value; }
         }
 
-        public int SelectedIndex
+        public nint SelectedIndex
         {
             get { return selectedIndex; }
             set { selectedIndex = value; }
@@ -727,7 +727,7 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// Called by the picker to determine how many rows are in a given spinner item
         /// </summary>
-        public override int GetRowsInComponent (UIPickerView picker, int component)
+        public override nint GetRowsInComponent (UIPickerView picker, nint component)
         {
             return this._items.Count;
         }
@@ -736,15 +736,15 @@ namespace AspyRoad.iOSCore
         /// Called by the picker to get the text for a particular row in a particular 
         /// spinner item
         /// </summary>
-        public override string GetTitle (UIPickerView picker, int row, int component)
+        public override string GetTitle (UIPickerView picker, nint row, nint component)
         {
-            return this._items[row];
+            return this._items[(int)row];
         }
 
         /// <summary>
         /// Called by the picker to get the number of spinner items
         /// </summary>
-        public override int GetComponentCount (UIPickerView picker)
+        public override nint GetComponentCount (UIPickerView picker)
         {
             return 1;
         }
@@ -752,9 +752,9 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// called when a row is selected in the spinner
         /// </summary>
-        public override void Selected (UIPickerView picker, int row, int component)
+        public override void Selected (UIPickerView picker, nint row, nint component)
         {
-            this.selectedIndex = row;
+            this.selectedIndex = (nint)row;
             picker.ReloadComponent(component);
             if (this.ValueChanged != null)
             {
@@ -765,7 +765,7 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// This is called for ever item in the picker source
         /// </summary>
-        public override UIView GetView(UIPickerView picker, int row, int component, UIView _view)
+        public override UIView GetView(UIPickerView picker, nint row, nint component, UIView _view)
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             // Common UI
@@ -778,7 +778,7 @@ namespace AspyRoad.iOSCore
             _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
             _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
             _lblPickerView.TextAlignment = UITextAlignment.Center;
-            _lblPickerView.Text = this._items[row];
+            _lblPickerView.Text = this._items[(int)row];
 
             // If Selected UI 
             // if (picker.SelectedRowInComponent(component) == row)
@@ -796,7 +796,7 @@ namespace AspyRoad.iOSCore
             return _lblPickerView;
         }
 
-		public override float GetRowHeight (UIPickerView picker, int component)
+		public override nfloat GetRowHeight (UIPickerView picker, nint component)
 		{
             return RowHeight;
 		}

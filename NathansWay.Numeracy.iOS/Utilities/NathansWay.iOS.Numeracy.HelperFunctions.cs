@@ -1,27 +1,27 @@
-﻿using System;
-using System.Drawing;
+using System;
+using CoreGraphics;
 
 namespace NathansWay.iOS.Numeracy
 {
 	public static class HelperFunctions
 	{
 
-		public static RectangleF StringToRectF(string _strRect)
+		public static CGRect StringToRectF(string _strRect)
 		{
 			// x, y, width, height
 			var strArray = _strRect.Split (',');
-			RectangleF tmpRect = 
-				new RectangleF (
-					float.Parse (strArray [0]),
-					float.Parse (strArray [1]),
-					float.Parse (strArray [2]),
-					float.Parse (strArray [3])
+			CGRect tmpRect = 
+				new CGRect (
+					nfloat.Parse (strArray [0]),
+					nfloat.Parse (strArray [1]),
+					nfloat.Parse (strArray [2]),
+					nfloat.Parse (strArray [3])
 				);
 			return tmpRect;
 
 		}
 
-		public static string RectFToString(RectangleF _rctString)
+		public static string RectFToString(CGRect _rctString)
 		{
 			//Convert a RectF to Text (csv)
 			string tmpStrRect = 

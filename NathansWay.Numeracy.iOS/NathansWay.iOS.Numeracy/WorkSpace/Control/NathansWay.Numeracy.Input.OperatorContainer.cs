@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -247,10 +247,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Text Box Frame
         // TODO: No longer needed ?
-        public RectangleF _rectTxtOperator;
-        public float _scale;
-        private float _fOperatorStartpointX;
-        private float _fOperatorStartpointY;
+        public CGRect _rectTxtOperator;
+        public nfloat _scale;
+        private nfloat _fOperatorStartpointX;
+        private nfloat _fOperatorStartpointY;
 
         #endregion
 
@@ -297,7 +297,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetRectTxtOperator()
         {
-            this._rectTxtOperator = new RectangleF(
+            this._rectTxtOperator = new CGRect(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,
@@ -315,13 +315,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Properties
 
-        public float OperatorStartpointX
+        public nfloat OperatorStartpointX
         {
             get { return this._fOperatorStartpointX; }
             set { this._fOperatorStartpointX = value; }
         }
 
-        public float OperatorStartpointY
+        public nfloat OperatorStartpointY
         {
             get { return this._fOperatorStartpointY; }
             set { this._fOperatorStartpointY = value; }

@@ -1,8 +1,8 @@
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
+using UIKit;
+using Foundation;
 
 namespace AspyRoad.iOSCore
 {
@@ -12,10 +12,10 @@ namespace AspyRoad.iOSCore
 		#region Private Members
 
 		private UIViewAutoresizing __ViewAutoResize = UIViewAutoresizing.None;
-		private RectangleF __RectWindowPortait;
-		private RectangleF __RectWindowLandscape;
-        private PointF __PntWindowPortaitCenter;
-        private PointF __PntWindowLandscapeCenter;
+		private CGRect __RectWindowPortait;
+		private CGRect __RectWindowLandscape;
+        private CGPoint __PntWindowPortaitCenter;
+        private CGPoint __PntWindowLandscapeCenter;
 		private bool __IsRetina;
 		private bool __IsiPad;
 		private bool __PrefersStatusBarHidden;
@@ -27,10 +27,10 @@ namespace AspyRoad.iOSCore
         private UIInterfaceOrientation _InterfaceOrientation;
 		private G__Orientation _Orientation = G__Orientation.Portait;
         private UIInterfaceOrientationMask _GetSupportedOrientations;
-        private Dictionary<string, int> _ViewPool = new Dictionary<string, int>() ; 
+        private Dictionary<string, nint> _ViewPool = new Dictionary<string, nint>() ; 
         private double _sgAnimationDuration = 1.0 ;
 		private AspyViewController _vcContainer;
-		private RectangleF __RectScreen;
+		private CGRect __RectScreen;
 
 		#endregion
          
@@ -58,27 +58,27 @@ namespace AspyRoad.iOSCore
 			get { return (AspyUIApplicationDelegate)UIApplication.SharedApplication.Delegate; }		
 		}
 
-        public RectangleF  G__RectWindowLandscape
+        public CGRect  G__RectWindowLandscape
         {
             get { return __RectWindowLandscape; }           
         }
 
-        public RectangleF G__RectWindowPortait
+        public CGRect G__RectWindowPortait
         {
             get { return __RectWindowPortait; }
         }
 
-        public PointF G__PntWindowLandscapeCenter
+        public CGPoint G__PntWindowLandscapeCenter
         {
             get { return __PntWindowLandscapeCenter; }                
         }
 
-        public PointF G__PntWindowPortaitCenter
+        public CGPoint G__PntWindowPortaitCenter
         {
             get { return __PntWindowPortaitCenter; }                
         }
 
-        public Dictionary<string, int> G__ViewPool
+        public Dictionary<string, nint> G__ViewPool
         {
             get { return _ViewPool; }
             set { _ViewPool = value; }
@@ -184,8 +184,8 @@ namespace AspyRoad.iOSCore
 		{
 			this.__RectScreen = UIScreen.MainScreen.Bounds;
 			this.__VersionNumber = new Version(UIDevice.CurrentDevice.SystemVersion);
-			this.__RectWindowPortait = new RectangleF(0,0,Math.Min(__RectScreen.Width, __RectScreen.Height), Math.Max(__RectScreen.Width, __RectScreen.Height));
-			this.__RectWindowLandscape = new RectangleF(0,0,Math.Max(__RectScreen.Width, __RectScreen.Height), Math.Min(__RectScreen.Width, __RectScreen.Height));
+			this.__RectWindowPortait = new CGRect(0,0,Math.Min(__RectScreen.Width, __RectScreen.Height), Math.Max(__RectScreen.Width, __RectScreen.Height));
+			this.__RectWindowLandscape = new CGRect(0,0,Math.Max(__RectScreen.Width, __RectScreen.Height), Math.Min(__RectScreen.Width, __RectScreen.Height));
 						
 			// Check if device is a phone or iPad
 			if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Pad)
@@ -203,7 +203,7 @@ namespace AspyRoad.iOSCore
 			//}
 			
 			// Check if display is retina.
-			if (UIScreen.MainScreen.RespondsToSelector(new MonoTouch.ObjCRuntime.Selector("scale")))
+			if (UIScreen.MainScreen.RespondsToSelector(new ObjCRuntime.Selector("scale")))
 			{
 				if (UIScreen.MainScreen.Scale == 2)
 				{
@@ -220,8 +220,8 @@ namespace AspyRoad.iOSCore
 			}
 			
 			//  Return portait or landscape
-            this.__PntWindowPortaitCenter = new PointF(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
-            this.__PntWindowLandscapeCenter = new PointF(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
+            this.__PntWindowPortaitCenter = new CGPoint(this.__RectWindowPortait.Width / 2, this.__RectWindowPortait.Height / 2);
+            this.__PntWindowLandscapeCenter = new CGPoint(this.__RectWindowLandscape.Width / 2, this.__RectWindowLandscape.Height / 2);
 
 			this.__PrefersStatusBarHidden = false;
 		}

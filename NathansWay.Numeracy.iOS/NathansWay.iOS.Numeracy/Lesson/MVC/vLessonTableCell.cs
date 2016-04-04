@@ -1,11 +1,10 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 // NathansWay
@@ -21,7 +20,7 @@ namespace NathansWay.iOS.Numeracy
 
         private vcLessonMenu _vcLessonMenu;
         // Create Action delegate for Method1.
-        private NSAction actOpenLesson;
+        private Action actOpenLesson;
 		 
         #endregion
 
@@ -35,7 +34,7 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
-        public vLessonTableCell (RectangleF _rect) : base (_rect)
+        public vLessonTableCell (CGRect _rect) : base (_rect)
         {
         }
 
@@ -71,7 +70,7 @@ namespace NathansWay.iOS.Numeracy
 			this.lblLessonName.Text = lesson.NameLesson;
 			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
 			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
-			this.lblLevel.LevelWidth = (float)lesson.Difficulty;
+			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
 		}
 
@@ -93,13 +92,13 @@ namespace NathansWay.iOS.Numeracy
 
         private void OnClick_btnbtnStartLesson (object sender, EventArgs e)
         {
-            this.actOpenLesson = new NSAction (OpenLesson);
+            this.actOpenLesson = new Action (OpenLesson);
             // Check if the detailviewentity has been populated or selected.
             // (It is possible that it may not have been, but we must have a lesson seq)
             if (this._vcLessonMenu.vmLesson.LessonDetail == null)
             {
                 // Load with the correct seq value for this row/start
-                this._vcLessonMenu.vmLesson.FilterLessonSeq = this.btnStartLesson.Seq;
+                this._vcLessonMenu.vmLesson.FilterLessonSeq = (int)this.btnStartLesson.Seq;
                 // Load the lesson detail entities
                 this._vcLessonMenu.vmLesson.LoadLessonDetailAsync().ContinueWith(_ =>
                     {

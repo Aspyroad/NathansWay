@@ -1,12 +1,12 @@
 using System;
-using System.Drawing;
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using CoreGraphics;
+using Foundation;
+using UIKit;
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy.Menu
 {
-	[MonoTouch.Foundation.Register ("vTeacher")]
+	[Foundation.Register ("vTeacher")]
 	public partial class vTeacher : AspyView
 	{		
 		#region Contructors
@@ -16,7 +16,7 @@ namespace NathansWay.iOS.Numeracy.Menu
             Initialize();
         }
 
-        public vTeacher (RectangleF frame) : base (frame)
+        public vTeacher (CGRect frame) : base (frame)
         {
             Initialize();
         }

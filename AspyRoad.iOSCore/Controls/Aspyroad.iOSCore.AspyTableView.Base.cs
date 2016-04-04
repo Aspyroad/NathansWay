@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -13,7 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 
 namespace AspyRoad.iOSCore
 {
-    [MonoTouch.Foundation.Register ("AspyTableView")]
+    [Foundation.Register ("AspyTableView")]
     public class AspyTableView : UITableView, IUIApply
 	{
 		#region Private Variables
@@ -24,8 +24,8 @@ namespace AspyRoad.iOSCore
         // UIApplication Variables
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
 
 		#endregion
@@ -42,7 +42,7 @@ namespace AspyRoad.iOSCore
             this.Initialize ();
         }
 
-        public AspyTableView (RectangleF _rect) : base (_rect)
+        public AspyTableView (CGRect _rect) : base (_rect)
         {
             this.Initialize ();
         }
@@ -127,7 +127,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -145,7 +145,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 

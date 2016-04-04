@@ -3,8 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;

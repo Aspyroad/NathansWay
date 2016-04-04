@@ -1,12 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -791,7 +790,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
-        public PointF FractionTextOffset
+        public CGPoint FractionTextOffset
         {
             get
             {
@@ -800,23 +799,23 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     // Most common
                     case (G__NumberDisplaySize.Small):
                     {
-                        return new PointF(0.0f, -2.0f);
+                        return new CGPoint(0.0f, -2.0f);
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return new PointF(0.0f, 2.0f);
+                        return new CGPoint(0.0f, 2.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
-                        return new PointF(0.0f, -6.0f);
+                        return new CGPoint(0.0f, -6.0f);
                     }
                     case (G__NumberDisplaySize.Large):
                     {
-                        return new PointF(0.0f, -8.0f);
+                        return new CGPoint(0.0f, -8.0f);
                     }
                     default : // Huge
                     {
-                        return new PointF(0.0f, -10.0f);
+                        return new CGPoint(0.0f, -10.0f);
                     }
                 }
             }
@@ -916,7 +915,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
-        public PointF BraceTextOffset
+        public CGPoint BraceTextOffset
         {
             get
             {
@@ -925,23 +924,23 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     // Most common
                     case (G__NumberDisplaySize.Small):
                     {
-                        return new PointF(0.0f, 0.0f);
+                        return new CGPoint(0.0f, 0.0f);
                     }
                     case (G__NumberDisplaySize.Normal):
                     {
-                        return new PointF(-6.0f, -8.0f);
+                        return new CGPoint(-6.0f, -8.0f);
                     }
                     case (G__NumberDisplaySize.Medium):
                     {
-                        return new PointF(0.0f, 0.0f);
+                        return new CGPoint(0.0f, 0.0f);
                     }
                     case (G__NumberDisplaySize.Large):
                     {
-                        return new PointF(0.0f, 0.0f);
+                        return new CGPoint(0.0f, 0.0f);
                     }
                     default : // Huge
                     {
-                        return new PointF(0.0f, 0.0f);
+                        return new CGPoint(0.0f, 0.0f);
                     }
                 }
             }
@@ -1076,11 +1075,11 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #region iOS Specific
 
-        public SizeF LabelPickerViewSize
+        public CGSize LabelPickerViewSize
         {
             get
             {
-                return new SizeF(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
+                return new CGSize(this.LabelPickerViewWidth, this.LabelPickerViewHeight);
             }
         }
         public UIFont GlobalNumberFont
@@ -1184,7 +1183,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //            }
     //        }
     //        // Number Text Box
-    //        public float LabelPickerViewHeight
+    //        public nfloat LabelPickerViewHeight
     //        {
     //            get
     //            {
@@ -1202,7 +1201,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float LabelPickerViewWidth
+    //        public nfloat LabelPickerViewWidth
     //        {
     //            get
     //            {
@@ -1222,7 +1221,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                //                }
     //            }
     //        }
-    //        public float MainNumberHeight
+    //        public nfloat MainNumberHeight
     //        {
     //            get
     //            {
@@ -1240,7 +1239,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float NumberPickerHeight
+    //        public nfloat NumberPickerHeight
     //        {
     //            get
     //            {
@@ -1258,7 +1257,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float TxtNumberHeight
+    //        public nfloat TxtNumberHeight
     //        {
     //            get
     //            {
@@ -1276,7 +1275,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float UpDownButtonHeight
+    //        public nfloat UpDownButtonHeight
     //        {
     //            get
     //            {
@@ -1294,7 +1293,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float GlobalNumberWidth
+    //        public nfloat GlobalNumberWidth
     //        {
     //            get
     //            {
@@ -1338,7 +1337,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //            }
     //        }
     //        // Fraction
-    //        public float FractionHeight
+    //        public nfloat FractionHeight
     //        {
     //            get
     //            {
@@ -1356,7 +1355,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //                }
     //            }
     //        }
-    //        public float DividerHeight
+    //        public nfloat DividerHeight
     //        {
     //            get
     //            {
@@ -1375,7 +1374,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //            }
     //        }
     //        // Decimal
-    //        public float DecimalWidth
+    //        public nfloat DecimalWidth
     //        {
     //            get
     //            {

@@ -1,12 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -16,7 +15,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("SizeBase")]
+    [Foundation.Register ("SizeBase")]
     public abstract class SizeBase
     {
         #region Events
@@ -54,16 +53,16 @@ namespace NathansWay.iOS.Numeracy
         // Set Docked
         protected bool _setDocked;
         // Global sizeclass padding variable for extreme left right top bottom placement.
-        protected float _fPaddingPositional;
+        protected nfloat _fPaddingPositional;
 
         // Parent container reference
         internal BaseContainer _parentContainer;
         // Current Sizing
-        protected float _fCurrentWidth = 0.0f;
-        protected float _fCurrentHeight = 0.0f;
+        protected nfloat _fCurrentWidth = 0.0f;
+        protected nfloat _fCurrentHeight = 0.0f;
         // Old Sizing
-        protected float _fOldWidth = 0.0f;
-        protected float _fOldHeight = 0.0f;
+        protected nfloat _fOldWidth = 0.0f;
+        protected nfloat _fOldHeight = 0.0f;
 
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
@@ -71,10 +70,10 @@ namespace NathansWay.iOS.Numeracy
         // Is part of a fraction container, these need to have their height adjusted
         protected bool _bIsFraction;
 
-        protected float _fParentContainerWidth;
-        protected float _fParentContainerHeight;
+        protected nfloat _fParentContainerWidth;
+        protected nfloat _fParentContainerHeight;
         // PointF location with respect to the Window and ContainerController
-        protected PointF _ptStartPointInWindow;
+        protected CGPoint _ptStartPointInWindow;
 
         #endregion
 
@@ -119,12 +118,12 @@ namespace NathansWay.iOS.Numeracy
         /// <returns>The display and position.</returns>
         /// <param name="_XWidth">X width.</param>
         /// <param name="_YHeight">Y height.</param>
-        private PointF RefreshDisplayAndPosition (float _XWidth, float _YHeight)
+        private CGPoint RefreshDisplayAndPosition (nfloat _XWidth, nfloat _YHeight)
         {         
-            float _YPos = _YHeight;
-            float _XPos = _XWidth;
-            float Y = _YHeight;
-            float X = _XWidth;
+            nfloat _YPos = _YHeight;
+            nfloat _XPos = _XWidth;
+            nfloat Y = _YHeight;
+            nfloat X = _XWidth;
 
             // ** Vertical Center
             if (this._setRelationPosY)
@@ -217,7 +216,7 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
 
-            return new PointF((float)Math.Round(_XPos), (float)Math.Round(_YPos));
+            return new CGPoint((nfloat)Math.Round(_XPos), (nfloat)Math.Round(_YPos));
         }
 
         //The event-invoking method. This mehtod calls all sizeclass virtual
@@ -257,13 +256,13 @@ namespace NathansWay.iOS.Numeracy
         }
 
         // Overload to set at init
-        public virtual void SetHeightWidth (float _width, float _height)
+        public virtual void SetHeightWidth (nfloat _width, nfloat _height)
         {
             this._fCurrentWidth = _width;
             this._fCurrentHeight = _height;
         }
 
-        public virtual void SetScale (int _scale)
+        public virtual void SetScale (nint _scale)
         {
             //var x = _vc.txtNumber.Font.PointSize;
             //x = x + 50.0f;
@@ -286,14 +285,14 @@ namespace NathansWay.iOS.Numeracy
         /// Calls all functions to set and position the parent class
         /// </summary>
         /// <param name="_startPoint">Start point.</param>
-        public virtual void SetPositions (PointF _startPoint)
+        public virtual void SetPositions (CGPoint _startPoint)
         {
             // SetPositions should be used to
             // 1. Set the StartPoint (PointF)
             // 2. Set the Height and Widths of the control
             // It should NOT be called to set frame objects
 
-            PointF _point;
+            CGPoint _point;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
@@ -311,13 +310,13 @@ namespace NathansWay.iOS.Numeracy
         /// </summary>
         /// <param name="_posX">_posX</param>
         /// <param name="_posY">_posY</param>
-        public virtual void SetPositions (float _posX, float _posY)
+        public virtual void SetPositions (nfloat _posX, nfloat _posY)
         {
-            PointF _point;
+            CGPoint _point;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
-                _point = new PointF(_posX, _posY);
+                _point = new CGPoint(_posX, _posY);
             }
             else
             {
@@ -337,7 +336,7 @@ namespace NathansWay.iOS.Numeracy
             if (this.ParentContainer != null)
             {                 
                 this.ParentContainer.View.Frame =
-                    new RectangleF
+                    new CGRect
                     (
                         this.StartPoint.X, 
                         this.StartPoint.Y, 
@@ -361,13 +360,13 @@ namespace NathansWay.iOS.Numeracy
         // X Horizontal
         // Y Vertical
         // Starting point when the control is created 
-        public PointF StartPoint 
+        public CGPoint StartPoint 
         { 
             get; 
             set; 
         }
         // Position of Parent vc view with reference to Window.
-        public PointF StartPointInWindow
+        public CGPoint StartPointInWindow
         {
             get
             {                
@@ -390,9 +389,9 @@ namespace NathansWay.iOS.Numeracy
             }
         }
         // Main Control Frame
-        public RectangleF RectMainFrame { get; set; }
+        public CGRect RectMainFrame { get; set; }
         // General Width and Height Variables
-        public float CurrentWidth 
+        public nfloat CurrentWidth 
         { 
             get { return this._fCurrentWidth; } 
             set
@@ -401,9 +400,9 @@ namespace NathansWay.iOS.Numeracy
                 this._fCurrentWidth = value;
             } 
         }
-        public float OldWidth { get; set; }
+        public nfloat OldWidth { get; set; }
 
-        public float CurrentHeight 
+        public nfloat CurrentHeight 
         { 
             get { return this._fCurrentHeight; } 
             set
@@ -412,7 +411,7 @@ namespace NathansWay.iOS.Numeracy
                 this._fCurrentHeight = value;
             } 
         }
-        public float OldHeight { get; set; }
+        public nfloat OldHeight { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
 
@@ -461,7 +460,7 @@ namespace NathansWay.iOS.Numeracy
             set { this._setMiddleRightPosX = value; }
         }
 
-        public float PaddingPositional
+        public nfloat PaddingPositional
         {
             get { return this._fPaddingPositional; }
             set { this._fPaddingPositional = value; }

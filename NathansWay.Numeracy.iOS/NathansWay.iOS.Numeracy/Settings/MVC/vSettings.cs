@@ -1,15 +1,15 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 
 namespace NathansWay.iOS.Numeracy
 {
-	[MonoTouch.Foundation.Register ("vSettings")]
+	[Foundation.Register ("vSettings")]
 	public partial class vSettings : AspyView
 	{		
 		#region Contructors
@@ -19,7 +19,7 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
-        public vSettings (RectangleF frame) : base (frame)
+        public vSettings (CGRect frame) : base (frame)
         {
             Initialize();
         }

@@ -1,18 +1,17 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using Foundation;
+using ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspyLabel")]
+	[Foundation.Register ("AspyLabel")]
     public class AspyLabel : UILabel, IUIApply
 	{
 		#region Private Variables
@@ -21,8 +20,8 @@ namespace AspyRoad.iOSCore
 
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
 
@@ -40,7 +39,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyLabel (RectangleF frame) : base(frame)
+		public AspyLabel (CGRect frame) : base(frame)
 		{
 			Initialize ();
 		}
@@ -177,13 +176,13 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set { this._fBorderWidth = value; }
         }
 
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set { this._fCornerRadius = value; }

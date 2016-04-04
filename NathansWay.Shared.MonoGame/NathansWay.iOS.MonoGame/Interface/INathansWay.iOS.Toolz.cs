@@ -1,15 +1,15 @@
-﻿#region Using Statements
+#region Using Statements
 // System
 using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Drawing;
+using CoreGraphics;
 using System.Linq;
 
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 
 // MonoGame
 using Microsoft.Xna.Framework;

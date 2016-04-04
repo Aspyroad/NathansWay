@@ -1,13 +1,13 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 
 // Aspyroad
 using AspyRoad.iOSCore;
@@ -48,15 +48,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         private vcNumberContainer _vcNumberContainer;
 
         private Action ePickerChanged;
-        private Action<int> actHandlePadPush;
-        private Action<int> actHandlePadLock;
+        private Action<nint> actHandlePadPush;
+        private Action<nint> actHandlePadLock;
 
         private G__UnitPlacement _tensUnit;
         private G__Significance _significance;
-        private int _intIndexNumber;
-        private int _intMultiNumberPosition;
-        private int _intMultiNumberSigPosition;
-        private int _intMultiNumberInSigPosition;
+        private nint _intIndexNumber;
+        private nint _intMultiNumberPosition;
+        private nint _intMultiNumberSigPosition;
+        private nint _intMultiNumberInSigPosition;
         private bool _bIsMultiNumberedText;
 
         #endregion
@@ -80,7 +80,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcNumberText(int _value)
+        public vcNumberText(nint _value)
         {
             this.CurrentValue = Convert.ToDouble(_value);
             // Default constructor supply our initial value
@@ -320,19 +320,19 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public int MutliNumberPosition
+        public nint MutliNumberPosition
         {
             get { return this._intMultiNumberPosition; }
             set { this._intMultiNumberPosition = value; }
         }
 
-        public int MutliNumberSigPosition
+        public nint MutliNumberSigPosition
         {
             get { return this._intMultiNumberSigPosition; }
             set { this._intMultiNumberSigPosition = value; }
         }
 
-        public int MutliNumberInSigPosition
+        public nint MutliNumberInSigPosition
         {
             get { return this._intMultiNumberInSigPosition; }
             set { this._intMultiNumberInSigPosition = value; }
@@ -385,7 +385,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public int IndexNumber
+        public nint IndexNumber
         {
             get { return this._intIndexNumber; }
             set { this._intIndexNumber = value; }
@@ -435,8 +435,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Define the container type
             this._containerType = G__ContainerType.NumberText;
             // Event delegates              
-            this.actHandlePadPush = new Action<int>(HandlePadPush);
-            this.actHandlePadLock = new Action<int>(HandlePadLock);
+            this.actHandlePadPush = new Action<nint>(HandlePadPush);
+            this.actHandlePadLock = new Action<nint>(HandlePadLock);
             // Local controls
             this.btnDown = new AspyButton();
             this.btnUp = new AspyButton();
@@ -739,7 +739,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._numberpad.PadValue = Convert.ToInt16(this.CurrentValue);
 
                 // Main Controller is now responsible for all top level Vc's
-                this._vcMainContainer.DisplayNumberPad(new PointF(this.View.Frame.X, this.View.Frame.Y));
+                this._vcMainContainer.DisplayNumberPad(new CGPoint(this.View.Frame.X, this.View.Frame.Y));
                 this._numberpad.InEditMode = true;
             }
 
@@ -791,7 +791,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // create a new tap gesture
             UITapGestureRecognizer singleTapGesture = null;
 
-            NSAction action = () =>
+            Action action = () =>
             { 
                 this.pkNumberPicker.Hidden = false;
             };
@@ -806,7 +806,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void pkSingleTapGestureRecognizer()
         {
-            NSAction action = () =>
+            Action action = () =>
             { 
                 if (this.IsInEditMode)
                 {
@@ -831,7 +831,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // Action Delegates
-        protected void HandlePadPush(int intPadValue)
+        protected void HandlePadPush(nint intPadValue)
         {
             if (this.IsInEditMode)
             {
@@ -866,7 +866,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        protected void HandlePadLock(int intPadValue)
+        protected void HandlePadLock(nint intPadValue)
         {
             if (!this._bIsInEditMode)
             {
@@ -906,10 +906,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             #region Class Variables
 
-            protected int selectedIndex = 0;
+            protected nint selectedIndex = 0;
             private List<string> _items;
             protected iOSUIManager iOSUIAppearance;
-            protected int _intCurrentValue;
+            protected nint _intCurrentValue;
             protected SizeNumber _numberSize;
 
             #endregion
@@ -949,16 +949,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public string SelectedItemStr
             {
-                get { return this._items[selectedIndex]; }
+                get { return this._items[(int)selectedIndex]; }
             }
 
-            public int SelectedItemInt
+            public nint SelectedItemInt
             {
                 get { return selectedIndex; }
                 set { selectedIndex = value; }
             }
 
-            public int CurrentValue
+            public nint CurrentValue
             {
                 set
                 { 
@@ -973,7 +973,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// Called when a row is selected in the spinner
             /// </summary>
-            public override void Selected(UIPickerView picker, int row, int component)
+            public override void Selected(UIPickerView picker, nint row, nint component)
             {
                 selectedIndex = row;
                 picker.ReloadComponent(component);
@@ -983,9 +983,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// Called by the picker to get the text for a particular row in a particular 
             /// spinner item
             /// </summary>
-            public override string GetTitle(UIPickerView picker, int row, int component)
+            public override string GetTitle(UIPickerView picker, nint row, nint component)
             {
-                return this._items[row];
+                return this._items[(int)row];
             }
 
             /// <summary>
@@ -994,7 +994,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="pickerView">Picker view.</param>
             /// <param name="row">Row.</param>
             /// <param name="_view">_view.</param>
-            public override UIView GetView(UIPickerView pickerView, int row, int component, UIView _view)
+            public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView _view)
             {
                 UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
                 _lblPickerView.ClipsToBounds = true;
@@ -1019,7 +1019,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
                 _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
-                _lblPickerView.Text = this._items[row];
+                _lblPickerView.Text = this._items[(int)row];
                 return _lblPickerView;
             }
 
@@ -1030,7 +1030,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <returns>The row height.</returns>
             /// <param name="pickerView">Picker view.</param>
             /// <param name="component">Component.</param>
-            public override float GetRowHeight(UIPickerView pickerView, int component)
+            public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
             {
                 return this._numberSize._rectTxtNumber.Height;
             }
@@ -1066,9 +1066,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// Called by the picker to determine how many rows are in a given spinner item
             /// </summary>
-            public override int GetRowsInComponent(UIPickerView picker, int component)
+            public override nint GetRowsInComponent(UIPickerView picker, nint component)
             {
-                int x = 0;
+                nint x = 0;
                 if (this._items != null)
                 {
                     x = this._items.Count;
@@ -1079,7 +1079,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// called by the picker to get the number of spinner items
             /// </summary>
-            public override int GetComponentCount(UIPickerView picker)
+            public override nint GetComponentCount(UIPickerView picker)
             {
                 return 1;
             }
@@ -1098,18 +1098,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectTxtNumber;
+        public CGRect _rectTxtNumber;
         // Up Down Button Frames, usually the same
-        public RectangleF _rectUpButton;
-        public RectangleF _rectDownButton;
+        public CGRect _rectUpButton;
+        public CGRect _rectDownButton;
         // Label Frame for the Picker View
-        public RectangleF _rectMainNumberWithPicker;
+        public CGRect _rectMainNumberWithPicker;
         // Number Picker Spinner Control
-        public RectangleF _rectNumberPicker;
+        public CGRect _rectNumberPicker;
         // Font Size
         public UIFont _globalFont;
         // Label
-        public SizeF _sLabelPickerViewSize;
+        public CGSize _sLabelPickerViewSize;
 
         #endregion
 
@@ -1160,7 +1160,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public override void SetPositions(PointF _startPoint)
+        public override void SetPositions(CGPoint _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
             base.SetPositions(_startPoint);
@@ -1222,21 +1222,21 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetPickerPositionTopOn()
         {
-            this._rectNumberPicker = new RectangleF(
+            this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X, 
                 (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 (this.GlobalSizeDimensions.TxtNumberHeight)
             );
 
-            this._rectTxtNumber = new RectangleF(
+            this._rectTxtNumber = new CGRect(
                 0.0f, 
                 (this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
@@ -1246,13 +1246,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetPickerPositionBottomOn()
         {
-            this._rectNumberPicker = new RectangleF(
+            this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
                 (this.StartPointInWindow.Y + this.CurrentHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth,
@@ -1262,31 +1262,31 @@ namespace NathansWay.iOS.Numeracy.Controls
        
         private void SetPickerPositionNormalOff()
         {
-            this._rectMainNumberWithPicker = new RectangleF(
+            this._rectMainNumberWithPicker = new CGRect(
                 0.0f,
                 0.0f,
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
-            this._rectUpButton = new RectangleF(
+            this._rectUpButton = new CGRect(
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
                 (this.CurrentHeight/2)
             );
-            this._rectDownButton = new RectangleF(
+            this._rectDownButton = new CGRect(
                 0.0f,
                 (this.CurrentHeight/2),
                 this.CurrentWidth,
                 (this.CurrentHeight/2)
             );
-            this._rectTxtNumber = new RectangleF(
+            this._rectTxtNumber = new CGRect(
                 0.0f, 
                 0.0f,
                 this.CurrentWidth,
@@ -1300,21 +1300,21 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionTopOnFraction()
         {
-            this._rectNumberPicker = new RectangleF(
+            this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X, 
                 (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 (this.GlobalSizeDimensions.TxtNumberHeight)
             );
 
-            this._rectTxtNumber = new RectangleF(
+            this._rectTxtNumber = new CGRect(
                 0.0f, 
                 (this.GlobalSizeDimensions.NumberPickerHeight), 
                 this.CurrentWidth,
@@ -1324,13 +1324,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionBottomOnFraction()
         {
-            this._rectNumberPicker = new RectangleF(
+            this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
                 (this.StartPointInWindow.Y + this.CurrentHeight), 
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth,
@@ -1340,31 +1340,31 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetPickerPositionNormalOffFraction()
         {
-            this._rectMainNumberWithPicker = new RectangleF(
+            this._rectMainNumberWithPicker = new CGRect(
                 0.0f,
                 0.0f,
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 this.GlobalSizeDimensions.FractionNumberHeight
             );
-            this._rectUpButton = new RectangleF(
+            this._rectUpButton = new CGRect(
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2)
             );
-            this._rectDownButton = new RectangleF(
+            this._rectDownButton = new CGRect(
                 0.0f,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2),
                 this.CurrentWidth,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2)
             );
-            this._rectTxtNumber = new RectangleF(
+            this._rectTxtNumber = new CGRect(
                 0.0f, 
                 0.0f,
                 this.CurrentWidth,
@@ -1390,7 +1390,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //        {
     //            #region Class Variables
     //
-    //            protected int selectedIndex = 0;
+    //            protected nint selectedIndex = 0;
     //
     //            #endregion
     //
@@ -1431,7 +1431,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            /// <summary>
     //            /// Called by the picker to determine how many rows are in a given spinner item
     //            /// </summary>
-    //            public override int GetRowsInComponent (UIPickerView picker, int component)
+    //            public override nint GetRowsInComponent (UIPickerView picker, nint component)
     //            {
     //                return items.Count;
     //            }
@@ -1440,7 +1440,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            /// called by the picker to get the text for a particular row in a particular
     //            /// spinner item
     //            /// </summary>
-    //            public override string GetTitle (UIPickerView picker, int row, int component)
+    //            public override string GetTitle (UIPickerView picker, nint row, nint component)
     //            {
     //                return items[row];
     //            }
@@ -1448,7 +1448,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            /// <summary>
     //            /// Called by the picker to get the number of spinner items
     //            /// </summary>
-    //            public override int GetComponentCount (UIPickerView picker)
+    //            public override nint GetComponentCount (UIPickerView picker)
     //            {
     //                return 1;
     //            }
@@ -1456,7 +1456,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            /// <summary>
     //            /// called when a row is selected in the spinner
     //            /// </summary>
-    //            public override void Selected (UIPickerView picker, int row, int component)
+    //            public override void Selected (UIPickerView picker, nint row, nint component)
     //            {
     //                selectedIndex = row;
     //                if (this.ValueChanged != null)
@@ -1468,7 +1468,7 @@ namespace NathansWay.iOS.Numeracy.Controls
     //            /// <summary>
     //            /// This is called for ever item in the picker source
     //            /// </summary>
-    //            public override UIView GetView(UIPickerView picker, int row, int component, UIView view)
+    //            public override UIView GetView(UIPickerView picker, nint row, nint component, UIView view)
     //            {
     //                // NOTE: Don't call the base implementation on a Model class
     //                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events

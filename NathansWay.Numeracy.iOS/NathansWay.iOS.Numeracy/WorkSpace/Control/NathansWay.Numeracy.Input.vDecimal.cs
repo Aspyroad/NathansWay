@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreMotion;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
@@ -14,16 +14,16 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("vDecimal")]
+    [Foundation.Register ("vDecimal")]
     public class vDecimal : AspyView
     {
         #region Private Variables
 
-        private float _fScale;
-        private float _fOperatorStartpointX;
-        private float _fOperatorStartpointY;
+        private nfloat _fScale;
+        private nfloat _fOperatorStartpointX;
+        private nfloat _fOperatorStartpointY;
 
-        private RectangleF _rectDecimalDraw;
+        private CGRect _rectDecimalDraw;
 
         #endregion
         
@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy
             //Initialize();
         }
 
-        public vDecimal (RectangleF frame) : base (frame)
+        public vDecimal (CGRect frame) : base (frame)
         {
             this.Frame = frame;
         }
@@ -58,13 +58,13 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public float ImageScale
+        public nfloat ImageScale
         {
             get;
             set;
         }
 
-        public RectangleF RectDecimalDraw
+        public CGRect RectDecimalDraw
         {
             set
             {
@@ -76,7 +76,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void Draw(RectangleF rect)
+        public override void Draw(CGRect rect)
         {
             // Custom draws
             if (this._rectDecimalDraw != null)
@@ -97,7 +97,7 @@ namespace NathansWay.iOS.Numeracy
         public void DrawDecimal()
         {
             // Decimal Drawing
-            var ovalPath = UIBezierPath.FromOval(new RectangleF(this._rectDecimalDraw.X, this._rectDecimalDraw.Y, 8.0f, 8.0f));
+            var ovalPath = UIBezierPath.FromOval(new CGRect(this._rectDecimalDraw.X, this._rectDecimalDraw.Y, 8.0f, 8.0f));
             UIColor.Black.SetFill();
             ovalPath.Fill();
         }

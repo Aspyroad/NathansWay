@@ -1,23 +1,23 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreMotion;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 
 
 namespace NathansWay.iOS.Numeracy
 {
-	[MonoTouch.Foundation.Register ("vFractionContainer")]
+	[Foundation.Register ("vFractionContainer")]
     public class vFractionContainer : AspyView
 	{
 		#region Private Variables
 
-        private RectangleF _rectFractionDivider;
+        private CGRect _rectFractionDivider;
 
 		#endregion
 
@@ -28,7 +28,7 @@ namespace NathansWay.iOS.Numeracy
             //Initialize();
 		}
 
-        public vFractionContainer (RectangleF frame) : base (frame)
+        public vFractionContainer (CGRect frame) : base (frame)
         {
             this.Frame = frame;
         }
@@ -56,7 +56,7 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Drawn Graphics
 
-        private void DrawFractionDivider(RectangleF rectDivider)
+        private void DrawFractionDivider(CGRect rectDivider)
         {            
             //// Color Declarations
             var x = this.iOSUIAppearance.GlobaliOSTheme.FontColor.Value;
@@ -77,7 +77,7 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
-		public override void Draw(RectangleF rect)
+		public override void Draw(CGRect rect)
         {            
             // Custom draws
             base.Draw (rect);
@@ -88,7 +88,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public RectangleF RectFractionDivider
+        public CGRect RectFractionDivider
         {
             get { return this._rectFractionDivider; }
             set { this._rectFractionDivider = value; }

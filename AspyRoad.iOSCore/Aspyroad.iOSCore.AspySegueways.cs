@@ -1,33 +1,33 @@
 using System;
-using System.Drawing;
+using CoreGraphics;
 using AspyRoad.iOSCore;
 //using NathansWay.Shared.Global;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
+using Foundation;
+using ObjCRuntime;
 
 
 namespace AspyRoad.iOSCore
 {
 
-    [MonoTouch.Foundation.Register("AspySegueBase")] 
+    [Foundation.Register("AspySegueBase")] 
     public class AspySegueBase : UIStoryboardSegue
     {
         public IAspyGlobals iOSGlobals;
         internal double kAnimationDuration; 
 
-        internal NSAction _slider;
+        internal Action _slider;
         internal UICompletionHandler _animationcomplete;
-        internal float tmpWidth;
-        internal float tmpHeight;
-        internal PointF rightFull;
-        internal PointF leftFull;
-        internal PointF upFull;
-        internal PointF downFull;
-        internal int tmpTag;
-        internal PointF originalCenter;
+        internal nfloat tmpWidth;
+        internal nfloat tmpHeight;
+        internal CGPoint rightFull;
+        internal CGPoint leftFull;
+        internal CGPoint upFull;
+        internal CGPoint downFull;
+        internal nint tmpTag;
+        internal CGPoint originalCenter;
         
         #region Construction
         // Def .ctr
@@ -83,7 +83,7 @@ namespace AspyRoad.iOSCore
 		}  
     }
 
-	[MonoTouch.Foundation.Register("AspySlidingLeftSegue")]	
+	[Foundation.Register("AspySlidingLeftSegue")]	
 	public class AspySlidingLeftSegue : AspySegueBase
 	{
         #region Construction
@@ -130,11 +130,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
 			if (this.SourceViewController.View.Frame.Width == tmpWidth)
 			{
-				rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+				rightFull = new CGPoint((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
 			}
 			else
 			{
-				rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+				rightFull = new CGPoint((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
 			}
             
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -145,11 +145,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
 			{
-				leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+				leftFull = new CGPoint(((tmpWidth / 2) * -1), (tmpHeight / 2));
 			}
 			else
 			{
-				leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));              
+				leftFull = new CGPoint((tmpHeight / 2), ((tmpWidth / 2) * -1));              
 			}
                         
             // Put the destination view fully over to the right, off screen            
@@ -157,7 +157,7 @@ namespace AspyRoad.iOSCore
             this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.rightFull;
 
             // Setup Action Delegates
-            _slider = new NSAction(animateSlide);
+            _slider = new Action(animateSlide);
             _animationcomplete = new UICompletionHandler (this.animateComplete);
 			//_animationcomplete (true);
 
@@ -257,7 +257,7 @@ namespace AspyRoad.iOSCore
 		#endregion
 	}
 
-    [MonoTouch.Foundation.Register("AspySlidingRightSegue")] 
+    [Foundation.Register("AspySlidingRightSegue")] 
     public class AspySlidingRightSegue : AspySegueBase
     {
                 
@@ -304,11 +304,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
 			{
-				leftFull = new PointF(((tmpWidth / 2) * -1), (tmpHeight / 2));
+				leftFull = new CGPoint(((tmpWidth / 2) * -1), (tmpHeight / 2));
 			}
 			else
 			{
-				leftFull = new PointF((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
+				leftFull = new CGPoint((tmpHeight / 2), ((tmpWidth / 2) * -1));                 
 			}
 
             this.SourceViewController.View.AddSubview(this.DestinationViewController.View);
@@ -317,11 +317,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
 			{
-				rightFull = new PointF((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
+				rightFull = new CGPoint((tmpWidth + (tmpWidth / 2)), (tmpHeight / 2));
 			}
 			else
 			{
-				rightFull = new PointF((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
+				rightFull = new CGPoint((tmpHeight / 2), (tmpWidth + (tmpWidth / 2)));                 
 			}
 
                         
@@ -330,7 +330,7 @@ namespace AspyRoad.iOSCore
             this.SourceViewController.View.ViewWithTag(this.tmpTag).Center = this.leftFull;
 
             // Setup Action Delegates
-            _slider = new NSAction(animateSlide);
+            _slider = new Action(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
 
 
@@ -352,7 +352,7 @@ namespace AspyRoad.iOSCore
 
     }
 
-    [MonoTouch.Foundation.Register("AspySlidingUpSegue")] 
+    [Foundation.Register("AspySlidingUpSegue")] 
     public class AspySlidingUpSegue : AspySegueBase
     {
         #region Construction
@@ -397,11 +397,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
             {
-                upFull = new PointF((tmpWidth / 2), ((tmpHeight / 2) * -1));
+                upFull = new CGPoint((tmpWidth / 2), ((tmpHeight / 2) * -1));
             }
             else
             {
-                upFull = new PointF(((tmpHeight / 2) * -1), (tmpWidth / 2)); 
+                upFull = new CGPoint(((tmpHeight / 2) * -1), (tmpWidth / 2)); 
             }
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -412,11 +412,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
-                downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));
+                downFull = new CGPoint((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));
             }
             else
             {
-                downFull = new PointF((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));                 
+                downFull = new CGPoint((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));                 
             }
 
             // Put the destination view fully over to the right, off screen            
@@ -425,7 +425,7 @@ namespace AspyRoad.iOSCore
             //this.SourceViewController.View.Center = upFull;
 
             // Setup Action Delegates
-            _slider = new NSAction(animateSlide);
+            _slider = new Action(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
 
 
@@ -451,7 +451,7 @@ namespace AspyRoad.iOSCore
 
     }
 
-    [MonoTouch.Foundation.Register("AspySlidingDownSegue")] 
+    [Foundation.Register("AspySlidingDownSegue")] 
     public class AspySlidingDownSegue : AspySegueBase
     {
         #region Construction
@@ -496,11 +496,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources
             if (this.SourceViewController.View.Frame.Width == tmpWidth)
             {
-                upFull = new PointF(((tmpHeight / 2) * -1), (tmpWidth / 2));
+                upFull = new CGPoint(((tmpHeight / 2) * -1), (tmpWidth / 2));
             }
             else
             {
-                upFull = new PointF((tmpWidth / 2), ((tmpHeight / 2) * -1)); 
+                upFull = new CGPoint((tmpWidth / 2), ((tmpHeight / 2) * -1)); 
             }
 
             //TODO:  Create a tagging dictionary to tag all views? That would be cool.
@@ -519,11 +519,11 @@ namespace AspyRoad.iOSCore
             // swap the Point sources - technically it should always be landscape after the preceding method...?
             if (this.SourceViewController.View.ViewWithTag(this.tmpTag).Frame.Width == tmpWidth)
             {
-                downFull = new PointF((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));
+                downFull = new CGPoint((tmpHeight + (tmpHeight / 2)), (tmpWidth / 2));
             }
             else
             {
-                downFull = new PointF((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));                 
+                downFull = new CGPoint((tmpWidth / 2), (tmpHeight + (tmpHeight / 2)));                 
             }
 
             // Put the destination view fully over to the right, off screen            
@@ -535,7 +535,7 @@ namespace AspyRoad.iOSCore
             #endif
 
             // Setup Action Delegates
-            _slider = new NSAction(animateSlide);
+            _slider = new Action(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
 
 
@@ -556,7 +556,7 @@ namespace AspyRoad.iOSCore
         }
     }
 
-    [MonoTouch.Foundation.Register("AspySpinthatwheelSegue")] 
+    [Foundation.Register("AspySpinthatwheelSegue")] 
     public class AspySpinthatwheelSegue : AspySegueBase
     {
         #region Construction
@@ -582,7 +582,7 @@ namespace AspyRoad.iOSCore
             tmpHeight = this.SourceViewController.View.Frame.Size.Height;
 
             // Setup Action Delegates
-            _slider = new NSAction(animateSlide);
+            _slider = new Action(animateSlide);
             _animationcomplete = new UICompletionHandler (animateComplete);
 
             this.SourceViewController.View.InsertSubview(this.DestinationViewController.View, 0);
@@ -590,7 +590,7 @@ namespace AspyRoad.iOSCore
             DestinationViewController.View.Transform = CGAffineTransform.MakeScale(0.05f, 0.05f);
 
 
-            PointF originalCenter = this.DestinationViewController.View.Center;
+            CGPoint originalCenter = this.DestinationViewController.View.Center;
             DestinationViewController.View.Center = this.SourceViewController.View.Center;
 
             #if DEBUG

@@ -1,11 +1,10 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore.UISettings;
 
@@ -15,7 +14,7 @@ namespace AspyRoad.iOSCore
 	// Aspy Delegates
 	public delegate void ScrolledToBottomEventHandler (Object sender, EventArgs e);
 
-    [MonoTouch.Foundation.Register ("AspyTableViewSource")]
+    [Foundation.Register ("AspyTableViewSource")]
 	public class AspyTableViewSource : UITableViewSource 
 	{
 		#region Private Variables
@@ -81,12 +80,12 @@ namespace AspyRoad.iOSCore
 
 		public override void Scrolled (UIScrollView scrollView)
 		{
-			float offsetY = scrollView.ContentOffset.Y;
-			float scrollHeight = scrollView.Frame.Size.Height;
-			float bottomInset = scrollView.ContentInset.Bottom;
-			float bottomScrollY = offsetY + scrollHeight - bottomInset;
-			float fuzzFactor = 3.0f;
-			float boundary = (scrollView.ContentSize.Height - fuzzFactor);
+			nfloat offsetY = scrollView.ContentOffset.Y;
+			nfloat scrollHeight = scrollView.Frame.Size.Height;
+			nfloat bottomInset = scrollView.ContentInset.Bottom;
+			nfloat bottomScrollY = offsetY + scrollHeight - bottomInset;
+			nfloat fuzzFactor = 3.0f;
+			nfloat boundary = (scrollView.ContentSize.Height - fuzzFactor);
 
 			if ((bottomScrollY >= boundary) && (!this.scrolledToBottom)) 
 			{
@@ -108,7 +107,7 @@ namespace AspyRoad.iOSCore
 			throw new NotImplementedException ();
 		}
 
-		public override int RowsInSection (UITableView tableview, int section)
+		public override nint RowsInSection (UITableView tableview, nint section)
 		{
 			// NOTE: Don't call the base implementation on a Model class
 			// see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events

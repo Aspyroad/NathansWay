@@ -4,8 +4,8 @@
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
+using Foundation;
+using UIKit;
 using System;
 using System.CodeDom.Compiler;
 
@@ -33,13 +33,13 @@ namespace NathansWay.iOS.Numeracy
 		NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderType { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UISwipeGestureRecognizer grSwipeBack2Menu { get; set; }
+		UIKit.UISwipeGestureRecognizer grSwipeBack2Menu { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIImageView imBgUpperLeft { get; set; }
+		UIKit.UIImageView imBgUpperLeft { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIImageView imBgUpperRight { get; set; }
+		UIKit.UIImageView imBgUpperRight { get; set; }
 
 		[Outlet]
 		AspyRoad.iOSCore.AspyLabel lblFilter { get; set; }

@@ -1,8 +1,8 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.UIKit;
+using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 
@@ -25,9 +25,9 @@ namespace AspyRoad.iOSCore
 	    }
 
 		// Public Tools
-		public static PointF CGPointMake (float x, float y)
+		public static CGPoint CGPointMake (float x, float y)
 		{
-		    PointF p = new PointF(); 
+		    CGPoint p = new CGPoint(); 
 		    p.X = x; 
 		    p.Y = y; 
 		    return p;
@@ -51,7 +51,7 @@ namespace AspyRoad.iOSCore
 
 		}
 
-		public RectangleF rectCurrentOrientation (AspyGlobals myGlobals)
+		public CGRect rectCurrentOrientation (AspyGlobals myGlobals)
 		{
 			if (AspyUtilities.IsLandScape ())
 			{
@@ -63,28 +63,28 @@ namespace AspyRoad.iOSCore
 			}
 		} 
 
-		public static bool IsOdd(int value)
+		public static bool IsOdd(nint value)
 		{
 			return value % 2 != 0;
 		}
 
         public static UIColor AlphaHalfer(UIColor _color)
         {
-            float r, g, b, a;
+            nfloat r, g, b, a;
             _color.GetRGBA(out r, out g, out b, out a);
             return new UIColor(r, g, b, 0.30f);
         }
 
         public static UIColor AlphaAdjust(UIColor _color, float _alpha)
         {
-            float r, g, b, a;
+            nfloat r, g, b, a;
             _color.GetRGBA(out r, out g, out b, out a);
             return new UIColor(r, g, b, _alpha);
         }
 
         public static UIColor AlphaRestorer(UIColor _color)
         {
-            float r, g, b, a;
+            nfloat r, g, b, a;
             _color.GetRGBA(out r, out g, out b, out a);
             return new UIColor(r, g, b, 1.0f);
         }

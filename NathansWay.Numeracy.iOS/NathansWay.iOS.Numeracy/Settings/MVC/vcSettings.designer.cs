@@ -4,7 +4,7 @@
 // actions made in the UI designer. If it is removed, they will be lost.
 // Manual changes to this file may not be handled correctly.
 //
-using MonoTouch.Foundation;
+using Foundation;
 using System.CodeDom.Compiler;
 
 namespace NathansWay.iOS.Numeracy
@@ -13,31 +13,31 @@ namespace NathansWay.iOS.Numeracy
 	partial class vcSettings
 	{
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn1 { get; set; }
+		UIKit.UIButton btn1 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn2 { get; set; }
+		UIKit.UIButton btn2 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn3 { get; set; }
+		UIKit.UIButton btn3 { get; set; }
 
 		[Outlet]
-		MonoTouch.UIKit.UIButton btn4 { get; set; }
+		UIKit.UIButton btn4 { get; set; }
 
 		[Action ("btn1_click:")]
-		partial void btn1_click (MonoTouch.Foundation.NSObject sender);
+		partial void btn1_click (Foundation.NSObject sender);
 
 		[Action ("btn2_click:")]
-		partial void btn2_click (MonoTouch.Foundation.NSObject sender);
+		partial void btn2_click (Foundation.NSObject sender);
 
 		[Action ("btn3_click:")]
-		partial void btn3_click (MonoTouch.Foundation.NSObject sender);
+		partial void btn3_click (Foundation.NSObject sender);
 
 		[Action ("btn4_click:")]
-		partial void btn4_click (MonoTouch.Foundation.NSObject sender);
+		partial void btn4_click (Foundation.NSObject sender);
 
 		[Action ("returnToStepOne:")]
-		partial void returnToStepOne (MonoTouch.UIKit.UIStoryboardSegue segue);
+		partial void returnToStepOne (UIKit.UIStoryboardSegue segue);
 		
 		void ReleaseDesignerOutlets ()
 		{

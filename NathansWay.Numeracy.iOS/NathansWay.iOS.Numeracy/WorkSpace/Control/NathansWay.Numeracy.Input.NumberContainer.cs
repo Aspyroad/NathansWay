@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -19,7 +19,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [MonoTouch.Foundation.Register ("vcNumberContainer")] 
+    [Foundation.Register ("vcNumberContainer")] 
     public class vcNumberContainer : BaseContainer
     {
         #region Class Variables
@@ -29,18 +29,18 @@ namespace NathansWay.iOS.Numeracy
         // Display a decimal place?
         private bool _bShowDecimal;
         // Number of "whole" (left side) number places
-        private int _intIntegralPlaces;
+        private nint _intIntegralPlaces;
         // Number of "decimal" (right side) number places
-        private int _intFractionalPlaces;
+        private nint _intFractionalPlaces;
         // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
         private List<vcNumberText> _lsNumbersOnly;
         private string[] _delimiters = { "." };
         // MultiNumber
         private bool _bMultiNumbered;
-        private int _intMultiNumberTotalCount;
-        private int _intMultiNumberTotalSigCount;
-        private int _intMultiNumberTotalInSigCount;
+        private nint _intMultiNumberTotalCount;
+        private nint _intMultiNumberTotalSigCount;
+        private nint _intMultiNumberTotalInSigCount;
         private bool _bHasDecimal;
 
         private vcNumberText _selectedNumberText;
@@ -161,7 +161,7 @@ namespace NathansWay.iOS.Numeracy
                 if (ch != ".")
                 {
                     // The Amazing Conversion Of Doctor Parasis!
-                    int intCh = Convert.ToInt16(ch);
+                    nint intCh = Convert.ToInt16(ch);
                     // PROCESS - BUILD NUMBER
                     // Create a number box
                     vcNumberText newnumber = new vcNumberText(intCh);
@@ -220,11 +220,11 @@ namespace NathansWay.iOS.Numeracy
                     // Set our current width - and shorten if there is more then one number
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
-                        newnumber.NumberSize.SetPositions(new PointF(_width, _height));
+                        newnumber.NumberSize.SetPositions(new CGPoint(_width, _height));
                     }
                     else
                     {
-                        newnumber.NumberSize.SetPositions(new PointF(_width, _height));
+                        newnumber.NumberSize.SetPositions(new CGPoint(_width, _height));
                     }
 
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
@@ -252,7 +252,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.SetPositions(new PointF(this.SizeClass.CurrentWidth, 0.0f));
+                    newdecimal.DecimalSize.SetPositions(new CGPoint(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 
@@ -273,7 +273,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public vcNumberText FindNumberTextByIndex(int _index)
+        public vcNumberText FindNumberTextByIndex(nint _index)
         {
             return this._lsNumbersOnly.Find(z => z.IndexNumber == _index);
         }
@@ -502,19 +502,19 @@ namespace NathansWay.iOS.Numeracy
             set { this._tensUnit = value; }
         }
 
-        public int MutliNumberCount
+        public nint MutliNumberCount
         {
             get { return this._intMultiNumberTotalCount; }
             set { this._intMultiNumberTotalCount = value; }
         }
 
-        public int MutliNumberSigCount
+        public nint MutliNumberSigCount
         {
             get { return this._intMultiNumberTotalSigCount; }
             set { this._intMultiNumberTotalSigCount = value; }
         }
 
-        public int MutliNumberInSigCount
+        public nint MutliNumberInSigCount
         {
             get { return this._intMultiNumberTotalInSigCount; }
             set { this._intMultiNumberTotalInSigCount = value; }
@@ -684,7 +684,7 @@ namespace NathansWay.iOS.Numeracy
             // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }
 
-        public override void SetPositions(float _posX, float _posY)
+        public override void SetPositions(nfloat _posX, nfloat _posY)
         {
             base.SetPositions(_posX, _posY);
         }

@@ -1,11 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Monotouch
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.ObjCRuntime;
+using Foundation;
+using UIKit;
+using ObjCRuntime;
 //Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
@@ -101,7 +101,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Three hours wasted looking for this, or well, looking for this being MISSING!
             // 14/3/2016
             base.LoadView();
-            this.View.Frame = new RectangleF(0.0f, 0.0f, 300.0f, 166.0f);
+            this.View.Frame = new CGRect(0.0f, 0.0f, 300.0f, 166.0f);
         }
 
         public override void ViewDidLoad()
@@ -139,7 +139,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public vcWorkSpace WorkSpaceParent
+        public vcMainWorkSpace WorkSpaceParent
         {
             set { this._vcMainWorkSpace = value; }
             get { return this._vcMainWorkSpace; }   

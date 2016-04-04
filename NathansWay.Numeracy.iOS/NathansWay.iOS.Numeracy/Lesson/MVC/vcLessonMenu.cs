@@ -1,11 +1,11 @@
 // System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using Foundation;
+using UIKit;
+using CoreGraphics;
+using CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
@@ -30,9 +30,9 @@ namespace NathansWay.iOS.Numeracy
 
 		// Lesson level hold state
 		// Used to let us know the current level filtering
-		private int intLevelHoldState;
-		private int intOpHoldState;
-		private int intTypeHoldState;
+		private nint intLevelHoldState;
+		private nint intOpHoldState;
+		private nint intTypeHoldState;
 
 		#endregion
 
@@ -466,12 +466,12 @@ namespace NathansWay.iOS.Numeracy
 
 			#region Overrides
 
-			public override int RowsInSection (UITableView tableview, int section)
+			public override nint RowsInSection (UITableView tableview, nint section)
 			{
 				return this.vmLesson.Lessons == null ? 0 : this.vmLesson.Lessons.Count;
 			}
 
-			public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+			public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
 			{
 
 				var lesson = this.vmLesson.Lessons [indexPath.Row];
@@ -532,12 +532,12 @@ namespace NathansWay.iOS.Numeracy
 
             #region Overrides
 
-            public override int RowsInSection (UITableView tableview, int section)
+            public override nint RowsInSection (UITableView tableview, nint section)
             {
                 return this.vmLesson.LessonDetail  == null ? 0 : this.vmLesson.LessonDetail.Count;
             }
 
-            public override UITableViewCell GetCell (UITableView tableView, MonoTouch.Foundation.NSIndexPath indexPath)
+            public override UITableViewCell GetCell (UITableView tableView, NSIndexPath indexPath)
             {
                 // TODO : Is this indexPath.Row in the detail viewmodel needed?
                 this.vmLesson.FilterLessonDetailRow = indexPath.Row;

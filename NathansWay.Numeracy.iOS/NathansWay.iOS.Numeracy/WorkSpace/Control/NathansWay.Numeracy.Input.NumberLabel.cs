@@ -1,12 +1,12 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using MonoTouch.Foundation;
-using MonoTouch.UIKit;
-using MonoTouch.CoreAnimation;
-using MonoTouch.CoreGraphics;
+using Foundation;
+using UIKit;
+using CoreAnimation;
+using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -52,7 +52,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcNumberLabel (int _value)
+        public vcNumberLabel (nint _value)
         {
             this.CurrentValue = Convert.ToDouble(_value);
             // Default constructor supply our initial value
@@ -169,7 +169,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public RectangleF _rectNumberLabel;
+        public CGRect _rectNumberLabel;
         // Parent Container
         private vcNumberLabel _vcChild;
 
@@ -217,7 +217,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }
 
-        public override void SetPositions (PointF _startPoint)
+        public override void SetPositions (CGPoint _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
             base.SetPositions(_startPoint);
@@ -231,13 +231,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetFrames ()
         {
-            this.RectMainFrame = new RectangleF(
+            this.RectMainFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
-            this._rectNumberLabel = new RectangleF(
+            this._rectNumberLabel = new CGRect(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,

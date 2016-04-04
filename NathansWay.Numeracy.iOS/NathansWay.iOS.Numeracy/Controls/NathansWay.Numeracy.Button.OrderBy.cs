@@ -1,13 +1,13 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 // MonoTouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -30,7 +30,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			Initialize();
 		}       
-		public ButtonOrderBy (RectangleF myFrame)  : base (myFrame)
+		public ButtonOrderBy (CGRect myFrame)  : base (myFrame)
 		{ 
 			Initialize();    
 		}
@@ -43,7 +43,7 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides 
 
-		public override void Draw (RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
             DrawButtonBase (this.colorButtonBGStart, this.colorButtonBGEnd, this.IsPressed, rect);
 			base.Draw (rect);
@@ -72,7 +72,7 @@ namespace NathansWay.iOS.Numeracy
 				//UIColor labelTextColor, 
 				bool bIsPressed, 
 				//string labelText, 
-				RectangleF buttonFrame
+				CGRect buttonFrame
 			)
 		{
 			//// General Declarations
@@ -95,11 +95,11 @@ namespace NathansWay.iOS.Numeracy
 
 
 			//// Rectangle Drawing
-			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
+			CGRect rectangleRect = new CGRect(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
 			var rectanglePath = UIBezierPath.FromRect(rectangleRect);
 			context.SaveState();
 			rectanglePath.AddClip();
-			context.DrawLinearGradient(colorWhenTapped, new PointF(50.0f, -0.0f), new PointF(50.0f, 50.0f), 0);
+			context.DrawLinearGradient(colorWhenTapped, new CGPoint(50.0f, -0.0f), new CGPoint(50.0f, 50.0f), 0);
 			context.RestoreState();
 			//labelTextColor.SetFill();
 			//var rectangleFont = UIFont.FromName("Helvetica", 12.0f);

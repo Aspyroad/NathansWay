@@ -1,21 +1,20 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.Foundation;
-using MonoTouch.CoreGraphics;
-using MonoTouch.CoreAnimation;
+using UIKit;
+using Foundation;
+using CoreAnimation;
 //using MonoTouch.Foundation;
 //using MonoTouch.ObjCRuntime;
 
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("LevelLabel")]
+	[Foundation.Register ("LevelLabel")]
 	public class LevelLabel : AspyLabel
 	{
 		// HOWTO: Great example of how to add a layer, draw something on it, and add it to a view
@@ -23,7 +22,7 @@ namespace AspyRoad.iOSCore
 		#region Private Variables
 
 		protected CALayer _levelLayer;
-		protected float _levelWidth;
+		protected nfloat _levelWidth;
 
 		#endregion
 
@@ -37,7 +36,7 @@ namespace AspyRoad.iOSCore
 		{
 		}
 
-		public LevelLabel (System.Drawing.RectangleF frame) : base(frame)
+		public LevelLabel (CGRect frame) : base(frame)
 		{
 		}
 
@@ -49,7 +48,7 @@ namespace AspyRoad.iOSCore
 
 		#region Public Members
 
-		public float LevelWidth
+		public nfloat LevelWidth
 		{
 			set{ _levelWidth = value; }
 		}
@@ -58,7 +57,7 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-		public override void Draw (System.Drawing.RectangleF rect)
+		public override void Draw (CGRect rect)
 		{
 			base.Draw (rect);
 			// Create the layer and draw it.
@@ -73,7 +72,7 @@ namespace AspyRoad.iOSCore
 
 		#region Private Members
 
-		private void DrawGradientInContext (System.Drawing.RectangleF rect)
+		private void DrawGradientInContext (CGRect rect)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB ();
@@ -89,19 +88,19 @@ namespace AspyRoad.iOSCore
 				UIColor.FromRGBA (0.5f, 0.3f, 0.09f, 0.9f).CGColor,
 				colorGradientEasyToHardColor2.CGColor
 			};
-			var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
-			var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
+			var colorGradientEasyToHardLocations = new nfloat [] { 0.0f, 0.67f, 1.0f };
+            var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
 
 			//// Rectangle Drawing
 			var rectanglePath = UIBezierPath.FromRect (rect);
 			context.SaveState ();
 			rectanglePath.AddClip ();
-			context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, (rect.Width/2)), new PointF (rect.Width, (rect.Width/2)), 0);
+			context.DrawLinearGradient (colorGradientEasyToHard, new CGPoint (0.0f, (rect.Width/2)), new CGPoint (rect.Width, (rect.Width/2)), 0);
 			//context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, 60.0f), new PointF (240.0f, 60.0f), 0);
 			context.RestoreState ();
 
 			//// Text Drawing
-			RectangleF textRect = new RectangleF(rect.X, rect.Y, rect.Width, rect.Height);
+			CGRect textRect = new CGRect(rect.X, rect.Y, rect.Width, rect.Height);
 			this.TextColor.SetFill ();
 			textRect.Offset(0.0f, (textRect.Height - new NSString(this.Text).StringSize(this.Font, textRect.Size).Height) / 2.0f);
 			new NSString(this.Text).DrawString(textRect, this.Font, UILineBreakMode.TailTruncation, UITextAlignment.Center);
@@ -118,23 +117,23 @@ namespace AspyRoad.iOSCore
 		}
 		public class LayerDelegate : CALayerDelegate
 		{
-			private float _width;
+			private nfloat _width;
 
-			public LayerDelegate(float width)
+			public LayerDelegate(nfloat width)
 			{
 				_width = width;
 			}
 
-			public override void DrawLayer (CALayer layer, MonoTouch.CoreGraphics.CGContext context)
+			public override void DrawLayer (CALayer layer, CGContext context)
 			{
 				// implement your drawing
 				// TODO: This rect really needs to be passed in for LevelLabel reuse senarios.
-				var rect = new RectangleF (10, 36, 100, 8);
+				var rect = new CGRect (10, 36, 100, 8);
 
 				this.DrawGradient (rect, context);
 			}
 
-			private void DrawGradient (System.Drawing.RectangleF rect, CGContext context)
+			private void DrawGradient (CGRect rect, CGContext context)
 			{
 				//// General Declarations
 				var colorSpace = CGColorSpace.CreateDeviceRGB ();
@@ -149,11 +148,11 @@ namespace AspyRoad.iOSCore
 					UIColor.FromRGBA (0.5f, 0.3f, 0.09f, 0.9f).CGColor,
 					colorGradientEasyToHardColor2.CGColor
 				};
-				var colorGradientEasyToHardLocations = new float [] { 0.0f, 0.67f, 1.0f };
-				var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
+				var colorGradientEasyToHardLocations = new nfloat [] { 0.0f, 0.67f, 1.0f };
+                var colorGradientEasyToHard = new CGGradient (colorSpace, colorGradientEasyToHardColors, colorGradientEasyToHardLocations);
 
 				// Varied rect for different levels
-				var varirect = new RectangleF (rect.X, rect.Y, (float)(this._width * (rect.Width/10)), rect.Height);
+				var varirect = new CGRect (rect.X, rect.Y, (float)(this._width * (rect.Width/10)), rect.Height);
 				//// White BackGround Drawing
 				var bgWhitePath = UIBezierPath.FromRect(varirect);
 				UIColor.White.SetFill();
@@ -163,7 +162,7 @@ namespace AspyRoad.iOSCore
 				var rectanglePath = UIBezierPath.FromRect (varirect);
 				context.SaveState ();
 				rectanglePath.AddClip ();
-				context.DrawLinearGradient (colorGradientEasyToHard, new PointF (0.0f, (rect.Width/2)), new PointF (rect.Width, (rect.Width/2)), 0);
+				context.DrawLinearGradient (colorGradientEasyToHard, new CGPoint (0.0f, (rect.Width/2)), new CGPoint (rect.Width, (rect.Width/2)), 0);
 				context.RestoreState ();
 			}
 		}
@@ -172,7 +171,7 @@ namespace AspyRoad.iOSCore
 		// Method 2: Create a custom CALayer and override the appropriate methods
 		public class MyCustomLayer : CALayer
 		{
-			public override void DrawInContext (MonoTouch.CoreGraphics.CGContext ctx)
+			public override void DrawInContext (CGContext ctx)
 			{
 				base.DrawInContext (ctx);
 				// implement your drawing

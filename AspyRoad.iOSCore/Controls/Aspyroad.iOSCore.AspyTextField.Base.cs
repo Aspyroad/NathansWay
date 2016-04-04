@@ -1,18 +1,17 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using Foundation;
+using ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-    [MonoTouch.Foundation.Register ("AspyTextField")]
+    [Foundation.Register ("AspyTextField")]
     public class AspyTextField : UITextField, IUIApply
 	{
         #region Variables
@@ -23,11 +22,11 @@ namespace AspyRoad.iOSCore
         protected bool _bHasBorder;
         protected bool _bHasRoundedCorners;
         protected UIColor _colorBorderColor;
-        protected float _fCornerRadius;
-        protected float _fBorderWidth;
+        protected nfloat _fCornerRadius;
+        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
-        protected PointF _pTextOffset;
+        protected CGPoint _pTextOffset;
         protected bool _bApplyTextOffset;
 
         protected bool _bAllowNextResponder;
@@ -46,7 +45,7 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		public AspyTextField (RectangleF frame) : base(frame)
+		public AspyTextField (CGRect frame) : base(frame)
 		{
 			Initialize ();
 		}
@@ -144,7 +143,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the width of the border.
         /// </summary>
         /// <value>The width of the border.</value>
-        public float BorderWidth
+        public nfloat BorderWidth
         {
             get { return this._fBorderWidth; }
             set 
@@ -162,7 +161,7 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the corner radius.
         /// </summary>
         /// <value>The corner radius.</value>
-        public float CornerRadius
+        public nfloat CornerRadius
         {
             get { return this._fCornerRadius; }
             set 
@@ -201,7 +200,7 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public PointF TextOffset
+        public CGPoint TextOffset
         {
             get
             {
@@ -312,9 +311,9 @@ namespace AspyRoad.iOSCore
         }
 
         // These are both overriden to change the location of the font
-        public override RectangleF TextRect(RectangleF forBounds)
+        public override CGRect TextRect(CGRect forBounds)
         {
-            RectangleF rectOrigValue = base.TextRect(forBounds);
+            CGRect rectOrigValue = base.TextRect(forBounds);
             // Only apply if we set it
             if (this._bApplyTextOffset)
             {
@@ -323,9 +322,9 @@ namespace AspyRoad.iOSCore
             return rectOrigValue;
         }
 
-        public override RectangleF EditingRect(RectangleF forBounds)
+        public override CGRect EditingRect(CGRect forBounds)
         {
-            RectangleF rectOrigValue = base.EditingRect(forBounds);
+            CGRect rectOrigValue = base.EditingRect(forBounds);
             // Only apply if we set it
             if (this._bApplyTextOffset)
             {

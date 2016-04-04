@@ -1,18 +1,18 @@
-﻿// System
+// System
 using System;
-using System.Drawing;
+using CoreGraphics;
 // AspyRoad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
-using MonoTouch.UIKit;
-using MonoTouch.CoreGraphics;
-using MonoTouch.Foundation;
-using MonoTouch.ObjCRuntime;
+using UIKit;
+using CoreGraphics;
+using Foundation;
+using ObjCRuntime;
 
 namespace AspyRoad.iOSCore
 {
-	[MonoTouch.Foundation.Register ("AspySlider")]
+	[Foundation.Register ("AspySlider")]
 	public class AspySlider : UISlider
 	{
 		// UI Variables
@@ -28,7 +28,7 @@ namespace AspyRoad.iOSCore
 		{
 			Init_AspySlider ();
 		}       
-		public AspySlider (RectangleF myFrame)  : base (myFrame)
+		public AspySlider (CGRect myFrame)  : base (myFrame)
 		{ 
 			Init_AspySlider ();  
 		}
