@@ -668,7 +668,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     }
                 }
 
-
                 this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
                 this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex + 1).ToString(), UIControlState.Normal);
                 // Load the equation
@@ -748,7 +747,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
 
             // Set the captions on the Next and Back buttons
-            var x = (this._intLessonDetailCurrentCount - 1);
+            var x = (this._intLessonDetailCurrentCount);
 
             this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
             this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
