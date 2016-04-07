@@ -653,19 +653,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     bOverIndex = true;
                 }
 
-                var x = ((this._intLessonDetailCurrentCount) - (this._intLessonDetailCurrentIndex + 1));
+                var x = ((this._intLessonDetailCurrentCount) - (this._intLessonDetailCurrentIndex));
                 // This holds the button on the last call, warning the user its the last question
-                if (x == 0)
+                if (bOverIndex)
                 {
-                    if (bOverIndex)
-                    {
-                        this.btnNextEquation.ApplyUI_Negative();
-                    }
-                    else
-                    {
-                        // Change the button UI to represent a push
-                        this.btnNextEquation.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-                    }
+                    var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor );
+                    this.btnNextEquation.Layer.AddAnimation(y , "_animateColor");
                 }
 
                 this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
@@ -690,27 +683,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // Have we gone over range
                 if (this._intLessonDetailCurrentIndex == -1)
                 {
-                    this._intLessonDetailCurrentIndex = 1;
+                    this._intLessonDetailCurrentIndex = 0;
                     bOverIndex = true;
                 }
 
-                var x = ((this._intLessonDetailCurrentCount ) - (this._intLessonDetailCurrentIndex - 1));
+                var x = ((this._intLessonDetailCurrentCount ) - (this._intLessonDetailCurrentIndex + 1));
                 // This holds the button on the last call, warning the user its the last question
-                if (x == this._intLessonDetailCurrentCount)
+                if (bOverIndex)
                 {
-                    if (bOverIndex)
-                    {
-                        this.btnPrevEquation.ApplyUI_Negative();
-                    }
-                    else
-                    {
-                        // Change the button UI to represent a push
-                        this.btnPrevEquation.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-                    }
+                    var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor );
+                    this.btnPrevEquation.Layer.AddAnimation(y , "_animateColor");
                 }
 
-                this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex - 1).ToString(), UIControlState.Normal);
-                this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+                this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex + 1).ToString(), UIControlState.Normal);
+                this.btnNextEquation.SetTitle((x + 1).ToString(), UIControlState.Normal);
                 // Load the equation
                 this.DisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition

@@ -128,13 +128,13 @@ namespace NathansWay.iOS.Numeracy
 
         public void ApplyUI_Negative()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value; 
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value; 
             this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value, UIControlState.Normal);
         }
 
         public void ApplyUI_Positive()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;  
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;  
             this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value, UIControlState.Normal);
         }
 

@@ -235,6 +235,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcPositioningDialog.designer.cs">
       <DependentUpon>vcPositioningDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\NathansWay.iOS.Numeracy.Animations.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">
