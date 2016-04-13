@@ -27,6 +27,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#region Private Variables
 
         private vcMainWorkSpace _vcMainWorkSpace;
+        private vcWorkSpace _vcWorkSpace;
 
 		#endregion
 
@@ -56,35 +57,32 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
 			this.AspyTag1 = 666100;
 			this.AspyName = "VC_PositioningDialog";
-
         }
 
         partial void OnTouch_btnCenterMethods(ButtonLabelStyle sender)
         {
-            //throw new NotImplementedException();
-            //this._vcMainWorkSpace.CenterMethods();
-            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void OnTouch_btnCenterQuestion(ButtonLabelStyle sender)
         {
             //throw new NotImplementedException();
 
-            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
         {
             //throw new NotImplementedException();
 
-            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
         {
             //throw new NotImplementedException();
 
-            this._vcMainWorkSpace.RemoveViewControllerFromParent(this);
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         #endregion
@@ -139,10 +137,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
-        public vcMainWorkSpace WorkSpaceParent
+        public vcMainWorkSpace MainWorkSpace
         {
             set { this._vcMainWorkSpace = value; }
             get { return this._vcMainWorkSpace; }   
+        }
+
+        public vcWorkSpace WorkSpace
+        {
+            set { this._vcWorkSpace = value; }
+            get { return this._vcWorkSpace; }   
         }
 
         #endregion

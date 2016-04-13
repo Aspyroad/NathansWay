@@ -32,10 +32,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private UINumberFactory _uiNumberFactory;
 
         // Main workspace views and docking variables
-        private AspyView _vCanvas;
-        private AspyView _vCanvasDocked;
-        private bool bDocked_SolveNumlet;
-        private bool bDocked_ResultNumlet;
+        private NWView _vCanvasMain;
+        private NWView _vCanvasDocked;
 
         private vcMainWorkSpace _vcMainWorkSpace;
         private vcWorkNumlet _vcNumletEquation;
@@ -122,14 +120,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
-            // Create a frame for the workcanvas
-            CGRect x = new CGRect(
-                               44.0f,
-                               30.0f,
-                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
-                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
-                           );
-            this._vCanvas = new NWView(x);
+
+            // Moved to size class
+            //            // Create a frame for the workcanvas
+            //            CGRect x = new CGRect(
+            //                               44.0f,
+            //                               30.0f,
+            //                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
+            //                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
+            //                           );
+            //            this._vCanvas = new NWView(x);
 
             // Storyboard reference
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
@@ -153,12 +153,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		}
 
-        private void AddNumlet (vcWorkNumlet _myNumlet)
+        private void AddNumlet (vcWorkNumlet _myNumlet, NWView _canvas)
         {
             _myNumlet.WillMoveToParentViewController(this);
             this.AddChildViewController(_myNumlet);
             _myNumlet.DidMoveToParentViewController(this);
-            this.vCanvas.AddSubview(_myNumlet.View);
+            _canvas.AddSubview(_myNumlet.View);
         }
 
         private void RemoveNumlet (vcWorkNumlet _myNumlet)
@@ -201,11 +201,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.LoadResultNumlet();
             this.LoadSolveNumlet();
 
-            this.AddNumlet(this._vcNumletEquation);
+            this.AddNumlet(this._vcNumletEquation, this._vCanvasMain);
             this._vcNumletEquation.MyWorkSpaceParent = this;
-            this.AddNumlet(this._vcNumletResult);
+            this.AddNumlet(this._vcNumletResult, this._vCanvasMain);
             this._vcNumletResult.MyWorkSpaceParent = this;
-            this.AddNumlet(this._vcNumletSolve);
+            this.AddNumlet(this._vcNumletSolve, this._vCanvasMain);
             this._vcNumletSolve.MyWorkSpaceParent = this;
         }
 
@@ -269,8 +269,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadDataStrings()
         {
-            // TODO: Wank Ian
-
             // Both of these types mean the same thing, the ? is just C# shorthand.
             // private void Example(nint? arg1, Nullable<nint> arg2)
 
@@ -292,11 +290,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadResultNumlet()
         {
             this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
+            this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
         }
 
         public void LoadSolveNumlet()
         {
             this._vcNumletSolve = this._uiNumberFactory.GetSolveNumlet(this._vcNumletResult.SizeClass.CurrentWidth);
+            this.WorkSpaceSize.SolveNumletWidth = this._vcNumletSolve.SizeClass.CurrentWidth;
         }
 
         public void LoadMethodNumlets()
@@ -336,17 +336,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             this._vcPositioningDialog = this._storyBoard.InstantiateViewController("vcPositioningDialog") as vcPositioningDialog;
             this._vcPositioningDialog.View.Center  = this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
-            this.MainWorkSpace.AddAndDisplayController(this._vcPositioningDialog);
+            this._vcPositioningDialog.WorkSpace = this;
+            this._vcPositioningDialog.MainWorkSpace = this._vcMainWorkSpace;
+
+            this.AddAndDisplayController(this._vcPositioningDialog);
         }
 
         public void DockSolveNumlet()
         {
-            this.bDocked_SolveNumlet = true;            
+            // TODO: Check there is a solve numlet?
+
+            // Flipflop
+            if (this._sizeWorkSpace.DockedSolveNumlet == false)
+            {
+                this._sizeWorkSpace.DockedSolveNumlet = true;  
+                // Remove the numlet from the current canvasmain
+                this.RemoveNumlet(this._vcNumletSolve);
+                this.AddNumlet(this._vcNumletSolve, this._vCanvasDocked);
+            }
+            else
+            {
+                // Remove from docked add to canvas main
+            }
         }
 
         public void DockResultNumlet()
         {
-            this.bDocked_ResultNumlet = true;
+            this._sizeWorkSpace.DockedResultNumlet = true;
         }
 
         public void CenterMethods()
@@ -368,10 +384,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public AspyView vCanvas 
+        public AspyView vCanvasMain 
         {
-            get { return this._vCanvas; }
-            set { this._vCanvas = value; }
+            get { return this._vCanvasMain; }
+            set { this._vCanvasMain = value; }
+        }
+
+        public AspyView vCanvasDocked 
+        {
+            get { return this._vCanvasDocked; }
+            set { this._vCanvasDocked = value; }
         }
 
         public UINumberFactory NumberFactory 
@@ -438,19 +460,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._vcNumletEquation; }   
         }
+
         public vcWorkNumlet NumletResult
         {
             get { return this._vcNumletResult; }
         }
+
         public List<vcWorkNumlet> NumletMethods
         {
             get { return this._vcNumletMethods; }    
         }
+
         public vcMainWorkSpace MainWorkSpace
         {
             set { this._vcMainWorkSpace = value; }
             get { return this._vcMainWorkSpace; }   
         }
+
 
         #endregion
 
@@ -476,20 +502,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 
-            // FexoTabs 180 mgs
-
 			base.ViewDidLoad();
             // UI
             this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
-            this.vCanvas.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
 
-            // Virtual Canvas setup
-            this.View.AddSubview(this._vCanvas);
-            this._vCanvas.CornerRadius = 5.0f;
-            this._vCanvas.Hidden = true;
-            this._vCanvas.ClipsToBounds = true;
+            // Virtual Canvas setups ******************************************************************
+            this._vCanvasMain = new NWView();
+            this._vCanvasDocked = new NWView();
+
+            this.View.AddSubview(this._vCanvasMain);
+            this.View.AddSubview(this._vCanvasDocked);
+
+            this._vCanvasMain.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
+            this._vCanvasMain.CornerRadius = 5.0f;
+            this._vCanvasMain.Hidden = true;
+            this._vCanvasMain.ClipsToBounds = true;
+
+            this._vCanvasDocked.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
+            this._vCanvasDocked.CornerRadius = 5.0f;
+            this._vCanvasDocked.Hidden = true;
+            this._vCanvasDocked.ClipsToBounds = true;
 
             // Delegate hookups / Control UI setup etc
             this.btnNextEquation.EnableHold = false;
@@ -499,8 +533,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnPrevEquation.TouchUpInside += OnClick_btnPrevEquation;
             this.btnPrevEquation.EnableHold = false;
             //this.btnPrevEquation.SetTitle("WorkSpace-PrevEquation".Aspylate(), UIControlState.Normal);
-
-
 
             this.btnSizeNormal.EnableHold = false;
             this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
@@ -540,17 +572,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
             this.View.Layer.Opacity = 1.0f;
+
+            // Setup all canvas size here.
+            this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasHeightWidth();
+            this._vCanvasDocked.Frame = this._sizeWorkSpace.SetCanvasDockedHeightWidth(0.0f);
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
             if (base.ApplyUI(_applywhere))
             {
-                // Global UI
-                this.vCanvas.BackgroundColor = UIColor.White;
-
-                this.vCanvas.HasRoundedCorners = true;
-                this.vCanvas.CornerRadius = 5.0f;
                 return true;
             }
             else
@@ -654,7 +685,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
 
                 var x = ((this._intLessonDetailCurrentCount) - (this._intLessonDetailCurrentIndex));
-                // This holds the button on the last call, warning the user its the last question
+
+                // The last question is reached, briefly display a flash background change
                 if (bOverIndex)
                 {
                     var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor );
@@ -688,7 +720,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
 
                 var x = ((this._intLessonDetailCurrentCount ) - (this._intLessonDetailCurrentIndex + 1));
-                // This holds the button on the last call, warning the user its the last question
+
+                // The last question is reached, briefly display a flash background change
                 if (bOverIndex)
                 {
                     var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor );
@@ -724,7 +757,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (this._enumLessonState == G__LessonState.Ready)
             {
                 this._enumLessonState = G__LessonState.Started;
-                this.vCanvas.Hidden = false;
+                this.vCanvasMain.Hidden = false;
                 this.DisplayExpression();
             }
             else
@@ -779,6 +812,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // X Horizontal
         // Y Vertical
+        private bool _bDocked_SolveNumlet;
+        private bool _bDocked_ResultNumlet;
+
+        private nfloat __fGlobalMargin = 4.0f;
+
+        private nfloat __fWorkSpaceX = 44.0f;
+        private nfloat __fWorkSpaceY = 30.0f;
+
+        private nfloat __fCanvasMainX = 44.0f;
+        private nfloat __fCanvasMainY = 30.0f;
+
+        private nfloat __fCanvasDockedX = 44.0f;
+        private nfloat __fCanvasDockedY = 30.0f;
+
+        private nfloat __fSolveNumletWidth;
+        private nfloat __fResultNumletWidth;
 
         #endregion
 
@@ -805,7 +854,95 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
+        #region Public Properties
+
+        public bool DockedSolveNumlet 
+        {
+            get { return this._bDocked_SolveNumlet; }
+            set 
+            { 
+                this._bDocked_SolveNumlet = value; 
+                this.SetOtherPositions();
+            }
+        }
+        public bool DockedResultNumlet 
+        {
+            get { return this._bDocked_ResultNumlet; }
+            set 
+            { 
+                this._bDocked_ResultNumlet = value; 
+                this.SetOtherPositions();
+            }
+        }
+        public nfloat SolveNumletWidth 
+        {
+            get { return this.__fSolveNumletWidth; }
+            set { this.__fSolveNumletWidth = value; }
+        }
+        public nfloat ResultNumletWidth 
+        {
+            get { return this.__fResultNumletWidth; }
+            set { this.__fResultNumletWidth = value; }
+        }
+
+        #endregion
+
+        #region Public Members
+
+        public CGRect SetCanvasHeightWidth ()
+        {
+            return new CGRect(
+                __fCanvasMainX,
+                __fCanvasMainY,
+                this.GlobalSizeDimensions.WorkSpaceCanvasWidth,
+                this.GlobalSizeDimensions.WorkSpaceCanvasHeight
+            );
+        }
+
+        public CGRect SetCanvasDockedHeightWidth (nfloat _dockingwidth)
+        {
+            return new CGRect();
+        }
+
+        #endregion
+
         #region Overrides
+
+        public override void SetPositions()
+        {
+            var y = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this.__fGlobalMargin);
+            this.StartPoint = new CGPoint(this.__fGlobalMargin, y);
+            base.SetPositions();
+        }
+
+        public override void SetOtherPositions()
+        {
+            base.SetOtherPositions();
+            if (this.DockedSolveNumlet)
+            {                
+                // 1. Canvas width reset to minus whatever the solvenumlet width is (plus margins)
+                // 2. CanvasDocked width is set to what ever
+
+            }
+            else
+            {
+
+
+
+            }
+
+            if (this.DockedResultNumlet)
+            {
+
+
+            }
+            else
+            {
+
+
+            }
+
+        }
 
         public override void SetHeightWidth ()
         {

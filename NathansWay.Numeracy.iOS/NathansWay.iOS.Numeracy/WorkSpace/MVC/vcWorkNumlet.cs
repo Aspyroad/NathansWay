@@ -182,7 +182,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.SizeClass.SetFrames();
+
             this.View.BackgroundColor = UIColor.White;
             this.HasBorder = true;
             this.SetBorderColor = UIColor.Black;

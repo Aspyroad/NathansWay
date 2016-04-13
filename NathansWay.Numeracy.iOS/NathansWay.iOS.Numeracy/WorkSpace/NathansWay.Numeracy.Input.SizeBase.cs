@@ -278,6 +278,10 @@ namespace NathansWay.iOS.Numeracy
         public virtual void SetPositions ()
         {
             // StartPoint MUST be set when calling this
+            if (StartPoint.IsEmpty)
+            {
+                throw new NullReferenceException("Aspy Error - StartPoint has not been set to a position");
+            }
             this.SetHeightWidth();
         }
 

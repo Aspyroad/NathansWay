@@ -5,7 +5,6 @@ using CoreGraphics;
 using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
 

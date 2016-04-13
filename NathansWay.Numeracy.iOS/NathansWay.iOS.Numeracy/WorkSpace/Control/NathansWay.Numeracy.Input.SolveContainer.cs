@@ -277,8 +277,6 @@ namespace NathansWay.iOS.Numeracy
         #region Private Variables
 
         private CGRect _rect;
-        private nfloat _x;
-        private nfloat _y;
         private CGRect _rectCross;
         private CGRect _rectTick;
         private CGPoint _pBottomCenter;
@@ -297,7 +295,6 @@ namespace NathansWay.iOS.Numeracy
         private CAShapeLayer slTickPathLayer;
 
         private CABasicAnimation _aniLayersToCenter;
-        private CABasicAnimation _aniLayersToCenterFade;
         private CABasicAnimation _aniLayersToEdge;
         private CABasicAnimation _aniLayersToEdgeFade;
 
@@ -307,7 +304,6 @@ namespace NathansWay.iOS.Numeracy
         private AnimateDelegate _myAnimateDelegate;
         private iOSUIManager _myUIAppearance;
         private iOSNumberDimensions _myGlobalDimensions;
-        private CAAnimationGroup _animationGroup;
 
         private BaseContainer _vcParentContainer;
 
@@ -550,7 +546,7 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToEdge = CABasicAnimation.FromKeyPath ("position");
             // ** These two set if the presentation layer will stay set in the final animated position
             _aniLayersToEdge.RemovedOnCompletion = true;
-            //_aniLayersToEdge.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdge.FillMode = CAFillMode.Forwards;
             _aniLayersToEdge.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
             _aniLayersToEdge.Delegate = this._myAnimateDelegate;
             _aniLayersToEdge.From = NSValue.FromCGPoint (pt);
@@ -562,14 +558,14 @@ namespace NathansWay.iOS.Numeracy
             _aniLayersToEdgeFade = CABasicAnimation.FromKeyPath("opacity");
             // ** These two set if the presentation layer will stay set in the final animated position
             _aniLayersToEdgeFade.RemovedOnCompletion = true;
-            //_aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
             _aniLayersToEdgeFade.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
             _aniLayersToEdgeFade.Delegate = this._myAnimateDelegate;
             _aniLayersToEdgeFade.From = NSNumber.FromFloat(1.0f);
             _aniLayersToEdgeFade.To = NSNumber.FromFloat(0.0f);
             //_aniLayersToCenter.Duration = 1.0f;
 
-            var y = this.SpinLogo();
+            var y = NWAnimations.SpinLogo();
 
             this._animationGroupToEdge.Duration = 0.5f;
             this._animationGroupToEdge.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y};
@@ -583,32 +579,6 @@ namespace NathansWay.iOS.Numeracy
             this.slCrossPathLayer.RemoveAllAnimations();
             this.slTickBGLayer.RemoveAllAnimations();
             this.slTickPathLayer.RemoveAllAnimations();  
-        }
-
-        private CAKeyFrameAnimation SpinLogo ()
-        {
-            // Spins that wheel! 3D Style
-
-            // Keyframes allow us to define an arbitrary number of points during the animation, 
-            // and then let Core Animation fill in the so-called in-betweens.
-            // CAKeyFrameAnimation _animation;
-
-            //_layer1.Transform = CATransform3D.MakeRotation ((nfloat)Math.PI * 2, 0, 0, 1);
-            //_layer2.Transform = CATransform3D.MakeRotation ((nfloat)Math.PI * 2, 0, 0, 1);
-
-            CAKeyFrameAnimation animRotate = (CAKeyFrameAnimation)CAKeyFrameAnimation.FromKeyPath ("transform");
-
-            animRotate.Values = new NSObject[] {
-                NSNumber.FromFloat (0.0f),
-                NSNumber.FromFloat ((float)Math.PI / 2.0f),
-                NSNumber.FromFloat ((float)Math.PI),
-                NSNumber.FromFloat ((float)Math.PI * 2.0f)};
-
-            //Rotation axis
-            animRotate.ValueFunction = CAValueFunction.FromName (CAValueFunction.RotateX);
-
-            animRotate.Duration = 0.1f;
-            return animRotate;
         }
 
         public void AnimationCorrect()
