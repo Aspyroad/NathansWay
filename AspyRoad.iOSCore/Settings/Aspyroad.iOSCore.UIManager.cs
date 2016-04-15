@@ -212,6 +212,13 @@ namespace AspyRoad.iOSCore.UISettings
             SelectedBorderColor = g.SelectedBorderColor;
             SelectedTextColor = g.SelectedTextColor;
 
+            // Dialog
+            DiagBorderColor = g.DiagBorderColor;
+            DiagButtonNormalBGColor = g.DiagButtonNormalBGColor;
+            DiagButtonNormalTitleColor = g.DiagButtonNormalTitleColor;
+            DiagSelectedBorderColor = g.DiagSelectedBorderColor;
+            DiagViewBGColor = g.DiagViewBGColor;
+
             // Apply global appearnce
 			this.ApplyGlobalAppearance ();
 
@@ -806,6 +813,52 @@ namespace AspyRoad.iOSCore.UISettings
         }
 
 		#endregion
+
+        #region Dialog
+
+        // Dialog Global
+        public Lazy<UIColor>  DiagBorderUIColor 
+        { 
+            get
+            {
+                return this.convertUIColor(_diagBorderColor);
+            }
+        }
+        public Lazy<UIColor>  DiagSelectedBorderUIColor 
+        { 
+            get
+            {
+                return this.convertUIColor(_diagSelectedBorderColor);
+            }
+        }
+
+        // Dialog UIButton
+        public Lazy<UIColor>  DiagButtonNormalBGUIColor 
+        { 
+            get
+            {
+                return this.convertUIColor(_diagButtonNormalBGColor);
+            }
+        }
+        public Lazy<UIColor>  DiagButtonNormalTitleUIColor 
+        { 
+            get
+            {
+                return this.convertUIColor(_diagButtonNormalTitleColor);
+            }
+        }
+
+        // Dialog UIView
+        public Lazy<UIColor>  DiagViewBGUIColor 
+        { 
+            get
+            {
+                return this.convertUIColor(_diagViewBGColor);
+            }
+        }
+
+
+        #endregion
 	}
 }
 

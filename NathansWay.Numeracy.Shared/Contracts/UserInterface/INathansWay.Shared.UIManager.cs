@@ -135,6 +135,17 @@ namespace NathansWay.Shared
         Lazy<G__Color> SelectedTextColor { get; set; }
         Lazy<G__Color> SelectedBorderColor { get; set; }
 
+        // Dialog Global
+        Lazy<G__Color>  DiagBorderColor { get; set; }
+        Lazy<G__Color>  DiagSelectedBorderColor { get; set; }
+
+        // Dialog UIButton
+        Lazy<G__Color>  DiagButtonNormalBGColor { get; set; }
+        Lazy<G__Color>  DiagButtonNormalTitleColor { get; set; }
+
+        // Dialog UIView
+        Lazy<G__Color>  DiagViewBGColor { get; set; }
+
 	}
 
     /* To Update follow me er the other side thee may see

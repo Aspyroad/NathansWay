@@ -42,7 +42,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		
 		private void Initialize()
 		{	
-            this.BackgroundColor = UIColor.Blue;
+            this.BackgroundColor = UIColor.Clear;
 		}
 		
 		#endregion

@@ -35,6 +35,7 @@ namespace AspyRoad.iOSCore
 
         // UIApplication Variables
         protected bool _bHasBorder;
+        protected UIColor _colorBorderColor;
         protected bool _bHasRoundedCorners;
         protected nfloat _fCornerRadius;
         protected nfloat _fBorderWidth;
@@ -276,6 +277,16 @@ namespace AspyRoad.iOSCore
                     this.SetNeedsDisplay();
                 }
                 this._bHasBorder = value; 
+            }
+        }
+
+        public virtual UIColor SetBorderColor
+        {
+            get { return this._colorBorderColor; }
+            set 
+            { 
+                this._colorBorderColor = value;
+                this.Layer.BorderColor = this._colorBorderColor.CGColor;   
             }
         }
 

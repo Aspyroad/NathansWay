@@ -216,6 +216,17 @@ namespace NathansWay.Shared
         protected Lazy<G__Color> _selectedtextcolor;
         protected Lazy<G__Color> _selectedbordercolor;
 
+        // Dialog Global
+        protected Lazy<G__Color>  _diagBorderColor;
+        protected Lazy<G__Color>  _diagSelectedBorderColor;
+
+        // Dialog UIButton
+        protected Lazy<G__Color>  _diagButtonNormalBGColor;
+        protected Lazy<G__Color>  _diagButtonNormalTitleColor;
+
+        // Dialog UIView
+        protected Lazy<G__Color>  _diagViewBGColor;
+
 		#endregion
 
 		#region Constructors
@@ -630,6 +641,38 @@ namespace NathansWay.Shared
             get{ return this._selectedbordercolor; } 
             set{ this._selectedbordercolor = value; } 
         }
+
+        // Dialog Global
+        public Lazy<G__Color>  DiagBorderColor 
+        { 
+            get{ return this._diagBorderColor; } 
+            set{ this._diagBorderColor = value; } 
+        }
+        public Lazy<G__Color>  DiagSelectedBorderColor 
+        { 
+            get{ return this._diagSelectedBorderColor; } 
+            set{ this._diagSelectedBorderColor = value; } 
+        }
+
+        // Dialog UIButton
+        public Lazy<G__Color>  DiagButtonNormalBGColor 
+        { 
+            get{ return this._diagButtonNormalBGColor; } 
+            set{ this._diagButtonNormalBGColor = value; } 
+        }
+        public Lazy<G__Color>  DiagButtonNormalTitleColor 
+        { 
+            get{ return this._diagButtonNormalTitleColor; }
+            set{ this._diagButtonNormalTitleColor = value; } 
+        }
+
+        // Dialog UIView
+        public Lazy<G__Color>  DiagViewBGColor 
+        { 
+            get{ return this._diagViewBGColor; } 
+            set{ this._diagViewBGColor = value; } 
+        }
+
 
 		#endregion
 	}

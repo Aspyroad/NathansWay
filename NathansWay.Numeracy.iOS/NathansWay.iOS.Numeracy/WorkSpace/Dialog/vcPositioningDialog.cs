@@ -59,32 +59,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			this.AspyName = "VC_PositioningDialog";
         }
 
-        partial void OnTouch_btnCenterMethods(ButtonLabelStyle sender)
-        {
-            this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        }
-
-        partial void OnTouch_btnCenterQuestion(ButtonLabelStyle sender)
-        {
-            //throw new NotImplementedException();
-
-            this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        }
-
-        partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
-        {
-            //throw new NotImplementedException();
-
-            this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        }
-
-        partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
-        {
-            //throw new NotImplementedException();
-
-            this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        }
-
         #endregion
 				
 		#region Overrides
@@ -99,20 +73,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Three hours wasted looking for this, or well, looking for this being MISSING!
             // 14/3/2016
             base.LoadView();
-            this.View.Frame = new CGRect(0.0f, 0.0f, 300.0f, 166.0f);
+            this.View.Frame = new CGRect(0.0f, 0.0f, 300.0f, 168.0f);
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
-            // Setup Button Text
-            this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
-            this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
-            this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
-            this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
+            this.HasRoundedCorners = true;
+            this.CornerRadius = 5.0f;
+            this.HasBorder = true;
+            this.BorderWidth = 1.0f;
+            this.SetBorderColor = UIColor.Black;
 
-            // Set the parent vc for type inference
+            // Setup Button Text
+            this.btnCenterQuestion.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            //this.btnCenterQuestion.CornerRadius = 5.0f;
+            this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
+
+            this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            //this.btnCenterMethods.CornerRadius = 5.0f;
+            this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
+
+            this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
+
+            this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
 
         }
 
@@ -150,7 +137,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         #endregion
-    }
 
+        #region Event Handlers
+
+        partial void OnTouch_btnCenterMethods(ButtonLabelStyle sender)
+        {
+            //
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnCenterQuestion(ButtonLabelStyle sender)
+        {
+            //throw new NotImplementedException();
+
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
+        {
+            this._vcWorkSpace.DockResultNumlet();
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
+        {
+            this._vcWorkSpace.DockSolveNumlet();
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
+
+        #endregion
+
+    }
 
 }        
