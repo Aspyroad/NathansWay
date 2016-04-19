@@ -98,6 +98,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeWorkNumlet = new SizeWorkNumlet(this);
             this._sizeClass = this._sizeWorkNumlet;
             this.HasRoundedCorners = true;
+            this.View.AutosizesSubviews = false;
 		}
 
 		#endregion
@@ -183,10 +184,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
 
-            this.View.BackgroundColor = UIColor.White;
             this.HasBorder = true;
-            this.SetBorderColor = UIColor.Black;
             this.BorderWidth = 5.0f;
+            // TODO: This should be in a UI call - UI_SetViewNeutral etc
+            this.View.BackgroundColor = UIColor.White;
+            this.SetBorderColor = UIColor.Black;
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
