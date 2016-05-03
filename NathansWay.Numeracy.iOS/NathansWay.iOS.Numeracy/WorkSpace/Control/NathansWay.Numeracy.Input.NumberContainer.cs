@@ -220,11 +220,11 @@ namespace NathansWay.iOS.Numeracy
                     // Set our current width - and shorten if there is more then one number
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
-                        newnumber.NumberSize.SetPositions(new CGPoint(_width, _height));
+                        newnumber.NumberSize.SetViewPosition(new CGPoint(_width, _height));
                     }
                     else
                     {
-                        newnumber.NumberSize.SetPositions(new CGPoint(_width, _height));
+                        newnumber.NumberSize.SetViewPosition(new CGPoint(_width, _height));
                     }
 
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
@@ -252,7 +252,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.SetPositions(new CGPoint(this.SizeClass.CurrentWidth, 0.0f));
+                    newdecimal.DecimalSize.SetViewPosition(new CGPoint(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 
@@ -684,9 +684,9 @@ namespace NathansWay.iOS.Numeracy
             // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }
 
-        public override void SetPositions(nfloat _posX, nfloat _posY)
+        public override void SetViewPosition(nfloat _posX, nfloat _posY)
         {
-            base.SetPositions(_posX, _posY);
+            base.SetViewPosition(_posX, _posY);
         }
 
         #endregion

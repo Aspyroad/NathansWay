@@ -191,9 +191,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             _txt.TextOffset = this.GlobalSizeDimensions.BraceTextOffset;
         }
 
-        public override void SetPositions(CGPoint _startPoint)
+        public override void SetViewPosition(CGPoint _startPoint)
         {
-            base.SetPositions(_startPoint);
+            base.SetViewPosition(_startPoint);
         }
 
         public override void SetHeightWidth ()

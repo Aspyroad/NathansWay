@@ -104,7 +104,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this.View.UserInteractionEnabled = true;
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
-            this.SizeClass.SetPositions(0.0f, 0.0f);
+            this.SizeClass.SetViewPosition(0.0f, 0.0f);
         }
 
         public override void ViewWillAppear(bool animated)
@@ -121,7 +121,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // TODO: Move this size shit into maingames size class
             var _pointF2 = new CGPoint(2.0f, 2.0f);
 
-            this._vcMainGame.SizeClass.SetPositions(_pointF2);
+            this._vcMainGame.SizeClass.SetViewPosition(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
         }
 
@@ -131,7 +131,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
 
-            this._vcWorkSpace.SizeClass.SetPositions();
+            this._vcWorkSpace.SizeClass.SetViewPosition();
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 

@@ -98,7 +98,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.DecimalSize.SetOtherPositions();
+            this.DecimalSize.SetSubViewPositions();
             this._vDecimal.RectDecimalDraw = this._sizeDecimal._rectDecimalDraw;
             //this.View.Frame = this.DecimalSize._rectDecimal;
         }
@@ -233,7 +233,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void SetOtherPositions()
+        public override void SetSubViewPositions()
         {
             // Set local frames to the VC
             this.SetRectDecimal();

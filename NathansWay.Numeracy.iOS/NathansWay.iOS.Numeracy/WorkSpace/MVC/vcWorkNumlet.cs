@@ -184,11 +184,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
 
+            // We need to set border width before Has Border
+            this.BorderWidth = 2.0f;
             this.HasBorder = true;
-            this.BorderWidth = 5.0f;
-            // TODO: This should be in a UI call - UI_SetViewNeutral etc
-            this.View.BackgroundColor = UIColor.White;
-            this.SetBorderColor = UIColor.Black;
+            this.View.BackgroundColor = UIColor.Clear;
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)

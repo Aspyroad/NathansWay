@@ -275,7 +275,7 @@ namespace NathansWay.iOS.Numeracy
         /// Calls all functions to set and position the parent class.
         /// This overload takes 0 params. StartPoint MUST be set for correct operation
         /// </summary>
-        public virtual void SetPositions ()
+        public virtual void SetViewPosition ()
         {
             // StartPoint MUST be set when calling this
             if (StartPoint.IsEmpty)
@@ -289,7 +289,7 @@ namespace NathansWay.iOS.Numeracy
         /// Calls all functions to set and position the parent class
         /// </summary>
         /// <param name="_startPoint">Start point.</param>
-        public virtual void SetPositions (CGPoint _startPoint)
+        public virtual void SetViewPosition (CGPoint _startPoint)
         {
             // SetPositions should be used to
             // 1. Set the StartPoint (PointF)
@@ -314,7 +314,7 @@ namespace NathansWay.iOS.Numeracy
         /// </summary>
         /// <param name="_posX">_posX</param>
         /// <param name="_posY">_posY</param>
-        public virtual void SetPositions (nfloat _posX, nfloat _posY)
+        public virtual void SetViewPosition (nfloat _posX, nfloat _posY)
         {
             CGPoint _point;
             this.SetHeightWidth();
@@ -329,7 +329,7 @@ namespace NathansWay.iOS.Numeracy
             this.StartPoint = _point;
         }
 
-        public virtual void SetOtherPositions ()
+        public virtual void SetSubViewPositions ()
         {
         }
 

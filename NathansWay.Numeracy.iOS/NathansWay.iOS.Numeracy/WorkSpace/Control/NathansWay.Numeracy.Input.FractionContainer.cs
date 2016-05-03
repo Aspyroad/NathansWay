@@ -180,13 +180,13 @@ namespace NathansWay.iOS.Numeracy
                 this.SizeClass.GlobalSizeDimensions.FractionDividerHeight;
 
             // Set the number padding
-            this._numberContainerNumerator.NumberContainerSize.SetPositions
+            this._numberContainerNumerator.NumberContainerSize.SetViewPosition
             (
                 this.SizeClass.CurrentWidth, 
                 this.SizeClass.GlobalSizeDimensions.FractionNumberPadding
             );
             // ****
-            this._numberContainerDenominator.NumberContainerSize.SetPositions
+            this._numberContainerDenominator.NumberContainerSize.SetViewPosition
             (
                 this.SizeClass.CurrentWidth, 
                 (_ypos + this.SizeClass.GlobalSizeDimensions.NumberBorderWidth)

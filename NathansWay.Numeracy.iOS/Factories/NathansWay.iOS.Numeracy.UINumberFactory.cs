@@ -111,20 +111,20 @@ namespace NathansWay.iOS.Numeracy
         public vcWorkNumlet GetEquationNumlet(string _strEquation, bool _readonly)
         {            
             var _vcNumletEquation = this.CreateNumletEquation(_strEquation, _readonly);
-            _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
-            _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
-            _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+//            _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
+//            _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
+//            _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+//            _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             return _vcNumletEquation;
         }
 
         public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
         {
             var _vcNumletResult = this.CreateNumletResult(_strResult);
-            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
-            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+//            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
+//            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+//            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+//            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             return _vcNumletResult;
         }
 
@@ -133,19 +133,11 @@ namespace NathansWay.iOS.Numeracy
             // This solver Numlet always sits to the left of the result numlet for the time being.
             // Maybe its own position is needed on the extreme left of workspace.
             var _vcNumletSolve = this.CreateNumletSolve();
-
-            if (bDocked_SolveNumlet)
-            {
-                
-            }
-            else
-            {
-                _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
-                _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-                _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-                nfloat w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
-                _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
-            }
+//            _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
+//            _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+//            _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+//            nfloat w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
+//            _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             return _vcNumletSolve;
         }
 
@@ -218,10 +210,10 @@ namespace NathansWay.iOS.Numeracy
             numlet.MyImmediateParent = this._vcCurrentWorkSpace;
             numlet.OutputContainers = this._uiOutputEquation;
             // Sizing
-            G__NumberDisplaySize _displaySize;
+            //G__NumberDisplaySize _displaySize;
             nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             nfloat _xPos = _xSpacing;
-            nfloat _yPos = this._globalSizeDimensions.NumletHeight;
+            //nfloat _yPos = this._globalSizeDimensions.NumletHeight;
 
             for (int i = 0; i < this._uiOutputEquation.Count; i++)
             {                
@@ -247,7 +239,7 @@ namespace NathansWay.iOS.Numeracy
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-                _control.SizeClass.SetPositions(_xPos, _yPos);
+                _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
                 numlet.AddAndDisplayController(_control);
                 _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
             }
@@ -315,11 +307,11 @@ namespace NathansWay.iOS.Numeracy
             // Set Parent
             numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
             numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+            numlet.OutputContainers = this._uiOutputResult;
             // Sizing
-            G__NumberDisplaySize _displaySize;
+            //G__NumberDisplaySize _displaySize;
             nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             nfloat _xPos = _xSpacing;
-            nfloat _yPos = this._globalSizeDimensions.NumletHeight;
 
             for (int i = 0; i < this._uiOutputResult.Count; i++)
             {                
@@ -352,7 +344,7 @@ namespace NathansWay.iOS.Numeracy
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-                _control.SizeClass.SetPositions(_xPos, _yPos);
+                _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
                 numlet.AddAndDisplayController(_control);
                 _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
             }
@@ -381,7 +373,7 @@ namespace NathansWay.iOS.Numeracy
             G__NumberDisplaySize _displaySize;
             nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             nfloat _xPos = _xSpacing;
-            nfloat _yPos = (_xSpacing/2.0f);
+            nfloat _yPos = (_xSpacing / 2.0f);
 
             // Hook up the control resizing events so that all controls are messaged by this numlet
             numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
@@ -389,7 +381,7 @@ namespace NathansWay.iOS.Numeracy
             // Most of these should ApplyUI in ViewWillAppear
             _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-            _control.SizeClass.SetPositions(_xPos, _yPos);
+            _control.SizeClass.SetViewPosition(_xPos, _yPos);
             numlet.AddAndDisplayController(_control);
 
             // Pad out the end

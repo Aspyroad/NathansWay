@@ -1160,10 +1160,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public override void SetPositions(CGPoint _startPoint)
+        public override void SetViewPosition(CGPoint _startPoint)
         {
             // Common width/height/frame settings from Dimensions class
-            base.SetPositions(_startPoint);
+            base.SetViewPosition(_startPoint);
             // Other Frames
             this.SetInitialPosition();
         }
