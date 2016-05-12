@@ -433,36 +433,70 @@ namespace NathansWay.iOS.Numeracy
         public G__NumberDisplayPositionY DisplayPositionY
         { 
             get { return this._displayPositionY; } 
-            set { this._displayPositionY = value; }
+            set 
+            { 
+                this._displayPositionY = value; 
+            }
         }
 
         public G__NumberDisplayPositionX DisplayPositionX
         { 
             get { return this._displayPositionX; } 
-            set { this._displayPositionX = value; }
+            set 
+            { 
+                this._displayPositionX = value; 
+            }
         }
-
+        // Vertical align. Rarely changed.
         public bool SetCenterRelativeParentViewPosY
         {
             get { return this._setRelationPosY; }
             set { this._setRelationPosY = value; }
         }
+
+        // Horizontal align ********************************
         public bool SetCenterRelativeParentViewPosX
         {
             get { return this._setRelationPosX; }
-            set { this._setRelationPosX = value; }
+            set 
+            { 
+                this._setRelationPosX = value; 
+                //if (value)
+                {
+                    this._setMiddleLeftPosX = false;
+                    this._setMiddleRightPosX = false;
+                }
+            }
         }
 
         public bool SetLeftRelativeMiddleParentViewPosX
         {
             get { return this._setMiddleLeftPosX; }
-            set { this._setMiddleLeftPosX = value; }
+            set 
+            { 
+                this._setMiddleLeftPosX = value; 
+                //if (value)
+                {
+                    this._setRelationPosX = false;
+                    this._setMiddleRightPosX = false;
+                }
+            }
         }
         public bool SetRightRelativeMiddleParentViewPosX
         {
             get { return this._setMiddleRightPosX; }
-            set { this._setMiddleRightPosX = value; }
+            set 
+            { 
+                this._setMiddleRightPosX = value; 
+                //if (value)
+                {
+                    this._setRelationPosX = false;
+                    this._setMiddleLeftPosX = false;
+                }
+            }
         }
+
+        // End Horizontal **********************************
 
         public nfloat PaddingPositional
         {

@@ -4,8 +4,6 @@
 <dict>
 	<key>CFBundleDisplayName</key>
 	<string>NathansWayiOSNumeracy</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.aspyroad.nathansway</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
@@ -24,6 +22,6 @@
 	<key>Custom Property</key>
 	<string></string>
 	<key>MinimumOSVersion</key>
-	<string>6.0</string>
+	<string>7.0</string>
 </dict>
 </plist>

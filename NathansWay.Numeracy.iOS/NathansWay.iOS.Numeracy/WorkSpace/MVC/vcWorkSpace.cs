@@ -365,7 +365,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcMainWorkSpace.AddAndDisplayController(this._vcPositioningDialog);
         }
 
-        public void DockSolveNumlet()
+        public void DockNumlets()
         {
             // TODO: Check there is a solve numlet?
 
@@ -390,15 +390,38 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.RemoveNumlet(this._vcNumletSolve);
                 this.AddNumlet(this._vcNumletSolve, this._vCanvasMain);
             }
+
+            if (this._sizeWorkSpace.DockedResultNumlet == false)
+            {
+                this._sizeWorkSpace.DockedResultNumlet = true;
+                // Set the new canavs sizes
+                this._sizeWorkSpace.SetSubViewPositions();
+
+                // Remove the numlet from the current canvasmain
+                this.RemoveNumlet(this._vcNumletResult);
+                this.AddNumlet(this._vcNumletResult, this._vCanvasDocked);
+            }
+            else
+            {
+                // Remove from docked add to canvas main
+                this._sizeWorkSpace.DockedResultNumlet = false;
+                // Set the new canvas sizes
+                this._sizeWorkSpace.SetSubViewPositions();
+
+                this.RemoveNumlet(this._vcNumletResult);
+                this.AddNumlet(this._vcNumletResult, this._vCanvasMain);
+            }
+
             // TODO: Should this be done here or Sizeclass? 
             this.vCanvasDocked.Frame = this._sizeWorkSpace.CanvasDockedFrame;
             this.vCanvasMain.Frame = this._sizeWorkSpace.CanvasMainFrame;
+
+
+
         }
 
         public void DockResultNumlet()
         {
-            //this._sizeWorkSpace.DockedResultNumlet = true;
-
             // TODO: Check there is a solve numlet?
 
             // Flipflop
@@ -898,6 +921,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private nfloat __fGlobalMargin = 2.0f;
 
+        // This is the start XY Cord for the placement of Workspace
         private nfloat __fCanvasX = 44.0f;
         private nfloat __fCanvasY = 30.0f;
 
@@ -1032,28 +1056,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (this.DockedResultNumlet)
             {  
-                width = (width + this.__fResultNumletWidth + this.__fGlobalMargin);           
+                width = (width + this.__fResultNumletWidth);           
             }
 
-            width = width + this.__fGlobalMargin;
+            //width = width + this.__fGlobalMargin;
 
             return new CGRect(
-                (u - width),
+                ((u - width) - this.__fGlobalMargin),
                 __fCanvasY,
                 width,
                 this.GlobalSizeDimensions.WorkSpaceCanvasHeight
             );
         }
-
         public void SetEquationNumletPosition()
         {
-            var ws = this._vcWorkSpace.NumletEquation;
+            var ne = this._vcWorkSpace.NumletEquation;
+
+            //this._rectCanvasMain = this.SetCanvasMainHeightWidth();
+            //this._rectCanvasDocked = this.SetCanvasDockedHeightWidth();
+
             nfloat x = this.GlobalSizeDimensions.WorkSpaceCanvasWidth;
             nfloat y = this.GlobalSizeDimensions.WorkSpaceCanvasHeight;
 
-            ws.SizeClass.SetCenterRelativeParentViewPosY = true;
-            ws.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
-            ws.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+            ne.SizeClass.SetCenterRelativeParentViewPosY = true;
+            ne.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
+            ne.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
 
             if (this.DockedSolveNumlet)
             {  
@@ -1065,57 +1092,90 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             }
 
-            ws.SizeClass.SetViewPosition(x, y);
+            ne.SizeClass.SetViewPosition(x, y);
         }
 
-        public void SetResultNumletPosition()
-        {
-            var ws = this._vcWorkSpace.NumletResult;
-            nfloat x = this.GlobalSizeDimensions.WorkSpaceCanvasWidth;
-            nfloat y = this.GlobalSizeDimensions.WorkSpaceCanvasHeight;
 
-            ws.SizeClass.SetCenterRelativeParentViewPosY = true;
-            ws.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-            ws.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
 
-            if (this.DockedSolveNumlet)
-            {  
-
-            }
-
-            if (this.DockedResultNumlet)
-            {
-
-            }
-
-            ws.SizeClass.SetViewPosition(x, y);
-        }
-
-        public void SetSolveNumletPosition()
+        public void SetDockedNumletPositions()
         {
             var ns = this._vcWorkSpace.NumletSolve;
-            nfloat x = this.GlobalSizeDimensions.WorkSpaceCanvasWidth;
-            nfloat y = this.GlobalSizeDimensions.WorkSpaceCanvasHeight;
+            var nr = this._vcWorkSpace.NumletResult;
 
+            //this._rectCanvasMain = this.SetCanvasMainHeightWidth();
+            //this._rectCanvasDocked = this.SetCanvasDockedHeightWidth();
+
+            //nfloat ns_x = this.GlobalSizeDimensions.WorkSpaceCanvasWidth;
+            nfloat ns_x = 0.0f;
+            nfloat ns_y = this.GlobalSizeDimensions.WorkSpaceCanvasHeight;
+
+            //nfloat nr_x = this.GlobalSizeDimensions.WorkSpaceCanvasWidth;
+            nfloat nr_x = 0.0f;
+            nfloat nr_y = this.GlobalSizeDimensions.WorkSpaceCanvasHeight;
+
+            nr.SizeClass.SetCenterRelativeParentViewPosY = true;
             ns.SizeClass.SetCenterRelativeParentViewPosY = true;
-            ns.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-            ns.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
 
-            if (this.DockedSolveNumlet)
-            {  
-                x = 0.0f;
+            // **** Nothing is docked
+            if (!this.DockedSolveNumlet && !this.DockedResultNumlet)
+            {
+                // Reset other sizes first
+                ns.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+                nr.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+
+                ns.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+                nr.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
+
+                ns_x = _rectCanvasMain.Width;
+                nr_x = _rectCanvasMain.Width;
+
             }
+            // **** Result Numlet is docked
+            else if (!this.DockedSolveNumlet && this.DockedResultNumlet)
+            {
+                // Reset other sizes first
+                ns.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+                ns.SizeClass.SetCenterRelativeParentViewPosX = true;
+
+                nr.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Center;
+                nr.SizeClass.SetCenterRelativeParentViewPosX = true;
+
+                ns_x = _rectCanvasMain.Width; 
+                nr_x = _rectCanvasDocked.Width;
+
+            }
+            // **** Solve Numlet is docked
+            else if (this.DockedSolveNumlet && !this.DockedResultNumlet)
+            {
+                // Reset other sizes first
+                nr.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+                nr.SizeClass.SetCenterRelativeParentViewPosX = true;
+
+                ns.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Center;
+                ns.SizeClass.SetCenterRelativeParentViewPosX = true;
+
+                ns_x = _rectCanvasDocked.Width;
+                nr_x = _rectCanvasMain.Width;
+
+            }
+            // **** Both are docked
             else
             {
-                x = ((this.__fResultNumletWidth * 2) + (x + GlobalSizeDimensions.NumletNumberSpacing));
+                // Reset other sizes first
+                ns.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
+                nr.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
+
+                ns.SizeClass.SetCenterRelativeParentViewPosY = true;
+                nr.SizeClass.SetCenterRelativeParentViewPosY = true;
+
+                nr_x = _rectCanvasDocked.Width;
+                ns_x = _rectCanvasDocked.Width;
+
             }
 
-            if (this.DockedResultNumlet)
-            {
+            ns.SizeClass.SetViewPosition(ns_x, ns_y);
+            nr.SizeClass.SetViewPosition(nr_x, nr_y);
 
-            }
-                
-            ns.SizeClass.SetViewPosition(x, y);
         }
 
         #endregion
@@ -1136,8 +1196,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._rectCanvasDocked = this.SetCanvasDockedHeightWidth();
             // Numlet settings
             this.SetEquationNumletPosition();
-            this.SetResultNumletPosition();
-            this.SetSolveNumletPosition();
+
+            this.SetDockedNumletPositions();
 
         }
 

@@ -155,13 +155,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
         {
-            this._vcWorkSpace.DockResultNumlet();
+            this._vcWorkSpace.DockNumlets();
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
         {
-            this._vcWorkSpace.DockSolveNumlet();
+            this._vcWorkSpace.DockNumlets();
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
