@@ -128,16 +128,9 @@ namespace NathansWay.iOS.Numeracy
             return _vcNumletResult;
         }
 
-        public vcWorkNumlet GetSolveNumlet(nfloat _resultNumletWidth)
+        public vcWorkNumlet GetSolveNumlet()
         {
-            // This solver Numlet always sits to the left of the result numlet for the time being.
-            // Maybe its own position is needed on the extreme left of workspace.
             var _vcNumletSolve = this.CreateNumletSolve();
-//            _vcNumletSolve.SizeClass.SetCenterRelativeParentViewPosY = true;
-//            _vcNumletSolve.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-//            _vcNumletSolve.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-//            nfloat w = ((_resultNumletWidth * 2) + this._globalSizeDimensions.WorkSpaceCanvasWidth + this._globalSizeDimensions.NumletNumberSpacing);
-//            _vcNumletSolve.SizeClass.SetPositions(w, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             return _vcNumletSolve;
         }
 
@@ -386,6 +379,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Pad out the end
             numlet.SizeClass.CurrentWidth = this._globalSizeDimensions.GlobalNumberWidth + (2 * _xSpacing); 
+            //numlet.SizeClass.CurrentWidth = this._globalSizeDimensions.GlobalNumberWidth; 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
             // Return completed numnut!

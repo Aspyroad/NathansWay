@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using Foundation;
 using UIKit;
 using CoreAnimation;
-using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
@@ -289,6 +288,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void SetHeightWidth ()
         {
             this._fCurrentHeight = this.GlobalSizeDimensions.NumletHeight;
+        }
+
+        public override void SetFrames()
+        {
+            base.SetFrames();
+            //var x = 1;
         }
 
         #endregion

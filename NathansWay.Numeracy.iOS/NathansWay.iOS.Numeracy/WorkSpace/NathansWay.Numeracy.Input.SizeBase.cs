@@ -54,12 +54,17 @@ namespace NathansWay.iOS.Numeracy
         protected bool _setDocked;
         // Global sizeclass padding variable for extreme left right top bottom placement.
         protected nfloat _fPaddingPositional;
-
         // Parent container reference
         internal BaseContainer _parentContainer;
         // Current Sizing
         protected nfloat _fCurrentWidth = 0.0f;
         protected nfloat _fCurrentHeight = 0.0f;
+        // When height and width are adjusted left/right - top/bottom padding is added.
+
+        // TODO: 24/05/2016
+        // Add padding counts when they are added then setup accessor functions to return
+        // height and width plus 2 * padding count for the full width/height
+
         // Old Sizing
         protected nfloat _fOldWidth = 0.0f;
         protected nfloat _fOldHeight = 0.0f;
@@ -142,7 +147,8 @@ namespace NathansWay.iOS.Numeracy
                     break;
                     default : // G__NumberDisplayPositionY.Bottom
                     {
-                        _YPos = (Y - this._fCurrentHeight);
+                        _YPos = (Y - (this._fCurrentHeight + this._fPaddingPositional));
+
                     }
                     break;
                 }
@@ -164,7 +170,8 @@ namespace NathansWay.iOS.Numeracy
                     break;
                     default : // G__NumberDisplayPosition.Right
                     {
-                        _XPos = (X - this._fCurrentWidth);
+                        // Add a pad?
+                        _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
                     }
                     break;
                 }
@@ -296,7 +303,7 @@ namespace NathansWay.iOS.Numeracy
             // 2. Set the Height and Widths of the control
             // It should NOT be called to set frame objects
 
-            CGPoint _point;
+            //CGPoint _point;
             this.SetHeightWidth();
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
@@ -404,7 +411,7 @@ namespace NathansWay.iOS.Numeracy
                 this._fCurrentWidth = value;
             } 
         }
-        public nfloat OldWidth { get; set; }
+
 
         public nfloat CurrentHeight 
         { 
@@ -415,7 +422,26 @@ namespace NathansWay.iOS.Numeracy
                 this._fCurrentHeight = value;
             } 
         }
+
+        public nfloat CurrentWidthWithPadding 
+        { 
+            get 
+            { 
+                return (this._fCurrentWidth + (2 * _fPaddingPositional)); 
+            } 
+        }
+
+
+        public nfloat CurrentHeightWithPadding 
+        { 
+            get 
+            { 
+                return (this._fCurrentHeight + (2 * _fPaddingPositional)); 
+            } 
+        }
+
         public nfloat OldHeight { get; set; }
+        public nfloat OldWidth { get; set; }
 
         public vcMainContainer VcMainContainer { get; set; }
 
