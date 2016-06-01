@@ -129,6 +129,22 @@ namespace NathansWay.iOS.Numeracy
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
 
+            Action action = () =>
+                { 
+                    UIAlertView alert = new UIAlertView();
+                    alert.Title = @"iOSNumberContainer";
+                    alert.AddButton(@"Ok");
+                    alert.Message = @"iOSNumberContainer";
+                    alert.Show();
+                };
+
+            UITapGestureRecognizer singleTapGesture = new UITapGestureRecognizer(action);
+            singleTapGesture.CancelsTouchesInView = true;
+            singleTapGesture.NumberOfTouchesRequired = 1;
+            singleTapGesture.NumberOfTapsRequired = 1;
+            // add the gesture recognizer to the view
+            this.View.AddGestureRecognizer(singleTapGesture);
+
         }
 
         #endregion
@@ -477,6 +493,17 @@ namespace NathansWay.iOS.Numeracy
         {  
             base.OnControlUnSelectedChange();
         }
+
+        //        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //        {
+        //            base.TouchesBegan(touches, evt);
+        //
+        //            // Continue next responder if set
+        //            //if (this._bAllowNextResponder)
+        //            {
+        //                this.NextResponder.TouchesBegan(touches, evt);
+        //            }
+        //        }
 
         #endregion
 

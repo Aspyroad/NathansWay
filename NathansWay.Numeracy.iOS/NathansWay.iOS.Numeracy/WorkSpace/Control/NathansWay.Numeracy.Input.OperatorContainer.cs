@@ -143,10 +143,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         {  
             base.OnControlUnSelectedChange();
         }
+            
+        // Check if its been touched.
+        // Remember this is a standard VC with view, 
+        // we must override TouchesBegan to check if its been hit
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            base.TouchesBegan(touches, evt);
+            // 1/06/16 move to bottom for testing
+            //base.TouchesBegan(touches, evt);
 
             this.Touched = true;
             if (_bSelected)
@@ -186,6 +191,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
             }
 
+            base.TouchesBegan(touches, evt);
 
             // For inherited members bubble through inheritance
 

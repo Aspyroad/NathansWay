@@ -228,6 +228,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+//        public override void TouchesBegan(NSSet touches, UIEvent evt)
+//        {
+//            base.TouchesBegan(touches, evt);
+//
+//            // Continue next responder if set
+//            //if (this._bAllowNextResponder)
+//            {
+//                this.NextResponder.TouchesBegan(touches, evt);
+//            }
+//        }
+
         #endregion
 
         #region Public Members
@@ -793,7 +804,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             Action action = () =>
             { 
-                this.pkNumberPicker.Hidden = false;
+                //this.pkNumberPicker.Hidden = false;
+                  this.txtTouchedDown(new object(), new EventArgs());
             };
 
             singleTapGesture = new UITapGestureRecognizer(action);

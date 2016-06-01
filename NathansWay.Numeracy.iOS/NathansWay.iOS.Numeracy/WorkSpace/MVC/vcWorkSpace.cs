@@ -32,8 +32,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private UINumberFactory _uiNumberFactory;
 
         // Main workspace views and docking variables
-        private UIScrollView _vCanvasMain;
-        private UIScrollView _vCanvasDocked;
+        private AspyScrollView _vCanvasMain;
+        private AspyView _vCanvasDocked;
 
         private vcMainWorkSpace _vcMainWorkSpace;
         private vcWorkNumlet _vcNumletEquation;
@@ -160,8 +160,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             _myNumlet.DidMoveToParentViewController(this);
         }
 
-        private void AddViewNumlet (vcWorkNumlet _myNumlet, UIScrollView _canvas)
+        private void AddViewNumlet (vcWorkNumlet _myNumlet, UIView _canvas)
         {
+            
             _canvas.AddSubview(_myNumlet.View);
             _myNumlet.View.SetNeedsDisplay();
         }
@@ -423,35 +424,35 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        public void DockResultNumlet()
-        {
-            // TODO: Check there is a solve numlet?
-
-            // Flipflop
-            if (this._sizeWorkSpace.DockedResultNumlet == false)
-            {
-                this._sizeWorkSpace.DockedResultNumlet = true;
-                // Set the new canavs sizes
-                this._sizeWorkSpace.SetSubViewPositions();
-
-                // Remove the numlet from the current canvasmain
-                this.RemoveNumlet(this._vcNumletResult);
-                this.AddVCNumlet(this._vcNumletResult);
-            }
-            else
-            {
-                // Remove from docked add to canvas main
-                this._sizeWorkSpace.DockedResultNumlet = false;
-                // Set the new canvas sizes
-                this._sizeWorkSpace.SetSubViewPositions();
-
-                this.RemoveNumlet(this._vcNumletResult);
-                this.AddVCNumlet(this._vcNumletResult);
-            }
-            // TODO: Should this be done here or Sizeclass? 
-            //this.vCanvasDocked.Frame = this._sizeWorkSpace.CanvasDockedFrame;
-            //this.vCanvasMain.Frame = this._sizeWorkSpace.CanvasMainFrame;
-        }
+//        public void DockResultNumlet()
+//        {
+//            // TODO: Check there is a solve numlet?
+//
+//            // Flipflop
+//            if (this._sizeWorkSpace.DockedResultNumlet == false)
+//            {
+//                this._sizeWorkSpace.DockedResultNumlet = true;
+//                // Set the new canavs sizes
+//                this._sizeWorkSpace.SetSubViewPositions();
+//
+//                // Remove the numlet from the current canvasmain
+//                this.RemoveNumlet(this._vcNumletResult);
+//                this.AddVCNumlet(this._vcNumletResult);
+//            }
+//            else
+//            {
+//                // Remove from docked add to canvas main
+//                this._sizeWorkSpace.DockedResultNumlet = false;
+//                // Set the new canvas sizes
+//                this._sizeWorkSpace.SetSubViewPositions();
+//
+//                this.RemoveNumlet(this._vcNumletResult);
+//                this.AddVCNumlet(this._vcNumletResult);
+//            }
+//            // TODO: Should this be done here or Sizeclass? 
+//            //this.vCanvasDocked.Frame = this._sizeWorkSpace.CanvasDockedFrame;
+//            //this.vCanvasMain.Frame = this._sizeWorkSpace.CanvasMainFrame;
+//        }
 
         public void CenterMethods()
         {
@@ -472,13 +473,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public UIScrollView vCanvasMain 
+        public AspyScrollView vCanvasMain 
         {
             get { return this._vCanvasMain; }
             set { this._vCanvasMain = value; }
         }
 
-        public UIScrollView vCanvasDocked 
+        //public AspyScrollView vCanvasDocked 
+        public AspyView vCanvasDocked 
         {
             get { return this._vCanvasDocked; }
             set { this._vCanvasDocked = value; }
@@ -623,8 +625,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 //            this._vCanvasDocked.AutosizesSubviews = false;
 
             // Scrollview tests
-            this._vCanvasMain = new UIScrollView();
-            this._vCanvasDocked = new UIScrollView();
+            this._vCanvasMain = new AspyScrollView();
+            this._vCanvasDocked = new AspyView();
 
             this._vCanvasMain.BackgroundColor = UIColor.White;
             this._vCanvasMain.ClipsToBounds = true;
@@ -638,7 +640,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasDocked.BackgroundColor = UIColor.Gray;
             this._vCanvasDocked.ClipsToBounds = true;
             this._vCanvasDocked.AutosizesSubviews = false;
-            this._vCanvasDocked.ScrollEnabled = true;
+            //this._vCanvasDocked.ScrollEnabled = true;
             this._vCanvasDocked.UserInteractionEnabled = true;
             // This is NEEDED for scrollview to work
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
@@ -647,6 +649,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this.View.AddSubview(this._vCanvasMain);
             this.View.AddSubview(this._vCanvasDocked);
+
+
 
             // Delegate hookups / Control UI setup etc
             this.btnNextEquation.EnableHold = false;
@@ -765,9 +769,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.TouchesBegan(touches, evt);
 
             // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
-            if (this.TouchInsideNumlets(y) != true)
-            {
+//            UITouch y = (UITouch)touches.AnyObject;
+//            if (this.TouchInsideNumlets(y) != true)
+//            {
                 if (this.HasSelectedNumberText)
                 {
                     var x = this.SelectedNumberText;
@@ -784,7 +788,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     this.SelectedOperatorText.OnControlUnSelectedChange();
                     this.SelectedOperatorText = null;
                 }
-            }
+//            }
         }
 
 		#endregion
@@ -1193,8 +1197,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (this.DockedResultNumlet)
             {
-                width = (width - (this.__fResultNumletWidth + (4 * this._fPaddingPositional)));
-                //width = (width - this.__fResultNumletWidth);
+                if (this.DockedSolveNumlet)
+                {
+                    // Make this value 2 pads less if both are docked as we only need one for the middle
+                    width = (width - (this.__fResultNumletWidth + (2 * this._fPaddingPositional)));
+                }
+                else
+                {
+                    width = (width - (this.__fResultNumletWidth + (4 * this._fPaddingPositional)));
+                }
             }
 
             this._rectCanvasMain = new CGRect(
@@ -1206,6 +1217,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // Assign to canvas frame
             this._vcWorkSpace.vCanvasMain.Frame = this._rectCanvasMain;
+            // Scrolling
+            this._vcWorkSpace.vCanvasMain.ContentSize = new CGSize(1000, this.GlobalSizeDimensions.WorkSpaceCanvasHeight);
         }
 
         public void SetCanvasDockedHeightWidth ()
@@ -1225,7 +1238,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (this.DockedResultNumlet)
             {  
-                //width = (width + this.__fResultNumletWidth + (2 * this._fPaddingPositional)); 
                 width = (width + this.__fResultNumletWidth + (2 * this._fPaddingPositional));           
             }
 
