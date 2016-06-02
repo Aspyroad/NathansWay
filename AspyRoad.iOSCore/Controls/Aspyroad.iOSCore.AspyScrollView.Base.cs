@@ -73,6 +73,8 @@ namespace AspyRoad.iOSCore
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bAutoApplyUI = false;
+
+            this.CanCancelContentTouches = false;
             //this._bAllowNextResponder = false;
 
             Action action = () =>
@@ -279,6 +281,15 @@ namespace AspyRoad.iOSCore
         #endregion
 
         #region Overrides
+
+        public override bool TouchesShouldCancelInContentView(UIView view)
+        {
+            if (view.GetType() == typeof(AspyTextField))
+            {
+                return false;
+            }
+            return base.TouchesShouldCancelInContentView(view);
+        }
 
         public override void MovedToSuperview()
         {

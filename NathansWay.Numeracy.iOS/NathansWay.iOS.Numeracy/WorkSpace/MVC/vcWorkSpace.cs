@@ -766,12 +766,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            base.TouchesBegan(touches, evt);
+            //base.TouchesBegan(touches, evt);
 
             // Check if the touch is inside any active numlets
-//            UITouch y = (UITouch)touches.AnyObject;
-//            if (this.TouchInsideNumlets(y) != true)
-//            {
+            UITouch y = (UITouch)touches.AnyObject;
+            if (this.TouchInsideNumlets(y) != true)
+            {
                 if (this.HasSelectedNumberText)
                 {
                     var x = this.SelectedNumberText;
@@ -788,7 +788,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     this.SelectedOperatorText.OnControlUnSelectedChange();
                     this.SelectedOperatorText = null;
                 }
-//            }
+            }
+
+            base.TouchesBegan(touches, evt);
         }
 
 		#endregion
