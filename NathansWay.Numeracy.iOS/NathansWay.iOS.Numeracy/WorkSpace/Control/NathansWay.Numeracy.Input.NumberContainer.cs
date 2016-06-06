@@ -128,7 +128,10 @@ namespace NathansWay.iOS.Numeracy
             this.HasRoundedCorners = true;
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
+        }
 
+        private void AddAGesture_NotUsed()
+        {
             Action action = () =>
                 { 
                     UIAlertView alert = new UIAlertView();
@@ -144,7 +147,6 @@ namespace NathansWay.iOS.Numeracy
             singleTapGesture.NumberOfTapsRequired = 1;
             // add the gesture recognizer to the view
             this.View.AddGestureRecognizer(singleTapGesture);
-
         }
 
         #endregion
@@ -493,17 +495,6 @@ namespace NathansWay.iOS.Numeracy
         {  
             base.OnControlUnSelectedChange();
         }
-
-        //        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        //        {
-        //            base.TouchesBegan(touches, evt);
-        //
-        //            // Continue next responder if set
-        //            //if (this._bAllowNextResponder)
-        //            {
-        //                this.NextResponder.TouchesBegan(touches, evt);
-        //            }
-        //        }
 
         #endregion
 

@@ -497,7 +497,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up our events
             this.btnDown.TouchUpInside += btnDownTouch;
             this.btnUp.TouchUpInside += btnUpTouch;
-            this.txtNumber.TouchDown += txtTouchedDown;
+            // Trying something here
+            // And it worked!
+            this.txtSingleTapGestureRecognizer();
+            //this.txtNumber.TouchDown += txtTouchedDown;
 
             items.Add("0");
             items.Add("1");
@@ -587,7 +590,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void btnUpTouch(object sender, EventArgs e)
         {
-            this.CommonButtonCode();
+            //this.CommonButtonCode();
 
             //return; 
 
@@ -610,7 +613,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void btnDownTouch(object sender, EventArgs e)
         {
-            this.CommonButtonCode();
+            //this.CommonButtonCode();
 
             //return;
 
@@ -630,11 +633,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //this.IsInEditMode = false;
             this.postEdit(x);
-        }
-
-        private void CommonButtonCode()
-        {
-            
         }
 
         // Setup editing
@@ -809,6 +807,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             };
 
             singleTapGesture = new UITapGestureRecognizer(action);
+            // Using protocols here with delegates, its just easier.
+            // Weak delagtes may have been even easier but I find them messy.
+            var y = new GestureDelegate();
+            singleTapGesture.Delegate = y;
 
             singleTapGesture.NumberOfTouchesRequired = 1;
             singleTapGesture.NumberOfTapsRequired = 1;
@@ -1097,6 +1099,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
             #endregion
+        }
+
+        protected class GestureDelegate : UIGestureRecognizerDelegate
+        {
+            // This is needed so that any gestures accuring "above" this subview also gets captured.
+            // By default gestures above the Z-order "block" other gestures 
+            public GestureDelegate()
+            {
+            }
+
+            public override bool ShouldRecognizeSimultaneously(UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
+            {
+                return true;
+            }
+
         }
 
         #endregion

@@ -633,24 +633,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasMain.AutosizesSubviews = false;
             this._vCanvasMain.ScrollEnabled = true;
             this._vCanvasMain.UserInteractionEnabled = true;
-            // This is NEEDED for scrollview to work
+            this._vCanvasMain.CornerRadius = 5.0f;
+            this._vCanvasMain.HasRoundedCorners = true;
+            this._vCanvasMain.ApplyUIWhere = G__ApplyUI.AlwaysApply;
+
+            // This is NEEDED for scrollview to work (currently set in sizing?)
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
 
 
             this._vCanvasDocked.BackgroundColor = UIColor.Gray;
             this._vCanvasDocked.ClipsToBounds = true;
             this._vCanvasDocked.AutosizesSubviews = false;
-            //this._vCanvasDocked.ScrollEnabled = true;
+            this._vCanvasDocked.CornerRadius = 5.0f;
+            this._vCanvasDocked.HasRoundedCorners = true;
             this._vCanvasDocked.UserInteractionEnabled = true;
             // This is NEEDED for scrollview to work
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
 
-
-
             this.View.AddSubview(this._vCanvasMain);
             this.View.AddSubview(this._vCanvasDocked);
-
-
 
             // Delegate hookups / Control UI setup etc
             this.btnNextEquation.EnableHold = false;
@@ -699,6 +700,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
             this.View.Layer.Opacity = 1.0f;
+
 
             // Setup all canvas size here.
             //this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasMainHeightWidth();

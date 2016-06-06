@@ -147,6 +147,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Check if its been touched.
         // Remember this is a standard VC with view, 
         // we must override TouchesBegan to check if its been hit
+        // TODO:  Should we use a Tap gesture here rather than overriding Touches?
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {

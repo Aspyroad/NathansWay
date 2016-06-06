@@ -33,8 +33,6 @@ namespace AspyRoad.iOSCore
         protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
 
-        protected UITapGestureRecognizer singleTapGesture;
-
         #endregion
        
 		#region Contructors
@@ -74,25 +72,13 @@ namespace AspyRoad.iOSCore
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bAutoApplyUI = false;
 
+            // ********************* 
+            // By default CanCancelContentTouches is set to true/YES
+            // We need to allow siujbview shandle touch response.
+            // This works in conjunction with the virtual TouchesShouldCancelInContentView()
+            // Overriding this lets us decide exactly how subviews respond to touch
             this.CanCancelContentTouches = false;
-            //this._bAllowNextResponder = false;
 
-            Action action = () =>
-                { 
-//                    UIAlertView alert = new UIAlertView();
-//                    alert.Title = @"iOSScrollView";
-//                    alert.AddButton(@"Ok");
-//                    alert.Message = @"iOSScrollView";
-//                    alert.Show();
-                    this.ResignFirstResponder();
-                };
-
-            singleTapGesture = new UITapGestureRecognizer(action);
-            singleTapGesture.CancelsTouchesInView = true;
-            singleTapGesture.NumberOfTouchesRequired = 1;
-            singleTapGesture.NumberOfTapsRequired = 1;
-            // add the gesture recognizer to the view
-            //this.AddGestureRecognizer(singleTapGesture);
         }
 
         #endregion
@@ -146,11 +132,11 @@ namespace AspyRoad.iOSCore
             { 
                 if (value == false)
                 {
-                    this.CornerRadius = 0.0f;
+                    this.Layer.CornerRadius = 0.0f;
                 }
                 else
                 {
-                    this.CornerRadius = this._fCornerRadius;   
+                    this.Layer.CornerRadius = this._fCornerRadius;   
                 }
                 this._bHasRoundedCorners = value;
             }
@@ -192,22 +178,6 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        /// <summary>
-        /// Gets or sets a value indicating whether to allow next responder touch events.
-        /// </summary>
-        /// <value><c>true</c> if allow next responder; otherwise, <c>false</c>.</value>
-        //        public bool AllowNextResponder
-        //        {
-        //            get
-        //            {
-        //                return _bAllowNextResponder;
-        //            }
-        //            set
-        //            {
-        //                _bAllowNextResponder = value;
-        //            }
-        //        }
-
         #endregion
 
         #region Virtual Members
@@ -243,51 +213,19 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-        #region Responder Chain Interrupt
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-
-
-            // Continue next responder if set
-            //if (this._bAllowNextResponder)
-            {
-                this.NextResponder.TouchesBegan(touches, evt);
-            }
-            base.TouchesBegan(touches, evt);
-        }
-        //
-        //        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        //        {
-        //            if (!this.Dragging)
-        //            {
-        //                this.NextResponder.TouchesEnded(touches, evt);
-        //            }
-        //
-        //            base.TouchesEnded(touches, evt);
-        //        }
-        //
-        //        public override void TouchesMoved(NSSet touches, UIEvent evt)
-        //        {
-        //            base.TouchesMoved(touches, evt);
-        //
-        //            // Continue next responder if set
-        //            //if (this._bAllowNextResponder)
-        //            {
-        //                this.NextResponder.TouchesMoved(touches, evt);
-        //            }
-        //        }
-
-        #endregion
-
         #region Overrides
 
+        // This is for selectively defining which subviews inside ScrolView
+        // receive touch. This is called just before TouchesStart() and it allows
+        // us to check the sub views for how to respond to touch
+        // this.CanCancelContentTouches = false;
+        // Must be set to false, so it calls this virtual.
         public override bool TouchesShouldCancelInContentView(UIView view)
         {
-            if (view.GetType() == typeof(AspyTextField))
-            {
-                return false;
-            }
+            //            if (view.GetType() == typeof(AspyTextField))
+            //            {
+            //                //return true;
+            //            }
             return base.TouchesShouldCancelInContentView(view);
         }
 
