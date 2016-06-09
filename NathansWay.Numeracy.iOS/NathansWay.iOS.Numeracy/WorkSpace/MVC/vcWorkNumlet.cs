@@ -22,8 +22,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	public class vcWorkNumlet : BaseContainer
 	{
 		#region Private Variables
-		// Control
+		// Control Attributes
         private G__WorkNumletType _workNumletType;
+        private G__LessonResultPosition _lessonResultyPosition;
+        private G__AnswerState _answerState;
         private string _strExpression;
         private List<object> _lsContainers;
 

@@ -18,6 +18,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 {
     public class vcOperatorText : BaseContainer
     {
+
+        // TODO: This should be editable.!
+        // This could be another type of question, leave the operator blank.
+        // That way the students have to work out what type operation is being done.
+
         #region Class Variables
 
         // UI Components
@@ -95,11 +100,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // Add subviews
-            //this.View.AddSubview(this.txtOperator);
-            // Delegate wireups (prevents the control from being edited)
-            //this._txtOperatorDelegate = new TextControlDelegate();
-            //this.txtOperator.Delegate = this._txtOperatorDelegate;
         }
 
         // Is only called when the viewcontroller first lays out its views
@@ -186,18 +186,16 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.OnControlSelectedChange();
             }
 
+            // *****************************************************************************
+            // Check Correct
             // If this is an equals sign fire check correct
             if (this._operatorType == G__MathChar.Equals)
             {
-                this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
+                //this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
+                this.MyWorkSpaceParent.Solve();
             }
 
             base.TouchesBegan(touches, evt);
-
-            // For inherited members bubble through inheritance
-
-            // If any controls want to subscribe
-            //this.FireControlSelected();
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)

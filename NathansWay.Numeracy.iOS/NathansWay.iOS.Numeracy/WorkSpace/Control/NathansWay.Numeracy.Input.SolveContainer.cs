@@ -73,6 +73,7 @@ namespace NathansWay.iOS.Numeracy
             {                
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
+                this.btnSolveButton.TouchUpInside -= OnTouch_btnSolveButton;
             }
         }
 
@@ -147,7 +148,15 @@ namespace NathansWay.iOS.Numeracy
 
         private void OnTouch_btnSolveButton (object sender, EventArgs e)
         {
-            this.btnSolveButton.AnimationCorrect();
+            bool x = this.MyWorkSpaceParent.Solve();
+            if (x) // Correct
+            {    
+                this.btnSolveButton.AnimationCorrect();
+            }
+            else
+            {
+                this.btnSolveButton.AnimationFalse();
+            }               
         }
 
         public override void OnControlSelectedChange()
@@ -159,33 +168,6 @@ namespace NathansWay.iOS.Numeracy
         {  
             //base.OnControlUnSelectedChange();
         }
-
-//        public override void TouchesBegan(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesBegan(touches, evt);
-//
-//            this.Touched = true;
-//            if (_bSelected)
-//            {
-//                // This control can actually be selected multiple times.
-//                this._bSelected = false;
-//                //this.OnControlUnSelectedChange();
-//            }
-//            else
-//            {
-//                this._bSelected = true;
-//                //this.OnControlSelectedChange();
-//            }
-//
-//            // If any controls want to subscribe
-//            //this.FireControlSelected();
-//        }
-//
-//        public override void TouchesEnded(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesEnded(touches, evt);
-//            this.Touched = false;
-//        }
 
         #endregion
 
@@ -580,6 +562,10 @@ namespace NathansWay.iOS.Numeracy
             this.slTickBGLayer.RemoveAllAnimations();
             this.slTickPathLayer.RemoveAllAnimations();  
         }
+
+        #endregion
+
+        #region Public Members
 
         public void AnimationCorrect()
         {

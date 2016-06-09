@@ -10,6 +10,7 @@ namespace NathansWay.Shared
     {
         // Global Display Output object
         bool IsAnswer { get; set; }
+        bool IsLabelOnly { get; set; }
 
         // Functions
         // All write there output into the UIOuput object

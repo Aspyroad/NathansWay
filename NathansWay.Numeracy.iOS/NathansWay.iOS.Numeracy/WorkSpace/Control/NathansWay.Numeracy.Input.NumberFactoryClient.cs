@@ -29,14 +29,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public NumberFactoryClient()
         {
             this.IsAnswer = false;
-            this.IsReadOnly = true;
         }
 
         public NumberFactoryClient(List<object> _lsOutput)
         {               
-            this.IsAnswer = false;
-            this.IsReadOnly = true;
-                
+            this.IsAnswer = false;                
         }
 
         #endregion
@@ -49,7 +46,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             set; 
         }
 
-        public bool IsReadOnly
+        public bool IsLabelOnly
         {
             get;
             set;
@@ -68,6 +65,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcNumberContainer(strValue);
             // Create the number
             x.CreateNumber(false);
+            x.IsAnswer = this.IsAnswer;
+            x.IsInitialLoad = true;
+            // TODO: Terribly lazy, workout if I need this and how IM using it.
+            x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
@@ -90,6 +91,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create a fraction
             var x = new vcFractionContainer(strFraction);
+            x.IsAnswer = this.IsAnswer;
+            x.IsInitialLoad = true;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
@@ -100,6 +103,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Create an operator
             var x = new vcOperatorText(mathChar, strChar);
+            x.IsAnswer = this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;

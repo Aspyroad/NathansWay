@@ -22,10 +22,12 @@ namespace NathansWay.Shared.BUS.Entity
 		private string _equation;
 		private string _method;
 		private string _result;
+        private string _inputResult;
 		//TODO : We need an enumeration on dificulty, let a teacher score how well they achieved the result.
 		private int _resultDifficulty;
 		private bool _correctResult;
 		private bool _correctMethod;
+        //private bool _attempted;
 
 		#endregion
 
@@ -38,7 +40,7 @@ namespace NathansWay.Shared.BUS.Entity
 
 		#endregion
 
-		#region Public Members 
+		#region Public DataTable Members 
 
 		[Column("student_seq")]
 		public int StudentSeq
@@ -113,7 +115,19 @@ namespace NathansWay.Shared.BUS.Entity
 			set { this._correctMethod = value; }
 		}
 
-		#endregion     
+		#endregion
+
+        #region Public Properties
+
+        public string InputResult
+        {
+            get { return this._inputResult; }
+            set { this._inputResult = value; }            
+        }
+
+        #endregion
+
+
 
 		#region Private Members
 

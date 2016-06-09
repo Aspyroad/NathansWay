@@ -7,6 +7,9 @@ using System.Globalization;
 
 namespace NathansWay.Shared
 {
+
+    #region DataBase
+
     public enum G__Entities : int
     {
         Teacher = 0,
@@ -22,12 +25,63 @@ namespace NathansWay.Shared
 		Toolz = 10
     }
 
+    #endregion
+
+    #region LessonType
+
 	public enum G__LessonClass : int
 	{
 		Practice = 1,
 		SpeedTest = 2,
 		Assesment = 3
 	}
+
+    // For very basic Algebraic functions, such as the result being inside the equation, instead of the result container
+    public enum G__LessonResultPosition : int
+    {
+        ResultInResultContainer = 1,
+        ResultInEquationContainer = 2
+    }
+
+
+    public enum G__AnswerState : int
+    {
+        Correct = 1,
+        InCorrect = 2,
+        UnAttempted = 3
+    }
+
+    public enum G__WorkNumletType : int
+    {
+        Equation = 1,
+        Method = 2,
+        Result = 3,
+        Solve = 4
+    }
+
+    public enum G__LessonState : int
+    {
+        Ready = 1,
+        Started = 2,
+        Paused = 3,
+        Finished = 4
+    }
+
+    public enum G__ContainerType : int
+    {
+        Number = 1,
+        Fraction = 2,
+        Operator = 3,
+        Container = 4,
+        NumberLabel = 5,
+        Decimal = 6,
+        NumberText = 7,
+        SolveButton = 8
+    }
+
+    #endregion
+
+    #region NumberField Attributes
 
     public enum G__NumberDisplaySize : int
     {
@@ -75,40 +129,10 @@ namespace NathansWay.Shared
         EditNumPad = 3       
     }
 
-    public enum G__AnswerState : int
-    {
-        Correct = 1,
-        InCorrect = 2,
-        UnAttempted = 3
-    }
+    #endregion
 
-    public enum G__WorkNumletType : int
-    {
-        Equation = 1,
-        Method = 2,
-        Result = 3,
-        Solve = 4
-    }
 
-    public enum G__LessonState : int
-    {
-        Ready = 1,
-        Started = 2,
-        Paused = 3,
-        Finished = 4
-    }
 
-    public enum G__ContainerType : int
-    {
-        Number = 1,
-        Fraction = 2,
-        Operator = 3,
-        Container = 4,
-        NumberLabel = 5,
-        Decimal = 6,
-        NumberText = 7,
-        SolveButton = 8
-    }
 
 	#region Filtering
 
@@ -439,7 +463,8 @@ namespace NathansWay.Shared
         Multiply = 7,
         Decimal = 8,
         Equals = 9,
-        Method = 10
+        Method = 10,
+        Answer = 11
     }
 
     public static class G__MathChars
@@ -455,7 +480,8 @@ namespace NathansWay.Shared
             {"x", G__MathChar.Multiply},
             {".", G__MathChar.Decimal},
             {"=", G__MathChar.Equals},
-            {"M", G__MathChar.Method}
+            {"M", G__MathChar.Method},
+            {"A", G__MathChar.Answer}
         };
 
         public static G__MathChar GetCharType(string x)

@@ -20,6 +20,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 {
 	public partial class vcWorkSpace : BaseContainer
 	{
+        // TODO: These are interesting
+        // Do we store the results as we go?
+        // What happens as the user cycles through and then back? 
+        // Do we see the completed equations? With their answers?
+        // Do we go back and show this info but make it all readonly
+        // There is quite a bit of logic to do here....
+
 		#region Private Variables
 
         private string _strExpression;
@@ -64,9 +71,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Should the answer display as being correct/incorrect bg color
         private bool _bDisplayAnswerStatusColor;
         // Readonly
-        private bool _bEquationReadOnly;
-        private bool _bResultReadonly;
-        private bool _bMethodsReadonly;
+//        private bool _bEquationReadOnly;
+//        private bool _bResultReadonly;
+//        private bool _bMethodsReadonly;
         private bool _bCenterMethod;
         private bool _bCenterEquation;
         private bool _bLockAnswerToRight;
@@ -144,9 +151,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._enumLessonState = G__LessonState.Ready;
 
-            this._bEquationReadOnly = true;
-            this._bResultReadonly = false;
-            this._bMethodsReadonly = true;
+//            this._bEquationReadOnly = true;
+//            this._bResultReadonly = false;
+//            this._bMethodsReadonly = true;
 
             this.HasSelectedNumberText = false;
             this.HasSelectedOperatorText = false;
@@ -254,13 +261,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        // TODO: These are interesting
-        // Do we store the results as we go?
-        // What happens as the user cycles through and then back? 
-        // Do we see the completed equations? With their answers?
-        // Do we go back and show this info but make it all readonly
-        // There is quite a bit of logic to do here....
-
         private bool NextEquation ()
         {
             return (this._enumLessonState == G__LessonState.Started);
@@ -329,12 +329,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadEquationNumlet()
         {
-            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation, this._bEquationReadOnly);
+            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
         }
 
         public void LoadResultNumlet()
         {
-            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult, this._bResultReadonly);
+            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
             this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
         }
 
@@ -424,36 +424,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-//        public void DockResultNumlet()
-//        {
-//            // TODO: Check there is a solve numlet?
-//
-//            // Flipflop
-//            if (this._sizeWorkSpace.DockedResultNumlet == false)
-//            {
-//                this._sizeWorkSpace.DockedResultNumlet = true;
-//                // Set the new canavs sizes
-//                this._sizeWorkSpace.SetSubViewPositions();
-//
-//                // Remove the numlet from the current canvasmain
-//                this.RemoveNumlet(this._vcNumletResult);
-//                this.AddVCNumlet(this._vcNumletResult);
-//            }
-//            else
-//            {
-//                // Remove from docked add to canvas main
-//                this._sizeWorkSpace.DockedResultNumlet = false;
-//                // Set the new canvas sizes
-//                this._sizeWorkSpace.SetSubViewPositions();
-//
-//                this.RemoveNumlet(this._vcNumletResult);
-//                this.AddVCNumlet(this._vcNumletResult);
-//            }
-//            // TODO: Should this be done here or Sizeclass? 
-//            //this.vCanvasDocked.Frame = this._sizeWorkSpace.CanvasDockedFrame;
-//            //this.vCanvasMain.Frame = this._sizeWorkSpace.CanvasMainFrame;
-//        }
-
         public void CenterMethods()
         {
             
@@ -461,8 +431,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void CenterQuestion()
         {
-
         }
+
+        public bool Solve ()
+        {
+            // TODO: We need to find which numlet contains the answer
+            // This should be specified in the factory at creation
+            // The Result Numlet wont nessaccerally contain the spot that needs to be answered
+            // As Algebra has the answer position on in the equation side.
+            // We then need to supply WorkSpace with the result given ans store it in the tempresult field
+            // of the lessondetail entity. 
+
+
+            return true;
+        }
+
+         
+
+         
 
         #endregion
 
@@ -605,26 +591,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasBorder = true;
 
             // Virtual Canvas setups ******************************************************************
-//            this._vCanvasMain = new NWView();
-//            this._vCanvasDocked = new NWView();
-//
-//            this._vCanvasMain.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
-//            this._vCanvasMain.CornerRadius = 5.0f;
-//            this._vCanvasMain.Hidden = true;
-//            this._vCanvasMain.HasRoundedCorners = true;
-//            this._vCanvasMain.BackgroundColor = UIColor.White;
-//            this._vCanvasMain.ClipsToBounds = true;
-//            this._vCanvasMain.AutosizesSubviews = false;
-//
-//            this._vCanvasDocked.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
-//            this._vCanvasDocked.CornerRadius = 5.0f;
-//            this._vCanvasDocked.Hidden = false;
-//            this._vCanvasDocked.HasRoundedCorners = true;
-//            this._vCanvasDocked.BackgroundColor = UIColor.Gray;
-//            this._vCanvasDocked.ClipsToBounds = true;
-//            this._vCanvasDocked.AutosizesSubviews = false;
-
-            // Scrollview tests
             this._vCanvasMain = new AspyScrollView();
             this._vCanvasDocked = new AspyView();
 
@@ -768,8 +734,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            //base.TouchesBegan(touches, evt);
-
             // Check if the touch is inside any active numlets
             UITouch y = (UITouch)touches.AnyObject;
             if (this.TouchInsideNumlets(y) != true)

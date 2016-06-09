@@ -87,7 +87,7 @@ namespace NathansWay.iOS.Numeracy
 
         public void Dispose ()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         #endregion
@@ -108,23 +108,15 @@ namespace NathansWay.iOS.Numeracy
             return this._vcCurrentWorkSpace;
         }
 
-        public vcWorkNumlet GetEquationNumlet(string _strEquation, bool _readonly)
+        public vcWorkNumlet GetEquationNumlet(string _strEquation)
         {            
-            var _vcNumletEquation = this.CreateNumletEquation(_strEquation, _readonly);
-//            _vcNumletEquation.SizeClass.SetCenterRelativeParentViewPosY = true;
-//            _vcNumletEquation.SizeClass.SetLeftRelativeMiddleParentViewPosX = true;
-//            _vcNumletEquation.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Right;
-//            _vcNumletEquation.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
+            var _vcNumletEquation = this.CreateNumletEquation(_strEquation);
             return _vcNumletEquation;
         }
 
-        public vcWorkNumlet GetResultNumlet(string _strResult, bool _readonly)
+        public vcWorkNumlet GetResultNumlet(string _strResult)
         {
             var _vcNumletResult = this.CreateNumletResult(_strResult);
-//            _vcNumletResult.SizeClass.SetCenterRelativeParentViewPosY = true;
-//            _vcNumletResult.SizeClass.SetRightRelativeMiddleParentViewPosX = true;
-//            _vcNumletResult.SizeClass.DisplayPositionX = G__NumberDisplayPositionX.Left;
-//            _vcNumletResult.SizeClass.SetPositions(this._globalSizeDimensions.WorkSpaceCanvasWidth, this._globalSizeDimensions.WorkSpaceCanvasHeight);
             return _vcNumletResult;
         }
 
@@ -189,7 +181,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        private vcWorkNumlet CreateNumletEquation(string _strEquation, bool _readonly)
+        private vcWorkNumlet CreateNumletEquation(string _strEquation)
         {            
             // Create all our expression symbols, numbers etc
             this.EquationStringToObjects(_strEquation);
@@ -197,7 +189,6 @@ namespace NathansWay.iOS.Numeracy
             // Setup the numlet
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Equation;
-            numlet.IsReadOnly = _readonly;
             // Set Parent
             numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
             numlet.MyImmediateParent = this._vcCurrentWorkSpace;
@@ -215,16 +206,21 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyNumletParent = numlet;
                 _control.MyImmediateParent = numlet;
                 _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+                _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
 
-                _control.IsReadOnly = _readonly;
+                // Let the numlet know its the answer
+                if (_control.IsAnswer)
+                {
+                    numlet.IsAnswer = true;
+                    numlet.IsReadOnly = false;
+                }
+
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
-                if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Fraction))
-                {                    
-                    _control.IsInitialLoad = true;
-                    _control.IsAnswer = false;
-                    _control.IsReadOnly = true;
-                }
+//                if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Fraction))
+//                {                    
+//                    _control.IsInitialLoad = true;
+//                }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
@@ -246,8 +242,8 @@ namespace NathansWay.iOS.Numeracy
             return numlet;
         }
 
-//        private List<vcWorkNumlet> CreateNumletMethods(string _strExpression)
-//        {
+        private List<vcWorkNumlet> CreateNumletMethods(string _strExpression)
+        {
 //            // Create all our expression symbols, numbers etc
 //            this.ExpressionToUIEditable(_strExpression);
 //
@@ -282,8 +278,8 @@ namespace NathansWay.iOS.Numeracy
 //
 //            // Return completed numnut!
 //            // Numlet has no size params set. SetPositions must be called before use!
-//            return numlet;
-//        }
+            return new List<vcWorkNumlet>();
+        }
 
         private vcWorkNumlet CreateNumletResult(string _strResult)
         {
@@ -296,7 +292,7 @@ namespace NathansWay.iOS.Numeracy
             // Setup the numlet
             var numlet = new vcWorkNumlet();
             numlet.NumletType = G__WorkNumletType.Result;
-            numlet.IsAnswer = true;
+
             // Set Parent
             numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
             numlet.MyImmediateParent = this._vcCurrentWorkSpace;
@@ -314,22 +310,30 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyImmediateParent = numlet;
                 _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+                _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
 
-                if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)
+                // Let the numlet know its the answer
+                if (_control.IsAnswer)
                 {
-                    numlet.ResultContainer = _control;
-                    _control.IsInitialLoad = true;
-                    _control.IsAnswer = true;
-                    _control.IsReadOnly = false;
-                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+                    numlet.IsAnswer = true;
+                    numlet.IsReadOnly = false;
+                }
 
-                    _control.ClearValue();
-                }
-                else
-                {
-                    _control.IsReadOnly = true;
-                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
-                }
+//                if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)
+//                {
+//                    numlet.ResultContainer = _control;
+//                    _control.IsInitialLoad = true;
+//                    _control.IsAnswer = true;
+//                    _control.IsReadOnly = false;
+//                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+//
+//                    _control.ClearValue();
+//                }
+//                else
+//                {
+//                    _control.IsReadOnly = true;
+//                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+//                }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
@@ -386,25 +390,17 @@ namespace NathansWay.iOS.Numeracy
             // Numlet has no size params set. SetPositions must be called before use!
             return numlet;
         }
-
-        /// <summary>
-        /// Builds an list<object> of our Equation from a string expression to an Editable UI.
-        /// </summary>
-        /// <param name="_strExpression">String expression.</param>
+            
         private void EquationStringToObjects(string _strExpression)
         {
             this._uiOutputEquation = this._expressionFactory.CreateExpressionEquation(_strExpression, false);
         }
-
+            
         private void ResultStringToObjects(string _strResult)
         {
             this._uiOutputResult = this._expressionFactory.CreateExpressionEquation(_strResult, false);
         }
-
-        /// <summary>
-        /// Builds an list<object> of our Equation from a string expression to a ReadOnly UI.
-        /// </summary>
-        /// <param name="_strExpression">String expression.</param>
+            
         private void ExpressionToUIReadOnly(string _strExpression)
         {
             this._uiOutputMethods = this._expressionFactory.CreateExpressionMethod(_strExpression, true);
