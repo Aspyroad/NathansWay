@@ -137,9 +137,16 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ViewDidLoad()
         {
+            // TODO: Why is Solvebutton in its own VC then inside a numlet? Wasteful.
+            // The biutton simply needs to be inside a numlet
+            // 
             base.ViewDidLoad();
+            this.View.BackgroundColor = UIColor.White;
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
+
+            this.CornerRadius = 5.0f;
+            this.HasRoundedCorners = true;
 
             this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
             this.btnSolveButton.TouchUpInside += OnTouch_btnSolveButton;
@@ -148,6 +155,7 @@ namespace NathansWay.iOS.Numeracy
 
         private void OnTouch_btnSolveButton (object sender, EventArgs e)
         {
+            // TODO: this container isnt gettng MyWorkSpaceParent set
             bool x = this.MyWorkSpaceParent.Solve();
             if (x) // Correct
             {    
@@ -331,6 +339,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.HasBorder = true;
+            this.CornerRadius = 5.0f;
             this.HasRoundedCorners = true;
             this.EnableHold = false;
             this.ApplyUI (this._applyUIWhere);

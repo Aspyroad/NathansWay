@@ -1,21 +1,14 @@
 // System
 using System;
 using CoreGraphics;
-using System.Collections.Generic;
 
 // Mono
 using Foundation;
-using UIKit;
-using CoreAnimation;
-using CoreGraphics;
 
 // Aspyroad
 using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
 
 // Nathansway iOS
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 
 // NathansWay Shared

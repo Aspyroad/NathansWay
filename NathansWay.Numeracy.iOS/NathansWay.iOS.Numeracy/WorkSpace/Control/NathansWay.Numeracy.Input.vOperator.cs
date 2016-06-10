@@ -4,8 +4,6 @@ using CoreGraphics;
 // Mono
 using Foundation;
 using UIKit;
-using CoreGraphics;
-using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay

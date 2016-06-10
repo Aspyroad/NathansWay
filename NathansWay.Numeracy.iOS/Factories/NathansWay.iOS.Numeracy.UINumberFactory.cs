@@ -1,9 +1,7 @@
 ﻿// System
 using System;
-using CoreGraphics;
 using System.Collections.Generic;
 // Mono
-using Foundation;
 using UIKit;
 using CoreAnimation;
 // Aspyroad
@@ -366,8 +364,12 @@ namespace NathansWay.iOS.Numeracy
             // Set Parent
             numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
             numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+
+            _control.MyNumletParent = numlet;
+            _control.MyImmediateParent = numlet;
+            _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+
             // Sizing
-            G__NumberDisplaySize _displaySize;
             nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             nfloat _xPos = _xSpacing;
             nfloat _yPos = (_xSpacing / 2.0f);
@@ -383,7 +385,6 @@ namespace NathansWay.iOS.Numeracy
 
             // Pad out the end
             numlet.SizeClass.CurrentWidth = this._globalSizeDimensions.GlobalNumberWidth + (2 * _xSpacing); 
-            //numlet.SizeClass.CurrentWidth = this._globalSizeDimensions.GlobalNumberWidth; 
             numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
             // Return completed numnut!

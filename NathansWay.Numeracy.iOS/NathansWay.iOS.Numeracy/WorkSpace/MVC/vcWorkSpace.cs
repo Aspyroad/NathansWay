@@ -5,14 +5,9 @@ using System.Collections.Generic;
 // Mono
 using Foundation;
 using UIKit;
-using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
 // Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.Shared.Factories;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared;
 

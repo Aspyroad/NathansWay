@@ -78,7 +78,6 @@ namespace NathansWay.Shared.Factories
 
             List<KeyValuePair<G__MathChar, string>> _lsDecodedExpressionEquation;
             List<object> _lsOutput = new List<object>();
-            string strPrevious = "";
 
 
             _lsDecodedExpressionEquation = this.SplitExpressionEquation(_expression);
@@ -131,8 +130,6 @@ namespace NathansWay.Shared.Factories
                     }
                     break;
                 }
-
-                //strPrevious = x.Value;
             }
 
             // Fire our finished event
@@ -186,15 +183,15 @@ namespace NathansWay.Shared.Factories
         /// <param name="_expression">Expression.</param>
         public List<string> SplitExpressionMethod (string _expression)
         {
-            List<string> _lsDecodedExpressionMethod = new List<string>();
+            this._lsDecodedExpressionMethod = new List<string>();
 
             string[] x = _expression.Split(sepMethodArray);
 
             for (int i = 0; i < x.Length; i++) // Loop with for.
             {
-                _lsDecodedExpressionMethod.Add(x[i]);
+                this._lsDecodedExpressionMethod.Add(x[i]);
             }
-            return _lsDecodedExpressionMethod;
+            return this._lsDecodedExpressionMethod;
         }
 
         #region Seperate Creation Functions

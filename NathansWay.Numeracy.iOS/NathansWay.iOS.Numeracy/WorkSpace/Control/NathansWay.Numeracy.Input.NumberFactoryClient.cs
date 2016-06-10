@@ -93,6 +93,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcFractionContainer(strFraction);
             x.IsAnswer = this.IsAnswer;
             x.IsInitialLoad = true;
+            // TODO: Terribly lazy, workout if I need this and how IM using it.
+            x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
