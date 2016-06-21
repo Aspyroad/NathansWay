@@ -1,11 +1,9 @@
 // System
 using System;
-using CoreGraphics;
 using System.Collections.Generic;
 
 // Monotouch
 using UIKit;
-using Foundation;
 
 // NathansWayShared
 using NathansWay.Shared;
@@ -35,7 +33,7 @@ namespace AspyRoad.iOSCore.UISettings
 
 		#region Private Functions
 
-		protected virtual void Initialize ()
+		protected void Initialize ()
 		{
 			_vcTagList = new Dictionary<int, string> ();
 			_vcUIThemeList = new Dictionary<int, IUITheme> ();
@@ -80,9 +78,16 @@ namespace AspyRoad.iOSCore.UISettings
 	public class iOSUITheme : UIThemeBase
 	{
 
-		#region Private Variables
+        /* To Update follow me er the other side thee may see
+         * 1. Open Shared - UserInterface/UIManagerBase.cs
+         * 2. Open Shared - UserInterface/UIGlobalTheme.cs
+         * 3. Open iOSCore - Settings/UIManager.cs
+         * 4. Open Shared - UserInterface/UIGlobalTheme.cs
+         */
 
-		private IAspyGlobals _iosglobals;
+        #region Private Variables
+
+        private IAspyGlobals _iosglobals;
 
 		// iOS Specific Themeing
 		protected bool _IsiOS7;
@@ -106,20 +111,12 @@ namespace AspyRoad.iOSCore.UISettings
 			this._iosglobals = _iOSGlobals;
 			this.g = _sharedGlobal;
 
-			//Initialize ();
 			AssignGlobals ();
 		}
 
 		#endregion
 
 		#region Private Members
-
-		/// <summary>
-		/// Initialize this instance.
-		/// </summary>
-		private void Initialize ()
-		{
-		}
 
 		/// <summary>
 		/// Assigns the globals.
@@ -146,6 +143,7 @@ namespace AspyRoad.iOSCore.UISettings
 			ButtonFontName = g.ButtonFontName;
             ButtonBorderWidth = g.ButtonBorderWidth;
             ButtonCornerRadius = g.ButtonCornerRadius;
+            ButtonMenuCornerRadius = g.ButtonMenuCornerRadius;
 			// View
 			ViewBGColor = g.ViewBGColor;
 			ViewBGColorTransition = g.ViewBGColorTransition;

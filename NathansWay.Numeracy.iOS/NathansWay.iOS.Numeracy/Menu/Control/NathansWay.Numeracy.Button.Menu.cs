@@ -5,10 +5,7 @@ using CoreGraphics;
 using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
-using CoreGraphics;
-using CoreAnimation;
 using Foundation;
-using ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -40,8 +37,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         #endregion
@@ -53,18 +49,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
-		{
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-		}
+        public override void ApplyUI7 ()
+        {
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion
 
@@ -93,7 +82,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainEnd.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -226,8 +215,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
             this.RedrawOnTapStart = true;
             this.RedrawOnTapFinish = true;
         }
@@ -241,18 +229,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLesson (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
+        public override void ApplyUI7 ()
         {
-            
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
 		}
 
 		#endregion
@@ -272,7 +252,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorButtonBGEnd.CGColor, colorButtonBGStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorButtonBGStart.CGColor, colorButtonBGEnd.CGColor});
 
 			//// MainFront Drawing
-			var mainFrontPath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			var mainFrontPath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainFrontPath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -368,8 +348,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         #endregion
@@ -381,18 +360,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFTeacher (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
+        public override void ApplyUI7 ()
         {
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-		}
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion
 
@@ -416,7 +388,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -522,8 +494,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         #endregion
@@ -535,18 +506,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFStudent (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
+        public override void ApplyUI7 ()
         {
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-		}
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion
 
@@ -570,7 +534,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -702,8 +666,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         #endregion
@@ -715,18 +678,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFLessonEdit (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
+        public override void ApplyUI7 ()
         {
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-		}
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion
 
@@ -745,7 +701,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+            var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -880,8 +836,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize ()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this.ApplyUI(this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         #endregion
@@ -893,18 +848,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 			DrawFVisuals (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
+        public override void ApplyUI7 ()
         {
-            if (base.ApplyUI(_applywhere))
-            {
-                this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-		}
+            base.ApplyUI7 ();
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+        }
 
 		#endregion
 
@@ -923,7 +871,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), 24.0f);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,

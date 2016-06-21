@@ -22,5 +22,19 @@ namespace AspyRoad.iOSCore
         bool ApplyUI (G__ApplyUI _applywhere);
 
     }
+    public interface IUIApplyView
+    {
+        // Properties
+        bool HasBorder { get; set; }
+        bool HasRoundedCorners { get; set; }
+        nfloat CornerRadius { get; set; }
+        nfloat BorderWidth { get; set; }
+        bool AutoApplyUI { get; set; }
+        // Methods
+        void ApplyUI7 ();
+        void ApplyUI6 ();
+        void ApplyUI ();
+
+    }
 }
 

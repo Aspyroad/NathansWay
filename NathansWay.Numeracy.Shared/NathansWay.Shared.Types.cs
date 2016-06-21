@@ -116,6 +116,17 @@ namespace NathansWay.Shared
         Bottom = 3
     }
 
+    public enum G__UnitPlacement : int
+    {
+        ones = 1,
+        tens = 2,
+        hundreds = 3,
+        thousands = 4,
+        tenthousands = 5,
+        hundredthousands = 6,
+        millions = 7
+    }
+
     public enum G__Significance : int
     {
         Significant = 1,
@@ -130,9 +141,6 @@ namespace NathansWay.Shared
     }
 
     #endregion
-
-
-
 
 	#region Filtering
 
@@ -153,17 +161,6 @@ namespace NathansWay.Shared
 	}
 
 	#endregion
-
-    public enum G__UnitPlacement : int
-    {
-        ones = 1,
-        tens = 2,
-        hundreds = 3,
-        thousands = 4,
-        tenthousands = 5,
-        hundredthousands = 6,
-        millions = 7
-    }
 
     public struct G__Color
 	{

@@ -4,16 +4,13 @@ using CoreGraphics;
 // Mono
 using Foundation;
 using UIKit;
-using CoreGraphics;
-using CoreAnimation;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.Shared;
-using NathansWay.Shared.DAL;
 using NathansWay.Shared.BUS.ViewModel;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.DAL.Repository;
+//using NathansWay.Shared.BUS.Entity;
+//using NathansWay.Shared.DAL.Repository;
 using NathansWay.Shared.Utilities;
 
 namespace NathansWay.iOS.Numeracy
@@ -207,9 +204,11 @@ namespace NathansWay.iOS.Numeracy
         }
 
 		private void ScrolledToBottom (object sender, EventArgs e)
-		{		
+		{	
+            #if DEBUG
 			Console.WriteLine ("Im at the bottom");
             // Go get more rows!~
+            #endif
 		}
 
 		#region Data 

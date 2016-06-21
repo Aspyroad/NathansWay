@@ -3,15 +3,12 @@ using System;
 using CoreGraphics;
 
 // Aspyroad
-using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 
 // Monotouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
-using ObjCRuntime;
-using CoreAnimation;
+
 
 namespace AspyRoad.iOSCore
 {			
@@ -28,7 +25,6 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected float _fCornerRadius;
         protected float _fBorderWidth;
-        protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
 
 		#endregion
@@ -58,16 +54,6 @@ namespace AspyRoad.iOSCore
 		#endregion
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
-        /// </summary>
-        /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
-        {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
@@ -166,12 +152,12 @@ namespace AspyRoad.iOSCore
 
         #region Virtual Members
 
-        public virtual void ApplyUI (G__ApplyUI _applywhere)
+        // View only ApplyUI()
+        // The view doesnt strictly follow IApplyUI()
+        // Its purpose is for "Auto" updating specifics for the view, and more for testing.
+        // Simply set AutoApplyUI to true, and override either or both ApplyUI7()/ApplyUI6()
+        public virtual void ApplyUI ()
         {
-            if (_applywhere != this._applyUIWhere)
-            {
-                return;
-            }
             if (this.iOSGlobals.G__IsiOS7)
             {
                 this.ApplyUI7();
@@ -202,10 +188,8 @@ namespace AspyRoad.iOSCore
 
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-
-            this._applyUIWhere = G__ApplyUI.ViewWillAppear;
             this._bAutoApplyUI = false;
-
+            // TODO: Do we need this? Not much point as we should always! apply further up.
             this.BackgroundColor = UIColor.Clear;
 
             #if DEBUG
@@ -293,7 +277,7 @@ namespace AspyRoad.iOSCore
             base.MovedToSuperview();
             if (this._bAutoApplyUI)
             {
-                this.ApplyUI(this._applyUIWhere);
+                this.ApplyUI();
             }
         }
             

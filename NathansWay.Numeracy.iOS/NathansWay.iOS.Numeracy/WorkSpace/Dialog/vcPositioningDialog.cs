@@ -74,33 +74,49 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // 14/3/2016
             base.LoadView();
             this.View.Frame = new CGRect(0.0f, 0.0f, 300.0f, 168.0f);
+            //this.View.Frame = new CGRect (0.0f, 0.0f, 360.0f, 190.0f);
+            this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
 
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
             this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
-            this.HasBorder = true;
-            this.BorderWidth = 1.0f;
-            this.SetBorderColor = UIColor.Black;
+            this.HasBorder = false;
+
 
             // Setup Button Text
-            this.btnCenterQuestion.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            //this.btnCenterQuestion.CornerRadius = 5.0f;
             this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
-
-            this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            //this.btnCenterMethods.CornerRadius = 5.0f;
             this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
-
-            this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
-
-            this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
 
+        }
+
+        public override void ApplyUI7 ()
+        {
+            // Backview color
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
+            // Buttons
+            this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnLockAnswer.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnLockAnswer.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnLockAnswer.CornerRadius = 5.0f;
+            this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnCenterMethods.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnCenterMethods.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnCenterMethods.CornerRadius = 5.0f;
+            this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnCenterQuestion.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnCenterQuestion.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnCenterQuestion.CornerRadius = 5.0f;
+            this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnLockSolveButton.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnLockSolveButton.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnLockSolveButton.CornerRadius = 5.0f;
         }
 
         public override void DidMoveToParentViewController(UIViewController parent)

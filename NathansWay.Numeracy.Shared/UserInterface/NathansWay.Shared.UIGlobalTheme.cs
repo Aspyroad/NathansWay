@@ -31,6 +31,7 @@ namespace NathansWay.Shared
 		public string ButtonPressedBGStrImage { get; set; }
 		public string ButtonFontName { get; set; }
         public float ButtonCornerRadius { get; set; }
+        public float ButtonMenuCornerRadius { get; set; }
         public float ButtonBorderWidth { get; set; }
 
 		// UIView
@@ -145,11 +146,12 @@ namespace NathansWay.Shared
 			ButtonPressedBGStrImage = "";
 			ButtonFontName = "HelveticaNeue-Medium";
             ButtonBorderWidth = 1.0f;
-            ButtonCornerRadius = 3.0f;
+            ButtonCornerRadius = 4.0f;
+            ButtonMenuCornerRadius = 10.0f;
 
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(50.0f, 50.0f, 50.0f, 255.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(60.0f, 60.0f, 60.0f, 255.0f)); // Orange
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(200.0f, 150.0f, 0.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 200.0f, 255.0f, 255.0f)); // Black 
             ViewBorderWidth = 1.0f;
@@ -217,19 +219,18 @@ namespace NathansWay.Shared
             ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
             ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             SelectedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
-            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(40.0f, 40.0f, 40.0f, 255.0f)); // Black
+            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 40.0f, 255.0f)); // Black
             SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
 
             // Dialog Global
-            DiagBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
+            DiagBorderColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
             DiagSelectedBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
 
             // Dialog UIButton
-            DiagButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
-            DiagButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
-
+            DiagButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
+            DiagButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // Dialog UIView
-            DiagViewBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 250.0f, 100.0f, 200.0f)); // Black
+            DiagViewBGColor = new Lazy<G__Color> (() => new G__Color(70.0f, 70.0f, 70.0f, 255.0f)); // Black
 
 		}
 

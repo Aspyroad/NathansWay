@@ -12,7 +12,7 @@ using ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
     [Foundation.Register ("AspyTextField")]
-    public class AspyTextField : UITextField, IUIApply
+    public class AspyTextField : UITextField
 	{
         #region Variables
 
@@ -24,7 +24,6 @@ namespace AspyRoad.iOSCore
         protected UIColor _colorBorderColor;
         protected nfloat _fCornerRadius;
         protected nfloat _fBorderWidth;
-        protected G__ApplyUI _applyUIWhere;
         protected bool _bAutoApplyUI;
         protected CGPoint _pTextOffset;
         protected bool _bApplyTextOffset;
@@ -67,8 +66,7 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
-            this._bAutoApplyUI = false;
+            this._bAutoApplyUI = true;
             this._bAllowNextResponder = false;
             this._bApplyTextOffset = false;
         }
@@ -76,16 +74,6 @@ namespace AspyRoad.iOSCore
         #endregion
 
         #region Public Properties
-
-        /// <summary>
-        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
-        /// </summary>
-        /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
-        {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
-        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
@@ -230,12 +218,8 @@ namespace AspyRoad.iOSCore
 
         #region Virtual Members
 
-        public virtual bool ApplyUI(G__ApplyUI _applywhere)
+        public virtual void ApplyUI()
         {
-            if (_applywhere != this._applyUIWhere)
-            {
-                return false;
-            }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 this.ApplyUI7();
@@ -244,19 +228,20 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
-            // Common UI
-            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
-            this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
-            return true;
         }
 
         public virtual void ApplyUI6()
-        {  
+        {
+            // No changes? May as well call 7
+            this.ApplyUI7 ();
         }
 
         public virtual void ApplyUI7()
         {
+            // Common UI
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
+            this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
             this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
         }
 
@@ -306,7 +291,7 @@ namespace AspyRoad.iOSCore
             base.MovedToSuperview();
             if (this._bAutoApplyUI)
             {
-                this.ApplyUI(this._applyUIWhere);
+                this.ApplyUI();
             }
         }
 

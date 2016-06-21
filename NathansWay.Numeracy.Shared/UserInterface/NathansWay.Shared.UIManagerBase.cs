@@ -140,6 +140,7 @@ namespace NathansWay.Shared
 		protected string _buttonfontname;
         // ----
         protected float _buttoncornerradius;
+        protected float _buttonmenucornerradius;
         protected float _buttonborderwidth;
 
 		// UIView
@@ -231,18 +232,9 @@ namespace NathansWay.Shared
 
 		#region Constructors
 
-		public UIThemeBase ()
-		{
-			//this.Initialize ();
-		}
-
 		#endregion
 
 		#region Private Members
-
-		protected virtual void Initialize ()
-        {
-        }
 
 		#endregion
 
@@ -346,6 +338,11 @@ namespace NathansWay.Shared
         {
             get { return _buttoncornerradius; }
             set { _buttoncornerradius = value; }
+        }
+        public float ButtonMenuCornerRadius 
+        {
+            get { return _buttonmenucornerradius; }
+            set { _buttonmenucornerradius = value; }
         }
         public float ButtonBorderWidth
         {

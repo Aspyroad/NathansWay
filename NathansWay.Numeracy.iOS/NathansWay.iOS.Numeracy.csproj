@@ -77,7 +77,7 @@
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\ToolBox\MVC\" />
     <Folder Include="Contracts\" />
-    <Folder Include="NathansWay.iOS.Numeracy\Controls\" />
+    <Folder Include="NathansWay.iOS.Numeracy\ControlsGlobal\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\Container\" />
     <Folder Include="NathansWay.iOS.Numeracy\Container\MVC\" />
@@ -90,6 +90,7 @@
     <Folder Include="NathansWay.iOS.Numeracy\Base\" />
     <Folder Include="NathansWay.iOS.Numeracy\Teacher\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Menu\Control\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NathansWay.iOS.Numeracy\Exception\README.md" />
@@ -166,23 +167,22 @@
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLesson.cs">
       <DependentUpon>vcLesson.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.OrderBy.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.Menu.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.OrderBy.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.SyncInvoke.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonTableCell.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonTableCell.designer.cs">
       <DependentUpon>vLessonTableCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Label.Bordered.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.LabelStyle.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Label.Bordered.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.LabelStyle.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.designer.cs">
       <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Button.NumberPad.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.NumberPad.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.MainContainer.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Controls\NathansWay.Numeracy.Input.TextBoxDelegate.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Input.TextBoxDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.vFractionContainer.cs">
       <DependentUpon>NathansWay.Numeracy.Input.FractionContainer.cs</DependentUpon>
     </Compile>
@@ -237,6 +237,7 @@
       <DependentUpon>vcPositioningDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.Animations.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">

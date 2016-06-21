@@ -156,7 +156,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.lblNumber.HasRoundedCorners = true;
 
             this.lblNumber.TextAlignment = UITextAlignment.Center;
-            this.lblNumber.ApplyUI(this._applyUIWhere);
         }
 
         #endregion

@@ -18,7 +18,7 @@ namespace AspyRoad.iOSCore
     /// </summary>
 
     [Foundation.Register ("AspyScrollView")]
-    public class AspyScrollView : UIScrollView, IUIApply
+    public class AspyScrollView : UIScrollView, IUIApplyView
 	{
         #region Variables
 
@@ -69,7 +69,6 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bAutoApplyUI = false;
 
             // ********************* 
@@ -89,10 +88,10 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
         /// </summary>
         /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
+        public bool AutoApplyUI
         {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
+            get { return this._bAutoApplyUI; }
+            set { this._bAutoApplyUI = value; }
         }
 
         /// <summary>
@@ -181,13 +180,9 @@ namespace AspyRoad.iOSCore
         #endregion
 
         #region Virtual Members
-
-        public virtual bool ApplyUI(G__ApplyUI _applywhere)
+        // Follows Aspyviews weaker implementation ApplyUI Methology please see notes in Aspyview for details
+        public virtual void ApplyUI()
         {
-            if (_applywhere != this._applyUIWhere)
-            {
-                return false;
-            }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 this.ApplyUI7();
@@ -196,19 +191,19 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
-            // Common UI
-            this.SetBorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
-            return true;
         }
 
         public virtual void ApplyUI6()
-        {  
+        {
+            // Common UI
+            this.ApplyUI7 ();
         }
 
         public virtual void ApplyUI7()
         {
-            this.TintColor = iOSUIAppearance.GlobaliOSTheme.TextBGUITint.Value;
+            // Common UI
+            this.SetBorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
         }
 
         #endregion
@@ -234,7 +229,7 @@ namespace AspyRoad.iOSCore
             base.MovedToSuperview();
             if (this._bAutoApplyUI)
             {
-                this.ApplyUI(this._applyUIWhere);
+                this.ApplyUI();
             }
         }
 

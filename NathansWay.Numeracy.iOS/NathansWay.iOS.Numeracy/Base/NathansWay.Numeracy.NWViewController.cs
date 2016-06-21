@@ -88,7 +88,6 @@ namespace AspyRoad.iOSCore
         {
             if (base.ApplyUI(_applywhere))
             {
-                this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
                 return true;
             }
             else
@@ -99,9 +98,14 @@ namespace AspyRoad.iOSCore
 
         public override void ApplyUI7()
         {
-            base.ApplyUI7();
-            // New to iOS 7
+            this.View.BackgroundColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //base.ApplyUI7();
+        }
+
+        public override void ApplyUI6 ()
+        {
             this.View.TintColor =  this.iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //base.ApplyUI6 ();
         }
 
 		#endregion		

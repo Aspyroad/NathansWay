@@ -5,9 +5,7 @@ using CoreGraphics;
 using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
-using ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -49,18 +47,13 @@ namespace NathansWay.iOS.Numeracy
 			base.Draw (rect);
 		}
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
-		{
-            return (base.ApplyUI(_applywhere));
-		}
-
 		#endregion
 
 		#region Private Members
 
         private void Initialize()
-        { 
-            this.ApplyUI (G__ApplyUI.AlwaysApply);
+        {
+            this.AutoApplyUI = true;
             this.RedrawOnTapStart = true;
             this.RedrawOnTapFinish = true;
         }

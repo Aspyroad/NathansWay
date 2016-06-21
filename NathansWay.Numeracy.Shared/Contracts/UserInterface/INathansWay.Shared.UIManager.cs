@@ -30,12 +30,17 @@ namespace NathansWay.Shared
 
 	public interface IUITheme
 	{
-		// Platform Specific Only
-		//bool IsiOS7 { get; set; }
+
+        /* To Update follow me er the other side thee may see
+         * 1. Open Shared - UserInterface/UIManagerBase.cs
+         * 2. Open Shared - UserInterface/UIGlobalTheme.cs
+         * 3. Open iOSCore - Settings/UIManager.cs
+         * 4. Open Shared - UserInterface/UIGlobalTheme.cs
+         */
 
 
-		// Id
-		string VcName { get; set; } 
+        // Id
+        string VcName { get; set; } 
 		int VcTag { get; set; } 
 
 		// Fonts
@@ -59,6 +64,7 @@ namespace NathansWay.Shared
 		string ButtonFontName { get; set; }
 
         float ButtonCornerRadius { get; set; }
+        float ButtonMenuCornerRadius { get; set; }
         float ButtonBorderWidth { get; set; }
 
 		// Views/Forms

@@ -396,13 +396,10 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-        // TODO: IM SWAPPING ApplyUI() it should be in ViewWillAppear.
-        // I want it in ViewDidLoad()
-        // THIS MAY BREAK NUMBER LOADING!!!!! REMEMBER!!!!!
-
         public override void LoadView()
         {
             base.LoadView();
+
             if (this._applyUIWhere == G__ApplyUI.LoadView)
             {
                 this.ApplyUI(G__ApplyUI.LoadView);
@@ -412,6 +409,7 @@ namespace AspyRoad.iOSCore
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
+
 			this.View.Tag = _AspyTag1;
 			// Copy the original tag number to tag2
 			// There are times with multiple controls where we need different tag numbers
@@ -428,6 +426,7 @@ namespace AspyRoad.iOSCore
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+
             if (this._applyUIWhere == G__ApplyUI.ViewWillAppear)
             {
                 this.ApplyUI(G__ApplyUI.ViewWillAppear);

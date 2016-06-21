@@ -4,8 +4,6 @@ using CoreGraphics;
 // Mono
 using Foundation;
 using UIKit;
-using CoreGraphics;
-using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 
@@ -15,7 +13,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 	[Foundation.Register ("vMenuStart")]
     public class vMenuStart : NWView
 	{
-		#region Private Variables
+        #region Private Variables
+
+        private nfloat _buttonMenuCornerRadius;
 
 		#endregion
 
@@ -132,48 +132,48 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 			// textNumbers Drawing
 			CGRect textNumbersRect = new CGRect(86.0f, 28.0f, 228.0f, 66.0f);
-			UIColor.White.SetFill();
+			UIColor.Gray.SetFill();
 			new NSString(strAppName).DrawString(textNumbersRect, UIFont.FromName("Helvetica-Light", 50.0f), UILineBreakMode.WordWrap, UITextAlignment.Center);
 
 
 			// templateButtonLesson Drawing
-			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new CGRect(50.0f, 256.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonLessonPath = UIBezierPath.FromRoundedRect(new CGRect(51.0f, 257.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonLessonPath.Fill();
 
 
 			// templateButtonToolBox Drawing
-			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new CGRect(526.0f, 256.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonToolBoxPath = UIBezierPath.FromRoundedRect(new CGRect(527.0f, 257.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonToolBoxPath.Fill();
 
 
 			// templateButtonTeacher Drawing
-			var templateButtonTeacherPath = UIBezierPath.FromRoundedRect(new CGRect(50.0f, 416.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonTeacherPath = UIBezierPath.FromRoundedRect(new CGRect(51.0f, 417.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonTeacherPath.Fill();
 
 
 			// templateButtonStudent Drawing
-			var templateButtonStudentPath = UIBezierPath.FromRoundedRect(new CGRect(526.0f, 416.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonStudentPath = UIBezierPath.FromRoundedRect(new CGRect(527.0f, 417.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonStudentPath.Fill();
 
 
 			// templateButtonLessonEdit Drawing
-			var templateButtonLessonEditPath = UIBezierPath.FromRoundedRect(new CGRect(50.0f, 576.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonLessonEditPath = UIBezierPath.FromRoundedRect(new CGRect(51.0f, 577.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonLessonEditPath.Fill();
 
 
 			// templateButtonVisuals Drawing
-			var templateButtonVisualsPath = UIBezierPath.FromRoundedRect(new CGRect(526.0f, 576.0f, 448.0f, 150.0f), 24.0f);
+			var templateButtonVisualsPath = UIBezierPath.FromRoundedRect(new CGRect(527.0f, 577.0f, 446.0f, 150.0f), this._buttonMenuCornerRadius);
 			UIColor.White.SetFill();
 			templateButtonVisualsPath.Fill();
 
 
 			// ComboBoxGroupFrame Drawing
-			var comboBoxGroupFramePath = UIBezierPath.FromRoundedRect(new CGRect(50.0f, 124.5f, 924.0f, 120.0f), 6.0f);
+			var comboBoxGroupFramePath = UIBezierPath.FromRoundedRect(new CGRect(51.0f, 124.5f, 924.0f, 120.0f), 6.0f);
 			colorTextWhiteFade.SetStroke();
 			comboBoxGroupFramePath.LineWidth = 1.0f;
 			comboBoxGroupFramePath.Stroke();
@@ -205,6 +205,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 		{
             var colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             var colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
+            this._buttonMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
 			DrawCanvasMain (colorMainBackGroundStart, colorMainBackGroundEnd, rect);
 		}
 

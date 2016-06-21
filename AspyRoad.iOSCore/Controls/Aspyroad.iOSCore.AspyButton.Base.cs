@@ -2,11 +2,9 @@
 using System;
 using CoreGraphics;
 // AspyRoad
-using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Monotouch
 using UIKit;
-using CoreGraphics;
 using CoreAnimation;
 using Foundation;
 using ObjCRuntime;
@@ -14,7 +12,7 @@ using ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
     [Foundation.Register ("AspyButton")]
-    public class AspyButton : UIButton, IUIApply
+    public class AspyButton : UIButton, IUIApplyView
 	{
         #region Private Variables
 
@@ -38,8 +36,9 @@ namespace AspyRoad.iOSCore
         protected UIColor _colorBorderColor;
         protected bool _bHasRoundedCorners;
         protected nfloat _fCornerRadius;
+        protected nfloat _fMenuCornerRadius;
         protected nfloat _fBorderWidth;
-        protected G__ApplyUI _applyUIWhere;
+        protected bool _bAutoApplyUI;
 
         #endregion
 
@@ -94,7 +93,7 @@ namespace AspyRoad.iOSCore
             this._bHasRoundedCorners = false;
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
+            this._fMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
 
             // Set the default BG color - Globally sets all UIButtons to this set
             UIButton.GetAppearance<AspyButton>().BackgroundColor = UIColor.Clear;
@@ -198,9 +197,15 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region Public Properties
+
+        public bool AutoApplyUI 
+        {
+            get { return this._bAutoApplyUI; }
+            set { this._bAutoApplyUI = value; }
+        }
 
         /// <summary>
         /// Gets or sets the index row.
@@ -242,16 +247,6 @@ namespace AspyRoad.iOSCore
         {
             get{ return _bEnableHold; }
             set{ _bEnableHold = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
-        /// </summary>
-        /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
-        {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
         }
 
         /// <summary>
@@ -355,12 +350,8 @@ namespace AspyRoad.iOSCore
 
 		#region Virtual Members
 
-		public virtual bool ApplyUI(G__ApplyUI _applywhere)
+		public virtual void ApplyUI()
 		{
-            if (_applywhere != this._applyUIWhere)
-            {   
-                return false;
-            }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 this.ApplyUI7();
@@ -369,37 +360,33 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
+		}
 
+        public virtual void ApplyUI6()
+        {
+            this.ApplyUI7 ();
+        }
+
+        public virtual void ApplyUI7()
+        {
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
             this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Highlighted);
-
+            this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Highlighted);
 
             // Border
-            if (this._bHasBorder)
+            if (this._bHasBorder) 
             {
                 this.Layer.BorderWidth = this._fBorderWidth;
                 this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             }
             // RoundedCorners
-            if (this._bHasRoundedCorners)
+            if (this._bHasRoundedCorners) 
             {
                 this.Layer.CornerRadius = this._fCornerRadius;
             }
-
-            return true;
-
-		}
-
-        public virtual void ApplyUI6()
-        {            
-        }
-
-        public virtual void ApplyUI7()
-        {            
         }
 
         public virtual void ApplyPressed(bool _isPressed)
@@ -438,7 +425,15 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-		#region Overrides
+        #region Overrides
+
+        public override void MovedToSuperview ()
+        {
+            base.MovedToSuperview ();
+            if (this._bAutoApplyUI) {
+                this.ApplyUI ();
+            }
+        }
 
 		public override bool Enabled 
 		{ 

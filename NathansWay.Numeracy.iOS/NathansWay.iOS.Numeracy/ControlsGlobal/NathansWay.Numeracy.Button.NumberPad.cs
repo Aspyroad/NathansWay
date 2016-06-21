@@ -5,9 +5,7 @@ using CoreGraphics;
 using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
-using ObjCRuntime;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -43,20 +41,15 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
 		{ 
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.HasBorder = true;
             this.HasRoundedCorners = true;
-            this.ApplyUI (this._applyUIWhere);
+            this.AutoApplyUI = true;
 		}
 
 		#endregion
 
 		#region Overrides 
 
-        //		public override void ApplyUI (G__ApplyUI _applywhere)
-        //		{ 
-        //			base.ApplyUI (_applywhere);
-        //		}
 
 		#endregion
 

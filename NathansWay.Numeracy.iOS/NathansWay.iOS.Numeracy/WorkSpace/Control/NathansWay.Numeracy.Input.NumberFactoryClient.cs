@@ -1,19 +1,12 @@
 // System
-using System;
-using CoreGraphics;
 using System.Collections.Generic;
+
 // Mono
-using Foundation;
-using UIKit;
-using CoreAnimation;
-using CoreGraphics;
+
 // Aspyroad
-using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
+
 // Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
-using NathansWay.Shared.Factories;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -106,6 +99,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create an operator
             var x = new vcOperatorText(mathChar, strChar);
             x.IsAnswer = this.IsAnswer;
+            x.IsInitialLoad = true;
+            // TODO: Terribly lazy, workout if I need this and how IM using it.
+            x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;

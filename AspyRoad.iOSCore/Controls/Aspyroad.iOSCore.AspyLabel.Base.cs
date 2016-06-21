@@ -12,7 +12,7 @@ using ObjCRuntime;
 namespace AspyRoad.iOSCore
 {
 	[Foundation.Register ("AspyLabel")]
-    public class AspyLabel : UILabel, IUIApply
+    public class AspyLabel : UILabel
 	{
 		#region Private Variables
 
@@ -65,10 +65,10 @@ namespace AspyRoad.iOSCore
             this._fBorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
             this._fCornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
 
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._bAutoApplyUI = false;
+
+            this._bAutoApplyUI = true;
 
             this.ClipsToBounds = true;
         }
@@ -82,7 +82,7 @@ namespace AspyRoad.iOSCore
             base.MovedToSuperview();
             if (this._bAutoApplyUI)
             {
-                this.ApplyUI(this._applyUIWhere);
+                this.ApplyUI();
             }
         }
 
@@ -90,12 +90,8 @@ namespace AspyRoad.iOSCore
 
 		#region Virtual Members
 
-        public virtual bool ApplyUI (G__ApplyUI _applywhere)
+        public virtual void ApplyUI()
 		{
-            if (_applywhere != this._applyUIWhere)
-            {
-                return false;
-            }
             if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
             {
                 this.ApplyUI7();
@@ -104,43 +100,34 @@ namespace AspyRoad.iOSCore
             {
                 this.ApplyUI6();
             }
-
-            // Common UI
-			this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
-			this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
-
-            // Border
-            if (this._bHasBorder)
-            {
-                this.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-                this.Layer.BorderColor =  iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
-            }
-            if (this._bHasRoundedCorners)
-            {
-                this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
-            }
-
-            return true;
 		}
 
         public virtual void ApplyUI7 ()
         {
+            // Common UI
+            this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
+            this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
+
+            // Border
+            if (this._bHasBorder) {
+                this.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
+            }
+            if (this._bHasRoundedCorners) {
+                this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            }
         }
 
         public virtual void ApplyUI6 ()
         {
+            // Cant think of any changes between version here but keep an eye on it.
+            this.ApplyUI7 ();
         }
 
 		#endregion
 
         #region Public Properties
-
-        public G__ApplyUI ApplyUIWhere
-        {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
-        }
 
         public bool HasBorder
         {

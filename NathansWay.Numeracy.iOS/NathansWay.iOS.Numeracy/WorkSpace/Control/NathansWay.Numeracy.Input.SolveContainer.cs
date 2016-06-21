@@ -337,12 +337,11 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.HasBorder = true;
             this.CornerRadius = 5.0f;
             this.HasRoundedCorners = true;
             this.EnableHold = false;
-            this.ApplyUI (this._applyUIWhere);
+            this.AutoApplyUI = true;
 
             this._myAnimateDelegate = new AnimateDelegate();
             //this._animationGroupToCenter = CAAnimationGroup.CreateAnimation ();

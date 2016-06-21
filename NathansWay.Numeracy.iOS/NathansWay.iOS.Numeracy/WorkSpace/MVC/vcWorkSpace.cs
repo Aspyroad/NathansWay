@@ -596,7 +596,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasMain.UserInteractionEnabled = true;
             this._vCanvasMain.CornerRadius = 5.0f;
             this._vCanvasMain.HasRoundedCorners = true;
-            this._vCanvasMain.ApplyUIWhere = G__ApplyUI.AlwaysApply;
 
             // This is NEEDED for scrollview to work (currently set in sizing?)
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
@@ -670,27 +669,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //this._sizeWorkSpace.SetCanvasDockedHeightWidth();
         }
 
-        public override bool ApplyUI(G__ApplyUI _applywhere)
-        {
-            if (base.ApplyUI(_applywhere))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //public override void ApplyUI6()
+        //{
+        //    base.ApplyUI6();
+        //}
 
-        public override void ApplyUI6()
-        {
-            base.ApplyUI6();
-        }
-
-        public override void ApplyUI7()
-        {
-            base.ApplyUI7();
-        }
+        //public override void ApplyUI7()
+        //{
+        //    base.ApplyUI7();
+        //}
 
         public override void OnControlSelectedChange()
         {

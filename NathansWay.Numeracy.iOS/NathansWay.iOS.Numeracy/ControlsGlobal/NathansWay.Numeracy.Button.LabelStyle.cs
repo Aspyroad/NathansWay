@@ -44,11 +44,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides 
 
-        public override bool ApplyUI (G__ApplyUI _applywhere)
-		{
-            return (base.ApplyUI(_applywhere));
-		}
-
         public override void ApplyUIHeld()
         {           
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
@@ -90,11 +85,10 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this._applyUIWhere = G__ApplyUI.AlwaysApply;
             this.HasBorder = true;
             this.HasRoundedCorners = true;
             this.EnableHold = true;
-            this.ApplyUI (this._applyUIWhere);
+            this.AutoApplyUI = true;
         }
 
         //		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
