@@ -33,9 +33,11 @@ namespace AspyRoad.iOSCore
         private nfloat _fPickerYOffset;
         // Tap Delegates
         private UITapGestureRecognizer singleTapGesture;
-        // 
+        // ParentController
+        private AspyViewController _vcAlternateParentViewController;
 
-		#endregion
+        #endregion
+
 
 		#region Constructors
 
@@ -116,7 +118,6 @@ namespace AspyRoad.iOSCore
             // Wireup our event
             this._pickerValueChanged = new Action<object, EventArgs>(valuechanged);
             this._pickerModel.ValueChanged += valuechanged;
-            //this._pickerModel.
             // Fill our pickerviewmodel with data
             this.SetItems (null);
 
@@ -126,15 +127,19 @@ namespace AspyRoad.iOSCore
 
         private void EditNumberPicker()
         {
-            this._pickerView = new AspyPickerView 
-                (
-                    new CGRect(
-                        this._pickerTxtField.Frame.X,
-                        this._pickerTxtField.Frame.Y - this._fPickerYOffset,
-                        this._pickerTxtField.Frame.Width,
-                        this._pickerTxtField.Frame.Height)                        
-                        
-                );
+            if (this._pickerView == null) 
+            {
+                this._pickerView = new AspyPickerView
+                    (
+                        new CGRect (
+                            this._pickerTxtField.Frame.X,
+                            this._pickerTxtField.Frame.Y - this._fPickerYOffset,
+                            this._pickerTxtField.Frame.Width,
+                            this._pickerTxtField.Frame.Height)
+
+                    );
+                this.AlternateParentViewController.View.AddSubview (this._pickerView);
+            }
             this._pickerView.UserInteractionEnabled = true;
             this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
@@ -142,8 +147,8 @@ namespace AspyRoad.iOSCore
             this._pickerModel.SelectedIndex = this.GetSelectedItem(this._strPickerText);
             this._pickerView.Select(this._pickerModel.SelectedIndex, 0, false);
 
-            this.View.AddSubview (this._pickerView);
-            this.View.BringSubviewToFront(this._pickerView);
+
+            this.AlternateParentViewController.View.BringSubviewToFront(this._pickerView);
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
         }
@@ -249,6 +254,21 @@ namespace AspyRoad.iOSCore
             set { this._pickerTxtField = value; }
         }
 
+        public AspyViewController AlternateParentViewController 
+        {
+            get 
+            {
+                if (this._vcAlternateParentViewController == null) 
+                {
+                    return (AspyViewController)this.ParentViewController;
+                } 
+                else 
+                {
+                    return this._vcAlternateParentViewController;
+                }
+            }
+            set { this._vcAlternateParentViewController = value; }
+        }
         #endregion
 
         #region Public Members
@@ -321,10 +341,10 @@ namespace AspyRoad.iOSCore
 			this.View.AddSubview (_pickerTxtField);
 		}			
 
-		public override void ViewDidAppear (bool animated)
-		{
-			base.ViewDidAppear (animated);
-		}
+		//public override void ViewDidAppear (bool animated)
+		//{
+		//	base.ViewDidAppear (animated);
+		//}
 					
 		#endregion
 
@@ -335,10 +355,10 @@ namespace AspyRoad.iOSCore
             this._strPickerText = this._pickerTxtField.Text;
 			this._pickerTxtField.Text = "";
             this.EditNumberPicker();
-			this.View.BringSubviewToFront(this._pickerView);
+			//this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-			this._pickerTxtField.BackgroundColor = UIColor.White;
+            this._pickerTxtField.BackgroundColor = UIColor.LightGray;
 			this._pickerTxtField.Alpha = 0.5f;
 		}  
 
@@ -360,7 +380,7 @@ namespace AspyRoad.iOSCore
 	}
 	
     [Foundation.Register ("AspyPickerView")] 
-    public class AspyPickerView : UIPickerView, IUIApply  
+    public class AspyPickerView : UIPickerView, IUIApplyView  
     {
         public iOSUIManager iOSUIAppearance;
         public IAspyGlobals iOSGlobals;
@@ -372,7 +392,7 @@ namespace AspyRoad.iOSCore
         protected bool _bHasRoundedCorners;
         protected nfloat _fCornerRadius;
         protected nfloat _fBorderWidth;
-        protected G__ApplyUI _applyUIWhere;
+        protected bool _bAutoApply;
 
         // Frames
         protected CGRect _rectSuperView;
@@ -425,7 +445,6 @@ namespace AspyRoad.iOSCore
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
             // Can see no reason why this should ever be false as Apple do!
             this.ClipsToBounds = true;
-            this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
 		}
 
         private CGRect SetFrames()
@@ -446,15 +465,13 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
-        public override void AwakeFromNib()
-        {
-            base.AwakeFromNib();
-        }
-
         public override void MovedToSuperview()
         {
             base.MovedToSuperview();
-            this.ApplyUI(this._applyUIWhere);
+            if (this._bAutoApply) 
+            {
+                this.ApplyUI ();
+            }
         }
 
 		#endregion
@@ -465,10 +482,10 @@ namespace AspyRoad.iOSCore
         /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
         /// </summary>
         /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
+        public bool AutoApplyUI
         {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
+            get { return this._bAutoApply; }
+            set { this._bAutoApply = value; }
         }
 
         /// <summary>
@@ -562,12 +579,8 @@ namespace AspyRoad.iOSCore
 
         #region Virtual Members
 
-        public virtual bool ApplyUI (G__ApplyUI _applywhere)
+        public virtual void ApplyUI ()
         {
-            if (_applywhere != this._applyUIWhere)
-            {
-                return false;
-            }
             if (this.iOSGlobals.G__IsiOS7)
             {
                 this.ApplyUI7();
@@ -579,12 +592,12 @@ namespace AspyRoad.iOSCore
 
             // Global UI Code here
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
+            this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
 
             this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this.Layer.BorderColor = this._pkBorderColor.CGColor;
             this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
 
-            return true;
         }
 
         public virtual void ApplyUI6 ()
@@ -672,7 +685,7 @@ namespace AspyRoad.iOSCore
 
         #region Private Members
 
-        protected virtual void Initialize()
+        protected void Initialize()
         {
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             this.selectedIndex = 0;

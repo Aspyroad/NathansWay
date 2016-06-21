@@ -11,10 +11,6 @@ using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 // Shared
-using NathansWay.Shared.Factories;
-using NathansWay.Shared;
-using NathansWay.Shared.Utilities;
-
 
 namespace NathansWay.iOS.Numeracy
 {

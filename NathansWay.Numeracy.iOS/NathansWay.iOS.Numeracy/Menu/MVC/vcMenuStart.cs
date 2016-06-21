@@ -3,8 +3,6 @@ using System;
 using CoreGraphics;
 // Mono
 using Foundation;
-using UIKit;
-using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
@@ -19,7 +17,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 		// View
 		private vMenuStart _vMenuStart;
 
-		// Controls
 		// Buttons
 		private ButtonStyleLesson btnMenuLessons;
 		private ButtonStyleToolBox btnMenuToolbox;
@@ -27,9 +24,13 @@ namespace NathansWay.iOS.Numeracy.Menu
 		private ButtonStyleStudent btnMenuStudent;
 		private ButtonStyleLessonBuilder btnMenuLessonBuilder;
 		private ButtonStyleVisuals btnMenuVisuals;
+
 		// ComboBox
 		private AspyComboBox cmbTeacher;
         private AspyComboBox cmbStudent;
+
+        // VCMainContainer
+        private vcMainContainer _vcMainContainer;
 
 		#endregion
 
@@ -76,9 +77,9 @@ namespace NathansWay.iOS.Numeracy.Menu
 
         private void Initialize ()
         {  
-			//base.Initialize ();
 			this.AspyTag1 = 6001;
             this.AspyName = "VC_MenuStart";
+            this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer> ();
         }
 
 		#endregion
@@ -138,12 +139,16 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.cmbTeacher = new AspyComboBox (new CGRect (76.0f, 180.0f, 400.0f, 44.0f));
 			this.cmbTeacher.AspyTag1 = 1031;
             this.cmbTeacher.Text = "Teacher";
-			this.View.AddSubview (this.cmbTeacher.View);
+            this.cmbTeacher.AlternateParentViewController = this;
+            this.AddAndDisplayController (this.cmbTeacher);
+			//this.View.AddSubview (this.cmbTeacher.View);
 
             this.cmbStudent = new AspyComboBox (new CGRect (550.0f, 180.0f, 400.0f, 44.0f));
             this.cmbStudent.AspyTag1 = 1032;
             this.cmbStudent.Text = "Student";
-            this.View.AddSubview (this.cmbStudent.View);
+            this.cmbStudent.AlternateParentViewController = this;
+            this.AddAndDisplayController (this.cmbStudent);
+            //this.View.AddSubview (this.cmbStudent.View);
 
 		}
 

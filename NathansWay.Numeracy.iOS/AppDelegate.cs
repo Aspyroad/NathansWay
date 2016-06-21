@@ -2,29 +2,21 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
-using CoreGraphics;
-using System.Linq;
 // Mono
 using Foundation;
 using UIKit;
-using ObjCRuntime;
 // SQLite
-using SQLite.Net.Platform;
 using SQLite.Net.Interop;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // NathansWay
-using NathansWay.iOS.Numeracy.Controls;
-//using NathansWay.iOS.Numeracy.WorkSpace;
-using NathansWay.iOS.Numeracy.Menu;
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
-using NathansWay.Shared.Factories;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 using NathansWay.Shared;
-using NathansWay.Shared.MonoToolz;
+
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -106,7 +98,7 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
             this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
             this._NumberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
             this._NumberAppSettings.GA__MoveToNextNumber = true;

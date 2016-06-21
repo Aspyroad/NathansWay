@@ -1,22 +1,15 @@
 // System
 using System;
 using CoreGraphics;
-using System.Collections.Generic;
 // Monotouch
 using Foundation;
 using UIKit;
-using ObjCRuntime;
 //Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.Shared.Factories;
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared.BUS.ViewModel;
 using NathansWay.Shared.Utilities;
-using NathansWay.Shared;
-
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

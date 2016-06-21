@@ -1,18 +1,11 @@
 // System
 using System;
 using CoreGraphics;
-using System.Collections.Generic;
 // Mono
 using Foundation;
 using UIKit;
-using CoreAnimation;
-using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
-// Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.Shared;
 
 [Foundation.Register ("NumberPickerView")] 
 public class NumberPickerView : AspyPickerView  
@@ -56,24 +49,12 @@ public class NumberPickerView : AspyPickerView
 
     private void Initialize()
     {
-        this._applyUIWhere = G__ApplyUI.ViewWillAppear;
+        this._bAutoApply = true;
     }
 
     #endregion
 
     #region Overrides Members
-
-    public override void MovedToSuperview()
-    {
-        base.MovedToSuperview();
-        this.ApplyUI(this._applyUIWhere);
-    }
-
-    public override bool ApplyUI (G__ApplyUI _applywhere)
-    {
-        // Must call base as it populates iOS7TableView
-        return (base.ApplyUI(_applywhere));
-    }
 
     public override void ApplyUI7()
     {
@@ -86,13 +67,12 @@ public class NumberPickerView : AspyPickerView
 
     public override void ApplyUI6()
     {
+        // Call base here?
         this.BackgroundColor = UIColor.White;
         this.Layer.CornerRadius = 8.0f;
         this.Layer.BorderColor = UIColor.Black.CGColor;
         this.Layer.BorderWidth = 1.0f;
     }
-    
-
 
     #endregion
 

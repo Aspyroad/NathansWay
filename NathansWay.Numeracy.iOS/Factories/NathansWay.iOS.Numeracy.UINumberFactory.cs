@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 // Mono
 using UIKit;
-using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
-using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
@@ -50,11 +48,6 @@ namespace NathansWay.iOS.Numeracy
         private G__NumberDisplaySize _numberDisplaySize;
         private nfloat _fNumberSpacing;
         protected IAppSettings _numberAppSettings;
-
-        // Logic
-
-        private bool bDocked_SolveNumlet;
-        private bool bDocked_ResultNumlet;
 
         // Data
         // TODO: These MUST be all populated for this class to work do we need security

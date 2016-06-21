@@ -155,7 +155,6 @@ namespace NathansWay.iOS.Numeracy
 
         private void OnTouch_btnSolveButton (object sender, EventArgs e)
         {
-            // TODO: this container isnt gettng MyWorkSpaceParent set
             bool x = this.MyWorkSpaceParent.Solve();
             if (x) // Correct
             {    

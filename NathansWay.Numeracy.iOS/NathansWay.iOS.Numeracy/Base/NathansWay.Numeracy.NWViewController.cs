@@ -1,11 +1,8 @@
 // System
 using System;
-using CoreGraphics;
 
 // Monotouch
 using Foundation;
-using UIKit;
-using CoreGraphics;
 
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
@@ -74,7 +71,7 @@ namespace AspyRoad.iOSCore
         public  iOSUIManager UIAppearance
         {
             get { return this.iOSUIAppearance; }
-        }
+        }   
 
         #endregion
 
