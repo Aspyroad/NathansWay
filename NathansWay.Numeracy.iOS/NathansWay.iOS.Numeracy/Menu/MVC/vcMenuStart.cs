@@ -140,6 +140,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.cmbTeacher.AspyTag1 = 1031;
             this.cmbTeacher.Text = "Teacher";
             this.cmbTeacher.AlternateParentViewController = this;
+            this.cmbTeacher.PickerTextField.HasBorder = true;
+            this.cmbTeacher.PickerTextField.HasRoundedCorners = true;
             this.AddAndDisplayController (this.cmbTeacher);
 			//this.View.AddSubview (this.cmbTeacher.View);
 

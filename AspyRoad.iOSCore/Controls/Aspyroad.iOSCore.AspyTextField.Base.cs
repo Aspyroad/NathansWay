@@ -214,6 +214,11 @@ namespace AspyRoad.iOSCore
             set { this._bApplyTextOffset = value; }
         }
 
+        public bool AutoApplyUI
+        {
+            get { return this._bAutoApplyUI; }
+            set { this._bAutoApplyUI = value; }
+        }
         #endregion
 
         #region Virtual Members

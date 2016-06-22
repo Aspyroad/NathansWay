@@ -62,13 +62,15 @@ namespace AspyRoad.iOSCore
         {
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();    
 
+            // Setup standard values form UI config
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
             this._fBorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
             this._fCornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
 
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
 
-            this._bAutoApplyUI = true;
+            this.AutoApplyUI = true;
 
             this.ClipsToBounds = true;
         }
@@ -110,13 +112,15 @@ namespace AspyRoad.iOSCore
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
 
             // Border
-            if (this._bHasBorder) {
-                this.Layer.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
-            }
-            if (this._bHasRoundedCorners) {
-                this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
-            }
+            //if (this._bHasBorder) 
+            //{
+            //    this.Layer.BorderWidth = this._fBorderWidth;
+            //    this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
+            //}
+            //if (this._bHasRoundedCorners) 
+            //{
+            //    this.Layer.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
+            //}
         }
 
         public virtual void ApplyUI6 ()

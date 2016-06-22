@@ -160,8 +160,8 @@ namespace NathansWay.Shared
 			// UILabel
 			LabelFontName = "";
 			LabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 255.0f, 255.0f, 255.0f)); // Black
-			LabelTextColor = new Lazy<G__Color> (() => new G__Color(150.0f, 150.0f, 150.0f, 255.0f)); // Black 
-            LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+			LabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+            LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black 
             LabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
             LabelCornerRadius = 10.0f;
             LabelBorderWidth = 1.0f;
@@ -196,14 +196,14 @@ namespace NathansWay.Shared
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
             // UIPickerView
-            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 20.0f)); // Black
+            PkViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
             PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";
-            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 50.0f)); // Black
+            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 0.0f, 255.0f)); // Black
+            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black
+            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 200.0f, 100.0f, 255.0f)); // Black
+            PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
             // Various
             PositiveBGColor = new Lazy<G__Color> (() => new G__Color(102.0f, 255.0f, 102.0f, 255.0f)); // Green Light

@@ -38,7 +38,6 @@ namespace AspyRoad.iOSCore
 
         #endregion
 
-
 		#region Constructors
 
 		public AspyComboBox ()
@@ -94,7 +93,7 @@ namespace AspyRoad.iOSCore
             this._fontSize = 30.0f;
             this._fontName = "HelveticaNeue-Light";
             this._pickerRowHeight = (_fontSize + 14.0f);
-            this._fPickerYOffset = 59.0f;
+            this._fPickerYOffset = 44.0f;
 
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
@@ -103,6 +102,7 @@ namespace AspyRoad.iOSCore
 
             // UI Creation
             this._pickerTxtField = new AspyTextField ();
+            this._pickerTxtField.AutoApplyUI = true;
             // Delegates
             this._pickerTxtField.TouchDown += this.pickerTxtField_TouchDown;
             this._pickerTxtField.Delegate = new _pickerTxtFieldDelegate();
@@ -135,10 +135,12 @@ namespace AspyRoad.iOSCore
                             this._pickerTxtField.Frame.X,
                             this._pickerTxtField.Frame.Y - this._fPickerYOffset,
                             this._pickerTxtField.Frame.Width,
-                            this._pickerTxtField.Frame.Height)
+                            this._pickerTxtField.Frame.Height * 3.0f)
 
                     );
-                this.AlternateParentViewController.View.AddSubview (this._pickerView);
+                this.View.AddSubview (this._pickerView);
+                this.View.BringSubviewToFront (this._pickerView);
+                //this.AlternateParentViewController.View.AddSubview (this._pickerView);
             }
             this._pickerView.UserInteractionEnabled = true;
             this._pickerView.ShowSelectionIndicator = true;
@@ -333,6 +335,7 @@ namespace AspyRoad.iOSCore
 			base.ViewDidLoad ();
             // Pickers frame
             this.View.Frame = this._aspyComboBoxFrame;
+            this.View.BackgroundColor = UIColor.Clear;
 
             // Rest
 			this._aspyLabelFrame = new CGRect (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
@@ -358,8 +361,8 @@ namespace AspyRoad.iOSCore
 			//this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-            this._pickerTxtField.BackgroundColor = UIColor.LightGray;
-			this._pickerTxtField.Alpha = 0.5f;
+            this._pickerTxtField.BackgroundColor = UIColor.White;
+			this._pickerTxtField.Alpha = 1.0f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -397,8 +400,6 @@ namespace AspyRoad.iOSCore
         // Frames
         protected CGRect _rectSuperView;
         protected CGRect _rectTempSuperView;
-
-
 
         // Pre iOS7 TableView
         protected UIView _iOS7TableView;
@@ -444,7 +445,8 @@ namespace AspyRoad.iOSCore
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
             // Can see no reason why this should ever be false as Apple do!
-            this.ClipsToBounds = true;
+            this.ClipsToBounds = false;
+            this.AutoApplyUI = true;
 		}
 
         private CGRect SetFrames()
@@ -581,15 +583,6 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI ()
         {
-            if (this.iOSGlobals.G__IsiOS7)
-            {
-                this.ApplyUI7();
-            }
-            else
-            {
-                this.ApplyUI6();
-            }
-
             // Global UI Code here
             this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
             this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
@@ -597,6 +590,15 @@ namespace AspyRoad.iOSCore
             this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
             this.Layer.BorderColor = this._pkBorderColor.CGColor;
             this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+
+            if (this.iOSGlobals.G__IsiOS7) 
+            {
+                this.ApplyUI7 ();
+            }
+            else 
+            {
+                this.ApplyUI6 ();
+            }
 
         }
 
@@ -781,16 +783,18 @@ namespace AspyRoad.iOSCore
         public override UIView GetView(UIPickerView picker, nint row, nint component, UIView _view)
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
+            _lblPickerView.AutoApplyUI = false;
             // Common UI
             _lblPickerView.HasBorder = true;
             _lblPickerView.HasRoundedCorners = true;
-            //_lblPickerView.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-            //_lblPickerView.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
-            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.2f).CGColor;
+
+            // Picker label specific UI
+            _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
             _lblPickerView.Font = UIFont.FromName(_fontName, _fontSize);
             _lblPickerView.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value;
             _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
             _lblPickerView.TextAlignment = UITextAlignment.Center;
+
             _lblPickerView.Text = this._items[(int)row];
 
             // If Selected UI 
