@@ -61,7 +61,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var context = UIGraphics.GetCurrentContext();
 
 			// Color Declarations
-			var colorTextWhiteFade = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.4f);
+			var colorTextWhiteFade = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.8f);
 			var colorTextOuterShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.55f);
 			var colorTextNumbersShadowColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 0.6f);
 
@@ -180,14 +180,14 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 
 			// TeacherFrame Drawing
-			var teacherFramePath = UIBezierPath.FromRoundedRect(new CGRect(76.0f, 180.0f, 400.0f, 44.0f), 6.0f);
+			var teacherFramePath = UIBezierPath.FromRoundedRect(new CGRect(76.0f, 180.0f, 400.0f, 44.0f), 4.0f);
 			colorTextWhiteFade.SetStroke();
 			teacherFramePath.LineWidth = 1.0f;
 			teacherFramePath.Stroke();
 
 
 			// StudentFrame Drawing
-			var studentFramePath = UIBezierPath.FromRoundedRect(new CGRect(550.0f, 180.0f, 400.0f, 44.0f), 6.0f);
+			var studentFramePath = UIBezierPath.FromRoundedRect(new CGRect(550.0f, 180.0f, 400.0f, 44.0f), 4.0f);
 			colorTextWhiteFade.SetStroke();
 			studentFramePath.LineWidth = 1.0f;
 			studentFramePath.Stroke();

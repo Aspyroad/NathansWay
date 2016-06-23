@@ -3,15 +3,11 @@ using System;
 using CoreGraphics;
 
 // Aspyroad
-using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 
 // Monotouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
-using ObjCRuntime;
-using CoreAnimation;
 
 namespace AspyRoad.iOSCore
 {			
@@ -20,7 +16,7 @@ namespace AspyRoad.iOSCore
 	{
 		#region Class Variables
 
-		protected iOSUIManager iOSUIAppearance;
+		//protected iOSUIManager iOSUIAppearance;
         public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
 
 		#endregion

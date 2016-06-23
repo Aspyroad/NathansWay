@@ -93,7 +93,7 @@ namespace AspyRoad.iOSCore
             this._fontSize = 30.0f;
             this._fontName = "HelveticaNeue-Light";
             this._pickerRowHeight = (_fontSize + 14.0f);
-            this._fPickerYOffset = 44.0f;
+            this._fPickerYOffset = 88.0f;
 
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
@@ -135,7 +135,7 @@ namespace AspyRoad.iOSCore
                             this._pickerTxtField.Frame.X,
                             this._pickerTxtField.Frame.Y - this._fPickerYOffset,
                             this._pickerTxtField.Frame.Width,
-                            this._pickerTxtField.Frame.Height * 3.0f)
+                            this._pickerTxtField.Frame.Height * 5.0f)
 
                     );
                 this.View.AddSubview (this._pickerView);
@@ -344,10 +344,6 @@ namespace AspyRoad.iOSCore
 			this.View.AddSubview (_pickerTxtField);
 		}			
 
-		//public override void ViewDidAppear (bool animated)
-		//{
-		//	base.ViewDidAppear (animated);
-		//}
 					
 		#endregion
 
@@ -361,8 +357,8 @@ namespace AspyRoad.iOSCore
 			//this.View.BringSubviewToFront(this._pickerView);
 
 			// UI - Text field half clear white to show it is being edited
-            this._pickerTxtField.BackgroundColor = UIColor.White;
-			this._pickerTxtField.Alpha = 1.0f;
+            //this._pickerTxtField.BackgroundColor = UIColor.White;
+			//this._pickerTxtField.Alpha = 1.0f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate
@@ -584,12 +580,12 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI ()
         {
             // Global UI Code here
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
-            this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
+            //this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PkViewBGUIColor.Value;
+            //this._pkBorderColor =  this.iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.ColorWithAlpha(0.8f);
 
-            this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-            this.Layer.BorderColor = this._pkBorderColor.CGColor;
-            this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+            //this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            //this.Layer.BorderColor = this._pkBorderColor.CGColor;
+            //this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
 
             if (this.iOSGlobals.G__IsiOS7) 
             {
@@ -635,16 +631,16 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7 ()
         {
-            if (this.Subviews.GetUpperBound (0) > 0)
-            {
-                foreach (UIView v in this.Subviews)
-                {
+            //if (this.Subviews.GetUpperBound (0) > 0)
+            //{
+            //    foreach (UIView v in this.Subviews)
+            //    {
 
-                }                
-            }
-            this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-            this.Layer.BorderColor = this._pkBorderColor.CGColor;
-            this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+            //    }                
+            //}
+            //this.Layer.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            //this.Layer.BorderColor = this._pkBorderColor.CGColor;
+            //this.Layer.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
         }
 
         #endregion
@@ -785,7 +781,8 @@ namespace AspyRoad.iOSCore
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             _lblPickerView.AutoApplyUI = false;
             // Common UI
-            _lblPickerView.HasBorder = true;
+            _lblPickerView.HasBorder = false;
+            _lblPickerView.CornerRadius = 4.0f;
             _lblPickerView.HasRoundedCorners = true;
 
             // Picker label specific UI

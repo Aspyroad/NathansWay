@@ -3,8 +3,10 @@ using System;
 using CoreGraphics;
 // Mono
 using Foundation;
+using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
+using AspyRoad.iOSCore.UISettings;
 // NathansWay
 using NathansWay.iOS.Numeracy.Controls;
 
@@ -31,6 +33,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
         // VCMainContainer
         private vcMainContainer _vcMainContainer;
+        private iOSUIManager iOSUIAppearance;
 
 		#endregion
 
@@ -80,6 +83,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.AspyTag1 = 6001;
             this.AspyName = "VC_MenuStart";
             this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer> ();
+            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
         }
 
 		#endregion
@@ -140,8 +144,6 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.cmbTeacher.AspyTag1 = 1031;
             this.cmbTeacher.Text = "Teacher";
             this.cmbTeacher.AlternateParentViewController = this;
-            this.cmbTeacher.PickerTextField.HasBorder = true;
-            this.cmbTeacher.PickerTextField.HasRoundedCorners = true;
             this.AddAndDisplayController (this.cmbTeacher);
 			//this.View.AddSubview (this.cmbTeacher.View);
 

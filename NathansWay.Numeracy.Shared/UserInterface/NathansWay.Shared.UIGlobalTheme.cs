@@ -151,7 +151,7 @@ namespace NathansWay.Shared
 
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(60.0f, 60.0f, 60.0f, 255.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Orange
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(200.0f, 150.0f, 0.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 200.0f, 255.0f, 255.0f)); // Black 
             ViewBorderWidth = 1.0f;
@@ -167,11 +167,11 @@ namespace NathansWay.Shared
             LabelBorderWidth = 1.0f;
 
 			// UITextViews
-			TextBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+			TextBGColor = new Lazy<G__Color> (() => new G__Color(90.0f, 90.0f, 40.0f, 255.0f)); // Black
 			TextBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
 			TextHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(240.0f, 240.0f, 240.0f, 255.0f)); // Black
-			TextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            TextHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(120.0f, 120.0f, 80.0f, 255.0f)); // Black
+			TextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 240.0f, 255.0f)); // Black
             TextBorderWidth = 1.0f;
             TextCornerRadius = 6.0f;
 
@@ -200,9 +200,9 @@ namespace NathansWay.Shared
             PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";
-            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 0.0f, 255.0f)); // Black
-            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black
-            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 200.0f, 100.0f, 255.0f)); // Black
+            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 210.0f, 255.0f)); // Black
+            PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f,220.0f, 255.0f)); // Black
+            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
             PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
             // Various
