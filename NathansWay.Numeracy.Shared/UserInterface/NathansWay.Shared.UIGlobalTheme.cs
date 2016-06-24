@@ -151,9 +151,9 @@ namespace NathansWay.Shared
 
 			// UIView
 			//ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Orange
-			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(200.0f, 150.0f, 0.0f, 255.0f)); // Orange less alpha
-			ViewBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 200.0f, 255.0f, 255.0f)); // Black 
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 120.0f, 120.0f, 255.0f)); // Orange
+			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(190.0f, 190.0f, 150.0f, 200.0f)); // Orange less alpha
+			ViewBGTint = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
             ViewBorderWidth = 1.0f;
             ViewCornerRadius = 5.0f;
 
@@ -192,7 +192,6 @@ namespace NathansWay.Shared
 			ViewCellSelectedColor = new Lazy<G__Color> (() => new G__Color(0.0f, 160.0f, 196.0f, 250.0f)); // 
 			ViewCellBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // 
             // Alternating Color
-			ViewCellBGColorTransition= new Lazy<G__Color> (() => new G__Color(155.0f, 155.0f, 155.0f, 100.0f)); // Orange less alpha
 			ViewCellBGTint = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
             // UIPickerView
