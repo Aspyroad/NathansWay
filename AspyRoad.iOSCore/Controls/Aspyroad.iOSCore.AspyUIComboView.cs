@@ -67,11 +67,17 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		#endregion
+        #endregion
 
-		#region DeConstructors
+        #region Events
 
-		protected override void Dispose (bool disposing)
+        public event EventHandler<EventArgs> ValueChanged;
+
+        #endregion
+
+        #region DeConstructors
+
+        protected override void Dispose (bool disposing)
 		{
 			base.Dispose (disposing);
 
@@ -142,14 +148,12 @@ namespace AspyRoad.iOSCore
                 this.View.BringSubviewToFront (this._pickerView);
                 //this.AlternateParentViewController.View.AddSubview (this._pickerView);
             }
+
             this._pickerView.UserInteractionEnabled = true;
             this._pickerView.ShowSelectionIndicator = true;
             this._pickerView.Model = this._pickerModel;
-
             this._pickerModel.SelectedIndex = this.GetSelectedItem(this._strPickerText);
             this._pickerView.Select(this._pickerModel.SelectedIndex, 0, false);
-
-
             this.AlternateParentViewController.View.BringSubviewToFront(this._pickerView);
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
@@ -182,8 +186,8 @@ namespace AspyRoad.iOSCore
             //this.View.SendSubviewToBack(this._pickerTxtField);
 
             // UI - Reverse text field half clear white to show it is being edited
-            this._pickerTxtField.BackgroundColor = UIColor.Clear;
-            this._pickerTxtField.Alpha = 1.0f;
+            this._pickerTxtField.BackgroundColor = this._pickerTxtField.BackgroundColor.ColorWithAlpha (0.5f);
+            //this._pickerTxtField.Alpha = 1.0f;
         }
 
         protected void pkSingleTapGestureRecognizer()
@@ -256,6 +260,10 @@ namespace AspyRoad.iOSCore
             set { this._pickerTxtField = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the alternate parent view controller.
+        /// </summary>
+        /// <value>The alternate parent view controller.</value>
         public AspyViewController AlternateParentViewController 
         {
             get 
@@ -271,6 +279,7 @@ namespace AspyRoad.iOSCore
             }
             set { this._vcAlternateParentViewController = value; }
         }
+
         #endregion
 
         #region Public Members
@@ -342,9 +351,8 @@ namespace AspyRoad.iOSCore
             this._pickerTxtField.Frame = new CGRect (0.0f, 0.0f, _aspyComboBoxFrame.Width, _aspyComboBoxFrame.Height);
             _pickerModel.LabelFrame = this._aspyLabelFrame;
 			this.View.AddSubview (_pickerTxtField);
-		}			
+		}	
 
-					
 		#endregion
 
 		#region Delegates
@@ -372,8 +380,12 @@ namespace AspyRoad.iOSCore
 
 		private void valuechanged(object s, System.EventArgs e)
 		{
-
-		}
+            // Propagate up the chain
+            if (this.ValueChanged != null) 
+            {
+                this.ValueChanged (this, new EventArgs ());
+            }
+        }
 
 		#endregion
 	}
@@ -782,7 +794,7 @@ namespace AspyRoad.iOSCore
             _lblPickerView.AutoApplyUI = false;
             // Common UI
             _lblPickerView.HasBorder = false;
-            _lblPickerView.CornerRadius = 4.0f;
+            //_lblPickerView.CornerRadius = 4.0f;
             _lblPickerView.HasRoundedCorners = true;
 
             // Picker label specific UI

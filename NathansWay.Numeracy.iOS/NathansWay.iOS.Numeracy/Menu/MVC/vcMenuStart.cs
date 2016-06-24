@@ -143,6 +143,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.cmbTeacher = new AspyComboBox (new CGRect (76.0f, 180.0f, 400.0f, 44.0f));
 			this.cmbTeacher.AspyTag1 = 1031;
             this.cmbTeacher.Text = "Teacher";
+            this.cmbTeacher.ValueChanged += CmbTeacher_ValueChanged;
             this.cmbTeacher.AlternateParentViewController = this;
             this.AddAndDisplayController (this.cmbTeacher);
 			//this.View.AddSubview (this.cmbTeacher.View);
@@ -150,6 +151,7 @@ namespace NathansWay.iOS.Numeracy.Menu
             this.cmbStudent = new AspyComboBox (new CGRect (550.0f, 180.0f, 400.0f, 44.0f));
             this.cmbStudent.AspyTag1 = 1032;
             this.cmbStudent.Text = "Student";
+            this.cmbStudent.ValueChanged += CmbStudent_ValueChanged;
             this.cmbStudent.AlternateParentViewController = this;
             this.AddAndDisplayController (this.cmbStudent);
             //this.View.AddSubview (this.cmbStudent.View);
@@ -190,8 +192,20 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		}
 
-		#endregion
-	}
+        private void CmbTeacher_ValueChanged(object sender, EventArgs e)
+        {
+            var x = 0;
+        }
+
+        private void CmbStudent_ValueChanged(object sender, EventArgs e)
+        {
+            var x = 0;
+        }
+
+        #endregion
+
+
+    }
 }
 
 

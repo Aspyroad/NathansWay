@@ -53,7 +53,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUIUnHeld()
         {
-            //this.BackgroundColor = UIColor.Clear;
+            this.BackgroundColor = UIColor.Clear;
             base.ApplyUIUnHeld();
         }
 

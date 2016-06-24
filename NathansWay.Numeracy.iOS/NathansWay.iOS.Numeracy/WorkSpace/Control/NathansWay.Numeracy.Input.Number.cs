@@ -6,8 +6,6 @@ using System.Collections.Generic;
 // Mono
 using Foundation;
 using UIKit;
-using CoreAnimation;
-using CoreGraphics;
 
 // Aspyroad
 using AspyRoad.iOSCore;
@@ -481,6 +479,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.Text = this.CurrentValueStr.Trim();
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.ClipsToBounds = true;
+            this.txtNumber.AutoApplyUI = false;
 
             this.txtNumber.HasBorder = false;
             this.txtNumber.HasRoundedCorners = true;

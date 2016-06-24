@@ -9,6 +9,8 @@ namespace NathansWay.Shared
         #region Private Variables
 
         // All defs are explained in the interface
+        private string _StudentLoggedIn;
+        private string _TeacherLoggedIn;
         private G__NumberDisplaySize _GA__NumberLabelDisplaySize;
         private G__NumberDisplaySize _GA__NumberDisplaySize;
         private G__NumberEditMode _GA__NumberEditMode;
@@ -21,12 +23,65 @@ namespace NathansWay.Shared
 
         public NWNumberAppSettings ()
         {
-
+            this._StudentLoggedIn = "";
+            this._TeacherLoggedIn = "";
         }
 
         #endregion
 
         #region Properties
+
+        public string StudentLoggedIn
+        {
+            get
+            {
+                return this._StudentLoggedIn;
+            }
+            set 
+            { 
+                this._StudentLoggedIn = value; 
+            }
+        }
+
+        public bool IsStudentLoggedIn
+        {
+            get
+            {
+                bool ret = false;
+
+                if (this._StudentLoggedIn.Length != 0)
+                {
+                    ret = true;
+                }
+                return ret;
+            }
+        }
+
+        public string TeacherLoggedIn 
+        {
+            get
+            {
+                return this._TeacherLoggedIn; 
+            }
+            set 
+            {   
+                this._TeacherLoggedIn = value; 
+            }
+        }
+
+        public bool IsTeacherLoggedIn
+        {
+            get
+            {
+                bool ret = false;
+
+                if (this._TeacherLoggedIn.Length != 0)
+                {
+                    ret = true;
+                }
+                return ret;
+            }
+        }
 
         public G__NumberDisplaySize GA__NumberDisplaySize
         {
