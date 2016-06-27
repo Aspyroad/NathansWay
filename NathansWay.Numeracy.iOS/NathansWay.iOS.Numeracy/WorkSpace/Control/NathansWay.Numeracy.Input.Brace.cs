@@ -5,14 +5,11 @@ using System.Collections.Generic;
 // Mono
 using Foundation;
 using UIKit;
-using CoreAnimation;
-using CoreGraphics;
 // Aspyroad
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.Shared;
+
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -25,8 +22,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private TextControlDelegate _txtBraceDelegate;
 
-        private vcMainContainer _viewcontollercontainer;
+        //private vcMainContainer _viewcontollercontainer;
         private bool _isRight;
+        private bool _isSquareBrace;
 
         #endregion
 
@@ -51,6 +49,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public vcBraceText(bool isright)
         {
             this._isRight = isright;
+            Initialize();
+        }
+
+        public vcBraceText(bool isright, bool isSquareBrace)
+        {
+            this._isRight = isright;
+            this._isSquareBrace = isSquareBrace;
             Initialize();
         }
 
@@ -91,6 +96,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
             // much of the brace UI can simply sit in here rather then ApplyUI
             this.txtBrace.BackgroundColor = UIColor.Clear;
+            this.txtBrace.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             this.View.BackgroundColor = UIColor.Clear;
             this.HasBorder = false;
             this.txtBrace.Frame = this.BraceSize._recttxtBrace;
@@ -104,6 +110,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return (SizeBrace)this._sizeClass; }
             //set { this._sizeClass = value; }
+        }
+
+        public bool IsSquareBrace
+        {
+            get { return this._isSquareBrace; }
+            set { this._isSquareBrace = value; }
         }
 
         #endregion
@@ -127,11 +139,26 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Left or right brace
             if (this._isRight)
             {
-                this.txtBrace.Text = ")";
+                if (this._isSquareBrace)
+                {
+                    this.txtBrace.Text = "]";
+                }
+                else
+                {
+                    this.txtBrace.Text = ")";
+                }
             }
             else
             {
-                this.txtBrace.Text = "(";
+
+                if (this._isSquareBrace)
+                {
+                    this.txtBrace.Text = "[";
+                }
+                else
+                {
+                    this.txtBrace.Text = "(";
+                }
             }
 
             //this.txtBrace.TextAlignment = UITextAlignment.Left;

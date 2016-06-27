@@ -24,11 +24,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public AspyTextField txtOperator { get; private set; }
         public vOperator _vOperator;
 
-        private vcMainContainer _viewcontollercontainer;
+        //private vcMainContainer _viewcontollercontainer;
         private G__MathChar _operatorType;
         private string _strOperator;
         private SizeOperator _sizeOperator;
-        private TextControlDelegate _txtOperatorDelegate;
+        //private TextControlDelegate _txtOperatorDelegate;
 
         #endregion
 

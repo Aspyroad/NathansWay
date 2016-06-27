@@ -80,6 +80,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 			// Variable Declarations
 			var strAppName = "Numbers";
+            var strStudentName = "Student";
+            var strTeacherName = "Teacher";
 
 			// FrameBackdropWhite Drawing
 			var frameBackdropWhitePath = UIBezierPath.FromRect(menuLogoFrame);
@@ -191,7 +193,20 @@ namespace NathansWay.iOS.Numeracy.Menu
 			colorTextWhiteFade.SetStroke();
 			studentFramePath.LineWidth = 1.0f;
 			studentFramePath.Stroke();
-		}
+
+
+            //// textNumbers 2 Drawing
+            CGRect textNumbers2Rect = new CGRect(76.0f, 132.0f, 400.0f, 40.0f);
+            UIColor.White.SetFill();
+            new NSString(strTeacherName).DrawString(textNumbers2Rect, UIFont.FromName("Helvetica-Light", 30.0f), UILineBreakMode.WordWrap, UITextAlignment.Left);
+
+
+            //// textNumbers 3 Drawing
+            CGRect textNumbers3Rect = new CGRect(550.0f, 132.0f, 400.0f, 40.0f);
+            UIColor.White.SetFill();
+            new NSString(strStudentName).DrawString(textNumbers3Rect, UIFont.FromName("Helvetica-Light", 30.0f), UILineBreakMode.WordWrap, UITextAlignment.Left);
+        }
+		
 
         #endregion
 

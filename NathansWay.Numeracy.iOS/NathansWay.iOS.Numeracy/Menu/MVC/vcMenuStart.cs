@@ -33,7 +33,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
         // VCMainContainer
         private vcMainContainer _vcMainContainer;
-        private iOSUIManager iOSUIAppearance;
+        //private iOSUIManager iOSUIAppearance;
 
 		#endregion
 

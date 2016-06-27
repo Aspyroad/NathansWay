@@ -18,9 +18,10 @@ namespace NathansWay.iOS.Numeracy
         #region Private Variables
 
         //private G__MathChar _mathOperator;
-        private nfloat _fScale;
+        //private nfloat _fScale;
         private nfloat _fOperatorStartpointX;
         private nfloat _fOperatorStartpointY;
+        private UIColor _fontColor;
 
         #endregion
         
@@ -65,6 +66,25 @@ namespace NathansWay.iOS.Numeracy
         {
             get;
             set;
+        }
+
+        public UIColor FontColor
+        {
+            get
+            {
+                if (this._fontColor == null)
+                {
+                    return UIColor.Black;
+                }
+                else
+                {
+                    return this._fontColor;
+                }
+            }
+            set 
+            {
+                this._fontColor = value;
+            }
         }
 
         public nfloat OperatorStartpointX
@@ -137,7 +157,7 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var fillColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fillColor = this.FontColor;
 
             //// Addition Drawing
             context.SaveState();
@@ -180,7 +200,7 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var color = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fillColor = this.FontColor;
 
             //// Addition Drawing
             context.SaveState();
@@ -189,13 +209,13 @@ namespace NathansWay.iOS.Numeracy
 
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(13.0f, 2.0f, 4.0f, 26.0f), 2.0f);
-            color.SetFill();
+            fillColor.SetFill();
             rectanglePath.Fill();
 
 
             //// Rectangle 2 Drawing
             var rectangle2Path = UIBezierPath.FromRoundedRect(new CGRect(2.0f, 13.0f, 26.0f, 4.0f), 2.0f);
-            color.SetFill();
+            fillColor.SetFill();
             rectangle2Path.Fill();
             context.RestoreState();
 
@@ -207,7 +227,7 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var fillColor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fillColor = this.FontColor;
 
             //// Addition Drawing
             context.SaveState();
@@ -226,26 +246,26 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var fillcolor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fillColor = this.FontColor;
 
             //// Addition Drawing
             context.SaveState();
             context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(3.0f, 13.0f, 24.0f, 4.0f), 2.0f);
-            fillcolor.SetFill();
+            fillColor.SetFill();
             rectanglePath.Fill();
 
 
             //// Oval1 Drawing
             var oval1Path = UIBezierPath.FromOval(new CGRect(12.0f, 5.0f, 6.0f, 6.0f));
-            fillcolor.SetFill();
+            fillColor.SetFill();
             oval1Path.Fill();
 
 
             //// Oval2 Drawing
             var oval2Path = UIBezierPath.FromOval(new CGRect(12.0f, 19.0f, 6.0f, 6.0f));
-            fillcolor.SetFill();
+            fillColor.SetFill();
             oval2Path.Fill();
         }
 
@@ -255,20 +275,20 @@ namespace NathansWay.iOS.Numeracy
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
-            var fillcolor = UIColor.FromRGBA(0.000f, 0.000f, 0.000f, 1.000f);
+            var fillColor = this.FontColor;
 
             //// Addition Drawing
             context.SaveState();
             context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
             //// Rect1 Drawing
             var rect1Path = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 10.0f, 22.0f, 4.0f), 2.0f);
-            fillcolor.SetFill();
+            fillColor.SetFill();
             rect1Path.Fill();
 
 
             //// Rect2 Drawing
             var rect2Path = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 16.0f, 22.0f, 4.0f), 2.0f);
-            fillcolor.SetFill();
+            fillColor.SetFill();
             rect2Path.Fill();
         }
 
