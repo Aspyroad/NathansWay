@@ -22,7 +22,7 @@ namespace AspyRoad.iOSCore
 		// Data Model
 		private AspyPickerViewModel _pickerModel;
 		// Event data for change
-		private Action<object, EventArgs> _pickerValueChanged;
+		//private Action<object, EventArgs> _pickerValueChanged;
 		// UI Appearance
         public iOSUIManager iOSUIAppearance;
 		private nfloat _fontSize;
@@ -72,6 +72,7 @@ namespace AspyRoad.iOSCore
         #region Events
 
         public event EventHandler<EventArgs> ValueChanged;
+        public event EventHandler<EventArgs> ValueSelected;
 
         #endregion
 
@@ -122,7 +123,7 @@ namespace AspyRoad.iOSCore
             // Model Creation
             this._pickerModel = new AspyPickerViewModel ();
             // Wireup our event
-            this._pickerValueChanged = new Action<object, EventArgs>(valuechanged);
+            //this._pickerValueChanged = new Action<object, EventArgs>(valuechanged);
             this._pickerModel.ValueChanged += valuechanged;
             // Fill our pickerviewmodel with data
             this.SetItems (null);
@@ -196,6 +197,8 @@ namespace AspyRoad.iOSCore
                 { 
                     this.HandlePickerChanged();
                     this.CloseNumberPicker();
+                    // Fire the finish selecting event dude.
+                    this.valueselected();
                 };
 
             singleTapGesture = new UITapGestureRecognizer(action);
@@ -378,12 +381,22 @@ namespace AspyRoad.iOSCore
 			}
 		}
 
+        // Event hookups this uses an action
 		private void valuechanged(object s, System.EventArgs e)
 		{
             // Propagate up the chain
             if (this.ValueChanged != null) 
             {
                 this.ValueChanged (this, new EventArgs ());
+            }
+        }
+
+        private void valueselected()
+        {
+            // Propagate up the chain
+            if (this.ValueSelected != null)
+            {
+                this.ValueSelected(this, new EventArgs());
             }
         }
 
@@ -658,6 +671,7 @@ namespace AspyRoad.iOSCore
         #endregion
     }
 
+    [Foundation.Register("AspyPickerViewModel")]
     public class AspyPickerViewModel : UIPickerViewModel 
     {
         #region Class Variables
