@@ -79,9 +79,11 @@ namespace NathansWay.iOS.Numeracy.Menu
 			var colorTextNumbersShadowBlurRadius = 5.0f;
 
 			// Variable Declarations
-			var strAppName = "Numbers";
-            var strStudentName = "Student";
-            var strTeacherName = "Teacher";
+            var strAppName = "MainMenu-Appname".Aspylate();
+            var strStudentName = "MainMenu-Student".Aspylate();
+            var strTeacherName = "MainMenu-Teacher".Aspylate();
+            string strLogoNathansWay = "MainMenu-Logo1".Aspylate();
+            string strLogo1234567890 = "MainMenu-Logo2".Aspylate();
 
 			// FrameBackdropWhite Drawing
 			var frameBackdropWhitePath = UIBezierPath.FromRect(menuLogoFrame);
@@ -111,7 +113,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 				colorTextWhiteFade.SetFill();
 				var textLogoNathansWayFont = UIFont.FromName("HelveticaNeue-Light", 50.0f);
 				textLogoNathansWayRect.Offset(0.0f, (textLogoNathansWayRect.Height - new NSString(textContent).StringSize(textLogoNathansWayFont, textLogoNathansWayRect.Size).Height) / 2.0f);
-				new NSString(textContent).DrawString(textLogoNathansWayRect, textLogoNathansWayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
+				new NSString(strLogoNathansWay).DrawString(textLogoNathansWayRect, textLogoNathansWayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
 				context.RestoreState();
 
 			}
@@ -126,7 +128,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 				colorTextWhiteFade.SetFill();
 				var textNumberDisplayFont = UIFont.FromName("Helvetica-Light", 40.0f);
 				textNumberDisplayRect.Offset(0.0f, (textNumberDisplayRect.Height - new NSString(textContent).StringSize(textNumberDisplayFont, textNumberDisplayRect.Size).Height) / 2.0f);
-				new NSString(textContent).DrawString(textNumberDisplayRect, textNumberDisplayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
+				new NSString(strLogo1234567890).DrawString(textNumberDisplayRect, textNumberDisplayFont, UILineBreakMode.WordWrap, UITextAlignment.Center);
 				context.RestoreState();
 
 			}

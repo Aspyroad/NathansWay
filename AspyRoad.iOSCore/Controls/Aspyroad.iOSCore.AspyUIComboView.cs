@@ -365,11 +365,6 @@ namespace AspyRoad.iOSCore
             this._strPickerText = this._pickerTxtField.Text;
 			this._pickerTxtField.Text = "";
             this.EditNumberPicker();
-			//this.View.BringSubviewToFront(this._pickerView);
-
-			// UI - Text field half clear white to show it is being edited
-            //this._pickerTxtField.BackgroundColor = UIColor.White;
-			//this._pickerTxtField.Alpha = 1.0f;
 		}  
 
 		protected class _pickerTxtFieldDelegate : UITextFieldDelegate

@@ -20,3 +20,12 @@
 "WorkSpace-Methods"="Methods";
 "WorkSpace-Option2"="NotUsed";
 "WorkSpace-Position"="Positions";
+
+/* VC MainMenu */
+"MainMenu-Appname"="Numbers";
+"MainMenu-Student"="Student";
+"MainMenu-Teacher"="Teacher";
+"MainMenu-SignIn"="Sign In";
+"MainMenu-Logo1"="NathansWay";
+"MainMenu-Logo2"="1234567890";
+

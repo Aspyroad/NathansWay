@@ -160,7 +160,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 			// Add ComboBoxes MuthaFucka!
 			this.cmbTeacher = new AspyComboBox (new CGRect (76.0f, 180.0f, 400.0f, 44.0f));
 			this.cmbTeacher.AspyTag1 = 1031;
-            this.cmbTeacher.Text = "Teacher";
+            this.cmbTeacher.Text = "MainMenu-SignIn".Aspylate();
             this.cmbTeacher.ValueChanged += cmbTeacher_ValueChanged;
             this.cmbTeacher.ValueSelected += cmbTeacher_ValueSelected;
             this.cmbTeacher.AlternateParentViewController = this;
@@ -169,7 +169,7 @@ namespace NathansWay.iOS.Numeracy.Menu
 
             this.cmbStudent = new AspyComboBox (new CGRect (550.0f, 180.0f, 400.0f, 44.0f));
             this.cmbStudent.AspyTag1 = 1032;
-            this.cmbStudent.Text = "Student";
+            this.cmbStudent.Text = "MainMenu-SignIn".Aspylate();
             this.cmbStudent.ValueChanged += cmbStudent_ValueChanged;
             this.cmbStudent.ValueSelected += cmbStudent_ValueSelected;
             this.cmbStudent.AlternateParentViewController = this;
