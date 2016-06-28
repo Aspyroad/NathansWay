@@ -94,13 +94,30 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
+
+            this.txtBrace.Frame = this.BraceSize._recttxtBrace;
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
+
             // much of the brace UI can simply sit in here rather then ApplyUI
             this.txtBrace.BackgroundColor = UIColor.Clear;
             this.txtBrace.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             this.View.BackgroundColor = UIColor.Clear;
             this.HasBorder = false;
-            this.txtBrace.Frame = this.BraceSize._recttxtBrace;
+            // Offset the text to appear more central
+            this.txtBrace.ApplyTextOffset = true;
+       
         }
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
+
+        }
+
 
         #endregion
         
@@ -132,10 +149,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Create textbox
             this.txtBrace = new AspyTextField();
-            // Apply some UI to the textbox
+            // Sizing
             this.SizeClass.SetNumberFont(this.txtBrace);
-            //this.txtBrace.HasBorder = true;
-            //this.txtBrace.HasRoundedCorners = false;
+            // ApplyUI
+            this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
             // Left or right brace
             if (this._isRight)
             {
@@ -163,7 +180,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //this.txtBrace.TextAlignment = UITextAlignment.Left;
             // Offset the text as ity draws by default to far to the right
-            this.txtBrace.ApplyTextOffset = true;
+
             // Stop editing
             this._txtBraceDelegate = new TextControlDelegate();
             this.txtBrace.Delegate = this._txtBraceDelegate;

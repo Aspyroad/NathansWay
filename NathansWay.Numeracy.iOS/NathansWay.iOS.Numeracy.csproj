@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
@@ -35,8 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
     <MtouchArch>ARMv7</MtouchArch>
-    <IpaPackageName>
-    </IpaPackageName>
+    <IpaPackageName></IpaPackageName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -201,6 +199,7 @@
       <DependentUpon>NathansWay.Numeracy.Input.OperatorContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberPicker.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Logic.OperatorContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
@@ -238,10 +237,6 @@
     </Compile>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.Animations.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Logic.OperatorContainer.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.vOperator %28copy%29.cs">
-      <DependentUpon>NathansWay.Numeracy.Input.Logic.OperatorContainer.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">
