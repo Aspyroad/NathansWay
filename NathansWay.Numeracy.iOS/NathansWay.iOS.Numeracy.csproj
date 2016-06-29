@@ -89,6 +89,7 @@
     <Folder Include="NathansWay.iOS.Numeracy\Teacher\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\" />
     <Folder Include="NathansWay.iOS.Numeracy\Menu\Control\" />
+    <Folder Include="NathansWay.iOS.Numeracy\Drawing\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="NathansWay.iOS.Numeracy\Exception\README.md" />
@@ -199,7 +200,6 @@
       <DependentUpon>NathansWay.Numeracy.Input.OperatorContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.NumberPicker.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.Logic.OperatorContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
@@ -237,6 +237,8 @@
     </Compile>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.Animations.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\Drawing\NathansWay.Numeracy.Drawing.Functions.cs" />
+    <Compile Include="Contracts\EmptyInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">

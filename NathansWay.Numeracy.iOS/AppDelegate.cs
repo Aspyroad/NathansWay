@@ -13,6 +13,7 @@ using AspyRoad.iOSCore.UISettings;
 // NathansWay
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.ToolBox;
+using NathansWay.iOS.Numeracy.Drawing;
 using NathansWay.Shared.Utilities;
 using NathansWay.Shared.DB;
 using NathansWay.Shared;
@@ -36,7 +37,8 @@ namespace NathansWay.iOS.Numeracy
         // Global classes loaded into services
 		private IAspyGlobals _iOSGlobals;
         private ISharedGlobal _sharedGlobals;
-        private IAppSettings _NumberAppSettings;
+        private IAppSettings _numberAppSettings;
+        private DrawingFunctions _drawingFunctions;
 		private iOSUIManager _numeracyUIManager;
         private iOSNumberDimensions _numberDimensions;
 		// Database
@@ -58,7 +60,7 @@ namespace NathansWay.iOS.Numeracy
 		//
 		// You have 17 seconds to return from this method, or iOS will terminate your application.
 		//
-		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
+		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
             // Falling rock style!
 
@@ -71,12 +73,15 @@ namespace NathansWay.iOS.Numeracy
 			// Create shared globals
 			this._sharedGlobals = new NathansWay.Shared.Utilities.SharedGlobal();
             // Create our application settings. These are settings that are global to Numbers Application only.
-            this._NumberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
+            this._numberAppSettings = new NathansWay.Shared.NWNumberAppSettings();
             // Load our storyboard and setup our UIWindow and first view controller
             _storyBoard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
             iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);
             // Number factory relies on Storyboard so load it first
             this._NumletFactory = new Lazy<UINumberFactory>(() => new UINumberFactory());
+            // Add any basic statis services needed for the apps lifetime
+            this._drawingFunctions = new DrawingFunctions();
+            iOSCoreServiceContainer.Register<DrawingFunctions>(_drawingFunctions);
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
@@ -98,11 +103,11 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._NumberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
-            this._NumberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
-            this._NumberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
-            this._NumberAppSettings.GA__MoveToNextNumber = true;
-            this._NumberAppSettings.GA__ShowAnswerNumlet = true;
+            this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
+            this._numberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Normal;
+            this._numberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Small;
+            this._numberAppSettings.GA__MoveToNextNumber = true;
+            this._numberAppSettings.GA__ShowAnswerNumlet = true;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			
@@ -137,7 +142,7 @@ namespace NathansWay.iOS.Numeracy
 			// Register any iOS services needed		
 			iOSCoreServiceContainer.Register<IAspyGlobals> (this._iOSGlobals);
             // Register our Numberappwide setings
-            SharedServiceContainer.Register<IAppSettings> (this._NumberAppSettings);
+            SharedServiceContainer.Register<IAppSettings> (this._numberAppSettings);
 
             // Application Services, Factories
             // Dimensions Class

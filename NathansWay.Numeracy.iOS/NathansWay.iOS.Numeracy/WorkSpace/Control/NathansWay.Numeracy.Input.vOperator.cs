@@ -7,6 +7,7 @@ using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 // NathansWay
+using NathansWay.iOS.Numeracy.Drawing;
 using NathansWay.Shared;
 
 
@@ -22,6 +23,7 @@ namespace NathansWay.iOS.Numeracy
         private nfloat _fOperatorStartpointX;
         private nfloat _fOperatorStartpointY;
         private UIColor _fontColor;
+        private DrawingFunctions _drawingFunctions;
 
         #endregion
         
@@ -78,12 +80,12 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-                    return this._fontColor;
+                    return this._drawingFunctions.FontColor;
                 }
             }
             set 
             {
-                this._fontColor = value;
+                this._drawingFunctions.FontColor = value;
             }
         }
 
@@ -119,35 +121,14 @@ namespace NathansWay.iOS.Numeracy
         // Fonts just didnt cut it.
         public void DrawOperator()
         {
-            switch (MathOperator)
+            if (this._drawingFunctions == null)
             {
-                // Most common
-                case (G__MathChar.Addition):
-                {
-                    this.DrawAddition();
-                }
-                break;
-                case (G__MathChar.Division):
-                {
-                    this.DrawDivision();
-                }
-                break;
-                case (G__MathChar.Negative):
-                {
-                    this.DrawSubtraction();
-                }
-                break;
-                case (G__MathChar.Multiply):
-                {
-                    this.DrawMultiply();
-                }
-                break;
-                default :
-                {
-                    this.DrawEquals();
-                }
-                break;
+                this._drawingFunctions = iOSCoreServiceContainer.Resolve<DrawingFunctions>();
             }
+
+            CGPoint _point = new CGPoint(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            this._drawingFunctions.DrawMathChar(_point, MathOperator);
+
         }
 
         #endregion

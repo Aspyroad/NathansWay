@@ -1,21 +1,21 @@
 // System
 using System;
 using CoreGraphics;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 // Monotouch
 using Foundation;
 using UIKit;
-using ObjCRuntime;
+//using ObjCRuntime;
 //Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.iOS.Numeracy;
-using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.Shared.Factories;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.BUS.ViewModel;
-using NathansWay.Shared.Utilities;
+//using NathansWay.iOS.Numeracy;
+//using NathansWay.iOS.Numeracy.UISettings;
+//using NathansWay.iOS.Numeracy.Controls;
+//using NathansWay.Shared.Factories;
+//using NathansWay.Shared.BUS.Entity;
+//using NathansWay.Shared.BUS.ViewModel;
+//using NathansWay.Shared.Utilities;
 using NathansWay.Shared;
 
 

@@ -11,12 +11,107 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Drawing
 {
-    public class PublicDrawingFunctions : BaseContainer
+    public class DrawingFunctions 
     {
-        // TODO: Make these all work remotely
-        public void DrawMultiply()
+        #region Private Variables
+
+        private UIColor _fontColor;
+        private CGSize _scaleFactor;
+
+        #endregion
+
+        #region Constructor
+
+        public DrawingFunctions()
+        {
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public UIColor FontColor
+        {
+            get
+            {
+                if (this._fontColor == null)
+                {
+                    return UIColor.Black;
+                }
+                else
+                {
+                    return this._fontColor;
+                }
+            }
+            set
+            {
+                this._fontColor = value;
+            }
+        }
+
+        public CGSize ScaleFactor
+        {
+            get
+            {
+                if (this._scaleFactor.IsEmpty)
+                {
+                    // Scale factor of zero
+                    return new CGSize(1.0f, 1.0f);
+                }
+                else
+                {
+                    return this._scaleFactor;
+                }
+            }
+            set
+            {
+                this._scaleFactor = value;
+            }
+        }
+
+        #endregion
+
+        #region Public Drawing Functions
+
+        public void DrawMathChar(CGPoint _point, G__MathChar _mathChar)
+        {
+
+            switch (_mathChar)
+            {
+                // Most common
+                case (G__MathChar.Addition):
+                    {
+                        this.DrawAddition(_point);
+                    }
+                    break;
+                case (G__MathChar.Division):
+                    {
+                        this.DrawDivision(_point);
+                    }
+                    break;
+                case (G__MathChar.Negative):
+                    {
+                        this.DrawSubtraction(_point);
+                    }
+                    break;
+                case (G__MathChar.Multiply):
+                    {
+                        this.DrawMultiply(_point);
+                    }
+                    break;
+                default:
+                    {
+                        this.DrawEquals(_point);
+                    }
+                    break;
+            }
+
+        }
+
+        public void DrawMultiply(CGPoint _startPoint)
         {
             //// General Declarations
+            ///  Allways draws in the "calling" context
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
@@ -24,7 +119,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             //// Addition Drawing
             context.SaveState();
-            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
 
             //// Bezier Drawing
             UIBezierPath bezierPath = new UIBezierPath();
@@ -56,7 +152,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             bezierPath.Fill();
         }
 
-        public void DrawAddition()
+        public void DrawAddition(CGPoint _startPoint)
         {
 
             //// General Declarations
@@ -67,7 +163,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             //// Addition Drawing
             context.SaveState();
-            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
 
 
             //// Rectangle Drawing
@@ -84,7 +182,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         }
 
-        public void DrawSubtraction()
+        public void DrawSubtraction(CGPoint _startPoint)
         {
             //// General Declarations
             var context = UIGraphics.GetCurrentContext();
@@ -94,7 +192,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             //// Addition Drawing
             context.SaveState();
-            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
 
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 13.0f, 22.0f, 4.0f), 2.0f);
@@ -103,7 +203,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         }
 
-        public void DrawDivision()
+        public void DrawDivision(CGPoint _startPoint)
         {
             //// General Declarations
             var context = UIGraphics.GetCurrentContext();
@@ -113,7 +213,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             //// Addition Drawing
             context.SaveState();
-            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(3.0f, 13.0f, 24.0f, 4.0f), 2.0f);
             fillColor.SetFill();
@@ -132,7 +234,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             oval2Path.Fill();
         }
 
-        public void DrawEquals()
+        public void DrawEquals(CGPoint _startPoint)
         {
             //// General Declarations
             var context = UIGraphics.GetCurrentContext();
@@ -142,7 +244,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             //// Addition Drawing
             context.SaveState();
-            context.TranslateCTM(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
             //// Rect1 Drawing
             var rect1Path = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 10.0f, 22.0f, 4.0f), 2.0f);
             fillColor.SetFill();
@@ -158,7 +262,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // Greater than etc
 
 
-#endregion
+        #endregion
 
     }
 }
