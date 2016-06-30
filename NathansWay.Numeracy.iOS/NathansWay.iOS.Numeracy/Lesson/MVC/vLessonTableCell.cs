@@ -68,7 +68,7 @@ namespace NathansWay.iOS.Numeracy
             this.btnStartLesson.IndexRow = indexPath.Row;
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
-			this.lblOperator.Text = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
+			//this.lblOperator. = G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
 			this.lblType.Text = G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
