@@ -38,7 +38,7 @@ namespace NathansWay.iOS.Numeracy
 		private IAspyGlobals _iOSGlobals;
         private ISharedGlobal _sharedGlobals;
         private IAppSettings _numberAppSettings;
-        private DrawingFunctions _drawingFunctions;
+        private DrawingFactory _drawingFunctions;
 		private iOSUIManager _numeracyUIManager;
         private iOSNumberDimensions _numberDimensions;
 		// Database
@@ -80,8 +80,8 @@ namespace NathansWay.iOS.Numeracy
             // Number factory relies on Storyboard so load it first
             this._NumletFactory = new Lazy<UINumberFactory>(() => new UINumberFactory());
             // Add any basic statis services needed for the apps lifetime
-            this._drawingFunctions = new DrawingFunctions();
-            iOSCoreServiceContainer.Register<DrawingFunctions>(_drawingFunctions);
+            this._drawingFunctions = new DrawingFactory();
+            iOSCoreServiceContainer.Register<DrawingFactory>(_drawingFunctions);
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built

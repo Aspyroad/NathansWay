@@ -237,8 +237,8 @@
     </Compile>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.Animations.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\Drawing\NathansWay.Numeracy.Drawing.Functions.cs" />
     <Compile Include="Contracts\EmptyInterface.cs" />
+    <Compile Include="Factories\NathansWay.iOS.Numeracy.UIDrawingFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">

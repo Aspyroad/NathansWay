@@ -11,24 +11,99 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Drawing
 {
-    public class DrawingFunctions 
+    public class DrawingFactory 
     {
         #region Private Variables
 
         private UIColor _fontColor;
         private CGSize _scaleFactor;
+        private CGSize _contextSize;
+
+        // Trying out layers for each drawing?
+        // Converting to a factory.
+        // Technically, I only need to draw the operators once, 
+        // then save the layers and use them for the life time of the app
+        // This will save a lot of layer creation.
+        private CGLayer _layerMultiply;
+        private CGLayer _layerAddition;
+        private CGLayer _layerSubtraction;
+        private CGLayer _layerDivision;
+        private CGLayer _layerEquals;
+
 
         #endregion
 
         #region Constructor
 
-        public DrawingFunctions()
+        public DrawingFactory()
         {
         }
 
         #endregion
 
         #region Public Properties
+
+        public CGLayer MultiplySignLayer
+        {
+            get
+            {
+                return this._layerMultiply;
+            }
+            set
+            {
+                this._layerMultiply = value;
+            }
+        }
+
+        public CGLayer AdditionSignLayer
+        {
+            get
+            {
+                return this._layerAddition;
+            }
+            set
+            {
+                this._layerAddition = value;
+            }
+        }
+
+        public CGLayer DivisionSignLayer
+        {
+            get
+            {
+                return this._layerDivision;
+            }
+            set
+            {
+                this._layerDivision = value;
+            }
+        }
+
+        public CGLayer EqualsSignLayer
+        {
+            get
+            {
+                return this._layerEquals;
+            }
+            set
+            {
+                this._layerEquals = value;
+            }
+        }
+
+        public CGLayer SubtractionSignLayer
+        {
+            get
+            {
+                return this._layerSubtraction;
+            }
+            set
+            {
+                this._layerSubtraction = value;
+            }
+        }
+
+
 
         public UIColor FontColor
         {
@@ -69,11 +144,31 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
+        public CGSize ContextSize
+        {
+            get
+            {
+                if (this._contextSize.IsEmpty)
+                {
+                    // Scale factor of zero
+                    return new CGSize(1.0f, 1.0f);
+                }
+                else
+                {
+                    return this._contextSize;
+                }
+            }
+            set
+            {
+                this._contextSize = value;
+            }
+        }
+
         #endregion
 
         #region Public Drawing Functions
 
-        public void DrawMathChar(CGPoint _point, G__MathChar _mathChar)
+        public void DrawMathChar(CGPoint _size, CGPoint _point, G__MathChar _mathChar)
         {
 
             switch (_mathChar)
@@ -110,8 +205,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public void DrawMultiply(CGPoint _startPoint)
         {
-            //// General Declarations
-            ///  Allways draws in the "calling" context
+
+            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
@@ -150,12 +245,14 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             fillColor.SetFill();
             bezierPath.Fill();
+
+            this._layerMultiply = CGLayer.Create(context, _contextSize);
         }
 
         public void DrawAddition(CGPoint _startPoint)
         {
 
-            //// General Declarations
+            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
@@ -184,7 +281,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public void DrawSubtraction(CGPoint _startPoint)
         {
-            //// General Declarations
+            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
@@ -205,7 +302,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public void DrawDivision(CGPoint _startPoint)
         {
-            //// General Declarations
+            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations
@@ -236,7 +333,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public void DrawEquals(CGPoint _startPoint)
         {
-            //// General Declarations
+            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations

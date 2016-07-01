@@ -23,7 +23,7 @@ namespace NathansWay.iOS.Numeracy
         private nfloat _fOperatorStartpointX;
         private nfloat _fOperatorStartpointY;
         private UIColor _fontColor;
-        private DrawingFunctions _drawingFunctions;
+        private DrawingFactory _drawingFunctions;
 
         #endregion
         
@@ -121,13 +121,13 @@ namespace NathansWay.iOS.Numeracy
         // Fonts just didnt cut it.
         public void DrawOperator()
         {
-            if (this._drawingFunctions == null)
-            {
-                this._drawingFunctions = iOSCoreServiceContainer.Resolve<DrawingFunctions>();
-            }
+            //if (this._drawingFunctions == null)
+            //{
+            //    this._drawingFunctions = iOSCoreServiceContainer.Resolve<DrawingFactory>();
+            //}
 
-            CGPoint _point = new CGPoint(this._fOperatorStartpointX, this._fOperatorStartpointY);
-            this._drawingFunctions.DrawMathChar(_point, MathOperator);
+            //CGPoint _point = new CGPoint(this._fOperatorStartpointX, this._fOperatorStartpointY);
+            //this._drawingFunctions.DrawMathChar(_point, MathOperator);
 
         }
 
