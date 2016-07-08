@@ -16,6 +16,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         private UIColor _fontColor;
         private CGSize _scaleFactor;
+
         private CGSize _contextSize;
 
         // Trying out layers for each drawing?
@@ -29,7 +30,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // Call any of these functions by supplying 
         // an global enum.
         // Then they are called inside Draw() so they have access to graphics context
-        // LEt the user pick what layers they want to draw by selecting them, then they are
+        // Let the user pick what layers they want to draw by selecting them, then they are
         // automatically drawn onto the layer the specified.
 
         private CAShapeLayer _layerMultiply;
@@ -38,6 +39,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         private CALayer _layerDivision;
         private CALayer _layerEquals;
 
+        private CGContext _cgContext;
 
         #endregion
 
