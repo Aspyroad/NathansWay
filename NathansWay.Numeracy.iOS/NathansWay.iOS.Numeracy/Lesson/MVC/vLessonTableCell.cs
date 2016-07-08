@@ -4,13 +4,13 @@ using CoreGraphics;
 // Mono
 using Foundation;
 using UIKit;
-using CoreAnimation;
 // AspyRoad
 using AspyRoad.iOSCore;
 // NathansWay
+using NathansWay.iOS.Numeracy.Drawing;
+// NathansWay Sharded
 using NathansWay.Shared;
 using NathansWay.Shared.BUS.Entity;
-
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -21,6 +21,7 @@ namespace NathansWay.iOS.Numeracy
         private vcLessonMenu _vcLessonMenu;
         // Create Action delegate for Method1.
         private Action actOpenLesson;
+        private DrawingFactory _drawingFactory;
 		 
         #endregion
 
@@ -53,6 +54,7 @@ namespace NathansWay.iOS.Numeracy
             if (disposing)
             {
                 this.btnStartLesson.TouchUpInside -= OnClick_btnbtnStartLesson;
+                this._drawingFactory = null;
             }
         }
 
@@ -68,7 +70,10 @@ namespace NathansWay.iOS.Numeracy
             this.btnStartLesson.IndexRow = indexPath.Row;
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
-			this.vwOperator.Layer.AddSublayer(G__MathOperators.GetOp ((G__MathOperator)lesson.Operator);
+            this.vwOperator.
+            //this.vwOperator.Dr(this._drawingFactory.GetLayerByMathOperator((G__MathOperator)lesson.Operator).);
+
+            
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);
@@ -109,8 +114,6 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.actOpenLesson();
             }
-
-
         } 
 
 		#endregion
@@ -121,6 +124,10 @@ namespace NathansWay.iOS.Numeracy
         {
             base.AwakeFromNib();
             this.btnStartLesson.TouchUpInside += OnClick_btnbtnStartLesson;
+            if (this._drawingFactory == null)
+            {
+                this._drawingFactory = iOSCoreServiceContainer.Resolve<DrawingFactory>();
+            }
         }            
 
 		#endregion

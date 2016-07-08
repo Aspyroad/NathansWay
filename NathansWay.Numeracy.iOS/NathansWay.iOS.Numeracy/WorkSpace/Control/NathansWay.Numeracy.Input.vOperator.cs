@@ -10,7 +10,6 @@ using AspyRoad.iOSCore;
 using NathansWay.iOS.Numeracy.Drawing;
 using NathansWay.Shared;
 
-
 namespace NathansWay.iOS.Numeracy
 {
     [Foundation.Register ("vOperator")]
@@ -23,7 +22,7 @@ namespace NathansWay.iOS.Numeracy
         private nfloat _fOperatorStartpointX;
         private nfloat _fOperatorStartpointY;
         private UIColor _fontColor;
-        private DrawingFactory _drawingFunctions;
+        private DrawingFactory _drawingFactory;
 
         #endregion
         
@@ -80,12 +79,12 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-                    return this._drawingFunctions.FontColor;
+                    return this._drawingFactory.FontColor;
                 }
             }
             set 
             {
-                this._drawingFunctions.FontColor = value;
+                this._drawingFactory.FontColor = value;
             }
         }
 
@@ -117,8 +116,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
        
-        // Custom draw class for our operators.
-        // Fonts just didnt cut it.
         public void DrawOperator()
         {
             //if (this._drawingFunctions == null)

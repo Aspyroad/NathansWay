@@ -1,8 +1,7 @@
 // System
-using System;
 using CoreGraphics;
+using CoreAnimation;
 // Mono
-using Foundation;
 using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
@@ -24,11 +23,20 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // Technically, I only need to draw the operators once, 
         // then save the layers and use them for the life time of the app
         // This will save a lot of layer creation.
-        private CGLayer _layerMultiply;
-        private CGLayer _layerAddition;
-        private CGLayer _layerSubtraction;
-        private CGLayer _layerDivision;
-        private CGLayer _layerEquals;
+
+
+        // Idea
+        // Call any of these functions by supplying 
+        // an global enum.
+        // Then they are called inside Draw() so they have access to graphics context
+        // LEt the user pick what layers they want to draw by selecting them, then they are
+        // automatically drawn onto the layer the specified.
+
+        private CAShapeLayer _layerMultiply;
+        private CALayer _layerAddition;
+        private CALayer _layerSubtraction;
+        private CALayer _layerDivision;
+        private CALayer _layerEquals;
 
 
         #endregion
@@ -43,7 +51,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #region Public Properties
 
-        public CGLayer MultiplySignLayer
+        public CALayer MultiplySignLayer
         {
             get
             {
@@ -55,7 +63,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        public CGLayer AdditionSignLayer
+        public CALayer AdditionSignLayer
         {
             get
             {
@@ -67,7 +75,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        public CGLayer DivisionSignLayer
+        public CALayer DivisionSignLayer
         {
             get
             {
@@ -79,7 +87,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        public CGLayer EqualsSignLayer
+        public CALayer EqualsSignLayer
         {
             get
             {
@@ -91,7 +99,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        public CGLayer SubtractionSignLayer
+        public CALayer SubtractionSignLayer
         {
             get
             {
@@ -170,7 +178,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public void DrawMathChar(CGPoint _size, CGPoint _point, G__MathChar _mathChar)
         {
-
             switch (_mathChar)
             {
                 // Most common
@@ -200,22 +207,87 @@ namespace NathansWay.iOS.Numeracy.Drawing
                     }
                     break;
             }
+        }
 
+        public void DrawMathChar(G__MathChar _mathChar)
+        {
+            //switch (_mathChar)
+            //{
+            //    // Most common
+            //    case (G__MathChar.Addition):
+            //        {
+            //            this.DrawAddition(_point);
+            //        }
+            //        break;
+            //    case (G__MathChar.Division):
+            //        {
+            //            this.DrawDivision(_point);
+            //        }
+            //        break;
+            //    case (G__MathChar.Negative):
+            //        {
+            //            this.DrawSubtraction(_point);
+            //        }
+            //        break;
+            //    case (G__MathChar.Multiply):
+            //        {
+            //            this.DrawMultiply(_point);
+            //        }
+            //        break;
+            //    default:
+            //        {
+            //            this.DrawEquals(_point);
+            //        }
+            //        break;
+            //}
+        }
+
+        public CALayer GetLayerByMathOperator(G__MathOperator _mathoperator)
+        {
+            return this._layerMultiply;
         }
 
         public void DrawMultiply(CGPoint _startPoint)
         {
+            //1 - (CAShapeLayer*)createPieSlice {
+            //2  CAShapeLayer* slice = [CAShapeLayer layer];
+            //3  slice.fillColor = [UIColor redColor].CGColor;
+            //4  slice.strokeColor = [UIColor blackColor].CGColor;
+            //5  slice.lineWidth = 3.0;
+            //6
+            //7  CGFloat angle = DEG2RAD(-60.0);
+            //8  CGPoint center = CGPointMake(100.0, 100.0);
+            //9  CGFloat radius = 100.0;
+            //10
+            //11  UIBezierPath* piePath = [UIBezierPath bezierPath];
+            //12[piePath moveToPoint: center];
+            //13
+            //14[piePath addLineToPoint: CGPointMake(center.x + radius * cosf(angle), center.y + radius * sinf(angle))];
+            //15
+            //16[piePath addArcWithCenter: center radius: radius startAngle: angle endAngle: DEG2RAD(60.0) clockwise: YES];
+            //17
+            //18 //   [piePath addLineToPoint:center];
+            //19[piePath closePath]; // this will automatically add a straight line to the center
+            //20  slice.path = piePath.CGPath;
+            //21
+            //22  return slice;
+            //23 }
 
-            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
-            var context = UIGraphics.GetCurrentContext();
+            //UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
+            //var context = UIGraphics.GetCurrentContext();
+
+            if (this._layerMultiply == null)
+            {
+                this._layerMultiply = new CAShapeLayer();
+            }
 
             //// Color Declarations
             var fillColor = this.FontColor;
 
             //// Addition Drawing
-            context.SaveState();
-            context.TranslateCTM(_startPoint.X, _startPoint.Y);
-            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+            //context.SaveState();
+            //context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            //context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
 
             //// Bezier Drawing
             UIBezierPath bezierPath = new UIBezierPath();
@@ -246,7 +318,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
             fillColor.SetFill();
             bezierPath.Fill();
 
-            this._layerMultiply = CGLayer.Create(context, _contextSize);
+            this._layerMultiply.dra
+
         }
 
         public void DrawAddition(CGPoint _startPoint)
