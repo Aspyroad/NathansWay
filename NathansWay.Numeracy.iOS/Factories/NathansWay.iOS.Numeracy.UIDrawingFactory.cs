@@ -33,7 +33,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // Let the user pick what layers they want to draw by selecting them, then they are
         // automatically drawn onto the layer the specified.
 
-        private CAShapeLayer _layerMultiply;
+        private CALayer _layerMultiply;
         private CALayer _layerAddition;
         private CALayer _layerSubtraction;
         private CALayer _layerDivision;
@@ -275,8 +275,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             //22  return slice;
             //23 }
 
-            //UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
-            //var context = UIGraphics.GetCurrentContext();
+        var context = UIGraphics.GetCurrentContext();
 
             if (this._layerMultiply == null)
             {
@@ -287,9 +286,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
             var fillColor = this.FontColor;
 
             //// Addition Drawing
-            //context.SaveState();
-            //context.TranslateCTM(_startPoint.X, _startPoint.Y);
-            //context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+            context.SaveState();
+            context.TranslateCTM(_startPoint.X, _startPoint.Y);
+            context.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
 
             //// Bezier Drawing
             UIBezierPath bezierPath = new UIBezierPath();
@@ -320,14 +319,15 @@ namespace NathansWay.iOS.Numeracy.Drawing
             fillColor.SetFill();
             bezierPath.Fill();
 
-            this._layerMultiply.dra
+            context.RestoreState();
 
         }
 
         public void DrawAddition(CGPoint _startPoint)
         {
 
-            UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
+            //UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
+
             var context = UIGraphics.GetCurrentContext();
 
             //// Color Declarations

@@ -43,21 +43,6 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
-		#endregion
-
-        #region DeConstructor
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (disposing)
-            {
-                this.btnStartLesson.TouchUpInside -= OnClick_btnbtnStartLesson;
-                this._drawingFactory = null;
-            }
-        }
-
         #endregion
 
 		#region Public Methods

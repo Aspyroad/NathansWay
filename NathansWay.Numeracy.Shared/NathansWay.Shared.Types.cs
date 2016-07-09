@@ -7,6 +7,20 @@ using System.Globalization;
 
 namespace NathansWay.Shared
 {
+    #region Drawing
+
+    public enum G__PrettyPictures
+    {
+        Multiply = 0,
+        Addition = 1,
+        Subtraction = 2,
+        Division = 3,
+        Equals = 4
+    }
+
+
+    #endregion
+
 
     #region DataBase
 

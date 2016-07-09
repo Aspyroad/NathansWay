@@ -15,13 +15,14 @@ using Foundation;
 namespace AspyRoad.iOSCore
 {			
 	[Foundation.Register("NWView")]	
-	public class NWView : AspyView
+    public class NWView : AspyView, IDisposable
 	{
 		#region Class Variables
 
 		//protected iOSUIManager iOSUIAppearance;
         public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
         protected DrawingFactory iOSDrawingFactory;
+        protected bool _bEnableDrawing;
 
 		#endregion
 
@@ -47,9 +48,30 @@ namespace AspyRoad.iOSCore
 			Initialize ();
 		}
 
-		#endregion
+        #endregion
 
-		#region Public Properties
+        #region DeConstructor
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (disposing)
+            {
+                this.iOSUIAppearance = null;
+                this.iOSDrawingFactory = null;
+            }
+        }
+
+        #endregion
+     
+        #region Public Properties
+
+        public bool EnableDrawing
+        {
+            get { return this._bEnableDrawing; }
+            set { this._bEnableDrawing = value; }
+        }
 
 		#endregion
 
@@ -67,9 +89,15 @@ namespace AspyRoad.iOSCore
         {
             base.Draw(rect);
 
+            if (this.EnableDrawing)
+            {
+                
 
 
 
+
+
+            }
         }
 
         #endregion
