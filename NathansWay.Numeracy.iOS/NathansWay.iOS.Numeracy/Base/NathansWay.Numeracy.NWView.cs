@@ -19,8 +19,9 @@ namespace AspyRoad.iOSCore
 	{
 		#region Class Variables
 
-		//protected iOSUIManager iOSUIAppearance;
+		// Protected iOSUIManager iOSUIAppearance;
         public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
+        // Drawing
         protected DrawingFactory iOSDrawingFactory;
         protected bool _bEnableDrawing;
 
@@ -73,13 +74,17 @@ namespace AspyRoad.iOSCore
             set { this._bEnableDrawing = value; }
         }
 
-		#endregion
+        #endregion
 
-		#region Public Members
+        #region Public Members
 
-		#endregion
+        #endregion
 
-		#region Virtual Members
+        #region Virtual Members
+
+        public virtual void Drawing()
+        {
+        }
 
 		#endregion
 
@@ -91,12 +96,7 @@ namespace AspyRoad.iOSCore
 
             if (this.EnableDrawing)
             {
-                
-
-
-
-
-
+                this.Drawing();
             }
         }
 

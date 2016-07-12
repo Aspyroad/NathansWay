@@ -9,15 +9,20 @@ namespace NathansWay.Shared
 {
     #region Drawing
 
-    public enum G__PrettyPictures
+    public enum G__FactoryDrawings : int
     {
-        Multiply = 0,
-        Addition = 1,
-        Subtraction = 2,
-        Division = 3,
-        Equals = 4
-    }
+        // 
+        //Addition = 1,
+        //Subtraction = 2,
+        //Division = 3,
+        //Multiplication = 4,
 
+        Addition = G__MathOperator.Addition,
+        Subtraction = G__MathOperator.Subtraction,
+        Division = G__MathOperator.Division,
+        Multiplication = G__MathOperator.Multiplication,
+        Equals = 5,
+    }
 
     #endregion
 

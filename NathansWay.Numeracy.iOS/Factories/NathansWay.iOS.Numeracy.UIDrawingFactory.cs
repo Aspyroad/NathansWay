@@ -1,12 +1,15 @@
 // System
+using System;
 using CoreGraphics;
 using CoreAnimation;
 // Mono
 using UIKit;
+using System.Collections.Generic;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
 using NathansWay.Shared;
+
 
 namespace NathansWay.iOS.Numeracy.Drawing
 {
@@ -16,7 +19,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         private UIColor _fontColor;
         private CGSize _scaleFactor;
-
+        //private CGPoint _startPoint;
         private CGSize _contextSize;
 
         // Trying out layers for each drawing?
@@ -24,7 +27,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // Technically, I only need to draw the operators once, 
         // then save the layers and use them for the life time of the app
         // This will save a lot of layer creation.
-
 
         // Idea
         // Call any of these functions by supplying 
@@ -39,7 +41,11 @@ namespace NathansWay.iOS.Numeracy.Drawing
         private CALayer _layerDivision;
         private CALayer _layerEquals;
 
+        private Action<CGSize, CGPoint> _drawingDelegate;
+        private Dictionary<G__FactoryDrawings, Action<CGSize, CGPoint>> _dictDrawings;
+
         private CGContext _cgContext;
+
 
         #endregion
 
@@ -51,7 +57,35 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #endregion
 
+        #region Private Members
+
+        private void Initialize()
+        {
+            this._dictDrawings = new Dictionary<G__FactoryDrawings, Action<CGSize,CGPoint>>();
+            this._dictDrawings.Add(G__FactoryDrawings.Addition, this.DrawAddition);
+            this._dictDrawings.Add(G__FactoryDrawings.Multiplication, this.DrawMultiply);
+            this._dictDrawings.Add(G__FactoryDrawings.Division, this.DrawDivision);
+            this._dictDrawings.Add(G__FactoryDrawings.Equals, this.DrawEquals);
+            this._dictDrawings.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
+        }
+
+        #endregion
+
         #region Public Properties
+
+        public Dictionary<G__FactoryDrawings, Action<CGSize, CGPoint>> DrawingDictionary
+        {
+            get
+            {
+                return this._dictDrawings;
+            }
+            // Do we need a setter? Im thinking no
+            //set
+            //{
+            //    this._layerMultiply = value;
+            //}
+        }
+
 
         public CALayer MultiplySignLayer
         {
@@ -178,70 +212,15 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #region Public Drawing Functions
 
-        public void DrawMathChar(CGPoint _size, CGPoint _point, G__MathChar _mathChar)
+        public void DrawMathChar(int drawingID, CGSize size, CGPoint startPoint)
         {
-            switch (_mathChar)
+            // TODO: Fix this shit below, we need an enum of enums...or a class really of drawing types matched 
+            // To smaller enums which are used elsewhere...
+            if (this._dictDrawings.TryGetValue((G__FactoryDrawings)drawingID, out _drawingDelegate))
             {
-                // Most common
-                case (G__MathChar.Addition):
-                    {
-                        this.DrawAddition(_point);
-                    }
-                    break;
-                case (G__MathChar.Division):
-                    {
-                        this.DrawDivision(_point);
-                    }
-                    break;
-                case (G__MathChar.Negative):
-                    {
-                        this.DrawSubtraction(_point);
-                    }
-                    break;
-                case (G__MathChar.Multiply):
-                    {
-                        this.DrawMultiply(_point);
-                    }
-                    break;
-                default:
-                    {
-                        this.DrawEquals(_point);
-                    }
-                    break;
+                _drawingDelegate(size, startPoint);
             }
-        }
-
-        public void DrawMathChar(G__MathChar _mathChar)
-        {
-            //switch (_mathChar)
-            //{
-            //    // Most common
-            //    case (G__MathChar.Addition):
-            //        {
-            //            this.DrawAddition(_point);
-            //        }
-            //        break;
-            //    case (G__MathChar.Division):
-            //        {
-            //            this.DrawDivision(_point);
-            //        }
-            //        break;
-            //    case (G__MathChar.Negative):
-            //        {
-            //            this.DrawSubtraction(_point);
-            //        }
-            //        break;
-            //    case (G__MathChar.Multiply):
-            //        {
-            //            this.DrawMultiply(_point);
-            //        }
-            //        break;
-            //    default:
-            //        {
-            //            this.DrawEquals(_point);
-            //        }
-            //        break;
-            //}
+            // Should we be concerned if we "dont" find an enum...we should ALWAYS know this value
         }
 
         public CALayer GetLayerByMathOperator(G__MathOperator _mathoperator)
@@ -249,7 +228,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             return this._layerMultiply;
         }
 
-        public void DrawMultiply(CGPoint _startPoint)
+        public void DrawMultiply(CGSize _size, CGPoint _startPoint)
         {
             //1 - (CAShapeLayer*)createPieSlice {
             //2  CAShapeLayer* slice = [CAShapeLayer layer];
@@ -323,7 +302,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         }
 
-        public void DrawAddition(CGPoint _startPoint)
+        public void DrawAddition(CGSize _size, CGPoint _startPoint)
         {
 
             //UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
@@ -354,7 +333,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         }
 
-        public void DrawSubtraction(CGPoint _startPoint)
+        public void DrawSubtraction(CGSize _size, CGPoint _startPoint)
         {
             UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
@@ -375,7 +354,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         }
 
-        public void DrawDivision(CGPoint _startPoint)
+        public void DrawDivision(CGSize _size, CGPoint _startPoint)
         {
             UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
@@ -406,7 +385,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             oval2Path.Fill();
         }
 
-        public void DrawEquals(CGPoint _startPoint)
+        public void DrawEquals(CGSize _size, CGPoint _startPoint)
         {
             UIGraphics.BeginImageContextWithOptions(this._contextSize, false, 0);
             var context = UIGraphics.GetCurrentContext();
@@ -430,9 +409,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             fillColor.SetFill();
             rect2Path.Fill();
         }
-
-        // Greater than etc
-
 
         #endregion
 

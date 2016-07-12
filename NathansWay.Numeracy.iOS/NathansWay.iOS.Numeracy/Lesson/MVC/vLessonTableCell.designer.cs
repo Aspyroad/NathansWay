@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AspyRoad.iOSCore.AspyView vwOperator { get; set; }
+        AspyRoad.iOSCore.NWView vwOperator { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
