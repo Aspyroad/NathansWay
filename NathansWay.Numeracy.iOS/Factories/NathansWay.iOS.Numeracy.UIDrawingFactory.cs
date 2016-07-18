@@ -16,28 +16,27 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Drawing
 {
+    public class DrawData
+    {
+        public UIColor PrimaryFillColor { get; set; }
+        public CGSize ScaleFactor { get; set; }
+        public CGPoint StartPoint { get; set; }
+        public CGRect RectFrame { get; set; }
+        public CGRect RectBounds { get; set; }
+        public G__FactoryDrawings DrawType { get; set; }
+    }
+
     public class DrawingFactory
     {
 
         #region Private Variables
 
-        private UIColor _fillColor;
+        private UIColor _primaryFillColor;
         private CGSize _scaleFactor;
         private CGPoint _startPoint;
+        private CGRect _rectFrame;
+        private CGRect _rectBounds;
         private G__FactoryDrawings _drawType;
-
-        // Trying out layers for each drawing?
-        // Converting to a factory.
-        // Technically, I only need to draw the operators once, 
-        // then save the layers and use them for the life time of the app
-        // This will save a lot of layer creation.
-
-        // Idea
-        // Call any of these functions by supplying 
-        // an global enum.
-        // Then they are called inside Draw() so they have access to graphics context
-        // Let the user pick what layers they want to draw by selecting them, then they are
-        // automatically drawn onto the layer the specified.
 
         private DrawLayer _layerMultiply;
         private DrawLayer _layerAddition;
@@ -94,17 +93,17 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        //public CALayer ViewLayer
-        //{
-        //    get
-        //    {
-        //        return this._viewLayer;
-        //    }
-        //    //set
-        //    //{
-        //    //    this._viewLayer = value;
-        //    //}
-        //}
+        public G__FactoryDrawings DrawingType
+        {
+            get
+            {
+                return this._drawType;
+            }
+            set
+            {
+                this._drawType = value;
+            }
+        }
 
         //public NWView MainView
         //{
@@ -181,22 +180,22 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
 
 
-        public UIColor DrawColor
+        public UIColor PrimaryFillColor
         {
             get
             {
-                if (this._fillColor == null)
+                if (this._primaryFillColor == null)
                 {
                     return UIColor.Black;
                 }
                 else
                 {
-                    return this._fillColor;
+                    return this._primaryFillColor;
                 }
             }
             set
             {
-                this._fillColor = value;
+                this._primaryFillColor = value;
             }
         }
 
@@ -240,7 +239,32 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
+        public CGRect DrawFrame
+        {
+            get
+            {
+                return this._rectFrame;
+            }
+            set
+            {
+                this._rectFrame = value;
+            }
+        }
+
+        public CGRect DrawBounds
+        {
+            get
+            {
+                return this._rectBounds;
+            }
+            set
+            {
+                this._rectBounds = value;
+            }
+        }
+
         #endregion
+
 
         public DrawLayer DrawLayer()
         {
@@ -251,14 +275,28 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 if (_layer == null)
                 {
                     // Create the layer
-                    //_layer = new DrawLayer(this._fillColor, this._scaleFactor, this._startPoint);
+                    _layer = new DrawLayer(this._primaryFillColor, this._scaleFactor, this._startPoint);
                 }
+                else
+                {
+                    _layer.FillColor = this._primaryFillColor;
+                    _layer.ScaleFactor = this._scaleFactor;
+                    _layer.StartPoint = this._startPoint;
+                }
+
+                if (!this._rectFrame.IsNull())
+                {
+                    _layer.Frame = this._rectFrame;    
+                }
+                if (!this._rectBounds.IsNull())
+                {
+                    _layer.Bounds = this._rectBounds;
+                }
+
                 if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
                 {
                     _layer.DrawingDelegate = _drawingDelegate;
                 }
-
-                
             }
 
             return _layer;
@@ -359,9 +397,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
     {
         #region Private Variables
 
-        private UIColor _fillColor;
-        private CGSize _scaleFactor;
-        private CGPoint _startPoint;
+        public UIColor FillColor { get; set; }
+        public CGSize ScaleFactor { get; set; }
+        public CGPoint StartPoint { get; set; }
 
         private Action<CGContext> _drawingDelegate;
 
@@ -379,9 +417,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // This is the constructor you would use to create your new CALayer
         public DrawLayer(UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
         {
-            this._fillColor = fillColor;
-            this._scaleFactor = scaleFactor;
-            this._startPoint = startPoint;
+            this.FillColor = fillColor;
+            this.ScaleFactor = scaleFactor;
+            this.StartPoint = startPoint;
         }
 
         #endregion
@@ -422,15 +460,15 @@ namespace NathansWay.iOS.Numeracy.Drawing
             ctx.SaveState();
 
             ////// Addition Drawing
-            ctx.TranslateCTM(_startPoint.X, _startPoint.Y);
-            ctx.ScaleCTM(_scaleFactor.Height, _scaleFactor.Width);
+            ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
+            ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
 
             if (this._drawingDelegate != null)
             {
                 this._drawingDelegate.Invoke(ctx);
             }
 
-            this._fillColor.SetFill();
+            this.FillColor.SetFill();
             ctx.RestoreState();
         }
 

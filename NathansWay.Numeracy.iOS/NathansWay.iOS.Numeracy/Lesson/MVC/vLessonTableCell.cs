@@ -55,8 +55,14 @@ namespace NathansWay.iOS.Numeracy
             this.btnStartLesson.IndexRow = indexPath.Row;
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
-            //this.vwOperator
-            //this.vwOperator.Dr(this._drawingFactory.GetLayerByMathOperator((G__MathOperator)lesson.Operator).);
+
+            // Draw Operator Layer
+            // TODO: I need to make this a reference to vcOperator.
+            // I need access to the size control.
+            // So replace the story board with an instance of vcOperator
+            // Add a reference to vwOperator in vcOperator and access it all form there.
+            this.vwOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)lesson.Operator;
+
 
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);

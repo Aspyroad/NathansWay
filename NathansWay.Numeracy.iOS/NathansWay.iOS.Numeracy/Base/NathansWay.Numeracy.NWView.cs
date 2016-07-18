@@ -23,10 +23,9 @@ namespace AspyRoad.iOSCore
 		// Protected iOSUIManager iOSUIAppearance;
         public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
         // Drawing
-        protected DrawingFactory iOSDrawingFactory;
+        protected DrawingFactory _iOSDrawingFactory;
         protected bool _bEnableDrawing;
         protected G__FactoryDrawings _drawing;
-        protected DrawLayer _drawedLayer;
 
 		#endregion
 
@@ -63,7 +62,7 @@ namespace AspyRoad.iOSCore
             if (disposing)
             {
                 this.iOSUIAppearance = null;
-                this.iOSDrawingFactory = null;
+                this._iOSDrawingFactory = null;
             }
         }
 
@@ -71,54 +70,50 @@ namespace AspyRoad.iOSCore
      
         #region Public Properties
 
-        public void EnableDrawing (G__FactoryDrawings drawing, CGSize scale, CGPoint startPoint)
-        {
-            this._bEnableDrawing = true;
-            // Begin stacking our factory
-            //this.iOSDrawingFactory.
-
-            //this._drawedLayer =
-                //this.iOSDrawingFactory.DrawOneOfThese(drawing, scale, startPoint);
-                
-        }
-
-        public void DisableDrawing()
-        {
-            this._bEnableDrawing = false;
-        }
-
         public G__FactoryDrawings DrawingType
         {
             get { return this._drawing; }
             set { this._drawing = value; }
         }
 
+        public DrawingFactory iOSDrawingFactory
+        {
+            get { return this._iOSDrawingFactory; }
+            set { this._iOSDrawingFactory = value; }
+        }
+
         #endregion
 
         #region Public Members
+
+        public void DrawLayer(G__FactoryDrawings drawing)
+        {
+            this.Layer.AddSublayer(this._iOSDrawingFactory.DrawLayer());
+
+        }
 
         #endregion
 
         #region Virtual Members
 
-        public virtual void Drawing(CGContext context)
-        {
+        //public virtual void Drawing()
+        //{
             
-        }
+        //}
 
 		#endregion
 
         #region Public Overrides
 
-        public override void Draw(CGRect rect)
-        {
-            base.Draw(rect);
+        //public override void Draw(CGRect rect)
+        //{
+        //    base.Draw(rect);
 
-            if (this._bEnableDrawing)
-            {
-                this.Drawing();
-            }
-        }
+        //    if (this._bEnableDrawing)
+        //    {
+        //        this.Drawing();
+        //    }
+        //}
 
         #endregion
 

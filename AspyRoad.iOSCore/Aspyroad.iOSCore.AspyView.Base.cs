@@ -27,10 +27,6 @@ namespace AspyRoad.iOSCore
         protected float _fBorderWidth;
         protected bool _bAutoApplyUI;
 
-        // Drawing
-        protected CGContext _cgContext;
-
-
 		#endregion
 
 		#region Contructors
@@ -263,12 +259,6 @@ namespace AspyRoad.iOSCore
 		#endregion
 
 		#region Overrides
-
-        public override void Draw(CGRect rect)
-        {
-            base.Draw(rect);
-
-        }
 
         public override UIViewAutoresizing AutoresizingMask
         {
