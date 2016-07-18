@@ -55,7 +55,7 @@ namespace NathansWay.iOS.Numeracy
             this.btnStartLesson.IndexRow = indexPath.Row;
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
-            this.vwOperator
+            //this.vwOperator
             //this.vwOperator.Dr(this._drawingFactory.GetLayerByMathOperator((G__MathOperator)lesson.Operator).);
 
             

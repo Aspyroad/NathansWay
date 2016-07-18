@@ -79,12 +79,12 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-                    return this._drawingFactory.FontColor;
+                    return this._drawingFactory.DrawColor;
                 }
             }
             set 
             {
-                this._drawingFactory.FontColor = value;
+                this._drawingFactory.DrawColor = value;
             }
         }
 

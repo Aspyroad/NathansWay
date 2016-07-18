@@ -6,6 +6,7 @@ using CoreGraphics;
 using AspyRoad.iOSCore.UISettings;
 
 // NathansWay
+using NathansWay.Shared;
 using NathansWay.iOS.Numeracy.Drawing;
 
 // Monotouch
@@ -24,6 +25,8 @@ namespace AspyRoad.iOSCore
         // Drawing
         protected DrawingFactory iOSDrawingFactory;
         protected bool _bEnableDrawing;
+        protected G__FactoryDrawings _drawing;
+        protected DrawLayer _drawedLayer;
 
 		#endregion
 
@@ -68,10 +71,26 @@ namespace AspyRoad.iOSCore
      
         #region Public Properties
 
-        public bool EnableDrawing
+        public void EnableDrawing (G__FactoryDrawings drawing, CGSize scale, CGPoint startPoint)
         {
-            get { return this._bEnableDrawing; }
-            set { this._bEnableDrawing = value; }
+            this._bEnableDrawing = true;
+            // Begin stacking our factory
+            //this.iOSDrawingFactory.
+
+            //this._drawedLayer =
+                //this.iOSDrawingFactory.DrawOneOfThese(drawing, scale, startPoint);
+                
+        }
+
+        public void DisableDrawing()
+        {
+            this._bEnableDrawing = false;
+        }
+
+        public G__FactoryDrawings DrawingType
+        {
+            get { return this._drawing; }
+            set { this._drawing = value; }
         }
 
         #endregion
@@ -82,8 +101,9 @@ namespace AspyRoad.iOSCore
 
         #region Virtual Members
 
-        public virtual void Drawing()
+        public virtual void Drawing(CGContext context)
         {
+            
         }
 
 		#endregion
@@ -94,7 +114,7 @@ namespace AspyRoad.iOSCore
         {
             base.Draw(rect);
 
-            if (this.EnableDrawing)
+            if (this._bEnableDrawing)
             {
                 this.Drawing();
             }
