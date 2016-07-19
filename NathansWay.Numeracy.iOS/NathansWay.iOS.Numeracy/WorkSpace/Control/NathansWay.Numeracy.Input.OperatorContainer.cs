@@ -22,7 +22,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // UI Components
         public AspyTextField txtOperator { get; private set; }
-        public vOperator _vOperator;
+        public vOperator _vOperator { get; private set; }
 
         //private vcMainContainer _viewcontollercontainer;
         private G__MathChar _operatorType;
@@ -84,7 +84,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.LoadView();
             this._vOperator = new vOperator();
-            this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
+            //this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
             this._vOperator.MathOperator = this._operatorType;
             this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
             this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;

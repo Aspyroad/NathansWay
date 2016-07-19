@@ -13,7 +13,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy
 {
     [Foundation.Register ("vOperator")]
-    public class vOperator : AspyView
+    public class vOperator : NWView
     {
         #region Private Variables
 

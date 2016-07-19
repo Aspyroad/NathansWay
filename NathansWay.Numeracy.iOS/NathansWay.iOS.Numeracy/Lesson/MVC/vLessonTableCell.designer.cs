@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AspyRoad.iOSCore.NWView vwOperator { get; set; }
+        NathansWay.iOS.Numeracy.vcOperator vcOperator { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -65,9 +65,9 @@ namespace NathansWay.iOS.Numeracy
                 lblType = null;
             }
 
-            if (vwOperator != null) {
-                vwOperator.Dispose ();
-                vwOperator = null;
+            if (vcOperator != null) {
+                vcOperator.Dispose ();
+                vcOperator = null;
             }
         }
     }

@@ -239,6 +239,10 @@
     <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
     <Compile Include="Contracts\EmptyInterface.cs" />
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UIDrawingFactory.cs" />
+    <Compile Include="vcOperator.cs" />
+    <Compile Include="vcOperator.designer.cs">
+      <DependentUpon>vcOperator.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AspyRoad.iOSCore\Aspyroad.iOSCore.csproj">

@@ -127,7 +127,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="NWView">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="vcOperator">
                                                     <rect key="frame" x="481" y="0.0" width="90" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -169,7 +169,7 @@
                                             <outlet property="lblEdit" destination="805" id="name-outlet-805"/>
                                             <outlet property="lblLessonName" destination="719" id="name-outlet-719"/>
                                             <outlet property="lblLevel" destination="718" id="name-outlet-718"/>
-                                            <outlet property="vwOperator" destination="726" id="name-outlet-726"/>
+                                            <outlet property="vcOperator" destination="726" id="name-outlet-726"/>
                                             <outlet property="lblType" destination="869" id="name-outlet-869"/>
                                         </connections>
                                     </tableViewCell>
