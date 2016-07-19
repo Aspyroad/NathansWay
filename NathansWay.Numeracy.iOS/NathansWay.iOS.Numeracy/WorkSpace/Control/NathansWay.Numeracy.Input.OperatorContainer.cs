@@ -11,6 +11,7 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
+    [Foundation.Register("vcOperatorText")]
     public class vcOperatorText : BaseContainer
     {
 
@@ -325,6 +326,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return this._fOperatorStartpointY; }
             set { this._fOperatorStartpointY = value; }
+        }
+
+        public CGPoint OperatorStartpoint
+        {
+            get
+            {
+                return new CGPoint(this._fOperatorStartpointY, this._fOperatorStartpointX);
+            }
         }
 
         #endregion

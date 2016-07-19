@@ -11,8 +11,8 @@ using UIKit;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [Register ("vcOperator")]
-    partial class vcOperator
+    [Register ("vOperator")]
+    partial class vOperator
     {
         void ReleaseDesignerOutlets ()
         {

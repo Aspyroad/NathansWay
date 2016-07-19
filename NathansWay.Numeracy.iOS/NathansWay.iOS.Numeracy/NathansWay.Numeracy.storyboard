@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="13F34" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" variant="6xAndEarlier" propertyAccessControl="none" initialViewController="JYt-to-IEW">
     <dependencies>
         <deployment version="1296" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--Menu-->
@@ -62,7 +62,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" id="941">
@@ -101,7 +101,7 @@
                                     <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="866" customClass="ButtonOrderBy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="866" customClass="AspyButton">
                                 <rect key="frame" x="571" y="126" width="100" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Type">
@@ -111,7 +111,7 @@
                             <tableView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="46" sectionHeaderHeight="1" sectionFooterHeight="1" id="709" customClass="AspyTableView">
                                 <rect key="frame" x="2" y="168" width="737" height="598"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" shouldIndentWhileEditing="NO" reuseIdentifier="LessonTableCell" rowHeight="46" id="710" customClass="vLessonTableCell">
                                         <rect key="frame" x="0.0" y="1" width="737" height="46"/>
@@ -127,7 +127,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="vcOperator">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Operator" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="726" customClass="vOperator">
                                                     <rect key="frame" x="481" y="0.0" width="90" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -138,7 +138,7 @@
                                                     <rect key="frame" x="224" y="0.0" width="255" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.79999999999999982" contentMode="left" text="0" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="718" customClass="LevelLabel">
@@ -169,8 +169,8 @@
                                             <outlet property="lblEdit" destination="805" id="name-outlet-805"/>
                                             <outlet property="lblLessonName" destination="719" id="name-outlet-719"/>
                                             <outlet property="lblLevel" destination="718" id="name-outlet-718"/>
-                                            <outlet property="vcOperator" destination="726" id="name-outlet-726"/>
                                             <outlet property="lblType" destination="869" id="name-outlet-869"/>
+                                            <outlet property="vOperator" destination="726" id="name-outlet-726"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -180,7 +180,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="140"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2ZY-n5-0zu" customClass="ButtonLabelStyle">
@@ -376,10 +376,10 @@
             </objects>
             <point key="canvasLocation" x="1502" y="-1941"/>
         </scene>
-        <!--Vc Number Pad-->
+        <!--Numeric Keypad-->
         <scene sceneID="M4W-6j-fu5">
             <objects>
-                <viewController storyboardIdentifier="vcNumberPad" id="DGX-GF-oXm" customClass="vcNumberPad" sceneMemberID="viewController" title="Numeric Keypad">
+                <viewController storyboardIdentifier="vcNumberPad" title="Numeric Keypad" id="DGX-GF-oXm" customClass="vcNumberPad" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r7Y-Cc-khW" customClass="vNumberPad">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="260"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -519,7 +519,7 @@
                             <button autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1iY-a0-hmX" userLabel="btnLocked" customClass="ButtonNumberPad">
                                 <rect key="frame" x="4" y="232" width="152" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="16"/>
                                 <state key="normal" title="Lock">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -545,7 +545,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -626,14 +626,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Pts-rM-MJg" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="2" width="168" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Options">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
                             <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2QH-PW-E96" customClass="ButtonLabelStyle">
@@ -679,7 +679,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" lineBreakMode="tailTruncation" minimumFontSize="10" id="1130" customClass="AspyLabel">
@@ -687,7 +687,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -697,11 +697,11 @@
                     <size key="freeformSize" width="1016" height="200"/>
                     <connections>
                         <outlet property="btnBackToLessons" destination="1120" id="name-outlet-1120"/>
-                        <outlet property="btnPosition" destination="Ho1-ee-a5I" id="name-outlet-Ho1-ee-a5I"/>
                         <outlet property="btnMethods" destination="1N6-Jx-U0q" id="name-outlet-1N6-Jx-U0q"/>
                         <outlet property="btnNextEquation" destination="TWY-au-o8H" id="name-outlet-TWY-au-o8H"/>
                         <outlet property="btnOption2" destination="9N0-DI-D33" id="name-outlet-9N0-DI-D33"/>
                         <outlet property="btnOptions" destination="Pts-rM-MJg" id="name-outlet-Pts-rM-MJg"/>
+                        <outlet property="btnPosition" destination="Ho1-ee-a5I" id="name-outlet-Ho1-ee-a5I"/>
                         <outlet property="btnPrevEquation" destination="cVp-A6-A5I" id="name-outlet-cVp-A6-A5I"/>
                         <outlet property="btnSizeHuge" destination="1109" id="name-outlet-1109"/>
                         <outlet property="btnSizeLarge" destination="1108" id="name-outlet-1108"/>
@@ -717,70 +717,70 @@
             </objects>
             <point key="canvasLocation" x="-131" y="-1084"/>
         </scene>
-        <!--Vc Positioning Dialog-->
+        <!--WorkSpace Positioning-->
         <scene sceneID="1191">
             <objects>
-                <viewController id="1192" customClass="vcPositioningDialog" sceneMemberID="viewController" storyboardIdentifier="vcPositioningDialog" title="WorkSpace Positioning">
+                <viewController storyboardIdentifier="vcPositioningDialog" title="WorkSpace Positioning" id="1192" customClass="vcPositioningDialog" sceneMemberID="viewController">
                     <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="1193" customClass="vPositioningDialog">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="168"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" colorSpace="calibratedWhite" white="0.666666666666667" alpha="1"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1206" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="2" width="296" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0" alpha="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="1">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTouch_btnCenterQuestion:" destination="1192" id="1218" eventType="touchUpInside"/>
+                                    <action selector="OnTouch_btnCenterQuestion:" destination="1192" eventType="touchUpInside" id="1218"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1207" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="42" width="296" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0" alpha="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="2">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTouch_btnCenterMethods:" destination="1192" id="1219" eventType="touchUpInside"/>
+                                    <action selector="OnTouch_btnCenterMethods:" destination="1192" eventType="touchUpInside" id="1219"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1208" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="84" width="296" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0" alpha="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="3">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTouch_btnLockAnswer:" destination="1192" id="1220" eventType="touchUpInside"/>
+                                    <action selector="OnTouch_btnLockAnswer:" destination="1192" eventType="touchUpInside" id="1220"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1209" customClass="ButtonLabelStyle">
                                 <rect key="frame" x="2" y="126" width="296" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" colorSpace="calibratedWhite" white="0" alpha="1"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="4">
-                                    <color key="titleShadowColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="OnTouch_btnLockSolveButton:" destination="1192" id="1221" eventType="touchUpInside"/>
+                                    <action selector="OnTouch_btnLockSolveButton:" destination="1192" eventType="touchUpInside" id="1221"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="300" height="168"/>
                     <connections>
-                        <outlet property="vPositioningDialog" destination="1193" id="name-outlet-1193"/>
-                        <outlet property="btnCenterQuestion" destination="1206" id="name-outlet-1206"/>
                         <outlet property="btnCenterMethods" destination="1207" id="name-outlet-1207"/>
+                        <outlet property="btnCenterQuestion" destination="1206" id="name-outlet-1206"/>
                         <outlet property="btnLockAnswer" destination="1208" id="name-outlet-1208"/>
                         <outlet property="btnLockSolveButton" destination="1209" id="name-outlet-1209"/>
+                        <outlet property="vPositioningDialog" destination="1193" id="name-outlet-1193"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1194" userLabel="First Responder" sceneMemberID="firstResponder"/>

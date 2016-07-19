@@ -17,12 +17,7 @@ namespace NathansWay.iOS.Numeracy
     {
         #region Private Variables
 
-        //private G__MathChar _mathOperator;
-        //private nfloat _fScale;
-        private nfloat _fOperatorStartpointX;
-        private nfloat _fOperatorStartpointY;
         private UIColor _fontColor;
-        private DrawingFactory _drawingFactory;
 
         #endregion
         
@@ -63,54 +58,17 @@ namespace NathansWay.iOS.Numeracy
             set;
         }
 
-        public nfloat ImageScale
-        {
-            get;
-            set;
-        }
-
-        public UIColor FontColor
-        {
-            get
-            {
-                if (this._fontColor == null)
-                {
-                    return UIColor.Black;
-                }
-                else
-                {
-                    return this._drawingFactory.PrimaryFillColor;
-                }
-            }
-            set 
-            {
-                this._drawingFactory.PrimaryFillColor = value;
-            }
-        }
-
-        public nfloat OperatorStartpointX
-        {
-            //get;
-            set { this._fOperatorStartpointX = value; }
-        }
-
-        public nfloat OperatorStartpointY
-        {
-            //get;
-            set { this._fOperatorStartpointY = value; }
-        }
-
         #endregion
 
         #region Overrides
 
-        public override void Draw(CGRect rect)
-        {
-            // Custom draws
-            DrawOperator();
-            // Base
-            base.Draw (rect);
-        }
+        //public override void Draw(CGRect rect)
+        //{
+        //    // Custom draws
+        //    DrawOperator();
+        //    // Base
+        //    base.Draw (rect);
+        //}
 
         #endregion
 

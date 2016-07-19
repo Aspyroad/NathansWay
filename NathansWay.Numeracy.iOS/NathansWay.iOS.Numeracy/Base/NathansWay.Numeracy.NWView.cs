@@ -86,10 +86,9 @@ namespace AspyRoad.iOSCore
 
         #region Public Members
 
-        public void DrawLayer(G__FactoryDrawings drawing)
+        public void DrawLayer()
         {
             this.Layer.AddSublayer(this._iOSDrawingFactory.DrawLayer());
-
         }
 
         #endregion

@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.vcOperator vcOperator { get; set; }
+        NathansWay.iOS.Numeracy.vOperator vOperator { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
@@ -65,9 +65,9 @@ namespace NathansWay.iOS.Numeracy
                 lblType = null;
             }
 
-            if (vcOperator != null) {
-                vcOperator.Dispose ();
-                vcOperator = null;
+            if (vOperator != null) {
+                vOperator.Dispose ();
+                vOperator = null;
             }
         }
     }

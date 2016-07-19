@@ -4,9 +4,9 @@ using UIKit;
 
 namespace NathansWay.iOS.Numeracy
 {
-    public partial class vcOperator : UILabel
+    public partial class vcOperatorText : UILabel
     {
-        public vcOperator (IntPtr handle) : base (handle)
+        public vcOperatorText (IntPtr handle) : base (handle)
         {
         }
     }

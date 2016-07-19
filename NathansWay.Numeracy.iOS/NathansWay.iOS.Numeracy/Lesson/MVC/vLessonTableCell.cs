@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy
         private vcLessonMenu _vcLessonMenu;
         // Create Action delegate for Method1.
         private Action actOpenLesson;
-        private DrawingFactory _drawingFactory;
+        //private DrawingFactory _drawingFactory;
 		 
         #endregion
 
@@ -49,6 +49,8 @@ namespace NathansWay.iOS.Numeracy
 
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
+            //var vwOp = vcOperator._vOperator;
+            //var drawfact = vwOp.iOSDrawingFactory;
             this._vcLessonMenu = controller;
             // Set the start buttons seq and row number for easy launching from the button
             this.btnStartLesson.Seq = lesson.SEQ;
@@ -61,8 +63,11 @@ namespace NathansWay.iOS.Numeracy
             // I need access to the size control.
             // So replace the story board with an instance of vcOperator
             // Add a reference to vwOperator in vcOperator and access it all form there.
-            this.vwOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)lesson.Operator;
 
+            //drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
+            //drawfact.DrawStartPoint = this.vcOperator.OperatorSize.OperatorStartpoint;
+            //drawfact.DrawFrame = vwOp.Frame;
+            //vwOp.DrawLayer();
 
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
