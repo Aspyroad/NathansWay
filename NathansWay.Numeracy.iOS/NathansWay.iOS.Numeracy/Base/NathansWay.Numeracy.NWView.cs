@@ -91,7 +91,9 @@ namespace AspyRoad.iOSCore
             var x = this._iOSDrawingFactory.DrawLayer();
             if (x != null)
             {
+                x.Contents = null;
                 this.Layer.AddSublayer(x);
+
                 this.SetNeedsDisplay();
             }
         }

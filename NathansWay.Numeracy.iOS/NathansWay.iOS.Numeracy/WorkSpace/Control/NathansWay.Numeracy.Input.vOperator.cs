@@ -62,29 +62,15 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        //public override void Draw(CGRect rect)
-        //{
-        //    // Custom draws
-        //    DrawOperator();
-        //    // Base
-        //    base.Draw (rect);
-        //}
+        public override void Draw(CGRect rect)
+        {
+            base.Draw(rect);
+        }
 
         #endregion
 
         #region Public Members
        
-        public void DrawOperator()
-        {
-            //if (this._drawingFunctions == null)
-            //{
-            //    this._drawingFunctions = iOSCoreServiceContainer.Resolve<DrawingFactory>();
-            //}
-
-            //CGPoint _point = new CGPoint(this._fOperatorStartpointX, this._fOperatorStartpointY);
-            //this._drawingFunctions.DrawMathChar(_point, MathOperator);
-
-        }
 
         #endregion
 

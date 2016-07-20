@@ -270,36 +270,39 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             DrawLayer _layer;
 
-            if (this._dictDrawnLayers.TryGetValue(_drawType, out _layer))
-            {
-                if (_layer == null)
-                {
-                    // Create the layer
-                    _layer = new DrawLayer(this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
-                }
-                else
-                {
+            _layer = new DrawLayer();
+            //if (this._dictDrawnLayers.TryGetValue(_drawType, out _layer))
+            //{
+            //    if (_layer == null)
+            //    {
+            //        // Create the layer
+            //        _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
+            //    }
+            //    else
+            //    {
                     _layer.FillColor = this.PrimaryFillColor;
+            _layer.Frame = DrawFrame;
                     _layer.ScaleFactor = this.DrawScale;
                     _layer.StartPoint = this.DrawStartPoint;
-                }
+            _layer.BackgroundColor = UIColor.Brown.CGColor;
+            //    }
 
-                if (!this._rectBounds.IsNull())
-                {
-                    _layer.Bounds = this._rectBounds;
-                }
+            //    if (!this._rectBounds.IsNull())
+            //    {
+            //        _layer.Bounds = this._rectBounds;
+            //    }
 
-                if (!this._rectFrame.IsNull())
-                {
-                    _layer.Frame = this._rectFrame;    
-                }
+            //    if (!this._rectFrame.IsNull())
+            //    {
+            //        _layer.Frame = this._rectFrame;    
+            //    }
 
                 if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
                 {
                     _layer.DrawingDelegate = _drawingDelegate;
                 }
-                _layer.Opacity = 1.0f;
-            }
+                //_layer.Opacity = 1.0f;
+            //}
 
             return _layer;
         }
@@ -408,17 +411,26 @@ namespace NathansWay.iOS.Numeracy.Drawing
         #endregion
 
         #region Constructors
+        [Export("init")]
+        public DrawLayer() : base()
+        {
+            // Do nothing, since we override Clone, but we could
+            // just clone the data here as well if we wanted to.
+            this.Frame = new CGRect(0.0f, 0.0f, 40.0f, 40.0f);
+        }
 
         [Export("initWithLayer:")]
         public DrawLayer(DrawLayer _other) : base(_other)
         {
             // Do nothing, since we override Clone, but we could
             // just clone the data here as well if we wanted to.
+            //this.Frame = new CGRect(0.0f, 0.0f, 20.0f, 20.0f);
         }
 
         // This is the constructor you would use to create your new CALayer
-        public DrawLayer(UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
+        public DrawLayer(CGRect myframe, UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
         {
+            this.Frame = myframe;
             this.FillColor = fillColor;
             this.ScaleFactor = scaleFactor;
             this.StartPoint = startPoint;
@@ -454,23 +466,28 @@ namespace NathansWay.iOS.Numeracy.Drawing
             //_other.strokeWidth = other.strokeWidth;
         }
 
-        public override void RenderInContext(CGContext ctx)
+        //public override void RenderInContext(CGContext ctx)
+        //{
+        //    base.RenderInContext(ctx);
+
+        //    ctx.SaveState();
+
+        //    ////// Addition Drawing
+        //    ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
+        //    ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
+        //    if (this._drawingDelegate != null)
+        //    {
+        //        this._drawingDelegate.Invoke(ctx);
+        //    }
+
+        //    this.FillColor.SetFill();
+        //    ctx.RestoreState();
+        //}
+
+        public override void Display()
         {
-            base.RenderInContext(ctx);
-
-            ctx.SaveState();
-
-            ////// Addition Drawing
-            ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
-            ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
-
-            if (this._drawingDelegate != null)
-            {
-                this._drawingDelegate.Invoke(ctx);
-            }
-
-            this.FillColor.SetFill();
-            ctx.RestoreState();
+            base.Display();
         }
 
         public override void DrawInContext(CGContext ctx)
