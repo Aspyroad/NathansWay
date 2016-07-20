@@ -49,8 +49,7 @@ namespace NathansWay.iOS.Numeracy
 
 		public void SetLessonCell (vcLessonMenu controller, EntityLesson lesson, NSIndexPath indexPath)
 		{
-            //var vwOp = vcOperator._vOperator;
-            //var drawfact = vwOp.iOSDrawingFactory;
+            var drawfact = vOperator.iOSDrawingFactory;
             this._vcLessonMenu = controller;
             // Set the start buttons seq and row number for easy launching from the button
             this.btnStartLesson.Seq = lesson.SEQ;
@@ -64,10 +63,12 @@ namespace NathansWay.iOS.Numeracy
             // So replace the story board with an instance of vcOperator
             // Add a reference to vwOperator in vcOperator and access it all form there.
 
-            //drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
-            //drawfact.DrawStartPoint = this.vcOperator.OperatorSize.OperatorStartpoint;
-            //drawfact.DrawFrame = vwOp.Frame;
-            //vwOp.DrawLayer();
+            drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
+            drawfact.DrawStartPoint = new CGPoint(0.0f, 0.0f);
+            drawfact.DrawBounds = vOperator.Bounds;
+            drawfact.DrawFrame = vOperator.Frame;
+            vOperator.BackgroundColor = UIColor.Purple;
+            vOperator.DrawLayer();
 
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
@@ -120,10 +121,6 @@ namespace NathansWay.iOS.Numeracy
         {
             base.AwakeFromNib();
             this.btnStartLesson.TouchUpInside += OnClick_btnbtnStartLesson;
-            if (this._drawingFactory == null)
-            {
-                this._drawingFactory = iOSCoreServiceContainer.Resolve<DrawingFactory>();
-            }
         }            
 
 		#endregion

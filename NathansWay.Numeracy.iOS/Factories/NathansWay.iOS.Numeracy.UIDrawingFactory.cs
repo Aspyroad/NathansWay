@@ -206,7 +206,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 if (this._scaleFactor.IsEmpty)
                 {
                     // Scale factor of zero
-                    return new CGSize(1.0f, 1.0f);
+                    return new CGSize(20.0f, 20.0f);
                 }
                 else
                 {
@@ -247,7 +247,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
             set
             {
-                this._rectFrame = value;
+                this._rectFrame = new CGRect(0.0f, 0.0f, value.Width, value.Height);
             }
         }
 
@@ -259,7 +259,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
             set
             {
-                this._rectBounds = value;
+                this._rectBounds = new CGRect(0.0f, 0.0f, value.Width, value.Height);
             }
         }
 
@@ -275,28 +275,30 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 if (_layer == null)
                 {
                     // Create the layer
-                    _layer = new DrawLayer(this._primaryFillColor, this._scaleFactor, this._startPoint);
+                    _layer = new DrawLayer(this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
                 }
                 else
                 {
-                    _layer.FillColor = this._primaryFillColor;
-                    _layer.ScaleFactor = this._scaleFactor;
-                    _layer.StartPoint = this._startPoint;
+                    _layer.FillColor = this.PrimaryFillColor;
+                    _layer.ScaleFactor = this.DrawScale;
+                    _layer.StartPoint = this.DrawStartPoint;
+                }
+
+                if (!this._rectBounds.IsNull())
+                {
+                    _layer.Bounds = this._rectBounds;
                 }
 
                 if (!this._rectFrame.IsNull())
                 {
                     _layer.Frame = this._rectFrame;    
                 }
-                if (!this._rectBounds.IsNull())
-                {
-                    _layer.Bounds = this._rectBounds;
-                }
 
                 if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
                 {
                     _layer.DrawingDelegate = _drawingDelegate;
                 }
+                _layer.Opacity = 1.0f;
             }
 
             return _layer;
@@ -450,6 +452,25 @@ namespace NathansWay.iOS.Numeracy.Drawing
             //_other.fillColor = other.fillColor;
             //_other.strokeColor = other.strokeColor;
             //_other.strokeWidth = other.strokeWidth;
+        }
+
+        public override void RenderInContext(CGContext ctx)
+        {
+            base.RenderInContext(ctx);
+
+            ctx.SaveState();
+
+            ////// Addition Drawing
+            ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
+            ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
+            if (this._drawingDelegate != null)
+            {
+                this._drawingDelegate.Invoke(ctx);
+            }
+
+            this.FillColor.SetFill();
+            ctx.RestoreState();
         }
 
         public override void DrawInContext(CGContext ctx)

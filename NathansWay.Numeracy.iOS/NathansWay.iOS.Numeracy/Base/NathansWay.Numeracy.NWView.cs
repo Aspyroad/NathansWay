@@ -88,7 +88,12 @@ namespace AspyRoad.iOSCore
 
         public void DrawLayer()
         {
-            this.Layer.AddSublayer(this._iOSDrawingFactory.DrawLayer());
+            var x = this._iOSDrawingFactory.DrawLayer();
+            if (x != null)
+            {
+                this.Layer.AddSublayer(x);
+                this.SetNeedsDisplay();
+            }
         }
 
         #endregion

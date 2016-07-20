@@ -37,25 +37,25 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcOperatorText (IntPtr h) : base (h)
         {
-            Initialize_();
+            Initialize();
         }
 
         [Export("initWithCoder:")]
         public vcOperatorText (NSCoder coder) : base(coder)
         {
-            Initialize_();
+            Initialize();
         }
 
         public vcOperatorText ()
         {
-            Initialize_();
+            Initialize();
         }
 
         public vcOperatorText (G__MathChar operatortype, string strOperator)
         {
             this._operatorType = operatortype;
             this._strOperator = strOperator;
-            Initialize_();
+            Initialize();
         }
 
         #endregion
@@ -85,10 +85,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.LoadView();
             this._vOperator = new vOperator();
+            // TODO: Sizing? Im thinking for the vc sizeclass should be totally in charge
             //this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
             this._vOperator.MathOperator = this._operatorType;
-            this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
-            this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;
+            this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
+            this._vOperator.iOSDrawingFactory.DrawStartPoint = this.OperatorSize.OperatorStartpoint;
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
@@ -104,8 +105,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Call to the derived sizeclass setotherpositions()
             this.OperatorSize.SetSubViewPositions();
             // Set drawn graphic positions
-            this._vOperator.OperatorStartpointX = this.OperatorSize.OperatorStartpointX;
-            this._vOperator.OperatorStartpointY = this.OperatorSize.OperatorStartpointY;
+            this._vOperator.iOSDrawingFactory.DrawStartPoint = this.OperatorSize.OperatorStartpoint;
             // Base Container will call vc set mainframe.
             base.ViewWillAppear(animated);
         }
@@ -214,7 +214,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Private Members
         
-        protected void Initialize_ ()
+        protected void Initialize ()
         {
             this.AspyTag1 = 600105;
             this.AspyName = "VC_DecimalText";
