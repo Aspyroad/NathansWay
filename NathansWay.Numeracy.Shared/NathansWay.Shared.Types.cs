@@ -11,17 +11,14 @@ namespace NathansWay.Shared
 
     public enum G__FactoryDrawings : int
     {
-        // 
-        //Addition = 1,
-        //Subtraction = 2,
-        //Division = 3,
-        //Multiplication = 4,
-
+        All = G__MathOperator.All,
         Addition = G__MathOperator.Addition,
         Subtraction = G__MathOperator.Subtraction,
         Division = G__MathOperator.Division,
         Multiplication = G__MathOperator.Multiplication,
-        Equals = 5,
+        AddSub = G__MathOperator.AddSub,
+        DivMulti = G__MathOperator.DivMulti,
+        Equals = 7,
     }
 
     #endregion

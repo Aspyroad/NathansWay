@@ -16,6 +16,24 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Drawing
 {
+
+    //class StudentName
+    //{
+    //    public string FirstName { get; set; }
+    //    public string LastName { get; set; }
+    //    public int ID { get; set; }
+    //}
+
+    //class CollInit
+    //{
+    //    Dictionary<int, StudentName> students = new Dictionary<int, StudentName>()
+    //{
+    //    { 111, new StudentName {FirstName="Sachin", LastName="Karnik", ID=211}},
+    //    { 112, new StudentName {FirstName="Dina", LastName="Salimzianova", ID=317}},
+    //    { 113, new StudentName {FirstName="Andy", LastName="Ruth", ID=198}}
+    //};
+    //}
+
     public class DrawData
     {
         public UIColor PrimaryFillColor { get; set; }
@@ -74,11 +92,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
 
             this._dictDrawnLayers = new Dictionary<G__FactoryDrawings, DrawLayer>();
-            this._dictDrawnLayers.Add(G__FactoryDrawings.Addition, this._layerAddition);
-            this._dictDrawnLayers.Add(G__FactoryDrawings.Multiplication, this._layerAddition);
-            this._dictDrawnLayers.Add(G__FactoryDrawings.Division, this._layerDivision);
-            this._dictDrawnLayers.Add(G__FactoryDrawings.Equals, this._layerEquals);
-            this._dictDrawnLayers.Add(G__FactoryDrawings.Subtraction, this._layerSubtraction);
+
         }
 
         #endregion
@@ -265,44 +279,37 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #endregion
 
-
         public DrawLayer DrawLayer()
         {
             DrawLayer _layer;
 
-            _layer = new DrawLayer();
-            //if (this._dictDrawnLayers.TryGetValue(_drawType, out _layer))
-            //{
-            //    if (_layer == null)
-            //    {
-            //        // Create the layer
-            //        _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
-            //    }
-            //    else
-            //    {
-                    _layer.FillColor = this.PrimaryFillColor;
-            _layer.Frame = DrawFrame;
-                    _layer.ScaleFactor = this.DrawScale;
-                    _layer.StartPoint = this.DrawStartPoint;
-            _layer.BackgroundColor = UIColor.Brown.CGColor;
-            //    }
-
-            //    if (!this._rectBounds.IsNull())
-            //    {
-            //        _layer.Bounds = this._rectBounds;
-            //    }
-
-            //    if (!this._rectFrame.IsNull())
-            //    {
-            //        _layer.Frame = this._rectFrame;    
-            //    }
-
+            if (this._dictDrawnLayers.TryGetValue(this._drawType, out _layer))
+            {
+                _layer.FillColor = this.PrimaryFillColor;
+                _layer.Frame = DrawFrame;
+                _layer.ScaleFactor = this.DrawScale;
+                _layer.StartPoint = this.DrawStartPoint;
+            }
+            else
+            {
+                _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
+                // Set the drawing type
                 if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
                 {
                     _layer.DrawingDelegate = _drawingDelegate;
                 }
-                //_layer.Opacity = 1.0f;
-            //}
+                // Add the fucker
+                this._dictDrawnLayers.Add(this._drawType, _layer);
+            }
+
+            if (true)
+            {
+                _layer.BackgroundColor = UIColor.Brown.CGColor;
+                _layer.Opacity = 1.0f;
+                // Think of any others we need to set
+
+
+            }
 
             return _layer;
         }
@@ -416,7 +423,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             // Do nothing, since we override Clone, but we could
             // just clone the data here as well if we wanted to.
-            this.Frame = new CGRect(0.0f, 0.0f, 40.0f, 40.0f);
+            //this.Frame = new CGRect(0.0f, 0.0f, 40.0f, 40.0f);
+
         }
 
         [Export("initWithLayer:")]
@@ -424,13 +432,13 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             // Do nothing, since we override Clone, but we could
             // just clone the data here as well if we wanted to.
-            //this.Frame = new CGRect(0.0f, 0.0f, 20.0f, 20.0f);
+            // this.Frame = new CGRect(0.0f, 0.0f, 20.0f, 20.0f);
         }
 
         // This is the constructor you would use to create your new CALayer
-        public DrawLayer(CGRect myframe, UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
+        public DrawLayer(CGRect mybounds, UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
         {
-            this.Frame = myframe;
+            this.Bounds = mybounds;
             this.FillColor = fillColor;
             this.ScaleFactor = scaleFactor;
             this.StartPoint = startPoint;
@@ -466,29 +474,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             //_other.strokeWidth = other.strokeWidth;
         }
 
-        //public override void RenderInContext(CGContext ctx)
-        //{
-        //    base.RenderInContext(ctx);
-
-        //    ctx.SaveState();
-
-        //    ////// Addition Drawing
-        //    ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
-        //    ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
-
-        //    if (this._drawingDelegate != null)
-        //    {
-        //        this._drawingDelegate.Invoke(ctx);
-        //    }
-
-        //    this.FillColor.SetFill();
-        //    ctx.RestoreState();
-        //}
-
-        public override void Display()
-        {
-            base.Display();
-        }
 
         public override void DrawInContext(CGContext ctx)
         {
@@ -503,7 +488,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             if (this._drawingDelegate != null)
             {
-                this._drawingDelegate.Invoke(ctx);
+                //this._drawingDelegate.Invoke(ctx);
             }
 
             this.FillColor.SetFill();

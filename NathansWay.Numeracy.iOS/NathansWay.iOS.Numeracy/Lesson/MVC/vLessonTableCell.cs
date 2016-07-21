@@ -65,11 +65,10 @@ namespace NathansWay.iOS.Numeracy
 
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             drawfact.DrawStartPoint = new CGPoint(0.0f, 0.0f);
-            //drawfact.DrawBounds = vOperator.Bounds;
+            drawfact.DrawBounds = vOperator.Bounds;
             drawfact.DrawFrame = vOperator.Frame;
             vOperator.BackgroundColor = UIColor.Purple;
             vOperator.DrawLayer();
-
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;

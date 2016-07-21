@@ -93,8 +93,9 @@ namespace AspyRoad.iOSCore
             {
                 x.Contents = null;
                 this.Layer.AddSublayer(x);
-
-                this.SetNeedsDisplay();
+                // This one line took me hours over the period of 19-21 July 2016
+                // We need to call setneedsdisply to FORCE drawincontext to be called.
+                x.SetNeedsDisplay();
             }
         }
 
