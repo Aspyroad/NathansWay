@@ -710,7 +710,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.NumberSize.AutoSetPickerPosition();
 
             // Reset the new frames - these are value types
-            this.View.Frame = this._sizeNumber.RectMainFrame;
+            this.View.Frame = this._sizeNumber.RectFrame;
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
 
             // Create the picker class
@@ -772,7 +772,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void CloseNumberPicker()
         {
-            this.View.Frame = _sizeClass.RectMainFrame;
+            this.View.Frame = _sizeClass.RectFrame;
             this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
             this.singleTapGesture = null;
             this.pkNumberPicker.Delegate = null;
@@ -897,7 +897,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
-            this.View.Frame = this._sizeClass.RectMainFrame;
+            this.View.Frame = this._sizeClass.RectFrame;
             this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
 
             this.IsInEditMode = false;
@@ -1257,7 +1257,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
@@ -1280,7 +1280,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth,
@@ -1296,7 +1296,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
@@ -1335,7 +1335,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 
@@ -1358,7 +1358,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth,
@@ -1374,7 +1374,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 

@@ -247,10 +247,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetHeightWidth();
         }
 
-        public override void SetScale (nint _scale)
-        {
-            base.SetScale(_scale);
-        }
 
         public override void SetFrames()
         {

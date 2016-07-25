@@ -230,7 +230,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void SetFrames ()
         {
-            this.RectMainFrame = new CGRect(
+            this.RectFrame = new CGRect(
                 this.StartPoint.X, 
                 this.StartPoint.Y, 
                 this.CurrentWidth, 

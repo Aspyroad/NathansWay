@@ -62,6 +62,9 @@ namespace NathansWay.iOS.Numeracy
         // When height and width are adjusted left/right - top/bottom padding is added.
 
         protected CGSize _scaleFactor;
+        private CGPoint _startPoint;
+        private CGRect _rectFrame;
+        private CGRect _rectBounds;
 
         // TODO: 24/05/2016
         // Add padding counts when they are added then setup accessor functions to return
@@ -115,6 +118,9 @@ namespace NathansWay.iOS.Numeracy
             this._setMiddleRightPosX = false;
             this._fPaddingPositional = 1.0f;
 
+            this._scaleFactor = new CGSize(1.0f, 1.0f);
+
+            // TODO: Sizeclass types - fucked, make this an enum for fuckssake!
             this._bMultiNumberLabel = false;
             this._bIsFraction = false;
         }
@@ -250,12 +256,12 @@ namespace NathansWay.iOS.Numeracy
 
         #region Virtual Members
 
-        // Override for label formatting of font, size etc
+        // Override for label formatting of font size etc
         public virtual void SetNumberFont (AspyLabel _lbl)
         {
         }
 
-        // Override for text formatting of font, size etc
+        // Override for text formatting of font size etc
         public virtual void SetNumberFont (AspyTextField _txt)
         {
         }
@@ -271,13 +277,9 @@ namespace NathansWay.iOS.Numeracy
             this._fCurrentHeight = _height;
         }
 
-        public virtual void SetScale (nint _scale)
+        public virtual void SetScale (nfloat _scale)
         {
-            //var x = _vc.txtNumber.Font.PointSize;
-            //x = x + 50.0f;
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
-            //_vc.View.Transform = CGAffineTransform.MakeScale(1.0f, 1.0f);
-            //_vc.txtNumber.Font = _vc.txtNumber.Font.WithSize(x);
+
         }
 
         /// <summary>
@@ -370,6 +372,39 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
+        public CGSize Scale
+        {
+            get
+            {
+                return this._scaleFactor;
+            }
+            set
+            {
+                this._scaleFactor = value;
+            }
+        }
+
+
+        public CGRect RectFramePostitionZero
+        {
+            get
+            {
+                return new CGRect(0.0f, 0.0f, this._rectFrame.Width, this._rectFrame.Height);
+            }
+        }
+
+        //public CGRect DrawBounds
+        //{
+        //    get
+        //    {
+        //        return this._rectBounds;
+        //    }
+        //    set
+        //    {
+        //        this._rectBounds = new CGRect(0.0f, 0.0f, value.Width, value.Height);
+        //    }
+        //}
+
         // X Horizontal
         // Y Vertical
         // Starting point when the control is created 
@@ -384,7 +419,7 @@ namespace NathansWay.iOS.Numeracy
             get
             {                
                 return this.ParentContainer.ParentViewController.View.ConvertPointToView(
-                    this.RectMainFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow.RootViewController.View);
+                    this.RectFrame.Location, this.ParentContainer.iOSGlobals.G__MainWindow.RootViewController.View);
             }
         }
          // Parent Container
@@ -402,7 +437,12 @@ namespace NathansWay.iOS.Numeracy
             }
         }
         // Main Control Frame
-        public CGRect RectMainFrame { get; set; }
+        public CGRect RectFrame 
+        { 
+            get; 
+            set; 
+        }
+
         // General Width and Height Variables
         public nfloat CurrentWidth 
         { 
@@ -442,8 +482,16 @@ namespace NathansWay.iOS.Numeracy
             } 
         }
 
-        public nfloat OldHeight { get; set; }
-        public nfloat OldWidth { get; set; }
+        public nfloat OldHeight 
+        { 
+            get; 
+            set; 
+        }
+        public nfloat OldWidth 
+        { 
+            get; 
+            set; 
+        }
 
         public vcMainContainer VcMainContainer { get; set; }
 

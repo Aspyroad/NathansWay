@@ -64,9 +64,12 @@ namespace NathansWay.iOS.Numeracy
             // Add a reference to vwOperator in vcOperator and access it all form there.
 
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
-            drawfact.DrawStartPoint = new CGPoint(0.0f, 0.0f);
-            drawfact.DrawBounds = vOperator.Bounds;
-            drawfact.DrawFrame = vOperator.Frame;
+            // Set the drawing in the middle of the view
+            drawfact.SetCenterRelativeParentViewPosY = true;
+            drawfact.SetCenterRelativeParentViewPosX = true;
+
+            drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
+            drawfact.RectFrame = vOperator.Frame;
             vOperator.BackgroundColor = UIColor.Purple;
             vOperator.DrawLayer();
             

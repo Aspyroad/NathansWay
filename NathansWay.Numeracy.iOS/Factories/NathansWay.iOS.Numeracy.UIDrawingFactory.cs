@@ -17,15 +17,15 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.Drawing
 {
 
-    public class DrawData
-    {
-        public UIColor PrimaryFillColor { get; set; }
-        public CGSize ScaleFactor { get; set; }
-        public CGPoint StartPoint { get; set; }
-        public CGRect RectFrame { get; set; }
-        public CGRect RectBounds { get; set; }
-        public G__FactoryDrawings DrawType { get; set; }
-    }
+    //public class DrawData
+    //{
+    //    public UIColor PrimaryFillColor { get; set; }
+    //    public CGSize ScaleFactor { get; set; }
+    //    public CGPoint StartPoint { get; set; }
+    //    public CGRect RectFrame { get; set; }
+    //    public CGRect RectBounds { get; set; }
+    //    public G__FactoryDrawings DrawType { get; set; }
+    //}
 
     public class DrawingFactory : SizeBase
     {
@@ -33,9 +33,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
         #region Private Variables
 
         private UIColor _primaryFillColor;
-        private CGPoint _startPoint;
-        private CGRect _rectFrame;
-        private CGRect _rectBounds;
+        private UIColor _backgroundColor;
+        private float _opacity;
         private G__FactoryDrawings _drawType;
 
         private Action<CGContext> _drawingDelegate;
@@ -65,6 +64,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Division, this.DrawDivision);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Equals, this.DrawEquals);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
+
+            this._opacity = 1.0f;
+
         }
 
         #endregion
@@ -110,69 +112,38 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-        public CGSize DrawScale
+        public UIColor BackgroundColor
         {
             get
             {
-                if (this._scaleFactor.IsEmpty)
+                if (this._backgroundColor == null)
                 {
-                    // Scale factor of zero
-                    return new CGSize(1.0f, 1.0f);
+                    return UIColor.Clear;
                 }
                 else
                 {
-                    return this._scaleFactor;
+                    return this._backgroundColor;
                 }
             }
             set
             {
-                this._scaleFactor = value;
+                this._backgroundColor = value;
             }
         }
 
-        public CGPoint DrawStartPoint
+        public float Opacity
         {
             get
             {
-                if (this._startPoint.IsEmpty)
-                {
-                    // Scale factor of zero
-                    return new CGPoint(0.0f, 0.0f);
-                }
-                else
-                {
-                    return this._startPoint;
-                }
+                    return this._opacity;
             }
             set
             {
-                this._startPoint = value;
+                this._opacity = value;
             }
         }
 
-        public CGRect DrawFrame
-        {
-            get
-            {
-                return this._rectFrame;
-            }
-            set
-            {
-                this._rectFrame = new CGRect(0.0f, 0.0f, value.Width, value.Height);
-            }
-        }
 
-        public CGRect DrawBounds
-        {
-            get
-            {
-                return this._rectBounds;
-            }
-            set
-            {
-                this._rectBounds = new CGRect(0.0f, 0.0f, value.Width, value.Height);
-            }
-        }
 
         #endregion
 
@@ -180,21 +151,18 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             DrawLayer _layer;
 
-            _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
+            _layer = new DrawLayer();
             // Set the drawing type
             if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
             {
                 _layer.DrawingDelegate = _drawingDelegate;
             }
 
+            // ** Global layer setup **
+            _layer.ContentsScale = UIScreen.MainScreen.Scale;
+            _layer.BackgroundColor = this.BackgroundColor.CGColor;
+            _layer.Opacity = this._opacity;
 
-            if (true)
-            {
-                // Global layer setup
-                _layer.ContentsScale = UIScreen.MainScreen.Scale;
-                _layer.BackgroundColor = UIColor.Brown.CGColor;
-                //_layer.Opacity = 1.0f;
-            }
 
             return _layer;
         }
@@ -359,7 +327,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             //_other.strokeColor = other.strokeColor;
             //_other.strokeWidth = other.strokeWidth;
         }
-
 
         public override void DrawInContext(CGContext ctx)
         {

@@ -89,7 +89,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
             this._vOperator.MathOperator = this._operatorType;
             this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
-            this._vOperator.iOSDrawingFactory.DrawStartPoint = this.OperatorSize.OperatorStartpoint;
+            this._vOperator.iOSDrawingFactory.StartPoint = this.OperatorSize.OperatorStartpoint;
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
@@ -105,7 +105,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Call to the derived sizeclass setotherpositions()
             this.OperatorSize.SetSubViewPositions();
             // Set drawn graphic positions
-            this._vOperator.iOSDrawingFactory.DrawStartPoint = this.OperatorSize.OperatorStartpoint;
+            this._vOperator.iOSDrawingFactory.StartPoint = this.OperatorSize.OperatorStartpoint;
             // Base Container will call vc set mainframe.
             base.ViewWillAppear(animated);
         }
