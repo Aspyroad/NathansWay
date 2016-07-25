@@ -55,11 +55,13 @@ namespace NathansWay.iOS.Numeracy
         // Global sizeclass padding variable for extreme left right top bottom placement.
         protected nfloat _fPaddingPositional;
         // Parent container reference
-        internal BaseContainer _parentContainer;
+        protected BaseContainer _parentContainer;
         // Current Sizing
         protected nfloat _fCurrentWidth = 0.0f;
         protected nfloat _fCurrentHeight = 0.0f;
         // When height and width are adjusted left/right - top/bottom padding is added.
+
+        protected CGSize _scaleFactor;
 
         // TODO: 24/05/2016
         // Add padding counts when they are added then setup accessor functions to return
@@ -84,12 +86,12 @@ namespace NathansWay.iOS.Numeracy
 
         #region Constructors
 
-        public SizeBase()
+        protected SizeBase()
         {
             this.Initialize(); 
         }
 
-        public SizeBase(BaseContainer _container)
+        protected SizeBase(BaseContainer _container)
         {
             this._parentContainer = _container;
             this.Initialize(); 
@@ -123,7 +125,7 @@ namespace NathansWay.iOS.Numeracy
         /// <returns>The display and position.</returns>
         /// <param name="_XWidth">X width.</param>
         /// <param name="_YHeight">Y height.</param>
-        private CGPoint RefreshDisplayAndPosition (nfloat _XWidth, nfloat _YHeight)
+        protected CGPoint RefreshDisplayAndPosition (nfloat _XWidth, nfloat _YHeight)
         {         
             nfloat _YPos = _YHeight;
             nfloat _XPos = _XWidth;

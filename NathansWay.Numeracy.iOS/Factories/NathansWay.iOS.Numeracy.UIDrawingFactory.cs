@@ -17,23 +17,6 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.Drawing
 {
 
-    //class StudentName
-    //{
-    //    public string FirstName { get; set; }
-    //    public string LastName { get; set; }
-    //    public int ID { get; set; }
-    //}
-
-    //class CollInit
-    //{
-    //    Dictionary<int, StudentName> students = new Dictionary<int, StudentName>()
-    //{
-    //    { 111, new StudentName {FirstName="Sachin", LastName="Karnik", ID=211}},
-    //    { 112, new StudentName {FirstName="Dina", LastName="Salimzianova", ID=317}},
-    //    { 113, new StudentName {FirstName="Andy", LastName="Ruth", ID=198}}
-    //};
-    //}
-
     public class DrawData
     {
         public UIColor PrimaryFillColor { get; set; }
@@ -44,33 +27,25 @@ namespace NathansWay.iOS.Numeracy.Drawing
         public G__FactoryDrawings DrawType { get; set; }
     }
 
-    public class DrawingFactory
+    public class DrawingFactory : SizeBase
     {
 
         #region Private Variables
 
         private UIColor _primaryFillColor;
-        private CGSize _scaleFactor;
         private CGPoint _startPoint;
         private CGRect _rectFrame;
         private CGRect _rectBounds;
         private G__FactoryDrawings _drawType;
 
-        private DrawLayer _layerMultiply;
-        private DrawLayer _layerAddition;
-        private DrawLayer _layerSubtraction;
-        private DrawLayer _layerDivision;
-        private DrawLayer _layerEquals;
-
         private Action<CGContext> _drawingDelegate;
         private Dictionary<G__FactoryDrawings, Action<CGContext>> _dictDrawingFuncs;
-        private Dictionary<G__FactoryDrawings, DrawLayer> _dictDrawnLayers;
 
         #endregion
 
         #region Constructor
 
-        public DrawingFactory()
+        public DrawingFactory() : base()
         {
             this.Initialize();
         }
@@ -90,9 +65,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Division, this.DrawDivision);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Equals, this.DrawEquals);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
-
-            this._dictDrawnLayers = new Dictionary<G__FactoryDrawings, DrawLayer>();
-
         }
 
         #endregion
@@ -118,81 +90,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 this._drawType = value;
             }
         }
-
-        //public NWView MainView
-        //{
-        //    get
-        //    {
-        //        return this._mainView;
-        //    }
-        //    set
-        //    {
-        //        this._viewLayer = value.Layer;
-        //        this._mainView = value;
-        //    }
-        //}
-
-        public DrawLayer MultiplySignLayer
-        {
-            get
-            {
-                return this._layerMultiply;
-            }
-            set
-            {
-                this._layerMultiply = value;
-            }
-        }
-
-        public DrawLayer AdditionSignLayer
-        {
-            get
-            {
-                return this._layerAddition;
-            }
-            set
-            {
-                this._layerAddition = value;
-            }
-        }
-
-        public DrawLayer DivisionSignLayer
-        {
-            get
-            {
-                return this._layerDivision;
-            }
-            set
-            {
-                this._layerDivision = value;
-            }
-        }
-
-        public DrawLayer EqualsSignLayer
-        {
-            get
-            {
-                return this._layerEquals;
-            }
-            set
-            {
-                this._layerEquals = value;
-            }
-        }
-
-        public DrawLayer SubtractionSignLayer
-        {
-            get
-            {
-                return this._layerSubtraction;
-            }
-            set
-            {
-                this._layerSubtraction = value;
-            }
-        }
-
-
 
         public UIColor PrimaryFillColor
         {
@@ -220,7 +117,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 if (this._scaleFactor.IsEmpty)
                 {
                     // Scale factor of zero
-                    return new CGSize(20.0f, 20.0f);
+                    return new CGSize(1.0f, 1.0f);
                 }
                 else
                 {
@@ -283,32 +180,20 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             DrawLayer _layer;
 
-            if (this._dictDrawnLayers.TryGetValue(this._drawType, out _layer))
+            _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
+            // Set the drawing type
+            if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
             {
-                _layer.FillColor = this.PrimaryFillColor;
-                _layer.Frame = DrawFrame;
-                _layer.ScaleFactor = this.DrawScale;
-                _layer.StartPoint = this.DrawStartPoint;
+                _layer.DrawingDelegate = _drawingDelegate;
             }
-            else
-            {
-                _layer = new DrawLayer(this._rectFrame, this.PrimaryFillColor, this.DrawScale, this.DrawStartPoint);
-                // Set the drawing type
-                if (this._dictDrawingFuncs.TryGetValue(_drawType, out _drawingDelegate))
-                {
-                    _layer.DrawingDelegate = _drawingDelegate;
-                }
-                // Add the fucker
-                this._dictDrawnLayers.Add(this._drawType, _layer);
-            }
+
 
             if (true)
             {
+                // Global layer setup
+                _layer.ContentsScale = UIScreen.MainScreen.Scale;
                 _layer.BackgroundColor = UIColor.Brown.CGColor;
-                _layer.Opacity = 1.0f;
-                // Think of any others we need to set
-
-
+                //_layer.Opacity = 1.0f;
             }
 
             return _layer;
@@ -320,6 +205,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             //// Bezier Drawing
             UIBezierPath bezierPath = new UIBezierPath();
+
             bezierPath.MoveTo(new CGPoint(25.46f, 22.92f));
             bezierPath.AddCurveToPoint(new CGPoint(25.46f, 25.58f), new CGPoint(26.18f, 23.64f), new CGPoint(26.18f, 24.85f));
             bezierPath.AddLineTo(new CGPoint(25.58f, 25.46f));
@@ -438,7 +324,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         // This is the constructor you would use to create your new CALayer
         public DrawLayer(CGRect mybounds, UIColor fillColor, CGSize scaleFactor, CGPoint startPoint)
         {
-            this.Bounds = mybounds;
+            this.Frame = mybounds;
             this.FillColor = fillColor;
             this.ScaleFactor = scaleFactor;
             this.StartPoint = startPoint;
@@ -480,19 +366,26 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             base.DrawInContext(ctx);
 
-            ctx.SaveState();
+            UIGraphics.PushContext(ctx);
+            //ctx.SaveState();
 
             ////// Addition Drawing
             ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
             ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+            //ctx.SetLineWidth(1.0f);
+            //ctx.SetStrokeColor(FillColor.CGColor);
+            this.FillColor.SetFill();
 
             if (this._drawingDelegate != null)
             {
-                //this._drawingDelegate.Invoke(ctx);
+                this._drawingDelegate.Invoke(ctx);
             }
-
-            this.FillColor.SetFill();
-            ctx.RestoreState();
+            else
+            {
+                this.BackgroundColor = UIColor.Yellow.CGColor;
+            }
+            UIGraphics.PopContext();
+            //ctx.RestoreState();
         }
 
         #endregion
@@ -529,13 +422,13 @@ namespace NathansWay.Tutorials
                 Contents = image;
             }
         }
+
         //]></code>
         //      </example>
         //      <format type = "text/html" >
         //        < h3 > Contents by Providing a CALayerDelegate</h3>
         //         </format>
         //      <para>
-
 
         //       This approach can be used if the developer does not want to change the
         //    class used for their CALayer rendering, and all they need to do is
@@ -550,6 +443,7 @@ namespace NathansWay.Tutorials
         //      <example>
         //        <code lang = "C#" >< ![CDATA[
         // Overriding DisplayLayer
+
         public class DemoLayerDelegate : CALayerDelegate
         {
             CGImage image = UIImage.FromBundle("demo.png").CGImage;
@@ -578,6 +472,23 @@ namespace NathansWay.Tutorials
         {
             view.Layer.Delegate = new DemoLayerDelegate();
             view2.Layer.Delegate = new DemoLayerDelegate2();
+        }
+
+        class StudentName
+        {
+            public string FirstName { get; set; }
+            public string LastName { get; set; }
+            public int ID { get; set; }
+        }
+
+        class CollInit
+        {
+            Dictionary<int, StudentName> students = new Dictionary<int, StudentName>()
+            {
+                { 111, new StudentName {FirstName="Sachin", LastName="Karnik", ID=211}},
+                { 112, new StudentName {FirstName="Dina", LastName="Salimzianova", ID=317}},
+                { 113, new StudentName {FirstName="Andy", LastName="Ruth", ID=198}}
+            };
         }
     }
 }

@@ -89,6 +89,7 @@ namespace AspyRoad.iOSCore
         public void DrawLayer()
         {
             var x = this._iOSDrawingFactory.DrawLayer();
+
             if (x != null)
             {
                 x.Contents = null;

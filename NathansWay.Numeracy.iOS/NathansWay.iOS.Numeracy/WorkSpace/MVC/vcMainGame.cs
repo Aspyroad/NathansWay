@@ -125,7 +125,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             Initialize();
         }
 
-        public SizeMainGame(BaseContainer _vc) : base (_vc)
+        public SizeMainGame(BaseContainer _vc)
         {
             this.ParentContainer = _vc;
             Initialize();
