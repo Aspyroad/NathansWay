@@ -149,7 +149,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vcMainContainer = this._sizeClass.VcMainContainer;
 
             // Apply some UI to the texbox
-            this.SizeClass.SetNumberFont(this.lblNumber);
+            this.SizeClass.SetFontAndSize(this.lblNumber);
 
             this.lblNumber.Text = this.CurrentValueStr.Trim();
             this.lblNumber.HasBorder = false;

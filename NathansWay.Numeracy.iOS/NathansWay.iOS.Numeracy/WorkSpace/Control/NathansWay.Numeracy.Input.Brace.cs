@@ -95,7 +95,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
 
-            this.txtBrace.Frame = this.BraceSize._recttxtBrace;
+            this.txtBrace.Frame = this.BraceSize.RectFramePostitionZero;
         }
 
         public override void ApplyUI7()
@@ -150,7 +150,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create textbox
             this.txtBrace = new AspyTextField();
             // Sizing
-            this.SizeClass.SetNumberFont(this.txtBrace);
+            this.SizeClass.SetFontAndSize(this.txtBrace);
             // ApplyUI
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
             // Left or right brace
@@ -198,7 +198,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Y Vertical
 
         // Text Box Frame
-        public CGRect _recttxtBrace;
+        // public CGRect _recttxtBrace;
         // Parent Container
         //private vcBraceText _vcChild;
 
@@ -222,23 +222,22 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void Initialize()
         {
-            //this._vcChild = (vcDecimalText)this.ParentContainer;
         }
 
         #endregion
 
         #region Overrides
 
-        public override void SetNumberFont(AspyTextField _txt)
+        public override void SetFontAndSize(AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalBraceFont;
             _txt.TextOffset = this.GlobalSizeDimensions.BraceTextOffset;
         }
 
-        public override void SetViewPosition(CGPoint _startPoint)
-        {
-            base.SetViewPosition(_startPoint);
-        }
+        //public override void SetViewPosition(CGPoint _startPoint)
+        //{
+        //    base.SetViewPosition(_startPoint);
+        //}
 
         public override void SetHeightWidth ()
         { 
@@ -248,17 +247,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
 
-        public override void SetFrames()
-        {
-            // Set main VC Frame
-            base.SetFrames();
-            this._recttxtBrace = new CGRect(
-                0.0f, 
-                0.0f, 
-                this.CurrentWidth,
-                this.CurrentHeight
-            );
-        }
+        //public override void SetFrames()
+        //{
+        //    // Set main VC Frame
+        //    base.SetFrames();
+        //    //this._recttxtBrace = new CGRect(
+        //    //    0.0f, 
+        //    //    0.0f, 
+        //    //    this.CurrentWidth,
+        //    //    this.CurrentHeight
+        //    //);
+        //}
 
         #endregion
 

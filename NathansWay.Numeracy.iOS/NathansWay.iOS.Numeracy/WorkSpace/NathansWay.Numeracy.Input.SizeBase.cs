@@ -126,13 +126,14 @@ namespace NathansWay.iOS.Numeracy
         }
 
         /// <summary>
+        /// HEART OF THIS CLASS POSITIONS EVERYTHING
         /// Refreshs the display dimensions and positions the view.
         /// </summary>
         /// <returns>The display and position.</returns>
         /// <param name="_XWidth">X width.</param>
         /// <param name="_YHeight">Y height.</param>
-        protected CGPoint RefreshDisplayAndPosition (nfloat _XWidth, nfloat _YHeight)
-        {         
+        protected CGPoint RefreshDisplayAndPosition(nfloat _XWidth, nfloat _YHeight)
+        {
             nfloat _YPos = _YHeight;
             nfloat _XPos = _XWidth;
             nfloat Y = _YHeight;
@@ -144,90 +145,90 @@ namespace NathansWay.iOS.Numeracy
                 switch (this.DisplayPositionY)
                 {
                     case (G__NumberDisplayPositionY.Center): // Most common first ??
-                    {
-                        _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
-                    }
-                    break;
+                        {
+                            _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
+                        }
+                        break;
                     case (G__NumberDisplayPositionY.Top):
-                    {
-                        _YPos = this._fPaddingPositional;
-                    }
-                    break;
-                    default : // G__NumberDisplayPositionY.Bottom
-                    {
-                        _YPos = (Y - (this._fCurrentHeight + this._fPaddingPositional));
+                        {
+                            _YPos = this._fPaddingPositional;
+                        }
+                        break;
+                    default: // G__NumberDisplayPositionY.Bottom
+                        {
+                            _YPos = (Y - (this._fCurrentHeight + this._fPaddingPositional));
 
-                    }
-                    break;
+                        }
+                        break;
                 }
             }
             // ** Horizontal Center
-            if (this._setRelationPosX) 
+            if (this._setRelationPosX)
             {
                 switch (this.DisplayPositionX)
                 {
                     case (G__NumberDisplayPositionX.Center): // Most common first ??
-                    {
-                        _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
-                    }
-                    break;
+                        {
+                            _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
+                        }
+                        break;
                     case (G__NumberDisplayPositionX.Left):
-                    {
-                        _XPos = this._fPaddingPositional;
-                    }
-                    break;
-                    default : // G__NumberDisplayPosition.Right
-                    {
-                        // Add a pad?
-                        _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
-                    }
-                    break;
+                        {
+                            _XPos = this._fPaddingPositional;
+                        }
+                        break;
+                    default: // G__NumberDisplayPosition.Right
+                        {
+                            // Add a pad?
+                            _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
+                        }
+                        break;
                 }
             }
 
             // TODO: Do we need these, I have now added two new enumerations middleleft middleright
             // ** Horizontal Left of Center
-            if (this._setMiddleLeftPosX) 
+            if (this._setMiddleLeftPosX)
             {
                 switch (this.DisplayPositionX)
                 {
                     case (G__NumberDisplayPositionX.Right): // Most common first ??
-                    {
-                        _XPos = ((X / 2.0f) - (this._fCurrentWidth + this._fPaddingPositional));
-                    }
-                    break;
+                        {
+                            _XPos = ((X / 2.0f) - (this._fCurrentWidth + this._fPaddingPositional));
+                        }
+                        break;
                     case (G__NumberDisplayPositionX.Left):
-                    {
-                        _XPos = this._fPaddingPositional;
-                    }
-                    break;
-                    default : // G__NumberDisplayPositionX.Center
-                    {
-                        _XPos = ((X / 4.0f) - (this._fCurrentWidth / 2.0f));    
-                    }
-                    break;
+                        {
+                            _XPos = this._fPaddingPositional;
+                        }
+                        break;
+                    default: // G__NumberDisplayPositionX.Center
+                        {
+                            _XPos = ((X / 4.0f) - (this._fCurrentWidth / 2.0f));
+                        }
+                        break;
                 }
             }
             // ** Horizontal Right of Center
-            if (this._setMiddleRightPosX) 
+            if (this._setMiddleRightPosX)
             {
                 switch (this.DisplayPositionX)
                 {
                     case (G__NumberDisplayPositionX.Right): // Most common first ??
-                    {
-                        _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
-                    }
-                    break;
+                        {
+                            _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
+                        }
+                        break;
                     case (G__NumberDisplayPositionX.Left):
-                    {
-                        _XPos = ((X / 2.0f) + this._fPaddingPositional);
-                    }
-                    break;
-                    default : // G__NumberDisplayPositionX.Center
-                    {
-                        _XPos = (((X / 2.0f) + (X / 4.0f)) - (this._fCurrentWidth / 4.0f));    
-                    }
-                    break;
+                        {
+                            _XPos = ((X / 2.0f) + this._fPaddingPositional);
+                        }
+                        break;
+                    default: // G__NumberDisplayPositionX.Center
+                        {
+                            _XPos = (((X / 2.0f) + (X / 4.0f)) - (this._fCurrentWidth / 4.0f));
+                        }
+                        break;
                 }
             }
 
@@ -250,44 +251,26 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Public Members
-
-        #endregion
-
         #region Virtual Members
 
-        // Override for label formatting of font size etc
-        public virtual void SetNumberFont (AspyLabel _lbl)
-        {
-        }
-
-        // Override for text formatting of font size etc
-        public virtual void SetNumberFont (AspyTextField _txt)
-        {
-        }
+        #region Set Frame And Position
 
         public virtual void SetHeightWidth ()
         {
         }
 
-        // Overload to set at init
         public virtual void SetHeightWidth (nfloat _width, nfloat _height)
         {
             this._fCurrentWidth = _width;
             this._fCurrentHeight = _height;
         }
 
-        public virtual void SetScale (nfloat _scale)
-        {
-
-        }
-
-        /// <summary>
-        /// Calls all functions to set and position the parent class.
-        /// This overload takes 0 params. StartPoint MUST be set for correct operation
-        /// </summary>
         public virtual void SetViewPosition ()
         {
+            /// <summary>
+            /// Calls all functions to set and position the parent class.
+            /// This overload takes 0 params. StartPoint MUST be set for correct operation
+            /// </summary>
             // StartPoint MUST be set when calling this
             if (StartPoint.IsEmpty)
             {
@@ -296,12 +279,11 @@ namespace NathansWay.iOS.Numeracy
             this.SetHeightWidth();
         }
 
-        /// <summary>
-        /// Calls all functions to set and position the parent class
-        /// </summary>
-        /// <param name="_startPoint">Start point.</param>
         public virtual void SetViewPosition (CGPoint _startPoint)
         {
+            /// <summary>
+            /// Calls all functions to set and position the parent class
+            /// </summary>
             // SetPositions should be used to
             // 1. Set the StartPoint (PointF)
             // 2. Set the Height and Widths of the control
@@ -325,7 +307,7 @@ namespace NathansWay.iOS.Numeracy
         /// </summary>
         /// <param name="_posX">_posX</param>
         /// <param name="_posY">_posY</param>
-        public virtual void SetViewPosition (nfloat _posX, nfloat _posY)
+        public virtual void SetViewPosition(nfloat _posX, nfloat _posY)
         {
             CGPoint _point;
             this.SetHeightWidth();
@@ -340,14 +322,30 @@ namespace NathansWay.iOS.Numeracy
             this.StartPoint = _point;
         }
 
+
+ 
+
         public virtual void SetSubViewPositions ()
         {
         }
 
-        // Should be called ONLY in viewdidload or viewwillappear (where frames are known)
         public virtual void SetFrames()
         {
+            // NOTE: 
+            // Should be called ONLY in viewdidload or viewwillappear (where frames are known)
+
             // TODO: This is a possible break
+            this._rectFrame = 
+                new CGRect
+                    (
+                        this.StartPoint.X,
+                        this.StartPoint.Y,
+                        this.CurrentWidth,
+                        this.CurrentHeight
+                    );
+
+
+
             // Generally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
             {                 
@@ -364,10 +362,31 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        #endregion
+
         public virtual void OnResize(object s, EventArgs e)
         {
             //this._parentContainer.OnResize();
         }
+
+        public virtual void SetScale(nfloat _scale)
+        {
+
+        }
+
+        #region Font Changes
+
+        // Override for label formatting of font size etc
+        public virtual void SetFontAndSize(AspyLabel _lbl)
+        {
+        }
+
+        // Override for text formatting of font size etc
+        public virtual void SetFontAndSize(AspyTextField _txt)
+        {
+        }
+
+        #endregion
 
         #endregion
 
@@ -385,7 +404,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-
         public CGRect RectFramePostitionZero
         {
             get
@@ -393,18 +411,6 @@ namespace NathansWay.iOS.Numeracy
                 return new CGRect(0.0f, 0.0f, this._rectFrame.Width, this._rectFrame.Height);
             }
         }
-
-        //public CGRect DrawBounds
-        //{
-        //    get
-        //    {
-        //        return this._rectBounds;
-        //    }
-        //    set
-        //    {
-        //        this._rectBounds = new CGRect(0.0f, 0.0f, value.Width, value.Height);
-        //    }
-        //}
 
         // X Horizontal
         // Y Vertical
@@ -440,8 +446,8 @@ namespace NathansWay.iOS.Numeracy
         // Main Control Frame
         public CGRect RectFrame 
         { 
-            get; 
-            set; 
+            get { return this._rectFrame; } 
+            set { this._rectFrame = value; }
         }
 
         // General Width and Height Variables

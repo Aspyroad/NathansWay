@@ -474,7 +474,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Hidden = true;
 
             // Apply some UI to the texbox
-            this.SizeClass.SetNumberFont(this.txtNumber);
+            this.SizeClass.SetFontAndSize(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
             this.txtNumber.AllowNextResponder = true;
@@ -1197,7 +1197,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // Overload for textfield
-        public override void SetNumberFont(AspyTextField _txt)
+        public override void SetFontAndSize(AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
             _txt.TextOffset = this.GlobalSizeDimensions.FractionTextOffset;
