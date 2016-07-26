@@ -79,9 +79,6 @@ namespace NathansWay.iOS.Numeracy
             iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);
             // Number factory relies on Storyboard so load it first
             this._NumletFactory = new Lazy<UINumberFactory>(() => new UINumberFactory());
-            // Add any basic statis services needed for the apps lifetime
-            this._drawingFunctions = new DrawingFactory();
-            iOSCoreServiceContainer.Register<DrawingFactory>(_drawingFunctions);
 
 			// Set SharedGlobals for the Shared lib
 			// This must be done for each device being built
@@ -200,6 +197,9 @@ namespace NathansWay.iOS.Numeracy
 
 			//Add our navigation object to the service library
             iOSCoreServiceContainer.Register<vcMainContainer> (_mainContainer);
+            // The drawing factory needs to know of MainController hence its position here...after maincontainers creation
+            this._drawingFunctions = new DrawingFactory();
+            iOSCoreServiceContainer.Register<DrawingFactory>(_drawingFunctions);
 
 			//window.MakeKeyAndVisible();
 			_window.RootViewController = _mainContainer;

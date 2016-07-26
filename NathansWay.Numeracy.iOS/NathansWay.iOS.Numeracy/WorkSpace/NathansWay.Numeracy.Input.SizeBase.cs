@@ -347,6 +347,7 @@ namespace NathansWay.iOS.Numeracy
         // Should be called ONLY in viewdidload or viewwillappear (where frames are known)
         public virtual void SetFrames()
         {
+            // TODO: This is a possible break
             // Generally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
             {                 

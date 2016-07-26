@@ -58,19 +58,13 @@ namespace NathansWay.iOS.Numeracy
 			this.lblLessonName.Text = lesson.NameLesson;
 
             // Draw Operator Layer
-            // TODO: I need to make this a reference to vcOperator.
-            // I need access to the size control.
-            // So replace the story board with an instance of vcOperator
-            // Add a reference to vwOperator in vcOperator and access it all form there.
-
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             // Set the drawing in the middle of the view
-            drawfact.SetCenterRelativeParentViewPosY = true;
-            drawfact.SetCenterRelativeParentViewPosX = true;
+            drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
             drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
             drawfact.RectFrame = vOperator.Frame;
-            vOperator.BackgroundColor = UIColor.Purple;
             vOperator.DrawLayer();
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
