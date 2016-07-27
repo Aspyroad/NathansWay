@@ -46,7 +46,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
 
         #region Standard
 
-        public G__NumberDisplaySize Size
+        public G__NumberDisplaySize DisplaySize
         {
             get { return this._size; }
             set { this._size = value; }
@@ -75,19 +75,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 162.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 0.0f;
                     }
@@ -105,19 +105,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 928.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 928.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 928.0f;
                     }
@@ -135,19 +135,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 194.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 0.0f;
                     }
@@ -165,19 +165,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                 // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 1016.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 1016.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 1020.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 1020.0f;
                     }
@@ -195,19 +195,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 8.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 16.0f;
                     }
@@ -230,19 +230,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 148.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 0.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 0.0f;
                     }
@@ -260,19 +260,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 1016.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 1016.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 1020.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 1020.0f;
                     }
@@ -290,19 +290,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 6.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 8.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 16.0f;
                     }
@@ -325,19 +325,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 130.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 130.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 195.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 260.0f;
                     }
@@ -363,19 +363,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 60.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 74.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 90.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 120.0f;;
                     }
@@ -393,19 +393,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 180.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 180.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 180.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 360.0f;;
                     }
@@ -423,19 +423,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                 // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 60.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 74.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 90.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 120.0f;
                         ;
@@ -454,19 +454,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return -4.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return -12.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return -8.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return -8.0f;
                         ;
@@ -485,19 +485,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 30.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 40.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 45.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 60.0f;;
                     }
@@ -520,19 +520,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 0.50f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 1.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 2.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 3.0f;
                     }
@@ -550,19 +550,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 40.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 56.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 46.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 102.0f;;
                     }
@@ -581,19 +581,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 36.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 46.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 86.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 90.0f;;
                     }
@@ -616,19 +616,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 128.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 142.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 195.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 262.0f;;
                     }
@@ -647,19 +647,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 60.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 62.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 90.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 120.0f;;
                     }
@@ -677,19 +677,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 40.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 46.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 102.0f;;
                     }
@@ -707,19 +707,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 15.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 22.0f;;
                     }
@@ -737,19 +737,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 60f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 4.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 8.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 12.0f;;
                     }
@@ -767,19 +767,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 64.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 64.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 90.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 120.0f;;
                     }
@@ -797,19 +797,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return new CGPoint(0.0f, -2.0f);
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return new CGPoint(0.0f, 2.0f);
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return new CGPoint(0.0f, -6.0f);
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return new CGPoint(0.0f, -8.0f);
                     }
@@ -832,19 +832,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 16.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 16.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 32.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 38.0f;;
                     }
@@ -862,19 +862,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 16.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 36.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 32.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 38.0f;;
                     }
@@ -892,19 +892,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 16.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 120.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 32.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 38.0f;;
                     }
@@ -922,19 +922,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return new CGPoint(0.0f, 0.0f);
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return new CGPoint(-6.0f, -8.0f);
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return new CGPoint(0.0f, 0.0f);
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return new CGPoint(0.0f, 0.0f);
                     }
@@ -952,19 +952,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 32.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 32.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 96.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 102.0f;;
                     }
@@ -982,19 +982,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 30.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 30.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 96.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 102.0f;;
                     }
@@ -1017,19 +1017,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 1.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 2.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 2.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 3.0f;
                     }
@@ -1047,19 +1047,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return 1.0f;
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return 2.0f;
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return 2.0f;
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return 3.0f;
                     }
@@ -1089,19 +1089,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return UIFont.FromName("Arial", 80.0f);
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
@@ -1119,19 +1119,19 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 switch (this._size)
                 {
                     // Most common
-                    case (G__NumberDisplaySize.Small):
+                    case (G__NumberDisplaySize.Level3):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
-                    case (G__NumberDisplaySize.Normal):
+                    case (G__NumberDisplaySize.Level5):
                     {
                         return UIFont.FromName("Helvetica-Light", 120.0f);
                     }
-                    case (G__NumberDisplaySize.Medium):
+                    case (G__NumberDisplaySize.Level7):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
-                    case (G__NumberDisplaySize.Large):
+                    case (G__NumberDisplaySize.Level10):
                     {
                         return UIFont.FromName("Arial", 76.0f);
                     }
@@ -1154,7 +1154,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //    {
     //        #region Private Variables
     //
-    //        // Default Normal size
+    //        // Default Level5 size
     //        private G__NumberDisplaySize _size;
     //        private static readonly iOSNumberDim _instance = new iOSNumberDim();
     //
@@ -1187,15 +1187,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 130.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 195.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 260.0f;
     //                }
@@ -1207,15 +1207,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //            {
     //                // Constant
     //                return 60.0f;
-    //                //                if (this._size == G__NumberDisplaySize.Normal)
+    //                //                if (this._size == G__NumberDisplaySize.Level5)
     //                //                {
     //                //                    return 60.0f;
     //                //                }
-    //                //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                //                else if (this._size == G__NumberDisplaySize.Level7)
     //                //                {
     //                //                    return 60.0f;
     //                //                }
-    //                //                else // Large
+    //                //                else // Level10
     //                //                {
     //                //                    return 60.0f;
     //                //                }
@@ -1225,15 +1225,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 60.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 90.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 120.0f;
     //                }
@@ -1243,15 +1243,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 180.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 180.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 360.0f;
     //                }
@@ -1261,15 +1261,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 60.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 90.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 120.0f;
     //                }
@@ -1279,15 +1279,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 30.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 45.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 60.0f;
     //                }
@@ -1297,15 +1297,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 46.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 96.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 102.0f;
     //                }
@@ -1322,15 +1322,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return UIFont.FromName("Arial", 55.0f);
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return UIFont.FromName("Arial", 77.5f);
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return UIFont.FromName("Arial", 110.0f);
     //                }
@@ -1341,15 +1341,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 60.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 195.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 260.0f;
     //                }
@@ -1359,15 +1359,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 10.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 195.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 260.0f;
     //                }
@@ -1378,15 +1378,15 @@ namespace NathansWay.iOS.Numeracy.UISettings
     //        {
     //            get
     //            {
-    //                if (this._size == G__NumberDisplaySize.Normal)
+    //                if (this._size == G__NumberDisplaySize.Level5)
     //                {
     //                    return 23.0f;
     //                }
-    //                else if (this._size == G__NumberDisplaySize.Medium)
+    //                else if (this._size == G__NumberDisplaySize.Level7)
     //                {
     //                    return 43.0f;
     //                }
-    //                else // Large
+    //                else // Level10
     //                {
     //                    return 51.0f;
     //                }

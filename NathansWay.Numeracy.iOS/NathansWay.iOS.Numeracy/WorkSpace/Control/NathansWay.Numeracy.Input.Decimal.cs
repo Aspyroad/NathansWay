@@ -1,6 +1,5 @@
 // System
 using System;
-using CoreGraphics;
 using System.Collections.Generic;
 // Mono
 using Foundation;

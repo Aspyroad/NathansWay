@@ -23,7 +23,6 @@ namespace NathansWay.Shared
 
     #endregion
 
-
     #region DataBase
 
     public enum G__Entities : int
@@ -97,17 +96,233 @@ namespace NathansWay.Shared
 
     #endregion
 
-    #region NumberField Attributes
+    #region UI
 
     public enum G__NumberDisplaySize : int
     {
-        Small = 1,
-        Normal = 2,
-        Medium = 3,
-        Large = 4,
-        Huge = 5,
-        Massive = 6
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3,
+        Level4 = 4,
+        Level5 = 5,
+        Level6 = 6,
+        Level7 = 7,
+        Level8 = 8,
+        Level9 = 9,
+        Level10 = 10
     }
+
+    public static class G__DisplaySize
+    {
+        public const int Level1 = 1;
+        public const int Level2 = 2;
+        public const int Level3 = 3;
+        public const int Level4 = 4;
+        public const int Level5 = 5;
+        public const int Level6 = 6;
+        public const int Level7 = 7;
+        public const int Level8 = 8;
+        public const int Level9 = 9;
+        public const int Level10 = 10;
+
+
+        static Dictionary<int, float> _dict = new Dictionary<int, float>
+        {
+            {G__DisplaySize.Level1, 0.1f},
+            {G__DisplaySize.Level1, 0.3f},
+            {G__DisplaySize.Level2, 0.5f},
+            {G__DisplaySize.Level3, 0.7f},
+            {G__DisplaySize.Level4, 0.9f},
+            {G__DisplaySize.Level5, 1.0f},
+            {G__DisplaySize.Level6, 1.5f},
+            {G__DisplaySize.Level7, 2.0f},
+            {G__DisplaySize.Level8, 3.0f},
+            {G__DisplaySize.Level9, 4.0f},
+        };
+
+        public static float GetLevel(int x)
+        {
+            // Try to get the result in the static Dictionary
+            float result;
+            if (_dict.TryGetValue(x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return 1.0f;
+            }
+        }
+
+        public static float GetLevel(G__NumberDisplaySize x)
+        {
+            // Try to get the result in the static Dictionary
+            float result;
+            if (_dict.TryGetValue((int)x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return 1.0f;
+            }
+        }
+    }
+
+    public struct G__Color
+    {
+        // Statics
+        public static readonly G__Color Empty;
+
+        // Privates
+        float _r;
+        float _g;
+        float _b;
+        float _alpha;
+
+        // Constructors
+        public G__Color(float r, float g, float b, float alpha)
+        {
+            this = default(G__Color);
+            this.Red = r;
+            this.Green = g;
+            this.Blue = b;
+            this.Alpha = alpha;
+        }
+
+        public G__Color(string r, string g, string b, string alpha)
+        {
+            this = default(G__Color);
+            this.Red = float.Parse(r, CultureInfo.InvariantCulture.NumberFormat);
+            this.Green = float.Parse(g, CultureInfo.InvariantCulture.NumberFormat);
+            this.Blue = float.Parse(b, CultureInfo.InvariantCulture.NumberFormat);
+            this.Alpha = float.Parse(alpha, CultureInfo.InvariantCulture.NumberFormat);
+        }
+
+        public G__Color(string _elements)
+        {
+            this = default(G__Color);
+            var x = _elements.Split(new[] { ',' }, 4);
+            this.Red = float.Parse(x[0], CultureInfo.InvariantCulture.NumberFormat);
+            this.Green = float.Parse(x[1], CultureInfo.InvariantCulture.NumberFormat);
+            this.Blue = float.Parse(x[2], CultureInfo.InvariantCulture.NumberFormat);
+            this.Alpha = float.Parse(x[3], CultureInfo.InvariantCulture.NumberFormat);
+        }
+
+        // Public Getters/Setters
+        public float Red
+        {
+            get
+            {
+                return this._r;
+            }
+            set
+            {
+                this._r = value;
+            }
+        }
+
+        public float Green
+        {
+            get
+            {
+                return this._g;
+            }
+            set
+            {
+                this._g = value;
+            }
+        }
+
+        public float Blue
+        {
+            get
+            {
+                return this._b;
+            }
+            set
+            {
+                this._b = value;
+            }
+        }
+
+        public float Alpha
+        {
+            get
+            {
+                return this._alpha;
+            }
+            set
+            {
+                this._alpha = value;
+            }
+        }
+
+        // RGB values returned as RGB floats for UIColor UIColor only accepts 0-1 values. eg 0.335, 0.0 , 1.0 ,0.999
+        public float RedRGB
+        {
+            get
+            {
+                return (this._r / 255.0f);
+            }
+            set
+            {
+                this._r = value;
+            }
+        }
+
+        public float GreenRGB
+        {
+            get
+            {
+                return (this._g / 255.0f);
+            }
+            set
+            {
+                this._g = value;
+            }
+        }
+
+        public float BlueRGB
+        {
+            get
+            {
+                return (this._b / 255.0f);
+            }
+            set
+            {
+                this._b = value;
+            }
+        }
+
+        public float AlphaRGB
+        {
+            get
+            {
+                return (this._alpha / 255.0f);
+            }
+            set
+            {
+                this._alpha = value;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1},{2},{3}", new object[]
+            {
+                this._r,
+                this._g,
+                this._b,
+                this._alpha
+            });
+        }
+
+    }
+
+    #endregion
+
+    #region NumberField Attributes
 
     public enum G__NumberDisplayPositionY : int
     {
@@ -177,157 +392,6 @@ namespace NathansWay.Shared
 	}
 
 	#endregion
-
-    public struct G__Color
-	{
-		// Statics
-		public static readonly G__Color Empty;
-
-		// Privates
-		float _r;
-		float _g;
-		float _b;
-		float _alpha;
-
-		// Constructors
-		public G__Color(float r, float g, float b, float alpha)
-		{
-			this = default(G__Color);
-			this.Red = r;
-			this.Green = g;
-			this.Blue = b;
-			this.Alpha = alpha;
-		}
-
-		public G__Color(string r, string g, string b, string alpha)
-		{
-			this = default(G__Color);
-			this.Red = float.Parse(r, CultureInfo.InvariantCulture.NumberFormat);
-			this.Green = float.Parse(g, CultureInfo.InvariantCulture.NumberFormat);
-			this.Blue = float.Parse(b, CultureInfo.InvariantCulture.NumberFormat);
-			this.Alpha = float.Parse(alpha, CultureInfo.InvariantCulture.NumberFormat);
-		}
-
-		public G__Color(string _elements)
-		{
-			this = default(G__Color);
-			var x = _elements.Split (new[]{ ',' }, 4);
-			this.Red = float.Parse(x[0], CultureInfo.InvariantCulture.NumberFormat);
-			this.Green = float.Parse(x[1], CultureInfo.InvariantCulture.NumberFormat);
-			this.Blue = float.Parse(x[2], CultureInfo.InvariantCulture.NumberFormat);
-			this.Alpha = float.Parse(x[3], CultureInfo.InvariantCulture.NumberFormat);
-		}
-
-		// Public Getters/Setters
-		public float Red
-		{
-			get
-			{
-				return this._r;
-			}
-			set
-			{
-				this._r = value;
-			}
-		}
-
-		public float Green
-		{
-			get
-			{
-				return this._g;
-			}
-			set
-			{
-				this._g = value;
-			}
-		}
-
-		public float Blue
-		{
-			get
-			{
-				return this._b;
-			}
-			set
-			{
-				this._b = value;
-			}
-		}
-
-		public float Alpha
-		{
-			get
-			{
-				return this._alpha;
-			}
-			set
-			{
-				this._alpha = value;
-			}
-		}
-
-		// RGB values returned as RGB floats for UIColor UIColor only accepts 0-1 values. eg 0.335, 0.0 , 1.0 ,0.999
-		public float RedRGB
-		{
-			get
-			{
-				return (this._r/255.0f);
-			}
-			set
-			{
-				this._r = value;
-			}
-		}
-
-		public float GreenRGB
-		{
-			get
-			{
-				return (this._g/255.0f);
-			}
-			set
-			{
-				this._g = value;
-			}
-		}
-
-		public float BlueRGB
-		{
-			get
-			{
-				return (this._b/255.0f);
-			}
-			set
-			{
-				this._b = value;
-			}
-		}
-
-		public float AlphaRGB
-		{
-			get
-			{
-				return (this._alpha/255.0f);
-			}
-			set
-			{
-				this._alpha = value;
-			}
-		}
-
-		public override string ToString()
-		{
-			return string.Format("{0},{1},{2},{3}", new object[] 
-			{
-				this._r,
-				this._g,
-				this._b,
-				this._alpha
-			});
-		}
-
-	}
 
 	#region Operator Logic 
 

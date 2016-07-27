@@ -377,6 +377,7 @@ namespace NathansWay.iOS.Numeracy
             _layer.AffineTransform = CGAffineTransform.MakeScale(_scale, _scale);
         }
 
+        // TODO: move this into drawing factory
         private void DrawCross (CGRect rect)
         {
             this.slCrossBGLayer = new CAShapeLayer();
@@ -432,6 +433,7 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
+        // TODO: move this into drawing factory
         private void DrawTick(CGRect rect)
         {
             this.slTickBGLayer = new CAShapeLayer();
@@ -480,6 +482,7 @@ namespace NathansWay.iOS.Numeracy
             this.Layer.AddSublayer(slTickPathLayer);
         }
 
+        // TODO: move this into drawing factory
         private void LayersToCenter(CALayer _layer1, CALayer _layer2)
         {            
             var pt = _layer1.Position;
@@ -514,6 +517,7 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
+        // TODO: move this into drawing factory
         private void LayersToEdge(CALayer _layer1, CALayer _layer2, G__NumberDisplayPositionY _direction)
         {
             var pt = _layer1.Position;

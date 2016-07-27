@@ -509,8 +509,8 @@ namespace NathansWay.iOS.Numeracy
 
         public G__NumberDisplaySize DisplaySize
         { 
-            get { return this._globalSizeDimensions.Size; } 
-            set { this._globalSizeDimensions.Size = value; }
+            get { return this._globalSizeDimensions.DisplaySize; } 
+            set { this._globalSizeDimensions.DisplaySize = value; }
         }
 
         public G__NumberDisplayPositionY DisplayPositionY

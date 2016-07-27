@@ -32,7 +32,6 @@ namespace NathansWay.Shared.Factories
         private readonly char[] sepMethodArray = {'M'};
 
         // Main output object
-        private G__NumberDisplaySize _UIDisplaySize;
         private int _intMethodCount;
 
         #endregion

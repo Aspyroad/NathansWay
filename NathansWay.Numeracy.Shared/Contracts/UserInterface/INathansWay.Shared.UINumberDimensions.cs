@@ -9,7 +9,7 @@ namespace NathansWay.Shared
     public interface IUINumberDimensions
     {
         // Global Display Output object
-        G__NumberDisplaySize Size { get; set; }
+        G__NumberDisplaySize DisplaySize  { get; set; }
         // Number Text
         float LabelPickerViewHeight { get; }
         float LabelPickerViewWidth { get; }
