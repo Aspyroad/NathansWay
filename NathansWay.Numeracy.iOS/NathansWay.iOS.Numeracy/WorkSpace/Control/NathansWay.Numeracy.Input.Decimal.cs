@@ -97,7 +97,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Base Container will call ALL main vc setframes.
             base.ViewWillAppear(animated);
             // Other Frames
-            this.DecimalSize.SetSubViewPositions();
+            // TODO: Break? commented out and putting in Sizeclass SetViewPosition
+            //this.DecimalSize.SetSubViewPositions();
             this._vDecimal.RectDecimalDraw = this._sizeDecimal._rectDecimalDraw;
             //this.View.Frame = this.DecimalSize._rectDecimal;
         }
@@ -150,7 +151,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public SizeDecimal DecimalSize
         {
             get { return (SizeDecimal)this._sizeClass; }
-            //set { this._sizeClass = value; }
         }
 
         #endregion
