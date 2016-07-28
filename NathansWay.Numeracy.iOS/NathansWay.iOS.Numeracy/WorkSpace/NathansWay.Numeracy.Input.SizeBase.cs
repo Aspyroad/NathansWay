@@ -270,24 +270,43 @@ namespace NathansWay.iOS.Numeracy
 
         #region Set Frame And Position
 
-
+        /// <summary>
+        /// For adopting classes to override their own functionality - base implementaion is empty
+        /// </summary>
+        /// <returns>Void</returns>
         public virtual void SetHeightWidth ()
         {
             // For adopting classes to override their own functionality - sub view sizing etc.
+            // This class is called 
         }
 
-        public virtual void SetHeightWidth (nfloat _width, nfloat _height)
+        /// <summary>
+        /// Sets the width and height of the Sizeclass frame.
+        /// </summary>
+        /// <returns>The height width.</returns>
+        /// <param name="_width">Width.</param>
+        /// <param name="_height">Height.</param>
+        public void SetHeightWidth (nfloat _width, nfloat _height)
         {
             this._fCurrentWidth = _width;
             this._fCurrentHeight = _height;
         }
 
-        public virtual void SetHeightWidth(CGRect _frame)
+        /// <summary>
+        /// Sets the width and height of the Sizeclass frame using the width and height of the suppplied CGRect.
+        /// </summary>
+        /// <returns>The height width.</returns>
+        /// <param name="_frame">Frame.</param>
+        public void SetHeightWidth(CGRect _frame)
         {
             this._fCurrentWidth = _frame.Width;
             this._fCurrentHeight = _frame.Height;
         }
 
+        /// <summary>
+        /// Calls no positioning logic. For hard coded positioning and adopting class override
+        /// </summary>
+        /// <returns>The view position.</returns>
         public virtual void SetViewPosition ()
         {
             /// <summary>
@@ -300,15 +319,6 @@ namespace NathansWay.iOS.Numeracy
                 throw new NullReferenceException("Aspy Error - StartPoint has not been set to a position");
             }
             this.SetHeightWidth();
-            this.SetSubViewPositions();
-            this._rectFrame =
-                new CGRect
-                    (
-                        this.StartPoint.X,
-                        this.StartPoint.Y,
-                        this.CurrentWidth,
-                        this.CurrentHeight
-                    );
         }
 
         /// <summary>
@@ -343,6 +353,7 @@ namespace NathansWay.iOS.Numeracy
             /// Boolean - If set to true it halves the parents Horizontal width and uses this.DisplayPositionX 
             /// to position rectframe in the middle of the Right half of its parent. Defining a 1/4
             /// </summary>
+
             // SetPositions should be used to
             // 1. Set the StartPoint (PointF)
             // 2. Set the Height and Widths of the control
@@ -358,17 +369,6 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.StartPoint = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y); 
             }
-
-            this.SetSubViewPositions();
-            this._rectFrame =
-                new CGRect
-                    (
-                        this.StartPoint.X,
-                        this.StartPoint.Y,
-                        this.CurrentWidth,
-                        this.CurrentHeight
-                    );
-
         }
 
         /// <summary>
@@ -389,23 +389,17 @@ namespace NathansWay.iOS.Numeracy
                 _point = this.RefreshDisplayAndPosition(_posX, _posY);
             }
             this.StartPoint = _point;
-
-            this.SetSubViewPositions();
-            this._rectFrame =
-                new CGRect
-                    (
-                        this.StartPoint.X,
-                        this.StartPoint.Y,
-                        this.CurrentWidth,
-                        this.CurrentHeight
-                    );
         }
 
-        public virtual void SetSubViewPositions ()
+        public virtual void SetSubViewPositions()
         {
             // For adopting classes to override their own functionality - sub view positioning etc.
         }
 
+        /// <summary>
+        /// Called by any inheriting Basecontainer in the location specified by G__UIApply method
+        /// </summary>
+        /// <returns>The frames.</returns>
         public virtual void SetFrames()
         {
             // NOTE: 
@@ -416,7 +410,7 @@ namespace NathansWay.iOS.Numeracy
             // Generally we will ALWAYS want to set the mainframe for this control in base
             if (this.ParentContainer != null)
             {                 
-                this.ParentContainer.View.Frame = this._rectFrame;
+                this.ParentContainer.View.Frame = this.RectFrame;
             }
         }
 
@@ -467,7 +461,7 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
-                return new CGRect(0.0f, 0.0f, this._rectFrame.Width, this._rectFrame.Height);
+                return new CGRect(0.0f, 0.0f, this._fCurrentWidth, this._fCurrentHeight);
             }
         }
 
@@ -505,8 +499,17 @@ namespace NathansWay.iOS.Numeracy
         // Main Control Frame
         public CGRect RectFrame 
         { 
-            get { return this._rectFrame; } 
-            set { this._rectFrame = value; }
+            get 
+            { 
+                return new CGRect
+                    (
+                        this.StartPoint.X,
+                        this.StartPoint.Y,
+                        this.CurrentWidth,
+                        this.CurrentHeight
+                    );
+            } 
+            //set { this._rectFrame = value; }
         }
 
         // General Width and Height Variables

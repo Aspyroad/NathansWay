@@ -246,19 +246,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.SetHeightWidth();
         }
 
-
-        //public override void SetFrames()
-        //{
-        //    // Set main VC Frame
-        //    base.SetFrames();
-        //    //this._recttxtBrace = new CGRect(
-        //    //    0.0f, 
-        //    //    0.0f, 
-        //    //    this.CurrentWidth,
-        //    //    this.CurrentHeight
-        //    //);
-        //}
-
         #endregion
 
         #region Public Members

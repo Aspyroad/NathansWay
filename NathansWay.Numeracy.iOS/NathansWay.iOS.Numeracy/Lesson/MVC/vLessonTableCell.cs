@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy
             drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
             drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
-            drawfact.RectFrame = vOperator.Frame;
+            drawfact.SetHeightWidth(vOperator.Frame);
             vOperator.DrawLayer();
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);

@@ -228,14 +228,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public void SetFrames ()
+        public override void SetFrames ()
         {
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                this.GlobalSizeDimensions.TxtNumberHeight
-            );
+            
+            this._fCurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+
             this._rectNumberLabel = new CGRect(
                 0.0f, 
                 0.0f, 

@@ -289,12 +289,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._fCurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }
 
-        public override void SetFrames()
-        {
-            base.SetFrames();
-            //var x = 1;
-        }
-
         #endregion
     }
 }

@@ -1257,12 +1257,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                (this.GlobalSizeDimensions.TxtNumberHeight)
-            );
+            this._fCurrentHeight = (this.GlobalSizeDimensions.TxtNumberHeight);
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth, 
+            //    (this.GlobalSizeDimensions.TxtNumberHeight)
+            //);
 
             this._rectTxtNumber = new CGRect(
                 0.0f, 
@@ -1280,12 +1282,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth,
-                (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
-            );
+
+            this._fCurrentHeight = (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight);
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth,
+            //    (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
+            //);
         }
        
         private void SetPickerPositionNormalOff()
@@ -1296,24 +1301,30 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                this.GlobalSizeDimensions.TxtNumberHeight
-            );
+
+            this._fCurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth, 
+            //    this.GlobalSizeDimensions.TxtNumberHeight
+            //);
+
             this._rectUpButton = new CGRect(
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
                 (this.CurrentHeight/2)
             );
+
             this._rectDownButton = new CGRect(
                 0.0f,
                 (this.CurrentHeight/2),
                 this.CurrentWidth,
                 (this.CurrentHeight/2)
             );
+
             this._rectTxtNumber = new CGRect(
                 0.0f, 
                 0.0f,
@@ -1335,12 +1346,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                (this.GlobalSizeDimensions.TxtNumberHeight)
-            );
+            this._fCurrentHeight = (this.GlobalSizeDimensions.TxtNumberHeight);
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth, 
+            //    (this.GlobalSizeDimensions.TxtNumberHeight)
+            //);
 
             this._rectTxtNumber = new CGRect(
                 0.0f, 
@@ -1358,12 +1371,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth,
-                (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
-            );
+
+            this._fCurrentHeight = (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight);
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth,
+            //    (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
+            //);
         }
 
         public void SetPickerPositionNormalOffFraction()
@@ -1374,24 +1390,30 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Width,
                 this._sLabelPickerViewSize.Height
             );
-            this.RectFrame = new CGRect(
-                this.StartPoint.X, 
-                this.StartPoint.Y, 
-                this.CurrentWidth, 
-                this.GlobalSizeDimensions.FractionNumberHeight
-            );
+
+            this._fCurrentHeight = this.GlobalSizeDimensions.FractionNumberHeight;
+
+            //this.RectFrame = new CGRect(
+            //    this.StartPoint.X, 
+            //    this.StartPoint.Y, 
+            //    this.CurrentWidth, 
+            //    this.GlobalSizeDimensions.FractionNumberHeight
+            //);
+
             this._rectUpButton = new CGRect(
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2)
             );
+
             this._rectDownButton = new CGRect(
                 0.0f,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2),
                 this.CurrentWidth,
                 (this.GlobalSizeDimensions.FractionNumberHeight/2)
             );
+
             this._rectTxtNumber = new CGRect(
                 0.0f, 
                 0.0f,
