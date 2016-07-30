@@ -232,18 +232,25 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void SetSubViewPositions()
+        //public override void SetSubViewPositions()
+        //{
+
+        //}
+
+        public override void SetSubHeightWidthPositions ()
+        { 
+            this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
+            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
+            base.SetSubHeightWidthPositions();
+        }
+
+        public override void SetFrames()
         {
             // Set local frames to the VC
             this.SetRectDecimal();
             this.SetRectDecimalDraw();
-        }
 
-        public override void SetHeightWidth ()
-        { 
-            this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
-            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
-            base.SetHeightWidth();
+            base.SetFrames();
         }
 
         #endregion

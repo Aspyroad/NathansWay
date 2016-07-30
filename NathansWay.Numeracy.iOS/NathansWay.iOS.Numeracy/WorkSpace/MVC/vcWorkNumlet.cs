@@ -284,7 +284,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         {
             this._fCurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }

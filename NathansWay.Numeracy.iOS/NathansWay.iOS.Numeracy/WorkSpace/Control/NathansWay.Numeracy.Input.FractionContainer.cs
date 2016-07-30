@@ -540,12 +540,12 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides Members
 
-        public override void SetHeightWidth()
+        public override void SetSubHeightWidthPositions()
         {
             // Width is assigned during the fraction creation as the number widths must be known
             // this.CurrentWidth = (width of the largest number)
             this.CurrentHeight = this.GlobalSizeDimensions.FractionHeight;
-            base.SetHeightWidth();
+            base.SetSubHeightWidthPositions();
         }
 
         #endregion

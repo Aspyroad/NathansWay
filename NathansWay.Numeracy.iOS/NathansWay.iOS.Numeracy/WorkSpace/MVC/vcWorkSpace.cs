@@ -146,14 +146,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._enumLessonState = G__LessonState.Ready;
 
-//            this._bEquationReadOnly = true;
-//            this._bResultReadonly = false;
-//            this._bMethodsReadonly = true;
-
             this.HasSelectedNumberText = false;
             this.HasSelectedOperatorText = false;
 
-		}
+
+            // Virtual Canvas setups ******************************************************************
+            this._vCanvasMain = new AspyScrollView();
+            this._vCanvasDocked = new AspyView();
+
+            this._vCanvasMain.BackgroundColor = UIColor.White;
+            this._vCanvasMain.ClipsToBounds = true;
+            this._vCanvasMain.AutosizesSubviews = false;
+            this._vCanvasMain.ScrollEnabled = true;
+            this._vCanvasMain.UserInteractionEnabled = true;
+            this._vCanvasMain.CornerRadius = 5.0f;
+            this._vCanvasMain.HasRoundedCorners = true;
+
+            // This is NEEDED for scrollview to work (currently set in sizing?)
+            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
+
+
+            this._vCanvasDocked.BackgroundColor = UIColor.Gray;
+            this._vCanvasDocked.ClipsToBounds = true;
+            this._vCanvasDocked.AutosizesSubviews = false;
+            this._vCanvasDocked.CornerRadius = 5.0f;
+            this._vCanvasDocked.HasRoundedCorners = true;
+            this._vCanvasDocked.UserInteractionEnabled = true;
+            // This is NEEDED for scrollview to work
+            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
+
+        }
 
         private void AddVCNumlet (vcWorkNumlet _myNumlet)
         {
@@ -226,7 +248,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void SetDisplayExpression ()
         {
-            this.SizeClass.SetSubViewPositions();
+            this.SizeClass.SetSubHeightWidthPositions();
 
             // TODO: Fix this shit, the only way SetFrames is being called is by "adding" the view again...costly code
             this.RemoveNumlet(this._vcNumletEquation);
@@ -441,10 +463,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return true;
         }
 
-         
-
-         
-
         #endregion
 
         #region Public Properties
@@ -459,6 +477,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return this._vCanvasMain; }
             set { this._vCanvasMain = value; }
         }
+
+        public G__LessonState LessonState
+        {
+            get { return this._enumLessonState; }
+        }
+
 
         //public AspyScrollView vCanvasDocked 
         public AspyView vCanvasDocked 
@@ -565,7 +589,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		public override void LoadView()
 		{
-			base.LoadView(); 
+			base.LoadView();
+
             this.SetWorkSpaceInitialPosition();
             this.View.Layer.Opacity = 0.0f;
             this.View.AutosizesSubviews = false;
@@ -585,30 +610,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
 
-            // Virtual Canvas setups ******************************************************************
-            this._vCanvasMain = new AspyScrollView();
-            this._vCanvasDocked = new AspyView();
 
-            this._vCanvasMain.BackgroundColor = UIColor.White;
-            this._vCanvasMain.ClipsToBounds = true;
-            this._vCanvasMain.AutosizesSubviews = false;
-            this._vCanvasMain.ScrollEnabled = true;
-            this._vCanvasMain.UserInteractionEnabled = true;
-            this._vCanvasMain.CornerRadius = 5.0f;
-            this._vCanvasMain.HasRoundedCorners = true;
-
-            // This is NEEDED for scrollview to work (currently set in sizing?)
-            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
-
-
-            this._vCanvasDocked.BackgroundColor = UIColor.Gray;
-            this._vCanvasDocked.ClipsToBounds = true;
-            this._vCanvasDocked.AutosizesSubviews = false;
-            this._vCanvasDocked.CornerRadius = 5.0f;
-            this._vCanvasDocked.HasRoundedCorners = true;
-            this._vCanvasDocked.UserInteractionEnabled = true;
-            // This is NEEDED for scrollview to work
-            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
 
             this.View.AddSubview(this._vCanvasMain);
             this.View.AddSubview(this._vCanvasDocked);
@@ -1206,30 +1208,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetViewPosition()
+        public override void SetSubHeightWidthPositions ()
         {
             var y = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
             this.StartPoint = new CGPoint(this._fPaddingPositional, y);
-            base.SetViewPosition();
-        }
 
-        public override void SetSubViewPositions()
-        {
-            base.SetSubViewPositions();
-            this.SetCanvasMainHeightWidth();
-            this.SetCanvasDockedHeightWidth();
-            // Numlet sizzing
-            this.SetEquationNumletPosition();
-            this.SetMethodsNumletPosition();
-            this.SetDockedNumletPositions();
-            //this._vcWorkSpace.View.SetNeedsDisplay();
-
-        }
-
-        public override void SetHeightWidth ()
-        {
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;
+
+            this.SetCanvasMainHeightWidth();
+            this.SetCanvasDockedHeightWidth();
+            // Numlet sizing
+            if (this._vcWorkSpace.LessonState != G__LessonState.Ready)
+            {
+                this.SetEquationNumletPosition();
+                this.SetMethodsNumletPosition();
+                this.SetDockedNumletPositions();
+            }
         }
 
         #endregion

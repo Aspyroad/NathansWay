@@ -88,7 +88,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void LoadView()
         {
             base.LoadView();
-            this.AddAndSet_WorkSpace();
+
         }
 
         public override void ViewDidLoad()
@@ -98,6 +98,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.UserInteractionEnabled = true;
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
             this.SizeClass.SetViewPosition(0.0f, 0.0f);
+
+            this.AddAndSet_WorkSpace();
         }
 
         public override void ViewWillAppear(bool animated)
@@ -124,7 +126,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
 
-            this._vcWorkSpace.SizeClass.SetViewPosition();
+            this._vcWorkSpace.SizeClass.SetSubHeightWidthPositions();
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 
@@ -185,7 +187,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions()
         {
             this.CurrentWidth = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Width;
             this.CurrentHeight = this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height;

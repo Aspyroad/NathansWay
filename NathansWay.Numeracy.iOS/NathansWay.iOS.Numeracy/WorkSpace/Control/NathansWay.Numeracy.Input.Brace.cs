@@ -239,11 +239,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         //    base.SetViewPosition(_startPoint);
         //}
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.BraceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.BraceHeight;
-            base.SetHeightWidth();
+            base.SetSubHeightWidthPositions();
         }
 
         #endregion

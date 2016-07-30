@@ -103,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewWillAppear(bool animated)
         {
             // Call to the derived sizeclass setotherpositions()
-            this.OperatorSize.SetSubViewPositions();
+            this.OperatorSize.SetSubHeightWidthPositions();
             // Set drawn graphic positions
             this._vOperator.iOSDrawingFactory.StartPoint = this.OperatorSize.OperatorStartpoint;
             // Base Container will call vc set mainframe.
@@ -279,15 +279,18 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void SetSubViewPositions()
+        //public override void SetSubViewPositions()
+        //{
+        //    // Set local frames to the VC
+        //    this.SetRectTxtOperator();
+        //    this.SetGraphicDrawPoint();
+        //}
+
+        public override void SetSubHeightWidthPositions ()
         {
             // Set local frames to the VC
             this.SetRectTxtOperator();
             this.SetGraphicDrawPoint();
-        }
-
-        public override void SetHeightWidth ()
-        { 
             this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }

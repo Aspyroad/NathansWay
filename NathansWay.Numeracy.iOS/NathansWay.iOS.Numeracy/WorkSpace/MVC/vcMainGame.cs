@@ -143,7 +143,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         {
             this.CurrentWidth = (this.VcMainContainer.iOSGlobals.G__RectWindowLandscape.Width - 4);
             this.CurrentHeight = (this.VcMainContainer.iOSGlobals.G__RectWindowLandscape.Height - 4);

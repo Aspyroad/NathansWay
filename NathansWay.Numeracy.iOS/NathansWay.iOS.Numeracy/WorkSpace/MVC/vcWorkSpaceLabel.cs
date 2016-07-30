@@ -189,7 +189,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         {
             // We have no fuckin idea how big this will be!!!!!
         }

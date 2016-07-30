@@ -203,7 +203,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         {
             if (this._bMultiNumberLabel)
             {

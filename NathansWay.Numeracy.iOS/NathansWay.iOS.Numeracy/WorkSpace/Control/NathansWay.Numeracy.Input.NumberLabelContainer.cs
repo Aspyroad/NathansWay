@@ -387,7 +387,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void SetHeightWidth ()
+        public override void SetSubHeightWidthPositions ()
         { 
             // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }

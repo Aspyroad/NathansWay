@@ -274,7 +274,7 @@ namespace NathansWay.iOS.Numeracy
         /// For adopting classes to override their own functionality - base implementaion is empty
         /// </summary>
         /// <returns>Void</returns>
-        public virtual void SetHeightWidth ()
+        public virtual void SetSubHeightWidthPositions ()
         {
             // For adopting classes to override their own functionality - sub view sizing etc.
             // This class is called 
@@ -303,23 +303,23 @@ namespace NathansWay.iOS.Numeracy
             this._fCurrentHeight = _frame.Height;
         }
 
-        /// <summary>
-        /// Calls no positioning logic. For hard coded positioning and adopting class override
-        /// </summary>
-        /// <returns>The view position.</returns>
-        public virtual void SetViewPosition ()
-        {
-            /// <summary>
-            /// Calls no positioning logic. For hard coded positioning
-            /// This overload takes 0 params. StartPoint MUST be set for correct operation
-            /// </summary>
-            // StartPoint MUST be set when calling this
-            if (StartPoint.IsEmpty)
-            {
-                throw new NullReferenceException("Aspy Error - StartPoint has not been set to a position");
-            }
-            this.SetHeightWidth();
-        }
+        ///// <summary>
+        ///// Calls no positioning logic. For hard coded positioning and adopting class override
+        ///// </summary>
+        ///// <returns>The view position.</returns>
+        //public virtual void SetPositions ()
+        //{
+        //    /// <summary>
+        //    /// Calls no positioning logic. For hard coded positioning
+        //    /// This overload takes 0 params. StartPoint MUST be set for correct operation
+        //    /// </summary>
+        //    // StartPoint MUST be set when calling this
+        //    if (StartPoint.IsEmpty)
+        //    {
+        //        throw new NullReferenceException("Aspy Error - StartPoint has not been set to a position");
+        //    }
+        //    this.SetHeightWidth();
+        //}
 
         /// <summary>
         /// Sets Rectframe position.
@@ -354,13 +354,13 @@ namespace NathansWay.iOS.Numeracy
             /// to position rectframe in the middle of the Right half of its parent. Defining a 1/4
             /// </summary>
 
-            // SetPositions should be used to
+            // SetViewPositions should be used to
             // 1. Set the StartPoint (PointF)
             // 2. Set the Height and Widths of the control
             // It should NOT be called to set frame objects
 
-            //CGPoint _point;
-            this.SetHeightWidth();
+            this.SetSubHeightWidthPositions();
+
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
                 this.StartPoint = _startPoint;
@@ -379,7 +379,9 @@ namespace NathansWay.iOS.Numeracy
         public virtual void SetViewPosition(nfloat _posX, nfloat _posY)
         {
             CGPoint _point;
-            this.SetHeightWidth();
+
+            this.SetSubHeightWidthPositions();
+
             if (!this._setRelationPosX && !this._setRelationPosY)
             {
                 _point = new CGPoint(_posX, _posY);
@@ -389,11 +391,6 @@ namespace NathansWay.iOS.Numeracy
                 _point = this.RefreshDisplayAndPosition(_posX, _posY);
             }
             this.StartPoint = _point;
-        }
-
-        public virtual void SetSubViewPositions()
-        {
-            // For adopting classes to override their own functionality - sub view positioning etc.
         }
 
         /// <summary>
