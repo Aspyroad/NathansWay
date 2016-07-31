@@ -126,7 +126,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
 
-            this._vcWorkSpace.SizeClass.SetSubHeightWidthPositions();
+            //this._vcWorkSpace.SizeClass.SetSubHeightWidthPositions();
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 
