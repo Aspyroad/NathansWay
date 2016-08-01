@@ -605,7 +605,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = true;
 
-
+            // To start hide the canvas's
+            this.vCanvasMain.Hidden = true;
+            this.vCanvasDocked.Hidden = true;
 
             this.View.AddSubview(this._vCanvasMain);
             this.View.AddSubview(this._vCanvasDocked);
@@ -655,8 +657,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void ViewWillAppear(bool animated)
         {
-            base.ViewWillAppear(animated);
             this.View.Layer.Opacity = 1.0f;
+            this.SizeClass.SetViewPosition();
+            base.ViewWillAppear(animated);
+
 
             // Setup all canvas size here.
             //this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasMainHeightWidth();
@@ -1204,8 +1208,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetSubHeightWidthPositions ()
         {
-            var y = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
-            this.StartPoint = new CGPoint(this._fPaddingPositional, y);
+            this._fCurrentY = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
+            this._fCurrentX = this._fPaddingPositional;
+            //this.StartPoint = new CGPoint(this._fPaddingPositional, this._fCurrentY);
 
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;

@@ -62,9 +62,11 @@ namespace NathansWay.iOS.Numeracy
             // Set the drawing in the middle of the view
             drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
             drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
-
-            drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
             drawfact.SetHeightWidth(vOperator.Frame);
+            drawfact.SetViewPosition(0.0f, 0.0f);
+
+            //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
+            //drawfact.SetHeightWidth(vOperator.Frame);
             vOperator.DrawLayer();
             
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
