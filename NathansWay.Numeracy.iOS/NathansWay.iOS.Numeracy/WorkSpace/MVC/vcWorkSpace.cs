@@ -591,15 +591,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.LoadView();
 
-            this.SetWorkSpaceInitialPosition();
+            //this.SetWorkSpaceInitialPosition();
             this.View.Layer.Opacity = 0.0f;
             this.View.AutosizesSubviews = false;
 		}
-
-        public override void AwakeFromNib()
-        {
-            base.AwakeFromNib();
-        }
 
 		public override void ViewDidLoad()
 		{
@@ -662,7 +657,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
             this.View.Layer.Opacity = 1.0f;
-
 
             // Setup all canvas size here.
             //this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasMainHeightWidth();

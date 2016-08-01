@@ -56,9 +56,12 @@ namespace NathansWay.iOS.Numeracy
         protected nfloat _fPaddingPositional;
         // Parent container reference
         protected BaseContainer _parentContainer;
-        // Current Sizing
+        // Current Sizing WidthHeight
         protected nfloat _fCurrentWidth = 0.0f;
         protected nfloat _fCurrentHeight = 0.0f;
+        // Current Sizing Position
+        protected nfloat _fCurrentY = 0.0f;
+        protected nfloat _fCurrentX = 0.0f;
         // When height and width are adjusted left/right - top/bottom padding is added.
 
         protected CGSize _scaleFactor;
@@ -149,8 +152,8 @@ namespace NathansWay.iOS.Numeracy
         /// <param name="_YHeight">Y height.</param>
         protected CGPoint RefreshDisplayAndPosition(nfloat _XWidth, nfloat _YHeight)
         {
-            nfloat _YPos = _YHeight;
-            nfloat _XPos = _XWidth;
+            this._fCurrentY = _YHeight;
+            this._fCurrentX = _XWidth;
             nfloat Y = _YHeight;
             nfloat X = _XWidth;
 
@@ -161,17 +164,17 @@ namespace NathansWay.iOS.Numeracy
                 {
                     case (G__NumberDisplayPositionY.Center): // Most common first ??
                         {
-                            _YPos = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
+                            _fCurrentY = ((Y / 2.0f) - (this._fCurrentHeight / 2.0f));
                         }
                         break;
                     case (G__NumberDisplayPositionY.Top):
                         {
-                            _YPos = this._fPaddingPositional;
+                            _fCurrentY = this._fPaddingPositional;
                         }
                         break;
                     default: // G__NumberDisplayPositionY.Bottom
                         {
-                            _YPos = (Y - (this._fCurrentHeight + this._fPaddingPositional));
+                            _fCurrentY = (Y - (this._fCurrentHeight + this._fPaddingPositional));
 
                         }
                         break;
@@ -184,18 +187,18 @@ namespace NathansWay.iOS.Numeracy
                 {
                     case (G__NumberDisplayPositionX.Center): // Most common first ??
                         {
-                            _XPos = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
+                            _fCurrentX = ((X / 2.0f) - (this._fCurrentWidth / 2.0f));
                         }
                         break;
                     case (G__NumberDisplayPositionX.Left):
                         {
-                            _XPos = this._fPaddingPositional;
+                            _fCurrentX = this._fPaddingPositional;
                         }
                         break;
                     default: // G__NumberDisplayPosition.Right
                         {
                             // Add a pad?
-                            _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
+                            _fCurrentX = (X - (this._fCurrentWidth + this._fPaddingPositional));
                         }
                         break;
                 }
@@ -209,17 +212,17 @@ namespace NathansWay.iOS.Numeracy
                 {
                     case (G__NumberDisplayPositionX.Right): // Most common first ??
                         {
-                            _XPos = ((X / 2.0f) - (this._fCurrentWidth + this._fPaddingPositional));
+                            _fCurrentX = ((X / 2.0f) - (this._fCurrentWidth + this._fPaddingPositional));
                         }
                         break;
                     case (G__NumberDisplayPositionX.Left):
                         {
-                            _XPos = this._fPaddingPositional;
+                            _fCurrentX = this._fPaddingPositional;
                         }
                         break;
                     default: // G__NumberDisplayPositionX.Center
                         {
-                            _XPos = ((X / 4.0f) - (this._fCurrentWidth / 2.0f));
+                            _fCurrentX = ((X / 4.0f) - (this._fCurrentWidth / 2.0f));
                         }
                         break;
                 }
@@ -231,23 +234,23 @@ namespace NathansWay.iOS.Numeracy
                 {
                     case (G__NumberDisplayPositionX.Right): // Most common first ??
                         {
-                            _XPos = (X - (this._fCurrentWidth + this._fPaddingPositional));
+                            _fCurrentX = (X - (this._fCurrentWidth + this._fPaddingPositional));
                         }
                         break;
                     case (G__NumberDisplayPositionX.Left):
                         {
-                            _XPos = ((X / 2.0f) + this._fPaddingPositional);
+                            _fCurrentX = ((X / 2.0f) + this._fPaddingPositional);
                         }
                         break;
                     default: // G__NumberDisplayPositionX.Center
                         {
-                            _XPos = (((X / 2.0f) + (X / 4.0f)) - (this._fCurrentWidth / 4.0f));
+                            _fCurrentX = (((X / 2.0f) + (X / 4.0f)) - (this._fCurrentWidth / 4.0f));
                         }
                         break;
                 }
             }
 
-            return new CGPoint((nfloat)Math.Round(_XPos), (nfloat)Math.Round(_YPos));
+            return new CGPoint((nfloat)Math.Round(_fCurrentX), (nfloat)Math.Round(_fCurrentY));
         }
 
         //The event-invoking method. This mehtod calls all sizeclass virtual
@@ -322,7 +325,7 @@ namespace NathansWay.iOS.Numeracy
         //}
 
         /// <summary>
-        /// Sets Rectframe position.
+        /// Override 1 Sets Rectframe position.
         /// </summary>
         /// <returns>The view position.</returns>
         /// <param name="_startPoint">Start point.</param>
@@ -360,37 +363,25 @@ namespace NathansWay.iOS.Numeracy
             // It should NOT be called to set frame objects
 
             this.SetSubHeightWidthPositions();
-
-            if (!this._setRelationPosX && !this._setRelationPosY)
-            {
-                this.StartPoint = _startPoint;
-            }
-            else
-            {
-                this.StartPoint = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y); 
-            }
+            this.StartPoint = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y); 
         }
 
         /// <summary>
-        /// Sets Rectframe position.
+        /// Override 2 Sets Rectframe position.
         /// </summary>
         /// <param name="_posX">_posX</param>
         /// <param name="_posY">_posY</param>
         public virtual void SetViewPosition(nfloat _posX, nfloat _posY)
         {
-            CGPoint _point;
-
             this.SetSubHeightWidthPositions();
+            this.StartPoint = this.RefreshDisplayAndPosition(_posX, _posY);
+        }
 
-            if (!this._setRelationPosX && !this._setRelationPosY)
-            {
-                _point = new CGPoint(_posX, _posY);
-            }
-            else
-            {
-                _point = this.RefreshDisplayAndPosition(_posX, _posY);
-            }
-            this.StartPoint = _point;
+        public virtual void SetViewPosition()
+        {
+            // Startpoint MUST be set or its crashville
+            this.SetSubHeightWidthPositions();
+            this.StartPoint = this.RefreshDisplayAndPosition(this._fCurrentX, this._fCurrentY);
         }
 
         /// <summary>
@@ -529,6 +520,28 @@ namespace NathansWay.iOS.Numeracy
                 this._fOldHeight = this._fCurrentHeight; 
                 this._fCurrentHeight = value;
             } 
+        }
+
+        // General X and Y Variables
+        public nfloat CurrentX
+        {
+            get { return this._fCurrentX; }
+            set
+            {
+                //this._fOldWidth = this._fCurrentWidth;
+                this._fCurrentX = value;
+            }
+        }
+
+
+        public nfloat CurrentY
+        {
+            get { return this._fCurrentY; }
+            set
+            {
+                //this._fOldHeight = this._fCurrentHeight;
+                this._fCurrentY = value;
+            }
         }
 
         public nfloat CurrentWidthWithPadding 

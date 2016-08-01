@@ -85,12 +85,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-        public override void LoadView()
-        {
-            base.LoadView();
-
-        }
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -100,11 +94,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetViewPosition(0.0f, 0.0f);
 
             this.AddAndSet_WorkSpace();
-        }
-
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
         }
 
 		#endregion
@@ -125,8 +114,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace(this._vmLesson);
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
-
-            //this._vcWorkSpace.SizeClass.SetSubHeightWidthPositions();
             this.AddAndDisplayController(this._vcWorkSpace);
         }
 
