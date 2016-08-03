@@ -129,15 +129,15 @@ namespace NathansWay.Shared
         static Dictionary<int, float> _dict = new Dictionary<int, float>
         {
             {G__DisplaySize.Level1, 0.1f},
-            {G__DisplaySize.Level1, 0.3f},
-            {G__DisplaySize.Level2, 0.5f},
-            {G__DisplaySize.Level3, 0.7f},
-            {G__DisplaySize.Level4, 0.9f},
+            {G__DisplaySize.Level2, 0.3f},
+            {G__DisplaySize.Level3, 0.5f},
+            {G__DisplaySize.Level4, 0.8f},
             {G__DisplaySize.Level5, 1.0f},
             {G__DisplaySize.Level6, 1.5f},
             {G__DisplaySize.Level7, 2.0f},
-            {G__DisplaySize.Level8, 3.0f},
-            {G__DisplaySize.Level9, 4.0f},
+            {G__DisplaySize.Level8, 2.5f},
+            {G__DisplaySize.Level9, 3.0f},
+            {G__DisplaySize.Level10, 4.0f},
         };
 
         public static float GetLevel(int x)

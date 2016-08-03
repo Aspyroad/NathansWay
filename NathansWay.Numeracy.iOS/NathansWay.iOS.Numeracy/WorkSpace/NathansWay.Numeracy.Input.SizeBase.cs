@@ -433,7 +433,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public CGSize Scale
+        public CGSize ScaleFactor
         {
             get
             {
@@ -606,7 +606,15 @@ namespace NathansWay.iOS.Numeracy
         public bool SetCenterRelativeParentViewPosY
         {
             get { return this._setRelationPosY; }
-            set { this._setRelationPosY = value; }
+            set 
+            { 
+                this._setRelationPosY = value;
+                //if (value)
+                {
+                    this._setMiddleLeftPosX = false;
+                    this._setMiddleRightPosX = false;
+                }
+            }
         }
 
         // Horizontal align ********************************

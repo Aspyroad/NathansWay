@@ -66,7 +66,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
 
             this._opacity = 1.0f;
-
         }
 
         #endregion
@@ -143,8 +142,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
-
-
         #endregion
 
         public DrawLayer DrawLayer()
@@ -162,6 +159,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
             _layer.ContentsScale = UIScreen.MainScreen.Scale;
             _layer.BackgroundColor = this.BackgroundColor.CGColor;
             _layer.Opacity = this._opacity;
+            _layer.Frame = this.RectFrame;
+            _layer.FillColor = this.PrimaryFillColor;
+            _layer.ScaleFactor = this.ScaleFactor;
+
 
 
             return _layer;
@@ -278,7 +279,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             // Do nothing, since we override Clone, but we could
             // just clone the data here as well if we wanted to.
             //this.Frame = new CGRect(0.0f, 0.0f, 40.0f, 40.0f);
-
         }
 
         [Export("initWithLayer:")]

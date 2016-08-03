@@ -144,6 +144,7 @@ namespace NathansWay.iOS.Numeracy
 			this._srcLesson = new LessonMenuTableSource (this);
 			this._srcLesson.ScrolledToBottom += ScrolledToBottom;
 			this.tvLessonMain.Source = this._srcLesson;
+            //this.tvLessonMain.RegisterClassForCellReuse(GetType(vLessonTableCell), "test");
 
             // LessonDetail TableView
             // Setup tableview source
@@ -474,8 +475,16 @@ namespace NathansWay.iOS.Numeracy
 			{
 
 				var lesson = this.vmLesson.Lessons [indexPath.Row];
-				var cell = tableView.DequeueReusableCell ("LessonTableCell") as vLessonTableCell;
-				cell.IndexValue = indexPath.Row;
+				vLessonTableCell cell = tableView.DequeueReusableCell ("LessonTableCell") as vLessonTableCell;
+                if (cell == null)
+                {
+                    cell = new vLessonTableCell(UITableViewCellStyle.Default, lesson.DateTmCreate.ToString());
+                }
+                else
+                {
+                    
+                }
+				//cell.IndexValue = indexPath.Row;
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
 
 

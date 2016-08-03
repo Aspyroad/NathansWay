@@ -60,10 +60,15 @@ namespace NathansWay.iOS.Numeracy
             // Draw Operator Layer
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             // Set the drawing in the middle of the view
+            //drawfact.SetCenterRelativeParentViewPosX = true;
+            //drawfact.SetCenterRelativeParentViewPosY = true;
             drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
             drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
             drawfact.SetHeightWidth(vOperator.Frame);
-            drawfact.SetViewPosition(0.0f, 0.0f);
+            drawfact.SetScale(G__NumberDisplaySize.Level5);
+            drawfact.BackgroundColor = UIColor.Clear;
+            // SetViewPosition is the ultimate sizeclass function, it calculates EVERYTHING!
+            drawfact.SetViewPosition(vOperator.Frame.Width / 2, vOperator.Frame.Height / 2);
 
             //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
             //drawfact.SetHeightWidth(vOperator.Frame);
