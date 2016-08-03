@@ -57,6 +57,14 @@ namespace NathansWay.iOS.Numeracy
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
 
+            if (vOperator.Layer.Sublayers != null)
+            {
+                if (vOperator.Layer.Sublayers.Length > 0)
+                {
+                    var x = 1;
+                }
+            }
+
             // Draw Operator Layer
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             // Set the drawing in the middle of the view
