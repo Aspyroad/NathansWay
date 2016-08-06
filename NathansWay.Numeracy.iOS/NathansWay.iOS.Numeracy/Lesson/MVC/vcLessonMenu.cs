@@ -144,7 +144,17 @@ namespace NathansWay.iOS.Numeracy
 			this._srcLesson = new LessonMenuTableSource (this);
 			this._srcLesson.ScrolledToBottom += ScrolledToBottom;
 			this.tvLessonMain.Source = this._srcLesson;
-            //this.tvLessonMain.RegisterClassForCellReuse(typeof(vLessonTableCell), "tvLessonMain");
+
+            #region Tutorial
+            // 4/8/2016
+            // Either of these must be used along with the deque approach in the tableview delegate getcell().
+            // But! as I have learnt over the last 2 days, yu need not worry if the cell is a prototype inside a storyboard file.
+            // Because the prototyped cell belongs to the tableview inside the storyboard, its already aware of what cell to create in a deque
+            // Custom Class method  for auto loading the deque
+            //this.tvLessonMain.RegisterClassForCellReuse(typeof(vLessonTableCell), "tvLessonMainCell");
+            // Nib file method for autoloading the deque
+            //this.tvLessonMain.RegisterNibForCellReuse(UINib.FromName("vlessonTableCell", NSBundle.MainBundle), "tvLessonMainCell");
+            #endregion
 
             // LessonDetail TableView
             // Setup tableview source
@@ -475,8 +485,8 @@ namespace NathansWay.iOS.Numeracy
 			{
 
 				var lesson = this.vmLesson.Lessons [indexPath.Row];
-				vLessonTableCell cell = tableView.DequeueReusableCell ("tvLessonMain") as vLessonTableCell;
-				cell.IndexValue = indexPath.Row;
+                vLessonTableCell cell = tableView.DequeueReusableCell("tvLessonMainCell", indexPath) as vLessonTableCell;
+                cell.IndexValue = indexPath.Row;
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
 
 

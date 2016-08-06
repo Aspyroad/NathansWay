@@ -26,6 +26,7 @@ namespace NathansWay.iOS.Numeracy
         public Lazy<vcMainWorkSpace> _vcMainWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
 
+
         private bool _bNumberPadLoaded;
         private Action _animation;
         private UICompletionHandler _transitionComplete;
@@ -79,7 +80,7 @@ namespace NathansWay.iOS.Numeracy
             _vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
             _vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
-            // _vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace);
+            //_vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard. InstantiateViewController("vcWorkSpace") as vcWorkSpace);
             _vcMainWorkSpace = new Lazy<vcMainWorkSpace>(() => new vcMainWorkSpace() as vcMainWorkSpace);
 
             // Logic assigns 

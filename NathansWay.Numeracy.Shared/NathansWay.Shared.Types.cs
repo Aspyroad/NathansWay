@@ -140,7 +140,7 @@ namespace NathansWay.Shared
             {G__DisplaySize.Level10, 4.0f},
         };
 
-        public static float GetLevel(int x)
+        public static float GetDisplaySizeLevel(int x)
         {
             // Try to get the result in the static Dictionary
             float result;
@@ -154,7 +154,7 @@ namespace NathansWay.Shared
             }
         }
 
-        public static float GetLevel(G__NumberDisplaySize x)
+        public static float GetDisplaySizeLevel(G__NumberDisplaySize x)
         {
             // Try to get the result in the static Dictionary
             float result;
@@ -166,6 +166,26 @@ namespace NathansWay.Shared
             {
                 return 1.0f;
             }
+        }
+
+        public static int GetDisplaySizeSize(G__NumberDisplaySize x)
+        {
+            // Try to get the result in the static Dictionary
+            float result;
+            float y;
+
+            if (_dict.TryGetValue((int)x, out result))
+            {
+                 y = result;
+            }
+            else
+            {
+                y = 1.0f;
+            }
+
+            int z = (int)Math.Round((30.0f * y), 0);
+
+            return z;
         }
     }
 

@@ -144,6 +144,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #endregion
 
+        #region Public Mambers
+
         public DrawLayer DrawLayer()
         {
             DrawLayer _layer;
@@ -163,10 +165,23 @@ namespace NathansWay.iOS.Numeracy.Drawing
             _layer.FillColor = this.PrimaryFillColor;
             _layer.ScaleFactor = this.ScaleFactor;
 
-
-
             return _layer;
         }
+
+        #endregion
+
+        #region Overrides
+
+        public override void SetScale(G__NumberDisplaySize _displaySize)
+        {
+            base.SetScale(_displaySize);
+
+            var x = G__DisplaySize.GetDisplaySizeSize(_displaySize);
+
+            this.SetHeightWidth(x, x);
+
+        }
+        #endregion
 
         #region Draw Functions
 

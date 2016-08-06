@@ -57,26 +57,19 @@ namespace NathansWay.iOS.Numeracy
             // Set the text fields for each row
 			this.lblLessonName.Text = lesson.NameLesson;
 
-            if (vOperator.Layer.Sublayers != null)
-            {
-                if (vOperator.Layer.Sublayers.Length > 0)
-                {
-                    var x = 1;
-                }
-            }
-
             // Draw Operator Layer
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             // Set the drawing in the middle of the view
-            //drawfact.SetCenterRelativeParentViewPosX = true;
-            //drawfact.SetCenterRelativeParentViewPosY = true;
+            drawfact.SetCenterRelativeParentViewPosX = true;
+            drawfact.SetCenterRelativeParentViewPosY = true;
             drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
             drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
-            drawfact.SetHeightWidth(vOperator.Frame);
-            drawfact.SetScale(G__NumberDisplaySize.Level5);
-            drawfact.BackgroundColor = UIColor.Clear;
+            //drawfact.SetHeightWidth(vOperator.Frame.Height/2, vOperator.Frame.Height/2);
+            drawfact.SetScale(G__NumberDisplaySize.Level3);
+
+            drawfact.BackgroundColor = UIColor.Gray;
             // SetViewPosition is the ultimate sizeclass function, it calculates EVERYTHING!
-            drawfact.SetViewPosition(vOperator.Frame.Width / 2, vOperator.Frame.Height / 2);
+            drawfact.SetViewPosition(vOperator.Frame.Width, vOperator.Frame.Height);
 
             //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
             //drawfact.SetHeightWidth(vOperator.Frame);
@@ -96,8 +89,6 @@ namespace NathansWay.iOS.Numeracy
             var x = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             x.LessonMenuToWorkSpace(this._vcLessonMenu);
         }
-
-
 
         #endregion
 
@@ -128,6 +119,15 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
+        public override void PrepareForReuse()
+        {
+            base.PrepareForReuse();
+            if (this.vOperator.Layer.Sublayers != null)
+            {
+                this.vOperator.Layer.Sublayers[0] = null;
+                this.vOperator.Layer.Sublayers[0].RemoveFromSuperLayer();
+            }
+        }
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();

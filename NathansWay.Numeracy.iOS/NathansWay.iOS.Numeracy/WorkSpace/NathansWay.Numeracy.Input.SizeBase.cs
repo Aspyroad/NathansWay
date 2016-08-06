@@ -117,7 +117,7 @@ namespace NathansWay.iOS.Numeracy
 
             this._scaleFactor = new CGSize(1.0f, 1.0f);
 
-            // TODO: Sizeclass types - fucked, make this an enum for fuckssake!
+            // TODO: Sizeclass types - fucked, make this an enum for fooksake!
             this._bMultiNumberLabel = false;
             this._bIsFraction = false;
         }
@@ -411,7 +411,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void SetScale(G__NumberDisplaySize  _displaySize)
         {
-            var x = G__DisplaySize.GetLevel(_displaySize);
+            var x = G__DisplaySize.GetDisplaySizeLevel(_displaySize);
             this._scaleFactor = new CGSize(x, x);
         }
 
