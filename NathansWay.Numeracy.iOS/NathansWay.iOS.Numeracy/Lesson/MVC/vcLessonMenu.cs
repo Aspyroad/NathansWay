@@ -485,7 +485,7 @@ namespace NathansWay.iOS.Numeracy
 			{
 
 				var lesson = this.vmLesson.Lessons [indexPath.Row];
-                vLessonTableCell cell = tableView.DequeueReusableCell("tvLessonMainCell", indexPath) as vLessonTableCell;
+                vLessonTableCell cell = tableView.DequeueReusableCell("tvLessonMainCell") as vLessonTableCell;
                 cell.IndexValue = indexPath.Row;
 				cell.SetLessonCell (vclessonmenu, lesson, indexPath);
 
@@ -553,7 +553,7 @@ namespace NathansWay.iOS.Numeracy
                 this.vmLesson.FilterLessonDetailRow = indexPath.Row;
                 //
                 var lessonDetail = this.vmLesson.LessonDetail [indexPath.Row];
-                var cell = tableView.DequeueReusableCell ("tvLessonMain") as vLessonDetailTableCell;
+                var cell = tableView.DequeueReusableCell ("tvLessonDetailCell") as vLessonDetailTableCell;
                 cell.IndexValue = indexPath.Row;
                 cell.SetLessonDetailCell (vclessonmenu, lessonDetail, indexPath);
                 // return
