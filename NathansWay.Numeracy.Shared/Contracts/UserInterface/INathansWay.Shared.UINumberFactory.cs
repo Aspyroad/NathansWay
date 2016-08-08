@@ -19,7 +19,7 @@ namespace NathansWay.Shared
         object UICreateNumber (string intNumber);
         object UICreateNumberLabel (string intNumber);
         object UICreateFraction (string strFraction);
-        object UICreateOperator (G__MathChar mathChar, string strChar);
+        object UICreateOperator (G__MathOperator mathOperator, string strChar);
         object UICreateBrace (bool bIsRight);
 
         void PrintUIOutput (object ViewObjectScreen);

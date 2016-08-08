@@ -94,10 +94,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Add to output
             return (x as object);
         }
-        public object UICreateOperator (G__MathChar mathChar, string strChar)
+        public object UICreateOperator (G__MathOperator mathOperator, string strChar)
         {
             // Create an operator
-            var x = new vcOperatorText(mathChar, strChar);
+            var x = new vcOperatorText(mathOperator, strChar);
             x.IsAnswer = this.IsAnswer;
             x.IsInitialLoad = true;
             // TODO: Terribly lazy, workout if I need this and how IM using it.

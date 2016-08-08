@@ -26,7 +26,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public vOperator _vOperator { get; private set; }
 
         //private vcMainContainer _viewcontollercontainer;
-        private G__MathChar _operatorType;
+        private G__MathOperator _operatorType;
         private string _strOperator;
         private SizeOperator _sizeOperator;
         //private TextControlDelegate _txtOperatorDelegate;
@@ -51,7 +51,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcOperatorText (G__MathChar operatortype, string strOperator)
+        public vcOperatorText (G__MathOperator operatortype, string strOperator)
         {
             this._operatorType = operatortype;
             this._strOperator = strOperator;
@@ -198,7 +198,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // *****************************************************************************
             // Check Correct
             // If this is an equals sign fire check correct
-            if (this._operatorType == G__MathChar.Equals)
+            if (this._operatorType == G__MathOperator.Equals)
             {
                 //this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
                 this.MyWorkSpaceParent.Solve();

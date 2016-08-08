@@ -423,7 +423,15 @@ namespace NathansWay.Shared
 		Division = 3,
 		Multiplication = 4,
 		AddSub = 5,
-		DivMulti = 6
+		DivMulti = 6,
+        Value = 7,
+        BraceRoundLeft = 8,
+        BraceRoundRight = 9,
+        Fraction = 10,
+        Decimal = 11,
+        Equals = 12,
+        Method = 13,
+        Answer = 14
 	}
 
 	public static class G__MathOperators
@@ -436,8 +444,33 @@ namespace NathansWay.Shared
 			{G__MathOperator.Division, "÷"},
 			{G__MathOperator.Multiplication, "x"},
 			{G__MathOperator.AddSub, "+ –"},
-			{G__MathOperator.DivMulti, "÷ x"}
+			{G__MathOperator.DivMulti, "÷ x"},
+            {G__MathOperator.BraceRoundLeft, "("},
+            {G__MathOperator.BraceRoundRight, ")"},
+            {G__MathOperator.Fraction, "F"},
+            {G__MathOperator.Decimal, "."},
+            {G__MathOperator.Equals, "="},
+            {G__MathOperator.Method, "M"},
+            {G__MathOperator.Answer, "A"}
 		};
+
+        static Dictionary<string, G__MathOperator> _dictrev = new Dictionary<string, G__MathOperator>
+        {
+            {"All", G__MathOperator.All},
+            {"+", G__MathOperator.Addition},
+            {"–", G__MathOperator.Subtraction},
+            {"÷", G__MathOperator.Division},
+            {"x", G__MathOperator.Multiplication},
+            {"+ –", G__MathOperator.AddSub},
+            {"÷ x", G__MathOperator.DivMulti},
+            {"(", G__MathOperator.BraceRoundLeft},
+            {")", G__MathOperator.BraceRoundRight},
+            {"F", G__MathOperator.Fraction},
+            {".", G__MathOperator.Decimal},
+            {"=", G__MathOperator.Equals},
+            {"M", G__MathOperator.Method},
+            {"A", G__MathOperator.Answer}
+        };
 			
 		public static string GetOp(G__MathOperator x)
 		{
@@ -452,6 +485,20 @@ namespace NathansWay.Shared
 				return null;
 			}
 		}
+
+        public static G__MathOperator GetOp(string x)
+        {
+            // Try to get the result in the static Dictionary
+            G__MathOperator result;
+            if (_dictrev.TryGetValue(x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return G__MathOperator.Value;
+            }
+        }
 	}
 
 	#endregion
@@ -548,53 +595,49 @@ namespace NathansWay.Shared
 
     #region MathCharacters
 
-    public enum G__MathChar : int
-    {
-        Value = 0,
-        BraceRoundLeft = 1,
-        BraceRoundRight = 2,
-        Fraction = 3,
-        Division = 4,
-        Addition = 5,
-        Negative = 6,
-        Multiply = 7,
-        Decimal = 8,
-        Equals = 9,
-        Method = 10,
-        Answer = 11
-    }
+    //public enum G__MathChar : int
+    //{
+    //    Value = 0,
+    //    BraceRoundLeft = 1,
+    //    BraceRoundRight = 2,
+    //    Fraction = 3,
+    //    Division = 4,
+    //    Addition = 5,
+    //    Subtraction = 6,
+    //    Multiplication = 7,
+    //    Decimal = 8,
+    //    Equals = 9,
+    //    Method = 10,
+    //    Answer = 11
+    //}
 
-    public static class G__MathChars
-    {
-        static Dictionary<string, G__MathChar> _dict = new Dictionary<string, G__MathChar>
-        {
-            {"(", G__MathChar.BraceRoundLeft},
-            {")", G__MathChar.BraceRoundRight},
-            {"F", G__MathChar.Fraction},
-            {"÷", G__MathChar.Division},
-            {"+", G__MathChar.Addition},
-            {"-", G__MathChar.Negative},
-            {"x", G__MathChar.Multiply},
-            {".", G__MathChar.Decimal},
-            {"=", G__MathChar.Equals},
-            {"M", G__MathChar.Method},
-            {"A", G__MathChar.Answer}
-        };
+    //public static class G__MathChars
+    //{
+    //    static Dictionary<string, G__MathChar> _dict = new Dictionary<string, G__MathChar>
+    //    {
+    //        {"(", G__MathChar.BraceRoundLeft},
+    //        {")", G__MathChar.BraceRoundRight},
+    //        {"F", G__MathChar.Fraction},
+    //        {".", G__MathChar.Decimal},
+    //        {"=", G__MathChar.Equals},
+    //        {"M", G__MathChar.Method},
+    //        {"A", G__MathChar.Answer}
+    //    };
 
-        public static G__MathChar GetCharType(string x)
-        {
-            // Try to get the result in the static Dictionary
-            G__MathChar result;
-            if (_dict.TryGetValue(x, out result))
-            {
-                return result;
-            }
-            else
-            {
-                return G__MathChar.Value;
-            }
-        }
-    }
+    //    public static G__MathChar GetCharType(string x)
+    //    {
+    //        // Try to get the result in the static Dictionary
+    //        G__MathChar result;
+    //        if (_dict.TryGetValue(x, out result))
+    //        {
+    //            return result;
+    //        }
+    //        else
+    //        {
+    //            return G__MathChar.Value;
+    //        }
+    //    }
+    //}
 
     #endregion
 }

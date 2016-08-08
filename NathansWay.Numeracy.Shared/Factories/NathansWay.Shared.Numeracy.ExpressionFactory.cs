@@ -72,10 +72,13 @@ namespace NathansWay.Shared.Factories
         /// <param name="_expression">Expression.</param>
         public List<object> CreateExpressionEquation (string _expression, bool _editable)
         {
+            // TODO: Important. This is getting called twice during a equation build...why?
+
+
             // Fire our start event
             this.FireBuildStartedEvent();
 
-            List<KeyValuePair<G__MathChar, string>> _lsDecodedExpressionEquation;
+            List<KeyValuePair<G__MathOperator, string>> _lsDecodedExpressionEquation;
             List<object> _lsOutput = new List<object>();
 
 
@@ -84,15 +87,15 @@ namespace NathansWay.Shared.Factories
             {
                 var x = _lsDecodedExpressionEquation[i];
 
-                switch ((G__MathChar)x.Key)
+                switch ((G__MathOperator)x.Key)
                 {
                     // Most common
-                    case (G__MathChar.Answer):
+                    case (G__MathOperator.Answer):
                     {
                         this._UIPlatformClient.IsAnswer = true;
                     }
                     break;
-                    case (G__MathChar.Value):
+                    case (G__MathOperator.Value):
                     {
                         // Build a number
                         if (this._UIPlatformClient.IsLabelOnly)
@@ -106,17 +109,17 @@ namespace NathansWay.Shared.Factories
                         this._UIPlatformClient.IsAnswer = false;
                     }
                     break;
-                    case (G__MathChar.BraceRoundLeft):
+                    case (G__MathOperator.BraceRoundLeft):
                     {
                         _lsOutput.Add(this._UIPlatformClient.UICreateBrace(false));
                     }
                     break;
-                    case (G__MathChar.BraceRoundRight):
+                    case (G__MathOperator.BraceRoundRight):
                     {
                         _lsOutput.Add(this._UIPlatformClient.UICreateBrace(true));
                     }
                     break;
-                    case (G__MathChar.Fraction):
+                    case (G__MathOperator.Fraction):
                     {
                         i++;
                         _lsOutput.Add(this._UIPlatformClient.UICreateFraction(_lsDecodedExpressionEquation[i].Value));
@@ -164,14 +167,14 @@ namespace NathansWay.Shared.Factories
         /// </summary>
         /// <returns>The expression equation.</returns>
         /// <param name="_expression">Expression.</param>
-        public List<KeyValuePair<G__MathChar, string>> SplitExpressionEquation (string _expression)
+        public List<KeyValuePair<G__MathOperator, string>> SplitExpressionEquation (string _expression)
         {
-            List<KeyValuePair<G__MathChar, string>> _lsDecodedExpressionEquation = new List<KeyValuePair<G__MathChar, string>>();
+            List<KeyValuePair<G__MathOperator, string>> _lsDecodedExpressionEquation = new List<KeyValuePair<G__MathOperator, string>>();
             string[] x = _expression.Split(sepArray);
             //foreach (string s in x)
             for (int i = 0; i < x.Length; i++) // Loop with for.
             {
-                _lsDecodedExpressionEquation.Add(new KeyValuePair<G__MathChar, string>(G__MathChars.GetCharType(x[i]), x[i]));
+                _lsDecodedExpressionEquation.Add(new KeyValuePair<G__MathOperator, string>(G__MathOperators.GetOp(x[i]), x[i]));
             }
             return _lsDecodedExpressionEquation;
         }

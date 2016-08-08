@@ -52,7 +52,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Properties
 
-        public G__MathChar MathOperator
+        public G__MathOperator MathOperator
         {
             get;
             set;
