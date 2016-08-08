@@ -241,7 +241,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             this.CurrentWidth = this.GlobalSizeDimensions.DecimalWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
-            base.SetSubHeightWidthPositions();
+            //base.SetSubHeightWidthPositions();
         }
 
         public override void SetFrames()

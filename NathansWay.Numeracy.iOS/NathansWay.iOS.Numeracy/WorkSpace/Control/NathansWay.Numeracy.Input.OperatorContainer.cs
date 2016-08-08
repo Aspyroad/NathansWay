@@ -85,11 +85,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.LoadView();
             this._vOperator = new vOperator();
-            // TODO: Sizing? Im thinking for the vc sizeclass should be totally in charge
-            //this._vOperator.ImageScale = (float)this.SizeClass.DisplaySize;
+            // Setup Math drawing
+
+            // Not sure if this is needed anymore? vOperator is now pretty dumb
             this._vOperator.MathOperator = this._operatorType;
+
+            // Set the drawing in the middle of the view
+            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+            this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
+            this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
+            this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
+            this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
+
+            // TODO: This needs to be fixed, there is a problem with the cast!!!
             this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
-            this._vOperator.iOSDrawingFactory.StartPoint = this.OperatorSize.OperatorStartpoint;
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
@@ -102,10 +113,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
-            // Call to the derived sizeclass setotherpositions()
-            this.OperatorSize.SetSubHeightWidthPositions();
+
             // Set drawn graphic positions
-            this._vOperator.iOSDrawingFactory.StartPoint = this.OperatorSize.OperatorStartpoint;
+            //this._sizeClass.SetViewPosition(0.0f, 0.0f);
+            this._vOperator.iOSDrawingFactory.SetHeightWidth(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
+            this._vOperator.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
+            this._vOperator.DrawLayer();
             // Base Container will call vc set mainframe.
             base.ViewWillAppear(animated);
         }
@@ -233,7 +246,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 //            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
 //            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
-            this._applyUIWhere = G__ApplyUI.ViewWillAppear;
+            // Not needed, this is set by the factory
+            //this._applyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
         #endregion 
@@ -245,13 +259,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Class Variables
         // X Horizontal
         // Y Vertical
-
-        // Text Box Frame
-        // TODO: No longer needed ?
-        public CGRect _rectTxtOperator;
-        public nfloat _scale;
-        private nfloat _fOperatorStartpointX;
-        private nfloat _fOperatorStartpointY;
 
         #endregion
 
@@ -279,18 +286,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        //public override void SetSubViewPositions()
-        //{
-        //    // Set local frames to the VC
-        //    this.SetRectTxtOperator();
-        //    this.SetGraphicDrawPoint();
-        //}
-
         public override void SetSubHeightWidthPositions ()
         {
-            // Set local frames to the VC
-            this.SetRectTxtOperator();
-            this.SetGraphicDrawPoint();
             this.CurrentWidth = this.GlobalSizeDimensions.OperatorWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }
@@ -299,45 +296,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Public Members
 
-        public void SetRectTxtOperator()
-        {
-            this._rectTxtOperator = new CGRect(
-                0.0f, 
-                0.0f, 
-                this.CurrentWidth,
-                this.CurrentHeight
-            );
-        }
-
-        public void SetGraphicDrawPoint()
-        {
-            this._fOperatorStartpointX = ((this._fCurrentWidth / 2.0f) - (this.GlobalSizeDimensions.OperatorGraphicWidthAndHeight / 2.0f));
-            this._fOperatorStartpointY = ((this._fCurrentHeight / 2.0f) - (this.GlobalSizeDimensions.OperatorGraphicWidthAndHeight / 2.0f));
-        }
-
         #endregion
 
         #region Public Properties
-
-        public nfloat OperatorStartpointX
-        {
-            get { return this._fOperatorStartpointX; }
-            set { this._fOperatorStartpointX = value; }
-        }
-
-        public nfloat OperatorStartpointY
-        {
-            get { return this._fOperatorStartpointY; }
-            set { this._fOperatorStartpointY = value; }
-        }
-
-        public CGPoint OperatorStartpoint
-        {
-            get
-            {
-                return new CGPoint(this._fOperatorStartpointY, this._fOperatorStartpointX);
-            }
-        }
 
         #endregion
     }

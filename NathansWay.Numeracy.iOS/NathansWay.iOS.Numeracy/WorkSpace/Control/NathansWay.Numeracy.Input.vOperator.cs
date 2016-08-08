@@ -62,10 +62,10 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        public override void Draw(CGRect rect)
-        {
-            base.Draw(rect);
-        }
+        //public override void Draw(CGRect rect)
+        //{
+        //    base.Draw(rect);
+        //}
 
         #endregion
 
