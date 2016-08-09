@@ -74,7 +74,7 @@ namespace NathansWay.iOS.Numeracy
             //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
             //drawfact.SetHeightWidth(vOperator.Frame);
             vOperator.DrawLayer();
-            
+            vOperator.BackgroundColor = UIColor.LightGray;
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);

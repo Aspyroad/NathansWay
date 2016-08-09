@@ -29,6 +29,15 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
     public class DrawingFactory : SizeBase
     {
+        // Notes
+        // This class is coupled heavily with SizeClass base.
+        // Rules :
+
+        // SetScale() MUST be called!
+        // Other the obvious scale transform applied to the layer, this also sets the hieght and width based on enum values for each drawing
+        // SetViewPosition MUST be called!
+
+
 
         #region Private Variables
 
@@ -64,6 +73,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Division, this.DrawDivision);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Equals, this.DrawEquals);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
+            this._dictDrawingFuncs.Add(G__FactoryDrawings.AddSub, this.DrawAddSub);
+            this._dictDrawingFuncs.Add(G__FactoryDrawings.DivMulti, this.DrawDivMulti);
 
             this._opacity = 1.0f;
         }
@@ -89,6 +100,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
             set
             {
                 this._drawType = value;
+
+                var x = G__FactoryDrawingSizes.GetSize(value);
+                this.CurrentWidth = x.width;
+                this.CurrentHeight = x.height;
             }
         }
 
@@ -176,9 +191,11 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             base.SetScale(_displaySize);
 
-            var x = G__DisplaySize.GetDisplaySizeSize(_displaySize);
+            // TODO: Fix this so that it auto creates sizes ratio-ed.
+            //var x = G__DisplaySize.GetDisplaySizeSize(_displaySize);
 
-            this.SetHeightWidth(x, x);
+            //this.SetHeightWidth(x, x);
+
 
         }
         #endregion
@@ -262,13 +279,67 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             //// Rect1 Drawing
             var rect1Path = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 10.0f, 22.0f, 4.0f), 2.0f);
-            //fillColor.SetFill();
             rect1Path.Fill();
 
             //// Rect2 Drawing
             var rect2Path = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 16.0f, 22.0f, 4.0f), 2.0f);
-            //fillColor.SetFill();
             rect2Path.Fill();
+        }
+
+        public void DrawAddSub(CGContext ctx)
+        {
+            // Height 30.0f Width 60.0f
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(13.0f, 2.0f, 4.0f, 26.0f), 2.0f);
+            rectanglePath.Fill();
+            //// Rectangle 2 Drawing
+            var rectangle2Path = UIBezierPath.FromRoundedRect(new CGRect(2.0f, 13.0f, 26.0f, 4.0f), 2.0f);
+            rectangle2Path.Fill();
+            //// Rectangle 3 Drawing
+            var rectangle3Path = UIBezierPath.FromRoundedRect(new CGRect(36.0f, 13.0f, 22.0f, 4.0f), 2.0f);
+            rectangle3Path.Fill();
+        }
+
+        public void DrawDivMulti(CGContext ctx)
+        {
+            //// Bezier Drawing
+            UIBezierPath bezierPath = new UIBezierPath();
+            bezierPath.MoveTo(new CGPoint(56.46f, 22.92f));
+            bezierPath.AddCurveToPoint(new CGPoint(56.46f, 25.58f), new CGPoint(57.18f, 23.64f), new CGPoint(57.18f, 24.85f));
+            bezierPath.AddLineTo(new CGPoint(56.58f, 25.46f));
+            bezierPath.AddCurveToPoint(new CGPoint(53.93f, 25.46f), new CGPoint(55.86f, 26.18f), new CGPoint(54.65f, 26.18f));
+            bezierPath.AddLineTo(new CGPoint(46.03f, 17.54f));
+            bezierPath.AddLineTo(new CGPoint(38.13f, 25.46f));
+            bezierPath.AddCurveToPoint(new CGPoint(35.47f, 25.46f), new CGPoint(37.4f, 26.18f), new CGPoint(36.2f, 26.18f));
+            bezierPath.AddLineTo(new CGPoint(35.6f, 25.58f));
+            bezierPath.AddCurveToPoint(new CGPoint(35.6f, 22.92f), new CGPoint(34.88f, 24.85f), new CGPoint(34.88f, 23.64f));
+            bezierPath.AddLineTo(new CGPoint(43.5f, 15.0f));
+            bezierPath.AddLineTo(new CGPoint(35.54f, 7.08f));
+            bezierPath.AddCurveToPoint(new CGPoint(35.54f, 4.42f), new CGPoint(34.82f, 6.36f), new CGPoint(34.82f, 5.15f));
+            bezierPath.AddLineTo(new CGPoint(35.42f, 4.54f));
+            bezierPath.AddCurveToPoint(new CGPoint(38.07f, 4.54f), new CGPoint(36.14f, 3.82f), new CGPoint(37.35f, 3.82f));
+            bezierPath.AddLineTo(new CGPoint(45.97f, 12.46f));
+            bezierPath.AddLineTo(new CGPoint(53.87f, 4.54f));
+            bezierPath.AddCurveToPoint(new CGPoint(56.52f, 4.54f), new CGPoint(54.59f, 3.82f), new CGPoint(55.8f, 3.82f));
+            bezierPath.AddLineTo(new CGPoint(56.4f, 4.42f));
+            bezierPath.AddCurveToPoint(new CGPoint(56.4f, 7.08f), new CGPoint(57.12f, 5.15f), new CGPoint(57.12f, 6.36f));
+            bezierPath.AddLineTo(new CGPoint(48.56f, 15.0f));
+            bezierPath.AddLineTo(new CGPoint(56.46f, 22.92f));
+            bezierPath.ClosePath();
+            bezierPath.MiterLimit = 4.0f;
+            bezierPath.Fill();
+
+            //// Rectangle Drawing
+            var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(3.0f, 13.0f, 24.0f, 4.0f), 2.0f);
+            rectanglePath.Fill();
+
+            //// Oval1 Drawing
+            var oval1Path = UIBezierPath.FromOval(new CGRect(12.0f, 5.0f, 6.0f, 6.0f));
+            oval1Path.Fill();
+
+            //// Oval2 Drawing
+            var oval2Path = UIBezierPath.FromOval(new CGRect(12.0f, 19.0f, 6.0f, 6.0f));
+            oval2Path.Fill();
         }
 
         #endregion
@@ -349,11 +420,11 @@ namespace NathansWay.iOS.Numeracy.Drawing
             base.DrawInContext(ctx);
 
             UIGraphics.PushContext(ctx);
-            //ctx.SaveState();
 
             ////// Addition Drawing
             ctx.TranslateCTM(StartPoint.X, StartPoint.Y);
             ctx.ScaleCTM(ScaleFactor.Height, ScaleFactor.Width);
+
             //ctx.SetLineWidth(1.0f);
             //ctx.SetStrokeColor(FillColor.CGColor);
             this.FillColor.SetFill();
@@ -367,7 +438,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
                 this.BackgroundColor = UIColor.Yellow.CGColor;
             }
             UIGraphics.PopContext();
-            //ctx.RestoreState();
         }
 
         #endregion

@@ -21,6 +21,47 @@ namespace NathansWay.Shared
         Equals = G__MathOperator.Equals
     }
 
+    public static class G__FactoryDrawingSizes
+    {
+        static Dictionary<G__FactoryDrawings, G__Size> _dict = new Dictionary<G__FactoryDrawings, G__Size>
+        {
+            {G__FactoryDrawings.All, new G__Size(0.0f, 0.0f)},
+            {G__FactoryDrawings.Addition, new G__Size(30.0f, 30.0f)},
+            {G__FactoryDrawings.Subtraction, new G__Size(30.0f, 30.0f)},
+            {G__FactoryDrawings.Division, new G__Size(30.0f, 30.0f)},
+            {G__FactoryDrawings.Multiplication, new G__Size(30.0f, 30.0f)},
+            {G__FactoryDrawings.AddSub, new G__Size(60.0f, 30.0f)},
+            {G__FactoryDrawings.DivMulti, new G__Size(60.0f, 30.0f)},
+            {G__FactoryDrawings.Equals, new G__Size(30.0f, 30.0f)}
+        };
+
+        public static G__Size GetSize(G__FactoryDrawings x)
+        {
+            // Try to get the result in the static Dictionary
+            G__Size result;
+            if (_dict.TryGetValue(x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return new G__Size(0.0f, 0.0f);
+            }
+        }
+    }
+
+    public struct G__Size
+    {
+        public float height { get; set; }
+        public float width { get; set; }
+
+        public G__Size(float _width, float _height)
+        {
+            this.height = _height;
+            this.width = _width;
+        }
+    }
+
     #endregion
 
     #region DataBase
@@ -182,7 +223,9 @@ namespace NathansWay.Shared
             {
                 y = 1.0f;
             }
-
+            // TODO: Do I need an enumeration of all graphic height widths?
+            // All Math drawings are 30 x 30 but this may not always the case.
+            //
             int z = (int)Math.Round((30.0f * y), 0);
 
             return z;

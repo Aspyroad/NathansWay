@@ -90,17 +90,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Not sure if this is needed anymore? vOperator is now pretty dumb
             this._vOperator.MathOperator = this._operatorType;
 
-            // Set the drawing in the middle of the view
-            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
-            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
-            this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
-            this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
-            //this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
-            //this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
-            //this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
 
-            //// TODO: This needs to be fixed, there is a problem with the cast!!!
-            //this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
+
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
@@ -113,6 +104,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
+            // Set the drawing in the middle of the view
+            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+            this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+            this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
             // Set drawn graphic positions
             //this._sizeClass.SetViewPosition(0.0f, 0.0f);
@@ -123,7 +119,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // TODO: This needs to be fixed, there is a problem with the cast!!!
             this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
 
-            this._vOperator.iOSDrawingFactory.SetHeightWidth(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
+            //this._vOperator.iOSDrawingFactory.SetHeightWidth(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
             this._vOperator.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
             this._vOperator.DrawLayer();
             // Base Container will call vc set mainframe.
@@ -142,6 +138,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.UI_SetViewNeutral();
                 }
+                this._vOperator.BackgroundColor = UIColor.LightGray;
                 return true;
             }
             else
