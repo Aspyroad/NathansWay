@@ -95,12 +95,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
             this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
             this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
-            this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
-            this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
-            this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
+            //this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
+            //this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
+            //this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
 
-            // TODO: This needs to be fixed, there is a problem with the cast!!!
-            this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
+            //// TODO: This needs to be fixed, there is a problem with the cast!!!
+            //this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
@@ -116,6 +116,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Set drawn graphic positions
             //this._sizeClass.SetViewPosition(0.0f, 0.0f);
+            this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
+            this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
+            this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
+
+            // TODO: This needs to be fixed, there is a problem with the cast!!!
+            this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
+
             this._vOperator.iOSDrawingFactory.SetHeightWidth(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
             this._vOperator.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
             this._vOperator.DrawLayer();

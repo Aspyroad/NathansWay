@@ -18,7 +18,7 @@ namespace NathansWay.Shared
         Multiplication = G__MathOperator.Multiplication,
         AddSub = G__MathOperator.AddSub,
         DivMulti = G__MathOperator.DivMulti,
-        Equals = 7,
+        Equals = G__MathOperator.Equals
     }
 
     #endregion
@@ -424,12 +424,12 @@ namespace NathansWay.Shared
 		Multiplication = 4,
 		AddSub = 5,
 		DivMulti = 6,
-        Value = 7,
-        BraceRoundLeft = 8,
-        BraceRoundRight = 9,
-        Fraction = 10,
-        Decimal = 11,
-        Equals = 12,
+        Equals = 7,
+        Value = 8,
+        BraceRoundLeft = 9,
+        BraceRoundRight = 10,
+        Fraction = 11,
+        Decimal = 12,
         Method = 13,
         Answer = 14
 	}
