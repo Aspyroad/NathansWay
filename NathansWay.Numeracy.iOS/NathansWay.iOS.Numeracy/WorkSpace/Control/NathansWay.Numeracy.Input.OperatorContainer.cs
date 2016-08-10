@@ -104,22 +104,20 @@ namespace NathansWay.iOS.Numeracy.Controls
         // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
-            // Set the drawing in the middle of the view
+            // First set the type of drawing
+            this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
+
+            // Set any positioning - the drawing in the middle of the view
             this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
             this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
             this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
             this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
-            // Set drawn graphic positions
-            //this._sizeClass.SetViewPosition(0.0f, 0.0f);
-            this._vOperator.iOSDrawingFactory.DisplaySizeLevel = G__NumberDisplaySize.Level5;
-            this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
+            // TODO: Set this with a global color
             this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
 
-            // TODO: This needs to be fixed, there is a problem with the cast!!!
-            this._vOperator.iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
-
-            //this._vOperator.iOSDrawingFactory.SetHeightWidth(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
+            // Set drawn graphic positions
+            this._vOperator.iOSDrawingFactory.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level5);
             this._vOperator.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
             this._vOperator.DrawLayer();
             // Base Container will call vc set mainframe.

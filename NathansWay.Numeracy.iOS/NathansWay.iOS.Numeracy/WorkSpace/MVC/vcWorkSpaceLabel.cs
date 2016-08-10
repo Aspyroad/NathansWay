@@ -35,7 +35,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // UI
         private SizeWorkSpaceLabel _sizeWorkSpaceLabel;
-        private G__NumberDisplaySize _numberDisplaySize;
+        private G__DisplaySizeLevels _numberDisplaySize;
 
 		#endregion
 
@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             throw new NotImplementedException();
         }
 
-        public void ChangeDisplaySize(G__NumberDisplaySize numberlabeldisplaysize)
+        public void ChangeDisplaySize(G__DisplaySizeLevels numberlabeldisplaysize)
         {
 
 
@@ -123,7 +123,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { this._wsLessonDetail = value; }
         }
 
-        public G__NumberDisplaySize  NumberDisplaySize
+        public G__DisplaySizeLevels  NumberDisplaySize
         {
             get { return this._numberDisplaySize; }
             set

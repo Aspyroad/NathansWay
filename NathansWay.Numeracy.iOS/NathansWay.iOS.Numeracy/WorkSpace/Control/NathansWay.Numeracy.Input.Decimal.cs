@@ -75,7 +75,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vDecimal = new vDecimal();
             //this.View = null;
             this.View = this._vDecimal;
-            this._vDecimal.ImageScale = (nfloat)(int)this.SizeClass.DisplaySize;
+            this._vDecimal.ImageScale = (nfloat)(int)this.SizeClass.GlobalDisplaySizeLevel;
             //this._vDecimal.OperatorStartpointX = this._sizeDecimal.OperatorStartpointX;
             //this._vDecimal.OperatorStartpointY = this._sizeDecimal.OperatorStartpointY;
             this._vDecimal.ClipsToBounds = true;

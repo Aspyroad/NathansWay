@@ -45,7 +45,7 @@ namespace NathansWay.iOS.Numeracy
         private vcWorkSpace _vcCurrentWorkSpace;
 
         private iOSNumberDimensions _globalSizeDimensions;
-        private G__NumberDisplaySize _numberDisplaySize;
+        private G__DisplaySizeLevels _numberDisplaySize;
         private nfloat _fNumberSpacing;
         protected IAppSettings _numberAppSettings;
 

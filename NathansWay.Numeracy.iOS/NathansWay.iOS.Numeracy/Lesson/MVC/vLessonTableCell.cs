@@ -60,22 +60,19 @@ namespace NathansWay.iOS.Numeracy
             // Draw Operator Layer
             drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
             // Set the drawing in the middle of the view
+            // when setting positions like this we manily refer to to the parents frame
+            drawfact.ParentFrame = this.vOperator.Frame;
             drawfact.SetCenterRelativeParentViewPosX = true;
             drawfact.SetCenterRelativeParentViewPosY = true;
             drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
             drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
-            //drawfact.SetHeightWidth(vOperator.Frame.Height/2, vOperator.Frame.Height/2);
-            drawfact.SetScale(G__NumberDisplaySize.Level3);
 
-            drawfact.BackgroundColor = UIColor.Gray;
-            // SetViewPosition is the ultimate sizeclass function, it calculates EVERYTHING!
-            //drawfact.S
-            drawfact.SetViewPosition(vOperator.Frame.Width, vOperator.Frame.Height);
 
-            //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);
-            //drawfact.SetHeightWidth(vOperator.Frame);
+            // Sizeclass calculations
+            drawfact.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level3);
+            drawfact.SetViewPosition(this.vOperator.Frame.Width, this.vOperator.Frame.Height);
             vOperator.DrawLayer();
-            vOperator.BackgroundColor = UIColor.LightGray;
+
 			this.lblType.Text= G__MathTypes.GetType ((G__MathType)lesson.ExpressionType);
 			this.lblLevel.LevelWidth = (nfloat)lesson.Difficulty;
 			this.lblLevel.Text = G__MathLevels.GetLevel ((G__MathLevel)lesson.Difficulty);

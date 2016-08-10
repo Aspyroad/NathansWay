@@ -101,8 +101,8 @@ namespace NathansWay.iOS.Numeracy
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
             this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
-            this._numberAppSettings.GA__NumberDisplaySize = G__NumberDisplaySize.Level5;
-            this._numberAppSettings.GA__NumberLabelDisplaySize = G__NumberDisplaySize.Level3;
+            this._numberAppSettings.GA__NumberDisplaySize = G__DisplaySizeLevels.Level5;
+            this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;
             this._numberAppSettings.GA__ShowAnswerNumlet = true;
 
@@ -143,7 +143,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Application Services, Factories
             // Dimensions Class
-            this._numberDimensions = new iOSNumberDimensions(G__NumberDisplaySize.Level5, this._iOSGlobals);
+            this._numberDimensions = new iOSNumberDimensions(G__DisplaySizeLevels.Level5, this._iOSGlobals);
             iOSCoreServiceContainer.Register<iOSNumberDimensions> (this._numberDimensions);
 
             // Build a ToolBoxFactory

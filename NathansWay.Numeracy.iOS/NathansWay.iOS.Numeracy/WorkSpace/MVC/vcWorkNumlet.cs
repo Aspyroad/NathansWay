@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
-        private G__NumberDisplaySize _numberDisplaySize;
+        private G__DisplaySizeLevels _numberDisplaySize;
 
         // Result ref
         private BaseContainer _resultContainer;

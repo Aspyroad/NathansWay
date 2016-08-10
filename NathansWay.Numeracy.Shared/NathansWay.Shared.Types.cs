@@ -139,7 +139,7 @@ namespace NathansWay.Shared
 
     #region UI
 
-    public enum G__NumberDisplaySize : int
+    public enum G__DisplaySizeLevels : int
     {
         Level1 = 1,
         Level2 = 2,
@@ -153,7 +153,7 @@ namespace NathansWay.Shared
         Level10 = 10
     }
 
-    public static class G__DisplaySize
+    public static class G__DisplaySizeLevel
     {
         public const int Level1 = 1;
         public const int Level2 = 2;
@@ -169,16 +169,16 @@ namespace NathansWay.Shared
 
         static Dictionary<int, float> _dict = new Dictionary<int, float>
         {
-            {G__DisplaySize.Level1, 0.1f},
-            {G__DisplaySize.Level2, 0.3f},
-            {G__DisplaySize.Level3, 0.5f},
-            {G__DisplaySize.Level4, 0.8f},
-            {G__DisplaySize.Level5, 1.0f},
-            {G__DisplaySize.Level6, 1.5f},
-            {G__DisplaySize.Level7, 2.0f},
-            {G__DisplaySize.Level8, 2.5f},
-            {G__DisplaySize.Level9, 3.0f},
-            {G__DisplaySize.Level10, 4.0f},
+            {G__DisplaySizeLevel.Level1, 0.1f},
+            {G__DisplaySizeLevel.Level2, 0.3f},
+            {G__DisplaySizeLevel.Level3, 0.5f},
+            {G__DisplaySizeLevel.Level4, 0.8f},
+            {G__DisplaySizeLevel.Level5, 1.0f},
+            {G__DisplaySizeLevel.Level6, 1.5f},
+            {G__DisplaySizeLevel.Level7, 2.0f},
+            {G__DisplaySizeLevel.Level8, 2.5f},
+            {G__DisplaySizeLevel.Level9, 3.0f},
+            {G__DisplaySizeLevel.Level10, 4.0f},
         };
 
         public static float GetDisplaySizeScale(int x)
@@ -195,7 +195,7 @@ namespace NathansWay.Shared
             }
         }
 
-        public static float GetDisplaySizeScale(G__NumberDisplaySize x)
+        public static float GetDisplaySizeScale(G__DisplaySizeLevels x)
         {
             // Try to get the result in the static Dictionary
             float result;
@@ -209,27 +209,27 @@ namespace NathansWay.Shared
             }
         }
 
-        public static int GetDisplaySizeSize(G__NumberDisplaySize x)
-        {
-            // Try to get the result in the static Dictionary
-            float result;
-            float y;
+        //public static int GetDisplaySizeSize(G__DisplaySizeLevels x)
+        //{
+        //    // Try to get the result in the static Dictionary
+        //    float result;
+        //    float y;
 
-            if (_dict.TryGetValue((int)x, out result))
-            {
-                 y = result;
-            }
-            else
-            {
-                y = 1.0f;
-            }
-            // TODO: Do I need an enumeration of all graphic height widths?
-            // All Math drawings are 30 x 30 but this may not always the case.
-            //
-            int z = (int)Math.Round((30.0f * y), 0);
+        //    if (_dict.TryGetValue((int)x, out result))
+        //    {
+        //         y = result;
+        //    }
+        //    else
+        //    {
+        //        y = 1.0f;
+        //    }
+        //    // TODO: Do I need an enumeration of all graphic height widths?
+        //    // All Math drawings are 30 x 30 but this may not always the case.
+        //    //
+        //    int z = (int)Math.Round((30.0f * y), 0);
 
-            return z;
-        }
+        //    return z;
+        //}
     }
 
     public struct G__Color

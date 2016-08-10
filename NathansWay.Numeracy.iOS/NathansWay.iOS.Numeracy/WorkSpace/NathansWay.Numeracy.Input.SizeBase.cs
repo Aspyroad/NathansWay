@@ -70,6 +70,8 @@ namespace NathansWay.iOS.Numeracy
         protected CGSize _scaleFactor;
         private CGRect _rectFrame;
         private CGRect _parentFrame;
+        private G__DisplaySizeLevels _displaySizeLevel;
+        private nfloat _displayScale;
 
         // Old Sizing
         protected nfloat _fOldWidth = 0.0f;
@@ -312,24 +314,6 @@ namespace NathansWay.iOS.Numeracy
             this._fCurrentHeight = _frame.Height;
         }
 
-        ///// <summary>
-        ///// Calls no positioning logic. For hard coded positioning and adopting class override
-        ///// </summary>
-        ///// <returns>The view position.</returns>
-        //public virtual void SetPositions ()
-        //{
-        //    /// <summary>
-        //    /// Calls no positioning logic. For hard coded positioning
-        //    /// This overload takes 0 params. StartPoint MUST be set for correct operation
-        //    /// </summary>
-        //    // StartPoint MUST be set when calling this
-        //    if (StartPoint.IsEmpty)
-        //    {
-        //        throw new NullReferenceException("Aspy Error - StartPoint has not been set to a position");
-        //    }
-        //    this.SetHeightWidth();
-        //}
-
         /// <summary>
         /// Override 1 Sets Rectframe position.
         /// </summary>
@@ -418,9 +402,10 @@ namespace NathansWay.iOS.Numeracy
             //this._parentContainer.OnResize();
         }
 
-        public virtual void SetScale(G__NumberDisplaySize  _displaySize)
+        public virtual void SetDisplaySizeAndScale(G__DisplaySizeLevels  _displaySizeLevel)
         {
-            var x = G__DisplaySize.GetDisplaySizeScale(_displaySize);
+            this.DisplaySizeLevel = _displaySizeLevel;
+            var x = G__DisplaySizeLevel.GetDisplaySizeScale(_displaySizeLevel);
             this._scaleFactor = new CGSize(x, x);
         }
 
@@ -441,6 +426,19 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Public Properties
+
+        public G__DisplaySizeLevels DisplaySizeLevel
+        {
+            get
+            {
+                return this._displaySizeLevel;
+            }
+            set
+            {
+                this._displaySizeLevel = value;
+                this._displayScale = G__DisplaySizeLevel.GetDisplaySizeScale(value);
+            }
+        }
 
         public CGSize ScaleFactor
         {
@@ -600,10 +598,10 @@ namespace NathansWay.iOS.Numeracy
             get { return this._globalSizeDimensions; }
         }
 
-        public G__NumberDisplaySize DisplaySize
+        public G__DisplaySizeLevels GlobalDisplaySizeLevel
         { 
             get { return this._globalSizeDimensions.DisplaySize; } 
-            set { this._globalSizeDimensions.DisplaySize = value; }
+            private set { this._globalSizeDimensions.DisplaySize = value; }
         }
 
         public G__NumberDisplayPositionY DisplayPositionY
@@ -709,13 +707,13 @@ namespace NathansWay.iOS.Numeracy
         #region Private Variable
 
         private bool _activated;
-        private G__NumberDisplaySize _numberDisplaySize;
+        private G__DisplaySizeLevels _numberDisplaySize;
 
         #endregion
 
         #region Constructor
 
-        public ResizeEventArgs(G__NumberDisplaySize numberDisplaySize)
+        public ResizeEventArgs(G__DisplaySizeLevels numberDisplaySize)
         {
             this._activated = true;
             this._numberDisplaySize = numberDisplaySize;
@@ -730,7 +728,7 @@ namespace NathansWay.iOS.Numeracy
             get { return this._activated; }
         }
 
-        public G__NumberDisplaySize NumberDisplaySize
+        public G__DisplaySizeLevels NumberDisplaySize
         {
             get { return this._numberDisplaySize; }
         }

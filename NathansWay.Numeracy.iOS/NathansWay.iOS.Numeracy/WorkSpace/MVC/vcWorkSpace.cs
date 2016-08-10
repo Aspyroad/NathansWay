@@ -1206,11 +1206,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
+        // This gets called every time theres a call to SetViewPosition
         public override void SetSubHeightWidthPositions ()
         {
+            // TODO : This isnt centered correctly?
             this._fCurrentY = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
             this._fCurrentX = this._fPaddingPositional;
-            //this.StartPoint = new CGPoint(this._fPaddingPositional, this._fCurrentY);
 
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;

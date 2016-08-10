@@ -11,8 +11,8 @@ namespace NathansWay.Shared
         // All defs are explained in the interface
         private string _StudentLoggedIn;
         private string _TeacherLoggedIn;
-        private G__NumberDisplaySize _GA__NumberLabelDisplaySize;
-        private G__NumberDisplaySize _GA__NumberDisplaySize;
+        private G__DisplaySizeLevels _GA__NumberLabelDisplaySize;
+        private G__DisplaySizeLevels _GA__NumberDisplaySize;
         private G__NumberEditMode _GA__NumberEditMode;
         private bool _GA__MoveToNextNumber;
         private bool _GA__ShowAnswerNumlet;
@@ -83,7 +83,7 @@ namespace NathansWay.Shared
             }
         }
 
-        public G__NumberDisplaySize GA__NumberDisplaySize
+        public G__DisplaySizeLevels GA__NumberDisplaySize
         {
             get
             {
@@ -95,7 +95,7 @@ namespace NathansWay.Shared
             }
         }
 
-        public G__NumberDisplaySize GA__NumberLabelDisplaySize
+        public G__DisplaySizeLevels GA__NumberLabelDisplaySize
         {
             get
             {
