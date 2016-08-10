@@ -45,6 +45,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
         private UIColor _backgroundColor;
         private float _opacity;
         private G__FactoryDrawings _drawType;
+        private G__NumberDisplaySize _displaySizeLevel;
+        private nfloat _displayScale;
 
         private Action<CGContext> _drawingDelegate;
         private Dictionary<G__FactoryDrawings, Action<CGContext>> _dictDrawingFuncs;
@@ -157,6 +159,19 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
+        public G__NumberDisplaySize DisplaySizeLevel
+        {
+            get
+            {
+                return this._displaySizeLevel;
+            }
+            set
+            {
+                this._displaySizeLevel = value;
+                this._displayScale = G__DisplaySize.GetDisplaySizeScale(value);
+            }
+        }
+
         #endregion
 
         #region Public Mambers
@@ -173,12 +188,17 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
 
             // ** Global layer setup **
+            // Set the main scale for images
             _layer.ContentsScale = UIScreen.MainScreen.Scale;
             _layer.BackgroundColor = this.BackgroundColor.CGColor;
-            _layer.Opacity = this._opacity;
-            _layer.Frame = this.RectFrame;
             _layer.FillColor = this.PrimaryFillColor;
+
+            // TODO : Refactor include the call to setviewposition here!!
+            // Just set up a parent frame var in sizeclass...
+
+            _layer.Opacity = this._opacity;
             _layer.ScaleFactor = this.ScaleFactor;
+            _layer.Frame = this.RectFrame;
 
             return _layer;
         }
@@ -193,7 +213,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             // TODO: Fix this so that it auto creates sizes ratio-ed.
             //var x = G__DisplaySize.GetDisplaySizeSize(_displaySize);
-
+            //int z = (int)Math.Round((30.0f * y), 0);
             //this.SetHeightWidth(x, x);
 
 

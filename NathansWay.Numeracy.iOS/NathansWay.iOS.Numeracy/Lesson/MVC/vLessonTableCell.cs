@@ -69,6 +69,7 @@ namespace NathansWay.iOS.Numeracy
 
             drawfact.BackgroundColor = UIColor.Gray;
             // SetViewPosition is the ultimate sizeclass function, it calculates EVERYTHING!
+            //drawfact.S
             drawfact.SetViewPosition(vOperator.Frame.Width, vOperator.Frame.Height);
 
             //drawfact.StartPoint = new CGPoint(0.0f, 0.0f);

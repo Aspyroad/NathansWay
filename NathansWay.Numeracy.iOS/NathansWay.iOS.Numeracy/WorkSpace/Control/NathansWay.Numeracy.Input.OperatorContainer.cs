@@ -112,7 +112,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Set drawn graphic positions
             //this._sizeClass.SetViewPosition(0.0f, 0.0f);
-            this._vOperator.iOSDrawingFactory.SetScale(G__NumberDisplaySize.Level5);
+            this._vOperator.iOSDrawingFactory.DisplaySizeLevel = G__NumberDisplaySize.Level5;
             this._vOperator.iOSDrawingFactory.BackgroundColor = UIColor.Gray;
             this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
 

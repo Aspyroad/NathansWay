@@ -59,6 +59,9 @@ namespace NathansWay.iOS.Numeracy
         // Current Sizing WidthHeight
         protected nfloat _fCurrentWidth = 0.0f;
         protected nfloat _fCurrentHeight = 0.0f;
+        // Current Parent Width and height
+        protected nfloat _fParentWidth = 0.0f;
+        protected nfloat _fParentHeight = 0.0f;
         // Current Sizing Position
         protected nfloat _fCurrentY = 0.0f;
         protected nfloat _fCurrentX = 0.0f;
@@ -66,6 +69,7 @@ namespace NathansWay.iOS.Numeracy
 
         protected CGSize _scaleFactor;
         private CGRect _rectFrame;
+        private CGRect _parentFrame;
 
         // Old Sizing
         protected nfloat _fOldWidth = 0.0f;
@@ -146,10 +150,12 @@ namespace NathansWay.iOS.Numeracy
         /// Boolean - If set to true it halves the parents Horizontal width and uses this.DisplayPositionX 
         /// to position rectframe in the middle of the Right half of its parent. Defining a 1/4
         /// 
+        /// The width and height supplied should normally be the "parent" container dimensions
+        /// 
         /// </summary>
         /// <returns>The display and position.</returns>
-        /// <param name="_XWidth">X width.</param>
-        /// <param name="_YHeight">Y height.</param>
+        /// <param name="_XWidth">Parent container X width.</param>
+        /// <param name="_YHeight">Parent container Y height.</param>
         protected CGPoint RefreshDisplayAndPosition(nfloat _XWidth, nfloat _YHeight)
         {
             this._fCurrentY = _YHeight;
@@ -369,17 +375,20 @@ namespace NathansWay.iOS.Numeracy
         /// <summary>
         /// Override 2 Sets Rectframe position.
         /// </summary>
-        /// <param name="_posX">_posX</param>
-        /// <param name="_posY">_posY</param>
-        public virtual void SetViewPosition(nfloat _posX, nfloat _posY)
+        /// <param name="_widthX">_posX</param>
+        /// <param name="_heightY">_posY</param>
+        public virtual void SetViewPosition(nfloat _widthX, nfloat _heightY)
         {
+            // This is mainly used of if the object being sized has  different
+            // dimensions to the parent container
             this.SetSubHeightWidthPositions();
-            this.StartPoint = this.RefreshDisplayAndPosition(_posX, _posY);
+            this.StartPoint = this.RefreshDisplayAndPosition(_widthX, _heightY);
         }
 
         public virtual void SetViewPosition()
         {
-            // Startpoint MUST be set or its crashville
+            // This is mainly used of if the object being sized has the same 
+            // dimensions as the parent container
             this.SetSubHeightWidthPositions();
             this.StartPoint = this.RefreshDisplayAndPosition(this._fCurrentX, this._fCurrentY);
         }
@@ -411,7 +420,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void SetScale(G__NumberDisplaySize  _displaySize)
         {
-            var x = G__DisplaySize.GetDisplaySizeLevel(_displaySize);
+            var x = G__DisplaySize.GetDisplaySizeScale(_displaySize);
             this._scaleFactor = new CGSize(x, x);
         }
 
@@ -498,6 +507,18 @@ namespace NathansWay.iOS.Numeracy
                     );
             } 
             //set { this._rectFrame = value; }
+        }
+
+        public CGRect ParentFrame
+        {
+            get
+            {
+                return this._parentFrame;
+            }
+            set 
+            { 
+                this._parentFrame = value; 
+            }
         }
 
         // General Width and Height Variables

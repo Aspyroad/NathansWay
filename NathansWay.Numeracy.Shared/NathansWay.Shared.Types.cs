@@ -181,7 +181,7 @@ namespace NathansWay.Shared
             {G__DisplaySize.Level10, 4.0f},
         };
 
-        public static float GetDisplaySizeLevel(int x)
+        public static float GetDisplaySizeScale(int x)
         {
             // Try to get the result in the static Dictionary
             float result;
@@ -195,7 +195,7 @@ namespace NathansWay.Shared
             }
         }
 
-        public static float GetDisplaySizeLevel(G__NumberDisplaySize x)
+        public static float GetDisplaySizeScale(G__NumberDisplaySize x)
         {
             // Try to get the result in the static Dictionary
             float result;
