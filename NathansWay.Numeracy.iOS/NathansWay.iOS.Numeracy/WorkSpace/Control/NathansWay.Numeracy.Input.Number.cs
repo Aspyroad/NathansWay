@@ -243,6 +243,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void TapText()
         {
+            // TODO : We need to tell number container the index position of the currently selected text field
+            // We need to do this so as to disable the "skipping" effect to the next number, if we select a number HIGHER up then 1 position from this one
             // Prevent the user double tapping
             if (this.IsInEditMode)
             {
@@ -889,11 +891,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            // REMEMBER:  Dont think this is needed and cant see its use? As it was preventing selecting zero on first pick.
-            //if (Convert.ToInt16(_dblCurrentValue) != this._pickerdelegate.SelectedItemInt)
-            //{
-                this.postEdit(this._pickerdelegate.SelectedItemInt);
-            //}
+
+            this.postEdit(this._pickerdelegate.SelectedItemInt);
+
 
             this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
