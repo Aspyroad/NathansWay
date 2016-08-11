@@ -1,6 +1,5 @@
 // System
 using System;
-using CoreGraphics;
 using System.Collections.Generic;
 // Mono
 using Foundation;
@@ -27,11 +26,11 @@ namespace NathansWay.iOS.Numeracy
         private G__UnitPlacement _tensUnit;
         private string _strInitialValue;
         // Display a decimal place?
-        private bool _bShowDecimal;
+        //private bool _bShowDecimal;
         // Number of "whole" (left side) number places
-        private nint _intIntegralPlaces;
+        //private nint _intIntegralPlaces;
         // Number of "decimal" (right side) number places
-        private nint _intFractionalPlaces;
+        //private nint _intFractionalPlaces;
         // Main list of number text boxes in this number
         private List<BaseContainer> _lsNumbers;
         private List<vcNumberText> _lsNumbersOnly;
@@ -42,8 +41,6 @@ namespace NathansWay.iOS.Numeracy
         private nint _intMultiNumberTotalSigCount;
         private nint _intMultiNumberTotalInSigCount;
         private bool _bHasDecimal;
-
-        private vcNumberText _selectedNumberText;
 
         #endregion
 
@@ -122,7 +119,7 @@ namespace NathansWay.iOS.Numeracy
             this._intMultiNumberTotalInSigCount = 0;
             this._intMultiNumberTotalSigCount = 0;
 
-            this._bShowDecimal = false;
+            //this._bShowDecimal = false;
             // Some basic UI
             this.BorderWidth = 1.0f;
             this.HasRoundedCorners = true;
@@ -158,7 +155,7 @@ namespace NathansWay.iOS.Numeracy
             // Locals
             int _sig = 0;
             int _insig = 0;
-            int _loopCount = 0;
+            //int _loopCount = 0;
 
             string[] _result;
             this._bHasDecimal = false;

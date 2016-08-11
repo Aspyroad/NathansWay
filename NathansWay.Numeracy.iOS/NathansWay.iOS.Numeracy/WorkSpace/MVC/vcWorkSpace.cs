@@ -1211,7 +1211,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO : This isnt centered correctly?
             this._fCurrentY = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
-            this._fCurrentX = this._fPaddingPositional;
+            this._fCurrentX = 4.0f;
 
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;
             this.CurrentHeight = this.GlobalSizeDimensions.GlobalWorkSpaceHeight;

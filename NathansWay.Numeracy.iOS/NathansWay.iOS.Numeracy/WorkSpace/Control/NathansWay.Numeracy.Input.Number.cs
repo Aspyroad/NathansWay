@@ -12,7 +12,6 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 
 // Nathansway
-using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
@@ -43,7 +42,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private vcNumberPad _numberpad;
         private SizeNumber _sizeNumber;
         private vcMainContainer _vcMainContainer;
-        private vcNumberContainer _vcNumberContainer;
+        //private vcNumberContainer _vcNumberContainer;
 
         private Action ePickerChanged;
         private Action<nint> actHandlePadPush;
@@ -273,9 +272,20 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
                 this.Selected = false;
+                this.MyNumberParent.SelectedNumberText = null;
             }
             else
             {
+                // Add this numbertext ref to the parent number container
+                // This wont work, its overwriting the one we want...what about an prevnumbertext?
+                if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
+                {
+                    if (this.MyNumberParent.SelectedNumberText != null)
+                    {
+                        this.MyNumberParent.SelectedNumberText.CallTouchedText();
+                    }
+                }
+                this.MyNumberParent.SelectedNumberText = this;
                 this.IsInEditMode = true;
                 this.Selected = true;
                 // Begin Editing
@@ -893,7 +903,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
 
             this.postEdit(this._pickerdelegate.SelectedItemInt);
-
 
             this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
