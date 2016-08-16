@@ -52,9 +52,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         private G__Significance _significance;
         private nint _intIndexNumber;
         private nint _intMultiNumberPosition;
+        private nint _intMultiNumberSigTotal;
         private nint _intMultiNumberSigPosition;
+        private nint _intMultiNumberInSigTotal;
         private nint _intMultiNumberInSigPosition;
         private bool _bIsMultiNumberedText;
+
+        private bool _logicProceed;
 
         #endregion
 
@@ -212,18 +216,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.UI_SetViewInCorrect();
         }
 
-        public override UIColor SetFontColor
-        {
-            get
-            {
-                return base.SetFontColor;
-            }
-            set
-            {
-                base.SetFontColor = value;
-                this.txtNumber.TextColor = value;
-            }
-        }
+
 
 //        public override void TouchesBegan(NSSet touches, UIEvent evt)
 //        {
@@ -278,13 +271,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 // Add this numbertext ref to the parent number container
                 // This wont work, its overwriting the one we want...what about an prevnumbertext?
-                if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
-                {
-                    if (this.MyNumberParent.SelectedNumberText != null)
-                    {
-                        this.MyNumberParent.SelectedNumberText.CallTouchedText();
-                    }
-                }
+
                 this.MyNumberParent.SelectedNumberText = this;
                 this.IsInEditMode = true;
                 this.Selected = true;
@@ -306,7 +293,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public void CallTouchedText()
+        public void AutoTouchedText()
         {
             this.txtTouchedDown(this, new EventArgs()); 
         }
@@ -353,15 +340,49 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._intMultiNumberSigPosition = value; }
         }
 
+        public nint MutliNumberSigTotal
+        {
+            get { return this._intMultiNumberSigTotal; }
+            set { this._intMultiNumberSigTotal = value; }
+        }
+
         public nint MutliNumberInSigPosition
         {
             get { return this._intMultiNumberInSigPosition; }
             set { this._intMultiNumberInSigPosition = value; }
         }
 
+        public nint MutliNumberInSigTotal
+        {
+            get { return this._intMultiNumberInSigTotal; }
+            set { this._intMultiNumberInSigTotal = value; }
+        }
+
+        public nint MultiNumberTotalNumbers
+        {
+            get
+            {
+                return this._intMultiNumberSigTotal + this._intMultiNumberInSigTotal;
+            }
+
+        }
+
         #endregion
 
         #region Override Public Properties
+
+        public override UIColor SetFontColor
+        {
+            get
+            {
+                return base.SetFontColor;
+            }
+            set
+            {
+                base.SetFontColor = value;
+                this.txtNumber.TextColor = value;
+            }
+        }
 
         public override vcFractionContainer MyFractionParent
         {
@@ -530,8 +551,30 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.singleTapGesture = null;
         }
 
+        private void Test()
+        {
+            nint g = 0;
+
+            if (this.MyNumberParent.SelectedNumberText != null && this._numberAppSettings.GA__MoveToNextNumber)
+            {
+                g = (this.IndexNumber - this.MyNumberParent.SelectedNumberText.IndexNumber);
+                // If this doesnt equate to 1, then this isnt the next selected number
+                if (g != 1)
+                {
+                    if (this.MyNumberParent.SelectedNumberText.IsInEditMode)
+                    {
+                        this.MyNumberParent.SelectedNumberText._logicProceed = true;
+                        this.MyNumberParent.SelectedNumberText.AutoTouchedText();
+                        this.MyNumberParent.SelectedNumberText._logicProceed = false;
+                    }
+                }
+            }
+        }
+
+
         private void txtTouchedDown(object sender, EventArgs e)
         {
+
             // FIRST!! We need to find ANY!!! selected number texts within the whole workspace and KILL them!
             if (this.MyWorkSpaceParent.HasSelectedNumberText)
             {
@@ -809,7 +852,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void txtSingleTapGestureRecognizer()
         {            
             // create a new tap gesture
-            UITapGestureRecognizer singleTapGesture = null;
+            this.singleTapGesture = null;
 
             Action action = () =>
             { 
@@ -881,7 +924,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // Grab the next text field
                     var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
                     // Call it as being touched
-                    y.CallTouchedText();
+                    y.AutoTouchedText();
                 }
                 else
                 {
@@ -901,7 +944,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-
             this.postEdit(this._pickerdelegate.SelectedItemInt);
 
             this.NumberSize.SetInitialPosition();
@@ -911,12 +953,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.IsInEditMode = false;
 
-            if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
+            // TODO: Check if this will return a number as we never want y null, I have added total sig and insig counts
+            //if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1)) )
+            if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
             {
                 // Grab the next text field
                 var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
                 // Call it as being touched
-                y.CallTouchedText();
+                y.AutoTouchedText();
             }
         }
 

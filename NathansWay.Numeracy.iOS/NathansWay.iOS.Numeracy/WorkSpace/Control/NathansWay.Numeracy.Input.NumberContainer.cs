@@ -182,7 +182,7 @@ namespace NathansWay.iOS.Numeracy
                     vcNumberText newnumber = new vcNumberText(intCh);
                     newnumber.MyNumberParent = this;
                     newnumber.MyImmediateParent = this;
-                    newnumber.MutliNumberPosition = (this._intMultiNumberTotalCount - i);
+                    newnumber.MutliNumberPosition = (this._intMultiNumberTotalCount - (this._intMultiNumberTotalCount - (i + 1)));
                     if (_bIsFraction)
                     {
                         newnumber.MyFractionParent = this.MyFractionParent;
@@ -224,6 +224,7 @@ namespace NathansWay.iOS.Numeracy
                     this._lsNumbersOnly.Add(newnumber);
                     // This is used to find
                     newnumber.IndexNumber = this._lsNumbersOnly.Count;
+
 
                     // I was whacking in a border height and width but at this level its not important.
                     //var _width = (this._sizeClass.CurrentWidth + (this._sizeClass.GlobalSizeDimensions.NumberBorderWidth * 1));
@@ -275,6 +276,13 @@ namespace NathansWay.iOS.Numeracy
                     // No value change is needed as this is readonly?
                     this.AddAndDisplayController(newdecimal, newdecimal.View.Frame);
                 }
+            }
+
+            // Set totals for logical processing later
+            for (int i = 0; i < _lsNumbersOnly.Count; i++)
+            {
+                _lsNumbersOnly[i].MutliNumberInSigTotal = _insig;
+                _lsNumbersOnly[i].MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
             }
 
             // Set our current height
@@ -657,6 +665,31 @@ namespace NathansWay.iOS.Numeracy
                         _Number.MyFractionParent = value;
                     }
                 }
+            }
+        }
+
+        public override vcNumberText SelectedNumberText
+        {
+            get
+            {
+                return base.SelectedNumberText;
+            }
+            set
+            {
+
+                //if (this.SelectedNumberText != null && this._numberAppSettings.GA__MoveToNextNumber)
+                //{
+                //    var g = (value.IndexNumber - this.SelectedNumberText.IndexNumber);
+
+                //    if (g > 1)
+                //    {
+                //        if (this.SelectedNumberText.IsInEditMode)
+                //        {
+                //            this.SelectedNumberText.CallTouchedText();
+                //        }
+                //    }
+                //}
+                base.SelectedNumberText = value;
             }
         }
 
