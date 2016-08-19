@@ -216,18 +216,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.UI_SetViewInCorrect();
         }
 
-
-
-//        public override void TouchesBegan(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesBegan(touches, evt);
-//
-//            // Continue next responder if set
-//            //if (this._bAllowNextResponder)
-//            {
-//                this.NextResponder.TouchesBegan(touches, evt);
-//            }
-//        }
+        //        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //        {
+        //            base.TouchesBegan(touches, evt);
+        //
+        //            // Continue next responder if set
+        //            //if (this._bAllowNextResponder)
+        //            {
+        //                this.NextResponder.TouchesBegan(touches, evt);
+        //            }
+        //        }
 
         #endregion
 
@@ -571,7 +569,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-
         private void txtTouchedDown(object sender, EventArgs e)
         {
 
@@ -770,6 +767,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Create the picker class
             this.pkNumberPicker = new NumberPickerView(this.NumberSize._rectNumberPicker);
+            //this.pkNumberPicker.Bounds = this.iOSGlobals.G__MainWindow.Frame;
             this.pkNumberPicker.UserInteractionEnabled = true;
             this.pkNumberPicker.ShowSelectionIndicator = true;
             // Create our delegates
@@ -1248,7 +1246,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Other Frames
             this.SetInitialPosition();
         }
-
         // Overload for textfield
         public override void SetFontAndSize(AspyTextField _txt)
         {
@@ -1303,6 +1300,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetPickerPositionTopOn()
         {
+            
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X, 
                 (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 

@@ -215,6 +215,11 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Overrides
 
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            base.TouchesBegan(touches, evt);
+        }
+
 		public override void ViewWillAppear (bool animated)
 		{
 			// Always correct bounds and frame

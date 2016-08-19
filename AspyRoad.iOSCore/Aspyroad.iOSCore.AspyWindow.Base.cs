@@ -12,7 +12,6 @@ using System;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using Foundation;
 #endregion
 
 namespace AspyRoad.iOSCore
@@ -34,16 +33,18 @@ namespace AspyRoad.iOSCore
 	public class AspyWindow : UIKit.UIWindow
 	{
 		#region Events
-		public event GlobalTouchEventHandler SomeonesTouchingMeInMySpecialPlace;
-		#endregion
 
-		#region Class Variables
-//		private UITapGestureRecognizer _tapGesture = null;
-//		private UISwipeGestureRecognizer _swipeGesture = null;
-//		private UIPinchGestureRecognizer _pinchGesture = null;
-//		private UIPanGestureRecognizer _panGesture = null;
-//		private UIRotationGestureRecognizer _rotorGesture = null;
-//		private UILongPressGestureRecognizer _longGesture = null;	
+		public event GlobalTouchEventHandler SomeonesTouchingMeInMySpecialPlace;
+
+        #endregion
+
+        #region Private Variables
+
+        // Actions
+        private Action<UIView> _actionOnTouch;
+        private UIView _vwViewMonitoringTouch;
+        private bool _bInterceptTouch;
+
 		#endregion
 
 		#region Constructors
@@ -63,45 +64,33 @@ namespace AspyRoad.iOSCore
 			
 		#endregion
 
-		#region Action Delegates
+		#region Public Properties
 
+        public Action<UIView> ActionOnTouch
+        {
+            set
+            {
+                this._actionOnTouch = value;
+            }
+        }
 
-		#endregion
+        public bool InterceptTouch
+        {
+            set
+            {
+                this._bInterceptTouch = value;
+            }
 
-		#region Public Variables
+        }
 
-//		public UISwipeGestureRecognizer swipeGesture
-//		{
-//			get { return this._swipeGesture; }
-//		}
-//		public UITapGestureRecognizer tapGesture
-//		{
-//			get { return this._tapGesture; }
-//		}
-//		public UIPinchGestureRecognizer pinchGesture
-//		{
-//			get { return this._pinchGesture; }
-//		}
-//		public UIPanGestureRecognizer panGesture
-//		{
-//			get { return this._panGesture; }
-//		}
-//		public UIRotationGestureRecognizer rotorGesture
-//		{
-//			get { return this._rotorGesture; }
-//		}
-//		public UILongPressGestureRecognizer longGesture
-//		{
-//			get { return this._longGesture; }
-//		}
 
 		#endregion
 		
 		#region Private Members
 
 		private void Initialize ()
-		{	
-			// Do something!
+		{
+            this._bInterceptTouch = false;
 		}
 
 		protected virtual void IveBeenTouched (GlobalTouchEventArgs e)
@@ -113,127 +102,73 @@ namespace AspyRoad.iOSCore
 			} 
 		}
 
-//		private UIGestureRecognizer CreateGestureType (G__GestureTypes gestype, NSAction gestureAction)
-//		{
-//			UIGestureRecognizer returnedGesture;
-//
-//			switch (gestype)
-//			{			
-//				case G__GestureTypes.UITap: //Tap
-//				{
-//					this._tapGesture = new UITapGestureRecognizer(gestureAction);
-//					returnedGesture = this._tapGesture;		
-//					break;			
-//				}
-//				case G__GestureTypes.UIPinch: //Pinch
-//				{
-//					this._pinchGesture = new UIPinchGestureRecognizer(gestureAction);
-//					returnedGesture = this._pinchGesture;	
-//					break;
-//				}
-//				case G__GestureTypes.UIPan: //Pan
-//				{
-//					this._panGesture = new UIPanGestureRecognizer(gestureAction);
-//					returnedGesture = this._panGesture;	
-//					break;
-//				}
-//				case G__GestureTypes.UISwipe: //Swipe
-//				{
-//					this._swipeGesture = new UISwipeGestureRecognizer(gestureAction);
-//					returnedGesture = this._swipeGesture;	
-//					break;
-//				}
-//				case G__GestureTypes.UIRotation: //Rotation
-//				{
-//					this._rotorGesture = new UIRotationGestureRecognizer(gestureAction);
-//					returnedGesture = this._rotorGesture;	
-//					break;
-//				}
-//				case G__GestureTypes.UILongPress: //Longpress
-//				{
-//					this._longGesture = new UILongPressGestureRecognizer(gestureAction);
-//					returnedGesture = this._longGesture;	
-//					break;
-//				}
-//				default:
-//				{
-//					returnedGesture = null;
-//					break;
-//				}					
-//			}
-//
-//			if (returnedGesture == null)
-//			{
-//				throw new NullReferenceException("Error creating gesture in - " + this.Description);
-//			}
-//			else
-//			{
-//				return returnedGesture;
-//			}
-//		}
-//		
+
         #endregion
 
 		#region Public Members
 
-//		public override void SendEvent (UIEvent evt)
-//		{
-//			if (evt.Type == UIEventType.Touches)
-//			{
-//
-////				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
-////				args.TouchSet = evt.AllTouches;
-////
-////				foreach (UITouch t in evt.AllTouches)
-////				{
-////                    if (t.GestureRecognizers != null)
-////                    {
-////                        args.gestureCount = t.GestureRecognizers.Length;
-////                        args.numTaps = t.TapCount;
-////                        args.UITouchObj = t;
-////                        args.TimeReached = t.Timestamp;
-////                        args.strGestureType = "No gesture";
-////                    }
-////
-////					//if (args.gestureCount == 1)
-////					//{
-//////					foreach (UIGestureRecognizer g in t.GestureRecognizers)
-//////					{
-//////						var myType = g.GetType();
-//////						if (myType.Name.Length > 0)
-//////						{
-//////							args.strGestureType = myType.Name;						
-//////						}
-//////					}
-////					//}	 
-////
-////
-////					IveBeenTouched(args);
-////				}
-//			}
-//
-//			base.SendEvent (evt);
-//		}
+        public override UIView HitTest(CGPoint point, UIEvent uievent)
+        {
+            return base.HitTest(point, uievent);
+        }
 
-/*		public void WireUpGestureToWindow(G__GestureTypes gestype, NSAction gestureAction)
+		public override void SendEvent (UIEvent evt)
 		{
-			this.AddGestureRecognizer (CreateGestureType (gestype, gestureAction));
-		}	
-		
-		public void RemoveGestureFromWindow(G__GestureTypes gestype)
-		{
+            if (evt.Type == UIEventType.Touches && this._bInterceptTouch)
+			{
+                if (this._actionOnTouch != null)
+                {
+                    
+                    //
+                    //this._actionOnTouch.Invoke(evt.AllTouches.[0].View);
+                    // Restet as this could be called 2-3 times on one touch event
+                    this._bInterceptTouch = false;
+                }
 
-		}*/	
+                //				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
+                //				args.TouchSet = evt.AllTouches;
+                //
+                //				foreach (UITouch t in evt.AllTouches)
+                //				{
+                //                    if (t.GestureRecognizers != null)
+                //                    {
+                //                        args.gestureCount = t.GestureRecognizers.Length;
+                //                        args.numTaps = t.TapCount;
+                //                        args.UITouchObj = t;
+                //                        args.TimeReached = t.Timestamp;
+                //                        args.strGestureType = "No gesture";
+                //                    }
+                //
+                //					//if (args.gestureCount == 1)
+                //					//{
+                ////					foreach (UIGestureRecognizer g in t.GestureRecognizers)
+                ////					{
+                ////						var myType = g.GetType();
+                ////						if (myType.Name.Length > 0)
+                ////						{
+                ////							args.strGestureType = myType.Name;						
+                ////						}
+                ////					}
+                //					//}	 
+                //
+                //
+                //					IveBeenTouched(args);
+                //				}
+
+			}
+            // MUST! be called
+			base.SendEvent (evt);
+		}
 
 		#endregion	
 		
 		#region Overrides
 
-		public override void SubviewAdded (UIView uiview)
-		{
-			base.SubviewAdded (uiview);
-			//this.ViewWithTag (666).Frame = new RectangleF (PointF.Empty, this.Frame.Size);
-		}
+		//public override void SubviewAdded (UIView uiview)
+		//{
+		//	base.SubviewAdded (uiview);
+		//	//this.ViewWithTag (666).Frame = new RectangleF (PointF.Empty, this.Frame.Size);
+		//}
 
 		#endregion	
 	}	
