@@ -58,7 +58,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private nint _intMultiNumberInSigPosition;
         private bool _bIsMultiNumberedText;
 
-        private bool _logicProceed;
+        private bool _bAutoMoveToNextNumber;
 
         #endregion
 
@@ -549,25 +549,25 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.singleTapGesture = null;
         }
 
-        private void Test()
-        {
-            nint g = 0;
+        //private void Test()
+        //{
+        //    nint g = 0;
 
-            if (this.MyNumberParent.SelectedNumberText != null && this._numberAppSettings.GA__MoveToNextNumber)
-            {
-                g = (this.IndexNumber - this.MyNumberParent.SelectedNumberText.IndexNumber);
-                // If this doesnt equate to 1, then this isnt the next selected number
-                if (g != 1)
-                {
-                    if (this.MyNumberParent.SelectedNumberText.IsInEditMode)
-                    {
-                        this.MyNumberParent.SelectedNumberText._logicProceed = true;
-                        this.MyNumberParent.SelectedNumberText.AutoTouchedText();
-                        this.MyNumberParent.SelectedNumberText._logicProceed = false;
-                    }
-                }
-            }
-        }
+        //    if (this.MyNumberParent.SelectedNumberText != null && this._numberAppSettings.GA__MoveToNextNumber)
+        //    {
+        //        g = (this.IndexNumber - this.MyNumberParent.SelectedNumberText.IndexNumber);
+        //        // If this doesnt equate to 1, then this isnt the next selected number
+        //        if (g != 1)
+        //        {
+        //            if (this.MyNumberParent.SelectedNumberText.IsInEditMode)
+        //            {
+        //                this.MyNumberParent.SelectedNumberText._logicProceed = true;
+        //                this.MyNumberParent.SelectedNumberText.AutoTouchedText();
+        //                this.MyNumberParent.SelectedNumberText._logicProceed = false;
+        //            }
+        //        }
+        //    }
+        //}
 
         private void txtTouchedDown(object sender, EventArgs e)
         {
@@ -785,6 +785,23 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
+
+            this.iOSGlobals.G__MainWindow.InterceptTouch = true;
+            this.iOSGlobals.G__MainWindow.ActionOnTouch =
+                new Action<UIView>(HandleAction);
+        }
+
+        void HandleAction(UIView obj)
+        {
+            if (obj.GetType() != typeof(UITableViewCell))
+            {
+                this._bAutoMoveToNextNumber = false;
+                this.AutoTouchedText();
+            }
+            else
+            {
+                this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+            }
         }
 
         protected void EditNumPad()
@@ -812,6 +829,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._numberpad.View.Hidden = false;
             }
         }
+
 
         protected void CloseNumPad()
         {
@@ -953,13 +971,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO: Check if this will return a number as we never want y null, I have added total sig and insig counts
             //if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1)) )
-            if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
+            if (this._bAutoMoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
             {
                 // Grab the next text field
                 var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
                 // Call it as being touched
                 y.AutoTouchedText();
             }
+            // Reset the auto advance
+            this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
         }
 
         #endregion
@@ -1037,17 +1057,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// Called when a row is selected in the spinner
             /// </summary>
-            public override void Selected(UIPickerView picker, nint row, nint component)
+            public override void Selected(UIPickerView pickerView, nint row, nint component)
             {
                 selectedIndex = row;
-                picker.ReloadComponent(component);
+                pickerView.ReloadComponent(component);
             }
 
             /// <summary>
             /// Called by the picker to get the text for a particular row in a particular 
             /// spinner item
             /// </summary>
-            public override string GetTitle(UIPickerView picker, nint row, nint component)
+            public override string GetTitle(UIPickerView pickerView, nint row, nint component)
             {
                 return this._items[(int)row];
             }

@@ -463,6 +463,7 @@ namespace AspyRoad.iOSCore
             // Can see no reason why this should ever be false as Apple do!
             this.ClipsToBounds = false;
             this.AutoApplyUI = true;
+            this.Tag = 666;
 		}
 
         private CGRect SetFrames()

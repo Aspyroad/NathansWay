@@ -118,9 +118,11 @@ namespace AspyRoad.iOSCore
 			{
                 if (this._actionOnTouch != null)
                 {
-                    
+
                     //
-                    //this._actionOnTouch.Invoke(evt.AllTouches.[0].View);
+                    var y = evt.AllTouches.ToArray<UITouch>();
+
+                    this._actionOnTouch.Invoke(y[0].View);
                     // Restet as this could be called 2-3 times on one touch event
                     this._bInterceptTouch = false;
                 }
