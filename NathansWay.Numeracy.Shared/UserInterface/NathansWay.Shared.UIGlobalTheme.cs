@@ -9,17 +9,14 @@ namespace NathansWay.Shared
 
 		#region Public Variables
 
-
-
 		public string VcName { get; set; }
 		public int VcTag { get; set; }
 
 		public string FontName { get; set; }
-		//public string FontNameiOS7 { get; set; }
+        public string FontNameMathChars { get; set; }
+        public string FontNameSpecial { get; set; }
 		public string FontBoldName { get; set; }
-		//public string FontBoldNameiOS7 { get; set; }
 		public float FontSize { get; set; }
-		//public float FontSizeiOS7 { get; set; }
 		public Lazy<G__Color> FontColor { get; set; }
 
 		// UIButton
@@ -130,9 +127,9 @@ namespace NathansWay.Shared
 			VcTag = 999;
 
 			FontName = "HelveticaNeue-Medium";
-			//FontNameiOS7 = "HelveticaNeue-Light";
+			FontNameMathChars = "HelveticaNeue-Light";
 			FontBoldName = "HelveticaNeue-Bold";
-			//FontBoldNameiOS7 = "HelveticaNeue-Medium";
+			FontNameSpecial = "HelveticaNeue-Medium";
 			FontSize = 22.0f;
 			//FontSizeiOS7 = 20.0f;
 			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
@@ -200,12 +197,12 @@ namespace NathansWay.Shared
 
             // UIPickerView
             PkViewBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
-            PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+            PKViewSelectedColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black
             // UIPickerViewLabel
             PkViewLabelFontName = "HelveticaNeue-Medium";
-            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 210.0f, 255.0f)); // Black
+            PkViewLabelHighLightedTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 215.0f, 210.0f, 0.0f)); // Black
             PkViewLabelTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f,220.0f, 255.0f)); // Black
-            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
+            PkViewLabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(10.0f, 10.0f, 10.0f, 0.0f)); // Black
             PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
             // Various
@@ -237,119 +234,119 @@ namespace NathansWay.Shared
 
 		}
 
-        public UIGlobalTheme(bool giveittomebaby)
-        {
-            // ALL Alpha Values are between 0-1 NOT 0-255!
-            VcName = "Global";
-            VcTag = 999;
+        //public UIGlobalTheme(bool giveittomebaby)
+        //{
+        //    // ALL Alpha Values are between 0-1 NOT 0-255!
+        //    VcName = "Global";
+        //    VcTag = 999;
 
-            FontName = "HelveticaNeue-Medium";
-            //FontNameiOS7 = "HelveticaNeue-Light";
-            FontBoldName = "HelveticaNeue-Bold";
-            //FontBoldNameiOS7 = "HelveticaNeue-Medium";
-            FontSize = 22.0f;
-            //FontSizeiOS7 = 20.0f;
-            FontColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
+        //    FontName = "HelveticaNeue-Medium";
+        //    //FontNameiOS7 = "HelveticaNeue-Light";
+        //    FontBoldName = "HelveticaNeue-Bold";
+        //    //FontBoldNameiOS7 = "HelveticaNeue-Medium";
+        //    FontSize = 22.0f;
+        //    //FontSizeiOS7 = 20.0f;
+        //    FontColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
 
-            // UIButton
-            ButtonNormalBGColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            ButtonNormalBGColorTransition = new Lazy<G__Color>(() => new G__Color(30.0f, 100.0f, 100.0f, 200.0f)); // Black
-            ButtonPressedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 220.0f, 255.0f)); // Black
-            ButtonNormalSVGColor = new Lazy<G__Color>(() => new G__Color(190.0f, 112.0f, 50.0f, 0.0f)); // Same as Backgroubnd View
-            ButtonNormalTitleColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 210.0f)); // Black
-            ButtonPressedTitleColor = new Lazy<G__Color>(() => new G__Color(200.0f, 30.0f, 30.0f, 255.0f)); // Black
-            ButtonNormalBGStrImage = "";
-            ButtonPressedBGStrImage = "";
-            ButtonFontName = "HelveticaNeue-Medium";
-            ButtonBorderWidth = 1.0f;
-            ButtonCornerRadius = 4.0f;
-            ButtonMenuCornerRadius = 10.0f;
+        //    // UIButton
+        //    ButtonNormalBGColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+        //    ButtonNormalBGColorTransition = new Lazy<G__Color>(() => new G__Color(30.0f, 100.0f, 100.0f, 200.0f)); // Black
+        //    ButtonPressedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 220.0f, 255.0f)); // Black
+        //    ButtonNormalSVGColor = new Lazy<G__Color>(() => new G__Color(190.0f, 112.0f, 50.0f, 0.0f)); // Same as Backgroubnd View
+        //    ButtonNormalTitleColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 210.0f)); // Black
+        //    ButtonPressedTitleColor = new Lazy<G__Color>(() => new G__Color(200.0f, 30.0f, 30.0f, 255.0f)); // Black
+        //    ButtonNormalBGStrImage = "";
+        //    ButtonPressedBGStrImage = "";
+        //    ButtonFontName = "HelveticaNeue-Medium";
+        //    ButtonBorderWidth = 1.0f;
+        //    ButtonCornerRadius = 4.0f;
+        //    ButtonMenuCornerRadius = 10.0f;
 
-            // UIView
-            //ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
-            ViewBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 120.0f, 120.0f, 255.0f)); // Orange
-            ViewBGColorTransition = new Lazy<G__Color>(() => new G__Color(190.0f, 190.0f, 150.0f, 200.0f)); // Orange less alpha
-            ViewBGTint = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
-            ViewBorderWidth = 1.0f;
-            ViewCornerRadius = 5.0f;
+        //    // UIView
+        //    //ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 140.0f, 0.0f, 250.0f)); // Orange
+        //    ViewBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 120.0f, 120.0f, 255.0f)); // Orange
+        //    ViewBGColorTransition = new Lazy<G__Color>(() => new G__Color(190.0f, 190.0f, 150.0f, 200.0f)); // Orange less alpha
+        //    ViewBGTint = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+        //    ViewBorderWidth = 1.0f;
+        //    ViewCornerRadius = 5.0f;
 
-            // UILabel
-            LabelFontName = "";
-            LabelHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 255.0f, 255.0f, 255.0f)); // Black
-            LabelTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
-            LabelHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black 
-            LabelBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
-            LabelCornerRadius = 6.0f;
-            LabelBorderWidth = 1.0f;
+        //    // UILabel
+        //    LabelFontName = "";
+        //    LabelHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 255.0f, 255.0f, 255.0f)); // Black
+        //    LabelTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
+        //    LabelHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black 
+        //    LabelBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
+        //    LabelCornerRadius = 6.0f;
+        //    LabelBorderWidth = 1.0f;
 
-            // UITextViews
-            TextBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 120.0f, 140.0f, 255.0f)); // Black
+        //    // UITextViews
+        //    TextBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 120.0f, 140.0f, 255.0f)); // Black
 
-            TextBGTint = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            TextHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            TextHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 120.0f, 80.0f, 255.0f)); // Black
-            TextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 240.0f, 255.0f)); // Black
-            TextBorderWidth = 1.0f;
-            TextCornerRadius = 6.0f;
+        //    TextBGTint = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+        //    TextHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+        //    TextHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 120.0f, 80.0f, 255.0f)); // Black
+        //    TextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 240.0f, 255.0f)); // Black
+        //    TextBorderWidth = 1.0f;
+        //    TextCornerRadius = 6.0f;
 
-            // Slider View
-            MaxTrackTintColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
-            MinTrackTintColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
-            ThumbColor = new Lazy<G__Color>(() => new G__Color(255.0f, 0.0f, 255.0f, 100.0f)); // Black
-            ThumbStrImage = "";
+        //    // Slider View
+        //    MaxTrackTintColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
+        //    MinTrackTintColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 100.0f)); // Black
+        //    ThumbColor = new Lazy<G__Color>(() => new G__Color(255.0f, 0.0f, 255.0f, 100.0f)); // Black
+        //    ThumbStrImage = "";
 
-            // UITableVIew
-            ViewTableBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // 
-            ViewTableSectionIndexBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
-            ViewTableSectionIndexColor = new Lazy<G__Color>(() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // 
-            ViewTableSectionIndexTrackingColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); //
-            ViewTableSeperatorColor = new Lazy<G__Color>(() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
+        //    // UITableVIew
+        //    ViewTableBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // 
+        //    ViewTableSectionIndexBGColor = new Lazy<G__Color>(() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
+        //    ViewTableSectionIndexColor = new Lazy<G__Color>(() => new G__Color(100.0f, 102.0f, 0.0f, 180.0f)); // 
+        //    ViewTableSectionIndexTrackingColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); //
+        //    ViewTableSeperatorColor = new Lazy<G__Color>(() => new G__Color(120.0f, 160.0f, 196.0f, 255.0f)); // 
 
-            // UITableVIewCell
-            ViewCellSelectedColor = new Lazy<G__Color>(() => new G__Color(0.0f, 160.0f, 196.0f, 250.0f)); // 
-            ViewCellBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // 
-            // Alternating Color
-            ViewCellBGColorTransition = new Lazy<G__Color>(() => new G__Color(155.0f, 155.0f, 155.0f, 100.0f)); // Orange less alpha
-            ViewCellBGTint = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
+        //    // UITableVIewCell
+        //    ViewCellSelectedColor = new Lazy<G__Color>(() => new G__Color(0.0f, 160.0f, 196.0f, 250.0f)); // 
+        //    ViewCellBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // 
+        //    // Alternating Color
+        //    ViewCellBGColorTransition = new Lazy<G__Color>(() => new G__Color(155.0f, 155.0f, 155.0f, 100.0f)); // Orange less alpha
+        //    ViewCellBGTint = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black 
 
-            // UIPickerView
-            PkViewBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
-            PKViewSelectedColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            // UIPickerViewLabel
-            PkViewLabelFontName = "HelveticaNeue-Medium";
-            PkViewLabelHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 210.0f, 255.0f)); // Black
-            PkViewLabelTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 220.0f, 255.0f)); // Black
-            PkViewLabelHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
-            PkViewLabelBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
+        //    // UIPickerView
+        //    PkViewBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
+        //    PKViewSelectedColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+        //    // UIPickerViewLabel
+        //    PkViewLabelFontName = "HelveticaNeue-Medium";
+        //    PkViewLabelHighLightedTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 210.0f, 255.0f)); // Black
+        //    PkViewLabelTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 220.0f, 255.0f)); // Black
+        //    PkViewLabelHighLightedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
+        //    PkViewLabelBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
-            // Various
-            PositiveBGColor = new Lazy<G__Color>(() => new G__Color(102.0f, 255.0f, 102.0f, 255.0f)); // Green Light
-            PositiveTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 51.0f, 0.0f, 255.0f)); // Dark x 2 Green
-            PositiveBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 102.0f, 0.0f, 255.0f)); // Dark Green
-            NegativeBGColor = new Lazy<G__Color>(() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Brick Red
-            NegativeTextColor = new Lazy<G__Color>(() => new G__Color(250.0f, 250.0f, 200.0f, 255.0f)); // Black
-            NegativeBorderColor = new Lazy<G__Color>(() => new G__Color(250.0f, 250.0f, 210.0f, 255.0f)); // Dark Red
-            NeutralBGColor = new Lazy<G__Color>(() => new G__Color(220.0f, 220.0f, 220.0f, 255.0f)); // White
-            NeutralTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
-            NeutralBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            ReadOnlyBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
-            ReadOnlyTextColor = new Lazy<G__Color>(() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
-            ReadOnlyBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            SelectedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
-            SelectedTextColor = new Lazy<G__Color>(() => new G__Color(20.0f, 20.0f, 40.0f, 255.0f)); // Black
-            SelectedBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+        //    // Various
+        //    PositiveBGColor = new Lazy<G__Color>(() => new G__Color(102.0f, 255.0f, 102.0f, 255.0f)); // Green Light
+        //    PositiveTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 51.0f, 0.0f, 255.0f)); // Dark x 2 Green
+        //    PositiveBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 102.0f, 0.0f, 255.0f)); // Dark Green
+        //    NegativeBGColor = new Lazy<G__Color>(() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Brick Red
+        //    NegativeTextColor = new Lazy<G__Color>(() => new G__Color(250.0f, 250.0f, 200.0f, 255.0f)); // Black
+        //    NegativeBorderColor = new Lazy<G__Color>(() => new G__Color(250.0f, 250.0f, 210.0f, 255.0f)); // Dark Red
+        //    NeutralBGColor = new Lazy<G__Color>(() => new G__Color(220.0f, 220.0f, 220.0f, 255.0f)); // White
+        //    NeutralTextColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
+        //    NeutralBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+        //    ReadOnlyBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
+        //    ReadOnlyTextColor = new Lazy<G__Color>(() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
+        //    ReadOnlyBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+        //    SelectedBGColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
+        //    SelectedTextColor = new Lazy<G__Color>(() => new G__Color(20.0f, 20.0f, 40.0f, 255.0f)); // Black
+        //    SelectedBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
 
-            // Dialog Global
-            DiagBorderColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
-            DiagSelectedBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
+        //    // Dialog Global
+        //    DiagBorderColor = new Lazy<G__Color>(() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
+        //    DiagSelectedBorderColor = new Lazy<G__Color>(() => new G__Color(0.0f, 255.0f, 100.0f, 200.0f)); // Black
 
-            // Dialog UIButton
-            DiagButtonNormalBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
-            DiagButtonNormalTitleColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
-            // Dialog UIView
-            DiagViewBGColor = new Lazy<G__Color>(() => new G__Color(70.0f, 70.0f, 70.0f, 255.0f)); // Black
+        //    // Dialog UIButton
+        //    DiagButtonNormalBGColor = new Lazy<G__Color>(() => new G__Color(100.0f, 100.0f, 100.0f, 255.0f)); // Black
+        //    DiagButtonNormalTitleColor = new Lazy<G__Color>(() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
+        //    // Dialog UIView
+        //    DiagViewBGColor = new Lazy<G__Color>(() => new G__Color(70.0f, 70.0f, 70.0f, 255.0f)); // Black
 
-        }
+        //}
 
 
         #endregion

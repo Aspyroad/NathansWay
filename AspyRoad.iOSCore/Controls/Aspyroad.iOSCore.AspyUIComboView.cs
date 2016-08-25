@@ -798,7 +798,7 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// This is called for ever item in the picker source
         /// </summary>
-        public override UIView GetView(UIPickerView picker, nint row, nint component, UIView _view)
+        public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             _lblPickerView.AutoApplyUI = false;

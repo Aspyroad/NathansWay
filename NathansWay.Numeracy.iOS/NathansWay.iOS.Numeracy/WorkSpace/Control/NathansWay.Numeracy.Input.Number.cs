@@ -36,6 +36,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         //private G__NumberPickerPosition _pickerPosition;
         private TextControlDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
+        private UITapGestureRecognizer doubleTapGesture;
 
         private List<string> items = new List<string>();
 
@@ -59,6 +60,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bIsMultiNumberedText;
 
         private bool _bAutoMoveToNextNumber;
+        private bool _bCancelSelect;
 
         #endregion
 
@@ -103,7 +105,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // Unhook any delegates
                     this._numberpad.PadPushed -= this.actHandlePadPush;
                     this._numberpad.PadLockPushed -= this.actHandlePadLock;
-                    this._pickerdelegate.psValueChanged -= this.ePickerChanged; 
+                    this._pickerdelegate.psValueChanged -= this.ePickerChanged;
                     this._numberpad = null;
                 }
                 // Destroy our picker delegate links
@@ -143,13 +145,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Set initital values
             this.preEdit();
-                        
+
             // Wire up our eventhandler to "valuechanged" member
             ePickerChanged = new Action(HandlePickerChanged);
 
             this._txtNumberDelegate = new TextControlDelegate();
             this.txtNumber.Delegate = this._txtNumberDelegate;
-                                    
+
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
             //            this.pkNumberPicker.Center = this.txtNumber.Center ;           
@@ -182,12 +184,12 @@ namespace NathansWay.iOS.Numeracy.Controls
                 if (this._bReadOnly)
                 {
                     this.UI_SetViewReadOnly();
-                } 
+                }
                 if (this._bIsAnswer)
                 {
                     this.UI_SetViewNeutral();
                 }
-            }            
+            }
             return true;
         }
 
@@ -293,7 +295,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void AutoTouchedText()
         {
-            this.txtTouchedDown(this, new EventArgs()); 
+            this.txtTouchedDown(this, new EventArgs());
         }
 
         #endregion
@@ -322,7 +324,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._bIsMultiNumberedText; }
             set
             {
-                this._bIsMultiNumberedText = value; 
+                this._bIsMultiNumberedText = value;
             }
         }
 
@@ -437,9 +439,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 // Set our previous value
-                this._dblPrevValue = this._dblCurrentValue; 
+                this._dblPrevValue = this._dblCurrentValue;
                 // Standard sets
-                this._dblCurrentValue = value; 
+                this._dblCurrentValue = value;
                 if (value == null)
                 {
                     this._strCurrentValue = "";
@@ -448,7 +450,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this._strCurrentValue = value.ToString().Trim();
                 }
-            }          
+            }
         }
 
         public override bool IsReadOnly
@@ -530,6 +532,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Trying something here
             // And it worked!
             this.txtSingleTapGestureRecognizer();
+            this.txtDoubleTapGestureRecognizer();
             //this.txtNumber.TouchDown += txtTouchedDown;
 
             items.Add("0");
@@ -599,7 +602,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     }
                 }
                 else
-                {                    
+                {
                     if (this.MyWorkSpaceParent.SelectedNumberText == this)
                     {
                         // ** Selecting the same control twice
@@ -627,7 +630,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Once here we are now selecting this control
                 this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange();
-                   // Is the control readonly, then return
+                // Is the control readonly, then return
                 if (this._bReadOnly)
                 {
                     return;
@@ -668,7 +671,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //return;
 
-            this.IsInEditMode = true; 
+            this.IsInEditMode = true;
 
             Nullable<double> x;
 
@@ -704,8 +707,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         protected void postEdit(Nullable<double> _dblValue)
-        {            
+        {
+            if (this._bCancelSelect)
+            {
+                return;
+            }
+
             Nullable<double> x = null;
+
+            // TODO: Handle zeros? 
+            // I cancel I need the value to be reset to nothing and hidden in the text field.
 
             if (this.txtNumber.Text.Length > 0)
             {
@@ -718,6 +729,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 if (this._dblPrevValue != _dblValue)
                 {
                     this._dblPrevValue = x;
+                    // Change in value
+                    this.FireValueChange();
                 }
             }
 
@@ -746,11 +759,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             // TODO: Problem 5 Fraction Number Picker
             // When selecting the 
 
-
-
-            this.CurrentValue = _dblValue; 
+            this.CurrentValue = _dblValue;
             this.txtNumber.Text = this.CurrentValueStr;
-            this.FireValueChange();
+
         }
 
         protected void EditNumberPicker()
@@ -774,7 +785,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate = new PickerDelegate(this.items, this.NumberSize);
             this._pickersource = new PickerSource(this.items);
             // Wire up the value change method
-            this._pickerdelegate.psValueChanged += this.ePickerChanged; 
+            this._pickerdelegate.psValueChanged += this.ePickerChanged;
             // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
@@ -788,27 +799,29 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.iOSGlobals.G__MainWindow.InterceptTouch = true;
             this.iOSGlobals.G__MainWindow.ActionOnTouch =
-                new Action<UIView>(HandleAction);
+                new Action<UIView>(HandlePickerCancel);
         }
 
-        void HandleAction(UIView obj)
+        private void HandlePickerCancel(UIView obj)
         {
             if (obj.GetType() != typeof(UITableViewCell))
             {
+                // User has hit elsewhere - cancel and stop auto select
                 this._bAutoMoveToNextNumber = false;
+                this._bCancelSelect = true;
                 this.AutoTouchedText();
             }
-            else
-            {
-                this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
-            }
+
+            this._bCancelSelect = false;
+            this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+
         }
 
         protected void EditNumPad()
         {
             // Create an instance of Numberpad if its null
             // TODO : this doesnt work right, we need to check if its been added to the container??
-          
+
             if (this._numberpad == null)
             {
                 this._numberpad = this._vcMainContainer._vcNumberPad.Value;
@@ -829,7 +842,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._numberpad.View.Hidden = false;
             }
         }
-
 
         protected void CloseNumPad()
         {
@@ -866,14 +878,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         // Touch and Input
         protected void txtSingleTapGestureRecognizer()
-        {            
+        {
             // create a new tap gesture
             this.singleTapGesture = null;
 
             Action action = () =>
-            { 
+            {
                 //this.pkNumberPicker.Hidden = false;
-                  this.txtTouchedDown(new object(), new EventArgs());
+                this.txtTouchedDown(new object(), new EventArgs());
             };
 
             singleTapGesture = new UITapGestureRecognizer(action);
@@ -888,10 +900,37 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.AddGestureRecognizer(singleTapGesture);
         }
 
+        protected void txtDoubleTapGestureRecognizer()
+        {
+            // create a new tap gesture
+            this.doubleTapGesture = null;
+
+            Action action = () =>
+            {
+                // Clear the contents of the textbox
+                var alert = new UIAlertView();
+                alert.Title = "Debug";
+                alert.Message = "DoubleTap Dectected";
+                alert.AddButton("Cancel");
+                alert.Show();
+            };
+
+            doubleTapGesture = new UITapGestureRecognizer(action);
+            // Using protocols here with delegates, its just easier.
+            // Weak delagtes may have been even easier but I find them messy.
+            var y = new GestureDelegate();
+            doubleTapGesture.Delegate = y;
+
+            doubleTapGesture.NumberOfTouchesRequired = 1;
+            doubleTapGesture.NumberOfTapsRequired = 2;
+            // add the gesture recognizer to the view
+            this.txtNumber.AddGestureRecognizer(doubleTapGesture);
+        }
+
         protected void pkSingleTapGestureRecognizer()
         {
             Action action = () =>
-            { 
+            {
                 if (this.IsInEditMode)
                 {
                     this.HandlePickerChanged();
@@ -920,18 +959,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this.IsInEditMode)
             {
                 this.postEdit(intPadValue);
-                this.IsInEditMode = false; 
+                this.IsInEditMode = false;
                 this.Selected = false;
 
                 // If the active input method is numberpad (we are in here!), we need to "move"
                 // the cursor along the path of a multinumber.
                 // For example if we have 198 and the user selects 1, when they hit
                 // the keypad we want the next digit to be selected (9 in this example)
-//                if (this.IsMultiNumberedText)
-//                {
-//                    // Find if its position in relation to the whole number
-//                    // Backward search
-                if (this._numberAppSettings.GA__MoveToNextNumber &&  this.MutliNumberPosition > 1)                    
+                //                if (this.IsMultiNumberedText)
+                //                {
+                //                    // Find if its position in relation to the whole number
+                //                    // Backward search
+                if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
                 {
                     // We are moving to the next text field.
                     // We need to release these event hooks
@@ -1015,7 +1054,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this._numberSize = _ns;
                 Initialize();
-                this._items = Items;                
+                this._items = Items;
             }
 
             #endregion
@@ -1045,7 +1084,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public nint CurrentValue
             {
                 set
-                { 
+                {
                     selectedIndex = value;
                 }
             }
@@ -1077,31 +1116,35 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// </summary>
             /// <param name="pickerView">Picker view.</param>
             /// <param name="row">Row.</param>
-            /// <param name="_view">_view.</param>
-            public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView _view)
+            /// <param name="view">_view.</param>
+            public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
             {
                 UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
                 _lblPickerView.ClipsToBounds = true;
 
                 if (pickerView.SelectedRowInComponent(component) == row)
                 {
-                    _lblPickerView.BackgroundColor = UIColor.White; 
-                    _lblPickerView.Layer.BorderColor = UIColor.Orange.CGColor;
+                    _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
+                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
                     _lblPickerView.Layer.BorderWidth = 2.0f;
                     _lblPickerView.Layer.CornerRadius = 8.0f;
                 }
                 else
                 {
-                    _lblPickerView.BackgroundColor = UIColor.Gray;
-                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
+                    _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
+                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
                     _lblPickerView.Layer.BorderWidth = 1.0f;
                     _lblPickerView.Layer.CornerRadius = 8.0f;
                 }
 
                 // Apply global UI
-                _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;
+                _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
 
-                _lblPickerView.Font = this._numberSize.GlobalSizeDimensions.GlobalNumberFont;
+
+                // TODO : Work on font names and sizes for global theme...
+                var x = _numberSize.VcMainContainer.NumberAppSettings.GA__NumberDisplaySize;
+                _lblPickerView.Font = iOSUIAppearance.GlobaliOSTheme.PkViewLabelFont(x);
+
                 _lblPickerView.TextAlignment = UITextAlignment.Center;
                 _lblPickerView.Text = this._items[(int)row];
                 return _lblPickerView;
@@ -1124,7 +1167,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected class PickerSource : UIPickerViewDataSource
         {
-            
+
             #region Class Variables
 
             private List<string> _items;
@@ -1135,12 +1178,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public PickerSource()
             {
-                
+
             }
 
             public PickerSource(List<string> Items)
             {
-                this._items = Items;                
+                this._items = Items;
             }
 
             #endregion
@@ -1320,10 +1363,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetPickerPositionTopOn()
         {
-            
+
             this._rectNumberPicker = new CGRect(
-                this.StartPointInWindow.X, 
-                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.StartPointInWindow.X,
+                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
@@ -1338,8 +1381,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             //);
 
             this._rectTxtNumber = new CGRect(
-                0.0f, 
-                (this.GlobalSizeDimensions.NumberPickerHeight), 
+                0.0f,
+                (this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
@@ -1349,7 +1392,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
-                (this.StartPointInWindow.Y + this.CurrentHeight), 
+                (this.StartPointInWindow.Y + this.CurrentHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
@@ -1363,7 +1406,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //    (this.GlobalSizeDimensions.NumberPickerHeight + this.CurrentHeight)
             //);
         }
-       
+
         private void SetPickerPositionNormalOff()
         {
             this._rectMainNumberWithPicker = new CGRect(
@@ -1386,22 +1429,22 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
-                (this.CurrentHeight/2)
+                (this.CurrentHeight / 2)
             );
 
             this._rectDownButton = new CGRect(
                 0.0f,
-                (this.CurrentHeight/2),
+                (this.CurrentHeight / 2),
                 this.CurrentWidth,
-                (this.CurrentHeight/2)
+                (this.CurrentHeight / 2)
             );
 
             this._rectTxtNumber = new CGRect(
-                0.0f, 
+                0.0f,
                 0.0f,
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
-            ); 
+            );
         }
 
         #endregion
@@ -1411,8 +1454,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public void SetPickerPositionTopOnFraction()
         {
             this._rectNumberPicker = new CGRect(
-                this.StartPointInWindow.X, 
-                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight), 
+                this.StartPointInWindow.X,
+                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
@@ -1427,8 +1470,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             //);
 
             this._rectTxtNumber = new CGRect(
-                0.0f, 
-                (this.GlobalSizeDimensions.NumberPickerHeight), 
+                0.0f,
+                (this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.TxtNumberHeight
             );
@@ -1438,7 +1481,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
-                (this.StartPointInWindow.Y + this.CurrentHeight), 
+                (this.StartPointInWindow.Y + this.CurrentHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
@@ -1475,18 +1518,18 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
-                (this.GlobalSizeDimensions.FractionNumberHeight/2)
+                (this.GlobalSizeDimensions.FractionNumberHeight / 2)
             );
 
             this._rectDownButton = new CGRect(
                 0.0f,
-                (this.GlobalSizeDimensions.FractionNumberHeight/2),
+                (this.GlobalSizeDimensions.FractionNumberHeight / 2),
                 this.CurrentWidth,
-                (this.GlobalSizeDimensions.FractionNumberHeight/2)
+                (this.GlobalSizeDimensions.FractionNumberHeight / 2)
             );
 
             this._rectTxtNumber = new CGRect(
-                0.0f, 
+                0.0f,
                 0.0f,
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.FractionNumberHeight
@@ -1501,6 +1544,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
     }
+}
 
     #region UIPickerViewModel Implementation
 
@@ -1601,38 +1645,35 @@ namespace NathansWay.iOS.Numeracy.Controls
 
     #endregion
 
-    #region VCSettings
+    /* Tap delay on single and double tap delay fix
 
-    //  public class vcs_numbercombo : VcSettings
-    //  {
-    //      private E__NumberComboEditMode _editmode;
-    //
-    //      public vcs_numbercombo (IAspyGlobals iOSGlobals)
-    //      {
-    //          this.VcTag = 102;
-    //          this.VcName = "VC_CtrlNumberCombo";
-    //
-    //          this.FrameSize =
-    //              new RectangleF
-    //              (
-    //                  0,
-    //                  0,
-    //                  54,
-    //                  68
-    //              );
-    //          this.HasBorder = true;
-    //          this.BackColor = UIColor.White;
-    //          this.BorderColor = UIColor.Brown;
-    //          this.BorderSize = 4.0f;
-    //
-    //      }
-    //
-    //      public E__NumberComboEditMode EditMode
-    //      {
-    //          get { return _editmode; }
-    //          set { _editmode = value; }
-    //      }
-    //  }
+    The easiest way to do this is to subclass UITapGestureRecognizer and not a general UIGestureRecognizer.
 
-    #endregion
-}
+    Like this:
+
+    #import <UIKit/UIGestureRecognizerSubclass.h>
+
+    #define UISHORT_TAP_MAX_DELAY 0.2
+    @interface UIShortTapGestureRecognizer : UITapGestureRecognizer
+
+    @end
+
+    And simply implement:
+
+    @implementation UIShortTapGestureRecognizer
+
+    - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+    {
+    [super touchesBegan:touches withEvent:event];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(UISHORT_TAP_MAX_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+    {
+        // Enough time has passed and the gesture was not recognized -> It has failed.
+        if  (self.state != UIGestureRecognizerStateRecognized)
+        {
+            self.state = UIGestureRecognizerStateFailed;
+        }
+    });
+    }
+    @end
+
+    */

@@ -167,7 +167,7 @@ namespace NathansWay.Shared
         public const int Level10 = 10;
 
 
-        static Dictionary<int, float> _dict = new Dictionary<int, float>
+        static readonly Dictionary<int, float> _dictScale = new Dictionary<int, float>
         {
             {G__DisplaySizeLevel.Level1, 0.1f},
             {G__DisplaySizeLevel.Level2, 0.3f},
@@ -181,11 +181,25 @@ namespace NathansWay.Shared
             {G__DisplaySizeLevel.Level10, 4.0f},
         };
 
+        static readonly Dictionary<int, float> _dictFont = new Dictionary<int, float>
+        {
+            {G__DisplaySizeLevel.Level1, 6.0f},
+            {G__DisplaySizeLevel.Level2, 8.0f},
+            {G__DisplaySizeLevel.Level3, 12.0f},
+            {G__DisplaySizeLevel.Level4, 16.0f},
+            {G__DisplaySizeLevel.Level5, 22.0f},
+            {G__DisplaySizeLevel.Level6, 26.0f},
+            {G__DisplaySizeLevel.Level7, 30.0f},
+            {G__DisplaySizeLevel.Level8, 36.0f},
+            {G__DisplaySizeLevel.Level9, 40.0f},
+            {G__DisplaySizeLevel.Level10, 44.0f},
+        };
+
         public static float GetDisplaySizeScale(int x)
         {
             // Try to get the result in the static Dictionary
             float result;
-            if (_dict.TryGetValue(x, out result))
+            if (_dictScale.TryGetValue(x, out result))
             {
                 return result;
             }
@@ -195,17 +209,46 @@ namespace NathansWay.Shared
             }
         }
 
+        public static float GetDisplayFontSize(int x)
+        {
+            // Try to get the result in the static Dictionary
+            float result;
+            if (_dictFont.TryGetValue(x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                // Basic size Level 5
+                return 22.0f;
+            }
+        }
+
         public static float GetDisplaySizeScale(G__DisplaySizeLevels x)
         {
             // Try to get the result in the static Dictionary
             float result;
-            if (_dict.TryGetValue((int)x, out result))
+            if (_dictScale.TryGetValue((int)x, out result))
             {
                 return result;
             }
             else
             {
                 return 1.0f;
+            }
+        }
+
+        public static float GetDisplayFontSize(G__DisplaySizeLevels x)
+        {
+            // Try to get the result in the static Dictionary
+            float result;
+            if (_dictFont.TryGetValue((int)x, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return 22.0f;
             }
         }
 

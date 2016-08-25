@@ -20,24 +20,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
     {
         #region Private Variables
 
-        private G__DisplaySizeLevels _size;
         private G__NumberDisplayPositionY _positionY;
         private G__NumberDisplayPositionX _positionX;
         public IAspyGlobals _iOSGlobals { get; set; }
+        public G__DisplaySizeLevels _size;
+        public iOSUIManager iOSUIAppearance { get; set; }
 
         #endregion
 
         #region Constructor
 
         public iOSNumberDimensions ()
-        {            
+        {
+            this.Initialize();
         }
 
         public iOSNumberDimensions (G__DisplaySizeLevels size, IAspyGlobals iOSGlobals)
         { 
             this._size = size;
             this._iOSGlobals = iOSGlobals;
+            this.Initialize();
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void Initialize()
+        {
             this._positionY = G__NumberDisplayPositionY.Center;
+            this._positionX = G__NumberDisplayPositionX.Center;
         }
 
         #endregion
@@ -1091,23 +1103,23 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     // Most common
                     case (G__DisplaySizeLevels.Level3):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 76.0f);
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return UIFont.FromName("Arial", 80.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 80.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 76.0f);
                     }
                     case (G__DisplaySizeLevels.Level10):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 76.0f);
                     }
                     default : // Huge
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 76.0f);
                     }
                 }
             }
@@ -1121,23 +1133,23 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     // Most common
                     case (G__DisplaySizeLevels.Level3):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 76.0f);
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return UIFont.FromName("Helvetica-Light", 120.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 120.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 76.0f);
                     }
                     case (G__DisplaySizeLevels.Level10):
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 76.0f);
                     }
                     default : // Huge
                     {
-                        return UIFont.FromName("Arial", 76.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 76.0f);
                     }
                 }
             }

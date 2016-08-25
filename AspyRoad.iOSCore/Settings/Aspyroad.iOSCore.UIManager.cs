@@ -128,6 +128,8 @@ namespace AspyRoad.iOSCore.UISettings
 			VcTag = g.VcTag;
 			// Fonts
 			FontName = g.FontName;
+            FontNameMathChars = g.FontNameSpecial;
+            FontNameSpecial = g.FontNameSpecial;
 			FontBoldName = g.FontBoldName;
 			FontSize = g.FontSize;
 			FontColor = g.FontColor;
@@ -291,6 +293,8 @@ namespace AspyRoad.iOSCore.UISettings
         #endregion
 
         #region UIFont
+
+        // As of yet, none of these are used nor will be
 		public UIFont FontOfSize (float size)
 		{
 			return UIFont.FromName (this.IsiOS7 ? this.FontNameiOS7 : this.FontName, size);
@@ -647,9 +651,12 @@ namespace AspyRoad.iOSCore.UISettings
 
         #region UIPickerViewLabel
 
-        public UIFont PkViewLabelFont (float size)
-        {             
-            return UIFont.FromName (this._pkviewlabelfontname, size);
+        // TODO : Do this to all font size settings
+
+        public UIFont PkViewLabelFont (G__DisplaySizeLevels size)
+        {
+            var x = G__DisplaySizeLevel.GetDisplayFontSize(size);
+            return UIFont.FromName (this._pkviewlabelfontname, x);
         }
 
         public Lazy<UIColor> PkViewLabelHighLightedTextUIColor 

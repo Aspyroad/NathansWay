@@ -102,15 +102,26 @@ namespace AspyRoad.iOSCore
 			} 
 		}
 
+        private void HandleNSSetTouches(NSObject obj, ref bool stop)
+        {
+            var y = (UITouch)obj;
+
+            if (y != null)
+            {
+                this._actionOnTouch.Invoke(y.View);
+            }
+            // We only need the first, stop enumerating after we have it
+            stop = true;
+        }
 
         #endregion
 
 		#region Public Members
 
-        public override UIView HitTest(CGPoint point, UIEvent uievent)
-        {
-            return base.HitTest(point, uievent);
-        }
+        //public override UIView HitTest(CGPoint point, UIEvent uievent)
+        //{
+        //    return base.HitTest(point, uievent);
+        //}
 
 		public override void SendEvent (UIEvent evt)
 		{
@@ -118,12 +129,14 @@ namespace AspyRoad.iOSCore
 			{
                 if (this._actionOnTouch != null)
                 {
+                    // Interesting to note that Enumerate on NSSets is a Xamarin momotouch link to - enumerateObjectsUsingBlock: 
+                    evt.AllTouches.Enumerate(HandleNSSetTouches);
 
-                    //
-                    var y = evt.AllTouches.ToArray<UITouch>();
+                    // First attempt before I learnt a little about NSSet
+                    //var y = evt.AllTouches.ToArray<UITouch>();
+                    //this._actionOnTouch.Invoke(y[0].View);
 
-                    this._actionOnTouch.Invoke(y[0].View);
-                    // Restet as this could be called 2-3 times on one touch event
+                    // Reset as this could be called 2-3 times on one touch event
                     this._bInterceptTouch = false;
                 }
 

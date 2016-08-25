@@ -45,9 +45,10 @@ namespace NathansWay.Shared
 
 		// Fonts
 		string FontName { get; set; }
-		//string FontNameiOS7 { get; set; }
-		string FontBoldName { get; set; }
-		//string FontBoldNameiOS7 { get; set; }
+        string FontNameMathChars { get; set; }
+        string FontNameSpecial { get; set; }
+        string FontBoldName { get; set; }
+
 		float FontSize { get; set; }
 		//float FontSizeiOS7 { get; set; }
 		Lazy<G__Color> FontColor { get; set; }

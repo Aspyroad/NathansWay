@@ -121,9 +121,9 @@ namespace NathansWay.Shared
 
 		// Globals
 		protected string _fontname;
-		//protected string _fontnameiOS7;
+		protected string _fontnamemathchar;
 		protected string _fontboldname;
-		//protected string _fontboldnameiOS7;
+		protected string _fontnamespecial;
 		protected float _fontsize;
 		//protected float _fontsizeiOS7;
 		protected Lazy<G__Color> _globalfontcolor;
@@ -257,37 +257,31 @@ namespace NathansWay.Shared
 			get { return _fontname; } 
 			set { _fontname = value; }
 		}
-//		public string FontNameiOS7 
-//		{ 
-//			get { return _fontnameiOS7; }
-//			set { _fontnameiOS7 = value; } 
-//		}
+		public string FontNameMathChars
+		{ 
+			get { return _fontnamemathchar; }
+			set { _fontnamemathchar = value; } 
+		}
 		public string FontBoldName 
 		{ 
 			get { return _fontboldname; }
 			set { _fontboldname = value; }
 		}
-//		public string FontBoldNameiOS7 
-//		{ 
-//			get { return _fontboldnameiOS7; } 
-//			set { _fontboldnameiOS7 = value; }
-//		}
+		public string FontNameSpecial 
+		{ 
+			get { return _fontnamespecial; } 
+			set { _fontnamespecial = value; }
+		}
 		public float FontSize 
 		{ 
 			get { return _fontsize; }
 			set { _fontsize = value; }
 		}
-//		public float FontSizeiOS7 
-//		{ 
-//			get { return _fontsizeiOS7; }
-//			set { _fontsizeiOS7 = value; }
-//		}
 		public Lazy<G__Color> FontColor
 		{ 
 			get { return _globalfontcolor; }
 			set { _globalfontcolor = value; }
 		}
-
 		// UIButton
 		public Lazy<G__Color> ButtonNormalBGColor 
 		{ 

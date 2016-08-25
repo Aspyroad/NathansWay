@@ -329,6 +329,7 @@ namespace NathansWay.iOS.Numeracy
 
 			// Register app/user settings
 			iOSCoreServiceContainer.Register<iOSUIManager>(this._numeracyUIManager);
+            this._numberDimensions.iOSUIAppearance = this._numeracyUIManager;
 
 		}
 
