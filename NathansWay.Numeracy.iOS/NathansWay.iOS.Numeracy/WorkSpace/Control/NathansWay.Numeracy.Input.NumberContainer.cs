@@ -127,24 +127,24 @@ namespace NathansWay.iOS.Numeracy
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
-        private void AddAGesture_NotUsed()
-        {
-            Action action = () =>
-                { 
-                    UIAlertView alert = new UIAlertView();
-                    alert.Title = @"iOSNumberContainer";
-                    alert.AddButton(@"Ok");
-                    alert.Message = @"iOSNumberContainer";
-                    alert.Show();
-                };
+        //private void AddAGesture_NotUsed()
+        //{
+        //    Action action = () =>
+        //        { 
+        //            UIAlertView alert = new UIAlertView();
+        //            alert.Title = @"iOSNumberContainer";
+        //            alert.AddButton(@"Ok");
+        //            alert.Message = @"iOSNumberContainer";
+        //            alert.Show();
+        //        };
 
-            UITapGestureRecognizer singleTapGesture = new UITapGestureRecognizer(action);
-            singleTapGesture.CancelsTouchesInView = true;
-            singleTapGesture.NumberOfTouchesRequired = 1;
-            singleTapGesture.NumberOfTapsRequired = 1;
-            // add the gesture recognizer to the view
-            this.View.AddGestureRecognizer(singleTapGesture);
-        }
+        //    UITapGestureRecognizer singleTapGesture = new UITapGestureRecognizer(action);
+        //    singleTapGesture.CancelsTouchesInView = true;
+        //    singleTapGesture.NumberOfTouchesRequired = 1;
+        //    singleTapGesture.NumberOfTapsRequired = 1;
+        //    // add the gesture recognizer to the view
+        //    this.View.AddGestureRecognizer(singleTapGesture);
+        //}
 
         #endregion
 

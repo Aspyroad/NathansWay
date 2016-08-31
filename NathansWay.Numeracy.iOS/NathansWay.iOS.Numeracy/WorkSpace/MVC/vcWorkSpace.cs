@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private UINumberFactory _uiNumberFactory;
 
         // Main workspace views and docking variables
-        private AspyScrollView _vCanvasMain;
+        private vCanvasScrollMain _vCanvasMain;
         private AspyView _vCanvasDocked;
 
         private vcMainWorkSpace _vcMainWorkSpace;
@@ -151,8 +151,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 
             // Virtual Canvas setups ******************************************************************
-            this._vCanvasMain = new AspyScrollView();
+            this._vCanvasMain = new vCanvasScrollMain();
             this._vCanvasDocked = new AspyView();
+
+            this._vCanvasMain.MyWorkSpaceParent = this;
 
             this._vCanvasMain.BackgroundColor = UIColor.White;
             this._vCanvasMain.ClipsToBounds = true;
@@ -472,7 +474,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return (SizeWorkSpace)this._sizeClass; }
         }
 
-        public AspyScrollView vCanvasMain 
+        public vCanvasScrollMain vCanvasMain 
         {
             get { return this._vCanvasMain; }
             set { this._vCanvasMain = value; }

@@ -34,7 +34,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private PickerDelegate _pickerdelegate;
         private PickerSource _pickersource;
         //private G__NumberPickerPosition _pickerPosition;
-        private TextControlDelegate _txtNumberDelegate;
+        //private TextControlDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
         private UITapGestureRecognizer doubleTapGesture;
 
@@ -149,8 +149,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up our eventhandler to "valuechanged" member
             ePickerChanged = new Action(HandlePickerChanged);
 
-            this._txtNumberDelegate = new TextControlDelegate();
-            this.txtNumber.Delegate = this._txtNumberDelegate;
+            //this._txtNumberDelegate = new TextControlDelegate();
+            //this.txtNumber.Delegate = this._txtNumberDelegate;
 
             //            pickerDataModel = new PickerDataModel();
             //            this.pkNumberPicker.Source = pickerDataModel;
@@ -504,12 +504,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             // ****
 
             this.btnDown.Hidden = true;
+            this.btnDown.Enabled = false;
             this.btnUp.Hidden = true;
+            this.btnUp.Enabled = false;
 
             // Apply some UI to the texbox
             this.SizeClass.SetFontAndSize(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
+
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AutoApplyUI = false;
@@ -524,15 +527,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             //this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
-            //this.txtNumber.ApplyUI(this._applyUIWhere);
 
             // Wire up our events
+            this.txtNumber.WeakDelegate = this;
             this.btnDown.TouchUpInside += btnDownTouch;
             this.btnUp.TouchUpInside += btnUpTouch;
             // Trying something here
             // And it worked!
-            this.txtSingleTapGestureRecognizer();
-            this.txtDoubleTapGestureRecognizer();
+            //this.txtSingleTapGestureRecognizer();
+            //this.txtDoubleTapGestureRecognizer();
             //this.txtNumber.TouchDown += txtTouchedDown;
 
             items.Add("0");
@@ -551,26 +554,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
             this.singleTapGesture = null;
         }
-
-        //private void Test()
-        //{
-        //    nint g = 0;
-
-        //    if (this.MyNumberParent.SelectedNumberText != null && this._numberAppSettings.GA__MoveToNextNumber)
-        //    {
-        //        g = (this.IndexNumber - this.MyNumberParent.SelectedNumberText.IndexNumber);
-        //        // If this doesnt equate to 1, then this isnt the next selected number
-        //        if (g != 1)
-        //        {
-        //            if (this.MyNumberParent.SelectedNumberText.IsInEditMode)
-        //            {
-        //                this.MyNumberParent.SelectedNumberText._logicProceed = true;
-        //                this.MyNumberParent.SelectedNumberText.AutoTouchedText();
-        //                this.MyNumberParent.SelectedNumberText._logicProceed = false;
-        //            }
-        //        }
-        //    }
-        //}
 
         private void txtTouchedDown(object sender, EventArgs e)
         {
@@ -789,6 +772,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
+            // Select the current value
+            this.pkNumberPicker.Select((nint)(this.CurrentValue), 0, true);
+            //this._pickerdelegate.
 
             // Done : swap the picker view to vcMainContainer??? 
             // This may fix the bounds problem when trying to touch.
@@ -802,6 +788,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 new Action<UIView>(HandlePickerCancel);
         }
 
+        // This is used to detect ANY touch outside of the active picker view and close it
         private void HandlePickerCancel(UIView obj)
         {
             if (obj.GetType() != typeof(UITableViewCell))
@@ -867,7 +854,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void ShowUpDownButtons()
         {
             this.btnDown.Hidden = false;
+            this.btnDown.Enabled = true;
             this.btnUp.Hidden = false;
+            this.btnUp.Enabled = true;
         }
 
         protected void HideUpDownButtons()
@@ -1025,6 +1014,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Delegate Classes
 
+        // To save an override and delegate creaqtion, the txtNumber field has its weakdelegate binded
+        // to vcNumberText, the shouldbeginediting has been implemented here to cancel text input from touch
+        [Export("textFieldShouldBeginEditing:")]
+        public bool ShouldBeginEditing(UITextField textField)
+        {
+            this.txtTouchedDown(new object(), new EventArgs());
+            return false;
+        }
+
         protected class PickerDelegate : UIPickerViewDelegate
         {
             #region Class Variables
@@ -1126,15 +1124,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
                     _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
-                    _lblPickerView.Layer.BorderWidth = 2.0f;
-                    _lblPickerView.Layer.CornerRadius = 8.0f;
+                    _lblPickerView.Layer.BorderWidth = 4.0f;
+                    _lblPickerView.Layer.CornerRadius = 20.0f;
                 }
                 else
                 {
                     _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
                     _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
                     _lblPickerView.Layer.BorderWidth = 1.0f;
-                    _lblPickerView.Layer.CornerRadius = 8.0f;
+                    _lblPickerView.Layer.CornerRadius = 20.0f;
                 }
 
                 // Apply global UI
@@ -1159,7 +1157,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="component">Component.</param>
             public override nfloat GetRowHeight(UIPickerView pickerView, nint component)
             {
-                return this._numberSize._rectTxtNumber.Height;
+                return (this._numberSize._rectTxtNumber.Height);
             }
 
             #endregion
@@ -1193,7 +1191,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// Called by the picker to determine how many rows are in a given spinner item
             /// </summary>
-            public override nint GetRowsInComponent(UIPickerView picker, nint component)
+            public override nint GetRowsInComponent(UIPickerView pickerView, nint component)
             {
                 nint x = 0;
                 if (this._items != null)
@@ -1206,7 +1204,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <summary>
             /// called by the picker to get the number of spinner items
             /// </summary>
-            public override nint GetComponentCount(UIPickerView picker)
+            public override nint GetComponentCount(UIPickerView pickerView)
             {
                 return 1;
             }
@@ -1363,10 +1361,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetPickerPositionTopOn()
         {
-
+            // ** 26/08/2016 move extend the length of the picker view for ease of selection
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
-                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
+                ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) -  this.GlobalSizeDimensions.NumberPickerHeight),
+                // ** (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );

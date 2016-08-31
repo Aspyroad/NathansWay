@@ -136,7 +136,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.UI_SetViewNeutral();
                 }
-                this._vOperator.BackgroundColor = UIColor.LightGray;
+                //this._vOperator.BackgroundColor = UIColor.LightGray;
                 return true;
             }
             else
@@ -211,8 +211,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)
         {
-            base.TouchesEnded(touches, evt);
             this.Touched = false;
+            base.TouchesEnded(touches, evt);
         }
 
         #endregion
