@@ -256,34 +256,35 @@ namespace AspyRoad.iOSCore
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            base.TouchesBegan(touches, evt);
-
             // Continue next responder if set
             if (this._bAllowNextResponder)
             {
-                this.NextResponder.TouchesBegan(touches, evt);
+                base.TouchesBegan(touches, evt);
+                //this.NextResponder.TouchesBegan(touches, evt);
             }
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)
         {
-            base.TouchesEnded(touches, evt);
+
 
             // Continue next responder if set
             if (this._bAllowNextResponder)
             {
-                this.NextResponder.TouchesEnded(touches, evt);
+                base.TouchesEnded(touches, evt);
+                //this.NextResponder.TouchesEnded(touches, evt);
             }
         }
 
         public override void TouchesMoved(NSSet touches, UIEvent evt)
         {
-            base.TouchesMoved(touches, evt);
+
 
             // Continue next responder if set
             if (this._bAllowNextResponder)
             {
-                this.NextResponder.TouchesMoved(touches, evt);
+                base.TouchesMoved(touches, evt);
+                //this.NextResponder.TouchesMoved(touches, evt);
             }
         }
 

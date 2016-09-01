@@ -36,7 +36,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         //private G__NumberPickerPosition _pickerPosition;
         //private TextControlDelegate _txtNumberDelegate;
         private UITapGestureRecognizer singleTapGesture;
-        private UITapGestureRecognizer doubleTapGesture;
+        private UILongPressGestureRecognizer doubleTapGesture;
 
         private List<string> items = new List<string>();
 
@@ -535,7 +535,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Trying something here
             // And it worked!
             //this.txtSingleTapGestureRecognizer();
-            //this.txtDoubleTapGestureRecognizer();
+            this.txtDoubleTapGestureRecognizer();
             //this.txtNumber.TouchDown += txtTouchedDown;
 
             items.Add("0");
@@ -783,24 +783,27 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
 
-            this.iOSGlobals.G__MainWindow.InterceptTouch = true;
-            this.iOSGlobals.G__MainWindow.ActionOnTouch =
-                new Action<UIView>(HandlePickerCancel);
+            //this.iOSGlobals.G__MainWindow.InterceptTouch = true;
+            //this.iOSGlobals.G__MainWindow.ActionOnTouch =
+            //    new Action<UIView>(HandlePickerCancel);
         }
 
         // This is used to detect ANY touch outside of the active picker view and close it
         private void HandlePickerCancel(UIView obj)
         {
-            if (obj.GetType() != typeof(UITableViewCell))
+            if (obj != null)
             {
-                // User has hit elsewhere - cancel and stop auto select
-                this._bAutoMoveToNextNumber = false;
-                this._bCancelSelect = true;
-                this.AutoTouchedText();
-            }
+                if (obj.GetType() != typeof(UITableViewCell))
+                {
+                    // User has hit elsewhere - cancel and stop auto select
+                    this._bAutoMoveToNextNumber = false;
+                    this._bCancelSelect = true;
+                    this.AutoTouchedText();
+                }
 
-            this._bCancelSelect = false;
-            this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+                this._bCancelSelect = false;
+                this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+            }
 
         }
 
@@ -904,14 +907,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 alert.Show();
             };
 
-            doubleTapGesture = new UITapGestureRecognizer(action);
+            doubleTapGesture = new UILongPressGestureRecognizer(action);
             // Using protocols here with delegates, its just easier.
             // Weak delagtes may have been even easier but I find them messy.
-            var y = new GestureDelegate();
-            doubleTapGesture.Delegate = y;
+            //var y = new GestureDelegate();
+            //doubleTapGesture.Delegate = y;
 
-            doubleTapGesture.NumberOfTouchesRequired = 1;
-            doubleTapGesture.NumberOfTapsRequired = 2;
+            //doubleTapGesture.NumberOfTouchesRequired = 2;
+            //doubleTapGesture.NumberOfTapsRequired = 1;
             // add the gesture recognizer to the view
             this.txtNumber.AddGestureRecognizer(doubleTapGesture);
         }
@@ -1364,7 +1367,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // ** 26/08/2016 move extend the length of the picker view for ease of selection
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
-                ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) -  this.GlobalSizeDimensions.NumberPickerHeight),
+                ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) - this.GlobalSizeDimensions.NumberPickerHeight),
                 // ** (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
@@ -1545,134 +1548,134 @@ namespace NathansWay.iOS.Numeracy.Controls
     }
 }
 
-    #region UIPickerViewModel Implementation
+#region UIPickerViewModel Implementation
 
-    /// <summary>
-    /// Overridden UIPickerViewModel - Serves as the datasource for the picklist
-    /// </summary>
-    //        protected class PickerDataModel : UIPickerViewModel
-    //        {
-    //            #region Class Variables
-    //
-    //            protected nint selectedIndex = 0;
-    //
-    //            #endregion
-    //
-    //            #region Events
-    //
-    //            public event EventHandler<EventArgs> ValueChanged;
-    //
-    //            #endregion
-    //
-    //            #region Constructor
-    //
-    //            public PickerDataModel ()
-    //            {
-    //            }
-    //
-    //            #endregion
-    //
-    //            #region Public Variables
-    //
-    //            public List<string> Items
-    //            {
-    //                get { return items; }
-    //                set { items = value; }
-    //            }
-    //
-    //            /// <summary>
-    //            /// The current selected item
-    //            /// </summary>
-    //            public string SelectedItem
-    //            {
-    //                get { return items[selectedIndex]; }
-    //            }
-    //
-    //            #endregion
-    //
-    //            #region Overrides
-    //
-    //            /// <summary>
-    //            /// Called by the picker to determine how many rows are in a given spinner item
-    //            /// </summary>
-    //            public override nint GetRowsInComponent (UIPickerView picker, nint component)
-    //            {
-    //                return items.Count;
-    //            }
-    //
-    //            /// <summary>
-    //            /// called by the picker to get the text for a particular row in a particular
-    //            /// spinner item
-    //            /// </summary>
-    //            public override string GetTitle (UIPickerView picker, nint row, nint component)
-    //            {
-    //                return items[row];
-    //            }
-    //
-    //            /// <summary>
-    //            /// Called by the picker to get the number of spinner items
-    //            /// </summary>
-    //            public override nint GetComponentCount (UIPickerView picker)
-    //            {
-    //                return 1;
-    //            }
-    //
-    //            /// <summary>
-    //            /// called when a row is selected in the spinner
-    //            /// </summary>
-    //            public override void Selected (UIPickerView picker, nint row, nint component)
-    //            {
-    //                selectedIndex = row;
-    //                if (this.ValueChanged != null)
-    //                {
-    //                    this.ValueChanged (this, new EventArgs ());
-    //                }
-    //            }
-    //
-    //            /// <summary>
-    //            /// This is called for ever item in the picker source
-    //            /// </summary>
-    //            public override UIView GetView(UIPickerView picker, nint row, nint component, UIView view)
-    //            {
-    //                // NOTE: Don't call the base implementation on a Model class
-    //                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
-    //                throw new NotImplementedException();
-    //            }
-    //
-    //            #endregion
-    //        }
+/// <summary>
+/// Overridden UIPickerViewModel - Serves as the datasource for the picklist
+/// </summary>
+//        protected class PickerDataModel : UIPickerViewModel
+//        {
+//            #region Class Variables
+//
+//            protected nint selectedIndex = 0;
+//
+//            #endregion
+//
+//            #region Events
+//
+//            public event EventHandler<EventArgs> ValueChanged;
+//
+//            #endregion
+//
+//            #region Constructor
+//
+//            public PickerDataModel ()
+//            {
+//            }
+//
+//            #endregion
+//
+//            #region Public Variables
+//
+//            public List<string> Items
+//            {
+//                get { return items; }
+//                set { items = value; }
+//            }
+//
+//            /// <summary>
+//            /// The current selected item
+//            /// </summary>
+//            public string SelectedItem
+//            {
+//                get { return items[selectedIndex]; }
+//            }
+//
+//            #endregion
+//
+//            #region Overrides
+//
+//            /// <summary>
+//            /// Called by the picker to determine how many rows are in a given spinner item
+//            /// </summary>
+//            public override nint GetRowsInComponent (UIPickerView picker, nint component)
+//            {
+//                return items.Count;
+//            }
+//
+//            /// <summary>
+//            /// called by the picker to get the text for a particular row in a particular
+//            /// spinner item
+//            /// </summary>
+//            public override string GetTitle (UIPickerView picker, nint row, nint component)
+//            {
+//                return items[row];
+//            }
+//
+//            /// <summary>
+//            /// Called by the picker to get the number of spinner items
+//            /// </summary>
+//            public override nint GetComponentCount (UIPickerView picker)
+//            {
+//                return 1;
+//            }
+//
+//            /// <summary>
+//            /// called when a row is selected in the spinner
+//            /// </summary>
+//            public override void Selected (UIPickerView picker, nint row, nint component)
+//            {
+//                selectedIndex = row;
+//                if (this.ValueChanged != null)
+//                {
+//                    this.ValueChanged (this, new EventArgs ());
+//                }
+//            }
+//
+//            /// <summary>
+//            /// This is called for ever item in the picker source
+//            /// </summary>
+//            public override UIView GetView(UIPickerView picker, nint row, nint component, UIView view)
+//            {
+//                // NOTE: Don't call the base implementation on a Model class
+//                // see http://docs.xamarin.com/guides/ios/application_fundamentals/delegates,_protocols,_and_events
+//                throw new NotImplementedException();
+//            }
+//
+//            #endregion
+//        }
 
-    #endregion
+#endregion
 
-    /* Tap delay on single and double tap delay fix
+/* Tap delay on single and double tap delay fix
 
-    The easiest way to do this is to subclass UITapGestureRecognizer and not a general UIGestureRecognizer.
+The easiest way to do this is to subclass UITapGestureRecognizer and not a general UIGestureRecognizer.
 
-    Like this:
+Like this:
 
-    #import <UIKit/UIGestureRecognizerSubclass.h>
+#import <UIKit/UIGestureRecognizerSubclass.h>
 
-    #define UISHORT_TAP_MAX_DELAY 0.2
-    @interface UIShortTapGestureRecognizer : UITapGestureRecognizer
+#define UISHORT_TAP_MAX_DELAY 0.2
+@interface UIShortTapGestureRecognizer : UITapGestureRecognizer
 
-    @end
+@end
 
-    And simply implement:
+And simply implement:
 
-    @implementation UIShortTapGestureRecognizer
+@implementation UIShortTapGestureRecognizer
 
-    - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+[super touchesBegan:touches withEvent:event];
+dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(UISHORT_TAP_MAX_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
+{
+    // Enough time has passed and the gesture was not recognized -> It has failed.
+    if  (self.state != UIGestureRecognizerStateRecognized)
     {
-    [super touchesBegan:touches withEvent:event];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(UISHORT_TAP_MAX_DELAY * NSEC_PER_SEC)), dispatch_get_main_queue(), ^
-    {
-        // Enough time has passed and the gesture was not recognized -> It has failed.
-        if  (self.state != UIGestureRecognizerStateRecognized)
-        {
-            self.state = UIGestureRecognizerStateFailed;
-        }
-    });
+        self.state = UIGestureRecognizerStateFailed;
     }
-    @end
+});
+}
+@end
 
-    */
+*/

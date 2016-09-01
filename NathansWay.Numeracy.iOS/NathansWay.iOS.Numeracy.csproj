@@ -220,7 +220,6 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.ContainerBase.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\NathansWay.Numeracy.Input.SizeBase.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.SolveContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Teacher\MVC\vcTeacher.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Teacher\MVC\vcTeacher.designer.cs">
       <DependentUpon>vcTeacher.cs</DependentUpon>
@@ -239,6 +238,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Menu\Control\NathansWay.Numeracy.Button.Menu.cs" />
     <Compile Include="Contracts\EmptyInterface.cs" />
     <Compile Include="Factories\NathansWay.iOS.Numeracy.UIDrawingFactory.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.SolveContainer.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Input.MainScrollCanvas.cs" />
   </ItemGroup>
   <ItemGroup>

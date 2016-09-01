@@ -744,7 +744,7 @@ namespace NathansWay.iOS.Numeracy
             if (this._bAllowNextResponder)
             {
                 base.TouchesBegan(touches, evt);
-                this.NextResponder.TouchesBegan(touches, evt);
+                //this.NextResponder.TouchesBegan(touches, evt);
             }
         }
 
@@ -756,7 +756,7 @@ namespace NathansWay.iOS.Numeracy
             if (this._bAllowNextResponder)
             {
                 base.TouchesEnded(touches, evt);
-                this.NextResponder.TouchesEnded(touches, evt);
+                //this.NextResponder.TouchesEnded(touches, evt);
             }
         }
 
@@ -768,7 +768,7 @@ namespace NathansWay.iOS.Numeracy
             if (this._bAllowNextResponder)
             {
                 base.TouchesMoved(touches, evt);
-                this.NextResponder.TouchesMoved(touches, evt);
+                //this.NextResponder.TouchesMoved(touches, evt);
             }
         }
 

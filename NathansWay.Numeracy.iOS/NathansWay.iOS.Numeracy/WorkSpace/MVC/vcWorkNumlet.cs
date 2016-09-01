@@ -97,7 +97,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeWorkNumlet;
             this.HasRoundedCorners = true;
             this.View.AutosizesSubviews = false;
-            this.AllowNextResponder = false;
+            //this.AllowNextResponder = false;
 		}
 
 		#endregion
@@ -254,29 +254,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Touch
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
+        //public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //{
+        //    // Check if the touch is inside any active numlets
+        //    UITouch y = (UITouch)touches.AnyObject;
 
-            if (this.MyWorkSpaceParent.HasSelectedNumberText)
-            {
-                var x = this.MyWorkSpaceParent.SelectedNumberText;
-                if (x.IsInEditMode)
-                {
-                    x.TapText();
-                }
-                x.OnControlUnSelectedChange();
-                this.MyWorkSpaceParent.SelectedNumberText = null;
-            }
-            // User taps another operator
-            if (this.MyWorkSpaceParent.HasSelectedOperatorText)
-            {
-                this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
-            }
+        //    if (this.MyWorkSpaceParent.HasSelectedNumberText)
+        //    {
+        //        var x = this.MyWorkSpaceParent.SelectedNumberText;
+        //        if (x.IsInEditMode)
+        //        {
+        //            x.TapText();
+        //        }
+        //        x.OnControlUnSelectedChange();
+        //        this.MyWorkSpaceParent.SelectedNumberText = null;
+        //    }
+        //    // User taps another operator
+        //    if (this.MyWorkSpaceParent.HasSelectedOperatorText)
+        //    {
+        //        this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+        //    }
 
-            base.TouchesBegan(touches, evt);
-        }
+        //    base.TouchesBegan(touches, evt);
+        //}
 
 		#endregion
 	}
