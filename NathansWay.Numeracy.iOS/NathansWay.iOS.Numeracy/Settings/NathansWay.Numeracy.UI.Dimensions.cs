@@ -411,7 +411,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return 500.0f;
+                        return 600.0f;
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {

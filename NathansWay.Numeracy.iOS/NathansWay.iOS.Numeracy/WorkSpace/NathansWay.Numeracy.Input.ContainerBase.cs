@@ -49,6 +49,8 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bTouched;
         // Technically true when touched?
         protected bool _bSelected;
+        // Stop the responder if needed
+        protected bool _bAllowNextResponder;
 
         // Number is Correct/Incorrect
         protected G__AnswerState _answerState;
@@ -145,6 +147,7 @@ namespace NathansWay.iOS.Numeracy
             this._bHasSelectedNumberText = false;
             this._bHasSelectedOperatorText = false;
             this._bInitialLoad = true;
+            this._bAllowNextResponder = true;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor
@@ -436,6 +439,22 @@ namespace NathansWay.iOS.Numeracy
             set { this._containerType = value; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether to allow next responder touch events.
+        /// </summary>
+        /// <value><c>true</c> if allow next responder; otherwise, <c>false</c>.</value>
+        public bool AllowNextResponder
+        {
+            get
+            {
+                return _bAllowNextResponder;
+            }
+            set
+            {
+                _bAllowNextResponder = value;
+            }
+        }
+
         #endregion
 
         #region Virtual Public Properties
@@ -717,9 +736,47 @@ namespace NathansWay.iOS.Numeracy
             base.ViewDidLoad();
         }
 
-		#region Autorotation for iOS 6 or newer
+        #region Responder Chain Interrupt
 
-		public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesBegan(touches, evt);
+                this.NextResponder.TouchesBegan(touches, evt);
+            }
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesEnded(touches, evt);
+                this.NextResponder.TouchesEnded(touches, evt);
+            }
+        }
+
+        public override void TouchesMoved(NSSet touches, UIEvent evt)
+        {
+
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesMoved(touches, evt);
+                this.NextResponder.TouchesMoved(touches, evt);
+            }
+        }
+
+        #endregion
+
+        #region Autorotation for iOS 6 or newer
+
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
 		{
 			return UIInterfaceOrientationMask.AllButUpsideDown;
 		}
