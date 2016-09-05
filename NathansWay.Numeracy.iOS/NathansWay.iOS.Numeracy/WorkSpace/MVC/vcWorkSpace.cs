@@ -751,6 +751,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             bool bOverIndex = false;
 
+            // TODO: VERY IMPORTANT!!!
+            // BUG When we move to the next equation we need to close all editing
+
             // TODO: change this._intLessonDetailSeq 
             // Forward one
             if (this.NextEquation())

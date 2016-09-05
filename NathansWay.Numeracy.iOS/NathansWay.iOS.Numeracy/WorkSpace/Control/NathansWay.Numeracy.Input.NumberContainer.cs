@@ -41,6 +41,8 @@ namespace NathansWay.iOS.Numeracy
         private nint _intMultiNumberTotalSigCount;
         private nint _intMultiNumberTotalInSigCount;
         private bool _bHasDecimal;
+        private bool _bHasOpenNumberPicker;
+
 
         #endregion
 

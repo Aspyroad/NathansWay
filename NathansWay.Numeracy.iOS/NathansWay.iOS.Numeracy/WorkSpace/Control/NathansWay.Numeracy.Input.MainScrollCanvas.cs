@@ -53,7 +53,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void Initialize()
         {
-
+            this.WeakDelegate = this;
         }
 
         #endregion
@@ -69,6 +69,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #endregion
 
         #region Overrides
+
+        [Export("gestureRecognizer:shouldRecognizeSimultaneouslyWithGestureRecognizer:")]
+        public bool ShouldRecognizeSimultaneously(UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
+        {
+            //if (gestureRecognizer is UIPanGestureRecognizer)
+            //{
+            //    var panRecognizer = (UIPanGestureRecognizer)gestureRecognizer;
+            //    var yVelocity = panRecognizer.VelocityInView(panRecognizer.View).Y;
+            //    return Math.Abs(yVelocity) <= 0.25f;
+            //}
+
+            return true;
+        }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {

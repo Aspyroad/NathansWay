@@ -35,7 +35,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private PickerSource _pickersource;
         //private G__NumberPickerPosition _pickerPosition;
         //private TextControlDelegate _txtNumberDelegate;
-        private UITapGestureRecognizer singleTapGesture;
+        private UITapGestureRecognizer singleTapTextGesture;
+        private UITapGestureRecognizer singleTapPickerGesture;
         private UILongPressGestureRecognizer doubleTapGesture;
 
         private List<string> items = new List<string>();
@@ -536,7 +537,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // And it worked!
             //this.txtSingleTapGestureRecognizer();
             this.txtDoubleTapGestureRecognizer();
+            this.txtSingleTapGestureRecognizer();
             //this.txtNumber.TouchDown += txtTouchedDown;
+            //this.txtNumber.TouchUpInside += txtTouchedDown;
+
 
             items.Add("0");
             items.Add("1");
@@ -552,7 +556,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // TODO: We need to make the buttons in updown edit mode disabled for readonly.
             // We also need to work on the UI for them.
             this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
-            this.singleTapGesture = null;
+            this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+            this.singleTapTextGesture = null;
         }
 
         private void txtTouchedDown(object sender, EventArgs e)
@@ -567,6 +572,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                     var x = this.MyWorkSpaceParent.SelectedNumberText;
                     if (x.IsInEditMode)
                     {
+                        // Stop it from auto moving to the next digit
+                        x._bAutoMoveToNextNumber = false;
                         x.TapText();
                     }
                     x.OnControlUnSelectedChange();
@@ -592,6 +599,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                         // If its not the answer toggle it back off
                         if (this.IsAnswer)
                         {
+                            // Stop it from auto moving to the next digit
+                            this.MyWorkSpaceParent.SelectedNumberText._bAutoMoveToNextNumber = false;
                             this.TapText();
                         }
                         else
@@ -611,7 +620,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.MyWorkSpaceParent.SelectedOperatorText = null;
                 }
                 // Once here we are now selecting this control
-                this.MyWorkSpaceParent.SelectedNumberText = this;
+                //this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange();
                 // Is the control readonly, then return
                 if (this._bReadOnly)
@@ -846,8 +855,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void CloseNumberPicker()
         {
             this.View.Frame = _sizeClass.RectFrame;
-            this.pkNumberPicker.RemoveGestureRecognizer(singleTapGesture);
-            this.singleTapGesture = null;
+            this.pkNumberPicker.RemoveGestureRecognizer(singleTapPickerGesture);
+            this.singleTapTextGesture = null;
             this.pkNumberPicker.Delegate = null;
             //this.pkNumberPicker.DataSource = null;
             this.pkNumberPicker.RemoveFromSuperview();
@@ -872,7 +881,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void txtSingleTapGestureRecognizer()
         {
             // create a new tap gesture
-            this.singleTapGesture = null;
+            this.singleTapTextGesture = null;
 
             Action action = () =>
             {
@@ -880,16 +889,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.txtTouchedDown(new object(), new EventArgs());
             };
 
-            singleTapGesture = new UITapGestureRecognizer(action);
-            // Using protocols here with delegates, its just easier.
-            // Weak delagtes may have been even easier but I find them messy.
-            var y = new GestureDelegate();
-            singleTapGesture.Delegate = y;
+            singleTapTextGesture = new UITapGestureRecognizer(action);
+            // In these three Gesture recog we use three different methods to assign the delegate
+            // Recognise simultaneously method 1 = Lambda
+            singleTapTextGesture.ShouldRecognizeSimultaneously = (gesture1, gesture2) => (true);
 
-            singleTapGesture.NumberOfTouchesRequired = 1;
-            singleTapGesture.NumberOfTapsRequired = 1;
+            singleTapTextGesture.NumberOfTouchesRequired = 1;
+            singleTapTextGesture.NumberOfTapsRequired = 1;
             // add the gesture recognizer to the view
-            this.txtNumber.AddGestureRecognizer(singleTapGesture);
+            this.View.AddGestureRecognizer(singleTapTextGesture);
         }
 
         protected void txtDoubleTapGestureRecognizer()
@@ -899,19 +907,23 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             Action action = () =>
             {
-                // Clear the contents of the textbox
-                var alert = new UIAlertView();
-                alert.Title = "Debug";
-                alert.Message = "DoubleTap Dectected";
-                alert.AddButton("Cancel");
-                alert.Show();
+                if (doubleTapGesture.State == UIGestureRecognizerState.Began)
+                {
+                    // Clear the contents of the textbox
+                    var alert = new UIAlertView();
+                    alert.Title = "Debug";
+                    alert.Message = "DoubleTap Dectected";
+                    alert.AddButton("Cancel");
+                    alert.Show();
+                }
             };
 
             doubleTapGesture = new UILongPressGestureRecognizer(action);
-            // Using protocols here with delegates, its just easier.
-            // Weak delagtes may have been even easier but I find them messy.
-            //var y = new GestureDelegate();
-            //doubleTapGesture.Delegate = y;
+
+            // In these three Gesture recog we use three different methods to assign the delegate
+            // Recognise simultaneously method 2 = Create a delegate class and override the method in that class
+            var y = new GestureDelegate();
+            doubleTapGesture.Delegate = y;
 
             //doubleTapGesture.NumberOfTouchesRequired = 2;
             //doubleTapGesture.NumberOfTapsRequired = 1;
@@ -921,6 +933,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void pkSingleTapGestureRecognizer()
         {
+            this.singleTapPickerGesture = null;
+
             Action action = () =>
             {
                 if (this.IsInEditMode)
@@ -930,19 +944,19 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             };
 
-            singleTapGesture = new UITapGestureRecognizer(action);
+            singleTapPickerGesture = new UITapGestureRecognizer(action);
 
-            singleTapGesture.NumberOfTouchesRequired = 1;
-            singleTapGesture.NumberOfTapsRequired = 1;
+            singleTapPickerGesture.NumberOfTouchesRequired = 1;
+            singleTapPickerGesture.NumberOfTapsRequired = 1;
 
             // This is needed for ios 7 >
-            singleTapGesture.ShouldRecognizeSimultaneously = delegate
+            singleTapPickerGesture.ShouldRecognizeSimultaneously = delegate
             {
                 return true;
             };
 
             // add the gesture recognizer to the view
-            this.pkNumberPicker.AddGestureRecognizer(singleTapGesture);
+            this.pkNumberPicker.AddGestureRecognizer(singleTapPickerGesture);
         }
 
         // Action Delegates
@@ -1022,7 +1036,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         [Export("textFieldShouldBeginEditing:")]
         public bool ShouldBeginEditing(UITextField textField)
         {
-            this.txtTouchedDown(new object(), new EventArgs());
+            // We never want the texbox to actually "edit" as with a keyboard.
+            // We use three methods Button updown, picker, and keypad.
             return false;
         }
 
@@ -1225,6 +1240,12 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             public override bool ShouldRecognizeSimultaneously(UIGestureRecognizer gestureRecognizer, UIGestureRecognizer otherGestureRecognizer)
             {
+                // If need be chjeck if you really want these two recognisers to be simul etc
+                // if (gestureRecognizer == tapgesture || otherGestureRecognizer == swipegesture) etc etc
+                // {
+                //     blah blah blah return true/false
+                // }
+
                 return true;
             }
 
@@ -1367,8 +1388,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // ** 26/08/2016 move extend the length of the picker view for ease of selection
             this._rectNumberPicker = new CGRect(
                 this.StartPointInWindow.X,
-                ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) - this.GlobalSizeDimensions.NumberPickerHeight),
-                // ** (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
+                // ** ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) - this.GlobalSizeDimensions.NumberPickerHeight),
+                (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
