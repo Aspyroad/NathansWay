@@ -266,14 +266,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
                 this.Selected = false;
-                this.MyNumberParent.SelectedNumberText = null;
+
             }
             else
             {
                 // Add this numbertext ref to the parent number container
                 // This wont work, its overwriting the one we want...what about an prevnumbertext?
 
-                this.MyNumberParent.SelectedNumberText = this;
+
                 this.IsInEditMode = true;
                 this.Selected = true;
                 // Begin Editing
@@ -620,7 +620,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.MyWorkSpaceParent.SelectedOperatorText = null;
                 }
                 // Once here we are now selecting this control
-                //this.MyWorkSpaceParent.SelectedNumberText = this;
+                this.MyNumberParent.SelectedNumberText = this;
+                this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange();
                 // Is the control readonly, then return
                 if (this._bReadOnly)
@@ -758,8 +759,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void EditNumberPicker()
         {
-            this.IsInEditMode = true;
-            this.Selected = true;
+            //this.IsInEditMode = true;
+            //this.Selected = true;
 
             // Reset our view positions. 
             this.NumberSize.AutoSetPickerPosition();
@@ -807,7 +808,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // User has hit elsewhere - cancel and stop auto select
                     this._bAutoMoveToNextNumber = false;
                     this._bCancelSelect = true;
-                    this.AutoTouchedText();
+                    this.txtTouchedDown(this, new EventArgs());
                 }
 
                 this._bCancelSelect = false;
@@ -985,7 +986,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // Grab the next text field
                     var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
                     // Call it as being touched
-                    y.AutoTouchedText();
+                    y.txtTouchedDown(this, new EventArgs());
                 }
                 else
                 {
@@ -1021,7 +1022,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Grab the next text field
                 var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
                 // Call it as being touched
-                y.AutoTouchedText();
+                y.txtTouchedDown(this, new EventArgs());
             }
             // Reset the auto advance
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
