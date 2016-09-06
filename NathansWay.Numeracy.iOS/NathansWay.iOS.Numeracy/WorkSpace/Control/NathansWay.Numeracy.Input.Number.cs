@@ -541,7 +541,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.TouchDown += txtTouchedDown;
             //this.txtNumber.TouchUpInside += txtTouchedDown;
 
-
             items.Add("0");
             items.Add("1");
             items.Add("2");
@@ -552,6 +551,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("7");
             items.Add("8");
             items.Add("9");
+            items.Add("");
 
             // TODO: We need to make the buttons in updown edit mode disabled for readonly.
             // We also need to work on the UI for them.
@@ -706,25 +706,27 @@ namespace NathansWay.iOS.Numeracy.Controls
                 return;
             }
 
-            Nullable<double> x = null;
+            // Nullable<double> x = null;
+            //if (this.txtNumber.Text.Length > 0)
+            //{
+            //    x = Convert.ToDouble(this.txtNumber.Text.Trim());
+            //}
 
-            // TODO: Handle zeros? 
-            // I cancel I need the value to be reset to nothing and hidden in the text field.
-
-            if (this.txtNumber.Text.Length > 0)
-            {
-                x = Convert.ToDouble(this.txtNumber.Text.Trim());
-            }
-
-            if (x != null)
+            if (_dblValue != null)
             {
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
-                    this._dblPrevValue = x;
+                    this._dblPrevValue = _dblValue;
                     // Change in value
                     this.FireValueChange();
                 }
+                this.CurrentValue = _dblValue;
+                this.txtNumber.Text = this.CurrentValueStr;
+            }
+            else
+            {
+                this.txtNumber.Text = "";
             }
 
             // FIXED: Problem 1 TouchUpDown
@@ -751,9 +753,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO: Problem 5 Fraction Number Picker
             // When selecting the 
-
-            this.CurrentValue = _dblValue;
-            this.txtNumber.Text = this.CurrentValueStr;
 
         }
 
@@ -1051,6 +1050,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             protected iOSUIManager iOSUIAppearance;
             protected nint _intCurrentValue;
             protected SizeNumber _numberSize;
+            protected string _strCurrentValue;
 
             #endregion
 
@@ -1087,9 +1087,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             #region Public Properties
 
-            public string SelectedItemStr
+            public string SelectedValueStr
             {
-                get { return this._items[(int)selectedIndex]; }
+                get { return this._strCurrentValue; }
             }
 
             public nint SelectedItemInt
@@ -1116,6 +1116,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public override void Selected(UIPickerView pickerView, nint row, nint component)
             {
                 selectedIndex = row;
+                this._strCurrentValue = this.GetTitle(pickerView, row, component);
                 pickerView.ReloadComponent(component);
             }
 
