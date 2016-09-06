@@ -813,7 +813,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._bCancelSelect = false;
                 this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
             }
-
         }
 
         protected void EditNumPad()
@@ -1005,7 +1004,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            this.postEdit(this._pickerdelegate.SelectedItemInt);
+            if (this._pickerdelegate.SelectedValueStr.Length == 0)
+            {
+                this.postEdit(null);
+            }
+            else
+            {
+                this.postEdit(Convert.ToDouble(this._pickerdelegate.SelectedValueStr));
+            }
 
             this.NumberSize.SetInitialPosition();
             // Reset the new frames - these are value types
@@ -1081,6 +1087,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             private void Initialize()
             {
                 this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager>();
+                this._strCurrentValue = "";
             }
 
             #endregion
