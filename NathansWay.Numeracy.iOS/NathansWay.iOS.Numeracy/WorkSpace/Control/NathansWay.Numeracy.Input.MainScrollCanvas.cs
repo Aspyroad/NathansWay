@@ -83,29 +83,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return true;
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
+        //public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //{
+        //    // Check if the touch is inside any active numlets
+        //    UITouch y = (UITouch)touches.AnyObject;
 
-            if (this.MyWorkSpaceParent.HasSelectedNumberText)
-            {
-                var x = this.MyWorkSpaceParent.SelectedNumberText;
-                if (x.IsInEditMode)
-                {
-                    x.TapText();
-                }
-                x.OnControlUnSelectedChange();
-                this.MyWorkSpaceParent.SelectedNumberText = null;
-            }
-            // User taps another operator
-            if (this.MyWorkSpaceParent.HasSelectedOperatorText)
-            {
-                this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
-            }
+        //    if (this.MyWorkSpaceParent.HasSelectedNumberText)
+        //    {
+        //        var x = this.MyWorkSpaceParent.SelectedNumberText;
+        //        if (x.IsInEditMode)
+        //        {
+        //            x.TapText();
+        //        }
+        //        x.OnControlUnSelectedChange();
+        //        this.MyWorkSpaceParent.SelectedNumberText = null;
+        //    }
+        //    // User taps another operator
+        //    if (this.MyWorkSpaceParent.HasSelectedOperatorText)
+        //    {
+        //        this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+        //    }
 
-            base.TouchesBegan(touches, evt);
-        }
+        //    base.TouchesBegan(touches, evt);
+        //}
         #endregion
     }
 }

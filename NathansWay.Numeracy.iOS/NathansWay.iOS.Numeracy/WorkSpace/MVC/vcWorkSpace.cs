@@ -327,9 +327,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return x;
         }
 
-		#endregion
+        #endregion
 
         #region Public Members
+
+        public void AnswerScrollEnabled(bool _scroll)
+        {
+            this._vCanvasMain.ScrollEnabled = _scroll;
+        }
 
         public void LoadDataStrings()
         {

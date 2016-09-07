@@ -541,6 +541,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.TouchDown += txtTouchedDown;
             //this.txtNumber.TouchUpInside += txtTouchedDown;
 
+            items.Add("-1"); // Empty
             items.Add("0");
             items.Add("1");
             items.Add("2");
@@ -551,7 +552,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             items.Add("7");
             items.Add("8");
             items.Add("9");
-            items.Add("");
 
             // TODO: We need to make the buttons in updown edit mode disabled for readonly.
             // We also need to work on the UI for them.
@@ -781,9 +781,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up delegate classes
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
-            // Select the current value
-            this.pkNumberPicker.Select((nint)(this.CurrentValue), 0, true);
-            //this._pickerdelegate.
 
             // Done : swap the picker view to vcMainContainer??? 
             // This may fix the bounds problem when trying to touch.
@@ -792,9 +789,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
 
-            //this.iOSGlobals.G__MainWindow.InterceptTouch = true;
-            //this.iOSGlobals.G__MainWindow.ActionOnTouch =
-            //    new Action<UIView>(HandlePickerCancel);
+            // Select the current value in the picker
+            // First get the index value of the current number
+            var x = this.items.IndexOf(this.CurrentValueStr);
+
+            this.pkNumberPicker.Select(x, 0, true);
+            // Set the pickers current number string to current value
+            this._pickerdelegate.SelectedValueStr = this.CurrentValueStr;
+
+            // Trun off the scrolling as the picker is presented to the MainView Controller
+            // This means its "frozen
+
         }
 
         // This is used to detect ANY touch outside of the active picker view and close it
@@ -860,6 +865,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.pkNumberPicker.DataSource = null;
             this.pkNumberPicker.RemoveFromSuperview();
             this.pkNumberPicker = null;
+            // Switch the scrolling back on
+            this.MyWorkSpaceParent.AnswerScrollEnabled(true);
         }
 
         protected void ShowUpDownButtons()
@@ -1097,6 +1104,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             public string SelectedValueStr
             {
                 get { return this._strCurrentValue; }
+                set { this._strCurrentValue = value; }
             }
 
             public nint SelectedItemInt
@@ -1146,8 +1154,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
                 _lblPickerView.ClipsToBounds = true;
+                var y = pickerView.SelectedRowInComponent(component);
 
-                if (pickerView.SelectedRowInComponent(component) == row)
+                if (y  == row)
                 {
                     _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
                     _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
