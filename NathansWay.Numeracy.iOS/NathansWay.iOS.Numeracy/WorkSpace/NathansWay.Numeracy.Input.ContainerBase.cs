@@ -520,7 +520,7 @@ namespace NathansWay.iOS.Numeracy
             get { return this._bIsInEditMode; }
             set 
             {
-                this._bIsInEditMode = value;
+                    this._bIsInEditMode = value;
             }
         }
 

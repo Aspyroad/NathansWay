@@ -405,6 +405,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 this._bIsInEditMode = value;
+                if (this._bHasNumberParent)
+                {
+                    this.MyNumberParent.IsInEditMode = value;
+                }
+                // WTF? numberpad should be asking MyNumberParent...?
                 if (this._numberpad != null)
                 {
                     this._numberpad.InEditMode = value;
@@ -423,7 +428,12 @@ namespace NathansWay.iOS.Numeracy.Controls
                 base.IsAnswer = value;
                 if (value)
                 {
-                    this.txtNumber.Text = "";
+                    // The answer
+                    this.OriginalValue = CurrentValue;
+                    // Set to empty number represented by null
+                    this.CurrentValue = null; 
+                    // Clear number text
+                    this.txtNumber.Text = ""; 
                 }
             }
         }
@@ -541,7 +551,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtNumber.TouchDown += txtTouchedDown;
             //this.txtNumber.TouchUpInside += txtTouchedDown;
 
-            items.Add("-1"); // Empty
+            items.Add(""); // Empty
             items.Add("0");
             items.Add("1");
             items.Add("2");
@@ -558,6 +568,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
             this.singleTapTextGesture = null;
+            this.singleTapPickerGesture = null;
         }
 
         private void txtTouchedDown(object sender, EventArgs e)
@@ -798,7 +809,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._pickerdelegate.SelectedValueStr = this.CurrentValueStr;
 
             // Trun off the scrolling as the picker is presented to the MainView Controller
-            // This means its "frozen
+            this.MyWorkSpaceParent.AnswerScrollEnabled(false);
 
         }
 
@@ -1038,6 +1049,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             // Reset the auto advance
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
+
+            // Re-enable scrolling
+            this.MyWorkSpaceParent.AnswerScrollEnabled(true);
         }
 
         #endregion
@@ -1152,36 +1166,46 @@ namespace NathansWay.iOS.Numeracy.Controls
             /// <param name="view">_view.</param>
             public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
             {
-                UILabel _lblPickerView = new UILabel(this._numberSize._rectTxtNumber);
-                _lblPickerView.ClipsToBounds = true;
+
+                // There is a bug in this in iOS 7,8,9
+                // It still hasnt been addressed.
+                // Basically the UIPicker view never reuses views. the view passed in is ALWAYS null.
+                // See http://stackoverflow.com/questions/20635949/reusing-view-in-uipickerview-with-ios-7
+
+                var view1 = new UILabel(this._numberSize._rectTxtNumber);
+                view1.ClipsToBounds = true;
+
+                //TODO: BUG The below code cannot work as the rows never lineup with the component in that row
+                // Component seems to be randomly chosen, we need state of some sort, possibly the label value (text)?
+
                 var y = pickerView.SelectedRowInComponent(component);
 
                 if (y  == row)
                 {
-                    _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
-                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
-                    _lblPickerView.Layer.BorderWidth = 4.0f;
-                    _lblPickerView.Layer.CornerRadius = 20.0f;
+                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
+                    view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
+                    view1.Layer.BorderWidth = 4.0f;
+                    view1.Layer.CornerRadius = 20.0f;
                 }
                 else
                 {
-                    _lblPickerView.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
-                    _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
-                    _lblPickerView.Layer.BorderWidth = 1.0f;
-                    _lblPickerView.Layer.CornerRadius = 20.0f;
+                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
+                    view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
+                    view1.Layer.BorderWidth = 1.0f;
+                    view1.Layer.CornerRadius = 20.0f;
                 }
 
                 // Apply global UI
-                _lblPickerView.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
+                view1.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
 
 
                 // TODO : Work on font names and sizes for global theme...
                 var x = _numberSize.VcMainContainer.NumberAppSettings.GA__NumberDisplaySize;
-                _lblPickerView.Font = iOSUIAppearance.GlobaliOSTheme.PkViewLabelFont(x);
+                view1.Font = iOSUIAppearance.GlobaliOSTheme.PkViewLabelFont(x);
 
-                _lblPickerView.TextAlignment = UITextAlignment.Center;
-                _lblPickerView.Text = this._items[(int)row];
-                return _lblPickerView;
+                view1.TextAlignment = UITextAlignment.Center;
+                view1.Text = this._items[(int)row];
+                return view1;
             }
 
             /// <Docs>To be added.</Docs>
