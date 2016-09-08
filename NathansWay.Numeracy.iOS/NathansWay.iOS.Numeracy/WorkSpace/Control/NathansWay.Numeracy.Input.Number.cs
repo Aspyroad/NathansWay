@@ -803,6 +803,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Select the current value in the picker
             // First get the index value of the current number
             var x = this.items.IndexOf(this.CurrentValueStr);
+            // Set the delegates row number so it knows which one to color when forst instantiated
+            this._pickerdelegate.IndexSelect = x;
             // How do we change the background color of the selected row?
             // http://stackoverflow.com/questions/37971352/how-to-change-text-color-of-starting-row-in-uipickerview
             this.pkNumberPicker.Select(x, 0, true);
@@ -1131,6 +1133,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 set { selectedIndex = value; }
             }
 
+            public nint IndexSelect { get; set; }
+
             #endregion
 
             #region Overrides
@@ -1186,14 +1190,25 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Component seems to be randomly chosen, we need state of some sort, possibly the label value (text)?
 
                 //var y = pickerView.SelectedRowInComponent(component);
-
-   
+                if (this.IndexSelect == row)
+                {
+                    this.IndexSelect = row;
+                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value.ColorWithAlpha(0.8f);
+                    view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.ColorWithAlpha(0.8f).CGColor;
+                    view1.Layer.BorderWidth = 1.0f;
+                    view1.Layer.CornerRadius = 20.0f;
+                }
+                else
                 {
                     view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
                     view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
                     view1.Layer.BorderWidth = 1.0f;
                     view1.Layer.CornerRadius = 20.0f;
                 }
+
+                // Setting this resets the first selected value
+                // Perhaps we want to keep it selected? SO you know where you started?
+                //this.IndexSelect = row;
 
                 // Apply global UI
                 view1.TextColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value;
