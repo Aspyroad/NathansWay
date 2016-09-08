@@ -795,7 +795,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Done : swap the picker view to vcMainContainer??? 
             // This may fix the bounds problem when trying to touch.
-            this._vcMainContainer.View.AddSubview(pkNumberPicker);
+
 
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
@@ -803,13 +803,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Select the current value in the picker
             // First get the index value of the current number
             var x = this.items.IndexOf(this.CurrentValueStr);
-
+            // How do we change the background color of the selected row?
+            // http://stackoverflow.com/questions/37971352/how-to-change-text-color-of-starting-row-in-uipickerview
             this.pkNumberPicker.Select(x, 0, true);
+
             // Set the pickers current number string to current value
             this._pickerdelegate.SelectedValueStr = this.CurrentValueStr;
 
             // Trun off the scrolling as the picker is presented to the MainView Controller
             this.MyWorkSpaceParent.AnswerScrollEnabled(false);
+
+            this._vcMainContainer.View.AddSubview(pkNumberPicker);
 
         }
 
@@ -1127,26 +1131,29 @@ namespace NathansWay.iOS.Numeracy.Controls
                 set { selectedIndex = value; }
             }
 
-            public nint CurrentValue
-            {
-                set
-                {
-                    selectedIndex = value;
-                }
-            }
-
             #endregion
 
             #region Overrides
+
+
 
             /// <summary>
             /// Called when a row is selected in the spinner
             /// </summary>
             public override void Selected(UIPickerView pickerView, nint row, nint component)
             {
-                selectedIndex = row;
+                // USing this method to color the selected row
+                // http://stackoverflow.com/questions/895830/how-to-change-color-of-selected-row-in-uipickerview
+
+                UILabel view1 = pickerView.ViewFor(row, component) as UILabel;
+         
+                view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
+                view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
+                view1.Layer.BorderWidth = 4.0f;
+                view1.Layer.CornerRadius = 20.0f;
+
                 this._strCurrentValue = this.GetTitle(pickerView, row, component);
-                pickerView.ReloadComponent(component);
+                //pickerView.ReloadComponent(component);
             }
 
             /// <summary>
@@ -1178,16 +1185,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //TODO: BUG The below code cannot work as the rows never lineup with the component in that row
                 // Component seems to be randomly chosen, we need state of some sort, possibly the label value (text)?
 
-                var y = pickerView.SelectedRowInComponent(component);
+                //var y = pickerView.SelectedRowInComponent(component);
 
-                if (y  == row)
-                {
-                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value;
-                    view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.CGColor;
-                    view1.Layer.BorderWidth = 4.0f;
-                    view1.Layer.CornerRadius = 20.0f;
-                }
-                else
+   
                 {
                     view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
                     view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
