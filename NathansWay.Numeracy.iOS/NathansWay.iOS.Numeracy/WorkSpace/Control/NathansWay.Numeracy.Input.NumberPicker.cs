@@ -61,9 +61,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI7()
         {
             base.ApplyUI7();
-            this.BackgroundColor = new UIColor(1.0f, 1.0f, 1.0f, 0.2f);
+            this.BackgroundColor = new UIColor(1.0f, 1.0f, 1.0f, 0.8f);
 
-            this.Layer.CornerRadius = 20.0f;
+            this.Layer.CornerRadius = 6.0f;
             this.HasBorder = false;
             //this.Layer.BorderColor = UIColor.Black.CGColor;
             //this.Layer.BorderWidth = 1.0f;

@@ -28,7 +28,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public AspyTextField txtNumber { get; private set; }
 
-        public AspyPickerView pkNumberPicker { get; private set; }
+        public NumberPickerView pkNumberPicker { get; private set; }
 
         // Picker Delegates
         private PickerDelegate _pickerdelegate;
@@ -793,10 +793,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.pkNumberPicker.Delegate = this._pickerdelegate;
             this.pkNumberPicker.DataSource = this._pickersource;
 
-            // Done : swap the picker view to vcMainContainer??? 
-            // This may fix the bounds problem when trying to touch.
-
-
             // Wire up tapgesture to 
             this.pkSingleTapGestureRecognizer();
 
@@ -1192,22 +1188,22 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //var y = pickerView.SelectedRowInComponent(component);
                 if (this.IndexSelect == row)
                 {
-                    this.IndexSelect = row;
-                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value.ColorWithAlpha(0.8f);
+
+                    view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedBGUIColor.Value.ColorWithAlpha(0.6f);
                     view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelHighLightedTextUIColor.Value.ColorWithAlpha(0.8f).CGColor;
                     view1.Layer.BorderWidth = 1.0f;
-                    view1.Layer.CornerRadius = 20.0f;
+                    view1.Layer.CornerRadius = 10.0f;
                 }
                 else
                 {
                     view1.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelBGUIColor.Value;
                     view1.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
-                    view1.Layer.BorderWidth = 1.0f;
+                    view1.Layer.BorderWidth = 4.0f;
                     view1.Layer.CornerRadius = 20.0f;
                 }
 
-                // Setting this resets the first selected value
-                // Perhaps we want to keep it selected? SO you know where you started?
+                // Setting this resets the first selected value on redraws
+                // Perhaps we want to keep it selected? So you know where you started?
                 //this.IndexSelect = row;
 
                 // Apply global UI
@@ -1444,10 +1440,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             // ** 26/08/2016 move extend the length of the picker view for ease of selection
             this._rectNumberPicker = new CGRect(
-                this.StartPointInWindow.X,
-                // ** ((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) - this.GlobalSizeDimensions.NumberPickerHeight),
+                this.StartPointInWindow.X - (this.GlobalSizeDimensions.GlobalNumberPickerMargin/2),
+                // This sets the picker above the textbox
+                // **((this.StartPointInWindow.Y + GlobalSizeDimensions.TxtNumberHeight) - this.GlobalSizeDimensions.NumberPickerHeight),
+                // This sets the picker at the bottom edge of the textbox
                 (this.StartPointInWindow.Y - this.GlobalSizeDimensions.NumberPickerHeight),
-                this.CurrentWidth,
+                this.CurrentWidth + this.GlobalSizeDimensions.GlobalNumberPickerMargin,
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 

@@ -303,6 +303,14 @@ namespace NathansWay.iOS.Numeracy
             return this._lsNumbersOnly.Find(z => z.IndexNumber == _index);
         }
 
+        // This function will deselect the cumber container, and if any members are in edit mode,
+        // it will reset them back to a waiting state
+        public void DeSelectAll()
+        {
+
+
+        }
+
         #endregion
 
         #region Delegates

@@ -555,6 +555,36 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
+        public float GlobalNumberPickerMargin
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__DisplaySizeLevels.Level3):
+                        {
+                            return 40.0f;
+                        }
+                    case (G__DisplaySizeLevels.Level5):
+                        {
+                            return 10.0f;
+                        }
+                    case (G__DisplaySizeLevels.Level7):
+                        {
+                            return 46.0f;
+                        }
+                    case (G__DisplaySizeLevels.Level10):
+                        {
+                            return 102.0f; ;
+                        }
+                    default: // Huge
+                        {
+                            return 204.0f;
+                        }
+                }
+            }
+        }
         public float GlobalNumberWidth
         {
             get
