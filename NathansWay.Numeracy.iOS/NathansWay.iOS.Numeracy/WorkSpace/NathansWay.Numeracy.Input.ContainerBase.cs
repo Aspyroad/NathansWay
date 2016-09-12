@@ -196,10 +196,6 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Public Virtual
 
-//        public virtual void OnResize ()
-//        {            
-//        }
-
         public virtual void OnValueChange(object s, EventArgs e)
         {
         }
@@ -241,6 +237,8 @@ namespace NathansWay.iOS.Numeracy
                 this.UI_SetViewNeutral();
             }
         }
+
+        public virtual void 
 
         // TODO: Fix this to include UI changes
         // This will only ever be called by hitting the equate sign

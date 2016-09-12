@@ -565,7 +565,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO: We need to make the buttons in updown edit mode disabled for readonly.
             // We also need to work on the UI for them.
-            this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+            //this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+            this.CurrentEditMode = G__NumberEditMode.EditUpDown;
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
             this.singleTapTextGesture = null;
             this.singleTapPickerGesture = null;
@@ -995,7 +996,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //                {
                 //                    // Find if its position in relation to the whole number
                 //                    // Backward search
-                if (this._numberAppSettings.GA__MoveToNextNumber && this.MutliNumberPosition > 1)
+                if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
                 {
                     // We are moving to the next text field.
                     // We need to release these event hooks

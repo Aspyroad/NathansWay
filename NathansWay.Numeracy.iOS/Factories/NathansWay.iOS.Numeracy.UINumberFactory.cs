@@ -41,6 +41,7 @@ namespace NathansWay.iOS.Numeracy
         // UI
         private List<object> _uiOutputEquation;
         private List<object> _uiOutputResult;
+        private List<object> _uiOutputAnswer;
         private List<List<object>> _uiOutputMethods;
         private vcWorkSpace _vcCurrentWorkSpace;
 
@@ -197,21 +198,17 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyNumletParent = numlet;
                 _control.MyImmediateParent = numlet;
                 _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
-                _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+                //_control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
 
                 // Let the numlet know its the answer
                 if (_control.IsAnswer)
                 {
+                    numlet.OutputAnswerContainers.Add(_control);
                     numlet.IsAnswer = true;
                     numlet.IsReadOnly = false;
                 }
 
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
-
-//                if ((_control.ContainerType == G__ContainerType.Number) || (_control.ContainerType == G__ContainerType.Fraction))
-//                {                    
-//                    _control.IsInitialLoad = true;
-//                }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
@@ -301,30 +298,15 @@ namespace NathansWay.iOS.Numeracy
                 _control.MyImmediateParent = numlet;
                 _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
-                _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+                //_control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
 
                 // Let the numlet know its the answer
                 if (_control.IsAnswer)
                 {
+                    numlet.OutputAnswerContainers.Add(_control);
                     numlet.IsAnswer = true;
                     numlet.IsReadOnly = false;
                 }
-
-//                if (_control.ContainerType == G__ContainerType.Number || _control.ContainerType == G__ContainerType.Fraction)
-//                {
-//                    numlet.ResultContainer = _control;
-//                    _control.IsInitialLoad = true;
-//                    _control.IsAnswer = true;
-//                    _control.IsReadOnly = false;
-//                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
-//
-//                    _control.ClearValue();
-//                }
-//                else
-//                {
-//                    _control.IsReadOnly = true;
-//                    _control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
-//                }
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;

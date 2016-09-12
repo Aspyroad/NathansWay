@@ -459,12 +459,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public bool Solve ()
         {
-            // TODO: We need to find which numlet contains the answer
-            // This should be specified in the factory at creation
-            // The Result Numlet wont nessaccerally contain the spot that needs to be answered
-            // As Algebra has the answer position on in the equation side.
-            // We then need to supply WorkSpace with the result given ans store it in the tempresult field
+            // We then need to supply WorkSpace with the result
             // of the lessondetail entity. 
+
+
+            // Plan
+            // First get a list of the Numlets which contain answers
+            // Note only Equation or Result will have an amswer Methods wont be checked
+            if (_vcNumletEquation.IsAnswer)
+            {
+                int x = 0;
+                for (int i = 0; i < this._vcNumletEquation.OutputAnswerContainers.Count; i++)
+                {
+
+                }
+
+            }
+            if (_vcNumletResult.IsAnswer)
+            {
+                for (int i = 0; i < this._vcNumletResult.OutputAnswerContainers.Count; i++)
+                {
+
+                }
+            }
 
 
             return true;

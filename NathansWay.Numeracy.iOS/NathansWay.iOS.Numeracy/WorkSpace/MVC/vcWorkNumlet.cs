@@ -21,10 +21,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		#region Private Variables
 		// Control Attributes
         private G__WorkNumletType _workNumletType;
-        private G__LessonResultPosition _lessonResultyPosition;
+        //private G__LessonResultPosition _lessonResultyPosition;
         //private G__AnswerState _answerState;
         private string _strExpression;
-        private List<object> _lsContainers;
+        //private List<object> _lsContainers;
 
         // Data
         private EntityLesson _wsLesson;
@@ -34,10 +34,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
-        private G__DisplaySizeLevels _numberDisplaySize;
+        //private G__DisplaySizeLevels _numberDisplaySize;
 
         // Result ref
-        private BaseContainer _resultContainer;
+        //private BaseContainer _resultContainer;
 
 		#endregion
 
@@ -76,7 +76,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (disposing)
             {                
                 // Remove the possible event hook to sizechange.
-                foreach (vcNumberText _Container in this._lsContainers) 
+                foreach (BaseContainer _Container in this.OutputContainers) 
                 {
                     // Event Hooks
                     _Container.SizeClass.eResizing -= _Container.SizeClass.OnResize;
@@ -97,6 +97,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeWorkNumlet;
             this.HasRoundedCorners = true;
             this.View.AutosizesSubviews = false;
+            this.OutputAnswerContainers = new List<object>();
             //this.AllowNextResponder = false;
 		}
 
@@ -111,8 +112,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public List<object> OutputContainers
         {
-            get { return this._lsContainers; }
-            set { this._lsContainers = value; }
+            get;
+            set;
+        }
+
+        public List<object> OutputAnswerContainers
+        {
+            get;
+            set;
         }
 
         public SizeWorkNumlet WorkNumletSize 
@@ -155,11 +162,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return this._wsLessonDetail.Equation.ToString(); } 
         }
 
-        public BaseContainer ResultContainer
-        {
-            get { return this._resultContainer; }
-            set { this._resultContainer = value; }
-        }
+        //public BaseContainer ResultContainer
+        //{
+        //    get { return this._resultContainer; }
+        //    set { this._resultContainer = value; }
+        //}
 
         #endregion
 
