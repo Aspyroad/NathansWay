@@ -194,6 +194,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             return true;
         }
 
+        public override bool Solve()
+        {
+            return base.Solve();
+        }
+
         public override void UI_SetViewSelected()
         {
             base.UI_SetViewSelected();

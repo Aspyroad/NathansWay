@@ -41,7 +41,7 @@ namespace NathansWay.iOS.Numeracy
         private nint _intMultiNumberTotalSigCount;
         private nint _intMultiNumberTotalInSigCount;
         private bool _bHasDecimal;
-        private bool _bHasOpenNumberPicker;
+        private bool _bPerNumberErrorUIDisplay;
 
 
         #endregion
@@ -125,6 +125,8 @@ namespace NathansWay.iOS.Numeracy
             // Some basic UI
             this.BorderWidth = 1.0f;
             this.HasRoundedCorners = true;
+
+            this._bPerNumberErrorUIDisplay = true;
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
@@ -434,10 +436,15 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewCorrect()
         {
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
+            // If enabled a >2 digit display will only show the value incorrect
+            // rather than the entire numer
+            if (!this._bPerNumberErrorUIDisplay)
             {
-                _Number.UI_SetViewCorrect();
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_SetViewCorrect();
+                }
             }
 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
@@ -448,10 +455,15 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewInCorrect()
         {
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
+            // If enabled a >2 digit display will only show the value incorrect
+            // rather than the entire numer
+            if (!this._bPerNumberErrorUIDisplay)
             {
-                _Number.UI_SetViewInCorrect();
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_SetViewInCorrect();
+                }
             }
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers

@@ -457,36 +457,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
         }
 
-        public bool Solve ()
-        {
-            // We then need to supply WorkSpace with the result
-            // of the lessondetail entity. 
-
-
-            // Plan
-            // First get a list of the Numlets which contain answers
-            // Note only Equation or Result will have an amswer Methods wont be checked
-            if (_vcNumletEquation.IsAnswer)
-            {
-                int x = 0;
-                for (int i = 0; i < this._vcNumletEquation.OutputAnswerContainers.Count; i++)
-                {
-
-                }
-
-            }
-            if (_vcNumletResult.IsAnswer)
-            {
-                for (int i = 0; i < this._vcNumletResult.OutputAnswerContainers.Count; i++)
-                {
-
-                }
-            }
-
-
-            return true;
-        }
-
         #endregion
 
         #region Public Properties
@@ -691,6 +661,34 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //this._vCanvasDocked.Frame = this._sizeWorkSpace.SetCanvasDockedHeightWidth();
             //this._sizeWorkSpace.SetCanvasMainHeightWidth();
             //this._sizeWorkSpace.SetCanvasDockedHeightWidth();
+        }
+
+        public override bool Solve()
+        {
+            bool _ret;
+
+            // First get a list of the Numlets which contain answers
+            // Note only Equation or Result will have an amswer Methods wont be checked
+            if (_vcNumletEquation.IsAnswer)
+            {
+                for (int i = 0; i < this._vcNumletEquation.OutputAnswerContainers.Count; i++)
+                {
+                    var x = (BaseContainer)this._vcNumletEquation.OutputAnswerContainers[i];
+                    _ret = x.Solve();
+                }
+
+            }
+            if (_vcNumletResult.IsAnswer)
+            {
+                for (int i = 0; i < this._vcNumletResult.OutputAnswerContainers.Count; i++)
+                {
+                    var x = (BaseContainer)this._vcNumletResult.OutputAnswerContainers[i];
+                    _ret = x.Solve();
+                }
+            }
+
+
+            return true;
         }
 
         //public override void ApplyUI6()

@@ -327,11 +327,6 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-        #region Public Members
-
-
-        #endregion
-
         #region Private Members
 
         private void Initialize()
@@ -613,7 +608,7 @@ namespace NathansWay.iOS.Numeracy
 
             }
             base.ApplyPressed(_isPressed);
-            //this.SetNeedsDisplay();
+
         }
 
         #endregion

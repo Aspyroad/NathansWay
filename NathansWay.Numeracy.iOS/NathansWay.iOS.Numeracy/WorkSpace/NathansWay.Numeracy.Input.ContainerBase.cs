@@ -238,7 +238,28 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual void 
+        public virtual bool Solve()
+        {
+            if (this._bInitialLoad)
+            {
+                this.UI_SetViewNeutral();
+            }
+            else
+            {
+                if (this._dblOriginalValue == this._dblCurrentValue)
+                {
+                    this._bIsCorrect = true;
+                }
+                else
+                {
+                    this._bIsCorrect = false;
+                }
+            }
+
+            this.UI_SetAnswerState();
+
+            return this._bIsCorrect;
+        }
 
         // TODO: Fix this to include UI changes
         // This will only ever be called by hitting the equate sign
