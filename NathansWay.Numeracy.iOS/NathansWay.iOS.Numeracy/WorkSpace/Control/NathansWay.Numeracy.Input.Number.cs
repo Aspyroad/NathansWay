@@ -132,12 +132,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            // UI
+            // UI for THIS view, not Textbox!!
             this.View.ClipsToBounds = true;
-            this.HasRoundedCorners = true;
-            //this.HasBorder = true;
-            this.txtNumber.HasBorder = false;
-            this.txtNumber.BackgroundColor = UIColor.Clear;
 
             // Add subviews - controls
             this.View.AddSubview(this.txtNumber);
@@ -149,20 +145,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Wire up our eventhandler to "valuechanged" member
             ePickerChanged = new Action(HandlePickerChanged);
-
-            //this._txtNumberDelegate = new TextControlDelegate();
-            //this.txtNumber.Delegate = this._txtNumberDelegate;
-
-            //            pickerDataModel = new PickerDataModel();
-            //            this.pkNumberPicker.Source = pickerDataModel;
-            //            this.pkNumberPicker.Center = this.txtNumber.Center ;           
-            //            this.pkNumberPicker.ValueChanged += (s, e) =>
-            //            {
-            //                this.txtNumber.Text = this._pickerdelegate.SelectedItem;
-            //            };  
-            //
-            //            // set our initial selection on the label
-            //            this.txtNumber.Text = pickerDataModel.SelectedItem;
 
         }
 
@@ -201,26 +183,31 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetViewSelected()
         {
+            this.txtNumber.HasBorder = true;
             base.UI_SetViewSelected();
         }
 
         public override void UI_SetViewNeutral()
         {
+            this.txtNumber.HasBorder = false;
             base.UI_SetViewNeutral();
         }
 
         public override void UI_SetViewReadOnly()
         {
+            this.txtNumber.HasBorder = false;
             base.UI_SetViewReadOnly();
         }
 
         public override void UI_SetViewCorrect()
         {
+            this.txtNumber.HasBorder = false;
             base.UI_SetViewCorrect();
         }
 
         public override void UI_SetViewInCorrect()
         {
+            this.txtNumber.HasBorder = false;
             base.UI_SetViewInCorrect();
         }
 
@@ -533,8 +520,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AutoApplyUI = false;
 
+            this.txtNumber.BorderWidth = 1.0f;
             this.txtNumber.HasBorder = false;
-            this.txtNumber.HasRoundedCorners = true;
+            this.txtNumber.HasRoundedCorners = false;
+            this.txtNumber.BackgroundColor = UIColor.Clear;
 
             // TODO: These may need to be seperate from global values
             //this.txtNumber.BorderWidth = 1.0f;
