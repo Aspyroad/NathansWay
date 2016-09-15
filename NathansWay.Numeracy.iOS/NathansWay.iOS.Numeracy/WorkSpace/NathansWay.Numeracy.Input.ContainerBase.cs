@@ -240,42 +240,26 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual bool Solve()
         {
-            if (this._bInitialLoad)
-            {
-                this.UI_SetViewNeutral();
-            }
-            else
-            {
-                if (this._dblOriginalValue == this._dblCurrentValue)
-                {
-                    this._bIsCorrect = true;
-                }
-                else
-                {
-                    this._bIsCorrect = false;
-                }
-            }
-
+            this.SetCorrectState();
             this.UI_SetAnswerState();
-
             return this._bIsCorrect;
         }
 
         // TODO: Fix this to include UI changes
         // This will only ever be called by hitting the equate sign
         public virtual void SetCorrectState ()
-        {            
-            if ((this._dblOriginalValue == this._dblCurrentValue))
+        {  
+            if (this._bInitialLoad)
             {
-                this.AnswerState = G__AnswerState.Correct;
-                this._bIsCorrect = true;
+                this.AnswerState = G__AnswerState.UnAttempted;
+                this._bIsCorrect = false;
             }
             else
             {
-                if (this._bInitialLoad)
+                if ((this._dblOriginalValue == this._dblCurrentValue))
                 {
-                    this.AnswerState = G__AnswerState.UnAttempted;
-                    this._bIsCorrect = false;
+                    this.AnswerState = G__AnswerState.Correct;
+                    this._bIsCorrect = true;
                 }
                 else
                 {
@@ -292,8 +276,6 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetAnswerState()
         {
-            this.SetCorrectState();
-
             if (this._bIsCorrect)
             {
                 this.UI_SetViewCorrect();

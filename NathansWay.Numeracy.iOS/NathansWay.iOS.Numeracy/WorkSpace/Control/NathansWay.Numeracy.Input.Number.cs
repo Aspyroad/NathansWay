@@ -176,11 +176,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             return true;
         }
 
-        public override bool Solve()
-        {
-            return base.Solve();
-        }
-
         public override void UI_SetViewSelected()
         {
             this.txtNumber.HasBorder = true;
@@ -210,17 +205,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.HasBorder = false;
             base.UI_SetViewInCorrect();
         }
-
-        //        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        //        {
-        //            base.TouchesBegan(touches, evt);
-        //
-        //            // Continue next responder if set
-        //            //if (this._bAllowNextResponder)
-        //            {
-        //                this.NextResponder.TouchesBegan(touches, evt);
-        //            }
-        //        }
 
         #endregion
 
@@ -720,6 +704,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (_dblValue != null)
             {
+                this._bInitialLoad = false;
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {

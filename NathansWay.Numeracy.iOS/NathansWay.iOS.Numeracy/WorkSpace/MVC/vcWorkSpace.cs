@@ -665,7 +665,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override bool Solve()
         {
-            bool _ret;
+            bool _ret = false;
+
+            // Unselect everything
+            if (this.HasSelectedNumberText)
+            {
+                this.SelectedNumberText.AutoTouchedText();
+            }
 
             // First get a list of the Numlets which contain answers
             // Note only Equation or Result will have an amswer Methods wont be checked
@@ -687,8 +693,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
             }
 
-
-            return true;
+            return _ret;
         }
 
         //public override void ApplyUI6()

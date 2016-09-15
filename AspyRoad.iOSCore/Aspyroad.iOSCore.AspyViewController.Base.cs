@@ -271,6 +271,19 @@ namespace AspyRoad.iOSCore
             // >iOS7 only
         }
 
+        public void AlertMe(string _message)
+        {
+            Action action = () =>
+                {
+                    UIAlertView alert = new UIAlertView();
+                    alert.Title = this.AspyName;
+                    alert.AddButton(@"Ok");
+                    alert.Message = _message;
+                    alert.Show();
+                };
+            action.Invoke();
+        }
+
 		#endregion
 
 		#region Public Container Members

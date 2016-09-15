@@ -43,7 +43,6 @@ namespace NathansWay.iOS.Numeracy
         private bool _bHasDecimal;
         private bool _bPerNumberErrorUIDisplay;
 
-
         #endregion
 
         #region Constructors
@@ -130,25 +129,6 @@ namespace NathansWay.iOS.Numeracy
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
-
-        //private void AddAGesture_NotUsed()
-        //{
-        //    Action action = () =>
-        //        { 
-        //            UIAlertView alert = new UIAlertView();
-        //            alert.Title = @"iOSNumberContainer";
-        //            alert.AddButton(@"Ok");
-        //            alert.Message = @"iOSNumberContainer";
-        //            alert.Show();
-        //        };
-
-        //    UITapGestureRecognizer singleTapGesture = new UITapGestureRecognizer(action);
-        //    singleTapGesture.CancelsTouchesInView = true;
-        //    singleTapGesture.NumberOfTouchesRequired = 1;
-        //    singleTapGesture.NumberOfTapsRequired = 1;
-        //    // add the gesture recognizer to the view
-        //    this.View.AddGestureRecognizer(singleTapGesture);
-        //}
 
         #endregion
 
@@ -356,6 +336,33 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
+        public override bool Solve()
+        {
+            bool _ret = false;
+
+            // Check if this entire answer is correct or not
+            this.SetCorrectState();
+
+            // If enabled a >1 digit display will only show the value incorrect
+            // rather than the entire numer
+            if (this._bPerNumberErrorUIDisplay)
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    // TODO: here we need to workout what we want to do with decimal colors
+                    // Based on this numbercontainers total correctness
+                    _ret = _Number.Solve();
+                }
+            }
+            else
+            {
+                _ret = base.Solve();
+            }
+
+            return _ret;
+        }
+
         public override void UI_SetViewSelected()
         {
             if (this.HasFractionParent)
@@ -382,21 +389,21 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewNeutral()
         {
-            if (this.HasFractionParent)
-            {
-                if (this._bMultiNumbered)
-                {
-                    this.HasBorder = true;
-                }
-                else
-                {
-                    this.HasBorder = false;                
-                }
-            }
-            else
-            {
-                this.HasBorder = true;
-            }
+            //if (this.HasFractionParent)
+            //{
+            //    if (this._bMultiNumbered)
+            //    {
+            //        this.HasBorder = true;
+            //    }
+            //    else
+            //    {
+            //        this.HasBorder = false;                
+            //    }
+            //}
+            //else
+            //{
+            //    this.HasBorder = true;
+            //}
 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
@@ -412,21 +419,21 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewReadOnly()
         {
-            if (this.HasFractionParent)
-            {
-                if (this._bMultiNumbered && this.Selected)
-                {
-                    this.HasBorder = true;
-                }
-                else
-                {
-                    this.HasBorder = false;                
-                }
-            }
-            else
-            {
-                this.HasBorder = true;
-            }
+            //if (this.HasFractionParent)
+            //{
+            //    if (this._bMultiNumbered && this.Selected)
+            //    {
+            //        this.HasBorder = true;
+            //    }
+            //    else
+            //    {
+            //        this.HasBorder = false;                
+            //    }
+            //}
+            //else
+            //{
+            //    this.HasBorder = true;
+            //}
 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
@@ -438,7 +445,7 @@ namespace NathansWay.iOS.Numeracy
         {
             // If enabled a >2 digit display will only show the value incorrect
             // rather than the entire numer
-            if (!this._bPerNumberErrorUIDisplay)
+            //if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)
@@ -457,7 +464,7 @@ namespace NathansWay.iOS.Numeracy
         {
             // If enabled a >2 digit display will only show the value incorrect
             // rather than the entire numer
-            if (!this._bPerNumberErrorUIDisplay)
+            //if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)
