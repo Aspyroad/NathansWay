@@ -165,20 +165,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Event Handlers
 
-        partial void OnTouch_btnCenterMethods(ButtonLabelStyle sender)
+        partial void OnTouch_btnCenterMethods(NWButton sender)
         {
             //
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnCenterQuestion(ButtonLabelStyle sender)
+        partial void OnTouch_btnCenterQuestion(NWButton sender)
         {
             //throw new NotImplementedException();
 
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnLockAnswer(ButtonLabelStyle sender)
+        partial void OnTouch_btnLockAnswer(NWButton sender)
         {
             
             this._vcWorkSpace.DockNumlets(G__WorkNumletType.Result);
@@ -187,7 +187,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnLockSolveButton(ButtonLabelStyle sender)
+        partial void OnTouch_btnLockSolveButton(NWButton sender)
         {
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }

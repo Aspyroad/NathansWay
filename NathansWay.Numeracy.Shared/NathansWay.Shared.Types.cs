@@ -526,7 +526,7 @@ namespace NathansWay.Shared
 		{
             {G__MathOperator.All, "All"},
 			{G__MathOperator.Addition, "+"},
-			{G__MathOperator.Subtraction, "–"},
+			{G__MathOperator.Subtraction, "-"},
 			{G__MathOperator.Division, "÷"},
 			{G__MathOperator.Multiplication, "x"},
 			{G__MathOperator.AddSub, "+ –"},
@@ -544,7 +544,7 @@ namespace NathansWay.Shared
         {
             {"All", G__MathOperator.All},
             {"+", G__MathOperator.Addition},
-            {"–", G__MathOperator.Subtraction},
+            {"-", G__MathOperator.Subtraction},
             {"÷", G__MathOperator.Division},
             {"x", G__MathOperator.Multiplication},
             {"+ –", G__MathOperator.AddSub},

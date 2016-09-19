@@ -26,7 +26,7 @@
     <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision>15d1c392-677b-40bd-94a8-680bea964e5e</CodesignProvision>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>

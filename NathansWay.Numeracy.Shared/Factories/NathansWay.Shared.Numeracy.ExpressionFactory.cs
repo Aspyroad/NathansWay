@@ -87,7 +87,9 @@ namespace NathansWay.Shared.Factories
             {
                 var x = _lsDecodedExpressionEquation[i];
 
-                switch ((G__MathOperator)x.Key)
+                var y = (G__MathOperator)x.Key;
+
+                switch (y)
                 {
                     // Most common
                     case (G__MathOperator.Answer):

@@ -16,19 +16,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	{
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnCenterMethods { get; set; }
+		NathansWay.iOS.Numeracy.NWButton btnCenterMethods { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnCenterQuestion { get; set; }
+		NathansWay.iOS.Numeracy.NWButton btnCenterQuestion { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnLockAnswer { get; set; }
+		NathansWay.iOS.Numeracy.NWButton btnLockAnswer { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		NathansWay.iOS.Numeracy.ButtonLabelStyle btnLockSolveButton { get; set; }
+		NathansWay.iOS.Numeracy.NWButton btnLockSolveButton { get; set; }
 
 		[Outlet]
 		[GeneratedCode ("iOS Designer", "1.0")]
@@ -36,19 +36,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 		[Action ("OnTouch_btnCenterMethods:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void OnTouch_btnCenterMethods (NathansWay.iOS.Numeracy.ButtonLabelStyle sender);
+		partial void OnTouch_btnCenterMethods (NathansWay.iOS.Numeracy.NWButton sender);
 
 		[Action ("OnTouch_btnCenterQuestion:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void OnTouch_btnCenterQuestion (NathansWay.iOS.Numeracy.ButtonLabelStyle sender);
+		partial void OnTouch_btnCenterQuestion (NathansWay.iOS.Numeracy.NWButton sender);
 
 		[Action ("OnTouch_btnLockAnswer:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void OnTouch_btnLockAnswer (NathansWay.iOS.Numeracy.ButtonLabelStyle sender);
+		partial void OnTouch_btnLockAnswer (NathansWay.iOS.Numeracy.NWButton sender);
 
 		[Action ("OnTouch_btnLockSolveButton:")]
 		[GeneratedCode ("iOS Designer", "1.0")]
-		partial void OnTouch_btnLockSolveButton (NathansWay.iOS.Numeracy.ButtonLabelStyle sender);
+		partial void OnTouch_btnLockSolveButton (NathansWay.iOS.Numeracy.NWButton sender);
 
 		void ReleaseDesignerOutlets ()
 		{

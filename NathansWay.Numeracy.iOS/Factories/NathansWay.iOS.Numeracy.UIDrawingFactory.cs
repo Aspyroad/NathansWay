@@ -17,27 +17,43 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy.Drawing
 {
 
-    //public class DrawData
-    //{
-    //    public UIColor PrimaryFillColor { get; set; }
-    //    public CGSize ScaleFactor { get; set; }
-    //    public CGPoint StartPoint { get; set; }
-    //    public CGRect RectFrame { get; set; }
-    //    public CGRect RectBounds { get; set; }
-    //    public G__FactoryDrawings DrawType { get; set; }
-    //}
+    public class AnimationPacket
+    {
+        public DrawLayer Layer1 { get; set; }
+        public DrawLayer Layer2 { get; set; }
+        public DrawLayer Layer3 { get; set; }
+        public DrawLayer Layer4 { get; set; }
+        public CGPoint FromPosition { get; set; }
+        public CGPoint ToPosition1 { get; set; }
+        public CGPoint ToPosition2 { get; set; }
+        public CGPoint ToPosition3 { get; set; }
+        public G__NumberDisplayPositionY DirectionY { get; set; }
+        public G__NumberDisplayPositionX DirectionX { get; set; }
+    }
 
     public class DrawingFactory : SizeBase
     {
         // Notes
         // This class is coupled heavily with SizeClass base.
         // Rules :
-
         // SetScale() MUST be called!
-        // Other the obvious scale transform applied to the layer, this also sets the hieght and width based on enum values for each drawing
         // SetViewPosition MUST be called!
+        // Drawing example of use.
+
+        //drawfact.DrawingType = (G__FactoryDrawings)lesson.Operator;
+        //// Set the drawing in the middle of the view
+        //// when setting positions like this we manily refer to to the parents frame
+        //drawfact.ParentFrame = this.vOperator.Frame;
+        //drawfact.SetCenterRelativeParentViewPosX = true;
+        //drawfact.SetCenterRelativeParentViewPosY = true;
+        //drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
+        //drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
 
+        //// Sizeclass calculations
+        //drawfact.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level3);
+        //drawfact.SetViewPosition(this.vOperator.Frame.Width, this.vOperator.Frame.Height);
+        //vOperator.DrawLayer();
 
         #region Private Variables
 
@@ -46,10 +62,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
         private float _opacity;
         private G__FactoryDrawings _drawType;
 
-
-
         private Action<CGContext> _drawingDelegate;
         private Dictionary<G__FactoryDrawings, Action<CGContext>> _dictDrawingFuncs;
+
+        private CAAnimationGroup _animationGroup;
 
         #endregion
 
@@ -182,8 +198,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             _layer.FillColor = this.PrimaryFillColor;
             _layer.Opacity = this._opacity;
 
-
-
             // Set the layer sizing
             _layer.ScaleFactor = this.ScaleFactor;
             _layer.Frame = this.RectFrame;
@@ -207,6 +221,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
         #endregion
 
         #region Draw Functions
+
+        // Each of these represents a single layer.
+        // It is fine to draw more than one and layer them, however
+        // Rule - Only one layer per function call.
 
         public void DrawMultiplication(CGContext ctx)
         {
@@ -237,7 +255,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
             bezierPath.ClosePath();
             bezierPath.MiterLimit = 4.0f;
 
-            //fillColor.SetFill();
             bezierPath.Fill();
         }
 
@@ -245,12 +262,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             //// Rectangle Drawing
             UIBezierPath rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(13.0f, 2.0f, 4.0f, 26.0f), 2.0f);
-            //fillColor.SetFill();
             rectanglePath.Fill();
 
             //// Rectangle 2 Drawing
             var rectangle2Path = UIBezierPath.FromRoundedRect(new CGRect(2.0f, 13.0f, 26.0f, 4.0f), 2.0f);
-            //fillColor.SetFill();
             rectangle2Path.Fill();
         }
 
@@ -258,8 +273,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(4.0f, 13.0f, 22.0f, 4.0f), 2.0f);
-            //// Fill
-            //fillColor.SetFill();
             rectanglePath.Fill();
         }
 
@@ -267,17 +280,14 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             //// Rectangle Drawing
             var rectanglePath = UIBezierPath.FromRoundedRect(new CGRect(3.0f, 13.0f, 24.0f, 4.0f), 2.0f);
-            //fillColor.SetFill();
             rectanglePath.Fill();
 
             //// Oval1 Drawing
             var oval1Path = UIBezierPath.FromOval(new CGRect(12.0f, 5.0f, 6.0f, 6.0f));
-            //fillColor.SetFill();
             oval1Path.Fill();
 
             //// Oval2 Drawing
             var oval2Path = UIBezierPath.FromOval(new CGRect(12.0f, 19.0f, 6.0f, 6.0f));
-            //fillColor.SetFill();
             oval2Path.Fill();
         }
 
@@ -348,8 +358,182 @@ namespace NathansWay.iOS.Numeracy.Drawing
             oval2Path.Fill();
         }
 
+        public void DrawCircle(CGContext ctx)
+        {
+            //// BG Drawing
+            var bGPath = UIBezierPath.FromOval(this.RectFrame);
+            bGPath.Fill();
+
+        }
+
+        public void DrawTick(CGContext ctx)
+        {
+
+            //// Bezier Drawing
+            UIBezierPath tickPath = new UIBezierPath();
+            tickPath.MoveTo(new CGPoint(8.15f, 28.52f));
+            tickPath.AddLineTo(new CGPoint(22.81f, 36.67f));
+            tickPath.AddLineTo(new CGPoint(35.85f, 10.59f));
+            tickPath.AddLineTo(new CGPoint(30.96f, 8.15f));
+            tickPath.AddLineTo(new CGPoint(20.37f, 29.33f));
+            tickPath.AddLineTo(new CGPoint(9.78f, 23.63f));
+            tickPath.AddLineTo(new CGPoint(8.15f, 28.52f));
+            tickPath.ClosePath();
+
+            tickPath.Fill();
+
+            //    // Border
+            //    slTickBGLayer.StrokeColor = this._colorPaths.CGColor;
+            //    slTickBGLayer.LineWidth = 1.0f;
+
+        }
+
+        public void DrawCross(CGContext ctx)
+        {
+            //// cross Drawing
+            UIBezierPath crossPath = new UIBezierPath();
+            crossPath.MoveTo(new CGPoint(35.85f, 12.39f));
+            crossPath.AddLineTo(new CGPoint(31.61f, 8.15f));
+            crossPath.AddLineTo(new CGPoint(22.0f, 18.09f));
+            crossPath.AddLineTo(new CGPoint(12.39f, 8.15f));
+            crossPath.AddLineTo(new CGPoint(8.15f, 12.39f));
+            crossPath.AddLineTo(new CGPoint(17.76f, 22.0f));
+            crossPath.AddLineTo(new CGPoint(8.15f, 31.61f));
+            crossPath.AddLineTo(new CGPoint(12.39f, 35.85f));
+            crossPath.AddLineTo(new CGPoint(22.0f, 26.24f));
+            crossPath.AddLineTo(new CGPoint(31.61f, 35.85f));
+            crossPath.AddLineTo(new CGPoint(35.85f, 31.61f));
+            crossPath.AddLineTo(new CGPoint(26.24f, 22.0f));
+            crossPath.AddLineTo(new CGPoint(35.85f, 12.39f));
+            crossPath.ClosePath();
+            crossPath.MiterLimit = 4.0f;
+
+            crossPath.Fill();
+
+            // Border
+            //slCrossBGLayer.StrokeColor = this._colorPaths.CGColor;
+            //slCrossBGLayer.LineWidth = 1.0f;
+        }
+
+        #endregion
+
+        #region Animation Functions
+
+        public void LayersToCenter(AnimationPacket _animatePacket)
+        {
+            CABasicAnimation _aniLayersToCenter;
+            AnimateDelegate _myAnimateDelegate = new AnimateDelegate();
+
+            var pt = _animatePacket.Layer1.Position;
+            _animatePacket.Layer1.Position = _animatePacket.ToPosition1;
+            _animatePacket.Layer2.Position = _animatePacket.ToPosition1;
+
+            // ** Position Animation
+            _aniLayersToCenter = CABasicAnimation.FromKeyPath("position");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToCenter.RemovedOnCompletion = true;
+            //_aniLayersToCenter.FillMode = CAFillMode.Forwards;
+            _aniLayersToCenter.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+
+            _aniLayersToCenter.Delegate = _myAnimateDelegate;
+            _aniLayersToCenter.From = NSValue.FromCGPoint(pt);
+            _aniLayersToCenter.To = NSValue.FromCGPoint(_animatePacket.ToPosition1);
+            _aniLayersToCenter.Duration = 0.5f;
+
+ 
+
+            _animatePacket.Layer1.AddAnimation(_aniLayersToCenter, "position");
+            _animatePacket.Layer2.AddAnimation(_aniLayersToCenter, "position");
+
+        }
+
+        public void LayersToEdge(AnimationPacket _animatePacket)
+        {
+            CABasicAnimation _aniLayersToEdge;
+            CABasicAnimation _aniLayersToEdgeFade;
+            AnimateDelegate _myAnimateDelegate = new AnimateDelegate();
+
+            var pt = _animatePacket.Layer1.Position;
+            CGPoint x;
+
+            if (_animatePacket.DirectionY == G__NumberDisplayPositionY.Top)
+            {
+                _animatePacket.Layer1.Position = _animatePacket.ToPosition1;
+                _animatePacket.Layer2.Position = _animatePacket.ToPosition1;
+                x = _animatePacket.ToPosition1;
+            }
+            else
+            {
+                _animatePacket.Layer1.Position = _animatePacket.ToPosition2;
+                _animatePacket.Layer2.Position = _animatePacket.ToPosition2;
+                x = _animatePacket.ToPosition2;
+            }
+
+            _aniLayersToEdge = CABasicAnimation.FromKeyPath("position");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToEdge.RemovedOnCompletion = true;
+            _aniLayersToEdge.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdge.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+            _aniLayersToEdge.Delegate = _myAnimateDelegate;
+            _aniLayersToEdge.From = NSValue.FromCGPoint(pt);
+            _aniLayersToEdge.To = NSValue.FromCGPoint(x);
+            //_aniLayersToEdge.Duration = 1.0f;
+            //_aniLayersToEdge.RepeatCount = 1.0f;
+
+            // ** Fade Animation
+            _aniLayersToEdgeFade = CABasicAnimation.FromKeyPath("opacity");
+            // ** These two set if the presentation layer will stay set in the final animated position
+            _aniLayersToEdgeFade.RemovedOnCompletion = true;
+            _aniLayersToEdgeFade.FillMode = CAFillMode.Forwards;
+            _aniLayersToEdgeFade.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.Linear);
+            _aniLayersToEdgeFade.Delegate = _myAnimateDelegate;
+            _aniLayersToEdgeFade.From = NSNumber.FromFloat(1.0f);
+            _aniLayersToEdgeFade.To = NSNumber.FromFloat(0.0f);
+            //_aniLayersToCenter.Duration = 1.0f;
+
+            var y = NWAnimations.SpinLogo();
+
+            this._animationGroup.Duration = 0.5f;
+            this._animationGroup.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y };
+            _animatePacket.Layer1.AddAnimation(this._animationGroup, null);
+            _animatePacket.Layer2.AddAnimation(this._animationGroup, null);
+        }
+
+        private void ClearAllAnimations()
+        {
+            //this.slCrossBGLayer.RemoveAllAnimations();
+            //this.slCrossPathLayer.RemoveAllAnimations();
+            //this.slTickBGLayer.RemoveAllAnimations();
+            //this.slTickPathLayer.RemoveAllAnimations();
+        }
+
         #endregion
       
+    }
+
+    public class AnimateDelegate : CAAnimationDelegate
+    {
+        #region Contructors
+
+        public AnimateDelegate() : base()
+        {
+        }
+
+        #endregion
+
+        #region Overrides
+
+        public override void AnimationStarted(CAAnimation anim)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public override void AnimationStopped(CAAnimation anim, bool finished)
+        {
+            //throw new NotImplementedException();
+        }
+
+        #endregion
     }
 
     public class DrawLayer : CALayer
@@ -422,7 +606,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         public override void DrawInContext(CGContext ctx)
         {
-
             base.DrawInContext(ctx);
 
             UIGraphics.PushContext(ctx);

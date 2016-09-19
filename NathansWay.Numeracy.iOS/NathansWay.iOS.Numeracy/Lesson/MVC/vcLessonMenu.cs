@@ -315,10 +315,10 @@ namespace NathansWay.iOS.Numeracy
             this.GlobalButtonLevelClick (this.btnLevel10, G__MathLevel.Level10);
 		}
 		// Global Level Handler 
-		private void GlobalButtonLevelClick (ButtonLabelStyle btnLevelButton, G__MathLevel _mathLevel)
+		private void GlobalButtonLevelClick (NWButton btnLevelButton, G__MathLevel _mathLevel)
 		{
 			// Turn off the old button
-			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intLevelHoldState) as ButtonLabelStyle;
+			NWButton tmpBtnViewOld = this.View.ViewWithTag (intLevelHoldState) as NWButton;
 			if (tmpBtnViewOld != null)
 			{
                 tmpBtnViewOld.ApplyUIUnHeld();
@@ -346,33 +346,33 @@ namespace NathansWay.iOS.Numeracy
 		// Operator Button Handlers
 		void OnClick_btnOpSubtract (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Subtraction);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.Subtraction);
 		}
 		void OnClick_btnOpDivMulti (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.DivMulti);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.DivMulti);
 		}
 		void OnClick_btnOpMultiply (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Multiplication);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.Multiplication);
 		}
 		void OnClick_btnOpDivision (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Division);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.Division);
 		}
 		void OnClick_btnOpAddSub (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.AddSub);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.AddSub);
 		}
 		void OnClick_btnOpAdd (object sender, EventArgs e)
 		{
-            GlobalButtonOpClick ((ButtonLabelStyle)sender, G__MathOperator.Addition);
+            GlobalButtonOpClick ((NWButton)sender, G__MathOperator.Addition);
 		}
 		// Global Level Handler 
-        private void GlobalButtonOpClick (ButtonLabelStyle btnOpButton, G__MathOperator _mathOperator)
+        private void GlobalButtonOpClick (NWButton btnOpButton, G__MathOperator _mathOperator)
 		{
 			// Turn off the old button
-			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intOpHoldState) as ButtonLabelStyle;
+			NWButton tmpBtnViewOld = this.View.ViewWithTag (intOpHoldState) as NWButton;
             if (tmpBtnViewOld != null)
             {
                 tmpBtnViewOld.ApplyUIUnHeld();
@@ -401,25 +401,25 @@ namespace NathansWay.iOS.Numeracy
 		// Type Buttons Handlers
 		void OnClick_btnTypeMixed (object sender, EventArgs e)
 		{
-            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Mixed);
+            GlobalButtonTypeClick ((NWButton)sender, G__MathType.Mixed);
 		}
 		void OnClick_btnTypeGrouped (object sender, EventArgs e)
 		{
-            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Grouped);
+            GlobalButtonTypeClick ((NWButton)sender, G__MathType.Grouped);
 		}
 		void OnClick_btnTypeFraction (object sender, EventArgs e)
 		{
-            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Fraction);
+            GlobalButtonTypeClick ((NWButton)sender, G__MathType.Fraction);
 		}
 		void OnClick_btnTypeBasic (object sender, EventArgs e)
 		{
-            GlobalButtonTypeClick ((ButtonLabelStyle)sender, G__MathType.Basic);
+            GlobalButtonTypeClick ((NWButton)sender, G__MathType.Basic);
 		}
 		// Global Type Handler 
-        private void GlobalButtonTypeClick (ButtonLabelStyle btnTypeButton, G__MathType _mathType)
+        private void GlobalButtonTypeClick (NWButton btnTypeButton, G__MathType _mathType)
 		{
 			// Turn off the old button
-			ButtonLabelStyle tmpBtnViewOld = this.View.ViewWithTag (intTypeHoldState) as ButtonLabelStyle;
+			NWButton tmpBtnViewOld = this.View.ViewWithTag (intTypeHoldState) as NWButton;
             if (tmpBtnViewOld != null)
             {
                 tmpBtnViewOld.ApplyUIUnHeld();

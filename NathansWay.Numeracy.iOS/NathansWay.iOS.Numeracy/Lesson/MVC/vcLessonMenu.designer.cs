@@ -63,71 +63,71 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnBackToMenu { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnBackToMenu { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel1 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel1 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel10 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel10 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel2 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel2 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel3 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel3 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel4 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel4 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel5 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel5 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel6 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel6 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel7 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel7 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel8 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel8 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnLevel9 { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnLevel9 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpAdd { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpAdd { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpAddSub { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpAddSub { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpDivision { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpDivision { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpMultiply { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpMultiply { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpMultSub { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpMultSub { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnOpSubtract { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnOpSubtract { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -135,19 +135,19 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnTypeBasic { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnTypeBasic { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnTypeFractions { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnTypeFractions { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnTypeGroups { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnTypeGroups { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonLabelStyle btnTypeMixed { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnTypeMixed { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

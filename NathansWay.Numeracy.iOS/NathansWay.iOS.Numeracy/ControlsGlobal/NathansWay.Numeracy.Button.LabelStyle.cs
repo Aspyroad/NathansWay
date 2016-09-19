@@ -6,36 +6,44 @@ using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
 using Foundation;
-using ObjCRuntime;
+// Nathansway
+using NathansWay.iOS.Numeracy.Drawing;
+using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-	[Register ("ButtonLabelStyle")]
-	public class ButtonLabelStyle : AspyButton
+	[Register ("NWButton")]
+	public class NWButton : AspyButton
 	{
 		#region Private Variables
+
+        // Drawing
+        protected DrawingFactory _iOSDrawingFactory;
+        protected bool _bEnableDrawing;
+        protected G__FactoryDrawings _drawing;
+
 
 		#endregion
 
 		#region Constructors
 
 		// Required for the Xamarin iOS Desinger
-		public ButtonLabelStyle () : base()
+		public NWButton () : base()
 		{
 			Initialize();
 		}
 
-		public ButtonLabelStyle (IntPtr handle) : base(handle)
+		public NWButton (IntPtr handle) : base(handle)
 		{
 			Initialize();
 		} 
 
-		public ButtonLabelStyle (CGRect myFrame)  : base (myFrame)
+		public NWButton (CGRect myFrame)  : base (myFrame)
 		{ 
 			Initialize();    
 		}
 
-		public ButtonLabelStyle (UIButtonType type) : base (type)
+		public NWButton (UIButtonType type) : base (type)
 		{
 			Initialize();
 		}
@@ -85,39 +93,33 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
+            this.BackgroundColor = UIColor.Purple;
             this.HasBorder = true;
             this.HasRoundedCorners = true;
             this.EnableHold = true;
             this.AutoApplyUI = true;
+            _iOSDrawingFactory = iOSCoreServiceContainer.Resolve<DrawingFactory>();
         }
-
-        //		private void DrawButtonLabelStyle(UIColor labelTextColor, RectangleF buttonFrame)
-        //		{
-        //            var context = UIGraphics.GetCurrentContext();
-        //			//// Rectangle Drawing
-        //			RectangleF rectangleRect = new RectangleF(buttonFrame.X, buttonFrame.Y, buttonFrame.Width, buttonFrame.Height);
-        //			var rectanglePath = UIBezierPath.FromRoundedRect(rectangleRect, 6.0f);
-        //			if (this.IsPressed || this.HoldState)
-        //			{
-        //				UIColor.FromRGBA (255, 255, 255, 250).SetFill ();
-        //			}
-        //			else
-        //			{
-        //				UIColor.Clear.SetFill ();
-        //			}
-        //			rectanglePath.Fill();
-        //			labelTextColor.SetStroke();
-        //			rectanglePath.LineWidth = 2.0f;
-        //			rectanglePath.Stroke();
-        //			labelTextColor.SetFill();
-        //
-        //            context.SaveState();
-        //            context.ClipToRect(rectangleRect);
-        //		}
 
 		#endregion
 
         #region Public Members
+
+        // This function is required by the DrawingFactory.
+        // This must be implemented.
+        public void DrawLayer()
+        {
+            var x = this._iOSDrawingFactory.DrawLayer();
+
+            if (x != null)
+            {
+                //x.Contents = null;
+                this.Layer.AddSublayer(x);
+                // This one line took me hours over the period of 19-21 July 2016
+                // We need to call setneedsdisply to FORCE drawincontext to be called.
+                x.SetNeedsDisplay();
+            }
+        }
 
         public void ApplyUI_Negative()
         {

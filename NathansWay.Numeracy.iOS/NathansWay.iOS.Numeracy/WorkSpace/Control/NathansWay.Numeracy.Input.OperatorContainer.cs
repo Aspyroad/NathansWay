@@ -90,8 +90,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Not sure if this is needed anymore? vOperator is now pretty dumb
             this._vOperator.MathOperator = this._operatorType;
 
-
-
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
         }
