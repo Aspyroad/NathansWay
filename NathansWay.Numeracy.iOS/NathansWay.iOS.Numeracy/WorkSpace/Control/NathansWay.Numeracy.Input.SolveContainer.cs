@@ -432,31 +432,46 @@ namespace NathansWay.iOS.Numeracy
 
             // Set drawn graphic positions
             this._iOSDrawingFactory.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level5);
-            this._iOSDrawingFactory.SetHeightWidth(this._rectTick.Width, this._rectTick.Height);
+            this._iOSDrawingFactory.SetHeightWidth(this._rectTick.Width, this._rectTick.Width);
 
 
             // Set Position
             this._iOSDrawingFactory.SetViewPosition(this._pTopCenter);
-            // Draw
+            this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
+            // Draw a tick
             this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Tick;
             this.slTickPathLayer = this._iOSDrawingFactory.DrawLayer();
+            // Draw a green background circle for a tick
+            this._iOSDrawingFactory.PrimaryFillColor = this._colorBGTick;
             this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
+            this._iOSDrawingFactory.DrawCircleBoundry = this._rectTick;
             this.slTickBGLayer = this._iOSDrawingFactory.DrawLayer();
 
             // Set Position
             this._iOSDrawingFactory.SetViewPosition(this._pBottomCenter);
-            // Draw
+            this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
+            // Draw a cross
             this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Cross;
             this.slCrossPathLayer = this._iOSDrawingFactory.DrawLayer();
+            // Draw the background for a corss
+            this._iOSDrawingFactory.PrimaryFillColor = this._colorBGCross;
             this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
             this.slCrossBGLayer = this._iOSDrawingFactory.DrawLayer();
 
-            slCrossBGLayer.FillColor = this._colorBGCross.CGColor;
+            slTickBGLayer.Bounds = rect;
+            slTickPathLayer.Bounds = rect;
+
+            slTickBGLayer.Bounds = rect;
+            slTickPathLayer.Bounds = rect;
 
             this.Layer.AddSublayer(slTickBGLayer);
             this.Layer.AddSublayer(slTickPathLayer);
+            slTickBGLayer.SetNeedsDisplay();
+            slTickPathLayer.SetNeedsDisplay();
             this.Layer.AddSublayer(slCrossBGLayer);
             this.Layer.AddSublayer(slCrossPathLayer);
+            slCrossBGLayer.SetNeedsDisplay();
+            slCrossPathLayer.SetNeedsDisplay();
 
         }
 

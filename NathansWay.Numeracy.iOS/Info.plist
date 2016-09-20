@@ -23,5 +23,9 @@
 	<string></string>
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
+	<key>CFBundleName</key>
+	<string>NathansWayiOSNumeracy</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array/>
 </dict>
 </plist>

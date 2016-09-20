@@ -37,9 +37,9 @@ namespace NathansWay.Shared
             {G__FactoryDrawings.AddSub, new G__Size(60.0f, 30.0f)},
             {G__FactoryDrawings.DivMulti, new G__Size(60.0f, 30.0f)},
             {G__FactoryDrawings.Equals, new G__Size(30.0f, 30.0f)},
-            {G__FactoryDrawings.Circle, new G__Size(60.0f, 30.0f)},
-            {G__FactoryDrawings.Tick, new G__Size(60.0f, 30.0f)},
-            {G__FactoryDrawings.Cross, new G__Size(30.0f, 30.0f)}
+            {G__FactoryDrawings.Circle, new G__Size(44.0f, 44.0f)},
+            {G__FactoryDrawings.Tick, new G__Size(44.0f, 44.0f)},
+            {G__FactoryDrawings.Cross, new G__Size(44.0f, 44.0f)}
         };
 
         public static G__Size GetSize(G__FactoryDrawings x)

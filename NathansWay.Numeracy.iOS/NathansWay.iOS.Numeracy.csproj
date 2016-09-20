@@ -102,6 +102,7 @@
     <None Include="NathansWay.iOS.Numeracy\Lesson\README.md" />
     <None Include="NathansWay.iOS.Numeracy\WorkSpace\README.md" />
     <None Include="Entitlements.plist" />
+    <Compile Include="Main.cs" />
     <None Include="RELEASE-NOTES.txt" />
     <None Include="packages.config" />
     <None Include="UISettingColors.txt" />
@@ -109,7 +110,6 @@
     <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Main.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.Game.Core.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />

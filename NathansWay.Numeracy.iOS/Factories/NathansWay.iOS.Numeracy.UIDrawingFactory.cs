@@ -177,6 +177,12 @@ namespace NathansWay.iOS.Numeracy.Drawing
             }
         }
 
+        public CGRect DrawCircleBoundry
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Public Members
@@ -363,7 +369,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         public void DrawCircle(CGContext ctx)
         {
             //// BG Drawing
-            var bGPath = UIBezierPath.FromOval(this.RectFrame);
+            var bGPath = UIBezierPath.FromOval(this.DrawCircleBoundry);
             bGPath.Fill();
 
         }
