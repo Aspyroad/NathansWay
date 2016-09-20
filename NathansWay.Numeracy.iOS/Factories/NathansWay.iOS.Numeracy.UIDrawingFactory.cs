@@ -49,7 +49,6 @@ namespace NathansWay.iOS.Numeracy.Drawing
         //drawfact.DisplayPositionX = G__NumberDisplayPositionX.Center;
         //drawfact.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
-
         //// Sizeclass calculations
         //drawfact.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level3);
         //drawfact.SetViewPosition(this.vOperator.Frame.Width, this.vOperator.Frame.Height);
@@ -93,6 +92,9 @@ namespace NathansWay.iOS.Numeracy.Drawing
             this._dictDrawingFuncs.Add(G__FactoryDrawings.Subtraction, this.DrawSubtraction);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.AddSub, this.DrawAddSub);
             this._dictDrawingFuncs.Add(G__FactoryDrawings.DivMulti, this.DrawDivMulti);
+            this._dictDrawingFuncs.Add(G__FactoryDrawings.Circle, this.DrawCircle);
+            this._dictDrawingFuncs.Add(G__FactoryDrawings.Tick, this.DrawTick);
+            this._dictDrawingFuncs.Add(G__FactoryDrawings.Cross, this.DrawCross);
 
             this._opacity = 1.0f;
         }
@@ -177,7 +179,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
         #endregion
 
-        #region Public Mambers
+        #region Public Members
 
         public DrawLayer DrawLayer()
         {

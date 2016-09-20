@@ -360,6 +360,12 @@ namespace NathansWay.iOS.Numeracy
             this._colorPaths = this._myUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
             this._colorBGTick = this._myUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this._colorBGCross = this._myUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+
+            // Set any positioning - the drawing in the middle of the view
+            this._iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+            this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+            this._iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
         }
 
         private void ScaleLayerAffine(CALayer _layer, nfloat _scale)
@@ -400,27 +406,58 @@ namespace NathansWay.iOS.Numeracy
             //this._iOSDrawingFactory.DrawingType = (G__FactoryDrawings)this._operatorType;
 
             //// Set any positioning - the drawing in the middle of the view
-            //this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
-            //this._vOperator.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
-            //this._vOperator.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
-            //this._vOperator.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
+            //this.iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+            //this.iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+            //this.iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+            //this.iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Center;
 
             //// TODO: Set this with a global color
-            //this._vOperator.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
+            //this.iOSDrawingFactory.PrimaryFillColor = UIColor.Black;
 
             //// Set drawn graphic positions
-            //this._vOperator.iOSDrawingFactory.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level5);
-            //this._vOperator.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
-            //this._vOperator.DrawLayer();
+            //this.iOSDrawingFactory.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level5);
+            //this.iOSDrawingFactory.SetViewPosition(this._sizeClass.CurrentWidth, this._sizeClass.CurrentHeight);
+            //this.DrawLayer();
         }
 
         public override void Draw(CGRect rect)
         {
             base.Draw(rect);
 
-            // Factory draw the Cross and Tick
-            //this.DrawCross(this._rectCross);
-            //this.DrawTick(this._rectTick);
+            //    slCrossBGLayer.Bounds = rect;
+            //    slCrossPathLayer.Bounds = rect;
+
+            //    slCrossBGLayer.Position = this._pBottomCenter;
+            //    slCrossPathLayer.Position = this._pBottomCenter;
+
+            // Set drawn graphic positions
+            this._iOSDrawingFactory.SetDisplaySizeAndScale(G__DisplaySizeLevels.Level5);
+            this._iOSDrawingFactory.SetHeightWidth(this._rectTick.Width, this._rectTick.Height);
+
+
+            // Set Position
+            this._iOSDrawingFactory.SetViewPosition(this._pTopCenter);
+            // Draw
+            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Tick;
+            this.slTickPathLayer = this._iOSDrawingFactory.DrawLayer();
+            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
+            this.slTickBGLayer = this._iOSDrawingFactory.DrawLayer();
+
+            // Set Position
+            this._iOSDrawingFactory.SetViewPosition(this._pBottomCenter);
+            // Draw
+            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Cross;
+            this.slCrossPathLayer = this._iOSDrawingFactory.DrawLayer();
+            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
+            this.slCrossBGLayer = this._iOSDrawingFactory.DrawLayer();
+
+            slCrossBGLayer.FillColor = this._colorBGCross.CGColor;
+
+            this.Layer.AddSublayer(slTickBGLayer);
+            this.Layer.AddSublayer(slTickPathLayer);
+            this.Layer.AddSublayer(slCrossBGLayer);
+            this.Layer.AddSublayer(slCrossPathLayer);
+
         }
 
         public override void ApplyPressed(bool _isPressed)

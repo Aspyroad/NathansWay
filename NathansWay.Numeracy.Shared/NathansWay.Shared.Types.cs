@@ -18,7 +18,11 @@ namespace NathansWay.Shared
         Multiplication = G__MathOperator.Multiplication,
         AddSub = G__MathOperator.AddSub,
         DivMulti = G__MathOperator.DivMulti,
-        Equals = G__MathOperator.Equals
+        Equals = G__MathOperator.Equals,
+        Circle = 8,
+        Tick = 9,
+        Cross = 10
+
     }
 
     public static class G__FactoryDrawingSizes
@@ -32,7 +36,10 @@ namespace NathansWay.Shared
             {G__FactoryDrawings.Multiplication, new G__Size(30.0f, 30.0f)},
             {G__FactoryDrawings.AddSub, new G__Size(60.0f, 30.0f)},
             {G__FactoryDrawings.DivMulti, new G__Size(60.0f, 30.0f)},
-            {G__FactoryDrawings.Equals, new G__Size(30.0f, 30.0f)}
+            {G__FactoryDrawings.Equals, new G__Size(30.0f, 30.0f)},
+            {G__FactoryDrawings.Circle, new G__Size(60.0f, 30.0f)},
+            {G__FactoryDrawings.Tick, new G__Size(60.0f, 30.0f)},
+            {G__FactoryDrawings.Cross, new G__Size(30.0f, 30.0f)}
         };
 
         public static G__Size GetSize(G__FactoryDrawings x)
