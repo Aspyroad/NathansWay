@@ -103,7 +103,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void AddAndSet_MainGame()
         {
             // TODO: Move this size shit into maingames size class
-            var _pointF2 = new CGPoint(2.0f, 2.0f);
+            var _pointF2 = new CGSize(2.0f, 2.0f);
 
             this._vcMainGame.SizeClass.SetViewPosition(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);

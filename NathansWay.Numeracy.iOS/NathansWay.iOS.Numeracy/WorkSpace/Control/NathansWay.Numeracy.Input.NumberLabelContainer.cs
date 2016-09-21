@@ -179,12 +179,12 @@ namespace NathansWay.iOS.Numeracy
                     if ((_lsNumbers.Count > 1) || (_result.Length > 1))
                     {
                         newnumber.NumberLabelSize.IsMultiNumberText = true;
-                        newnumber.NumberLabelSize.SetViewPosition(new CGPoint(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberLabelSize.SetViewPosition(new CGSize(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberLabelSize.CurrentWidth);
                     }
                     else
                     {
-                        newnumber.NumberLabelSize.SetViewPosition(new CGPoint(this._sizeClass.CurrentWidth, 0.0f));
+                        newnumber.NumberLabelSize.SetViewPosition(new CGSize(this._sizeClass.CurrentWidth, 0.0f));
                         this._sizeClass.CurrentWidth += (newnumber.NumberLabelSize.CurrentWidth);
                     }
 
@@ -208,7 +208,7 @@ namespace NathansWay.iOS.Numeracy
                     _lsNumbers.Add(newdecimal);
                     // Sizing
                     // The Space Madness!
-                    newdecimal.DecimalSize.SetViewPosition(new CGPoint(this.SizeClass.CurrentWidth, 0.0f));
+                    newdecimal.DecimalSize.SetViewPosition(new CGSize(this.SizeClass.CurrentWidth, 0.0f));
                     // Set our current width
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 

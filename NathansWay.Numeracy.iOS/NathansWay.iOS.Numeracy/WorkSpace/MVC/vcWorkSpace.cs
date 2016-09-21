@@ -293,7 +293,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private void SetWorkSpaceInitialPosition()
         {
             var y = ((this.iOSGlobals.G__RectWindowLandscape.Height - this.SizeClass.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
-            var _pointF1 = new CGPoint(4.0f, y);
+            var _pointF1 = new CGSize(4.0f, y);
             this.SizeClass.SetViewPosition(_pointF1);
         }
 

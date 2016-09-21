@@ -441,7 +441,9 @@ namespace NathansWay.Shared
     {
         Top = 1,
         Center = 2,
-        Bottom = 3
+        Bottom = 3,
+        TopPadded = 4, 
+        BottomPadded = 5
     }
 
     public enum G__NumberDisplayPositionX : int

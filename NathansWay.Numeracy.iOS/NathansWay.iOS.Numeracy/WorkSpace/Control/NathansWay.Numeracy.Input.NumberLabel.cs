@@ -216,10 +216,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
         }
 
-        public override void SetViewPosition (CGPoint _startPoint)
+        public override void SetViewPosition (CGSize _parentFrame)
         {
             // Common width/height/frame settings from Dimensions class
-            base.SetViewPosition(_startPoint);
+            base.SetViewPosition(_parentFrame);
             // Other Frames
             this.SetFrames();
         }  

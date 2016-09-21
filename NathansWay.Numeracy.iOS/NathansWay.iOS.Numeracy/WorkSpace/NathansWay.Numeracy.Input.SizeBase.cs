@@ -156,14 +156,14 @@ namespace NathansWay.iOS.Numeracy
         /// 
         /// </summary>
         /// <returns>The display and position.</returns>
-        /// <param name="_XWidth">Parent container X width.</param>
-        /// <param name="_YHeight">Parent container Y height.</param>
-        protected CGPoint RefreshDisplayAndPosition(nfloat _XWidth, nfloat _YHeight)
+        /// <param name="_XParentFrameWidth">Parent container X width.</param>
+        /// <param name="_YParentFrameHeight">Parent container Y height.</param>
+        protected CGPoint RefreshDisplayAndPosition(nfloat _XParentFrameWidth, nfloat _YParentFrameHeight)
         {
-            this._fCurrentY = _YHeight;
-            this._fCurrentX = _XWidth;
-            nfloat Y = _YHeight;
-            nfloat X = _XWidth;
+            this._fCurrentY = _YParentFrameHeight;
+            this._fCurrentX = _XParentFrameWidth;
+            nfloat Y = _YParentFrameHeight;
+            nfloat X = _XParentFrameWidth;
 
             // ** Vertical Center
             if (this._setRelationPosY)
@@ -318,8 +318,8 @@ namespace NathansWay.iOS.Numeracy
         /// Override 1 Sets Rectframe position.
         /// </summary>
         /// <returns>The view position.</returns>
-        /// <param name="_startPoint">Start point.</param>
-        public virtual void SetViewPosition (CGPoint _startPoint)
+        /// <param name="_parentFrame">Start point.</param>
+        public virtual void SetViewPosition (CGSize _parentFrame)
         {
             /// <summary>
             /// Calls Refreshanddisplay positions.
@@ -353,7 +353,7 @@ namespace NathansWay.iOS.Numeracy
             // It should NOT be called to set frame objects
 
             this.SetSubHeightWidthPositions();
-            this.StartPoint = this.RefreshDisplayAndPosition(_startPoint.X, _startPoint.Y); 
+            this.StartPoint = this.RefreshDisplayAndPosition(_parentFrame.Width, _parentFrame.Height); 
         }
 
         /// <summary>
@@ -367,6 +367,18 @@ namespace NathansWay.iOS.Numeracy
             // dimensions to the parent container
             this.SetSubHeightWidthPositions();
             this.StartPoint = this.RefreshDisplayAndPosition(_widthX, _heightY);
+        }
+
+        /// <summary>
+        /// Override 3 Sets Rectframe position.
+        /// </summary>
+        /// <param name="_frame">CGRect frame object</param>
+        public virtual void SetViewPosition(CGRect _frame)
+        {
+            // This is mainly used of if the object being sized has  different
+            // dimensions to the parent container
+            this.SetSubHeightWidthPositions();
+            this.StartPoint = this.RefreshDisplayAndPosition(_frame.Width, _frame.Height);
         }
 
         public virtual void SetViewPosition()
