@@ -74,7 +74,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // 14/3/2016
             base.LoadView();
             this.View.Frame = new CGRect(0.0f, 0.0f, 168.0f, 168.0f);
-            //this.View.Frame = new CGRect (0.0f, 0.0f, 360.0f, 190.0f);
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
@@ -87,13 +86,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = false;
 
-
             // Setup Button Text
             this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
             this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
             this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
             this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
-
         }
 
         public override void ApplyUI7 ()
@@ -111,7 +108,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnCenterMethods.HasBorder = false;
             //this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnCenterMethods.CornerRadius = 5.0f;
-            this.btnCenterMethods.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnCenterMethods.BackgroundColor = UIColor.Clear;
             this.btnCenterMethods.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
             this.btnCenterQuestion.HasBorder = false;
@@ -167,14 +164,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         partial void OnTouch_btnCenterMethods(NWButton sender)
         {
-            //
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void OnTouch_btnCenterQuestion(NWButton sender)
         {
-            //throw new NotImplementedException();
-
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 

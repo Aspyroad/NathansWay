@@ -18,6 +18,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 	[Register("vcWorkNumlet")]
 	public class vcWorkNumlet : BaseContainer
 	{
+
+        #region Events
+
+        public delegate void ResultSelected(Object sender, EventArgs e);
+        public event ResultSelected evtResultSelected;
+
+        #endregion
+
 		#region Private Variables
 		// Control Attributes
         private G__WorkNumletType _workNumletType;
@@ -220,6 +228,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnControlSelectedChange()
         {
+            if (this.NumletType == G__WorkNumletType.Result)
+            {
+                this.FireResultSelected();
+            }
             base.OnControlSelectedChange();
         }
 
@@ -286,6 +298,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //}
 
 		#endregion
+
+        #region EventHandlers
+
+        protected void FireResultSelected()
+        {
+            // Thread safety.
+            var x = this.evtResultSelected;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x(this, new EventArgs());
+            }
+        }
+
+        #endregion
 	}
 
     public class SizeWorkNumlet : SizeBase

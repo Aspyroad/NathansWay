@@ -148,6 +148,7 @@ namespace NathansWay.iOS.Numeracy
 
             this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
             this.btnSolveButton.TouchUpInside += OnTouch_btnSolveButton;
+            this.MyWorkSpaceParent.NumletResult.evtResultSelected += (sender, e) => { this.btnSolveButton.DrawTickAndCross(); };
             this.View.AddSubview(this.btnSolveButton);
         }
 
@@ -177,6 +178,12 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Public Members
+
+        public void RefreshDisplay()
+        {
+            this.btnSolveButton.DrawTickAndCross();
+            this.View.SetNeedsDisplay();
+        }
 
         #endregion
 
@@ -266,11 +273,14 @@ namespace NathansWay.iOS.Numeracy
         private CGRect _rect;
         private CGRect _rectCross;
         private CGRect _rectTick;
-        private CGPoint _pBottomCenter;
-        private CGPoint _pTopCenter;
+        //private CGPoint _pBottomCenter;
+        //private CGPoint _pTopCenter;
         private CGPoint _pTrueCenter;
         private CGPoint _pTrueBottomEdge;
         private CGPoint _pTrueTopEdge;
+        // Original
+        private CGPoint _pTickLayerPosition;
+        private CGPoint _pCrossLayerPosition;
 
         private UIColor _colorBGTick;
         private UIColor _colorBGCross;
@@ -334,8 +344,8 @@ namespace NathansWay.iOS.Numeracy
             var _width = (this._rect.Width - (4 * this._myGlobalDimensions.NumberBorderWidth));
             var _height = (this._rect.Height / 2);
 
-            this._pTopCenter = new CGPoint(f, g);
-            this._pBottomCenter = new CGPoint(f, (g * 3.0f));
+            //this._pTopCenter = new CGPoint(f, g);
+            //this._pBottomCenter = new CGPoint(f, (g * 3.0f));
             this._pTrueCenter = new CGPoint(f, _height);
             this._pTrueBottomEdge = new CGPoint(f, (this._rect.Height + g));
             this._pTrueTopEdge = new CGPoint(f, (0.0f - g));
@@ -367,18 +377,19 @@ namespace NathansWay.iOS.Numeracy
         {
             AnimationPacket _data = new AnimationPacket();
 
+            // Tick to the center
             _data.ToPosition1 = this._pTrueBottomEdge;
             _data.ToPosition2 = this._pTrueCenter;
-
-            _data.Layer1 = slCrossBGLayer;
-            _data.Layer2 = slCrossPathLayer;
+            _data.Layer1 = slTickBGLayer;
+            _data.Layer2 = slTickPathLayer;
             _data.DirectionY = G__NumberDisplayPositionY.Bottom;
             this._iOSDrawingFactory.LayersToCenter(_data);
 
+            // Cross to the edge spinning and fading
             _data.ToPosition1 = this._pTrueCenter;
             _data.ToPosition2 = this._pTrueBottomEdge;
-            _data.Layer1 = slTickBGLayer;
-            _data.Layer2 = slTickPathLayer;
+            _data.Layer1 = slCrossBGLayer;
+            _data.Layer2 = slCrossPathLayer;
             _data.DirectionY = G__NumberDisplayPositionY.Top;
             this._iOSDrawingFactory.LayersToEdge(_data);
         }
@@ -387,19 +398,86 @@ namespace NathansWay.iOS.Numeracy
         {
             AnimationPacket _data = new AnimationPacket();
 
-            _data.ToPosition1 = this._pTrueTopEdge;
-            //_data.ToPosition2 = this._pTrueBottomEdge;
+            // Tick to the edge spinning and fading
+            _data.ToPosition1 = this._pTrueTopEdge; 
             _data.DirectionY = G__NumberDisplayPositionY.Top;
             _data.Layer1 = slTickBGLayer;
             _data.Layer2 = slTickPathLayer;
             this._iOSDrawingFactory.LayersToEdge(_data);
 
+            // Cross to the center
             _data.ToPosition1 = this._pTrueCenter;
             _data.ToPosition2 = this._pTrueBottomEdge;
             _data.Layer1 = slCrossBGLayer;
             _data.Layer2 = slCrossPathLayer;
-
             this._iOSDrawingFactory.LayersToCenter(_data);
+        }
+
+        public void DrawTickAndCross()
+        {
+            if (slTickBGLayer == null && slCrossBGLayer == null)
+            {
+                // Set the margin for top and bottom
+                this._iOSDrawingFactory.PaddingPositional = 10.0f;
+
+                // Draw a tick ********************************************************************
+                this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Tick;
+                // Set tick position Center horizontal and Top relative to the parent frame (this)
+                this._iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+                this._iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+
+                this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+                this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Top;
+                // Set the position
+                this._iOSDrawingFactory.SetViewPosition(this.Frame.Width, this.Frame.Width);
+                this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
+
+                this.slTickPathLayer = this._iOSDrawingFactory.DrawLayer();
+                // Draw a green background circle for a tick
+                this._iOSDrawingFactory.PrimaryFillColor = this._colorBGTick;
+                this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
+                this._iOSDrawingFactory.DrawCircleBoundry = this._rectTick;
+                this.slTickBGLayer = this._iOSDrawingFactory.DrawLayer();
+
+                // Draw a cross *******************************************************************
+                this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Cross;
+                // Set cross position Center horizontal and Bottom relative to the parent frame (this)
+                this._iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
+                this._iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
+
+                this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
+                this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Bottom;
+                // Set the position
+                this._iOSDrawingFactory.SetViewPosition(this.Frame);
+                this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
+
+                this.slCrossPathLayer = this._iOSDrawingFactory.DrawLayer();
+                // Draw the background for a cross
+                this._iOSDrawingFactory.PrimaryFillColor = this._colorBGCross;
+                this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
+                this.slCrossBGLayer = this._iOSDrawingFactory.DrawLayer();
+
+                this._pTickLayerPosition = this.slTickBGLayer.Position;
+                this._pCrossLayerPosition = this.slCrossBGLayer.Position;
+            }
+            else
+            {
+                slTickBGLayer.Position = this._pTickLayerPosition;
+                slTickPathLayer.Position = this._pTickLayerPosition;
+                slCrossBGLayer.Position = this._pCrossLayerPosition;
+                slCrossPathLayer.Position = this._pCrossLayerPosition;
+            }
+
+            //Place the layers
+            this.Layer.AddSublayer(slTickBGLayer);
+            this.Layer.AddSublayer(slTickPathLayer);
+            slTickBGLayer.SetNeedsDisplay();
+            slTickPathLayer.SetNeedsDisplay();
+            this.Layer.AddSublayer(slCrossBGLayer);
+            this.Layer.AddSublayer(slCrossPathLayer);
+            slCrossBGLayer.SetNeedsDisplay();
+            slCrossPathLayer.SetNeedsDisplay();
+
         }
 
         #endregion
@@ -414,68 +492,7 @@ namespace NathansWay.iOS.Numeracy
         public override void Draw(CGRect rect)
         {
             base.Draw(rect);
-
-            // Draw a tick ********************************************************************
-            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Tick;
-            // Set tick position Center horizontal and Top relative to the parent frame (this)
-            this._iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
-            this._iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
-
-            this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
-            this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Top;
-            // Set the position
-            this._iOSDrawingFactory.SetViewPosition(this.Frame.Width, this.Frame.Width);
-            this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
-
-            this.slTickPathLayer = this._iOSDrawingFactory.DrawLayer();
-            // Draw a green background circle for a tick
-            this._iOSDrawingFactory.PrimaryFillColor = this._colorBGTick;
-            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
-            this._iOSDrawingFactory.DrawCircleBoundry = this._rectTick;
-            this.slTickBGLayer = this._iOSDrawingFactory.DrawLayer();
-
-            // Draw a cross *******************************************************************
-            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Cross;
-            // Set cross position Center horizontal and Bottom relative to the parent frame (this)
-            this._iOSDrawingFactory.SetCenterRelativeParentViewPosX = true;
-            this._iOSDrawingFactory.DisplayPositionX = G__NumberDisplayPositionX.Center;
-
-            this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
-            this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Bottom;
-            // Set the position
-            this._iOSDrawingFactory.SetViewPosition(this.Frame);
-            this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
-
-            this.slCrossPathLayer = this._iOSDrawingFactory.DrawLayer();
-            // Draw the background for a cross
-            this._iOSDrawingFactory.PrimaryFillColor = this._colorBGCross;
-            this._iOSDrawingFactory.DrawingType = G__FactoryDrawings.Circle;
-            this.slCrossBGLayer = this._iOSDrawingFactory.DrawLayer();
-
-            // Place the layers
-            this.Layer.AddSublayer(slTickBGLayer);
-            this.Layer.AddSublayer(slTickPathLayer);
-            slTickBGLayer.SetNeedsDisplay();
-            slTickPathLayer.SetNeedsDisplay();
-            this.Layer.AddSublayer(slCrossBGLayer);
-            this.Layer.AddSublayer(slCrossPathLayer);
-            slCrossBGLayer.SetNeedsDisplay();
-            slCrossPathLayer.SetNeedsDisplay();
-
-        }
-
-        public override void ApplyPressed(bool _isPressed)
-        {            
-            if (!this._vcParentContainer.IsCorrect)
-            {
-                //this.AnimationCorrect();
-            }
-            else
-            {
-
-            }
-            base.ApplyPressed(_isPressed);
-
+            this.DrawTickAndCross();
         }
 
         #endregion

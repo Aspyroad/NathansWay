@@ -45,6 +45,9 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bInitialLoad;
         // Known only after numbercontainer returns after a selection and val change
         protected bool _bIsCorrect;
+        // Attemped Solve - used to find the state after a solve has been attempted
+        // This should be reset as soon as it is attemped again.
+        protected bool _bSolveAttemped;
         // Obviously when touched
         protected bool _bTouched;
         // Technically true when touched?
@@ -501,6 +504,18 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 _bReadOnly = value;
+            }
+        }
+
+        public virtual bool SolveAttemped
+        {
+            get
+            {
+                return _bSolveAttemped;
+            }
+            set
+            {
+                _bSolveAttemped = value;
             }
         }
 

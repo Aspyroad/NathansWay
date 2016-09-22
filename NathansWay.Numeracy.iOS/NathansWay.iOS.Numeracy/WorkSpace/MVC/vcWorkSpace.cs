@@ -22,6 +22,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Do we go back and show this info but make it all readonly
         // There is quite a bit of logic to do here....
 
+        #region Events
+
+        #endregion
+
+
 		#region Private Variables
 
         private string _strExpression;
@@ -666,6 +671,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override bool Solve()
         {
             bool _ret = false;
+
+            this._bSolveAttemped = true;
 
             // Unselect everything
             if (this.HasSelectedNumberText)
