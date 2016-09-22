@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy.Drawing
         private Action<CGContext> _drawingDelegate;
         private Dictionary<G__FactoryDrawings, Action<CGContext>> _dictDrawingFuncs;
 
-        private CAAnimationGroup _animationGroup;
+        //private CAAnimationGroup _animationGroup;
 
         #endregion
 
@@ -459,6 +459,8 @@ namespace NathansWay.iOS.Numeracy.Drawing
         {
             CABasicAnimation _aniLayersToEdge;
             CABasicAnimation _aniLayersToEdgeFade;
+            CAAnimationGroup _animationGroup = new CAAnimationGroup();
+
             AnimateDelegate _myAnimateDelegate = new AnimateDelegate();
 
             var pt = _animatePacket.Layer1.Position;
@@ -501,10 +503,10 @@ namespace NathansWay.iOS.Numeracy.Drawing
 
             var y = NWAnimations.SpinLogo();
 
-            this._animationGroup.Duration = 0.5f;
-            this._animationGroup.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y };
-            _animatePacket.Layer1.AddAnimation(this._animationGroup, null);
-            _animatePacket.Layer2.AddAnimation(this._animationGroup, null);
+            _animationGroup.Duration = 0.5f;
+            _animationGroup.Animations = new CAAnimation[] { _aniLayersToEdgeFade, _aniLayersToEdge, y };
+            _animatePacket.Layer1.AddAnimation(_animationGroup, null);
+            _animatePacket.Layer2.AddAnimation(_animationGroup, null);
         }
 
         private void ClearAllAnimations()

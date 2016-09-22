@@ -1,7 +1,6 @@
 // System
 using System;
 using CoreGraphics;
-using System.Collections.Generic;
 
 // Mono
 using Foundation;
@@ -14,11 +13,10 @@ using AspyRoad.iOSCore.UISettings;
 
 // Nathansway iOS
 using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.iOS.Numeracy.WorkSpace;
 
 // NathansWay Shared
 using NathansWay.Shared;
+using NathansWay.iOS.Numeracy.Drawing;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -278,19 +276,11 @@ namespace NathansWay.iOS.Numeracy
         private UIColor _colorBGCross;
         private UIColor _colorPaths;
 
-        private CALayer slCrossBGLayer;
-        private CALayer slCrossPathLayer;
-        private CALayer slTickBGLayer;
-        private CALayer slTickPathLayer;
+        private DrawLayer slCrossBGLayer;
+        private DrawLayer slCrossPathLayer;
+        private DrawLayer slTickBGLayer;
+        private DrawLayer slTickPathLayer;
 
-        private CABasicAnimation _aniLayersToCenter;
-        private CABasicAnimation _aniLayersToEdge;
-        private CABasicAnimation _aniLayersToEdgeFade;
-
-        //private CAAnimationGroup _animationGroupToCenter;
-        private CAAnimationGroup _animationGroupToEdge;
-
-        private AnimateDelegate _myAnimateDelegate;
         private iOSUIManager _myUIAppearance;
         private iOSNumberDimensions _myGlobalDimensions;
 
@@ -337,10 +327,6 @@ namespace NathansWay.iOS.Numeracy
             this.EnableHold = false;
             this.AutoApplyUI = true;
 
-            this._myAnimateDelegate = new AnimateDelegate();
-            //this._animationGroupToCenter = CAAnimationGroup.CreateAnimation ();
-            this._animationGroupToEdge = CAAnimationGroup.CreateAnimation ();
-
             // Get center of the bottom and top halfs of the button
             var f = (this._rect.Width / 2.0f);
             var g = (this._rect.Height / 4.0f);
@@ -379,14 +365,41 @@ namespace NathansWay.iOS.Numeracy
 
         public void AnimationCorrect()
         {
-            //this.LayersToCenter(slTickBGLayer, slTickPathLayer);
-            //this.LayersToEdge(slCrossBGLayer, slCrossPathLayer, G__NumberDisplayPositionY.Bottom);
+            AnimationPacket _data = new AnimationPacket();
+
+            _data.ToPosition1 = this._pTrueBottomEdge;
+            _data.ToPosition2 = this._pTrueCenter;
+
+            _data.Layer1 = slCrossBGLayer;
+            _data.Layer2 = slCrossPathLayer;
+            _data.DirectionY = G__NumberDisplayPositionY.Bottom;
+            this._iOSDrawingFactory.LayersToCenter(_data);
+
+            _data.ToPosition1 = this._pTrueCenter;
+            _data.ToPosition2 = this._pTrueBottomEdge;
+            _data.Layer1 = slTickBGLayer;
+            _data.Layer2 = slTickPathLayer;
+            _data.DirectionY = G__NumberDisplayPositionY.Top;
+            this._iOSDrawingFactory.LayersToEdge(_data);
         }
 
         public void AnimationFalse()
         {
-            //this.LayersToCenter(slCrossBGLayer, slCrossPathLayer);
-            //this.LayersToEdge(slTickBGLayer, slTickPathLayer, G__NumberDisplayPositionY.Top);
+            AnimationPacket _data = new AnimationPacket();
+
+            _data.ToPosition1 = this._pTrueTopEdge;
+            //_data.ToPosition2 = this._pTrueBottomEdge;
+            _data.DirectionY = G__NumberDisplayPositionY.Top;
+            _data.Layer1 = slTickBGLayer;
+            _data.Layer2 = slTickPathLayer;
+            this._iOSDrawingFactory.LayersToEdge(_data);
+
+            _data.ToPosition1 = this._pTrueCenter;
+            _data.ToPosition2 = this._pTrueBottomEdge;
+            _data.Layer1 = slCrossBGLayer;
+            _data.Layer2 = slCrossPathLayer;
+
+            this._iOSDrawingFactory.LayersToCenter(_data);
         }
 
         #endregion
@@ -411,7 +424,7 @@ namespace NathansWay.iOS.Numeracy
             this._iOSDrawingFactory.SetCenterRelativeParentViewPosY = true;
             this._iOSDrawingFactory.DisplayPositionY = G__NumberDisplayPositionY.Top;
             // Set the position
-            this._iOSDrawingFactory.SetViewPosition(this.Frame.Width, (this.Frame - ();
+            this._iOSDrawingFactory.SetViewPosition(this.Frame.Width, this.Frame.Width);
             this._iOSDrawingFactory.PrimaryFillColor = this._colorPaths;
 
             this.slTickPathLayer = this._iOSDrawingFactory.DrawLayer();
