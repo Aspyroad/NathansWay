@@ -211,10 +211,7 @@ namespace AspyRoad.iOSCore
             get { return this._fBorderWidth; }
             set 
             { 
-                if (this._bHasBorder)
-                {
-                    this.View.SetNeedsDisplay();
-                }
+
                 this._fBorderWidth = value; 
 
             }

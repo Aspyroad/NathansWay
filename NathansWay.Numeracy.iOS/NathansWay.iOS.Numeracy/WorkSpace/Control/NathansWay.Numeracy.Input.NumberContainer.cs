@@ -125,7 +125,7 @@ namespace NathansWay.iOS.Numeracy
             this.BorderWidth = 1.0f;
             this.HasRoundedCorners = true;
 
-            this._bPerNumberErrorUIDisplay = true;
+            this._bPerNumberErrorUIDisplay = false;
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
@@ -385,25 +385,31 @@ namespace NathansWay.iOS.Numeracy
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.White;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+
+            // Loop through this._lsNumbers
+            //foreach (BaseContainer _Number in this._lsNumbers)
+            //{
+            //    _Number.UI_SetViewNeutral();
+            //}
+
+            // UI State for parent containers
+            if (this.MyNumletParent != null)
+            {
+                this.MyNumletParent.UI_SetViewInCorrect();
+            }
+            if (this.MyFractionParent != null)
+            {
+
+            }
+            if (this.MyWorkSpaceParent != null)
+            {
+
+            }
+
         }
 
         public override void UI_SetViewNeutral()
         {
-            //if (this.HasFractionParent)
-            //{
-            //    if (this._bMultiNumbered)
-            //    {
-            //        this.HasBorder = true;
-            //    }
-            //    else
-            //    {
-            //        this.HasBorder = false;                
-            //    }
-            //}
-            //else
-            //{
-            //    this.HasBorder = true;
-            //}
 
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
@@ -415,26 +421,24 @@ namespace NathansWay.iOS.Numeracy
             {
                 _Number.UI_SetViewNeutral();
             }
+
+            // UI State for parent containers
+            if (this.MyNumletParent != null)
+            {
+                this.MyNumletParent.UI_SetViewInCorrect();
+            }
+            if (this.MyFractionParent != null)
+            {
+
+            }
+            if (this.MyWorkSpaceParent != null)
+            {
+
+            }
         }
 
         public override void UI_SetViewReadOnly()
         {
-            //if (this.HasFractionParent)
-            //{
-            //    if (this._bMultiNumbered && this.Selected)
-            //    {
-            //        this.HasBorder = true;
-            //    }
-            //    else
-            //    {
-            //        this.HasBorder = false;                
-            //    }
-            //}
-            //else
-            //{
-            //    this.HasBorder = true;
-            //}
-
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.White;
@@ -443,8 +447,11 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewCorrect()
         {
-            // If enabled a >2 digit display will only show the value incorrect
-            // rather than the entire numer
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+
             //if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
@@ -454,16 +461,29 @@ namespace NathansWay.iOS.Numeracy
                 }
             }
 
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            // UI State for parent containers
+            if (this.MyNumletParent != null)
+            {
+                this.MyNumletParent.UI_SetViewInCorrect();
+            }
+            if (this.MyFractionParent != null)
+            {
+
+            }
+            if (this.MyWorkSpaceParent != null)
+            {
+
+            }
         }
 
         public override void UI_SetViewInCorrect()
         {
-            // If enabled a >2 digit display will only show the value incorrect
-            // rather than the entire numer
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.BorderWidth = 5.0f;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.White;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+
             //if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
@@ -472,10 +492,20 @@ namespace NathansWay.iOS.Numeracy
                     _Number.UI_SetViewInCorrect();
                 }
             }
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
+
+            // UI State for parent containers
+            if (this.MyNumletParent != null)
+            {
+                this.MyNumletParent.UI_SetViewInCorrect();
+            }
+            if (this.MyFractionParent != null)
+            {
+
+            }
+            if (this.MyWorkSpaceParent != null)
+            {
+
+            }
         }
 
         public override void ClearValue()
@@ -761,9 +791,9 @@ namespace NathansWay.iOS.Numeracy
             // Dont call base...we have no idea how big this needs to be till we see the number its representing
         }
 
-        public override void SetViewPosition(nfloat _posX, nfloat _posY)
+        public override void SetViewPosition(nfloat _widthX, nfloat _heightY)
         {
-            base.SetViewPosition(_posX, _posY);
+            base.SetViewPosition(_widthX, _heightY);
         }
 
         #endregion

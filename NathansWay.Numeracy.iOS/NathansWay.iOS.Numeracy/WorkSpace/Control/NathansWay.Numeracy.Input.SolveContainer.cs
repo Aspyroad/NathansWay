@@ -354,8 +354,8 @@ namespace NathansWay.iOS.Numeracy
             this._rectTick = new CGRect(0.0f, 0.0f, _width , _width );
 
             this._colorPaths = this._myUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
-            this._colorBGTick = this._myUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-            this._colorBGCross = this._myUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+            this._colorBGTick = this._myUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value.ColorWithAlpha(1.0f);
+            this._colorBGCross = this._myUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(1.0f);
 
         }
 

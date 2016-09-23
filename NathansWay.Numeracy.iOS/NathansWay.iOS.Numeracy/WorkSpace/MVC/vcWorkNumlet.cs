@@ -192,16 +192,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
+
+
+            // We need to set border width before Has Border
+            this.BorderWidth = 2.0f;
+            this.HasBorder = true;
+            //this.View.BackgroundColor = UIColor.Clear;
 		}
 
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            this.UI_SetViewNeutral();
 
-            // We need to set border width before Has Border
-            this.BorderWidth = 2.0f;
-            this.HasBorder = true;
-            this.View.BackgroundColor = UIColor.Clear;
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
@@ -246,18 +249,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void UI_SetViewSelected()
         {
-            this.View.BackgroundColor = UIColor.Gray;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;;
+            this.BorderWidth = 3.0f;
+            this.HasBorder = true;
             //base.UI_SetViewSelected();
         }
 
         public override void UI_SetViewNeutral()
         {
+            
             base.UI_SetViewNeutral();
         }
 
         public override void UI_SetViewInCorrect()
         {
-            base.UI_SetViewInCorrect();
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.BorderWidth = 4.0f;
+            this.HasBorder = true;
+            //base.UI_SetViewInCorrect();
         }
 
         public override void UI_SetViewCorrect()
@@ -272,12 +281,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         // Touch
-
         //public override void TouchesBegan(NSSet touches, UIEvent evt)
         //{
         //    // Check if the touch is inside any active numlets
         //    UITouch y = (UITouch)touches.AnyObject;
-
         //    if (this.MyWorkSpaceParent.HasSelectedNumberText)
         //    {
         //        var x = this.MyWorkSpaceParent.SelectedNumberText;
@@ -293,7 +300,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //    {
         //        this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
         //    }
-
         //    base.TouchesBegan(touches, evt);
         //}
 
