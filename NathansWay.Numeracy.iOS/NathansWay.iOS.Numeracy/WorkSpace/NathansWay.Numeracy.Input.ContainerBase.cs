@@ -252,17 +252,17 @@ namespace NathansWay.iOS.Numeracy
         // This will only ever be called by hitting the equate sign
         public virtual void SetCorrectState ()
         {  
-            if (this._bInitialLoad)
+            if ((this._dblOriginalValue == this._dblCurrentValue))
             {
-                this.AnswerState = G__AnswerState.UnAttempted;
-                this._bIsCorrect = false;
+                this.AnswerState = G__AnswerState.Correct;
+                this._bIsCorrect = true;
             }
             else
             {
-                if ((this._dblOriginalValue == this._dblCurrentValue))
+                if (this._bInitialLoad)
                 {
-                    this.AnswerState = G__AnswerState.Correct;
-                    this._bIsCorrect = true;
+                    this.AnswerState = G__AnswerState.UnAttempted;
+                    this._bIsCorrect = false;
                 }
                 else
                 {
@@ -378,39 +378,29 @@ namespace NathansWay.iOS.Numeracy
         public Nullable<double> OriginalValue
         {
             get { return this._dblOriginalValue; }
-            set { this._dblOriginalValue = value; }          
+            set 
+            { 
+                this._dblOriginalValue = value; 
+                this._strOriginalValue = value.ToString().Trim();
+            }          
         }
 
         public string CurrentValueStr
         {
-            get 
-            { 
-                return this._strCurrentValue.ToString().Trim(); 
-            }
-            set 
-            {
-                this._strCurrentValue = value;
-            }
+            get { return this._strCurrentValue.ToString().Trim(); }
+            set { this._strCurrentValue = value; }
         }
 
         public string PrevValueStr
         {
-            get 
-            { 
-                return this._dblPrevValue.ToString().Trim(); 
-            }
-            set 
-            {
-                this._strPrevValue = value;
-            }
+            get { return this._dblPrevValue.ToString().Trim(); }
+            set { this._strPrevValue = value; }
         }
 
         public string OriginalValueStr
         {
-            get 
-            { 
-                return this._dblOriginalValue.ToString().Trim(); 
-            }
+            get { return this._strOriginalValue; }
+            set { this._strOriginalValue = value; }
         }
 
         public G__AnswerState AnswerState
@@ -473,6 +463,8 @@ namespace NathansWay.iOS.Numeracy
             get { return this._dblCurrentValue; }
             set
             {
+                // Set our previous value
+                this._dblPrevValue = this._dblCurrentValue;
                 this._dblCurrentValue = value; 
             }          
         }
@@ -485,8 +477,8 @@ namespace NathansWay.iOS.Numeracy
                 this._bIsAnswer = value;
                 //this.AnswerState = G__AnswerState.UnAttempted;
                 // Set the Answer as the current value.
-                this._dblOriginalValue = this._dblCurrentValue;
-                this._strOriginalValue = this._strCurrentValue;
+                //this._dblOriginalValue = this._dblCurrentValue;
+                //this._strOriginalValue = this._strCurrentValue;
             }
         }
 

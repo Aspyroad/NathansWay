@@ -26,7 +26,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-
 		#region Private Variables
 
         private string _strExpression;

@@ -425,8 +425,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             get { return this._dblCurrentValue; }
             set
             {
-                // Set our previous value
-                this._dblPrevValue = this._dblCurrentValue;
                 // Standard sets
                 this._dblCurrentValue = value;
                 if (value == null)
@@ -695,25 +693,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 return;
             }
-            else
-            {
-                this._bInitialLoad = false;
-                this.MyNumberParent.IsInitialLoad = false;
-            }
-
-            // Nullable<double> x = null;
-            //if (this.txtNumber.Text.Length > 0)
-            //{
-            //    x = Convert.ToDouble(this.txtNumber.Text.Trim());
-            //}
 
             if (_dblValue != null)
             {
                 this._bInitialLoad = false;
+                this.MyNumberParent.IsInitialLoad = false;
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
-                    this._dblPrevValue = _dblValue;
+                    //this._dblPrevValue = _dblValue;
                     // Change in value
                     this.FireValueChange();
                 }
@@ -723,7 +711,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             else
             {
                 this.txtNumber.Text = "";
+                this.CurrentValue = null;
             }
+
+            //Update the parentNumber container
+            this.MyNumberParent.PostEdit();
+
+            //this.MyNumberParent.
 
             // FIXED: Problem 1 TouchUpDown
             // When we tap the control it gets selected - fine

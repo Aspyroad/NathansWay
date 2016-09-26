@@ -24,7 +24,7 @@ namespace NathansWay.iOS.Numeracy
         #region Class Variables
 
         private G__UnitPlacement _tensUnit;
-        private string _strInitialValue;
+        //private string _strOriginalValue;
         // Display a decimal place?
         //private bool _bShowDecimal;
         // Number of "whole" (left side) number places
@@ -54,9 +54,9 @@ namespace NathansWay.iOS.Numeracy
 
         public vcNumberContainer (string _strValue)
         {            
-            this._strInitialValue = _strValue;
+            this._strOriginalValue = _strValue;
             this._dblOriginalValue = Convert.ToDouble(_strValue);
-            this.CurrentValue = this._dblOriginalValue;
+            this._dblCurrentValue = null;
             this._dblPrevValue = null;
 
             Initialize ();
@@ -146,16 +146,16 @@ namespace NathansWay.iOS.Numeracy
             this._sizeClass.CurrentWidth = 0.0f;
 
             // Tens allocation 
-            _result = _strInitialValue.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
+            _result = _strOriginalValue.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
 
             _sig = _result[0].Length;
-            this._intMultiNumberTotalCount = _strInitialValue.Length;
+            this._intMultiNumberTotalCount = _strOriginalValue.Length;
 
             // Main creation loop
             for (int i = 0; i < this._intMultiNumberTotalCount; i++)
             {
                 // The Amazing Conversion Of Doctor Parasis!
-                var ch = _strInitialValue[i].ToString();
+                var ch = _strOriginalValue[i].ToString();
                 // Check if its a dot
                 if (ch != ".")
                 {
@@ -285,12 +285,39 @@ namespace NathansWay.iOS.Numeracy
             return this._lsNumbersOnly.Find(z => z.IndexNumber == _index);
         }
 
-        // This function will deselect the cumber container, and if any members are in edit mode,
-        // it will reset them back to a waiting state
-        public void DeSelectAll()
+        public void PostEdit()
         {
+            string _strCurValue = "";
+            bool _isEmpty = false;
 
-
+            // Should be called after any number change
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                if (_Number.CurrentValueStr.Length > 0)
+                {
+                    _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                }
+                else
+                {
+                    _isEmpty = true;
+                    break;
+                }
+            }
+            if (_isEmpty)
+            {
+                this._strCurrentValue = "";
+                this._strPrevValue = "";
+                this.CurrentValue = null;
+            }
+            else
+            {
+                if (this._strPrevValue != _strCurValue)
+                {
+                    this.FireValueChange();
+                }
+                this.CurrentValue = Convert.ToDouble(_strCurValue);
+            }
         }
 
         #endregion
@@ -335,6 +362,11 @@ namespace NathansWay.iOS.Numeracy
         #endregion
 
         #region Overrides
+
+        // TODO:
+        // Two current bug
+        // 1. If the container is empty, solving shows as being correct
+        // 2. If only 1 container is filled but another is empty, it still sloves as correct
 
         public override bool Solve()
         {
@@ -648,6 +680,8 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 base._bReadOnly = value;
+                // Set the Current Value as this is never going to be an answer and wont change
+                this._dblCurrentValue = this._dblOriginalValue;
                 // Loop through this._lsNumbers
                 if (this._lsNumbers != null)
                 {
