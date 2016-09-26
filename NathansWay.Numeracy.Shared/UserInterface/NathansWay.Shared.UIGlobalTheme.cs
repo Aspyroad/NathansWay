@@ -129,8 +129,8 @@ namespace NathansWay.Shared
 			FontName = "HelveticaNeue-Medium";
 			FontNameMathChars = "HelveticaNeue-Light";
 			FontBoldName = "HelveticaNeue-Bold";
-			FontNameSpecial = "HelveticaNeue-Medium";
-			FontSize = 22.0f;
+			FontNameSpecial = "ArialMT";
+			FontSize = 20.0f;
 			//FontSizeiOS7 = 20.0f;
 			FontColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 1.0f)); // Black
 
@@ -211,16 +211,16 @@ namespace NathansWay.Shared
             PositiveBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 102.0f, 0.0f, 255.0f)); // Dark Green
             NegativeBGColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 50.0f)); // Brick Red
             NegativeTextColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Black
-            NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(253.0f, 65.0f, 84.0f, 255.0f)); // Dark Red
+            NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(253.0f, 35.0f, 34.0f, 255.0f)); // Dark Red
             NeutralBGColor = new Lazy<G__Color> (() => new G__Color(220.0f, 220.0f, 220.0f, 255.0f)); // White
             NeutralTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
             NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             ReadOnlyBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // White
             ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
             ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
-            SelectedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
+            SelectedBGColor = new Lazy<G__Color> (() => new G__Color(100.0f, 200.0f, 200.0f, 255.0f)); // White
             SelectedTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 40.0f, 255.0f)); // Black
-            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
+            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(100.0f, 200.0f, 50.0f, 255.0f)); // Black
 
             // Dialog Global
             DiagBorderColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black

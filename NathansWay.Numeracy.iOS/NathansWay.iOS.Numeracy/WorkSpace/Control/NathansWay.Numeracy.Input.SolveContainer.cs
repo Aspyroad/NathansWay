@@ -378,7 +378,7 @@ namespace NathansWay.iOS.Numeracy
             AnimationPacket _data = new AnimationPacket();
 
             // Tick to the center
-            _data.ToPosition1 = this._pTrueBottomEdge;
+            _data.ToPosition1 = this._pTrueCenter; //_pTrueBottomEdge;
             _data.ToPosition2 = this._pTrueCenter;
             _data.Layer1 = slTickBGLayer;
             _data.Layer2 = slTickPathLayer;
@@ -386,11 +386,11 @@ namespace NathansWay.iOS.Numeracy
             this._iOSDrawingFactory.LayersToCenter(_data);
 
             // Cross to the edge spinning and fading
-            _data.ToPosition1 = this._pTrueCenter;
+            _data.ToPosition1 = this._pCrossLayerPosition;
             _data.ToPosition2 = this._pTrueBottomEdge;
             _data.Layer1 = slCrossBGLayer;
             _data.Layer2 = slCrossPathLayer;
-            _data.DirectionY = G__NumberDisplayPositionY.Top;
+            _data.DirectionY = G__NumberDisplayPositionY.Bottom;
             this._iOSDrawingFactory.LayersToEdge(_data);
         }
 

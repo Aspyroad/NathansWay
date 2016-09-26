@@ -472,7 +472,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return -12.0f;
+                        return -4.0f;
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
@@ -490,6 +490,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
+
         public float UpDownButtonHeight
         {
             get
@@ -970,7 +971,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return new CGPoint(-6.0f, -8.0f);
+                        return new CGPoint(0.0f, -8.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
@@ -1137,7 +1138,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 80.0f);
+                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontName, 76.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
@@ -1167,7 +1168,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameMathChars, 120.0f);
+                            return UIFont.FromName(iOSUIAppearance.GlobaliOSTheme.FontNameSpecial, 90.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {

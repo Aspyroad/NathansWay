@@ -395,7 +395,7 @@ namespace NathansWay.iOS.Numeracy
             // UI State for parent containers
             if (this.MyNumletParent != null)
             {
-                this.MyNumletParent.UI_SetViewInCorrect();
+                this.MyNumletParent.UI_SetViewSelected();
             }
             if (this.MyFractionParent != null)
             {
@@ -410,7 +410,6 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetViewNeutral()
         {
-
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.White;
@@ -425,7 +424,7 @@ namespace NathansWay.iOS.Numeracy
             // UI State for parent containers
             if (this.MyNumletParent != null)
             {
-                this.MyNumletParent.UI_SetViewInCorrect();
+                this.MyNumletParent.UI_SetViewNeutral();
             }
             if (this.MyFractionParent != null)
             {
@@ -443,6 +442,20 @@ namespace NathansWay.iOS.Numeracy
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.White;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+
+            // UI State for parent containers
+            if (this.MyNumletParent != null)
+            {
+                this.MyNumletParent.UI_SetViewReadOnly();
+            }
+            if (this.MyFractionParent != null)
+            {
+
+            }
+            if (this.MyWorkSpaceParent != null)
+            {
+
+            }
         }
 
         public override void UI_SetViewCorrect()
@@ -464,7 +477,7 @@ namespace NathansWay.iOS.Numeracy
             // UI State for parent containers
             if (this.MyNumletParent != null)
             {
-                this.MyNumletParent.UI_SetViewInCorrect();
+                this.MyNumletParent.UI_SetViewCorrect();
             }
             if (this.MyFractionParent != null)
             {

@@ -695,6 +695,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 return;
             }
+            else
+            {
+                this._bInitialLoad = false;
+                this.MyNumberParent.IsInitialLoad = false;
+            }
 
             // Nullable<double> x = null;
             //if (this.txtNumber.Text.Length > 0)
