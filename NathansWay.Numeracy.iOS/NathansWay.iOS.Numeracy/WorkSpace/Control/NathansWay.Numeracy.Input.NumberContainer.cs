@@ -395,6 +395,8 @@ namespace NathansWay.iOS.Numeracy
             return _ret;
         }
 
+        #region UI Functions
+
         public override void UI_SetViewSelected()
         {
             if (this.HasFractionParent)
@@ -583,6 +585,8 @@ namespace NathansWay.iOS.Numeracy
                 return false;
             }
         }
+
+        #endregion
 
         public override void ViewDidLoad()
         {

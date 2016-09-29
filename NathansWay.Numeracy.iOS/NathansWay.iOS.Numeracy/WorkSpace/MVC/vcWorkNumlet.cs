@@ -88,6 +88,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     // Event Hooks
                     _Container.SizeClass.eResizing -= _Container.SizeClass.OnResize;
+                    //_Container.eValueChanged -=
                 }
             }
         }
@@ -207,6 +208,78 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
+        public override void OnControlSelectedChange()
+        {
+            // TODO: This isnot the best spot for this...
+            // I think it should be on Numbercontainer
+            if (this.NumletType == G__WorkNumletType.Result)
+            {
+                this.FireResultSelected();
+            }
+            base.OnControlSelectedChange();
+        }
+
+        public override void OnControlUnSelectedChange()
+        {
+            // TODO : What of this is a method numlet?
+            if (this.NumletType == G__WorkNumletType.Equation)
+            {
+                this.UI_SetViewReadOnly();
+            }
+            else
+            {
+                this.UI_SetViewNeutral();
+            }
+            base.OnControlUnSelectedChange();
+        }
+
+        #region UI Functions
+
+        public override void UI_SetViewSelected()
+        {
+            this.BorderWidth = 2.0f;
+            this.HasBorder = true;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+        }
+
+        public override void UI_SetViewNeutral()
+        {
+            this.BorderWidth = 1.0f;
+            this.HasBorder = true;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+        }
+
+        public override void UI_SetViewInCorrect()
+        {
+            this.BorderWidth = 2.0f;
+            this.HasBorder = true;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+        }
+
+        public override void UI_SetViewCorrect()
+        {
+            this.BorderWidth = 2.0f;
+            this.HasBorder = true;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+        }
+
+        public override void UI_SetViewReadOnly()
+        {
+            this.BorderWidth = 1.0f;
+            this.HasBorder = true;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+        }
+
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
             if (base.ApplyUI(_applywhere))
@@ -229,56 +302,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ApplyUI6();
         }
 
-        public override void OnControlSelectedChange()
-        {
-            if (this.NumletType == G__WorkNumletType.Result)
-            {
-                this.FireResultSelected();
-            }
-            base.OnControlSelectedChange();
-        }
-
-        public override void OnControlUnSelectedChange()
-        {
-            if (this.NumletType == G__WorkNumletType.Equation)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            base.OnControlUnSelectedChange();
-        }
-
-        public override void UI_SetViewSelected()
-        {
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;;
-            this.BorderWidth = 3.0f;
-            this.HasBorder = true;
-            //base.UI_SetViewSelected();
-        }
-
-        public override void UI_SetViewNeutral()
-        {
-            
-            base.UI_SetViewNeutral();
-        }
-
-        public override void UI_SetViewInCorrect()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-            this.BorderWidth = 4.0f;
-            this.HasBorder = true;
-            //base.UI_SetViewInCorrect();
-        }
-
-        public override void UI_SetViewCorrect()
-        {
-            base.UI_SetViewCorrect();
-        }
-
-        public override void UI_SetViewReadOnly()
-        {
-            this.View.BackgroundColor = UIColor.White;
-            //base.UI_SetViewReadOnly();
-        }
+        #endregion
 
         // Touch
         //public override void TouchesBegan(NSSet touches, UIEvent evt)

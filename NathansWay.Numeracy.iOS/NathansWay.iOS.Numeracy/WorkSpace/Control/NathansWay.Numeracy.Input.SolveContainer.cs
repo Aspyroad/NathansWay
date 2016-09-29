@@ -148,7 +148,7 @@ namespace NathansWay.iOS.Numeracy
 
             this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
             this.btnSolveButton.TouchUpInside += OnTouch_btnSolveButton;
-            this.MyWorkSpaceParent.NumletResult.evtResultSelected += (sender, e) => { this.btnSolveButton.DrawTickAndCross(); };
+            //this.MyWorkSpaceParent.NumletResult.evtResultSelected += (sender, e) => { this.btnSolveButton.DrawTickAndCross(); };
             this.View.AddSubview(this.btnSolveButton);
         }
 

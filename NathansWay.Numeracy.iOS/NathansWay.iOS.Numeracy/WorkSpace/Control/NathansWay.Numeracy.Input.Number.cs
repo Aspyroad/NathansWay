@@ -701,8 +701,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
-                    //this._dblPrevValue = _dblValue;
-                    // Change in value
                     this.FireValueChange();
                 }
                 this.CurrentValue = _dblValue;

@@ -158,44 +158,48 @@ namespace NathansWay.iOS.Numeracy
             this._myEventArgs = new EventArgs();
 		}
 
-        protected void FireValueChange()
+		#endregion
+
+        #region Delegates
+
+        #endregion         
+
+        #region Public Members
+
+        public void FireValueChange()
         {
             // Thread safety.
             var x = this.eValueChanged;
             // Check for null before firing.
-             if (x != null)
+            if (x != null)
             {
-                x (this, this._myEventArgs);
-            }   
+                x(this, this._myEventArgs);
+            }
         }
 
-        protected void FireTextSizeChange()
+        public void FireTextSizeChange()
         {
             // Thread safety.
             var x = this.eTextSizeChanged;
             // Check for null before firing.
             if (x != null)
             {
-                x (this, this._myEventArgs);
-            }   
+                x(this, this._myEventArgs);
+            }
         }
 
-        protected void FireControlSelected()
+        public void FireControlSelected()
         {
             // Thread safety.
             var x = this.eControlSelected;
             // Check for null before firing.
             if (x != null)
             {
-                x (this, this._myEventArgs);
-            }   
+                x(this, this._myEventArgs);
+            }
         }
 
-		#endregion
-
-        #region Delegates
-
-        #endregion         
+        #endregion
 
 		#region Public Virtual
 
@@ -251,19 +255,20 @@ namespace NathansWay.iOS.Numeracy
         // TODO: Fix this to include UI changes
         // This will only ever be called by hitting the equate sign
         public virtual void SetCorrectState ()
-        {  
-            if ((this._dblOriginalValue == this._dblCurrentValue))
+        {
+            if (this._bInitialLoad)
             {
-                this.AnswerState = G__AnswerState.Correct;
-                this._bIsCorrect = true;
+                this.AnswerState = G__AnswerState.UnAttempted;
+                this._bIsCorrect = false;
             }
             else
             {
-                if (this._bInitialLoad)
+                if ((this._dblOriginalValue == this._dblCurrentValue))
                 {
-                    this.AnswerState = G__AnswerState.UnAttempted;
-                    this._bIsCorrect = false;
+                    this.AnswerState = G__AnswerState.Correct;
+                    this._bIsCorrect = true;
                 }
+
                 else
                 {
                     this.AnswerState = G__AnswerState.InCorrect;

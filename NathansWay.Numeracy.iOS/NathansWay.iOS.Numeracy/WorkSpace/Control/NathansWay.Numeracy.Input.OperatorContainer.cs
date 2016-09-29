@@ -89,6 +89,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Not sure if this is needed anymore? vOperator is now pretty dumb
             this._vOperator.MathOperator = this._operatorType;
+            if (this._operatorType == G__MathOperator.Equals)
+            {
+                this._bIsAnswer = true;
+            }
 
             this._vOperator.ClipsToBounds = true;
             this.View = this._vOperator;
@@ -190,9 +194,12 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
                 }
-                // Handle re-taping the same numbertext...toggle
-                this.MyWorkSpaceParent.SelectedOperatorText = this;
-                this.OnControlSelectedChange();
+                else
+                {
+                    // Handle re-taping the same numbertext...toggle
+                    this.MyWorkSpaceParent.SelectedOperatorText = this;
+                    this.OnControlSelectedChange();
+                }
             }
 
             // *****************************************************************************
