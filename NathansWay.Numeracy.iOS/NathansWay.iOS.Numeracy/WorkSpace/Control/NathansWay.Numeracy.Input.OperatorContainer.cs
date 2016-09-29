@@ -147,14 +147,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public override void OnControlSelectedChange()
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {           
-            base.OnControlSelectedChange();
+            base.OnControlSelectedChange(s,e);
         }
 
-        public override void OnControlUnSelectedChange()
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
         {  
-            base.OnControlUnSelectedChange();
+            base.OnControlUnSelectedChange(s,e);
         }
             
         // Check if its been touched.
@@ -173,7 +173,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._bSelected = false;
                 // Handle re-taping the same numbertext...toggle
                 this.MyWorkSpaceParent.SelectedOperatorText = null;
-                this.OnControlUnSelectedChange();
+                this.OnControlUnSelectedChange(this, new EventArgs());
             }
             else
             {
@@ -186,19 +186,19 @@ namespace NathansWay.iOS.Numeracy.Controls
                     {
                         x.TapText();
                     }
-                    x.OnControlUnSelectedChange();
+                    x.OnControlUnSelectedChange(this, new EventArgs());
                     this.MyWorkSpaceParent.SelectedNumberText = null;
                 }
                 // User taps another operator
                 if (this.MyWorkSpaceParent.HasSelectedOperatorText)
                 {
-                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
                 }
                 else
                 {
                     // Handle re-taping the same numbertext...toggle
                     this.MyWorkSpaceParent.SelectedOperatorText = this;
-                    this.OnControlSelectedChange();
+                    this.OnControlSelectedChange(this, new EventArgs());
                 }
             }
 

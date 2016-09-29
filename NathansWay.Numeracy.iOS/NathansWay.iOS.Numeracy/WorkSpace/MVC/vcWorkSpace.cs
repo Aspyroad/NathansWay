@@ -713,14 +713,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //    base.ApplyUI7();
         //}
 
-        public override void OnControlSelectedChange()
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            base.OnControlSelectedChange();
+            base.OnControlSelectedChange(s,e);
         }
 
-        public override void OnControlUnSelectedChange()
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
         {  
-            base.OnControlUnSelectedChange();
+            base.OnControlUnSelectedChange(s,e);
         }
 
         public override void UI_SetViewSelected()
@@ -761,13 +761,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     {
                         x.TapText();
                     }
-                    x.OnControlUnSelectedChange();
+                    x.OnControlUnSelectedChange(this, new EventArgs());
                     this.SelectedNumberText = null;
                 }
                 // User taps another operator
                 if (this.HasSelectedOperatorText)
                 {
-                    this.SelectedOperatorText.OnControlUnSelectedChange();
+                    this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
                     this.SelectedOperatorText = null;
                 }
             }

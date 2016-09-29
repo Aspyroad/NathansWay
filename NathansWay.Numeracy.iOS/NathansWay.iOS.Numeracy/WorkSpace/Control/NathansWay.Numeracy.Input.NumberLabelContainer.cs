@@ -257,7 +257,6 @@ namespace NathansWay.iOS.Numeracy
 
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            // base.HandleControlSelectedChange(s, e);
             if (this.Selected)
             {
                 this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;

@@ -310,7 +310,7 @@ namespace NathansWay.iOS.Numeracy
 
                 // Hook up the control resizing events so that all controls are messaged by this numlet
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
-                _control.eValueChanged += numlet.FireValueChange;
+                //_control.eValueChanged += numlet.FireValueChange;
 
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 

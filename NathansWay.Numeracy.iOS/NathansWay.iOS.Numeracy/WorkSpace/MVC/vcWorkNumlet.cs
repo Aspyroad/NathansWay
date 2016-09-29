@@ -208,29 +208,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        public override void OnControlSelectedChange()
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            // TODO: This isnot the best spot for this...
-            // I think it should be on Numbercontainer
-            if (this.NumletType == G__WorkNumletType.Result)
-            {
-                this.FireResultSelected();
-            }
-            base.OnControlSelectedChange();
+
+            base.OnControlSelectedChange(s,e);
         }
 
-        public override void OnControlUnSelectedChange()
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
-            // TODO : What of this is a method numlet?
-            if (this.NumletType == G__WorkNumletType.Equation)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            else
-            {
-                this.UI_SetViewNeutral();
-            }
-            base.OnControlUnSelectedChange();
+            //// TODO : What of this is a method numlet?
+            //if (this.NumletType == G__WorkNumletType.Equation)
+            //{
+            //    this.UI_SetViewReadOnly();
+            //}
+            //else
+            //{
+            //    this.UI_SetViewNeutral();
+            //}
+            base.OnControlUnSelectedChange(s,e);
         }
 
         #region UI Functions

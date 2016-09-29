@@ -564,11 +564,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                         x._bAutoMoveToNextNumber = false;
                         x.TapText();
                     }
-                    x.OnControlUnSelectedChange();
+                    x.OnControlUnSelectedChange(sender,e);
 
                     // Once here we are now selecting this control
                     this.MyWorkSpaceParent.SelectedNumberText = this;
-                    this.OnControlSelectedChange();
+                    this.OnControlSelectedChange(sender,e);
                     // Is the control readonly, then return
                     if (this._bReadOnly)
                     {
@@ -593,7 +593,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         }
                         else
                         {
-                            this.OnControlUnSelectedChange();
+                            this.OnControlUnSelectedChange(sender,e);
                             this.MyWorkSpaceParent.SelectedNumberText = null;
                         }
                     }
@@ -604,13 +604,13 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // SECOND!! We need to see if any operators have been touched
                 if (this.MyWorkSpaceParent.HasSelectedOperatorText)
                 {
-                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
+                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(sender,e);
                     this.MyWorkSpaceParent.SelectedOperatorText = null;
                 }
                 // Once here we are now selecting this control
                 this.MyNumberParent.SelectedNumberText = this;
                 this.MyWorkSpaceParent.SelectedNumberText = this;
-                this.OnControlSelectedChange();
+                this.OnControlSelectedChange(sender,e);
                 // Is the control readonly, then return
                 if (this._bReadOnly)
                 {
@@ -689,6 +689,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void postEdit(Nullable<double> _dblValue)
         {
+            bool x = false;
             if (this._bCancelSelect)
             {
                 return;
@@ -701,7 +702,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
-                    this.FireValueChange();
+                    //Why...well its the ordering, I need to tell NumberContainer one of its kids has changed
+                    // but I need to so it after I change its current value, not before
+                    x = true;
                 }
                 this.CurrentValue = _dblValue;
                 this.txtNumber.Text = this.CurrentValueStr;
@@ -713,41 +716,17 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
 
             //Update the parentNumber container
-            this.MyNumberParent.PostEdit();
-
-            //this.MyNumberParent.
-
-            // FIXED: Problem 1 TouchUpDown
-            // When we tap the control it gets selected - fine
-            // But, when in touch updown mode, the updown buttons hide the lower text control
-            // meaning its touchdown code isnt invoked
-            // So if you select a number and press for example up, all is fine, but when you press up again, 
-            // The control becomes unselected in appearance only, this is confusing.
-            // Fixed : Remove the call to OnControlUnselected() in NumberContainers FireValueChange()
-
-            // FIXED: Problem 2 Number Pad 
-            // When we are in number pad, and the user selects a "multi number" (With Hundreds, Tens etc)
-            // Once the user changes the first value, we want the the "next" text control to become selected 
-            // for editing
-
-            // FIXED: Problem 3 NumberPicker
-            // Similar to problem 2 except with numberpicker control
-            // It will just make editing more simple if with multinumbers we move to the next text control
-            // for easier editing.
-
-            // FIXED : Problem 4 MultiNumber Selections
-            // When checking the answer to (hitting equate buttons) a multinumber problem, if I get it wrong or right
-            // when I select one of the numbers, ALL the multinumbers should unselect back to Neutral
+            if (x)
+            {
+                this.FireValueChange();
+            }
 
             // TODO: Problem 5 Fraction Number Picker
-            // When selecting the 
 
         }
 
         protected void EditNumberPicker()
         {
-            //this.IsInEditMode = true;
-            //this.Selected = true;
 
             // Reset our view positions. 
             this.NumberSize.AutoSetPickerPosition();

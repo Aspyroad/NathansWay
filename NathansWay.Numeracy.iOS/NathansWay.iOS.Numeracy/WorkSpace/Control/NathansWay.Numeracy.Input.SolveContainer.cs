@@ -165,12 +165,12 @@ namespace NathansWay.iOS.Numeracy
             }               
         }
 
-        public override void OnControlSelectedChange()
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {           
             //base.OnControlSelectedChange();
         }
 
-        public override void OnControlUnSelectedChange()
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
         {  
             //base.OnControlUnSelectedChange();
         }

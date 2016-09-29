@@ -93,9 +93,15 @@ namespace NathansWay.iOS.Numeracy
                 {
                     // Event Hooks
                     _Number.eValueChanged -= this.OnValueChange;
+                    _Number.eControlSelected -= this.OnControlSelectedChange;
+                    _Number.eControlUnSelected -= this.OnControlUnSelectedChange;
                     _Number.eTextSizeChanged -= this.OnSizeChange;
                     _Number.SizeClass.eResizing -= _Number.SizeClass.OnResize;
                     _Number.MyNumberParent = null;
+                    _Number.MyImmediateParent = null;
+                    _Number.MyFractionParent = null;
+                    _Number.MyNumletParent = null;
+                    _Number.MyWorkSpaceParent = null;
                 }
             }
         }
@@ -285,7 +291,11 @@ namespace NathansWay.iOS.Numeracy
             return this._lsNumbersOnly.Find(z => z.IndexNumber == _index);
         }
 
-        public void PostEdit()
+        #endregion
+
+        #region Delegates
+
+        public override void OnValueChange(object s, EventArgs e)
         {
             string _strCurValue = "";
             bool _isEmpty = false;
@@ -320,43 +330,23 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        #endregion
-
-        #region Delegates
-
-        public override void OnValueChange(object s, EventArgs e)
-        {
-            // Fire this objects FireValueChange for bubbleup
-            this.FireValueChange();
-
-            string _strVal = "";
-
-            // Once in here we are past an inital load, and a user has input a value
-            // We must reset our intital load variable to false
-            this.IsInitialLoad = false;
-
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
-            {
-                _strVal += _Number.CurrentValueStr;
-                _Number.IsInitialLoad = false;               
-            }
-
-            if (_strVal.Length == 0 || _strVal == ".")
-            {
-                this.CurrentValue = null;
-            }
-            else
-            {
-                this.CurrentValue = Convert.ToDouble(_strVal);
-            }
-            // Edit : After a value change we may still need to keep editing, dont unselect.
-            //this.OnControlUnSelectedChange();
-        }
-
         public override void OnSizeChange(object s, EventArgs e)
         {
             base.OnSizeChange(s, e);
+        }
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            //if (this.AnswerState == G__AnswerState.InCorrect)
+            //{
+            //    this.UI_SetViewNeutral();
+            //}
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlUnSelectedChange(s,e);
         }
 
         #endregion
@@ -595,19 +585,7 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
-        public override void OnControlSelectedChange()
-        {
-            if (this.AnswerState == G__AnswerState.InCorrect)
-            {
-                this.UI_SetViewNeutral();
-            }
-            base.OnControlSelectedChange();
-        }
 
-        public override void OnControlUnSelectedChange()
-        {  
-            base.OnControlUnSelectedChange();
-        }
 
         #endregion
 

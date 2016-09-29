@@ -89,9 +89,15 @@ namespace NathansWay.iOS.Numeracy
                 this._numberContainerNumerator.eTextSizeChanged -= this.OnSizeChange;
                 this._numberContainerDenominator.eValueChanged -= this.OnValueChange;
                 this._numberContainerDenominator.eTextSizeChanged -= this.OnSizeChange;
+
+                this._numberContainerNumerator.eControlSelected -= this.OnControlSelectedChange;
+                this._numberContainerNumerator.eControlUnSelected -= this.OnControlUnSelectedChange;
+                this._numberContainerDenominator.eControlSelected -= this.OnControlSelectedChange;
+                this._numberContainerDenominator.eControlUnSelected -= this.OnControlUnSelectedChange;
                 // Clear its parent
                 this._numberContainerNumerator.MyFractionParent = null;
                 this._numberContainerDenominator.MyFractionParent = null;
+
             }
         }
 
@@ -153,10 +159,16 @@ namespace NathansWay.iOS.Numeracy
             this._numberContainerDenominator.CreateNumber(true);
 
             // Event hooks
+            // Numerator
             this._numberContainerNumerator.eValueChanged += this.OnValueChange;
             this._numberContainerNumerator.eTextSizeChanged += this.OnSizeChange;
+            this._numberContainerNumerator.eControlSelected += this.OnControlSelectedChange;
+            this._numberContainerNumerator.eControlUnSelected += this.OnControlUnSelectedChange;
+            // Denominator
             this._numberContainerDenominator.eValueChanged += this.OnValueChange;
             this._numberContainerDenominator.eTextSizeChanged += this.OnSizeChange;
+            this._numberContainerDenominator.eControlSelected += this.OnControlSelectedChange;
+            this._numberContainerDenominator.eControlUnSelected += this.OnControlUnSelectedChange;
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
@@ -258,14 +270,14 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
-        public override void OnControlSelectedChange()
+        public override void OnControlSelectedChange(object s, EventArgs e)
         {           
-            base.OnControlSelectedChange();
+            base.OnControlSelectedChange(s,e);
         }
 
-        public override void OnControlUnSelectedChange()
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
         {  
-            base.OnControlUnSelectedChange();
+            base.OnControlUnSelectedChange(s,e);
         }
 
         public override void SetCorrectState ()

@@ -23,7 +23,7 @@ namespace NathansWay.iOS.Numeracy
 
         public event EventHandler eTextSizeChanged;
         public event EventHandler eValueChanged;
-        public event EventHandler eValueUnChanged;
+        public event EventHandler eControlUnSelected;
         public event EventHandler eControlSelected;
 
         #endregion
@@ -199,6 +199,17 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public void FireControlUnSelected()
+        {
+            // Thread safety.
+            var x = this.eControlUnSelected;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x(this, this._myEventArgs);
+            }
+        }
+
         #endregion
 
 		#region Public Virtual
@@ -213,36 +224,32 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void OnControlSelectedChange(object s, EventArgs e)
         {
-        }
-
-        public virtual void OnControlSelectedChange()
-        {
             // MUST CALL BASE
             this._bSelected = true;
-            if (this._bHasImmediateParent)
-            {
-                this.MyImmediateParent.OnControlSelectedChange();
-            }
-            this.UI_SetViewSelected();
+            //if (this._bHasImmediateParent)
+            //{
+            //    this.MyImmediateParent.OnControlSelectedChange(s,e);
+            //}
+            //this.UI_SetViewSelected();
         }
 
-        public virtual void OnControlUnSelectedChange()
+        public virtual void OnControlUnSelectedChange(object s, EventArgs e)
         {
             // MUST CALL BASE
             this._bSelected = false;
-            if (this._bHasImmediateParent)
-            {
-                this.MyImmediateParent.OnControlUnSelectedChange();
-            }
-            // There are some rules for an Unselect, as it must go back to [n] states
-            if (this._bReadOnly)
-            {
-                this.UI_SetViewReadOnly();
-            }
-            if (this._bIsAnswer)
-            {
-                this.UI_SetViewNeutral();
-            }
+            //if (this._bHasImmediateParent)
+            //{
+            //    this.MyImmediateParent.OnControlUnSelectedChange();
+            //}
+            //// There are some rules for an Unselect, as it must go back to [n] states
+            //if (this._bReadOnly)
+            //{
+            //    this.UI_SetViewReadOnly();
+            //}
+            //if (this._bIsAnswer)
+            //{
+            //    this.UI_SetViewNeutral();
+            //}
         }
 
         public virtual bool Solve()
