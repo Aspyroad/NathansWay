@@ -86,9 +86,9 @@ namespace NathansWay.iOS.Numeracy
                 // Remove the event hook up for value change
                 // Remove the possible event hook to sizechange.
                 this._numberContainerNumerator.eValueChanged -= this.OnValueChange;
-                this._numberContainerNumerator.eTextSizeChanged -= this.OnSizeChange;
+                this._numberContainerNumerator.eSizeChanged -= this.OnSizeChange;
                 this._numberContainerDenominator.eValueChanged -= this.OnValueChange;
-                this._numberContainerDenominator.eTextSizeChanged -= this.OnSizeChange;
+                this._numberContainerDenominator.eSizeChanged -= this.OnSizeChange;
 
                 this._numberContainerNumerator.eControlSelected -= this.OnControlSelectedChange;
                 this._numberContainerNumerator.eControlUnSelected -= this.OnControlUnSelectedChange;
@@ -161,12 +161,12 @@ namespace NathansWay.iOS.Numeracy
             // Event hooks
             // Numerator
             this._numberContainerNumerator.eValueChanged += this.OnValueChange;
-            this._numberContainerNumerator.eTextSizeChanged += this.OnSizeChange;
+            this._numberContainerNumerator.eSizeChanged += this.OnSizeChange;
             this._numberContainerNumerator.eControlSelected += this.OnControlSelectedChange;
             this._numberContainerNumerator.eControlUnSelected += this.OnControlUnSelectedChange;
             // Denominator
             this._numberContainerDenominator.eValueChanged += this.OnValueChange;
-            this._numberContainerDenominator.eTextSizeChanged += this.OnSizeChange;
+            this._numberContainerDenominator.eSizeChanged += this.OnSizeChange;
             this._numberContainerDenominator.eControlSelected += this.OnControlSelectedChange;
             this._numberContainerDenominator.eControlUnSelected += this.OnControlUnSelectedChange;
 

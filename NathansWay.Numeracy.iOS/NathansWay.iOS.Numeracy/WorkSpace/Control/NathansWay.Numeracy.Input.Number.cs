@@ -1014,6 +1014,31 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
+        #region Delegates
+
+        public override void OnValueChange(object s, EventArgs e)
+        {
+            base.OnValueChange(s, e);
+        }
+
+        public override void OnSizeChange(object s, EventArgs e)
+        {
+            this.FireSizeChange();
+            base.OnSizeChange(s, e);
+        }
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlUnSelectedChange(s, e);
+        }
+
+        #endregion
+
         #region Delegate Classes
 
         // To save an override and delegate creaqtion, the txtNumber field has its weakdelegate binded

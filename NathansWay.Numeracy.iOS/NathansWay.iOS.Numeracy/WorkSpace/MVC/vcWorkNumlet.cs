@@ -84,11 +84,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (disposing)
             {                
                 // Remove the possible event hook to sizechange.
-                foreach (BaseContainer _Container in this.OutputContainers) 
+                foreach (BaseContainer _con in this.OutputContainers) 
                 {
                     // Event Hooks
-                    _Container.SizeClass.eResizing -= _Container.SizeClass.OnResize;
-                    //_Container.eValueChanged -=
+
+                    this.eValueChanged -= _con.OnSizeChange;
+                    this.eControlSelected -= _con.OnControlSelectedChange;
+                    this.eControlUnSelected -= _con.OnControlUnSelectedChange;
                 }
             }
         }
@@ -183,6 +185,41 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
+        #region Delegates
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            //// TODO : What of this is a method numlet?
+            //if (this.NumletType == G__WorkNumletType.Equation)
+            //{
+            //    this.UI_SetViewReadOnly();
+            //}
+            //else
+            //{
+            //    this.UI_SetViewNeutral();
+            //}
+            base.OnControlUnSelectedChange(s, e);
+        }
+
+        public override void OnValueChange(object s, EventArgs e)
+        {
+            this.FireValueChange();
+            base.OnValueChange(s, e);
+        }
+
+        public override void OnSizeChange(object s, EventArgs e)
+        {
+            this.FireSizeChange();
+            base.OnSizeChange(s, e);
+        }
+
+        #endregion
+
 		#region Overrides
 
 		public override void DidReceiveMemoryWarning()
@@ -206,26 +243,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewWillAppear(animated);
             this.UI_SetViewNeutral();
 
-        }
-
-        public override void OnControlSelectedChange(object s, EventArgs e)
-        {
-
-            base.OnControlSelectedChange(s,e);
-        }
-
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {
-            //// TODO : What of this is a method numlet?
-            //if (this.NumletType == G__WorkNumletType.Equation)
-            //{
-            //    this.UI_SetViewReadOnly();
-            //}
-            //else
-            //{
-            //    this.UI_SetViewNeutral();
-            //}
-            base.OnControlUnSelectedChange(s,e);
         }
 
         #region UI Functions

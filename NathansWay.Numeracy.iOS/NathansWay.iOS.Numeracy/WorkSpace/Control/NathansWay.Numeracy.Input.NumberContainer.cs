@@ -95,14 +95,16 @@ namespace NathansWay.iOS.Numeracy
                     _Number.eValueChanged -= this.OnValueChange;
                     _Number.eControlSelected -= this.OnControlSelectedChange;
                     _Number.eControlUnSelected -= this.OnControlUnSelectedChange;
-                    _Number.eTextSizeChanged -= this.OnSizeChange;
-                    _Number.SizeClass.eResizing -= _Number.SizeClass.OnResize;
+                    _Number.eSizeChanged -= this.MyNumletParent.OnSizeChange;
+                    _Number.SizeClass.eResizing -= this.MyNumletParent.SizeClass.OnResize;
                     _Number.MyNumberParent = null;
                     _Number.MyImmediateParent = null;
                     _Number.MyFractionParent = null;
                     _Number.MyNumletParent = null;
                     _Number.MyWorkSpaceParent = null;
                 }
+                this._lsNumbers = null;
+                this._lsNumbersOnly = null;
             }
         }
 
@@ -236,10 +238,13 @@ namespace NathansWay.iOS.Numeracy
                     this._sizeClass.CurrentWidth += (newnumber.NumberSize.CurrentWidth);
 
                     // Event Hooks
+                    // Value and selection changes
                     newnumber.eValueChanged += this.OnValueChange;
-                    newnumber.eTextSizeChanged += this.OnSizeChange;
-                    //newnumber.eControlSelected += this.HandleControlSelectedChange;
-                    newnumber.SizeClass.eResizing += newnumber.SizeClass.OnResize;
+                    newnumber.eControlSelected += this.OnControlSelectedChange;
+                    newnumber.eControlUnSelected += this.OnControlUnSelectedChange;
+                    // Resizing
+                    this.eSizeChanged += newnumber.OnSizeChange;
+                    this.SizeClass.eResizing += newnumber.SizeClass.OnResize;
 
                     // Add control
                     this.AddAndDisplayController(newnumber);
@@ -263,7 +268,13 @@ namespace NathansWay.iOS.Numeracy
                     this.SizeClass.CurrentWidth += newdecimal.SizeClass.CurrentWidth;
 
                     // Event Hooks
-                    // No value change is needed as this is readonly?
+                    // Selection changes
+                    newdecimal.eControlSelected += this.OnControlSelectedChange;
+                    newdecimal.eControlUnSelected += this.OnControlUnSelectedChange;
+                    // Resizing
+                    this.eSizeChanged += newdecimal.OnSizeChange;
+                    this.SizeClass.eResizing += newdecimal.SizeClass.OnResize;
+
                     this.AddAndDisplayController(newdecimal, newdecimal.View.Frame);
                 }
             }
@@ -332,6 +343,7 @@ namespace NathansWay.iOS.Numeracy
 
         public override void OnSizeChange(object s, EventArgs e)
         {
+            this.FireSizeChange();
             base.OnSizeChange(s, e);
         }
 

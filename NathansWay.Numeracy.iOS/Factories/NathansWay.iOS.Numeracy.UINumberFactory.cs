@@ -210,8 +210,19 @@ namespace NathansWay.iOS.Numeracy
 
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
+                // Event Hooks ************************************************************************
+                // Value and selection changes
+                _control.eValueChanged += numlet.OnValueChange;
+                _control.eControlSelected += numlet.OnControlSelectedChange;
+                _control.eControlUnSelected += numlet.OnControlUnSelectedChange;
+
                 // Hook up the control resizing events so that all controls are messaged by this numlet
+                numlet.eSizeChanged += _control.OnSizeChange;
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+
+                numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
+                numlet.eControlSelected += this._vcCurrentWorkSpace.OnControlSelectedChange;
+                numlet.eControlUnSelected += this._vcCurrentWorkSpace.OnControlUnSelectedChange;
 
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
@@ -308,9 +319,19 @@ namespace NathansWay.iOS.Numeracy
                     numlet.IsReadOnly = false;
                 }
 
+                // Event Hooks ************************************************************************
+                // Value and selection changes
+                _control.eValueChanged += numlet.OnValueChange;
+                _control.eControlSelected += numlet.OnControlSelectedChange;
+                _control.eControlUnSelected += numlet.OnControlUnSelectedChange;
+
                 // Hook up the control resizing events so that all controls are messaged by this numlet
+                numlet.eSizeChanged += _control.OnSizeChange;
                 numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
-                //_control.eValueChanged += numlet.FireValueChange;
+
+                numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
+                numlet.eControlSelected += this._vcCurrentWorkSpace.OnControlSelectedChange;
+                numlet.eControlUnSelected += this._vcCurrentWorkSpace.OnControlUnSelectedChange;
 
                 // Most of these should ApplyUI in ViewWillAppear
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 

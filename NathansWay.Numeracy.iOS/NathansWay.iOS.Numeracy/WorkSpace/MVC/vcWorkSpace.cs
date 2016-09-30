@@ -461,6 +461,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
         }
 
+        public void Resize(G__DisplaySizeLevels _level)
+        {
+            // This should fire a resize
+            // We also need to supply the global size variable
+            this.FireSizeChange();
+        }
+
         #endregion
 
         #region Public Properties
@@ -575,6 +582,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get { return this._vcMainWorkSpace; }   
         }
 
+
+        #endregion
+
+        #region Delegates
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlUnSelectedChange(s, e);
+        }
+
+        public override void OnValueChange(object s, EventArgs e)
+        {
+            var x = 10;
+            //base.OnValueChange(s, e);
+        }
+
+        public override void OnSizeChange(object s, EventArgs e)
+        {
+            base.OnSizeChange(s, e);
+        }
 
         #endregion
 
@@ -703,24 +735,49 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return _ret;
         }
 
-        //public override void ApplyUI6()
-        //{
-        //    base.ApplyUI6();
-        //}
-
-        //public override void ApplyUI7()
-        //{
-        //    base.ApplyUI7();
-        //}
-
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            base.OnControlSelectedChange(s,e);
+            // Check if the touch is inside any active numlets
+            UITouch y = (UITouch)touches.AnyObject;
+            if (this.TouchInsideNumlets(y) != true)
+            {
+                if (this.HasSelectedNumberText)
+                {
+                    var x = this.SelectedNumberText;
+                    if (x.IsInEditMode)
+                    {
+                        x.TapText();
+                    }
+                    x.OnControlUnSelectedChange(this, new EventArgs());
+                    this.SelectedNumberText = null;
+                }
+                // User taps another operator
+                if (this.HasSelectedOperatorText)
+                {
+                    this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
+                    this.SelectedOperatorText = null;
+                }
+            }
+
+            base.TouchesBegan(touches, evt);
         }
 
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {  
-            base.OnControlUnSelectedChange(s,e);
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+            base.TouchesEnded(touches, evt);
+        }
+
+
+        #region UI
+
+        public override void ApplyUI6()
+        {
+            base.ApplyUI6();
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
         }
 
         public override void UI_SetViewSelected()
@@ -748,32 +805,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //base.UI_SetViewReadOnly();
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
-            if (this.TouchInsideNumlets(y) != true)
-            {
-                if (this.HasSelectedNumberText)
-                {
-                    var x = this.SelectedNumberText;
-                    if (x.IsInEditMode)
-                    {
-                        x.TapText();
-                    }
-                    x.OnControlUnSelectedChange(this, new EventArgs());
-                    this.SelectedNumberText = null;
-                }
-                // User taps another operator
-                if (this.HasSelectedOperatorText)
-                {
-                    this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-                    this.SelectedOperatorText = null;
-                }
-            }
-
-            base.TouchesBegan(touches, evt);
-        }
+        #endregion
 
 		#endregion
 
@@ -903,7 +935,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnSizeNormal (object sender, EventArgs e)
         {
-
+            this.Resize(G__DisplaySizeLevels.Level4);
         }
 
         private void OnClick_btnSizeLarge (object sender, EventArgs e)
