@@ -107,41 +107,41 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (this._bReadOnly)
             {
-                this.UI_SetViewReadOnly();
+                this.UI_ViewReadOnly();
             } 
             if (this._bIsAnswer)
             {
-                this.UI_SetViewNeutral();
+                this.UI_ViewNeutral();
             }
             return true;
         }
 
-        public override void UI_SetViewSelected()
+        public override void UI_ViewSelected()
         {
-            base.UI_SetViewSelected();
+            base.UI_ViewSelected();
             // Number specific
         }
 
-        public override void UI_SetViewNeutral()
+        public override void UI_ViewNeutral()
         {
-            base.UI_SetViewNeutral();
+            base.UI_ViewNeutral();
             // Number specific
         }
 
-        public override void UI_SetViewReadOnly()
+        public override void UI_ViewReadOnly()
         {
-            base.UI_SetViewReadOnly();
+            base.UI_ViewReadOnly();
             // Number specific
         }
 
-        public override void UI_SetViewCorrect()
+        public override void UI_ViewCorrect()
         {
-            base.UI_SetViewCorrect();
+            base.UI_ViewCorrect();
         }
 
-        public override void UI_SetViewInCorrect()
+        public override void UI_ViewInCorrect()
         {
-            base.UI_SetViewInCorrect();
+            base.UI_ViewInCorrect();
         }
 
         #endregion

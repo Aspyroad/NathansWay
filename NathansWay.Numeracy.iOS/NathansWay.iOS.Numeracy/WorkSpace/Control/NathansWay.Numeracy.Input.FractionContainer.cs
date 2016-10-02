@@ -249,11 +249,11 @@ namespace NathansWay.iOS.Numeracy
             {
                 if (this._bReadOnly)
                 {
-                    base.UI_SetViewReadOnly();
+                    base.UI_ViewReadOnly();
                 } 
                 if (this._bIsAnswer)
                 {
-                    base.UI_SetViewNeutral();
+                    base.UI_ViewNeutral();
                 }
                 return true;
             }
@@ -271,12 +271,14 @@ namespace NathansWay.iOS.Numeracy
         }
 
         public override void OnControlSelectedChange(object s, EventArgs e)
-        {           
+        {
+            this.FireControlSelected();
             base.OnControlSelectedChange(s,e);
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {  
+        {
+            this.FireControlUnSelected();
             base.OnControlUnSelectedChange(s,e);
         }
 
@@ -318,54 +320,51 @@ namespace NathansWay.iOS.Numeracy
 
             if (this._bIsCorrect)
             {
-                this.UI_SetViewCorrect();
-                this._numberContainerDenominator.UI_SetViewCorrect();
-                this._numberContainerNumerator.UI_SetViewCorrect();
+                this.UI_ViewCorrect();
+                this._numberContainerDenominator.UI_ViewCorrect();
+                this._numberContainerNumerator.UI_ViewCorrect();
             }
             else
             {
                 if (this._bInitialLoad)
                 {
-                    this.UI_SetViewNeutral();
-                    this._numberContainerDenominator.UI_SetViewNeutral();
-                    this._numberContainerNumerator.UI_SetViewNeutral();
+                    this.UI_ViewNeutral();
+                    this._numberContainerDenominator.UI_ViewNeutral();
+                    this._numberContainerNumerator.UI_ViewNeutral();
                 }
                 else
                 {
-                    this.UI_SetViewInCorrect();
-                    this._numberContainerDenominator.UI_SetViewInCorrect();
-                    this._numberContainerNumerator.UI_SetViewInCorrect();
+                    this.UI_ViewInCorrect();
+                    this._numberContainerDenominator.UI_ViewInCorrect();
+                    this._numberContainerNumerator.UI_ViewInCorrect();
                 }
             }
 
         }
 
-        public override void UI_SetViewSelected()
+        public override void UI_ViewSelected()
         {
-            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            //base.UI_SetViewSelected();
+            base.UI_ViewSelected();
         }
 
-        public override void UI_SetViewNeutral()
+        public override void UI_ViewNeutral()
         {
-            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            base.UI_SetViewNeutral();
+            base.UI_ViewNeutral();
         }
 
-        public override void UI_SetViewReadOnly()
+        public override void UI_ViewReadOnly()
         {
-            //this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            base.UI_SetViewReadOnly();
+            base.UI_ViewReadOnly();
         }
 
-        public override void UI_SetViewCorrect()
+        public override void UI_ViewCorrect()
         {
-            base.UI_SetViewCorrect();
+            base.UI_ViewCorrect();
         }
 
-        public override void UI_SetViewInCorrect()
+        public override void UI_ViewInCorrect()
         {
-            base.UI_SetViewInCorrect();
+            base.UI_ViewInCorrect();
         }
 
 //        public override void TouchesBegan(NSSet touches, UIEvent evt)

@@ -219,8 +219,8 @@ namespace NathansWay.Shared
             ReadOnlyTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 20.0f, 225.0f)); // Black
             ReadOnlyBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black
             SelectedBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // White
-            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(20.0f, 20.0f, 60.0f, 255.0f)); // Black
-            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black
+            SelectedTextColor = new Lazy<G__Color> (() => new G__Color(100.0f, 0.0f, 0.0f, 255.0f)); // Black
+            SelectedBorderColor = new Lazy<G__Color> (() => new G__Color(200.0f, 0.0f, 0.0f, 255.0f)); // Black
 
             // Dialog Global
             DiagBorderColor = new Lazy<G__Color> (() => new G__Color(200.0f, 200.0f, 200.0f, 255.0f)); // Black

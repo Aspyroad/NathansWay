@@ -599,7 +599,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, EventArgs e)
         {
-            var x = 10;
             //base.OnValueChange(s, e);
         }
 
@@ -767,6 +766,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.TouchesEnded(touches, evt);
         }
 
+        #endregion
 
         #region UI
 
@@ -780,32 +780,30 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ApplyUI7();
         }
 
-        public override void UI_SetViewSelected()
+        public override void UI_ViewSelected()
         {
             //base.UI_SetViewSelected();
         }
 
-        public override void UI_SetViewNeutral()
+        public override void UI_ViewNeutral()
         {
             //base.UI_SetViewNeutral();
         }
 
-        public override void UI_SetViewInCorrect()
+        public override void UI_ViewInCorrect()
         {
             //base.UI_SetViewInCorrect();
         }
 
-        public override void UI_SetViewCorrect()
+        public override void UI_ViewCorrect()
         {
             //base.UI_SetViewCorrect();
         }
 
-        public override void UI_SetViewReadOnly()
+        public override void UI_ViewReadOnly()
         {
             //base.UI_SetViewReadOnly();
         }
-
-        #endregion
 
 		#endregion
 

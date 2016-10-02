@@ -160,52 +160,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Set the initial state
         }
 
-        public override bool ApplyUI(G__ApplyUI _applywhere)
-        {
-            if (base.ApplyUI(_applywhere))
-            {
-                if (this._bReadOnly)
-                {
-                    this.UI_SetViewReadOnly();
-                }
-                if (this._bIsAnswer)
-                {
-                    this.UI_SetViewNeutral();
-                }
-            }
-            return true;
-        }
-
-        public override void UI_SetViewSelected()
-        {
-            this.txtNumber.HasBorder = true;
-            base.UI_SetViewSelected();
-        }
-
-        public override void UI_SetViewNeutral()
-        {
-            this.txtNumber.HasBorder = false;
-            base.UI_SetViewNeutral();
-        }
-
-        public override void UI_SetViewReadOnly()
-        {
-            this.txtNumber.HasBorder = false;
-            base.UI_SetViewReadOnly();
-        }
-
-        public override void UI_SetViewCorrect()
-        {
-            this.txtNumber.HasBorder = false;
-            base.UI_SetViewCorrect();
-        }
-
-        public override void UI_SetViewInCorrect()
-        {
-            this.txtNumber.HasBorder = false;
-            base.UI_SetViewInCorrect();
-        }
-
         #endregion
 
         #region Public Members
@@ -1016,25 +970,80 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Delegates
 
-        public override void OnValueChange(object s, EventArgs e)
-        {
-            base.OnValueChange(s, e);
-        }
-
+        // FLOW - DOWN FORM NUMBER CONTAINER
         public override void OnSizeChange(object s, EventArgs e)
         {
-            this.FireSizeChange();
-            base.OnSizeChange(s, e);
+            // Handle the size change
         }
 
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
+        public override void OnValueChange(object s, EventArgs e)
+        {
+            this.FireValueChange();
+        }
+
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            base.OnControlSelectedChange(s, e);
+            base.OnControlSelectedChange(s,e);
+            this.FireControlSelected();
         }
 
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
-            base.OnControlUnSelectedChange(s, e);
+            base.OnControlUnSelectedChange(s,e);
+            this.FireControlUnSelected();
+        }
+
+        #endregion
+
+        #region UI
+
+        public override bool ApplyUI(G__ApplyUI _applywhere)
+        {
+            if (base.ApplyUI(_applywhere))
+            {
+                if (this._bReadOnly)
+                {
+                    this.UI_ViewReadOnly();
+                }
+                if (this._bIsAnswer)
+                {
+                    this.UI_ViewNeutral();
+                }
+            }
+            return true;
+        }
+
+        public override void UI_ViewSelected()
+        {
+            this.txtNumber.HasBorder = false;
+            base.UI_ViewSelected();
+        }
+
+        public override void UI_ViewNeutral()
+        {
+            this.txtNumber.HasBorder = false;
+            base.UI_ViewNeutral();
+        }
+
+        public override void UI_ViewReadOnly()
+        {
+            this.txtNumber.HasBorder = false;
+            base.UI_ViewReadOnly();
+        }
+
+        public override void UI_ViewCorrect()
+        {
+            this.txtNumber.HasBorder = false;
+            base.UI_ViewCorrect();
+        }
+
+        public override void UI_ViewInCorrect()
+        {
+            this.txtNumber.HasBorder = false;
+            base.UI_ViewInCorrect();
         }
 
         #endregion

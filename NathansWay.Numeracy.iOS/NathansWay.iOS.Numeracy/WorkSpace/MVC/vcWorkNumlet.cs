@@ -187,25 +187,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Delegates
 
-        public override void OnControlSelectedChange(object s, EventArgs e)
-        {
-            base.OnControlSelectedChange(s, e);
-        }
-
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {
-            //// TODO : What of this is a method numlet?
-            //if (this.NumletType == G__WorkNumletType.Equation)
-            //{
-            //    this.UI_SetViewReadOnly();
-            //}
-            //else
-            //{
-            //    this.UI_SetViewNeutral();
-            //}
-            base.OnControlUnSelectedChange(s, e);
-        }
-
         public override void OnValueChange(object s, EventArgs e)
         {
             this.FireValueChange();
@@ -214,8 +195,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnSizeChange(object s, EventArgs e)
         {
+            // 
             this.FireSizeChange();
-            base.OnSizeChange(s, e);
+        }
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlUnSelectedChange(s, e);
         }
 
         #endregion
@@ -241,13 +232,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            this.UI_SetViewNeutral();
+            this.UI_ViewNeutral();
 
         }
 
+		#endregion
+
         #region UI Functions
 
-        public override void UI_SetViewSelected()
+        public override void UI_ViewSelected()
         {
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
@@ -256,7 +249,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
-        public override void UI_SetViewNeutral()
+        public override void UI_ViewNeutral()
         {
             this.BorderWidth = 1.0f;
             this.HasBorder = true;
@@ -265,7 +258,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
-        public override void UI_SetViewInCorrect()
+        public override void UI_ViewInCorrect()
         {
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
@@ -274,7 +267,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
-        public override void UI_SetViewCorrect()
+        public override void UI_ViewCorrect()
         {
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
@@ -283,7 +276,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
         }
 
-        public override void UI_SetViewReadOnly()
+        public override void UI_ViewReadOnly()
         {
             this.BorderWidth = 1.0f;
             this.HasBorder = true;
@@ -312,46 +305,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ApplyUI6()
         {
             base.ApplyUI6();
-        }
-
-        #endregion
-
-        // Touch
-        //public override void TouchesBegan(NSSet touches, UIEvent evt)
-        //{
-        //    // Check if the touch is inside any active numlets
-        //    UITouch y = (UITouch)touches.AnyObject;
-        //    if (this.MyWorkSpaceParent.HasSelectedNumberText)
-        //    {
-        //        var x = this.MyWorkSpaceParent.SelectedNumberText;
-        //        if (x.IsInEditMode)
-        //        {
-        //            x.TapText();
-        //        }
-        //        x.OnControlUnSelectedChange();
-        //        this.MyWorkSpaceParent.SelectedNumberText = null;
-        //    }
-        //    // User taps another operator
-        //    if (this.MyWorkSpaceParent.HasSelectedOperatorText)
-        //    {
-        //        this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange();
-        //    }
-        //    base.TouchesBegan(touches, evt);
-        //}
-
-		#endregion
-
-        #region EventHandlers
-
-        protected void FireResultSelected()
-        {
-            // Thread safety.
-            var x = this.evtResultSelected;
-            // Check for null before firing.
-            if (x != null)
-            {
-                x(this, new EventArgs());
-            }
         }
 
         #endregion

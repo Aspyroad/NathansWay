@@ -225,24 +225,13 @@ namespace NathansWay.iOS.Numeracy
         public virtual void OnControlSelectedChange(object s, EventArgs e)
         {
             this._bSelected = true;
+            this.UI_SetSelectedState();
         }
 
         public virtual void OnControlUnSelectedChange(object s, EventArgs e)
         {
             this._bSelected = false;
-            //if (this._bHasImmediateParent)
-            //{
-            //    this.MyImmediateParent.OnControlUnSelectedChange();
-            //}
-            //// There are some rules for an Unselect, as it must go back to [n] states
-            //if (this._bReadOnly)
-            //{
-            //    this.UI_SetViewReadOnly();
-            //}
-            //if (this._bIsAnswer)
-            //{
-            //    this.UI_SetViewNeutral();
-            //}
+            this.UI_SetUnSelectedState();
         }
 
         public virtual bool Solve()
@@ -286,50 +275,67 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this._bIsCorrect)
             {
-                this.UI_SetViewCorrect();
+                this.UI_ViewCorrect();
             }
             else
             {
                 if (this._bInitialLoad)
                 {
-                    this.UI_SetViewNeutral();
+                    this.UI_ViewNeutral();
                 }
                 else
                 {
-                    this.UI_SetViewInCorrect();
+                    this.UI_ViewInCorrect();
                 }
             }
         }
 
-        public virtual void UI_SetViewNeutral()
+        public virtual void UI_SetSelectedState()
+        {
+            this.UI_ViewSelected();
+        }
+
+        public virtual void UI_SetUnSelectedState()
+        {
+            if (this.IsAnswer)
+            {
+                UI_ViewNeutral();
+            }
+            else
+            {
+                UI_ViewReadOnly();
+            }
+        }
+
+        public virtual void UI_ViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
         }
 
-        public virtual void UI_SetViewReadOnly()
+        public virtual void UI_ViewReadOnly()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
-        public virtual void UI_SetViewCorrect()
+        public virtual void UI_ViewCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
-        public virtual void UI_SetViewInCorrect()
+        public virtual void UI_ViewInCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
         }
 
-        public virtual void UI_SetViewSelected()
+        public virtual void UI_ViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;

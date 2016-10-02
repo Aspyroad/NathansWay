@@ -132,11 +132,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 if (this._bReadOnly)
                 {
-                    this.UI_SetViewReadOnly();
+                    this.UI_ViewReadOnly();
                 }
                 else
                 {
-                    this.UI_SetViewNeutral();
+                    this.UI_ViewNeutral();
                 }
                 //this._vOperator.BackgroundColor = UIColor.LightGray;
                 return true;

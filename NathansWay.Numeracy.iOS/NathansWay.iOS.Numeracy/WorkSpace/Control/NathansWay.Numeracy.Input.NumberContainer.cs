@@ -306,6 +306,14 @@ namespace NathansWay.iOS.Numeracy
 
         #region Delegates
 
+        // FLOW - DOWN FORM NUMBER CONTAINER
+        public override void OnSizeChange(object s, EventArgs e)
+        {
+            // FIRE CHILD NUMBER
+            this.FireSizeChange();
+        }
+
+        // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnValueChange(object s, EventArgs e)
         {
             string _strCurValue = "";
@@ -341,24 +349,130 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void OnSizeChange(object s, EventArgs e)
-        {
-            this.FireSizeChange();
-            base.OnSizeChange(s, e);
-        }
-
+        // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            //if (this.AnswerState == G__AnswerState.InCorrect)
-            //{
-            //    this.UI_SetViewNeutral();
-            //}
+            this.FireControlSelected();
             base.OnControlSelectedChange(s, e);
         }
 
+        // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
+            this.FireControlUnSelected();
             base.OnControlUnSelectedChange(s,e);
+        }
+
+        #endregion
+
+        #region UI Functions
+
+        public override void UI_ViewSelected()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                if (_Number.Selected)
+                {
+                    _Number.UI_ViewSelected();
+                }
+                else
+                {
+                    this.UI_SetUnSelectedState();
+                }
+            }
+        }
+
+        public override void UI_ViewNeutral()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                _Number.UI_ViewNeutral();
+            }
+        }
+
+        public override void UI_ViewReadOnly()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+
+        }
+
+        public override void UI_ViewCorrect()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+
+            //if (!this._bPerNumberErrorUIDisplay)
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_ViewCorrect();
+                }
+            }
+
+        }
+
+        public override void UI_ViewInCorrect()
+        {
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.View.BackgroundColor = UIColor.Clear;
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+
+            //if (!this._bPerNumberErrorUIDisplay)
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_ViewInCorrect();
+                }
+            }
+        }
+
+        public override void ClearValue()
+        {
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                this.CurrentValue = null;
+                _Number.CurrentValue = null;
+            }
+        }
+
+        public override bool ApplyUI(G__ApplyUI _applywhere)
+        {
+            // Note the calls to base for UI when initializing
+            if (base.ApplyUI(_applywhere))
+            {
+                if (this._bReadOnly)
+                {
+                    base.UI_ViewReadOnly();
+                }
+                if (this._bIsAnswer)
+                {
+                    base.UI_ViewNeutral();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -397,207 +511,12 @@ namespace NathansWay.iOS.Numeracy
             return _ret;
         }
 
-        #region UI Functions
-
-        public override void UI_SetViewSelected()
-        {
-            if (this.HasFractionParent)
-            {
-                if (this._bMultiNumbered)
-                {
-                    this.HasBorder = true;
-                }
-                else
-                {
-                    this.HasBorder = false;  
-                }
-            }
-            else
-            {
-                this.HasBorder = true;
-            }
-
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
-
-            // Loop through this._lsNumbers
-            //foreach (BaseContainer _Number in this._lsNumbers)
-            //{
-            //    _Number.UI_SetViewNeutral();
-            //}
-
-            // UI State for parent containers
-            if (this.MyNumletParent != null)
-            {
-                this.MyNumletParent.UI_SetViewSelected();
-            }
-            if (this.MyFractionParent != null)
-            {
-
-            }
-            if (this.MyWorkSpaceParent != null)
-            {
-
-            }
-
-        }
-
-        public override void UI_SetViewNeutral()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
-
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
-            {
-                _Number.UI_SetViewNeutral();
-            }
-
-            // UI State for parent containers
-            if (this.MyNumletParent != null)
-            {
-                this.MyNumletParent.UI_SetViewNeutral();
-            }
-            if (this.MyFractionParent != null)
-            {
-
-            }
-            if (this.MyWorkSpaceParent != null)
-            {
-
-            }
-        }
-
-        public override void UI_SetViewReadOnly()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
-
-            // UI State for parent containers
-            if (this.MyNumletParent != null)
-            {
-                this.MyNumletParent.UI_SetViewReadOnly();
-            }
-            if (this.MyFractionParent != null)
-            {
-
-            }
-            if (this.MyWorkSpaceParent != null)
-            {
-
-            }
-        }
-
-        public override void UI_SetViewCorrect()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
-
-            //if (!this._bPerNumberErrorUIDisplay)
-            {
-                // Loop through this._lsNumbers
-                foreach (BaseContainer _Number in this._lsNumbers)
-                {
-                    _Number.UI_SetViewCorrect();
-                }
-            }
-
-            // UI State for parent containers
-            if (this.MyNumletParent != null)
-            {
-                this.MyNumletParent.UI_SetViewCorrect();
-            }
-            if (this.MyFractionParent != null)
-            {
-
-            }
-            if (this.MyWorkSpaceParent != null)
-            {
-
-            }
-        }
-
-        public override void UI_SetViewInCorrect()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-            this.BorderWidth = 5.0f;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.White;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
-
-            //if (!this._bPerNumberErrorUIDisplay)
-            {
-                // Loop through this._lsNumbers
-                foreach (BaseContainer _Number in this._lsNumbers)
-                {
-                    _Number.UI_SetViewInCorrect();
-                }
-            }
-
-            // UI State for parent containers
-            if (this.MyNumletParent != null)
-            {
-                this.MyNumletParent.UI_SetViewInCorrect();
-            }
-            if (this.MyFractionParent != null)
-            {
-
-            }
-            if (this.MyWorkSpaceParent != null)
-            {
-
-            }
-        }
-
-        public override void ClearValue()
-        {
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers) 
-            {
-                this.CurrentValue = null;
-                _Number.CurrentValue = null;             
-            }
-        }
-
-        public override bool ApplyUI(G__ApplyUI _applywhere)
-        {
-            // Note the calls to base for UI when initializing
-            if (base.ApplyUI(_applywhere))
-            {
-                if (this._bReadOnly)
-                {
-                    base.UI_SetViewReadOnly();
-                } 
-                if (this._bIsAnswer)
-                {
-                    base.UI_SetViewNeutral();
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        #endregion
-
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
         }
-
-
 
         #endregion
 
