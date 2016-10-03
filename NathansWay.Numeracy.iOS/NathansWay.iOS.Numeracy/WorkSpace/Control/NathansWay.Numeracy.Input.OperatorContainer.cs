@@ -148,12 +148,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         public override void OnControlSelectedChange(object s, EventArgs e)
-        {           
+        {
+            this.FireControlSelected();
             base.OnControlSelectedChange(s,e);
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {  
+        {
+            this.FireControlUnSelected();
             base.OnControlUnSelectedChange(s,e);
         }
             
@@ -170,14 +172,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.Touched = true;
             if (_bSelected)
             {
-                this._bSelected = false;
+                //this._bSelected = false;
                 // Handle re-taping the same numbertext...toggle
                 this.MyWorkSpaceParent.SelectedOperatorText = null;
                 this.OnControlUnSelectedChange(this, new EventArgs());
             }
             else
             {
-                this._bSelected = true;
+                //this._bSelected = true;
 
                 if (this.MyWorkSpaceParent.HasSelectedNumberText)
                 {
@@ -194,7 +196,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
                 }
-                else
+                //else
                 {
                     // Handle re-taping the same numbertext...toggle
                     this.MyWorkSpaceParent.SelectedOperatorText = this;
@@ -208,7 +210,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (this._operatorType == G__MathOperator.Equals)
             {
                 //this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
-                this.MyWorkSpaceParent.Solve();
+                //this.MyWorkSpaceParent.Solve();
             }
 
             base.TouchesBegan(touches, evt);

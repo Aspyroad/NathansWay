@@ -161,12 +161,11 @@ namespace NathansWay.iOS.Numeracy
             // Event hooks
             // Numerator
             this._numberContainerNumerator.eValueChanged += this.OnValueChange;
-            this._numberContainerNumerator.eSizeChanged += this.OnSizeChange;
             this._numberContainerNumerator.eControlSelected += this.OnControlSelectedChange;
             this._numberContainerNumerator.eControlUnSelected += this.OnControlUnSelectedChange;
+
             // Denominator
             this._numberContainerDenominator.eValueChanged += this.OnValueChange;
-            this._numberContainerDenominator.eSizeChanged += this.OnSizeChange;
             this._numberContainerDenominator.eControlSelected += this.OnControlSelectedChange;
             this._numberContainerDenominator.eControlUnSelected += this.OnControlUnSelectedChange;
 
@@ -221,19 +220,6 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-        public override void OnValueChange(object s, EventArgs e)
-        {
-            // Fire this objects FireValueChange for bubbleup
-            this.FireValueChange();
-
-            // Once in here we are past an inital load, and a user has input a value
-            // We must reset our intital load variable to false
-            this.IsInitialLoad = false;
-
-            // If this is an answer type, check it
-            //this.CheckCorrect();
-        }
-
         public override void ClearValue()
         {
             this.CurrentValue = null;
@@ -270,17 +256,44 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        #endregion
+
+        #region Delegates
+
+        // FLOW - DOWN FORM NUMBER CONTAINER
+        public override void OnSizeChange(object s, EventArgs e)
         {
-            this.FireControlSelected();
-            base.OnControlSelectedChange(s,e);
+            // Handle the size change
         }
 
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
+        public override void OnValueChange(object s, EventArgs e)
+        {
+            // Fire this objects FireValueChange for bubbleup
+            this.FireValueChange();
+
+            // Once in here we are past an inital load, and a user has input a value
+            // We must reset our intital load variable to false
+            this.IsInitialLoad = false;
+        }
+
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            base.OnControlSelectedChange(s, e);
+            this.FireControlSelected();
+        }
+
+        // FLOW - UP FROM HERE TO NUMBER CONTAINER
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
+            base.OnControlUnSelectedChange(s, e);
             this.FireControlUnSelected();
-            base.OnControlUnSelectedChange(s,e);
         }
+
+        #endregion
+
+        #region UI
 
         public override void SetCorrectState ()
         {            
@@ -344,7 +357,9 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_ViewSelected()
         {
-            base.UI_ViewSelected();
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
+            //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
         public override void UI_ViewNeutral()
@@ -366,33 +381,6 @@ namespace NathansWay.iOS.Numeracy
         {
             base.UI_ViewInCorrect();
         }
-
-//        public override void TouchesBegan(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesBegan(touches, evt);
-//
-//            this.Touched = true;
-//            if (_bSelected)
-//            {
-//                // This control can actually be selected multiple times.
-//                this._bSelected = false;
-//                //this.OnControlUnSelectedChange();
-//            }
-//            else
-//            {
-//                this._bSelected = true;
-//                //this.OnControlSelectedChange();
-//            }
-//
-//            // If any controls want to subscribe
-//            //this.FireControlSelected();
-//        }
-//
-//        public override void TouchesEnded(NSSet touches, UIEvent evt)
-//        {
-//            base.TouchesEnded(touches, evt);
-//            this.Touched = false;
-//        }
 
         #endregion
 
@@ -509,6 +497,10 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 base._vcNumletContainer = value;
+                // Hook resize events to the fraction container
+                this.eSizeChanged += value.OnSizeChange;
+                this.SizeClass.eResizing += value.SizeClass.OnResize;
+
                 this._numberContainerNumerator.MyNumletParent = value;
                 this._numberContainerDenominator.MyNumletParent = value;                
             }
