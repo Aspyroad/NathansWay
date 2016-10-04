@@ -105,6 +105,7 @@ namespace NathansWay.iOS.Numeracy
             this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;
             this._numberAppSettings.GA__ShowAnswerNumlet = true;
+            this._numberAppSettings.GA__NumberErrorUIDisplay = true;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

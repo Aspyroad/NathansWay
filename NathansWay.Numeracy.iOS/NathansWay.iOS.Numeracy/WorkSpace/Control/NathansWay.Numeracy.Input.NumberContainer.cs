@@ -479,11 +479,6 @@ namespace NathansWay.iOS.Numeracy
 
         #region Overrides
 
-        // TODO:
-        // Two current bug
-        // 1. If the container is empty, solving shows as being correct
-        // 2. If only 1 container is filled but another is empty, it still sloves as correct
-
         public override bool Solve()
         {
             bool _ret = false;
@@ -493,7 +488,7 @@ namespace NathansWay.iOS.Numeracy
 
             // If enabled a >1 digit display will only show the value incorrect
             // rather than the entire numer
-            if (this._bPerNumberErrorUIDisplay)
+            if (this.NumberAppSettings.GA__NumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)

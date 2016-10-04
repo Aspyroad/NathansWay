@@ -1125,8 +1125,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             #region Overrides
 
-
-
             /// <summary>
             /// Called when a row is selected in the spinner
             /// </summary>

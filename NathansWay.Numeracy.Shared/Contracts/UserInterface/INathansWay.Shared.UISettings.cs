@@ -65,6 +65,13 @@ namespace NathansWay.Shared
         /// the next text box on a multinumbered text
         ///<summary>
         bool GA__MoveToNextNumber { get; set; }
+
+        /// <summary>
+        /// When checking the answer, this will highlite the particular number
+        /// which is wrong. Eg if the answer was 20, but the user selected 21
+        /// the "1" would be highlited as incorrect but the "2" would be dislplyed correct
+        ///<summary>
+        bool GA__NumberErrorUIDisplay { get; set; }
     }
 
 

@@ -142,6 +142,12 @@ namespace NathansWay.Shared
             }
         }
 
+        public bool GA__NumberErrorUIDisplay 
+        { 
+            get; 
+            set; 
+        }
+
         #endregion
 
         #region Private Members

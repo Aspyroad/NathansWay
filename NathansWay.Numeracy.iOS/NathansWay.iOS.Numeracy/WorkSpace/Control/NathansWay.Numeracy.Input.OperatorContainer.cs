@@ -209,7 +209,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // If this is an equals sign fire check correct
             if (this._operatorType == G__MathOperator.Equals)
             {
-                //this.MyWorkSpaceParent.NumletResult.ResultContainer.UI_SetAnswerState();
                 //this.MyWorkSpaceParent.Solve();
             }
 

@@ -91,7 +91,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.txtDecimal.Delegate = this._txtDecimalDelegate;
         }
 
-        // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             // Base Container will call ALL main vc setframes.
@@ -102,6 +101,15 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._vDecimal.RectDecimalDraw = this._sizeDecimal._rectDecimalDraw;
             //this.View.Frame = this.DecimalSize._rectDecimal;
         }
+
+        public override bool Solve()
+        {
+            return base.Solve();
+        }
+
+        #endregion
+
+        #region UI
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
