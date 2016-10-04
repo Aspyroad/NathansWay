@@ -206,12 +206,12 @@ namespace NathansWay.Shared
             PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
             // Various
-            PositiveBGColor = new Lazy<G__Color> (() => new G__Color(102.0f, 255.0f, 102.0f, 255.0f)); // Green Light
-            PositiveTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 51.0f, 0.0f, 255.0f)); // Dark x 2 Green
-            PositiveBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 102.0f, 0.0f, 255.0f)); // Dark Green
-            NegativeBGColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 50.0f)); // Brick Red
-            NegativeTextColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Black
-            NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(253.0f, 35.0f, 34.0f, 255.0f)); // Dark Red
+            PositiveBGColor = new Lazy<G__Color> (() => new G__Color(102.0f, 255.0f, 102.0f, 10.0f)); // Green Light
+            PositiveTextColor = new Lazy<G__Color> (() => new G__Color(50.0f, 255.0f, 20.0f, 255.0f)); // Dark x 2 Green
+            PositiveBorderColor = new Lazy<G__Color> (() => new G__Color(.0f, 255.0f, 0.0f, 255.0f)); // Dark Green
+            NegativeBGColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 10.0f)); // Brick Red
+            NegativeTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 60.0f, 60.0f, 255.0f)); // Black
+            NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(255.0f, 60.0f, 60.0f, 255.0f)); // Dark Red
             NeutralBGColor = new Lazy<G__Color> (() => new G__Color(220.0f, 220.0f, 220.0f, 255.0f)); // White
             NeutralTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 100.0f, 255.0f)); // Black
             NeutralBorderColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black

@@ -48,6 +48,8 @@ namespace NathansWay.iOS.Numeracy
         // Attemped Solve - used to find the state after a solve has been attempted
         // This should be reset as soon as it is attemped again.
         protected bool _bSolveAttemped;
+        // Answer isnt complete
+        protected bool _bIsInComplete;
         // Obviously when touched
         protected bool _bTouched;
         // Technically true when touched?
@@ -143,6 +145,7 @@ namespace NathansWay.iOS.Numeracy
             this._containerType = G__ContainerType.Container;
             // Logic
             this._bIsAnswer = false;
+            this._bIsInComplete = false;
             this._bHasFractionParent = false;
             this._bHasNumletParent = false;
             this._bHasNumberParent = false;
@@ -241,8 +244,6 @@ namespace NathansWay.iOS.Numeracy
             return this._bIsCorrect;
         }
 
-        // TODO: Fix this to include UI changes
-        // This will only ever be called by hitting the equate sign
         public virtual void SetCorrectState ()
         {
             if (this._bInitialLoad)
@@ -344,6 +345,88 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
+		#region Overrides
+
+		public override void ViewWillAppear (bool animated)
+		{
+			// Always correct bounds and frame
+			base.ViewWillAppear (animated);
+
+            // Set all control frames
+            this.SizeClass.SetFrames();
+		}
+
+        public override bool ApplyUI(G__ApplyUI _applywhere)
+        {
+            if (base.ApplyUI(_applywhere))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override void ViewDidLoad()
+        {
+            base.ViewDidLoad();
+        }
+
+        #endregion
+
+        #region Responder Chain Interrupt
+
+        public override void TouchesBegan(NSSet touches, UIEvent evt)
+        {
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesBegan(touches, evt);
+                //this.NextResponder.TouchesBegan(touches, evt);
+            }
+        }
+
+        public override void TouchesEnded(NSSet touches, UIEvent evt)
+        {
+
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesEnded(touches, evt);
+                //this.NextResponder.TouchesEnded(touches, evt);
+            }
+        }
+
+        public override void TouchesMoved(NSSet touches, UIEvent evt)
+        {
+
+
+            // Continue next responder if set
+            if (this._bAllowNextResponder)
+            {
+                base.TouchesMoved(touches, evt);
+                //this.NextResponder.TouchesMoved(touches, evt);
+            }
+        }
+
+        #endregion
+
+        #region Autorotation for iOS 6 or newer
+
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
+		{
+			return UIInterfaceOrientationMask.AllButUpsideDown;
+		}
+
+		public override bool ShouldAutorotate ()
+		{
+			return true;
+		}
+
+		#endregion
+
         #region Public Properties
 
         public Action ActTextSizeChange
@@ -364,6 +447,18 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
+        public bool IsInComplete
+        {
+            get
+            {
+                return this._bIsInComplete;
+            }
+            set
+            {
+                this._bIsInComplete = value;
+            }
+        }
+
         public bool Selected
         {
             get
@@ -379,9 +474,9 @@ namespace NathansWay.iOS.Numeracy
         public Nullable<double> PrevValue
         {
             get { return this._dblPrevValue; }
-            set 
-            { 
-                this._dblPrevValue = value; 
+            set
+            {
+                this._dblPrevValue = value;
                 this._strPrevValue = value.ToString().Trim();
             }
         }
@@ -389,11 +484,11 @@ namespace NathansWay.iOS.Numeracy
         public Nullable<double> OriginalValue
         {
             get { return this._dblOriginalValue; }
-            set 
-            { 
-                this._dblOriginalValue = value; 
+            set
+            {
+                this._dblOriginalValue = value;
                 this._strOriginalValue = value.ToString().Trim();
-            }          
+            }
         }
 
         public string CurrentValueStr
@@ -416,11 +511,11 @@ namespace NathansWay.iOS.Numeracy
 
         public G__AnswerState AnswerState
         {
-            get 
+            get
             {
                 return this._answerState;
             }
-            set 
+            set
             {
                 this._answerState = value;
             }
@@ -476,14 +571,14 @@ namespace NathansWay.iOS.Numeracy
             {
                 // Set our previous value
                 this._dblPrevValue = this._dblCurrentValue;
-                this._dblCurrentValue = value; 
-            }          
+                this._dblCurrentValue = value;
+            }
         }
 
         public virtual bool IsAnswer
         {
             get { return this._bIsAnswer; }
-            set 
+            set
             {
                 this._bIsAnswer = value;
                 //this.AnswerState = G__AnswerState.UnAttempted;
@@ -524,9 +619,9 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual G__NumberEditMode CurrentEditMode
         {
-            get 
-            { 
-                return this._currentEditMode; 
+            get
+            {
+                return this._currentEditMode;
             }
             set
             {
@@ -537,9 +632,9 @@ namespace NathansWay.iOS.Numeracy
         public virtual bool IsInEditMode
         {
             get { return this._bIsInEditMode; }
-            set 
+            set
             {
-                    this._bIsInEditMode = value;
+                this._bIsInEditMode = value;
             }
         }
 
@@ -631,7 +726,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual vcNumberText SelectedNumberText
         {
-            get { return this._vcSelectedNumberText;}
+            get { return this._vcSelectedNumberText; }
             set
             {
                 if (value != null)
@@ -650,7 +745,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual vcOperatorText SelectedOperatorText
         {
-            get { return this._vcSelectedOperatorText;}
+            get { return this._vcSelectedOperatorText; }
             set
             {
                 if (value != null)
@@ -727,87 +822,6 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-		#region Overrides
-
-		public override void ViewWillAppear (bool animated)
-		{
-			// Always correct bounds and frame
-			base.ViewWillAppear (animated);
-
-            // Set all control frames
-            this.SizeClass.SetFrames();
-		}
-
-        public override bool ApplyUI(G__ApplyUI _applywhere)
-        {
-            if (base.ApplyUI(_applywhere))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-        }
-
-        #region Responder Chain Interrupt
-
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                base.TouchesBegan(touches, evt);
-                //this.NextResponder.TouchesBegan(touches, evt);
-            }
-        }
-
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-
-
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                base.TouchesEnded(touches, evt);
-                //this.NextResponder.TouchesEnded(touches, evt);
-            }
-        }
-
-        public override void TouchesMoved(NSSet touches, UIEvent evt)
-        {
-
-
-            // Continue next responder if set
-            if (this._bAllowNextResponder)
-            {
-                base.TouchesMoved(touches, evt);
-                //this.NextResponder.TouchesMoved(touches, evt);
-            }
-        }
-
-        #endregion
-
-        #region Autorotation for iOS 6 or newer
-
-        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
-		{
-			return UIInterfaceOrientationMask.AllButUpsideDown;
-		}
-
-		public override bool ShouldAutorotate ()
-		{
-			return true;
-		}
-
-		#endregion
-			
-		#endregion
 	}
 
 

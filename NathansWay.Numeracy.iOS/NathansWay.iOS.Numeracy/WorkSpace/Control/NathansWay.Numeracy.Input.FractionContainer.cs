@@ -269,12 +269,17 @@ namespace NathansWay.iOS.Numeracy
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
         public override void OnValueChange(object s, EventArgs e)
         {
-            // Fire this objects FireValueChange for bubbleup
+            // Change the load status
+            this.IsInitialLoad = false;
+            // If either are empty then this is incomplete
+            if (this._numberContainerNumerator.IsInComplete || this._numberContainerDenominator.IsInComplete)
+            {
+                this._bIsInComplete = true;
+            }
+
+            // Bubbleup
             this.FireValueChange();
 
-            // Once in here we are past an inital load, and a user has input a value
-            // We must reset our intital load variable to false
-            this.IsInitialLoad = false;
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER

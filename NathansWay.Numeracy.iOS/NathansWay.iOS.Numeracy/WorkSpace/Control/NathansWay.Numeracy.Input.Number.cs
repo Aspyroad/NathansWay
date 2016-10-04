@@ -231,182 +231,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
-        #region Public Properties
-
-        public SizeNumber NumberSize
-        {
-            get { return this._sizeNumber; }
-        }
-
-        public G__UnitPlacement TensUnit
-        {
-            get { return _tensUnit; }
-            set { _tensUnit = value; }
-        }
-
-        public G__Significance Significance
-        {
-            get { return this._significance; }
-            set { this._significance = value; }
-        }
-
-        public bool IsMultiNumberedText
-        {
-            get { return this._bIsMultiNumberedText; }
-            set
-            {
-                this._bIsMultiNumberedText = value;
-            }
-        }
-
-        public nint MutliNumberPosition
-        {
-            get { return this._intMultiNumberPosition; }
-            set { this._intMultiNumberPosition = value; }
-        }
-
-        public nint MutliNumberSigPosition
-        {
-            get { return this._intMultiNumberSigPosition; }
-            set { this._intMultiNumberSigPosition = value; }
-        }
-
-        public nint MutliNumberSigTotal
-        {
-            get { return this._intMultiNumberSigTotal; }
-            set { this._intMultiNumberSigTotal = value; }
-        }
-
-        public nint MutliNumberInSigPosition
-        {
-            get { return this._intMultiNumberInSigPosition; }
-            set { this._intMultiNumberInSigPosition = value; }
-        }
-
-        public nint MutliNumberInSigTotal
-        {
-            get { return this._intMultiNumberInSigTotal; }
-            set { this._intMultiNumberInSigTotal = value; }
-        }
-
-        public nint MultiNumberTotalNumbers
-        {
-            get
-            {
-                return this._intMultiNumberSigTotal + this._intMultiNumberInSigTotal;
-            }
-
-        }
-
-        #endregion
-
-        #region Override Public Properties
-
-        public override UIColor SetFontColor
-        {
-            get
-            {
-                return base.SetFontColor;
-            }
-            set
-            {
-                base.SetFontColor = value;
-                this.txtNumber.TextColor = value;
-            }
-        }
-
-        public override vcFractionContainer MyFractionParent
-        {
-            get
-            {
-                return base.MyFractionParent;
-            }
-            set
-            {
-                base.MyFractionParent = value;
-                this.SizeClass.IsFraction = true;
-                this.txtNumber.ApplyTextOffset = true;
-            }
-        }
-
-        public override bool IsInEditMode
-        {
-            get { return this._bIsInEditMode; }
-            set
-            {
-                this._bIsInEditMode = value;
-                if (this._bHasNumberParent)
-                {
-                    this.MyNumberParent.IsInEditMode = value;
-                }
-                // WTF? numberpad should be asking MyNumberParent...?
-                if (this._numberpad != null)
-                {
-                    this._numberpad.InEditMode = value;
-                }
-            }
-        }
-
-        public override bool IsAnswer
-        {
-            get
-            {
-                return base.IsAnswer;
-            }
-            set
-            {
-                base.IsAnswer = value;
-                if (value)
-                {
-                    // The answer
-                    this.OriginalValue = CurrentValue;
-                    // Set to empty number represented by null
-                    this.CurrentValue = null; 
-                    // Clear number text
-                    this.txtNumber.Text = ""; 
-                }
-            }
-        }
-
-        public nint IndexNumber
-        {
-            get { return this._intIndexNumber; }
-            set { this._intIndexNumber = value; }
-        }
-
-        public override Nullable<double> CurrentValue
-        {
-            get { return this._dblCurrentValue; }
-            set
-            {
-                // Standard sets
-                this._dblCurrentValue = value;
-                if (value == null)
-                {
-                    this._strCurrentValue = "";
-                }
-                else
-                {
-                    this._strCurrentValue = value.ToString().Trim();
-                }
-            }
-        }
-
-        public override bool IsReadOnly
-        {
-            get
-            {
-                return base._bReadOnly;
-            }
-            set
-            {
-                base._bReadOnly = value;
-
-            }
-        }
-
-        #endregion
-
         #region Private Members
 
         private void Initialize()
@@ -521,8 +345,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                     x.OnControlUnSelectedChange(sender,e);
 
                     // Once here we are now selecting this control
+                    // TODO: MOVE the selectednumbertext to OnControlSelectedChange along with adding it to all other parents
+                    this.OnControlSelectedChange(sender, e);
+                    // MOVE THESE CALL INTO THE ABOVE OVERRIDE
+                    // ALSO IS THERE A BETTER WAY OF DOING THIS THROUGH GETTERS SETTERS??
                     this.MyWorkSpaceParent.SelectedNumberText = this;
-                    this.OnControlSelectedChange(sender,e);
+                    this.MyNumberParent.SelectedNumberText = this;
+                    this.MyNumletParent.SelectedNumberText = this;
+
                     // Is the control readonly, then return
                     if (this._bReadOnly)
                     {
@@ -652,7 +482,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (_dblValue != null)
             {
                 this._bInitialLoad = false;
-                this.MyNumberParent.IsInitialLoad = false;
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
@@ -672,7 +501,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             //Update the parentNumber container
             if (x)
             {
-                this.FireValueChange();
+                // Begin bubbleup
+                this.OnValueChange(this, new EventArgs());
             }
 
             // TODO: Problem 5 Fraction Number Picker
@@ -1044,6 +874,182 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.txtNumber.HasBorder = false;
             base.UI_ViewInCorrect();
+        }
+
+        #endregion
+
+        #region Public Properties
+
+        public SizeNumber NumberSize
+        {
+            get { return this._sizeNumber; }
+        }
+
+        public G__UnitPlacement TensUnit
+        {
+            get { return _tensUnit; }
+            set { _tensUnit = value; }
+        }
+
+        public G__Significance Significance
+        {
+            get { return this._significance; }
+            set { this._significance = value; }
+        }
+
+        public bool IsMultiNumberedText
+        {
+            get { return this._bIsMultiNumberedText; }
+            set
+            {
+                this._bIsMultiNumberedText = value;
+            }
+        }
+
+        public nint MutliNumberPosition
+        {
+            get { return this._intMultiNumberPosition; }
+            set { this._intMultiNumberPosition = value; }
+        }
+
+        public nint MutliNumberSigPosition
+        {
+            get { return this._intMultiNumberSigPosition; }
+            set { this._intMultiNumberSigPosition = value; }
+        }
+
+        public nint MutliNumberSigTotal
+        {
+            get { return this._intMultiNumberSigTotal; }
+            set { this._intMultiNumberSigTotal = value; }
+        }
+
+        public nint MutliNumberInSigPosition
+        {
+            get { return this._intMultiNumberInSigPosition; }
+            set { this._intMultiNumberInSigPosition = value; }
+        }
+
+        public nint MutliNumberInSigTotal
+        {
+            get { return this._intMultiNumberInSigTotal; }
+            set { this._intMultiNumberInSigTotal = value; }
+        }
+
+        public nint MultiNumberTotalNumbers
+        {
+            get
+            {
+                return this._intMultiNumberSigTotal + this._intMultiNumberInSigTotal;
+            }
+
+        }
+
+        #endregion
+
+        #region Override Public Properties
+
+        public override UIColor SetFontColor
+        {
+            get
+            {
+                return base.SetFontColor;
+            }
+            set
+            {
+                base.SetFontColor = value;
+                this.txtNumber.TextColor = value;
+            }
+        }
+
+        public override vcFractionContainer MyFractionParent
+        {
+            get
+            {
+                return base.MyFractionParent;
+            }
+            set
+            {
+                base.MyFractionParent = value;
+                this.SizeClass.IsFraction = true;
+                this.txtNumber.ApplyTextOffset = true;
+            }
+        }
+
+        public override bool IsInEditMode
+        {
+            get { return this._bIsInEditMode; }
+            set
+            {
+                this._bIsInEditMode = value;
+                if (this._bHasNumberParent)
+                {
+                    this.MyNumberParent.IsInEditMode = value;
+                }
+                // WTF? numberpad should be asking MyNumberParent...?
+                if (this._numberpad != null)
+                {
+                    this._numberpad.InEditMode = value;
+                }
+            }
+        }
+
+        public override bool IsAnswer
+        {
+            get
+            {
+                return base.IsAnswer;
+            }
+            set
+            {
+                base.IsAnswer = value;
+                if (value)
+                {
+                    // The answer
+                    this.OriginalValue = CurrentValue;
+                    // Set to empty number represented by null
+                    this.CurrentValue = null;
+                    // Clear number text
+                    this.txtNumber.Text = "";
+                }
+            }
+        }
+
+        public nint IndexNumber
+        {
+            get { return this._intIndexNumber; }
+            set { this._intIndexNumber = value; }
+        }
+
+        public override Nullable<double> CurrentValue
+        {
+            get { return this._dblCurrentValue; }
+            set
+            {
+                // Standard sets
+                this._dblCurrentValue = value;
+                if (value == null)
+                {
+                    this._strCurrentValue = "";
+                }
+                else
+                {
+                    this._strCurrentValue = value.ToString().Trim();
+                }
+            }
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return base._bReadOnly;
+            }
+            set
+            {
+                base._bReadOnly = value;
+
+            }
         }
 
         #endregion

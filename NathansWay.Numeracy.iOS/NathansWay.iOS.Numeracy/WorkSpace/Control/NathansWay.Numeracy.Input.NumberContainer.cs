@@ -317,7 +317,8 @@ namespace NathansWay.iOS.Numeracy
         public override void OnValueChange(object s, EventArgs e)
         {
             string _strCurValue = "";
-            bool _isEmpty = false;
+            // Change the load status
+            this._bInitialLoad = false;
 
             // Should be called after any number change
             // Loop through this._lsNumbers
@@ -329,11 +330,11 @@ namespace NathansWay.iOS.Numeracy
                 }
                 else
                 {
-                    _isEmpty = true;
+                    this._bIsInComplete = true;
                     break;
                 }
             }
-            if (_isEmpty)
+            if (this._bIsInComplete)
             {
                 this._strCurrentValue = "";
                 this._strPrevValue = "";
@@ -341,26 +342,24 @@ namespace NathansWay.iOS.Numeracy
             }
             else
             {
-                if (this._strPrevValue != _strCurValue)
-                {
-                    this.FireValueChange();
-                }
                 this.CurrentValue = Convert.ToDouble(_strCurValue);
             }
+            // Bubbleup
+            this.FireValueChange();
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            this.FireControlSelected();
             base.OnControlSelectedChange(s, e);
+            this.FireControlSelected();
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
-            this.FireControlUnSelected();
             base.OnControlUnSelectedChange(s,e);
+            this.FireControlUnSelected();
         }
 
         #endregion

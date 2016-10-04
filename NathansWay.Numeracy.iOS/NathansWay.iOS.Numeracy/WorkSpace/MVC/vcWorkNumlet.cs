@@ -21,18 +21,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Events
 
-        public delegate void ResultSelected(Object sender, EventArgs e);
-        public event ResultSelected evtResultSelected;
-
         #endregion
 
 		#region Private Variables
 		// Control Attributes
         private G__WorkNumletType _workNumletType;
-        //private G__LessonResultPosition _lessonResultyPosition;
-        //private G__AnswerState _answerState;
         private string _strExpression;
-        //private List<object> _lsContainers;
 
         // Data
         private EntityLesson _wsLesson;
@@ -42,10 +36,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
-        //private G__DisplaySizeLevels _numberDisplaySize;
-
-        // Result ref
-        //private BaseContainer _resultContainer;
 
 		#endregion
 
@@ -109,7 +99,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasRoundedCorners = true;
             this.View.AutosizesSubviews = false;
             this.OutputAnswerContainers = new List<object>();
-            //this.AllowNextResponder = false;
 		}
 
 		#endregion
@@ -119,78 +108,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-        #region Public Properties
-
-        public List<object> OutputContainers
-        {
-            get;
-            set;
-        }
-
-        public List<object> OutputAnswerContainers
-        {
-            get;
-            set;
-        }
-
-        public SizeWorkNumlet WorkNumletSize 
-        {
-            get { return (SizeWorkNumlet)this._sizeClass; }
-        }
-
-        public G__WorkNumletType NumletType
-        {
-            get { return this._workNumletType;}
-            set { this._workNumletType = value;}
-        }
-
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
-
-//        public EntityLessonResults WsLessonResults
-//        {
-//            get { return this._wsLessonResults; }
-//            set { this._wsLessonResults = value; }
-//        }
-
-        public EntityLessonDetail WsLessonDetail
-        {
-            get { return this._wsLessonDetail; }
-            set { this._wsLessonDetail = value; }
-        }
-
-//        public EntityLessonDetailResults WsLessonDetailResults
-//        {
-//            get { return this._wsLessonDetailResults; }
-//            set { this._wsLessonDetailResults = value; }
-//        }
-
-        public string ExpressionString 
-        { 
-            get { return this._wsLessonDetail.Equation.ToString(); } 
-        }
-
-        //public BaseContainer ResultContainer
-        //{
-        //    get { return this._resultContainer; }
-        //    set { this._resultContainer = value; }
-        //}
-
-        #endregion
-
-        #region Override Public Properties
-
-        #endregion
-
         #region Delegates
 
         public override void OnValueChange(object s, EventArgs e)
         {
+            this._bInitialLoad = false;
+
             this.FireValueChange();
-            base.OnValueChange(s, e);
         }
 
         public override void OnSizeChange(object s, EventArgs e)
@@ -202,11 +126,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             base.OnControlSelectedChange(s, e);
+            this.FireControlSelected();
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
             base.OnControlUnSelectedChange(s, e);
+            this.FireControlSelected();
         }
 
         #endregion
@@ -233,10 +159,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             base.ViewWillAppear(animated);
             this.UI_ViewNeutral();
-
         }
 
-		#endregion
+        public override bool Solve()
+        {
+            bool _ret = false;
+            if (this.IsAnswer)
+            {
+                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+                {
+                    var x = (BaseContainer)this.OutputAnswerContainers[i];
+                    _ret = x.Solve();
+                    if (!_ret)
+                    {
+                        this._bIsCorrect = false;
+                    }
+                }
+            }
+            return this._bIsCorrect;
+        }
+
+        #endregion
 
         #region UI Functions
 
@@ -308,7 +251,67 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         #endregion
-	}
+
+        #region Public Properties
+
+        public List<object> OutputContainers
+        {
+            get;
+            set;
+        }
+
+        public List<object> OutputAnswerContainers
+        {
+            get;
+            set;
+        }
+
+        public SizeWorkNumlet WorkNumletSize
+        {
+            get { return (SizeWorkNumlet)this._sizeClass; }
+        }
+
+        public G__WorkNumletType NumletType
+        {
+            get { return this._workNumletType; }
+            set { this._workNumletType = value; }
+        }
+
+        public EntityLesson WsLesson
+        {
+            get { return this._wsLesson; }
+            set { this._wsLesson = value; }
+        }
+
+        //        public EntityLessonResults WsLessonResults
+        //        {
+        //            get { return this._wsLessonResults; }
+        //            set { this._wsLessonResults = value; }
+        //        }
+
+        public EntityLessonDetail WsLessonDetail
+        {
+            get { return this._wsLessonDetail; }
+            set { this._wsLessonDetail = value; }
+        }
+
+        //        public EntityLessonDetailResults WsLessonDetailResults
+        //        {
+        //            get { return this._wsLessonDetailResults; }
+        //            set { this._wsLessonDetailResults = value; }
+        //        }
+
+        public string ExpressionString
+        {
+            get { return this._wsLessonDetail.Equation.ToString(); }
+        }
+
+        #endregion
+
+        #region Override Public Properties
+
+        #endregion
+    }
 
     public class SizeWorkNumlet : SizeBase
     {

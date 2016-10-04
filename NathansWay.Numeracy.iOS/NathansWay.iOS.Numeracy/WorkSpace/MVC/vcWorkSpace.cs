@@ -69,16 +69,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private bool _bRecordResults;
         // Should the answer display as being correct/incorrect bg color
         private bool _bDisplayAnswerStatusColor;
-        // Readonly
-//        private bool _bEquationReadOnly;
-//        private bool _bResultReadonly;
-//        private bool _bMethodsReadonly;
-        private bool _bCenterMethod;
-        private bool _bCenterEquation;
-        private bool _bLockAnswerToRight;
-        private bool _bLockAnswerButtonToRight;
-
-        private bool _bLoadMethods;
 
 		#endregion
      
@@ -470,126 +460,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-        #region Public Properties
-
-        public SizeWorkSpace WorkSpaceSize 
-        {
-            get { return (SizeWorkSpace)this._sizeClass; }
-        }
-
-        public vCanvasScrollMain vCanvasMain 
-        {
-            get { return this._vCanvasMain; }
-            set { this._vCanvasMain = value; }
-        }
-
-        public G__LessonState LessonState
-        {
-            get { return this._enumLessonState; }
-        }
-
-
-        //public AspyScrollView vCanvasDocked 
-        public AspyView vCanvasDocked 
-        {
-            get { return this._vCanvasDocked; }
-            set { this._vCanvasDocked = value; }
-        }
-
-        public UINumberFactory NumberFactory 
-        {
-            set { this._uiNumberFactory = value; }
-        }
-
-        public string ExpressionString 
-        { 
-            get { return this._strExpression; } 
-            set 
-            { 
-                this._strExpression = value; 
-            }
-        }
-
-        public nint LessonDetailCurrentSeq
-        {
-            get { return this._intLessonDetailCurrentSeq; }
-            set { this._intLessonDetailCurrentSeq = value; }
-        }
-
-        public nint LessonDetailCurrentIndex
-        {
-            get { return this._intLessonDetailCurrentIndex; }
-            set { this._intLessonDetailCurrentIndex = value; }
-        }
-
-        public nint LessonDetailCurrentCount
-        {
-            get { return this._intLessonDetailCurrentCount; }
-            set { this._intLessonDetailCurrentCount = value; }
-        }
-
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
-
-        //        public EntityLessonResults WsLessonResults
-        //        {
-        //            get { return this._wsLessonResults; }
-        //            set { this._wsLessonResults = value; }
-        //        }
-
-        public List<EntityLessonDetail> WsLessonDetail
-        {
-            get { return this._wsLessonDetail; }
-            set 
-            { 
-                this._wsLessonDetail = value; 
-                this._intLessonDetailCurrentCount = value.Count;
-            }
-        }
-
-        //        public EntityLessonDetailResults WsLessonDetailResults
-        //        {
-        //            get { return this._wsLessonDetailResults; }
-        //            set { this._wsLessonDetailResults = value; }
-        //        }
-
-        public vcWorkNumlet NumletEquation
-        {
-            get { return this._vcNumletEquation; }   
-        }
-
-        public vcWorkNumlet NumletResult
-        {
-            get { return this._vcNumletResult; }
-        }
-
-        public vcWorkNumlet NumletSolve
-        {
-            get { return this._vcNumletSolve; }
-        }
-
-        public List<vcWorkNumlet> NumletMethods
-        {
-            get { return this._vcNumletMethods; }    
-        }
-
-        public vcMainWorkSpace MainWorkSpace
-        {
-            set { this._vcMainWorkSpace = value; }
-            get { return this._vcMainWorkSpace; }   
-        }
-
-
-        #endregion
-
         #region Delegates
 
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             base.OnControlSelectedChange(s, e);
+            var x = 10;
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
@@ -599,6 +475,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, EventArgs e)
         {
+            var x = 10;
             //base.OnValueChange(s, e);
         }
 
@@ -700,8 +577,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override bool Solve()
         {
-            bool _ret = false;
-
             this._bSolveAttemped = true;
 
             // Unselect everything
@@ -711,27 +586,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.SelectedNumberText = null;
             }
 
-            // First get a list of the Numlets which contain answers
-            // Note only Equation or Result will have an amswer Methods wont be checked
-            if (_vcNumletEquation.IsAnswer)
-            {
-                for (int i = 0; i < this._vcNumletEquation.OutputAnswerContainers.Count; i++)
-                {
-                    var x = (BaseContainer)this._vcNumletEquation.OutputAnswerContainers[i];
-                    _ret = x.Solve();
-                }
+            // Check all Numlets
+            this._bIsCorrect = this._vcNumletEquation.Solve();
+            this._bIsCorrect = this._vcNumletResult.Solve();
 
-            }
-            if (_vcNumletResult.IsAnswer)
-            {
-                for (int i = 0; i < this._vcNumletResult.OutputAnswerContainers.Count; i++)
-                {
-                    var x = (BaseContainer)this._vcNumletResult.OutputAnswerContainers[i];
-                    _ret = x.Solve();
-                }
-            }
-
-            return _ret;
+            return this._bIsCorrect;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -962,7 +821,121 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         #endregion
-	}
+
+        #region Public Properties
+
+        public SizeWorkSpace WorkSpaceSize
+        {
+            get { return (SizeWorkSpace)this._sizeClass; }
+        }
+
+        public vCanvasScrollMain vCanvasMain
+        {
+            get { return this._vCanvasMain; }
+            set { this._vCanvasMain = value; }
+        }
+
+        public G__LessonState LessonState
+        {
+            get { return this._enumLessonState; }
+        }
+
+
+        //public AspyScrollView vCanvasDocked 
+        public AspyView vCanvasDocked
+        {
+            get { return this._vCanvasDocked; }
+            set { this._vCanvasDocked = value; }
+        }
+
+        public UINumberFactory NumberFactory
+        {
+            set { this._uiNumberFactory = value; }
+        }
+
+        public string ExpressionString
+        {
+            get { return this._strExpression; }
+            set
+            {
+                this._strExpression = value;
+            }
+        }
+
+        public nint LessonDetailCurrentSeq
+        {
+            get { return this._intLessonDetailCurrentSeq; }
+            set { this._intLessonDetailCurrentSeq = value; }
+        }
+
+        public nint LessonDetailCurrentIndex
+        {
+            get { return this._intLessonDetailCurrentIndex; }
+            set { this._intLessonDetailCurrentIndex = value; }
+        }
+
+        public nint LessonDetailCurrentCount
+        {
+            get { return this._intLessonDetailCurrentCount; }
+            set { this._intLessonDetailCurrentCount = value; }
+        }
+
+        public EntityLesson WsLesson
+        {
+            get { return this._wsLesson; }
+            set { this._wsLesson = value; }
+        }
+
+        //        public EntityLessonResults WsLessonResults
+        //        {
+        //            get { return this._wsLessonResults; }
+        //            set { this._wsLessonResults = value; }
+        //        }
+
+        public List<EntityLessonDetail> WsLessonDetail
+        {
+            get { return this._wsLessonDetail; }
+            set
+            {
+                this._wsLessonDetail = value;
+                this._intLessonDetailCurrentCount = value.Count;
+            }
+        }
+
+        //        public EntityLessonDetailResults WsLessonDetailResults
+        //        {
+        //            get { return this._wsLessonDetailResults; }
+        //            set { this._wsLessonDetailResults = value; }
+        //        }
+
+        public vcWorkNumlet NumletEquation
+        {
+            get { return this._vcNumletEquation; }
+        }
+
+        public vcWorkNumlet NumletResult
+        {
+            get { return this._vcNumletResult; }
+        }
+
+        public vcWorkNumlet NumletSolve
+        {
+            get { return this._vcNumletSolve; }
+        }
+
+        public List<vcWorkNumlet> NumletMethods
+        {
+            get { return this._vcNumletMethods; }
+        }
+
+        public vcMainWorkSpace MainWorkSpace
+        {
+            set { this._vcMainWorkSpace = value; }
+            get { return this._vcMainWorkSpace; }
+        }
+
+        #endregion
+    }
 
     public class SizeWorkSpace : SizeBase
     {

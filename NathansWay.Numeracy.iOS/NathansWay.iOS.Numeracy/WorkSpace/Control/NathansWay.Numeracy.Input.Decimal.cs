@@ -104,7 +104,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool Solve()
         {
-            return base.Solve();
+            // Always correct
+            return true;
         }
 
         #endregion
