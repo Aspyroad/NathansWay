@@ -164,6 +164,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override bool Solve()
         {
             bool _ret = false;
+            this._bIsCorrect = true;
+
             if (this.IsAnswer)
             {
                 for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
@@ -174,8 +176,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     {
                         this._bIsCorrect = false;
                     }
+
                 }
+                // Set the numlets answer state
+                this.UI_SetAnswerState();
             }
+            else
+            {
+                this.UI_ViewNeutral();
+            }
+
+
             return this._bIsCorrect;
         }
 
@@ -188,7 +199,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value.ColorWithAlpha(0.1f);
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
@@ -197,7 +208,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.BorderWidth = 1.0f;
             this.HasBorder = true;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value.ColorWithAlpha(0.1f);
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
@@ -206,7 +217,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(0.5f);
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(0.1f);
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
@@ -214,9 +225,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.ColorWithAlpha(0.5f);
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value.ColorWithAlpha(0.1f);
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
         public override void UI_ViewReadOnly()

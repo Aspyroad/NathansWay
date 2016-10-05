@@ -103,7 +103,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
         }
 
-        // Is only called when the viewcontroller first lays out its views
         public override void ViewWillAppear(bool animated)
         {
             // First set the type of drawing
@@ -147,27 +146,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        public override bool Solve()
         {
-            this.FireControlSelected();
-            base.OnControlSelectedChange(s,e);
+            return true;
         }
-
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {
-            this.FireControlUnSelected();
-            base.OnControlUnSelectedChange(s,e);
-        }
-            
-        // Check if its been touched.
-        // Remember this is a standard VC with view, 
-        // we must override TouchesBegan to check if its been hit
-        // TODO:  Should we use a Tap gesture here rather than overriding Touches?
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            // 1/06/16 move to bottom for testing
-            //base.TouchesBegan(touches, evt);
+            // TODO : this has a bug after selectcion it keeps one number selected...
 
             this.Touched = true;
             if (_bSelected)
@@ -219,6 +205,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.Touched = false;
             base.TouchesEnded(touches, evt);
+        }
+
+        #endregion
+
+        #region Delegates
+
+        public override void OnControlSelectedChange(object s, EventArgs e)
+        {
+            this.FireControlSelected();
+            base.OnControlSelectedChange(s, e);
+        }
+
+        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        {
+            this.FireControlUnSelected();
+            base.OnControlUnSelectedChange(s, e);
         }
 
         #endregion

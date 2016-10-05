@@ -104,7 +104,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool Solve()
         {
-            // Always correct
             return true;
         }
 

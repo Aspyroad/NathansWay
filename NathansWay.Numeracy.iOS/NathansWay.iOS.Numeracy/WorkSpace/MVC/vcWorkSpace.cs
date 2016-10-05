@@ -583,7 +583,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (this.HasSelectedNumberText)
             {
                 this.SelectedNumberText.AutoTouchedText();
-                this.SelectedNumberText = null;
+                //this.SelectedNumberText = null;
             }
 
             // Check all Numlets

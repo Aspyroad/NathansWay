@@ -316,9 +316,11 @@ namespace NathansWay.iOS.Numeracy
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnValueChange(object s, EventArgs e)
         {
+            // Update the state of the Number container
             string _strCurValue = "";
             // Change the load status
             this._bInitialLoad = false;
+            this._bIsInComplete = false;
 
             // Should be called after any number change
             // Loop through this._lsNumbers
@@ -481,9 +483,6 @@ namespace NathansWay.iOS.Numeracy
         public override bool Solve()
         {
             bool _ret = false;
-
-            // Check if this entire answer is correct or not
-            this.SetCorrectState();
 
             // If enabled a >1 digit display will only show the value incorrect
             // rather than the entire numer

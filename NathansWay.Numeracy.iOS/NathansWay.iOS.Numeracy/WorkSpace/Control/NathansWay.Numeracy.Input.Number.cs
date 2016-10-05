@@ -349,9 +349,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.OnControlSelectedChange(sender, e);
                     // MOVE THESE CALL INTO THE ABOVE OVERRIDE
                     // ALSO IS THERE A BETTER WAY OF DOING THIS THROUGH GETTERS SETTERS??
-                    this.MyWorkSpaceParent.SelectedNumberText = this;
-                    this.MyNumberParent.SelectedNumberText = this;
-                    this.MyNumletParent.SelectedNumberText = this;
+                    //this.MyWorkSpaceParent.SelectedNumberText = this;
+                    //this.MyNumberParent.SelectedNumberText = this;
+                    //this.MyNumletParent.SelectedNumberText = this;
 
                     // Is the control readonly, then return
                     if (this._bReadOnly)
@@ -378,7 +378,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         else
                         {
                             this.OnControlUnSelectedChange(sender,e);
-                            this.MyWorkSpaceParent.SelectedNumberText = null;
+                            //this.MyWorkSpaceParent.SelectedNumberText = null;
                         }
                     }
                 }
@@ -389,11 +389,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 if (this.MyWorkSpaceParent.HasSelectedOperatorText)
                 {
                     this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(sender,e);
-                    this.MyWorkSpaceParent.SelectedOperatorText = null;
+                    //this.MyWorkSpaceParent.SelectedOperatorText = null;
                 }
                 // Once here we are now selecting this control
-                this.MyNumberParent.SelectedNumberText = this;
-                this.MyWorkSpaceParent.SelectedNumberText = this;
+                //this.MyNumberParent.SelectedNumberText = this;
+                //this.MyWorkSpaceParent.SelectedNumberText = this;
                 this.OnControlSelectedChange(sender,e);
                 // Is the control readonly, then return
                 if (this._bReadOnly)
@@ -816,6 +816,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             base.OnControlSelectedChange(s,e);
+
+            this.MyWorkSpaceParent.SelectedNumberText = this;
+            this.MyNumberParent.SelectedNumberText = this;
+            this.MyNumletParent.SelectedNumberText = this;
+
             this.FireControlSelected();
         }
 
@@ -823,6 +828,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
             base.OnControlUnSelectedChange(s,e);
+
+            this.MyWorkSpaceParent.SelectedNumberText = null;
+            this.MyNumberParent.SelectedNumberText = null;
+            this.MyNumletParent.SelectedNumberText = null;
+
             this.FireControlUnSelected();
         }
 

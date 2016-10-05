@@ -256,6 +256,13 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
+        public override bool Solve()
+        {
+            this._bIsCorrect = this._numberContainerDenominator.Solve();
+            this._bIsCorrect = this._numberContainerNumerator.Solve();
+            return base.Solve();
+        }
+
         #endregion
 
         #region Delegates
