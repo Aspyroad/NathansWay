@@ -1392,7 +1392,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetFontAndSize(AspyTextField _txt)
         {
             _txt.Font = this.GlobalSizeDimensions.GlobalNumberFont;
-            _txt.TextOffset = this.GlobalSizeDimensions.FractionTextOffset;
+            if (this.IsFraction)
+            {
+                _txt.TextOffset = this.GlobalSizeDimensions.FractionTextOffset;
+            }
+            else
+            {
+                _txt.TextOffset = this.GlobalSizeDimensions.Off
         }
 
         #endregion

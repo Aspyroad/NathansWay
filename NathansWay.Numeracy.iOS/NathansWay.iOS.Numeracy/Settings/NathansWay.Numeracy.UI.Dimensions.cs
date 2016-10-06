@@ -846,7 +846,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return new CGPoint(0.0f, 2.0f);
+                        return new CGPoint(0.0f, -2.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {
