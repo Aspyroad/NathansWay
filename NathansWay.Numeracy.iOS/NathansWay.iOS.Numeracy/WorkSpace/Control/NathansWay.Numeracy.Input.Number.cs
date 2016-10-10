@@ -433,10 +433,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void btnDownTouch(object sender, EventArgs e)
         {
-            //this.CommonButtonCode();
-
-            //return;
-
             this.IsInEditMode = true;
 
             Nullable<double> x;
@@ -449,9 +445,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 x = 9;
             }
-            //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
 
-            //this.IsInEditMode = false;
             this.postEdit(x);
         }
 

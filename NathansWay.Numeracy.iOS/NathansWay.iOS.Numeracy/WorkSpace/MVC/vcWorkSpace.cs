@@ -461,6 +461,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.FireSizeChange();
         }
 
+        public void OnSelection()
+        {
+            if (this.HasSelectedNumberText)
+            {
+                var x = this.SelectedNumberText;
+                if (x.IsInEditMode)
+                {
+                    x.TapText();
+                }
+                x.OnControlUnSelectedChange(this, new EventArgs());
+                //this.SelectedNumberText = null;
+            }
+            // User taps another operator
+            if (this.HasSelectedOperatorText)
+            {
+                this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
+                //this.SelectedOperatorText = null;
+            }
+        }
+
         #endregion
 
         #region Delegates
@@ -468,7 +488,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             base.OnControlSelectedChange(s, e);
-            var x = 10;
+            //var x = 10;
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
@@ -478,7 +498,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, EventArgs e)
         {
-            var x = 10;
+            //var x = 10;
             //base.OnValueChange(s, e);
         }
 
@@ -598,10 +618,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         //public override void TouchesBegan(NSSet touches, UIEvent evt)
         //{
-        //    // Check if the touch is inside any active numlets
-        //    UITouch y = (UITouch)touches.AnyObject;
-        //    if (this.TouchInsideNumlets(y) != true)
-        //    {
+
         //        if (this.HasSelectedNumberText)
         //        {
         //            var x = this.SelectedNumberText;
@@ -618,9 +635,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //            this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
         //            this.SelectedOperatorText = null;
         //        }
-        //    }
 
-        //    base.TouchesBegan(touches, evt);
         //}
 
         //public override void TouchesEnded(NSSet touches, UIEvent evt)

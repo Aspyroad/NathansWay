@@ -516,6 +516,27 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
         }
 
+        public override void UI_SetUnSelectedState()
+        {
+            if (this.IsAnswer)
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_SetAnswerState(false);
+                }
+            }
+            else
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_ViewReadOnly();
+                }
+               
+            }
+        }
+
         #endregion
 
         #region Public Properties

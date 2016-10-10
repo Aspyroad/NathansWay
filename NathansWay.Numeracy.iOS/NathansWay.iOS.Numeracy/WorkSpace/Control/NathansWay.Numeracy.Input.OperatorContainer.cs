@@ -198,7 +198,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 //this.MyWorkSpaceParent.Solve();
             }
 
-            base.TouchesBegan(touches, evt);
+            //base.TouchesBegan(touches, evt);
         }
 
         public override void TouchesEnded(NSSet touches, UIEvent evt)

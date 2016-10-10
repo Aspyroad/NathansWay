@@ -234,6 +234,7 @@ namespace NathansWay.iOS.Numeracy
         public virtual void OnControlUnSelectedChange(object s, EventArgs e)
         {
             this._bSelected = false;
+            this.SetCorrectState();
             this.UI_SetUnSelectedState();
         }
 
@@ -274,25 +275,33 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetAnswerState(bool _solving)
         {
-            if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection)
+            if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                // TODO : Sort this shit
-            }
-
-
-            if (this._bInitialLoad)
-            {
-                this.UI_ViewNeutral();
-            }
-            else
-            {
-                if (this._bIsCorrect)
+                if (this._bInitialLoad)
                 {
-                    this.UI_ViewCorrect();
+                    this.UI_ViewNeutral();
                 }
                 else
                 {
-                    this.UI_ViewInCorrect();
+                    if (this._bIsCorrect)
+                    {
+                        this.UI_ViewCorrect();
+                    }
+                    else
+                    {
+                        this.UI_ViewInCorrect();
+                    }
+                }
+            }
+            else
+            {
+                if (this.IsAnswer)
+                {
+                    this.UI_ViewNeutral();
+                }
+                else
+                {
+                    this.UI_ViewReadOnly();
                 }
             }
         }

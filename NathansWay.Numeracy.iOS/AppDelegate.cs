@@ -106,7 +106,7 @@ namespace NathansWay.iOS.Numeracy
             this._numberAppSettings.GA__MoveToNextNumber = true;
             this._numberAppSettings.GA__ShowAnswerNumlet = true;
             this._numberAppSettings.GA__NumberErrorUIDisplay = false;
-            this._numberAppSettings.GA__ShowCorrectnessStateOnDeselection = true;
+            this._numberAppSettings.GA__ShowCorrectnessStateOnDeselection = false;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

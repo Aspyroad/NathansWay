@@ -186,9 +186,32 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.UI_ViewNeutral();
             }
 
-
             return this._bIsCorrect;
         }
+        public override void UI_SetUnSelectedState()
+        {
+            if (this.IsAnswer)
+            {
+                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+                {
+                    var x = (BaseContainer)this.OutputAnswerContainers[i];
+                    // Set the numlets answer state
+                    x.UI_SetAnswerState(false);
+                }
+                this.UI_SetAnswerState(false);
+            }
+            else
+            {
+                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+                {
+                    var x = (BaseContainer)this.OutputAnswerContainers[i];
+                    // Set the numlets answer state
+                    x.UI_ViewNeutral();
+                }
+                this.UI_ViewNeutral();
+            }
+        }
+
 
         #endregion
 

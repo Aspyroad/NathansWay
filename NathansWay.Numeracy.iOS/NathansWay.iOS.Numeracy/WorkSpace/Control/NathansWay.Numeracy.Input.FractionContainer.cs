@@ -343,27 +343,46 @@ namespace NathansWay.iOS.Numeracy
 
         public override void UI_SetAnswerState(bool _solving)
         {
-            if (this._bInitialLoad)
+            if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                this.UI_ViewNeutral();
-                this._numberContainerDenominator.UI_ViewNeutral();
-                this._numberContainerNumerator.UI_ViewNeutral();
-            }
-            else
-            {
-                if (this._bIsCorrect)
+                if (this._bInitialLoad)
                 {
-                    this.UI_ViewCorrect();
-                    this._numberContainerDenominator.UI_ViewCorrect();
-                    this._numberContainerNumerator.UI_ViewCorrect();
+                    this.UI_ViewNeutral();
+                    this._numberContainerDenominator.UI_ViewNeutral();
+                    this._numberContainerNumerator.UI_ViewNeutral();
                 }
                 else
                 {
-                    this.UI_ViewInCorrect();
-                    this._numberContainerDenominator.UI_ViewInCorrect();
-                    this._numberContainerNumerator.UI_ViewInCorrect();
+                    if (this._bIsCorrect)
+                    {
+                        this.UI_ViewCorrect();
+                        this._numberContainerDenominator.UI_ViewCorrect();
+                        this._numberContainerNumerator.UI_ViewCorrect();
+                    }
+                    else
+                    {
+                        this.UI_ViewInCorrect();
+                        this._numberContainerDenominator.UI_ViewInCorrect();
+                        this._numberContainerNumerator.UI_ViewInCorrect();
+                    }
+                }            
+            }
+            else
+            {
+                if (this.IsAnswer)
+                {
+                    this.UI_ViewNeutral();
+                    this._numberContainerDenominator.UI_ViewNeutral();
+                    this._numberContainerNumerator.UI_ViewNeutral();
+                }
+                else
+                {
+                    this.UI_ViewReadOnly();
+                    this._numberContainerDenominator.UI_ViewReadOnly();
+                    this._numberContainerNumerator.UI_ViewReadOnly();
                 }
             }
+    
 
         }
 
@@ -392,6 +411,22 @@ namespace NathansWay.iOS.Numeracy
         public override void UI_ViewInCorrect()
         {
             base.UI_ViewInCorrect();
+        }
+
+        public override void UI_SetUnSelectedState()
+        {
+            if (this.IsAnswer)
+            {
+                this._numberContainerDenominator.UI_SetAnswerState(false);
+                this._numberContainerNumerator.UI_SetAnswerState(false);
+                this.UI_SetAnswerState(false); 
+            }
+            else
+            {
+                this._numberContainerDenominator.UI_ViewReadOnly();
+                this._numberContainerNumerator.UI_ViewReadOnly();
+                this.UI_ViewReadOnly();
+            }
         }
 
         #endregion
