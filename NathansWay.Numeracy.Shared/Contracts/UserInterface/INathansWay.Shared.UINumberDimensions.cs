@@ -15,7 +15,7 @@ namespace NathansWay.Shared
         float LabelPickerViewWidth { get; }
         float NumberContainerHeight { get; }
         float NumberPickerHeight { get; }
-        float TxtNumberHeight { get; }
+        float NumberTxtHeight { get; }
         float UpDownButtonHeight { get; }
         float GlobalNumberWidth { get; }
         // Fraction

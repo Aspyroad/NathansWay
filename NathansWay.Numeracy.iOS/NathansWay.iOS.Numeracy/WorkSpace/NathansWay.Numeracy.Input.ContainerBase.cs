@@ -240,7 +240,7 @@ namespace NathansWay.iOS.Numeracy
         public virtual bool Solve()
         {
             this.SetCorrectState();
-            this.UI_SetAnswerState();
+            this.UI_SetAnswerState(true);
             return this._bIsCorrect;
         }
 
@@ -272,17 +272,23 @@ namespace NathansWay.iOS.Numeracy
             
         }
 
-        public virtual void UI_SetAnswerState()
+        public virtual void UI_SetAnswerState(bool _solving)
         {
-            if (this._bIsCorrect)
+            if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection)
             {
-                this.UI_ViewCorrect();
+                // TODO : Sort this shit
+            }
+
+
+            if (this._bInitialLoad)
+            {
+                this.UI_ViewNeutral();
             }
             else
             {
-                if (this._bInitialLoad)
+                if (this._bIsCorrect)
                 {
-                    this.UI_ViewNeutral();
+                    this.UI_ViewCorrect();
                 }
                 else
                 {
@@ -300,7 +306,11 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this.IsAnswer)
             {
-                UI_ViewNeutral();
+                // TODO: Here we need to decide if we want the answers to be shown constantly
+                // in different colors
+                UI_SetAnswerState(false);
+                // or
+                // UI_ViewNeutral();
             }
             else
             {

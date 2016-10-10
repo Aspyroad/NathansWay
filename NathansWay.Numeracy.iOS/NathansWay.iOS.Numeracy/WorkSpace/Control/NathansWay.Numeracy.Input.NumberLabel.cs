@@ -200,7 +200,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetSubHeightWidthPositions ()
         {
-            if (this._bMultiNumberLabel)
+            if (this._bIsMultiNumber)
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
             }
@@ -226,13 +226,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void SetFrames ()
         {
             
-            this._fCurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+            this._fCurrentHeight = this.GlobalSizeDimensions.NumberTxtHeight;
 
             this._rectNumberLabel = new CGRect(
                 0.0f, 
                 0.0f, 
                 this.CurrentWidth,
-                this.GlobalSizeDimensions.TxtNumberHeight
+                this.GlobalSizeDimensions.NumberTxtHeight
             );
         }
 

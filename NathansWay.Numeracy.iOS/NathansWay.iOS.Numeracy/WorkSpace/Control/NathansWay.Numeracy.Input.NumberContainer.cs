@@ -155,8 +155,14 @@ namespace NathansWay.iOS.Numeracy
 
             // Tens allocation 
             _result = _strOriginalValue.Split(_delimiters, StringSplitOptions.RemoveEmptyEntries);
-
+            // Honestly, this thing can only ever have two array members...
+            // hard to have more than one decimal place in a number?
             _sig = _result[0].Length;
+            if (_result.Length > 1)
+            {
+                this._intMultiNumberTotalInSigCount = _result[1].Length;
+            }
+            this._intMultiNumberTotalSigCount = _result[0].Length;        
             this._intMultiNumberTotalCount = _strOriginalValue.Length;
 
             // Main creation loop
@@ -178,8 +184,9 @@ namespace NathansWay.iOS.Numeracy
                     if (_bIsFraction)
                     {
                         newnumber.MyFractionParent = this.MyFractionParent;
+                        newnumber.SizeClass.IsFraction = true;
                     }
-                    if (_sig > 1 || _result.Length > 1)
+                    if (this._intMultiNumberTotalSigCount > 1 || this._intMultiNumberTotalSigCount > 1)
                     {
                         newnumber.NumberSize.IsMultiNumberText = true;
                         newnumber.IsMultiNumberedText = true;
@@ -193,21 +200,19 @@ namespace NathansWay.iOS.Numeracy
                         _insig++;
                         newnumber.Significance = G__Significance.InSignificant;
                         newnumber.TensUnit = (G__UnitPlacement)_insig;
-
-                        // Set up some details about where the number fits in the multinumber
                         newnumber.MutliNumberInSigPosition = _insig;
-                        this._intMultiNumberTotalInSigCount++;
+                        newnumber.MutliNumberInSigTotal = this._intMultiNumberTotalInSigCount;
                     }
                     else
                     {
                         newnumber.Significance = G__Significance.Significant;
                         newnumber.TensUnit = (G__UnitPlacement)_sig;
-                        _sig--;
-
-                        // Set up some details aboout where the number fits in the nultinumber\
-                        newnumber.MutliNumberSigPosition = (_sig + 1);
-                        this._intMultiNumberTotalSigCount++;
+                        newnumber.MutliNumberSigPosition = _sig;
+                        newnumber.MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
+                        _sig--;                       
                     }
+
+
 
                     #endregion
 
@@ -280,11 +285,11 @@ namespace NathansWay.iOS.Numeracy
             }
 
             // Set totals for logical processing later
-            for (int i = 0; i < _lsNumbersOnly.Count; i++)
-            {
-                _lsNumbersOnly[i].MutliNumberInSigTotal = _insig;
-                _lsNumbersOnly[i].MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
-            }
+            //for (int i = 0; i < _lsNumbersOnly.Count; i++)
+            //{
+            //    _lsNumbersOnly[i].MutliNumberInSigTotal = _insig;
+            //    _lsNumbersOnly[i].MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
+            //}
 
             // Set our current height
             if (this.MyFractionParent == null)

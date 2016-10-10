@@ -428,7 +428,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                 }
             }
         }
-        public float TxtNumberHeight
+        public float NumberTxtHeight
         {
             get
             {
@@ -487,6 +487,37 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     {
                         return -10.0f;
                     }
+                }
+            }
+        }
+
+        public CGPoint NumberTxtOffset
+        {
+            get
+            {
+                switch (this._size)
+                {
+                    // Most common
+                    case (G__DisplaySizeLevels.Level3):
+                        {
+                            return new CGPoint(0.0f, -2.0f);
+                        }
+                    case (G__DisplaySizeLevels.Level5):
+                        {
+                            return new CGPoint(-0.0f, -0.0f);
+                        }
+                    case (G__DisplaySizeLevels.Level7):
+                        {
+                            return new CGPoint(0.0f, -6.0f);
+                        }
+                    case (G__DisplaySizeLevels.Level10):
+                        {
+                            return new CGPoint(0.0f, -8.0f);
+                        }
+                    default: // Huge
+                        {
+                            return new CGPoint(0.0f, -10.0f);
+                        }
                 }
             }
         }
@@ -846,7 +877,7 @@ namespace NathansWay.iOS.Numeracy.UISettings
                     }
                     case (G__DisplaySizeLevels.Level5):
                     {
-                        return new CGPoint(0.0f, -2.0f);
+                        return new CGPoint(0.0f, -1.0f);
                     }
                     case (G__DisplaySizeLevels.Level7):
                     {

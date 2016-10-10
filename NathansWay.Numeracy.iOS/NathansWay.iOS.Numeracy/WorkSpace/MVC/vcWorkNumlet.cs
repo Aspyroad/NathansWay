@@ -179,7 +179,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
                 }
                 // Set the numlets answer state
-                this.UI_SetAnswerState();
+                this.UI_SetAnswerState(true);
             }
             else
             {

@@ -79,7 +79,7 @@ namespace NathansWay.iOS.Numeracy
 
         // Is part of a container with more then one text number e.g. 12 or 10 etc
         // These need to be thinner in the container to look more natural
-        protected bool _bMultiNumberLabel;
+        protected bool _bIsMultiNumber;
         // Is part of a fraction container, these need to have their height adjusted
         protected bool _bIsFraction;
 
@@ -124,7 +124,7 @@ namespace NathansWay.iOS.Numeracy
             this._scaleFactor = new CGSize(1.0f, 1.0f);
 
             // TODO: Sizeclass types - fucked, make this an enum for fooksake!
-            this._bMultiNumberLabel = false;
+            this._bIsMultiNumber = false;
             this._bIsFraction = false;
         }
 
@@ -700,8 +700,11 @@ namespace NathansWay.iOS.Numeracy
 
         public bool IsMultiNumberText
         {
-            get { return this._bMultiNumberLabel; }
-            set { this._bMultiNumberLabel = value; }
+            get 
+            {
+                return this._bIsMultiNumber;
+            }
+            set { this._bIsMultiNumber = value; }
         }
 
         public bool IsFraction

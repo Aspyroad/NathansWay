@@ -153,11 +153,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
 
             // The absolute best spot to set frames!
-            // Main frame is called in ViewWillAppear Container Base
+
+            // Set the text offset
+            this.SizeClass.SetFontAndSize(this.txtNumber);
             this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
             this.btnDown.Frame = this._sizeNumber._rectDownButton;
             this.btnUp.Frame = this._sizeNumber._rectUpButton;
-            // Set the initial state
         }
 
         #endregion
@@ -205,7 +206,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 
                 this.IsInEditMode = true;
-                this.Selected = true;
+                //this.Selected = true;
                 // Begin Editing
                 this.preEdit();
 
@@ -272,7 +273,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.btnUp.Enabled = false;
 
             // Apply some UI to the texbox
-            this.SizeClass.SetFontAndSize(this.txtNumber);
+            //this.SizeClass.SetFontAndSize(this.txtNumber);
 
             this.txtNumber.Text = this.CurrentValueStr.Trim();
 
@@ -465,8 +466,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this._dblPrevValue = 0;
-                this._dblCurrentValue = 0;
+                this._dblPrevValue = null;
+                this._dblCurrentValue = null;
                 this.txtNumber.Text = "";
             }
         }
@@ -937,13 +938,27 @@ namespace NathansWay.iOS.Numeracy.Controls
         public nint MutliNumberInSigPosition
         {
             get { return this._intMultiNumberInSigPosition; }
-            set { this._intMultiNumberInSigPosition = value; }
+            set 
+            { 
+                this._intMultiNumberInSigPosition = value;
+                if (value > 1)
+                {
+                    this.IsMultiNumberedText = true;
+                }
+            }
         }
 
         public nint MutliNumberInSigTotal
         {
             get { return this._intMultiNumberInSigTotal; }
-            set { this._intMultiNumberInSigTotal = value; }
+            set 
+            { 
+                this._intMultiNumberInSigTotal = value; 
+                if (value > 1)        
+                {
+                    this.IsMultiNumberedText = true;
+                }
+            }
         }
 
         public nint MultiNumberTotalNumbers
@@ -1362,7 +1377,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetSubHeightWidthPositions()
         {
-            if (this._bMultiNumberLabel)
+            if (this.IsMultiNumberText)
             {
                 this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
             }
@@ -1377,7 +1392,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this.CurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+                this.CurrentHeight = this.GlobalSizeDimensions.NumberTxtHeight;
             }
         }
 
@@ -1398,7 +1413,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                _txt.TextOffset = this.GlobalSizeDimensions.Off
+                _txt.TextOffset = this.GlobalSizeDimensions.NumberTxtOffset;
+            }
         }
 
         #endregion
@@ -1459,7 +1475,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this._fCurrentHeight = (this.GlobalSizeDimensions.TxtNumberHeight);
+            this._fCurrentHeight = (this.GlobalSizeDimensions.NumberTxtHeight);
 
             //this.RectFrame = new CGRect(
             //    this.StartPoint.X, 
@@ -1472,7 +1488,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 (this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
-                this.GlobalSizeDimensions.TxtNumberHeight
+                this.GlobalSizeDimensions.NumberTxtHeight
             );
         }
 
@@ -1504,7 +1520,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._sLabelPickerViewSize.Height
             );
 
-            this._fCurrentHeight = this.GlobalSizeDimensions.TxtNumberHeight;
+            this._fCurrentHeight = this.GlobalSizeDimensions.NumberTxtHeight;
 
             //this.RectFrame = new CGRect(
             //    this.StartPoint.X, 
@@ -1531,7 +1547,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 0.0f,
                 this.CurrentWidth,
-                this.GlobalSizeDimensions.TxtNumberHeight
+                this.GlobalSizeDimensions.NumberTxtHeight
             );
         }
 
@@ -1548,7 +1564,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this.GlobalSizeDimensions.NumberPickerHeight
             );
 
-            this._fCurrentHeight = (this.GlobalSizeDimensions.TxtNumberHeight);
+            this._fCurrentHeight = (this.GlobalSizeDimensions.NumberTxtHeight);
 
             //this.RectFrame = new CGRect(
             //    this.StartPoint.X, 
@@ -1561,7 +1577,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 0.0f,
                 (this.GlobalSizeDimensions.NumberPickerHeight),
                 this.CurrentWidth,
-                this.GlobalSizeDimensions.TxtNumberHeight
+                this.GlobalSizeDimensions.NumberTxtHeight
             );
         }
 

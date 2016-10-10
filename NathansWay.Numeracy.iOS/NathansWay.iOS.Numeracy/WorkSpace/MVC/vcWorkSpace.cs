@@ -207,6 +207,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void ReloadAllNumlets ()
         {
+            this.SelectedNumberText = null;
+            this.SelectedOperatorText = null;
+
             // If there are any Numlets present, remove them.
             // vcWorkSpace is lazy, these may be populated.
             if (this._vcNumletEquation != null)
@@ -583,47 +586,47 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (this.HasSelectedNumberText)
             {
                 this.SelectedNumberText.AutoTouchedText();
-                //this.SelectedNumberText = null;
+                this.SelectedNumberText = null;
             }
 
             // Check all Numlets
-            this._bIsCorrect = this._vcNumletEquation.Solve();
-            this._bIsCorrect = this._vcNumletResult.Solve();
+            bool num1 = this._vcNumletEquation.Solve();
+            bool num2 = this._vcNumletResult.Solve();
 
-            return this._bIsCorrect;
+            return (num1 && num2);
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
-            if (this.TouchInsideNumlets(y) != true)
-            {
-                if (this.HasSelectedNumberText)
-                {
-                    var x = this.SelectedNumberText;
-                    if (x.IsInEditMode)
-                    {
-                        x.TapText();
-                    }
-                    x.OnControlUnSelectedChange(this, new EventArgs());
-                    this.SelectedNumberText = null;
-                }
-                // User taps another operator
-                if (this.HasSelectedOperatorText)
-                {
-                    this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-                    this.SelectedOperatorText = null;
-                }
-            }
+        //public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //{
+        //    // Check if the touch is inside any active numlets
+        //    UITouch y = (UITouch)touches.AnyObject;
+        //    if (this.TouchInsideNumlets(y) != true)
+        //    {
+        //        if (this.HasSelectedNumberText)
+        //        {
+        //            var x = this.SelectedNumberText;
+        //            if (x.IsInEditMode)
+        //            {
+        //                x.TapText();
+        //            }
+        //            x.OnControlUnSelectedChange(this, new EventArgs());
+        //            this.SelectedNumberText = null;
+        //        }
+        //        // User taps another operator
+        //        if (this.HasSelectedOperatorText)
+        //        {
+        //            this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
+        //            this.SelectedOperatorText = null;
+        //        }
+        //    }
 
-            base.TouchesBegan(touches, evt);
-        }
+        //    base.TouchesBegan(touches, evt);
+        //}
 
-        public override void TouchesEnded(NSSet touches, UIEvent evt)
-        {
-            base.TouchesEnded(touches, evt);
-        }
+        //public override void TouchesEnded(NSSet touches, UIEvent evt)
+        //{
+        //    base.TouchesEnded(touches, evt);
+        //}
 
         #endregion
 

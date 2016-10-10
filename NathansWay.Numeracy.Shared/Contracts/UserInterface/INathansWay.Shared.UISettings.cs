@@ -72,6 +72,8 @@ namespace NathansWay.Shared
         /// the "1" would be highlited as incorrect but the "2" would be dislplyed correct
         ///<summary>
         bool GA__NumberErrorUIDisplay { get; set; }
+
+        bool GA__ShowCorrectnessStateOnDeselection { get; set; }
     }
 
 

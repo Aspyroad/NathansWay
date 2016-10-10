@@ -139,7 +139,7 @@ namespace NathansWay.iOS.Numeracy
             // The biutton simply needs to be inside a numlet
             // 
             base.ViewDidLoad();
-            this.View.BackgroundColor = UIColor.White;
+            this.View.BackgroundColor = UIColor.Clear;
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
 
@@ -331,11 +331,13 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this.HasBorder = true;
+            this.HasBorder = false;
             this.CornerRadius = 5.0f;
             this.HasRoundedCorners = true;
             this.EnableHold = false;
             this.AutoApplyUI = true;
+
+            this.BackgroundColor = UIColor.Clear;
 
             // Get center of the bottom and top halfs of the button
             var f = (this._rect.Width / 2.0f);
@@ -344,8 +346,6 @@ namespace NathansWay.iOS.Numeracy
             var _width = (this._rect.Width - (4 * this._myGlobalDimensions.NumberBorderWidth));
             var _height = (this._rect.Height / 2);
 
-            //this._pTopCenter = new CGPoint(f, g);
-            //this._pBottomCenter = new CGPoint(f, (g * 3.0f));
             this._pTrueCenter = new CGPoint(f, _height);
             this._pTrueBottomEdge = new CGPoint(f, (this._rect.Height + g));
             this._pTrueTopEdge = new CGPoint(f, (0.0f - g));

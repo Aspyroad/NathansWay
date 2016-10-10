@@ -314,21 +314,23 @@ namespace NathansWay.iOS.Numeracy
             // No need to call base it for basic compares
 
             this._numberContainerDenominator.SetCorrectState();
+            //this._numberContainerDenominator.UI_SetAnswerState();
             this._numberContainerNumerator.SetCorrectState();
+            //this._numberContainerNumerator.UI_SetAnswerState();
 
-            if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
+            if (this._bInitialLoad)
             {
-                this.AnswerState = G__AnswerState.Correct;
-                this._bIsCorrect = true;
-                //this.UI_SetViewCorrect();
+                this.AnswerState = G__AnswerState.UnAttempted;
+                this._bIsCorrect = false;
+                //this.UI_SetViewNeutral();
             }
             else
             {
-                if (this._bInitialLoad)
+                if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
                 {
-                    this.AnswerState = G__AnswerState.UnAttempted;
-                    this._bIsCorrect = false;
-                    //this.UI_SetViewNeutral();
+                    this.AnswerState = G__AnswerState.Correct;
+                    this._bIsCorrect = true;
+                    //this.UI_SetViewCorrect();
                 }
                 else
                 {
@@ -339,23 +341,21 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public override void UI_SetAnswerState()
+        public override void UI_SetAnswerState(bool _solving)
         {
-            this.SetCorrectState();
-
-            if (this._bIsCorrect)
+            if (this._bInitialLoad)
             {
-                this.UI_ViewCorrect();
-                this._numberContainerDenominator.UI_ViewCorrect();
-                this._numberContainerNumerator.UI_ViewCorrect();
+                this.UI_ViewNeutral();
+                this._numberContainerDenominator.UI_ViewNeutral();
+                this._numberContainerNumerator.UI_ViewNeutral();
             }
             else
             {
-                if (this._bInitialLoad)
+                if (this._bIsCorrect)
                 {
-                    this.UI_ViewNeutral();
-                    this._numberContainerDenominator.UI_ViewNeutral();
-                    this._numberContainerNumerator.UI_ViewNeutral();
+                    this.UI_ViewCorrect();
+                    this._numberContainerDenominator.UI_ViewCorrect();
+                    this._numberContainerNumerator.UI_ViewCorrect();
                 }
                 else
                 {

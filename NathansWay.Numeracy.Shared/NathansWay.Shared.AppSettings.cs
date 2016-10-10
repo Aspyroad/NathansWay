@@ -16,6 +16,7 @@ namespace NathansWay.Shared
         private G__NumberEditMode _GA__NumberEditMode;
         private bool _GA__MoveToNextNumber;
         private bool _GA__ShowAnswerNumlet;
+        private bool _GA__ShowCorrectnessStateOnDeselection;
 
         #endregion
 
@@ -148,6 +149,11 @@ namespace NathansWay.Shared
             set; 
         }
 
+        public bool GA__ShowCorrectnessStateOnDeselection
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Private Members
