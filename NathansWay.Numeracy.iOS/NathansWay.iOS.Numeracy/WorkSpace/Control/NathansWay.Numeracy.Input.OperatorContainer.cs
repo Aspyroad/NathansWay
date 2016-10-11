@@ -174,7 +174,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     {
                         x.TapText();
                     }
-                    x.OnControlUnSelectedChange(this, new EventArgs());
+                    //x.OnControlUnSelectedChange(this, new EventArgs());
                     this.MyWorkSpaceParent.SelectedNumberText = null;
                 }
                 // User taps another operator
@@ -213,14 +213,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
-            this.FireControlSelected();
             base.OnControlSelectedChange(s, e);
+            this.FireControlSelected();
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
-            this.FireControlUnSelected();
             base.OnControlUnSelectedChange(s, e);
+            this.FireControlUnSelected();
         }
 
         #endregion

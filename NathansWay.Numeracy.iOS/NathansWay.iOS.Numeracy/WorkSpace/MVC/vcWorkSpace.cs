@@ -461,7 +461,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.FireSizeChange();
         }
 
-        public void OnSelection()
+        public void ResetAllSelection()
         {
             if (this.HasSelectedNumberText)
             {
@@ -470,15 +470,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     x.TapText();
                 }
-                x.OnControlUnSelectedChange(this, new EventArgs());
-                //this.SelectedNumberText = null;
+                this.SelectedNumberText = null;
             }
             // User taps another operator
             if (this.HasSelectedOperatorText)
             {
-                this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-                //this.SelectedOperatorText = null;
+                this.SelectedOperatorText = null;
             }
+            this.NumletEquation.UI_SetUnSelectedState();
+            this.NumletResult.UI_SetUnSelectedState();
+            // this.NumletMEthod.UI_SetUnSelectedState();
         }
 
         #endregion
@@ -607,6 +608,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 this.SelectedNumberText.AutoTouchedText();
                 this.SelectedNumberText = null;
+            }
+            if (this.HasSelectedOperatorText)
+            {
+                this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
+                this.SelectedOperatorText = null;
             }
 
             // Check all Numlets

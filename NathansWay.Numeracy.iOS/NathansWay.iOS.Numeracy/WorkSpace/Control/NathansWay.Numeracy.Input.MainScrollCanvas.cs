@@ -89,7 +89,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             UITouch y = (UITouch)touches.AnyObject;
             if (y.Phase == UITouchPhase.Began)
             {
-                this.MyWorkSpaceParent.OnSelection();
+                this.MyWorkSpaceParent.ResetAllSelection();
             }
         }
 
