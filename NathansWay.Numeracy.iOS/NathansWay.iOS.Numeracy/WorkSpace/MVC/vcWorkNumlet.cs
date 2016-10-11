@@ -101,10 +101,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.OutputAnswerContainers = new List<object>();
 		}
 
-		#endregion
+        #endregion
 
         #region Public Members
 
+        public void SelectionState(G__WorkNumletType _type)
+        {
+            if (this.NumletType != _type)
+            {
+                this.UI_SetUnSelectedState();
+            }
+        }
 
         #endregion
 
@@ -158,6 +165,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
+            
             this.UI_ViewNeutral();
         }
 
@@ -165,50 +173,82 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             bool _ret = false;
             this._bIsCorrect = true;
+            this.IsInitialLoad = false;
+            // ALl the Children in this numlet
+            for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputAnswerContainers[i];
+                _ret = x.Solve();
+                if (!_ret)
+                {
+                    this._bIsCorrect = false;
+                }
+            }
+            //this.SetCorrectState();
+            this.UI_SetAnswerState(true);
+            return this._bIsCorrect;
+        }
 
+        public override void UI_SetAnswerState(bool _solving)
+        {
+            // ALl the Children in this numlet
+            for (int i = 0; i < this.OutputContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputContainers[i];
+
+                if (x.ContainerType == G__ContainerType.Brace)
+                {
+                    break;
+                }
+
+                if (this.IsAnswer)
+                {
+                    // Set the numlets answer state
+                    x.UI_SetAnswerState(_solving);
+                }
+                else
+                {
+                    // Set the numlets answer state
+                    x.UI_ViewNeutral();
+                }
+            }
+            // This Numlet
             if (this.IsAnswer)
             {
-                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
-                {
-                    var x = (BaseContainer)this.OutputAnswerContainers[i];
-                    _ret = x.Solve();
-                    if (!_ret)
-                    {
-                        this._bIsCorrect = false;
-                    }
-
-                }
-                // Set the numlets answer state
-                this.UI_SetAnswerState(true);
+                base.UI_SetAnswerState(_solving);
             }
             else
             {
-                this.UI_ViewNeutral();
+                this.UI_ViewReadOnly();
             }
-
-            return this._bIsCorrect;
+            //base.UI_SetAnswerState(_solving);
         }
+
         public override void UI_SetUnSelectedState()
         {
-            if (this.IsAnswer)
+            // All the children in this numlet
+            for (int i = 0; i < this.OutputContainers.Count; i++)
             {
-                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+                var x = (BaseContainer)this.OutputContainers[i];
+                if (this.IsAnswer)
                 {
-                    var x = (BaseContainer)this.OutputAnswerContainers[i];
                     // Set the numlets answer state
                     x.UI_SetAnswerState(false);
                 }
+                else
+                {
+                    // Set the numlets answer state
+                    x.UI_ViewNeutral();                   
+                }
+            }
+            // This numlet
+            if (this.IsAnswer)
+            {
                 this.UI_SetAnswerState(false);
             }
             else
             {
-                for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
-                {
-                    var x = (BaseContainer)this.OutputAnswerContainers[i];
-                    // Set the numlets answer state
-                    x.UI_ViewNeutral();
-                }
-                this.UI_ViewNeutral();
+                this.UI_ViewReadOnly();
             }
         }
 

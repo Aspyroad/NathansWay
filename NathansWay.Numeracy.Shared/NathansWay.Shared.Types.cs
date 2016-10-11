@@ -99,14 +99,6 @@ namespace NathansWay.Shared
 		Assesment = 3
 	}
 
-    // For very basic Algebraic functions, such as the result being inside the equation, instead of the result container
-    public enum G__LessonResultPosition : int
-    {
-        ResultInResultContainer = 1,
-        ResultInEquationContainer = 2
-    }
-
-
     public enum G__AnswerState : int
     {
         Correct = 1,
@@ -139,7 +131,8 @@ namespace NathansWay.Shared
         NumberLabel = 5,
         Decimal = 6,
         NumberText = 7,
-        SolveButton = 8
+        SolveButton = 8,
+        Brace = 9
     }
 
     #endregion

@@ -147,6 +147,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Sizing class
             this._sizeClass = new SizeBrace(this);
 
+            this.ContainerType = Shared.G__ContainerType.Brace;
+
             // Create textbox
             this.txtBrace = new AspyTextField();
             // Sizing

@@ -91,6 +91,8 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bHasSelectedNumberText;
         protected vcOperatorText _vcSelectedOperatorText;
         protected bool _bHasSelectedOperatorText;
+        protected vcWorkNumlet _vcSelectedNumlet;
+        protected bool _bHasSelectedNumlet;
 
         // Currently selected container, this could be any basecontainer.
         protected BaseContainer _selectedContainer;
@@ -740,6 +742,25 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasNumberParent = false;
                     this._vcNumberContainer = null;
                 }
+            }
+        }
+
+        public virtual vcWorkNumlet SelectedNumlet
+        {
+            get { return this._vcSelectedNumlet; }
+            set
+            {
+                if (value != null)
+                {
+                    this._bHasSelectedNumlet = true;
+                    this._vcSelectedNumlet = value;
+                }
+                else
+                {
+                    this._bHasSelectedNumlet = false;
+                    this._vcSelectedNumlet = null;
+                }
+
             }
         }
 
