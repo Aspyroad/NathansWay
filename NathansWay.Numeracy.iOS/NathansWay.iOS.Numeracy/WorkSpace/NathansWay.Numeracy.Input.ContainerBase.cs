@@ -230,18 +230,19 @@ namespace NathansWay.iOS.Numeracy
         public virtual void OnControlSelectedChange(object s, EventArgs e)
         {
             this._bSelected = true;
-            this.UI_SetSelectedState();
+            //this.UI_SetSelectedState();
         }
 
         public virtual void OnControlUnSelectedChange(object s, EventArgs e)
         {
             this._bSelected = false;
             this.SetCorrectState();
-            this.UI_SetUnSelectedState();
+            //this.UI_SetUnSelectedState();
         }
 
         public virtual bool Solve()
         {
+            this.IsInitialLoad = false;
             this.SetCorrectState();
             this.UI_SetAnswerState(true);
             return this._bIsCorrect;
@@ -249,7 +250,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void SetCorrectState ()
         {
-            if (this._bInitialLoad)
+            if (this._dblCurrentValue == null)
             {
                 this.AnswerState = G__AnswerState.UnAttempted;
                 this._bIsCorrect = false;
@@ -279,21 +280,15 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                if (this._bInitialLoad)
+                if (this._bIsCorrect)
                 {
-                    this.UI_ViewNeutral();
+                    this.UI_ViewCorrect();
                 }
                 else
                 {
-                    if (this._bIsCorrect)
-                    {
-                        this.UI_ViewCorrect();
-                    }
-                    else
-                    {
-                        this.UI_ViewInCorrect();
-                    }
+                    this.UI_ViewInCorrect();
                 }
+
             }
             else
             {
@@ -317,15 +312,11 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this.IsAnswer)
             {
-                // TODO: Here we need to decide if we want the answers to be shown constantly
-                // in different colors
-                UI_SetAnswerState(false);
-                // or
-                // UI_ViewNeutral();
+                this.UI_ViewNeutral();
             }
             else
             {
-                UI_ViewReadOnly();
+                this.UI_ViewReadOnly();
             }
         }
 

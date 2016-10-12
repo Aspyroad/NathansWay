@@ -137,7 +137,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     this.UI_ViewNeutral();
                 }
-                //this._vOperator.BackgroundColor = UIColor.LightGray;
                 return true;
             }
             else
@@ -148,7 +147,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool Solve()
         {
-            return true;
+            return false;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
@@ -239,25 +238,18 @@ namespace NathansWay.iOS.Numeracy.Controls
         
         protected void Initialize ()
         {
-            this.AspyTag1 = 600105;
-            this.AspyName = "VC_DecimalText";
+            this.AspyTag1 = 600104;
+            this.AspyName = "VC_OperatorText";
 
             // Sizing class
             this._sizeOperator = new SizeOperator(this);
             this._sizeClass = this._sizeOperator;
+            this.CurrentValue = null;
+            this.PrevValue = null;
+            this.CurrentValueStr = "";
+            this.PrevValueStr = "";
 
-            // Create textbox
-//            this.txtOperator = new AspyTextField();
-//            // Apply some UI to the textbox
-//            this.SizeClass.SetNumberFont(this.txtOperator);
-//            this.txtOperator.HasBorder = false;
-//            this.txtOperator.HasRoundedCorners = true;
-//            this.txtOperator.Text = _strOperator;
-//            this.txtOperator.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
-//            this.txtOperator.TextAlignment = UITextAlignment.Center;
 
-            // Not needed, this is set by the factory
-            //this._applyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
         #endregion 

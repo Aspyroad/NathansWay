@@ -84,9 +84,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             Initialize();
         }
 
-        public vcNumberText(nint _value)
+        public vcNumberText(double _value)
         {
-            this.CurrentValue = Convert.ToDouble(_value);
+            this.OriginalValue = _value;
             // Default constructor supply our initial value
             Initialize();
         }
@@ -275,7 +275,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply some UI to the texbox
             //this.SizeClass.SetFontAndSize(this.txtNumber);
 
-            this.txtNumber.Text = this.CurrentValueStr.Trim();
+            this.txtNumber.Text = this.OriginalValueStr.Trim();
 
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.ClipsToBounds = true;
@@ -476,7 +476,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (_dblValue != null)
             {
-                this._bInitialLoad = false;
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {

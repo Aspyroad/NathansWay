@@ -119,8 +119,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, EventArgs e)
         {
-            this._bInitialLoad = false;
-
             this.FireValueChange();
         }
 
@@ -133,12 +131,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             base.OnControlSelectedChange(s, e);
+            //this.UI_SetUnSelectedState();
             this.FireControlSelected();
         }
 
         public override void OnControlUnSelectedChange(object s, EventArgs e)
         {
             base.OnControlUnSelectedChange(s, e);
+            //this.UI_SetUnSelectedState();
             this.FireControlSelected();
         }
 

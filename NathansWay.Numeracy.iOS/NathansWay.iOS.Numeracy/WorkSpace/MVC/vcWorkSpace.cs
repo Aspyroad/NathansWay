@@ -489,8 +489,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnControlSelectedChange(object s, EventArgs e)
         {
             this.SelectedNumlet = (vcWorkNumlet)s;
-            this._vcNumletEquation.SelectionState(this.SelectedNumlet.NumletType);
-            this._vcNumletResult.SelectionState(this.SelectedNumlet.NumletType);
+            //this._vcNumletEquation.SelectionState(this.SelectedNumlet.NumletType);
+            //this._vcNumletResult.SelectionState(this.SelectedNumlet.NumletType);
             //this._vcNumletMethod.SelectionState(this.SelectedNumlet.NumletType);
             base.OnControlSelectedChange(s, e);
         }

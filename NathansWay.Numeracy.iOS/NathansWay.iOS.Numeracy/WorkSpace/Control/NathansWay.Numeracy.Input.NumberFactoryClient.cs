@@ -57,8 +57,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create a number
             var x = new vcNumberContainer(strValue);
             // Create the number
-            x.CreateNumber(false);
             x.IsAnswer = this.IsAnswer;
+            x.CreateNumber(false);
             x.IsInitialLoad = true;
             // TODO: Terribly lazy, workout if I need this and how IM using it.
             x.IsReadOnly = !this.IsAnswer;

@@ -318,11 +318,10 @@ namespace NathansWay.iOS.Numeracy
             this._numberContainerNumerator.SetCorrectState();
             //this._numberContainerNumerator.UI_SetAnswerState();
 
-            if (this._bInitialLoad)
+            if (this._numberContainerDenominator.CurrentValue == null || this._numberContainerNumerator.CurrentValue == null)
             {
                 this.AnswerState = G__AnswerState.UnAttempted;
                 this._bIsCorrect = false;
-                //this.UI_SetViewNeutral();
             }
             else
             {
@@ -330,13 +329,11 @@ namespace NathansWay.iOS.Numeracy
                 {
                     this.AnswerState = G__AnswerState.Correct;
                     this._bIsCorrect = true;
-                    //this.UI_SetViewCorrect();
                 }
                 else
                 {
                     this.AnswerState = G__AnswerState.InCorrect;
                     this._bIsCorrect = false;
-                    //this.UI_SetViewInCorrect();
                 }
             }
         }
@@ -345,27 +342,18 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                if (this._bInitialLoad)
+                if (this._bIsCorrect)
                 {
-                    this.UI_ViewNeutral();
-                    this._numberContainerDenominator.UI_ViewNeutral();
-                    this._numberContainerNumerator.UI_ViewNeutral();
+                    this.UI_ViewCorrect();
+                    this._numberContainerDenominator.UI_ViewCorrect();
+                    this._numberContainerNumerator.UI_ViewCorrect();
                 }
                 else
                 {
-                    if (this._bIsCorrect)
-                    {
-                        this.UI_ViewCorrect();
-                        this._numberContainerDenominator.UI_ViewCorrect();
-                        this._numberContainerNumerator.UI_ViewCorrect();
-                    }
-                    else
-                    {
-                        this.UI_ViewInCorrect();
-                        this._numberContainerDenominator.UI_ViewInCorrect();
-                        this._numberContainerNumerator.UI_ViewInCorrect();
-                    }
-                }            
+                    this.UI_ViewInCorrect();
+                    this._numberContainerDenominator.UI_ViewInCorrect();
+                    this._numberContainerNumerator.UI_ViewInCorrect();
+                }
             }
             else
             {
@@ -382,8 +370,6 @@ namespace NathansWay.iOS.Numeracy
                     this._numberContainerNumerator.UI_ViewReadOnly();
                 }
             }
-    
-
         }
 
         public override void UI_ViewSelected()
@@ -393,33 +379,33 @@ namespace NathansWay.iOS.Numeracy
             //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
-        public override void UI_ViewNeutral()
-        {
-            base.UI_ViewNeutral();
-        }
+        //public override void UI_ViewNeutral()
+        //{
+        //    base.UI_ViewNeutral();
+        //}
 
-        public override void UI_ViewReadOnly()
-        {
-            base.UI_ViewReadOnly();
-        }
+        //public override void UI_ViewReadOnly()
+        //{
+        //    base.UI_ViewReadOnly();
+        //}
 
-        public override void UI_ViewCorrect()
-        {
-            base.UI_ViewCorrect();
-        }
+        //public override void UI_ViewCorrect()
+        //{
+        //    base.UI_ViewCorrect();
+        //}
 
-        public override void UI_ViewInCorrect()
-        {
-            base.UI_ViewInCorrect();
-        }
+        //public override void UI_ViewInCorrect()
+        //{
+        //    base.UI_ViewInCorrect();
+        //}
 
         public override void UI_SetUnSelectedState()
         {
             if (this.IsAnswer)
             {
-                this._numberContainerDenominator.UI_SetAnswerState(false);
-                this._numberContainerNumerator.UI_SetAnswerState(false);
-                this.UI_SetAnswerState(false); 
+                this._numberContainerDenominator.UI_ViewNeutral();
+                this._numberContainerNumerator.UI_ViewNeutral();
+                this.UI_ViewNeutral();
             }
             else
             {

@@ -174,10 +174,11 @@ namespace NathansWay.iOS.Numeracy
                 if (ch != ".")
                 {
                     // The Amazing Conversion Of Doctor Parasis!
-                    nint intCh = Convert.ToInt16(ch);
+                    double dblCh = Convert.ToDouble(ch);
                     // PROCESS - BUILD NUMBER
                     // Create a number box
-                    vcNumberText newnumber = new vcNumberText(intCh);
+                    vcNumberText newnumber = new vcNumberText(dblCh);
+                    newnumber.IsAnswer = this.IsAnswer;
                     newnumber.MyNumberParent = this;
                     newnumber.MyImmediateParent = this;
                     newnumber.MutliNumberPosition = (this._intMultiNumberTotalCount - (this._intMultiNumberTotalCount - (i + 1)));
@@ -261,6 +262,7 @@ namespace NathansWay.iOS.Numeracy
                     // PROCESS - BUILD DECIMAL
                     // Create a decimal box
                     var newdecimal = new vcDecimalText();
+                    newdecimal.IsAnswer = this.IsAnswer;
                     // Decimal UI
                     newdecimal.HasBorder = false;
 
@@ -323,8 +325,6 @@ namespace NathansWay.iOS.Numeracy
         {
             // Update the state of the Number container
             string _strCurValue = "";
-            // Change the load status
-            this._bInitialLoad = false;
             this._bIsInComplete = false;
 
             // Should be called after any number change
@@ -593,13 +593,13 @@ namespace NathansWay.iOS.Numeracy
             {
                 base.IsAnswer = value;
                 // Loop through this._lsNumbers
-                if (this._lsNumbers != null)
-                {
-                    foreach (BaseContainer _Number in this._lsNumbers)
-                    {
-                        _Number.IsAnswer = value;
-                    }
-                }
+                //if (this._lsNumbers != null)
+                //{
+                //    foreach (BaseContainer _Number in this._lsNumbers)
+                //    {
+                //        _Number.IsAnswer = value;
+                //    }
+                //}
             }
         }
 
