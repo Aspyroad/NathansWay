@@ -314,14 +314,14 @@ namespace NathansWay.iOS.Numeracy
         #region Delegates
 
         // FLOW - DOWN FORM NUMBER CONTAINER
-        public override void OnSizeChange(object s, EventArgs e)
+        public override void OnSizeChange(object s, evtArgsSelectionChain e)
         {
             // FIRE CHILD NUMBER
             this.FireSizeChange();
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, evtArgsSelectionChain e)
         {
             // Update the state of the Number container
             string _strCurValue = "";
@@ -356,14 +356,14 @@ namespace NathansWay.iOS.Numeracy
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
         {
             base.OnControlSelectedChange(s, e);
             this.FireControlSelected();
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
         {
             base.OnControlUnSelectedChange(s,e);
             this.FireControlUnSelected();

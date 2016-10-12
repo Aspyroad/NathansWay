@@ -13,9 +13,15 @@ using NathansWay.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {
-    [Foundation.Register ("BaseContainer")]	
-	public class BaseContainer : NWViewController
-	{
+    [Foundation.Register("evtArgsSelectionChain")]
+    public class evtArgsSelectionChain : EventArgs
+    {
+        public BaseContainer StartContainer { get; set; }
+    }
+
+    [Foundation.Register("BaseContainer")]
+    public class BaseContainer : NWViewController
+    {
         // Both of these types mean the same thing, the ? is just C# shorthand.
         // private void Example(nint? arg1, Nullable<nint> arg2)
 
@@ -28,7 +34,7 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-		#region Class Variables
+        #region Class Variables
 
         protected Action _actTextSizeChanged;
 
@@ -101,41 +107,41 @@ namespace NathansWay.iOS.Numeracy
         protected G__NumberEditMode _currentEditMode;
         protected bool _bIsInEditMode;
 
-        protected EventArgs _myEventArgs;
+        protected evtArgsSelectionChain _myEventArgs;
 
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
-       
-		#endregion
 
-		#region Constructors
+        #endregion
 
-		public BaseContainer ()
-		{
-			Initialize ();
-		}
+        #region Constructors
 
-		public BaseContainer (string nibName, NSBundle bundle) : base (nibName, bundle)
-		{
-			Initialize ();
-		}
+        public BaseContainer()
+        {
+            Initialize();
+        }
 
-		public BaseContainer (IntPtr h) : base (h)
-		{
-			Initialize ();
-		}
+        public BaseContainer(string nibName, NSBundle bundle) : base(nibName, bundle)
+        {
+            Initialize();
+        }
 
-		public BaseContainer (NSCoder coder) : base (coder)
-		{
-			Initialize ();
-		}
+        public BaseContainer(IntPtr h) : base(h)
+        {
+            Initialize();
+        }
 
-		#endregion
+        public BaseContainer(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
 
-		#region Private Members
+        #endregion
 
-		private void Initialize ()
-		{
+        #region Private Members
+
+        private void Initialize()
+        {
             this._strPrevValue = "";
             this._strCurrentValue = "";
             this._strOriginalValue = "";
@@ -160,14 +166,14 @@ namespace NathansWay.iOS.Numeracy
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
-            this._myEventArgs = new EventArgs();
-		}
+            this._myEventArgs = new evtArgsSelectionChain();
+        }
 
-		#endregion
+        #endregion
 
         #region Delegates
 
-        #endregion         
+        #endregion
 
         #region Public Members
 
@@ -217,23 +223,23 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-		#region Public Virtual
+        #region Public Virtual
 
-        public virtual void OnValueChange(object s, EventArgs e)
+        public virtual void OnValueChange(object s, evtArgsSelectionChain e)
         {
         }
 
-        public virtual void OnSizeChange(object s, EventArgs e)
+        public virtual void OnSizeChange(object s, evtArgsSelectionChain e)
         {
         }
 
-        public virtual void OnControlSelectedChange(object s, EventArgs e)
+        public virtual void OnControlSelectedChange(object s, evtArgsSelectionChain e)
         {
             this._bSelected = true;
             //this.UI_SetSelectedState();
         }
 
-        public virtual void OnControlUnSelectedChange(object s, EventArgs e)
+        public virtual void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
         {
             this._bSelected = false;
             this.SetCorrectState();
@@ -248,7 +254,7 @@ namespace NathansWay.iOS.Numeracy
             return this._bIsCorrect;
         }
 
-        public virtual void SetCorrectState ()
+        public virtual void SetCorrectState()
         {
             if (this._dblCurrentValue == null)
             {
@@ -271,9 +277,9 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual void ClearValue ()
+        public virtual void ClearValue()
         {
-            
+
         }
 
         public virtual void UI_SetAnswerState(bool _solving)
@@ -324,7 +330,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;  
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
         public virtual void UI_ViewReadOnly()
@@ -345,28 +351,28 @@ namespace NathansWay.iOS.Numeracy
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;  
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
         }
 
         public virtual void UI_ViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;  
+            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
         #endregion
 
-		#region Overrides
+        #region Overrides
 
-		public override void ViewWillAppear (bool animated)
-		{
-			// Always correct bounds and frame
-			base.ViewWillAppear (animated);
+        public override void ViewWillAppear(bool animated)
+        {
+            // Always correct bounds and frame
+            base.ViewWillAppear(animated);
 
             // Set all control frames
             this.SizeClass.SetFrames();
-		}
+        }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
@@ -427,17 +433,17 @@ namespace NathansWay.iOS.Numeracy
 
         #region Autorotation for iOS 6 or newer
 
-        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations ()
-		{
-			return UIInterfaceOrientationMask.AllButUpsideDown;
-		}
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations()
+        {
+            return UIInterfaceOrientationMask.AllButUpsideDown;
+        }
 
-		public override bool ShouldAutorotate ()
-		{
-			return true;
-		}
+        public override bool ShouldAutorotate()
+        {
+            return true;
+        }
 
-		#endregion
+        #endregion
 
         #region Public Properties
 
@@ -853,7 +859,7 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-	}
+    }
 
 
 

@@ -117,25 +117,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Delegates
 
-        public override void OnValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, evtArgsSelectionChain e)
         {
             this.FireValueChange();
         }
 
-        public override void OnSizeChange(object s, EventArgs e)
+        public override void OnSizeChange(object s, evtArgsSelectionChain e)
         {
             // 
             this.FireSizeChange();
         }
 
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
         {
             base.OnControlSelectedChange(s, e);
             //this.UI_SetUnSelectedState();
             this.FireControlSelected();
         }
 
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
         {
             base.OnControlUnSelectedChange(s, e);
             //this.UI_SetUnSelectedState();

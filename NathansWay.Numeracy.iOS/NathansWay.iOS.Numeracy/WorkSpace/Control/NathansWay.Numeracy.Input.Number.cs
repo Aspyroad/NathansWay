@@ -795,39 +795,44 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Delegates
 
         // FLOW - DOWN FORM NUMBER CONTAINER
-        public override void OnSizeChange(object s, EventArgs e)
+        public override void OnSizeChange(object s, evtArgsSelectionChain e)
         {
             // Handle the size change
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnValueChange(object s, EventArgs e)
+        public override void OnValueChange(object s, evtArgsSelectionChain e)
         {
             this.FireValueChange();
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlSelectedChange(object s, EventArgs e)
+        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
         {
+            e.StartContainer = this;
             base.OnControlSelectedChange(s,e);
+            this.FireControlSelected();
 
             this.MyWorkSpaceParent.SelectedNumberText = this;
+            this.MyWorkSpaceParent.SelectedNumlet = this.MyNumletParent;
             this.MyNumberParent.SelectedNumberText = this;
             this.MyNumletParent.SelectedNumberText = this;
 
-            this.FireControlSelected();
+
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
+        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
         {
             base.OnControlUnSelectedChange(s,e);
+            this.FireControlUnSelected();
 
             this.MyWorkSpaceParent.SelectedNumberText = null;
+            this.MyWorkSpaceParent.SelectedNumlet = null;
             this.MyNumberParent.SelectedNumberText = null;
             this.MyNumletParent.SelectedNumberText = null;
 
-            this.FireControlUnSelected();
+
         }
 
         #endregion
