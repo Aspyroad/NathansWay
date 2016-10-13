@@ -486,13 +486,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Delegates
 
-        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
+        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
         {
             this.SelectedNumlet = (vcWorkNumlet)s;
             //this._vcNumletEquation.SelectionState(this.SelectedNumlet.NumletType);
             //this._vcNumletResult.SelectionState(this.SelectedNumlet.NumletType);
             //this._vcNumletMethod.SelectionState(this.SelectedNumlet.NumletType);
-            base.OnControlSelectedChange(s, e);
+            base.OnSelectionChange(s, e);
         }
 
         public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)

@@ -342,17 +342,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                         // Stop it from auto moving to the next digit
                         x._bAutoMoveToNextNumber = false;
                         x.TapText();
+                        x.Selected = false;
                     }
-                    x.OnControlUnSelectedChange(sender,e);
 
-                    // Once here we are now selecting this control
-                    // TODO: MOVE the selectednumbertext to OnControlSelectedChange along with adding it to all other parents
-                    this.OnControlSelectedChange(sender, e);
-                    // MOVE THESE CALL INTO THE ABOVE OVERRIDE
-                    // ALSO IS THERE A BETTER WAY OF DOING THIS THROUGH GETTERS SETTERS??
-                    //this.MyWorkSpaceParent.SelectedNumberText = this;
-                    //this.MyNumberParent.SelectedNumberText = this;
-                    //this.MyNumletParent.SelectedNumberText = this;
+                    this.MyWorkSpaceParent.OnSelectionChange(this);
+                    
 
                     // Is the control readonly, then return
                     if (this._bReadOnly)
@@ -807,32 +801,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
+        public override void OnSelectionChange()
         {
-            e.StartContainer = this;
-            base.OnControlSelectedChange(s,e);
-            this.FireControlSelected();
-
             this.MyWorkSpaceParent.SelectedNumberText = this;
             this.MyWorkSpaceParent.SelectedNumlet = this.MyNumletParent;
             this.MyNumberParent.SelectedNumberText = this;
             this.MyNumletParent.SelectedNumberText = this;
-
-
-        }
-
-        // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnControlUnSelectedChange(s,e);
-            this.FireControlUnSelected();
-
-            this.MyWorkSpaceParent.SelectedNumberText = null;
-            this.MyWorkSpaceParent.SelectedNumlet = null;
-            this.MyNumberParent.SelectedNumberText = null;
-            this.MyNumletParent.SelectedNumberText = null;
-
-
         }
 
         #endregion

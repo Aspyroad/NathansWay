@@ -290,9 +290,9 @@ namespace NathansWay.iOS.Numeracy
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlSelectedChange(object s, evtArgsSelectionChain e)
+        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
         {
-            base.OnControlSelectedChange(s, e);
+            base.OnSelectionChange(s, e);
             this.FireControlSelected();
         }
 

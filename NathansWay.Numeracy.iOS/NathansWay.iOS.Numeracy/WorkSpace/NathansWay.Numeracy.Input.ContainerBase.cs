@@ -47,8 +47,6 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bIsAnswer;
         // ?? Are equations readonly ?? possible teachers may want to change on the fly
         protected bool _bReadOnly;
-        // Known at load/build
-        protected bool _bInitialLoad;
         // Known only after numbercontainer returns after a selection and val change
         protected bool _bIsCorrect;
         // Attemped Solve - used to find the state after a solve has been attempted
@@ -199,28 +197,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public void FireControlSelected()
-        {
-            // Thread safety.
-            var x = this.eControlSelected;
-            // Check for null before firing.
-            if (x != null)
-            {
-                x(this, this._myEventArgs);
-            }
-        }
-
-        public void FireControlUnSelected()
-        {
-            // Thread safety.
-            var x = this.eControlUnSelected;
-            // Check for null before firing.
-            if (x != null)
-            {
-                x(this, this._myEventArgs);
-            }
-        }
-
         #endregion
 
         #region Public Virtual
@@ -233,22 +209,18 @@ namespace NathansWay.iOS.Numeracy
         {
         }
 
-        public virtual void OnControlSelectedChange(object s, evtArgsSelectionChain e)
+        public virtual void OnSelectionChange()
         {
             this._bSelected = true;
-            //this.UI_SetSelectedState();
         }
 
-        public virtual void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
+        public virtual void OnSelectionChange(BaseContainer _selectedContainer)
         {
-            this._bSelected = false;
-            this.SetCorrectState();
-            //this.UI_SetUnSelectedState();
+            this._bSelected = true;
         }
 
         public virtual bool Solve()
         {
-            this.IsInitialLoad = false;
             this.SetCorrectState();
             this.UI_SetAnswerState(true);
             return this._bIsCorrect;
@@ -536,18 +508,6 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 this._answerState = value;
-            }
-        }
-
-        public bool IsInitialLoad
-        {
-            get
-            {
-                return this._bInitialLoad;
-            }
-            set
-            {
-                this._bInitialLoad = value;
             }
         }
 
