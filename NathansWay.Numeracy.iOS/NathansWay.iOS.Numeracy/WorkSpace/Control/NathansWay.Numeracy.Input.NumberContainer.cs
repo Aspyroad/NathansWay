@@ -16,7 +16,7 @@ using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
 using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy
+namespace NathansWay.iOS.Numeracy.Controls
 {
     [Foundation.Register ("vcNumberContainer")] 
     public class vcNumberContainer : BaseContainer
@@ -93,8 +93,6 @@ namespace NathansWay.iOS.Numeracy
                 {
                     // Event Hooks
                     _Number.eValueChanged -= this.OnValueChange;
-                    _Number.eControlSelected -= this.OnControlSelectedChange;
-                    _Number.eControlUnSelected -= this.OnControlUnSelectedChange;
                     _Number.eSizeChanged -= this.MyNumletParent.OnSizeChange;
                     _Number.SizeClass.eResizing -= this.MyNumletParent.SizeClass.OnResize;
                     _Number.MyNumberParent = null;
@@ -246,8 +244,6 @@ namespace NathansWay.iOS.Numeracy
                     // Event Hooks
                     // Value and selection changes
                     newnumber.eValueChanged += this.OnValueChange;
-                    newnumber.eControlSelected += this.OnControlSelectedChange;
-                    newnumber.eControlUnSelected += this.OnControlUnSelectedChange;
                     // Resizing
                     this.eSizeChanged += newnumber.OnSizeChange;
                     this.SizeClass.eResizing += newnumber.SizeClass.OnResize;
@@ -276,8 +272,6 @@ namespace NathansWay.iOS.Numeracy
 
                     // Event Hooks
                     // Selection changes
-                    newdecimal.eControlSelected += this.OnControlSelectedChange;
-                    newdecimal.eControlUnSelected += this.OnControlUnSelectedChange;
                     // Resizing
                     this.eSizeChanged += newdecimal.OnSizeChange;
                     this.SizeClass.eResizing += newdecimal.SizeClass.OnResize;
@@ -314,14 +308,14 @@ namespace NathansWay.iOS.Numeracy
         #region Delegates
 
         // FLOW - DOWN FORM NUMBER CONTAINER
-        public override void OnSizeChange(object s, evtArgsSelectionChain e)
+        public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             // FIRE CHILD NUMBER
             this.FireSizeChange();
         }
 
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnValueChange(object s, evtArgsSelectionChain e)
+        public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
             // Update the state of the Number container
             string _strCurValue = "";
@@ -353,20 +347,6 @@ namespace NathansWay.iOS.Numeracy
             }
             // Bubbleup
             this.FireValueChange();
-        }
-
-        // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnSelectionChange(s, e);
-            this.FireControlSelected();
-        }
-
-        // FLOW - UP FROM HERE TO NUMLET OR FRACTION
-        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnControlUnSelectedChange(s,e);
-            this.FireControlUnSelected();
         }
 
         #endregion

@@ -17,6 +17,7 @@ using NathansWay.iOS.Numeracy.UISettings;
 // NathansWay Shared
 using NathansWay.Shared;
 using NathansWay.iOS.Numeracy.Drawing;
+using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -102,16 +103,6 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
         }
 
-        public override void OnValueChange(object s, EventArgs e)
-        {
-            // Fire this objects FireValueChange for bubbleup
-            this.FireValueChange();
-
-            // Once in here we are past an inital load, and a user has input a value
-            // We must reset our intital load variable to false
-            this.IsInitialLoad = false;
-        }
-
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
             // Note the calls to base for UI when initializing
@@ -163,16 +154,6 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.btnSolveButton.AnimationFalse();
             }               
-        }
-
-        public override void OnControlSelectedChange(object s, EventArgs e)
-        {           
-            //base.OnControlSelectedChange();
-        }
-
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {  
-            //base.OnControlUnSelectedChange();
         }
 
         #endregion

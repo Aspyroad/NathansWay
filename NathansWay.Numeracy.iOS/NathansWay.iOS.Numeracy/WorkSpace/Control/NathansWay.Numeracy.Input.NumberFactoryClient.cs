@@ -59,8 +59,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create the number
             x.IsAnswer = this.IsAnswer;
             x.CreateNumber(false);
-            x.IsInitialLoad = true;
-            // TODO: Terribly lazy, workout if I need this and how IM using it.
             x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;
@@ -70,23 +68,20 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
         public object UICreateNumberLabel (string strValue)
         {
-            // Create a number
-            var x = new vcNumberLabelContainer(strValue);
-            // Create the number
-            x.CreateNumber();
-            // UI
-            x.HasBorder = true;
-            x.HasRoundedCorners = true;
-            // Add to output
-            return (x as object);
+            //// Create a number
+            //var x = new vcNumberLabelContainer(strValue);
+            //// Create the number
+            //x.CreateNumber();
+            //// UI
+            //x.HasBorder = true;
+            //x.HasRoundedCorners = true;
+            //// Add to output
+            return (new object());
         }
         public object UICreateFraction (string strFraction)
         {
             // Create a fraction
-            var x = new vcFractionContainer(strFraction);
-            x.IsAnswer = this.IsAnswer;
-            x.IsInitialLoad = true;
-            // TODO: Terribly lazy, workout if I need this and how IM using it.
+            var x = new vcFractionContainer(strFraction, this.IsAnswer);
             x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;
@@ -99,8 +94,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create an operator
             var x = new vcOperatorText(mathOperator, strChar);
             x.IsAnswer = this.IsAnswer;
-            x.IsInitialLoad = true;
-            // TODO: Terribly lazy, workout if I need this and how IM using it.
             x.IsReadOnly = !this.IsAnswer;
             // UI
             x.HasBorder = true;

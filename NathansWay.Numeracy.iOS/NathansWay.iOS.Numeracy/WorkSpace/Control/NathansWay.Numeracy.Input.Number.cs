@@ -167,9 +167,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public void TapText()
         {
-            // TODO : We need to tell number container the index position of the currently selected text field
-            // We need to do this so as to disable the "skipping" effect to the next number, if we select a number HIGHER up then 1 position from this one
-            // Prevent the user double tapping
             if (this.IsInEditMode)
             {
                 // Close anything thats activated by the touch
@@ -201,12 +198,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                // Add this numbertext ref to the parent number container
-                // This wont work, its overwriting the one we want...what about an prevnumbertext?
-
-
                 this.IsInEditMode = true;
-                //this.Selected = true;
+
                 // Begin Editing
                 this.preEdit();
 
@@ -345,9 +338,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         x.Selected = false;
                     }
 
-                    this.MyWorkSpaceParent.OnSelectionChange(this);
-                    
-
+                    // this.MyWorkSpaceParent.OnSelectionChange(this);
                     // Is the control readonly, then return
                     if (this._bReadOnly)
                     {
@@ -370,27 +361,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                             this.MyWorkSpaceParent.SelectedNumberText._bAutoMoveToNextNumber = false;
                             this.TapText();
                         }
-                        else
-                        {
-                            this.OnControlUnSelectedChange(sender,e);
-                            //this.MyWorkSpaceParent.SelectedNumberText = null;
-                        }
+                        //else
+                        //{
+                        //    this.MyWorkSpaceParent.OnSelectionChange(this);
+                        //}
                     }
                 }
             }
             else
             {
-                // SECOND!! We need to see if any operators have been touched
-                if (this.MyWorkSpaceParent.HasSelectedOperatorText)
-                {
-                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(sender,e);
-                    //this.MyWorkSpaceParent.SelectedOperatorText = null;
-                }
-                // Once here we are now selecting this control
-                //this.MyNumberParent.SelectedNumberText = this;
-                //this.MyWorkSpaceParent.SelectedNumberText = this;
-                this.OnControlSelectedChange(sender,e);
-                // Is the control readonly, then return
                 if (this._bReadOnly)
                 {
                     return;
@@ -400,6 +379,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                     this.TapText();
                 }
             }
+            // This should be called right at the end
+            this._bSelected = true;
+            this.MyWorkSpaceParent.OnSelectionChange(this);
         }
 
         private void btnUpTouch(object sender, EventArgs e)
@@ -490,7 +472,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (x)
             {
                 // Begin bubbleup
-                this.OnValueChange(this, new EventArgs());
+                this.OnValueChange(this, new evtArgsBaseContainer());
             }
 
             // TODO: Problem 5 Fraction Number Picker
@@ -789,13 +771,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         #region Delegates
 
         // FLOW - DOWN FORM NUMBER CONTAINER
-        public override void OnSizeChange(object s, evtArgsSelectionChain e)
+        public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             // Handle the size change
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnValueChange(object s, evtArgsSelectionChain e)
+        public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
             this.FireValueChange();
         }

@@ -213,8 +213,6 @@ namespace NathansWay.iOS.Numeracy
                 // Event Hooks ************************************************************************
                 // Value and selection changes - FLOW - FROM CONTROL UP TO NUMLET
                 _control.eValueChanged += numlet.OnValueChange;
-                _control.eControlSelected += numlet.OnControlSelectedChange;
-                _control.eControlUnSelected += numlet.OnControlUnSelectedChange;
 
                 // Hook up the control resizing - FLOW - FROM NUMLET DOWN TO CONTROL
                 numlet.eSizeChanged += _control.OnSizeChange;
@@ -231,8 +229,6 @@ namespace NathansWay.iOS.Numeracy
             // Event Hooks ************************************************************************
             // Value and selection changes - FLOW - FROM NUMLET UP TO WORKSPACE
             numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
-            numlet.eControlSelected += this._vcCurrentWorkSpace.OnControlSelectedChange;
-            numlet.eControlUnSelected += this._vcCurrentWorkSpace.OnControlUnSelectedChange;
 
             // Resizing - FLOW - FROM WORKSPACE DOWN TO NUMLET
             this._vcCurrentWorkSpace.eSizeChanged += numlet.OnSizeChange;
@@ -328,8 +324,6 @@ namespace NathansWay.iOS.Numeracy
                 // Event Hooks ************************************************************************
                 // Value and selection changes - FLOW - FROM CONTROL UP TO NUMLET
                 _control.eValueChanged += numlet.OnValueChange;
-                _control.eControlSelected += numlet.OnControlSelectedChange;
-                _control.eControlUnSelected += numlet.OnControlUnSelectedChange;
 
                 // Hook up the control resizing - FLOW - FROM NUMLET DOWN TO CONTROL
                 numlet.eSizeChanged += _control.OnSizeChange;
@@ -346,8 +340,6 @@ namespace NathansWay.iOS.Numeracy
             // Event Hooks ************************************************************************
             // Value and selection changes - FLOW - FROM NUMLET UP TO WORKSPACE
             numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
-            numlet.eControlSelected += this._vcCurrentWorkSpace.OnControlSelectedChange;
-            numlet.eControlUnSelected += this._vcCurrentWorkSpace.OnControlUnSelectedChange;
 
             // Resizing - FLOW - FROM WORKSPACE DOWN TO NUMLET
             this._vcCurrentWorkSpace.eSizeChanged += numlet.OnSizeChange;

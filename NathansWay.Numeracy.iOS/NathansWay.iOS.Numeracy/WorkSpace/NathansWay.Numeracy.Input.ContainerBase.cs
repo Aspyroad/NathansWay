@@ -14,7 +14,7 @@ using NathansWay.Shared;
 namespace NathansWay.iOS.Numeracy
 {
     [Foundation.Register("evtArgsSelectionChain")]
-    public class evtArgsSelectionChain : EventArgs
+    public class evtArgsBaseContainer : EventArgs
     {
         public BaseContainer StartContainer { get; set; }
     }
@@ -27,10 +27,12 @@ namespace NathansWay.iOS.Numeracy
 
         #region Events
 
-        public event EventHandler eSizeChanged;
-        public event EventHandler eValueChanged;
-        public event EventHandler eControlUnSelected;
-        public event EventHandler eControlSelected;
+        public event ContainerBaseHandler eSizeChanged;
+        public event ContainerBaseHandler eValueChanged;
+        public event ContainerBaseHandler eControlUnSelected;
+        public event ContainerBaseHandler eControlSelected;
+
+        public delegate void ContainerBaseHandler(object s, evtArgsBaseContainer e);
 
         #endregion
 
@@ -98,14 +100,11 @@ namespace NathansWay.iOS.Numeracy
         protected vcWorkNumlet _vcSelectedNumlet;
         protected bool _bHasSelectedNumlet;
 
-        // Currently selected container, this could be any basecontainer.
-        protected BaseContainer _selectedContainer;
-
         // Current editing mode for this container
         protected G__NumberEditMode _currentEditMode;
         protected bool _bIsInEditMode;
 
-        protected evtArgsSelectionChain _myEventArgs;
+        protected evtArgsBaseContainer _myEventArgs;
 
         // This is always true the first time we load, after any attempt
         // to change the value, it gets set to false.
@@ -143,8 +142,8 @@ namespace NathansWay.iOS.Numeracy
             this._strPrevValue = "";
             this._strCurrentValue = "";
             this._strOriginalValue = "";
-            this._dblPrevValue = 0;
-            this._dblCurrentValue = 0;
+            this._dblPrevValue = null;
+            this._dblCurrentValue = null;
             this._dblOriginalValue = 0;
             // Set answer state - default
             this._answerState = G__AnswerState.UnAttempted;
@@ -158,13 +157,12 @@ namespace NathansWay.iOS.Numeracy
             this._bHasWorkSpaceParent = false;
             this._bHasSelectedNumberText = false;
             this._bHasSelectedOperatorText = false;
-            this._bInitialLoad = true;
             this._bAllowNextResponder = true;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
-            this._myEventArgs = new evtArgsSelectionChain();
+            this._myEventArgs = new evtArgsBaseContainer();
         }
 
         #endregion
@@ -201,11 +199,11 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Virtual
 
-        public virtual void OnValueChange(object s, evtArgsSelectionChain e)
+        public virtual void OnValueChange(object s, evtArgsBaseContainer e)
         {
         }
 
-        public virtual void OnSizeChange(object s, evtArgsSelectionChain e)
+        public virtual void OnSizeChange(object s, evtArgsBaseContainer e)
         {
         }
 

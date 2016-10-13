@@ -152,51 +152,16 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {
-            // TODO : this has a bug after selectcion it keeps one number selected...
-
-            this.Touched = true;
-            if (_bSelected)
+            if (this.MyWorkSpaceParent.HasSelectedNumberText)
             {
-                //this._bSelected = false;
-                // Handle re-taping the same numbertext...toggle
-                this.MyWorkSpaceParent.SelectedOperatorText = null;
-                this.OnControlUnSelectedChange(this, new EventArgs());
-            }
-            else
-            {
-                //this._bSelected = true;
-
-                if (this.MyWorkSpaceParent.HasSelectedNumberText)
+                var x = this.MyWorkSpaceParent.SelectedNumberText;
+                if (x.IsInEditMode)
                 {
-                    var x = this.MyWorkSpaceParent.SelectedNumberText;
-                    if (x.IsInEditMode)
-                    {
-                        x.TapText();
-                    }
-                    //x.OnControlUnSelectedChange(this, new EventArgs());
-                    this.MyWorkSpaceParent.SelectedNumberText = null;
-                }
-                // User taps another operator
-                if (this.MyWorkSpaceParent.HasSelectedOperatorText)
-                {
-                    this.MyWorkSpaceParent.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-                }
-                //else
-                {
-                    // Handle re-taping the same numbertext...toggle
-                    this.MyWorkSpaceParent.SelectedOperatorText = this;
-                    this.OnControlSelectedChange(this, new EventArgs());
+                    x.TapText();
                 }
             }
 
-            // *****************************************************************************
-            // Check Correct
-            // If this is an equals sign fire check correct
-            if (this._operatorType == G__MathOperator.Equals)
-            {
-                //this.MyWorkSpaceParent.Solve();
-            }
-
+            this.MyWorkSpaceParent.OnSelectionChange(this);
             //base.TouchesBegan(touches, evt);
         }
 
@@ -210,17 +175,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Delegates
 
-        public override void OnControlSelectedChange(object s, EventArgs e)
-        {
-            base.OnControlSelectedChange(s, e);
-            this.FireControlSelected();
-        }
-
-        public override void OnControlUnSelectedChange(object s, EventArgs e)
-        {
-            base.OnControlUnSelectedChange(s, e);
-            this.FireControlUnSelected();
-        }
 
         #endregion
 

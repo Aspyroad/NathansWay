@@ -1,246 +1,246 @@
-// System
-using System;
-using CoreGraphics;
-// Mono
-using Foundation;
-using UIKit;
-// Aspyroad
-using AspyRoad.iOSCore;
-// Nathansway
-using NathansWay.Shared;
+//// System
+//using System;
+//using CoreGraphics;
+//// Mono
+//using Foundation;
+//using UIKit;
+//// Aspyroad
+//using AspyRoad.iOSCore;
+//// Nathansway
+//using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy.Controls
-{
-    [Register ("vcNumberLabel")]
-    public class vcNumberLabel : BaseContainer
-    {
-        #region Class Variables
+//namespace NathansWay.iOS.Numeracy.Controls
+//{
+//    [Register ("vcNumberLabel")]
+//    public class vcNumberLabel : BaseContainer
+//    {
+//        #region Class Variables
 
-        // UI Components
-        public AspyLabel lblNumber { get; private set; }
+//        // UI Components
+//        public AspyLabel lblNumber { get; private set; }
 
-        private SizeNumberLabel _sizeNumberLabel;
-        private vcMainContainer _vcMainContainer;
-        private vcNumberLabelContainer _vcNumberLabelContainer;
+//        private SizeNumberLabel _sizeNumberLabel;
+//        private vcMainContainer _vcMainContainer;
+//        private vcNumberLabelContainer _vcNumberLabelContainer;
 
-        private G__UnitPlacement _tensUnit;
-        private G__Significance _significance;
+//        private G__UnitPlacement _tensUnit;
+//        private G__Significance _significance;
 
-        #endregion
+//        #endregion
 
-        #region Constructors
+//        #region Constructors
 
-        public vcNumberLabel (IntPtr h) : base (h)
-        {
-            Initialize();
-        }
+//        public vcNumberLabel (IntPtr h) : base (h)
+//        {
+//            Initialize();
+//        }
 
-        [Export("initWithCoder:")]
-        public vcNumberLabel (NSCoder coder) : base(coder)
-        {
-            Initialize();
-        }
+//        [Export("initWithCoder:")]
+//        public vcNumberLabel (NSCoder coder) : base(coder)
+//        {
+//            Initialize();
+//        }
 
-        public vcNumberLabel ()
-        {
-            // Default constructor supply our initial value
-            Initialize();
-        }
+//        public vcNumberLabel ()
+//        {
+//            // Default constructor supply our initial value
+//            Initialize();
+//        }
 
-        public vcNumberLabel (nint _value)
-        {
-            this.CurrentValue = Convert.ToDouble(_value);
-            // Default constructor supply our initial value
-            Initialize();
-        }
+//        public vcNumberLabel (nint _value)
+//        {
+//            this.CurrentValue = Convert.ToDouble(_value);
+//            // Default constructor supply our initial value
+//            Initialize();
+//        }
 
-        #endregion
+//        #endregion
 
-        #region Deconstructors
+//        #region Deconstructors
 
-        protected override void Dispose (bool disposing)
-        {
-            base.Dispose (disposing);
+//        protected override void Dispose (bool disposing)
+//        {
+//            base.Dispose (disposing);
 
-            if (disposing)
-            {
-            }
-        }
+//            if (disposing)
+//            {
+//            }
+//        }
 
-        #endregion
+//        #endregion
 
-        #region Overrides
+//        #region Overrides
         
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-        }
+//        public override void DidReceiveMemoryWarning()
+//        {
+//            base.DidReceiveMemoryWarning();
+//        }
 
 
-        public override void ViewDidLoad()
-        {
-            base.ViewDidLoad();
-            // Add subviews - controls
-            this.View.AddSubview(this.lblNumber);
-        }
+//        public override void ViewDidLoad()
+//        {
+//            base.ViewDidLoad();
+//            // Add subviews - controls
+//            this.View.AddSubview(this.lblNumber);
+//        }
 
-        // Is only called when the viewcontroller first lays out its views
-        public override void ViewWillAppear(bool animated)
-        {
-            base.ViewWillAppear(animated);
-            this.lblNumber.Frame = this._sizeNumberLabel._rectNumberLabel;
-        }
+//        // Is only called when the viewcontroller first lays out its views
+//        public override void ViewWillAppear(bool animated)
+//        {
+//            base.ViewWillAppear(animated);
+//            this.lblNumber.Frame = this._sizeNumberLabel._rectNumberLabel;
+//        }
 
 
-        #endregion
+//        #endregion
 
-        #region Public Properties
+//        #region Public Properties
 
-        public SizeNumberLabel NumberLabelSize
-        {
-            get { return this._sizeNumberLabel; }
-        }
+//        public SizeNumberLabel NumberLabelSize
+//        {
+//            get { return this._sizeNumberLabel; }
+//        }
 
-        public G__UnitPlacement TensUnit
-        {
-            get { return _tensUnit; }
-            set { _tensUnit = value; }
-        }
+//        public G__UnitPlacement TensUnit
+//        {
+//            get { return _tensUnit; }
+//            set { _tensUnit = value; }
+//        }
 
-        public G__Significance Significance
-        {
-            get { return this._significance; }
-            set { this._significance = value; }
-        }
+//        public G__Significance Significance
+//        {
+//            get { return this._significance; }
+//            set { this._significance = value; }
+//        }
 
-        public vcNumberLabelContainer MyNumberLabelContainer
-        {
-            get
-            {
-                return _vcNumberLabelContainer;
-            }
-            set
-            {
-                _vcNumberLabelContainer = value;
-            }
-        }
+//        public vcNumberLabelContainer MyNumberLabelContainer
+//        {
+//            get
+//            {
+//                return _vcNumberLabelContainer;
+//            }
+//            set
+//            {
+//                _vcNumberLabelContainer = value;
+//            }
+//        }
                         
-        #endregion
+//        #endregion
 
-        #region Private Members
+//        #region Private Members
         
-        protected void Initialize ()
-        {
-			this.AspyTag1 = 600108;
-            this.AspyName = "VC_NumberLabel";
-            // Define the container type
-            this._containerType = G__ContainerType.NumberLabel;
+//        protected void Initialize ()
+//        {
+//			this.AspyTag1 = 600108;
+//            this.AspyName = "VC_NumberLabel";
+//            // Define the container type
+//            this._containerType = G__ContainerType.NumberLabel;
 
-            // Local controls
-            this.lblNumber = new AspyLabel();
-            // Size class Init
-            this._sizeNumberLabel = new SizeNumberLabel(this);
-            this._sizeClass = this._sizeNumberLabel;
-            this._vcMainContainer = this._sizeClass.VcMainContainer;
+//            // Local controls
+//            this.lblNumber = new AspyLabel();
+//            // Size class Init
+//            this._sizeNumberLabel = new SizeNumberLabel(this);
+//            this._sizeClass = this._sizeNumberLabel;
+//            this._vcMainContainer = this._sizeClass.VcMainContainer;
 
-            // Apply some UI to the texbox
-            this.SizeClass.SetFontAndSize(this.lblNumber);
+//            // Apply some UI to the texbox
+//            this.SizeClass.SetFontAndSize(this.lblNumber);
 
-            this.lblNumber.Text = this.CurrentValueStr.Trim();
-            this.lblNumber.HasBorder = false;
-            this.lblNumber.HasRoundedCorners = true;
+//            this.lblNumber.Text = this.CurrentValueStr.Trim();
+//            this.lblNumber.HasBorder = false;
+//            this.lblNumber.HasRoundedCorners = true;
 
-            this.lblNumber.TextAlignment = UITextAlignment.Center;
-        }
+//            this.lblNumber.TextAlignment = UITextAlignment.Center;
+//        }
 
-        #endregion
-    }
+//        #endregion
+//    }
 
-    public class SizeNumberLabel : SizeBase
-    {
-        #region Class Variables
-        // X Horizontal
-        // Y Vertical
+//    public class SizeNumberLabel : SizeBase
+//    {
+//        #region Class Variables
+//        // X Horizontal
+//        // Y Vertical
 
-        // Text Box Frame
-        public CGRect _rectNumberLabel;
-        // Parent Container
-        private vcNumberLabel _vcChild;
+//        // Text Box Frame
+//        public CGRect _rectNumberLabel;
+//        // Parent Container
+//        private vcNumberLabel _vcChild;
 
-        // Font Size
-        public UIFont _globalFont;
+//        // Font Size
+//        public UIFont _globalFont;
 
-        #endregion
+//        #endregion
 
-        #region Constructors
+//        #region Constructors
 
-        public SizeNumberLabel ()
-        {
-            Initialize();
-        }
+//        public SizeNumberLabel ()
+//        {
+//            Initialize();
+//        }
 
-        public SizeNumberLabel (BaseContainer _vc) : base (_vc)
-        {
-            this.ParentContainer = _vc;
-            Initialize();
-        }
+//        public SizeNumberLabel (BaseContainer _vc) : base (_vc)
+//        {
+//            this.ParentContainer = _vc;
+//            Initialize();
+//        }
 
-        #endregion
+//        #endregion
 
-        #region Private Members
+//        #region Private Members
 
-        private void Initialize ()
-        {
-            this._vcChild = (vcNumberLabel)this.ParentContainer;
-        }
+//        private void Initialize ()
+//        {
+//            this._vcChild = (vcNumberLabel)this.ParentContainer;
+//        }
 
-        #endregion
+//        #endregion
 
-        #region Overrides
+//        #region Overrides
 
-        public override void SetSubHeightWidthPositions ()
-        {
-            if (this._bIsMultiNumber)
-            {
-                this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
-            }
-            else
-            {
-                this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
-            }
-            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
-        }
+//        public override void SetSubHeightWidthPositions ()
+//        {
+//            if (this._bIsMultiNumber)
+//            {
+//                this.CurrentWidth = this.GlobalSizeDimensions.MultipleNumberWidth;
+//            }
+//            else
+//            {
+//                this.CurrentWidth = this.GlobalSizeDimensions.GlobalNumberWidth;
+//            }
+//            this.CurrentHeight = this.GlobalSizeDimensions.NumberContainerHeight;
+//        }
 
-        public override void SetViewPosition (CGSize _parentFrame)
-        {
-            // Common width/height/frame settings from Dimensions class
-            base.SetViewPosition(_parentFrame);
-            // Other Frames
-            this.SetFrames();
-        }  
+//        public override void SetViewPosition (CGSize _parentFrame)
+//        {
+//            // Common width/height/frame settings from Dimensions class
+//            base.SetViewPosition(_parentFrame);
+//            // Other Frames
+//            this.SetFrames();
+//        }  
 
-        #endregion
+//        #endregion
 
-        #region Public Members
+//        #region Public Members
 
-        public override void SetFrames ()
-        {
+//        public override void SetFrames ()
+//        {
             
-            this._fCurrentHeight = this.GlobalSizeDimensions.NumberTxtHeight;
+//            this._fCurrentHeight = this.GlobalSizeDimensions.NumberTxtHeight;
 
-            this._rectNumberLabel = new CGRect(
-                0.0f, 
-                0.0f, 
-                this.CurrentWidth,
-                this.GlobalSizeDimensions.NumberTxtHeight
-            );
-        }
+//            this._rectNumberLabel = new CGRect(
+//                0.0f, 
+//                0.0f, 
+//                this.CurrentWidth,
+//                this.GlobalSizeDimensions.NumberTxtHeight
+//            );
+//        }
 
-        #endregion
+//        #endregion
 
-        #region Public Properties
+//        #region Public Properties
 
 
-        #endregion
-    }
-}
+//        #endregion
+//    }
+//}

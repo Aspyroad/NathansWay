@@ -10,6 +10,7 @@ using AspyRoad.iOSCore;
 // Nathansway
 using NathansWay.Shared.BUS.Entity;
 using NathansWay.Shared;
+using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -486,27 +487,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Delegates
 
-        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
-        {
-            this.SelectedNumlet = (vcWorkNumlet)s;
-            //this._vcNumletEquation.SelectionState(this.SelectedNumlet.NumletType);
-            //this._vcNumletResult.SelectionState(this.SelectedNumlet.NumletType);
-            //this._vcNumletMethod.SelectionState(this.SelectedNumlet.NumletType);
-            base.OnSelectionChange(s, e);
-        }
-
-        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnControlUnSelectedChange(s, e);
-        }
-
-        public override void OnValueChange(object s, evtArgsSelectionChain e)
+        public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
             //var x = 10;
             //base.OnValueChange(s, e);
         }
 
-        public override void OnSizeChange(object s, evtArgsSelectionChain e)
+        public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             base.OnSizeChange(s, e);
         }
@@ -612,45 +599,42 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.SelectedNumberText.AutoTouchedText();
                 this.SelectedNumberText = null;
             }
-            if (this.HasSelectedOperatorText)
-            {
-                this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-                this.SelectedOperatorText = null;
-            }
 
             // Check all Numlets
             bool num1 = this._vcNumletEquation.Solve();
             bool num2 = this._vcNumletResult.Solve();
 
+            this._bIsCorrect = (num1 && num2);
+
             return (num1 && num2);
         }
 
-        //public override void TouchesBegan(NSSet touches, UIEvent evt)
-        //{
+        public override void OnSelectionChange(BaseContainer _selectedContainer)
+        {
+            var c = _selectedContainer.ContainerType;
 
-        //        if (this.HasSelectedNumberText)
-        //        {
-        //            var x = this.SelectedNumberText;
-        //            if (x.IsInEditMode)
-        //            {
-        //                x.TapText();
-        //            }
-        //            x.OnControlUnSelectedChange(this, new EventArgs());
-        //            this.SelectedNumberText = null;
-        //        }
-        //        // User taps another operator
-        //        if (this.HasSelectedOperatorText)
-        //        {
-        //            this.SelectedOperatorText.OnControlUnSelectedChange(this, new EventArgs());
-        //            this.SelectedOperatorText = null;
-        //        }
+            if (c == G__ContainerType.NumberText)
+            {
+                this.SelectedNumberText = (vcNumberText)_selectedContainer;
+                //UI
 
-        //}
 
-        //public override void TouchesEnded(NSSet touches, UIEvent evt)
-        //{
-        //    base.TouchesEnded(touches, evt);
-        //}
+
+
+
+            }
+            if (c == G__ContainerType.Operator)
+            {
+                this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
+                //UI
+
+
+
+
+
+
+            }
+        }
 
         #endregion
 

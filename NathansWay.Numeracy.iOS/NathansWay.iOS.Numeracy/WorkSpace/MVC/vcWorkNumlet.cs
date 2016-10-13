@@ -77,10 +77,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 foreach (BaseContainer _con in this.OutputContainers) 
                 {
                     // Event Hooks
-
-                    this.eValueChanged -= _con.OnSizeChange;
-                    this.eControlSelected -= _con.OnControlSelectedChange;
-                    this.eControlUnSelected -= _con.OnControlUnSelectedChange;
+                    this.eValueChanged -= _con.OnValueChange;
                 }
             }
         }
@@ -117,29 +114,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Delegates
 
-        public override void OnValueChange(object s, evtArgsSelectionChain e)
+        public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
             this.FireValueChange();
         }
 
-        public override void OnSizeChange(object s, evtArgsSelectionChain e)
+        public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             // 
             this.FireSizeChange();
-        }
-
-        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnSelectionChange(s, e);
-            //this.UI_SetUnSelectedState();
-            this.FireControlSelected();
-        }
-
-        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnControlUnSelectedChange(s, e);
-            //this.UI_SetUnSelectedState();
-            this.FireControlSelected();
         }
 
         #endregion
@@ -173,7 +156,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             bool _ret = false;
             this._bIsCorrect = true;
-            this.IsInitialLoad = false;
             // ALl the Children in this numlet
             for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
             {

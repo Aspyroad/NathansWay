@@ -14,7 +14,7 @@ using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
 using NathansWay.Shared;
 
-namespace NathansWay.iOS.Numeracy
+namespace NathansWay.iOS.Numeracy.Controls
 {
     [Foundation.Register("vcFractionContainer")] 
     public class vcFractionContainer : BaseContainer
@@ -52,8 +52,9 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
-        public vcFractionContainer(string _expression)
+        public vcFractionContainer(string _expression, bool isanswer)
         {
+            this._bIsAnswer = isanswer;
             this._strFractionExpression = _expression;
             Initialize();
         }
@@ -89,11 +90,6 @@ namespace NathansWay.iOS.Numeracy
                 this._numberContainerNumerator.eSizeChanged -= this.OnSizeChange;
                 this._numberContainerDenominator.eValueChanged -= this.OnValueChange;
                 this._numberContainerDenominator.eSizeChanged -= this.OnSizeChange;
-
-                this._numberContainerNumerator.eControlSelected -= this.OnControlSelectedChange;
-                this._numberContainerNumerator.eControlUnSelected -= this.OnControlUnSelectedChange;
-                this._numberContainerDenominator.eControlSelected -= this.OnControlSelectedChange;
-                this._numberContainerDenominator.eControlUnSelected -= this.OnControlUnSelectedChange;
                 // Clear its parent
                 this._numberContainerNumerator.MyFractionParent = null;
                 this._numberContainerDenominator.MyFractionParent = null;
@@ -144,8 +140,8 @@ namespace NathansWay.iOS.Numeracy
             this._numberContainerNumerator = new vcNumberContainer(_result[0].ToString());
             this._numberContainerDenominator = new vcNumberContainer(_result[1].ToString());
             // AnswerType
-            //this.numberText_Numerator.IsAnswer = this.IsAnswer;
-            //this.numberText_Denominator.IsAnswer = this.IsAnswer;
+            this._numberContainerNumerator.IsAnswer = this.IsAnswer;
+            this._numberContainerDenominator.IsAnswer = this.IsAnswer;
 
             // Set the fraction container parent of num and den
             this._numberContainerNumerator.MyFractionParent = this;
@@ -161,13 +157,9 @@ namespace NathansWay.iOS.Numeracy
             // Event hooks
             // Numerator
             this._numberContainerNumerator.eValueChanged += this.OnValueChange;
-            this._numberContainerNumerator.eControlSelected += this.OnControlSelectedChange;
-            this._numberContainerNumerator.eControlUnSelected += this.OnControlUnSelectedChange;
 
             // Denominator
             this._numberContainerDenominator.eValueChanged += this.OnValueChange;
-            this._numberContainerDenominator.eControlSelected += this.OnControlSelectedChange;
-            this._numberContainerDenominator.eControlUnSelected += this.OnControlUnSelectedChange;
 
             // Grab the width - we need the largest.
             // Math.Max returns the largest or if equal, the value of the variables inputed
@@ -268,16 +260,14 @@ namespace NathansWay.iOS.Numeracy
         #region Delegates
 
         // FLOW - DOWN FORM NUMBER CONTAINER
-        public override void OnSizeChange(object s, evtArgsSelectionChain e)
+        public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             // Handle the size change
         }
 
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnValueChange(object s, evtArgsSelectionChain e)
+        public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
-            // Change the load status
-            this.IsInitialLoad = false;
             // If either are empty then this is incomplete
             if (this._numberContainerNumerator.IsInComplete || this._numberContainerDenominator.IsInComplete)
             {
@@ -287,20 +277,6 @@ namespace NathansWay.iOS.Numeracy
             // Bubbleup
             this.FireValueChange();
 
-        }
-
-        // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnSelectionChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnSelectionChange(s, e);
-            this.FireControlSelected();
-        }
-
-        // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnControlUnSelectedChange(object s, evtArgsSelectionChain e)
-        {
-            base.OnControlUnSelectedChange(s, e);
-            this.FireControlUnSelected();
         }
 
         #endregion
