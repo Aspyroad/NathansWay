@@ -171,6 +171,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return this._bIsCorrect;
         }
 
+        public override void OnSelectionChange(BaseContainer _selectedContainer)
+        {
+            var c = _selectedContainer.ContainerType;
+
+            if (c == G__ContainerType.NumberText)
+            {
+                this.SelectedNumberText = (vcNumberText)_selectedContainer;
+                this.SelectedNumberContainer = this.SelectedNumberText.MyNumberParent;
+                if (this.SelectedNumberText.HasFractionParent)
+                {
+                    this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
+                }
+
+
+
+
+            }
+
+
+
+            if (c == G__ContainerType.Operator)
+            {
+                this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
+                //UI
+
+
+
+            }
+        }
+
         public override void UI_SetAnswerState(bool _solving)
         {
             // ALl the Children in this numlet
@@ -206,7 +236,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //base.UI_SetAnswerState(_solving);
         }
 
-        public override void UI_SetUnSelectedState()
+        public override void UI_SetSelectedState()
         {
             // All the children in this numlet
             for (int i = 0; i < this.OutputContainers.Count; i++)
@@ -321,6 +351,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get;
             set;
         }
+
+        public vcNumberContainer SelectedNumberContainer { get; set; }
+        public vcFractionContainer SelectedFractionContainer { get; set; }
 
         public SizeWorkNumlet WorkNumletSize
         {

@@ -194,11 +194,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // User is cancelling the edit - backout
                 this.IsInEditMode = false;
                 this.Selected = false;
-
             }
             else
             {
                 this.IsInEditMode = true;
+                this.Selected = true;
 
                 // Begin Editing
                 this.preEdit();
@@ -322,8 +322,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void txtTouchedDown(object sender, EventArgs e)
         {
-
-            // FIRST!! We need to find ANY!!! selected number texts within the whole workspace and KILL them!
+            // **** These routines are purly for deactivating any EDIT state. NO UI here.
             if (this.MyWorkSpaceParent.HasSelectedNumberText)
             {
                 if (this.MyWorkSpaceParent.SelectedNumberText != this)
@@ -351,6 +350,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
+                    // Not sure why Ive put this if here..what else can SelectedNumberText be??
                     if (this.MyWorkSpaceParent.SelectedNumberText == this)
                     {
                         // ** Selecting the same control twice
@@ -358,13 +358,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                         if (this.IsAnswer)
                         {
                             // Stop it from auto moving to the next digit
-                            this.MyWorkSpaceParent.SelectedNumberText._bAutoMoveToNextNumber = false;
+                            this._bAutoMoveToNextNumber = false;
                             this.TapText();
                         }
-                        //else
-                        //{
-                        //    this.MyWorkSpaceParent.OnSelectionChange(this);
-                        //}
                     }
                 }
             }
@@ -386,10 +382,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void btnUpTouch(object sender, EventArgs e)
         {
-            //this.CommonButtonCode();
-
-            //return; 
-
             this.IsInEditMode = true;
 
             Nullable<double> x;
@@ -402,8 +394,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 x = 0;
             }
-            //this.txtNumber.Text = this._dblCurrentValue.ToString().Trim();
-            //this.IsInEditMode = false;
             this.postEdit(x);
         }
 

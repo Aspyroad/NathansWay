@@ -611,29 +611,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnSelectionChange(BaseContainer _selectedContainer)
         {
+            // 1. Check if other numlets are selected - if so we need to unselect them.
+            if (this._bHasSelectedNumlet)
+            {
+                if (this.SelectedNumlet != _selectedContainer.MyNumletParent)
+                {
+                    // UI
+                    this.SelectedNumlet.OnUnSelectionChange();
+                }
+            }
+            this.SelectedNumlet = _selectedContainer.MyNumletParent;
+
+            // 2. No Check what type of control was selected and
             var c = _selectedContainer.ContainerType;
 
             if (c == G__ContainerType.NumberText)
             {
+                this.SelectedOperatorText = null;
                 this.SelectedNumberText = (vcNumberText)_selectedContainer;
-                //UI
-
-
-
-
-
             }
             if (c == G__ContainerType.Operator)
             {
+                this.SelectedNumberText = null;
                 this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
-                //UI
-
-
-
-
-
-
             }
+
+            // UI
+            this.SelectedNumlet.OnSelectionChange(_selectedContainer);
         }
 
         #endregion

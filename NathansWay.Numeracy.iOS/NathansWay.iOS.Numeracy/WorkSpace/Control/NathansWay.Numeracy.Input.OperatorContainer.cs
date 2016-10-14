@@ -154,6 +154,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (this.MyWorkSpaceParent.HasSelectedNumberText)
             {
+                // Cancel any edit modes active on Numbertexts
                 var x = this.MyWorkSpaceParent.SelectedNumberText;
                 if (x.IsInEditMode)
                 {

@@ -217,6 +217,16 @@ namespace NathansWay.iOS.Numeracy
             this._bSelected = true;
         }
 
+        public virtual void OnUnSelectionChange()
+        {
+            this._bSelected = false;
+        }
+
+        public virtual void OnUnSelectionChange(BaseContainer _selectedContainer)
+        {
+            this._bSelected = false;
+        }
+
         public virtual bool Solve()
         {
             this.SetCorrectState();
