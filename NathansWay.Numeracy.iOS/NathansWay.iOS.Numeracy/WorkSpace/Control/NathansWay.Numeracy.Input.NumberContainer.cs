@@ -503,7 +503,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)
                 {
-                    _Number.UI_SetAnswerState(false);
+                    _Number.UI_SetUnSelectedState();
                 }
             }
             else
@@ -515,6 +515,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                
             }
+            base.UI_SetUnSelectedState();
         }
 
         #endregion

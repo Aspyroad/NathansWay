@@ -34,6 +34,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private EntityLessonDetail _wsLessonDetail;
         //private EntityLessonDetailResults _wsLessonDetailResults;
 
+
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
 
@@ -173,6 +174,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnSelectionChange(BaseContainer _selectedContainer)
         {
+            base.OnSelectionChange();
             var c = _selectedContainer.ContainerType;
 
             if (c == G__ContainerType.NumberText)
@@ -188,33 +190,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (c == G__ContainerType.Operator)
             {
                 this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
-                //UI
             }
+
+            this.UI_SetSelectedState();
         }
 
         public override void UI_SetAnswerState(bool _solving)
         {
-            // ALl the Children in this numlet
-            for (int i = 0; i < this.OutputContainers.Count; i++)
-            {
-                var x = (BaseContainer)this.OutputContainers[i];
-
-                if (x.ContainerType == G__ContainerType.Brace)
-                {
-                    break;
-                }
-
-                if (this.IsAnswer)
-                {
-                    // Set the numlets answer state
-                    x.UI_SetAnswerState(_solving);
-                }
-                else
-                {
-                    // Set the numlets answer state
-                    x.UI_ViewNeutral();
-                }
-            }
             // This Numlet
             if (this.IsAnswer)
             {
@@ -222,9 +204,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
             else
             {
-                this.UI_ViewReadOnly();
-            }
-            //base.UI_SetAnswerState(_solving);
+                this.UI_ViewReadOnly();}
+
         }
 
         public override void UI_SetSelectedState()
@@ -233,21 +214,54 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             for (int i = 0; i < this.OutputContainers.Count; i++)
             {
                 var x = (BaseContainer)this.OutputContainers[i];
-                if (this.IsAnswer)
+
+                if ((x == this.SelectedNumberText) || (x == this.SelectedOperatorText))
                 {
-                    // Set the numlets answer state
-                    x.UI_SetAnswerState(false);
+                    x.UI_SetSelectedState();
                 }
                 else
                 {
-                    // Set the numlets answer state
-                    x.UI_ViewNeutral();                   
+                    if (this.IsAnswer)
+                    {
+                        // Set the numlets answer state
+                        x.UI_SetAnswerState(false);
+                    }
+                    else
+                    {
+                        // Set the numlets answer state
+                        x.UI_ViewNeutral();
+                    }
                 }
             }
             // This numlet
             if (this.IsAnswer)
             {
                 this.UI_SetAnswerState(false);
+            }
+            else
+            {
+                this.UI_ViewReadOnly();
+            }
+        }
+
+        public override void UI_SetUnSelectedState()
+        {
+             // All the Children in this numlet
+            for (int i = 0; i < this.OutputContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputContainers[i];
+
+                if (x.ContainerType == G__ContainerType.Brace)
+                {
+                    continue;
+                }
+
+                x.UI_SetUnSelectedState();
+            }
+
+            if (this.IsAnswer)
+            {
+                this.UI_ViewNeutral();
             }
             else
             {
