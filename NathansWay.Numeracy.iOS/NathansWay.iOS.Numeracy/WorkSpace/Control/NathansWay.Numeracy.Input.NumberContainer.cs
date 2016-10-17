@@ -563,6 +563,18 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Override Public Properties
 
+        public override double? CurrentValue
+        {
+            get
+            {
+                return base.CurrentValue;
+            }
+            set
+            {
+                base.CurrentValue = value;
+            }
+        }
+
         public override bool IsAnswer
         {
             get
@@ -593,7 +605,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 base._bReadOnly = value;
                 // Set the Current Value as this is never going to be an answer and wont change
-                this._dblCurrentValue = this._dblOriginalValue;
+                if (value)
+                {
+                    this._dblCurrentValue = this._dblOriginalValue;
+                }
                 // Loop through this._lsNumbers
                 if (this._lsNumbers != null)
                 {
@@ -602,7 +617,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                         _Number.IsReadOnly = value;
                     }
                 }
-
             }
         }
 

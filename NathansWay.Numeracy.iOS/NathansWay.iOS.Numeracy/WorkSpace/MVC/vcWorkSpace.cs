@@ -596,7 +596,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Unselect everything
             if (this.HasSelectedNumberText)
             {
-                this.SelectedNumberText.AutoTouchedText();
+                if (this.SelectedNumberText.IsInEditMode)
+                {
+                    this.SelectedNumberText.AutoTouchedText();
+                }
                 this.SelectedNumberText = null;
             }
 

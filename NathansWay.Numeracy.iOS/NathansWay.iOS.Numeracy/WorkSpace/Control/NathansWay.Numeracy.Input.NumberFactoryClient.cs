@@ -63,7 +63,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
-
+            // Pissoff the state...yes it was dumb!
+            this.IsAnswer = false;
             return (x as object);
         }
         public object UICreateNumberLabel (string strValue)
@@ -86,6 +87,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
+
+            this.IsAnswer = false;
             // Add to output
             return (x as object);
         }
@@ -98,6 +101,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
+
+            this.IsAnswer = false;
             // Add to output
             return (x as object);
         }
@@ -108,6 +113,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             x.HasBorder = true;
             x.HasRoundedCorners = true;
+
+            this.IsAnswer = false;
             // Add to output
             return (x as object);
         }

@@ -183,21 +183,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
                 }
-
-
-
-
             }
-
-
 
             if (c == G__ContainerType.Operator)
             {
                 this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
                 //UI
-
-
-
             }
         }
 
