@@ -334,18 +334,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                         // Stop it from auto moving to the next digit
                         x._bAutoMoveToNextNumber = false;
                         x.TapText();
-                        x.Selected = false;
-                    }
-
-                    // this.MyWorkSpaceParent.OnSelectionChange(this);
-                    // Is the control readonly, then return
-                    if (this._bReadOnly)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        this.TapText();
+                        x.OnUnSelectionChange();
                     }
                 }
                 else
@@ -364,19 +353,15 @@ namespace NathansWay.iOS.Numeracy.Controls
                     }
                 }
             }
-            else
+
+            if (this._bIsAnswer)
             {
-                if (this._bReadOnly)
-                {
-                    return;
-                }
-                else
-                {
-                    this.TapText();
-                }
+                this.TapText();
             }
-            // This should be called right at the end
-            this._bSelected = true;
+
+
+            this.OnSelectionChange();
+            // If we are in the process of solving stop the selection chain.
             if (!MyWorkSpaceParent.SolvingState)
             {
                 this.MyWorkSpaceParent.OnSelectionChange(this);
@@ -775,15 +760,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.FireValueChange();
         }
 
-        // FLOW - UP FROM HERE TO NUMBER CONTAINER
-        public override void OnSelectionChange()
-        {
-            this.MyWorkSpaceParent.SelectedNumberText = this;
-            this.MyWorkSpaceParent.SelectedNumlet = this.MyNumletParent;
-            this.MyNumberParent.SelectedNumberText = this;
-            this.MyNumletParent.SelectedNumberText = this;
-        }
-
         #endregion
 
         #region UI
@@ -792,7 +768,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (base.ApplyUI(_applywhere))
             {
-                if (this._bReadOnly)
+                if (this._bIsReadOnly)
                 {
                     this.UI_ViewReadOnly();
                 }
@@ -1015,11 +991,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
-                return base._bReadOnly;
+                return base._bIsReadOnly;
             }
             set
             {
-                base._bReadOnly = value;
+                base._bIsReadOnly = value;
 
             }
         }

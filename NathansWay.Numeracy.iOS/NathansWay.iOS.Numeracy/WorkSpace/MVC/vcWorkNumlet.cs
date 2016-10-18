@@ -103,12 +103,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Members
 
-        public void SelectionState(G__WorkNumletType _type)
+        public void ResetAllSelection()
         {
-            if (this.NumletType != _type)
+            // RESET - All the Children in this numlet
+            for (int i = 0; i < this.OutputContainers.Count; i++)
             {
-                this.UI_SetUnSelectedState();
+                var x = (BaseContainer)this.OutputContainers[i];
+
+                if (x.ContainerType == G__ContainerType.Brace)
+                {
+                    continue;
+                }
+
+                x.UI_SetUnSelectedState();
             }
+            this.UI_SetUnSelectedState();
         }
 
         #endregion
@@ -175,30 +184,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void OnSelectionChange(BaseContainer _selectedContainer)
         {
             base.OnSelectionChange();
-            var c = _selectedContainer.ContainerType;
-
-            if (c == G__ContainerType.NumberText)
-            {
-                this.SelectedNumberText = (vcNumberText)_selectedContainer;
-                this.SelectedNumberContainer = this.SelectedNumberText.MyNumberParent;
-                if (this.SelectedNumberText.HasFractionParent)
-                {
-                    this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
-                    this.SelectedFractionContainer.UI_SetSelectedState();
-                }
-                else
-                {
-                    this.SelectedNumberContainer.UI_SetSelectedState();
-                }
-            }
-
-            if (c == G__ContainerType.Operator)
-            {
-                this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
-                this.SelectedOperatorText.UI_SetSelectedState();
-            }
 
             this.UI_SetSelectedState();
+        }
+
+        public override void OnUnSelectionChange()
+        {
+            base.OnUnSelectionChange();
+
+            this.UI_SetUnSelectedState();
         }
 
         public override void UI_SetAnswerState(bool _solving)
@@ -216,33 +210,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void UI_SetSelectedState()
         {
-            this.SelectedNumberText.MyNumberParent.UI_SetSelectedState();
-
-            // All the children in this numlet
-            for (int i = 0; i < this.OutputContainers.Count; i++)
-            {
-                var x = (BaseContainer)this.OutputContainers[i];
-
-
-                //if (x == (BaseContainer)this.SelectedNumberText)
-                //{
-                //    x.UI_SetSelectedState();
-                //}
-                //else
-                //{
-                //    if (this.IsAnswer)
-                //    {
-                //        // Set the numlets answer state
-                //        x.UI_SetAnswerState(false);
-                //    }
-                //    else
-                //    {
-                //        // Set the numlets answer state
-                //        x.UI_ViewNeutral();
-                //    }
-                //}
-            }
-            // This numlet
             if (this.IsAnswer)
             {
                 this.UI_SetAnswerState(false);
@@ -255,19 +222,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void UI_SetUnSelectedState()
         {
-             // All the Children in this numlet
-            for (int i = 0; i < this.OutputContainers.Count; i++)
-            {
-                var x = (BaseContainer)this.OutputContainers[i];
-
-                if (x.ContainerType == G__ContainerType.Brace)
-                {
-                    continue;
-                }
-
-                x.UI_SetUnSelectedState();
-            }
-
             if (this.IsAnswer)
             {
                 this.UI_ViewNeutral();
@@ -365,9 +319,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             get;
             set;
         }
-
-        public vcNumberContainer SelectedNumberContainer { get; set; }
-        public vcFractionContainer SelectedFractionContainer { get; set; }
 
         public SizeWorkNumlet WorkNumletSize
         {

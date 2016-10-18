@@ -96,6 +96,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void ViewDidLoad()
         {
+            this.ContainerType = G__ContainerType.Operator;
             base.ViewDidLoad();
         }
 
@@ -125,7 +126,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (base.ApplyUI(_applywhere))
             {
-                if (this._bReadOnly)
+                if (this._bIsReadOnly)
                 {
                     this.UI_ViewReadOnly();
                 }
@@ -143,6 +144,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool Solve()
         {
+            // TODO: This will need to be changed if we give users the ability to pick operators as an equation
+            // EG 1 (blank) 1 = 2 (Operator obviously being a plus)
             return false;
         }
 

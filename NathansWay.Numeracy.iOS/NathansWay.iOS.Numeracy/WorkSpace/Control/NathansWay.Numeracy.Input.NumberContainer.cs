@@ -356,6 +356,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewSelected()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            this.BorderWidth = 3.0f;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
@@ -376,6 +377,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewNeutral()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.BorderWidth = 1.0f;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
@@ -390,6 +392,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewReadOnly()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            this.BorderWidth = 1.0f;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
@@ -399,6 +402,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            this.BorderWidth = 2.0f;
             // Hard coded value. These should always be white for best alpha shading of foreground numbers
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
@@ -417,6 +421,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewInCorrect()
         {
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.BorderWidth = 2.0f;
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
 
@@ -445,7 +450,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Note the calls to base for UI when initializing
             if (base.ApplyUI(_applywhere))
             {
-                if (this._bReadOnly)
+                if (this._bIsReadOnly)
                 {
                     base.UI_ViewReadOnly();
                 }
@@ -496,25 +501,30 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.ClipsToBounds = true;
         }
 
+        public override void UI_SetSelectedState()
+        {
+            base.UI_SetSelectedState();
+        }
+
         public override void UI_SetUnSelectedState()
         {
-            if (this.IsAnswer)
-            {
-                // Loop through this._lsNumbers
-                foreach (BaseContainer _Number in this._lsNumbers)
-                {
-                    _Number.UI_SetUnSelectedState();
-                }
-            }
-            else
-            {
-                // Loop through this._lsNumbers
-                foreach (BaseContainer _Number in this._lsNumbers)
-                {
-                    _Number.UI_ViewReadOnly();
-                }
+            //if (this.IsAnswer)
+            //{
+            //    // Loop through this._lsNumbers
+            //    foreach (BaseContainer _Number in this._lsNumbers)
+            //    {
+            //        _Number.UI_SetUnSelectedState();
+            //    }
+            //}
+            //else
+            //{
+            //    // Loop through this._lsNumbers
+            //    foreach (BaseContainer _Number in this._lsNumbers)
+            //    {
+            //        _Number.UI_ViewReadOnly();
+            //    }
                
-            }
+            //}
             base.UI_SetUnSelectedState();
         }
 
@@ -600,11 +610,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
-                return base._bReadOnly;
+                return base._bIsReadOnly;
             }
             set
             {
-                base._bReadOnly = value;
+                base._bIsReadOnly = value;
                 // Set the Current Value as this is never going to be an answer and wont change
                 if (value)
                 {

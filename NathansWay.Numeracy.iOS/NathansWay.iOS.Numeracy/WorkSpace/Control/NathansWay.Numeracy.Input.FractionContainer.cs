@@ -225,7 +225,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Note the calls to base for UI when initializing
             if (base.ApplyUI(_applywhere))
             {
-                if (this._bReadOnly)
+                if (this._bIsReadOnly)
                 {
                     base.UI_ViewReadOnly();
                 } 
@@ -375,6 +375,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         //    base.UI_ViewInCorrect();
         //}
 
+        public override void UI_SetSelectedState()
+        {
+            this._numberContainerDenominator.UI_ViewSelected();
+            this._numberContainerNumerator.UI_ViewSelected();
+            this.UI_ViewSelected();
+        }
+
         public override void UI_SetUnSelectedState()
         {
             if (this.IsAnswer)
@@ -459,11 +466,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
-                return base._bReadOnly;
+                return base._bIsReadOnly;
             }
             set
             {
-                base._bReadOnly = value;
+                base._bIsReadOnly = value;
                 this._numberContainerNumerator.IsReadOnly = value;
                 this._numberContainerDenominator.IsReadOnly = value;
             }

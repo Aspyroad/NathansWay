@@ -471,16 +471,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     x.TapText();
                 }
-                this.SelectedNumberText = null;
             }
-            // User taps another operator
-            if (this.HasSelectedOperatorText)
-            {
-                this.SelectedOperatorText = null;
-            }
-            this.NumletEquation.UI_SetUnSelectedState();
-            this.NumletResult.UI_SetUnSelectedState();
-            // this.NumletMethod.UI_SetUnSelectedState();
+            // CLEAR FUCKING EVERYTHING
+            this.SelectedFractionContainer = null;
+            this.SelectedOperatorText = null;
+            this.SelectedNumberContainer = null;
+            this.SelectedNumlet = null;
+            this.SelectedNumberText = null;
+
+            this.NumletEquation.ResetAllSelection();
+            this.NumletResult.ResetAllSelection();
+            // this.NumletMethod.ResetAllSelection();
         }
 
         #endregion
@@ -602,6 +603,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     this.SelectedNumberText.AutoTouchedText();
                 }
+
+                this.SelectedFractionContainer = null;
+                this.SelectedOperatorText = null;
+                this.SelectedNumberContainer = null;
+                this.SelectedNumlet = null;
                 this.SelectedNumberText = null;
             }
 
@@ -618,30 +624,74 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnSelectionChange(BaseContainer _selectedContainer)
         {
-            // 1. Check if other numlets are selected - if so we need to unselect them.
+            var c = _selectedContainer.ContainerType;
+            // Check if other numlets are selected - if so we need to unselect them.
             if (this._bHasSelectedNumlet)
             {
                 if (this.SelectedNumlet != _selectedContainer.MyNumletParent)
                 {
                     // UI
-                    this.SelectedNumlet.OnUnSelectionChange();
-                    //this.SelectedNumlet = null;
+                    this.SelectedNumlet.ResetAllSelection();
+                }
+                else
+                {
+                    if (this.SelectedNumberText != null)
+                    {
+                        this.SelectedNumberText.UI_SetUnSelectedState();
+                        this.SelectedNumberText = null;
+                    }
+                    if (this.SelectedFractionContainer != null)
+                    {
+                        this.SelectedFractionContainer.UI_SetUnSelectedState();
+                        this.SelectedFractionContainer = null;
+                    }
+                    if (this.SelectedOperatorText != null)
+                    {
+                        this.SelectedOperatorText.UI_SetUnSelectedState();
+                        this.SelectedOperatorText = null;
+                    }
+                    if (this.SelectedNumberContainer != null)
+                    {
+                        this.SelectedNumberContainer.UI_SetUnSelectedState();
+                        this.SelectedNumberContainer = null;
+                    }
                 }
             }
+
+            // ****************** SELECT THE SELECTED NUMLET
             this.SelectedNumlet = _selectedContainer.MyNumletParent;
 
-            // 2. No Check what type of control was selected and
-            var c = _selectedContainer.ContainerType;
-
+            // ****************** SELECTED NUMBER TEXT
             if (c == G__ContainerType.NumberText)
             {
                 this.SelectedOperatorText = null;
                 this.SelectedNumberText = (vcNumberText)_selectedContainer;
+                // Numlet seletion moved here for ease - less repetaed code
+                this.SelectedNumlet.SelectedNumberText = this.SelectedNumberText;
+                this.SelectedNumberContainer = this.SelectedNumberText.MyNumberParent;
+                if (this.SelectedNumberText.HasFractionParent)
+                {
+                    this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
+                    this.SelectedFractionContainer.UI_SetSelectedState();
+                }
+                else
+                {
+                    this.SelectedNumberContainer.UI_SetSelectedState();
+                }
+
             }
+
+            // ****************** SELECTED OPERATOR TEXT
             if (c == G__ContainerType.Operator)
             {
                 this.SelectedNumberText = null;
+                this.SelectedFractionContainer = null;
+                this.SelectedNumberContainer = null;
+
                 this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
+                // Numlet selection moved here for ease - less repeated code
+                this.SelectedNumlet.SelectedOperatorText = this.SelectedOperatorText;
+                this.SelectedNumlet.SelectedOperatorText.UI_SetSelectedState();
             }
 
             // UI
@@ -852,6 +902,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public bool SolvingState { get; set; }
 
+        public vcNumberContainer SelectedNumberContainer { get; set; }
+          
+        public vcFractionContainer SelectedFractionContainer { get; set; }
 
         public SizeWorkSpace WorkSpaceSize
         {

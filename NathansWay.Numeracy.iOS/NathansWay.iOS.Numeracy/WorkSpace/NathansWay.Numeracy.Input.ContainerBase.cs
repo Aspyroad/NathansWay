@@ -48,7 +48,7 @@ namespace NathansWay.iOS.Numeracy
         // Known at load/build
         protected bool _bIsAnswer;
         // ?? Are equations readonly ?? possible teachers may want to change on the fly
-        protected bool _bReadOnly;
+        protected bool _bIsReadOnly;
         // Known only after numbercontainer returns after a selection and val change
         protected bool _bIsCorrect;
         // Attemped Solve - used to find the state after a solve has been attempted
@@ -295,6 +295,10 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetUnSelectedState()
         {
+            if (this._bIsReadOnly)
+            {
+                this.UI_ViewReadOnly();
+            }
             if (this.IsAnswer)
             {
                 this.UI_ViewNeutral();
@@ -307,6 +311,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewNeutral()
         {
+            this.BorderWidth = 1.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
@@ -314,6 +319,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewReadOnly()
         {
+            this.BorderWidth = 1.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
@@ -321,6 +327,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewCorrect()
         {
+            this.BorderWidth = 2.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
@@ -328,6 +335,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewInCorrect()
         {
+            this.BorderWidth = 2.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
@@ -335,6 +343,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewSelected()
         {
+            this.BorderWidth = 3.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
@@ -582,11 +591,11 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
-                return _bReadOnly;
+                return _bIsReadOnly;
             }
             set
             {
-                _bReadOnly = value;
+                _bIsReadOnly = value;
             }
         }
 

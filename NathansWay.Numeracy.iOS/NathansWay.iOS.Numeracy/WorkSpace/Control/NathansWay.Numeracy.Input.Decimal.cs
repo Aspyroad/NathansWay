@@ -113,7 +113,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
         {
-            if (this._bReadOnly)
+            if (this._bIsReadOnly)
             {
                 this.UI_ViewReadOnly();
             } 
