@@ -184,12 +184,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this.SelectedNumberText.HasFractionParent)
                 {
                     this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
+                    this.SelectedFractionContainer.UI_SetSelectedState();
+                }
+                else
+                {
+                    this.SelectedNumberContainer.UI_SetSelectedState();
                 }
             }
 
             if (c == G__ContainerType.Operator)
             {
                 this.SelectedOperatorText = (vcOperatorText)_selectedContainer;
+                this.SelectedOperatorText.UI_SetSelectedState();
             }
 
             this.UI_SetSelectedState();
@@ -210,28 +216,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void UI_SetSelectedState()
         {
+            this.SelectedNumberText.MyNumberParent.UI_SetSelectedState();
+
             // All the children in this numlet
             for (int i = 0; i < this.OutputContainers.Count; i++)
             {
                 var x = (BaseContainer)this.OutputContainers[i];
 
-                if ((x == this.SelectedNumberText) || (x == this.SelectedOperatorText))
-                {
-                    x.UI_SetSelectedState();
-                }
-                else
-                {
-                    if (this.IsAnswer)
-                    {
-                        // Set the numlets answer state
-                        x.UI_SetAnswerState(false);
-                    }
-                    else
-                    {
-                        // Set the numlets answer state
-                        x.UI_ViewNeutral();
-                    }
-                }
+
+                //if (x == (BaseContainer)this.SelectedNumberText)
+                //{
+                //    x.UI_SetSelectedState();
+                //}
+                //else
+                //{
+                //    if (this.IsAnswer)
+                //    {
+                //        // Set the numlets answer state
+                //        x.UI_SetAnswerState(false);
+                //    }
+                //    else
+                //    {
+                //        // Set the numlets answer state
+                //        x.UI_ViewNeutral();
+                //    }
+                //}
             }
             // This numlet
             if (this.IsAnswer)

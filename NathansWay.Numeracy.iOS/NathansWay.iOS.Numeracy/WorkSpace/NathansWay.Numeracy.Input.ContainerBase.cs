@@ -52,7 +52,6 @@ namespace NathansWay.iOS.Numeracy
         // Known only after numbercontainer returns after a selection and val change
         protected bool _bIsCorrect;
         // Attemped Solve - used to find the state after a solve has been attempted
-        // This should be reset as soon as it is attemped again.
         protected bool _bSolveAttemped;
         // Answer isnt complete
         protected bool _bIsInComplete;

@@ -593,6 +593,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             this._bSolveAttemped = true;
 
+            this.SolvingState = true;
+
             // Unselect everything
             if (this.HasSelectedNumberText)
             {
@@ -609,6 +611,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._bIsCorrect = (num1 && num2);
 
+            this.SolvingState = false;
+
             return (num1 && num2);
         }
 
@@ -621,6 +625,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     // UI
                     this.SelectedNumlet.OnUnSelectionChange();
+                    //this.SelectedNumlet = null;
                 }
             }
             this.SelectedNumlet = _selectedContainer.MyNumletParent;
@@ -692,6 +697,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // TODO: VERY IMPORTANT!!!
             // BUG When we move to the next equation we need to close all editing
+
+            // TODO: Store the solving state of the equation,
+            // if its been solved or attempted this state needs to be saved wityh each entity
 
             // TODO: change this._intLessonDetailSeq 
             // Forward one
@@ -841,6 +849,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #endregion
 
         #region Public Properties
+
+        public bool SolvingState { get; set; }
+
 
         public SizeWorkSpace WorkSpaceSize
         {

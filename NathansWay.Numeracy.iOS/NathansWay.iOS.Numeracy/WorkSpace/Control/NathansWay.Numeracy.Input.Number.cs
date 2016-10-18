@@ -377,7 +377,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             // This should be called right at the end
             this._bSelected = true;
-            this.MyWorkSpaceParent.OnSelectionChange(this);
+            if (!MyWorkSpaceParent.SolvingState)
+            {
+                this.MyWorkSpaceParent.OnSelectionChange(this);
+            }
         }
 
         private void btnUpTouch(object sender, EventArgs e)
