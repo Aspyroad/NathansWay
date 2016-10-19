@@ -351,16 +351,23 @@ namespace NathansWay.iOS.Numeracy.Controls
                             this.TapText();
                         }
                     }
+                    else
+                    {
+                        if (this._bIsAnswer)
+                        {
+                            this.TapText();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (this._bIsAnswer)
+                {
+                    this.TapText();
                 }
             }
 
-            if (this._bIsAnswer)
-            {
-                this.TapText();
-            }
-
-
-            this.OnSelectionChange();
             // If we are in the process of solving stop the selection chain.
             if (!MyWorkSpaceParent.SolvingState)
             {
@@ -778,6 +785,39 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
             return true;
+        }
+
+        public override void OnSelectionChange()
+        {
+            this._bSelected = true;
+            //this.UI_SetSelectedState();
+        }
+
+        public override void OnUnSelectionChange()
+        {
+            this._bSelected = false;
+            //this.UI_SetUnSelectedState();
+        }
+
+        public override void UI_SetSelectedState()
+        {
+            this.UI_ViewSelected();
+        }
+
+        public override void UI_SetUnSelectedState()
+        {
+            if (this._bIsReadOnly)
+            {
+                this.UI_ViewReadOnly();
+            }
+            if (this.IsAnswer)
+            {
+                this.UI_ViewNeutral();
+            }
+            else
+            {
+                this.UI_ViewReadOnly();
+            }
         }
 
         public override void UI_ViewSelected()

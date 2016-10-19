@@ -503,28 +503,32 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetSelectedState()
         {
+            if (this.IsAnswer)
+            {
+                
+                this.MyWorkSpaceParent.SelectedNumberText.UI_ViewSelected();
+            }
             base.UI_SetSelectedState();
         }
 
         public override void UI_SetUnSelectedState()
         {
-            //if (this.IsAnswer)
-            //{
-            //    // Loop through this._lsNumbers
-            //    foreach (BaseContainer _Number in this._lsNumbers)
-            //    {
-            //        _Number.UI_SetUnSelectedState();
-            //    }
-            //}
-            //else
-            //{
-            //    // Loop through this._lsNumbers
-            //    foreach (BaseContainer _Number in this._lsNumbers)
-            //    {
-            //        _Number.UI_ViewReadOnly();
-            //    }
-               
-            //}
+            if (this.IsAnswer)
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_ViewNeutral();
+                }
+            }
+            else
+            {
+                // Loop through this._lsNumbers
+                foreach (BaseContainer _Number in this._lsNumbers)
+                {
+                    _Number.UI_ViewReadOnly();
+                }
+            }
             base.UI_SetUnSelectedState();
         }
 

@@ -602,6 +602,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this.SelectedNumberText.IsInEditMode)
                 {
                     this.SelectedNumberText.AutoTouchedText();
+                    this.SelectedNumberText.OnUnSelectionChange();
+                    //this.SelectedNumberText = null;
                 }
 
                 this.SelectedFractionContainer = null;
@@ -635,25 +637,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
                 else
                 {
-                    if (this.SelectedNumberText != null)
+                    if (this.SelectedNumberContainer != null)
                     {
-                        this.SelectedNumberText.UI_SetUnSelectedState();
-                        this.SelectedNumberText = null;
+                        this.SelectedNumberContainer.OnUnSelectionChange();
+                        this.SelectedNumberContainer = null;
                     }
                     if (this.SelectedFractionContainer != null)
                     {
-                        this.SelectedFractionContainer.UI_SetUnSelectedState();
+                        this.SelectedFractionContainer.OnUnSelectionChange();
                         this.SelectedFractionContainer = null;
+                    }
+                    if (this.SelectedNumberText != null)
+                    {
+                        this.SelectedNumberText.OnUnSelectionChange();
+                        this.SelectedNumberText = null;
                     }
                     if (this.SelectedOperatorText != null)
                     {
-                        this.SelectedOperatorText.UI_SetUnSelectedState();
+                        this.SelectedOperatorText.OnUnSelectionChange();
                         this.SelectedOperatorText = null;
-                    }
-                    if (this.SelectedNumberContainer != null)
-                    {
-                        this.SelectedNumberContainer.UI_SetUnSelectedState();
-                        this.SelectedNumberContainer = null;
                     }
                 }
             }
@@ -665,20 +667,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (c == G__ContainerType.NumberText)
             {
                 this.SelectedOperatorText = null;
+
+                if (this.HasSelectedNumberText)
+                {
+                    if (this.SelectedNumberText.IsInEditMode)
+                    {
+                        this.SelectedNumberText.AutoTouchedText();
+                        this.SelectedNumberText.OnUnSelectionChange();
+                    }
+                }
+
                 this.SelectedNumberText = (vcNumberText)_selectedContainer;
+                this.SelectedNumberText.OnSelectionChange();
                 // Numlet seletion moved here for ease - less repetaed code
                 this.SelectedNumlet.SelectedNumberText = this.SelectedNumberText;
                 this.SelectedNumberContainer = this.SelectedNumberText.MyNumberParent;
                 if (this.SelectedNumberText.HasFractionParent)
                 {
                     this.SelectedFractionContainer = this.SelectedNumberText.MyFractionParent;
-                    this.SelectedFractionContainer.UI_SetSelectedState();
+                    this.SelectedNumberContainer.OnSelectionChange();
+                    this.SelectedFractionContainer.OnSelectionChange();
                 }
                 else
                 {
-                    this.SelectedNumberContainer.UI_SetSelectedState();
+                    this.SelectedNumberContainer.OnSelectionChange();
                 }
-
             }
 
             // ****************** SELECTED OPERATOR TEXT

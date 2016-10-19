@@ -181,20 +181,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return this._bIsCorrect;
         }
 
-        public override void OnSelectionChange(BaseContainer _selectedContainer)
-        {
-            base.OnSelectionChange();
-
-            this.UI_SetSelectedState();
-        }
-
-        public override void OnUnSelectionChange()
-        {
-            base.OnUnSelectionChange();
-
-            this.UI_SetUnSelectedState();
-        }
-
         public override void UI_SetAnswerState(bool _solving)
         {
             // This Numlet

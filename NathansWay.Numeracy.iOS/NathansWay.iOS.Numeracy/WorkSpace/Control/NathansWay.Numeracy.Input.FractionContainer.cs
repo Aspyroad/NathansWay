@@ -377,8 +377,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetSelectedState()
         {
-            this._numberContainerDenominator.UI_ViewSelected();
-            this._numberContainerNumerator.UI_ViewSelected();
+            //this._numberContainerDenominator.UI_ViewSelected();
+            //this._numberContainerNumerator.UI_ViewSelected();
             this.UI_ViewSelected();
         }
 

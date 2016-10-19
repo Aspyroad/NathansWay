@@ -209,21 +209,25 @@ namespace NathansWay.iOS.Numeracy
         public virtual void OnSelectionChange()
         {
             this._bSelected = true;
+            this.UI_SetSelectedState();
         }
 
         public virtual void OnSelectionChange(BaseContainer _selectedContainer)
         {
             this._bSelected = true;
+            this.UI_SetSelectedState();
         }
 
         public virtual void OnUnSelectionChange()
         {
             this._bSelected = false;
+            this.UI_SetUnSelectedState();
         }
 
         public virtual void OnUnSelectionChange(BaseContainer _selectedContainer)
         {
             this._bSelected = false;
+            this.UI_SetUnSelectedState();
         }
 
         public virtual bool Solve()
