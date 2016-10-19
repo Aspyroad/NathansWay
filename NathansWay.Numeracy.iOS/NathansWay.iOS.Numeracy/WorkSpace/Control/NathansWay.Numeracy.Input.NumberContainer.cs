@@ -353,26 +353,26 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region UI Functions
 
-        public override void UI_ViewSelected()
-        {
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
-            this.BorderWidth = 3.0f;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.Clear;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers)
-            {
-                if (_Number.Selected)
-                {
-                    _Number.UI_ViewSelected();
-                }
-                else
-                {
-                    this.UI_SetUnSelectedState();
-                }
-            }
-        }
+        //public override void UI_ViewSelected()
+        //{
+        //    this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+        //    this.BorderWidth = 3.0f;
+        //    // Hard coded value. These should always be white for best alpha shading of foreground numbers
+        //    this.View.BackgroundColor = UIColor.Clear;
+        //    this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+        //    // Loop through this._lsNumbers
+        //    foreach (BaseContainer _Number in this._lsNumbers)
+        //    {
+        //        if (_Number.Selected)
+        //        {
+        //            _Number.UI_ViewSelected();
+        //        }
+        //        else
+        //        {
+        //            this.UI_SetUnSelectedState();
+        //        }
+        //    }
+        //}
 
         public override void UI_ViewNeutral()
         {
@@ -397,6 +397,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.BackgroundColor = UIColor.Clear;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
 
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                _Number.UI_ViewReadOnly();
+            }
         }
 
         public override void UI_ViewCorrect()
@@ -503,11 +508,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetSelectedState()
         {
-            if (this.IsAnswer)
-            {
-                
-                this.MyWorkSpaceParent.SelectedNumberText.UI_ViewSelected();
-            }
+            this.MyWorkSpaceParent.SelectedNumberText.UI_SetSelectedState();
             base.UI_SetSelectedState();
         }
 

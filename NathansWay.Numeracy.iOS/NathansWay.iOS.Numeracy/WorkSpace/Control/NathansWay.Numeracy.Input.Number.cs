@@ -274,7 +274,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AutoApplyUI = false;
 
-            this.txtNumber.BorderWidth = 1.0f;
+            this.txtNumber.BorderWidth = 0.0f;
             this.txtNumber.HasBorder = false;
             this.txtNumber.HasRoundedCorners = false;
             this.txtNumber.BackgroundColor = UIColor.Clear;
@@ -313,8 +313,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO: We need to make the buttons in updown edit mode disabled for readonly.
             // We also need to work on the UI for them.
-            //this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
-            this.CurrentEditMode = G__NumberEditMode.EditUpDown;
+            this.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+            //this.CurrentEditMode = G__NumberEditMode.EditUpDown;
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
             this.singleTapTextGesture = null;
             this.singleTapPickerGesture = null;
@@ -334,7 +334,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                         // Stop it from auto moving to the next digit
                         x._bAutoMoveToNextNumber = false;
                         x.TapText();
-                        x.OnUnSelectionChange();
+                        //x.OnUnSelectionChange();
+                    }
+                    if (this._bIsAnswer)
+                    {
+                        this.TapText();
                     }
                 }
                 else
@@ -348,13 +352,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                         {
                             // Stop it from auto moving to the next digit
                             this._bAutoMoveToNextNumber = false;
-                            this.TapText();
-                        }
-                    }
-                    else
-                    {
-                        if (this._bIsAnswer)
-                        {
                             this.TapText();
                         }
                     }
@@ -737,12 +734,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // TODO: Check if this will return a number as we never want y null, I have added total sig and insig counts
             //if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1)) )
-            if (this._bAutoMoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
+            if (this.MyWorkSpaceParent.SelectedNumberText != this)
             {
-                // Grab the next text field
-                var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
-                // Call it as being touched
-                y.txtTouchedDown(this, new EventArgs());
+                if (this._bAutoMoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
+                {
+                    // Grab the next text field
+                    var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
+                    // Call it as being touched
+                    y.txtTouchedDown(this, new EventArgs());
+                }
             }
             // Reset the auto advance
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
@@ -790,63 +790,42 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnSelectionChange()
         {
             this._bSelected = true;
-            //this.UI_SetSelectedState();
+            // Number Container controls vcTextBoxes view UI
         }
 
         public override void OnUnSelectionChange()
         {
             this._bSelected = false;
-            //this.UI_SetUnSelectedState();
-        }
-
-        public override void UI_SetSelectedState()
-        {
-            this.UI_ViewSelected();
-        }
-
-        public override void UI_SetUnSelectedState()
-        {
-            if (this._bIsReadOnly)
-            {
-                this.UI_ViewReadOnly();
-            }
-            if (this.IsAnswer)
-            {
-                this.UI_ViewNeutral();
-            }
-            else
-            {
-                this.UI_ViewReadOnly();
-            }
+            // Number Container controls vcTextBoxes view UI
         }
 
         public override void UI_ViewSelected()
         {
-            this.txtNumber.HasBorder = false;
+            this.HasBorder = false;
             base.UI_ViewSelected();
         }
 
         public override void UI_ViewNeutral()
         {
-            this.txtNumber.HasBorder = false;
+            this.HasBorder = false;
             base.UI_ViewNeutral();
         }
 
         public override void UI_ViewReadOnly()
         {
-            this.txtNumber.HasBorder = false;
+            this.HasBorder = false;
             base.UI_ViewReadOnly();
         }
 
         public override void UI_ViewCorrect()
         {
-            this.txtNumber.HasBorder = false;
+            this.HasBorder = false;
             base.UI_ViewCorrect();
         }
 
         public override void UI_ViewInCorrect()
         {
-            this.txtNumber.HasBorder = false;
+            this.HasBorder = false;
             base.UI_ViewInCorrect();
         }
 

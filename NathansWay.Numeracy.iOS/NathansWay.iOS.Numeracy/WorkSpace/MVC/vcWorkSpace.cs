@@ -593,6 +593,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override bool Solve()
         {
             this._bSolveAttemped = true;
+            // Claer the display
+            this.NumletEquation.ResetAllSelection();
+            this.NumletResult.ResetAllSelection();
 
             this.SolvingState = true;
 
@@ -624,6 +627,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return (num1 && num2);
         }
 
+        public void Clear()
+        {
+            if (this.SelectedNumberContainer != null)
+            {
+                this.SelectedNumberContainer.OnUnSelectionChange();
+                this.SelectedNumberContainer = null;
+            }
+            if (this.SelectedFractionContainer != null)
+            {
+                this.SelectedFractionContainer.OnUnSelectionChange();
+                this.SelectedFractionContainer = null;
+            }
+            if (this.SelectedNumberText != null)
+            {
+                this.SelectedNumberText.OnUnSelectionChange();
+                this.SelectedNumberText = null;
+            }
+            if (this.SelectedOperatorText != null)
+            {
+                this.SelectedOperatorText.OnUnSelectionChange();
+                this.SelectedOperatorText = null;
+            }
+
+        }
+
         public override void OnSelectionChange(BaseContainer _selectedContainer)
         {
             var c = _selectedContainer.ContainerType;
@@ -637,26 +665,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
                 else
                 {
-                    if (this.SelectedNumberContainer != null)
-                    {
-                        this.SelectedNumberContainer.OnUnSelectionChange();
-                        this.SelectedNumberContainer = null;
-                    }
-                    if (this.SelectedFractionContainer != null)
-                    {
-                        this.SelectedFractionContainer.OnUnSelectionChange();
-                        this.SelectedFractionContainer = null;
-                    }
-                    if (this.SelectedNumberText != null)
-                    {
-                        this.SelectedNumberText.OnUnSelectionChange();
-                        this.SelectedNumberText = null;
-                    }
-                    if (this.SelectedOperatorText != null)
-                    {
-                        this.SelectedOperatorText.OnUnSelectionChange();
-                        this.SelectedOperatorText = null;
-                    }
+                    this.Clear();
                 }
             }
 
@@ -673,8 +682,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                     if (this.SelectedNumberText.IsInEditMode)
                     {
                         this.SelectedNumberText.AutoTouchedText();
-                        this.SelectedNumberText.OnUnSelectionChange();
                     }
+                    this.SelectedNumberText.MyNumletParent.OnUnSelectionChange();
                 }
 
                 this.SelectedNumberText = (vcNumberText)_selectedContainer;
@@ -756,6 +765,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnNextEquation (object sender, EventArgs e)
         {
+            this.Clear();
+
             bool bOverIndex = false;
 
             // TODO: VERY IMPORTANT!!!
@@ -799,6 +810,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnPrevEquation (object sender, EventArgs e)
         {
+            this.Clear();
+
             bool bOverIndex = false;
             // TODO: change this._intLessonDetailSeq 
             // Back one

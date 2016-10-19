@@ -212,7 +212,8 @@ namespace AspyRoad.iOSCore
             set 
             { 
 
-                this._fBorderWidth = value; 
+                this._fBorderWidth = value;
+                //this.View.Layer.BorderWidth = value;
 
             }
         }

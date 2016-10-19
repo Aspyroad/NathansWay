@@ -331,7 +331,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewCorrect()
         {
-            this.BorderWidth = 2.0f;
+            this.BorderWidth = 1.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
@@ -339,7 +339,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewInCorrect()
         {
-            this.BorderWidth = 2.0f;
+            this.BorderWidth = 1.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
@@ -347,7 +347,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewSelected()
         {
-            this.BorderWidth = 3.0f;
+            this.BorderWidth = 1.0f;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
