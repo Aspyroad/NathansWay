@@ -157,7 +157,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 var x = this.MyWorkSpaceParent.SelectedNumberText;
                 if (x.IsInEditMode)
                 {
-                    x.TapText();
+                    x.AutoTouchedText();
                 }
                 this.MyWorkSpaceParent.SelectedNumberText = null;
             }

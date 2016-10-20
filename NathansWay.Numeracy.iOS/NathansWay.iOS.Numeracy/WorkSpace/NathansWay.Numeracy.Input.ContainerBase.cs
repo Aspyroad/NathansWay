@@ -283,7 +283,7 @@ namespace NathansWay.iOS.Numeracy
             {
                 if (this.IsAnswer)
                 {
-                    this.UI_ViewNeutral();
+                    this.UI_ViewSelected();
                 }
                 else
                 {

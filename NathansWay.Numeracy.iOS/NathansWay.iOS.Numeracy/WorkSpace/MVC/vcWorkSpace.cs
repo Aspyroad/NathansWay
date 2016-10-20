@@ -469,7 +469,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 var x = this.SelectedNumberText;
                 if (x.IsInEditMode)
                 {
-                    x.TapText();
+                    x.AutoTouchedText();
                 }
             }
             // CLEAR FUCKING EVERYTHING

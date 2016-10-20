@@ -148,11 +148,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			base.ViewDidLoad();
 
-
-            // We need to set border width before Has Border
             this.BorderWidth = 2.0f;
             this.HasBorder = true;
-            //this.View.BackgroundColor = UIColor.Clear;
 		}
 
         public override void ViewWillAppear(bool animated)
@@ -190,7 +187,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
             else
             {
-                this.UI_ViewReadOnly();}
+                this.UI_ViewReadOnly();
+            }
 
         }
 
@@ -202,7 +200,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
             else
             {
-                this.UI_ViewReadOnly();
+                this.UI_ViewSelected();
             }
         }
 
@@ -225,7 +223,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void UI_ViewSelected()
         {
-            this.BorderWidth = 2.0f;
+            this.BorderWidth = 3.0f;
             this.HasBorder = true;
             this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value.ColorWithAlpha(0.1f);

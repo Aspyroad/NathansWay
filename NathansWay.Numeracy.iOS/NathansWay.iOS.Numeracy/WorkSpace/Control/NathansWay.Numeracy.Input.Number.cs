@@ -163,60 +163,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #endregion
 
-        #region Public Members
-
-        public void TapText()
-        {
-            if (this.IsInEditMode)
-            {
-                // Close anything thats activated by the touch
-                // Close the number picker
-                if (this._currentEditMode == G__NumberEditMode.EditScroll)
-                {
-                    this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
-                    this.HandlePickerChanged();
-                    this.CloseNumberPicker();
-                }
-                if (this._currentEditMode == G__NumberEditMode.EditNumPad)
-                {
-                    if (!this._numberpad.Locked)
-                    {
-                        this.CloseNumPad();
-                    }
-                }
-                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
-                {
-                    this.HideUpDownButtons();
-                }
-
-                //this.postEdit();
-
-                // User is cancelling the edit - backout
-                this.IsInEditMode = false;
-                this.Selected = false;
-            }
-            else
-            {
-                this.IsInEditMode = true;
-                this.Selected = true;
-
-                // Begin Editing
-                this.preEdit();
-
-                if (this._currentEditMode == G__NumberEditMode.EditScroll)
-                {
-                    this.EditNumberPicker();
-                }
-                if (this._currentEditMode == G__NumberEditMode.EditNumPad)
-                {
-                    this.EditNumPad();
-                }
-                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
-                {
-                    this.ShowUpDownButtons();
-                }
-            }
-        }
+        #region Public Members       
 
         public void AutoTouchedText()
         {
@@ -372,6 +319,59 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+        private void TapText()
+        {
+            if (this.IsInEditMode)
+            {
+                // Close anything thats activated by the touch
+                // Close the number picker
+                if (this._currentEditMode == G__NumberEditMode.EditScroll)
+                {
+                    this._pickerdelegate.SelectedItemInt = Convert.ToInt16(this._dblPrevValue);
+                    this.HandlePickerChanged();
+                    this.CloseNumberPicker();
+                }
+                if (this._currentEditMode == G__NumberEditMode.EditNumPad)
+                {
+                    if (!this._numberpad.Locked)
+                    {
+                        this.CloseNumPad();
+                    }
+                }
+                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
+                {
+                    this.HideUpDownButtons();
+                }
+
+                //this.postEdit();
+
+                // User is cancelling the edit - backout
+                this.IsInEditMode = false;
+                this.Selected = false;
+            }
+            else
+            {
+                this.IsInEditMode = true;
+                this.Selected = true;
+
+                // Begin Editing
+                this.preEdit();
+
+                if (this._currentEditMode == G__NumberEditMode.EditScroll)
+                {
+                    this.EditNumberPicker();
+                }
+                if (this._currentEditMode == G__NumberEditMode.EditNumPad)
+                {
+                    this.EditNumPad();
+                }
+                if (this._currentEditMode == G__NumberEditMode.EditUpDown)
+                {
+                    this.ShowUpDownButtons();
+                }
+            }
+        }
+
         private void btnUpTouch(object sender, EventArgs e)
         {
             this.IsInEditMode = true;
@@ -469,7 +469,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             // Reset the new frames - these are value types
             this.View.Frame = this._sizeNumber.RectFrame;
-            this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
+            //this.txtNumber.Frame = this._sizeNumber._rectTxtNumber;
 
             // Create the picker class
             this.pkNumberPicker = new NumberPickerView(this.NumberSize._rectNumberPicker);
@@ -716,7 +716,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
-            nint x = 0;
+            nint x = (this._intIndexNumber + 1);
 
             if (this._pickerdelegate.SelectedValueStr.Length == 0)
             {
@@ -732,22 +732,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.Frame = this._sizeClass.RectFrame;
             this.txtNumber.Frame = this.NumberSize._rectTxtNumber;
 
-            this.IsInEditMode = false;
-
-            // This is to handle any decimals on auto selection moves
-            if (this._intIndexNumber == this.MutliNumberSigTotal)
-            {
-                x = (this._intIndexNumber + 2);
-            }
-            else
-            {
-                x = (this._intIndexNumber + 1);
-            }
+            this.IsInEditMode = false;    
 
             if (this._bAutoMoveToNextNumber && (x <= this.MultiNumberTotalNumbers))
             {
                 // Grab the next text field
-                var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
+                var y = this.MyNumberParent.FindNumberTextByIndex(x);
                 // Call it as being touched
                 y.txtTouchedDown(this, new EventArgs());
             }

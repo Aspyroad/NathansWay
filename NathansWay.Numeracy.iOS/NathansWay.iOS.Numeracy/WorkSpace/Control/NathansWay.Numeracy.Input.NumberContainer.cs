@@ -201,12 +201,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                         newnumber.TensUnit = (G__UnitPlacement)_insig;
                         newnumber.MutliNumberInSigPosition = _insig;
                         newnumber.MutliNumberInSigTotal = this._intMultiNumberTotalInSigCount;
+                        newnumber.MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
                     }
                     else
                     {
                         newnumber.Significance = G__Significance.Significant;
                         newnumber.TensUnit = (G__UnitPlacement)_sig;
                         newnumber.MutliNumberSigPosition = _sig;
+                        newnumber.MutliNumberInSigTotal = this._intMultiNumberTotalInSigCount;
                         newnumber.MutliNumberSigTotal = this._intMultiNumberTotalSigCount;
                         _sig--;                       
                     }
