@@ -716,6 +716,8 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         protected void HandlePickerChanged()
         {
+            nint x = 0;
+
             if (this._pickerdelegate.SelectedValueStr.Length == 0)
             {
                 this.postEdit(null);
@@ -732,18 +734,24 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.IsInEditMode = false;
 
-            // TODO: Check if this will return a number as we never want y null, I have added total sig and insig counts
-            //if (this._numberAppSettings.GA__MoveToNextNumber && ((this.IndexNumber + 1)) )
-            if (this.MyWorkSpaceParent.SelectedNumberText != this)
+            // This is to handle any decimals on auto selection moves
+            if (this._intIndexNumber == this.MutliNumberSigTotal)
             {
-                if (this._bAutoMoveToNextNumber && ((this.IndexNumber + 1) <= this.MultiNumberTotalNumbers))
-                {
-                    // Grab the next text field
-                    var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
-                    // Call it as being touched
-                    y.txtTouchedDown(this, new EventArgs());
-                }
+                x = (this._intIndexNumber + 2);
             }
+            else
+            {
+                x = (this._intIndexNumber + 1);
+            }
+
+            if (this._bAutoMoveToNextNumber && (x <= this.MultiNumberTotalNumbers))
+            {
+                // Grab the next text field
+                var y = this.MyNumberParent.FindNumberTextByIndex(this.IndexNumber + 1);
+                // Call it as being touched
+                y.txtTouchedDown(this, new EventArgs());
+            }
+
             // Reset the auto advance
             this._bAutoMoveToNextNumber = this._numberAppSettings.GA__MoveToNextNumber;
 

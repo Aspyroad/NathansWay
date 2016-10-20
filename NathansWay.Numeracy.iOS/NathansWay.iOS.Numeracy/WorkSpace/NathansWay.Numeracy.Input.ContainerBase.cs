@@ -393,7 +393,7 @@ namespace NathansWay.iOS.Numeracy
             if (this._bAllowNextResponder)
             {
                 base.TouchesBegan(touches, evt);
-                //this.NextResponder.TouchesBegan(touches, evt);
+
             }
         }
 

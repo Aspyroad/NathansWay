@@ -83,15 +83,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return true;
         }
 
-        public override void TouchesBegan(NSSet touches, UIEvent evt)
-        {
-            // Check if the touch is inside any active numlets
-            UITouch y = (UITouch)touches.AnyObject;
-            if (y.Phase == UITouchPhase.Began)
-            {
-                this.MyWorkSpaceParent.ResetAllSelection();
-            }
-        }
+        //public override void TouchesBegan(NSSet touches, UIEvent evt)
+        //{
+        //    // Check if the touch is inside any active numlets
+        //    UITouch y = (UITouch)touches.AnyObject;
+        //    if (y.Phase == UITouchPhase.Began)
+        //    {
+        //        this.MyWorkSpaceParent.ResetAllSelection();
+        //    }
+        //}
 
         #endregion
     }
