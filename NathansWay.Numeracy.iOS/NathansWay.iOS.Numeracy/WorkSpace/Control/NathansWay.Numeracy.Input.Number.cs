@@ -448,6 +448,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.txtNumber.Text = "";
                 this.CurrentValue = null;
+                //if (this._bIsReadOnly)
+                //{
+                //    this.CurrentValueStr = this.OriginalValueStr;
+                //}
             }
 
             //Update the parentNumber container
@@ -456,9 +460,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Begin bubbleup
                 this.OnValueChange(this, new evtArgsBaseContainer());
             }
-
-            // TODO: Problem 5 Fraction Number Picker
-
         }
 
         protected void EditNumberPicker()
@@ -977,6 +978,10 @@ namespace NathansWay.iOS.Numeracy.Controls
                     // Clear number text
                     this.txtNumber.Text = "";
                 }
+                else
+                {
+                    this._strCurrentValue = this._strOriginalValue;
+                }
             }
         }
 
@@ -1013,7 +1018,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 base._bIsReadOnly = value;
-
             }
         }
 

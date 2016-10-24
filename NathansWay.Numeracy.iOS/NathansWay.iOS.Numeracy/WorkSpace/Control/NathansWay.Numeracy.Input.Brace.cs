@@ -119,6 +119,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         }
 
+        public override string ToString()
+        {
+            return this.txtBrace.Text.ToString().Trim();
+        }
 
         #endregion
         

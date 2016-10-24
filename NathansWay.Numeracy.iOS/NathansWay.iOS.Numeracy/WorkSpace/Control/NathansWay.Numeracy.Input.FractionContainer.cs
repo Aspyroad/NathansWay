@@ -9,6 +9,7 @@ using Foundation;
 using AspyRoad.iOSCore;
 
 // Nathansway iOS
+using NathansWay.iOS.Numeracy;
 using NathansWay.iOS.Numeracy.WorkSpace;
 
 // NathansWay Shared
@@ -24,14 +25,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
 
-
-        private Nullable<double> _dblNumeratorPrevValue;
-        private Nullable<double> _dblNumeratorCurrentValue;
-        private Nullable<double> _dblNumeratorOriginalValue;
-
-        private Nullable<double> _dblDenominatorPrevValue;
-        private Nullable<double> _dblDenominatorCurrentValue;
-        private Nullable<double> _dblDenominatorOriginalValue;
+        private HelperFunctions.Fraction _fracActualValue;
 
         private SizeFraction _sizeFraction;
 
@@ -110,6 +104,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
+            this._fracActualValue = new HelperFunctions.Fraction(null, null);
             // UI
             // Always fire UIApply in ViewWillAppear
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
@@ -132,8 +127,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // TODO : Raise an error. This should never be any greater then two dimensions
             }
             // Set our values in fraction variables
-            this.NumeratorValue = Convert.ToDouble(_result[0].ToString());
-            this.DenominatorValue = Convert.ToDouble(_result[1].ToString());
+            //this.NumeratorValue = Convert.ToDouble(_result[0].ToString());
+            //this.DenominatorValue = Convert.ToDouble(_result[1].ToString());
 
             // PROCESS - BUILD NUMBER
             // Create a number box
@@ -153,6 +148,12 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create the numbers
             this._numberContainerNumerator.CreateNumber(true);
             this._numberContainerDenominator.CreateNumber(true);
+
+
+            if (!this._bIsAnswer)
+            {
+                this._fracActualValue = HelperFunctions.RealToFraction((double)this.FractionToDecimal, 0.8);
+            }
 
             // Event hooks
             // Numerator
@@ -190,6 +191,17 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             this.AddAndDisplayController(this._numberContainerNumerator);
             this.AddAndDisplayController(this._numberContainerDenominator);
+
+        }
+
+        // Setup editing
+        protected void preEdit()
+        {
+
+        }
+
+        protected void postEdit()
+        {
 
         }
 
@@ -255,6 +267,40 @@ namespace NathansWay.iOS.Numeracy.Controls
             return base.Solve();
         }
 
+        public override void SetCorrectState()
+        {
+            // TODO : Check if this fraction is the answer
+            // Compare against the original value
+            // No need to call base it for basic compares
+
+            this._numberContainerDenominator.SetCorrectState();
+            //this._numberContainerDenominator.UI_SetAnswerState();
+            this._numberContainerNumerator.SetCorrectState();
+            //this._numberContainerNumerator.UI_SetAnswerState();
+
+            if (this._numberContainerDenominator.CurrentValue == null || this._numberContainerNumerator.CurrentValue == null)
+            {
+                this.AnswerState = G__AnswerState.UnAttempted;
+                this._bIsCorrect = false;
+            }
+            else
+            {
+                // Update the actual value of this is an answer
+                this._fracActualValue = HelperFunctions.RealToFraction((double)this.FractionToDecimal, 0.2);
+
+                if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
+                {
+                    this.AnswerState = G__AnswerState.Correct;
+                    this._bIsCorrect = true;
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                    this._bIsCorrect = false;
+                }
+            }
+        }
+
         #endregion
 
         #region Delegates
@@ -274,6 +320,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._bIsInComplete = true;
             }
 
+
+
             // Bubbleup
             this.FireValueChange();
 
@@ -282,37 +330,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region UI
-
-        public override void SetCorrectState ()
-        {            
-            // TODO : Check if this fraction is the answer
-            // Compare against the original value
-            // No need to call base it for basic compares
-
-            this._numberContainerDenominator.SetCorrectState();
-            //this._numberContainerDenominator.UI_SetAnswerState();
-            this._numberContainerNumerator.SetCorrectState();
-            //this._numberContainerNumerator.UI_SetAnswerState();
-
-            if (this._numberContainerDenominator.CurrentValue == null || this._numberContainerNumerator.CurrentValue == null)
-            {
-                this.AnswerState = G__AnswerState.UnAttempted;
-                this._bIsCorrect = false;
-            }
-            else
-            {
-                if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
-                {
-                    this.AnswerState = G__AnswerState.Correct;
-                    this._bIsCorrect = true;
-                }
-                else
-                {
-                    this.AnswerState = G__AnswerState.InCorrect;
-                    this._bIsCorrect = false;
-                }
-            }
-        }
 
         public override void UI_SetAnswerState(bool _solving)
         {
@@ -418,16 +435,52 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._numberContainerSelected = value; }
         }
 
+        // Same as Nullable<double>
+        public double? FractionToDecimal
+        {
+            get
+            {
+                if (NumeratorValue != null && DenominatorValue != null)
+                {
+                    var x = (NumeratorValue / DenominatorValue);
+                    return Math.Round((double)x, 4);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public HelperFunctions.Fraction DecimalToFraction
+        {
+            get { return this._fracActualValue; }
+        }
+
+        public override string ToString()
+        {
+            if (this._fracActualValue.D != null && this._fracActualValue.N != null)
+            {
+                return string.Format("{0}/{1}", this._fracActualValue.N.ToString(), this._fracActualValue.D.ToString());
+            }
+            else
+            {
+                return "x/x";
+            }
+        }
+
         public Nullable<double> NumeratorValue
         {
             get
-            { 
-                return this._dblNumeratorCurrentValue; 
-            }
-            set
-            { 
-                this._dblNumeratorPrevValue = this._dblNumeratorCurrentValue; 
-                this._dblNumeratorCurrentValue = value;
+            {
+                if (this.IsAnswer)
+                {
+                    return this._numberContainerNumerator.CurrentValue;
+                }
+                else
+                {
+                    return this._numberContainerNumerator.OriginalValue;
+                }
             }
         }
 
@@ -435,12 +488,30 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             { 
-                return this._dblDenominatorCurrentValue; 
+                if (this.IsAnswer)
+                {
+                    return this._numberContainerDenominator.CurrentValue;
+                }
+                else
+                {
+                    return this._numberContainerDenominator.OriginalValue;
+                }
             }
-            set
-            { 
-                this._dblDenominatorPrevValue = this._dblDenominatorCurrentValue; 
-                this._dblDenominatorCurrentValue = value;
+        }
+
+        public Nullable<double> NumeratorPrevValue
+        {
+            get
+            {
+                return this._numberContainerNumerator.PrevValue;
+            }
+        }
+
+        public Nullable<double> DenominatorPrevValue
+        {
+            get
+            {
+                return this._numberContainerDenominator.PrevValue;
             }
         }
 

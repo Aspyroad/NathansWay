@@ -120,6 +120,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.UI_SetUnSelectedState();
         }
 
+        public string EquationToString()
+        {
+            string s = "";
+
+            for (int i = 0; i < this.OutputContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputContainers[i];
+                s = s + x.ToString();
+            }
+
+            return s;
+        }
+
         #endregion
 
         #region Delegates

@@ -103,14 +103,14 @@ namespace NathansWay.iOS.Numeracy
 
         public struct Fraction
         {
-            public Fraction(int n, int d)
+            public Fraction(int? n, int? d)
             {
                 N = n;
                 D = d;
             }
 
-            public int N { get; private set; }
-            public int D { get; private set; }
+            public int? N { get; private set; }
+            public int? D { get; private set; }
         }
 
         public static string DoubleToFraction(double num, double epsilon = 0.0001, int maxIterations = 20)

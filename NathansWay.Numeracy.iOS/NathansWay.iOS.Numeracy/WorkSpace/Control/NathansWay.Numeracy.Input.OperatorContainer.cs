@@ -75,10 +75,15 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Overrides
-        
+
         public override void DidReceiveMemoryWarning()
         {
             base.DidReceiveMemoryWarning();
+        }
+
+        public override string ToString()
+        {
+            return this._strOperator;
         }
 
         public override void LoadView()

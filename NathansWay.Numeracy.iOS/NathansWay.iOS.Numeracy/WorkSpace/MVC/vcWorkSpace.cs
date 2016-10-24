@@ -848,7 +848,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnToolBox (object sender, EventArgs e)
         {
-
+            AlertMe(this.NumletEquation.EquationToString());
         }
 
         private void OnClick_btnOptions (object sender, EventArgs e)

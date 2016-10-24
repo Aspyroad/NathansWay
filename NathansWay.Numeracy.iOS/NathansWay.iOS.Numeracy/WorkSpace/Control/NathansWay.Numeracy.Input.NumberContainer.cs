@@ -136,6 +136,40 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
+        private void SetCurrentValue()
+        {
+            // Update the state of the Number container
+            string _strCurValue = "";
+            this._bIsInComplete = false;
+
+            // Should be called after any number change
+            // Loop through this._lsNumbers
+            foreach (BaseContainer _Number in this._lsNumbers)
+            {
+                if (_Number.CurrentValueStr.Length > 0)
+                {
+                    _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                }
+                else
+                {
+                    this._bIsInComplete = true;
+                    break;
+                }
+            }
+            if (this._bIsInComplete)
+            {
+                this._strCurrentValue = "";
+                this._strPrevValue = "";
+                this.CurrentValue = null;
+            }
+            else
+            {
+                this.CurrentValue = Convert.ToDouble(_strCurValue);
+            }
+            this._strCurrentValue = _strCurValue;
+
+        }
+
         #endregion
 
         #region Public Members
@@ -319,34 +353,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         // FLOW - UP FROM HERE TO NUMLET OR FRACTION
         public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
-            // Update the state of the Number container
-            string _strCurValue = "";
-            this._bIsInComplete = false;
-
-            // Should be called after any number change
-            // Loop through this._lsNumbers
-            foreach (BaseContainer _Number in this._lsNumbers)
-            {
-                if (_Number.CurrentValueStr.Length > 0)
-                {
-                    _strCurValue = _strCurValue + _Number.CurrentValueStr;
-                }
-                else
-                {
-                    this._bIsInComplete = true;
-                    break;
-                }
-            }
-            if (this._bIsInComplete)
-            {
-                this._strCurrentValue = "";
-                this._strPrevValue = "";
-                this.CurrentValue = null;
-            }
-            else
-            {
-                this.CurrentValue = Convert.ToDouble(_strCurValue);
-            }
+            this.SetCurrentValue();
             // Bubbleup
             this.FireValueChange();
         }
@@ -593,6 +600,18 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+        public override string ToString()
+        {
+            if (this.CurrentValueStr.Length > 0)
+            {
+                return this.CurrentValueStr.Trim();
+            }
+            else
+            {
+                return "x";
+            }
+        }
+
         public override bool IsAnswer
         {
             get
@@ -625,7 +644,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Set the Current Value as this is never going to be an answer and wont change
                 if (value)
                 {
-                    this._dblCurrentValue = this._dblOriginalValue;
+                    this.SetCurrentValue();
                 }
                 // Loop through this._lsNumbers
                 if (this._lsNumbers != null)
