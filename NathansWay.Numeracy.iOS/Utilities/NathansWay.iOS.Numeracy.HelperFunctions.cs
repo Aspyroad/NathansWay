@@ -122,7 +122,7 @@ namespace NathansWay.iOS.Numeracy
             int t = 1;
 
             int wholeNumberPart = (int)num;
-            double decimalNumberPart = num - Convert.ToDouble(wholeNumberPart);
+            double? decimalNumberPart = num - Convert.ToDouble(wholeNumberPart);
 
             while (t < maxIterations && Math.Abs(n / d[t] - num) > epsilon)
             {

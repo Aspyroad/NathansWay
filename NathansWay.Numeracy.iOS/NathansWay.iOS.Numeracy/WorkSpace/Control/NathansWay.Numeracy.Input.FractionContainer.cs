@@ -25,7 +25,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
 
-        private HelperFunctions.Fraction _fracActualValue;
+        //private HelperFunctions.Fraction _fracActualValue;
+        private string _fracActualValue;
 
         private SizeFraction _sizeFraction;
 
@@ -104,7 +105,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
-            this._fracActualValue = new HelperFunctions.Fraction(null, null);
+            //this._fracActualValue = new HelperFunctions.Fraction(null, null);
+            this._fracActualValue = "";
             // UI
             // Always fire UIApply in ViewWillAppear
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
@@ -152,7 +154,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (!this._bIsAnswer)
             {
-                this._fracActualValue = HelperFunctions.RealToFraction((double)this.FractionToDecimal, 0.8);
+                this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
             }
 
             // Event hooks
@@ -286,7 +288,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             else
             {
                 // Update the actual value of this is an answer
-                this._fracActualValue = HelperFunctions.RealToFraction((double)this.FractionToDecimal, 0.2);
+                this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
 
                 if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
                 {
@@ -435,15 +437,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._numberContainerSelected = value; }
         }
 
-        // Same as Nullable<double>
+        //// Same as Nullable<double>
         public double? FractionToDecimal
         {
             get
             {
                 if (NumeratorValue != null && DenominatorValue != null)
                 {
-                    var x = (NumeratorValue / DenominatorValue);
-                    return Math.Round((double)x, 4);
+                    double? x = (NumeratorValue / DenominatorValue);
+                    //return Math.Round((double)x, 4);
+                    return x;
                 }
                 else
                 {
@@ -452,21 +455,30 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public HelperFunctions.Fraction DecimalToFraction
-        {
-            get { return this._fracActualValue; }
-        }
+        //public HelperFunctions.Fraction DecimalToFraction
+        //{
+        //    get { return this._fracActualValue; }
+        //}
+
+        //public  DecimalToFraction
+        //{
+        //    get { return this._fracActualValue; }
+        //}
 
         public override string ToString()
         {
-            if (this._fracActualValue.D != null && this._fracActualValue.N != null)
-            {
-                return string.Format("{0}/{1}", this._fracActualValue.N.ToString(), this._fracActualValue.D.ToString());
-            }
-            else
-            {
-                return "x/x";
-            }
+            //if (this._fracActualValue.D != null && this._fracActualValue.N != null)
+            //{
+            //    return string.Format("{0}/{1}", this._fracActualValue.N.ToString(), this._fracActualValue.D.ToString());
+            //}
+            //else
+            //{
+            //    return "x/x";
+            //}
+
+            return this._fracActualValue;
+
+
         }
 
         public Nullable<double> NumeratorValue
