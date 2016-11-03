@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NathansWay.MonoGame
+namespace NathansWay.Numeracy.Shared
 {
 	public static class HelperFunctions 
 	{

@@ -85,9 +85,9 @@
     <Compile Include="Controls\Aspyroad.iOSCore.vCanvasScrollMain.Base.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj">
+    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj">
       <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
-      <Name>NathansWay.Shared.Numeracy</Name>
+      <Name>NathansWay.Numeracy.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

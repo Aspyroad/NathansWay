@@ -7,7 +7,7 @@
 //// Aspyroad
 //using AspyRoad.iOSCore;
 //// Nathansway
-//using NathansWay.Shared;
+//using NathansWay.Numeracy.Shared;
 
 //namespace NathansWay.iOS.Numeracy.Controls
 //{

@@ -1,10 +1,10 @@
-﻿// System
+// System
 using System;
 using System.Xml;
 using System.Collections.Generic;
 
 
-namespace NathansWay.MonoGame
+namespace NathansWay.Numeracy.Shared
 {
 	public interface ISharedUIManager
 	{

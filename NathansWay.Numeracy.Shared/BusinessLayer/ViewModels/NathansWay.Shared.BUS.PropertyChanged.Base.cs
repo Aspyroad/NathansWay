@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.MonoGame.BUS.ViewModel
+namespace NathansWay.Numeracy.Shared.BUS.ViewModel
 {
 	/// <summary>
 	/// Base class for implementing INotifyPropertyChanged

@@ -1,6 +1,6 @@
 using System;
 
-namespace NathansWay.MonoGame.MonoGame
+namespace NathansWay.MonoGame.Shared
 {
 	public class HammerPhysics
 	{

@@ -12,11 +12,11 @@ using AspyRoad.iOSCore;
 //using NathansWay.iOS.Numeracy;
 //using NathansWay.iOS.Numeracy.UISettings;
 //using NathansWay.iOS.Numeracy.Controls;
-//using NathansWay.Shared.Factories;
-//using NathansWay.Shared.BUS.Entity;
-//using NathansWay.Shared.BUS.ViewModel;
-//using NathansWay.Shared.Utilities;
-using NathansWay.MonoGame;
+//using NathansWay.Numeracy.Shared.Factories;
+//using NathansWay.Numeracy.Shared.BUS.Entity;
+//using NathansWay.Numeracy.Shared.BUS.ViewModel;
+//using NathansWay.Numeracy.Shared.Utilities;
+using NathansWay.Numeracy.Shared;
 
 
 namespace NathansWay.iOS.Numeracy.WorkSpace

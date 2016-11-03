@@ -6,7 +6,7 @@ using CoreGraphics;
 using AspyRoad.iOSCore.UISettings;
 
 // NathansWay
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 using NathansWay.iOS.Numeracy.Drawing;
 
 // Monotouch

@@ -15,13 +15,13 @@ using SQLite.Net.Attributes;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.DAL;
-using NathansWay.MonoGame.BUS;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.DB;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.DAL;
+using NathansWay.Numeracy.Shared.BUS;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.DB;
 
-namespace NathansWay.MonoGame.DAL.Repository
+namespace NathansWay.Numeracy.Shared.DAL.Repository
 {
 	public class NWRepository<T> : IRepository<T> where T : class, IBusEntity, new()
     {
@@ -58,7 +58,7 @@ namespace NathansWay.MonoGame.DAL.Repository
 		/// Gets a table as a list, async.
 		/// </summary>
 		/// <returns>A Task TResult List IEntity</returns>
-		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
+		/// <typeparam name="T">where T : NathansWay.Numeracy.Shared.BUS.Entity.IBusEntity</typeparam>
         public Task<List<T>> SelectAllAsync ()
 		{			
             var Conn = _db.GetAsyncConnection ();
@@ -73,7 +73,7 @@ namespace NathansWay.MonoGame.DAL.Repository
 		/// </summary>
 		/// <returns>A Task TResult List IEntity containing T seq</returns>
 		/// <param name="seq">Seq</param>
-		/// <typeparam name="T">where T : NathansWay.Shared.BUS.Entity.IBusEntity</typeparam>
+		/// <typeparam name="T">where T : NathansWay.Numeracy.Shared.BUS.Entity.IBusEntity</typeparam>
 		public Task<List<T>> SelectSeqAsync (T _entity) 
 		{
             // Obviously only returns one value

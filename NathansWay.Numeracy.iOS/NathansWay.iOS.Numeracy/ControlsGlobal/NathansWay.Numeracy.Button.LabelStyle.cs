@@ -8,7 +8,7 @@ using UIKit;
 using Foundation;
 // Nathansway
 using NathansWay.iOS.Numeracy.Drawing;
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {

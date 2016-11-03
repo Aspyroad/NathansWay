@@ -1,4 +1,4 @@
- // Core
+// Core
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -13,9 +13,10 @@ using AspyRoad.iOSCore.UISettings;
 // NathansWay
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Drawing;
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame;
-using NathansWay.MonoGame.DB;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.Factories;
+using NathansWay.MonoGame.iOS;
+using NathansWay.Numeracy.Shared.DB;
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -69,9 +70,9 @@ namespace NathansWay.iOS.Numeracy
 			// Create our appwide user setup settings
 			//this._numeracyUIManager = new NumeracyUIManager(this.iOSGlobals);
 			// Create shared globals
-			this._sharedGlobals = new NathansWay.MonoGame.Global.SharedGlobal();
+			this._sharedGlobals = new NathansWay.Numeracy.Shared.SharedGlobal();
             // Create our application settings. These are settings that are global to Numbers Application only.
-            this._numberAppSettings = new NathansWay.MonoGame.NWNumberAppSettings();
+            this._numberAppSettings = new NathansWay.Numeracy.Shared.NWNumberAppSettings();
             // Load our storyboard and setup our UIWindow and first view controller
             _storyBoard = UIStoryboard.FromName ("NathansWay.Numeracy", null);
             iOSCoreServiceContainer.Register<UIStoryboard> (_storyBoard);

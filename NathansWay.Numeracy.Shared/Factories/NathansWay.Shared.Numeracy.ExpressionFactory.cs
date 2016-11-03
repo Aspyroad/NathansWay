@@ -1,10 +1,10 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 // NathansWay
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 
-namespace NathansWay.MonoGame.Factories
+namespace NathansWay.Numeracy.Shared.Factories
 {
     public class ExpressionFactory
     {

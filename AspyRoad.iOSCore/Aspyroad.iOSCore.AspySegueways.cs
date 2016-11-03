@@ -1,7 +1,7 @@
 using System;
 using CoreGraphics;
 using AspyRoad.iOSCore;
-//using NathansWay.Shared.Global;
+//using NathansWay.Numeracy.Shared;
 using UIKit;
 using CoreGraphics;
 using CoreAnimation;

@@ -9,7 +9,7 @@ using UIKit;
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Nathansway
-
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
@@ -152,7 +152,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Sizing class
             this._sizeClass = new SizeBrace(this);
 
-            this.ContainerType = MonoGame.G__ContainerType.Brace;
+            this.ContainerType = G__ContainerType.Brace;
 
             // Create textbox
             this.txtBrace = new AspyTextField();

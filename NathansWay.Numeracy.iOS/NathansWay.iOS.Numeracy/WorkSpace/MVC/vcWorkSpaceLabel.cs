@@ -13,9 +13,9 @@ using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.MonoGame.Factories;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared.Factories;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

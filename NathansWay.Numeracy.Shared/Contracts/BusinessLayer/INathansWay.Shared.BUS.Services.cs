@@ -1,4 +1,4 @@
-﻿// Core
+// Core
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.DB;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.DAL.Repository;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.DB;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.DAL.Repository;
 
 
-namespace NathansWay.MonoGame.BUS.Services
+namespace NathansWay.Numeracy.Shared.BUS.Services
 {
 }

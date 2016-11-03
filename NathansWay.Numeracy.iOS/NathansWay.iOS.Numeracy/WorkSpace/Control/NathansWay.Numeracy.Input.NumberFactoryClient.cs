@@ -6,7 +6,7 @@ using System.Collections.Generic;
 // Aspyroad
 
 // Nathansway
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {

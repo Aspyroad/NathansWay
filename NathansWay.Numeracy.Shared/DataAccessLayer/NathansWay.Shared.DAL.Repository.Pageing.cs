@@ -1,4 +1,4 @@
-﻿//// 
+//// 
 //// SQLiteTableModel.cs
 ////  
 //// Author: Jeffrey Stedfast <jeff@xamarin.com>
@@ -33,7 +33,7 @@
 //using SQLite.Net.Interop;
 //using SQLite.Net.Async;
 //
-//namespace NathansWay.Shared
+//namespace NathansWay.Numeracy.Shared
 //{
 //	public class SQLiteTableModel<T> : IDisposable where T : new ()
 //	{

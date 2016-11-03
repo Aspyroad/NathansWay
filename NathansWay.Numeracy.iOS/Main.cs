@@ -2,16 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-// Mono
-using Foundation;
-using UIKit;
 // AspyCore
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
+// Mono
+using Foundation;
 // NathansWay
-using NathansWay.MonoGame;
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.BUS.ViewModel;
+using NathansWay.Numeracy.Shared;
+using UIKit;
 
 namespace NathansWay.iOS.Numeracy
 {

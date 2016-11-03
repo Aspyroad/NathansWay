@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using CoreGraphics;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared;
 using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace

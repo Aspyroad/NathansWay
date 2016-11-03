@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 // NathansWayShared
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 
 
-namespace NathansWay.MonoGame.Util
+namespace NathansWay.Numeracy.Shared
 {
     /// <summary>
     /// Class containing helper extension methods

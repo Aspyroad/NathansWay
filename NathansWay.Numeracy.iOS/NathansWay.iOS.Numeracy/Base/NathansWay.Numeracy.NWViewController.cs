@@ -8,8 +8,8 @@ using Foundation;
 using AspyRoad.iOSCore.UISettings;
 
 // Shared
-using NathansWay.MonoGame;
-using NathansWay.MonoGame.Global;
+using NathansWay.Numeracy.Shared;
+
 
 namespace AspyRoad.iOSCore
 {

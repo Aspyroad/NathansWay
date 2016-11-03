@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,14 +9,14 @@ using System.Linq.Expressions;
 using System.Text;
 
 // NathansWay
-using NathansWay.MonoGame.DAL;
-using NathansWay.MonoGame.BUS;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.DAL.Repository;
-using NathansWay.MonoGame.Global;
+using NathansWay.Numeracy.Shared.DAL;
+using NathansWay.Numeracy.Shared.BUS;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.DAL.Repository;
+using NathansWay.Numeracy.Shared;
 
 
-namespace NathansWay.MonoGame.BUS
+namespace NathansWay.Numeracy.Shared.BUS
 {
 	public static class NWExpressionBuilder
 	{

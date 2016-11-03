@@ -1,11 +1,11 @@
-﻿// System
+// System
 using System;
 //using System.Collections.Generic;
 // Xamarin
 
 
 
-namespace NathansWay.MonoGame
+namespace NathansWay.Numeracy.Shared
 {
 	public interface IAppSettings
 	{

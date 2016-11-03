@@ -1,4 +1,4 @@
-﻿//	Xamarin License
+//	Xamarin License
 //  Copyright 2012  Xamarin Inc.
 //
 //    Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,16 +24,16 @@ using System.Linq.Expressions;
 using System.Text;
 
 // NathansWay
-using NathansWay.MonoGame.DAL;
-using NathansWay.MonoGame.BUS;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.DAL.Repository;
-using NathansWay.MonoGame.Global;
+using NathansWay.Numeracy.Shared.DAL;
+using NathansWay.Numeracy.Shared.BUS;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.DAL.Repository;
+using NathansWay.Numeracy.Shared;
 
 
 // Originally ripped from Xamarin Assignment Demo Application
 // Respectz to the original devs!
-namespace NathansWay.MonoGame.BUS.ViewModel
+namespace NathansWay.Numeracy.Shared.BUS.ViewModel
 {
 	/// <summary>
 	/// Base class for all view models

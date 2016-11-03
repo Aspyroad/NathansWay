@@ -1,4 +1,4 @@
-﻿// Core
+// Core
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +12,12 @@ using SQLite.Net.Async;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.DAL.Repository;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.DAL.Repository;
 
 
-namespace NathansWay.MonoGame.DB
+namespace NathansWay.Numeracy.Shared.DB
 {
 	/// <summary>
 	/// Service for returning and saving assignment information

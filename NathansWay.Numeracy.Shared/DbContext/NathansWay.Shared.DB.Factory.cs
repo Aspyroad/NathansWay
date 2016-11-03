@@ -4,11 +4,10 @@ using System;
 using SQLite.Net;
 using SQLite.Net.Interop;
 // Shared
-using NathansWay.MonoGame;
-using NathansWay.MonoGame.Global;
+using NathansWay.Numeracy.Shared;
 
 
-namespace NathansWay.MonoGame.DB
+namespace NathansWay.Numeracy.Shared.DB
 {
     public class DBFactory
     {

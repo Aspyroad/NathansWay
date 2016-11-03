@@ -13,7 +13,7 @@
 //using NathansWay.iOS.Numeracy.UISettings;
 //using NathansWay.iOS.Numeracy.Controls;
 //// NathansWay Shared
-//using NathansWay.Shared;
+//using NathansWay.Numeracy.Shared;
 
 //namespace NathansWay.iOS.Numeracy
 //{

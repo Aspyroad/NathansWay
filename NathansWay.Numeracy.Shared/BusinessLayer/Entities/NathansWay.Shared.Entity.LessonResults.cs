@@ -1,11 +1,11 @@
-﻿// Core
+// Core
 using System;
 // SQLite
 using SQLite.Net.Attributes;
 // Shared
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared;
 
-namespace NathansWay.MonoGame.BUS.Entity
+namespace NathansWay.Numeracy.Shared.BUS.Entity
 {
 	public class EntityLessonResults : EntityBase
 	{

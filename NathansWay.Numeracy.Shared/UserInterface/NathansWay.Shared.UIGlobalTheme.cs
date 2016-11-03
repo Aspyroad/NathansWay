@@ -1,8 +1,8 @@
 ﻿// System
 using System;
+using NathansWay.Numeracy.Shared;
 
-
-namespace NathansWay.MonoGame
+namespace NathansWay.Numeracy.Shared
 {
 	public class UIGlobalTheme : IUITheme
 	{

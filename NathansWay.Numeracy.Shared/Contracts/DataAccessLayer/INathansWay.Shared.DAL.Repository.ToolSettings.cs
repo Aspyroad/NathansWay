@@ -1,4 +1,4 @@
-﻿// Core
+// Core
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.DB;
-using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.DB;
+using NathansWay.Numeracy.Shared.BUS.Entity;
 
 
-namespace NathansWay.MonoGame.DAL.Repository
+namespace NathansWay.Numeracy.Shared.DAL.Repository
 {
 	public interface IRepoToolSettings<EntityToolSettings> : IRepository<IBusEntity>
 	{

@@ -12,10 +12,11 @@
 using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NathansWay.MonoGame.Shared;
 
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.iOS
 {
 	public class ToolFactory
 	{

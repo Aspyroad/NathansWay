@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NathansWay.MonoGame.Global
+namespace NathansWay.Numeracy.Shared
 {
     public class SharedGlobal : ISharedGlobal
     {

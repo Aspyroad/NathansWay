@@ -10,8 +10,8 @@ using CoreAnimation;
 using AspyRoad.iOSCore;
 // Nathansway
 using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

@@ -1,12 +1,10 @@
 // System
 using System;
 using System.Collections.Generic;
-
+// NathansWayShared
+using NathansWay.Numeracy.Shared;
 // Monotouch
 using UIKit;
-
-// NathansWayShared
-using NathansWay.MonoGame;
 
 namespace AspyRoad.iOSCore.UISettings
 {

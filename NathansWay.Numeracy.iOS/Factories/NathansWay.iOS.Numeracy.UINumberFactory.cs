@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 // Mono
@@ -10,11 +10,11 @@ using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 // Shared
-using NathansWay.MonoGame.Factories;
-using NathansWay.MonoGame.BUS.Entity;
-using NathansWay.MonoGame.BUS.ViewModel;
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame;
+using NathansWay.Numeracy.Shared.Factories;
+using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.BUS.ViewModel;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy
 {

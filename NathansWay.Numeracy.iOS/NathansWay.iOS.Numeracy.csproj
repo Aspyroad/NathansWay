@@ -234,9 +234,17 @@
       <Project>{587047CE-E3BC-4A5D-A59E-58558971F231}</Project>
       <Name>Aspyroad.iOSCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj">
+    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
+      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
+      <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj">
       <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
-      <Name>NathansWay.Shared.Numeracy</Name>
+      <Name>NathansWay.Numeracy.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NathansWay.MonoGame.iOS\NathansWay.MonoGame.iOS.csproj">
+      <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
+      <Name>NathansWay.MonoGame.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

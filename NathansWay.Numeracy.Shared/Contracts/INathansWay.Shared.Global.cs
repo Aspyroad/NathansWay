@@ -1,7 +1,7 @@
 using System;
 
 
-namespace NathansWay.MonoGame.Global
+namespace NathansWay.Numeracy.Shared
 {
     public interface ISharedGlobal
     {	

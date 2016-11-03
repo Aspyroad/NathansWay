@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NathansWay.MonoGame.Global 
+namespace NathansWay.Numeracy.Shared
 {
     /// <summary>
     /// Class containing helper extension methods

@@ -1,4 +1,4 @@
-﻿// System
+// System
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +8,12 @@ using SQLite.Net;
 using SQLite.Net.Interop;
 using SQLite.Net.Async;
 // NWShared
-using NathansWay.MonoGame.Global;
-using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.BUS.Entity;
 using System.Threading.Tasks;
 
 
-namespace NathansWay.MonoGame.DB
+namespace NathansWay.Numeracy.Shared.DB
 {
 
 	/// <summary>

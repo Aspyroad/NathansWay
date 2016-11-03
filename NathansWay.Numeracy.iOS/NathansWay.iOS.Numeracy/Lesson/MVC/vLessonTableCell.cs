@@ -9,8 +9,8 @@ using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Drawing;
 // NathansWay Sharded
-using NathansWay.MonoGame;
-using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.Numeracy.Shared;
+using NathansWay.Numeracy.Shared.BUS.Entity;
 
 namespace NathansWay.iOS.Numeracy
 {

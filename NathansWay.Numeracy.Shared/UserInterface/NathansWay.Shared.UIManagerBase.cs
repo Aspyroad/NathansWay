@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 
 
-namespace NathansWay.MonoGame
+namespace NathansWay.Numeracy.Shared
 {
 	// Note the Abstract.
 	// This class needs a few methods implemented as per framework (iOS, Android etc) 
