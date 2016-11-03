@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace NathansWay.Shared.Drawing
+namespace NathansWay.MonoGame.Drawing
 {
 	public struct RectangleF
 	{

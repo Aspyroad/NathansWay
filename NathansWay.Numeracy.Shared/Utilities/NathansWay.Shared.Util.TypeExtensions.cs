@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 // NathansWayShared
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 
-namespace NathansWay.Shared.Util
+namespace NathansWay.MonoGame.Util
 {
     /// <summary>
     /// Class containing helper extension methods

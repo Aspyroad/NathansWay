@@ -10,11 +10,11 @@ using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 // Shared
-using NathansWay.Shared.Factories;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.BUS.ViewModel;
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared;
+using NathansWay.MonoGame.Factories;
+using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.MonoGame.BUS.ViewModel;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame;
 
 namespace NathansWay.iOS.Numeracy
 {

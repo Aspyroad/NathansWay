@@ -12,12 +12,12 @@ using SQLite.Net.Async;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.DAL.Repository;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.MonoGame.DAL.Repository;
 
 
-namespace NathansWay.Shared.DB
+namespace NathansWay.MonoGame.DB
 {
 	/// <summary>
 	/// Service for returning and saving assignment information

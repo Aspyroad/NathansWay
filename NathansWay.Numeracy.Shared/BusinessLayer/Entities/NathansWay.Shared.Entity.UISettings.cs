@@ -3,9 +3,9 @@ using System;
 // SQLite
 using SQLite.Net.Attributes;
 // Shared
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
-namespace NathansWay.Shared.BUS.Entity
+namespace NathansWay.MonoGame.BUS.Entity
 {
 	public class EntityUISettings : EntityBase
 	{

@@ -15,13 +15,13 @@ using SQLite.Net.Attributes;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.DAL;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.DB;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.DAL;
+using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.MonoGame.DB;
 
 
-namespace NathansWay.Shared.DAL.Repository
+namespace NathansWay.MonoGame.DAL.Repository
 {
 	public class RepoSchool<T> : NWRepository<T> where T : EntitySchool, new()
 	{

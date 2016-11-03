@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{999A310F-17D7-4B1B-87E2-00A2B116EEDA}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>NathansWay.Shared.MonoGame</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Hammer\NathansWay.ToolBox.Hammer.Physics.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SideCutters\NathansWay.ToolBox.SideCutters.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ScrewDriver\NathansWay.ToolBox.ScrewDriver.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pliers\NathansWay.ToolBox.Pliers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NathansWay.ToolBox.AspyGame.Base.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Contracts\INathansWay.ToolBox.Tool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Hammer\NathansWay.ToolBox.Hammer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NathansWay.ToolBox.ParallaxingBg.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.Types.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.ToolBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Hammer\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SideCutters\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ScrewDriver\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Pliers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Contracts\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+  </ItemGroup>
+</Project>

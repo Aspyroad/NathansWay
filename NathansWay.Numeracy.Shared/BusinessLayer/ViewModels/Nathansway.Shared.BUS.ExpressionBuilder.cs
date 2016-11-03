@@ -9,14 +9,14 @@ using System.Linq.Expressions;
 using System.Text;
 
 // NathansWay
-using NathansWay.Shared.DAL;
-using NathansWay.Shared.BUS;
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared.DAL.Repository;
-using NathansWay.Shared.Utilities;
+using NathansWay.MonoGame.DAL;
+using NathansWay.MonoGame.BUS;
+using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.MonoGame.DAL.Repository;
+using NathansWay.MonoGame.Global;
 
 
-namespace NathansWay.Shared.BUS
+namespace NathansWay.MonoGame.BUS
 {
 	public static class NWExpressionBuilder
 	{

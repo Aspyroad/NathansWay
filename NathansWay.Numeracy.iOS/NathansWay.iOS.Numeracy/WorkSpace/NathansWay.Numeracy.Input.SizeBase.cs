@@ -11,7 +11,7 @@ using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // Nathansway
 using NathansWay.iOS.Numeracy.UISettings;
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 namespace NathansWay.iOS.Numeracy
 {

@@ -5,7 +5,7 @@ using System;
 
 
 
-namespace NathansWay.Shared
+namespace NathansWay.MonoGame
 {
 	public interface IAppSettings
 	{

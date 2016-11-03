@@ -5,10 +5,10 @@ using System;
 // SQLite
 using SQLite.Net.Attributes;
 // Shared
-using NathansWay.Shared;
-using NathansWay.Shared.BUS.Services;
+using NathansWay.MonoGame;
+using NathansWay.MonoGame.BUS.Services;
 
-namespace NathansWay.Shared.BUS.Entity
+namespace NathansWay.MonoGame.BUS.Entity
 {
     public abstract class EntityBase : IBusEntity, IComparable<EntityBase>
     {

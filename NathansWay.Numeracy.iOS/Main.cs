@@ -9,9 +9,9 @@ using UIKit;
 using AspyRoad.iOSCore;
 using AspyRoad.iOSCore.UISettings;
 // NathansWay
-using NathansWay.Shared;
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.BUS.ViewModel;
+using NathansWay.MonoGame;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.BUS.ViewModel;
 
 namespace NathansWay.iOS.Numeracy
 {

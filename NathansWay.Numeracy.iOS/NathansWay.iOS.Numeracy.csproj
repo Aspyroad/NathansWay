@@ -60,13 +60,6 @@
     <Folder Include="NathansWay.iOS.Numeracy\Student\" />
     <Folder Include="NathansWay.iOS.Numeracy\Student\MVC\" />
     <Folder Include="NathansWay.iOS.Numeracy\Teacher\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Hammer\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\Content\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\Content\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\" />
-    <Folder Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\Content\" />
     <Folder Include="NathansWay.iOS.Numeracy\Lesson\" />
     <Folder Include="NathansWay.iOS.Numeracy\WorkSpace\" />
     <Folder Include="NathansWay.iOS.Numeracy\Settings\" />
@@ -110,11 +103,6 @@
     <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.Game.Core.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\ScrewDriver\ToolBox.iOS.ScrewDriver.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\Pliers\ToolBox.iOS.Pliers.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\SideCutters\ToolBox.iOS.SideCutters.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ToolBox\NathansWay.iOS.ToolBox.Factory.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vcMenuStart.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Menu\MVC\vMenuStart.cs">
@@ -249,14 +237,6 @@
     <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Shared.Numeracy.csproj">
       <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
       <Name>NathansWay.Shared.Numeracy</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NathansWay.Shared.MonoGame\NathansWay.iOS.MonoGame\NathansWay.iOS.MonoToolz.csproj">
-      <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
-      <Name>NathansWay.iOS.MonoToolz</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
-      <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
-      <Name>MonoGame.Framework.iOS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace NathansWay.Shared.BUS.ViewModel
+namespace NathansWay.MonoGame.BUS.ViewModel
 {
 	/// <summary>
 	/// Base class for implementing INotifyPropertyChanged

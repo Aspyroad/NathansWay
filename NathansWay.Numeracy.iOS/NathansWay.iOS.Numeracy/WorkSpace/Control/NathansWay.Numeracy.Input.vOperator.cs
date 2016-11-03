@@ -8,7 +8,7 @@ using UIKit;
 using AspyRoad.iOSCore;
 // NathansWay
 using NathansWay.iOS.Numeracy.Drawing;
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 namespace NathansWay.iOS.Numeracy
 {

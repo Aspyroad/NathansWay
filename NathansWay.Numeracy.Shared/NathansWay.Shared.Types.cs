@@ -5,7 +5,7 @@ using System.Globalization;
 
 // NathansWay Type Library
 
-namespace NathansWay.Shared
+namespace NathansWay.MonoGame
 {
     #region Drawing
 

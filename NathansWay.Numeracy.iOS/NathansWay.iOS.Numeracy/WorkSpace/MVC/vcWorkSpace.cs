@@ -8,8 +8,8 @@ using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.Shared.BUS.Entity;
-using NathansWay.Shared;
+using NathansWay.MonoGame.BUS.Entity;
+using NathansWay.MonoGame;
 using NathansWay.iOS.Numeracy.Controls;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace

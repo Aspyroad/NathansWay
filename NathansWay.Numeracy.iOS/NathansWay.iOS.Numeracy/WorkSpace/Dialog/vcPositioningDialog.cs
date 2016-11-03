@@ -16,7 +16,7 @@ using AspyRoad.iOSCore;
 //using NathansWay.Shared.BUS.Entity;
 //using NathansWay.Shared.BUS.ViewModel;
 //using NathansWay.Shared.Utilities;
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 
 namespace NathansWay.iOS.Numeracy.WorkSpace

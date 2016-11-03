@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 
 
-namespace NathansWay.Shared
+namespace NathansWay.MonoGame
 {
 	// Note the Abstract.
 	// This class needs a few methods implemented as per framework (iOS, Android etc) 

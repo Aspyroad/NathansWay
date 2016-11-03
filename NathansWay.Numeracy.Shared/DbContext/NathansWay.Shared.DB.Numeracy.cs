@@ -7,12 +7,12 @@ using System.Threading;
 using SQLite.Net;
 using SQLite.Net.Interop;
 // NWShared
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.BUS.Entity;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.BUS.Entity;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
 
-namespace NathansWay.Shared.DB
+namespace NathansWay.MonoGame.DB
 {
 	public class NumeracyDB : NWDbBase
 	{

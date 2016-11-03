@@ -2,7 +2,7 @@
 using System;
 
 
-namespace NathansWay.Shared
+namespace NathansWay.MonoGame
 {
 	public class NWNumberAppSettings : IAppSettings
 	{

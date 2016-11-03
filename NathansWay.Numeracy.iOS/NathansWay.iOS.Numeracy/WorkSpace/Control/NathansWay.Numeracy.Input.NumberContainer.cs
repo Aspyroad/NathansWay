@@ -14,7 +14,7 @@ using NathansWay.iOS.Numeracy.UISettings;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.iOS.Numeracy.WorkSpace;
 // NathansWay Shared
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {

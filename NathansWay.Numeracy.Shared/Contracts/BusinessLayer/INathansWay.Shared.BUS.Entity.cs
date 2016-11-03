@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.DB;
-using NathansWay.Shared.BUS.Services;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.DB;
+using NathansWay.MonoGame.BUS.Services;
 
-namespace NathansWay.Shared.BUS.Entity
+namespace NathansWay.MonoGame.BUS.Entity
 {
     public interface IBusEntity
     {

@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 using SQLite.Net.Interop;
 
 // NathansWay
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.DB;
-using NathansWay.Shared.BUS.Entity;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.DB;
+using NathansWay.MonoGame.BUS.Entity;
 
 
-namespace NathansWay.Shared.DAL.Repository
+namespace NathansWay.MonoGame.DAL.Repository
 {
 	public interface IRepoLessonDetailResults<EntityLessonDetailResults> : IRepository<IBusEntity>
 	{

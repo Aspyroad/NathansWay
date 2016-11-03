@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 // NathansWay
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
-namespace NathansWay.Shared.Factories
+namespace NathansWay.MonoGame.Factories
 {
     public class ExpressionFactory
     {

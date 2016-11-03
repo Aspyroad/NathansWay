@@ -4,7 +4,7 @@ using System.Xml;
 using System.Collections.Generic;
 
 
-namespace NathansWay.Shared
+namespace NathansWay.MonoGame
 {
     public interface IUINumberFactoryClient
     {

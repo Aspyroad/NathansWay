@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UIKit;
 
 // NathansWayShared
-using NathansWay.Shared;
+using NathansWay.MonoGame;
 
 namespace AspyRoad.iOSCore.UISettings
 {

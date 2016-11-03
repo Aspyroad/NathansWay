@@ -8,12 +8,12 @@ using SQLite.Net;
 using SQLite.Net.Interop;
 using SQLite.Net.Async;
 // NWShared
-using NathansWay.Shared.Utilities;
-using NathansWay.Shared.BUS.Entity;
+using NathansWay.MonoGame.Global;
+using NathansWay.MonoGame.BUS.Entity;
 using System.Threading.Tasks;
 
 
-namespace NathansWay.Shared.DB
+namespace NathansWay.MonoGame.DB
 {
 
 	/// <summary>
