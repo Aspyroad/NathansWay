@@ -50,6 +50,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcWorkNumlet _vcNumletEquation;
         private vcWorkNumlet _vcNumletResult;
         private vcWorkNumlet _vcNumletSolve;
+        // Ref to the monogame vc.
+        private UIWindow _wToolSpaceWindow;
+        private UIViewController _vcToolSpace;
+        private BaseTool _currentTool;
         private UIStoryboard _storyBoard;
         private List<vcWorkNumlet> _vcNumletMethods;
         // VC Dialogs
@@ -374,30 +378,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadTool(E__ToolBoxTool _tool)
         {
-            //var _wind = UIApplication.SharedApplication.KeyWindow;
-            var t = _toolFactory.CreateNewTool(_tool);
-            // Do we want to run syn or async??
-            //t.Run(new Microsoft.Xna.Framework.GameRunBehavior());
-            // Below cant be done, its set is protected
-            //t.Window = _wind;
-            // Testinmg what can we do with this window
-            // Grab the window
-            var y = t.Services.GetService<UIWindow>();
-            // Grab the viewcontroller
-            var z = t.Services.GetService<UIViewController>();
-            //z.View.RemoveFromSuperview();
+            if (this._currentTool != null)
+            {
+                this._vcToolSpace.WillMoveToParentViewController(null);
+                this._vcToolSpace.View.RemoveFromSuperview();
+                this._currentTool = null;
+            }
+            else
+            {
+                this._currentTool = _toolFactory.CreateNewTool(_tool, this._vcMainWorkSpace);
+                this._vcToolSpace = this._currentTool.Services.GetService<UIViewController>();
 
-            t.Services.RemoveService(typeof(UIWindow));
+                this._vcToolSpace.View.Bounds = new CGRect(0.0f, 0.0f, 1016.0f, 600.0f);
+                this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 540.0f);
+                this._currentTool.Run();
+            }
 
-            //t.Services.AddService(typeof(UIWindow), _wind);
-            //var x = t.Services.GetService<UIWindow>();
-
-            var c = 10;
-
-
-
-            //
-            //t.Run();
         }
 
         public void LoadAfterSizeChange()

@@ -10,6 +10,7 @@
 #region Using Statements
 
 using NathansWay.MonoGame.Shared;
+using UIKit;
 
 #endregion
 
@@ -17,46 +18,62 @@ namespace NathansWay.MonoGame.iOS
 {
 	public class ToolFactory
 	{
-		private BaseTool _newTool;
-		private BaseTool _oldTool;
+		private UIWindow _localWindow;
 
 		public ToolFactory ()
 		{
-			//this.Intialize ();
+			this.Intialize ();
 		}
 
 		private void Intialize ()
 		{
 		}
 
+		private BaseTool WindowSwitcher (BaseTool _tool, UIWindow _newWindow)
+		{
+			var _vcToolSpace = _tool.Services.GetService<UIViewController> ();
+			var _wToolSpaceWindow = _tool.Services.GetService<UIWindow> ();
+			_vcToolSpace.WillMoveToParentViewController (null);
+			_vcToolSpace.View.RemoveFromSuperview ();
+
+			_vcToolSpace.WillMoveToParentViewController (_vcWorkSpace);
+			_vcWorkSpace.Add (_vcToolSpace.View);
+
+			_tool.Services.RemoveService (typeof(UIWindow));
+			_tool.Services.AddService (typeof (UIWindow), _localWindow);
+
+			return _tool;
+		}
+
 		#region Public Members
-		public BaseTool CreateNewTool (E__ToolBoxTool newTool)
+		public BaseTool CreateNewTool (E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
 		{
 			switch (newTool)
 			{
 				case E__ToolBoxTool.Hammerz:
 				{
-					_newTool = new Hammer ();
-					return _newTool;
+					var _newTool = new Hammer ();
+
+					return this.WindowSwitcher(_newTool, this._localWindow);
 				}
 				case E__ToolBoxTool.Plierz:
 				{
-					_newTool = new Hammer ();
-					return _newTool;
+					var _newTool = new Hammer ();
+					return this.WindowSwitcher (_newTool, this._localWindow);
 				}
 				case E__ToolBoxTool.ScrewDriverz:
 				{
-					_newTool = new Hammer ();
-					return _newTool;
+					var _newTool = new Hammer ();
+					return this.WindowSwitcher (_newTool, this._localWindow);
 				}
 				case E__ToolBoxTool.SideCutterz:
 				{
-					_newTool = new Hammer ();
-					return _newTool;
+					var _newTool = new Hammer ();
+					return this.WindowSwitcher (_newTool, this._localWindow);
 				}
 				default:
 				{
-					_newTool = new Hammer ();
+					var _newTool = new Hammer ();
 					return _newTool;
 				}
 			}
