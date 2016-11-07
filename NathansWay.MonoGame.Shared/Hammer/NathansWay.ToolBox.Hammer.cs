@@ -19,212 +19,176 @@ namespace NathansWay.MonoGame.Shared
 	/// Info : Hammer is the main counting tool. 
 	/// </summary>
 
-	public class Hammer : ITool
+	public class Hammer : BaseTool
 	{
+
 		#region Private Variables
 
-		private Game _maingame;
-		private E__ToolBoxToolz _gametype;
+		private SpriteBatch spriteBatch;
+		private Texture2D logoTexturem, wallTexture, playerTexture, groundBottom;
+		private TouchCollection previousTouches;
+		private TouchCollection currentTouches;
+		private Rectangle bottomGroundRect;
+		private ParallaxingBackground ground;
+		private ParallaxingBackground clouds1;
+		private ParallaxingBackground clouds2;
+
+		private bool accelActive;
+		private int wallHeight;
+		private int scoreBoardPadding = 0;
+		private int maxGap;
+
+		const int MaxWallheight = 920;
 
 		#endregion
 
-		#region Constructor
-		public Hammer ()
+		#region Initialization
+
+		public Hammer () : base()
 		{
-			this._gametype = E__ToolBoxToolz.Hammerz;
-			this._maingame = new HammerGame ();
-		}
-		#endregion
-
-		#region Public Member
-
-		public Game MainGame {
-			get { return _maingame; }
+			//graphics = new GraphicsDeviceManager (this);
+			//Content.RootDirectory = "Content";
+			//graphics.IsFullScreen = false;
 		}
 
-		public E__ToolBoxToolz ToolType {
-			get { return _gametype; }
-		}
-
-		#endregion
-
-		#region MainGame
-
-		private class HammerGame : AspyGame
+		/// <summary>
+		/// Overridden from the base Game.Initialize. Once the GraphicsDevice is setup,
+		/// we'll use the viewport to initialize some values.
+		/// </summary>
+		protected override void Initialize ()
 		{
-
-			#region Private Variables
-
-			private GraphicsDeviceManager graphics;
-			private SpriteBatch spriteBatch;
-			private Texture2D logoTexturem, wallTexture, playerTexture, groundBottom;
-			private TouchCollection previousTouches;
-			private TouchCollection currentTouches;
-			private Rectangle bottomGroundRect;
-			private ParallaxingBackground ground;
-			private ParallaxingBackground clouds1;
-			private ParallaxingBackground clouds2;
-
-			private bool accelActive;
-			private int wallHeight;
-			private int scoreBoardPadding = 0;
-			private int maxGap;
-
-			const int MaxWallheight = 920;
-
-			#endregion
-
-			#region Initialization
-
-			public HammerGame ()
-			{
-				graphics = new GraphicsDeviceManager (this);
-				Content.RootDirectory = "Content";
-				graphics.IsFullScreen = false;
-			}
-
-			/// <summary>
-			/// Overridden from the base Game.Initialize. Once the GraphicsDevice is setup,
-			/// we'll use the viewport to initialize some values.
-			/// </summary>
-			protected override void Initialize ()
-			{
-				wallHeight = Math.Min (GraphicsDevice.Viewport.Height, MaxWallheight);
-				bottomGroundRect = new Rectangle
-					(
-						0,
-						(wallHeight + 1),
-						GraphicsDevice.Viewport.Width,
-						(GraphicsDevice.Viewport.Height - MaxWallheight)
-					);
-				//player = new Player ();
-				ground = new ParallaxingBackground ();
-				clouds1 = new ParallaxingBackground ();
-				clouds2 = new ParallaxingBackground ();
-				base.Initialize ();
-			}
-
-			/// <summary>
-			/// Load your graphics content.
-			/// </summary>
-			protected override void LoadContent ()
-			{
-				// Create a new SpriteBatch, which can be use to draw textures.
-				this.spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
-				this.groundBottom = Content.Load<Texture2D> ("Hammer\\bottomGround");
-				this.ground.Initialize
+			wallHeight = Math.Min (GraphicsDevice.Viewport.Height, MaxWallheight);
+			bottomGroundRect = new Rectangle
 				(
-					Content,
-					"Hammer\\ground",
-					wallHeight,
-					GraphicsDevice.Viewport.Width,
-					GraphicsDevice.Viewport.Height,
-					-HammerPhysics.WallSpeed,
-					false
-				);
-				this.clouds1.Initialize
-				(
-					Content,
-					"Hammer\\clouds1",
 					0,
+					(wallHeight + 1),
 					GraphicsDevice.Viewport.Width,
-					GraphicsDevice.Viewport.Height,
-					-.25f,
-					true
+					(GraphicsDevice.Viewport.Height - MaxWallheight)
 				);
-				this.clouds2.Initialize
-				(
-					Content,
-					"Hammer\\clouds2",
-					0,
-					GraphicsDevice.Viewport.Width,
-					GraphicsDevice.Viewport.Height,
-					-(HammerPhysics.WallSpeed + .5f),
-					true
-				);
+			//player = new Player ();
+			ground = new ParallaxingBackground ();
+			clouds1 = new ParallaxingBackground ();
+			clouds2 = new ParallaxingBackground ();
+			base.Initialize ();
+		}
 
-				Reset ();
-			}
+		/// <summary>
+		/// Load your graphics content.
+		/// </summary>
+		protected override void LoadContent ()
+		{
+			// Create a new SpriteBatch, which can be use to draw textures.
+			this.spriteBatch = new SpriteBatch (graphics.GraphicsDevice);
+			this.groundBottom = Content.Load<Texture2D> ("Hammer\\bottomGround");
+			this.ground.Initialize
+			(
+				Content,
+				"Hammer\\ground",
+				wallHeight,
+				GraphicsDevice.Viewport.Width,
+				GraphicsDevice.Viewport.Height,
+				-HammerPhysics.WallSpeed,
+				false
+			);
+			this.clouds1.Initialize
+			(
+				Content,
+				"Hammer\\clouds1",
+				0,
+				GraphicsDevice.Viewport.Width,
+				GraphicsDevice.Viewport.Height,
+				-.25f,
+				true
+			);
+			this.clouds2.Initialize
+			(
+				Content,
+				"Hammer\\clouds2",
+				0,
+				GraphicsDevice.Viewport.Width,
+				GraphicsDevice.Viewport.Height,
+				-(HammerPhysics.WallSpeed + .5f),
+				true
+			);
 
-			public void Reset ()
-			{
-			}
+			Reset ();
+		}
 
-			#endregion
+		public void Reset ()
+		{
+		}
 
-			#region Update and Draw
+		#endregion
 
-			/// <summary>
-			/// Allows the game to run logic such as updating the world,
-			/// checking for collisions, gathering input, and playing audio.
-			/// </summary>
-			/// <param name="gameTime">Provides a snapshot of timing values.</param>
-			protected override void Update (GameTime gameTime)
-			{
-				base.Update (gameTime);
+		#region Update and Draw
 
-				ground.Update ();
-				clouds1.Update ();
-				clouds2.Update ();
+		/// <summary>
+		/// Allows the game to run logic such as updating the world,
+		/// checking for collisions, gathering input, and playing audio.
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		protected override void Update (GameTime gameTime)
+		{
+			base.Update (gameTime);
 
-				// Save the previous state of the keyboard and game pad so we can determine single key/button presses	
-				previousTouches = currentTouches;
+			ground.Update ();
+			clouds1.Update ();
+			clouds2.Update ();
 
-				// Read the current state of the keyboard and gamepad and store it
-				currentTouches = TouchPanel.GetState ();
+			// Save the previous state of the keyboard and game pad so we can determine single key/button presses	
+			previousTouches = currentTouches;
 
-			}
-
-			private void UpdateCollision ()
-			{
-				// Use the Rectangle's built-in intersect function to 
-				// determine if two objects are overlapping
-				//			var rectangle1 = player.Rectangle;
-				//
-				//			//If it collides with a wall, you die
-				//			foreach (var wall in walls.Where(x=> x.Collides(rectangle1))) {
-				//				gameOver ();
-				//			}
-				//
-				//			var points = walls.Sum (x => x.CollectPoints ());
-				//			score += points;
-				//
-				//			if (rectangle1.Bottom >= wallHeight) {
-				//				gameOver ();
-				//			}
-			}
-
-			/// <summary>
-			/// This is called when the game should draw itself. 
-			/// </summary>
-			/// <param name="gameTime">Provides a snapshot of timing values.</param>
-			protected override void Draw (GameTime gameTime)
-			{
-				GraphicsDevice.Clear (Color.CornflowerBlue);
-				// Start drawing
-				spriteBatch.Begin
-					(
-						SpriteSortMode.Deferred,
-						BlendState.AlphaBlend,
-						SamplerState.PointClamp,
-						DepthStencilState.None,
-						RasterizerState.CullNone
-					);
-
-				clouds1.Draw (spriteBatch);
-				clouds2.Draw (spriteBatch);
-				//spriteBatch.Draw (groundBottom, bottomGroundRect, Color.White);
-				ground.Draw (spriteBatch);
-
-				// Stop drawing
-				spriteBatch.End ();
-
-				base.Draw (gameTime);
-			}
-			#endregion
+			// Read the current state of the keyboard and gamepad and store it
+			currentTouches = TouchPanel.GetState ();
 
 		}
 
+		private void UpdateCollision ()
+		{
+			// Use the Rectangle's built-in intersect function to 
+			// determine if two objects are overlapping
+			//			var rectangle1 = player.Rectangle;
+			//
+			//			//If it collides with a wall, you die
+			//			foreach (var wall in walls.Where(x=> x.Collides(rectangle1))) {
+			//				gameOver ();
+			//			}
+			//
+			//			var points = walls.Sum (x => x.CollectPoints ());
+			//			score += points;
+			//
+			//			if (rectangle1.Bottom >= wallHeight) {
+			//				gameOver ();
+			//			}
+		}
+
+		/// <summary>
+		/// This is called when the game should draw itself. 
+		/// </summary>
+		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		protected override void Draw (GameTime gameTime)
+		{
+			GraphicsDevice.Clear (Color.CornflowerBlue);
+			// Start drawing
+			spriteBatch.Begin
+				(
+					SpriteSortMode.Deferred,
+					BlendState.AlphaBlend,
+					SamplerState.PointClamp,
+					DepthStencilState.None,
+					RasterizerState.CullNone
+				);
+
+			clouds1.Draw (spriteBatch);
+			clouds2.Draw (spriteBatch);
+			//spriteBatch.Draw (groundBottom, bottomGroundRect, Color.White);
+			ground.Draw (spriteBatch);
+
+			// Stop drawing
+			spriteBatch.End ();
+
+			base.Draw (gameTime);
+		}
 		#endregion
 
 	}

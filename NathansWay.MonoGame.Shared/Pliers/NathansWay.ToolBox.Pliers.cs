@@ -23,22 +23,15 @@ namespace NathansWay.MonoGame.Shared
 	public class Pliers : BaseTool
 	{
 
-	#region Fields
-		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
-		Texture2D logoTexture;
-	#endregion
+		#region Private Variables
 
-	#region Initialization
+		#endregion
 
-        public Pliers()  
+		#region Initialization
+
+		public Pliers() : base() 
         {
 
-			graphics = new GraphicsDeviceManager(this);
-			
-			Content.RootDirectory = "Content";
-
-			graphics.IsFullScreen = false;
 		}
 
 		/// <summary>

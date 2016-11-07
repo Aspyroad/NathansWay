@@ -11,6 +11,8 @@ using AspyRoad.iOSCore;
 using NathansWay.Numeracy.Shared.BUS.Entity;
 using NathansWay.Numeracy.Shared;
 using NathansWay.iOS.Numeracy.Controls;
+using NathansWay.MonoGame.iOS;
+using NathansWay.MonoGame.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -36,7 +38,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private string _strResult;
 
         private SizeWorkSpace _sizeWorkSpace;
+        // Factories
         private UINumberFactory _uiNumberFactory;
+        private ToolFactory _toolFactory;
 
         // Main workspace views and docking variables
         private vCanvasScrollMain _vCanvasMain;
@@ -70,6 +74,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private bool _bRecordResults;
         // Should the answer display as being correct/incorrect bg color
         private bool _bDisplayAnswerStatusColor;
+
+        // Tool Logic
+        //private 
 
 		#endregion
      
@@ -118,15 +125,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeWorkSpace = new SizeWorkSpace(this);
             this._sizeClass = this._sizeWorkSpace;
 
-            // Moved to size class
-            //            // Create a frame for the workcanvas
-            //            CGRect x = new CGRect(
-            //                               44.0f,
-            //                               30.0f,
-            //                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasWidth,
-            //                               this.SizeClass.GlobalSizeDimensions.WorkSpaceCanvasHeight
-            //                           );
-            //            this._vCanvas = new NWView(x);
+            // Tool Factory
+            this._toolFactory = iOSCoreServiceContainer.Resolve<ToolFactory>();
 
             // Storyboard reference
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
@@ -370,6 +370,34 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Check if we need to load them first to save time.
             // This must also be a loop
+        }
+
+        public void LoadTool(E__ToolBoxTool _tool)
+        {
+            //var _wind = UIApplication.SharedApplication.KeyWindow;
+            var t = _toolFactory.CreateNewTool(_tool);
+            // Do we want to run syn or async??
+            //t.Run(new Microsoft.Xna.Framework.GameRunBehavior());
+            // Below cant be done, its set is protected
+            //t.Window = _wind;
+            // Testinmg what can we do with this window
+            // Grab the window
+            var y = t.Services.GetService<UIWindow>();
+            // Grab the viewcontroller
+            var z = t.Services.GetService<UIViewController>();
+            //z.View.RemoveFromSuperview();
+
+            t.Services.RemoveService(typeof(UIWindow));
+
+            //t.Services.AddService(typeof(UIWindow), _wind);
+            //var x = t.Services.GetService<UIWindow>();
+
+            var c = 10;
+
+
+
+            //
+            //t.Run();
         }
 
         public void LoadAfterSizeChange()
@@ -848,12 +876,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnToolBox (object sender, EventArgs e)
         {
-            AlertMe(this.NumletEquation.EquationToString());
+            this.LoadTool(E__ToolBoxTool.Hammerz);
         }
 
         private void OnClick_btnOptions (object sender, EventArgs e)
         {
-
+            AlertMe(this.NumletEquation.EquationToString());
         }
 
         private void OnClick_btnBackToLessons (object sender, EventArgs e)

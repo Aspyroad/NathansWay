@@ -22,22 +22,17 @@ namespace NathansWay.MonoGame.Shared
 	public class ScrewDriver : BaseTool
 	{
 
-	#region Fields
-		GraphicsDeviceManager graphics;
+		#region Fields
+
 		SpriteBatch spriteBatch;
 		Texture2D logoTexture;
-	#endregion
 
-	#region Initialization
+		#endregion
 
-        public ScrewDriver()  
+		#region Initialization
+
+		public ScrewDriver() : base() 
         {
-
-			graphics = new GraphicsDeviceManager(this);
-			
-			Content.RootDirectory = "Content";
-
-			graphics.IsFullScreen = false;
 		}
 
 		/// <summary>
@@ -48,7 +43,6 @@ namespace NathansWay.MonoGame.Shared
 		{
 			base.Initialize();
 		}
-
 
 		/// <summary>
 		/// Load your graphics content.
@@ -62,15 +56,15 @@ namespace NathansWay.MonoGame.Shared
 			//logoTexture = Content.Load<Texture2D>("logo");
 		}
 
-	#endregion
+		#endregion
 
-	#region Update and Draw
+		#region Update and Draw
 
 		/// <summary>
-        	/// Allows the game to run logic such as updating the world,
-        	/// checking for collisions, gathering input, and playing audio.
-        	/// </summary>
-        	/// <param name="gameTime">Provides a snapshot of timing values.</param>
+    	/// Allows the game to run logic such as updating the world,
+    	/// checking for collisions, gathering input, and playing audio.
+    	/// </summary>
+    	/// <param name="gameTime">Provides a snapshot of timing values.</param>
 		protected override void Update(GameTime gameTime)
 		{
 			// TODO: Add your update logic here			
@@ -98,6 +92,6 @@ namespace NathansWay.MonoGame.Shared
 			base.Draw(gameTime);
 		}
 
-	#endregion
+		#endregion
 	}
 }

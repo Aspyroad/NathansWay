@@ -8,7 +8,7 @@
 
 namespace NathansWay.MonoGame.Shared
 {
-	public enum E__ToolBoxToolz
+	public enum E__ToolBoxTool
 	{
 		Hammerz = 1,
 		Plierz = 2,

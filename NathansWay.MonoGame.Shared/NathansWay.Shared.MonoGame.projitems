@@ -13,10 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)SideCutters\NathansWay.ToolBox.SideCutters.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ScrewDriver\NathansWay.ToolBox.ScrewDriver.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pliers\NathansWay.ToolBox.Pliers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\NathansWay.ToolBox.AspyGame.Base.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\INathansWay.ToolBox.Tool.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hammer\NathansWay.ToolBox.Hammer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Common\NathansWay.ToolBox.ParallaxingBg.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\NathansWay.ToolBox.ParallaxingBg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.Types.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.ToolBase.cs" />
   </ItemGroup>
@@ -26,7 +24,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)ScrewDriver\" />
     <Folder Include="$(MSBuildThisFileDirectory)Pliers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
   </ItemGroup>
 </Project>

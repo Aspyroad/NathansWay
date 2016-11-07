@@ -1,6 +1,6 @@
 #region File Description
 //-----------------------------------------------------------------------------
-// iOS_MonogameViewGame.cs
+// NathansWay.ToolBox.SideCutters.cs
 //
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
@@ -8,10 +8,8 @@
 #endregion
 
 #region Using Statements
-using System;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 #endregion
 
@@ -23,22 +21,14 @@ namespace NathansWay.MonoGame.Shared
 	public class SideCutters : BaseTool
 	{
 
-	#region Fields
-		GraphicsDeviceManager graphics;
-		//SpriteBatch spriteBatch;
-		//Texture2D logoTexture;
-	#endregion
+		#region Private Variables
 
-	#region Initialization
+		#endregion
+
+		#region Constructors
 
         public SideCutters()  
         {
-
-			graphics = new GraphicsDeviceManager(this);
-			
-			Content.RootDirectory = "Content";
-
-			graphics.IsFullScreen = false;
 		}
 
 		/// <summary>
@@ -63,9 +53,9 @@ namespace NathansWay.MonoGame.Shared
 			//logoTexture = Content.Load<Texture2D>("logo");
 		}
 
-	#endregion
+		#endregion
 
-	#region Update and Draw
+		#region Update and Draw
 
 		/// <summary>
         	/// Allows the game to run logic such as updating the world,
@@ -99,6 +89,6 @@ namespace NathansWay.MonoGame.Shared
 			base.Draw(gameTime);
 		}
 
-	#endregion
+		#endregion
 	}
 }

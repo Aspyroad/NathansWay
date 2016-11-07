@@ -9,9 +9,6 @@
 
 #region Using Statements
 
-using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using NathansWay.MonoGame.Shared;
 
 #endregion
@@ -20,8 +17,8 @@ namespace NathansWay.MonoGame.iOS
 {
 	public class ToolFactory
 	{
-		private ITool _newTool;
-		private ITool _oldTool;
+		private BaseTool _newTool;
+		private BaseTool _oldTool;
 
 		public ToolFactory ()
 		{
@@ -33,26 +30,26 @@ namespace NathansWay.MonoGame.iOS
 		}
 
 		#region Public Members
-		public ITool CreateNewTool (E__ToolBoxToolz newTool)
+		public BaseTool CreateNewTool (E__ToolBoxTool newTool)
 		{
 			switch (newTool)
 			{
-				case E__ToolBoxToolz.Hammerz:
+				case E__ToolBoxTool.Hammerz:
 				{
 					_newTool = new Hammer ();
 					return _newTool;
 				}
-				case E__ToolBoxToolz.Plierz:
+				case E__ToolBoxTool.Plierz:
 				{
 					_newTool = new Hammer ();
 					return _newTool;
 				}
-				case E__ToolBoxToolz.ScrewDriverz:
+				case E__ToolBoxTool.ScrewDriverz:
 				{
 					_newTool = new Hammer ();
 					return _newTool;
 				}
-				case E__ToolBoxToolz.SideCutterz:
+				case E__ToolBoxTool.SideCutterz:
 				{
 					_newTool = new Hammer ();
 					return _newTool;

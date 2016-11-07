@@ -1,7 +1,5 @@
 using System;
-using CoreGraphics;
 using Microsoft.Xna.Framework;
-using UIKit;
 
 namespace NathansWay.MonoGame.Shared
 {
@@ -9,12 +7,20 @@ namespace NathansWay.MonoGame.Shared
 	{
 		#region Declarations
 		
-		private String ToolName;
-		private  DateTime Instance_CreateTime;		
-		
+		protected String ToolName;
+		protected DateTime Instance_CreateTime;
+		protected GraphicsDeviceManager graphics;
+
 		#endregion
-		
+
 		#region Construction
+
+		protected BaseTool ()
+		{
+			graphics = new GraphicsDeviceManager (this);
+			Content.RootDirectory = "Content";
+			graphics.IsFullScreen = false;
+		}
 		
 		#endregion
 		

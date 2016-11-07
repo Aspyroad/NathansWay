@@ -182,7 +182,8 @@ namespace NathansWay.iOS.Numeracy
 			//Setup UIManager
 			this.SetUpUI();
 			// Setup the window
-			_window = new AspyWindow(UIScreen.MainScreen.Bounds);
+			// _window = new AspyWindow(UIScreen.MainScreen.Bounds);
+            _window = new iOSGameWindow(UIScreen.MainScreen.Bounds);
 			// Register our window
 			iOSCoreServiceContainer.Register<AspyWindow> (_window);
 
