@@ -35,9 +35,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NathansWay.iOS.Game.Core.cs" />
     <Compile Include="NathansWay.MonoGame.iOS.ToolBox.Factory.cs" />
-    <Compile Include="iOSGamePlatform.cs">
-      <Platforms>iOS</Platforms>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
@@ -51,6 +48,12 @@
     <BundleResource Include="Resources\Content\Hammer\clouds2.xnb" />
     <BundleResource Include="Resources\Content\Hammer\ground.xnb" />
     <BundleResource Include="Resources\Content\Hammer\logo.xnb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MacGameplatform.cs" />
+    <None Include="iOSGamePlatform.cs">
+      <Platforms>iOS</Platforms>
+    </None>
   </ItemGroup>
   <Import Project="..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems" Label="Shared" Condition="Exists('..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

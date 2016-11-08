@@ -380,8 +380,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             if (this._currentTool != null)
             {
-                this._vcToolSpace.WillMoveToParentViewController(null);
-                this._vcToolSpace.View.RemoveFromSuperview();
+                this._currentTool.Exit();
                 this._currentTool = null;
             }
             else
