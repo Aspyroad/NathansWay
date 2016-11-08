@@ -389,11 +389,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._currentTool = _toolFactory.CreateNewTool(_tool, this._vcMainWorkSpace);
                 this._vcToolSpace = this._currentTool.Services.GetService<UIViewController>();
 
-                this._vcToolSpace.View.Bounds = new CGRect(0.0f, 0.0f, 1016.0f, 600.0f);
+                this._vcToolSpace.View.Bounds = new CGRect(0.0f, 0.0f, 1016.0f, 540.0f);
                 this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 540.0f);
                 this._currentTool.Run();
             }
-
         }
 
         public void LoadAfterSizeChange()

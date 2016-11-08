@@ -20,6 +20,7 @@ namespace NathansWay.MonoGame.Shared
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = false;
+			//this.EndRun
 		}
 		
 		#endregion

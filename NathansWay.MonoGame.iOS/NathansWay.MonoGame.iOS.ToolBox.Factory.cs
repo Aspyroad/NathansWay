@@ -19,6 +19,7 @@ namespace NathansWay.MonoGame.iOS
 	public class ToolFactory
 	{
 		private UIWindow _localWindow;
+		private UIViewController _vcMainWorkSpace;
 
 		public ToolFactory ()
 		{
@@ -36,11 +37,11 @@ namespace NathansWay.MonoGame.iOS
 			_vcToolSpace.WillMoveToParentViewController (null);
 			_vcToolSpace.View.RemoveFromSuperview ();
 
-			_vcToolSpace.WillMoveToParentViewController (_vcWorkSpace);
-			_vcWorkSpace.Add (_vcToolSpace.View);
+			_vcToolSpace.WillMoveToParentViewController (_vcMainWorkSpace);
+			_vcMainWorkSpace.Add (_vcToolSpace.View);
 
 			_tool.Services.RemoveService (typeof(UIWindow));
-			_tool.Services.AddService (typeof (UIWindow), _localWindow);
+			_tool.Services.AddService(typeof (UIWindow), _localWindow);
 
 			return _tool;
 		}
@@ -48,6 +49,9 @@ namespace NathansWay.MonoGame.iOS
 		#region Public Members
 		public BaseTool CreateNewTool (E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
 		{
+			this._vcMainWorkSpace = _vcWorkSpace;
+			this._localWindow = UIApplication.SharedApplication.KeyWindow;
+
 			switch (newTool)
 			{
 				case E__ToolBoxTool.Hammerz:
