@@ -54,6 +54,7 @@
     <None Include="iOSGamePlatform.cs">
       <Platforms>iOS</Platforms>
     </None>
+    <None Include="Game.cs" />
   </ItemGroup>
   <Import Project="..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems" Label="Shared" Condition="Exists('..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
