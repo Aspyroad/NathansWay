@@ -82,6 +82,16 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Input.Touch;
 //using Microsoft.Xna.Framework.GamerServices;
 
+/*
+*****************************************************************************
+Changes - Methods
+
+iOSGamePlatform(Game game) (Constructor)
+Exit
+StartRunLoop
+
+*/
+
 namespace Microsoft.Xna.Framework
 {
     class iOSGamePlatform : GamePlatform
@@ -107,7 +117,14 @@ namespace Microsoft.Xna.Framework
 
             #if !TVOS
             UIApplication.SharedApplication.SetStatusBarHidden(true, UIStatusBarAnimation.Fade);
-#endif
+			#endif
+
+			/*
+
+			Changes - Remove the monogame created "UIWindow" and replace it with the Numeracy version.
+
+			*/
+
 
             // Create a full-screen window
             //_mainWindow = new UIWindow (UIScreen.MainScreen.Bounds);
@@ -200,6 +217,13 @@ namespace Microsoft.Xna.Framework
 
         public override void StartRunLoop()
         {
+
+			/*
+				Changes - Stop monogame from keying the main window as its used only as a lib not an app as such.
+				Remove the monogame VC from the root and responder. This is the role of 
+			*/
+
+
             // Show the window
             //_mainWindow.MakeKeyAndVisible();
 
@@ -270,6 +294,13 @@ namespace Microsoft.Xna.Framework
         {
             // Do nothing: iOS games are always full screen
         }
+
+		/*
+		*****************************************************************************
+		Changes - Implementn the exit method
+		This normally is not used in iOS monogame as iOS doesnt allow an app to be closed
+		But as this version of monogame is used "within" Numeracy its ok to call.
+		*/
 
         public override void Exit ()
         {

@@ -49,31 +49,27 @@ namespace NathansWay.MonoGame.iOS
 		#region Public Members
 		public BaseTool CreateNewTool (E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
 		{
-			this._vcMainWorkSpace = _vcWorkSpace;
-			this._localWindow = UIApplication.SharedApplication.KeyWindow;
-
 			switch (newTool)
 			{
 				case E__ToolBoxTool.Hammerz:
 				{
 					var _newTool = new Hammer ();
-
-					return this.WindowSwitcher(_newTool, this._localWindow);
+					return _newTool;
 				}
 				case E__ToolBoxTool.Plierz:
 				{
 					var _newTool = new Hammer ();
-					return this.WindowSwitcher (_newTool, this._localWindow);
+					return _newTool;
 				}
 				case E__ToolBoxTool.ScrewDriverz:
 				{
 					var _newTool = new Hammer ();
-					return this.WindowSwitcher (_newTool, this._localWindow);
+					return _newTool;
 				}
 				case E__ToolBoxTool.SideCutterz:
 				{
 					var _newTool = new Hammer ();
-					return this.WindowSwitcher (_newTool, this._localWindow);
+					return _newTool;
 				}
 				default:
 				{

@@ -53,14 +53,11 @@
     <None Include="SampleCode\iOSGamePlatform.cs">
       <Platforms>iOS</Platforms>
     </None>
-<<<<<<< Updated upstream
-    <None Include="Game.cs" />
-=======
-    <None Include="SampleCode\MacGameplatform.cs" />
+<None Include="SampleCode\MacGameplatform.cs" />
+<None Include="SampleCode\Game.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SampleCode\" />
->>>>>>> Stashed changes
   </ItemGroup>
   <Import Project="..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems" Label="Shared" Condition="Exists('..\NathansWay.MonoGame.Shared\NathansWay.Shared.MonoGame.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
