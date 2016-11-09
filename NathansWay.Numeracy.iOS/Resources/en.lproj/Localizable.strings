@@ -9,6 +9,12 @@
 "PositioningDialog-LockAnswer"="Lock Answer";
 "PositioningDialog-LockSolve"="Empty";
 
+/* VC ToolBoxDialog */
+"ToolBoxDialog-Hammer"="Hammer";
+"ToolBoxDialog-Pliers"="Pliers";
+"ToolBoxDialog-SideCutters"="SideCutters";
+"ToolBoxDialog-ScrewDriver"="ScrewDriver";
+
 /* VC WorkSpace */
 "WorkSpace-SizeNormal"="1";
 "WorkSpace-SizeLarge"="2";

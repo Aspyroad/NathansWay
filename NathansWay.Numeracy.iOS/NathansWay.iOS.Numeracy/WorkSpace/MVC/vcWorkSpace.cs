@@ -58,6 +58,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private List<vcWorkNumlet> _vcNumletMethods;
         // VC Dialogs
         private vcPositioningDialog _vcPositioningDialog;
+        private vcToolBoxDialog _vcToolBoxDialog;
 
         // Data
         private EntityLesson _wsLesson;
@@ -434,6 +435,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vcPositioningDialog.MainWorkSpace = this._vcMainWorkSpace;
 
             this._vcMainWorkSpace.AddAndDisplayController(this._vcPositioningDialog);
+        }
+
+        public void AddAndDisplay_ToolBoxDialog(CGPoint _location)
+        {
+            this._vcToolBoxDialog = this._storyBoard.InstantiateViewController("vcToolBoxDialog") as vcToolBoxDialog;
+            //this._vcPositioningDialog.View.Center = new CGPoint(200.0f, 0.0f); 
+
+            this._vcToolBoxDialog.View.Center = this.View.ConvertPointToView(_location, UIApplication.SharedApplication.KeyWindow.RootViewController.View);
+
+            this._vcToolBoxDialog.WorkSpace = this;
+            this._vcToolBoxDialog.MainWorkSpace = this._vcMainWorkSpace;
+
+            this._vcMainWorkSpace.AddAndDisplayController(this._vcToolBoxDialog);
         }
 
         public void DockNumlets(G__WorkNumletType _numType)
@@ -872,7 +886,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnToolBox (object sender, EventArgs e)
         {
-            this.LoadTool(E__ToolBoxTool.Hammerz);
+            this.AddAndDisplay_ToolBoxDialog(this.btnToolBox.Center);
+            //this.LoadTool(E__ToolBoxTool.Hammerz);
         }
 
         private void OnClick_btnOptions (object sender, EventArgs e)

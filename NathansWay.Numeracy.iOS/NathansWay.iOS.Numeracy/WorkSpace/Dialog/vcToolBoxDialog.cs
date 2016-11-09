@@ -23,7 +23,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 {
     partial class vcToolBoxDialog : NWViewController
     {
-
 		#region Private Variables
 
         private vcMainWorkSpace _vcMainWorkSpace;
@@ -86,42 +85,42 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.CornerRadius = 5.0f;
             this.HasBorder = false;
 
-            //// Setup Button Text
-            //this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
-            //this.btnCenterMethods.SetTitle("PositioningDialog-CenterMethods".Aspylate(), UIControlState.Normal);
-            //this.btnLockAnswer.SetTitle("PositioningDialog-LockAnswer".Aspylate(), UIControlState.Normal);
-            //this.btnLockSolveButton.SetTitle("PositioningDialog-LockSolve".Aspylate(), UIControlState.Normal);
+            // Setup Button Text
+            this.btnHammer.SetTitle("ToolBoxDialog-Hammer".Aspylate(), UIControlState.Normal);
+            this.btnPliers.SetTitle("ToolBoxDialog-Pliers".Aspylate(), UIControlState.Normal);
+            this.btnScrewDriver.SetTitle("ToolBoxDialog-ScrewDriver".Aspylate(), UIControlState.Normal);
+            this.btnSideCutters.SetTitle("ToolBoxDialog-SideCutters".Aspylate(), UIControlState.Normal);
         }
 
         public override void ApplyUI7 ()
         {
-            //// Backview color
-            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
+            // Backview color
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
 
-            //// Buttons
-            //this.btnLockAnswer.HasBorder = false;
-            ////this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            ////this.btnLockAnswer.CornerRadius = 5.0f;
-            //this.btnLockAnswer.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
-            //this.btnLockAnswer.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            // Buttons
+            this.btnHammer.HasBorder = false;
+            //this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            //this.btnLockAnswer.CornerRadius = 5.0f;
+            this.btnHammer.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnHammer.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            //this.btnCenterMethods.HasBorder = false;
-            ////this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            ////this.btnCenterMethods.CornerRadius = 5.0f;
-            //this.btnCenterMethods.BackgroundColor = UIColor.Clear;
-            //this.btnCenterMethods.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnPliers.HasBorder = false;
+            //this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            //this.btnCenterMethods.CornerRadius = 5.0f;
+            this.btnPliers.BackgroundColor = UIColor.Clear;
+            this.btnPliers.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            //this.btnCenterQuestion.HasBorder = false;
-            ////this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
-            ////this.btnCenterQuestion.CornerRadius = 5.0f;
-            //this.btnCenterQuestion.SetBorderColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            //this.btnCenterQuestion.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnSideCutters.HasBorder = false;
+            //this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            //this.btnCenterQuestion.CornerRadius = 5.0f;
+            this.btnSideCutters.SetBorderColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnSideCutters.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            //this.btnLockSolveButton.HasBorder = false;
-            ////this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
-            ////this.btnLockSolveButton.CornerRadius = 5.0f;
-            //this.btnLockSolveButton.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
-            //this.btnLockSolveButton.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.btnScrewDriver.HasBorder = false;
+            //this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            //this.btnLockSolveButton.CornerRadius = 5.0f;
+            this.btnScrewDriver.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
+            this.btnScrewDriver.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
         }
 
@@ -162,29 +161,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Event Handlers
 
-        //partial void OnTouch_btnCenterMethods(NWButton sender)
-        //{
-        //    this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        //}
+        partial void OnTouch_btnSideCutters(NWButton sender)
+        {
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
 
-        //partial void OnTouch_btnCenterQuestion(NWButton sender)
-        //{
-        //    this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        //}
+        partial void OnTouch_btnScrewDriver(NWButton sender)
+        {
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
 
-        //partial void OnTouch_btnLockAnswer(NWButton sender)
-        //{
-            
-        //    this._vcWorkSpace.DockNumlets(G__WorkNumletType.Result);
-        //    this._vcWorkSpace.DockNumlets(G__WorkNumletType.Solve);
+        partial void OnTouch_btnPliers(NWButton sender)
+        {
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
 
-        //    this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        //}
-
-        //partial void OnTouch_btnLockSolveButton(NWButton sender)
-        //{
-        //    this._vcWorkSpace.RemoveViewControllerFromParent(this);
-        //}
+        partial void OnTouch_btnHammer(NWButton sender)
+        {
+            this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Hammerz);
+            this._vcWorkSpace.RemoveViewControllerFromParent(this);
+        }
 
         #endregion
 

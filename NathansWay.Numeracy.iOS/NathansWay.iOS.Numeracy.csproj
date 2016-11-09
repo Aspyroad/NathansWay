@@ -105,7 +105,9 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vToolBoxDialog.cs">
       <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcToolBoxDialog.designer.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcToolBoxDialog.designer.cs">
+		      <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
+			</Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
