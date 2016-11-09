@@ -169,7 +169,7 @@
       <DependentUpon>vLessonTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Label.Bordered.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.LabelStyle.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.Base.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.designer.cs">
       <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>

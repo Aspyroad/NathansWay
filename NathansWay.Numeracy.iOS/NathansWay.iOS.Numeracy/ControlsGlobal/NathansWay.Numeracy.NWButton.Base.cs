@@ -55,27 +55,28 @@ namespace NathansWay.iOS.Numeracy
         public override void ApplyUIHeld()
         {           
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-            // Must call base last.
             base.ApplyUIHeld();
+            // Must call base last.
         }
 
         public override void ApplyUIUnHeld()
         {
-            this.BackgroundColor = UIColor.Clear;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             base.ApplyUIUnHeld();
+            // Must call base last.
         }
 
         public override void ApplyPressed(bool _isPressed)
         {
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
             base.ApplyPressed(_isPressed);
         }
 
         public override void ApplyUnPressed(bool _isPressed)
         {
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             base.ApplyUnPressed(_isPressed);
         }
             
@@ -93,8 +94,9 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this.BackgroundColor = UIColor.Purple;
+            this.BackgroundColor = UIColor.Clear;
             this.HasBorder = true;
+            this.BorderWidth = 2.0f;
             this.HasRoundedCorners = true;
             this.EnableHold = true;
             this.AutoApplyUI = true;
