@@ -842,7 +842,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.ReloadAllNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
-                this.btnPrevEquation.ApplyUI_Normal();
+                //this.btnPrevEquation.ApplyUI_Normal();
             }
         }
 
@@ -880,7 +880,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.ReloadAllNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
-                this.btnNextEquation.ApplyUI_Normal();
+                //this.btnNextEquation.ApplyUI_Normal();
             }
         }
 

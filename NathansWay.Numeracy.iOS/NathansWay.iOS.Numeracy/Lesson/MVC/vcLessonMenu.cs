@@ -11,7 +11,7 @@ using NathansWay.Numeracy.Shared;
 using NathansWay.Numeracy.Shared.BUS.ViewModel;
 //using NathansWay.Numeracy.Shared.BUS.Entity;
 //using NathansWay.Numeracy.Shared.DAL.Repository;
-using NathansWay.Numeracy.Shared;
+
 
 namespace NathansWay.iOS.Numeracy
 {
@@ -188,6 +188,31 @@ namespace NathansWay.iOS.Numeracy
                 // Change the label filter text color to a cooler value
                 this.lblFilter.TextColor = UIColor.Black;
                 this.lblLevel.TextColor = UIColor.Black;
+
+                this.btnLevel1.SetClearBackGround = true;
+                this.btnLevel2.SetClearBackGround = true;
+                this.btnLevel3.SetClearBackGround = true;
+                this.btnLevel4.SetClearBackGround = true;
+                this.btnLevel5.SetClearBackGround = true;
+                this.btnLevel6.SetClearBackGround = true;
+                this.btnLevel7.SetClearBackGround = true;
+                this.btnLevel8.SetClearBackGround = true;
+                this.btnLevel9.SetClearBackGround = true;
+                this.btnLevel10.SetClearBackGround = true;
+                // Type Buttons
+                this.btnTypeBasic.SetClearBackGround = true;
+                this.btnTypeFractions.SetClearBackGround = true;
+                this.btnTypeGroups.SetClearBackGround = true;
+                this.btnTypeMixed.SetClearBackGround = true;
+                // Operator Buttons
+                this.btnOpAdd.SetClearBackGround = true;
+                this.btnOpAddSub.SetClearBackGround = true;
+                this.btnOpDivision.SetClearBackGround = true;
+                this.btnOpMultiply.SetClearBackGround = true;
+                this.btnOpMultSub.SetClearBackGround = true;
+                this.btnOpSubtract.SetClearBackGround = true;
+                // BackToMenu
+                this.btnBackToMenu.SetClearBackGround = true;
 
                 // Im going to try and call these from MovedToSuperView inside the tv classes.
                 this.tvLessonMain.ApplyUI(_applywhere);

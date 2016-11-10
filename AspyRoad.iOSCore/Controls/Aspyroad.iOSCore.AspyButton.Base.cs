@@ -30,6 +30,7 @@ namespace AspyRoad.iOSCore
         protected UIColor colorBorderColor;
         private CGRect labRect;
         private CGRect imgRect;
+        private bool _clearBackground;
 
         // UIApplication Variables
         protected bool _bHasBorder;
@@ -91,6 +92,7 @@ namespace AspyRoad.iOSCore
             // UIApply
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
+            this._clearBackground = false;
             this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
             this._fMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
@@ -224,6 +226,12 @@ namespace AspyRoad.iOSCore
 			get{ return _bHoldState; }
 			set{ _bHoldState = value; }
 		}
+
+        public bool SetClearBackGround
+        {
+            get { return this._clearBackground; }
+            set { this._clearBackground = value; }
+        }
 
         public bool IsPressed
         {
@@ -397,11 +405,13 @@ namespace AspyRoad.iOSCore
             {
                 if (this._bHoldState)
                 {
-                    this.ApplyUIUnHeld();
+                    this.ApplyUIHeld();
+                    this._bHoldState = false;
+
                 }
                 else
                 {
-                    this.ApplyUIHeld();
+                    this.ApplyUIUnHeld();
                 }
             }
         }
@@ -409,6 +419,18 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUnPressed(bool _isPressed)
         {
             this._bIsPressed = _isPressed;
+
+            //if (this._bEnableHold)
+            //{
+            //    if (!this._bHoldState)
+            //    {
+            //        this.ApplyUIHeld();
+            //    }
+            //    else
+            //    {
+            //        this.ApplyUIUnHeld();
+            //    }
+            //}
         }
 
         // Must call this base last.

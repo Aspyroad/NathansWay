@@ -53,30 +53,30 @@ namespace NathansWay.iOS.Numeracy
 		#region Overrides 
 
         public override void ApplyUIHeld()
-        {           
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+        { 
             base.ApplyUIHeld();
-            // Must call base last.
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
         }
 
         public override void ApplyUIUnHeld()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
             base.ApplyUIUnHeld();
-            // Must call base last.
+            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
         }
 
         public override void ApplyPressed(bool _isPressed)
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
+            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
+            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
             base.ApplyPressed(_isPressed);
         }
 
         public override void ApplyUnPressed(bool _isPressed)
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             base.ApplyUnPressed(_isPressed);
         }
             
@@ -96,7 +96,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this.BackgroundColor = UIColor.Clear;
             this.HasBorder = true;
-            this.BorderWidth = 2.0f;
+            this.BorderWidth = iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this.HasRoundedCorners = true;
             this.EnableHold = true;
             this.AutoApplyUI = true;
@@ -123,23 +123,23 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public void ApplyUI_Negative()
-        {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value; 
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value, UIControlState.Normal);
-        }
+        //public void ApplyUI_Negative()
+        //{
+        //    this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value; 
+        //    this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value, UIControlState.Normal);
+        //}
 
-        public void ApplyUI_Positive()
-        {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;  
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value, UIControlState.Normal);
-        }
+        //public void ApplyUI_Positive()
+        //{
+        //    this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;  
+        //    this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value, UIControlState.Normal);
+        //}
 
-        public void ApplyUI_Normal()
-        {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-        }
+        //public void ApplyUI_Normal()
+        //{
+        //    this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+        //    this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+        //}
 
         #endregion
 	}
