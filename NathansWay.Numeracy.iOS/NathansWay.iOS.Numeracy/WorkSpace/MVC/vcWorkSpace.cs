@@ -162,7 +162,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasMain.ScrollEnabled = true;
             this._vCanvasMain.UserInteractionEnabled = true;
             this._vCanvasMain.CornerRadius = 5.0f;
-            this._vCanvasMain.HasRoundedCorners = true;
+            //this._vCanvasMain.HasRoundedCorners = true;
 
             // This is NEEDED for scrollview to work (currently set in sizing?)
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
@@ -172,7 +172,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasDocked.ClipsToBounds = true;
             this._vCanvasDocked.AutosizesSubviews = false;
             this._vCanvasDocked.CornerRadius = 5.0f;
-            this._vCanvasDocked.HasRoundedCorners = true;
+            //this._vCanvasDocked.HasRoundedCorners = true;
             this._vCanvasDocked.UserInteractionEnabled = true;
             // This is NEEDED for scrollview to work
             // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
@@ -842,7 +842,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.ReloadAllNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
-                this.btnPrevEquation.ApplyUI_Normal();
+                //this.btnPrevEquation.ApplyUI_Normal();
             }
         }
 
@@ -880,7 +880,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.ReloadAllNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
-                this.btnNextEquation.ApplyUI_Normal();
+                //this.btnNextEquation.ApplyUI_Normal();
             }
         }
 

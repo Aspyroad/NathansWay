@@ -6,12 +6,13 @@ using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
 using Foundation;
+using NathansWay.iOS.Numeracy;
 
 namespace NathansWay.iOS.Numeracy.Controls
 {
 	//[Register ("ButtonStyleToolBox")]
-	public class ButtonStyleToolBox : AspyButton
-	{
+	public class ButtonStyleToolBox : NWButton
+    {
 		#region Constructors
 
 		public ButtonStyleToolBox () : base()
@@ -53,6 +54,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
 		#endregion
@@ -62,7 +64,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 		private void DrawFToolBox (CGRect frame, 
                                     UIColor colorGradientButtonMainStart, 
                                     UIColor colorGradientButtonMainEnd, 
-                                    UIColor colorNormalSVGColor, 
+                                    UIColor _colorNormalSVGColor, 
                                     bool isTapped)
 		{
 			//// General Declarations
@@ -130,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 					spannerPath.ClosePath();
 					spannerPath.MiterLimit = 4.0f;
 
-					colorNormalSVGColor.SetFill();
+					_colorNormalSVGColor.SetFill();
 					spannerPath.Fill();
 
 					//// ScrewDriverHandle Drawing
@@ -149,7 +151,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 					screwDriverHandlePath.ClosePath();
 					screwDriverHandlePath.MiterLimit = 4.0f;
 
-					colorNormalSVGColor.SetFill();
+					_colorNormalSVGColor.SetFill();
 					screwDriverHandlePath.Fill();
 
 
@@ -167,7 +169,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 					screwDriverTipPath.ClosePath();
 					screwDriverTipPath.MiterLimit = 4.0f;
 
-					colorNormalSVGColor.SetFill();
+					_colorNormalSVGColor.SetFill();
 					screwDriverTipPath.Fill();
 
                     this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath); 
@@ -188,7 +190,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	}
 
 	//[Register ("ButtonStyleLesson")]
-	public class ButtonStyleLesson : AspyButton
+	public class ButtonStyleLesson : NWButton
 	{
 		#region Constructors
 
@@ -233,13 +235,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
 		}
 
 		#endregion
 
 		#region Draw Methods
 
-		private void DrawFLesson(CGRect frame, UIColor colorButtonBGStart, UIColor colorButtonBGEnd, UIColor colorNormalSVGColor, bool isTapped)
+        private void DrawFLesson(CGRect frame, UIColor _colorButtonBGStart, UIColor _colorButtonBGEnd, UIColor _colorNormalSVGColor, bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -249,7 +252,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorTextGradient = UIColor.FromRGBA(1.000f, 1.000f, 1.000f, 0.780f);
 
 			//// Variable Declarations
-			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorButtonBGEnd.CGColor, colorButtonBGStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorButtonBGStart.CGColor, colorButtonBGEnd.CGColor});
+			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {_colorButtonBGEnd.CGColor, _colorButtonBGStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {_colorButtonBGStart.CGColor, _colorButtonBGEnd.CGColor});
 
 			//// MainFront Drawing
 			var mainFrontPath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
@@ -311,7 +314,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			bezierPath.ClosePath();
 			bezierPath.MiterLimit = 4.0f;
 
-			colorNormalSVGColor.SetFill();
+			_colorNormalSVGColor.SetFill();
 			bezierPath.Fill();
 
             this.ClipDrawingToFrame(frame, mainFrontPath); 
@@ -321,7 +324,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	}
 
 	//[Register ("ButtonStyleTeacher")]
-	public class ButtonStyleTeacher : AspyButton
+	public class ButtonStyleTeacher : NWButton
 	{
 		#region Constructors
 
@@ -362,8 +365,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void ApplyUI7 ()
         {
+            
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
 		#endregion
@@ -467,7 +472,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	}
 
 	//[Register ("ButtonStyleStudent")]
-	public class ButtonStyleStudent : AspyButton
+	public class ButtonStyleStudent : NWButton
 	{
 		#region Constructors
 
@@ -510,6 +515,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
 		#endregion
@@ -639,7 +645,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	}
 
 	//[Register ("ButtonStyleLessonBuilder")]
-	public class ButtonStyleLessonBuilder : AspyButton
+	public class ButtonStyleLessonBuilder : NWButton
 	{
 		#region Constructors
 
@@ -682,13 +688,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
 		#endregion
 
 		#region Draw Methods
 
-		private void DrawFLessonEdit(CGRect frame, UIColor colorGradientButtonMainStart, UIColor colorGradientButtonMainEnd, UIColor colorNormalSVGColor, bool isTapped)
+        private void DrawFLessonEdit(CGRect frame, UIColor colorGradientButtonMainStart, UIColor colorGradientButtonMainEnd, UIColor _colorNormalSVGColor, bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -768,7 +775,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 				paperCirclePath.ClosePath();
 				paperCirclePath.MiterLimit = 4.0f;
 
-				colorNormalSVGColor.SetFill();
+				_colorNormalSVGColor.SetFill();
 				paperCirclePath.Fill();
 
 
@@ -783,7 +790,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 					pencilTipPath.ClosePath();
 					pencilTipPath.MiterLimit = 4.0f;
 
-					colorNormalSVGColor.SetFill();
+					_colorNormalSVGColor.SetFill();
 					pencilTipPath.Fill();
 
 
@@ -797,7 +804,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 					pencilBodyPath.ClosePath();
 					pencilBodyPath.MiterLimit = 4.0f;
 
-					colorNormalSVGColor.SetFill();
+					_colorNormalSVGColor.SetFill();
 					pencilBodyPath.Fill();
 
                     this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath);
@@ -809,7 +816,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 	}
 
 	//[Register ("ButtonStyleVisuals")]
-	public class ButtonStyleVisuals : AspyButton
+	public class ButtonStyleVisuals : NWButton
 	{
 		#region Constructors
 
@@ -852,13 +859,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             base.ApplyUI7 ();
             this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
 		#endregion
 
 		#region Draw Methods
 
-		private void DrawFVisuals(CGRect frame, UIColor colorGradientButtonMainStart, UIColor colorGradientButtonMainEnd, UIColor colorNormalSVGColor, bool isTapped)
+        private void DrawFVisuals(CGRect frame, UIColor colorGradientButtonMainStart, UIColor colorGradientButtonMainEnd, UIColor _colorNormalSVGColor, bool isTapped)
 		{
 			//// General Declarations
 			var colorSpace = CGColorSpace.CreateDeviceRGB();
@@ -959,7 +967,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				leftSlidePath.UsesEvenOddFillRule = true;
 
-				colorNormalSVGColor.SetFill();
+				_colorNormalSVGColor.SetFill();
 				leftSlidePath.Fill();
 
 
@@ -1033,7 +1041,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				rightSlidePath.UsesEvenOddFillRule = true;
 
-				colorNormalSVGColor.SetFill();
+				_colorNormalSVGColor.SetFill();
 				rightSlidePath.Fill();
 
 
@@ -1107,7 +1115,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 				middleSlidePath.UsesEvenOddFillRule = true;
 
-				colorNormalSVGColor.SetFill();
+				_colorNormalSVGColor.SetFill();
 				middleSlidePath.Fill();
 
                 this.ClipDrawingToFrame(frame, mainSurfaceRectanglePath);

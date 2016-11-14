@@ -15,27 +15,27 @@ namespace NathansWay.iOS.Numeracy
     partial class vcLessonMenu
     {
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderEdit { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderEdit { get; set; }
 
 
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderLessonName { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderLessonName { get; set; }
 
 
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderLevel { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderLevel { get; set; }
 
 
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderOperator { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderOperator { get; set; }
 
 
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderStart { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderStart { get; set; }
 
 
         [Outlet]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnHeaderType { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnHeaderType { get; set; }
 
 
         [Outlet]
@@ -131,7 +131,7 @@ namespace NathansWay.iOS.Numeracy
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.ButtonOrderBy btnQuestions { get; set; }
+        NathansWay.iOS.Numeracy.NWButtonOrderBy btnQuestions { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]

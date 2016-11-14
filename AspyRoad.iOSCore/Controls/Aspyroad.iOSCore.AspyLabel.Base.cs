@@ -133,50 +133,97 @@ namespace AspyRoad.iOSCore
 
         #region Public Properties
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
-            get { return this._bHasBorder; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.BorderWidth > 0.0f)
                 {
-                    this.Layer.BorderWidth = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.BorderWidth = this._fBorderWidth;   
+                    return false;
                 }
-                this._bHasBorder = value; 
+            }
+            set
+            {
+                if (value == false)
+                {
+                    this.BorderWidth = 0.0f;
+                    this._bHasBorder = false;
+                }
+                else
+                {
+                    this.BorderWidth = this._fBorderWidth;
+                    this._bHasBorder = true;
+                }
             }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// </summary>
+        /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
-            get { return this._bHasRoundedCorners; }
-            set 
-            { 
+            get
+            {
+                if (this.Layer.CornerRadius > 0.0f)
+                {
+                    this._bHasRoundedCorners = true;
+                    return true;
+                }
+                else
+                {
+                    this._bHasRoundedCorners = false;
+                    return false;
+                }
+            }
+            set
+            {
                 if (value == false)
                 {
                     this.Layer.CornerRadius = 0.0f;
+                    this._bHasRoundedCorners = false;
                 }
                 else
                 {
-                    this.Layer.CornerRadius = this._fCornerRadius;   
+                    this.Layer.CornerRadius = this._fCornerRadius;
+                    this._bHasRoundedCorners = true;
                 }
-                this._bHasRoundedCorners = value; 
             }
         }
 
+        /// <summary>
+        /// Gets or sets the width of the border.
+        /// </summary>
+        /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this._fBorderWidth; }
-            set { this._fBorderWidth = value; }
+            get { return this.Layer.BorderWidth; }
+            set
+            {
+                this.Layer.BorderWidth = value;
+
+            }
         }
 
+        /// <summary>
+        /// Gets or sets the corner radius.
+        /// </summary>
+        /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this._fCornerRadius; }
-            set { this._fCornerRadius = value; }
+            get { return this.Layer.CornerRadius; }
+            set
+            {
+                this.Layer.CornerRadius = value;
+            }
         }
 
         public bool AutoApplyUI

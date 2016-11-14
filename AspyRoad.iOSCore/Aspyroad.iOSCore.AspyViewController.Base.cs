@@ -156,23 +156,29 @@ namespace AspyRoad.iOSCore
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
-            get { return this._bHasBorder; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.BorderWidth > 0.0f)
                 {
-                    this.View.Layer.BorderWidth = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.View.Layer.BorderWidth = this._fBorderWidth;   
+                    return false;
                 }
-
-                if (this._bHasBorder)
-                { 
-                    this.View.SetNeedsDisplay();
+            }
+            set
+            {
+                if (value == false)
+                {
+                    this.BorderWidth = 0.0f;
+                    this._bHasBorder = false;
                 }
-                this._bHasBorder = value; 
+                else
+                {
+                    this.BorderWidth = this._fBorderWidth;
+                    this._bHasBorder = true;
+                }
             }
         }
 
@@ -182,23 +188,31 @@ namespace AspyRoad.iOSCore
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
-            get { return this._bHasRoundedCorners; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.View.Layer.CornerRadius > 0.0f)
                 {
-                    this.View.Layer.CornerRadius = 0.0f;
+                    this._bHasRoundedCorners = true;
+                    return true;
                 }
                 else
                 {
-                    this.View.Layer.CornerRadius = this._fCornerRadius;   
+                    this._bHasRoundedCorners = false;
+                    return false;
                 }
-
-                if (this._bHasRoundedCorners)
+            }
+            set
+            {
+                if (value == false)
                 {
-                    this.View.SetNeedsDisplay();
+                    this.View.Layer.CornerRadius = 0.0f;
+                    this._bHasRoundedCorners = false;
                 }
-                this._bHasRoundedCorners = value;
+                else
+                {
+                    this.View.Layer.CornerRadius = this._fCornerRadius;
+                    this._bHasRoundedCorners = true;
+                }
             }
         }
 
@@ -208,12 +222,10 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this._fBorderWidth; }
-            set 
-            { 
-
-                this._fBorderWidth = value;
-                //this.View.Layer.BorderWidth = value;
+            get { return this.View.Layer.BorderWidth; }
+            set
+            {
+                this.View.Layer.BorderWidth = value;
 
             }
         }
@@ -224,17 +236,12 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this._fCornerRadius; }
-            set 
+            get { return this.View.Layer.CornerRadius; }
+            set
             {
-                if (this._bHasRoundedCorners)
-                {
-                    this.View.SetNeedsDisplay();
-                }
-                this._fCornerRadius = value; 
+                this.View.Layer.CornerRadius = value;
             }
         }
-
         #endregion
 
         #region Public Members

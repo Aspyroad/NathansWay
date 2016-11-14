@@ -41,8 +41,6 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
 		{ 
-            this.HasBorder = true;
-            this.HasRoundedCorners = true;
             this.AutoApplyUI = true;
 		}
 

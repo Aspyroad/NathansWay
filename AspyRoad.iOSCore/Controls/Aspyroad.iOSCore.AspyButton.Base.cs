@@ -23,7 +23,7 @@ namespace AspyRoad.iOSCore
         private bool _bRedrawOnTapStart;
         private bool _bRedrawOnTapFinish;
 		// UI Variables
-		protected iOSUIManager iOSUIAppearance; 
+		protected IAspyGlobals aspyGlobals; 
 		protected UIColor colorNormalSVGColor;
 		protected UIColor colorButtonBGStart;
 		protected UIColor colorButtonBGEnd;
@@ -81,7 +81,7 @@ namespace AspyRoad.iOSCore
 
         private void Initialize()
         { 
-            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            this.aspyGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
             // Logic
             this._bHoldState = false;
             this._bEnableHold = false;
@@ -91,12 +91,7 @@ namespace AspyRoad.iOSCore
             // UIApply
             this._bHasBorder = false;
             this._bHasRoundedCorners = false;
-            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
-            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
-            this._fMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
-
-            // Set the default BG color - Globally sets all UIButtons to this set
-            UIButton.GetAppearance<AspyButton>().BackgroundColor = UIColor.Clear;
+            this.SetBorderColor = UIColor.Clear.CGColor;
         }
 
         protected void ClipDrawingToFrame(CGRect _frame, UIBezierPath _maskPath)
@@ -255,33 +250,29 @@ namespace AspyRoad.iOSCore
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
-            get { return this._bHasBorder; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.BorderWidth > 0.0f)
                 {
-                    this.Layer.BorderWidth = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.BorderWidth = this._fBorderWidth;   
+                    return false;
                 }
-
-                if (this._bHasBorder)
-                { 
-                    this.SetNeedsDisplay();
-                }
-                this._bHasBorder = value; 
             }
-        }
-
-        public virtual UIColor SetBorderColor
-        {
-            get { return this._colorBorderColor; }
-            set 
-            { 
-                this._colorBorderColor = value;
-                this.Layer.BorderColor = this._colorBorderColor.CGColor;   
+            set
+            {
+                if (value == false)
+                {
+                    this.BorderWidth = 0.0f;
+                    this._bHasBorder = false;
+                }
+                else
+                {
+                    this.BorderWidth = this._fBorderWidth;
+                    this._bHasBorder = true;
+                }
             }
         }
 
@@ -291,23 +282,31 @@ namespace AspyRoad.iOSCore
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
-            get { return this._bHasRoundedCorners; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.Layer.CornerRadius > 0.0f)
                 {
-                    this.Layer.CornerRadius = 0.0f;
+                    this._bHasRoundedCorners = true;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.CornerRadius = this._fCornerRadius;   
+                    this._bHasRoundedCorners = false;
+                    return false;
                 }
-
-                if (this._bHasRoundedCorners)
+            }
+            set
+            {
+                if (value == false)
                 {
-                    this.SetNeedsDisplay();
+                    this.Layer.CornerRadius = 0.0f;
+                    this._bHasRoundedCorners = false;
                 }
-                this._bHasRoundedCorners = value;
+                else
+                {
+                    this.Layer.CornerRadius = this._fCornerRadius;
+                    this._bHasRoundedCorners = true;
+                }
             }
         }
 
@@ -317,14 +316,10 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this._fBorderWidth; }
-            set 
-            { 
-                if (this._bHasBorder)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._fBorderWidth = value; 
+            get { return this.Layer.BorderWidth; }
+            set
+            {
+                this.Layer.BorderWidth = value;
 
             }
         }
@@ -335,24 +330,26 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this._fCornerRadius; }
-            set 
+            get { return this.Layer.CornerRadius; }
+            set
             {
-                if (this._bHasRoundedCorners)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._fCornerRadius = value; 
+                this.Layer.CornerRadius = value;
             }
         }
 
-		#endregion
+        public CGColor SetBorderColor
+        {
+            get { return this.Layer.BorderColor; }
+            set { this.Layer.BorderColor = value; }
+        }
+
+        #endregion
 
 		#region Virtual Members
 
 		public virtual void ApplyUI()
 		{
-            if (this.iOSUIAppearance.GlobaliOSTheme.IsiOS7)
+            if (this.aspyGlobals.G__IsiOS7)
             {
                 this.ApplyUI7();
             }
@@ -369,41 +366,23 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
-            this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
-            this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-            this.SetTitleColor (iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Highlighted);
-
-            // Border
-            if (this._bHasBorder) 
-            {
-                this.Layer.BorderWidth = this._fBorderWidth;
-                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
-            }
-            // RoundedCorners
-            if (this._bHasRoundedCorners) 
-            {
-                this.Layer.CornerRadius = this._fCornerRadius;
-            }
         }
 
         public virtual void ApplyPressed(bool _isPressed)
         {
             this._bIsPressed = _isPressed;
 
-            if (this._bEnableHold)
-            {
-                if (this._bHoldState)
-                {
-                    this.ApplyUIUnHeld();
-                }
-                else
-                {
-                    this.ApplyUIHeld();
-                }
-            }
+            //if (this._bEnableHold)
+            //{
+            //    if (this._bHoldState)
+            //    {
+            //        this.ApplyUIUnHeld();
+            //    }
+            //    else
+            //    {
+            //        this.ApplyUIHeld();
+            //    }
+            //}
         }
 
         public virtual void ApplyUnPressed(bool _isPressed)
@@ -414,13 +393,13 @@ namespace AspyRoad.iOSCore
         // Must call this base last.
         public virtual void ApplyUIHeld()
         {
-            this._bHoldState = true;
+            //this._bHoldState = true;
         }
 
         // Must call this base last.
         public virtual void ApplyUIUnHeld()
         {
-            this._bHoldState = false;
+            //this._bHoldState = false;
         }
 
         #endregion

@@ -108,6 +108,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcToolBoxDialog.designer.cs">
 		      <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
 			</Compile>
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
@@ -161,22 +162,21 @@
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLesson.cs">
       <DependentUpon>vcLesson.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.OrderBy.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.NWOrderBy.cs" />
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.SyncInvoke.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonTableCell.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonTableCell.designer.cs">
       <DependentUpon>vLessonTableCell.cs</DependentUpon>
     </Compile>
-    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Label.Bordered.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.Base.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWLabel.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Lesson\MVC\vLessonDetailTableCell.designer.cs">
       <DependentUpon>vLessonDetailTableCell.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Button.NumberPad.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Container\MVC\NathansWay.Numeracy.Container.MainContainer.cs" />
-    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.Input.TextBoxDelegate.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWTextBoxDelegate.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Control\NathansWay.Numeracy.Container.vFractionContainer.cs">
       <DependentUpon>NathansWay.Numeracy.Input.FractionContainer.cs</DependentUpon>
     </Compile>

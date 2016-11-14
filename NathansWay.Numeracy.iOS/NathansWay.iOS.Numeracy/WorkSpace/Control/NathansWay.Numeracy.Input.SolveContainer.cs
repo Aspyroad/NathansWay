@@ -312,12 +312,9 @@ namespace NathansWay.iOS.Numeracy
 
         private void Initialize()
         {
-            this.HasBorder = false;
             this.CornerRadius = 5.0f;
-            this.HasRoundedCorners = true;
             this.EnableHold = false;
             this.AutoApplyUI = true;
-
             this.BackgroundColor = UIColor.Clear;
 
             // Get center of the bottom and top halfs of the button

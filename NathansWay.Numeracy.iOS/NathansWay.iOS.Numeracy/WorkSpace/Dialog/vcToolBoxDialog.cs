@@ -113,7 +113,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnSideCutters.HasBorder = false;
             //this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             //this.btnCenterQuestion.CornerRadius = 5.0f;
-            this.btnSideCutters.SetBorderColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnSideCutters.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnSideCutters.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
             this.btnScrewDriver.HasBorder = false;

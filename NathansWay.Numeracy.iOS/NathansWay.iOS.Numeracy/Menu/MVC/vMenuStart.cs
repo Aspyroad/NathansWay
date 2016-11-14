@@ -223,7 +223,7 @@ namespace NathansWay.iOS.Numeracy.Menu
             var colorMainBackGroundEnd = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             var colorMainBackGroundStart = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColorTransition.Value;
             this._buttonMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
-			DrawCanvasMain (colorMainBackGroundStart, colorMainBackGroundEnd, rect);
+			DrawCanvasMain (colorMainBackGroundEnd, colorMainBackGroundStart, rect);
 		}
 
 		#endregion

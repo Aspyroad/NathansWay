@@ -12,7 +12,7 @@ using ObjCRuntime;
 namespace NathansWay.iOS.Numeracy
 {
 	[Register ("BorderLabel")]
-	public class BorderLabel : AspyLabel
+	public class NWLabel : AspyLabel
 	{
 		#region Private Variables
 
@@ -21,22 +21,22 @@ namespace NathansWay.iOS.Numeracy
 
 		#region Constructors
 
-		public BorderLabel (IntPtr handle) : base(handle)
+		public NWLabel (IntPtr handle) : base(handle)
 		{
 			Initialize ();
 		}
 
-		public BorderLabel (NSCoder coder) : base(coder)
+		public NWLabel (NSCoder coder) : base(coder)
 		{
 			Initialize ();
 		}
 
-		public BorderLabel (CGRect frame) : base(frame)
+		public NWLabel (CGRect frame) : base(frame)
 		{
 			Initialize ();
 		}
 
-		public BorderLabel () : base ()
+		public NWLabel () : base ()
 		{
 			Initialize ();
 		}

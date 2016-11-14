@@ -114,7 +114,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnCenterQuestion.HasBorder = false;
             //this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             //this.btnCenterQuestion.CornerRadius = 5.0f;
-            this.btnCenterQuestion.SetBorderColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
+            this.btnCenterQuestion.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnCenterQuestion.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
             this.btnLockSolveButton.HasBorder = false;

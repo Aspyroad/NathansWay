@@ -10,7 +10,7 @@ using Foundation;
 namespace NathansWay.iOS.Numeracy
 {
 	[Register ("ButtonOrderBy")]
-	public class ButtonOrderBy : AspyButton
+	public class NWButtonOrderBy : NWButton
 	{
 		#region Private Variables
 
@@ -20,19 +20,19 @@ namespace NathansWay.iOS.Numeracy
 		#region Constructors
 
 		// Required for the Xamarin iOS Desinger
-		public ButtonOrderBy () : base()
+		public NWButtonOrderBy () : base()
 		{
 			Initialize();
 		}
-		public ButtonOrderBy (IntPtr handle) : base(handle)
+		public NWButtonOrderBy (IntPtr handle) : base(handle)
 		{
 			Initialize();
 		}       
-		public ButtonOrderBy (CGRect myFrame)  : base (myFrame)
+		public NWButtonOrderBy (CGRect myFrame)  : base (myFrame)
 		{ 
 			Initialize();    
 		}
-		public ButtonOrderBy (UIButtonType type) : base (type)
+		public NWButtonOrderBy (UIButtonType type) : base (type)
 		{
 			Initialize();
 		}
@@ -60,8 +60,8 @@ namespace NathansWay.iOS.Numeracy
 
 		private void DrawButtonBase 
 			( 
-				UIColor colorButtonBGStart, 
-				UIColor colorButtonBGEnd, 
+				UIColor _colorButtonBGStart, 
+				UIColor _colorButtonBGEnd, 
 				//UIColor labelTextColor, 
 				bool bIsPressed, 
 				//string labelText, 
@@ -78,11 +78,11 @@ namespace NathansWay.iOS.Numeracy
             // var colorWhenTapped = bIsTapped ? : 
             if (bIsPressed)
             {
-                colorWhenTapped =  new CGGradient(colorSpace, new CGColor [] {colorButtonBGEnd.CGColor, colorButtonBGStart.CGColor});
+                colorWhenTapped =  new CGGradient(colorSpace, new CGColor [] { _colorButtonBGEnd.CGColor, _colorButtonBGStart.CGColor});
             }
             else
             {
-                colorWhenTapped = new CGGradient(colorSpace, new CGColor [] { colorButtonBGStart.CGColor, colorButtonBGEnd.CGColor });
+                colorWhenTapped = new CGGradient(colorSpace, new CGColor [] { _colorButtonBGStart.CGColor, _colorButtonBGEnd.CGColor });
             }
 
 
