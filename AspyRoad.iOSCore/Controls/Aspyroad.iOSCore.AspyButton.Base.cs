@@ -30,6 +30,7 @@ namespace AspyRoad.iOSCore
         protected UIColor colorBorderColor;
         private CGRect labRect;
         private CGRect imgRect;
+        private bool _clearBackground;
 
         // UIApplication Variables
         protected bool _bHasBorder;
@@ -220,6 +221,12 @@ namespace AspyRoad.iOSCore
 			set{ _bHoldState = value; }
 		}
 
+        public bool SetClearBackGround
+        {
+            get { return this._clearBackground; }
+            set { this._clearBackground = value; }
+        }
+
         public bool IsPressed
         {
             get{ return _bIsPressed; }
@@ -372,6 +379,7 @@ namespace AspyRoad.iOSCore
         {
             this._bIsPressed = _isPressed;
 
+<<<<<<< HEAD
             //if (this._bEnableHold)
             //{
             //    if (this._bHoldState)
@@ -383,11 +391,38 @@ namespace AspyRoad.iOSCore
             //        this.ApplyUIHeld();
             //    }
             //}
+=======
+            if (this._bEnableHold)
+            {
+                if (this._bHoldState)
+                {
+                    this.ApplyUIHeld();
+                    this._bHoldState = false;
+
+                }
+                else
+                {
+                    this.ApplyUIUnHeld();
+                }
+            }
+>>>>>>> origin/master
         }
 
         public virtual void ApplyUnPressed(bool _isPressed)
         {
             this._bIsPressed = _isPressed;
+
+            //if (this._bEnableHold)
+            //{
+            //    if (!this._bHoldState)
+            //    {
+            //        this.ApplyUIHeld();
+            //    }
+            //    else
+            //    {
+            //        this.ApplyUIUnHeld();
+            //    }
+            //}
         }
 
         // Must call this base last.
