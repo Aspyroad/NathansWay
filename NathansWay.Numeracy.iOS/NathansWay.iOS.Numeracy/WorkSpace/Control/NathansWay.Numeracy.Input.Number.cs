@@ -222,8 +222,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.AutoApplyUI = false;
 
             this.txtNumber.BorderWidth = 0.0f;
-            this.txtNumber.HasBorder = false;
-            this.txtNumber.HasRoundedCorners = false;
+            this.txtNumber.BorderWidth = 0.0f;
+            this.txtNumber.CornerRadius = 0.0f;
             this.txtNumber.BackgroundColor = UIColor.Clear;
 
             // TODO: These may need to be seperate from global values
@@ -800,31 +800,31 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewSelected()
         {
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             base.UI_ViewSelected();
         }
 
         public override void UI_ViewNeutral()
         {
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             base.UI_ViewNeutral();
         }
 
         public override void UI_ViewReadOnly()
         {
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             base.UI_ViewReadOnly();
         }
 
         public override void UI_ViewCorrect()
         {
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             base.UI_ViewCorrect();
         }
 
         public override void UI_ViewInCorrect()
         {
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             base.UI_ViewInCorrect();
         }
 
@@ -915,15 +915,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Override Public Properties
 
-        public override UIColor SetFontColor
+        public override UIColor FontColor
         {
             get
             {
-                return base.SetFontColor;
+                return base.FontColor;
             }
             set
             {
-                base.SetFontColor = value;
+                base.FontColor = value;
                 this.txtNumber.TextColor = value;
             }
         }

@@ -22,13 +22,15 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchArch>x86_64</MtouchArch>
-    <CodesignKey>iPhone Developer: Brett Anthony (53TD5VH39M)</CodesignKey>
+    <MtouchArch>i386</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignProvision>15d1c392-677b-40bd-94a8-680bea964e5e</CodesignProvision>
+    <CodesignProvision></CodesignProvision>
     <MtouchLink>None</MtouchLink>
     <MtouchFloat32>true</MtouchFloat32>
     <PlatformTarget>anycpu</PlatformTarget>
+    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchExtraArgs></MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>

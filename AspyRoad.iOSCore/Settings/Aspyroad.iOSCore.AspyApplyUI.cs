@@ -17,10 +17,6 @@ namespace AspyRoad.iOSCore
         #region Private Variables
 
         // UIApplication Variables
-        protected bool _bHasBorder;
-        protected bool _bHasRoundedCorners;
-        protected nfloat _fCornerRadius;
-        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
 
         public IAspyGlobals iOSGlobals;
@@ -45,7 +41,7 @@ namespace AspyRoad.iOSCore
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has a border. 
         /// </summary>
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
@@ -61,23 +57,10 @@ namespace AspyRoad.iOSCore
                     return false;
                 }
             }
-            set 
-            {
-                if (value == false)
-                {
-                    this.BorderWidth = 0.0f;
-                    this._bHasBorder = false;
-                }
-                else
-                {
-                    this.BorderWidth = this._fBorderWidth;
-                    this._bHasBorder = true;
-                }
-            }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has rounded corners. 
         /// </summary>
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
@@ -86,26 +69,11 @@ namespace AspyRoad.iOSCore
             {
                 if (this.View.Layer.CornerRadius > 0.0f)
                 {
-                    this._bHasRoundedCorners = true;
                     return true;
                 }
                 else
                 {
-                    this._bHasRoundedCorners = false;
                     return false;
-                }
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this.View.Layer.CornerRadius = 0.0f;
-                    this._bHasRoundedCorners = false;
-                }
-                else
-                {
-                    this.View.Layer.CornerRadius = this._fCornerRadius;
-                    this._bHasRoundedCorners = true;
                 }
             }
         }
@@ -116,11 +84,13 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this.View.Layer.BorderWidth; }
+            get 
+            { 
+                return this.View.Layer.BorderWidth; 
+            }
             set 
             { 
                 this.View.Layer.BorderWidth = value; 
-
             }
         }
 
@@ -130,10 +100,30 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this.View.Layer.CornerRadius; }
+            get 
+            { 
+                return this.View.Layer.CornerRadius; 
+            }
             set 
             {
                 this.View.Layer.CornerRadius = value; 
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the BorderColor.
+        /// </summary>
+        /// <value>The corner radius.</value>
+        public CGColor BorderColor
+        {
+            get
+            {
+                return this.View.Layer.BorderColor;
+            }
+
+            set
+            {
+                this.View.Layer.BorderColor = value;
             }
         }
 
@@ -205,54 +195,40 @@ namespace AspyRoad.iOSCore
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has a border. 
         /// </summary>
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
-            get { return this._bHasBorder; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.Layer.BorderWidth > 0.0f)
                 {
-                    this.Layer.BorderWidth = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.BorderWidth = this._fBorderWidth;   
+                    return false;
                 }
-
-                if (this._bHasBorder)
-                { 
-                    this.SetNeedsDisplay();
-                }
-                this._bHasBorder = value; 
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has rounded corners.
         /// </summary>
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
-            get { return this._bHasRoundedCorners; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.Layer.CornerRadius > 0.0f)
                 {
-                    this.Layer.CornerRadius = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.CornerRadius = this._fCornerRadius;   
+                    return false;
                 }
-
-                if (this._bHasRoundedCorners)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._bHasRoundedCorners = value;
             }
         }
 
@@ -288,6 +264,19 @@ namespace AspyRoad.iOSCore
                     this.SetNeedsDisplay();
                 }
                 this._fCornerRadius = value; 
+            }
+        }
+
+        public CGColor BorderColor
+        {
+            get
+            {
+                return this.Layer.BorderColor;
+            }
+
+            set
+            {
+                this.Layer.BorderColor = value;
             }
         }
 

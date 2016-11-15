@@ -19,11 +19,6 @@ namespace AspyRoad.iOSCore
 		#region Class Variables
 
 		public IAspyGlobals iOSGlobals;
-        //protected iOSUIManager iOSUIAppearance; 
-        // Event subscribing
-        //private bool Subscribe_TextSizeChange;
-
-
 		// Tags for id
 		private nint _AspyTag1;
 		private nint _AspyTag2;
@@ -31,16 +26,7 @@ namespace AspyRoad.iOSCore
 		private string _AspyName;
 
         // UIApplication Variables
-        protected bool _bHasBorder;
-        protected bool _bHasRoundedCorners;
-        protected nfloat _fCornerRadius;
-        protected nfloat _fBorderWidth;
         protected G__ApplyUI _applyUIWhere;
-        // UIViewSpecific
-        protected UIColor _colorBorderColor;
-        protected UIColor _colorBGColor;
-        protected UIColor _colorFontColor;
-        protected UIColor _colorBGTransisition;
 
 		#endregion
 
@@ -74,10 +60,6 @@ namespace AspyRoad.iOSCore
 		{
 			// Main setup
 			this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> ();
-			//this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            // UI
-            this._bHasBorder = false;
-            this._bHasRoundedCorners = false;
 		}
 
 		#endregion
@@ -114,51 +96,27 @@ namespace AspyRoad.iOSCore
 			set { _AspyName = value; }
 		}
 
-        public virtual UIColor SetBGColor
+        public virtual UIColor BackgroundColor
         {
-            get { return this._colorBGColor; }
+            get 
+            {
+                return this.View.BackgroundColor;
+            }
             set 
-            { 
-                this._colorBGColor = value;
-                this.View.BackgroundColor = this._colorBGColor;   
+            {
+                this.View.BackgroundColor = value;
             }
         }
 
-        public virtual UIColor SetBorderColor
-        {
-            get { return this._colorBorderColor; }
-            set 
-            { 
-                this._colorBorderColor = value;
-                this.View.Layer.BorderColor = this._colorBorderColor.CGColor;   
-            }
-        }
-
-        public virtual UIColor SetFontColor
-        {
-            get { return this._colorFontColor; }
-            set { this._colorFontColor = value; }
-        }
-
         /// <summary>
-        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
-        /// </summary>
-        /// <value>The apply user interface where.</value>
-        public G__ApplyUI ApplyUIWhere
-        {
-            get { return this._applyUIWhere; }
-            set { this._applyUIWhere = value; }
-        }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has a border. 
         /// </summary>
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
             get
             {
-                if (this.BorderWidth > 0.0f)
+                if (this.View.Layer.BorderWidth > 0.0f)
                 {
                     return true;
                 }
@@ -167,23 +125,10 @@ namespace AspyRoad.iOSCore
                     return false;
                 }
             }
-            set
-            {
-                if (value == false)
-                {
-                    this.BorderWidth = 0.0f;
-                    this._bHasBorder = false;
-                }
-                else
-                {
-                    this.BorderWidth = this._fBorderWidth;
-                    this._bHasBorder = true;
-                }
-            }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has rounded corners.
         /// </summary>
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
@@ -192,26 +137,11 @@ namespace AspyRoad.iOSCore
             {
                 if (this.View.Layer.CornerRadius > 0.0f)
                 {
-                    this._bHasRoundedCorners = true;
                     return true;
                 }
                 else
                 {
-                    this._bHasRoundedCorners = false;
                     return false;
-                }
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this.View.Layer.CornerRadius = 0.0f;
-                    this._bHasRoundedCorners = false;
-                }
-                else
-                {
-                    this.View.Layer.CornerRadius = this._fCornerRadius;
-                    this._bHasRoundedCorners = true;
                 }
             }
         }
@@ -222,11 +152,13 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this.View.Layer.BorderWidth; }
+            get
+            {
+                return this.View.Layer.BorderWidth;
+            }
             set
             {
                 this.View.Layer.BorderWidth = value;
-
             }
         }
 
@@ -242,6 +174,46 @@ namespace AspyRoad.iOSCore
                 this.View.Layer.CornerRadius = value;
             }
         }
+
+        /// <summary>
+        /// Gets or sets the BorderColor.
+        /// </summary>
+        /// <value>The corner radius.</value>
+        public CGColor BorderColor
+        {
+            get
+            {
+                return this.View.Layer.BorderColor;
+            }
+
+            set
+            {
+                this.View.Layer.BorderColor = value;
+            }
+        } 
+
+        public virtual UIColor FontColor
+        {
+            get 
+            {
+                return this.FontColor;
+            }
+            set 
+            { 
+                this.FontColor = value; 
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the where or if ApplyUI() is fired. ApplyUI sets all colours, borders and edges.
+        /// </summary>
+        /// <value>The apply user interface where.</value>
+        public G__ApplyUI ApplyUIWhere
+        {
+            get { return this._applyUIWhere; }
+            set { this._applyUIWhere = value; }
+        }
+        
         #endregion
 
         #region Public Members

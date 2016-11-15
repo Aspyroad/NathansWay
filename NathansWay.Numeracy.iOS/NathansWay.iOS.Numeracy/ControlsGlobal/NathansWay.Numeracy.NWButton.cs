@@ -60,25 +60,6 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ApplyUI7()
         {
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
-            this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Selected);
-            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Focused);
-
-            // Border
-            if (this._bHasBorder)
-            {
-                this.Layer.BorderWidth = this._fBorderWidth;
-                this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
-            }
-            // RoundedCorners
-            if (this._bHasRoundedCorners)
-            {
-                this.Layer.CornerRadius = this._fCornerRadius;
-            }
         }
 
         public override void ApplyUIHeld()
@@ -105,16 +86,13 @@ namespace NathansWay.iOS.Numeracy
                 this.HoldState = true;
             }
 
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedBGUIColor.Value;
-            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value.CGColor;
+
             base.ApplyPressed(_isPressed);
 
         }
 
         public override void ApplyUnPressed(bool _isPressed)
         {
-            //this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            //this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             base.ApplyUnPressed(_isPressed);
         }
             
@@ -135,14 +113,21 @@ namespace NathansWay.iOS.Numeracy
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager>();
             this._iOSDrawingFactory = iOSCoreServiceContainer.Resolve<DrawingFactory>();
 
-            this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
-            this.SetBorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
+            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalSVGUIColor.Value;
+            this.colorButtonBGStart = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColor.Value;
+            this.colorButtonBGEnd = iOSUIAppearance.GlobaliOSTheme.ButtonNormalBGUIColorTransition.Value;
+
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value, UIControlState.Normal);
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Highlighted);
+            this.SetTitleColor(iOSUIAppearance.GlobaliOSTheme.ButtonPressedTitleUIColor.Value, UIControlState.Focused);
+
+            this.BorderColor = iOSUIAppearance.GlobaliOSTheme.ButtonNormalTitleUIColor.Value.CGColor;
             this.BorderWidth = iOSUIAppearance.GlobaliOSTheme.ButtonBorderWidth;
             this.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonCornerRadius;
-            this._fMenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
+            this.MenuCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
+
             this.EnableHold = true;
             this.AutoApplyUI = true;
-
         }
 
 		#endregion

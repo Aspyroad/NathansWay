@@ -4,7 +4,6 @@ using CoreGraphics;
 // Mono
 using Foundation;
 using UIKit;
-using CoreGraphics;
 using CoreMotion;
 // AspyCore
 using AspyRoad.iOSCore;
@@ -13,7 +12,7 @@ using AspyRoad.iOSCore;
 namespace NathansWay.iOS.Numeracy
 {
 	[Foundation.Register ("vFractionContainer")]
-    public class vFractionContainer : AspyView
+    public class vFractionContainer : NWView
 	{
 		#region Private Variables
 

@@ -300,9 +300,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();  
 
             this.NumberPadPanGestureRecognizer();
-
-            // UI
-            this.HasBorder = true;
         }
 
         public override void ViewDidLayoutSubviews()

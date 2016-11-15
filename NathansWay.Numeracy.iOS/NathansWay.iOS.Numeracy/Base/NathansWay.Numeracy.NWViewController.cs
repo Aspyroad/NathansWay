@@ -55,8 +55,8 @@ namespace AspyRoad.iOSCore
             this._numberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
 
             // Set common UI variables
-            this._fBorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ViewBorderWidth;
-            this._fCornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
+            this.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ViewBorderWidth;
+            this.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.ViewCornerRadius;
 		}
 
 		#endregion

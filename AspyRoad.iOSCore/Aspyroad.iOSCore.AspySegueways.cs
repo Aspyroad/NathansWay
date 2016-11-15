@@ -31,10 +31,10 @@ namespace AspyRoad.iOSCore
         
         #region Construction
         // Def .ctr
-        public AspySegueBase()
-        {
-            Initialize();
-        }
+        //public AspySegueBase()
+        //{
+        //    Initialize();
+        //}
         // AspyCustom .ctor
         public AspySegueBase(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
@@ -88,10 +88,10 @@ namespace AspyRoad.iOSCore
 	{
         #region Construction
         // Def .ctr
-        public AspySlidingLeftSegue()
-        {
-            Initialize();
-        }
+        //public AspySlidingLeftSegue()
+        //{
+        //    Initialize();
+        //}
         // AspyCustom .ctor
         public AspySlidingLeftSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
@@ -263,10 +263,10 @@ namespace AspyRoad.iOSCore
                 
         #region Construction
         // Def .ctr
-        public AspySlidingRightSegue()
-        {
-            Initialize();
-        }
+        //public AspySlidingRightSegue()
+        //{
+        //    Initialize();
+        //}
         // AspyCustom .ctor
         public AspySlidingRightSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
@@ -357,10 +357,10 @@ namespace AspyRoad.iOSCore
     {
         #region Construction
         // Def .ctr
-        public AspySlidingUpSegue()
-        {
-            Initialize();
-        }
+        //public AspySlidingUpSegue()
+        //{
+        //    Initialize();
+        //}
         // AspyCustom .ctor
         public AspySlidingUpSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
@@ -456,10 +456,10 @@ namespace AspyRoad.iOSCore
     {
         #region Construction
         // Def .ctr
-        public AspySlidingDownSegue()
-        {
-            Initialize();
-        }
+        //public AspySlidingDownSegue()
+        //{
+        //    Initialize();
+        //}
         // AspyCustom .ctor
         public AspySlidingDownSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {
@@ -561,9 +561,9 @@ namespace AspyRoad.iOSCore
     {
         #region Construction
         // Def .ctr
-        public AspySpinthatwheelSegue()
-        {
-        }
+        //public AspySpinthatwheelSegue()
+        //{
+        //}
         // AspyCustom .ctor
         public AspySpinthatwheelSegue(string _strIdentifier, UIViewController _vcSource, UIViewController _vcDest) : base(_strIdentifier, _vcSource, _vcDest)
         {

@@ -61,8 +61,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             x.CreateNumber(false);
             x.IsReadOnly = !this.IsAnswer;
             // UI
-            x.HasBorder = true;
-            x.HasRoundedCorners = true;
+            //x.HasBorder = true;
+            //x.HasRoundedCorners = true;
             // Pissoff the state...yes it was dumb!
             this.IsAnswer = false;
             return (x as object);
@@ -85,8 +85,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcFractionContainer(strFraction, this.IsAnswer);
             x.IsReadOnly = !this.IsAnswer;
             // UI
-            x.HasBorder = true;
-            x.HasRoundedCorners = true;
+            //x.HasBorder = true;
+            //x.HasRoundedCorners = true;
 
             this.IsAnswer = false;
             // Add to output
@@ -99,8 +99,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             x.IsAnswer = this.IsAnswer;
             x.IsReadOnly = !this.IsAnswer;
             // UI
-            x.HasBorder = true;
-            x.HasRoundedCorners = true;
+            //x.HasBorder = true;
+            //x.HasRoundedCorners = true;
 
             this.IsAnswer = false;
             // Add to output
@@ -111,8 +111,8 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create a brace (left or right parameter boolean)
             var x = new vcBraceText(bIsRight);
             // UI
-            x.HasBorder = true;
-            x.HasRoundedCorners = true;
+            //x.HasBorder = true;
+            //x.HasRoundedCorners = true;
 
             this.IsAnswer = false;
             // Add to output

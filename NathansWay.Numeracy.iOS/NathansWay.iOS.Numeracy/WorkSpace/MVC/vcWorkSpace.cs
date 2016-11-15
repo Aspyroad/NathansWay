@@ -560,9 +560,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 			base.ViewDidLoad();
             // UI
-            this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
-            this.HasBorder = true;
+            this.BorderWidth = this.UIAppearance.GlobaliOSTheme.ViewBorderWidth;
 
             // To start hide the canvas's
             this.vCanvasMain.Hidden = true;

@@ -40,6 +40,11 @@ namespace NathansWay.iOS.Numeracy
             Initialize();
         }
 
+        public vcLessonMenu(string nibName, NSBundle bundle) : base (nibName, bundle)
+        {
+            Initialize();
+        }
+
         public vcLessonMenu (IntPtr h) : base (h)
 		{
             Initialize();
@@ -99,6 +104,7 @@ namespace NathansWay.iOS.Numeracy
 		{
 			base.LoadView ();
 			this._vLessonMenu = this.View as vLessonMenu;
+            this.View = this._vLessonMenu;
 		}
 
         public override void DidReceiveMemoryWarning()
@@ -111,6 +117,11 @@ namespace NathansWay.iOS.Numeracy
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            // LessonMain TableView
+            // Setup tableview source
+            this._srcLesson = new LessonMenuTableSource(this);
+            this._srcLesson.ScrolledToBottom += ScrolledToBottom;
+            this.tvLessonMain.Source = this._srcLesson;
 
 			// Register Events
 			// Level Buttons
@@ -139,11 +150,7 @@ namespace NathansWay.iOS.Numeracy
             // BackToMenu
             this.btnBackToMenu.TouchUpInside += OnClick_btnBackToMenu;
 
-            // LessonMain TableView
-			// Setup tableview source
-			this._srcLesson = new LessonMenuTableSource (this);
-			this._srcLesson.ScrolledToBottom += ScrolledToBottom;
-			this.tvLessonMain.Source = this._srcLesson;
+
 
             #region Tutorial
             // 4/8/2016
@@ -163,6 +170,7 @@ namespace NathansWay.iOS.Numeracy
             this.tvLessonDetail.Source = this._srcLessonDetail;
 
 			// Load Initial lesson list
+            _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
 			this.LoadLessonsInit ();
 
         }
@@ -189,30 +197,30 @@ namespace NathansWay.iOS.Numeracy
                 this.lblFilter.TextColor = UIColor.Black;
                 this.lblLevel.TextColor = UIColor.Black;
 
-                this.btnLevel1.SetClearBackGround = true;
-                this.btnLevel2.SetClearBackGround = true;
-                this.btnLevel3.SetClearBackGround = true;
-                this.btnLevel4.SetClearBackGround = true;
-                this.btnLevel5.SetClearBackGround = true;
-                this.btnLevel6.SetClearBackGround = true;
-                this.btnLevel7.SetClearBackGround = true;
-                this.btnLevel8.SetClearBackGround = true;
-                this.btnLevel9.SetClearBackGround = true;
-                this.btnLevel10.SetClearBackGround = true;
-                // Type Buttons
-                this.btnTypeBasic.SetClearBackGround = true;
-                this.btnTypeFractions.SetClearBackGround = true;
-                this.btnTypeGroups.SetClearBackGround = true;
-                this.btnTypeMixed.SetClearBackGround = true;
-                // Operator Buttons
-                this.btnOpAdd.SetClearBackGround = true;
-                this.btnOpAddSub.SetClearBackGround = true;
-                this.btnOpDivision.SetClearBackGround = true;
-                this.btnOpMultiply.SetClearBackGround = true;
-                this.btnOpMultSub.SetClearBackGround = true;
-                this.btnOpSubtract.SetClearBackGround = true;
-                // BackToMenu
-                this.btnBackToMenu.SetClearBackGround = true;
+                //this.btnLevel1.SetClearBackGround = true;
+                //this.btnLevel2.SetClearBackGround = true;
+                //this.btnLevel3.SetClearBackGround = true;
+                //this.btnLevel4.SetClearBackGround = true;
+                //this.btnLevel5.SetClearBackGround = true;
+                //this.btnLevel6.SetClearBackGround = true;
+                //this.btnLevel7.SetClearBackGround = true;
+                //this.btnLevel8.SetClearBackGround = true;
+                //this.btnLevel9.SetClearBackGround = true;
+                //this.btnLevel10.SetClearBackGround = true;
+                //// Type Buttons
+                //this.btnTypeBasic.SetClearBackGround = true;
+                //this.btnTypeFractions.SetClearBackGround = true;
+                //this.btnTypeGroups.SetClearBackGround = true;
+                //this.btnTypeMixed.SetClearBackGround = true;
+                //// Operator Buttons
+                //this.btnOpAdd.SetClearBackGround = true;
+                //this.btnOpAddSub.SetClearBackGround = true;
+                //this.btnOpDivision.SetClearBackGround = true;
+                //this.btnOpMultiply.SetClearBackGround = true;
+                //this.btnOpMultSub.SetClearBackGround = true;
+                //this.btnOpSubtract.SetClearBackGround = true;
+                //// BackToMenu
+                //this.btnBackToMenu.SetClearBackGround = true;
 
                 // Im going to try and call these from MovedToSuperView inside the tv classes.
                 this.tvLessonMain.ApplyUI(_applywhere);
@@ -235,7 +243,7 @@ namespace NathansWay.iOS.Numeracy
             this.AspyTag1 = 6003;
             this.AspyName = "VC_LessonMenu";
             // Grab a ref to our data class
-            _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+            //_vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
         }
 

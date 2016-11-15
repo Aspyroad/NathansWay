@@ -316,41 +316,41 @@ namespace NathansWay.iOS.Numeracy
         public virtual void UI_ViewNeutral()
         {
             this.BorderWidth = 1.0f;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
         public virtual void UI_ViewReadOnly()
         {
             this.BorderWidth = 1.0f;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
         public virtual void UI_ViewCorrect()
         {
             this.BorderWidth = 1.0f;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
         public virtual void UI_ViewInCorrect()
         {
             this.BorderWidth = 1.0f;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
         }
 
         public virtual void UI_ViewSelected()
         {
             this.BorderWidth = 1.0f;
-            this.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
-            this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
         #endregion
@@ -656,7 +656,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasWorkSpaceParent = false;
                     this._vcWorkSpaceContainer = null;
                 }
-
             }
         }
 
@@ -737,7 +736,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasSelectedNumlet = false;
                     this._vcSelectedNumlet = null;
                 }
-
             }
         }
 
@@ -756,7 +754,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasSelectedNumberText = false;
                     this._vcSelectedNumberText = null;
                 }
-
             }
         }
 
@@ -775,7 +772,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasSelectedOperatorText = false;
                     this._vcSelectedOperatorText = null;
                 }
-
             }
         }
 
@@ -797,7 +793,6 @@ namespace NathansWay.iOS.Numeracy
                     this._bHasImmediateParent = false;
                     this._vcImmediateParent = null;
                 }
-
             }
         }
 

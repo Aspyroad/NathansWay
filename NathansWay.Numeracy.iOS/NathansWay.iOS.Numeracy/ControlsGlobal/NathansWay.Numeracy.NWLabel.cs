@@ -5,7 +5,6 @@ using CoreGraphics;
 using AspyRoad.iOSCore;
 // MonoTouch
 using UIKit;
-using CoreGraphics;
 using Foundation;
 using ObjCRuntime;
 
@@ -47,7 +46,6 @@ namespace NathansWay.iOS.Numeracy
 
 		private void Initialize()
 		{
-            this.HasBorder = true;
 		}
 
 		#endregion

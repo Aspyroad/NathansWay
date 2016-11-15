@@ -318,7 +318,6 @@ namespace AspyRoad.iOSCore
                 // Visual Attributes For PickerView
                 _pickerTxtField.Font = UIFont.FromName(_fontName, _fontSize);
                 _pickerTxtField.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
-                _pickerTxtField.HasRoundedCorners = true;
 
                 // Visual Attributes For PickerView
                 _pickerModel.FontSize = this._fontSize;
@@ -407,10 +406,6 @@ namespace AspyRoad.iOSCore
         #region Private Variables
 
         // UIApplication Variables
-        protected bool _bHasBorder;
-        protected bool _bHasRoundedCorners;
-        protected nfloat _fCornerRadius;
-        protected nfloat _fBorderWidth;
         protected bool _bAutoApply;
 
         // Frames
@@ -508,54 +503,40 @@ namespace AspyRoad.iOSCore
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has a border. 
         /// </summary>
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
-            get { return this._bHasBorder; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.Layer.BorderWidth > 0.0f)
                 {
-                    this.Layer.BorderWidth = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.Layer.BorderWidth = this._fBorderWidth;   
+                    return false;
                 }
-
-                if (this._bHasBorder)
-                { 
-                    this.SetNeedsDisplay();
-                }
-                this._bHasBorder = value; 
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has rounded corners.
         /// </summary>
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
         {
-            get { return this._bHasRoundedCorners; }
-            set 
-            { 
-                if (value == false)
+            get
+            {
+                if (this.Layer.CornerRadius > 0.0f)
                 {
-                    this.CornerRadius = 0.0f;
+                    return true;
                 }
                 else
                 {
-                    this.CornerRadius = this._fCornerRadius;   
+                    return false;
                 }
-
-                if (this._bHasRoundedCorners)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._bHasRoundedCorners = value;
             }
         }
 
@@ -565,15 +546,13 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this._fBorderWidth; }
-            set 
-            { 
-                if (this._bHasBorder)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._fBorderWidth = value; 
-
+            get
+            {
+                return this.Layer.BorderWidth;
+            }
+            set
+            {
+                this.Layer.BorderWidth = value;
             }
         }
 
@@ -583,14 +562,27 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this._fCornerRadius; }
-            set 
+            get { return this.Layer.CornerRadius; }
+            set
             {
-                if (this._bHasRoundedCorners)
-                {
-                    this.SetNeedsDisplay();
-                }
-                this._fCornerRadius = value; 
+                this.Layer.CornerRadius = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the BorderColor.
+        /// </summary>
+        /// <value>The corner radius.</value>
+        public CGColor BorderColor
+        {
+            get
+            {
+                return this.Layer.BorderColor;
+            }
+
+            set
+            {
+                this.Layer.BorderColor = value;
             }
         }
 
@@ -760,7 +752,7 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// Called by the picker to determine how many rows are in a given spinner item
         /// </summary>
-        public override nint GetRowsInComponent (UIPickerView picker, nint component)
+        public override nint GetRowsInComponent (UIPickerView pickerView, nint component)
         {
             return this._items.Count;
         }
@@ -769,7 +761,7 @@ namespace AspyRoad.iOSCore
         /// Called by the picker to get the text for a particular row in a particular 
         /// spinner item
         /// </summary>
-        public override string GetTitle (UIPickerView picker, nint row, nint component)
+        public override string GetTitle (UIPickerView pickerView, nint row, nint component)
         {
             return this._items[(int)row];
         }
@@ -777,7 +769,7 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// Called by the picker to get the number of spinner items
         /// </summary>
-        public override nint GetComponentCount (UIPickerView picker)
+        public override nint GetComponentCount (UIPickerView pickerView)
         {
             return 1;
         }
@@ -785,10 +777,10 @@ namespace AspyRoad.iOSCore
         /// <summary>
         /// called when a row is selected in the spinner
         /// </summary>
-        public override void Selected (UIPickerView picker, nint row, nint component)
+        public override void Selected (UIPickerView pickerView, nint row, nint component)
         {
             this.selectedIndex = (nint)row;
-            picker.ReloadComponent(component);
+            pickerView.ReloadComponent(component);
             if (this.ValueChanged != null)
             {
                 this.ValueChanged (this, new EventArgs ());
@@ -803,9 +795,9 @@ namespace AspyRoad.iOSCore
             AspyLabel _lblPickerView = new AspyLabel(_labelFrame);
             _lblPickerView.AutoApplyUI = false;
             // Common UI
-            _lblPickerView.HasBorder = false;
-            //_lblPickerView.CornerRadius = 4.0f;
-            _lblPickerView.HasRoundedCorners = true;
+            _lblPickerView.BorderWidth = 0.0f;
+            _lblPickerView.CornerRadius = 2.0f;
+
 
             // Picker label specific UI
             _lblPickerView.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.PkViewLabelTextUIColor.Value.CGColor;
@@ -832,7 +824,7 @@ namespace AspyRoad.iOSCore
             return _lblPickerView;
         }
 
-		public override nfloat GetRowHeight (UIPickerView picker, nint component)
+		public override nfloat GetRowHeight (UIPickerView pickerView, nint component)
 		{
             return RowHeight;
 		}

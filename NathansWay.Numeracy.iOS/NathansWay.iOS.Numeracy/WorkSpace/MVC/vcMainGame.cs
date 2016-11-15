@@ -85,9 +85,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             if (base.ApplyUI(_applywhere))
             {
-                this.HasRoundedCorners = true;
-                this.HasBorder = true;
-                this.View.BackgroundColor = UIColor.Green;
                 return true;
             }
             else

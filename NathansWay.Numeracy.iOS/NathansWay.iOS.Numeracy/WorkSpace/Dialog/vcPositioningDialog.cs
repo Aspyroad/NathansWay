@@ -82,9 +82,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewDidLoad();
 
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
-            this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
 
             // Setup Button Text
             this.btnCenterQuestion.SetTitle("PositioningDialog-CenterQuestion".Aspylate(), UIControlState.Normal);
@@ -99,25 +98,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
 
             // Buttons
-            this.btnLockAnswer.HasBorder = false;
+            this.btnLockAnswer.BorderWidth = 0.0f;
             //this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnLockAnswer.CornerRadius = 5.0f;
             this.btnLockAnswer.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             this.btnLockAnswer.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnCenterMethods.HasBorder = false;
+            this.btnCenterMethods.BorderWidth = 0.0f;
             //this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnCenterMethods.CornerRadius = 5.0f;
             this.btnCenterMethods.BackgroundColor = UIColor.Clear;
             this.btnCenterMethods.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnCenterQuestion.HasBorder = false;
+            this.btnCenterQuestion.BorderWidth = 0.0f;
             //this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             //this.btnCenterQuestion.CornerRadius = 5.0f;
             this.btnCenterQuestion.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnCenterQuestion.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnLockSolveButton.HasBorder = false;
+            this.btnLockSolveButton.BorderWidth = 0.0f;
             //this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnLockSolveButton.CornerRadius = 5.0f;
             this.btnLockSolveButton.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;

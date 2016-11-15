@@ -84,7 +84,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainEnd.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -255,7 +255,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {_colorButtonBGEnd.CGColor, _colorButtonBGStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {_colorButtonBGStart.CGColor, _colorButtonBGEnd.CGColor});
 
 			//// MainFront Drawing
-			var mainFrontPath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+			var mainFrontPath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainFrontPath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -393,7 +393,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -540,7 +540,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -708,7 +708,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-            var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+            var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,
@@ -879,7 +879,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 			var colorWhenTapped = isTapped ? new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainStart.CGColor}) : new CGGradient(colorSpace, new CGColor [] {colorGradientButtonMainStart.CGColor, colorGradientButtonMainEnd.CGColor});
 
 			//// MainSurfaceRectangle Drawing
-			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this._fMenuCornerRadius);
+			var mainSurfaceRectanglePath = UIBezierPath.FromRoundedRect(new CGRect(0.0f, 0.0f, 448.0f, 152.0f), this.MenuCornerRadius);
 			context.SaveState();
 			mainSurfaceRectanglePath.AddClip();
 			context.DrawLinearGradient(colorWhenTapped,

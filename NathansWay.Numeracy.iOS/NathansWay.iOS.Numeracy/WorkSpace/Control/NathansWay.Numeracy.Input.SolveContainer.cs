@@ -135,7 +135,6 @@ namespace NathansWay.iOS.Numeracy
             this.View.ClipsToBounds = true;
 
             this.CornerRadius = 5.0f;
-            this.HasRoundedCorners = true;
 
             this.btnSolveButton = new ButtonSolve(this.SolveSize.RectSolveButtonFrame(), this);
             this.btnSolveButton.TouchUpInside += OnTouch_btnSolveButton;

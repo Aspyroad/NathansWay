@@ -107,7 +107,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtBrace.TextColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
             this.View.BackgroundColor = UIColor.Clear;
             this.View.BackgroundColor.ColorWithAlpha(0.0f);
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
             // Offset the text to appear more central
             this.txtBrace.ApplyTextOffset = true;
        

@@ -20,8 +20,7 @@ namespace AspyRoad.iOSCore
 	{
 		#region Class Variables
 
-		// Protected iOSUIManager iOSUIAppearance;
-        public UIResponder nextResponderHeyAppleWhyDidYouStealThis;
+		protected iOSUIManager iOSUIAppearance;
         // Drawing
         protected DrawingFactory _iOSDrawingFactory;
         protected bool _bEnableDrawing;

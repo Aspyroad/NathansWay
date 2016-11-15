@@ -88,7 +88,8 @@ namespace NathansWay.iOS.Numeracy.Menu
 			this.AspyTag1 = 6001;
             this.AspyName = "VC_MenuStart";
             this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer> ();
-            this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+            //this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+
         }
 
         private bool LogInTeacher()

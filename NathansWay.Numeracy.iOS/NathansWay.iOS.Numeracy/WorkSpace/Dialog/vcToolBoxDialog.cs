@@ -81,9 +81,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             base.ViewDidLoad();
 
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
-            this.HasRoundedCorners = true;
             this.CornerRadius = 5.0f;
-            this.HasBorder = false;
+            this.BorderWidth = 0.0f;
 
             // Setup Button Text
             this.btnHammer.SetTitle("ToolBoxDialog-Hammer".Aspylate(), UIControlState.Normal);
@@ -98,25 +97,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagViewBGUIColor.Value;
 
             // Buttons
-            this.btnHammer.HasBorder = false;
+            this.btnHammer.BorderWidth = 0.0f;
             //this.btnLockAnswer.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnLockAnswer.CornerRadius = 5.0f;
             this.btnHammer.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             this.btnHammer.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnPliers.HasBorder = false;
+            this.btnPliers.BorderWidth = 0.0f;
             //this.btnCenterMethods.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnCenterMethods.CornerRadius = 5.0f;
             this.btnPliers.BackgroundColor = UIColor.Clear;
             this.btnPliers.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnSideCutters.HasBorder = false;
+            this.btnSideCutters.BorderWidth = 0.0f;
             //this.btnCenterQuestion.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;
             //this.btnCenterQuestion.CornerRadius = 5.0f;
             this.btnSideCutters.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             this.btnSideCutters.SetTitleColor (this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalTitleUIColor.Value, UIControlState.Normal);
 
-            this.btnScrewDriver.HasBorder = false;
+            this.btnScrewDriver.BorderWidth = 0.0f;
             //this.btnLockSolveButton.SetBorderColor = this.iOSUIAppearance.GlobaliOSTheme.DiagBorderUIColor.Value;
             //this.btnLockSolveButton.CornerRadius = 5.0f;
             this.btnScrewDriver.BackgroundColor = UIColor.Clear; //this.iOSUIAppearance.GlobaliOSTheme.DiagButtonNormalBGUIColor.Value;

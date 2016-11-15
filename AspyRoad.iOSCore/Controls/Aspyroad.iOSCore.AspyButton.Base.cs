@@ -33,12 +33,6 @@ namespace AspyRoad.iOSCore
         private bool _clearBackground;
 
         // UIApplication Variables
-        protected bool _bHasBorder;
-        protected UIColor _colorBorderColor;
-        protected bool _bHasRoundedCorners;
-        protected nfloat _fCornerRadius;
-        protected nfloat _fMenuCornerRadius;
-        protected nfloat _fBorderWidth;
         protected bool _bAutoApplyUI;
 
         #endregion
@@ -90,9 +84,7 @@ namespace AspyRoad.iOSCore
             this._bRedrawOnTapStart = false;
             this._bRedrawOnTapFinish = false;
             // UIApply
-            this._bHasBorder = false;
-            this._bHasRoundedCorners = false;
-            this.SetBorderColor = UIColor.Clear.CGColor;
+            //this.BorderColor = UIColor.Clear.CGColor;
         }
 
         protected void ClipDrawingToFrame(CGRect _frame, UIBezierPath _maskPath)
@@ -252,14 +244,14 @@ namespace AspyRoad.iOSCore
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has a border. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has a border. 
         /// </summary>
         /// <value><c>true</c> if this instance has border; otherwise, <c>false</c>.</value>
         public bool HasBorder
         {
             get
             {
-                if (this.BorderWidth > 0.0f)
+                if (this.Layer.BorderWidth > 0.0f)
                 {
                     return true;
                 }
@@ -268,23 +260,10 @@ namespace AspyRoad.iOSCore
                     return false;
                 }
             }
-            set
-            {
-                if (value == false)
-                {
-                    this.BorderWidth = 0.0f;
-                    this._bHasBorder = false;
-                }
-                else
-                {
-                    this.BorderWidth = this._fBorderWidth;
-                    this._bHasBorder = true;
-                }
-            }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance has rounded corners. It will also update the UIView.Layer instance.
+        /// Gets a value indicating whether this instance has rounded corners.
         /// </summary>
         /// <value><c>true</c> if this instance has rounded corners; otherwise, <c>false</c>.</value>
         public bool HasRoundedCorners
@@ -293,26 +272,11 @@ namespace AspyRoad.iOSCore
             {
                 if (this.Layer.CornerRadius > 0.0f)
                 {
-                    this._bHasRoundedCorners = true;
                     return true;
                 }
                 else
                 {
-                    this._bHasRoundedCorners = false;
                     return false;
-                }
-            }
-            set
-            {
-                if (value == false)
-                {
-                    this.Layer.CornerRadius = 0.0f;
-                    this._bHasRoundedCorners = false;
-                }
-                else
-                {
-                    this.Layer.CornerRadius = this._fCornerRadius;
-                    this._bHasRoundedCorners = true;
                 }
             }
         }
@@ -323,7 +287,10 @@ namespace AspyRoad.iOSCore
         /// <value>The width of the border.</value>
         public nfloat BorderWidth
         {
-            get { return this.Layer.BorderWidth; }
+            get 
+            { 
+                return this.Layer.BorderWidth; 
+            }
             set
             {
                 this.Layer.BorderWidth = value;
@@ -344,7 +311,9 @@ namespace AspyRoad.iOSCore
             }
         }
 
-        public CGColor SetBorderColor
+        public nfloat MenuCornerRadius { get; set; }
+
+        public CGColor BorderColor
         {
             get { return this.Layer.BorderColor; }
             set { this.Layer.BorderColor = value; }
@@ -378,63 +347,19 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyPressed(bool _isPressed)
         {
             this._bIsPressed = _isPressed;
-
-<<<<<<< HEAD
-            //if (this._bEnableHold)
-            //{
-            //    if (this._bHoldState)
-            //    {
-            //        this.ApplyUIUnHeld();
-            //    }
-            //    else
-            //    {
-            //        this.ApplyUIHeld();
-            //    }
-            //}
-=======
-            if (this._bEnableHold)
-            {
-                if (this._bHoldState)
-                {
-                    this.ApplyUIHeld();
-                    this._bHoldState = false;
-
-                }
-                else
-                {
-                    this.ApplyUIUnHeld();
-                }
-            }
->>>>>>> origin/master
         }
 
         public virtual void ApplyUnPressed(bool _isPressed)
         {
             this._bIsPressed = _isPressed;
-
-            //if (this._bEnableHold)
-            //{
-            //    if (!this._bHoldState)
-            //    {
-            //        this.ApplyUIHeld();
-            //    }
-            //    else
-            //    {
-            //        this.ApplyUIUnHeld();
-            //    }
-            //}
         }
 
-        // Must call this base last.
         public virtual void ApplyUIHeld()
         {
-            //this._bHoldState = true;
         }
 
-        // Must call this base last.
         public virtual void ApplyUIUnHeld()
         {
-            //this._bHoldState = false;
         }
 
         #endregion
