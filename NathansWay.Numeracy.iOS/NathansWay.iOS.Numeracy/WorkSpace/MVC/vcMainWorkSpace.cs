@@ -21,15 +21,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // VC Controllers
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
-        private vcMainContainer _vcMainContainer;
+        //private vcMainContainer _vcMainContainer;
         private UINumberFactory _uiNumberFactory;
-        private UIStoryboard _storyBoard;
+        //private UIStoryboard _storyBoard;
         // VC Dialogs
-        private Lazy<vcPositioningDialog> _vcPositioningDialog;
+        //private Lazy<vcPositioningDialog> _vcPositioningDialog;
 
         // Db
         private LessonViewModel _vmLesson;
-        private EntityLesson _wsSelectedLesson;
+        //private EntityLesson _wsSelectedLesson;
 
         // Sizing
         private SizeMainWorkSpace _sizeMainWorkSpace;
@@ -67,13 +67,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeMainWorkSpace;
 
             this._vcMainGame = new vcMainGame();
-            this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
+            //this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
             this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
 
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
             // Storyboard reference
-            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+            //this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
         }
 
         #endregion

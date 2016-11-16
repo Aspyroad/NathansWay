@@ -99,12 +99,6 @@ namespace NathansWay.iOS.Numeracy
 			
 		#region Overrides
 
-                public override void AwakeFromNib()
-        {
-            base.AwakeFromNib();
-            this.View.Tag = this.AspyTag1;
-        }
-
         // UIView Overs
 		public override void LoadView ()
 		{
@@ -248,8 +242,7 @@ namespace NathansWay.iOS.Numeracy
         {
             this.AspyTag1 = 6003;
             this.AspyName = "VC_LessonMenu";
-            // Grab a ref to our data class
-            //_vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
         }
 

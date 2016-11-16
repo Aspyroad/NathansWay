@@ -32,7 +32,7 @@ namespace NathansWay.iOS.Numeracy.Menu
         private AspyComboBox cmbStudent;
 
         // VCMainContainer
-        private vcMainContainer _vcMainContainer;
+        //ivate vcMainContainer _vcMainContainer;
         //private iOSUIManager iOSUIAppearance;
 
 		#endregion
@@ -92,9 +92,8 @@ namespace NathansWay.iOS.Numeracy.Menu
         {  
 			this.AspyTag1 = 6001;
             this.AspyName = "VC_MenuStart";
-            this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer> ();
-            //this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 
+            this._applyUIWhere = G__ApplyUI.ViewDidLoad;
         }
 
         private bool LogInTeacher()
@@ -116,9 +115,10 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		public override void LoadView()
 		{
-			//base.LoadView();
-			this._vMenuStart = new vMenuStart (this.iOSGlobals.G__RectWindowLandscape);
-			this.View = this._vMenuStart;
+			base.LoadView();
+            this._vMenuStart = new vMenuStart(this.iOSGlobals.G__RectWindowLandscape);
+            this.View = this._vMenuStart;
+
 		}
 
 		public override void ViewDidAppear (bool animated)

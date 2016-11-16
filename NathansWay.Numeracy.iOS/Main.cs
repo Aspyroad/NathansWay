@@ -23,7 +23,7 @@ namespace NathansWay.iOS.Numeracy
 			//Setup our services for core library
 			SharedServiceRegistrar.Startup ();
 
-			UIApplication.Main (args, null, "AppDelegate");
+    		UIApplication.Main (args, null, "AppDelegate");
 		}
 
 	}

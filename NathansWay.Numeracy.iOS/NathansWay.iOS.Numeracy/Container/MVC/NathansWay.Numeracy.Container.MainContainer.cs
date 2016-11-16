@@ -21,7 +21,7 @@ namespace NathansWay.iOS.Numeracy
 
         // Application wide vcs
 		public UIStoryboard _storyBoard;
-		public Lazy<vcMenuStart> _vcMainMenu;
+		//public Lazy<vcMenuStart> _vcMainMenu;
 		public Lazy<vcLessonMenu> _vcLessonMenu;
         public Lazy<vcMainWorkSpace> _vcMainWorkSpace;
         public Lazy<vcNumberPad> _vcNumberPad;
@@ -77,7 +77,7 @@ namespace NathansWay.iOS.Numeracy
             // Storyboard reference
 			this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
             // Vc's
-            _vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
+            //_vcMainMenu = new Lazy<vcMenuStart>(() => this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
             _vcLessonMenu = new Lazy<vcLessonMenu>(() => this._storyBoard.InstantiateViewController("vcLessonMenu") as vcLessonMenu);
             _vcNumberPad = new Lazy<vcNumberPad>(() => this._storyBoard.InstantiateViewController("vcNumberPad") as vcNumberPad);
             //_vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard. InstantiateViewController("vcWorkSpace") as vcWorkSpace);
@@ -120,6 +120,7 @@ namespace NathansWay.iOS.Numeracy
 
         private void TransitionComplete (bool finished)
         {
+            this._vcOld.WillMoveToParentViewController(null);
             this._vcOld.RemoveFromParentViewController();
             this._vcNew.DidMoveToParentViewController(this);
             //this._vcNew = null;
@@ -231,7 +232,7 @@ namespace NathansWay.iOS.Numeracy
 
             // Add any views or vc's
             //this.AddAndDisplayController(_vcLessonMenu.Value);
-            this.AddAndDisplayController(_vcMainMenu.Value);
+            this.AddAndDisplayController(this._storyBoard.InstantiateViewController("vcMenuStart") as vcMenuStart);
 		}
 
 		public override void ViewDidLoad ()

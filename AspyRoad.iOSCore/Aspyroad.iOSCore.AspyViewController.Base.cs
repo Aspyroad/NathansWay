@@ -416,7 +416,7 @@ namespace AspyRoad.iOSCore
         public override void AwakeFromNib()
         {
             base.AwakeFromNib();
-            this.View.Tag = 6001;
+            this.View.Tag = this.AspyTag1;
         }
 
         public override void LoadView()

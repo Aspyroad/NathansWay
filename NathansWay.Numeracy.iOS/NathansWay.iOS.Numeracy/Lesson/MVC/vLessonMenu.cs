@@ -47,7 +47,6 @@ namespace NathansWay.iOS.Numeracy
 		
         private void Initialize()
         {
-            this.Tag = 6003;
         }
 
 		#endregion

@@ -56,13 +56,14 @@ namespace AspyRoad.iOSCore
 			// Reposition our views into the center after the animations changed the center points
 			this.SourceViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
             this.DestinationViewController.View.Center = iOSGlobals.G__PntWindowLandscapeCenter;
+
+            // Called to keep the view container pattern, supplied with null as it wont have a vc
+            this.SourceViewController.WillMoveToParentViewController(null);
 			// When we added the destination view as a subview of source, remove it now.
 			this.SourceViewController.View.ViewWithTag (tmpTag).RemoveFromSuperview ();
             // Remove the sorucevc from maincontainer/rootvc
             this.SourceViewController.View.RemoveFromSuperview();
-            // Called to keep the view container pattern, supplied with null as it wont have a vc
-            this.SourceViewController.WillMoveToParentViewController(null);
-            this.SourceViewController.RemoveFromParentViewController ();
+            //this.SourceViewController.RemoveFromParentViewController ();
 
 			this.DestinationViewController.WillMoveToParentViewController (iOSGlobals.G__MainWindow.RootViewController);
             iOSGlobals.G__MainWindow.RootViewController.AddChildViewController(this.DestinationViewController);
@@ -110,7 +111,7 @@ namespace AspyRoad.iOSCore
 		{
             // Tag the destination with a local tag variable            
             this.tmpTag = this.DestinationViewController.View.Tag;
-			this.DestinationViewController.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
+			//this.DestinationViewController.View.Frame = this.iOSGlobals.G__RectWindowLandscape;
 
             // Landscape only segue
             tmpWidth = this.iOSGlobals.G__RectWindowLandscape.Size.Width;
@@ -260,7 +261,7 @@ namespace AspyRoad.iOSCore
 
         private void Initialize()
         {
-            var x = 1;
+
         } 
         #endregion
 
