@@ -99,6 +99,12 @@ namespace NathansWay.iOS.Numeracy
 			
 		#region Overrides
 
+                public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            this.View.Tag = this.AspyTag1;
+        }
+
         // UIView Overs
 		public override void LoadView ()
 		{

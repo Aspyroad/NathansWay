@@ -138,7 +138,7 @@ namespace NathansWay.Numeracy.Shared
             // Normal
 			ButtonNormalBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 130.0f, 0.0f, 255.0f));
 			ButtonNormalBGColorTransition = new Lazy<G__Color> (() => new G__Color(255.0f, 180.0f, 0.0f,250.0f));
-            ButtonNormalSVGColor = new Lazy<G__Color>(() => new G__Color(0.0f, 112.0f, 50.0f, 0.0f));
+            ButtonNormalSVGColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 50.0f, 255.0f));
             ButtonNormalTitleColor = new Lazy<G__Color>(() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f));
             ButtonNormalBGStrImage = "";
 
@@ -150,7 +150,7 @@ namespace NathansWay.Numeracy.Shared
 			ButtonFontName = "HelveticaNeue-Medium";
             ButtonBorderWidth = 2.0f;
             ButtonCornerRadius = 3.0f;
-            ButtonMenuCornerRadius = 5.0f;
+            ButtonMenuCornerRadius = 10.0f;
 
 			// UIView
 			ViewBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 153.0f, 50.0f, 255.0f)); // Orange

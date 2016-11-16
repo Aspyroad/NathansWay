@@ -39,10 +39,15 @@ namespace NathansWay.iOS.Numeracy.Menu
 
 		#region Contructors
 
-		public vcMenuStart () : base ()
+		public vcMenuStart () 
 		{
             this.Initialize();
 		}
+
+        public vcMenuStart(string nibName, NSBundle bundle) : base (nibName, bundle)
+        {
+            this.Initialize();
+        }
 
 		public vcMenuStart (IntPtr h) : base (h) 
 		{

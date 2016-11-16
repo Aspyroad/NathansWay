@@ -12,7 +12,7 @@
                 <viewController storyboardIdentifier="vcMenuStart" title="Menu" modalTransitionStyle="crossDissolve" id="JYt-to-IEW" customClass="vcMenuStart" sceneMemberID="viewController">
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <segue destination="612" kind="custom" identifier="sgMenuToLessons" customClass="AspySlidingRightSegue" id="1095"/>
+                        <segue destination="612" kind="custom" identifier="sgMenuToLessons" id="1095" customClass="AspySlidingRightSegue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYo-Sw-cNb" userLabel="First Responder" sceneMemberID="firstResponder"/>

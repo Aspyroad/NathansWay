@@ -10,7 +10,34 @@ using UIKit;
 // AspyCore
 using AspyRoad.iOSCore.UISettings;
 
+/*
+************* Order of calls ****************
+-(void)awakeFromNib
 
+Is only called if you are using story board to store the ViewController drawn in story board Nib = means interface bundle.
+
+The proper sequence is
+
+-(void)initWithCoder()
+-(void)awakefromNib()   // (only if story board is used)
+-(void)loadView() // (if manually generating the view contoller)
+
+-(void)viewDidLoad() (called only once in the life cycle of viewController)
+-(void)viewWillAppear()
+-(void)viewDidAppear()
+
+While moving to a new ViewController
+
+-(void)viewWillDisappear
+-(void)viewDidDisappear
+
+While returning to the first ViewController
+
+-(void)viewWillAppear
+-(void)viewDidAppear
+
+
+*/
 namespace AspyRoad.iOSCore
 {
 	[Foundation.Register ("AspyViewController")]	
@@ -386,9 +413,19 @@ namespace AspyRoad.iOSCore
 
 		#region Overrides
 
+        public override void AwakeFromNib()
+        {
+            base.AwakeFromNib();
+            this.View.Tag = 6001;
+        }
+
         public override void LoadView()
         {
             base.LoadView();
+
+            this._AspyTag2 = _AspyTag1;
+            // This has been added for iOS7 and below as it screws view sizes
+            this.View.AutosizesSubviews = false;
 
             if (this._applyUIWhere == G__ApplyUI.LoadView)
             {
@@ -400,13 +437,6 @@ namespace AspyRoad.iOSCore
 		{
 			base.ViewDidLoad ();
 
-			this.View.Tag = _AspyTag1;
-			// Copy the original tag number to tag2
-			// There are times with multiple controls where we need different tag numbers
-			// But we can always get the global control tag from tag2
-			this._AspyTag2 = _AspyTag1;
-            // This has been added for iOS7 and below as it screws view sizes
-            this.View.AutosizesSubviews = false;
             if (this._applyUIWhere == G__ApplyUI.ViewDidLoad)
             {
                 this.ApplyUI(G__ApplyUI.ViewDidLoad);

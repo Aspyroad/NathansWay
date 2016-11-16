@@ -47,13 +47,13 @@ namespace NathansWay.iOS.Numeracy.Controls
 
 		public override void Draw (CGRect rect)
 		{
-			DrawFToolBox (rect, colorButtonBGStart, colorButtonBGEnd, colorNormalSVGColor, IsPressed);
+			DrawFToolBox (rect, this.colorButtonBGStart, this.colorButtonBGEnd, this.colorNormalSVGColor, IsPressed);
 		}
 
         public override void ApplyUI7 ()
         {
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
@@ -234,7 +234,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI7 ()
         {
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
 		}
 
@@ -367,7 +367,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
@@ -514,7 +514,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI7 ()
         {
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
@@ -687,7 +687,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI7 ()
         {
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 
@@ -858,7 +858,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ApplyUI7 ()
         {
             base.ApplyUI7 ();
-            this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
+            //this.colorNormalSVGColor = iOSUIAppearance.GlobaliOSTheme.ViewBGUIColor.Value;
             this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.ButtonMenuCornerRadius;
         }
 

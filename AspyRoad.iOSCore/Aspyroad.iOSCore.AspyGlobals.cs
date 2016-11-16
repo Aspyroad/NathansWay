@@ -28,7 +28,7 @@ namespace AspyRoad.iOSCore
 		private G__Orientation _Orientation = G__Orientation.Portait;
         private UIInterfaceOrientationMask _GetSupportedOrientations;
         private Dictionary<string, nint> _ViewPool = new Dictionary<string, nint>() ; 
-        private double _sgAnimationDuration = 1.0 ;
+        private double _sgAnimationDuration = 3.0 ;
 		private AspyViewController _vcContainer;
 		private CGRect __RectScreen;
 

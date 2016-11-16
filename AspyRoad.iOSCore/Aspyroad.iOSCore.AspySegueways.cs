@@ -1,9 +1,6 @@
 using System;
 using CoreGraphics;
-using AspyRoad.iOSCore;
-//using NathansWay.Numeracy.Shared;
 using UIKit;
-using CoreGraphics;
 using CoreAnimation;
 using Foundation;
 using ObjCRuntime;
@@ -49,7 +46,7 @@ namespace AspyRoad.iOSCore
         private void Initialize()
         {   
             this.iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>(); 
-            kAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
+            this.kAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
 
         } 
         #endregion   
@@ -169,8 +166,6 @@ namespace AspyRoad.iOSCore
                 _animationcomplete
             );
 
-
-            
             #region ObjCCode         
             // **************************************************************************
             // This code is for view ccontroller containment only.
@@ -239,22 +234,7 @@ namespace AspyRoad.iOSCore
         {
             this.SourceViewController.View.Center = leftFull;
         }  
-     
-		#region eventhookups
 
-//		/// <summary>
-//		/// Raises the slide event.
-//		/// </summary>
-//		/// <param name="e">E.</param>
-//		protected virtual void OnSlide(EventArgs e)
-//		{
-//			Slide handler = Sliding;
-//			if (handler != null)
-//			{
-//				handler(e);
-//			}
-//		}
-		#endregion
 	}
 
     [Foundation.Register("AspySlidingRightSegue")] 
@@ -279,7 +259,8 @@ namespace AspyRoad.iOSCore
         }
 
         private void Initialize()
-        {             
+        {
+            var x = 1;
         } 
         #endregion
 
