@@ -110,7 +110,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI
             // Always fire UIApply in ViewWillAppear
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
-            // Build the fraction
+
             this.CreateFraction();
         }
 
@@ -191,8 +191,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 (_ypos + this.SizeClass.GlobalSizeDimensions.NumberBorderWidth)
             );
 
-            this.AddAndDisplayController(this._numberContainerNumerator);
-            this.AddAndDisplayController(this._numberContainerDenominator);
+            //this.AddAndDisplayController(this._numberContainerNumerator);
+            //this.AddAndDisplayController(this._numberContainerDenominator);
 
         }
 
@@ -214,7 +214,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void LoadView()
         {
             this._vFractionContainer = new vFractionContainer();
-            //this.View = null;
             this.View = this._vFractionContainer;
 
         }
@@ -260,6 +259,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewDidLoad();
             this.View.UserInteractionEnabled = true;
             this.View.ClipsToBounds = true;
+
+            // This instantly caused NULL Exception moved from init.
+            //this.CreateFraction();
+            // Fix 1
+            this.AddAndDisplayController(this._numberContainerNumerator);
+            this.AddAndDisplayController(this._numberContainerDenominator);
+
         }
 
         public override bool Solve()
@@ -369,7 +375,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewSelected()
         {
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
             //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             //this.SetFontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }

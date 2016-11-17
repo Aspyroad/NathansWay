@@ -315,42 +315,42 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewNeutral()
         {
-            this.BorderWidth = 1.0f;
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            //this.BorderWidth = 1.0f;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
         public virtual void UI_ViewReadOnly()
         {
-            this.BorderWidth = 1.0f;
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+            //this.BorderWidth = 1.0f;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
         public virtual void UI_ViewCorrect()
         {
-            this.BorderWidth = 1.0f;
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            //this.BorderWidth = 1.0f;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
         public virtual void UI_ViewInCorrect()
         {
-            this.BorderWidth = 1.0f;
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
-            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            //this.BorderWidth = 1.0f;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
+            //this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
         }
 
         public virtual void UI_ViewSelected()
         {
-            this.BorderWidth = 1.0f;
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
+            //this.BorderWidth = 1.0f;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
         }
 
         #endregion

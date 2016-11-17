@@ -128,7 +128,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //this._bShowDecimal = false;
             // Some basic UI
-            this.BorderWidth = 1.0f;
+            //this.BorderWidth = 1.0f;
 
             this._bPerNumberErrorUIDisplay = false;
 
@@ -384,11 +384,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewNeutral()
         {
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
-            this.BorderWidth = 1.0f;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.Clear;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+            //this.BorderWidth = 1.0f;
+            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
+            //this.View.BackgroundColor = UIColor.Clear;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
 
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers)
@@ -399,11 +399,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewReadOnly()
         {
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
-            this.BorderWidth = 1.0f;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.Clear;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
+            //this.BorderWidth = 1.0f;
+            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
+            //this.View.BackgroundColor = UIColor.Clear;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
 
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers)
@@ -414,11 +414,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewCorrect()
         {
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
-            this.BorderWidth = 2.0f;
-            // Hard coded value. These should always be white for best alpha shading of foreground numbers
-            this.View.BackgroundColor = UIColor.Clear;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
+            //this.BorderWidth = 2.0f;
+            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
+            //this.View.BackgroundColor = UIColor.Clear;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
 
             //if (!this._bPerNumberErrorUIDisplay)
             {
@@ -433,10 +433,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewInCorrect()
         {
-            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
-            this.BorderWidth = 2.0f;
-            this.View.BackgroundColor = UIColor.Clear;
-            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
+            //this.BorderWidth = 2.0f;
+            //this.View.BackgroundColor = UIColor.Clear;
+            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
 
             //if (!this._bPerNumberErrorUIDisplay)
             {

@@ -135,6 +135,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             // UI for THIS view, not Textbox!!
             this.View.ClipsToBounds = true;
 
+            // UpDown Buttons
+            this.btnDown.Alpha = 0.6f;
+            this.btnUp.Alpha = 0.6f;
+
+            this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
+            this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
+
             // Add subviews - controls
             this.View.AddSubview(this.txtNumber);
             this.View.AddSubview(this.btnUp);
@@ -198,13 +205,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._intMultiNumberSigPosition = 0;
             this._intMultiNumberInSigPosition = 0;
 
-            // UpDown Buttons
-            this.btnDown.Alpha = 0.6f;
-            this.btnUp.Alpha = 0.6f;
-
-            // TODO : Should these come from UIAppearance?
-            this.btnDown.BackgroundColor = UIColor.FromRGBA(0.16f, 1.0f, 0.14f, 0.20f);
-            this.btnUp.BackgroundColor = UIColor.FromRGBA(1.0f, 0.13f, 0.21f, 0.20f);
             // ****
 
             this.btnDown.Hidden = true;
@@ -221,10 +221,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AutoApplyUI = false;
 
-            this.txtNumber.BorderWidth = 0.0f;
-            this.txtNumber.BorderWidth = 0.0f;
-            this.txtNumber.CornerRadius = 0.0f;
-            this.txtNumber.BackgroundColor = UIColor.Clear;
+            //this.txtNumber.BorderWidth = 0.0f;
+            //this.txtNumber.CornerRadius = 0.0f;
+            //this.txtNumber.BackgroundColor = UIColor.Clear;
 
             // TODO: These may need to be seperate from global values
             //this.txtNumber.BorderWidth = 1.0f;

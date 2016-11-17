@@ -195,7 +195,10 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get { return this.View.Layer.CornerRadius; }
+            get 
+            {
+                return this.View.Layer.CornerRadius; 
+            }
             set
             {
                 this.View.Layer.CornerRadius = value;

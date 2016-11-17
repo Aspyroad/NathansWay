@@ -6,7 +6,7 @@ using Foundation;
 using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
-
+using AspyRoad.iOSCore.UISettings;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -53,7 +53,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void Initialize()
         {
-            this.WeakDelegate = this;
+            this.WeakDelegate = this;           
         }
 
         #endregion

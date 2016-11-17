@@ -81,7 +81,7 @@
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTableView.Base.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTableViewCell.Base.cs" />
     <Compile Include="Controls\Aspyroad.iOSCore.AspyTableViewSource.Base.cs" />
-    <Compile Include="Controls\Aspyroad.iOSCore.vCanvasScrollMain.Base.cs" />
+    <Compile Include="Controls\Aspyroad.iOSCore.AspyScrollView.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj">

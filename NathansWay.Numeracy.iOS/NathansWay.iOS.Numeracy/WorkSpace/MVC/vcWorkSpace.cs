@@ -44,7 +44,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Main workspace views and docking variables
         private vCanvasScrollMain _vCanvasMain;
-        private AspyView _vCanvasDocked;
+        private NWView _vCanvasDocked;
 
         private vcMainWorkSpace _vcMainWorkSpace;
         private vcWorkNumlet _vcNumletEquation;
@@ -126,9 +126,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		{
 			this.AspyTag1 = 60022;
 			this.AspyName = "VC_WorkSpace";
-            // Size Class Init
-            this._sizeWorkSpace = new SizeWorkSpace(this);
-            this._sizeClass = this._sizeWorkSpace;
+
 
             // Tool Factory
             this._toolFactory = iOSCoreServiceContainer.Resolve<ToolFactory>();
@@ -149,34 +147,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasSelectedNumberText = false;
             this.HasSelectedOperatorText = false;
 
-
-            // Virtual Canvas setups ******************************************************************
-            this._vCanvasMain = new vCanvasScrollMain();
-            this._vCanvasDocked = new AspyView();
-
-            this._vCanvasMain.MyWorkSpaceParent = this;
-
-            this._vCanvasMain.BackgroundColor = UIColor.White;
-            this._vCanvasMain.ClipsToBounds = true;
-            this._vCanvasMain.AutosizesSubviews = false;
-            this._vCanvasMain.ScrollEnabled = true;
-            this._vCanvasMain.UserInteractionEnabled = true;
-            this._vCanvasMain.CornerRadius = 5.0f;
-            //this._vCanvasMain.HasRoundedCorners = true;
-
-            // This is NEEDED for scrollview to work (currently set in sizing?)
-            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
-
-
-            this._vCanvasDocked.BackgroundColor = UIColor.Gray;
-            this._vCanvasDocked.ClipsToBounds = true;
-            this._vCanvasDocked.AutosizesSubviews = false;
-            this._vCanvasDocked.CornerRadius = 5.0f;
-            //this._vCanvasDocked.HasRoundedCorners = true;
-            this._vCanvasDocked.UserInteractionEnabled = true;
-            // This is NEEDED for scrollview to work
-            // mainScroll.contentSize = CGSizeMake(width,height);//width and height depends your scroll area
-
         }
 
         private void AddVCNumlet (vcWorkNumlet _myNumlet)
@@ -186,11 +156,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             _myNumlet.DidMoveToParentViewController(this);
         }
 
-        private void AddViewNumlet (vcWorkNumlet _myNumlet, UIView _canvas)
+        private void AddViewNumlet (vcWorkNumlet _myNumlet, vCanvasScrollMain _canvas)
         {
             
             _canvas.AddSubview(_myNumlet.View);
-            _myNumlet.View.SetNeedsDisplay();
+            //_myNumlet.View.SetNeedsDisplay();
+        }
+
+        private void AddViewNumlet(vcWorkNumlet _myNumlet, NWView _canvas)
+        {
+
+            _canvas.AddSubview(_myNumlet.View);
+            //_myNumlet.View.SetNeedsDisplay();
         }
 
         private void RemoveViewNumlet (vcWorkNumlet _myNumlet)
@@ -259,7 +236,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.RemoveNumlet(this._vcNumletEquation);
             this.RemoveNumlet(this._vcNumletResult);
             this.RemoveNumlet(this._vcNumletSolve);
-
 
             this.AddViewNumlet(this._vcNumletEquation, this._vCanvasMain);
 
@@ -551,14 +527,44 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.LoadView();
 
             //this.SetWorkSpaceInitialPosition();
-            this.View.Layer.Opacity = 0.0f;
+            this.View.BackgroundColor = UIColor.Clear;
             this.View.AutosizesSubviews = false;
 		}
+
+        public override void AwakeFromNib()
+        {
+            // First function call for Storyboard nibs
+            base.AwakeFromNib();
+            // Size Class Init
+            this._sizeWorkSpace = new SizeWorkSpace(this);
+            this._sizeClass = this._sizeWorkSpace;
+            this.SizeClass.SetViewPosition();
+        }
 
 		public override void ViewDidLoad()
 		{
 
 			base.ViewDidLoad();
+
+            //******** Virtual Canvas setups ************************
+            this._vCanvasMain = new vCanvasScrollMain();
+            this._vCanvasDocked = new NWView();
+
+            this._vCanvasMain.MyWorkSpaceParent = this;
+            this._vCanvasMain.BackgroundColor = UIColor.White;
+            this._vCanvasMain.ClipsToBounds = true;
+            this._vCanvasMain.AutosizesSubviews = false;
+            this._vCanvasMain.ScrollEnabled = true;
+            this._vCanvasMain.UserInteractionEnabled = true;
+            this._vCanvasMain.CornerRadius = 5.0f;
+
+            //this._vCanvasDocked.MyWorkSpaceParent = this;
+            this._vCanvasDocked.BackgroundColor = UIColor.LightGray;
+            this._vCanvasDocked.ClipsToBounds = true;
+            this._vCanvasDocked.AutosizesSubviews = false;
+            this._vCanvasDocked.UserInteractionEnabled = true;
+            this._vCanvasDocked.CornerRadius = 5.0f;
+
             // UI
             this.CornerRadius = 5.0f;
             this.BorderWidth = this.UIAppearance.GlobaliOSTheme.ViewBorderWidth;
@@ -611,15 +617,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnPosition.EnableHold = false;
             this.btnPosition.TouchUpInside += OnClick_btnPosition;
             this.btnPosition.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
+
 		}
 
         public override void ViewWillAppear(bool animated)
         {
+
             this.View.Layer.Opacity = 1.0f;
             this.SizeClass.SetViewPosition();
+
             base.ViewWillAppear(animated);
-
-
             // Setup all canvas size here.
             //this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasMainHeightWidth();
             //this._vCanvasDocked.Frame = this._sizeWorkSpace.SetCanvasDockedHeightWidth();
@@ -988,7 +995,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 
         //public AspyScrollView vCanvasDocked 
-        public AspyView vCanvasDocked
+        public NWView vCanvasDocked
         {
             get { return this._vCanvasDocked; }
             set { this._vCanvasDocked = value; }
