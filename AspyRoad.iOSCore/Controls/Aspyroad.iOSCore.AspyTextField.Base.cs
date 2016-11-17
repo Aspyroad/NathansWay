@@ -61,9 +61,6 @@ namespace AspyRoad.iOSCore
 		private void Initialize()
 		{
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
-            // UIApply
-            this.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
-            this.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
             this._bAutoApplyUI = true;
             this._bAllowNextResponder = false;
             this._bApplyTextOffset = false;
@@ -229,6 +226,8 @@ namespace AspyRoad.iOSCore
         public virtual void ApplyUI7()
         {
             // Common UI
+            this.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.TextBorderWidth;
+            this.CornerRadius = this.iOSUIAppearance.GlobaliOSTheme.TextCornerRadius;
             this.Layer.BorderColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value.CGColor;
             this.BackgroundColor = iOSUIAppearance.GlobaliOSTheme.TextBGUIColor.Value;
             this.TextColor = iOSUIAppearance.GlobaliOSTheme.TextUIColor.Value;

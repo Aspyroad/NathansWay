@@ -14,7 +14,7 @@ using NathansWay.Numeracy.Shared.Factories;
 using NathansWay.Numeracy.Shared.BUS.Entity;
 using NathansWay.Numeracy.Shared.BUS.ViewModel;
 using NathansWay.Numeracy.Shared;
-using NathansWay.Numeracy.Shared;
+
 
 namespace NathansWay.iOS.Numeracy
 {

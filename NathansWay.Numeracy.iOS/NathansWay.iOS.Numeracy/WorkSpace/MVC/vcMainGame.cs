@@ -58,7 +58,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._sizeMainGame = new SizeMainGame(this);
             this._sizeClass = this._sizeMainGame;
-
 		}
 
 		#endregion

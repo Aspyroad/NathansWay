@@ -58,15 +58,6 @@ namespace AspyRoad.iOSCore
         {
             this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();    
 
-            // Setup standard values form UI config
-            this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
-            this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
-            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
-
-            this.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
-            this.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
-            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
-
             this.AutoApplyUI = true;
 
             this.ClipsToBounds = true;
@@ -103,6 +94,13 @@ namespace AspyRoad.iOSCore
 
         public virtual void ApplyUI7 ()
         {
+            // Setup standard values form UI config
+            this.TextColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value;
+            this.HighlightedTextColor = iOSUIAppearance.GlobaliOSTheme.LabelHighLightedTextUIColor.Value;
+            this.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.LabelBGUIColor.Value;
+            this.BorderColor = iOSUIAppearance.GlobaliOSTheme.LabelTextUIColor.Value.CGColor;
+            this.BorderWidth = iOSUIAppearance.GlobaliOSTheme.LabelBorderWidth;
+            this.CornerRadius = iOSUIAppearance.GlobaliOSTheme.LabelCornerRadius;
         }
 
         public virtual void ApplyUI6 ()

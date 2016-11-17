@@ -22,24 +22,24 @@ namespace AspyRoad.iOSCore
 		// Required for the Xamarin iOS Desinger
 		public AspySlider () : base()
 		{
-			Init_AspySlider ();
+			Initalize ();
 		}
 		public AspySlider (IntPtr handle) : base(handle)
 		{
-			Init_AspySlider ();
+			Initalize ();
 		}       
 		public AspySlider (CGRect myFrame)  : base (myFrame)
 		{ 
-			Init_AspySlider ();  
+			Initalize ();  
 		}
 		public AspySlider (NSCoder coder) : base(coder)
 		{
-			Init_AspySlider ();
+			Initalize ();
 		}
 
 		#region Private Members
 
-		private void Init_AspySlider ()
+        private void Initalize ()
 		{ 
 			this.iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
 			this.MinValue = 1.0f;

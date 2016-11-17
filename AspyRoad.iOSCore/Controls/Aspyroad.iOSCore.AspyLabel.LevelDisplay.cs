@@ -60,6 +60,7 @@ namespace AspyRoad.iOSCore
 		public override void Draw (CGRect rect)
 		{
 			base.Draw (rect);
+
 			// Create the layer and draw it.
 			// (This is done in view.drawrect simply because this is the only spot we can get a graphic context in a views lifetime.)
 			this._levelLayer = this.CreateLayerWithDelegate ();
