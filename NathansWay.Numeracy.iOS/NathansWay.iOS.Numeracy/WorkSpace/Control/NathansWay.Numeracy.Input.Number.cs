@@ -436,8 +436,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                 // Value changed
                 if (this._dblPrevValue != _dblValue)
                 {
-                    //Why...well its the ordering, I need to tell NumberContainer one of its kids has changed
-                    // but I need to so it after I change its current value, not before
                     x = true;
                 }
                 this.CurrentValue = _dblValue;
@@ -447,10 +445,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 this.txtNumber.Text = "";
                 this.CurrentValue = null;
-                //if (this._bIsReadOnly)
-                //{
-                //    this.CurrentValueStr = this.OriginalValueStr;
-                //}
             }
 
             //Update the parentNumber container

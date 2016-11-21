@@ -34,13 +34,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
 
-        // Data
-        private EntityLesson _wsLesson;
-        //private EntityLessonResults _wsLessonResults;
-        private EntityLessonDetail _wsLessonDetail;
-        //private EntityLessonDetailResults _wsLessonDetailResults;
-
-
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
 
@@ -84,7 +77,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 foreach (BaseContainer _con in this.OutputContainers) 
                 {
                     // Event Hooks
-                    this.eValueChanged -= _con.OnValueChange;
+                    //this.eValueChanged -= _con.OnValueChange ;
+                    this.eSizeChanged -= _con.OnSizeChange;
+                    this.SizeClass.eResizing -= _con.SizeClass.OnResize;
+                    this._sizeClass = null;
+                    this._sizeWorkNumlet = null;
+                    this._uiNumberFactory = null;
                 }
             }
         }
@@ -110,15 +108,40 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Members
 
-        public void Load(G__WorkNumletType workNumletType, string strData)
+        public void LoadControls(G__WorkNumletType workNumletType, string strData)
         {
             this.NumletType = workNumletType;
             this._uiNumberFactory.CreateNumletEquation(strData, this);
             // Should CreateNumletEquation just return the List<> ?
             this.OutputContainers = this._uiNumberFactory.UIOutputEquation;
-
             // NOTE! How do we display??
+        }
 
+        public void LoadControlsToView()
+        {
+            // Walk through all controls in 
+            for (int i = 0; i < this.OutputContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputContainers[i];
+
+                x.WillMoveToParentViewController(this);
+                this.AddChildViewController(x);
+                x.DidMoveToParentViewController(this);
+            }
+        }
+
+        public void RemoveControlsToView()
+        {
+            // Walk through all controls in 
+            for (int i = 0; i < this.OutputContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputContainers[i];
+
+                x.WillMoveToParentViewController(null);
+                x.View.RemoveFromSuperview();
+                x.RemoveFromParentViewController();
+                x.DidMoveToParentViewController(null);
+            }
         }
 
         public void ResetAllSelection()
@@ -336,35 +359,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get { return this._workNumletType; }
             set { this._workNumletType = value; }
-        }
-
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
-
-        //        public EntityLessonResults WsLessonResults
-        //        {
-        //            get { return this._wsLessonResults; }
-        //            set { this._wsLessonResults = value; }
-        //        }
-
-        public EntityLessonDetail WsLessonDetail
-        {
-            get { return this._wsLessonDetail; }
-            set { this._wsLessonDetail = value; }
-        }
-
-        //        public EntityLessonDetailResults WsLessonDetailResults
-        //        {
-        //            get { return this._wsLessonDetailResults; }
-        //            set { this._wsLessonDetailResults = value; }
-        //        }
-
-        public string ExpressionString
-        {
-            get { return this._wsLessonDetail.Equation.ToString(); }
         }
 
         #endregion

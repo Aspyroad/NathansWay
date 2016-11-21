@@ -14,8 +14,48 @@ using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.MonoGame.iOS;
 using NathansWay.MonoGame.Shared;
 
+
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
+    public class LessonNumlets
+    {
+        public vcWorkNumlet vcNumletEquation { get; set; }
+        public vcWorkNumlet vcNumletResult { get; set; }
+        public List<vcWorkNumlet> vcNumletMethods { get; set; }
+
+        public EntityLesson Lesson { get; set; }
+        public EntityLessonDetail LessonDetail { get; set; }
+        public EntityLessonResults LessonResults { get; set; }
+        public EntityLessonDetailResults LessonDetailResults { get; set; }
+
+
+        public string strExpression;
+        // Expression breakdown
+        public string strEquation;
+        public string strMethods;
+        public string strResult;
+
+        public LessonNumlets()
+        {
+            this.strEquation = "";
+            this.strMethods = "";
+            this.strResult = "";
+            this.vcNumletEquation = new vcWorkNumlet();
+            this.vcNumletResult = new vcWorkNumlet();
+            this.vcNumletMethods = new List<vcWorkNumlet>();
+        }
+    }
+
+    // Override List class for lessonList
+    // http://stackoverflow.com/questions/22165015/how-to-override-list-add-method
+    public class LessonList<LessonNumlets> : List<LessonNumlets>
+    {
+
+
+
+    }
+
+
 	public partial class vcWorkSpace : BaseContainer
 	{
         // TODO: These are interesting
@@ -47,22 +87,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private NWView _vCanvasDocked;
 
         private vcMainWorkSpace _vcMainWorkSpace;
-        private vcWorkNumlet _vcNumletEquation;
-        private vcWorkNumlet _vcNumletResult;
+        // All our lesson UI container
+        private LessonList<LessonNumlets> LessonNumletList;
+
+        private List<vcWorkNumlet> _numletCurrentMethods;
+        private vcWorkNumlet _numletCurrentEquation;
+        private vcWorkNumlet _numletCurrentResult;
+
         private vcWorkNumlet _vcNumletSolve;
         // Ref to the monogame vc.
         private UIWindow _wToolSpaceWindow;
         private UIViewController _vcToolSpace;
         private BaseTool _currentTool;
         private UIStoryboard _storyBoard;
-        private List<vcWorkNumlet> _vcNumletMethods;
+        //private List<vcWorkNumlet> _vcNumletMethods;
         // VC Dialogs
         private vcPositioningDialog _vcPositioningDialog;
         private vcToolBoxDialog _vcToolBoxDialog;
 
         // Data
-        private EntityLesson _wsLesson;
-        private EntityLessonResults _wsLessonResults;
+
         private List<EntityLessonDetail> _wsLessonDetail;
         private List<EntityLessonDetailResults> _wsLessonDetailResults;
         // Data and state
@@ -115,6 +159,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 //Do this because the ViewModel hangs around for the lifetime of the app
                 this.btnNextEquation.TouchUpInside -= OnClick_btnNextEquation;
+
+                this._toolFactory = null;
+                this._storyBoard = null;
             }
         }
 
@@ -137,6 +184,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._strEquation = "";
             this._strMethods = "";
             this._strResult = "";
+
+            this._vcNumletSolve = new vcWorkNumlet();
 
             this._intLessonDetailCurrentSeq = 0;
             this._intLessonDetailCurrentIndex = 0;
@@ -176,7 +225,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // If there are any Numlets present, remove them.
             // vcWorkSpace is lazy, these may be populated.
-            if (this._vcNumletEquation != null)
+            if (this._numletCurrentEquation != null)
             {
                 this.RemoveNumlet(this._vcNumletEquation);
             }
@@ -193,19 +242,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.RemoveNumlet(this._vcNumletSolve);
             }
 
-            this.LoadDataStrings();
-            this.LoadEquationNumlet();
-            this.LoadMethodNumlets();
-            this.LoadResultNumlet();
+            //this.LoadDataStrings();
+            //this.LoadEquationNumlet();
+            //this.LoadMethodNumlets();
+            //this.LoadResultNumlet();
             this.LoadSolveNumlet();
 
-            this.AddNumlet(this._vcNumletEquation);
-            this.AddNumlet(this._vcNumletResult);
-            this.AddNumlet(this._vcNumletSolve);
+            //this.AddNumlet(this._vcNumletEquation);
+            //this.AddNumlet(this._vcNumletResult);
+            //this.AddNumlet(this._vcNumletSolve);
 
-            this._vcNumletResult.MyWorkSpaceParent = this;
-            this._vcNumletSolve.MyWorkSpaceParent = this;
-            this._vcNumletEquation.MyWorkSpaceParent = this;
+            //this._vcNumletResult.MyWorkSpaceParent = this;
+            //this._vcNumletSolve.MyWorkSpaceParent = this;
+            //this._vcNumletEquation.MyWorkSpaceParent = this;
 
         }
 
@@ -214,6 +263,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetSubHeightWidthPositions();
 
             // TODO: Fix this shit, the only way SetFrames is being called is by "adding" the view again...costly code
+            // HERE we look at our lesson list and move/load the next lesson into the current buffer.
             this.RemoveNumlet(this._vcNumletEquation);
             this.RemoveNumlet(this._vcNumletResult);
             this.RemoveNumlet(this._vcNumletSolve);
@@ -301,10 +351,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasMain.ScrollEnabled = _scroll;
         }
 
-        public void LoadDataStrings()
+        public void LoadLessonUIList()
         {
             // Both of these types mean the same thing, the ? is just C# shorthand.
             // private void Example(nint? arg1, Nullable<nint> arg2)
+
+            if (this.LessonNumletList.Count == 0)
+            {
+                // Nothing loaded - first load
+                var x = new LessonNumlets();
+                // More setup here ? Load the lesson wheres that done?
+                // Assign data to local strings
+                x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
+                x.strMethods = this._currentLessonDetail.Method.ToString().Trim();
+                x.strResult = this._currentLessonDetail.Result.ToString().Trim();
+                x.Lesson 
+                this.LessonNumletList.Add(x);
+                // More shit here
+
+            }
+            else
+            {
+                //LoadView the next lesson
+            }
 
             this._wsLessonDetail.Sort();
             this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
@@ -325,15 +394,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // Create all our expression symbols, numbers etc
             // REMEMBER:  do we add the equals sign here?? Not sure
+            if (this._vcNumletResult != null)
+            {
+                this._vcNumletResult = null;
+                this._vcNumletResult = new vcWorkNumlet();
+            }
+            else
+            {
+                this.
             this._strResult = ("=," + this._strResult);
 
-            var numlet = new vcWorkNumlet();
-            numlet.NumletType = G__WorkNumletType.Equation;
+            this..Load(G__WorkNumletType.Result, this._strResult);
+
+
 
             // Set Parent
             numlet.MyWorkSpaceParent = this;
             numlet.MyImmediateParent = this;
-            numlet.OutputContainers = this._uiOutputEquation;
             //this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
             this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
         }
@@ -658,8 +735,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
 
             // Check all Numlets
-            bool num1 = this._vcNumletEquation.Solve();
-            bool num2 = this._vcNumletResult.Solve();
+            bool num1 = this._numletCurrentEquation.Solve();
+            bool num2 = this._numletCurrentResult.Solve();
 
             this._bIsCorrect = (num1 && num2);
 
