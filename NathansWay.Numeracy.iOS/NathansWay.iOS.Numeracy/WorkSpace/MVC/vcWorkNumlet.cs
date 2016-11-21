@@ -24,6 +24,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #endregion
 
 		#region Private Variables
+
+        // Executive decision number 36
+        // Im going to make the numlet responsible for creating its display.
+        // Factories
+        private UINumberFactory _uiNumberFactory;
+
 		// Control Attributes
         private G__WorkNumletType _workNumletType;
         private string _strExpression;
@@ -94,6 +100,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Size Class Init
             this._sizeWorkNumlet = new SizeWorkNumlet(this);
             this._sizeClass = this._sizeWorkNumlet;
+            // Factory Classes for expression building
+            this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
             this.View.AutosizesSubviews = false;
             this.OutputAnswerContainers = new List<object>();
 		}
@@ -101,6 +109,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #endregion
 
         #region Public Members
+
+        public void Load(G__WorkNumletType workNumletType, string strData)
+        {
+            this.NumletType = workNumletType;
+            this._uiNumberFactory.CreateNumletEquation(strData, this);
+            // Should CreateNumletEquation just return the List<> ?
+            this.OutputContainers = this._uiNumberFactory.UIOutputEquation;
+
+            // NOTE! How do we display??
+
+        }
 
         public void ResetAllSelection()
         {
@@ -159,8 +178,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
-            this.BorderWidth = 2.0f;
 		}
 
         public override void ViewWillAppear(bool animated)
@@ -400,3 +417,74 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     }
 }
 
+//private void CreateNumletResult(string _strResult)
+//{
+//    // Create all our expression symbols, numbers etc
+//    // REMEMBER:  do we add the equals sign here?? Not sure
+//   // _strResult = ("=," + _strResult);
+//    // Build...
+//    //this.ResultStringToObjects(_strResult);
+
+//    // Setup the numlet
+//    var numlet = new vcWorkNumlet();
+//    numlet.NumletType = G__WorkNumletType.Result;
+
+//    // Set Parent
+//    numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+//    numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+//    numlet.OutputContainers = this._uiOutputResult;
+//    // Sizing
+//    //G__NumberDisplaySize _displaySize;
+//    nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+//    nfloat _xPos = _xSpacing;
+
+//    for (int i = 0; i < this._uiOutputResult.Count; i++)
+//    {
+//        var _control = (BaseContainer)this._uiOutputResult[i];
+//        // Set Parents
+//        _control.MyNumletParent = numlet;
+//        _control.MyImmediateParent = numlet;
+//        _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+//        _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+//        //_control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+
+//        // Let the numlet know its the answer
+//        if (_control.IsAnswer)
+//        {
+//            numlet.OutputAnswerContainers.Add(_control);
+//            numlet.IsAnswer = true;
+//            numlet.IsReadOnly = false;
+//        }
+
+//        // Event Hooks ************************************************************************
+//        // Value and selection changes - FLOW - FROM CONTROL UP TO NUMLET
+//        _control.eValueChanged += numlet.OnValueChange;
+
+//        // Hook up the control resizing - FLOW - FROM NUMLET DOWN TO CONTROL
+//        numlet.eSizeChanged += _control.OnSizeChange;
+//        numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+
+//        // Most of these should ApplyUI in ViewWillAppear
+//        _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
+
+//        _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
+//        numlet.AddAndDisplayController(_control);
+//        _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
+//    }
+
+//    // Event Hooks ************************************************************************
+//    // Value and selection changes - FLOW - FROM NUMLET UP TO WORKSPACE
+//    numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
+
+//    // Resizing - FLOW - FROM WORKSPACE DOWN TO NUMLET
+//    this._vcCurrentWorkSpace.eSizeChanged += numlet.OnSizeChange;
+//    this._vcCurrentWorkSpace.SizeClass.eResizing += numlet.SizeClass.OnResize;
+
+//    // Pad out the end
+//    numlet.SizeClass.CurrentWidth = _xPos;
+//    numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
+
+//    // Return completed numnut!
+//    // Numlet has no size params set. SetPositions must be called before use!
+//    // return numlet;
+//}

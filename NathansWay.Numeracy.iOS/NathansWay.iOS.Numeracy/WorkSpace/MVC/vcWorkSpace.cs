@@ -149,30 +149,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void AddVCNumlet (vcWorkNumlet _myNumlet)
+        private void AddNumlet (vcWorkNumlet _myNumlet)
         {
             _myNumlet.WillMoveToParentViewController(this);
             this.AddChildViewController(_myNumlet);
             _myNumlet.DidMoveToParentViewController(this);
-        }
-
-        private void AddViewNumlet (vcWorkNumlet _myNumlet, vCanvasScrollMain _canvas)
-        {
-            
-            _canvas.AddSubview(_myNumlet.View);
-            //_myNumlet.View.SetNeedsDisplay();
-        }
-
-        private void AddViewNumlet(vcWorkNumlet _myNumlet, NWView _canvas)
-        {
-
-            _canvas.AddSubview(_myNumlet.View);
-            //_myNumlet.View.SetNeedsDisplay();
-        }
-
-        private void RemoveViewNumlet (vcWorkNumlet _myNumlet)
-        {
-            _myNumlet.View.RemoveFromSuperview();
         }
 
         private void RemoveNumlet (vcWorkNumlet _myNumlet)
@@ -218,9 +199,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.LoadResultNumlet();
             this.LoadSolveNumlet();
 
-            this.AddVCNumlet(this._vcNumletEquation);
-            this.AddVCNumlet(this._vcNumletResult);
-            this.AddVCNumlet(this._vcNumletSolve);
+            this.AddNumlet(this._vcNumletEquation);
+            this.AddNumlet(this._vcNumletResult);
+            this.AddNumlet(this._vcNumletSolve);
 
             this._vcNumletResult.MyWorkSpaceParent = this;
             this._vcNumletSolve.MyWorkSpaceParent = this;
@@ -237,25 +218,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.RemoveNumlet(this._vcNumletResult);
             this.RemoveNumlet(this._vcNumletSolve);
 
-            this.AddViewNumlet(this._vcNumletEquation, this._vCanvasMain);
+            this._vCanvasMain.AddSubview(this._vcNumletEquation.View);
 
             // Either of these may be docked to the side, we need to check this and add the nunlets to the correct canvas.
             if (this._sizeWorkSpace.DockedResultNumlet)
             {
-                this.AddViewNumlet(this._vcNumletResult, this._vCanvasDocked);
+                //this.AddViewNumlet(this._vcNumletResult, this._vCanvasDocked);
+                this._vCanvasDocked.AddSubview(this._vcNumletResult.View);
             }
             else
             {
-                this.AddViewNumlet(this._vcNumletResult, this._vCanvasMain);
+                //this.AddViewNumlet(this._vcNumletResult, this._vCanvasMain);
+                this._vCanvasMain.AddSubview(this._vcNumletResult.View);
             }
 
             if (this._sizeWorkSpace.DockedSolveNumlet)
             {
-                this.AddViewNumlet(this._vcNumletSolve, this._vCanvasDocked);
+                //this.AddViewNumlet(this._vcNumletSolve, this._vCanvasDocked);
+                this._vCanvasDocked.AddSubview(this._vcNumletSolve.View);
             }
             else
             {
-                this.AddViewNumlet(this._vcNumletSolve, this._vCanvasMain);
+                //this.AddViewNumlet(this._vcNumletSolve, this._vCanvasMain);
+                this._vCanvasMain.AddSubview(this._vcNumletSolve.View);
             }
         }
 
@@ -287,6 +272,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 x = true;
             }
+
             if (this._vcNumletResult.View.PointInside(pNumletResult, null))
             {
                 x = true;
@@ -332,18 +318,29 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void LoadEquationNumlet()
         {
-            this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
+            //this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
         }
 
         public void LoadResultNumlet()
         {
-            this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
+            // Create all our expression symbols, numbers etc
+            // REMEMBER:  do we add the equals sign here?? Not sure
+            this._strResult = ("=," + this._strResult);
+
+            var numlet = new vcWorkNumlet();
+            numlet.NumletType = G__WorkNumletType.Equation;
+
+            // Set Parent
+            numlet.MyWorkSpaceParent = this;
+            numlet.MyImmediateParent = this;
+            numlet.OutputContainers = this._uiOutputEquation;
+            //this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
             this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
         }
 
         public void LoadSolveNumlet()
         {
-            this._vcNumletSolve = this._uiNumberFactory.GetSolveNumlet();
+            //this._vcNumletSolve = this._uiNumberFactory.GetSolveNumlet();
             this.WorkSpaceSize.SolveNumletWidth = this._vcNumletSolve.SizeClass.CurrentWidth;
         }
 
