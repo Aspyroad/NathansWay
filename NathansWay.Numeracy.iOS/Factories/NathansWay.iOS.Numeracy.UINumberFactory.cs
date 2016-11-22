@@ -69,7 +69,7 @@ namespace NathansWay.iOS.Numeracy
             this._globalSizeDimensions = iOSCoreServiceContainer.Resolve<iOSNumberDimensions> ();
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
             this._numberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
-            this._intLessonDetailSeq = 1;
+            //this._intLessonDetailSeq = 1;
         }
 
         #endregion
@@ -117,38 +117,38 @@ namespace NathansWay.iOS.Numeracy
         //    return _vcNumletSolve;
         //}
 
-        public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
-        {
-            // Fire start event
-            this.FireBuildStartedEvent();
+        //public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
+        //{
+        //    // Fire start event
+        //    this.FireBuildStartedEvent();
 
-            this._wsLesson = entLesson;
-            this._wsLessonDetail = entLessonDetail;
+        //    this._wsLesson = entLesson;
+        //    this._wsLessonDetail = entLessonDetail;
 
-            // Create our workspace label object
-            vcWorkSpaceLabel x = new vcWorkSpaceLabel();
+        //    // Create our workspace label object
+        //    vcWorkSpaceLabel x = new vcWorkSpaceLabel();
 
-            // Fire completed event
-            this.FireBuildCompletedEvent();
+        //    // Fire completed event
+        //    this.FireBuildCompletedEvent();
 
-            return x;
-        }
+        //    return x;
+        //}
 
         #endregion
 
         #region Public Properties
 
-        public nint LessonDetailSeq
-        {
-            get { return this._intLessonDetailSeq; }
-            set { this._intLessonDetailSeq = value; }
-        }
+        //public nint LessonDetailSeq
+        //{
+        //    get { return this._intLessonDetailSeq; }
+        //    set { this._intLessonDetailSeq = value; }
+        //}
 
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
+        //public EntityLesson WsLesson
+        //{
+        //    get { return this._wsLesson; }
+        //    set { this._wsLesson = value; }
+        //}
 
         //        public EntityLessonResults WsLessonResults
         //        {
@@ -156,11 +156,11 @@ namespace NathansWay.iOS.Numeracy
         //            set { this._wsLessonResults = value; }
         //        }
 
-        public List<EntityLessonDetail> WsLessonDetail
-        {
-            get { return this._wsLessonDetail; }
-            set { this._wsLessonDetail = value; }
-        }
+        //public List<EntityLessonDetail> WsLessonDetail
+        //{
+        //    get { return this._wsLessonDetail; }
+        //    set { this._wsLessonDetail = value; }
+        //}
 
         //        public EntityLessonDetailResults WsLessonDetailResults
         //        {
@@ -172,17 +172,14 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        public void CreateNumletEquation(string _strEquation, vcWorkNumlet numlet)
+        public void CreateNumletEquation(string _strEquation)
         {            
             // Create all our expression symbols, numbers etc
             this.StringToObjects(_strEquation);
 
             // Setup the numlet
-
-            //var numlet = new vcWorkNumlet();
-            //numlet.NumletType = G__WorkNumletType.Equation;
-
-
+            var numlet = new vcWorkNumlet();
+            numlet.NumletType = G__WorkNumletType.Equation;
 
             //// Set Parent
             //numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
