@@ -110,8 +110,8 @@
       <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcToolBoxDialog.designer.cs">
-		      <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
-			</Compile>
+      <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +202,7 @@
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWViewController.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\Base\NathansWay.Numeracy.NWView.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.LessonList.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\MVC\vcWorkSpace.designer.cs">
       <DependentUpon>vcWorkSpace.cs</DependentUpon>
     </Compile>

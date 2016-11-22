@@ -111,7 +111,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void LoadControls(G__WorkNumletType workNumletType, string strData)
         {
             this.NumletType = workNumletType;
-            this._uiNumberFactory.CreateNumletEquation(strData, this);
+            this._uiNumberFactory.CreateNumletEquation(strData);
             // Should CreateNumletEquation just return the List<> ?
             this.OutputContainers = this._uiNumberFactory.UIOutputEquation;
             // NOTE! How do we display??

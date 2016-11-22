@@ -17,63 +17,8 @@ using NathansWay.MonoGame.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-    public class LessonNumletSet
+    public partial class vcWorkSpace : BaseContainer
     {
-        public vcWorkNumlet vcNumletEquation { get; set; }
-        public vcWorkNumlet vcNumletResult { get; set; }
-        public List<vcWorkNumlet> vcNumletMethods { get; set; }
-
-        public EntityLesson Lesson { get; set; }
-        public EntityLessonDetail LessonDetail { get; set; }
-        public EntityLessonResults LessonResults { get; set; }
-        public EntityLessonDetailResults LessonDetailResults { get; set; }
-
-
-        public string strExpression;
-        // Expression breakdown
-        public string strEquation;
-        public string strMethods;
-        public string strResult;
-
-        public LessonNumletSet()
-        {
-            this.strEquation = "";
-            this.strMethods = "";
-            this.strResult = "";
-            this.vcNumletEquation = new vcWorkNumlet();
-            this.vcNumletResult = new vcWorkNumlet();
-            this.vcNumletMethods = new List<vcWorkNumlet>();
-        }
-    }
-
-    // Override List class for lessonList
-    // http://stackoverflow.com/questions/22165015/how-to-override-list-add-method
-    public class LessonList<LessonNumlets> : List<LessonNumlets>
-    {
-        public LessonNumletSet Add(LessonNumletSet _numletSet)
-        {
-            return new LessonNumletSet();
-        }
-
-        public LessonNumletSet Next()
-        {
-            return new LessonNumletSet();
-        }
-
-        public LessonNumletSet Prev()
-        {
-            return new LessonNumletSet();
-        }
-
-
-
-
-
-
-    }
-
-	public partial class vcWorkSpace : BaseContainer
-	{
         // TODO: These are interesting
         // Do we store the results as we go?
         // What happens as the user cycles through and then back? 
@@ -85,7 +30,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-		#region Private Variables
+        #region Private Variables
 
         private string _strExpression;
         // Expression breakdown
@@ -142,33 +87,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Tool Logic
         //private 
 
-		#endregion
-     
-		#region Constructors
+        #endregion
 
-		public vcWorkSpace(IntPtr h) : base(h)
-		{
-			Initialize();
-		}
+        #region Constructors
 
-		[Export("initWithCoder:")]
-		public vcWorkSpace(NSCoder coder) : base(coder)
-		{
-			Initialize();
-		}
-
-        public vcWorkSpace() 
+        public vcWorkSpace(IntPtr h) : base(h)
         {
             Initialize();
         }
 
-		#endregion
+        [Export("initWithCoder:")]
+        public vcWorkSpace(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
+
+        public vcWorkSpace()
+        {
+            Initialize();
+        }
+
+        #endregion
 
         #region Deconstructors
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
 
             if (disposing)
             {
@@ -182,18 +127,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-		#region Private Members
+        #region Private Members
 
-		private void Initialize()
-		{
-			this.AspyTag1 = 60022;
-			this.AspyName = "VC_WorkSpace";
+        private void Initialize()
+        {
+            this.AspyTag1 = 60022;
+            this.AspyName = "VC_WorkSpace";
 
 
             // Tool Factory
             this._toolFactory = iOSCoreServiceContainer.Resolve<ToolFactory>();
             // Storyboard reference
-            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
+            this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard>();
 
             this._strEquation = "";
             this._strMethods = "";
@@ -212,27 +157,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void AddNumlet (vcWorkNumlet _myNumlet)
+        private void AddNumlet(vcWorkNumlet _myNumlet)
         {
             _myNumlet.WillMoveToParentViewController(this);
             this.AddChildViewController(_myNumlet);
             _myNumlet.DidMoveToParentViewController(this);
         }
 
-        private void RemoveNumlet (vcWorkNumlet _myNumlet)
+        private void RemoveNumlet(vcWorkNumlet _myNumlet)
         {
             _myNumlet.WillMoveToParentViewController(null);
             _myNumlet.View.RemoveFromSuperview();
             _myNumlet.RemoveFromParentViewController();
-            _myNumlet.DidMoveToParentViewController(null);            
+            _myNumlet.DidMoveToParentViewController(null);
         }
 
-        private void RemoveMethodNumlets ()
+        private void RemoveMethodNumlets()
         {
             // No point passing in this._vcMethodNumlets, its the only type of its kind in the class!
         }
 
-        private void ReloadAllNumlets ()
+        private void ReloadAllNumlets()
         {
             this.SelectedNumberText = null;
             this.SelectedOperatorText = null;
@@ -272,7 +217,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void SetDisplayExpression ()
+        private void SetDisplayExpression()
         {
             this.SizeClass.SetSubHeightWidthPositions();
 
@@ -308,12 +253,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        private bool NextEquation ()
+        private bool NextEquation()
         {
             return (this._enumLessonState == G__LessonState.Started);
         }
 
-        private bool PreviousEquation ()
+        private bool PreviousEquation()
         {
             return (this._enumLessonState == G__LessonState.Started);
         }
@@ -344,7 +289,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (this._numletCurrentMethods != null)
             {
-                foreach (BaseContainer _Numlet in this._numletCurrentMethods) 
+                foreach (BaseContainer _Numlet in this._numletCurrentMethods)
                 {
                     CGPoint pNumletMethod = _Numlet.View.ConvertPointFromView(p1, this.View);
                     if (this._numletCurrentEquation.View.PointInside(pNumletEquation, null))
@@ -379,8 +324,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
                 x.strMethods = this._currentLessonDetail.Method.ToString().Trim();
                 x.strResult = this._currentLessonDetail.Result.ToString().Trim();
-                x.Lesson 
-                this.LessonNumletList.Add(x);
+                //x.Lesson 
+                //this.LessonNumletList.Add(x);
                 // More shit here
 
             }
@@ -415,13 +360,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //    }
         //    else
         //    {
-        //        this.
+        //        
+        //    }
         //    this._strResult = ("=," + this._strResult);
-
         //    this..Load(G__WorkNumletType.Result, this._strResult);
-
-
-
         //    // Set Parent
         //    numlet.MyWorkSpaceParent = this;
         //    numlet.MyImmediateParent = this;
@@ -516,7 +458,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void DockNumlets(G__WorkNumletType _numType)
         {
-            this.RemoveNumlet(this._vcNumletResult);
+            this.RemoveNumlet(this._numletCurrentResult);
             this.RemoveNumlet(this._vcNumletSolve);
 
             // Result FlipFlop
@@ -1121,11 +1063,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set { this._intLessonDetailCurrentCount = value; }
         }
 
-        public EntityLesson WsLesson
-        {
-            get { return this._wsLesson; }
-            set { this._wsLesson = value; }
-        }
+        //public EntityLesson WsLesson
+        //{
+        //    get { return this._wsLesson; }
+        //    set { this._wsLesson = value; }
+        //}
 
         //        public EntityLessonResults WsLessonResults
         //        {
@@ -1151,12 +1093,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public vcWorkNumlet NumletEquation
         {
-            get { return this._vcNumletEquation; }
+            get { return this._numletCurrentEquation; }
         }
 
         public vcWorkNumlet NumletResult
         {
-            get { return this._vcNumletResult; }
+            get { return this._numletCurrentResult; }
         }
 
         public vcWorkNumlet NumletSolve
@@ -1166,7 +1108,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public List<vcWorkNumlet> NumletMethods
         {
-            get { return this._vcNumletMethods; }
+            get { return this._numletCurrentMethods; }
         }
 
         public vcMainWorkSpace MainWorkSpace
