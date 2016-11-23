@@ -8,11 +8,11 @@ using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
+// Shared
+using NathansWay.Numeracy.Shared.Factories;
 using NathansWay.Numeracy.Shared.BUS.Entity;
+using NathansWay.Numeracy.Shared.BUS.ViewModel;
 using NathansWay.Numeracy.Shared;
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.MonoGame.iOS;
-using NathansWay.MonoGame.Shared;
 
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -23,10 +23,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public vcWorkNumlet vcNumletResult { get; set; }
         public List<vcWorkNumlet> vcNumletMethods { get; set; }
 
-        public EntityLesson Lesson { get; set; }
+        //public EntityLesson Lesson { get; set; }
         public EntityLessonDetail LessonDetail { get; set; }
         public EntityLessonResults LessonResults { get; set; }
-        public EntityLessonDetailResults LessonDetailResults { get; set; }
+        //public EntityLessonDetailResults LessonDetailResults { get; set; }
 
 
         public string strExpression;
@@ -48,8 +48,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
     // Override List class for lessonList
     // http://stackoverflow.com/questions/22165015/how-to-override-list-add-method
-    public class LessonList<LessonNumlets> : List<LessonNumlets>
+    public class LessonList<LessonNumletSet> : List<LessonNumletSet>
     {
+        #region Variables
+
+        // Data
+        public EntityLesson Lesson { get; set; }
+        public EntityLessonResults LessonResults { get; set; }
+        public List<EntityLessonDetail> LessonDetail { get; set; }
+        public List<EntityLessonDetailResults> LessonDetailResults { get; set; }
+
+        #endregion
+
+        public LessonList(LessonViewModel _lesson)
+        {
+            this.Lesson = _lesson;
+
+        }
+
         public LessonNumletSet Add(LessonNumletSet _numletSet)
         {
             return new LessonNumletSet();

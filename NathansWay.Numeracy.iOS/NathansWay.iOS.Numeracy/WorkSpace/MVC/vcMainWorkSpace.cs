@@ -68,7 +68,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._vcMainGame = new vcMainGame();
             //this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+            //this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
 
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();

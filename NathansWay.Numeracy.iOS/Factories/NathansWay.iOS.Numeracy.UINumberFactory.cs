@@ -85,8 +85,10 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public vcWorkSpace UILoadWorkSpace (LessonViewModel _vmLesson)
+        public vcWorkSpace UILoadWorkSpace ()
         {
+            var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+            LessonList _ls = new LessonList<LessonNumletSet>(_vmLesson);
             // Create our workspace object
             this._vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
             // Load the lesson detail for the selected lesson

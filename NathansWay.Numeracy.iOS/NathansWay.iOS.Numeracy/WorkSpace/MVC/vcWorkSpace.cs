@@ -67,8 +67,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcToolBoxDialog _vcToolBoxDialog;
 
         // Data
-        private List<EntityLessonDetail> _wsLessonDetail;
-        private List<EntityLessonDetailResults> _wsLessonDetailResults;
+        //private List<EntityLessonDetail> _wsLessonDetail;
+        //private List<EntityLessonDetailResults> _wsLessonDetailResults;
         // Data and state
         private EntityLessonDetail _currentLessonDetail;
         // Selected lessons quetion position/number
