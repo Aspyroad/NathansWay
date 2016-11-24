@@ -62,8 +62,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public LessonList(LessonViewModel _lesson)
         {
-            this.Lesson = _lesson;
-
+            this.Lesson = _lesson.SelectedLesson;
+            this.LessonDetail = _lesson.LessonDetail;
         }
 
         public LessonNumletSet Add(LessonNumletSet _numletSet)

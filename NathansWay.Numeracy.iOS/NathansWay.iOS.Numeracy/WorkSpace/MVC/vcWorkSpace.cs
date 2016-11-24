@@ -49,7 +49,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private vcMainWorkSpace _vcMainWorkSpace;
         // All our lesson UI container
-        private LessonList<LessonNumletSet> LessonNumletList;
+        private LessonList<LessonNumletSet> _lessonNumletList;
 
         private List<vcWorkNumlet> _numletCurrentMethods;
         private vcWorkNumlet _numletCurrentEquation;
@@ -310,7 +310,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasMain.ScrollEnabled = _scroll;
         }
 
-        public void LoadLessonUIList()
+        public void LoadLessonInit()
         {
             // Both of these types mean the same thing, the ? is just C# shorthand.
             // private void Example(nint? arg1, Nullable<nint> arg2)
@@ -318,7 +318,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (this.LessonNumletList.Count == 0)
             {
                 // Nothing loaded - first load
-                var x = new LessonNumletSet();
+                // var x = new LessonNumletSet();
                 // More setup here ? Load the lesson wheres that done?
                 // Assign data to local strings
                 x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
@@ -334,8 +334,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 //LoadView the next lesson
             }
 
-            this._wsLessonDetail.Sort();
-            this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
+            //this._wsLessonDetail.Sort();
+            //this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
             this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
 
             // Assign data to local strings
@@ -1075,13 +1075,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //            set { this._wsLessonResults = value; }
         //        }
 
-        public List<EntityLessonDetail> WsLessonDetail
+        public LessonList<LessonNumletSet> LessonNumletList
         {
-            get { return this._wsLessonDetail; }
+            get 
+            { 
+                return this._lessonNumletList; 
+            }
             set
             {
-                this._wsLessonDetail = value;
-                this._intLessonDetailCurrentCount = value.Count;
+                this._lessonNumletList = value;
             }
         }
 

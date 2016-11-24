@@ -48,13 +48,6 @@ namespace NathansWay.iOS.Numeracy
         private G__DisplaySizeLevels _numberDisplaySize;
         private nfloat _fNumberSpacing;
         protected IAppSettings _numberAppSettings;
-
-        // Data
-        // TODO: These MUST be all populated for this class to work do we need security
-        private EntityLesson _wsLesson;
-        //private EntityLessonResults _wsLessonResults;
-        private List<EntityLessonDetail> _wsLessonDetail;
-        //private EntityLessonDetailResults _wsLessonDetailResults;
         private nint _intLessonDetailSeq;
 
         #endregion
@@ -88,16 +81,13 @@ namespace NathansWay.iOS.Numeracy
         public vcWorkSpace UILoadWorkSpace ()
         {
             var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
-            LessonList _ls = new LessonList<LessonNumletSet>(_vmLesson);
+            LessonList<LessonNumletSet> _ls = new LessonList<LessonNumletSet>(_vmLesson);
+
+
+
             // Create our workspace object
             this._vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
-            // Load the lesson detail for the selected lesson
-            this._vcCurrentWorkSpace.WsLesson = _vmLesson.SelectedLesson;
-            this._vcCurrentWorkSpace.WsLessonDetail = _vmLesson.LessonDetail;
-            this._vcCurrentWorkSpace.NumberFactory = this;
-
-            // TODO: Code here to load the first lesson detail automatically if needed goes here I think
-
+            this._vcCurrentWorkSpace.LessonNumletList = _ls;
             return this._vcCurrentWorkSpace;
         }
 
