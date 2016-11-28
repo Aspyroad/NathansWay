@@ -108,14 +108,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Members
 
-        public void LoadControls(G__WorkNumletType workNumletType, string strData)
+        public void LoadControlsEquation(string strData)
         {
-            this.NumletType = workNumletType;
-            this._uiNumberFactory.CreateNumletEquation(strData);
-            // Should CreateNumletEquation just return the List<> ?
-            this.OutputContainers = this._uiNumberFactory.UIOutputEquation;
-            // NOTE! How do we display??
+            this._uiNumberFactory.CreateNumletEquation(this, strData);
         }
+
+        public void LoadControlsResult(string strData)
+        {
+            this._uiNumberFactory.CreateNumletResult(this, strData);
+        }
+
 
         public void LoadControlsToView()
         {
@@ -130,7 +132,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public void RemoveControlsToView()
+        public void RemoveControlsFromView()
         {
             // Walk through all controls in 
             for (int i = 0; i < this.OutputContainers.Count; i++)

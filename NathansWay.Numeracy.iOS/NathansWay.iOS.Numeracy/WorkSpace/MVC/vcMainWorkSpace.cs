@@ -67,8 +67,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeClass = this._sizeMainWorkSpace;
 
             this._vcMainGame = new vcMainGame();
-            //this._vcMainContainer = iOSCoreServiceContainer.Resolve<vcMainContainer>();
-            //this._vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
 
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
@@ -111,7 +109,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void AddAndSet_WorkSpace()
         {
-            this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace(this._vmLesson);
+            this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace();
             // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
             this.AddAndDisplayController(this._vcWorkSpace);

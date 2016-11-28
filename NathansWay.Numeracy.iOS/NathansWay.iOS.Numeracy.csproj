@@ -31,6 +31,7 @@
     <PlatformTarget>anycpu</PlatformTarget>
     <MtouchFastDev>false</MtouchFastDev>
     <MtouchExtraArgs></MtouchExtraArgs>
+    <MtouchNoSymbolStrip>false</MtouchNoSymbolStrip>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <Optimize>false</Optimize>

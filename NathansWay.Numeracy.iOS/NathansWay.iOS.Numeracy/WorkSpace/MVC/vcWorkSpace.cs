@@ -70,7 +70,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         //private List<EntityLessonDetail> _wsLessonDetail;
         //private List<EntityLessonDetailResults> _wsLessonDetailResults;
         // Data and state
-        private EntityLessonDetail _currentLessonDetail;
+        public EntityLessonDetail CurrentLessonDetail { get; set; }
         // Selected lessons quetion position/number
         private nint _intLessonDetailCurrentSeq;
         private nint _intLessonDetailCurrentIndex;
@@ -315,15 +315,21 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Both of these types mean the same thing, the ? is just C# shorthand.
             // private void Example(nint? arg1, Nullable<nint> arg2)
 
+            if (this._lessonNumletList == null)
+            {
+                this._lessonNumletList = new LessonList<LessonNumletSet>();
+                this._lessonNumletList.MyWorkSpaceParent = this;
+            }
+
             if (this.LessonNumletList.Count == 0)
             {
                 // Nothing loaded - first load
                 // var x = new LessonNumletSet();
                 // More setup here ? Load the lesson wheres that done?
                 // Assign data to local strings
-                x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
-                x.strMethods = this._currentLessonDetail.Method.ToString().Trim();
-                x.strResult = this._currentLessonDetail.Result.ToString().Trim();
+                //x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
+                //x.strMethods = this._currentLessonDetail.Method.ToString().Trim();
+                //x.strResult = this._currentLessonDetail.Result.ToString().Trim();
                 //x.Lesson 
                 //this.LessonNumletList.Add(x);
                 // More shit here
@@ -336,12 +342,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             //this._wsLessonDetail.Sort();
             //this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
-            this._intLessonDetailCurrentSeq = this._currentLessonDetail.SEQ;
+            this._intLessonDetailCurrentSeq = this.CurrentLessonDetail.SEQ;
 
             // Assign data to local strings
-            this._strEquation = this._currentLessonDetail.Equation.ToString().Trim();
-            this._strMethods = this._currentLessonDetail.Method.ToString().Trim();
-            this._strResult = this._currentLessonDetail.Result.ToString().Trim();
+            this._strEquation = this.CurrentLessonDetail.Equation.ToString().Trim();
+            this._strMethods = this.CurrentLessonDetail.Method.ToString().Trim();
+            this._strResult = this.CurrentLessonDetail.Result.ToString().Trim();
         }
 
         //public void LoadEquationNumlet()
@@ -947,8 +953,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.btnBackToLessons.Hidden = true;
 
                 // Load the first lesson
-                this.ReloadAllNumlets ();
-                this.SetDisplayExpression();
+                this.LoadLessonInit();
+                //this.ReloadAllNumlets ();
+                //this.SetDisplayExpression();
             }
             else
             {

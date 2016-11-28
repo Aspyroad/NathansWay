@@ -83,8 +83,6 @@ namespace NathansWay.iOS.Numeracy
             var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
             LessonList<LessonNumletSet> _ls = new LessonList<LessonNumletSet>(_vmLesson);
 
-
-
             // Create our workspace object
             this._vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
             this._vcCurrentWorkSpace.LessonNumletList = _ls;
@@ -164,27 +162,24 @@ namespace NathansWay.iOS.Numeracy
 
         #region Private Members
 
-        public void CreateNumletEquation(string _strEquation)
-        {            
+        public void CreateNumletEquation(vcWorkNumlet numlet, string _strEquation)
+        {
+            List<object> UIOutput = this.StringToObjects(_strEquation);
             // Create all our expression symbols, numbers etc
-            this.StringToObjects(_strEquation);
-
-            // Setup the numlet
-            var numlet = new vcWorkNumlet();
-            numlet.NumletType = G__WorkNumletType.Equation;
+            //this.StringToObjects(_strEquation);
 
             //// Set Parent
             //numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
             //numlet.MyImmediateParent = this._vcCurrentWorkSpace;
-            //numlet.OutputContainers = this._uiOutputEquation;
+            numlet.OutputContainers = UIOutput;
             // Sizing
-            //G__NumberDisplaySize _displaySize;
+            //G__NumberDisplaySize _displaySize; 
             nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
             nfloat _xPos = _xSpacing;
 
-            for (int i = 0; i < this.UIOutputEquation.Count; i++)
+            for (int i = 0; i < UIOutput.Count; i++)
             {                
-                var _control = (BaseContainer)this.UIOutputEquation[i];
+                var _control = (BaseContainer)UIOutput[i];
                 // Set Parents
                 _control.MyNumletParent = numlet;
                 _control.MyImmediateParent = numlet;
@@ -223,7 +218,6 @@ namespace NathansWay.iOS.Numeracy
                 // OR
                 // Do I create a new List<object> of the newly changed objects. IM thinking th later
 
-
                 _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
             }
 
@@ -245,7 +239,7 @@ namespace NathansWay.iOS.Numeracy
             //return numlet;
         }
 
-        private void CreateNumletMethods(string _strExpression)
+        public void CreateNumletMethods(string _strExpression)
         {
 //            // Create all our expression symbols, numbers etc
 //            this.ExpressionToUIEditable(_strExpression);
@@ -284,77 +278,73 @@ namespace NathansWay.iOS.Numeracy
               //return new List<vcWorkNumlet>();
         }
 
-        //private void CreateNumletResult(string _strResult)
-        //{
-        //    // Create all our expression symbols, numbers etc
-        //    // REMEMBER:  do we add the equals sign here?? Not sure
-        //    _strResult = ("=," + _strResult);
-        //    // Build...
-        //    this.ResultStringToObjects(_strResult);
+        public void CreateNumletResult(vcWorkNumlet numlet, string _strResult)
+        {
+            // Create all our expression symbols, numbers etc
+            // REMEMBER:  do we add the equals sign here?? Not sure
+            _strResult = ("=," + _strResult);
+            // Build...
+            List<object> UIOutput = this.StringToObjects(_strResult);
 
-        //    // Setup the numlet
-        //    var numlet = new vcWorkNumlet();
-        //    numlet.NumletType = G__WorkNumletType.Result;
+            // Set Parent
+            numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+            numlet.MyImmediateParent = this._vcCurrentWorkSpace;
+            numlet.OutputContainers = UIOutput;
+            // Sizing
+            //G__NumberDisplaySize _displaySize;
+            nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
+            nfloat _xPos = _xSpacing;
 
-        //    // Set Parent
-        //    numlet.MyWorkSpaceParent = this._vcCurrentWorkSpace;
-        //    numlet.MyImmediateParent = this._vcCurrentWorkSpace;
-        //    numlet.OutputContainers = this._uiOutputResult;
-        //    // Sizing
-        //    //G__NumberDisplaySize _displaySize;
-        //    nfloat _xSpacing = this._globalSizeDimensions.NumletNumberSpacing;
-        //    nfloat _xPos = _xSpacing;
+            for (int i = 0; i < UIOutput.Count; i++)
+            {                
+                var _control = (BaseContainer)UIOutput[i];
+                // Set Parents
+                _control.MyNumletParent = numlet;
+                _control.MyImmediateParent = numlet;
+                _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
+                _control.SizeClass.SetCenterRelativeParentViewPosY = true;
+                //_control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
 
-        //    for (int i = 0; i < this._uiOutputResult.Count; i++)
-        //    {                
-        //        var _control = (BaseContainer)this._uiOutputResult[i];
-        //        // Set Parents
-        //        _control.MyNumletParent = numlet;
-        //        _control.MyImmediateParent = numlet;
-        //        _control.MyWorkSpaceParent = this._vcCurrentWorkSpace;
-        //        _control.SizeClass.SetCenterRelativeParentViewPosY = true;
-        //        //_control.CurrentEditMode = this._numberAppSettings.GA__NumberEditMode;
+                // Let the numlet know its the answer
+                if (_control.IsAnswer)
+                {
+                    numlet.OutputAnswerContainers.Add(_control);
+                    numlet.IsAnswer = true;
+                    numlet.IsReadOnly = false;
+                }
 
-        //        // Let the numlet know its the answer
-        //        if (_control.IsAnswer)
-        //        {
-        //            numlet.OutputAnswerContainers.Add(_control);
-        //            numlet.IsAnswer = true;
-        //            numlet.IsReadOnly = false;
-        //        }
+                // Event Hooks ************************************************************************
+                // Value and selection changes - FLOW - FROM CONTROL UP TO NUMLET
+                _control.eValueChanged += numlet.OnValueChange;
 
-        //        // Event Hooks ************************************************************************
-        //        // Value and selection changes - FLOW - FROM CONTROL UP TO NUMLET
-        //        _control.eValueChanged += numlet.OnValueChange;
+                // Hook up the control resizing - FLOW - FROM NUMLET DOWN TO CONTROL
+                numlet.eSizeChanged += _control.OnSizeChange;
+                numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
 
-        //        // Hook up the control resizing - FLOW - FROM NUMLET DOWN TO CONTROL
-        //        numlet.eSizeChanged += _control.OnSizeChange;
-        //        numlet.SizeClass.eResizing += _control.SizeClass.OnResize;
+                // Most of these should ApplyUI in ViewWillAppear
+                _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
-        //        // Most of these should ApplyUI in ViewWillAppear
-        //        _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
+                _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
+                numlet.AddAndDisplayController(_control);
+                _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
+            }
 
-        //        _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
-        //        numlet.AddAndDisplayController(_control);
-        //        _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
-        //    }
+            // Event Hooks ************************************************************************
+            // Value and selection changes - FLOW - FROM NUMLET UP TO WORKSPACE
+            numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
 
-        //    // Event Hooks ************************************************************************
-        //    // Value and selection changes - FLOW - FROM NUMLET UP TO WORKSPACE
-        //    numlet.eValueChanged += this._vcCurrentWorkSpace.OnValueChange;
+            // Resizing - FLOW - FROM WORKSPACE DOWN TO NUMLET
+            this._vcCurrentWorkSpace.eSizeChanged += numlet.OnSizeChange;
+            this._vcCurrentWorkSpace.SizeClass.eResizing += numlet.SizeClass.OnResize;
 
-        //    // Resizing - FLOW - FROM WORKSPACE DOWN TO NUMLET
-        //    this._vcCurrentWorkSpace.eSizeChanged += numlet.OnSizeChange;
-        //    this._vcCurrentWorkSpace.SizeClass.eResizing += numlet.SizeClass.OnResize;
+            // Pad out the end
+            numlet.SizeClass.CurrentWidth = _xPos; 
+            numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
 
-        //    // Pad out the end
-        //    numlet.SizeClass.CurrentWidth = _xPos; 
-        //    numlet.SizeClass.CurrentHeight = this._globalSizeDimensions.NumletHeight;
-
-        //    // Return completed numnut!
-        //    // Numlet has no size params set. SetPositions must be called before use!
-        //    // return numlet;
-        //}
+            // Return completed numnut!
+            // Numlet has no size params set. SetPositions must be called before use!
+            // return numlet;
+        }
 
         private void CreateNumletSolve(vcWorkNumlet numlet)
         {
@@ -399,7 +389,7 @@ namespace NathansWay.iOS.Numeracy
 
         private List<object> StringToObjects(string _strExpression)
         {
-            return this.UIOutputEquation = this._expressionFactory.CreateExpressionEquation(_strExpression, false);
+            return this._expressionFactory.CreateExpressionEquation(_strExpression, false);
         }
 
         //private void EquationStringToObjects(string _strExpression)

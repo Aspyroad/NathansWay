@@ -145,9 +145,9 @@ namespace NathansWay.iOS.Numeracy
             {
                 UIView.Transition
                 (
-                    window, 
-                    0.3, 
-                    UIViewAnimationOptions.TransitionCrossDissolve, 
+                    window,
+                    0.3,
+                    UIViewAnimationOptions.TransitionFlipFromLeft,
                     delegate {}, 
                     delegate {}
                 );
