@@ -69,11 +69,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-		public override void LoadView()
-		{
-			base.LoadView();
-
-		}
+		//public override void LoadView()
+		//{
+		//	base.LoadView();
+		//}
 
 		public override void ViewDidLoad()
 		{

@@ -21,18 +21,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // VC Controllers
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
-        //private vcMainContainer _vcMainContainer;
         private UINumberFactory _uiNumberFactory;
-        //private UIStoryboard _storyBoard;
-        // VC Dialogs
-        //private Lazy<vcPositioningDialog> _vcPositioningDialog;
-
-        // Db
-        private LessonViewModel _vmLesson;
-        //private EntityLesson _wsSelectedLesson;
-
         // Sizing
         private SizeMainWorkSpace _sizeMainWorkSpace;
+        // AutoStart Lesson
+        public bool AutoStartLesson { get; set; }
 
 		#endregion
 
@@ -66,12 +59,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._sizeMainWorkSpace = new SizeMainWorkSpace(this);
             this._sizeClass = this._sizeMainWorkSpace;
 
-            this._vcMainGame = new vcMainGame();
-
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
-            // Storyboard reference
-            //this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard> ();
         }
 
         #endregion
@@ -90,8 +79,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.UserInteractionEnabled = true;
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
             this.SizeClass.SetViewPosition(0.0f, 0.0f);
-
-            this.AddAndSet_WorkSpace();
+            //this.AddAndSet_WorkSpace();
+            this.AddAndSet_MainGame();
         }
 
 		#endregion
@@ -102,7 +91,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Move this size shit into maingames size class
             var _pointF2 = new CGSize(2.0f, 2.0f);
-
+            this._vcMainGame = new vcMainGame();
             this._vcMainGame.SizeClass.SetViewPosition(_pointF2);
             this.AddAndDisplayController(this._vcMainGame);
         }
@@ -110,7 +99,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public void AddAndSet_WorkSpace()
         {
             this._vcWorkSpace = this._uiNumberFactory.UILoadWorkSpace();
-            // Link to dad
             this._vcWorkSpace.MainWorkSpace = this;
             this.AddAndDisplayController(this._vcWorkSpace);
         }
