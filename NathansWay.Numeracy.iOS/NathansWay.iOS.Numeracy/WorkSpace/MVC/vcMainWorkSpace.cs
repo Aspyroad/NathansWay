@@ -6,10 +6,6 @@ using Foundation;
 using UIKit;
 //Aspyroad
 using AspyRoad.iOSCore;
-// Nathansway
-using NathansWay.Numeracy.Shared.BUS.Entity;
-using NathansWay.Numeracy.Shared.BUS.ViewModel;
-using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -22,6 +18,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcWorkSpace _vcWorkSpace;
         private vcMainGame _vcMainGame;
         private UINumberFactory _uiNumberFactory;
+        private UIStoryboard _storyBoard;
         // Sizing
         private SizeMainWorkSpace _sizeMainWorkSpace;
         // AutoStart Lesson
@@ -61,6 +58,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // Factory Classes for expression building
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
+            //this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard>();
         }
 
         #endregion
@@ -79,8 +77,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.View.UserInteractionEnabled = true;
             this._applyUIWhere = G__ApplyUI.ViewDidLoad;
             this.SizeClass.SetViewPosition(0.0f, 0.0f);
-            //this.AddAndSet_WorkSpace();
+
+
             this.AddAndSet_MainGame();
+            this.AddAndSet_WorkSpace();
+
+        }
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
         }
 
 		#endregion
@@ -106,18 +112,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #endregion
 
         #region Public Properties
-
-//        public EntityLesson WsLesson
-//        {
-//            get { return this._wsLesson; }
-//            set { this._wsLesson = value; }
-//        }
-//
-//        public List<EntityLessonDetail> WsLessonDetail
-//        {
-//            get { return this._wsLessonDetail; }
-//            set { this._wsLessonDetail = value; }
-//        }
 
         #endregion
     }

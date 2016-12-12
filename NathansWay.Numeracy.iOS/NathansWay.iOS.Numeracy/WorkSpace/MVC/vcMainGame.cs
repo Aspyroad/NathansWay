@@ -39,10 +39,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			Initialize();
 		}
 
-		public vcMainGame() : base("vwMainGame", null)
-		{   
-			Initialize();
-		}
+		//public vcMainGame() : base("vwMainGame", null)
+		//{   
+		//	Initialize();
+		//}
+
+        public vcMainGame() : base()
+        {   
+            Initialize();
+        }
 
 		#endregion
 
@@ -99,7 +104,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ApplyUI7()
         {
             base.ApplyUI7();
-            this.View.TintColor = UIColor.LightGray;
+            this.View.BackgroundColor = UIColor.LightGray;
         }
 
 		#endregion

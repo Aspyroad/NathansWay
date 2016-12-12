@@ -8,6 +8,7 @@ using UIKit;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
+using NathansWay.Numeracy.Shared.BUS.ViewModel;
 using NathansWay.Numeracy.Shared.BUS.Entity;
 using NathansWay.Numeracy.Shared;
 using NathansWay.iOS.Numeracy.Controls;
@@ -33,10 +34,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         #region Private Variables
 
         private string _strExpression;
-        // Expression breakdown
-        private string _strEquation;
-        private string _strMethods;
-        private string _strResult;
 
         private SizeWorkSpace _sizeWorkSpace;
         // Factories
@@ -55,7 +52,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcWorkNumlet _numletCurrentEquation;
         private vcWorkNumlet _numletCurrentResult;
 
-        private vcWorkNumlet _vcNumletSolve;
+        private LessonNumletSet _currentLessonSet;
+
         // Ref to the monogame vc.
         private UIWindow _wToolSpaceWindow;
         private UIViewController _vcToolSpace;
@@ -66,26 +64,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private vcPositioningDialog _vcPositioningDialog;
         private vcToolBoxDialog _vcToolBoxDialog;
 
-        // Data
-        //private List<EntityLessonDetail> _wsLessonDetail;
-        //private List<EntityLessonDetailResults> _wsLessonDetailResults;
-        // Data and state
-        public EntityLessonDetail CurrentLessonDetail { get; set; }
         // Selected lessons quetion position/number
         private nint _intLessonDetailCurrentSeq;
         private nint _intLessonDetailCurrentIndex;
         private nint _intLessonDetailCurrentCount;
 
-        // Logic
+        // Logic for the lessons
         private G__LessonState _enumLessonState;
         private bool _blessonFinished;
         // Are we storing/recording results
         private bool _bRecordResults;
         // Should the answer display as being correct/incorrect bg color
         private bool _bDisplayAnswerStatusColor;
+        // Auto load all lessons into the list
+        private bool _bAutoLoadAllLessons;
 
-        // Tool Logic
-        //private 
+        // Public
+        // SolveNumlet
+        public vcWorkNumlet vcNumletSolve { get; private set; }
+
 
         #endregion
 
@@ -134,17 +131,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.AspyTag1 = 60022;
             this.AspyName = "VC_WorkSpace";
 
-
             // Tool Factory
             this._toolFactory = iOSCoreServiceContainer.Resolve<ToolFactory>();
             // Storyboard reference
             this._storyBoard = iOSCoreServiceContainer.Resolve<UIStoryboard>();
 
-            this._strEquation = "";
-            this._strMethods = "";
-            this._strResult = "";
+            //this._vcNumletSolve = new vcWorkNumlet();
 
-            this._vcNumletSolve = new vcWorkNumlet();
+            // Autoload the lessons
+            this._bAutoLoadAllLessons = true;
 
             this._intLessonDetailCurrentSeq = 0;
             this._intLessonDetailCurrentIndex = 0;
@@ -155,11 +150,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.HasSelectedNumberText = false;
             this.HasSelectedOperatorText = false;
 
+            // Size Class Init
+            this._sizeWorkSpace = new SizeWorkSpace(this);
+            this._sizeClass = this._sizeWorkSpace;
+
+            //var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
+            //this._lessonNumletList = new LessonList<LessonNumletSet>(_vmLesson);
+
         }
 
-        private void AddNumlet(vcWorkNumlet _myNumlet)
+        private void AddNumlet(vcWorkNumlet _myNumlet, UIView _vwCanvas)
         {
             _myNumlet.WillMoveToParentViewController(this);
+            _vwCanvas.AddSubview(_myNumlet.View);
             this.AddChildViewController(_myNumlet);
             _myNumlet.DidMoveToParentViewController(this);
         }
@@ -177,7 +180,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // No point passing in this._vcMethodNumlets, its the only type of its kind in the class!
         }
 
-        private void ReloadAllNumlets()
+        private void DisplayNumlets()
         {
             this.SelectedNumberText = null;
             this.SelectedOperatorText = null;
@@ -223,33 +226,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // TODO: Fix this shit, the only way SetFrames is being called is by "adding" the view again...costly code
             // HERE we look at our lesson list and move/load the next lesson into the current buffer.
-            this.RemoveNumlet(this._numletCurrentEquation);
-            this.RemoveNumlet(this._numletCurrentResult);
-            this.RemoveNumlet(this._vcNumletSolve);
+            //this.RemoveNumlet(this._numletCurrentEquation);
+            //this.RemoveNumlet(this._numletCurrentResult);
+            //this.RemoveNumlet(this._vcNumletSolve);
 
-            this._vCanvasMain.AddSubview(this._numletCurrentEquation.View);
+            this._vCanvasMain.AddSubview(this._currentLessonSet.vcNumletEquation.View);
 
             // Either of these may be docked to the side, we need to check this and add the nunlets to the correct canvas.
             if (this._sizeWorkSpace.DockedResultNumlet)
             {
                 //this.AddViewNumlet(this._vcNumletResult, this._vCanvasDocked);
-                this._vCanvasDocked.AddSubview(this._numletCurrentResult.View);
+                this._vCanvasDocked.AddSubview(this._currentLessonSet.vcNumletResult.View);
             }
             else
             {
                 //this.AddViewNumlet(this._vcNumletResult, this._vCanvasMain);
-                this._vCanvasMain.AddSubview(this._numletCurrentResult.View);
+                //this._vCanvasMain.AddSubview(this._currentLessonSet.vcNumletResult.View);
             }
 
             if (this._sizeWorkSpace.DockedSolveNumlet)
             {
-                //this.AddViewNumlet(this._vcNumletSolve, this._vCanvasDocked);
-                this._vCanvasDocked.AddSubview(this._vcNumletSolve.View);
+                this.AddNumlet(this.vcNumletSolve, this._vCanvasDocked);
+                this._vCanvasDocked.AddSubview(this.vcNumletSolve.View);
             }
             else
             {
-                //this.AddViewNumlet(this._vcNumletSolve, this._vCanvasMain);
-                this._vCanvasMain.AddSubview(this._vcNumletSolve.View);
+                this.AddNumlet(this.vcNumletSolve, this._vCanvasMain);
+                this._vCanvasMain.AddSubview(this.vcNumletSolve.View);
             }
         }
 
@@ -315,72 +318,65 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Both of these types mean the same thing, the ? is just C# shorthand.
             // private void Example(nint? arg1, Nullable<nint> arg2)
 
+            // ** Unused code. Here we have a catch for an empty LessonList...WHY?
+            // I doubt it will ever be needed, but if a lesson isnt load from the menu it may be required.
             if (this._lessonNumletList == null)
             {
                 this._lessonNumletList = new LessonList<LessonNumletSet>();
                 this._lessonNumletList.MyWorkSpaceParent = this;
             }
-
+            // Make sure a lesson is loaded
             if (this.LessonNumletList.Count == 0)
             {
-                // Nothing loaded - first load
-                // var x = new LessonNumletSet();
-                // More setup here ? Load the lesson wheres that done?
-                // Assign data to local strings
-                //x.strEquation = this._currentLessonDetail.Equation.ToString().Trim();
-                //x.strMethods = this._currentLessonDetail.Method.ToString().Trim();
-                //x.strResult = this._currentLessonDetail.Result.ToString().Trim();
-                //x.Lesson 
-                //this.LessonNumletList.Add(x);
-                // More shit here
-
+                if (this._bAutoLoadAllLessons)
+                {
+                    this._lessonNumletList.LoadAllLessonDetailSets();
+                }
             }
             else
             {
                 //LoadView the next lesson
             }
-
-            //this._wsLessonDetail.Sort();
-            //this._currentLessonDetail = _wsLessonDetail[(int)this._intLessonDetailCurrentIndex];
-            this._intLessonDetailCurrentSeq = this.CurrentLessonDetail.SEQ;
-
-            // Assign data to local strings
-            this._strEquation = this.CurrentLessonDetail.Equation.ToString().Trim();
-            this._strMethods = this.CurrentLessonDetail.Method.ToString().Trim();
-            this._strResult = this.CurrentLessonDetail.Result.ToString().Trim();
         }
 
-        //public void LoadEquationNumlet()
-        //{
-        //    //this._vcNumletEquation = this._uiNumberFactory.GetEquationNumlet(this._strEquation);
-        //}
+        public void LoadEquationNumlet()
+        {
+            if (this._currentLessonSet != null)
+            {
+                this._currentLessonSet.vcNumletEquation.LoadControlsToView();
+                //this.WorkSpaceSize.ResultNumletWidth = this._currentLessonSet.vcNumletEquation.SizeClass.CurrentWidth;
+            }
+        }
 
-        //public void LoadResultNumlet()
-        //{
-        //    // Create all our expression symbols, numbers etc
-        //    // REMEMBER:  do we add the equals sign here?? Not sure
-        //    if (this._numletCurrentResult != null)
-        //    {
-        //        this._numletCurrentResult = null;
-        //        this._numletCurrentResult = new vcWorkNumlet();
-        //    }
-        //    else
-        //    {
-        //        
-        //    }
-        //    this._strResult = ("=," + this._strResult);
-        //    this..Load(G__WorkNumletType.Result, this._strResult);
-        //    // Set Parent
-        //    numlet.MyWorkSpaceParent = this;
-        //    numlet.MyImmediateParent = this;
-        //    //this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
-        //    this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
-        //}
+        public void LoadResultNumlet()
+        {
+            if (this._currentLessonSet != null)
+            {
+                this._currentLessonSet.vcNumletEquation.LoadControlsToView();
+                //this.WorkSpaceSize.ResultNumletWidth = this._currentLessonSet.vcNumletResult.SizeClass.CurrentWidth;
+            }
+            // Create all our expression symbols, numbers etc
+            // REMEMBER:  do we add the equals sign here?? Not sure
+            //if (this._numletCurrentResult != null)
+            //{
+            //    this._numletCurrentResult = null;
+            //    this._numletCurrentResult = new vcWorkNumlet();
+            //}
+            //else
+            //{
+            //}
+            //this._strResult = ("=," + this._strResult);
+            //this..Load(G__WorkNumletType.Result, this._strResult);
+            //// Set Parent
+            //numlet.MyWorkSpaceParent = this;
+            //numlet.MyImmediateParent = this;
+            //this._vcNumletResult = this._uiNumberFactory.GetResultNumlet(this._strResult);
+            //this.WorkSpaceSize.ResultNumletWidth = this._vcNumletResult.SizeClass.CurrentWidth;
+        }
 
         public void LoadSolveNumlet()
         {
-            //this._vcNumletSolve = this._uiNumberFactory.GetSolveNumlet();
-            this.WorkSpaceSize.SolveNumletWidth = this._vcNumletSolve.SizeClass.CurrentWidth;
+            this.WorkSpaceSize.SolveNumletWidth = this.vcNumletSolve.SizeClass.CurrentWidth;
         }
 
         public void LoadMethodNumlets()
@@ -464,8 +460,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void DockNumlets(G__WorkNumletType _numType)
         {
-            this.RemoveNumlet(this._numletCurrentResult);
-            this.RemoveNumlet(this._vcNumletSolve);
+            this.RemoveNumlet(this._currentLessonSet.vcNumletResult);
+            this.RemoveNumlet(this.vcNumletSolve);
 
             // Result FlipFlop
             if (_numType == G__WorkNumletType.Result)
@@ -534,6 +530,93 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // this.NumletMethod.ResetAllSelection();
         }
 
+        public void Clear()
+        {
+            if (this.SelectedNumberContainer != null)
+            {
+                this.SelectedNumberContainer.OnUnSelectionChange();
+                this.SelectedNumberContainer = null;
+            }
+            if (this.SelectedFractionContainer != null)
+            {
+                this.SelectedFractionContainer.OnUnSelectionChange();
+                this.SelectedFractionContainer = null;
+            }
+            if (this.SelectedNumberText != null)
+            {
+                this.SelectedNumberText.OnUnSelectionChange();
+                this.SelectedNumberText = null;
+            }
+            if (this.SelectedOperatorText != null)
+            {
+                this.SelectedOperatorText.OnUnSelectionChange();
+                this.SelectedOperatorText = null;
+            }
+        }
+
+        public void Start()
+        {
+            if (this._enumLessonState == G__LessonState.Ready)
+            {
+                this._enumLessonState = G__LessonState.Started;
+                this.vCanvasMain.Hidden = false;
+                this.vCanvasDocked.Hidden = false;
+                this.btnStartStop.Hidden = true;
+                this.btnBackToLessons.Hidden = true;
+
+                // Create the solve Numlet/Button
+                // Solve button/Numlet
+                this.vcNumletSolve = new vcWorkNumlet();
+                this.vcNumletSolve.NumletType = G__WorkNumletType.Solve;
+                this.vcNumletSolve.MyWorkSpaceParent = this;
+                this.vcNumletSolve.MyImmediateParent = this;
+                this.vcNumletSolve.LoadControls("");
+
+                // Crash here
+                this._currentLessonSet = this.LessonNumletList.CurrentLessonDetailSet;
+
+                // Load the first lesson
+                this.LoadLessonInit();
+                this.WorkSpaceSize.ResultNumletWidth = this._currentLessonSet.vcNumletResult.SizeClass.CurrentWidth;
+                this.WorkSpaceSize.EquationNumletWidth = this._currentLessonSet.vcNumletEquation.SizeClass.CurrentWidth;
+                this.WorkSpaceSize.SolveNumletWidth = this.vcNumletSolve.SizeClass.CurrentWidth;
+                //this.AddNumlet(this.CurrentLessonNumletSet.vcNumletEquation);
+                //this.AddNumlet(this.CurrentLessonNumletSet.vcNumletResult);
+                //this.AddNumlet(this.vcNumletSolve);
+
+                //LoadEquationNumlet();
+                //LoadResultNumlet();
+                //LoadSolveNumlet();
+                //this.ReloadAllNumlets ();
+
+                this.SetDisplayExpression();
+                this._currentLessonSet.LoadAllNumletControls();
+                this._currentLessonSet.vcNumletEquation.LoadControlsToView();
+                this._currentLessonSet.vcNumletResult.LoadControlsToView();
+                this.vcNumletSolve.LoadControlsToView();
+
+
+
+            }
+            else
+            {
+                this._enumLessonState = G__LessonState.Ready;
+                this.vCanvasMain.Hidden = true;
+                this.vCanvasDocked.Hidden = true;
+                this.btnStartStop.Hidden = false;
+                this.btnBackToLessons.Hidden = false;
+            }
+
+
+
+            // Set the captions on the Next and Back buttons
+            var x = (this.LessonNumletList.Count);
+
+            this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+            this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
+
+        }
+
         #endregion
 
         #region Delegates
@@ -558,29 +641,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-		public override void LoadView()
-		{
-			base.LoadView();
-
-            //this.SetWorkSpaceInitialPosition();
-            this.View.BackgroundColor = UIColor.Clear;
-            this.View.AutosizesSubviews = false;
-		}
-
-        public override void AwakeFromNib()
-        {
-            // First function call for Storyboard nibs
-            base.AwakeFromNib();
-            // Size Class Init
-            this._sizeWorkSpace = new SizeWorkSpace(this);
-            this._sizeClass = this._sizeWorkSpace;
-            this.SizeClass.SetViewPosition();
-        }
-
 		public override void ViewDidLoad()
 		{
-
 			base.ViewDidLoad();
+            this.View.AutosizesSubviews = false;
 
             //******** Virtual Canvas setups ************************
             this._vCanvasMain = new vCanvasScrollMain();
@@ -588,22 +652,26 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             this._vCanvasMain.MyWorkSpaceParent = this;
             this._vCanvasMain.BackgroundColor = UIColor.White;
+            //this._vCanvasMain.BackgroundColor = UIColor.White.ColorWithAlpha(0.5f);
             this._vCanvasMain.ClipsToBounds = true;
             this._vCanvasMain.AutosizesSubviews = false;
             this._vCanvasMain.ScrollEnabled = true;
             this._vCanvasMain.UserInteractionEnabled = true;
             this._vCanvasMain.CornerRadius = 5.0f;
 
+            // TODO: Fuckin around with the shadows man...
+            //this._vCanvasMain.Layer.ShadowOffset = new CGSize(4.0f, 4.0f);
+            //this._vCanvasMain.Layer.ShadowColor = UIColor.Black.CGColor;
+            //this._vCanvasMain.Layer.ShadowOpacity = 0.5f;
+
+            // Doesnt need a parent reference
             //this._vCanvasDocked.MyWorkSpaceParent = this;
-            this._vCanvasDocked.BackgroundColor = UIColor.LightGray;
+            //this._vCanvasDocked.BackgroundColor = UIColor.LightGray;
+            this._vCanvasDocked.BackgroundColor = UIColor.Purple;
             this._vCanvasDocked.ClipsToBounds = true;
             this._vCanvasDocked.AutosizesSubviews = false;
             this._vCanvasDocked.UserInteractionEnabled = true;
             this._vCanvasDocked.CornerRadius = 5.0f;
-
-            // UI
-            this.CornerRadius = 5.0f;
-            this.BorderWidth = this.UIAppearance.GlobaliOSTheme.ViewBorderWidth;
 
             // To start hide the canvas's
             this.vCanvasMain.Hidden = true;
@@ -654,20 +722,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnPosition.TouchUpInside += OnClick_btnPosition;
             this.btnPosition.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
 
+            this.SizeClass.SetViewPosition();
 		}
 
         public override void ViewWillAppear(bool animated)
         {
-
-            this.View.Layer.Opacity = 1.0f;
-            this.SizeClass.SetViewPosition();
-
+            //this.SizeClass.SetViewPosition();
             base.ViewWillAppear(animated);
-            // Setup all canvas size here.
-            //this._vCanvasMain.Frame = this._sizeWorkSpace.SetCanvasMainHeightWidth();
-            //this._vCanvasDocked.Frame = this._sizeWorkSpace.SetCanvasDockedHeightWidth();
-            //this._sizeWorkSpace.SetCanvasMainHeightWidth();
-            //this._sizeWorkSpace.SetCanvasDockedHeightWidth();
         }
 
         public override bool Solve()
@@ -705,31 +766,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SolvingState = false;
 
             return (num1 && num2);
-        }
-
-        public void Clear()
-        {
-            if (this.SelectedNumberContainer != null)
-            {
-                this.SelectedNumberContainer.OnUnSelectionChange();
-                this.SelectedNumberContainer = null;
-            }
-            if (this.SelectedFractionContainer != null)
-            {
-                this.SelectedFractionContainer.OnUnSelectionChange();
-                this.SelectedFractionContainer = null;
-            }
-            if (this.SelectedNumberText != null)
-            {
-                this.SelectedNumberText.OnUnSelectionChange();
-                this.SelectedNumberText = null;
-            }
-            if (this.SelectedOperatorText != null)
-            {
-                this.SelectedOperatorText.OnUnSelectionChange();
-                this.SelectedOperatorText = null;
-            }
-
         }
 
         public override void OnSelectionChange(BaseContainer _selectedContainer)
@@ -812,6 +848,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ApplyUI7()
         {
             base.ApplyUI7();
+            // UI
+            this.CornerRadius = 5.0f;
+            this.BorderWidth = this.UIAppearance.GlobaliOSTheme.ViewBorderWidth;
+            this.BorderColor = this.UIAppearance.GlobaliOSTheme.TextUIColor.Value.ColorWithAlpha(0.9f).CGColor;
+            this.View.BackgroundColor = this.UIAppearance.GlobaliOSTheme.ViewBGUIColor.Value.ColorWithAlpha(0.4f);
         }
 
         public override void UI_ViewSelected()
@@ -881,7 +922,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
                 this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex + 1).ToString(), UIControlState.Normal);
                 // Load the equation
-                this.ReloadAllNumlets ();
+                this.DisplayNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
                 //this.btnPrevEquation.ApplyUI_Normal();
@@ -919,7 +960,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.btnPrevEquation.SetTitle((this._intLessonDetailCurrentIndex + 1).ToString(), UIControlState.Normal);
                 this.btnNextEquation.SetTitle((x + 1).ToString(), UIControlState.Normal);
                 // Load the equation
-                this.ReloadAllNumlets ();
+                this.DisplayNumlets ();
                 this.SetDisplayExpression();
                 // Swap the other buttons UI to normal no matter what the condition
                 //this.btnNextEquation.ApplyUI_Normal();
@@ -943,35 +984,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         private void OnClick_btnStartStop (object sender, EventArgs e)    
-        {            
-            if (this._enumLessonState == G__LessonState.Ready)
-            {
-                this._enumLessonState = G__LessonState.Started;
-                this.vCanvasMain.Hidden = false;
-                this.vCanvasDocked.Hidden = false;
-                this.btnStartStop.Hidden = true;
-                this.btnBackToLessons.Hidden = true;
-
-                // Load the first lesson
-                this.LoadLessonInit();
-                //this.ReloadAllNumlets ();
-                //this.SetDisplayExpression();
-            }
-            else
-            {
-                this._enumLessonState = G__LessonState.Ready;
-                this.vCanvasMain.Hidden = true;
-                this.vCanvasDocked.Hidden = true;
-                this.btnStartStop.Hidden = false;
-                this.btnBackToLessons.Hidden = false;
-            }
-
-            // Set the captions on the Next and Back buttons
-            var x = (this._intLessonDetailCurrentCount);
-
-            this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
-            this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
-
+        {
+            this.Start();
         }
 
         private void OnClick_btnSizeNormal (object sender, EventArgs e)
@@ -1013,6 +1027,39 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public vcNumberContainer SelectedNumberContainer { get; set; }
           
         public vcFractionContainer SelectedFractionContainer { get; set; }
+
+        public EntityLessonDetail CurrentLessonDetail
+        {
+            get
+            {
+                return this._currentLessonSet.LessonDetail;
+            }
+        }
+
+        public List<EntityLessonDetail> CurrentLessonDetailList
+        {
+            get
+            {
+                return this.LessonNumletList.LessonDetail;
+            }
+        }
+
+        public EntityLesson CurrentLesson
+        {
+            get
+            {
+                return this.LessonNumletList.Lesson;
+            }
+        }
+
+        public LessonNumletSet CurrentLessonNumletSet
+        {
+            get
+            {
+                return this._currentLessonSet;
+            }
+
+        }
 
         public SizeWorkSpace WorkSpaceSize
         {
@@ -1091,6 +1138,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set
             {
                 this._lessonNumletList = value;
+                this._lessonNumletList.MyWorkSpaceParent = this;
             }
         }
 
@@ -1102,22 +1150,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public vcWorkNumlet NumletEquation
         {
-            get { return this._numletCurrentEquation; }
+            get { return this._currentLessonSet.vcNumletEquation; }
         }
 
         public vcWorkNumlet NumletResult
         {
-            get { return this._numletCurrentResult; }
+            get { return this._currentLessonSet.vcNumletResult; }
         }
 
         public vcWorkNumlet NumletSolve
         {
-            get { return this._vcNumletSolve; }
+            get { return this.vcNumletSolve; }
         }
 
         public List<vcWorkNumlet> NumletMethods
         {
-            get { return this._numletCurrentMethods; }
+            get { return this._currentLessonSet.vcNumletMethods; }
         }
 
         public vcMainWorkSpace MainWorkSpace
@@ -1442,7 +1490,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void SetSubHeightWidthPositions ()
         {
             // TODO : This isnt centered correctly?
-            this._fCurrentY = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - this._fPaddingPositional);
+            this._fCurrentY = ((this.ParentContainer.iOSGlobals.G__RectWindowLandscape.Height - this.GlobalSizeDimensions.GlobalWorkSpaceHeight) - 4);
             this._fCurrentX = 4.0f;
 
             this.CurrentWidth = this.GlobalSizeDimensions.GlobalWorkSpaceWidth;

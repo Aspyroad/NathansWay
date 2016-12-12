@@ -217,6 +217,17 @@ namespace AspyRoad.iOSCore.UISettings
             DiagSelectedBorderColor = g.DiagSelectedBorderColor;
             DiagViewBGColor = g.DiagViewBGColor;
 
+            // Shadow Variables
+            // Low Shadow 
+            ShadowOffsetLow = g.ShadowOffsetLow;
+            ShadowRadiusLow = g.ShadowRadiusLow;
+            ShadowOpacityLow = g.ShadowOpacityLow;
+
+            // High Shadow
+            ShadowOffsetHigh = g.ShadowOffsetHigh;
+            ShadowRadiusHigh = g.ShadowRadiusHigh;
+            ShadowOpacityHigh = g.ShadowOpacityHigh;
+
             // Apply global appearnce
 			this.ApplyGlobalAppearance ();
 

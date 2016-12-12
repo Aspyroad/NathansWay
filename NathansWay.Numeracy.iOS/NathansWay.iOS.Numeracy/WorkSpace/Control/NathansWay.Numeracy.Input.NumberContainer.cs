@@ -541,6 +541,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.UI_SetUnSelectedState();
         }
 
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+        }
+
         #endregion
 
         #region Public Properties

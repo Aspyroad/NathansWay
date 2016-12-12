@@ -227,7 +227,16 @@ namespace NathansWay.Numeracy.Shared
 
         // Dialog UIView
         protected Lazy<G__Color>  _diagViewBGColor;
+        // Shadow Variables
+        // Low Shadow 
+        protected float _shadowOffsetLow;
+        protected float _shadowRadiusLow;
+        protected float _shadowOpacityLow;
 
+        // High Shadow
+        protected float _shadowOffsetHigh;
+        protected float _shadowRadiusHigh;
+        protected float _shadowOpacityHigh;
 		#endregion
 
 		#region Constructors
@@ -662,6 +671,41 @@ namespace NathansWay.Numeracy.Shared
         { 
             get{ return this._diagViewBGColor; } 
             set{ this._diagViewBGColor = value; } 
+        }
+
+        // Shadow Variables
+        // Low Shadow 
+        public float ShadowOffsetLow
+        {
+            get { return this._shadowOffsetLow; }
+            set { this._shadowOffsetLow = value; }
+        }
+        public float ShadowRadiusLow
+        {
+            get { return this._shadowRadiusLow; }
+            set { this._shadowRadiusLow = value; }
+        }
+        public float ShadowOpacityLow
+        {
+            get { return this._shadowOpacityLow; }
+            set { this._shadowOpacityLow = value; }
+        }
+
+        // High Shadow
+        public float ShadowOffsetHigh
+        {
+            get { return this._shadowOffsetHigh; }
+            set { this._shadowOffsetHigh = value; }
+        }
+        public float ShadowRadiusHigh
+        {
+            get { return this._shadowRadiusHigh; }
+            set { this._shadowRadiusHigh = value; }
+        }
+        public float ShadowOpacityHigh
+        {
+            get { return this._shadowOpacityHigh; }
+            set { this._shadowOpacityHigh = value; }
         }
 
 

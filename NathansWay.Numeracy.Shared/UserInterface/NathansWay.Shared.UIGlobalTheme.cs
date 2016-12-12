@@ -116,6 +116,17 @@ namespace NathansWay.Numeracy.Shared
         // Dialog UIView
         public Lazy<G__Color> DiagViewBGColor { get; set; }
 
+        // Shadow Variables
+        // Low Shadow 
+        public float ShadowOffsetLow { get; set; }
+        public float ShadowRadiusLow { get; set; }
+        public float ShadowOpacityLow { get; set; }
+
+        // High Shadow
+        public float ShadowOffsetHigh { get; set; }
+        public float ShadowRadiusHigh { get; set; }
+        public float ShadowOpacityHigh { get; set; }
+
 		#endregion
 
 		#region Constructors
@@ -235,6 +246,18 @@ namespace NathansWay.Numeracy.Shared
             DiagButtonNormalTitleColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 255.0f)); // Black
             // Dialog UIView
             DiagViewBGColor = new Lazy<G__Color> (() => new G__Color(70.0f, 70.0f, 70.0f, 255.0f)); // Black
+
+            // Shadow Variables
+            // Low Shadow 
+            // Note - Offset must be converted to a point. Obviously XY must be the same. So no offscale shadow drops.
+            ShadowOffsetLow = 1.0f;
+            ShadowRadiusLow = 1.0f;
+            ShadowOpacityLow = 1.0f;
+
+            // High Shadow
+            ShadowOffsetHigh = 1.0f;
+            ShadowRadiusHigh = 1.0f;
+            ShadowOpacityHigh = 1.0f;
 
 		}
 

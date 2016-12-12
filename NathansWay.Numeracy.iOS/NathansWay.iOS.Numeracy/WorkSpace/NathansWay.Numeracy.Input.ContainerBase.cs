@@ -359,11 +359,13 @@ namespace NathansWay.iOS.Numeracy
 
         public override void ViewWillAppear(bool animated)
         {
+            // Set all control frames
+            this.SizeClass.SetFrames();
+
             // Always correct bounds and frame
             base.ViewWillAppear(animated);
 
-            // Set all control frames
-            this.SizeClass.SetFrames();
+
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)
