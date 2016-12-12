@@ -260,7 +260,7 @@ namespace NathansWay.iOS.Numeracy
                 _control.ApplyUIWhere = G__ApplyUI.ViewWillAppear; 
 
                 _control.SizeClass.SetViewPosition(_xPos, this._globalSizeDimensions.NumletHeight);
-                numlet.AddAndDisplayController(_control);
+                //numlet.AddAndDisplayController(_control);
                 _xPos = _xPos + _control.SizeClass.CurrentWidth + _xSpacing;
             }
 

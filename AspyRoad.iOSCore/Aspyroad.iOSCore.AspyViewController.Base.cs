@@ -224,14 +224,7 @@ namespace AspyRoad.iOSCore
 
         public virtual UIColor FontColor
         {
-            get 
-            {
-                return this.FontColor;
-            }
-            set 
-            { 
-                this.FontColor = value; 
-            }
+            get; set; 
         }
 
         /// <summary>

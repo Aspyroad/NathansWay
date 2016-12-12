@@ -366,6 +366,7 @@ namespace NathansWay.iOS.Numeracy
             base.ViewWillAppear(animated);
 
 
+
         }
 
         public override bool ApplyUI(G__ApplyUI _applywhere)

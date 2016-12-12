@@ -50,6 +50,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Results
             this.LessonDetailResults = new EntityLessonDetailResults();
             this.ControlsLoaded = false;
+            this.NumletsLoaded = false;
         }
 
         public void LoadAllNumlets()
@@ -61,16 +62,31 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
                 this.vcNumletResult = new vcWorkNumlet();
                 this.vcNumletResult.NumletType = G__WorkNumletType.Result;
+
+                this.vcNumletResult.MyImmediateParent = this._myWorkSpaceParent;
+                this.vcNumletResult.MyWorkSpaceParent = this._myWorkSpaceParent;
+                this.vcNumletEquation.MyImmediateParent = this._myWorkSpaceParent;
+                this.vcNumletEquation.MyWorkSpaceParent = this._myWorkSpaceParent;
+
                 this.NumletsLoaded = true;
             }
         }
 
         public void LoadAllNumletControls()
         {
-            this.vcNumletResult.LoadControls(strResult);
-            this.vcNumletEquation.LoadControls(strEquation);
-            // TODO: Load NumletMethods here
-            this.ControlsLoaded = true;
+            if (!this.ControlsLoaded)
+            {
+                this.vcNumletResult.LoadControls(strResult);
+                this.vcNumletEquation.LoadControls(strEquation);
+                // TODO: Load NumletMethods here
+                this.ControlsLoaded = true;
+            }
+        }
+
+        public void ResetAll()
+        {
+            // TODO: Reset function
+            // Reload all controls, clear all state and recreate an answer dataset
         }
 
         public vcWorkSpace MyWorkSpaceParent
@@ -78,19 +94,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set
             {
                 this._myWorkSpaceParent = value;
-                this.vcNumletResult.MyImmediateParent = value;
-                this.vcNumletResult.MyWorkSpaceParent = value;
-                this.vcNumletEquation.MyImmediateParent = value;
-                this.vcNumletEquation.MyWorkSpaceParent = value;
-
-                if (vcNumletMethods != null)
-                {
-                    for (int i = 0; i < vcNumletMethods.Count; i++)
-                    {
-                        vcNumletMethods[i].MyWorkSpaceParent = value;
-                        vcNumletMethods[i].MyImmediateParent = value;
-                    }
-                }
             }
             get
             {
@@ -178,6 +181,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
+        public void LoadLessonDetailSet(int _index)
+        {
+                var x = new LessonNumletSet();
+                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                x.LessonDetail = this.LessonDetail[_index];
+                this._currentLessonDetailSet = x;
+                base.Add((T)x);
+        }
+
         public LessonNumletSet Next()
         {
             // Set a current Lesson 
@@ -230,14 +242,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Always return the first element
             get
             {
+                // Init - only run at on first access.
                 if (this._currentLessonDetailSet == null)
                 {
-                    this._currentLessonDetailSet = this[0];
+                    this.LoadLessonDetailSet(0);
                 }
 
                 if (!this._currentLessonDetailSet.NumletsLoaded)
                 {
                     this._currentLessonDetailSet.LoadAllNumlets();
+                }
+                if (!this._currentLessonDetailSet.ControlsLoaded)
+                {
+                    this._currentLessonDetailSet.LoadAllNumletControls();
                 }
 
                 return this._currentLessonDetailSet;
