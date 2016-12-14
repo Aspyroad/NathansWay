@@ -474,27 +474,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // I doubt it will ever be needed, but if a lesson isnt load from the menu it may be required.
                 if (this._lessonNumletList == null)
                 {
-                    this._lessonNumletList = new LessonList<LessonNumletSet>();
+                    this._lessonNumletList = new LessonList<LessonNumletSet>(this);
                     this._lessonNumletList.MyWorkSpaceParent = this;
                 }
-                if (this.LessonNumletList.Count == 0)
-                {
-                    this._lessonNumletList.LoadAllLessonDetailSets();
-                }
+
                 // Current lesson set
                 // Loads 0 index of lesson set as CurrentlessonDetailSet is init here in property settergetter
                 this._currentLessonSet = this._lessonNumletList.CurrentLessonDetailSet;
 
                 this.UIDisplayNumlets();
-                //this.WorkSpaceSize.ResultNumletWidth = this._currentLessonSet.vcNumletResult.SizeClass.CurrentWidth;
-                //this.WorkSpaceSize.EquationNumletWidth = this._currentLessonSet.vcNumletEquation.SizeClass.CurrentWidth;
-                //this.WorkSpaceSize.SolveNumletWidth = this.vcNumletSolve.SizeClass.CurrentWidth;
-
-                //this.UISetWorkSpaceCanvas();
-
-                //this._currentLessonSet.vcNumletEquation.LoadControlsToView();
-                //this._currentLessonSet.vcNumletResult.LoadControlsToView();
-                //this.vcNumletSolve.LoadControlsToView();
             }
             //else
             //{
@@ -504,8 +492,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //    this.btnStartStop.Hidden = false;
             //    this.btnBackToLessons.Hidden = false;
             //}
-
-
 
             // Set the captions on the Next and Back buttons
             var x = (this.LessonNumletList.Count);

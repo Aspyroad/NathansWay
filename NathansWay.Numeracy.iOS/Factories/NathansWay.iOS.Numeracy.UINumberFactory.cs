@@ -81,9 +81,8 @@ namespace NathansWay.iOS.Numeracy
             // Create our workspace object
             var _vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
             var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
-            _vcCurrentWorkSpace.LessonNumletList = new LessonList<LessonNumletSet>(_vmLesson);
-            // Must set LessonLists Workspace parent
-            _vcCurrentWorkSpace.LessonNumletList.MyWorkSpaceParent = _vcCurrentWorkSpace;
+            _vcCurrentWorkSpace.LessonNumletList = new LessonList<LessonNumletSet>(_vmLesson, _vcCurrentWorkSpace);
+
             return _vcCurrentWorkSpace;
         }
 

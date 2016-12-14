@@ -18,7 +18,7 @@ using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-    public class LessonNumletSet
+    public class LessonNumletSet : IComparable<LessonNumletSet>
     {
         public vcWorkNumlet vcNumletEquation { get; set; }
         public vcWorkNumlet vcNumletResult { get; set; }
@@ -41,8 +41,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public string strMethods;
         public string strResult;
 
-        public LessonNumletSet()
+        public LessonNumletSet(vcWorkSpace _myWorkSpace)
         {
+            this._myWorkSpaceParent = _myWorkSpace;
             this.strEquation = "";
             this.strMethods = "";
             this.strResult = "";
@@ -87,6 +88,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             // TODO: Reset function
             // Reload all controls, clear all state and recreate an answer dataset
+        }
+
+        public int CompareTo(LessonNumletSet other)
+        {
+            return other._lessonDetail.LessonSeq.CompareTo(this._lessonDetail.LessonSeq);
         }
 
         public vcWorkSpace MyWorkSpaceParent
@@ -140,14 +146,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Constructor
 
-        public LessonList()
+        public LessonList(vcWorkSpace _workSpace)
         {
             this._lessonModel = SharedServiceContainer.Resolve<LessonViewModel>();
+            this._myWorkSpaceParent = _workSpace;
             this.Initialize();
         }
 
-        public LessonList(LessonViewModel lessonModel)
+        public LessonList(LessonViewModel lessonModel, vcWorkSpace _workSpace)
         {
+            this._myWorkSpaceParent = _workSpace;
             this._lessonModel = lessonModel;
             this.Initialize();
         }
@@ -163,8 +171,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 // *******************
                 // Creation of LessonNumletSet
-                var x = new LessonNumletSet();
-                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                var x = new LessonNumletSet(this.MyWorkSpaceParent);
+                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
                 x.LessonDetail = _lessonDetail;
             }
         }
@@ -174,17 +182,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Walk through all controls in 
             for (int i = 0; i< this.LessonDetail.Count; i++)
             {
-                var x = new LessonNumletSet();
-                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                var x = new LessonNumletSet(this.MyWorkSpaceParent);
+                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
                 x.LessonDetail = this.LessonDetail[i];
                 base.Add((T)x);
             }
+
+            this.Sort();
         }
 
         public void LoadLessonDetailSet(int _index)
         {
-                var x = new LessonNumletSet();
-                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                var x = new LessonNumletSet(this.MyWorkSpaceParent);
+                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
                 x.LessonDetail = this.LessonDetail[_index];
                 this._currentLessonDetailSet = x;
                 base.Add((T)x);
@@ -203,7 +213,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._currentLessonDetailSet = this[intNextIndex];
             }
 
-            return this._currentLessonDetailSet;
+            return this.CurrentLessonDetailSet;
         }
 
         public LessonNumletSet Prev()
@@ -218,7 +228,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 this._currentLessonDetailSet = this[intNextIndex];
             }
-            return this._currentLessonDetailSet;
+            return this.CurrentLessonDetailSet;
+        }
+
+        public LessonNumletSet FindByLessonSeq(int _seq)
+        {
+            return this.Find(y => y.LessonDetail.LessonSeq == _seq);
         }
 
         #endregion
@@ -245,7 +260,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // Init - only run at on first access.
                 if (this._currentLessonDetailSet == null)
                 {
-                    this.LoadLessonDetailSet(0);
+                    this._currentLessonDetailSet = this[0];
                 }
 
                 if (!this._currentLessonDetailSet.NumletsLoaded)
@@ -270,6 +285,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
+        public int LessonIndex
+        {
+            get
+            {
+                return this._currentLessonDetailSet.LessonDetail.LessonSeq;
+            }
+        }
+
 
         #endregion
 
@@ -280,6 +303,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.Lesson = _lessonModel.SelectedLesson;
             this.LessonDetail = _lessonModel.LessonDetail;
             this.LessonDetail.Sort();
+            this.LoadAllLessonDetailSets();
         }
 
 
