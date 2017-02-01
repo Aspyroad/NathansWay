@@ -147,11 +147,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
-        public override bool Solve()
+        public override G__AnswerState Solve()
         {
             // TODO: This will need to be changed if we give users the ability to pick operators as an equation
             // EG 1 (blank) 1 = 2 (Operator obviously being a plus)
-            return false;
+            return G__AnswerState.InCorrect;
         }
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)

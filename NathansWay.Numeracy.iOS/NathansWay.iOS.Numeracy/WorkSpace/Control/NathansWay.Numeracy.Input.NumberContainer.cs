@@ -246,8 +246,6 @@ namespace NathansWay.iOS.Numeracy.Controls
                         _sig--;                       
                     }
 
-
-
                     #endregion
 
                     // Add our numbers to our internal list counter.
@@ -354,7 +352,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.SetCurrentValue();
             // Bubbleup
-            this.FireValueChange();
+            this.FireValueChange(s);
         }
 
         #endregion
@@ -384,11 +382,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewNeutral()
         {
-            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
-            //this.BorderWidth = 1.0f;
-            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
-            //this.View.BackgroundColor = UIColor.Clear;
-            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+            this.BorderWidth = 1.0f;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
 
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers)
@@ -399,11 +397,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewReadOnly()
         {
-            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
-            //this.BorderWidth = 1.0f;
-            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
-            //this.View.BackgroundColor = UIColor.Clear;
-            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
+            this.BorderWidth = 1.0f;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
 
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers)
@@ -414,11 +412,11 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewCorrect()
         {
-            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
-            //this.BorderWidth = 2.0f;
-            //// Hard coded value. These should always be white for best alpha shading of foreground numbers
-            //this.View.BackgroundColor = UIColor.Clear;
-            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
+            this.BorderWidth = 2.0f;
+            // Hard coded value. These should always be white for best alpha shading of foreground numbers
+            this.View.BackgroundColor = UIColor.Clear;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
 
             //if (!this._bPerNumberErrorUIDisplay)
             {
@@ -433,10 +431,10 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_ViewInCorrect()
         {
-            //this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
-            //this.BorderWidth = 2.0f;
-            //this.View.BackgroundColor = UIColor.Clear;
-            //this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
+            this.BorderWidth = 2.0f;
+            this.View.BackgroundColor = UIColor.Clear;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
 
             //if (!this._bPerNumberErrorUIDisplay)
             {
@@ -483,20 +481,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Overrides
 
-        public override bool Solve()
+        public override G__AnswerState Solve()
         {
-            bool _ret = false;
+            G__AnswerState _ret = G__AnswerState.InCorrect;
 
             // If enabled a >1 digit display will only show the value incorrect
             // rather than the entire numer
             if (this.NumberAppSettings.GA__NumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
-                foreach (BaseContainer _Number in this._lsNumbers)
+                foreach (BaseContainer x in this._lsNumbers)
                 {
                     // TODO: here we need to workout what we want to do with decimal colors
                     // Based on this numbercontainers total correctness
-                    _ret = _Number.Solve();
+                    _ret = x.Solve();
                 }
             }
             else

@@ -27,7 +27,7 @@ namespace NathansWay.Numeracy.Shared.BUS.Entity
 		private int _resultDifficulty;
 		private bool _correctResult;
 		private bool _correctMethod;
-        //private bool _attempted;
+        private bool _correctEquation;
 
 		#endregion
 
@@ -114,6 +114,12 @@ namespace NathansWay.Numeracy.Shared.BUS.Entity
 			get { return this._correctMethod; } 
 			set { this._correctMethod = value; }
 		}
+        [Column("correctequation")]
+        public bool ScoreEquation
+        {
+            get { return this._correctEquation; }
+            set { this._correctEquation = value; }
+        }
 
 		#endregion
 

@@ -265,13 +265,21 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Fix 1
             this.AddAndDisplayController(this._numberContainerNumerator);
             this.AddAndDisplayController(this._numberContainerDenominator);
-
         }
 
-        public override bool Solve()
+        public override G__AnswerState Solve()
         {
-            this._bIsCorrect = this._numberContainerDenominator.Solve();
-            this._bIsCorrect = this._numberContainerNumerator.Solve();
+            var x1 = this._numberContainerDenominator.Solve();
+            var x2 = this._numberContainerNumerator.Solve();
+
+            if ((x1 == G__AnswerState.Correct) && (x2 == G__AnswerState.Correct))
+            {
+                this.AnswerState = G__AnswerState.Correct;
+            }
+            else
+            {
+                this.AnswerState = G__AnswerState.InCorrect;
+            }
             return base.Solve();
         }
 
@@ -288,23 +296,20 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             if (this._numberContainerDenominator.CurrentValue == null || this._numberContainerNumerator.CurrentValue == null)
             {
-                this.AnswerState = G__AnswerState.UnAttempted;
-                this._bIsCorrect = false;
+                this.AnswerState = G__AnswerState.InCorrect;
             }
             else
             {
                 // Update the actual value of this is an answer
                 this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
 
-                if (this._numberContainerDenominator.IsCorrect && this._numberContainerNumerator.IsCorrect)
+                if ((this._numberContainerDenominator.AnswerState == G__AnswerState.Correct)  && (this._numberContainerNumerator.AnswerState == G__AnswerState.Correct))
                 {
                     this.AnswerState = G__AnswerState.Correct;
-                    this._bIsCorrect = true;
                 }
                 else
                 {
                     this.AnswerState = G__AnswerState.InCorrect;
-                    this._bIsCorrect = false;
                 }
             }
         }
@@ -343,7 +348,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                if (this._bIsCorrect)
+                if (this.AnswerState == G__AnswerState.Correct)
                 {
                     this.UI_ViewCorrect();
                     this._numberContainerDenominator.UI_ViewCorrect();

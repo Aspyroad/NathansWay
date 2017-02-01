@@ -194,7 +194,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
-            this.FireValueChange();
+            this.FireValueChange(s);
         }
 
         public override void OnSizeChange(object s, evtArgsBaseContainer e)
@@ -224,23 +224,18 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.UI_ViewNeutral();
         }
 
-        public override bool Solve()
+        public override G__AnswerState Solve()
         {
-            bool _ret = false;
-            this._bIsCorrect = true;
+            this.AnswerState = G__AnswerState.Correct;
             // ALl the Children in this numlet
             for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
             {
                 var x = (BaseContainer)this.OutputAnswerContainers[i];
-                _ret = x.Solve();
-                if (!_ret)
-                {
-                    this._bIsCorrect = false;
-                }
+                this.AnswerState = x.Solve();
             }
-            //this.SetCorrectState();
+
             this.UI_SetAnswerState(true);
-            return this._bIsCorrect;
+            return this.AnswerState;
         }
 
         public override void UI_SetAnswerState(bool _solving)

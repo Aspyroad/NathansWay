@@ -70,13 +70,11 @@
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.UISettings.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Blocks.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.BlockResults.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.LessonDetailResults.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.Lessons.cs" />
-    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.LessonResults.cs" />
+    <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.LessonsResults.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.BlockResults.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Blocks.cs" />
-    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.LessonDetailResults.cs" />
-    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.LessonResults.cs" />
+    <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.LessonsResults.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Lessons.cs" />
     <Compile Include="Contracts\DataAccessLayer\INathansWay.Shared.DAL.Repository.Student.cs" />
     <Compile Include="DataAccessLayer\NathansWay.Shared.DAL.Repository.School.cs" />
@@ -107,6 +105,7 @@
     <Compile Include="Contracts\UserInterface\INathansWay.Shared.UINumberDimensions.cs" />
     <Compile Include="Factories\NathansWay.Shared.Numeracy.ExpressionFactory.cs" />
     <Compile Include="NathansWay.Shared.AppSettings.cs" />
+    <Compile Include="BusinessLayer\ViewModels\Nathansway.Shared.BUS.LessonResultsViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

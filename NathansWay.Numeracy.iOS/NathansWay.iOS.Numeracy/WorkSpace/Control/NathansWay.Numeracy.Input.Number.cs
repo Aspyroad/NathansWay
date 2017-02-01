@@ -451,6 +451,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             if (x)
             {
                 // Begin bubbleup
+                
                 this.OnValueChange(this, new evtArgsBaseContainer());
             }
         }
@@ -800,25 +801,33 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void UI_ViewNeutral()
         {
             this.BorderWidth = 0.0f;
-            base.UI_ViewNeutral();
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
         }
 
         public override void UI_ViewReadOnly()
         {
             this.BorderWidth = 0.0f;
-            base.UI_ViewReadOnly();
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
         }
 
         public override void UI_ViewCorrect()
         {
             this.BorderWidth = 0.0f;
-            base.UI_ViewCorrect();
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
         }
 
         public override void UI_ViewInCorrect()
         {
             this.BorderWidth = 0.0f;
-            base.UI_ViewInCorrect();
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
         }
 
         #endregion

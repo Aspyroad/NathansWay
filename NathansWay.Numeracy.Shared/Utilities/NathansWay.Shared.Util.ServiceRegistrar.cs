@@ -31,21 +31,15 @@ namespace NathansWay.Numeracy.Shared
 		{
 			SharedServiceContainer.Register<IRepoLesson<EntityLesson>> (() => new RepoLesson<EntityLesson> ());
             SharedServiceContainer.Register<IRepoLessonDetail<EntityLessonDetail>>(() => new RepoLessonDetail<EntityLessonDetail>());
+            SharedServiceContainer.Register<IRepoLessonResults<EntityLessonResults>>(() => new RepoLessonResults<EntityLessonResults>());
+            SharedServiceContainer.Register<IRepoLessonDetailResults<EntityLessonDetailResults>>(() => new RepoLessonDetailResults<EntityLessonDetailResults>());
 
-			//            ServiceContainer.Register<IAssignmentService> (() => new SampleAssignmentService ());
-			//
 
 			#if !NETFX_CORE
 				//Only do these on iOS or Android
 				SharedServiceContainer.Register<LessonViewModel> ();
-			//            ServiceContainer.Register<AssignmentViewModel>();
-			//            ServiceContainer.Register<DocumentViewModel>();
-			//            ServiceContainer.Register<ExpenseViewModel>();
-			//            ServiceContainer.Register<HistoryViewModel>();
-			//            ServiceContainer.Register<ItemViewModel>();
-			//            ServiceContainer.Register<LaborViewModel>();
-			//            ServiceContainer.Register<LoginViewModel>();
-			//            ServiceContainer.Register<PhotoViewModel>();
+                SharedServiceContainer.Register<LessonResultsViewModel>();
+
 			#endif		
 		}
     }

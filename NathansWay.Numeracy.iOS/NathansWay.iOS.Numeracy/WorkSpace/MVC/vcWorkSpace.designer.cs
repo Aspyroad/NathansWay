@@ -16,19 +16,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnBackToLessons { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.NWButton btnMethods { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.NWButton btnNextEquation { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnOption2 { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -76,11 +68,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         void ReleaseDesignerOutlets ()
         {
-            if (btnBackToLessons != null) {
-                btnBackToLessons.Dispose ();
-                btnBackToLessons = null;
-            }
-
             if (btnMethods != null) {
                 btnMethods.Dispose ();
                 btnMethods = null;
@@ -89,11 +76,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (btnNextEquation != null) {
                 btnNextEquation.Dispose ();
                 btnNextEquation = null;
-            }
-
-            if (btnOption2 != null) {
-                btnOption2.Dispose ();
-                btnOption2 = null;
             }
 
             if (btnOptions != null) {

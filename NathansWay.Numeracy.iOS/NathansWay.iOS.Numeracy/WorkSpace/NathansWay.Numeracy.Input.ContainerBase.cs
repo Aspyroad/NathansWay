@@ -49,10 +49,10 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bIsAnswer;
         // ?? Are equations readonly ?? possible teachers may want to change on the fly
         protected bool _bIsReadOnly;
-        // Known only after numbercontainer returns after a selection and val change
-        protected bool _bIsCorrect;
+        // Number is Correct/Incorrect
+        protected G__AnswerState _answerState;
         // Attemped Solve - used to find the state after a solve has been attempted
-        protected bool _bSolveAttemped;
+        protected G__SolveAttempted _solveAttempted;
         // Answer isnt complete
         protected bool _bIsInComplete;
         // Obviously when touched
@@ -61,9 +61,6 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bSelected;
         // Stop the responder if needed
         protected bool _bAllowNextResponder;
-
-        // Number is Correct/Incorrect
-        protected G__AnswerState _answerState;
 
         protected Nullable<double> _dblPrevValue;
         protected Nullable<double> _dblCurrentValue;
@@ -145,7 +142,8 @@ namespace NathansWay.iOS.Numeracy
             this._dblCurrentValue = null;
             this._dblOriginalValue = 0;
             // Set answer state - default
-            this._answerState = G__AnswerState.UnAttempted;
+            this._solveAttempted = G__SolveAttempted.UnAttempted;
+            this._answerState = G__AnswerState.InCorrect;
             this._containerType = G__ContainerType.Container;
             // Logic
             this._bIsAnswer = false;
@@ -180,6 +178,17 @@ namespace NathansWay.iOS.Numeracy
             if (x != null)
             {
                 x(this, this._myEventArgs);
+            }
+        }
+
+        public void FireValueChange(object s)
+        {
+            // Thread safety.
+            var x = this.eValueChanged;
+            // Check for null before firing.
+            if (x != null)
+            {
+                x(s, this._myEventArgs);
             }
         }
 
@@ -230,33 +239,23 @@ namespace NathansWay.iOS.Numeracy
             this.UI_SetUnSelectedState();
         }
 
-        public virtual bool Solve()
+        public virtual G__AnswerState Solve()
         {
+            this._solveAttempted = G__SolveAttempted.Attempted;
             this.SetCorrectState();
             this.UI_SetAnswerState(true);
-            return this._bIsCorrect;
+            return this.AnswerState;
         }
 
         public virtual void SetCorrectState()
         {
-            if (this._dblCurrentValue == null)
+            if ((this._dblOriginalValue == this._dblCurrentValue))
             {
-                this.AnswerState = G__AnswerState.UnAttempted;
-                this._bIsCorrect = false;
+                this.AnswerState = G__AnswerState.Correct;
             }
             else
             {
-                if ((this._dblOriginalValue == this._dblCurrentValue))
-                {
-                    this.AnswerState = G__AnswerState.Correct;
-                    this._bIsCorrect = true;
-                }
-
-                else
-                {
-                    this.AnswerState = G__AnswerState.InCorrect;
-                    this._bIsCorrect = false;
-                }
+                this.AnswerState = G__AnswerState.InCorrect;
             }
         }
 
@@ -269,7 +268,7 @@ namespace NathansWay.iOS.Numeracy
         {
             if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
             {
-                if (this._bIsCorrect)
+                if (this.AnswerState == G__AnswerState.Correct)
                 {
                     this.UI_ViewCorrect();
                 }
@@ -589,11 +588,6 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual bool IsCorrect
-        {
-            get { return _bIsCorrect; }
-        }
-
         public virtual bool IsReadOnly
         {
             get
@@ -606,15 +600,15 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual bool SolveAttemped
+        public virtual G__SolveAttempted SolveAttemped
         {
             get
             {
-                return _bSolveAttemped;
+                return  _solveAttempted;
             }
             set
             {
-                _bSolveAttemped = value;
+                 _solveAttempted = value;
             }
         }
 

@@ -99,7 +99,7 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
             this._numberAppSettings.GA__NumberDisplaySize = G__DisplaySizeLevels.Level5;
             this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;
@@ -325,7 +325,9 @@ namespace NathansWay.iOS.Numeracy
             _numeracyUIManager.AddVC (600109, "VC_NumberLabelContainer");
             _numeracyUIManager.AddVC (600110, "VC_SolveContainer");
             // Dialogs
-            _numeracyUIManager.AddVC (666100, "VC_FreezingDialog");
+            _numeracyUIManager.AddVC (666100, "VC_PositioningDialog");
+            _numeracyUIManager.AddVC(666101, "VC_ToolBoxDialog");
+            _numeracyUIManager.AddVC(666102, "VC_StartStopDialog");
 
 
 

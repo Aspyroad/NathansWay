@@ -142,17 +142,28 @@ namespace NathansWay.iOS.Numeracy
             this.View.AddSubview(this.btnSolveButton);
         }
 
-        private void OnTouch_btnSolveButton (object sender, EventArgs e)
+        public override G__AnswerState Solve()
         {
-            bool x = this.MyWorkSpaceParent.Solve();
-            if (x) // Correct
-            {    
+            G__AnswerState x = this.MyWorkSpaceParent.Solve();
+            if (x == G__AnswerState.Correct) // Correct
+            {
                 this.btnSolveButton.AnimationCorrect();
             }
             else
             {
                 this.btnSolveButton.AnimationFalse();
-            }               
+            }
+
+            return x;
+        }
+
+        #endregion
+
+        #region Private Members
+
+        private void OnTouch_btnSolveButton (object sender, EventArgs e)
+        {
+            this.Solve();
         }
 
         #endregion
@@ -315,6 +326,7 @@ namespace NathansWay.iOS.Numeracy
             this.EnableHold = false;
             this.AutoApplyUI = true;
             this.BackgroundColor = UIColor.Clear;
+            this.BorderWidth = 0.0f;
 
             // Get center of the bottom and top halfs of the button
             var f = (this._rect.Width / 2.0f);

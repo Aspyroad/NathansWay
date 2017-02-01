@@ -26,7 +26,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignProvision></CodesignProvision>
-    <MtouchLink>None</MtouchLink>
+    <MtouchLink>SdkOnly</MtouchLink>
     <MtouchFloat32>true</MtouchFloat32>
     <PlatformTarget>anycpu</PlatformTarget>
     <MtouchFastDev>false</MtouchFastDev>
@@ -114,6 +114,7 @@
       <DependentUpon>vcToolBoxDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.cs" />
+    <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcStartStopDialog.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />

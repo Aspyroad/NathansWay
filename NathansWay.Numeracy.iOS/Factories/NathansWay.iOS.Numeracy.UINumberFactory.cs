@@ -80,8 +80,10 @@ namespace NathansWay.iOS.Numeracy
         {
             // Create our workspace object
             var _vcCurrentWorkSpace = this._storyBoard.InstantiateViewController("vcWorkSpace") as vcWorkSpace;
-            var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
-            _vcCurrentWorkSpace.LessonNumletList = new LessonList<LessonNumletSet>(_vmLesson, _vcCurrentWorkSpace);
+            var _vmLessons = SharedServiceContainer.Resolve<LessonViewModel>();
+            var _vmLessonResults = SharedServiceContainer.Resolve<LessonResultsViewModel>();
+            _vcCurrentWorkSpace.LessonNumletList = new LessonList<LessonNumletSet>(_vmLessons, _vmLessonResults, _vcCurrentWorkSpace);
+            _vcCurrentWorkSpace.LessonNumletList.sortOrder = G__SortOrder.Descending;
 
             return _vcCurrentWorkSpace;
         }

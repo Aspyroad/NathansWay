@@ -102,9 +102,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             //this.View.Frame = this.DecimalSize._rectDecimal;
         }
 
-        public override bool Solve()
+        public override G__AnswerState Solve()
         {
-            return true;
+            return G__AnswerState.Correct;
         }
 
         #endregion

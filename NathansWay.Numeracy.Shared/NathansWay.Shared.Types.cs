@@ -88,6 +88,12 @@ namespace NathansWay.Numeracy.Shared
 		Toolz = 10
     }
 
+    public enum G__SortOrder : int
+    {
+        Ascending = 1,
+        Descending = 2
+    }
+
     #endregion
 
     #region LessonType
@@ -102,8 +108,13 @@ namespace NathansWay.Numeracy.Shared
     public enum G__AnswerState : int
     {
         Correct = 1,
-        InCorrect = 2,
-        UnAttempted = 3
+        InCorrect = 2
+    }
+
+    public enum G__SolveAttempted : int
+    {
+        Attempted = 1,
+        UnAttempted = 2
     }
 
     public enum G__WorkNumletType : int
@@ -477,6 +488,12 @@ namespace NathansWay.Numeracy.Shared
         EditScroll = 1,
         EditUpDown = 2,
         EditNumPad = 3       
+    }
+
+    public enum G__TimeDisplay
+    {
+        Seconds = 1,
+        Time = 2
     }
 
     #endregion

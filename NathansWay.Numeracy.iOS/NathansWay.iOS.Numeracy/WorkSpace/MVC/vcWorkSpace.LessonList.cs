@@ -24,29 +24,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public vcWorkNumlet vcNumletResult { get; set; }
         public List<vcWorkNumlet> vcNumletMethods { get; set; }
 
-        //public EntityLesson Lesson { get; set; }
-        // TODO : Use getter setters to setup our lessondetailresult
-        private EntityLessonDetail _lessonDetail { get; set; }
+        public EntityLessonDetail _lessonDetail { get; set; }
         public EntityLessonDetailResults LessonDetailResults { get; set; }
-        //public EntityLessonDetailResults LessonDetailResults { get; set; }
 
-        private vcWorkSpace _myWorkSpaceParent;
+        public vcWorkSpace MyWorkSpaceParent { get; set; }
+        public LessonList<LessonNumletSet> MyLessonListParent { get; set; }
 
         // Publics
         public bool NumletsLoaded { get; private set; }
         public bool ControlsLoaded { get; private set; }
-        public string strExpression;
+        public string lnsExpression;
         // Expression breakdown
-        public string strEquation;
-        public string strMethods;
-        public string strResult;
+        public string lnsEquation;
+        public string lnsMethods;
+        public string lnsResult;
+        public G__SolveAttempted lnsAttempted { get; set; }
 
-        public LessonNumletSet(vcWorkSpace _myWorkSpace)
+        public LessonNumletSet()
         {
-            this._myWorkSpaceParent = _myWorkSpace;
-            this.strEquation = "";
-            this.strMethods = "";
-            this.strResult = "";
+            this.lnsEquation = "";
+            this.lnsMethods = "";
+            this.lnsResult = "";
+            this.lnsAttempted = G__SolveAttempted.UnAttempted;
 
             // Results
             this.LessonDetailResults = new EntityLessonDetailResults();
@@ -64,10 +63,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.vcNumletResult = new vcWorkNumlet();
                 this.vcNumletResult.NumletType = G__WorkNumletType.Result;
 
-                this.vcNumletResult.MyImmediateParent = this._myWorkSpaceParent;
-                this.vcNumletResult.MyWorkSpaceParent = this._myWorkSpaceParent;
-                this.vcNumletEquation.MyImmediateParent = this._myWorkSpaceParent;
-                this.vcNumletEquation.MyWorkSpaceParent = this._myWorkSpaceParent;
+                this.vcNumletResult.MyImmediateParent = this.MyWorkSpaceParent;
+                this.vcNumletResult.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                this.vcNumletEquation.MyImmediateParent = this.MyWorkSpaceParent;
+                this.vcNumletEquation.MyWorkSpaceParent = this.MyWorkSpaceParent;
 
                 this.NumletsLoaded = true;
             }
@@ -77,8 +76,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             if (!this.ControlsLoaded)
             {
-                this.vcNumletResult.LoadControls(strResult);
-                this.vcNumletEquation.LoadControls(strEquation);
+                this.vcNumletResult.LoadControls(lnsResult);
+                this.vcNumletEquation.LoadControls(lnsEquation);
                 // TODO: Load NumletMethods here
                 this.ControlsLoaded = true;
             }
@@ -92,19 +91,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public int CompareTo(LessonNumletSet other)
         {
-            return other._lessonDetail.LessonSeq.CompareTo(this._lessonDetail.LessonSeq);
-        }
-
-        public vcWorkSpace MyWorkSpaceParent
-        {
-            set
-            {
-                this._myWorkSpaceParent = value;
-            }
-            get
-            {
-                return this._myWorkSpaceParent;
-            }
+            return other._lessonDetail.SEQ.CompareTo(this._lessonDetail.SEQ);
         }
 
         public EntityLessonDetail LessonDetail 
@@ -116,9 +103,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             set
             {
                 this._lessonDetail = value;
-                this.strResult = value.Result;
-                this.strMethods = value.Method;
-                this.strEquation = value.Equation;
+                this.lnsResult = value.Result;
+                this.lnsMethods = value.Method;
+                this.lnsEquation = value.Equation;
             }
         }
     }
@@ -133,14 +120,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         // Data
         public EntityLesson Lesson { get; set; }
-        public EntityLessonResults LessonResults { get; set; }
         public List<EntityLessonDetail> LessonDetail { get; set; }
+
+        public EntityLessonResults LessonResults { get; set; }
         public List<EntityLessonDetailResults> LessonDetailResults { get; set; }
 
         public LessonViewModel _lessonModel;
+        public LessonResultsViewModel _lessonResultsModel;
 
         public vcWorkSpace _myWorkSpaceParent;
-
+        public G__SortOrder sortOrder;
+        public bool bOverIndex { get; private set; }
 
         #endregion
 
@@ -149,14 +139,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public LessonList(vcWorkSpace _workSpace)
         {
             this._lessonModel = SharedServiceContainer.Resolve<LessonViewModel>();
+            this._lessonResultsModel = SharedServiceContainer.Resolve<LessonResultsViewModel>();
             this._myWorkSpaceParent = _workSpace;
             this.Initialize();
         }
 
-        public LessonList(LessonViewModel lessonModel, vcWorkSpace _workSpace)
+        public LessonList(LessonViewModel lessonsModel, LessonResultsViewModel lessonResultsModel, vcWorkSpace _workSpace)
         {
             this._myWorkSpaceParent = _workSpace;
-            this._lessonModel = lessonModel;
+            this._lessonModel = lessonsModel;
+            this._lessonResultsModel = lessonResultsModel;
             this.Initialize();
         }
 
@@ -171,8 +163,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             {
                 // *******************
                 // Creation of LessonNumletSet
-                var x = new LessonNumletSet(this.MyWorkSpaceParent);
-                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                var x = new LessonNumletSet();
+                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                x.MyLessonListParent = this as LessonList<LessonNumletSet>;
                 x.LessonDetail = _lessonDetail;
             }
         }
@@ -182,34 +175,36 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Walk through all controls in 
             for (int i = 0; i< this.LessonDetail.Count; i++)
             {
-                var x = new LessonNumletSet(this.MyWorkSpaceParent);
-                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                var x = new LessonNumletSet();
+                x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+                x.MyLessonListParent = this as LessonList<LessonNumletSet>;
                 x.LessonDetail = this.LessonDetail[i];
                 base.Add((T)x);
             }
-
-            this.Sort();
         }
 
         public void LoadLessonDetailSet(int _index)
         {
-                var x = new LessonNumletSet(this.MyWorkSpaceParent);
-                //x.MyWorkSpaceParent = this.MyWorkSpaceParent;
-                x.LessonDetail = this.LessonDetail[_index];
-                this._currentLessonDetailSet = x;
-                base.Add((T)x);
+            var x = new LessonNumletSet();
+            x.MyWorkSpaceParent = this.MyWorkSpaceParent;
+            x.MyLessonListParent = this as LessonList<LessonNumletSet>;
+            x.LessonDetail = this.LessonDetail[_index];
+            this._currentLessonDetailSet = x;
+            base.Add((T)x);
         }
 
         public LessonNumletSet Next()
         {
             // Set a current Lesson 
             var intNextIndex = this.CurrentIndex + 1;
-            if (intNextIndex > this.Count)
+            if (intNextIndex >= (this.Count))
             {
-                this._currentLessonDetailSet = this[this.Count];
+                this.bOverIndex = true;
+                this._currentLessonDetailSet = this[this.Count - 1];
             }
             else
             {
+                this.bOverIndex = false;
                 this._currentLessonDetailSet = this[intNextIndex];
             }
 
@@ -222,18 +217,37 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             var intNextIndex = this.CurrentIndex - 1;
             if (intNextIndex < 0)
             {
+                this.bOverIndex = true;
                 this._currentLessonDetailSet = this[0];
             }
             else
             {
+                this.bOverIndex = false;
                 this._currentLessonDetailSet = this[intNextIndex];
             }
             return this.CurrentLessonDetailSet;
         }
 
+        public void OrderLessons(G__SortOrder _order)
+        {
+            if (_order == G__SortOrder.Ascending)
+            {
+                this.OrderBy(d => d); 
+            }
+            else
+            {
+                this.OrderByDescending(d => d);
+            }
+        }
+
         public LessonNumletSet FindByLessonSeq(int _seq)
         {
-            return this.Find(y => y.LessonDetail.LessonSeq == _seq);
+            return this.Find(x => x.LessonDetail.LessonSeq == _seq);
+        }
+
+        public void CreateCurrentLessonResult()
+        {
+
         }
 
         #endregion
@@ -260,6 +274,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // Init - only run at on first access.
                 if (this._currentLessonDetailSet == null)
                 {
+                    //this._currentLessonDetailSet = this.Min();
                     this._currentLessonDetailSet = this[0];
                 }
 
@@ -293,6 +308,45 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
+        public int CurrentCorrect
+        {
+            get
+            {
+                LessonNumletSet x;
+                int y = 0;
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    x = this[i];
+                    if (x.LessonDetailResults.ScoreEquation || x.LessonDetailResults.ScoreMethod || x.LessonDetailResults.ScoreResult)
+                    {
+                        y++;
+                    }
+                };
+
+                return y;
+            }
+        }
+
+        public int CurrentInCorrect
+        {
+            get
+            {
+                LessonNumletSet x;
+                int y = 0;
+
+                for (int i = 0; i < this.Count; i++)
+                {
+                    x = this[i];
+                    if (!x.LessonDetailResults.ScoreEquation || !x.LessonDetailResults.ScoreMethod || !x.LessonDetailResults.ScoreResult)
+                    {
+                        y++;
+                    }
+                };
+
+                return y;
+            }
+        }
 
         #endregion
 
@@ -302,7 +356,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             this.Lesson = _lessonModel.SelectedLesson;
             this.LessonDetail = _lessonModel.LessonDetail;
-            this.LessonDetail.Sort();
+            this.sortOrder = G__SortOrder.Descending;
+            //this.sortOrder = G__SortOrder.Ascending;
+            this.bOverIndex = false;
+            this.OrderLessons(this.sortOrder);
             this.LoadAllLessonDetailSets();
         }
 
