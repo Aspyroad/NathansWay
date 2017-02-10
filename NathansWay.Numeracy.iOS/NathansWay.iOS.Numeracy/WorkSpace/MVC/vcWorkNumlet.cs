@@ -220,13 +220,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            
-            this.UI_ViewNeutral();
+            // ** 5/2/2017 - Removed into ApplyUI() this should be where all initialised UI should take place
+            //this.UI_ViewNeutral();
         }
 
         public override G__AnswerState Solve()
         {
             this.AnswerState = G__AnswerState.Correct;
+            this._solveAttempted = G__SolveAttempted.Attempted;
             // ALl the Children in this numlet
             for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
             {
@@ -325,6 +326,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             if (base.ApplyUI(_applywhere))
             {
+                if (this._bIsReadOnly)
+                {
+                    base.UI_ViewReadOnly();
+                }
+
+
                 return true;
             }
             else

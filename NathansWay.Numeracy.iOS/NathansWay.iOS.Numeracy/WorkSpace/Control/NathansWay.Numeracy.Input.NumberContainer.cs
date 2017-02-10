@@ -467,7 +467,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 if (this._bIsAnswer)
                 {
-                    base.UI_ViewNeutral();
+                    //base.UI_ViewNeutral();
+                    this.UI_AttemptedAnswerState();
                 }
                 return true;
             }
@@ -484,10 +485,11 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override G__AnswerState Solve()
         {
             G__AnswerState _ret = G__AnswerState.InCorrect;
+            this._solveAttempted = G__SolveAttempted.Attempted;
 
             // If enabled a >1 digit display will only show the value incorrect
             // rather than the entire numer
-            if (this.NumberAppSettings.GA__NumberErrorUIDisplay)
+            if (this.NumberAppSettings.GA__SingleDigitErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer x in this._lsNumbers)

@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="NathansWay.iOS.Numeracy\ControlsGlobal\NathansWay.Numeracy.NWButton.cs" />
     <Compile Include="NathansWay.iOS.Numeracy\WorkSpace\Dialog\vcStartStopDialog.cs" />
+    <None Include="CurrentWorkNeeded.txt" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />

@@ -108,7 +108,8 @@ namespace NathansWay.Numeracy.Shared
     public enum G__AnswerState : int
     {
         Correct = 1,
-        InCorrect = 2
+        InCorrect = 2,
+        PartCorrect = 3
     }
 
     public enum G__SolveAttempted : int

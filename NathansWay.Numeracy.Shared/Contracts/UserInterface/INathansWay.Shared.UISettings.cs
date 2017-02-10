@@ -63,17 +63,35 @@ namespace NathansWay.Numeracy.Shared
         /// <summary>
         /// Variable to assist edit mode, do we want the selection to jump to 
         /// the next text box on a multinumbered text
-        ///<summary>
+        ///</summary>
         bool GA__MoveToNextNumber { get; set; }
 
         /// <summary>
         /// When checking the answer, this will highlite the particular number
         /// which is wrong. Eg if the answer was 20, but the user selected 21
         /// the "1" would be highlited as incorrect but the "2" would be dislplyed correct
-        ///<summary>
-        bool GA__NumberErrorUIDisplay { get; set; }
+        ///</summary>
+        bool GA__SingleDigitErrorUIDisplay { get; set; }
 
-        bool GA__ShowCorrectnessStateOnDeselection { get; set; }
+        /// <summary>
+        /// When we move to the next or previous question after moving, should we retain
+        /// the UI correct state of the equationset
+        ///</summary>
+        ///<value><c>true</c> if persist UI, otherwise to reset to neutral <c>false</c></value>
+        bool GA__PersistUICorrectStateOnMove { get; set; }
+
+        /// <summary>
+        /// When we move to the next or previous question after moving, should we retain
+        /// the UI incorrect state of the equationset
+        ///</summary>
+        ///<value><c>true</c> if persist UI, otherwise to reset to neutral <c>false</c></value>
+        bool GA__PersistUIInCorrectStateOnMove { get; set; }
+
+        /// <summary>
+        /// When we solve, do we only solve the numlets with answers or all numlets
+        ///</summary>
+        ///<value><c>true</c> all numlets are solved, otherwise <c>false</c>, only the numlet selected.</value>
+        bool GA__SolveAllNumlets { get; set; }
     }
 
 

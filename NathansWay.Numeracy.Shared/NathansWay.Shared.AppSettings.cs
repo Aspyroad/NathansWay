@@ -143,17 +143,30 @@ namespace NathansWay.Numeracy.Shared
             }
         }
 
-        public bool GA__NumberErrorUIDisplay 
+        public bool GA__SingleDigitErrorUIDisplay 
         { 
             get; 
             set; 
         }
 
-        public bool GA__ShowCorrectnessStateOnDeselection
+        public bool GA__PersistUICorrectStateOnMove
         {
             get;
             set;
         }
+
+        public bool GA__PersistUIInCorrectStateOnMove 
+        { 
+            get;
+            set;
+        }
+
+        public bool GA__SolveAllNumlets 
+        { 
+            get; 
+            set; 
+        }
+
         #endregion
 
         #region Private Members

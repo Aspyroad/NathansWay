@@ -774,7 +774,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 if (this._bIsAnswer)
                 {
-                    this.UI_ViewNeutral();
+                    //this.UI_ViewNeutral();
+                    this.UI_AttemptedAnswerState();
                 }
             }
             return true;

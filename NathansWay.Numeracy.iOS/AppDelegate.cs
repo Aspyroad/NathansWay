@@ -99,13 +99,14 @@ namespace NathansWay.iOS.Numeracy
 			// Depending on student, teahcer etc some of these will change at log in, but we will set defaults here.
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
-            this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
+            this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditUpDown;
             this._numberAppSettings.GA__NumberDisplaySize = G__DisplaySizeLevels.Level5;
             this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;
             this._numberAppSettings.GA__ShowAnswerNumlet = true;
-            this._numberAppSettings.GA__NumberErrorUIDisplay = false;
-            this._numberAppSettings.GA__ShowCorrectnessStateOnDeselection = false;
+            this._numberAppSettings.GA__SingleDigitErrorUIDisplay = true;
+            this._numberAppSettings.GA__PersistUICorrectStateOnMove = true;
+            this._numberAppSettings.GA__PersistUIInCorrectStateOnMove = true;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

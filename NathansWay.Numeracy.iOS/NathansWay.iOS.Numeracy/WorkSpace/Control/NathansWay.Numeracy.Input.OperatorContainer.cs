@@ -137,7 +137,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
-                    this.UI_ViewNeutral();
+                    //this.UI_ViewNeutral();
+                    this.UI_AttemptedAnswerState();
                 }
                 return true;
             }

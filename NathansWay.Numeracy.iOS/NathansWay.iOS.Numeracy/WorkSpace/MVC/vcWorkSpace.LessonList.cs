@@ -38,14 +38,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public string lnsEquation;
         public string lnsMethods;
         public string lnsResult;
-        public G__SolveAttempted lnsAttempted { get; set; }
+        private G__SolveAttempted _solveAttempted;
+        public G__AnswerState AnswerState { get; set; }
+
+        // Variables to define the "stste" of each numletset
+        // Has it been attempted, is it wrong or right.
+        // This will be used by the list to tell if they are completed, correct etc
 
         public LessonNumletSet()
         {
             this.lnsEquation = "";
             this.lnsMethods = "";
             this.lnsResult = "";
-            this.lnsAttempted = G__SolveAttempted.UnAttempted;
+            this._solveAttempted = G__SolveAttempted.UnAttempted;
+            this.AnswerState = G__AnswerState.InCorrect;
 
             // Results
             this.LessonDetailResults = new EntityLessonDetailResults();
@@ -94,6 +100,20 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return other._lessonDetail.SEQ.CompareTo(this._lessonDetail.SEQ);
         }
 
+        public G__SolveAttempted SolveAttempted 
+        { 
+            get
+            {
+                return this._solveAttempted;
+            } 
+            set
+            {
+                this._solveAttempted = value;
+                //this.Nu
+
+            }
+        }
+
         public EntityLessonDetail LessonDetail 
         { 
             get
@@ -131,6 +151,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         public vcWorkSpace _myWorkSpaceParent;
         public G__SortOrder sortOrder;
         public bool bOverIndex { get; private set; }
+
+        public int CurrentCorrect { get; private set; }
+        public int CurrentInCorrect { get; private set; }
+        public int CurrentPartCorrect { get; private set; }
 
         #endregion
 
@@ -195,6 +219,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public LessonNumletSet Next()
         {
+            // Set all state for the current list
+            this.SetLessonListState();
             // Set a current Lesson 
             var intNextIndex = this.CurrentIndex + 1;
             if (intNextIndex >= (this.Count))
@@ -213,6 +239,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public LessonNumletSet Prev()
         {
+            // Set all state for the current list
+            this.SetLessonListState();
             // Set a current Lesson 
             var intNextIndex = this.CurrentIndex - 1;
             if (intNextIndex < 0)
@@ -247,6 +275,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void CreateCurrentLessonResult()
         {
+
+        }
+        /// <summary>
+        /// Sets all state of the current list
+        /// </summary>
+        /// <value>My work space parent.</value>
+        public void SetLessonListState()
+        {
+            this.CurrentCorrect = this.CountCorrect();
+            this.CurrentInCorrect = this.CountInCorrect();
+            this.CurrentPartCorrect = this.CountPartCorrect();
 
         }
 
@@ -308,46 +347,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public int CurrentCorrect
-        {
-            get
-            {
-                LessonNumletSet x;
-                int y = 0;
-
-                for (int i = 0; i < this.Count; i++)
-                {
-                    x = this[i];
-                    if (x.LessonDetailResults.ScoreEquation || x.LessonDetailResults.ScoreMethod || x.LessonDetailResults.ScoreResult)
-                    {
-                        y++;
-                    }
-                };
-
-                return y;
-            }
-        }
-
-        public int CurrentInCorrect
-        {
-            get
-            {
-                LessonNumletSet x;
-                int y = 0;
-
-                for (int i = 0; i < this.Count; i++)
-                {
-                    x = this[i];
-                    if (!x.LessonDetailResults.ScoreEquation || !x.LessonDetailResults.ScoreMethod || !x.LessonDetailResults.ScoreResult)
-                    {
-                        y++;
-                    }
-                };
-
-                return y;
-            }
-        }
-
         #endregion
 
         #region Private Members
@@ -363,6 +362,58 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.LoadAllLessonDetailSets();
         }
 
+        private int CountCorrect()
+        {
+            LessonNumletSet x;
+            int y = 0;
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                x = this[i];
+                if (x.AnswerState == G__AnswerState.Correct)
+                {
+                    y++;
+                }
+
+            };
+
+            return y;
+
+        }
+
+        private int CountInCorrect()
+        {
+            LessonNumletSet x;
+            int y = 0;
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                x = this[i];
+                if (x.AnswerState == G__AnswerState.InCorrect)
+                {
+                    y++;
+                }
+            };
+
+            return y;
+        }
+
+        private int CountPartCorrect()
+        {
+            LessonNumletSet x;
+            int y = 0;
+
+            for (int i = 0; i < this.Count; i++)
+            {
+                x = this[i];
+                if (x.AnswerState == G__AnswerState.PartCorrect)
+                {
+                    y++;
+                }
+            };
+
+            return y;
+        }
 
         #endregion
     }

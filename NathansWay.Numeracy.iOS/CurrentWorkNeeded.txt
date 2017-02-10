@@ -1,0 +1,14 @@
+﻿1. There is currently a bug in WorkSpace. When a user puts a number into edit mode, and then 
+selects next or previous, the control is orphaned in edit mode.
+Fix : We need to unselect any edits prior to calling a move next or previous().
+Status = FIXED
+
+2. Make all these variables work as expected
+
+        public bool GA__SingleDigitErrorUIDisplay
+        public bool GA__PersistUICorrectStateOnMove
+        public bool GA__PersistUIInCorrectStateOnMove
+        public bool GA__SolveAllNumlets 
+
+3. When you try to reset UI Answer colours after solving it still shows correct/incorrect state
+This is a bug caused by the Persist after solved and then move list position UI

@@ -266,7 +266,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetAnswerState(bool _solving)
         {
-            if (this.NumberAppSettings.GA__ShowCorrectnessStateOnDeselection || _solving)
+            if (this.NumberAppSettings.GA__PersistUICorrectStateOnMove || _solving)
             {
                 if (this.AnswerState == G__AnswerState.Correct)
                 {
@@ -276,7 +276,6 @@ namespace NathansWay.iOS.Numeracy
                 {
                     this.UI_ViewInCorrect();
                 }
-
             }
             else
             {
@@ -288,6 +287,42 @@ namespace NathansWay.iOS.Numeracy
                 {
                     this.UI_ViewReadOnly();
                 }
+            }
+        }
+
+        public virtual void UI_AttemptedAnswerState()
+        {
+            //this._numberAppSettings.GA__PersistUICorrectStateOnMove = false;
+            //this._numberAppSettings.GA__PersistUIInCorrectStateOnMove = false;
+
+            if (this.MyNumletParent.SolveAttemped == G__SolveAttempted.Attempted)
+            {
+                if (this.MyNumletParent.AnswerState == G__AnswerState.Correct)
+                {
+                    if (this._numberAppSettings.GA__PersistUICorrectStateOnMove)
+                    {
+                        this.UI_ViewCorrect();
+                    }
+                    else
+                    {
+                        this.UI_ViewNeutral();
+                    }
+                }
+                else
+                {
+                    if (this._numberAppSettings.GA__PersistUIInCorrectStateOnMove)
+                    {
+                        this.UI_ViewInCorrect();
+                    }
+                    else
+                    {
+                        this.UI_ViewNeutral();
+                    }
+                }
+            }
+            else
+            {
+                this.UI_ViewNeutral();
             }
         }
 
@@ -304,7 +339,7 @@ namespace NathansWay.iOS.Numeracy
             }
             if (this.IsAnswer)
             {
-                this.UI_ViewNeutral();
+                this.UI_AttemptedAnswerState();
             }
             else
             {

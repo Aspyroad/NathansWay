@@ -52,7 +52,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private vcMainWorkSpace _vcMainWorkSpace;
         // All our lesson UI container
-        private LessonList<LessonNumletSet> _lessonNumletList;
+        private LessonList<LessonNumletSet> _lessonList;
 
         private List<vcWorkNumlet> _numletCurrentMethods;
         private vcWorkNumlet _numletCurrentEquation;
@@ -262,7 +262,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private bool NextEquation()
         {
-            return (this._enumLessonState == G__LessonState.Started);
+            return (true);
         }
 
         private bool PreviousEquation()
@@ -448,29 +448,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.UIResetSolveButton();
         }
 
-        public void Clear()
-        {
-            if (this.SelectedNumberContainer != null)
-            {
-                this.SelectedNumberContainer.OnUnSelectionChange();
-                this.SelectedNumberContainer = null;
-            }
-            if (this.SelectedFractionContainer != null)
-            {
-                this.SelectedFractionContainer.OnUnSelectionChange();
-                this.SelectedFractionContainer = null;
-            }
-            if (this.SelectedNumberText != null)
-            {
-                this.SelectedNumberText.OnUnSelectionChange();
-                this.SelectedNumberText = null;
-            }
-            if (this.SelectedOperatorText != null)
-            {
-                this.SelectedOperatorText.OnUnSelectionChange();
-                this.SelectedOperatorText = null;
-            }
-        }
+        #region LessonFlow
 
         public void LoadFirstLesson()
         {
@@ -490,47 +468,101 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // private void Example(nint? arg1, Nullable<nint> arg2)
             // ** Unused code. Here we have a catch for an empty LessonList...WHY?
             // I doubt it will ever be needed, but if a lesson isnt load from the menu it may be required.
-            if (this._lessonNumletList == null)
+            if (this._lessonList == null)
             {
-                this._lessonNumletList = new LessonList<LessonNumletSet>(this);
-                this._lessonNumletList.MyWorkSpaceParent = this;
+                this._lessonList = new LessonList<LessonNumletSet>(this);
+                this._lessonList.MyWorkSpaceParent = this;
             }
 
             // Current lesson set
             // Loads 0 index of lesson set as CurrentlessonDetailSet is init here in property settergetter
-            this._currentLessonNumletSet = this._lessonNumletList.CurrentLessonDetailSet;
+            this._currentLessonNumletSet = this._lessonList.CurrentLessonDetailSet;
             this.UIDisplayNumlets();
 
             this.View.AddSubview(this._vCanvasOverlay);
             this.View.BringSubviewToFront(this._vCanvasOverlay);
         }
 
-        public void StartLesson()
+        public void Clear()
         {
-            if (this._enumLessonState == G__LessonState.Ready || this._enumLessonState == G__LessonState.Paused)
+            if (this.SelectedNumberContainer != null)
             {
-                var x = (this.LessonNumletList.Count);
-                this.btnStartStop.SetTitle("Pause : 0", UIControlState.Normal);
-
-                this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
-                this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
-                // Setup 
-                this._vCanvasDocked.UserInteractionEnabled = true;
-                this._vCanvasMain.UserInteractionEnabled = true;
-                this._vCanvasOverlay.RemoveFromSuperview();
-                // Set the lesson as started
-                this._enumLessonState = G__LessonState.Started;
-                this.aTimer.Start();
+                this.SelectedNumberContainer.OnUnSelectionChange();
+                this.SelectedNumberContainer = null;
             }
-            else
+            if (this.SelectedFractionContainer != null)
             {
-                this.View.AddSubview(this._vCanvasOverlay);
-                this._vCanvasDocked.UserInteractionEnabled = false;
-                this._vCanvasMain.UserInteractionEnabled = false;
-                this._enumLessonState = G__LessonState.Paused;
-                this.aTimer.Stop();
+                this.SelectedFractionContainer.OnUnSelectionChange();
+                this.SelectedFractionContainer = null;
+            }
+            if (this.SelectedNumberText != null)
+            {
+                if (this.SelectedNumberText.IsInEditMode)
+                {
+                    this.SelectedNumberText.AutoTouchedText();
+                }
+                this.SelectedNumberText.OnUnSelectionChange();
+                this.SelectedNumberText = null;
+            }
+            if (this.SelectedOperatorText != null)
+            {
+                this.SelectedOperatorText.OnUnSelectionChange();
+                this.SelectedOperatorText = null;
             }
         }
+
+        public void Start()
+        {
+            // Set the lesson as started
+            this._enumLessonState = G__LessonState.Started;
+
+            var x = (this.LessonNumletList.Count);
+            this.btnStartStop.SetTitle("Pause : 0", UIControlState.Normal);
+
+            this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+            this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
+            // Setup 
+            this._vCanvasDocked.UserInteractionEnabled = true;
+            this._vCanvasMain.UserInteractionEnabled = true;
+            this._vCanvasOverlay.RemoveFromSuperview();
+
+            this.aTimer.Start();
+        }
+
+        public void Continue()
+        {
+            // Set the lesson as started
+            this._enumLessonState = G__LessonState.Started;
+
+            var x = (this.LessonNumletList.Count);
+            //this.btnStartStop.SetTitle("Pause : 0", UIControlState.Normal);
+
+            //this.btnNextEquation.SetTitle(x.ToString(), UIControlState.Normal);
+            //this.btnPrevEquation.SetTitle("1", UIControlState.Normal);
+            // Setup 
+            this._vCanvasDocked.UserInteractionEnabled = true;
+            this._vCanvasMain.UserInteractionEnabled = true;
+            this._vCanvasOverlay.RemoveFromSuperview();
+
+            this.aTimer.Start();
+        }
+
+        public void Stop()
+        {
+            this._enumLessonState = G__LessonState.Finished;
+        }
+
+        public void Pause()
+        {
+            this._enumLessonState = G__LessonState.Paused;
+
+            this.View.AddSubview(this._vCanvasOverlay);
+            this._vCanvasDocked.UserInteractionEnabled = false;
+            this._vCanvasMain.UserInteractionEnabled = false;
+            this.aTimer.Stop();
+        }
+
+        #endregion 
 
         #endregion
 
@@ -602,7 +634,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._vCanvasDocked.UserInteractionEnabled = false;
             this._vCanvasDocked.CornerRadius = 5.0f;
 
-            this._vCanvasOverlay.BackgroundColor = UIColor.Black.ColorWithAlpha(0.6f);
+            this._vCanvasOverlay.BackgroundColor = UIColor.Black.ColorWithAlpha(0.7f);
             this._vCanvasOverlay.ClipsToBounds = true;
             this._vCanvasOverlay.AutosizesSubviews = false;
             this._vCanvasOverlay.UserInteractionEnabled = false;
@@ -667,12 +699,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override G__AnswerState Solve()
         {
-            this. _solveAttempted = G__SolveAttempted.Attempted;
-            this._currentLessonNumletSet.lnsAttempted = G__SolveAttempted.Attempted;
-            // Claer the display
+            // * Pointless - this._solveAttempted = G__SolveAttempted.Attempted;
+            this._currentLessonNumletSet.SolveAttempted = G__SolveAttempted.Attempted;
+            // Clear the display
             this._currentLessonNumletSet.vcNumletEquation.ResetAllSelection();
             this._currentLessonNumletSet.vcNumletResult.ResetAllSelection();
-
+            // While true it lets the system know we are in the midst of a solve
             this.SolvingState = true;
 
             // Unselect everything
@@ -696,13 +728,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             G__AnswerState num1 = this._currentLessonNumletSet.vcNumletEquation.Solve();
             G__AnswerState num2 = this._currentLessonNumletSet.vcNumletResult.Solve();
 
+            // Check if its correct
             if ((num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.Correct))
             {
                 this.AnswerState = G__AnswerState.Correct;
+                this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
+            }
+            // Check Part and Incorrect
+            if ((num1 == G__AnswerState.InCorrect) && (num2 == G__AnswerState.Correct) 
+                    || (num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.InCorrect))
+            {
+                this.AnswerState = G__AnswerState.PartCorrect;
+                this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
             }
             else
             {
                 this.AnswerState = G__AnswerState.InCorrect;
+                this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
             }
 
             this.SolvingState = false;
@@ -918,7 +960,33 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnStartStop (object sender, EventArgs e)    
         {
-            this.StartLesson();
+            switch (this._enumLessonState)
+            {
+                case G__LessonState.Paused:
+                    this.Continue();
+                    break;
+                case G__LessonState.Started:
+                    this.Pause();
+                    break;
+                //case G__LessonState.Ready
+                default:
+                    this.Start();
+                    break;
+            }
+            if (this._enumLessonState == G__LessonState.Paused)
+            {
+
+
+            }
+            if (this._enumLessonState == G__LessonState.Ready)
+            {
+            }
+            else
+            {
+
+            }
+
+            //this.Start();
         }
 
         private void OnClick_btnSizeNormal (object sender, EventArgs e)
@@ -1071,12 +1139,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             get 
             { 
-                return this._lessonNumletList; 
+                return this._lessonList; 
             }
             set
             {
-                this._lessonNumletList = value;
-                this._lessonNumletList.MyWorkSpaceParent = this;
+                this._lessonList = value;
+                this._lessonList.MyWorkSpaceParent = this;
             }
         }
 
