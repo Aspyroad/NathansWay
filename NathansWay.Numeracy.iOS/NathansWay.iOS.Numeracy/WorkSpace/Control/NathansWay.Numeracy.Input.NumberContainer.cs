@@ -126,9 +126,9 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._intMultiNumberTotalInSigCount = 0;
             this._intMultiNumberTotalSigCount = 0;
 
-            //this._bShowDecimal = false;
+
             // Some basic UI
-            //this.BorderWidth = 1.0f;
+            this.CornerRadius = 0.0f;
 
             this._bPerNumberErrorUIDisplay = false;
 
@@ -418,7 +418,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.BackgroundColor = UIColor.Clear;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
 
-            //if (!this._bPerNumberErrorUIDisplay)
+            if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)
@@ -436,7 +436,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.View.BackgroundColor = UIColor.Clear;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
 
-            //if (!this._bPerNumberErrorUIDisplay)
+            if (!this._bPerNumberErrorUIDisplay)
             {
                 // Loop through this._lsNumbers
                 foreach (BaseContainer _Number in this._lsNumbers)
@@ -467,8 +467,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 if (this._bIsAnswer)
                 {
-                    //base.UI_ViewNeutral();
-                    this.UI_AttemptedAnswerState();
+                    base.UI_ViewNeutral();
+                    //this.UI_AttemptedAnswerState();
                 }
                 return true;
             }
@@ -476,6 +476,13 @@ namespace NathansWay.iOS.Numeracy.Controls
             {
                 return false;
             }
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
+            //this.BorderWidth = this.iOSUIAppearance.GlobaliOSTheme.ViewBorderWidth;
+            //this.CornerRadius = 0.0f;
         }
 
         #endregion

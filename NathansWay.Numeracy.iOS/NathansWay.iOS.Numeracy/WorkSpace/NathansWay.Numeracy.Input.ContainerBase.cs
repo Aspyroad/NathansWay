@@ -243,7 +243,8 @@ namespace NathansWay.iOS.Numeracy
         {
             this._solveAttempted = G__SolveAttempted.Attempted;
             this.SetCorrectState();
-            this.UI_SetAnswerState(true);
+            this.UI_SetAnswerState();
+
             return this.AnswerState;
         }
 
@@ -264,40 +265,35 @@ namespace NathansWay.iOS.Numeracy
 
         }
 
-        public virtual void UI_SetAnswerState(bool _solving)
+        public virtual void UI_SetAnswerState()
         {
-            if (this.NumberAppSettings.GA__PersistUICorrectStateOnMove || _solving)
+            if (this.AnswerState == G__AnswerState.Correct)
             {
-                if (this.AnswerState == G__AnswerState.Correct)
-                {
-                    this.UI_ViewCorrect();
-                }
-                else
-                {
-                    this.UI_ViewInCorrect();
-                }
+                this.UI_ViewCorrect();
             }
             else
             {
-                if (this.IsAnswer)
-                {
-                    this.UI_ViewSelected();
-                }
-                else
-                {
-                    this.UI_ViewReadOnly();
-                }
+                this.UI_ViewInCorrect();
             }
         }
 
         public virtual void UI_AttemptedAnswerState()
         {
+            BaseContainer x;
             //this._numberAppSettings.GA__PersistUICorrectStateOnMove = false;
             //this._numberAppSettings.GA__PersistUIInCorrectStateOnMove = false;
-
-            if (this.MyNumletParent.SolveAttemped == G__SolveAttempted.Attempted)
+            if (this.MyNumletParent == null)
             {
-                if (this.MyNumletParent.AnswerState == G__AnswerState.Correct)
+                x = this;
+            }
+            else
+            {
+                x = this.MyNumletParent;
+            }
+
+            if (x.SolveAttempted == G__SolveAttempted.Attempted)
+            {
+                if (x.AnswerState == G__AnswerState.Correct)
                 {
                     if (this._numberAppSettings.GA__PersistUICorrectStateOnMove)
                     {
@@ -333,13 +329,17 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetUnSelectedState()
         {
-            if (this._bIsReadOnly)
-            {
-                this.UI_ViewReadOnly();
-            }
+            //if (this._bIsReadOnly)
+            //{
+            //    this.UI_ViewReadOnly();
+            //}
             if (this.IsAnswer)
             {
-                this.UI_AttemptedAnswerState();
+                // TODO: Here : We need to move this. I think it best to just call
+                // SOLVE() after we move forward or back, its not heavy.
+                // this.UI_AttemptedAnswerState();
+
+                this.UI_ViewNeutral();
             }
             else
             {
@@ -635,7 +635,7 @@ namespace NathansWay.iOS.Numeracy
             }
         }
 
-        public virtual G__SolveAttempted SolveAttemped
+        public virtual G__SolveAttempted SolveAttempted
         {
             get
             {

@@ -223,6 +223,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
 
             this.WorkSpaceSize.SetAllNumletPositions();
+
+            if (this._currentLessonNumletSet.vcNumletEquation.SolveAttempted == G__SolveAttempted.Attempted)
+            {
+                this._currentLessonNumletSet.vcNumletEquation.Solve();
+            }
+            if (this._currentLessonNumletSet.vcNumletResult.SolveAttempted == G__SolveAttempted.Attempted)
+            {
+                this._currentLessonNumletSet.vcNumletResult.Solve();
+            }
+
             this.UISetWorkSpaceCanvas();
 
         }
@@ -714,7 +724,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     this.SelectedNumberText.AutoTouchedText();
                     this.SelectedNumberText.OnUnSelectionChange();
-                    //this.SelectedNumberText = null;
                 }
 
                 this.SelectedFractionContainer = null;

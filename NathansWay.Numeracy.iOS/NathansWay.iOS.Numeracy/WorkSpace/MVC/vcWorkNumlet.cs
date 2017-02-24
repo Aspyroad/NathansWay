@@ -188,6 +188,16 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             return s;
         }
 
+        public void SetSolveAttempted()
+        {
+            for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
+            {
+                var x = (BaseContainer)this.OutputAnswerContainers[i];
+                x.UI_AttemptedAnswerState();
+            }
+
+        }
+
         #endregion
 
         #region Delegates
@@ -235,29 +245,28 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this.AnswerState = x.Solve();
             }
 
-            this.UI_SetAnswerState(true);
+            this.UI_SetAnswerState();
             return this.AnswerState;
         }
 
-        public override void UI_SetAnswerState(bool _solving)
+        public override void UI_SetAnswerState()
         {
             // This Numlet
             if (this.IsAnswer)
             {
-                base.UI_SetAnswerState(_solving);
+                base.UI_SetAnswerState();
             }
             else
             {
                 this.UI_ViewReadOnly();
             }
-
         }
 
         public override void UI_SetSelectedState()
         {
             if (this.IsAnswer)
             {
-                this.UI_SetAnswerState(false);
+                this.UI_SetAnswerState();
             }
             else
             {

@@ -104,7 +104,7 @@ namespace NathansWay.iOS.Numeracy
             this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;
             this._numberAppSettings.GA__ShowAnswerNumlet = true;
-            this._numberAppSettings.GA__SingleDigitErrorUIDisplay = true;
+            this._numberAppSettings.GA__SingleDigitErrorUIDisplay = false;
             this._numberAppSettings.GA__PersistUICorrectStateOnMove = true;
             this._numberAppSettings.GA__PersistUIInCorrectStateOnMove = true;
 

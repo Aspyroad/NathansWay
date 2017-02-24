@@ -6,9 +6,13 @@ Status = FIXED
 2. Make all these variables work as expected
 
         public bool GA__SingleDigitErrorUIDisplay
+        Status = NOTFIXED
         public bool GA__PersistUICorrectStateOnMove
+        Status = NOTFIXED
         public bool GA__PersistUIInCorrectStateOnMove
+        Status = NOTFIXED
         public bool GA__SolveAllNumlets 
+        Status = NOTFIXED
 
 3. When you try to reset UI Answer colours after solving it still shows correct/incorrect state
 This is a bug caused by the Persist after solved and then move list position UI

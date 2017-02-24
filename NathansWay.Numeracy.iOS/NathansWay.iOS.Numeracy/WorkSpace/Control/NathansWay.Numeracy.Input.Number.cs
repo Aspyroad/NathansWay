@@ -221,14 +221,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.txtNumber.ClipsToBounds = true;
             this.txtNumber.AutoApplyUI = false;
 
-            //this.txtNumber.BorderWidth = 0.0f;
-            //this.txtNumber.CornerRadius = 0.0f;
-            //this.txtNumber.BackgroundColor = UIColor.Clear;
-
-            // TODO: These may need to be seperate from global values
-            //this.txtNumber.BorderWidth = 1.0f;
-            //this.txtNumber.CornerRadius = 2.0f;
-
             //this.txtNumber.HorizontalAlignment = UIControlContentHorizontalAlignment.Center;
             //this.txtNumber.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             this.txtNumber.TextAlignment = UITextAlignment.Center;
@@ -774,11 +766,21 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 if (this._bIsAnswer)
                 {
-                    //this.UI_ViewNeutral();
-                    this.UI_AttemptedAnswerState();
+                    base.UI_ViewNeutral();
+                    //this.UI_AttemptedAnswerState();
                 }
             }
             return true;
+        }
+
+        public override void ApplyUI7()
+        {
+            base.ApplyUI7();
+            this.txtNumber.BorderWidth = 0.0f;
+            this.txtNumber.CornerRadius = 0.0f;
+            this.CornerRadius = 0.0f;
+            this.BorderWidth = 0.0f;
+            this.txtNumber.BackgroundColor = UIColor.Clear;
         }
 
         public override void OnSelectionChange()

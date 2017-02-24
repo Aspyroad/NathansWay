@@ -244,8 +244,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                 } 
                 if (this._bIsAnswer)
                 {
-                    //base.UI_ViewNeutral();
-                    this.UI_AttemptedAnswerState();
+
+                    base.UI_ViewNeutral();
+                    //this.UI_AttemptedAnswerState();
                 }
                 return true;
             }
@@ -345,9 +346,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region UI
 
-        public override void UI_SetAnswerState(bool _solving)
+        public override void UI_SetAnswerState()
         {
-            if (this.NumberAppSettings.GA__PersistUICorrectStateOnMove || _solving)
+            if (this.NumberAppSettings.GA__PersistUICorrectStateOnMove)
             {
                 if (this.AnswerState == G__AnswerState.Correct)
                 {
