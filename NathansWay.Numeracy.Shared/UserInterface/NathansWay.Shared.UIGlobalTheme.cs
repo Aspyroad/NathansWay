@@ -159,8 +159,8 @@ namespace NathansWay.Numeracy.Shared
 			ButtonPressedBGStrImage = "";
 
 			ButtonFontName = "HelveticaNeue-Medium";
-            ButtonBorderWidth = 2.0f;
-            ButtonCornerRadius = 3.0f;
+            ButtonBorderWidth = 1.0f;
+            ButtonCornerRadius = 2.0f;
             ButtonMenuCornerRadius = 10.0f;
 
 			// UIView
@@ -177,7 +177,7 @@ namespace NathansWay.Numeracy.Shared
 			LabelTextColor = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
             LabelHighLightedBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 0.0f, 0.0f, 255.0f)); // Black 
             LabelBGColor = new Lazy<G__Color> (() => new G__Color(255.0f, 255.0f, 255.0f, 0.0f)); // Black 
-            LabelCornerRadius = 6.0f;
+            LabelCornerRadius = 2.0f;
             LabelBorderWidth = 1.0f;
 
 			// UITextViews

@@ -109,7 +109,8 @@ namespace NathansWay.Numeracy.Shared
     {
         Correct = 1,
         InCorrect = 2,
-        PartCorrect = 3
+        PartCorrect = 3,
+        Empty = 4
     }
 
     public enum G__SolveAttempted : int

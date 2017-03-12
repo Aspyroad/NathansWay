@@ -271,48 +271,21 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override G__AnswerState Solve()
         {
-            var x1 = this._numberContainerDenominator.Solve();
-            var x2 = this._numberContainerNumerator.Solve();
+            this._numberContainerDenominator.Solve();
+            this._numberContainerNumerator.Solve();
 
-            if ((x1 == G__AnswerState.Correct) && (x2 == G__AnswerState.Correct))
-            {
-                this.AnswerState = G__AnswerState.Correct;
-            }
-            else
-            {
-                this.AnswerState = G__AnswerState.InCorrect;
-            }
             return base.Solve();
         }
 
         public override void SetCorrectState()
         {
-            // TODO : Check if this fraction is the answer
-            // Compare against the original value
-            // No need to call base it for basic compares
+            
+            this.AnswerState = this.BinarySolve(this._numberContainerDenominator.AnswerState , this._numberContainerNumerator.AnswerState);
 
-            this._numberContainerDenominator.SetCorrectState();
-            //this._numberContainerDenominator.UI_SetAnswerState();
-            this._numberContainerNumerator.SetCorrectState();
-            //this._numberContainerNumerator.UI_SetAnswerState();
-
-            if (this._numberContainerDenominator.CurrentValue == null || this._numberContainerNumerator.CurrentValue == null)
-            {
-                this.AnswerState = G__AnswerState.InCorrect;
-            }
-            else
+            if (this._numberContainerDenominator.AnswerState != G__AnswerState.Empty && this._numberContainerNumerator.AnswerState != G__AnswerState.Empty)
             {
                 // Update the actual value of this is an answer
                 this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
-
-                if ((this._numberContainerDenominator.AnswerState == G__AnswerState.Correct)  && (this._numberContainerNumerator.AnswerState == G__AnswerState.Correct))
-                {
-                    this.AnswerState = G__AnswerState.Correct;
-                }
-                else
-                {
-                    this.AnswerState = G__AnswerState.InCorrect;
-                }
             }
         }
 
@@ -348,36 +321,38 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void UI_SetAnswerState()
         {
-            if (this.NumberAppSettings.GA__PersistUICorrectStateOnMove)
+            switch (this.AnswerState)
             {
-                if (this.AnswerState == G__AnswerState.Correct)
-                {
-                    this.UI_ViewCorrect();
-                    this._numberContainerDenominator.UI_ViewCorrect();
-                    this._numberContainerNumerator.UI_ViewCorrect();
-                }
-                else
-                {
-                    this.UI_ViewInCorrect();
-                    this._numberContainerDenominator.UI_ViewInCorrect();
-                    this._numberContainerNumerator.UI_ViewInCorrect();
-                }
+                case G__AnswerState.Correct:
+                    {
+                        this.UI_ViewCorrect();
+                        this._numberContainerDenominator.UI_ViewCorrect();
+                        this._numberContainerNumerator.UI_ViewCorrect();
+                        break;
+                    }
+                case G__AnswerState.PartCorrect:
+                    {
+                        this.UI_ViewInCorrect();
+                        this._numberContainerDenominator.UI_ViewInCorrect();
+                        this._numberContainerNumerator.UI_ViewInCorrect();
+                        break;
+                    }
+                case G__AnswerState.InCorrect:
+                    {
+                        this.UI_ViewInCorrect();
+                        this._numberContainerDenominator.UI_ViewInCorrect();
+                        this._numberContainerNumerator.UI_ViewInCorrect();
+                        break;
+                    }
+                default: // Empty
+                    {
+                        this.UI_ViewNeutral();
+                        this._numberContainerDenominator.UI_ViewNeutral();
+                        this._numberContainerNumerator.UI_ViewNeutral();
+                        break;
+                    }
             }
-            else
-            {
-                if (this.IsAnswer)
-                {
-                    this.UI_ViewNeutral();
-                    this._numberContainerDenominator.UI_ViewNeutral();
-                    this._numberContainerNumerator.UI_ViewNeutral();
-                }
-                else
-                {
-                    this.UI_ViewReadOnly();
-                    this._numberContainerDenominator.UI_ViewReadOnly();
-                    this._numberContainerNumerator.UI_ViewReadOnly();
-                }
-            }
+
         }
 
         public override void UI_ViewSelected()

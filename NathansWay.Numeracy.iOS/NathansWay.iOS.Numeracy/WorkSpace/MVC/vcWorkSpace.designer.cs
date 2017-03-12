@@ -16,7 +16,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnMethods { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnDisplay { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -25,10 +25,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.NWButton btnOptions { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnPosition { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -64,13 +60,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
+        AspyRoad.iOSCore.AspyLabel lblMessage { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.WorkSpace.vWorkSpace vWorkSpace { get; set; }
 
         void ReleaseDesignerOutlets ()
         {
-            if (btnMethods != null) {
-                btnMethods.Dispose ();
-                btnMethods = null;
+            if (btnDisplay != null) {
+                btnDisplay.Dispose ();
+                btnDisplay = null;
             }
 
             if (btnNextEquation != null) {
@@ -81,11 +81,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (btnOptions != null) {
                 btnOptions.Dispose ();
                 btnOptions = null;
-            }
-
-            if (btnPosition != null) {
-                btnPosition.Dispose ();
-                btnPosition = null;
             }
 
             if (btnPrevEquation != null) {
@@ -126,6 +121,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (lblForwardCount != null) {
                 lblForwardCount.Dispose ();
                 lblForwardCount = null;
+            }
+
+            if (lblMessage != null) {
+                lblMessage.Dispose ();
+                lblMessage = null;
             }
 
             if (vWorkSpace != null) {

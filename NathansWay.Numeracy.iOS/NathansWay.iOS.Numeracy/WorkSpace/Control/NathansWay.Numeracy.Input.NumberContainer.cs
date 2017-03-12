@@ -491,9 +491,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override G__AnswerState Solve()
         {
-            G__AnswerState _ret = G__AnswerState.InCorrect;
-            this._solveAttempted = G__SolveAttempted.Attempted;
-
             // If enabled a >1 digit display will only show the value incorrect
             // rather than the entire numer
             if (this.NumberAppSettings.GA__SingleDigitErrorUIDisplay)
@@ -503,15 +500,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                 {
                     // TODO: here we need to workout what we want to do with decimal colors
                     // Based on this numbercontainers total correctness
-                    _ret = x.Solve();
+                    this._answerState = x.Solve();
                 }
             }
-            else
-            {
-                _ret = base.Solve();
-            }
 
-            return _ret;
+            return base.Solve();
         }
 
         public override void ViewDidLoad()

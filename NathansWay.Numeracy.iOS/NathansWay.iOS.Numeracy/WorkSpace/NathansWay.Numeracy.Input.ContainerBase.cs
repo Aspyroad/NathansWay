@@ -241,22 +241,72 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual G__AnswerState Solve()
         {
-            this._solveAttempted = G__SolveAttempted.Attempted;
+            //
             this.SetCorrectState();
             this.UI_SetAnswerState();
 
             return this.AnswerState;
         }
 
+        public virtual G__AnswerState BinarySolve(G__AnswerState x, G__AnswerState y)
+        {
+            G__AnswerState z = G__AnswerState.Empty;
+
+            // Check correct
+            if ((x == G__AnswerState.Correct) && (y == G__AnswerState.Correct))
+            {
+                z = G__AnswerState.Correct;
+            }
+
+            // Check Part
+            if ((x == G__AnswerState.InCorrect) && (y == G__AnswerState.Correct)
+                || (x == G__AnswerState.Correct) && (y == G__AnswerState.InCorrect)
+                || (x == G__AnswerState.PartCorrect) && (y == G__AnswerState.Correct)
+                || (x == G__AnswerState.Correct) && (y == G__AnswerState.PartCorrect)
+                || (x == G__AnswerState.Empty) && (y == G__AnswerState.Correct)
+                || (x == G__AnswerState.Correct) && (y == G__AnswerState.Empty)
+                || (x == G__AnswerState.PartCorrect) && (y == G__AnswerState.Empty)
+                || (x == G__AnswerState.Empty) && (y == G__AnswerState.PartCorrect))
+            {
+                z = G__AnswerState.PartCorrect;
+            }
+
+            // Check Incorrect
+            if ((x == G__AnswerState.InCorrect) && (y == G__AnswerState.Empty)
+                || (x == G__AnswerState.Empty) && (y == G__AnswerState.InCorrect)
+                || (x == G__AnswerState.InCorrect) && (y == G__AnswerState.InCorrect))
+            {
+                z = G__AnswerState.InCorrect;
+            }
+
+            // Empty
+            if ((x == G__AnswerState.Empty) && (y == G__AnswerState.Empty))
+            {
+                z = G__AnswerState.Empty;
+            }
+
+            return z;
+        }
+
         public virtual void SetCorrectState()
         {
-            if ((this._dblOriginalValue == this._dblCurrentValue))
+            if (this._dblCurrentValue == null)
             {
-                this.AnswerState = G__AnswerState.Correct;
+                this._answerState = G__AnswerState.Empty;
+                this._solveAttempted = G__SolveAttempted.UnAttempted;
             }
             else
             {
-                this.AnswerState = G__AnswerState.InCorrect;
+                this._solveAttempted = G__SolveAttempted.Attempted;
+
+                if (this._dblOriginalValue == this._dblCurrentValue)
+                {
+                    this.AnswerState = G__AnswerState.Correct;
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                }
             }
         }
 
@@ -267,13 +317,20 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetAnswerState()
         {
-            if (this.AnswerState == G__AnswerState.Correct)
+            if (this._answerState == G__AnswerState.Empty)
             {
-                this.UI_ViewCorrect();
+                this.UI_SetUnSelectedState();
             }
             else
             {
-                this.UI_ViewInCorrect();
+                if (this.AnswerState == G__AnswerState.Correct)
+                {
+                    this.UI_ViewCorrect();
+                }
+                else
+                {
+                    this.UI_ViewInCorrect();
+                }
             }
         }
 

@@ -37,6 +37,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
 
+        // Tallies of answerstate objects
+        private int _intCorrect;
+        private int _intPartCorrect;
+        private int _intInCorrect;
+        private int _intEmpty;
+
 		#endregion
 
 		#region Constructors
@@ -102,6 +108,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
             this.View.AutosizesSubviews = false;
             this.OutputAnswerContainers = new List<object>();
+
+            // init total
+            this._intEmpty = 0;
+            this._intCorrect = 0;
+            this._intInCorrect = 0;
+
 		}
 
         #endregion
@@ -236,17 +248,96 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override G__AnswerState Solve()
         {
-            this.AnswerState = G__AnswerState.Correct;
-            this._solveAttempted = G__SolveAttempted.Attempted;
+            this._intEmpty = 0;
+            this._intCorrect = 0;
+            this._intInCorrect = 0;
+            this._intPartCorrect = 0;
+            //this.AnswerState = G__AnswerState.Correct;
+            //this._solveAttempted = G__SolveAttempted.Attempted;
             // ALl the Children in this numlet
             for (int i = 0; i < this.OutputAnswerContainers.Count; i++)
             {
                 var x = (BaseContainer)this.OutputAnswerContainers[i];
-                this.AnswerState = x.Solve();
+                var answerstate = x.Solve();
+
+                switch (answerstate)
+                {
+                    case G__AnswerState.Correct:
+                        {
+                            this._intCorrect++;
+                            break;
+                        }
+                    case G__AnswerState.PartCorrect:
+                        {
+                            this._intPartCorrect++;
+                            break;
+                        }
+                    case G__AnswerState.InCorrect:
+                        {
+                            this._intInCorrect++;
+                            break;
+                        }
+                    default:
+                        {
+                            this._intEmpty++;
+                            break;
+                        }
+                }
             }
 
-            this.UI_SetAnswerState();
-            return this.AnswerState;
+            return base.Solve();
+        }
+
+        public override void SetCorrectState()
+        {
+            var _total = this.OutputAnswerContainers.Count;
+            // Empty
+            if (this._intEmpty == _total)
+            {
+                this._answerState = G__AnswerState.Empty;
+            }
+            // Correct
+            if (this._intCorrect == _total)
+            {
+                this._answerState = G__AnswerState.Correct;
+            }
+            // InCorrect
+            if (this._intInCorrect == _total)
+            {
+                this._answerState = G__AnswerState.InCorrect;
+            }
+            // Half Empty half incorrect
+            if (this._intEmpty > 0 && this._intInCorrect > 0)
+            {
+                if ((this._intInCorrect + this._intEmpty) == _total)
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                }
+            }
+            else
+            {
+                this.AnswerState = G__AnswerState.PartCorrect;
+            }
+
+
+
+            //if (this._answerState == G__AnswerState.Empty)
+            //{
+            //    this._solveAttempted = G__SolveAttempted.UnAttempted;
+            //}
+            //else
+            //{
+            //    this._solveAttempted = G__SolveAttempted.Attempted;
+
+            //    if (this._dblOriginalValue == this._dblCurrentValue)
+            //    {
+            //        this.AnswerState = G__AnswerState.Correct;
+            //    }
+            //    else
+            //    {
+            //        this.AnswerState = G__AnswerState.InCorrect;
+            //    }
+            //}
         }
 
         public override void UI_SetAnswerState()

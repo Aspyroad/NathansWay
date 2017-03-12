@@ -580,7 +580,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
-            var x = 10;
             //base.OnValueChange(s, e);
         }
 
@@ -669,9 +668,11 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnSizeNormal.EnableHold = false;
             this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
             this.btnSizeNormal.SetTitle("WorkSpace-SizeNormal".Aspylate(), UIControlState.Normal);
+
             this.btnSizeLarge.EnableHold = false;
             this.btnSizeLarge.TouchUpInside += OnClick_btnSizeLarge;
             this.btnSizeLarge.SetTitle("WorkSpace-SizeLarge".Aspylate(), UIControlState.Normal);
+
             this.btnSizeHuge.EnableHold = false;
             this.btnSizeHuge.TouchUpInside += OnClick_btnSizeHuge;
             this.btnSizeHuge.SetTitle("WorkSpace-SizeHuge".Aspylate(), UIControlState.Normal);
@@ -679,6 +680,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnStartStop.EnableHold = false;
             this.btnStartStop.TouchUpInside += OnClick_btnStartStop;
             this.btnStartStop.SetTitle("WorkSpace-StartStop".Aspylate(), UIControlState.Normal);
+            this.btnStartStop.BorderWidth = 0.0f;
+
             //this.btnBackToLessons.EnableHold = false;
             //this.btnBackToLessons.TouchUpInside += OnClick_btnBackToLessons;
             //this.btnBackToLessons.SetTitle("WorkSpace-BackToLessons".Aspylate(), UIControlState.Normal);
@@ -686,18 +689,22 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnOptions.EnableHold = false;
             this.btnOptions.TouchUpInside += OnClick_btnOptions;
             this.btnOptions.SetTitle("WorkSpace-Options".Aspylate(), UIControlState.Normal);
+
             this.btnToolBox.EnableHold = false;
             this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
             this.btnToolBox.SetTitle("WorkSpace-ToolBox".Aspylate(), UIControlState.Normal);
-            this.btnMethods.EnableHold = false;
-            this.btnMethods.TouchUpInside += OnClick_btnMethods;
-            this.btnMethods.SetTitle("WorkSpace-Methods".Aspylate(), UIControlState.Normal);
+
+            //this.btnMethods.EnableHold = false;
+            //this.btnMethods.TouchUpInside += OnClick_btnMethods;
+            //this.btnMethods.SetTitle("WorkSpace-Methods".Aspylate(), UIControlState.Normal);
             //this.btnOption2.EnableHold = false;
             //this.btnOption2.TouchUpInside += OnClick_btnOption2;
             //this.btnOption2.SetTitle("WorkSpace-Option2".Aspylate(), UIControlState.Normal);
-            this.btnPosition.EnableHold = false;
-            this.btnPosition.TouchUpInside += OnClick_btnPosition;
-            this.btnPosition.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
+
+            this.btnDisplay.EnableHold = false;
+            this.btnDisplay.TouchUpInside += OnClick_btnDisplay;
+            this.btnDisplay.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
+
             this.SizeClass.SetViewPosition();
 		}
 
@@ -709,7 +716,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override G__AnswerState Solve()
         {
-            // * Pointless - this._solveAttempted = G__SolveAttempted.Attempted;
+            // TODO: Fix up the visual display of Empty user hits solve but hasnt entered anything
             this._currentLessonNumletSet.SolveAttempted = G__SolveAttempted.Attempted;
             // Clear the display
             this._currentLessonNumletSet.vcNumletEquation.ResetAllSelection();
@@ -737,24 +744,75 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             G__AnswerState num1 = this._currentLessonNumletSet.vcNumletEquation.Solve();
             G__AnswerState num2 = this._currentLessonNumletSet.vcNumletResult.Solve();
 
-            // Check if its correct
-            if ((num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.Correct))
+            this.AnswerState = this.BinarySolve(num1, num2);
+            // Check correct
+
+           
+            switch (this.AnswerState)
             {
-                this.AnswerState = G__AnswerState.Correct;
-                this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
+                case G__AnswerState.Correct:
+                {
+                    this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
+                    this.lblMessage.Text = "Correct";
+                    break;
+                }
+                case G__AnswerState.PartCorrect:
+                {
+                    this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
+                    this.lblMessage.Text = "PartCorrect";
+                    break;
+                }
+                case G__AnswerState.InCorrect:
+                {
+                    this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
+                    this.lblMessage.Text = "InCorrect";
+                    break;
+                }
+                default:
+                {
+                    this._currentLessonNumletSet.AnswerState = G__AnswerState.Empty;
+                    this.lblMessage.Text = "Empty";
+                    break;
+                }
             }
-            // Check Part and Incorrect
-            if ((num1 == G__AnswerState.InCorrect) && (num2 == G__AnswerState.Correct) 
-                    || (num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.InCorrect))
-            {
-                this.AnswerState = G__AnswerState.PartCorrect;
-                this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
-            }
-            else
-            {
-                this.AnswerState = G__AnswerState.InCorrect;
-                this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
-            }
+
+            // Moved into BaseContainer 
+            //if ((num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.Correct))
+            //{
+            //    this.AnswerState = G__AnswerState.Correct;
+            //    this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
+            //    this.lblMessage.Text = "Correct";
+            //}
+
+            //// Check Part
+            //if ((num1 == G__AnswerState.InCorrect) && (num2 == G__AnswerState.Correct) 
+            //    || (num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.InCorrect)
+            //    || (num1 == G__AnswerState.PartCorrect) && (num2 == G__AnswerState.Correct)
+            //    || (num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.PartCorrect)
+            //    || (num1 == G__AnswerState.Empty) && (num2 == G__AnswerState.Correct)
+            //    || (num1 == G__AnswerState.Correct) && (num2 == G__AnswerState.Empty)
+            //    || (num1 == G__AnswerState.PartCorrect) && (num2 == G__AnswerState.Empty)
+            //    || (num1 == G__AnswerState.Empty) && (num2 == G__AnswerState.PartCorrect))
+            //{
+            //    this.AnswerState = G__AnswerState.PartCorrect;
+            //    this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
+            //    this.lblMessage.Text = "PartCorrect";
+            //}
+            //// Check Incorrect
+            //if ((num1 == G__AnswerState.InCorrect) && (num2 == G__AnswerState.Empty)
+            //    || (num1 == G__AnswerState.Empty) && (num2 == G__AnswerState.InCorrect)
+            //    || (num1 == G__AnswerState.InCorrect) && (num2 == G__AnswerState.InCorrect))
+            //{
+            //    this.AnswerState = G__AnswerState.InCorrect;
+            //    this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
+            //    this.lblMessage.Text = "InCorrect";
+            //}
+            //else // Check both empty? ((num1 == G__AnswerState.Empty) && (num2 == G__AnswerState.Empty))
+            //{
+            //    this.AnswerState = G__AnswerState.Empty;
+            //    this._currentLessonNumletSet.AnswerState = G__AnswerState.Empty;
+            //    this.lblMessage.Text = "Empty";
+            //}
 
             this.SolvingState = false;
 
@@ -1013,9 +1071,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         }
 
-        private void OnClick_btnPosition (object sender, EventArgs e)
+        private void OnClick_btnDisplay (object sender, EventArgs e)
         {
-            this.AddAndDisplay_PositioningDialog(this.btnPosition.Center);
+            this.AddAndDisplay_PositioningDialog(this.btnDisplay.Center);
         }
 
         private void OnClick_btnOption2 (object sender, EventArgs e)
