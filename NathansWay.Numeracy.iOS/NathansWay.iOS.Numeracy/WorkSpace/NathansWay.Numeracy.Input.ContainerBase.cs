@@ -266,7 +266,9 @@ namespace NathansWay.iOS.Numeracy
                 || (x == G__AnswerState.Empty) && (y == G__AnswerState.Correct)
                 || (x == G__AnswerState.Correct) && (y == G__AnswerState.Empty)
                 || (x == G__AnswerState.PartCorrect) && (y == G__AnswerState.Empty)
-                || (x == G__AnswerState.Empty) && (y == G__AnswerState.PartCorrect))
+                || (x == G__AnswerState.Empty) && (y == G__AnswerState.PartCorrect)
+                || (x == G__AnswerState.PartCorrect) && (y == G__AnswerState.InCorrect)
+                || (x == G__AnswerState.PartCorrect) && (y == G__AnswerState.PartCorrect))
             {
                 z = G__AnswerState.PartCorrect;
             }
@@ -317,21 +319,43 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_SetAnswerState()
         {
-            if (this._answerState == G__AnswerState.Empty)
+            //if (this._answerState == G__AnswerState.Empty)
+            //{
+            //    this.UI_SetUnSelectedState();
+            //}
+            //if (this.AnswerState == G__AnswerState.Correct)
+            //{
+            //    this.UI_ViewCorrect();
+            //}
+            //if (this.AnswerState == G__AnswerState.InCorrect)
+            //{
+            //    this.UI_ViewInCorrect();
+            //}
+
+            switch (this.AnswerState)
             {
-                this.UI_SetUnSelectedState();
+                case G__AnswerState.Correct:
+                    {
+                        this.UI_ViewCorrect();
+                        break;
+                    }
+                case G__AnswerState.PartCorrect:
+                    {
+                        this.UI_ViewPartCorrect();
+                        break;
+                    }
+                case G__AnswerState.InCorrect:
+                    {
+                        this.UI_ViewInCorrect();
+                        break;
+                    }
+                default:
+                    {
+                        this.UI_SetUnSelectedState();
+                        break;
+                    }
             }
-            else
-            {
-                if (this.AnswerState == G__AnswerState.Correct)
-                {
-                    this.UI_ViewCorrect();
-                }
-                else
-                {
-                    this.UI_ViewInCorrect();
-                }
-            }
+
         }
 
         public virtual void UI_AttemptedAnswerState()
@@ -426,6 +450,14 @@ namespace NathansWay.iOS.Numeracy
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
+        }
+
+        public virtual void UI_ViewPartCorrect()
+        {
+            this.BorderWidth = 1.0f;
+            this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectBorderUIColor.Value.CGColor;
+            this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectBGUIColor.Value;
+            this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectTextUIColor.Value;
         }
 
         public virtual void UI_ViewInCorrect()

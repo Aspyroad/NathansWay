@@ -753,25 +753,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 case G__AnswerState.Correct:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
-                    this.lblMessage.Text = "Correct";
+                    this.lblMessage.Text = "Messages-Correct".Aspylate();
                     break;
                 }
                 case G__AnswerState.PartCorrect:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
-                    this.lblMessage.Text = "PartCorrect";
+                        this.lblMessage.Text = "Messages-PartCorrect".Aspylate();
                     break;
                 }
                 case G__AnswerState.InCorrect:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
-                    this.lblMessage.Text = "InCorrect";
+                        this.lblMessage.Text = "Messages-InCorrect".Aspylate();
                     break;
                 }
                 default:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.Empty;
-                    this.lblMessage.Text = "Empty";
+                    this.lblMessage.Text = "Messages-Empty".Aspylate();
+                        var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
+                        this.lblMessage.Layer.AddAnimation(y, "_animateColor");
                     break;
                 }
             }
@@ -958,7 +960,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if (this.LessonNumletList.bOverIndex)
                 {
                     // TODO : Crash this.btnNextEquation has no bg color its null ???
-                    var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
+                    var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
                     this.btnNextEquation.Layer.AddAnimation(y , "_animateColor");
                 }
 
@@ -992,7 +994,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // The last question is reached, briefly display a flash background change
                 if (this.LessonNumletList.bOverIndex)
                 {
-                    var y = NWAnimations.NegativeBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor );
+                    var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor );
                     this.btnPrevEquation.Layer.AddAnimation(y , "_animateColor");
                 }
 

@@ -308,11 +308,8 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._bIsInComplete = true;
             }
 
-
-
             // Bubbleup
             this.FireValueChange();
-
         }
 
         #endregion
@@ -332,9 +329,9 @@ namespace NathansWay.iOS.Numeracy.Controls
                     }
                 case G__AnswerState.PartCorrect:
                     {
-                        this.UI_ViewInCorrect();
-                        this._numberContainerDenominator.UI_ViewInCorrect();
-                        this._numberContainerNumerator.UI_ViewInCorrect();
+                        this.UI_ViewPartCorrect();
+                        this._numberContainerDenominator.UI_ViewPartCorrect();
+                        this._numberContainerNumerator.UI_ViewPartCorrect();
                         break;
                     }
                 case G__AnswerState.InCorrect:

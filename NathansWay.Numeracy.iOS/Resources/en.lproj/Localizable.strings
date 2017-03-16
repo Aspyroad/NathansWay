@@ -35,3 +35,10 @@
 "MainMenu-Logo1"="NathansWay";
 "MainMenu-Logo2"="1234567890";
 
+/* Messages */
+"Messages-Correct"="Yeah, ya done it!";
+"Messages-InCorrect"="Thats not right dumbo!";
+"Messages-PartCorrect"="Almost!!";
+"Messages-Empty"="Try changing something first...";
+
+

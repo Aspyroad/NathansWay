@@ -204,6 +204,9 @@ namespace NathansWay.Numeracy.Shared
         protected Lazy<G__Color> _positivebgcolor;
         protected Lazy<G__Color> _positivetextcolor;
         protected Lazy<G__Color> _positivebordercolor;
+        protected Lazy<G__Color> _partcorrectbgcolor;
+        protected Lazy<G__Color> _partcorrecttextcolor;
+        protected Lazy<G__Color> _partcorrectbordercolor;
         protected Lazy<G__Color> _negativebgcolor;
         protected Lazy<G__Color> _negativetextcolor;
         protected Lazy<G__Color> _negativebordercolor;
@@ -580,6 +583,21 @@ namespace NathansWay.Numeracy.Shared
         {             
             get{ return this._positivebordercolor; } 
             set{ this._positivebordercolor = value; }  
+        }
+        public Lazy<G__Color> PartCorrectBGColor
+        {
+            get { return this._partcorrectbgcolor; }
+            set { this._partcorrectbgcolor = value; }
+        }
+        public Lazy<G__Color> PartCorrectTextColor
+        {
+            get { return this._partcorrecttextcolor; }
+            set { this._partcorrecttextcolor = value; }
+        }
+        public Lazy<G__Color> PartCorrectBorderColor
+        {
+            get { return this._partcorrectbordercolor; }
+            set { this._partcorrectbordercolor = value; }
         }
         public Lazy<G__Color> NegativeBGColor 
         {             

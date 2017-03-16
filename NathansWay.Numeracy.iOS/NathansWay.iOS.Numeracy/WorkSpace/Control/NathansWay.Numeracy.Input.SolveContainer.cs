@@ -149,11 +149,12 @@ namespace NathansWay.iOS.Numeracy
             {
                 this.btnSolveButton.AnimationCorrect();
             }
-            else
+            if (x == G__AnswerState.InCorrect || x == G__AnswerState.PartCorrect) // Correct
             {
                 this.btnSolveButton.AnimationFalse();
             }
 
+            // Do we want to do anything if its empty??
             return x;
         }
 

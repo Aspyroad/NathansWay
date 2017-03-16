@@ -129,6 +129,9 @@ namespace NathansWay.Numeracy.Shared
         Lazy<G__Color> PositiveBGColor { get; set; }
         Lazy<G__Color> PositiveTextColor { get; set; }
         Lazy<G__Color> PositiveBorderColor { get; set; }
+        Lazy<G__Color> PartCorrectBGColor { get; set; }
+        Lazy<G__Color> PartCorrectTextColor { get; set; }
+        Lazy<G__Color> PartCorrectBorderColor { get; set; }
         Lazy<G__Color> NegativeBGColor { get; set; }
         Lazy<G__Color> NegativeTextColor { get; set; }
         Lazy<G__Color> NegativeBorderColor { get; set; }

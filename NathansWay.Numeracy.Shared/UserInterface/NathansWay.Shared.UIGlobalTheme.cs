@@ -92,6 +92,9 @@ namespace NathansWay.Numeracy.Shared
         public Lazy<G__Color> PositiveBGColor { get; set; }
         public Lazy<G__Color> PositiveTextColor { get; set; }
         public Lazy<G__Color> PositiveBorderColor { get; set; }
+        public Lazy<G__Color> PartCorrectBGColor { get; set; }
+        public Lazy<G__Color> PartCorrectTextColor { get; set; }
+        public Lazy<G__Color> PartCorrectBorderColor { get; set; }
         public Lazy<G__Color> NegativeBGColor { get; set; }
         public Lazy<G__Color> NegativeTextColor { get; set; }
         public Lazy<G__Color> NegativeBorderColor { get; set; }
@@ -164,7 +167,7 @@ namespace NathansWay.Numeracy.Shared
             ButtonMenuCornerRadius = 10.0f;
 
 			// UIView
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(112.0f, 156.0f, 224.0f, 255.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(212.0f, 256.0f, 224.0f, 255.0f)); // Orange
             // Bottom of Main menu
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 
@@ -221,9 +224,12 @@ namespace NathansWay.Numeracy.Shared
             PkViewLabelBGColor = new Lazy<G__Color> (() => new G__Color(200.0f, 100.0f, 100.0f, 255.0f)); // Black
 
             // Various
-            PositiveBGColor = new Lazy<G__Color> (() => new G__Color(102.0f, 255.0f, 102.0f, 10.0f)); // Green Light
-            PositiveTextColor = new Lazy<G__Color> (() => new G__Color(50.0f, 255.0f, 20.0f, 255.0f)); // Dark x 2 Green
-            PositiveBorderColor = new Lazy<G__Color> (() => new G__Color(.0f, 255.0f, 0.0f, 255.0f)); // Dark Green
+            PositiveBGColor = new Lazy<G__Color> (() => new G__Color(15.0f, 190.0f, 30.0f, 50.0f)); // Green Light
+            PositiveTextColor = new Lazy<G__Color> (() => new G__Color(10.0f, 130.0f, 20.0f, 255.0f)); // Dark x 2 Green
+            PositiveBorderColor = new Lazy<G__Color> (() => new G__Color(15.0f, 190.0f, 30.0f, 255.0f)); // Dark Green
+            PartCorrectBGColor = new Lazy<G__Color>(() => new G__Color(255.0f, 102.0f, 51.0f, 100.0f)); // Orange Light
+            PartCorrectTextColor = new Lazy<G__Color>(() => new G__Color(255.0f, 102.0f, 51.0f, 255.0f)); // Dark x 2 Orange
+            PartCorrectBorderColor = new Lazy<G__Color>(() => new G__Color(255.0f, 102.0f, 51.0f, 255.0f)); // Dark Orange
             NegativeBGColor = new Lazy<G__Color> (() => new G__Color(203.0f, 65.0f, 84.0f, 255.0f)); // Brick Red
             NegativeTextColor = new Lazy<G__Color> (() => new G__Color(255.0f, 60.0f, 60.0f, 255.0f)); // Black
             NegativeBorderColor = new Lazy<G__Color> (() => new G__Color(255.0f, 60.0f, 60.0f, 255.0f)); // Dark Red

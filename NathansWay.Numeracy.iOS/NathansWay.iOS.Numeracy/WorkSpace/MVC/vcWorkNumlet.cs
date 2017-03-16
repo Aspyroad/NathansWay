@@ -108,6 +108,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this._uiNumberFactory = iOSCoreServiceContainer.Resolve<UINumberFactory>();
             this.View.AutosizesSubviews = false;
             this.OutputAnswerContainers = new List<object>();
+            this.AnswerState = G__AnswerState.Empty;
 
             // init total
             this._intEmpty = 0;
@@ -248,6 +249,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override G__AnswerState Solve()
         {
+            // If this doesnt contain any answer objects then get out...
+            // Exit point **********************************************
+            if (!this.IsAnswer)
+            {
+                return G__AnswerState.Empty;
+            }
+
+
             this._intEmpty = 0;
             this._intCorrect = 0;
             this._intInCorrect = 0;
@@ -290,21 +299,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetCorrectState()
         {
+            bool _state = false;
             var _total = this.OutputAnswerContainers.Count;
             // Empty
             if (this._intEmpty == _total)
             {
                 this._answerState = G__AnswerState.Empty;
+                _state = true;
             }
             // Correct
             if (this._intCorrect == _total)
             {
                 this._answerState = G__AnswerState.Correct;
+                _state = true;
             }
             // InCorrect
             if (this._intInCorrect == _total)
             {
                 this._answerState = G__AnswerState.InCorrect;
+                _state = true;
             }
             // Half Empty half incorrect
             if (this._intEmpty > 0 && this._intInCorrect > 0)
@@ -312,9 +325,30 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 if ((this._intInCorrect + this._intEmpty) == _total)
                 {
                     this.AnswerState = G__AnswerState.InCorrect;
+                    _state = true;
                 }
             }
-            else
+            // Half Empty half incorrect
+            if (this._intEmpty > 0 && this._intInCorrect > 0)
+            {
+                if ((this._intInCorrect + this._intEmpty) == _total)
+                {
+                    this.AnswerState = G__AnswerState.InCorrect;
+                    _state = true;
+                }
+                else
+                {
+                    // If we are here then there must be one correct
+                    this.AnswerState = G__AnswerState.PartCorrect;
+                }
+            }
+            //// Final catch if there are no empties
+            //if ((this._intInCorrect > 0) &&  (this._intCorrect > 0))
+            //{
+            //    this.AnswerState = G__AnswerState.PartCorrect;
+            //}
+            //// Final catch if there are no empties
+            if (!_state)
             {
                 this.AnswerState = G__AnswerState.PartCorrect;
             }

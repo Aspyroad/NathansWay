@@ -197,6 +197,9 @@ namespace AspyRoad.iOSCore.UISettings
             PositiveBGColor = g.PositiveBGColor;
             PositiveTextColor = g.PositiveTextColor;
             PositiveBorderColor = g.PositiveBorderColor;
+            PartCorrectBGColor = g.PartCorrectBGColor;
+            PartCorrectTextColor = g.PartCorrectTextColor;
+            PartCorrectBorderColor = g.PartCorrectBorderColor;
             NegativeBGColor = g.NegativeBGColor;
             NegativeTextColor = g.NegativeTextColor;
             NegativeBorderColor = g.NegativeBorderColor;
@@ -727,6 +730,31 @@ namespace AspyRoad.iOSCore.UISettings
             { 
                 return this.convertUIColor(_positivebordercolor); 
             } 
+        }
+
+        public Lazy<UIColor> PartCorrectBGUIColor
+        {
+            get
+            {
+                return this.convertUIColor(_partcorrectbgcolor);
+            }
+
+        }
+
+        public Lazy<UIColor> PartCorrectTextUIColor
+        {
+            get
+            {
+                return this.convertUIColor(_partcorrecttextcolor);
+            }
+        }
+
+        public Lazy<UIColor> PartCorrectBorderUIColor
+        {
+            get
+            {
+                return this.convertUIColor(_partcorrectbordercolor);
+            }
         }
 
         public Lazy<UIColor> NegativeBGUIColor 

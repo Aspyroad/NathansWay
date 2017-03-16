@@ -18,7 +18,7 @@ namespace NathansWay.iOS.Numeracy
 
         #region Public Members
 
-        public static CABasicAnimation NegativeBGColorFade(CGColor _cgFromColor, CGColor _cgToColor)
+        public static CABasicAnimation BasicBGColorFade(CGColor _cgFromColor, CGColor _cgToColor)
         {
             CABasicAnimation _animateColor;
             _animateColor = CABasicAnimation.FromKeyPath("backgroundColor");
