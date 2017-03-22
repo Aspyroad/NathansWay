@@ -92,6 +92,13 @@ namespace NathansWay.Numeracy.Shared
         ///</summary>
         ///<value><c>true</c> all numlets are solved, otherwise <c>false</c>, only the numlet selected.</value>
         bool GA__SolveAllNumlets { get; set; }
+
+        /// <summary>
+        /// When overridden ToString() is called on NumberContainers this variable when set to true
+        /// will return the current value not the original, if empty is returns an "x".
+        ///</summary>
+        ///<value><c>true</c> Current number value is returned <c>false</c>, Normal Original value is returned.</value>
+        bool GA__ToStringReturnsCurrentValue { get; set; }
     }
 
 

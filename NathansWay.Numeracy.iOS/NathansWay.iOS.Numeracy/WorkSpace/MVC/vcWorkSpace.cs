@@ -1019,7 +1019,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void OnClick_btnOptions (object sender, EventArgs e)
         {
-            AlertMe(this.NumletEquation.EquationToString());
+            //AlertMe(this.NumletEquation.EquationToString());
+            AlertMe(this.NumletEquation.CalcString());
+            AlertMe(this.NumletResult.CalcString());
+
         }
 
         private void OnClick_btnBackToLessons (object sender, EventArgs e)

@@ -100,6 +100,8 @@ namespace NathansWay.iOS.Numeracy
         protected G__NumberEditMode _currentEditMode;
         protected bool _bIsInEditMode;
 
+        protected bool _bToStringReturnCurrentValue;
+
         protected evtArgsBaseContainer _myEventArgs;
 
         // This is always true the first time we load, after any attempt
@@ -155,6 +157,7 @@ namespace NathansWay.iOS.Numeracy
             this._bHasSelectedNumberText = false;
             this._bHasSelectedOperatorText = false;
             this._bAllowNextResponder = true;
+            this._bToStringReturnCurrentValue = this._numberAppSettings.GA__ToStringReturnsCurrentValue;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor

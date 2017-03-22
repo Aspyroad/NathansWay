@@ -53,7 +53,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         public vcNumberContainer (string _strValue)
-        {            
+        {  
+            
             this._strOriginalValue = _strValue;
             this._dblOriginalValue = Convert.ToDouble(_strValue);
             this._dblCurrentValue = null;
@@ -546,6 +547,34 @@ namespace NathansWay.iOS.Numeracy.Controls
             base.ViewWillAppear(animated);
         }
 
+        public override string ToString()
+        {
+            if (this._bToStringReturnCurrentValue)
+            {
+                if (this.CurrentValueStr.Length > 0)
+                {
+                    return this.CurrentValueStr.Trim();
+                }
+                else
+                {
+                    return "x";
+                }
+            }
+            else
+            {
+                if (this.OriginalValueStr.Length > 0)
+                {
+                    return this.OriginalValueStr.Trim();
+                }
+                else
+                {
+                    // Is this needed? This should always have a value...maybe
+                    // What if we decide a freeform version where the students can enter anything?
+                    return "x";
+                }
+            }
+        }
+
         #endregion
 
         #region Public Properties
@@ -601,18 +630,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             set
             {
                 base.CurrentValue = value;
-            }
-        }
-
-        public override string ToString()
-        {
-            if (this.CurrentValueStr.Length > 0)
-            {
-                return this.CurrentValueStr.Trim();
-            }
-            else
-            {
-                return "x";
             }
         }
 

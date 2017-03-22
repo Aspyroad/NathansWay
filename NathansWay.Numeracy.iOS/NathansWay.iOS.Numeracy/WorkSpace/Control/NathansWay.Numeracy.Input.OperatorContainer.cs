@@ -83,6 +83,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override string ToString()
         {
+            //string x = "";
+            //if (this._operatorType != G__MathOperator.Equals)
+            //{
+            //    x = this._strOperator;
+            //}
+
+            //return x;
+
             return this._strOperator;
         }
 

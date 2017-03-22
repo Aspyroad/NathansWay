@@ -289,6 +289,36 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
         }
 
+        public override string ToString()
+        {
+            string den = "";
+            string num = "";
+
+            if (this._bToStringReturnCurrentValue)
+            {
+                den = this._numberContainerNumerator.ToString();
+            }
+
+            if (this._numberContainerNumerator.OriginalValue != null && this._numberContainerDenominator.OriginalValue != null)
+            {
+                return string.Format("{0}/{1}", this._numberContainerNumerator.OriginalValue.ToString(), this._numberContainerDenominator.OriginalValue.ToString());
+            }
+            else
+            {
+                return "x/x";
+            }
+
+            //if (this.CurrentValueStr.Length > 0)
+            //{
+            //    return this.CurrentValueStr.Trim();
+            //}
+            //else
+            //{
+            //    return "x";
+            //}
+
+        }
+
         #endregion
 
         #region Delegates
@@ -430,40 +460,14 @@ namespace NathansWay.iOS.Numeracy.Controls
                 if (NumeratorValue != null && DenominatorValue != null)
                 {
                     double? x = (NumeratorValue / DenominatorValue);
-                    //return Math.Round((double)x, 4);
-                    return x;
+                    return Math.Round((double)x, 4);
+                    //return x;
                 }
                 else
                 {
                     return null;
                 }
             }
-        }
-
-        //public HelperFunctions.Fraction DecimalToFraction
-        //{
-        //    get { return this._fracActualValue; }
-        //}
-
-        //public  DecimalToFraction
-        //{
-        //    get { return this._fracActualValue; }
-        //}
-
-        public override string ToString()
-        {
-            //if (this._fracActualValue.D != null && this._fracActualValue.N != null)
-            //{
-            //    return string.Format("{0}/{1}", this._fracActualValue.N.ToString(), this._fracActualValue.D.ToString());
-            //}
-            //else
-            //{
-            //    return "x/x";
-            //}
-
-            return this._fracActualValue;
-
-
         }
 
         public Nullable<double> NumeratorValue

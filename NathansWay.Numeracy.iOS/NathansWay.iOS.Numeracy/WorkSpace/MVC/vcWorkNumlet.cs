@@ -1,16 +1,12 @@
 // System
 using System;
-using CoreGraphics;
+using System.Data;
 using System.Collections.Generic;
 // Mono
 using Foundation;
-using UIKit;
-using CoreAnimation;
 // Aspyroad
 using AspyRoad.iOSCore;
 // Nathansway
-using NathansWay.iOS.Numeracy.Controls;
-using NathansWay.Numeracy.Shared.BUS.Entity;
 using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -208,7 +204,24 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 var x = (BaseContainer)this.OutputAnswerContainers[i];
                 x.UI_AttemptedAnswerState();
             }
+        }
 
+        public string CalcString()
+        {
+            DataTable dt = new DataTable();
+            object y = "";
+            string s = this.EquationToString();
+            try
+            {
+                y = dt.Compute(s, "");
+            }
+            catch (System.Data.SyntaxErrorException)
+            {
+                y = "";
+            }
+
+            //var v = dt.Compute(s, "");
+            return y.ToString();
         }
 
         #endregion

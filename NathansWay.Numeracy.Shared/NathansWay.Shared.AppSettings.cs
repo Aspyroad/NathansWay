@@ -17,6 +17,7 @@ namespace NathansWay.Numeracy.Shared
         private bool _GA__MoveToNextNumber;
         private bool _GA__ShowAnswerNumlet;
         private bool _GA__ShowCorrectnessStateOnDeselection;
+        //private bool _GA__ToStringReturnsCurrentValue;
 
         #endregion
 
@@ -166,6 +167,13 @@ namespace NathansWay.Numeracy.Shared
             get; 
             set; 
         }
+
+        public bool GA__ToStringReturnsCurrentValue
+        {
+            get;
+            set;
+        }
+
 
         #endregion
 

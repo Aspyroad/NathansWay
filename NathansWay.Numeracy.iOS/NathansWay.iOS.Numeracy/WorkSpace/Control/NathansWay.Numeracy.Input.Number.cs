@@ -86,6 +86,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcNumberText(double _value)
         {
+            
             this.OriginalValue = _value;
             // Default constructor supply our initial value
             Initialize();

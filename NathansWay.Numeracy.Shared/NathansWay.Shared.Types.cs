@@ -538,7 +538,8 @@ namespace NathansWay.Numeracy.Shared
         Fraction = 11,
         Decimal = 12,
         Method = 13,
-        Answer = 14
+        Answer = 14,
+        Empty = 15
 	}
 
 	public static class G__MathOperators
@@ -558,7 +559,8 @@ namespace NathansWay.Numeracy.Shared
             {G__MathOperator.Decimal, "."},
             {G__MathOperator.Equals, "="},
             {G__MathOperator.Method, "M"},
-            {G__MathOperator.Answer, "A"}
+            {G__MathOperator.Answer, "A"},
+            {G__MathOperator.Empty, "E"}
 		};
 
         static Dictionary<string, G__MathOperator> _dictrev = new Dictionary<string, G__MathOperator>
@@ -576,7 +578,8 @@ namespace NathansWay.Numeracy.Shared
             {".", G__MathOperator.Decimal},
             {"=", G__MathOperator.Equals},
             {"M", G__MathOperator.Method},
-            {"A", G__MathOperator.Answer}
+            {"A", G__MathOperator.Answer},
+            {"E", G__MathOperator.Empty}
         };
 			
 		public static string GetOp(G__MathOperator x)
