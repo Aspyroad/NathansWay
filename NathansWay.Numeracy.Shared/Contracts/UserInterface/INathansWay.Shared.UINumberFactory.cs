@@ -10,6 +10,7 @@ namespace NathansWay.Numeracy.Shared
     {
         // Global Display Output object
         bool IsAnswer { get; set; }
+        bool IsFreeForm { get; set; }
         bool IsLabelOnly { get; set; }
 
         // Functions

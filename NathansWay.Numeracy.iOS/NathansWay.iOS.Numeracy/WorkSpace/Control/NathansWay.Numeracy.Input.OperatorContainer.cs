@@ -83,14 +83,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override string ToString()
         {
-            //string x = "";
-            //if (this._operatorType != G__MathOperator.Equals)
-            //{
-            //    x = this._strOperator;
-            //}
-
-            //return x;
-
             return this._strOperator;
         }
 
@@ -190,7 +182,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Delegates
 
-
         #endregion
 
         #region Public Properties
@@ -199,6 +190,14 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get { return this._sizeOperator; }
             //set { this._sizeClass = value; }
+        }
+
+        public G__MathOperator OperatorType
+        {
+            get 
+            { 
+                return this._operatorType;
+            }
         }
 
         #endregion

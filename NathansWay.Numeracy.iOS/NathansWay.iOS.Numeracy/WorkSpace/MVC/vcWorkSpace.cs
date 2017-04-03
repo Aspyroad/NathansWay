@@ -155,7 +155,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             // Set timers and display
             aTimer = new System.Timers.Timer();
-            aTimer.Elapsed += new ElapsedEventHandler(OnWorkSpaceTimer);
+            //aTimer.Elapsed += new ElapsedEventHandler(OnWorkSpaceTimer);
             this.intSecondCounter = 1;
             aTimer.Interval = 1000;
             aTimer.Enabled = false;
@@ -744,10 +744,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             G__AnswerState num1 = this._currentLessonNumletSet.vcNumletEquation.Solve();
             G__AnswerState num2 = this._currentLessonNumletSet.vcNumletResult.Solve();
 
-            this.AnswerState = this.BinarySolve(num1, num2);
-            // Check correct
+            // TODO: Here we evaluate the Freeform stuff!!
+            if (num1 == G__AnswerState.FreeForm || num2 == G__AnswerState.FreeForm)
+            {
+                int x = 0;
+                string str1 = this._currentLessonNumletSet.vcNumletEquation.CalcString();
+                string str2 = this._currentLessonNumletSet.vcNumletResult.CalcString();
+                if (str1 == str2)
+                {
+                    x = 1;
+                }
+                else
+                {
+                    x = 2;
+                }
+            }
+            else
+            {
+                this.AnswerState = this.BinarySolve(num1, num2);
+            }
 
-           
+            // Check correct
             switch (this.AnswerState)
             {
                 case G__AnswerState.Correct:

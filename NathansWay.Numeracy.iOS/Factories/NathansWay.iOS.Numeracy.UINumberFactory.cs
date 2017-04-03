@@ -163,6 +163,11 @@ namespace NathansWay.iOS.Numeracy
                     numlet.IsReadOnly = false;
                 }
 
+                if (_control.IsFreeFrom)
+                {
+                    numlet.IsFreeFrom = true;
+                }
+
                 _control.SizeClass.SetCenterRelativeParentViewPosY = true;
 
                 // Event Hooks ************************************************************************
@@ -247,6 +252,11 @@ namespace NathansWay.iOS.Numeracy
                     numlet.OutputAnswerContainers.Add(_control);
                     numlet.IsAnswer = true;
                     numlet.IsReadOnly = false;
+                }
+
+                if (_control.IsFreeFrom)
+                {
+                    numlet.IsFreeFrom = true;
                 }
 
                 // Event Hooks ************************************************************************

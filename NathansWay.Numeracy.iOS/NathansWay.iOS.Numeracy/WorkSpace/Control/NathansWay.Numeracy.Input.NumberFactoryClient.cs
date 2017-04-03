@@ -22,11 +22,13 @@ namespace NathansWay.iOS.Numeracy.Controls
         public NumberFactoryClient()
         {
             this.IsAnswer = false;
+            this.IsFreeForm = false;
         }
 
         public NumberFactoryClient(List<object> _lsOutput)
         {               
-            this.IsAnswer = false;                
+            this.IsAnswer = false;
+            this.IsFreeForm = false;
         }
 
         #endregion
@@ -37,6 +39,12 @@ namespace NathansWay.iOS.Numeracy.Controls
         { 
             get; 
             set; 
+        }
+
+        public bool IsFreeForm
+        {
+            get;
+            set;
         }
 
         public bool IsLabelOnly
@@ -58,6 +66,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             var x = new vcNumberContainer(strValue);
             // Create the number
             x.IsAnswer = this.IsAnswer;
+            x.IsFreeFrom = this.IsFreeForm;
             x.CreateNumber(false);
             x.IsReadOnly = !this.IsAnswer;
             this.IsAnswer = false;
@@ -75,9 +84,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         public object UICreateFraction (string strFraction)
         {
             // Create a fraction
+
             var x = new vcFractionContainer(strFraction, this.IsAnswer);
             x.IsReadOnly = !this.IsAnswer;
-
+            x.IsFreeFrom = this.IsFreeForm;
             this.IsAnswer = false;
             // Add to output
             return (x as object);
@@ -87,9 +97,11 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create an operator
             var x = new vcOperatorText(mathOperator, strChar);
             x.IsAnswer = this.IsAnswer;
+            x.IsFreeFrom = this.IsFreeForm;
             x.IsReadOnly = !this.IsAnswer;
 
             this.IsAnswer = false;
+            this.IsFreeForm = false;
             // Add to output
             return (x as object);
         }

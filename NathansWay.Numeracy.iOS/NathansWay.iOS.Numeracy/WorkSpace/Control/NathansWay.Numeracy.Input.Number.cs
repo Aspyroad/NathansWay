@@ -86,8 +86,15 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public vcNumberText(double _value)
         {
-            
             this.OriginalValue = _value;
+            // Default constructor supply our initial value
+            Initialize();
+        }
+
+        public vcNumberText(string _value)
+        {
+            this._bFreeForm = true;
+            this.OriginalValue = null;
             // Default constructor supply our initial value
             Initialize();
         }
@@ -216,7 +223,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Apply some UI to the texbox
             //this.SizeClass.SetFontAndSize(this.txtNumber);
 
-            this.txtNumber.Text = this.OriginalValueStr.Trim();
+            if (this._bFreeForm)
+            {
+                this.txtNumber.Text = "";
+            }
+            else
+            {
+                this.txtNumber.Text = this.OriginalValueStr.Trim();
+            }
 
             this.txtNumber.AllowNextResponder = true;
             this.txtNumber.ClipsToBounds = true;

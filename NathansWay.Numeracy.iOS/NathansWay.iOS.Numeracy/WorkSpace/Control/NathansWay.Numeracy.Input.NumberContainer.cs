@@ -53,10 +53,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         public vcNumberContainer (string _strValue)
-        {  
-            
+        {
             this._strOriginalValue = _strValue;
             this._dblOriginalValue = Convert.ToDouble(_strValue);
+
             this._dblCurrentValue = null;
             this._dblPrevValue = null;
 
@@ -138,7 +138,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetCurrentValue()
         {
-            // Update the state of the Number container
+
+            // TODO This isnt converting string properly...check PROBLEM
+            // Update the sstate of the Number container
             string _strCurValue = "";
             this._bIsInComplete = false;
 
@@ -146,16 +148,30 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Loop through this._lsNumbers
             foreach (BaseContainer _Number in this._lsNumbers)
             {
-                if (_Number.CurrentValueStr.Length > 0)
+                if (this._bFreeForm)
                 {
-                    _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                    if (_Number.CurrentValueStr.Length > 0)
+                    {
+                        _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                    }
+                    else
+                    {
+                        _strCurValue = _strCurValue + _Number.OriginalValueStr;
+                    }
                 }
                 else
                 {
-                    this._bIsInComplete = true;
-                    break;
+                    if (_Number.CurrentValueStr.Length > 0)
+                    {
+                        _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                    }
+                    else
+                    {
+                        this._bIsInComplete = true;
+                    }
                 }
             }
+
             if (this._bIsInComplete)
             {
                 this._strCurrentValue = "";
@@ -164,8 +180,16 @@ namespace NathansWay.iOS.Numeracy.Controls
             }
             else
             {
-                this.CurrentValue = Convert.ToDouble(_strCurValue);
+                if (_strCurValue.Length > 0)
+                {
+                    this.CurrentValue = Convert.ToDouble(_strCurValue);
+                }
+                else
+                {
+                    this.CurrentValue = Convert.ToDouble(_strOriginalValue);
+                }
             }
+
             this._strCurrentValue = _strCurValue;
 
         }
@@ -508,6 +532,36 @@ namespace NathansWay.iOS.Numeracy.Controls
             return base.Solve();
         }
 
+        public override void SetCorrectState()
+        {
+            if (this._dblCurrentValue == null)
+            {
+                this._answerState = G__AnswerState.Empty;
+                this._solveAttempted = G__SolveAttempted.UnAttempted;
+            }
+            else
+            {
+                this._solveAttempted = G__SolveAttempted.Attempted;
+
+                if (!this._bFreeForm)
+                {
+                    if ((this._dblOriginalValue == this._dblCurrentValue))
+                    {
+                        this.AnswerState = G__AnswerState.Correct;
+                    }
+                    else
+                    {
+                        this.AnswerState = G__AnswerState.InCorrect;
+                    }
+                }
+                else
+                {
+                    this.AnswerState = G__AnswerState.FreeForm;
+                }
+
+            }
+        }
+
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
@@ -551,13 +605,17 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             if (this._bToStringReturnCurrentValue)
             {
+                // Only ever set to true when we have a Freeform number
+                // The _bToStringReturnCurrentValue may be redundant as its 
+                // set along with Freefrom value, maybe this will be needed 
+                // on its own down the track
                 if (this.CurrentValueStr.Length > 0)
                 {
                     return this.CurrentValueStr.Trim();
                 }
                 else
                 {
-                    return "x";
+                    return this.OriginalValueStr.Trim();
                 }
             }
             else

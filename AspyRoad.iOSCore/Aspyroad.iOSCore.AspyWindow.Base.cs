@@ -123,57 +123,57 @@ namespace AspyRoad.iOSCore
         //    return base.HitTest(point, uievent);
         //}
 
-		public override void SendEvent (UIEvent evt)
-		{
-           //         if (evt.Type == UIEventType.Touches && this._bInterceptTouch)
-        			//{
-           //             //if (this._actionOnTouch != null)
-           //             {
-           //                 // Interesting to note that Enumerate on NSSets is a Xamarin momotouch link to - enumerateObjectsUsingBlock: 
-           //                 evt.AllTouches.Enumerate(HandleNSSetTouches);
+		//public override void SendEvent (UIEvent evt)
+		//{
+  //         //         if (evt.Type == UIEventType.Touches && this._bInterceptTouch)
+  //      			//{
+  //         //             //if (this._actionOnTouch != null)
+  //         //             {
+  //         //                 // Interesting to note that Enumerate on NSSets is a Xamarin momotouch link to - enumerateObjectsUsingBlock: 
+  //         //                 evt.AllTouches.Enumerate(HandleNSSetTouches);
 
-           //                 // First attempt before I learnt a little about NSSet
-           //                 //var y = evt.AllTouches.ToArray<UITouch>();
-           //                 //this._actionOnTouch.Invoke(y[0].View);
+  //         //                 // First attempt before I learnt a little about NSSet
+  //         //                 //var y = evt.AllTouches.ToArray<UITouch>();
+  //         //                 //this._actionOnTouch.Invoke(y[0].View);
 
-           //                 // Reset as this could be called 2-3 times on one touch event
-           //                 this._bInterceptTouch = false;
-           //             }
+  //         //                 // Reset as this could be called 2-3 times on one touch event
+  //         //                 this._bInterceptTouch = false;
+  //         //             }
 
-           //             //				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
-           //             //				args.TouchSet = evt.AllTouches;
-           //             //
-           //             //				foreach (UITouch t in evt.AllTouches)
-           //             //				{
-           //             //                    if (t.GestureRecognizers != null)
-           //             //                    {
-           //             //                        args.gestureCount = t.GestureRecognizers.Length;
-           //             //                        args.numTaps = t.TapCount;
-           //             //                        args.UITouchObj = t;
-           //             //                        args.TimeReached = t.Timestamp;
-           //             //                        args.strGestureType = "No gesture";
-           //             //                    }
-           //             //
-           //             //					//if (args.gestureCount == 1)
-           //             //					//{
-           //             ////					foreach (UIGestureRecognizer g in t.GestureRecognizers)
-           //             ////					{
-           //             ////						var myType = g.GetType();
-           //             ////						if (myType.Name.Length > 0)
-           //             ////						{
-           //             ////							args.strGestureType = myType.Name;						
-           //             ////						}
-           //             ////					}
-           //             //					//}	 
-           //             //
-           //             //
-           //             //					IveBeenTouched(args);
-           //             //				}
+  //         //             //				GlobalTouchEventArgs args = new GlobalTouchEventArgs();
+  //         //             //				args.TouchSet = evt.AllTouches;
+  //         //             //
+  //         //             //				foreach (UITouch t in evt.AllTouches)
+  //         //             //				{
+  //         //             //                    if (t.GestureRecognizers != null)
+  //         //             //                    {
+  //         //             //                        args.gestureCount = t.GestureRecognizers.Length;
+  //         //             //                        args.numTaps = t.TapCount;
+  //         //             //                        args.UITouchObj = t;
+  //         //             //                        args.TimeReached = t.Timestamp;
+  //         //             //                        args.strGestureType = "No gesture";
+  //         //             //                    }
+  //         //             //
+  //         //             //					//if (args.gestureCount == 1)
+  //         //             //					//{
+  //         //             ////					foreach (UIGestureRecognizer g in t.GestureRecognizers)
+  //         //             ////					{
+  //         //             ////						var myType = g.GetType();
+  //         //             ////						if (myType.Name.Length > 0)
+  //         //             ////						{
+  //         //             ////							args.strGestureType = myType.Name;						
+  //         //             ////						}
+  //         //             ////					}
+  //         //             //					//}	 
+  //         //             //
+  //         //             //
+  //         //             //					IveBeenTouched(args);
+  //         //             //				}
 
-        			//}
-            // MUST! be called
-			base.SendEvent (evt);
-		}
+  //      			//}
+  //          // MUST! be called
+		//	base.SendEvent (evt);
+		//}
 
 		#endregion	
 		

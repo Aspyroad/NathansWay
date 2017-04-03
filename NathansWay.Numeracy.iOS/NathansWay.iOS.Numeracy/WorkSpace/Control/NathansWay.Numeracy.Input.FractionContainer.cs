@@ -9,7 +9,6 @@ using Foundation;
 using AspyRoad.iOSCore;
 
 // Nathansway iOS
-using NathansWay.iOS.Numeracy;
 using NathansWay.iOS.Numeracy.WorkSpace;
 
 // NathansWay Shared
@@ -24,9 +23,6 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
-
-        //private HelperFunctions.Fraction _fracActualValue;
-        private string _fracActualValue;
 
         private SizeFraction _sizeFraction;
 
@@ -105,8 +101,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._sizeClass = this._sizeFraction;
             this._vcMainContainer = this._sizeClass.VcMainContainer;
             this._containerType = G__ContainerType.Fraction;
-            //this._fracActualValue = new HelperFunctions.Fraction(null, null);
-            this._fracActualValue = "";
             // UI
             // Always fire UIApply in ViewWillAppear
             this._applyUIWhere = G__ApplyUI.ViewWillAppear;
@@ -136,9 +130,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Create a number box
             this._numberContainerNumerator = new vcNumberContainer(_result[0].ToString());
             this._numberContainerDenominator = new vcNumberContainer(_result[1].ToString());
+
             // AnswerType
             this._numberContainerNumerator.IsAnswer = this.IsAnswer;
             this._numberContainerDenominator.IsAnswer = this.IsAnswer;
+
+            // Freeform?
+            //this._numberContainerNumerator.IsFreeFrom = this.IsFreeFrom;
+            //this._numberContainerDenominator.IsFreeFrom = this.IsFreeFrom;
 
             // Set the fraction container parent of num and den
             this._numberContainerNumerator.MyFractionParent = this;
@@ -151,13 +150,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._numberContainerNumerator.CreateNumber(true);
             this._numberContainerDenominator.CreateNumber(true);
 
-
+            // TODO: Should this be here? I havent yet told the fraciton if its freeform...LOGIC PROBLEM!
             if (!this._bIsAnswer)
             {
-                this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
+                this._strOriginalValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
             }
 
             // Event hooks
+
             // Numerator
             this._numberContainerNumerator.eValueChanged += this.OnValueChange;
 
@@ -193,6 +193,63 @@ namespace NathansWay.iOS.Numeracy.Controls
 
             //this.AddAndDisplayController(this._numberContainerNumerator);
             //this.AddAndDisplayController(this._numberContainerDenominator);
+
+        }
+
+        private void SetCurrentValue()
+        {
+
+            // TODO Fix this for Fraction!!! 3/4/2017
+            string _strCurValue = "";
+            this._bIsInComplete = false;
+
+            // Should be called after any number change
+            // Loop through this._lsNumbers
+            //foreach (BaseContainer _Number in this._lsNumbers)
+            //{
+            //    if (this._bFreeForm)
+            //    {
+            //        if (_Number.CurrentValueStr.Length > 0)
+            //        {
+            //            _strCurValue = _strCurValue + _Number.CurrentValueStr;
+            //        }
+            //        else
+            //        {
+            //            _strCurValue = _strCurValue + _Number.OriginalValueStr;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (_Number.CurrentValueStr.Length > 0)
+            //        {
+            //            _strCurValue = _strCurValue + _Number.CurrentValueStr;
+            //        }
+            //        else
+            //        {
+            //            this._bIsInComplete = true;
+            //        }
+            //    }
+            //}
+
+            if (this._bIsInComplete)
+            {
+                this._strCurrentValue = "";
+                this._strPrevValue = "";
+                this.CurrentValue = null;
+            }
+            else
+            {
+                if (_strCurValue.Length > 0)
+                {
+                    this.CurrentValue = Convert.ToDouble(_strCurValue);
+                }
+                else
+                {
+                    this.CurrentValue = Convert.ToDouble(_strOriginalValue);
+                }
+            }
+
+            this._strCurrentValue = _strCurValue;
 
         }
 
@@ -279,43 +336,43 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         public override void SetCorrectState()
         {
-            
-            this.AnswerState = this.BinarySolve(this._numberContainerDenominator.AnswerState , this._numberContainerNumerator.AnswerState);
+            if (!this.IsFreeFrom)
+            {
+                this.AnswerState = this.BinarySolve(this._numberContainerDenominator.AnswerState, this._numberContainerNumerator.AnswerState);
+            }
+            else
+            {
+                this.AnswerState = G__AnswerState.FreeForm;
+            }
 
             if (this._numberContainerDenominator.AnswerState != G__AnswerState.Empty && this._numberContainerNumerator.AnswerState != G__AnswerState.Empty)
             {
                 // Update the actual value of this is an answer
-                this._fracActualValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
+                this._strCurrentValue = HelperFunctions.DoubleToFraction((double)this.FractionToDecimal);
             }
         }
 
         public override string ToString()
         {
-            string den = "";
-            string num = "";
-
-            if (this._bToStringReturnCurrentValue)
-            {
-                den = this._numberContainerNumerator.ToString();
-            }
+            string strReturn = "";
 
             if (this._numberContainerNumerator.OriginalValue != null && this._numberContainerDenominator.OriginalValue != null)
             {
-                return string.Format("{0}/{1}", this._numberContainerNumerator.OriginalValue.ToString(), this._numberContainerDenominator.OriginalValue.ToString());
+                strReturn = string.Format("({0}/{1})", this._numberContainerNumerator.ToString(), this._numberContainerDenominator.ToString());
+                if (strReturn.Trim() == "(0/0)")
+                {
+                    // If its al zero, this cannot be evaluated -  zero by zero = (edge of the universe shit!)
+                    this._bIsInComplete = true;
+                    strReturn = "x";
+                }
             }
             else
             {
-                return "x/x";
+                this._bIsInComplete = true;
+                strReturn = "x";
             }
 
-            //if (this.CurrentValueStr.Length > 0)
-            //{
-            //    return this.CurrentValueStr.Trim();
-            //}
-            //else
-            //{
-            //    return "x";
-            //}
+            return strReturn;
 
         }
 
@@ -332,6 +389,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         // FLOW - UP FROM HERE TO NUMBER CONTAINER
         public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
+            this.SetCurrentValue();
+
             // If either are empty then this is incomplete
             if (this._numberContainerNumerator.IsInComplete || this._numberContainerDenominator.IsInComplete)
             {
@@ -531,6 +590,21 @@ namespace NathansWay.iOS.Numeracy.Controls
                 base.IsAnswer = value;
                 this._numberContainerNumerator.IsAnswer = value;
                 this._numberContainerDenominator.IsAnswer = value;
+            }
+        }
+
+        public override bool IsFreeFrom
+        {
+            get
+            {
+                return this._bFreeForm;
+            }
+            set
+            {
+                this._bFreeForm = value;
+                this._numberContainerNumerator.IsFreeFrom = value;
+                this._numberContainerDenominator.IsFreeFrom = value;
+                this._bToStringReturnCurrentValue = value;
             }
         }
 

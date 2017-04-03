@@ -16,3 +16,6 @@ Status = FIXED
 
 3. When you try to reset UI Answer colours after solving it still shows correct/incorrect state
 This is a bug caused by the Persist after solved and then move list position UI
+
+4.  There is an error with the number pad edit function. If you select a number to edit, then reselect it, it as it should removes the numberpad
+But if you hit ity again it wont bring back number pad, moving to a new number works, but not continually flipfloping off the one number

@@ -101,6 +101,9 @@ namespace NathansWay.iOS.Numeracy
         protected bool _bIsInEditMode;
 
         protected bool _bToStringReturnCurrentValue;
+        // Freeform mode is a way of open editing the equations/answers
+        // The system will calculate out 
+        protected bool _bFreeForm;
 
         protected evtArgsBaseContainer _myEventArgs;
 
@@ -158,6 +161,8 @@ namespace NathansWay.iOS.Numeracy
             this._bHasSelectedOperatorText = false;
             this._bAllowNextResponder = true;
             this._bToStringReturnCurrentValue = this._numberAppSettings.GA__ToStringReturnsCurrentValue;
+            this._bFreeForm = false;
+            //this._bFreeFormMode = this._numberAppSettings.GA__FreeFromModeActive;
             // UI
             // Most objects from BaseContainer need to be drawn at ViewWillAppear
             // This can obviously be changed for individual controls at their .ctor
@@ -433,7 +438,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewNeutral()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NeutralTextUIColor.Value;
@@ -441,7 +446,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewReadOnly()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.ReadOnlyTextUIColor.Value;
@@ -449,7 +454,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewCorrect()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PositiveTextUIColor.Value;
@@ -457,7 +462,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewPartCorrect()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.PartCorrectTextUIColor.Value;
@@ -465,7 +470,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewInCorrect()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.NegativeTextUIColor.Value;
@@ -473,7 +478,7 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void UI_ViewSelected()
         {
-            this.BorderWidth = 1.0f;
+            this.BorderWidth = 0.0f;
             this.BorderColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBorderUIColor.Value.CGColor;
             this.View.BackgroundColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedBGUIColor.Value;
             this.FontColor = this.iOSUIAppearance.GlobaliOSTheme.SelectedTextUIColor.Value;
@@ -602,13 +607,26 @@ namespace NathansWay.iOS.Numeracy
         {
             get
             {
-                return _bSelected;
+                return this._bSelected;
             }
             set
             {
-                _bSelected = value;
+                this._bSelected = value;
             }
         }
+
+        //public bool IsFreeFrom
+        //{
+        //    get
+        //    {
+        //        return this._bFreeForm;
+        //    }
+        //    set
+        //    {
+        //        this._bFreeForm = value;
+        //        this._bToStringReturnCurrentValue = value;
+        //    }
+        //}
 
         public Nullable<double> PrevValue
         {
@@ -724,6 +742,19 @@ namespace NathansWay.iOS.Numeracy
             set
             {
                 _bIsReadOnly = value;
+            }
+        }
+
+        public virtual bool IsFreeFrom
+        {
+            get
+            {
+                return this._bFreeForm;
+            }
+            set
+            {
+                this._bFreeForm = value;
+                this._bToStringReturnCurrentValue = value;
             }
         }
 

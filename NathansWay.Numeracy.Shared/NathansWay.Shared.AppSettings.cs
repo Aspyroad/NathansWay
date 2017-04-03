@@ -174,6 +174,12 @@ namespace NathansWay.Numeracy.Shared
             set;
         }
 
+        public bool GA__FreeFromModeActive 
+        { 
+            get; 
+            set; 
+        }
+
 
         #endregion
 

@@ -27,6 +27,8 @@ namespace NathansWay.Numeracy.Shared.Factories
 
         protected IUINumberFactoryClient _UIPlatformClient;
 
+        protected IAppSettings _numberAppSettings;
+
         // Separators
         private readonly char[] sepArray = {','};
         private readonly char[] sepMethodArray = {'M'};
@@ -57,6 +59,7 @@ namespace NathansWay.Numeracy.Shared.Factories
 
         public ExpressionFactory(IUINumberFactoryClient UIPlatform)
         {
+            this._numberAppSettings = SharedServiceContainer.Resolve<IAppSettings>();
             this.FactoryClient = UIPlatform;
             this._intMethodCount = 0;
         }
@@ -89,12 +92,26 @@ namespace NathansWay.Numeracy.Shared.Factories
 
                 var y = (G__MathOperator)x.Key;
 
+                //this._UIPlatformClient.IsFreeForm = true;
+
+                // Global this will be a switch from Workspace
+                if (_numberAppSettings.GA__FreeFromModeActive)
+                {
+                    this._UIPlatformClient.IsFreeForm = true;
+                    this._UIPlatformClient.IsAnswer = true;
+                }
+
                 switch (y)
                 {
                     // Most common
                     case (G__MathOperator.Answer):
                     {
                         this._UIPlatformClient.IsAnswer = true;
+                    }
+                    break;
+                    case (G__MathOperator.Empty):
+                    {
+                        this._UIPlatformClient.IsFreeForm = true;
                     }
                     break;
                     case (G__MathOperator.Value):
@@ -109,6 +126,7 @@ namespace NathansWay.Numeracy.Shared.Factories
                             _lsOutput.Add(this._UIPlatformClient.UICreateNumber(x.Value));
                         }
                         this._UIPlatformClient.IsAnswer = false;
+                        this._UIPlatformClient.IsFreeForm = false;
                     }
                     break;
                     case (G__MathOperator.BraceRoundLeft):
@@ -126,6 +144,7 @@ namespace NathansWay.Numeracy.Shared.Factories
                         i++;
                         _lsOutput.Add(this._UIPlatformClient.UICreateFraction(_lsDecodedExpressionEquation[i].Value));
                         this._UIPlatformClient.IsAnswer = false;
+                        this._UIPlatformClient.IsFreeForm = false;
                     }
                     break;
                     default :

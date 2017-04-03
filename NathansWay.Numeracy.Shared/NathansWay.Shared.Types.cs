@@ -110,7 +110,8 @@ namespace NathansWay.Numeracy.Shared
         Correct = 1,
         InCorrect = 2,
         PartCorrect = 3,
-        Empty = 4
+        Empty = 4,
+        FreeForm = 5
     }
 
     public enum G__SolveAttempted : int
@@ -151,6 +152,16 @@ namespace NathansWay.Numeracy.Shared
     #endregion
 
     #region UI
+
+    public enum G__PrimaryColor : int
+    {
+        Red = 1,
+        Orange = 2,
+        Yellow = 3,
+        Green = 4,
+        Blue = 5,
+        Purple = 6
+    }
 
     public enum G__DisplaySizeLevels : int
     {
