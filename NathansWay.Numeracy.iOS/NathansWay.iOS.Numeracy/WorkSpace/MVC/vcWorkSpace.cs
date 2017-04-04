@@ -844,6 +844,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Check if other numlets are selected - if so we need to unselect them.
             if (this._bHasSelectedNumlet)
             {
+                // TODO: Theres a bug here. If we are on Numberpad, and we select an 
                 if (this.SelectedNumlet != _selectedContainer.MyNumletParent)
                 {
                     // UI

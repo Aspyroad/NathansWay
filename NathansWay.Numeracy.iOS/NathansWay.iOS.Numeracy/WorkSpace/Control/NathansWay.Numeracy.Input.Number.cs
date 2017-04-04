@@ -543,6 +543,12 @@ namespace NathansWay.iOS.Numeracy.Controls
                 this._vcMainContainer.DisplayNumberPad(new CGPoint(this.View.Frame.X, this.View.Frame.Y));
                 this._numberpad.InEditMode = true;
             }
+            else
+            {
+                // If the same number has been reselected
+                // Simply reshow the current numberpad which is hidden
+                this._numberpad.View.Hidden = false;
+            }
 
             this._numberpad.PadPushed += this.actHandlePadPush;
             this._numberpad.PadLockPushed += this.actHandlePadLock;

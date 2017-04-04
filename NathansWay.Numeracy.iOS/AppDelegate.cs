@@ -100,6 +100,8 @@ namespace NathansWay.iOS.Numeracy
             // TODO : These will need to be loaded from a database as they will be different for each student
             // But not all need to be saved?
             this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditNumPad;
+            //this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditScroll;
+            //this._numberAppSettings.GA__NumberEditMode = G__NumberEditMode.EditUpDown;
             this._numberAppSettings.GA__NumberDisplaySize = G__DisplaySizeLevels.Level5;
             this._numberAppSettings.GA__NumberLabelDisplaySize = G__DisplaySizeLevels.Level3;
             this._numberAppSettings.GA__MoveToNextNumber = true;

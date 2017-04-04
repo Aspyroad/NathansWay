@@ -23,12 +23,9 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private vFractionContainer _vFractionContainer;
         private vcMainContainer _vcMainContainer;
-
         private SizeFraction _sizeFraction;
-
         private vcNumberContainer _numberContainerNumerator;
         private vcNumberContainer _numberContainerDenominator;
-
         private vcNumberContainer _numberContainerSelected;
 
         private string _strFractionExpression;
@@ -198,62 +195,23 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         private void SetCurrentValue()
         {
+            this._strPrevValue = this._strCurrentValue;
+            this._dblPrevValue = this._dblCurrentValue;
 
-            // TODO Fix this for Fraction!!! 3/4/2017
-            string _strCurValue = "";
             this._bIsInComplete = false;
-
-            // Should be called after any number change
-            // Loop through this._lsNumbers
-            //foreach (BaseContainer _Number in this._lsNumbers)
-            //{
-            //    if (this._bFreeForm)
-            //    {
-            //        if (_Number.CurrentValueStr.Length > 0)
-            //        {
-            //            _strCurValue = _strCurValue + _Number.CurrentValueStr;
-            //        }
-            //        else
-            //        {
-            //            _strCurValue = _strCurValue + _Number.OriginalValueStr;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        if (_Number.CurrentValueStr.Length > 0)
-            //        {
-            //            _strCurValue = _strCurValue + _Number.CurrentValueStr;
-            //        }
-            //        else
-            //        {
-            //            this._bIsInComplete = true;
-            //        }
-            //    }
-            //}
+            // 
+            this._strCurrentValue = this.ToString();
+            this._dblCurrentValue = this.FractionToDecimal;
 
             if (this._bIsInComplete)
             {
-                this._strCurrentValue = "";
-                this._strPrevValue = "";
+                this._strCurrentValue = "x";
                 this.CurrentValue = null;
             }
-            else
-            {
-                if (_strCurValue.Length > 0)
-                {
-                    this.CurrentValue = Convert.ToDouble(_strCurValue);
-                }
-                else
-                {
-                    this.CurrentValue = Convert.ToDouble(_strOriginalValue);
-                }
-            }
 
-            this._strCurrentValue = _strCurValue;
 
         }
 
-        // Setup editing
         protected void preEdit()
         {
 
@@ -356,7 +314,16 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             string strReturn = "";
 
-            if (this._numberContainerNumerator.OriginalValue != null && this._numberContainerDenominator.OriginalValue != null)
+            // If either are empty then this is incomplete
+            if (this._numberContainerNumerator.IsInComplete || this._numberContainerDenominator.IsInComplete)
+            {
+                this._bIsInComplete = true;
+                strReturn = "x";
+                //}
+
+                //if (this._numberContainerNumerator.OriginalValue != null && this._numberContainerDenominator.OriginalValue != null)
+            }
+            else
             {
                 strReturn = string.Format("({0}/{1})", this._numberContainerNumerator.ToString(), this._numberContainerDenominator.ToString());
                 if (strReturn.Trim() == "(0/0)")
@@ -366,11 +333,11 @@ namespace NathansWay.iOS.Numeracy.Controls
                     strReturn = "x";
                 }
             }
-            else
-            {
-                this._bIsInComplete = true;
-                strReturn = "x";
-            }
+            //else
+            //{
+            //    this._bIsInComplete = true;
+                
+            //}
 
             return strReturn;
 
@@ -390,12 +357,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void OnValueChange(object s, evtArgsBaseContainer e)
         {
             this.SetCurrentValue();
-
-            // If either are empty then this is incomplete
-            if (this._numberContainerNumerator.IsInComplete || this._numberContainerDenominator.IsInComplete)
-            {
-                this._bIsInComplete = true;
-            }
 
             // Bubbleup
             this.FireValueChange();
@@ -516,16 +477,25 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             get
             {
+                double? _ret;
                 if (NumeratorValue != null && DenominatorValue != null)
                 {
-                    double? x = (NumeratorValue / DenominatorValue);
-                    return Math.Round((double)x, 4);
-                    //return x;
+                    // Check divide by zero
+                    if (DenominatorValue > 0)
+                    {
+                        double? x = (NumeratorValue / DenominatorValue);
+                        _ret = Math.Round((double)x, 2);
+                    }
+                    else
+                    {
+                        _ret = 0;
+                    }
                 }
                 else
                 {
-                    return null;
+                    _ret = null;
                 }
+                return _ret;
             }
         }
 
