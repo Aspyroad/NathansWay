@@ -321,7 +321,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // If we are in the process of solving stop the selection chain.
             if (!MyWorkSpaceParent.SolvingState)
             {
-                this.MyWorkSpaceParent.OnSelectionChange(this);
+                if (this.MyWorkSpaceParent.SelectedNumberText != this)
+                {
+                    this.MyWorkSpaceParent.OnSelectionChange(this);
+                }
             }
         }
 

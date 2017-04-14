@@ -111,6 +111,7 @@ namespace NathansWay.iOS.Numeracy
             this._numberAppSettings.GA__PersistUIInCorrectStateOnMove = true;
             this._numberAppSettings.GA__ToStringReturnsCurrentValue = false;
             this._numberAppSettings.GA__FreeFromModeActive = false;
+            this._numberAppSettings.GA__DecimalPrecission = 2;
 
 			// Set AspyiOSCore global         variables here....		
 			this._iOSGlobals.G__ViewAutoResize = UIViewAutoresizing.None;			

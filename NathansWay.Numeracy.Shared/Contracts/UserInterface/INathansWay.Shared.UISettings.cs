@@ -105,6 +105,12 @@ namespace NathansWay.Numeracy.Shared
         ///</summary>
         ///<value><c>true</c> Freefrom mode enabled <c>false</c>, only the numlet select.</value>
         bool GA__FreeFromModeActive { get; set; }
+
+int GA__DecimalPrecission
+{
+	get;
+ set; 
+        }
     }
 
 

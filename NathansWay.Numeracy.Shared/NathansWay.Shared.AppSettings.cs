@@ -180,6 +180,12 @@ namespace NathansWay.Numeracy.Shared
             set; 
         }
 
+        public int GA__DecimalPrecission
+        {
+        	get;
+            set; 
+        }
+
 
         #endregion
 

@@ -162,10 +162,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             aTimer.Stop();
             // TODO: Let the user change this somehow
             this._timeDisplay = G__TimeDisplay.Seconds;
-
-            //var _vmLesson = SharedServiceContainer.Resolve<LessonViewModel>();
-            //this._lessonNumletList = new LessonList<LessonNumletSet>(_vmLesson);
-
         }
 
         private void AddNumlet(vcWorkNumlet _myNumlet, UIView _vwCanvas)
@@ -320,6 +316,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         private void UIResetSolveButton()
         {
+            // Clear the message display
+            this.lblMessage.Text = "";
             vcSolveContainer x = (vcSolveContainer)this.vcNumletSolve.OutputContainers[0];
             x.RefreshDisplay();
         }
@@ -705,6 +703,9 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.btnDisplay.TouchUpInside += OnClick_btnDisplay;
             this.btnDisplay.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
 
+	        // Clear the message display
+			this.lblMessage.Text = "";
+
             this.SizeClass.SetViewPosition();
 		}
 
@@ -716,7 +717,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override G__AnswerState Solve()
         {
-            // TODO: Fix up the visual display of Empty user hits solve but hasnt entered anything
             this._currentLessonNumletSet.SolveAttempted = G__SolveAttempted.Attempted;
             // Clear the display
             this._currentLessonNumletSet.vcNumletEquation.ResetAllSelection();
@@ -744,24 +744,51 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             G__AnswerState num1 = this._currentLessonNumletSet.vcNumletEquation.Solve();
             G__AnswerState num2 = this._currentLessonNumletSet.vcNumletResult.Solve();
 
-            // TODO: Here we evaluate the Freeform stuff!!
+
+
+
             if (num1 == G__AnswerState.FreeForm || num2 == G__AnswerState.FreeForm)
             {
-                int x = 0;
-                string str1 = this._currentLessonNumletSet.vcNumletEquation.CalcString();
-                string str2 = this._currentLessonNumletSet.vcNumletResult.CalcString();
-                if (str1 == str2)
+                // Check that both freeform equations can be calulated
+                if (!this._currentLessonNumletSet.vcNumletEquation.StringToDecimalError && !this._currentLessonNumletSet.vcNumletResult.StringToDecimalError)
                 {
-                    x = 1;
-                }
-                else
-                {
-                    x = 2;
+                    // Check for empties even though its free from, the user may not have entered anything
+                    if (this._currentLessonNumletSet.vcNumletEquation.NumberContainerCountEmpty > 0 || this._currentLessonNumletSet.vcNumletResult.NumberContainerCountEmpty > 0)
+                    {
+                        this.AnswerState = G__AnswerState.Empty;
+                    }
+
+                    if (this._currentLessonNumletSet.vcNumletEquation.ComputedValueDecimal == this._currentLessonNumletSet.vcNumletResult.ComputedValueDecimal)
+                    {
+                        // Corect!
+                        this.AnswerState = G__AnswerState.Correct;
+                    }
+                    else
+                    {
+                        // Fucked
+                        this.AnswerState = G__AnswerState.InCorrect;
+                    }
+
                 }
             }
             else
             {
-                this.AnswerState = this.BinarySolve(num1, num2);
+                // Is one side Readonly - Most Common
+                if (num1 == G__AnswerState.ReadOnly || num2 == G__AnswerState.ReadOnly)
+                {
+                    if (num1 == G__AnswerState.ReadOnly)
+                    {
+                        this.AnswerState = num2;
+                    }
+                    else
+                    {
+                        this.AnswerState = num1;
+                    }
+                }
+                else
+                {
+                    this.AnswerState = this.BinarySolve(num1, num2);
+                }
             }
 
             // Check correct
@@ -852,7 +879,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
                 else
                 {
-                    this.Clear();
+                    if (this._vcSelectedNumberText == _selectedContainer)
+                    {
+                        // TODO:  The bug is this
+                        // If we select the same Numbertext to edit, it freaks.
+                        // We arent catching if we are selecting the "same" numbertext again!
+                        this.SelectedNumberText.OnUnSelectionChange();
+                        //this.SelectedNumberText.AutoTouchedText();
+                        //return; // ****************** EXIT POINT!
+                    }
+                    else
+                    {
+                        this.Clear();
+                    }
                 }
             }
 
@@ -961,15 +1000,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (this.NextEquation())
             {
-                // Remove the old numlets
-                //this._intLessonDetailCurrentIndex++;
-                //// Have we gone over range
-                //if (this._intLessonDetailCurrentIndex >= this._intLessonDetailCurrentCount)
-                //{
-                //    this._intLessonDetailCurrentIndex--;
-                //    // Warn the user by changing the color of the button
-                //    bOverIndex = true;
-                //}
                 this.UIRemoveNumlets();
 
                 this._currentLessonNumletSet = this.LessonNumletList.Next();
@@ -1038,8 +1068,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private void OnClick_btnOptions (object sender, EventArgs e)
         {
             //AlertMe(this.NumletEquation.EquationToString());
-            AlertMe(this.NumletEquation.CalcString());
-            AlertMe(this.NumletResult.CalcString());
+            //AlertMe(this.NumletEquation.CalcString());
+            //AlertMe(this.NumletResult.CalcString());
 
         }
 

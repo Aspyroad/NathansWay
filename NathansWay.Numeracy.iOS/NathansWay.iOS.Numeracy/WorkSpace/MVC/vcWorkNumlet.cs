@@ -11,24 +11,32 @@ using NathansWay.Numeracy.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
-	[Register("vcWorkNumlet")]
-	public class vcWorkNumlet : BaseContainer
-	{
+    [Register("vcWorkNumlet")]
+    public class vcWorkNumlet : BaseContainer
+    {
 
         #region Events
 
         #endregion
 
-		#region Private Variables
+        #region Private Variables
 
         // Executive decision number 36
         // Im going to make the numlet responsible for creating its display.
         // Factories
         private UINumberFactory _uiNumberFactory;
 
-		// Control Attributes
+        // Control Attributes
         private G__WorkNumletType _workNumletType;
+
+        // Values
+        // Set our error flags to false
+        private bool _bStringToComputedError;
+        private bool _bStringToDecimalError;
         private string _strExpression;
+        private string _strExpressionString;
+        private string _strComputedValueString;
+        private decimal _decComputedValueDecimal;
 
         // UI
         private SizeWorkNumlet _sizeWorkNumlet;
@@ -39,44 +47,44 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private int _intInCorrect;
         private int _intEmpty;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
         public vcWorkNumlet(IntPtr h) : base(h)
-		{
-			Initialize();
-		}
+        {
+            Initialize();
+        }
 
-		[Export("initWithCoder:")]
+        [Export("initWithCoder:")]
         public vcWorkNumlet(NSCoder coder) : base(coder)
-		{
-			Initialize();
-		}
+        {
+            Initialize();
+        }
 
-        public vcWorkNumlet(string _expression) 
-        {            
+        public vcWorkNumlet(string _expression)
+        {
             this._strExpression = _expression;
             Initialize();
         }
 
-        public vcWorkNumlet() 
-		{   
-			Initialize();
-		}
+        public vcWorkNumlet()
+        {
+            Initialize();
+        }
 
-		#endregion
+        #endregion
 
         #region Deconstruction
 
-        protected override void Dispose (bool disposing)
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose (disposing);
+            base.Dispose(disposing);
 
             if (disposing)
-            {                
+            {
                 // Remove the possible event hook to sizechange.
-                foreach (BaseContainer _con in this.OutputContainers) 
+                foreach (BaseContainer _con in this.OutputContainers)
                 {
                     // Event Hooks
                     //this.eValueChanged -= _con.OnValueChange ;
@@ -91,12 +99,12 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-		#region Private Members
+        #region Private Members
 
-		private void Initialize()
-		{
-			this.AspyTag1 = 60024;
-			this.AspyName = "VC_WorkNumlet";
+        private void Initialize()
+        {
+            this.AspyTag1 = 60024;
+            this.AspyName = "VC_WorkNumlet";
             // Size Class Init
             this._sizeWorkNumlet = new SizeWorkNumlet(this);
             this._sizeClass = this._sizeWorkNumlet;
@@ -106,12 +114,17 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.OutputAnswerContainers = new List<object>();
             this.AnswerState = G__AnswerState.Empty;
 
+            // Set our error flags to false
+            this._bStringToComputedError = false;
+            this._bStringToDecimalError = false;
+
             // init total
             this._intEmpty = 0;
             this._intCorrect = 0;
             this._intInCorrect = 0;
+            this._intPartCorrect = 0;
 
-		}
+        }
 
         #endregion
 
@@ -132,12 +145,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._uiNumberFactory.CreateNumletSolve(this);
             }
         }
-
-        //public void LoadControlsResult(string strData)
-        //{
-        //    this._uiNumberFactory.CreateNumletResult(this, strData);
-        //}
-
 
         public void LoadControlsToView()
         {
@@ -203,6 +210,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 }
             }
 
+            this._strExpressionString = s;
             return s;
         }
 
@@ -217,36 +225,72 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        public string CalcString()
+        private void CalcString()
         {
             DataTable dt = new DataTable();
-            string y;
             object x;
+            // Reset the error flag
+            this._bStringToComputedError = false;
 
             string s = this.EquationToString();
 
             try
             {
-                 x = dt.Compute(s, "");
+                x = dt.Compute(s, "");
             }
             // Halt on any error and set to unknown "x".
             catch (System.Exception)
             {
-                y = "x";
+                this._bStringToComputedError = true;
                 x = new object();
             }
- 
+
+            dt = null;
 
             // Test for null - If compute is fed zero, it returns null, zero is of course a possible outcome!
             if (x == null)
             {
-                return "0";
+                this._strComputedValueString = "0";
             }
             else
             {
-                y = "";
-                return y;
+                if (this._bStringToComputedError)
+                {
+                    this._strComputedValueString = "x";
+                }
+                else
+                {
+                    this._strComputedValueString = x.ToString();
+                }
             }
+        }
+
+        private void CalcDecimal()
+        {
+            this.CalcString();
+            decimal decValue = 0.0M;
+            decimal decRounded = 0.0M;
+            this._bStringToDecimalError = false;
+
+            try
+            {
+                if (!this.StringToComputedError)
+                {
+                    decValue = Convert.ToDecimal(this._strComputedValueString);
+                }
+                else
+                {
+                    this._bStringToDecimalError = true;
+                }
+            }
+            catch (System.Exception)
+            {
+                this._bStringToDecimalError = true;
+            }
+
+            decRounded = Math.Round(decValue, this._numberAppSettings.GA__DecimalPrecission);
+
+            this._decComputedValueDecimal = decRounded;
         }
 
         #endregion
@@ -266,17 +310,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #endregion
 
-		#region Overrides
+        #region Overrides
 
-		public override void DidReceiveMemoryWarning()
-		{
-			base.DidReceiveMemoryWarning();
-		}
+        public override void DidReceiveMemoryWarning()
+        {
+            base.DidReceiveMemoryWarning();
+        }
 
-		public override void ViewDidLoad()
-		{
-			base.ViewDidLoad();
-		}
+        //public override void ViewDidLoad()
+        //{
+        //	base.ViewDidLoad();
+        //}
+
+        public override string ToString()
+        {
+            return this.EquationToString();
+            //return string.Format("[vcWorkNumlet: OutputContainers={0}, OutputAnswerContainers={1}, WorkNumletSize={2}, NumletType={3}]", OutputContainers, OutputAnswerContainers, WorkNumletSize, NumletType);
+        }
 
         public override void ViewWillAppear(bool animated)
         {
@@ -291,7 +341,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             // Exit point **********************************************
             if (!this.IsAnswer)
             {
-                return G__AnswerState.Empty;
+                return G__AnswerState.ReadOnly;
             }
 
             this._intEmpty = 0;
@@ -342,6 +392,15 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public override void SetCorrectState()
         {
+
+            if (!this.IsAnswer)
+            {
+                this.AnswerState = G__AnswerState.ReadOnly;
+                // Finished ... Nothing to check
+                return;  // ***************************ExitPoint
+            }
+
+
             if (!this.IsFreeFrom)
             {
                 bool _state = false;
@@ -534,6 +593,95 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Public Properties
 
+        public bool StringToComputedError
+        {
+            get
+            {
+                this.CalcString();
+                return this._bStringToComputedError;
+            }
+            set 
+            { 
+                this._bStringToComputedError = value; 
+            }
+        }
+
+        public bool StringToDecimalError
+        {
+            get
+            {
+                this.CalcDecimal();
+                return this._bStringToDecimalError;
+            }
+            set 
+            { 
+                this._bStringToDecimalError = value; 
+            }
+        }
+
+        public int NumberContainerCountCorrect
+        {
+            get
+            {
+                return this._intCorrect;
+            }
+            set
+            {
+                this._intCorrect = value;
+            }
+        }
+
+        public int NumberContainerCountInCorrect
+        {
+            get
+            {
+                return this._intInCorrect;
+            }
+            set
+            {
+                this._intInCorrect = value;    
+            }
+        }
+
+        public int NumberContainerCountEmpty
+        {
+            get
+            {
+                return this._intEmpty;
+            }
+            set
+            {
+                this._intEmpty = value;     
+            }
+        }
+
+        public int NumberContainerCountPartCorrect
+        {
+            get
+            {
+                return this._intPartCorrect;
+            }
+            set
+            {
+                this._intPartCorrect = value;     
+            }
+        }
+
+        public string ExpressionString
+        {
+            get { return this._strExpressionString; }
+        }
+
+        public string ComputedValueString
+        {
+            get { return this._strComputedValueString; }
+        }
+
+        public decimal ComputedValueDecimal
+        {
+            get { return this._decComputedValueDecimal; }
+        }
+
         public List<object> OutputContainers
         {
             get;
@@ -580,7 +728,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             Initialize();
         }
 
-        public SizeWorkNumlet(BaseContainer _vc) : base (_vc)
+        public SizeWorkNumlet(BaseContainer _vc) : base(_vc)
         {
             this.ParentContainer = _vc;
             Initialize();
@@ -598,7 +746,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Overrides
 
-        public override void SetSubHeightWidthPositions ()
+        public override void SetSubHeightWidthPositions()
         {
             this._fCurrentHeight = this.GlobalSizeDimensions.NumletHeight;
         }

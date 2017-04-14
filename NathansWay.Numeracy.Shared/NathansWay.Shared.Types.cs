@@ -111,7 +111,8 @@ namespace NathansWay.Numeracy.Shared
         InCorrect = 2,
         PartCorrect = 3,
         Empty = 4,
-        FreeForm = 5
+        FreeForm = 5,
+        ReadOnly = 6
     }
 
     public enum G__SolveAttempted : int

@@ -300,22 +300,31 @@ namespace NathansWay.iOS.Numeracy
 
         public virtual void SetCorrectState()
         {
-            if (this._dblCurrentValue == null)
+            if (!this.IsAnswer)
             {
-                this._answerState = G__AnswerState.Empty;
-                this._solveAttempted = G__SolveAttempted.UnAttempted;
+                this.AnswerState = G__AnswerState.ReadOnly;
+                // Finished ... Nothing to check
+                return;  // ***************************************ExitPoint
             }
             else
             {
-                this._solveAttempted = G__SolveAttempted.Attempted;
-
-                if (this._dblOriginalValue == this._dblCurrentValue)
+                if (this._dblCurrentValue == null)
                 {
-                    this.AnswerState = G__AnswerState.Correct;
+                    this._answerState = G__AnswerState.Empty;
+                    this._solveAttempted = G__SolveAttempted.UnAttempted;
                 }
                 else
                 {
-                    this.AnswerState = G__AnswerState.InCorrect;
+                    this._solveAttempted = G__SolveAttempted.Attempted;
+
+                    if (this._dblOriginalValue == this._dblCurrentValue)
+                    {
+                        this.AnswerState = G__AnswerState.Correct;
+                    }
+                    else
+                    {
+                        this.AnswerState = G__AnswerState.InCorrect;
+                    }
                 }
             }
         }

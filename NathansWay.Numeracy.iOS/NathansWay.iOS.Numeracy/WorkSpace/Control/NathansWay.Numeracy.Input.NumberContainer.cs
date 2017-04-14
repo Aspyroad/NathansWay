@@ -143,6 +143,10 @@ namespace NathansWay.iOS.Numeracy.Controls
             // Update the sstate of the Number container
             string _strCurValue = "";
             this._bIsInComplete = false;
+            // This was added just in case the user adds only one value.
+            // Say you have a value of 20, and th user only puts in a 2.
+            // This indicates that its not fully complete
+            bool _bHasValue = false;
 
             // Should be called after any number change
             // Loop through this._lsNumbers
@@ -164,6 +168,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                     if (_Number.CurrentValueStr.Length > 0)
                     {
                         _strCurValue = _strCurValue + _Number.CurrentValueStr;
+                        _bHasValue = true;
                     }
                     else
                     {
@@ -172,7 +177,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
             }
 
-            if (this._bIsInComplete)
+            if (this._bIsInComplete && !_bHasValue)
             {
                 this._strCurrentValue = "";
                 this._strPrevValue = "";
