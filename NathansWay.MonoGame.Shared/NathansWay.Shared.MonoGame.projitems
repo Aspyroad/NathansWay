@@ -26,5 +26,12 @@
     <Folder Include="$(MSBuildThisFileDirectory)Contracts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ModifiedCode\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)ModifiedCode\Game.cs" />
+    <None Include="$(MSBuildThisFileDirectory)ModifiedCode\iOSGamePlatform.cs">
+      <Platforms>iOS</Platforms>
+    </None>
   </ItemGroup>
 </Project>

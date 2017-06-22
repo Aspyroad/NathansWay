@@ -88,41 +88,6 @@ namespace NathansWay.iOS.Numeracy
             return _vcCurrentWorkSpace;
         }
 
-        //public vcWorkNumlet GetEquationNumlet(string _strEquation)
-        //{            
-        //    var _vcNumletEquation = this.CreateNumletEquation(_strEquation);
-        //    return _vcNumletEquation;
-        //}
-
-        //public vcWorkNumlet GetResultNumlet(string _strResult)
-        //{
-        //    var _vcNumletResult = this.CreateNumletResult(_strResult);
-        //    return _vcNumletResult;
-        //}
-
-        //public vcWorkNumlet GetSolveNumlet()
-        //{
-        //    var _vcNumletSolve = this.CreateNumletSolve();
-        //    return _vcNumletSolve;
-        //}
-
-        //public vcWorkSpaceLabel UILoadEquationDisplayOnly (EntityLesson entLesson, List<EntityLessonDetail> entLessonDetail)
-        //{
-        //    // Fire start event
-        //    this.FireBuildStartedEvent();
-
-        //    this._wsLesson = entLesson;
-        //    this._wsLessonDetail = entLessonDetail;
-
-        //    // Create our workspace label object
-        //    vcWorkSpaceLabel x = new vcWorkSpaceLabel();
-
-        //    // Fire completed event
-        //    this.FireBuildCompletedEvent();
-
-        //    return x;
-        //}
-
         #endregion
 
         #region Public Properties

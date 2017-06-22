@@ -11,14 +11,14 @@ namespace NathansWay.iOS.Numeracy.Controls
 {
     public partial class vcNumberPad : NWViewController
     {
-        
+
         #region Events
-        
+
         public event Action<nint> PadPushed;
         public event Action<nint> PadLockPushed;
-        
+
         #endregion
-        
+
         #region Private Variables
 
         private nint _intPadValue;
@@ -29,41 +29,42 @@ namespace NathansWay.iOS.Numeracy.Controls
         private nfloat _fAlphaLevel;
         private nfloat _fOldAlphaLevel;
         // Geometry variables for dragging
-        //private nfloat dx = 0;
-        //private nfloat dy = 0;
+        private nfloat _fWidth = 160;
+        private nfloat _fHeight = 260;
+
         private CGPoint _pLastPoint;
         private CGPoint _p6;
         private bool _bHitLabel;
 
 
         #endregion
-        
+
         #region Constructors
 
-        public vcNumberPad (IntPtr h) : base (h)
+        public vcNumberPad(IntPtr h) : base(h)
         {
             Initialize();
         }
 
         [Export("initWithCoder:")]
-        public vcNumberPad (NSCoder coder) : base(coder)
+        public vcNumberPad(NSCoder coder) : base(coder)
         {
             Initialize();
         }
 
-        public vcNumberPad () : base()
+        public vcNumberPad() : base()
         {
             Initialize();
         }
 
-        #endregion        
+        #endregion
 
         #region Private Members
-                
-        private void Initialize ()
+
+        private void Initialize()
         {
-			//base.Initialize ();
-			this.AspyTag1 = 600100; 
+            //base.Initialize ();
+            this.AspyTag1 = 600100;
             this.AspyName = "VC_NumberPad";
 
             this._bInc = false;
@@ -73,23 +74,24 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._fAlphaLevel = 1.0f;
             this._fOldAlphaLevel = 1.0f;
 
+
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
 
-        private void _padpushed (nint _intPad)
-        {          
+        private void _padpushed(nint _intPad)
+        {
             if (PadPushed != null)
             {
-                PadPushed (_intPad);
-            }            
+                PadPushed(_intPad);
+            }
         }
 
-        private void _padlockedpushed (nint _intPad)
-        {          
+        private void _padlockedpushed(nint _intPad)
+        {
             if (PadLockPushed != null)
             {
-                PadLockPushed (_intPad);
-            }            
+                PadLockPushed(_intPad);
+            }
         }
 
         private void DealWithIt(nint _intValue)
@@ -114,7 +116,7 @@ namespace NathansWay.iOS.Numeracy.Controls
                 }
                 else
                 {
-                    this._intPadValue ++;
+                    this._intPadValue++;
                 }
                 this._bInc = false;
             }
@@ -130,22 +132,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn1Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn2Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn3Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn4Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
@@ -155,22 +157,22 @@ namespace NathansWay.iOS.Numeracy.Controls
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn6Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn7Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn8Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
         }
-        
+
         partial void btn9Touch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             this.DealWithIt(sender.Tag);
@@ -188,7 +190,7 @@ namespace NathansWay.iOS.Numeracy.Controls
             this.DealWithIt(sender.Tag);
         }
 
-        partial void btnLockedTouch (NathansWay.iOS.Numeracy.ButtonNumberPad sender)
+        partial void btnLockedTouch(NathansWay.iOS.Numeracy.ButtonNumberPad sender)
         {
             if (this._bLocked)
             {
@@ -212,45 +214,52 @@ namespace NathansWay.iOS.Numeracy.Controls
             // create a new tap gesture
             UIPanGestureRecognizer MovePadPanGesture = null;
 
-            Action<UIPanGestureRecognizer> action = (pg) => 
+            Action<UIPanGestureRecognizer> action = (pg) =>
                 {
+                    // I was only using the label to drag, but this made it difficult to use, 
+                    // so it can now be dragged from any point in the keypad view.
 
-                    if (pg.State == UIGestureRecognizerState.Began)
+                    //if (pg.State == UIGestureRecognizerState.Began)
+                    //{
+                    //    this._fOldAlphaLevel = this.View.Alpha;
+                    //    this._bHitLabel = false;
+                    //    //this._pLastPoint = this.View.Center;
+                    //    //this._p6 = pg.LocationInView (this.View);
+                    //    this._p6 = pg.TranslationInView(this.View);
+                    //    if (this.lblNumberPad.PointInside(pg.LocationInView(this.View), null))
+                    //    {
+                    //        this._bHitLabel = true;
+                    //    }
+                    //}
+
+                    //if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches < 4) && this._bHitLabel)
+                    if (pg.State == UIGestureRecognizerState.Changed)
                     {
-                        this._fOldAlphaLevel = this.View.Alpha;
                         // Set the display to half opacity
-                        this.SetAlphaLevel = 0.5f;
-                        
-                        this._bHitLabel = false;
-                        this._pLastPoint = this.View.Center;
-                        this._p6 = pg.LocationInView (this.View);
-                        if (this.lblNumberPad.PointInside(this._p6, null))
-                        {
-                            this._bHitLabel = true;
-                        }
-                    }
-
-                    if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches < 3) && this._bHitLabel)
-                    {
-                        var p0 = pg.LocationInView (this.View);
+                        this.SetAlphaLevel = 0.7f;
+                        //var p0 = pg.LocationInView (this.View);
+                        var p0 = pg.TranslationInView(this.View);
 
                         // To stop the jerky movement when first moving we only want to capture the finger movement,
                         // not the initial point of touch also
                         var x = p0.X - this._p6.X;
                         var y = p0.Y - this._p6.Y;
 
-                        var p1 = new CGPoint (this.View.Center.X + x, this.View.Center.Y + y);
-                        this.View.Center = p1;
-                    } 
+                        this.View.Center = new CGPoint(this.View.Center.X + x, this.View.Center.Y + y);
+                        pg.SetTranslation(new CGPoint(0, 0), this.View);
+                    }
 
                     if (pg.State == UIGestureRecognizerState.Ended)
                     {
-                        this.SetAlphaLevel = this._fOldAlphaLevel;
+                        this.SetAlphaLevel = 1.0f; //this._fOldAlphaLevel;
                         this._bHitLabel = false;
                     }
                 };
 
             MovePadPanGesture = new UIPanGestureRecognizer(action);
+            // Test to see how it work with one finger.
+            MovePadPanGesture.MaximumNumberOfTouches = 1;
+            MovePadPanGesture.MinimumNumberOfTouches = 1;
 
             // add the gesture recognizer to the view
             this.View.AddGestureRecognizer(MovePadPanGesture);
@@ -273,6 +282,14 @@ namespace NathansWay.iOS.Numeracy.Controls
             set { this._bInEditMode = value; }
         }
 
+        public CGRect RectFrame
+        {
+            get
+            {
+                return new CGRect(0, 0, 160, 260);
+            }
+        }
+
         /// <summary>
         /// If the numberpad is locked on the screen this is set to true.
         /// </summary>
@@ -284,9 +301,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         public nfloat SetAlphaLevel
         {
             get { return this._fAlphaLevel; }
-            set 
-            { 
-                this._fAlphaLevel = value; 
+            set
+            {
+                this._fAlphaLevel = value;
                 this.View.Alpha = value;
             }
         }
@@ -294,10 +311,10 @@ namespace NathansWay.iOS.Numeracy.Controls
         #endregion
 
         #region Overrides
-        
+
         public override void ViewDidLoad()
         {
-            base.ViewDidLoad();  
+            base.ViewDidLoad();
 
             this.NumberPadPanGestureRecognizer();
         }
@@ -317,7 +334,7 @@ namespace NathansWay.iOS.Numeracy.Controls
         }
 
         #endregion
-        
+
     }
 }
 

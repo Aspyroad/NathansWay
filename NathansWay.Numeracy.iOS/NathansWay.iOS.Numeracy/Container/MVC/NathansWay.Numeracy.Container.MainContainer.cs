@@ -167,17 +167,14 @@ namespace NathansWay.iOS.Numeracy
                 // Set the pad view position
                 this.AddAndDisplayController(
                     this._vcNumberPad.Value, 
-                    new CGRect(
-                        pLocation.X, 
-                        pLocation.Y, 
-                        160, 
-                        260
-                    )
+                    this._vcNumberPad.Value.RectFrame
                 );
             }
             else
             {
                 this._vcNumberPad.Value.View.Hidden = false;
+                this._vcNumberPad.Value.View.Frame = this._vcNumberPad.Value.RectFrame;
+
             }
 
         }
