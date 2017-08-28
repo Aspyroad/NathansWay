@@ -30,6 +30,9 @@
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.iOS" />
     <Reference Include="OpenTK-1.0" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -40,6 +43,10 @@
     <ProjectReference Include="..\..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj">
       <Project>{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}</Project>
       <Name>MonoGame.Framework.iOS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\MonoGame.Extended\Source\MonoGame.Extended\MonoGame.Extended.csproj">
+      <Project>{41724C52-3D50-45BB-81EB-3C8A247EAFD1}</Project>
+      <Name>MonoGame.Extended</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +62,7 @@
     </None>
 <None Include="SampleCode\MacGameplatform.cs" />
 <None Include="SampleCode\Game.cs" />
+<None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SampleCode\" />

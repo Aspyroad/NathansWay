@@ -52,13 +52,13 @@ namespace NathansWay.MonoGame.iOS
 			switch (newTool)
 			{
 				case E__ToolBoxTool.Hammerz:
-				{
-					var _newTool = new Hammer ();
+				{   
+                    var _newTool = new Hammer ();
 					return _newTool;
 				}
 				case E__ToolBoxTool.Plierz:
 				{
-					var _newTool = new Hammer ();
+                    var _newTool = new Pliers ();
 					return _newTool;
 				}
 				case E__ToolBoxTool.ScrewDriverz:

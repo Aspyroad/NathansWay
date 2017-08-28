@@ -1,6 +1,6 @@
 #region File Description
 //-----------------------------------------------------------------------------
-// iOS_MonogameViewGame.cs
+// PrimitivesSampleGame.cs
 //
 // Microsoft XNA Community Game Platform
 // Copyright (C) Microsoft Corporation. All rights reserved.
@@ -8,7 +8,6 @@
 #endregion
 
 #region Using Statements
-
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,17 +15,15 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace PrimitivesSample
 {
-    /// <summary>
-    /// Default Project Template
-    /// </summary>
-    public class Pliers : BaseTool
+    // This sample illustrates the use of PrimitiveBatch to draw lines and points
+    // on the screen. Lines and points are used to recreate the Spacewars starter kit's
+    // retro mode.
+    public class PrimitivesSampleGame : Microsoft.Xna.Framework.Game
     {
-
         #region Constants
 
         // this constant controls the number of stars that will be created when the game
@@ -34,25 +31,25 @@ namespace NathansWay.MonoGame.Shared
         const int NumStars = 500;
 
         // what percentage of those stars will be "big" stars? the default is 20%.
-        const float PercentBigStars = .6f;
+        const float PercentBigStars = .2f;
 
         // how bright will stars be?  somewhere between these two values.
         const byte MinimumStarBrightness = 56;
         const byte MaximumStarBrightness = 255;
 
         // how big is the ship?
-        const float ShipSizeX = 100f;
-        const float ShipSizeY = 150f;
+        const float ShipSizeX = 10f;
+        const float ShipSizeY = 15f;
         const float ShipCutoutSize = 5f;
 
         // the radius of the sun.
-        const float SunSize = 300f;
+        const float SunSize = 30f;
 
         #endregion
 
         #region Fields
 
-        //GraphicsDeviceManager graphics;
+        GraphicsDeviceManager graphics;
 
         // PrimitiveBatch is the new class introduced in this sample. We'll use it to
         // draw everything in this sample, including the stars, ships, and sun.
@@ -67,69 +64,33 @@ namespace NathansWay.MonoGame.Shared
         #endregion
 
         #region Initialization
-
-        public Pliers() : base()
+        public PrimitivesSampleGame()
         {
-            //graphics = new GraphicsDeviceManager(this);
-            //Content.RootDirectory = "Content";
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
 
+#if WINDOWS_PHONE
+            TargetElapsedTime = TimeSpan.FromTicks(333333);
+
+            graphics.PreferredBackBufferWidth = 480;
+            graphics.PreferredBackBufferHeight = 800;
+            graphics.IsFullScreen = true;
+#else
+            // set the backbuffer size to something that will work well on both xbox
+            // and windows.
             graphics.PreferredBackBufferWidth = 853;
             graphics.PreferredBackBufferHeight = 480;
+#endif
         }
 
         protected override void Initialize()
         {
             base.Initialize();
+
+            // CreateStars needs to know how big the GraphicsDevice's viewport is, so 
+            // once base.Initialize has been called, we can call this.
             CreateStars();
         }
-
-        protected override void LoadContent()
-        {
-              primitiveBatch = new PrimitiveBatch(graphics.GraphicsDevice);
-        }
-
-        #endregion
-
-        #region Update and Draw
-
-        protected override void Update(GameTime gameTime)
-        {
-            // Allows the game to exit
-            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed) || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                this.Exit();
-            }
-
-            base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            graphics.GraphicsDevice.Clear(Color.Black);
-
-            // how big is the screen? we'll use that information to center the sun
-            // and place the ships.
-            int screenWidth = graphics.GraphicsDevice.Viewport.Width;
-            int screenHeight = graphics.GraphicsDevice.Viewport.Height;
-
-            // draw the sun in the center
-            DrawSun(new Vector2(screenWidth / 2, screenHeight / 2));
-
-            // draw the left hand ship
-            DrawShip(new Vector2(100, screenHeight / 2));
-
-            // and the right hand ship
-            DrawShip(new Vector2(screenWidth - 100, screenHeight / 2));
-
-
-            DrawStars();
-
-            base.Draw(gameTime);
-        }
-
-        #endregion
-
-        #region Drawing Functions
 
         private void CreateStars()
         {
@@ -145,12 +106,15 @@ namespace NathansWay.MonoGame.Shared
             for (int i = 0; i < NumStars; i++)
             {
                 // pick a random spot...
-                Vector2 where = new Vector2(random.Next(0, screenWidth), random.Next(0, screenHeight));
+                Vector2 where = new Vector2(
+                    random.Next(0, screenWidth),
+                    random.Next(0, screenHeight));
 
                 // ...and a random color. it's safe to cast random.Next to a byte,
                 // because MinimumStarBrightness and MaximumStarBrightness are both
                 // bytes.
-                byte greyValue = (byte)random.Next(MinimumStarBrightness, MaximumStarBrightness);
+                byte greyValue =
+                    (byte)random.Next(MinimumStarBrightness, MaximumStarBrightness);
                 Color color = new Color(greyValue, greyValue, greyValue);
 
                 // if the random number was greater than the percentage chance for a big
@@ -176,6 +140,43 @@ namespace NathansWay.MonoGame.Shared
                     stars.Add(where + Vector2.One);
                 }
             }
+        }
+
+        /// <summary>
+        /// Load your graphics content.
+        /// </summary>
+        protected override void LoadContent()
+        {
+            primitiveBatch = new PrimitiveBatch(graphics.GraphicsDevice);
+        }
+
+        #endregion
+
+        #region Update and Draw
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Update(GameTime gameTime)
+        {
+            // Allows the game to exit
+            if ((GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+
+
+            base.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This is called when the game should draw itself.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        protected override void Draw(GameTime gameTime)
+        {
+
         }
 
         // DrawStars is called to do exactly what its name says: draw the stars.
@@ -231,10 +232,10 @@ namespace NathansWay.MonoGame.Shared
 
             // draw the vertical and horizontal lines
             primitiveBatch.AddVertex(where + new Vector2(0, SunSize), Color.White);
-            primitiveBatch.AddVertex(where + new Vector2(0, -SunSize), Color.BlueViolet);
+            primitiveBatch.AddVertex(where + new Vector2(0, -SunSize), Color.White);
 
             primitiveBatch.AddVertex(where + new Vector2(SunSize, 0), Color.White);
-            primitiveBatch.AddVertex(where + new Vector2(-SunSize, 0), Color.Orange);
+            primitiveBatch.AddVertex(where + new Vector2(-SunSize, 0), Color.White);
 
             // to know where to draw the diagonal lines, we need to use trig.
             // cosine of pi / 4 tells us what the x coordinate of a circle's radius is
@@ -255,7 +256,22 @@ namespace NathansWay.MonoGame.Shared
             primitiveBatch.End();
         }
 
-        #endregion    
+        #endregion
+
+        #region Entry point
+
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        static void Main()
+        {
+            using (PrimitivesSampleGame game = new PrimitivesSampleGame())
+            {
+                game.Run();
+            }
+        }
+
+        #endregion
+
     }
 }
-

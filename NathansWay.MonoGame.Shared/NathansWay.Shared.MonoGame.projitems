@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NathansWay.ToolBox.ParallaxingBg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.Types.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.ToolBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pliers\NathansWay.ToolBox.PrimitiveBatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Hammer\" />
@@ -33,5 +34,6 @@
     <None Include="$(MSBuildThisFileDirectory)ModifiedCode\iOSGamePlatform.cs">
       <Platforms>iOS</Platforms>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)Pliers\NathansWay.ToolBox.PrimitivesGame.cs" />
   </ItemGroup>
 </Project>

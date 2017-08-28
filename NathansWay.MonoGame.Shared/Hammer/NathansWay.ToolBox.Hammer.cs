@@ -9,6 +9,8 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input.Touch;
+using MonoGame.Extended;
+
 
 #endregion
 
@@ -33,10 +35,13 @@ namespace NathansWay.MonoGame.Shared
 		private ParallaxingBackground clouds1;
 		private ParallaxingBackground clouds2;
 
+
 		private bool accelActive;
 		private int wallHeight;
 		private int scoreBoardPadding = 0;
 		private int maxGap;
+
+        private 
 
 		const int MaxWallheight = 920;
 
@@ -69,7 +74,11 @@ namespace NathansWay.MonoGame.Shared
 			ground = new ParallaxingBackground ();
 			clouds1 = new ParallaxingBackground ();
 			clouds2 = new ParallaxingBackground ();
+
 			base.Initialize ();
+
+
+
 		}
 
 		/// <summary>

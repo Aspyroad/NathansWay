@@ -16,6 +16,7 @@ using NathansWay.iOS.Numeracy.Drawing;
 using NathansWay.Numeracy.Shared;
 using NathansWay.Numeracy.Shared.Factories;
 using NathansWay.MonoGame.iOS;
+
 using NathansWay.Numeracy.Shared.DB;
 
 namespace NathansWay.iOS.Numeracy

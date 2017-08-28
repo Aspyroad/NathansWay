@@ -11,6 +11,7 @@ namespace NathansWay.iOS.MonoGame
 		public Game game;
 		public UIViewController _gameViewController;
 
+
 		// Constructors
 		// Default		
 		public GameViewControl ()
@@ -25,6 +26,7 @@ namespace NathansWay.iOS.MonoGame
 		public GameViewControl (CGRect scrnBounds)
 		{
 			throw new NotImplementedException ();
+
 		}
 	}
 

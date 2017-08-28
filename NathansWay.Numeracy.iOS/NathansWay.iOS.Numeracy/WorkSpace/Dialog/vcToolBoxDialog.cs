@@ -172,6 +172,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         partial void OnTouch_btnPliers(NWButton sender)
         {
+            this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Plierz);
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
