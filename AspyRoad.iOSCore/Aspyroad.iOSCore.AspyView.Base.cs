@@ -13,6 +13,7 @@ using Foundation;
 namespace AspyRoad.iOSCore
 {			
 	[Foundation.Register("AspyView")]	
+    [System.ComponentModel.DesignTimeVisible(false)]
 	public class AspyView : UIView
 	{
 		#region Class Variables

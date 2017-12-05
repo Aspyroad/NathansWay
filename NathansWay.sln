@@ -7,15 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspyroad.iOSCore", "AspyRoa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.Numeracy.Shared", "NathansWay.Numeracy.Shared\NathansWay.Numeracy.Shared.csproj", "{8DD61860-526C-4447-B806-E0ADC61DFB54}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Framework.iOS", "..\MonoGame\MonoGame.Framework\MonoGame.Framework.iOS.csproj", "{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NathansWay.MonoGame", "NathansWay.MonoGame", "{06C877F8-4312-4C00-B60F-8EC046D43D40}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.MonoGame.iOS", "NathansWay.MonoGame.iOS\NathansWay.MonoGame.iOS.csproj", "{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "NathansWay.MonoGame.Shared", "NathansWay.MonoGame.Shared\NathansWay.MonoGame.Shared.shproj", "{999A310F-17D7-4B1B-87E2-00A2B116EEDA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Extended", "..\MonoGame.Extended\Source\MonoGame.Extended\MonoGame.Extended.csproj", "{41724C52-3D50-45BB-81EB-3C8A247EAFD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,17 +47,6 @@ Global
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Release|iPhone.Build.0 = Release|Any CPU
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{8DD61860-526C-4447-B806-E0ADC61DFB54}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.AppStore|iPhone.Build.0 = AppStore|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhone.ActiveCfg = Debug|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhone.Build.0 = Debug|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Release|iPhone.ActiveCfg = Release|iPhone
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
-		{DB8508BB-9849-4CC2-BC0F-8EB5DACB3C47}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.Ad-Hoc|iPhone.ActiveCfg = Debug|iPhoneSimulator
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.Ad-Hoc|iPhone.Build.0 = Debug|iPhoneSimulator
 		{ED846A11-F3F8-4277-9E00-8AC75C114910}.AppStore|iPhone.ActiveCfg = Debug|iPhoneSimulator
@@ -101,18 +86,6 @@ Global
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}.AppStore|iPhone.Build.0 = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Release|iPhone.Build.0 = Release|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
-		{41724C52-3D50-45BB-81EB-3C8A247EAFD1}.AppStore|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4} = {06C877F8-4312-4C00-B60F-8EC046D43D40}
@@ -151,36 +124,13 @@ Global
 		$2.BeforeDelegateDeclarationParentheses = False
 		$2.NewParentheses = False
 		$2.SpacesBeforeBrackets = False
-		$2.inheritsSet = Mono
-		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$2.IndentSwitchSection = True
-		$2.NewLinesForBracesInProperties = True
-		$2.NewLinesForBracesInAccessors = True
-		$2.NewLinesForBracesInAnonymousMethods = True
-		$2.NewLinesForBracesInControlBlocks = True
-		$2.NewLinesForBracesInAnonymousTypes = True
-		$2.NewLinesForBracesInObjectCollectionArrayInitializers = True
-		$2.NewLinesForBracesInLambdaExpressionBody = True
-		$2.NewLineForElse = True
-		$2.NewLineForCatch = True
-		$2.NewLineForFinally = True
-		$2.NewLineForMembersInObjectInit = True
-		$2.NewLineForMembersInAnonymousTypes = True
-		$2.NewLineForClausesInQuery = True
-		$2.SpacingAfterMethodDeclarationName = False
-		$2.SpaceAfterMethodCallName = False
-		$2.SpaceBeforeOpenSquareBracket = False
 		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = application/vnd.apple-xcode-storyboard
 		$0.XmlFormattingPolicy = $4
-		$4.inheritsSet = Mono
 		$4.scope = application/xml
-		$4.inheritsScope = application/xml
 		$0.DotNetNamingPolicy = $5
-		$5.DirectoryNamespaceAssociation = None
-		$5.ResourceNamePolicy = FileFormatDefault
 		$0.TextStylePolicy = $6
 		$6.inheritsSet = null
 		$6.scope = application/config+xml
@@ -195,17 +145,13 @@ Global
 		$9.inheritsScope = application/xml
 		$9.scope = application/xml
 		$0.TextStylePolicy = $10
-		$10.TabsToSpaces = False
-		$10.inheritsSet = VisualStudio
-		$10.inheritsScope = text/plain
 		$10.scope = text/plain
+		$10.FileWidth = 80
 		$0.TextStylePolicy = $11
-		$11.inheritsSet = VisualStudio
 		$11.scope = text/x-csharp
-		$11.inheritsScope = text/plain
+		$11.FileWidth = 80
+		$11.TabsToSpaces = True
 		$0.StandardHeader = $12
-		$12.Text = 
-		$12.IncludeInNewFiles = True
 		$0.NameConventionPolicy = $13
 		$13.Rules = $14
 		$14.NamingRule = $15

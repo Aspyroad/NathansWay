@@ -30,6 +30,7 @@ namespace AspyRoad.iOSCore
 		public double TimeReached { get; set; }		
 	}
 
+    [System.ComponentModel.DesignTimeVisible(false)]
 	public class AspyWindow : UIKit.UIWindow
 	{
 		#region Events

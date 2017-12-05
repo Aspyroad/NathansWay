@@ -9,13 +9,17 @@
 
 #region Using Statements
 
+using Microsoft.Xna.Framework;
 using NathansWay.MonoGame.Shared;
 using UIKit;
+
+using MonoGame.Extended;
 
 #endregion
 
 namespace NathansWay.MonoGame.iOS
 {
+
 	public class ToolFactory
 	{
 		private UIWindow _localWindow;
@@ -47,6 +51,7 @@ namespace NathansWay.MonoGame.iOS
 		}
 
 		#region Public Members
+
 		public BaseTool CreateNewTool (E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
 		{
 			switch (newTool)
@@ -54,6 +59,7 @@ namespace NathansWay.MonoGame.iOS
 				case E__ToolBoxTool.Hammerz:
 				{   
                     var _newTool = new Hammer ();
+                    this.SetGameView(_newTool);
 					return _newTool;
 				}
 				case E__ToolBoxTool.Plierz:
@@ -78,6 +84,16 @@ namespace NathansWay.MonoGame.iOS
 				}
 			}
 		}
+
+        public void SetGameView(BaseTool _gametool)
+        {
+            var _vcToolSpace = _gametool.Services.GetService<UIViewController>();
+            _vcToolSpace.View.Layer.CornerRadius = 2.0f;
+
+
+
+        }
+
 		#endregion
 	}
 }

@@ -1,9 +1,10 @@
 using System;
 using CoreGraphics;
 using Microsoft.Xna.Framework;
+using NathansWay.MonoGame.Shared;
 using UIKit;
 
-namespace NathansWay.iOS.MonoGame
+namespace NathansWay.MonoGame.iOS
 {
 	public class GameViewControl
 	{

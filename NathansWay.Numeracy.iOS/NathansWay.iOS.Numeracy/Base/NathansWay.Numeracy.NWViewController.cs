@@ -14,6 +14,7 @@ using NathansWay.Numeracy.Shared;
 namespace AspyRoad.iOSCore
 {
 	[Foundation.Register ("NWViewController")]	
+    [System.ComponentModel.DesignTimeVisible(false)]
     public class NWViewController : AspyViewController
 	{
 		#region Class Variables

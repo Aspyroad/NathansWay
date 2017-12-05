@@ -8,6 +8,8 @@ using Foundation;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
+using NathansWay.MonoGame.iOS;
+using NathansWay.MonoGame.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

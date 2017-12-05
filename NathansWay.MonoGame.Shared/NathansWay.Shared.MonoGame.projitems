@@ -6,7 +6,7 @@
     <SharedGUID>{999A310F-17D7-4B1B-87E2-00A2B116EEDA}</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>NathansWay.Shared.MonoGame</Import_RootNamespace>
+    <Import_RootNamespace>NathansWay.MonoGame.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Hammer\NathansWay.ToolBox.Hammer.Physics.cs" />
@@ -16,7 +16,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Hammer\NathansWay.ToolBox.Hammer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NathansWay.ToolBox.ParallaxingBg.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.Types.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NathansWay.MonoGame.Shared.ToolBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pliers\NathansWay.ToolBox.PrimitiveBatch.cs" />
   </ItemGroup>
   <ItemGroup>

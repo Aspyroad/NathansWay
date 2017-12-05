@@ -41,6 +41,7 @@ While returning to the first ViewController
 namespace AspyRoad.iOSCore
 {
 	[Foundation.Register ("AspyViewController")]	
+    [System.ComponentModel.DesignTimeVisible(false)]
 	public class AspyViewController : UIViewController, IUIApply
 	{
 		#region Class Variables

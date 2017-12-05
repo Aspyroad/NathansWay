@@ -335,19 +335,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         {
             if (this._currentTool != null)
             {
-                this._currentTool.Exit();
-                this._currentTool = null;
+                _currentTool.Exit();
+                _currentTool = null;
             }
             else
             {
                 this._currentTool = _toolFactory.CreateNewTool(_tool, this._vcMainWorkSpace);
-                this._vcToolSpace = this._currentTool.Services.GetService<UIViewController>();
+                this._vcToolSpace = _currentTool.Services.GetService<UIViewController>();
 
                 //this._vcToolSpace.View.Bounds = new CGRect(0.0f, 0.0f, 1016.0f, 540.0f);
-                this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 540.0f);
+                this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 566.0f);
                 this._vcToolSpace.WillMoveToParentViewController(this._vcMainWorkSpace);
                 this._vcMainWorkSpace.Add(this._vcToolSpace.View);
-                this._currentTool.Run();
+                _currentTool.Run();
             }
         }
 
