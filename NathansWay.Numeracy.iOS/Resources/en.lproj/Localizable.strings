@@ -16,16 +16,17 @@
 "ToolBoxDialog-ScrewDriver"="ScrewDriver";
 
 /* VC WorkSpace */
-"WorkSpace-SizeNormal"="1";
-"WorkSpace-SizeLarge"="2";
-"WorkSpace-SizeHuge"="3";
+"WorkSpace-SizeNormal"="0";
+"WorkSpace-SizeLarge"="0";
+"WorkSpace-SizeHuge"="0";
 "WorkSpace-StartStop"="Start";
+"WorkSpace-Pause"="Pause";
 "WorkSpace-BackToLessons"="Back To Lessons";
-"WorkSpace-Options"="Options";
+"WorkSpace-Finish"="Finish";
 "WorkSpace-ToolBox"="ToolBox";
-"WorkSpace-Methods"="Methods";
-"WorkSpace-Option2"="NotUsed";
-"WorkSpace-Position"="Positions";
+"WorkSpace-Focus"="Focus";
+"WorkSpace-Hide"="Hide";
+"WorkSpace-Freeform"="Freeform";
 
 /* VC MainMenu */
 "MainMenu-Appname"="Numbers";

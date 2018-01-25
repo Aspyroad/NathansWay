@@ -1,15 +1,15 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
 using Foundation;
+using NathansWay.MonoGame.iOS;
+using NathansWay.MonoGame.Shared;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
-using NathansWay.MonoGame.iOS;
-using NathansWay.MonoGame.Shared;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {
@@ -18,15 +18,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
     {
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnDisplay { get; set; }
+        NathansWay.iOS.Numeracy.NWButton btnFinish { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        NathansWay.iOS.Numeracy.NWButton btnFocus { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        NathansWay.iOS.Numeracy.NWButton btnFreeform { get; set; }
+
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        NathansWay.iOS.Numeracy.NWButton btnHide { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.NWButton btnNextEquation { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        NathansWay.iOS.Numeracy.NWButton btnOptions { get; set; }
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
@@ -54,35 +62,77 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         [Outlet]
         [GeneratedCode ("iOS Designer", "1.0")]
-        AspyRoad.iOSCore.AspyLabel lblBackwardCount { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AspyRoad.iOSCore.AspyLabel lblForwardCount { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
-        AspyRoad.iOSCore.AspyLabel lblMessage { get; set; }
-
-        [Outlet]
-        [GeneratedCode ("iOS Designer", "1.0")]
         NathansWay.iOS.Numeracy.WorkSpace.vWorkSpace vWorkSpace { get; set; }
+
+        [Action ("BtnFinish_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnFinish_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnFocus_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnFocus_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnFreeform_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnFreeform_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnHide_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnHide_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnNextEquation_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnNextEquation_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnPrevEquation_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnPrevEquation_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnSizeHuge_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnSizeHuge_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnSizeLarge_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnSizeLarge_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnSizeNormal_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnSizeNormal_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnStartStop_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnStartStop_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
+
+        [Action ("BtnToolBox_TouchUpInside:")]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        partial void BtnToolBox_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
 
         void ReleaseDesignerOutlets ()
         {
-            if (btnDisplay != null) {
-                btnDisplay.Dispose ();
-                btnDisplay = null;
+            if (btnFinish != null) {
+                btnFinish.Dispose ();
+                btnFinish = null;
+            }
+
+            if (btnFocus != null) {
+                btnFocus.Dispose ();
+                btnFocus = null;
+            }
+
+            if (btnFreeform != null) {
+                btnFreeform.Dispose ();
+                btnFreeform = null;
+            }
+
+            if (btnHide != null) {
+                btnHide.Dispose ();
+                btnHide = null;
             }
 
             if (btnNextEquation != null) {
                 btnNextEquation.Dispose ();
                 btnNextEquation = null;
-            }
-
-            if (btnOptions != null) {
-                btnOptions.Dispose ();
-                btnOptions = null;
             }
 
             if (btnPrevEquation != null) {
@@ -113,21 +163,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             if (btnToolBox != null) {
                 btnToolBox.Dispose ();
                 btnToolBox = null;
-            }
-
-            if (lblBackwardCount != null) {
-                lblBackwardCount.Dispose ();
-                lblBackwardCount = null;
-            }
-
-            if (lblForwardCount != null) {
-                lblForwardCount.Dispose ();
-                lblForwardCount = null;
-            }
-
-            if (lblMessage != null) {
-                lblMessage.Dispose ();
-                lblMessage = null;
             }
 
             if (vWorkSpace != null) {

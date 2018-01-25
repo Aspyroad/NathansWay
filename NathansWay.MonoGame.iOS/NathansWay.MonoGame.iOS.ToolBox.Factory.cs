@@ -20,81 +20,94 @@ using MonoGame.Extended;
 namespace NathansWay.MonoGame.iOS
 {
 
-	public class ToolFactory
-	{
-		private UIWindow _localWindow;
-		private UIViewController _vcMainWorkSpace;
+    public class ToolFactory
+    {
+        private UIWindow _localWindow;
+        private UIViewController _vcMainWorkSpace;
+        private UIViewController _vcMonoGameWorkSpace;
 
-		public ToolFactory ()
-		{
-			this.Intialize ();
-		}
+        public ToolFactory()
+        {
+            this.Intialize();
+        }
 
-		private void Intialize ()
-		{
-		}
+        private void Intialize()
+        {
+        }
 
-		private BaseTool WindowSwitcher (BaseTool _tool, UIWindow _newWindow)
-		{
-			var _vcToolSpace = _tool.Services.GetService<UIViewController> ();
-			var _wToolSpaceWindow = _tool.Services.GetService<UIWindow> ();
-			_vcToolSpace.WillMoveToParentViewController (null);
-			_vcToolSpace.View.RemoveFromSuperview ();
+        // Not needed now as we are modding MonogameiOS platform directly
+        private BaseTool WindowSwitcher(BaseTool _tool, UIWindow _newWindow)
+        {
+            var _vcToolSpace = _tool.Services.GetService<UIViewController>();
+            var _wToolSpaceWindow = _tool.Services.GetService<UIWindow>();
+            _vcToolSpace.WillMoveToParentViewController(null);
+            _vcToolSpace.View.RemoveFromSuperview();
 
-			_vcToolSpace.WillMoveToParentViewController (_vcMainWorkSpace);
-			_vcMainWorkSpace.Add (_vcToolSpace.View);
+            _vcToolSpace.WillMoveToParentViewController(_vcMainWorkSpace);
+            _vcMainWorkSpace.Add(_vcToolSpace.View);
 
-			_tool.Services.RemoveService (typeof(UIWindow));
-			_tool.Services.AddService(typeof (UIWindow), _localWindow);
+            _tool.Services.RemoveService(typeof(UIWindow));
+            _tool.Services.AddService(typeof(UIWindow), _localWindow);
 
-			return _tool;
-		}
+            return _tool;
+        }
 
-		#region Public Members
+        #region Public Members
 
-		public BaseTool CreateNewTool (E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
-		{
-			switch (newTool)
-			{
-				case E__ToolBoxTool.Hammerz:
-				{   
-                    var _newTool = new Hammer ();
-                    this.SetGameView(_newTool);
-					return _newTool;
-				}
-				case E__ToolBoxTool.Plierz:
-				{
-                    var _newTool = new Pliers ();
-					return _newTool;
-				}
-				case E__ToolBoxTool.ScrewDriverz:
-				{
-					var _newTool = new Hammer ();
-					return _newTool;
-				}
-				case E__ToolBoxTool.SideCutterz:
-				{
-					var _newTool = new Hammer ();
-					return _newTool;
-				}
-				default:
-				{
-					var _newTool = new Hammer ();
-					return _newTool;
-				}
-			}
-		}
+        public BaseTool CreateNewTool(E__ToolBoxTool newTool, UIViewController _vcWorkSpace)
+        {
+            switch (newTool)
+            {
+                case E__ToolBoxTool.Hammerz:
+                    {
+                        var _newTool = new Hammer();
+                        this.SetGameView(_newTool);
+                        return _newTool;
+                    }
+                case E__ToolBoxTool.Plierz:
+                    {
+                        var _newTool = new Pliers();
+                        return _newTool;
+                    }
+                case E__ToolBoxTool.ScrewDriverz:
+                    {
+                        var _newTool = new Hammer();
+                        return _newTool;
+                    }
+                case E__ToolBoxTool.SideCutterz:
+                    {
+                        var _newTool = new Hammer();
+                        return _newTool;
+                    }
+                default:
+                    {
+                        var _newTool = new Hammer();
+                        return _newTool;
+                    }
+            }
+        }
 
         public void SetGameView(BaseTool _gametool)
         {
-            var _vcToolSpace = _gametool.Services.GetService<UIViewController>();
-            _vcToolSpace.View.Layer.CornerRadius = 2.0f;
+            this._vcMonoGameWorkSpace = _gametool.Services.GetService<UIViewController>();
+            //_vcToolSpace.View.Layer.CornerRadius = 2.0f;
 
 
 
         }
 
-		#endregion
-	}
+        #endregion
+
+        #region Public Properties
+
+        public UIViewController MonoGameWorkSpace
+        {
+            get { return this._vcMonoGameWorkSpace; }
+
+        }
+
+        #endregion
+
+    }
 }
 

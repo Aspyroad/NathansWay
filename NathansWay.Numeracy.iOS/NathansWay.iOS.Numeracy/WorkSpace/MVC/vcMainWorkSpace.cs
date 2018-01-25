@@ -79,7 +79,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.SizeClass.SetViewPosition(0.0f, 0.0f);
 
 
-            this.AddAndSet_MainGame();
+            //this.AddAndSet_MainGame();
             this.AddAndSet_WorkSpace();
 
         }

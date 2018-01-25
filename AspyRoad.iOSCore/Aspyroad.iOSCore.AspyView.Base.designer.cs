@@ -7,16 +7,12 @@
 using Foundation;
 using System;
 using System.CodeDom.Compiler;
-using UIKit;
 
-namespace NathansWay.iOS.Numeracy
+namespace AspyRoad.iOSCore
 {
-    [Register ("vcLesson")]
-    partial class vcLesson
+    [Register ("AspyView")]
+    partial class AspyView
     {
-        [Outlet]
-        UIKit.UIButton btn1 { get; set; }
-
         void ReleaseDesignerOutlets ()
         {
         }

@@ -83,6 +83,8 @@ namespace NathansWay.iOS.Numeracy
             //_vcWorkSpace = new Lazy<vcWorkSpace>(() => this._storyBoard. InstantiateViewController("vcWorkSpace") as vcWorkSpace);
             _vcMainWorkSpace = new Lazy<vcMainWorkSpace>(() => new vcMainWorkSpace() as vcMainWorkSpace);
 
+            this.UseAspyView = true;
+
             // Logic assigns 
             this._dblAnimationDuration = this.iOSGlobals.G__SegueingAnimationDuration;
 
@@ -211,7 +213,7 @@ namespace NathansWay.iOS.Numeracy
 
         #endregion
 
-		#region Overrides
+        #region Overrides
 
         public override void TouchesBegan(NSSet touches, UIEvent evt)
         {

@@ -1,6 +1,6 @@
 // WARNING
 //
-// This file has been generated automatically by Xamarin Studio from the outlets and
+// This file has been generated automatically by Visual Studio from the outlets and
 // actions declared in your storyboard file.
 // Manual changes to this file will not be maintained.
 //
@@ -36,19 +36,19 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         [Action ("BtnHammer_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void OnTouch_btnHammer (NathansWay.iOS.Numeracy.NWButton sender);
+        partial void BtnHammer_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
 
         [Action ("BtnPliers_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void OnTouch_btnPliers (NathansWay.iOS.Numeracy.NWButton sender);
+        partial void BtnPliers_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
 
         [Action ("BtnScrewDriver_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void OnTouch_btnScrewDriver (NathansWay.iOS.Numeracy.NWButton sender);
+        partial void BtnScrewDriver_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
 
         [Action ("BtnSideCutters_TouchUpInside:")]
         [GeneratedCode ("iOS Designer", "1.0")]
-        partial void OnTouch_btnSideCutters (NathansWay.iOS.Numeracy.NWButton sender);
+        partial void BtnSideCutters_TouchUpInside (NathansWay.iOS.Numeracy.NWButton sender);
 
         void ReleaseDesignerOutlets ()
         {

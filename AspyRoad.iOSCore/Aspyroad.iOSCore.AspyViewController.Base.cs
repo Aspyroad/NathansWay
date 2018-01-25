@@ -56,6 +56,9 @@ namespace AspyRoad.iOSCore
         // UIApplication Variables
         protected G__ApplyUI _applyUIWhere;
 
+        // Test Load AspyView auto var
+        private bool _bUseAspyView;
+
 		#endregion
 
 		#region Constructors
@@ -99,6 +102,12 @@ namespace AspyRoad.iOSCore
 			get { return _AspyTag1; }
 			set { _AspyTag1 = value; }
 		}
+
+        public bool UseAspyView
+        {
+            get { return this._bUseAspyView; }
+            set { this._bUseAspyView = value; }
+        }
 
 		public string AspyStringTag
 		{
@@ -406,6 +415,155 @@ namespace AspyRoad.iOSCore
 			return _return;
 		}
 
+        public void DragPanGestureRecognizer(bool BoundedBySuperview)
+        {
+            // create a new tap gesture
+            UIPanGestureRecognizer MovePadPanGesture = null;
+
+            Action<UIPanGestureRecognizer> actGesture = (pg) =>
+            {
+                System.nfloat x;
+                System.nfloat y;
+
+                CGPoint _nextMove;
+
+                AspyView _view = pg.View as AspyView;
+
+                // Get the last touched position in the swipe
+                _view.DragTranslationPoint = pg.TranslationInView(this.View.Superview);
+
+
+                if (pg.State == UIGestureRecognizerState.Began)
+                {
+                    // Calc the allowed area for a drag
+                    _view.DragValidFrame = new CGRect(
+                                                        (_view.Frame.Width / 2),
+                                                        (_view.Frame.Height / 2),
+                                                        (_view.Superview.Frame.Width - _view.Frame.Width),
+                                                        (_view.Superview.Frame.Height - _view.Frame.Height));
+                    _view.DragStartPoint = pg.LocationInView(_view);
+                    _view.DragLastCenterPoint = this.View.Center;
+                    return;
+                }
+
+                if (pg.State == UIGestureRecognizerState.Cancelled)
+                {
+                    this.View.Alpha = 1.0f;
+                    return;
+                }
+
+                if (pg.State == UIGestureRecognizerState.Ended)
+                {
+                    //_animate();
+                    this.View.Alpha = 1.0f;
+                    return;
+                }
+
+                if ((Math.Abs(_view.DragTranslationPoint.X) <= 1.0 && Math.Abs(_view.DragTranslationPoint.Y) <= 1.0))
+                {
+                    return; // Ignore very small movements
+                }
+
+
+                if (BoundedBySuperview)
+                {
+                    System.nfloat m = 0.0f;
+                    System.nfloat n = 0.0f;
+                    System.Boolean bRight = false;
+                    System.Boolean bLeft = false;
+                    System.Boolean bTop = false;
+                    System.Boolean bBottom = false;
+                    CGRect _superFrame = this.View.Superview.Frame;
+                    // Create a new Rect based on the boundary variables crossed
+                    CGRect _intersect = CGRect.Intersect(_superFrame, this.View.Frame);
+                    if (!CGRect.Equals(_intersect, this.View.Frame))
+                    {
+                        m = _intersect.X + _intersect.Width;
+                        n = _intersect.Y + _intersect.Height;
+                        if (_superFrame.Width <= m)
+                        {
+                            // Hit the right
+                            bRight = true;
+                        }
+                        if (_intersect.X <= 0)
+                        {
+                            // Hit the Left
+                            bLeft = true;
+                        }
+                        if (_intersect.Y <= 0)
+                        {
+                            // Hit the Top
+                            bTop = true;
+                        }
+                        if (_superFrame.Height <= n)
+                        {
+                            // Hit the Bottom
+                            bBottom = true;
+                        }
+                        _view.DragCrossedSuperView = true;
+                    }
+                    else
+                    {
+                        _view.DragCrossedSuperView = false;
+                    }
+                }
+
+                if (_view.DragVerticallyOnly)
+                {
+                    x = _view.Frame.X;
+                }
+                else
+                {
+                    x = _view.DragTranslationPoint.X + _view.DragLastCenterPoint.X;
+                }
+
+                if (_view.DragHorizontallyOnly)
+                {
+                    y = _view.Frame.Y;
+                }
+                else
+                {
+                    y = _view.DragTranslationPoint.Y + _view.DragLastCenterPoint.Y;
+                }
+
+                _nextMove = new CGPoint(x, y);
+
+                Action _animate = () =>
+                {
+                    this.View.Alpha = 0.3f;
+
+                    if (!BoundedBySuperview)
+                    {
+                        _view.Center = _nextMove;
+                    }
+                    if (_view.DragValidFrame.Contains(_nextMove))
+                    {
+                        _view.Center = _nextMove;
+                    }
+
+                };
+
+                // You can use animation here.
+                // But Im unsure if its any better/faster/responsive then simply redefining the center.
+
+                UIView.Animate(0.1, _animate);
+                //_animate();
+
+            };
+
+            MovePadPanGesture = new UIPanGestureRecognizer(actGesture);
+            // Test to see how it work with one finger.
+            MovePadPanGesture.MaximumNumberOfTouches = 1;
+            MovePadPanGesture.MinimumNumberOfTouches = 1;
+
+            // add the gesture recognizer to the view
+            this.View.AddGestureRecognizer(MovePadPanGesture);
+
+
+
+        }
+
+
 		#endregion
 
 		#region Overrides
@@ -419,6 +577,11 @@ namespace AspyRoad.iOSCore
         public override void LoadView()
         {
             base.LoadView();
+
+            if (this._bUseAspyView)
+            {
+                this.View = new AspyView();
+            }
 
             this._AspyTag2 = _AspyTag1;
             // This has been added for iOS7 and below as it screws view sizes

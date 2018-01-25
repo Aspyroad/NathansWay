@@ -160,23 +160,23 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region Event Handlers
 
-        partial void OnTouch_btnSideCutters(NWButton sender)
+        partial void BtnSideCutters_TouchUpInside(NWButton sender)
         {
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnScrewDriver(NWButton sender)
+        partial void BtnScrewDriver_TouchUpInside(NWButton sender)
         {
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnPliers(NWButton sender)
+        partial void BtnPliers_TouchUpInside(NWButton sender)
         {
             this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Plierz);
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
-        partial void OnTouch_btnHammer(NWButton sender)
+        partial void BtnHammer_TouchUpInside(NWButton sender)
         {
             this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Hammerz);
             this._vcWorkSpace.RemoveViewControllerFromParent(this);

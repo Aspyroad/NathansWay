@@ -167,7 +167,7 @@ namespace NathansWay.Numeracy.Shared
             ButtonMenuCornerRadius = 10.0f;
 
 			// UIView
-			ViewBGColor = new Lazy<G__Color> (() => new G__Color(212.0f, 256.0f, 224.0f, 255.0f)); // Orange
+			ViewBGColor = new Lazy<G__Color> (() => new G__Color(212.0f, 256.0f, 100.0f, 255.0f)); // Orange
             // Bottom of Main menu
 			ViewBGColorTransition = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Orange less alpha
 			ViewBGTint = new Lazy<G__Color> (() => new G__Color(0.0f, 0.0f, 0.0f, 255.0f)); // Black 

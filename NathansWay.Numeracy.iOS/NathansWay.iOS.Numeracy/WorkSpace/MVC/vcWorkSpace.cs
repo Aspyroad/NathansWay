@@ -20,6 +20,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 {
     public partial class vcWorkSpace : BaseContainer
     {
+
         // TODO: These are interesting
         // Do we store the results as we go?
         // What happens as the user cycles through and then back? 
@@ -119,8 +120,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
             if (disposing)
             {
-                //Do this because the ViewModel hangs around for the lifetime of the app
-                this.btnNextEquation.TouchUpInside -= OnClick_btnNextEquation;
+                //Do this because the ViewModel hangs around for the lifetime of the app            
 
                 this._toolFactory = null;
                 this._storyBoard = null;
@@ -317,7 +317,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         private void UIResetSolveButton()
         {
             // Clear the message display
-            this.lblMessage.Text = "";
+            // this.lblMessage.Text = "";
             vcSolveContainer x = (vcSolveContainer)this.vcNumletSolve.OutputContainers[0];
             x.RefreshDisplay();
         }
@@ -344,7 +344,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 this._vcToolSpace = _currentTool.Services.GetService<UIViewController>();
 
                 //this._vcToolSpace.View.Bounds = new CGRect(0.0f, 0.0f, 1016.0f, 540.0f);
-                this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 566.0f);
+                this._vcToolSpace.View.Frame = new CGRect(4.0f, 4.0f, 1016.0f, 564.0f);
                 this._vcToolSpace.WillMoveToParentViewController(this._vcMainWorkSpace);
                 this._vcMainWorkSpace.Add(this._vcToolSpace.View);
                 _currentTool.Run();
@@ -422,6 +422,10 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         }
 
         public void CenterQuestion()
+        {
+        }
+
+        public void CenterAnswer()
         {
         }
 
@@ -612,7 +616,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 			base.DidReceiveMemoryWarning();
 		}
 
-		public override void ViewDidLoad()
+        public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
             this.View.AutosizesSubviews = false;
@@ -655,28 +659,32 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             this.vCanvasDocked.Hidden = true;
 
             // Delegate hookups / Control UI setup etc
-            this.btnNextEquation.EnableHold = false;
-            this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
-            //this.btnNextEquation.SetTitle("WorkSpace-NextEquation".Aspylate(), UIControlState.Normal);
+            // Note : Delegate hookups are not required here for example 
+            // this.btnNextEquation.TouchUpInside += OnClick_btnNextEquation;
+            // Is not needed as we are hooking up to Actions outlets in iOS, example
+            // [Action ("BtnCenterAnswer_TouchUpInside:")] attribute hooks the method to the action
 
-            this.btnPrevEquation.TouchUpInside += OnClick_btnPrevEquation;
+            this.btnNextEquation.EnableHold = false;
+            //this.btnNextEquation.SetTitle("WorkSpace-NextEquation".Aspylate(), UIControlState.Normal);
+            this.btnNextEquation.BorderWidth = 0.0f;
+
             this.btnPrevEquation.EnableHold = false;
             //this.btnPrevEquation.SetTitle("WorkSpace-PrevEquation".Aspylate(), UIControlState.Normal);
+            this.btnPrevEquation.BorderWidth = 0.0f;
 
             this.btnSizeNormal.EnableHold = false;
-            this.btnSizeNormal.TouchUpInside += OnClick_btnSizeNormal;
             this.btnSizeNormal.SetTitle("WorkSpace-SizeNormal".Aspylate(), UIControlState.Normal);
+            this.btnSizeNormal.BorderWidth = 0.0f;
 
             this.btnSizeLarge.EnableHold = false;
-            this.btnSizeLarge.TouchUpInside += OnClick_btnSizeLarge;
             this.btnSizeLarge.SetTitle("WorkSpace-SizeLarge".Aspylate(), UIControlState.Normal);
+            this.btnSizeLarge.BorderWidth = 0.0f;
 
             this.btnSizeHuge.EnableHold = false;
-            this.btnSizeHuge.TouchUpInside += OnClick_btnSizeHuge;
             this.btnSizeHuge.SetTitle("WorkSpace-SizeHuge".Aspylate(), UIControlState.Normal);
+            this.btnSizeHuge.BorderWidth = 0.0f;
 
             this.btnStartStop.EnableHold = false;
-            this.btnStartStop.TouchUpInside += OnClick_btnStartStop;
             this.btnStartStop.SetTitle("WorkSpace-StartStop".Aspylate(), UIControlState.Normal);
             this.btnStartStop.BorderWidth = 0.0f;
 
@@ -684,27 +692,25 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //this.btnBackToLessons.TouchUpInside += OnClick_btnBackToLessons;
             //this.btnBackToLessons.SetTitle("WorkSpace-BackToLessons".Aspylate(), UIControlState.Normal);
 
-            this.btnOptions.EnableHold = false;
-            this.btnOptions.TouchUpInside += OnClick_btnOptions;
-            this.btnOptions.SetTitle("WorkSpace-Options".Aspylate(), UIControlState.Normal);
+            this.btnFinish.EnableHold = false;
+            this.btnFinish.SetTitle("WorkSpace-Finish".Aspylate(), UIControlState.Normal);
+            this.btnFinish.BorderWidth = 0.0f;
 
             this.btnToolBox.EnableHold = false;
-            this.btnToolBox.TouchUpInside += OnClick_btnToolBox;
             this.btnToolBox.SetTitle("WorkSpace-ToolBox".Aspylate(), UIControlState.Normal);
+            this.btnToolBox.BorderWidth = 0.0f;
 
-            //this.btnMethods.EnableHold = false;
-            //this.btnMethods.TouchUpInside += OnClick_btnMethods;
-            //this.btnMethods.SetTitle("WorkSpace-Methods".Aspylate(), UIControlState.Normal);
-            //this.btnOption2.EnableHold = false;
-            //this.btnOption2.TouchUpInside += OnClick_btnOption2;
-            //this.btnOption2.SetTitle("WorkSpace-Option2".Aspylate(), UIControlState.Normal);
+            this.btnFocus.EnableHold = false;
+            this.btnFocus.SetTitle("WorkSpace-Focus".Aspylate(), UIControlState.Normal);
+            this.btnFocus.BorderWidth = 0.0f;
 
-            this.btnDisplay.EnableHold = false;
-            this.btnDisplay.TouchUpInside += OnClick_btnDisplay;
-            this.btnDisplay.SetTitle("WorkSpace-Position".Aspylate(), UIControlState.Normal);
+            this.btnHide.EnableHold = false;
+            this.btnHide.SetTitle("WorkSpace-Hide".Aspylate(), UIControlState.Normal);
+            this.btnHide.BorderWidth = 0.0f;
 
-	        // Clear the message display
-			this.lblMessage.Text = "";
+            this.btnFreeform.EnableHold = false;
+            this.btnFreeform.SetTitle("WorkSpace-Freeform".Aspylate(), UIControlState.Normal);
+            this.btnFreeform.BorderWidth = 0.0f;
 
             this.SizeClass.SetViewPosition();
 		}
@@ -797,27 +803,27 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 case G__AnswerState.Correct:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.Correct;
-                    this.lblMessage.Text = "Messages-Correct".Aspylate();
+                    //this.lblMessage.Text = "Messages-Correct".Aspylate();
                     break;
                 }
                 case G__AnswerState.PartCorrect:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.PartCorrect;
-                        this.lblMessage.Text = "Messages-PartCorrect".Aspylate();
+                    //this.lblMessage.Text = "Messages-PartCorrect".Aspylate();
                     break;
                 }
                 case G__AnswerState.InCorrect:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.InCorrect;
-                        this.lblMessage.Text = "Messages-InCorrect".Aspylate();
+                    //this.lblMessage.Text = "Messages-InCorrect".Aspylate();
                     break;
                 }
                 default:
                 {
                     this._currentLessonNumletSet.AnswerState = G__AnswerState.Empty;
-                    this.lblMessage.Text = "Messages-Empty".Aspylate();
-                        var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
-                        this.lblMessage.Layer.AddAnimation(y, "_animateColor");
+                    //this.lblMessage.Text = "Messages-Empty".Aspylate();
+                    var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
+                    //this.lblMessage.Layer.AddAnimation(y, "_animateColor");
                     break;
                 }
             }
@@ -994,7 +1000,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         #region EventHandlers
 
-        private void OnClick_btnNextEquation (object sender, EventArgs e)
+        partial void BtnNextEquation_TouchUpInside(NWButton sender)
         {
             this.Clear();
 
@@ -1009,7 +1015,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 {
                     // TODO : Crash this.btnNextEquation has no bg color its null ???
                     var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnNextEquation.BackgroundColor.CGColor);
-                    this.btnNextEquation.Layer.AddAnimation(y , "_animateColor");
+                    this.btnNextEquation.Layer.AddAnimation(y, "_animateColor");
                 }
 
                 this.btnNextEquation.SetTitle((this.LessonNumletList.Count - (this.LessonNumletList.CurrentIndex)).ToString(), UIControlState.Normal);
@@ -1017,14 +1023,14 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
                 // Load the equation
 
-                this.UIDisplayNumlets ();
+                this.UIDisplayNumlets();
                 this.UIResetSolveButton();
                 // Swap the other buttons UI to normal no matter what the condition
                 //this.btnPrevEquation.ApplyUI_Normal();
             }
         }
 
-        private void OnClick_btnPrevEquation (object sender, EventArgs e)
+        partial void BtnPrevEquation_TouchUpInside(NWButton sender)
         {
             this.Clear();
 
@@ -1042,8 +1048,8 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
                 // The last question is reached, briefly display a flash background change
                 if (this.LessonNumletList.bOverIndex)
                 {
-                    var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor );
-                    this.btnPrevEquation.Layer.AddAnimation(y , "_animateColor");
+                    var y = NWAnimations.BasicBGColorFade(iOSUIAppearance.GlobaliOSTheme.NegativeBGUIColor.Value.CGColor, this.btnPrevEquation.BackgroundColor.CGColor);
+                    this.btnPrevEquation.Layer.AddAnimation(y, "_animateColor");
                 }
 
                 this.btnPrevEquation.SetTitle((this.LessonNumletList.CurrentIndex + 1).ToString(), UIControlState.Normal);
@@ -1051,7 +1057,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
                 // Load the equation
 
-                this.UIDisplayNumlets ();
+                this.UIDisplayNumlets();
                 this.UIResetSolveButton();
                 //this.UISetWorkSpaceCanvas();
                 // Swap the other buttons UI to normal no matter what the condition
@@ -1059,26 +1065,47 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             }
         }
 
-        private void OnClick_btnToolBox (object sender, EventArgs e)
+        partial void BtnSizeHuge_TouchUpInside(NWButton sender)
+        {
+            //this.Resize(G__DisplaySizeLevels.Level4);
+        }
+
+        partial void BtnSizeLarge_TouchUpInside(NWButton sender)
+        {
+
+        }
+
+        partial void BtnSizeNormal_TouchUpInside(NWButton sender)
+        {
+
+        }
+
+        partial void BtnToolBox_TouchUpInside(NWButton sender)
         {
             this.AddAndDisplay_ToolBoxDialog(this.btnToolBox.Center);
-            //this.LoadTool(E__ToolBoxTool.Hammerz);
         }
 
-        private void OnClick_btnOptions (object sender, EventArgs e)
+        partial void BtnFreeform_TouchUpInside(NWButton sender)
         {
-            //AlertMe(this.NumletEquation.EquationToString());
-            //AlertMe(this.NumletEquation.CalcString());
-            //AlertMe(this.NumletResult.CalcString());
-
+            //throw new NotImplementedException();
         }
 
-        private void OnClick_btnBackToLessons (object sender, EventArgs e)
+        partial void BtnHide_TouchUpInside(NWButton sender)
         {
-
+            //throw new NotImplementedException();
         }
 
-        private void OnClick_btnStartStop (object sender, EventArgs e)    
+        partial void BtnFocus_TouchUpInside(NWButton sender)
+        {
+            //throw new NotImplementedException();
+        }
+
+        partial void BtnFinish_TouchUpInside(NWButton sender)
+        {
+            //throw new NotImplementedException();
+        }
+
+        partial void BtnStartStop_TouchUpInside(NWButton sender)
         {
             switch (this._enumLessonState)
             {
@@ -1109,35 +1136,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
             //this.Start();
         }
 
-        private void OnClick_btnSizeNormal (object sender, EventArgs e)
-        {
-            this.Resize(G__DisplaySizeLevels.Level4);
-        }
-
-        private void OnClick_btnSizeLarge (object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnClick_btnSizeHuge (object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnClick_btnDisplay (object sender, EventArgs e)
-        {
-            this.AddAndDisplay_PositioningDialog(this.btnDisplay.Center);
-        }
-
-        private void OnClick_btnOption2 (object sender, EventArgs e)
-        {
-
-        }
-
-        private void OnClick_btnMethods (object sender, EventArgs e)
-        {
-
-        }
 
         #endregion
 

@@ -292,6 +292,7 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
+    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

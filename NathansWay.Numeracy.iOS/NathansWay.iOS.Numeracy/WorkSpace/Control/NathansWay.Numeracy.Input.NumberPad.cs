@@ -28,14 +28,9 @@ namespace NathansWay.iOS.Numeracy.Controls
         private bool _bInEditMode;
         private nfloat _fAlphaLevel;
         private nfloat _fOldAlphaLevel;
-        // Geometry variables for dragging
+        // Geometry variables
         private nfloat _fWidth = 160;
         private nfloat _fHeight = 260;
-
-        private CGPoint _pLastPoint;
-        private CGPoint _p6;
-        private bool _bHitLabel;
-
 
         #endregion
 
@@ -73,7 +68,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._bInEditMode = false;
             this._fAlphaLevel = 1.0f;
             this._fOldAlphaLevel = 1.0f;
-
 
             this.ApplyUIWhere = G__ApplyUI.ViewWillAppear;
         }
@@ -209,63 +203,6 @@ namespace NathansWay.iOS.Numeracy.Controls
             this._padlockedpushed(this._intPadValue);
         }
 
-        private void NumberPadPanGestureRecognizer()
-        {
-            // create a new tap gesture
-            UIPanGestureRecognizer MovePadPanGesture = null;
-
-            Action<UIPanGestureRecognizer> action = (pg) =>
-                {
-                    // I was only using the label to drag, but this made it difficult to use, 
-                    // so it can now be dragged from any point in the keypad view.
-
-                    //if (pg.State == UIGestureRecognizerState.Began)
-                    //{
-                    //    this._fOldAlphaLevel = this.View.Alpha;
-                    //    this._bHitLabel = false;
-                    //    //this._pLastPoint = this.View.Center;
-                    //    //this._p6 = pg.LocationInView (this.View);
-                    //    this._p6 = pg.TranslationInView(this.View);
-                    //    if (this.lblNumberPad.PointInside(pg.LocationInView(this.View), null))
-                    //    {
-                    //        this._bHitLabel = true;
-                    //    }
-                    //}
-
-                    //if (pg.State == UIGestureRecognizerState.Changed && (pg.NumberOfTouches < 4) && this._bHitLabel)
-                    if (pg.State == UIGestureRecognizerState.Changed)
-                    {
-                        // Set the display to half opacity
-                        this.SetAlphaLevel = 0.7f;
-                        //var p0 = pg.LocationInView (this.View);
-                        var p0 = pg.TranslationInView(this.View);
-
-                        // To stop the jerky movement when first moving we only want to capture the finger movement,
-                        // not the initial point of touch also
-                        var x = p0.X - this._p6.X;
-                        var y = p0.Y - this._p6.Y;
-
-                        this.View.Center = new CGPoint(this.View.Center.X + x, this.View.Center.Y + y);
-                        pg.SetTranslation(new CGPoint(0, 0), this.View);
-                    }
-
-                    if (pg.State == UIGestureRecognizerState.Ended)
-                    {
-                        this.SetAlphaLevel = 1.0f; //this._fOldAlphaLevel;
-                        this._bHitLabel = false;
-                    }
-                };
-
-            MovePadPanGesture = new UIPanGestureRecognizer(action);
-            // Test to see how it work with one finger.
-            MovePadPanGesture.MaximumNumberOfTouches = 1;
-            MovePadPanGesture.MinimumNumberOfTouches = 1;
-
-            // add the gesture recognizer to the view
-            this.View.AddGestureRecognizer(MovePadPanGesture);
-
-        }
-
         #endregion
 
         #region Public Members
@@ -315,8 +252,8 @@ namespace NathansWay.iOS.Numeracy.Controls
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            this.NumberPadPanGestureRecognizer();
+            // This can be dragged around within the confines of the superview
+            this.DragPanGestureRecognizer(true);
         }
 
         public override void ViewDidLayoutSubviews()

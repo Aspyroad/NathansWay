@@ -11,44 +11,44 @@ using Foundation;
 
 
 namespace AspyRoad.iOSCore
-{			
-	[Foundation.Register("AspyView")]	
+{
+    [Foundation.Register("AspyView")]
     [System.ComponentModel.DesignTimeVisible(false)]
-	public class AspyView : UIView
-	{
-		#region Class Variables
+    public class AspyView : UIView
+    {
+        #region Class Variables
 
         protected IAspyGlobals iOSGlobals;
-		//protected iOSUIManager iOSUIAppearance;
+        //protected iOSUIManager iOSUIAppearance;
 
         // UIApplication Variables
         protected bool _bAutoApplyUI;
 
-		#endregion
+        #endregion
 
-		#region Contructors
+        #region Contructors
 
-		public AspyView (IntPtr handle) : base(handle)
-		{
-			Initialize ();
-		}
+        public AspyView(IntPtr handle) : base(handle)
+        {
+            Initialize();
+        }
 
-		public AspyView (NSCoder coder) : base(coder)
-		{
-			Initialize ();
-		}
+        public AspyView(NSCoder coder) : base(coder)
+        {
+            Initialize();
+        }
 
-		public AspyView (CGRect frame) : base(frame)
-		{
-			Initialize ();
-		}
-		
-		public AspyView () : base ()
-		{
-			Initialize ();
-		}
+        public AspyView(CGRect frame) : base(frame)
+        {
+            Initialize();
+        }
 
-		#endregion
+        public AspyView() : base()
+        {
+            Initialize();
+        }
+
+        #endregion
 
         #region Public Properties
 
@@ -112,9 +112,9 @@ namespace AspyRoad.iOSCore
         /// <value>The corner radius.</value>
         public nfloat CornerRadius
         {
-            get 
+            get
             {
-                return this.Layer.CornerRadius; 
+                return this.Layer.CornerRadius;
             }
             set
             {
@@ -145,6 +145,48 @@ namespace AspyRoad.iOSCore
             set { this._bAutoApplyUI = value; }
         }
 
+        public CGPoint DragStartPoint
+        {
+            get;
+            set;
+        }
+
+        public CGPoint DragTranslationPoint
+        {
+            get;
+            set;
+        }
+
+        public CGPoint DragLastCenterPoint
+        {
+            get;
+            set;
+        }
+
+        public CGRect DragValidFrame
+        {
+            get;
+            set;
+        }
+
+        public bool DragVerticallyOnly
+        {
+            get;
+            set;
+        }
+
+        public bool DragHorizontallyOnly
+        {
+            get;
+            set;
+        }
+
+        public bool DragCrossedSuperView
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region Virtual Members
@@ -153,7 +195,7 @@ namespace AspyRoad.iOSCore
         // The view doesnt strictly follow IApplyUI()
         // Its purpose is for "Auto" updating specifics for the view, and more for testing.
         // Simply set AutoApplyUI to true, and override either or both ApplyUI7()/ApplyUI6()
-        public virtual void ApplyUI ()
+        public virtual void ApplyUI()
         {
             if (this.iOSGlobals.G__IsiOS7)
             {
@@ -166,32 +208,33 @@ namespace AspyRoad.iOSCore
         }
 
         public virtual void ApplyUI6()
-        {            
+        {
         }
 
         public virtual void ApplyUI7()
-        {            
+        {
         }
 
         #endregion
 
-		#region Private Members
+        #region Private Members
 
-		private void Initialize ()
-        {   
-
-            iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals> (); 
-			//iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
+        private void Initialize()
+        {
+            iOSGlobals = iOSCoreServiceContainer.Resolve<IAspyGlobals>();
+            //iOSUIAppearance = iOSCoreServiceContainer.Resolve<iOSUIManager> ();
             this._bAutoApplyUI = false;
+            this.DragVerticallyOnly = false;
+            this.DragHorizontallyOnly = false;
 
             //#if DEBUG
             //    //this.iOSGlobals.G__ViewPool.Add(this.ToString(), 0);
             //#endif
         }
 
-		#endregion
+        #endregion
 
-		#region Overrides
+        #region Overrides
 
         public override UIViewAutoresizing AutoresizingMask
         {
@@ -213,7 +256,11 @@ namespace AspyRoad.iOSCore
                 this.ApplyUI();
             }
         }
-            
-		#endregion			
-	}	
+
+        #endregion
+
+        #region PublicMethods
+
+        #endregion 
+    }	
 }
