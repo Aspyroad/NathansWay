@@ -127,6 +127,7 @@
     <None Include="..\..\MonoGame.Extended\Source\Demos\Demo.NuclexGui\Demo.NuclexGui.csproj">
       <Link>Demo.NuclexGui.csproj</Link>
     </None>
+    <None Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard.bk" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
@@ -264,7 +265,7 @@
       <Project>{8DD61860-526C-4447-B806-E0ADC61DFB54}</Project>
       <Name>NathansWay.Numeracy.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NathansWay.MonoGame.iOS\NathansWay.MonoGame.iOS.csproj">
+    <ProjectReference Include="..\NathansWay.MonoGame\NathansWay.MonoGame.iOS\NathansWay.MonoGame.iOS.csproj">
       <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
       <Name>NathansWay.MonoGame.iOS</Name>
     </ProjectReference>
@@ -292,7 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />
-    <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

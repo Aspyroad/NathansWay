@@ -64,7 +64,7 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
         // Ref to the monogame vc.
         private UIWindow _wToolSpaceWindow;
         private UIViewController _vcToolSpace;
-        private BaseTool _currentTool;
+        private ToolBase _currentTool;
         private UIStoryboard _storyBoard;
         //private List<vcWorkNumlet> _vcNumletMethods;
         // VC Dialogs
@@ -418,7 +418,6 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         public void CenterMethods()
         {
-            
         }
 
         public void CenterQuestion()

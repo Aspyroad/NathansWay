@@ -533,8 +533,6 @@ namespace NathansWay.iOS.Numeracy.Controls
         protected void EditNumPad()
         {
             // Create an instance of Numberpad if its null
-            // TODO : this doesnt work right, we need to check if its been added to the container??
-
             if (this._numberpad == null)
             {
                 this._numberpad = this._vcMainContainer._vcNumberPad.Value;
@@ -764,7 +762,7 @@ namespace NathansWay.iOS.Numeracy.Controls
 
         #region Delegates
 
-        // FLOW - DOWN FORM NUMBER CONTAINER
+        // FLOW - DOWN FROM NUMBER CONTAINER
         public override void OnSizeChange(object s, evtArgsBaseContainer e)
         {
             // Handle the size change

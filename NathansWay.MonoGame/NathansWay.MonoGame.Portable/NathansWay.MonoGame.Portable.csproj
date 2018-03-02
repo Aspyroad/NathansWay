@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C092F228-70EA-4208-A6AB-5EF60AD016D8}</ProjectGuid>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UseMSBuildEngine>true</UseMSBuildEngine>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NathansWay.MonoGame.Portable</RootNamespace>
+    <AssemblyName>NathansWay.MonoGame.Portable</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Hammer\NathansWay.ToolBox.Hammer.cs" />
+    <Compile Include="Hammer\NathansWay.ToolBox.Hammer.Physics.cs" />
+    <Compile Include="Menus\NathansWay.ToolBox.MainMenu.cs" />
+    <Compile Include="Menus\NathansWay.ToolBox.Menus.cs" />
+    <Compile Include="Pliers\NathansWay.ToolBox.Pliers.cs" />
+    <Compile Include="Pliers\NathansWay.ToolBox.PrimitiveBatch.cs" />
+    <Compile Include="ScrewDriver\NathansWay.ToolBox.ScrewDriver.cs" />
+    <Compile Include="SideCutters\NathansWay.ToolBox.SideCutters.cs" />
+    <Compile Include="Utilities\NathansWay.ToolBox.ParallaxingBg.cs" />
+    <Compile Include="NathansWay.MonoGame.Shared.ToolBase.cs" />
+    <Compile Include="NathansWay.MonoGame.Shared.Types.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\packages\MonoGame.Framework.Portable.3.6.0.1625\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\..\Libraries\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended">
+      <HintPath>..\..\Libraries\MonoGame.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Animations">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Animations.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Collisions">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Collisions.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Entities">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Graphics">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Gui">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Gui.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Input">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.NuclexGui">
+      <HintPath>..\..\Libraries\MonoGame.Extended.NuclexGui.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Particles">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Particles.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.SceneGraphs">
+      <HintPath>..\..\Libraries\MonoGame.Extended.SceneGraphs.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Tiled">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Tiled.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Extended.Tweening">
+      <HintPath>..\..\Libraries\MonoGame.Extended.Tweening.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="ModifiedCode\Game.cs" />
+    <None Include="ModifiedCode\iOSGamePlatform.cs" />
+    <None Include="Pliers\NathansWay.ToolBox.PrimitivesGame.cs" />
+    <None Include="ContentShared\Hammer\bottomGround.png" />
+    <None Include="ContentShared\Hammer\clouds1.png" />
+    <None Include="ContentShared\Hammer\clouds2.png" />
+    <None Include="ContentShared\Hammer\ground.png" />
+    <None Include="ContentShared\Hammer\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="ContentShared\NathansWay.MonoGame.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ContentShared\" />
+    <Folder Include="Contracts\" />
+    <Folder Include="Hammer\" />
+    <Folder Include="Menus\" />
+    <Folder Include="ModifiedCode\" />
+    <Folder Include="Pliers\" />
+    <Folder Include="ScrewDriver\" />
+    <Folder Include="SideCutters\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+</Project>

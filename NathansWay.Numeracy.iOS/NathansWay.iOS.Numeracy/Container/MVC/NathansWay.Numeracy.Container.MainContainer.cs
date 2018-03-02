@@ -175,8 +175,9 @@ namespace NathansWay.iOS.Numeracy
             else
             {
                 this._vcNumberPad.Value.View.Hidden = false;
-                this._vcNumberPad.Value.View.Frame = this._vcNumberPad.Value.RectFrame;
-
+                // TODO: Bug here? Number pad doesnt always retain its moved position
+                //
+                //this._vcNumberPad.Value.View.Frame = this._vcNumberPad.Value.RectFrame;
             }
 
         }

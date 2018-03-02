@@ -29,12 +29,20 @@ namespace NathansWay.iOS.Numeracy.Menu
         [Outlet]
         UIKit.UIButton btn4 { get; set; }
 
+        [Outlet]
+        [GeneratedCode ("iOS Designer", "1.0")]
+        NathansWay.iOS.Numeracy.WorkSpace.vWorkSpace WorkSpace { get; set; }
+
 
         [Action ("returnToStepOne:")]
         partial void returnToStepOne (UIKit.UIStoryboardSegue segue);
 
         void ReleaseDesignerOutlets ()
         {
+            if (WorkSpace != null) {
+                WorkSpace.Dispose ();
+                WorkSpace = null;
+            }
         }
     }
 }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />	
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>NathansWay.MonoGame.iOS</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile></DocumentationFile>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Libraries\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\Libraries\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Lidgren.Network">
+      <HintPath>..\..\Libraries\Lidgren.Network.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NathansWay.MonoGame.iOS.ToolBox.Factory.cs" />
+    <Compile Include="NathansWay.MonoGame.iOS.Core.cs" />
+  </ItemGroup>
+  <ItemGroup>
+<None Include="..\..\Libraries\libopenal.1.dylib">
+  <Link>libopenal.1.dylib</Link>
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+<None Include="..\..\Libraries\libSDL2-2.0.0.dylib">
+  <Link>libSDL2-2.0.0.dylib</Link>
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+  <IncludeInPackage>true</IncludeInPackage>
+</None>
+<None Include="..\..\Libraries\MonoGame.Framework.dll.config">
+  <Link>MonoGame.Framework.dll.config</Link>
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+<None Include="..\..\Libraries\SDL2.dll">
+  <Link>SDL2.dll</Link>
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+<None Include="..\..\Libraries\soft_oal.dll">
+  <Link>soft_oal.dll</Link>
+  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+</None>
+<None Include="Info.plist" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MonoGameChanges\" />
+    <Folder Include="Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Hammer\bottomGround.xnb" />
+    <Content Include="Content\Hammer\clouds1.xnb" />
+    <Content Include="Content\Hammer\clouds2.xnb" />
+    <Content Include="Content\Hammer\ground.xnb" />
+    <Content Include="Content\Hammer\logo.xnb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NathansWay.MonoGame.Portable\NathansWay.MonoGame.Portable.csproj">
+      <Project>{C092F228-70EA-4208-A6AB-5EF60AD016D8}</Project>
+      <Name>NathansWay.MonoGame.Portable</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+</Project>
