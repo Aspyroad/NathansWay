@@ -16,10 +16,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+// Extended
+using MonoGame.Extended;
+using NathansWay.MonoGame.Portable;
 
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.Portable
 {
     /// <summary>
     /// Default Project Template

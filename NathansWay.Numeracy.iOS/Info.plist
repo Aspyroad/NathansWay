@@ -17,15 +17,13 @@
 	<true/>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
-	<key>CFBundleVersion</key>
-	<string>01</string>
-	<key>Custom Property</key>
-	<string></string>
 	<key>MinimumOSVersion</key>
 	<string>9.0</string>
 	<key>CFBundleName</key>
 	<string>NathansWayiOSNumeracy</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array/>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleIdentifier</key>
+	<string>NathansWayiOSNumeracy</string>
 </dict>
 </plist>

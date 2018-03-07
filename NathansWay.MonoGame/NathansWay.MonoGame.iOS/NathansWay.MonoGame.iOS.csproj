@@ -79,6 +79,15 @@
     <Content Include="Content\Hammer\clouds2.xnb" />
     <Content Include="Content\Hammer\ground.xnb" />
     <Content Include="Content\Hammer\logo.xnb" />
+    <Content Include="Content\logo-square-128.xnb" />
+    <Content Include="Content\Skins\DefaultFont.xnb" />
+    <Content Include="Content\Skins\SuaveSheet.xnb" />
+    <Content Include="Content\Skins\TitleFont.xnb" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="..\NathansWay.MonoGame.Portable\ContentShared\NathansWay.MonoGame.iOS.mgcb">
+      <Link>Content\NathansWay.MonoGame.iOS.mgcb</Link>
+    </MonoGameContentReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NathansWay.MonoGame.Portable\NathansWay.MonoGame.Portable.csproj">

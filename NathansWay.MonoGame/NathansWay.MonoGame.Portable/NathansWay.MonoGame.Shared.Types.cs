@@ -6,7 +6,7 @@
 
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.Portable
 {
 	public enum E__ToolBoxTool
 	{

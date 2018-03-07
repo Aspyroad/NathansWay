@@ -10,9 +10,9 @@ using MonoGame.Extended.ViewportAdapters;
 using MonoGame.Extended.NuclexGui;
 using MonoGame.Extended.NuclexGui.Controls.Desktop;
 
-using NathansWay.MonoGame.Shared;
+using NathansWay.MonoGame.Portable;
 
-namespace NathansWay.MonoGame.iOS
+namespace NathansWay.MonoGame.Portable
 {
     public class Game1 : ToolBase
     {

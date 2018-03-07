@@ -9,13 +9,13 @@
 
 #region Using Statements
 
-using Microsoft.Xna.Framework;
-using NathansWay.MonoGame.Shared;
+//using Microsoft.Xna.Framework;
+using NathansWay.MonoGame.Portable;
 // Game Namespaces
 using NathansWay.MonoGame.ToolBox;
 using UIKit;
 
-using MonoGame.Extended;
+//using MonoGame.Extended;
 
 #endregion
 

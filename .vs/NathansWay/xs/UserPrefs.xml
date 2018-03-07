@@ -1,0 +1,20 @@
+﻿<Properties StartupConfiguration="{ED846A11-F3F8-4277-9E00-8AC75C114910}|Default">
+  <MonoDevelop.Ide.ItemProperties.NathansWay.iOS.Numeracy PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.964DA2D2-ADBD-4266-82C6-8D85EE4CDF71" automaticSigning="False" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="NathansWay.MonoGame/NathansWay.MonoGame.Portable/Menus/NathansWay.ToolBox.MainMenu.cs">
+    <Files>
+      <File FileName="NathansWay.MonoGame/NathansWay.MonoGame.Portable/Menus/NathansWay.ToolBox.MainMenu.cs" Line="10" Column="25" />
+      <File FileName="NathansWay.MonoGame/NathansWay.MonoGame.iOS/NathansWay.MonoGame.iOS.ToolBox.Factory.cs" Line="50" Column="54" />
+      <File FileName="../MonoGame.Extended/Source/MonoGame.Extended.NuclexGui/Visuals/Flat/FlatGuiVisualizer.cs" Line="211" Column="63" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/thedood/Projects/NathansWay/NathansWay.Numeracy.iOS/NathansWay.iOS.Numeracy/WorkSpace/Control/NathansWay.Numeracy.Input.FractionContainer.cs" relfile="NathansWay.Numeracy.iOS/NathansWay.iOS.Numeracy/WorkSpace/Control/NathansWay.Numeracy.Input.FractionContainer.cs" line="480" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="AspyRoad.iOSCore/Aspyroad.iOSCore.AspyViewController.Base.cs" line="415" offsetX="342" offsetY="4872" expression="this.View" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MultiItemStartupConfigurations />
+</Properties>

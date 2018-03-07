@@ -74,9 +74,6 @@
     <Reference Include="MonoGame.Extended.Input">
       <HintPath>..\..\Libraries\MonoGame.Extended.Input.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Extended.NuclexGui">
-      <HintPath>..\..\Libraries\MonoGame.Extended.NuclexGui.dll</HintPath>
-    </Reference>
     <Reference Include="MonoGame.Extended.Particles">
       <HintPath>..\..\Libraries\MonoGame.Extended.Particles.dll</HintPath>
     </Reference>
@@ -100,6 +97,9 @@
     <None Include="ContentShared\Hammer\clouds2.png" />
     <None Include="ContentShared\Hammer\ground.png" />
     <None Include="ContentShared\Hammer\logo.png" />
+    <None Include="ContentShared\Skins\DefaultFont.spritefont" />
+    <None Include="ContentShared\Skins\SuaveSheet.png" />
+    <None Include="ContentShared\Skins\TitleFont.spritefont" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="ContentShared\NathansWay.MonoGame.mgcb" />
@@ -114,6 +114,12 @@
     <Folder Include="ScrewDriver\" />
     <Folder Include="SideCutters\" />
     <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\MonoGame.Extended\Source\MonoGame.Extended.NuclexGui\MonoGame.Extended.NuclexGui.csproj">
+      <Project>{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}</Project>
+      <Name>MonoGame.Extended.NuclexGui</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
 </Project>

@@ -1,7 +1,7 @@
 using System;
 using CoreGraphics;
 using Microsoft.Xna.Framework;
-using NathansWay.MonoGame.Shared;
+using NathansWay.MonoGame.Portable;
 using UIKit;
 
 namespace NathansWay.MonoGame.iOS

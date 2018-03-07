@@ -13,7 +13,7 @@ using Microsoft.Xna.Framework;
 
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.Portable
 {
 	/// <summary>
 	/// Default Project Template

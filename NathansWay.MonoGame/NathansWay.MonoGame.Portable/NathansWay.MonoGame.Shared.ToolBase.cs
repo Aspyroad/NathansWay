@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.Portable
 {
     // MAIN MONOGAME BACKING CLASS
 	public abstract class ToolBase : Game

@@ -128,6 +128,9 @@
       <Link>Demo.NuclexGui.csproj</Link>
     </None>
     <None Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard.bk" />
+    <None Include="..\Libraries\Resources\Skins\SuaveSkin.json">
+      <Link>Resources\Skins\SuaveSkin.json</Link>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utilities\NathansWay.iOS.Numeracy.HelperFunctions.cs" />
@@ -269,6 +272,10 @@
       <Project>{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4}</Project>
       <Name>NathansWay.MonoGame.iOS</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NathansWay.MonoGame\NathansWay.MonoGame.Portable\NathansWay.MonoGame.Portable.csproj">
+      <Project>{C092F228-70EA-4208-A6AB-5EF60AD016D8}</Project>
+      <Name>NathansWay.MonoGame.Portable</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Content\AppImages\Exit.png" />
@@ -290,6 +297,15 @@
     <BundleResource Include="Resources\fr.lproj\Localizable.strings" />
     <BundleResource Include="Resources\de.lproj\Localizable.strings" />
     <BundleResource Include="Resources\es.lproj\Localizable.strings" />
+    <BundleResource Include="..\Libraries\Resources\Skins\DefaultFont.xnb">
+      <Link>Resources\Skins\DefaultFont.xnb</Link>
+    </BundleResource>
+    <BundleResource Include="..\Libraries\Resources\Skins\SuaveSheet.xnb">
+      <Link>Resources\Skins\SuaveSheet.xnb</Link>
+    </BundleResource>
+    <BundleResource Include="..\Libraries\Resources\Skins\TitleFont.xnb">
+      <Link>Resources\Skins\TitleFont.xnb</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="NathansWay.iOS.Numeracy\NathansWay.Numeracy.storyboard" />

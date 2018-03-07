@@ -15,7 +15,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 #endregion
 
-namespace NathansWay.MonoGame.Shared
+namespace NathansWay.MonoGame.Portable
 {
 	/// <summary>
 	/// Default Project Template

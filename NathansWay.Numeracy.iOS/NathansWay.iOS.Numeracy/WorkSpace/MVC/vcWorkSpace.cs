@@ -14,7 +14,7 @@ using NathansWay.Numeracy.Shared.BUS.Entity;
 using NathansWay.Numeracy.Shared;
 using NathansWay.iOS.Numeracy.Controls;
 using NathansWay.MonoGame.iOS;
-using NathansWay.MonoGame.Shared;
+using NathansWay.MonoGame.Portable;
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
 {

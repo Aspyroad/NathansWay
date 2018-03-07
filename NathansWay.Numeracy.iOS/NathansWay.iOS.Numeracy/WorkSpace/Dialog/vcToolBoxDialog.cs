@@ -16,7 +16,7 @@ using AspyRoad.iOSCore;
 //using NathansWay.Numeracy.Shared.BUS.Entity;
 //using NathansWay.Numeracy.Shared.BUS.ViewModel;
 //using NathansWay.Numeracy.Shared.Utilities;
-using NathansWay.Numeracy.Shared;
+using NathansWay.MonoGame.Portable;
 
 
 namespace NathansWay.iOS.Numeracy.WorkSpace
@@ -172,13 +172,13 @@ namespace NathansWay.iOS.Numeracy.WorkSpace
 
         partial void BtnPliers_TouchUpInside(NWButton sender)
         {
-            this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Plierz);
+            this.WorkSpace.LoadTool(E__ToolBoxTool.Plierz);
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 
         partial void BtnHammer_TouchUpInside(NWButton sender)
         {
-            this.WorkSpace.LoadTool(NathansWay.MonoGame.Shared.E__ToolBoxTool.Hammerz);
+            this.WorkSpace.LoadTool(E__ToolBoxTool.Hammerz);
             this._vcWorkSpace.RemoveViewControllerFromParent(this);
         }
 

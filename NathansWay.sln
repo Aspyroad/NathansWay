@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.MonoGame.iOS", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NathansWay.MonoGame.Portable", "NathansWay.MonoGame\NathansWay.MonoGame.Portable\NathansWay.MonoGame.Portable.csproj", "{C092F228-70EA-4208-A6AB-5EF60AD016D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoGame.Extended.NuclexGui", "..\MonoGame.Extended\Source\MonoGame.Extended.NuclexGui\MonoGame.Extended.NuclexGui.csproj", "{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -98,10 +100,23 @@ Global
 		{C092F228-70EA-4208-A6AB-5EF60AD016D8}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{C092F228-70EA-4208-A6AB-5EF60AD016D8}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
 		{C092F228-70EA-4208-A6AB-5EF60AD016D8}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Release|iPhone.Build.0 = Release|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA}.AppStore|iPhone.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6CAEBFA6-0096-4FBE-84C5-9CA3C6CD0FC4} = {06C877F8-4312-4C00-B60F-8EC046D43D40}
 		{C092F228-70EA-4208-A6AB-5EF60AD016D8} = {06C877F8-4312-4C00-B60F-8EC046D43D40}
+		{D8BC4F21-E71D-46CE-B6D3-259F1E0DFABA} = {06C877F8-4312-4C00-B60F-8EC046D43D40}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

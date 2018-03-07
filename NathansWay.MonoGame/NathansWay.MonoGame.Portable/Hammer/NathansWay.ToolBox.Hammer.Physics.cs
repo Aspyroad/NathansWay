@@ -7,7 +7,7 @@
 //using Microsoft.Xna.Framework.Input.Touch;
 //using MonoGame.Extended;
 //// NathansWay
-//using NathansWay.MonoGame.Shared;
+using NathansWay.MonoGame.Portable;
 #endregion
 
 namespace NathansWay.MonoGame.ToolBox

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.NuclexGui;
 
-using NathansWay.MonoGame.Shared;
+using NathansWay.MonoGame.Portable;
 
 namespace NathansWay.ToolBox.Menu
 {

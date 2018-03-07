@@ -5,8 +5,6 @@
 // Manual changes to this file will not be maintained.
 //
 using Foundation;
-using NathansWay.MonoGame.iOS;
-using NathansWay.MonoGame.Shared;
 using System;
 using System.CodeDom.Compiler;
 using UIKit;
