@@ -33,7 +33,7 @@ namespace NathansWay.MonoGame.Portable
             // Content.RootDirectory = "Content";
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
-            _backgroundColor = Color.MediumPurple;
+            _backgroundColor = Color.DarkKhaki;
 
             // First, we create an input manager.
             _inputManager = new InputListenerComponent(this);

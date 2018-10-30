@@ -415,6 +415,12 @@ namespace AspyRoad.iOSCore
 			return _return;
 		}
 
+
+        /// <summary>
+        /// Sets up a drag recongniser on this view, so it can be moved/dragged.
+        /// </summary>
+        /// <param name="BoundedBySuperview">
+        /// If set to <c>true</c> this frame cannot move past its parents frame boundary</param>
         public void DragPanGestureRecognizer(bool BoundedBySuperview)
         {
             // create a new tap gesture
